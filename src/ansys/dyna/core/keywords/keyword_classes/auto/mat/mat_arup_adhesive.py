@@ -23,8 +23,68 @@
 """Module providing the MatArupAdhesive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATARUPADHESIVE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("tenmax", float, 40, 10, 1e+20),
+    FieldSchema("gcten", float, 50, 10, 1e+20),
+    FieldSchema("shrmax", float, 60, 10, 1e+20),
+    FieldSchema("gcshr", float, 70, 10, 1e+20),
+)
+
+_MATARUPADHESIVE_CARD1 = (
+    FieldSchema("pwrt", float, 0, 10, 2.0),
+    FieldSchema("pwrs", float, 10, 10, 2.0),
+    FieldSchema("shrp", float, 20, 10, None),
+    FieldSchema("sht_sl", float, 30, 10, None),
+    FieldSchema("edot0", float, 40, 10, 1.0),
+    FieldSchema("edot2", float, 50, 10, None),
+    FieldSchema("thkdir", float, 60, 10, 0.0),
+    FieldSchema("extra", float, 70, 10, None),
+)
+
+_MATARUPADHESIVE_CARD2 = (
+    FieldSchema("tmaxe", float, 0, 10, 1e+20),
+    FieldSchema("gcte", float, 10, 10, 1e+20),
+    FieldSchema("smaxe", float, 20, 10, 1e+20),
+    FieldSchema("gcse", float, 30, 10, 1e+20),
+    FieldSchema("pwrte", float, 40, 10, 2.0),
+    FieldSchema("pwrse", float, 50, 10, 2.0),
+)
+
+_MATARUPADHESIVE_CARD3 = (
+    FieldSchema("facet", float, 0, 10, 1.0),
+    FieldSchema("facct", float, 10, 10, 1.0),
+    FieldSchema("faces", float, 20, 10, 1.0),
+    FieldSchema("faccs", float, 30, 10, 1.0),
+    FieldSchema("softt", float, 40, 10, 1.0),
+    FieldSchema("softs", float, 50, 10, 1.0),
+)
+
+_MATARUPADHESIVE_CARD4 = (
+    FieldSchema("sdfac", float, 0, 10, 1.0),
+    FieldSchema("sgfac", float, 10, 10, 1.0),
+    FieldSchema("sdefac", float, 20, 10, 1.0),
+    FieldSchema("sgefac", float, 30, 10, 1.0),
+)
+
+_MATARUPADHESIVE_CARD5 = (
+    FieldSchema("bthk", float, 0, 10, None),
+    FieldSchema("outfail", float, 10, 10, 0.0),
+    FieldSchema("fsip", float, 20, 10, None),
+    FieldSchema("fbr713", float, 30, 10, None),
+    FieldSchema("ele2ns", float, 40, 10, 0.0),
+)
+
+_MATARUPADHESIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatArupAdhesive(KeywordBase):
     """DYNA MAT_ARUP_ADHESIVE keyword"""
@@ -40,334 +100,35 @@ class MatArupAdhesive(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tenmax",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcten",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrmax",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcshr",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pwrt",
-                        float,
-                        0,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwrs",
-                        float,
-                        10,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sht_sl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot0",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thkdir",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "extra",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tmaxe",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcte",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smaxe",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcse",
-                        float,
-                        30,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwrte",
-                        float,
-                        40,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwrse",
-                        float,
-                        50,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "facet",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "facct",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "faces",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "faccs",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "softt",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "softs",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sdfac",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sgfac",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sdefac",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sgefac",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bthk",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outfail",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsip",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fbr713",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele2ns",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATARUPADHESIVE_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatArupAdhesive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATARUPADHESIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

@@ -23,7 +23,14 @@
 """Module providing the EmControlSwitchContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLSWITCHCONTACT_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, 0),
+    FieldSchema("ncylfem", int, 10, 10, 0),
+    FieldSchema("ncylfem", int, 20, 10, 0),
+)
 
 class EmControlSwitchContact(KeywordBase):
     """DYNA EM_CONTROL_SWITCH_CONTACT keyword"""
@@ -35,36 +42,10 @@ class EmControlSwitchContact(KeywordBase):
         """Initialize the EmControlSwitchContact class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncylfem",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncylfem",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLSWITCHCONTACT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> int:
         """Get or set the Load Curve ID.Negative values switch the contact detection off, positive values switch it back on.

@@ -23,7 +23,13 @@
 """Module providing the DatabaseD3Ftg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASED3FTG_CARD0 = (
+    FieldSchema("binary", int, 0, 10, 0),
+    FieldSchema("dt", float, 10, 10, 0.0),
+)
 
 class DatabaseD3Ftg(KeywordBase):
     """DYNA DATABASE_D3FTG keyword"""
@@ -35,28 +41,10 @@ class DatabaseD3Ftg(KeywordBase):
         """Initialize the DatabaseD3Ftg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "binary",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASED3FTG_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def binary(self) -> int:
         """Get or set the Flag for writing the binary plot file

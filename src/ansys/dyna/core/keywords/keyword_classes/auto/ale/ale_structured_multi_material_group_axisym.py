@@ -23,7 +23,19 @@
 """Module providing the AleStructuredMultiMaterialGroupAxisym class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMULTIMATERIALGROUPAXISYM_CARD0 = (
+    FieldSchema("ammg_name", str, 0, 10, None),
+    FieldSchema("mid", int, 10, 10, None),
+    FieldSchema("eosid", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("pref", float, 70, 10, 0.0),
+)
 
 class AleStructuredMultiMaterialGroupAxisym(KeywordBase):
     """DYNA ALE_STRUCTURED_MULTI-MATERIAL_GROUP_AXISYM keyword"""
@@ -35,69 +47,10 @@ class AleStructuredMultiMaterialGroupAxisym(KeywordBase):
         """Initialize the AleStructuredMultiMaterialGroupAxisym class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ammg_name",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pref",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMULTIMATERIALGROUPAXISYM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ammg_name(self) -> typing.Optional[str]:
         """Get or set the AMMG name. Required to identify the AMMG (S-ALE fluid); Not case sensitive and need to be unique; See remark 2.

@@ -23,8 +23,68 @@
 """Module providing the Mat191 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT191_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("asflag", float, 40, 10, 0.0),
+    FieldSchema("ftype", int, 50, 10, 1),
+    FieldSchema("degrad", int, 60, 10, 0),
+    FieldSchema("ifema", int, 70, 10, 0),
+)
+
+_MAT191_CARD1 = (
+    FieldSchema("lcpms", int, 0, 10, None),
+    FieldSchema("sfs", float, 10, 10, 1.0),
+    FieldSchema("lcpmt", int, 20, 10, None),
+    FieldSchema("sft", float, 30, 10, 1.0),
+    FieldSchema("lcat", int, 40, 10, None),
+    FieldSchema("sfat", float, 50, 10, 1.0),
+    FieldSchema("lcac", int, 60, 10, None),
+    FieldSchema("sfac", float, 70, 10, 1.0),
+)
+
+_MAT191_CARD2 = (
+    FieldSchema("alpha", float, 0, 10, 2.0),
+    FieldSchema("beta", float, 10, 10, 2.0),
+    FieldSchema("gamma", float, 20, 10, 2.0),
+    FieldSchema("delta", float, 30, 10, 4.0),
+    FieldSchema("a", float, 40, 10, 2.0),
+    FieldSchema("b", float, 50, 10, -1.0),
+    FieldSchema("foffs", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_MAT191_CARD3 = (
+    FieldSchema("sigy", float, 0, 10, None),
+    FieldSchema("d", float, 10, 10, None),
+    FieldSchema("w", float, 20, 10, None),
+    FieldSchema("tf", float, 30, 10, None),
+    FieldSchema("tw", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_MAT191_CARD4 = (
+    FieldSchema("phi_t", float, 0, 10, 0.8),
+    FieldSchema("phi_c", float, 10, 10, 0.85),
+    FieldSchema("phi_b", float, 20, 10, 0.9),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_MAT191_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat191(KeywordBase):
     """DYNA MAT_191 keyword"""
@@ -40,342 +100,32 @@ class Mat191(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asflag",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftype",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "degrad",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifema",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpms",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcat",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfat",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcac",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfac",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha",
-                        float,
-                        0,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        10,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delta",
-                        float,
-                        30,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        40,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        50,
-                        10,
-                        -1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "foffs",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigy",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tw",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "phi_t",
-                        float,
-                        0,
-                        10,
-                        0.8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi_c",
-                        float,
-                        10,
-                        10,
-                        0.85,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi_b",
-                        float,
-                        20,
-                        10,
-                        0.9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT191_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT191_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT191_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT191_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT191_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat191.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT191_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

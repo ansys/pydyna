@@ -23,8 +23,22 @@
 """Module providing the DefineFormingClamp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFORMINGCLAMP_CARD0 = (
+    FieldSchema("clp1", int, 0, 10, None),
+    FieldSchema("clp2", int, 10, 10, None),
+    FieldSchema("vid", int, 20, 10, None),
+    FieldSchema("gap", float, 30, 10, 0.0),
+    FieldSchema("at", float, 40, 10, 0.0),
+    FieldSchema("dt", float, 50, 10, 0.0),
+)
+
+_DEFINEFORMINGCLAMP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFormingClamp(KeywordBase):
     """DYNA DEFINE_FORMING_CLAMP keyword"""
@@ -40,74 +54,20 @@ class DefineFormingClamp(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "clp1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "clp2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGCLAMP_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingClamp.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGCLAMP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def clp1(self) -> typing.Optional[int]:
         """Get or set the Part ID of a moving rigid body clamp, defined by *PART and *MAT_020 (*MAT_RIGID).

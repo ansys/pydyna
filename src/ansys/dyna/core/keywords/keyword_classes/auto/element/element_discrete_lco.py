@@ -23,7 +23,24 @@
 """Module providing the ElementDiscreteLco class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTDISCRETELCO_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("vid", int, 32, 8, 0),
+    FieldSchema("s", float, 40, 16, 1.0),
+    FieldSchema("pf", int, 56, 8, 0),
+    FieldSchema("offset", float, 64, 16, 0.0),
+)
+
+_ELEMENTDISCRETELCO_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("lciddr", int, 10, 10, None),
+)
 
 class ElementDiscreteLco(KeywordBase):
     """DYNA ELEMENT_DISCRETE_LCO keyword"""
@@ -35,90 +52,13 @@ class ElementDiscreteLco(KeywordBase):
         """Initialize the ElementDiscreteLco class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        32,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        40,
-                        16,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pf",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lciddr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTDISCRETELCO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTDISCRETELCO_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

@@ -23,7 +23,12 @@
 """Module providing the AleMultiMaterialGroupPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEMULTIMATERIALGROUPPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
 
 class AleMultiMaterialGroupPart(KeywordBase):
     """DYNA ALE_MULTI-MATERIAL_GROUP_PART keyword"""
@@ -35,19 +40,10 @@ class AleMultiMaterialGroupPart(KeywordBase):
         """Initialize the AleMultiMaterialGroupPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMULTIMATERIALGROUPPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID.

@@ -23,7 +23,22 @@
 """Module providing the InitialHydrostaticAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALHYDROSTATICALE_CARD0 = (
+    FieldSchema("alesid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("vecid", int, 20, 10, None),
+    FieldSchema("grav", float, 30, 10, None),
+    FieldSchema("pbase", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+)
+
+_INITIALHYDROSTATICALE_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("mmgblo", int, 10, 10, None),
+)
 
 class InitialHydrostaticAle(KeywordBase):
     """DYNA INITIAL_HYDROSTATIC_ALE keyword"""
@@ -35,74 +50,13 @@ class InitialHydrostaticAle(KeywordBase):
         """Initialize the InitialHydrostaticAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "alesid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbase",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgblo",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALHYDROSTATICALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALHYDROSTATICALE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the Set ID.

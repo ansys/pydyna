@@ -23,8 +23,196 @@
 """Module providing the MatModifiedForceLimited class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATMODIFIEDFORCELIMITED_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("df", float, 40, 10, None),
+    FieldSchema("iaflc", int, 50, 10, 0),
+    FieldSchema("ytflag", float, 60, 10, 0.0),
+    FieldSchema("asoft", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD1 = (
+    FieldSchema("m1", float, 0, 10, None),
+    FieldSchema("m2", float, 10, 10, None),
+    FieldSchema("m3", float, 20, 10, None),
+    FieldSchema("m4", float, 30, 10, None),
+    FieldSchema("m5", float, 40, 10, None),
+    FieldSchema("m6", float, 50, 10, None),
+    FieldSchema("m7", float, 60, 10, None),
+    FieldSchema("m8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD2 = (
+    FieldSchema("lc1", int, 0, 10, None),
+    FieldSchema("lc2", int, 10, 10, 0),
+    FieldSchema("lc3", int, 20, 10, 0),
+    FieldSchema("lc4", int, 30, 10, 0),
+    FieldSchema("lc5", int, 40, 10, 0),
+    FieldSchema("lc6", int, 50, 10, 0),
+    FieldSchema("lc7", int, 60, 10, 0),
+    FieldSchema("lc8", int, 70, 10, 0),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD3 = (
+    FieldSchema("lps1", int, 0, 10, 0),
+    FieldSchema("sfs1", float, 10, 10, 1.0),
+    FieldSchema("lps2", int, 20, 10, 0),
+    FieldSchema("sfs2", float, 30, 10, 1.0),
+    FieldSchema("yms1", float, 40, 10, 1e+20),
+    FieldSchema("yms2", float, 50, 10, 1e+20),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD4 = (
+    FieldSchema("lpt1", int, 0, 10, 0),
+    FieldSchema("sft1", float, 10, 10, 1.0),
+    FieldSchema("lpt2", int, 20, 10, 0),
+    FieldSchema("sft2", float, 30, 10, 1.0),
+    FieldSchema("ymt1", float, 40, 10, 1e+20),
+    FieldSchema("ymt2", float, 50, 10, 1e+20),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD5 = (
+    FieldSchema("lpr", int, 0, 10, 0),
+    FieldSchema("sfr", float, 10, 10, 1.0),
+    FieldSchema("ymr", float, 20, 10, 1e+20),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD6 = (
+    FieldSchema("lys1", int, 0, 10, 0),
+    FieldSchema("sys1", float, 10, 10, 1.0),
+    FieldSchema("lys2", int, 20, 10, 0),
+    FieldSchema("sys2", float, 30, 10, 1.0),
+    FieldSchema("lyt1", int, 40, 10, 0),
+    FieldSchema("syt1", float, 50, 10, 1.0),
+    FieldSchema("lyt2", int, 60, 10, 0),
+    FieldSchema("syt2", float, 70, 10, 1.0),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD7 = (
+    FieldSchema("lyr", int, 0, 10, 0),
+    FieldSchema("syr", float, 10, 10, 1.0),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD8 = (
+    FieldSchema("hms1_1", float, 0, 10, None),
+    FieldSchema("hms1_2", float, 10, 10, None),
+    FieldSchema("hms1_3", float, 20, 10, None),
+    FieldSchema("hms1_4", float, 30, 10, None),
+    FieldSchema("hms1_5", float, 40, 10, None),
+    FieldSchema("hms1_6", float, 50, 10, None),
+    FieldSchema("hms1_7", float, 60, 10, None),
+    FieldSchema("hms1_8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD9 = (
+    FieldSchema("lpms1_1", int, 0, 10, None),
+    FieldSchema("lpms1_2", int, 10, 10, None),
+    FieldSchema("lpms1_3", int, 20, 10, None),
+    FieldSchema("lpms1_4", int, 30, 10, None),
+    FieldSchema("lpms1_5", int, 40, 10, None),
+    FieldSchema("lpms1_6", int, 50, 10, None),
+    FieldSchema("lpms1_7", int, 60, 10, None),
+    FieldSchema("lpms1_8", int, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD10 = (
+    FieldSchema("hms2_1", float, 0, 10, None),
+    FieldSchema("hms2_2", float, 10, 10, None),
+    FieldSchema("hms2_3", float, 20, 10, None),
+    FieldSchema("hms2_4", float, 30, 10, None),
+    FieldSchema("hms2_5", float, 40, 10, None),
+    FieldSchema("hms2_6", float, 50, 10, None),
+    FieldSchema("hms2_7", float, 60, 10, None),
+    FieldSchema("hms2_8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD11 = (
+    FieldSchema("lpms2_1", int, 0, 10, None),
+    FieldSchema("lpms2_2", int, 10, 10, None),
+    FieldSchema("lpms2_3", int, 20, 10, None),
+    FieldSchema("lpms2_4", int, 30, 10, None),
+    FieldSchema("lpms2_5", int, 40, 10, None),
+    FieldSchema("lpms2_6", int, 50, 10, None),
+    FieldSchema("lpms2_7", int, 60, 10, None),
+    FieldSchema("lpms2_8", int, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD12 = (
+    FieldSchema("hmt1_1", float, 0, 10, None),
+    FieldSchema("hmt1_2", float, 10, 10, None),
+    FieldSchema("hmt1_3", float, 20, 10, None),
+    FieldSchema("hmt1_4", float, 30, 10, None),
+    FieldSchema("hmt1_5", float, 40, 10, None),
+    FieldSchema("hmt1_6", float, 50, 10, None),
+    FieldSchema("hmt1_7", float, 60, 10, None),
+    FieldSchema("hmt1_8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD13 = (
+    FieldSchema("lpmt1_1", int, 0, 10, None),
+    FieldSchema("lpmt1_2", int, 10, 10, None),
+    FieldSchema("lpmt1_3", int, 20, 10, None),
+    FieldSchema("lpmt1_4", int, 30, 10, None),
+    FieldSchema("lpmt1_5", int, 40, 10, None),
+    FieldSchema("lpmt1_6", int, 50, 10, None),
+    FieldSchema("lpmt1_7", int, 60, 10, None),
+    FieldSchema("lpmt1_8", int, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD14 = (
+    FieldSchema("hmt2_1", float, 0, 10, None),
+    FieldSchema("hmt2_2", float, 10, 10, None),
+    FieldSchema("hmt2_3", float, 20, 10, None),
+    FieldSchema("hmt2_4", float, 30, 10, None),
+    FieldSchema("hmt2_5", float, 40, 10, None),
+    FieldSchema("hmt2_6", float, 50, 10, None),
+    FieldSchema("hmt2_7", float, 60, 10, None),
+    FieldSchema("hmt2_8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD15 = (
+    FieldSchema("lpmt2_1", int, 0, 10, None),
+    FieldSchema("lpmt2_2", int, 10, 10, None),
+    FieldSchema("lpmt2_3", int, 20, 10, None),
+    FieldSchema("lpmt2_4", int, 30, 10, None),
+    FieldSchema("lpmt2_5", int, 40, 10, None),
+    FieldSchema("lpmt2_6", int, 50, 10, None),
+    FieldSchema("lpmt2_7", int, 60, 10, None),
+    FieldSchema("lpmt2_8", int, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD16 = (
+    FieldSchema("hmr_1", float, 0, 10, None),
+    FieldSchema("hmr_2", float, 10, 10, None),
+    FieldSchema("hmr_3", float, 20, 10, None),
+    FieldSchema("hmr_4", float, 30, 10, None),
+    FieldSchema("hmr_5", float, 40, 10, None),
+    FieldSchema("hmr_6", float, 50, 10, None),
+    FieldSchema("hmr_7", float, 60, 10, None),
+    FieldSchema("hmr_8", float, 70, 10, None),
+)
+
+_MATMODIFIEDFORCELIMITED_CARD17 = (
+    FieldSchema("lpmr_1", int, 0, 10, 0),
+    FieldSchema("lpmr_2", int, 10, 10, 0),
+    FieldSchema("lpmr_3", int, 20, 10, 0),
+    FieldSchema("lpmr_4", int, 30, 10, 0),
+    FieldSchema("lpmr_5", int, 40, 10, 0),
+    FieldSchema("lpmr_6", int, 50, 10, 0),
+    FieldSchema("lpmr_7", int, 60, 10, 0),
+    FieldSchema("lpmr_8", int, 70, 10, 0),
+)
+
+_MATMODIFIEDFORCELIMITED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatModifiedForceLimited(KeywordBase):
     """DYNA MAT_MODIFIED_FORCE_LIMITED keyword"""
@@ -40,1042 +228,71 @@ class MatModifiedForceLimited(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "df",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaflc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ytflag",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asoft",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lps1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lps2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yms1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yms2",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpt1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpt2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymt1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymt2",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfr",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymr",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lys1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sys1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lys2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sys2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lyt1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syt1",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lyt2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syt2",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lyr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syr",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hms1_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpms1_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hms2_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpms2_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmt1_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmt1_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmt2_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmt2_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmr_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmr_1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD10,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD11,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD12,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD13,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD14,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD15,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD16,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDFORCELIMITED_CARD17,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatModifiedForceLimited.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDFORCELIMITED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

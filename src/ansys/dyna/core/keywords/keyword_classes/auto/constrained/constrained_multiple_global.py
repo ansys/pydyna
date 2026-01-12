@@ -23,7 +23,22 @@
 """Module providing the ConstrainedMultipleGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD1 = (
+    FieldSchema("nmp", int, 0, 10, None),
+)
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD2 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("dir", int, 10, 10, 1),
+    FieldSchema("coef", float, 20, 10, None),
+)
 
 class ConstrainedMultipleGlobal(KeywordBase):
     """DYNA CONSTRAINED_MULTIPLE_GLOBAL keyword"""
@@ -35,56 +50,16 @@ class ConstrainedMultipleGlobal(KeywordBase):
         """Initialize the ConstrainedMultipleGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nmp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coef",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Constraint set identification. All constraint sets should have a unique set ID.

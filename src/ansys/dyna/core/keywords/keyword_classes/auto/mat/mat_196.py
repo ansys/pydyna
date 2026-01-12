@@ -25,9 +25,25 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT196_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("dospot", int, 70, 10, 0),
+)
+
+_MAT196_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat196(KeywordBase):
     """DYNA MAT_196 keyword"""
@@ -43,174 +59,43 @@ class Mat196(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
+            Card.from_field_schemas_with_defaults(
+                _MAT196_CARD0,
+                **kwargs,
+            ),            TableCardGroup(
                 [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
+                    (
+                        FieldSchema("dof", int, 0, 10, None),
+                        FieldSchema("type", int, 10, 10, None),
+                        FieldSchema("k", float, 20, 10, None),
+                        FieldSchema("d", float, 30, 10, None),
+                        FieldSchema("cdf", float, 40, 10, None),
+                        FieldSchema("tdf", float, 50, 10, None),
                     ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dospot",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCardGroup(
-                [
-                    Card(
-                            [
-                                Field(
-                                    "dof",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "type",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "k",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "d",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "cdf",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "tdf",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                            ],
-                    ),
-                    Card(
-                            [
-                                Field(
-                                    "flcid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "hlcid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "c1",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "c2",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "dle",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "glcid",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                            ],
+                    (
+                        FieldSchema("flcid", int, 0, 10, None),
+                        FieldSchema("hlcid", int, 10, 10, None),
+                        FieldSchema("c1", float, 20, 10, None),
+                        FieldSchema("c2", float, 30, 10, None),
+                        FieldSchema("dle", float, 40, 10, None),
+                        FieldSchema("glcid", int, 50, 10, None),
                     ),
                 ],
                 None,
                 None,
                 "springs",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = Mat196.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT196_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

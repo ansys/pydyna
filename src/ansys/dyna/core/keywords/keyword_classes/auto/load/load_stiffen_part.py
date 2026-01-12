@@ -23,7 +23,16 @@
 """Module providing the LoadStiffenPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSTIFFENPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("stga", int, 30, 10, None),
+    FieldSchema("stgr", int, 40, 10, None),
+)
 
 class LoadStiffenPart(KeywordBase):
     """DYNA LOAD_STIFFEN_PART keyword"""
@@ -35,47 +44,10 @@ class LoadStiffenPart(KeywordBase):
         """Initialize the LoadStiffenPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stga",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSTIFFENPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID

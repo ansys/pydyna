@@ -23,7 +23,19 @@
 """Module providing the IcfdControlSteady class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLSTEADY_CARD0 = (
+    FieldSchema("its", int, 0, 10, 1000000),
+    FieldSchema("tol1", float, 10, 10, 0.001),
+    FieldSchema("tol2", float, 20, 10, 0.001),
+    FieldSchema("tol3", float, 30, 10, 0.001),
+    FieldSchema("rel1", float, 40, 10, 0.3),
+    FieldSchema("rel2", float, 50, 10, 0.7),
+    FieldSchema("urel", float, 60, 10, 1.0),
+    FieldSchema("order", int, 70, 10, 0),
+)
 
 class IcfdControlSteady(KeywordBase):
     """DYNA ICFD_CONTROL_STEADY keyword"""
@@ -35,76 +47,10 @@ class IcfdControlSteady(KeywordBase):
         """Initialize the IcfdControlSteady class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "its",
-                        int,
-                        0,
-                        10,
-                        1000000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol1",
-                        float,
-                        10,
-                        10,
-                        1.e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol2",
-                        float,
-                        20,
-                        10,
-                        1.e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol3",
-                        float,
-                        30,
-                        10,
-                        1.e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rel1",
-                        float,
-                        40,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rel2",
-                        float,
-                        50,
-                        10,
-                        0.7,
-                        **kwargs,
-                    ),
-                    Field(
-                        "urel",
-                        float,
-                        60,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "order",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLSTEADY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def its(self) -> int:
         """Get or set the Maximum number of iterations to reach convergence.

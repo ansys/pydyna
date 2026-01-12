@@ -23,7 +23,19 @@
 """Module providing the DualceseBoundarySolidWallMsurfRotate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYSOLIDWALLMSURFROTATE_CARD0 = (
+    FieldSchema("mspid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("xp", float, 20, 10, 0.0),
+    FieldSchema("yp", float, 30, 10, 0.0),
+    FieldSchema("zp", float, 40, 10, 0.0),
+    FieldSchema("nx", float, 50, 10, 0.0),
+    FieldSchema("ny", float, 60, 10, 0.0),
+    FieldSchema("nz", float, 70, 10, 0.0),
+)
 
 class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_SOLID_WALL_MSURF_ROTATE keyword"""
@@ -35,74 +47,10 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
         """Initialize the DualceseBoundarySolidWallMsurfRotate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mspid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYSOLIDWALLMSURFROTATE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

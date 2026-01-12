@@ -23,8 +23,49 @@
 """Module providing the SetPorousLagrangian class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETPOROUSLAGRANGIAN_CARD0 = (
+    FieldSchema("eidbeg", int, 0, 10, None),
+    FieldSchema("eidend", int, 10, 10, 0),
+    FieldSchema("local", int, 20, 10, 0),
+    FieldSchema("veccid1", int, 30, 10, 0),
+    FieldSchema("veccid2", int, 40, 10, 0),
+    FieldSchema("userdef", int, 50, 10, 0),
+)
+
+_SETPOROUSLAGRANGIAN_CARD1 = (
+    FieldSchema("axx", float, 0, 10, 0.0),
+    FieldSchema("axy", float, 10, 10, 0.0),
+    FieldSchema("axz", float, 20, 10, 0.0),
+    FieldSchema("bxx", float, 30, 10, 0.0),
+    FieldSchema("bxy", float, 40, 10, 0.0),
+    FieldSchema("bxz", float, 50, 10, 0.0),
+)
+
+_SETPOROUSLAGRANGIAN_CARD2 = (
+    FieldSchema("ayx", float, 0, 10, 0.0),
+    FieldSchema("ayy", float, 10, 10, 0.0),
+    FieldSchema("ayz", float, 20, 10, 0.0),
+    FieldSchema("byx", float, 30, 10, 0.0),
+    FieldSchema("byy", float, 40, 10, 0.0),
+    FieldSchema("byz", float, 50, 10, 0.0),
+)
+
+_SETPOROUSLAGRANGIAN_CARD3 = (
+    FieldSchema("azx", float, 0, 10, 0.0),
+    FieldSchema("azy", float, 10, 10, 0.0),
+    FieldSchema("azz", float, 20, 10, 0.0),
+    FieldSchema("bzx", float, 30, 10, 0.0),
+    FieldSchema("bzy", float, 40, 10, 0.0),
+    FieldSchema("bzz", float, 50, 10, 0.0),
+)
+
+_SETPOROUSLAGRANGIAN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetPorousLagrangian(KeywordBase):
     """DYNA SET_POROUS_LAGRANGIAN keyword"""
@@ -40,232 +81,29 @@ class SetPorousLagrangian(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eidbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eidend",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "veccid1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "veccid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "userdef",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "axx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ayx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ayy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ayz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "azx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "azy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "azz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETPOROUSLAGRANGIAN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETPOROUSLAGRANGIAN_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETPOROUSLAGRANGIAN_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETPOROUSLAGRANGIAN_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetPorousLagrangian.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPOROUSLAGRANGIAN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def eidbeg(self) -> typing.Optional[int]:
         """Get or set the EIDBEG is a set of thick porous elements.

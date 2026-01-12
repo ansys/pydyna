@@ -23,7 +23,19 @@
 """Module providing the DatabaseRecoverNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASERECOVERNODE_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("iax", str, 10, 10, "SMNPD"),
+    FieldSchema("iay", str, 20, 10, "SMNPD"),
+    FieldSchema("iaz", str, 30, 10, "SMNPD"),
+    FieldSchema("method", int, 40, 10, 0),
+    FieldSchema("ivx", str, 50, 10, "SMNPD"),
+    FieldSchema("ivy", str, 60, 10, "SMNPD"),
+    FieldSchema("ivz", str, 70, 10, "SMNPD"),
+)
 
 class DatabaseRecoverNode(KeywordBase):
     """DYNA DATABASE_RECOVER_NODE keyword"""
@@ -35,75 +47,10 @@ class DatabaseRecoverNode(KeywordBase):
         """Initialize the DatabaseRecoverNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iax",
-                        str,
-                        10,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "iay",
-                        str,
-                        20,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaz",
-                        str,
-                        30,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivx",
-                        str,
-                        50,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivy",
-                        str,
-                        60,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivz",
-                        str,
-                        70,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASERECOVERNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID of solid elements whose nodal stress will be recovered.

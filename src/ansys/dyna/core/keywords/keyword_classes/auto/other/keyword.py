@@ -23,7 +23,14 @@
 """Module providing the Keyword class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_KEYWORD_CARD0 = (
+    FieldSchema("memory", str, 0, 10, None),
+    FieldSchema("memory2", str, 10, 10, None),
+    FieldSchema("ncpu", int, 20, 10, None),
+)
 
 class Keyword(KeywordBase):
     """DYNA KEYWORD keyword"""
@@ -35,33 +42,10 @@ class Keyword(KeywordBase):
         """Initialize the Keyword class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "memory",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memory2",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncpu",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _KEYWORD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def memory(self) -> typing.Optional[str]:
         """Get or set the Memory size in units of words to be allocated.

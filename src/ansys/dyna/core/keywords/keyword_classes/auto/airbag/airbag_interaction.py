@@ -23,7 +23,18 @@
 """Module providing the AirbagInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_AIRBAGINTERACTION_CARD0 = (
+    FieldSchema("ab1", int, 0, 10, None),
+    FieldSchema("ab2", int, 10, 10, None),
+    FieldSchema("area", float, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, None),
+    FieldSchema("pid", int, 40, 10, 0),
+    FieldSchema("lcid", int, 50, 10, 0),
+    FieldSchema("iflow", int, 60, 10, 0),
+)
 
 class AirbagInteraction(KeywordBase):
     """DYNA AIRBAG_INTERACTION keyword"""
@@ -35,64 +46,10 @@ class AirbagInteraction(KeywordBase):
         """Initialize the AirbagInteraction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ab1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ab2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflow",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGINTERACTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ab1(self) -> typing.Optional[int]:
         """Get or set the First airbag ID, as defined on *AIRBAG card.

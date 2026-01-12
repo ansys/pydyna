@@ -23,7 +23,14 @@
 """Module providing the ParameterType class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARAMETERTYPE_CARD0 = (
+    FieldSchema("prmr", str, 0, 10, None),
+    FieldSchema("val", int, 10, 10, None),
+    FieldSchema("prtyp", str, 20, 10, "   "),
+)
 
 class ParameterType(KeywordBase):
     """DYNA PARAMETER_TYPE keyword"""
@@ -35,34 +42,10 @@ class ParameterType(KeywordBase):
         """Initialize the ParameterType class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "prmr",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prtyp",
-                        str,
-                        20,
-                        10,
-                        "   ",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARAMETERTYPE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def prmr(self) -> typing.Optional[str]:
         """Get or set the Define the nth parameter in a field of 10.

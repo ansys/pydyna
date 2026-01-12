@@ -23,7 +23,15 @@
 """Module providing the ControlFormingOnestepDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGONESTEPDRAWBEAD_CARD0 = (
+    FieldSchema("ndset", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("th", float, 20, 10, 0.0),
+    FieldSchema("percnt", float, 30, 10, 0.0),
+)
 
 class ControlFormingOnestepDrawbead(KeywordBase):
     """DYNA CONTROL_FORMING_ONESTEP_DRAWBEAD keyword"""
@@ -35,42 +43,10 @@ class ControlFormingOnestepDrawbead(KeywordBase):
         """Initialize the ControlFormingOnestepDrawbead class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ndset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "th",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "percnt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGONESTEPDRAWBEAD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ndset(self) -> typing.Optional[int]:
         """Get or set the Node set ID along the periphery of the part, as defined by keyword *SET_NODE_LIST.

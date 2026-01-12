@@ -23,7 +23,23 @@
 """Module providing the BoundaryRadiationSegmentVfCalculate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYRADIATIONSEGMENTVFCALCULATE_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("type", int, 40, 10, 2),
+    FieldSchema("block", int, 50, 10, 0),
+    FieldSchema("nint", int, 60, 10, 0),
+)
+
+_BOUNDARYRADIATIONSEGMENTVFCALCULATE_CARD1 = (
+    FieldSchema("selcid", int, 0, 10, 0),
+    FieldSchema("semult", float, 10, 10, 1.0),
+)
 
 class BoundaryRadiationSegmentVfCalculate(KeywordBase):
     """DYNA BOUNDARY_RADIATION_SEGMENT_VF_CALCULATE keyword"""
@@ -35,84 +51,13 @@ class BoundaryRadiationSegmentVfCalculate(KeywordBase):
         """Initialize the BoundaryRadiationSegmentVfCalculate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "block",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nint",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "selcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "semult",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSEGMENTVFCALCULATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSEGMENTVFCALCULATE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the First node ID defining the segment.

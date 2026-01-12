@@ -23,7 +23,15 @@
 """Module providing the CeseBoundarySet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("dof ", int, 10, 10, 101),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+)
 
 class CeseBoundarySet(KeywordBase):
     """DYNA CESE_BOUNDARY_SET keyword"""
@@ -35,42 +43,10 @@ class CeseBoundarySet(KeywordBase):
         """Initialize the CeseBoundarySet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof ",
-                        int,
-                        10,
-                        10,
-                        101,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set  ID.

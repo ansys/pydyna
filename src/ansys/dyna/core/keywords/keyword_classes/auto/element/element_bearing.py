@@ -23,7 +23,49 @@
 """Module providing the ElementBearing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTBEARING_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 0),
+    FieldSchema("n1", int, 20, 10, None),
+    FieldSchema("cid1", int, 30, 10, None),
+    FieldSchema("n2", int, 40, 10, None),
+    FieldSchema("ci2", int, 50, 10, None),
+    FieldSchema("nb", int, 60, 10, None),
+)
+
+_ELEMENTBEARING_CARD1 = (
+    FieldSchema("eball", float, 0, 10, 0.0),
+    FieldSchema("prball", float, 10, 10, 0.0),
+    FieldSchema("erace", float, 20, 10, 0.0),
+    FieldSchema("prrace", float, 30, 10, 0.0),
+    FieldSchema("stresl", float, 40, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD2 = (
+    FieldSchema("d", float, 0, 10, 0.0),
+    FieldSchema("di", float, 10, 10, 0.0),
+    FieldSchema("do", float, 20, 10, 0.0),
+    FieldSchema("dm", float, 30, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD3 = (
+    FieldSchema("ao", float, 0, 10, 0.0),
+    FieldSchema("ai", float, 10, 10, 0.0),
+    FieldSchema("bo", float, 20, 10, 0.0),
+    FieldSchema("pd", float, 30, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD4 = (
+    FieldSchema("ipflag", int, 0, 10, 0),
+    FieldSchema("xtran", float, 10, 10, 0.0),
+    FieldSchema("ytran", float, 20, 10, 0.0),
+    FieldSchema("ztran", float, 30, 10, 0.0),
+    FieldSchema("xrot", float, 40, 10, 0.0),
+    FieldSchema("yrot", float, 50, 10, 0.0),
+)
 
 class ElementBearing(KeywordBase):
     """DYNA ELEMENT_BEARING keyword"""
@@ -35,230 +77,22 @@ class ElementBearing(KeywordBase):
         """Initialize the ElementBearing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ci2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nb",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eball",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prball",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erace",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prrace",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stresl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "di",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "do",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dm",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ao",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ai",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pd",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xtran",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ytran",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ztran",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xrot",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yrot",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the 

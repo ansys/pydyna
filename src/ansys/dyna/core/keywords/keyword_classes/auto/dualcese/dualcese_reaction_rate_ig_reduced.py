@@ -23,7 +23,17 @@
 """Module providing the DualceseReactionRateIgReduced class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEREACTIONRATEIGREDUCED_CARD0 = (
+    FieldSchema("react_id", int, 0, 10, None),
+    FieldSchema("grow1", float, 10, 10, None),
+    FieldSchema("cc", float, 20, 10, None),
+    FieldSchema("dd", float, 30, 10, None),
+    FieldSchema("yy", float, 40, 10, None),
+    FieldSchema("ph10", float, 50, 10, None),
+)
 
 class DualceseReactionRateIgReduced(KeywordBase):
     """DYNA DUALCESE_REACTION_RATE_IG_REDUCED keyword"""
@@ -35,54 +45,10 @@ class DualceseReactionRateIgReduced(KeywordBase):
         """Initialize the DualceseReactionRateIgReduced class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "react_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grow1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dd",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ph10",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEREACTIONRATEIGREDUCED_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def react_id(self) -> typing.Optional[int]:
         """Get or set the ID of reaction rate law

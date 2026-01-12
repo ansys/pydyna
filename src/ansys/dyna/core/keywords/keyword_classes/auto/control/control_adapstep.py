@@ -23,7 +23,13 @@
 """Module providing the ControlAdapstep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLADAPSTEP_CARD0 = (
+    FieldSchema("factin", float, 0, 10, 1.0),
+    FieldSchema("dfactr", float, 10, 10, 0.01),
+)
 
 class ControlAdapstep(KeywordBase):
     """DYNA CONTROL_ADAPSTEP keyword"""
@@ -35,28 +41,10 @@ class ControlAdapstep(KeywordBase):
         """Initialize the ControlAdapstep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "factin",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfactr",
-                        float,
-                        10,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPSTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def factin(self) -> float:
         """Get or set the Initial relaxation factor for contact force during each adaptive remesh. Unless stability problems occur in the contact, FACTIN=1.0 is recommended since this option can create some numerical noise in the resultant tooling forces. A typical value for this parameter is 0.10.

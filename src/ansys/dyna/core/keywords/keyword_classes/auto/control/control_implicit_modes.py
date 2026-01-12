@@ -23,7 +23,23 @@
 """Module providing the ControlImplicitModes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITMODES_CARD0 = (
+    FieldSchema("nsidc", int, 0, 10, 0),
+    FieldSchema("nsida", int, 10, 10, 0),
+    FieldSchema("neig", int, 20, 10, None),
+    FieldSchema("ibase", int, 30, 10, None),
+    FieldSchema("se_mass", str, 40, 10, None),
+    FieldSchema("se_damp", str, 50, 10, None),
+    FieldSchema("se_stiff", str, 60, 10, None),
+    FieldSchema("se_inert", str, 70, 10, None),
+)
+
+_CONTROLIMPLICITMODES_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class ControlImplicitModes(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODES keyword"""
@@ -35,81 +51,13 @@ class ControlImplicitModes(KeywordBase):
         """Initialize the ControlImplicitModes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsidc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsida",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neig",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibase",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_mass",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_damp",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_stiff",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_inert",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODES_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsidc(self) -> int:
         """Get or set the Node set ID for constraint modes:

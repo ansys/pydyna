@@ -23,7 +23,14 @@
 """Module providing the DeformableToRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFORMABLETORIGID_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lrb", int, 10, 10, 0),
+    FieldSchema("ptype", str, 20, 10, "PART"),
+)
 
 class DeformableToRigid(KeywordBase):
     """DYNA DEFORMABLE_TO_RIGID keyword"""
@@ -35,35 +42,10 @@ class DeformableToRigid(KeywordBase):
         """Initialize the DeformableToRigid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lrb",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        str,
-                        20,
-                        10,
-                        "PART",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for the part that will switched to a rigid material, also see *PART.

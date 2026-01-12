@@ -23,7 +23,15 @@
 """Module providing the AleEssentialBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEESSENTIALBOUNDARY_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("idtype", int, 10, 10, 0),
+    FieldSchema("ictype", int, 20, 10, 1),
+    FieldSchema("iexcl", int, 30, 10, None),
+)
 
 class AleEssentialBoundary(KeywordBase):
     """DYNA ALE_ESSENTIAL_BOUNDARY keyword"""
@@ -35,42 +43,10 @@ class AleEssentialBoundary(KeywordBase):
         """Initialize the AleEssentialBoundary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ictype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iexcl",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEESSENTIALBOUNDARY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set or segment set ID of the ALE mesh boundary.

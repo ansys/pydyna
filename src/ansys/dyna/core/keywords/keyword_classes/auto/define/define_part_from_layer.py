@@ -23,8 +23,22 @@
 """Module providing the DefinePartFromLayer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEPARTFROMLAYER_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("layer", int, 10, 10, None),
+    FieldSchema("pidsrc", int, 20, 10, None),
+    FieldSchema("layold", int, 30, 10, None),
+    FieldSchema("mid", int, 40, 10, None),
+    FieldSchema("thick", float, 50, 10, None),
+)
+
+_DEFINEPARTFROMLAYER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefinePartFromLayer(KeywordBase):
     """DYNA DEFINE_PART_FROM_LAYER keyword"""
@@ -40,71 +54,20 @@ class DefinePartFromLayer(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layer",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidsrc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layold",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTFROMLAYER_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePartFromLayer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPARTFROMLAYER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The part ID to be created

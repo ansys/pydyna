@@ -23,7 +23,21 @@
 """Module providing the IcfdControlFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLFSI_CARD0 = (
+    FieldSchema("owc", int, 0, 10, 0),
+    FieldSchema("bt", float, 10, 10, 0.0),
+    FieldSchema("dt", float, 20, 10, 1e+28),
+    FieldSchema("idc", float, 30, 10, 0.25),
+    FieldSchema("lcidsf", int, 40, 10, None),
+    FieldSchema("xproj", int, 50, 10, 0),
+)
+
+_ICFDCONTROLFSI_CARD1 = (
+    FieldSchema("nsub", int, 0, 10, None),
+)
 
 class IcfdControlFsi(KeywordBase):
     """DYNA ICFD_CONTROL_FSI keyword"""
@@ -35,70 +49,13 @@ class IcfdControlFsi(KeywordBase):
         """Initialize the IcfdControlFsi class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "owc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        20,
-                        10,
-                        1.0E28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idc",
-                        float,
-                        30,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidsf",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xproj",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsub",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLFSI_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLFSI_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def owc(self) -> int:
         """Get or set the Indicates the coupling direction to the solver.

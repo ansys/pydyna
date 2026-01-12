@@ -23,9 +23,18 @@
 """Module providing the SetBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETBEAM_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetBeam(KeywordBase):
     """DYNA SET_BEAM keyword"""
@@ -41,43 +50,26 @@ class SetBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETBEAM_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "element",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("element")),
-            OptionCardSet(
+                data = kwargs.get("element")),            OptionCardSet(
                 option_spec = SetBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID.

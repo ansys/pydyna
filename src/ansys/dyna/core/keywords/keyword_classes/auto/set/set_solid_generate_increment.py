@@ -23,8 +23,24 @@
 """Module providing the SetSolidGenerateIncrement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETSOLIDGENERATEINCREMENT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("solver", str, 10, 10, "MECH"),
+)
+
+_SETSOLIDGENERATEINCREMENT_CARD1 = (
+    FieldSchema("bbeg", int, 0, 10, None),
+    FieldSchema("bend", int, 10, 10, None),
+    FieldSchema("incr", int, 20, 10, None),
+)
+
+_SETSOLIDGENERATEINCREMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetSolidGenerateIncrement(KeywordBase):
     """DYNA SET_SOLID_GENERATE_INCREMENT keyword"""
@@ -40,69 +56,23 @@ class SetSolidGenerateIncrement(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        10,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bend",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERATEINCREMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERATEINCREMENT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetSolidGenerateIncrement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSOLIDGENERATEINCREMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID. All solid sets should have a unique set ID.

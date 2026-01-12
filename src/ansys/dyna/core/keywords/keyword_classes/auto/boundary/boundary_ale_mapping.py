@@ -23,7 +23,37 @@
 """Module providing the BoundaryAleMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYALEMAPPING_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("typ", int, 10, 10, 0),
+    FieldSchema("ammsid", int, 20, 10, None),
+    FieldSchema("ivoltyp", int, 30, 10, None),
+    FieldSchema("birth", float, 40, 10, 0.0),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("dtout", float, 60, 10, None),
+    FieldSchema("ini", int, 70, 10, 0),
+)
+
+_BOUNDARYALEMAPPING_CARD1 = (
+    FieldSchema("thick", float, 0, 10, 0.0),
+    FieldSchema("radius", float, 10, 10, 0.0),
+    FieldSchema("x1", float, 20, 10, 0.0),
+    FieldSchema("y1", float, 30, 10, 0.0),
+    FieldSchema("z1", float, 40, 10, 0.0),
+    FieldSchema("x2", float, 50, 10, 0.0),
+    FieldSchema("y2", float, 60, 10, 0.0),
+    FieldSchema("z2", float, 70, 10, 0.0),
+)
+
+_BOUNDARYALEMAPPING_CARD2 = (
+    FieldSchema("x0", float, 0, 10, 0.0),
+    FieldSchema("y0", float, 10, 10, 0.0),
+    FieldSchema("z0", float, 20, 10, 0.0),
+    FieldSchema("vecid", int, 30, 10, None),
+)
 
 class BoundaryAleMapping(KeywordBase):
     """DYNA BOUNDARY_ALE_MAPPING keyword"""
@@ -35,175 +65,16 @@ class BoundaryAleMapping(KeywordBase):
         """Initialize the BoundaryAleMapping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivoltyp",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ini",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "thick",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYALEMAPPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYALEMAPPING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYALEMAPPING_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID or element set ID

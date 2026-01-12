@@ -23,8 +23,30 @@
 """Module providing the DefineMultiDrawbeadsIges class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEMULTIDRAWBEADSIGES_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_DEFINEMULTIDRAWBEADSIGES_CARD1 = (
+    FieldSchema("dbid", int, 0, 10, None),
+    FieldSchema("vid", int, 10, 10, None),
+    FieldSchema("pid", int, 20, 10, None),
+    FieldSchema("blkid", int, 30, 10, None),
+    FieldSchema("ncur", int, 40, 10, None),
+)
+
+_DEFINEMULTIDRAWBEADSIGES_CARD2 = (
+    FieldSchema("crvid", int, 0, 10, None),
+    FieldSchema("bforce", float, 10, 10, 0.0),
+)
+
+_DEFINEMULTIDRAWBEADSIGES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineMultiDrawbeadsIges(KeywordBase):
     """DYNA DEFINE_MULTI_DRAWBEADS_IGES keyword"""
@@ -40,94 +62,26 @@ class DefineMultiDrawbeadsIges(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dbid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blkid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncur",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "crvid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bforce",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEMULTIDRAWBEADSIGES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEMULTIDRAWBEADSIGES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEMULTIDRAWBEADSIGES_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineMultiDrawbeadsIges.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEMULTIDRAWBEADSIGES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the IGES file that has the draw bead curve segment definitions

@@ -23,7 +23,16 @@
 """Module providing the IgaSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGASOLID_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("nisr", float, 20, 10, 0.0),
+    FieldSchema("niss", float, 30, 10, 0.0),
+    FieldSchema("nist", float, 40, 10, 0.0),
+)
 
 class IgaSolid(KeywordBase):
     """DYNA IGA_SOLID keyword"""
@@ -35,50 +44,10 @@ class IgaSolid(KeywordBase):
         """Initialize the IgaSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nisr",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niss",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nist",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGASOLID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Isogeometric solid (patch) ID, see Remark 1 and Remark 2. A unique number must be chosen.

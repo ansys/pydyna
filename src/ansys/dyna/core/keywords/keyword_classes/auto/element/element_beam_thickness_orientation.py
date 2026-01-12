@@ -23,7 +23,35 @@
 """Module providing the ElementBeamThicknessOrientation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTBEAMTHICKNESSORIENTATION_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("rt1", int, 40, 8, 0),
+    FieldSchema("rr1", int, 48, 8, 0),
+    FieldSchema("rt2", int, 56, 8, 0),
+    FieldSchema("rr2", int, 64, 8, 0),
+    FieldSchema("local", int, 72, 8, 2),
+)
+
+_ELEMENTBEAMTHICKNESSORIENTATION_CARD1 = (
+    FieldSchema("parm1", float, 0, 16, None),
+    FieldSchema("parm2", float, 16, 16, None),
+    FieldSchema("parm3", float, 32, 16, None),
+    FieldSchema("parm4", float, 48, 16, None),
+    FieldSchema("parm5", float, 64, 16, None),
+)
+
+_ELEMENTBEAMTHICKNESSORIENTATION_CARD2 = (
+    FieldSchema("vx", float, 0, 10, 0.0),
+    FieldSchema("vy", float, 10, 10, 0.0),
+    FieldSchema("vz", float, 20, 10, 0.0),
+)
 
 class ElementBeamThicknessOrientation(KeywordBase):
     """DYNA ELEMENT_BEAM_THICKNESS_ORIENTATION keyword"""
@@ -35,154 +63,16 @@ class ElementBeamThicknessOrientation(KeywordBase):
         """Initialize the ElementBeamThicknessOrientation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt1",
-                        int,
-                        40,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr1",
-                        int,
-                        48,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt2",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr2",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        72,
-                        8,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "parm1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMTHICKNESSORIENTATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMTHICKNESSORIENTATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMTHICKNESSORIENTATION_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

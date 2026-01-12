@@ -23,8 +23,93 @@
 """Module providing the MatThermalOrthotropicTd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTHERMALORTHOTROPICTD_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
+    FieldSchema("tgmult", float, 30, 10, None),
+    FieldSchema("aopt", float, 40, 10, 0.0),
+    FieldSchema("tlat", float, 50, 10, None),
+    FieldSchema("hlat", float, 60, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD1 = (
+    FieldSchema("t1", float, 0, 10, None),
+    FieldSchema("t2", float, 10, 10, None),
+    FieldSchema("t3", float, 20, 10, None),
+    FieldSchema("t4", float, 30, 10, None),
+    FieldSchema("t5", float, 40, 10, None),
+    FieldSchema("t6", float, 50, 10, None),
+    FieldSchema("t7", float, 60, 10, None),
+    FieldSchema("t8", float, 70, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD2 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+    FieldSchema("c4", float, 30, 10, None),
+    FieldSchema("c5", float, 40, 10, None),
+    FieldSchema("c6", float, 50, 10, None),
+    FieldSchema("c7", float, 60, 10, None),
+    FieldSchema("c8", float, 70, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD3 = (
+    FieldSchema("(k1-1)", float, 0, 10, None),
+    FieldSchema("(k1-2)", float, 10, 10, None),
+    FieldSchema("(k1-3)", float, 20, 10, None),
+    FieldSchema("(k1-4)", float, 30, 10, None),
+    FieldSchema("(k1-5)", float, 40, 10, None),
+    FieldSchema("(k1-6)", float, 50, 10, None),
+    FieldSchema("(k1-7)", float, 60, 10, None),
+    FieldSchema("(k1-8)", float, 70, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD4 = (
+    FieldSchema("(k2-1)", float, 0, 10, None),
+    FieldSchema("(k2-2)", float, 10, 10, None),
+    FieldSchema("(k2-3)", float, 20, 10, None),
+    FieldSchema("(k2-4)", float, 30, 10, None),
+    FieldSchema("(k2-5)", float, 40, 10, None),
+    FieldSchema("(k2-6)", float, 50, 10, None),
+    FieldSchema("(k2-7)", float, 60, 10, None),
+    FieldSchema("(k2-8)", float, 70, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD5 = (
+    FieldSchema("(k3-1)", float, 0, 10, None),
+    FieldSchema("(k-2)", float, 10, 10, None),
+    FieldSchema("(k3-3)", float, 20, 10, None),
+    FieldSchema("(k3-4)", float, 30, 10, None),
+    FieldSchema("(k3-5)", float, 40, 10, None),
+    FieldSchema("(k3-6)", float, 50, 10, None),
+    FieldSchema("(k3-7)", float, 60, 10, None),
+    FieldSchema("(k3-8)", float, 70, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD6 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_CARD7 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+)
+
+_MATTHERMALORTHOTROPICTD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatThermalOrthotropicTd(KeywordBase):
     """DYNA MAT_THERMAL_ORTHOTROPIC_TD keyword"""
@@ -40,450 +125,41 @@ class MatThermalOrthotropicTd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgrlc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgmult",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlat",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlat",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k1-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k2-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k3-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALORTHOTROPICTD_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermalOrthotropicTd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALORTHOTROPICTD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal material identification, a unique number or label muast be specified.

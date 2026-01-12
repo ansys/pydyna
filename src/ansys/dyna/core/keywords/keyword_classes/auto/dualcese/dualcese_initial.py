@@ -23,7 +23,19 @@
 """Module providing the DualceseInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEINITIAL_CARD0 = (
+    FieldSchema("u", float, 0, 10, 0.0),
+    FieldSchema("v", float, 10, 10, 0.0),
+    FieldSchema("w", float, 20, 10, 0.0),
+    FieldSchema("rh", float, 30, 10, 1.225),
+    FieldSchema("p", float, 40, 10, 0.0),
+    FieldSchema("t", float, 50, 10, 0.0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("ifunc", int, 70, 10, None),
+)
 
 class DualceseInitial(KeywordBase):
     """DYNA DUALCESE_INITIAL keyword"""
@@ -35,74 +47,10 @@ class DualceseInitial(KeywordBase):
         """Initialize the DualceseInitial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "u",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rh",
-                        float,
-                        30,
-                        10,
-                        1.225,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifunc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def u(self) -> float:
         """Get or set the x-, y-, z-velocity components respectively

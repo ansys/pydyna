@@ -23,7 +23,38 @@
 """Module providing the DualceseBoundaryPrescribedTwoPhaseMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD0 = (
+    FieldSchema("mspid", int, 0, 10, None),
+    FieldSchema("idcomp", int, 10, 10, None),
+    FieldSchema("dirx", float, 20, 10, None),
+    FieldSchema("diry", float, 30, 10, None),
+    FieldSchema("dirz", float, 40, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD1 = (
+    FieldSchema("lc_z1", int, 0, 10, None),
+    FieldSchema("lc_u", int, 10, 10, None),
+    FieldSchema("lc_v", int, 20, 10, None),
+    FieldSchema("lc_w", int, 30, 10, None),
+    FieldSchema("lc_d1", int, 40, 10, None),
+    FieldSchema("lc_d2", int, 50, 10, None),
+    FieldSchema("lc_p", float, 60, 10, None),
+    FieldSchema("lc_t", float, 70, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD2 = (
+    FieldSchema("sf_z1", float, 0, 10, 1.0),
+    FieldSchema("sf_u", float, 10, 10, 1.0),
+    FieldSchema("sf_v", float, 20, 10, 1.0),
+    FieldSchema("sf_w", float, 30, 10, 1.0),
+    FieldSchema("sf_d1", float, 40, 10, 1.0),
+    FieldSchema("sf_d2", float, 50, 10, 1.0),
+    FieldSchema("sf_p", float, 60, 10, 1.0),
+    FieldSchema("sf_t", float, 70, 10, 1.0),
+)
 
 class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_PRESCRIBED_TWO-PHASE_MSURF keyword"""
@@ -35,175 +66,16 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
         """Initialize the DualceseBoundaryPrescribedTwoPhaseMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mspid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcomp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_z1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_u",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_v",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_w",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_d1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_d2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_p",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_t",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf_z1",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_u",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_v",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_w",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_d1",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_d2",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_p",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_t",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDTWOPHASEMSURF_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

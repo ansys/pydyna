@@ -23,7 +23,12 @@
 """Module providing the ControlMppDecompositionFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONFILE_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class ControlMppDecompositionFile(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_FILE keyword"""
@@ -35,19 +40,10 @@ class ControlMppDecompositionFile(KeywordBase):
         """Initialize the ControlMppDecompositionFile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONFILE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of a file containing (or to contain ) a decomposition record.

@@ -23,7 +23,46 @@
 """Module providing the ConstrainedInterpolationSpotweld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0 = (
+    FieldSchema("pid1", int, 0, 10, None),
+    FieldSchema("pid2", int, 10, 10, None),
+    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("thick", float, 30, 10, None),
+    FieldSchema("r", float, 40, 10, None),
+    FieldSchema("stiff", float, 50, 10, None),
+    FieldSchema("alpha1", float, 60, 10, None),
+    FieldSchema("model", int, 70, 10, 1),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1 = (
+    FieldSchema("rn", float, 0, 10, None),
+    FieldSchema("rs", float, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("lcf", int, 30, 10, None),
+    FieldSchema("lcupf", int, 40, 10, None),
+    FieldSchema("lcupr", int, 50, 10, None),
+    FieldSchema("dens", float, 60, 10, None),
+    FieldSchema("intp", int, 70, 10, 0),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2 = (
+    FieldSchema("upfn", float, 0, 10, None),
+    FieldSchema("upfs", float, 10, 10, None),
+    FieldSchema("alpha2", float, 20, 10, None),
+    FieldSchema("beta2", float, 30, 10, None),
+    FieldSchema("uprn", float, 40, 10, None),
+    FieldSchema("uprs", float, 50, 10, None),
+    FieldSchema("alpha3", float, 60, 10, None),
+    FieldSchema("beta3", float, 70, 10, None),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3 = (
+    FieldSchema("mrn", float, 0, 10, None),
+    FieldSchema("mrs", float, 10, 10, None),
+)
 
 class ConstrainedInterpolationSpotweld(KeywordBase):
     """DYNA CONSTRAINED_INTERPOLATION_SPOTWELD keyword"""
@@ -35,208 +74,19 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         """Initialize the ConstrainedInterpolationSpotweld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiff",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "model",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcf",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcupf",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcupr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "upfn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "upfs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uprn",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uprs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mrn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mrs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID of first sheet

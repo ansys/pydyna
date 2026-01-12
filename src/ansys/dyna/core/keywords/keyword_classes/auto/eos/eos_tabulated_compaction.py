@@ -23,7 +23,83 @@
 """Module providing the EosTabulatedCompaction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSTABULATEDCOMPACTION_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("gama", float, 10, 10, None),
+    FieldSchema("e0", float, 20, 10, None),
+    FieldSchema("vo", float, 30, 10, None),
+    FieldSchema("lcc", int, 40, 10, None),
+    FieldSchema("lct", int, 50, 10, None),
+    FieldSchema("lck", int, 60, 10, None),
+    FieldSchema("lcid", int, 70, 10, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD1 = (
+    FieldSchema("ev1", float, 0, 16, None),
+    FieldSchema("ev2", float, 16, 16, None),
+    FieldSchema("ev3", float, 32, 16, None),
+    FieldSchema("ev4", float, 48, 16, None),
+    FieldSchema("ev5", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD2 = (
+    FieldSchema("ev6", float, 0, 16, None),
+    FieldSchema("ev7", float, 16, 16, None),
+    FieldSchema("ev8", float, 32, 16, None),
+    FieldSchema("ev9", float, 48, 16, None),
+    FieldSchema("ev10", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD3 = (
+    FieldSchema("c1", float, 0, 16, None),
+    FieldSchema("c2", float, 16, 16, None),
+    FieldSchema("c3", float, 32, 16, None),
+    FieldSchema("c4", float, 48, 16, None),
+    FieldSchema("c5", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD4 = (
+    FieldSchema("c6", float, 0, 16, None),
+    FieldSchema("c7", float, 16, 16, None),
+    FieldSchema("c8", float, 32, 16, None),
+    FieldSchema("c9", float, 48, 16, None),
+    FieldSchema("c10", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD5 = (
+    FieldSchema("t1", float, 0, 16, None),
+    FieldSchema("t2", float, 16, 16, None),
+    FieldSchema("t3", float, 32, 16, None),
+    FieldSchema("t4", float, 48, 16, None),
+    FieldSchema("t5", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD6 = (
+    FieldSchema("t6", float, 0, 16, None),
+    FieldSchema("t7", float, 16, 16, None),
+    FieldSchema("t8", float, 32, 16, None),
+    FieldSchema("t9", float, 48, 16, None),
+    FieldSchema("t10", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD7 = (
+    FieldSchema("k1", float, 0, 16, None),
+    FieldSchema("k2", float, 16, 16, None),
+    FieldSchema("k3", float, 32, 16, None),
+    FieldSchema("k4", float, 48, 16, None),
+    FieldSchema("k5", float, 64, 16, None),
+)
+
+_EOSTABULATEDCOMPACTION_CARD8 = (
+    FieldSchema("k6", float, 0, 16, None),
+    FieldSchema("k7", float, 16, 16, None),
+    FieldSchema("k8", float, 32, 16, None),
+    FieldSchema("k9", float, 48, 16, None),
+    FieldSchema("k10", float, 64, 16, None),
+)
 
 class EosTabulatedCompaction(KeywordBase):
     """DYNA EOS_TABULATED_COMPACTION keyword"""
@@ -35,380 +111,34 @@ class EosTabulatedCompaction(KeywordBase):
         """Initialize the EosTabulatedCompaction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gama",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vo",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lck",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ev1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ev6",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev7",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev8",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev9",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ev10",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c6",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c8",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c9",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t6",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t7",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t8",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t9",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t10",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k6",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k7",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k8",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k9",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k10",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSTABULATEDCOMPACTION_CARD8,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.

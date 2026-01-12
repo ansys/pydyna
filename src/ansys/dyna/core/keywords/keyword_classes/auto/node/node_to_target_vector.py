@@ -23,7 +23,15 @@
 """Module providing the NodeToTargetVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODETOTARGETVECTOR_CARD0 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("xdelta", float, 8, 16, 0.0),
+    FieldSchema("ydelta", float, 24, 16, 0.0),
+    FieldSchema("zdelta", float, 40, 16, 0.0),
+)
 
 class NodeToTargetVector(KeywordBase):
     """DYNA NODE_TO_TARGET_VECTOR keyword"""
@@ -35,43 +43,10 @@ class NodeToTargetVector(KeywordBase):
         """Initialize the NodeToTargetVector class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xdelta",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ydelta",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zdelta",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODETOTARGETVECTOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID on a part best fitted to the target.

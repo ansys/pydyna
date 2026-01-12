@@ -23,7 +23,22 @@
 """Module providing the BoundaryRadiationSetVfCalculate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYRADIATIONSETVFCALCULATE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 2),
+    FieldSchema("rad_grp", int, 20, 10, 0),
+    FieldSchema("file_no", int, 30, 10, 0),
+    FieldSchema("block", int, 40, 10, 0),
+    FieldSchema("nint", int, 50, 10, 0),
+)
+
+_BOUNDARYRADIATIONSETVFCALCULATE_CARD1 = (
+    FieldSchema("selcid", int, 0, 10, 0),
+    FieldSchema("semult", float, 10, 10, 1.0),
+)
 
 class BoundaryRadiationSetVfCalculate(KeywordBase):
     """DYNA BOUNDARY_RADIATION_SET_VF_CALCULATE keyword"""
@@ -35,79 +50,13 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
         """Initialize the BoundaryRadiationSetVfCalculate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rad_grp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "file_no",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "block",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nint",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "selcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "semult",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSETVFCALCULATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSETVFCALCULATE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.

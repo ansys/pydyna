@@ -23,7 +23,13 @@
 """Module providing the AleMultiMaterialGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEMULTIMATERIALGROUP_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("idtype", int, 10, 10, 0),
+)
 
 class AleMultiMaterialGroup(KeywordBase):
     """DYNA ALE_MULTI-MATERIAL_GROUP keyword"""
@@ -35,27 +41,10 @@ class AleMultiMaterialGroup(KeywordBase):
         """Initialize the AleMultiMaterialGroup class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMULTIMATERIALGROUP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID.

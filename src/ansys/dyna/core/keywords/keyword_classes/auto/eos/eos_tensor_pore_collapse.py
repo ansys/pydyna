@@ -23,7 +23,18 @@
 """Module providing the EosTensorPoreCollapse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSTENSORPORECOLLAPSE_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("nld", int, 10, 10, None),
+    FieldSchema("ncr", int, 20, 10, None),
+    FieldSchema("mu1", float, 30, 10, 0.0),
+    FieldSchema("mu2", float, 40, 10, 0.0),
+    FieldSchema("ie0", float, 50, 10, 0.0),
+    FieldSchema("ec0", float, 60, 10, 0.0),
+)
 
 class EosTensorPoreCollapse(KeywordBase):
     """DYNA EOS_TENSOR_PORE_COLLAPSE keyword"""
@@ -35,65 +46,10 @@ class EosTensorPoreCollapse(KeywordBase):
         """Initialize the EosTensorPoreCollapse class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nld",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ie0",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec0",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSTENSORPORECOLLAPSE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.

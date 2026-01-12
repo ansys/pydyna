@@ -23,7 +23,17 @@
 """Module providing the ControlReferenceControlVolumeCoordinates class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
+
+_CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD1 = (
+    FieldSchema("opt", int, 0, 10, 0),
+    FieldSchema("psid", int, 10, 10, None),
+)
 
 class ControlReferenceControlVolumeCoordinates(KeywordBase):
     """DYNA CONTROL_REFERENCE_CONTROL_VOLUME_COORDINATES keyword"""
@@ -35,38 +45,13 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
         """Initialize the ControlReferenceControlVolumeCoordinates class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "opt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the The file name contains the *INITIAL_FOAM_REFERENCE_GEOMETRY, *INITIAL_STRESS_SOLID, and *INITIAL_STRESS_SHELL to be read or written.

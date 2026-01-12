@@ -23,7 +23,18 @@
 """Module providing the InitialStressDepthSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSDEPTHSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("ro_g", float, 10, 10, None),
+    FieldSchema("zdatum", float, 20, 10, None),
+    FieldSchema("kfact", float, 30, 10, 0.0),
+    FieldSchema("lc", int, 40, 10, None),
+    FieldSchema("lch", int, 50, 10, None),
+    FieldSchema("lck0", int, 60, 10, None),
+)
 
 class InitialStressDepthSet(KeywordBase):
     """DYNA INITIAL_STRESS_DEPTH_SET keyword"""
@@ -35,62 +46,10 @@ class InitialStressDepthSet(KeywordBase):
         """Initialize the InitialStressDepthSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro_g",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zdatum",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kfact",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lck0",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSDEPTHSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.

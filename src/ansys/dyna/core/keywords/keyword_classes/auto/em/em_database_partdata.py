@@ -23,7 +23,13 @@
 """Module providing the EmDatabasePartdata class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMDATABASEPARTDATA_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 0),
+    FieldSchema("dtout", float, 10, 10, 0.0),
+)
 
 class EmDatabasePartdata(KeywordBase):
     """DYNA EM_DATABASE_PARTDATA keyword"""
@@ -35,28 +41,10 @@ class EmDatabasePartdata(KeywordBase):
         """Initialize the EmDatabasePartdata class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASEPARTDATA_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

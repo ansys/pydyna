@@ -23,7 +23,12 @@
 """Module providing the ControlAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLACOUSTIC_CARD0 = (
+    FieldSchema("macdvp", int, 0, 10, 0),
+)
 
 class ControlAcoustic(KeywordBase):
     """DYNA CONTROL_ACOUSTIC keyword"""
@@ -35,20 +40,10 @@ class ControlAcoustic(KeywordBase):
         """Initialize the ControlAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "macdvp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLACOUSTIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def macdvp(self) -> int:
         """Get or set the Calculate the nodal displacements and velocities of *MAT_‌ACOUSTIC volume elements for inclusion in d3plot and time-history files.

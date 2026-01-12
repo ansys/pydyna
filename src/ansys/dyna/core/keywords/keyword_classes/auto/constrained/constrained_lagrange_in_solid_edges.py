@@ -23,7 +23,56 @@
 """Module providing the ConstrainedLagrangeInSolidEdges class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD1 = (
+    FieldSchema("slave", int, 0, 10, None),
+    FieldSchema("master", int, 10, 10, None),
+    FieldSchema("sstyp", int, 20, 10, 0),
+    FieldSchema("mstyp", int, 30, 10, 0),
+    FieldSchema("nquad", int, 40, 10, 0),
+    FieldSchema("ctype", int, 50, 10, 2),
+    FieldSchema("direc", int, 60, 10, 1),
+    FieldSchema("mcoup", int, 70, 10, 0),
+)
+
+_CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD2 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 10000000000.0),
+    FieldSchema("pfac", float, 20, 10, 0.1),
+    FieldSchema("fric", float, 30, 10, 0.0),
+    FieldSchema("frcmin", float, 40, 10, 0.5),
+    FieldSchema("norm", int, 50, 10, 0),
+    FieldSchema("normtyp", int, 60, 10, 0),
+    FieldSchema("damp", float, 70, 10, 0.0),
+)
+
+_CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD3 = (
+    FieldSchema("cq", float, 0, 10, 0.0),
+    FieldSchema("hmin", float, 10, 10, None),
+    FieldSchema("hmax", float, 20, 10, None),
+    FieldSchema("ileak", int, 30, 10, 0),
+    FieldSchema("pleak", float, 40, 10, 0.1),
+    FieldSchema("lcidpor", int, 50, 10, None),
+    FieldSchema("nvent", int, 60, 10, 0),
+    FieldSchema("blockage", int, 70, 10, 0),
+)
+
+_CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD4 = (
+    FieldSchema("iboxid", int, 0, 10, 0),
+    FieldSchema("ipenchk", int, 10, 10, 0),
+    FieldSchema("intforc", int, 20, 10, 0),
+    FieldSchema("ialesof", int, 30, 10, 0),
+    FieldSchema("lagmul", float, 40, 10, 0.0),
+    FieldSchema("pfacmm", int, 50, 10, 0),
+    FieldSchema("thkf", float, 60, 10, 0.0),
+)
 
 class ConstrainedLagrangeInSolidEdges(KeywordBase):
     """DYNA CONSTRAINED_LAGRANGE_IN_SOLID_EDGES keyword"""
@@ -35,285 +84,22 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
         """Initialize the ConstrainedLagrangeInSolidEdges class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "coupid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "slave",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "master",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nquad",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        50,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "direc",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcoup",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        1.0E+10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac",
-                        float,
-                        20,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frcmin",
-                        float,
-                        40,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normtyp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cq",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ileak",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pleak",
-                        float,
-                        40,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidpor",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nvent",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blockage",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iboxid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipenchk",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intforc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ialesof",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagmul",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfacmm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thkf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the ID.

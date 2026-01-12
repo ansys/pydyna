@@ -23,8 +23,41 @@
 """Module providing the SectionPointSourceMixture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONPOINTSOURCEMIXTURE_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("lcidt", int, 10, 10, None),
+    FieldSchema("notused", int, 20, 10, None),
+    FieldSchema("lcidvel", int, 30, 10, None),
+    FieldSchema("nidlc001", int, 40, 10, None),
+    FieldSchema("nidlc002", int, 50, 10, None),
+    FieldSchema("nidlc003", int, 60, 10, None),
+    FieldSchema("idir", int, 70, 10, None),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_CARD1 = (
+    FieldSchema("lcmdot1", int, 0, 10, 0),
+    FieldSchema("lcmdot2", int, 10, 10, 0),
+    FieldSchema("lcmdot3", int, 20, 10, 0),
+    FieldSchema("lcmdot4", int, 30, 10, 0),
+    FieldSchema("lcmdot5", int, 40, 10, 0),
+    FieldSchema("lcmdot6", int, 50, 10, 0),
+    FieldSchema("lcmdot7", int, 60, 10, 0),
+    FieldSchema("lcmdot8", int, 70, 10, 0),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_CARD2 = (
+    FieldSchema("nodeid", int, 0, 10, 0),
+    FieldSchema("vecid", int, 10, 10, 0),
+    FieldSchema("orifarea", float, 20, 10, 0.0),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionPointSourceMixture(KeywordBase):
     """DYNA SECTION_POINT_SOURCE_MIXTURE keyword"""
@@ -40,181 +73,26 @@ class SectionPointSourceMixture(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "notused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidvel",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc001",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc002",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc003",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcmdot1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodeid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orifarea",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionPointSourceMixture.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID Number

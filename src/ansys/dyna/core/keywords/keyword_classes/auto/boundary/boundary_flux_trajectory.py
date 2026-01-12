@@ -23,7 +23,50 @@
 """Module providing the BoundaryFluxTrajectory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYFLUXTRAJECTORY_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("pserod", int, 10, 10, None),
+    FieldSchema("nsid1", int, 20, 10, None),
+    FieldSchema("spd1", float, 30, 10, 0.0),
+    FieldSchema("nsid2", int, 40, 10, None),
+    FieldSchema("spd2", float, 50, 10, 0.0),
+    FieldSchema("relvel", int, 60, 10, 0),
+)
+
+_BOUNDARYFLUXTRAJECTORY_CARD1 = (
+    FieldSchema("erod", int, 0, 10, 0),
+    FieldSchema("loc", int, 10, 10, None),
+    FieldSchema("lcrot", int, 20, 10, None),
+    FieldSchema("lclat", int, 30, 10, None),
+)
+
+_BOUNDARYFLUXTRAJECTORY_CARD2 = (
+    FieldSchema("iform", int, 0, 10, None),
+    FieldSchema("lctim", int, 10, 10, None),
+    FieldSchema("q", float, 20, 10, 0.0),
+    FieldSchema("lcinc", int, 30, 10, None),
+    FieldSchema("enfor", int, 40, 10, 0),
+)
+
+_BOUNDARYFLUXTRAJECTORY_CARD3 = (
+    FieldSchema("p1", float, 0, 10, None),
+    FieldSchema("p2", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("p4", float, 30, 10, None),
+    FieldSchema("p5", float, 40, 10, None),
+    FieldSchema("p6", float, 50, 10, None),
+    FieldSchema("p7", float, 60, 10, None),
+    FieldSchema("p8", float, 70, 10, None),
+)
+
+_BOUNDARYFLUXTRAJECTORY_CARD4 = (
+    FieldSchema("tx", float, 0, 10, None),
+    FieldSchema("ty", float, 10, 10, None),
+    FieldSchema("tz", float, 20, 10, None),
+)
 
 class BoundaryFluxTrajectory(KeywordBase):
     """DYNA BOUNDARY_FLUX_TRAJECTORY keyword"""
@@ -35,223 +78,22 @@ class BoundaryFluxTrajectory(KeywordBase):
         """Initialize the BoundaryFluxTrajectory class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pserod",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spd1",
-                        float,
-                        30,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spd2",
-                        float,
-                        50,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relvel",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "erod",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrot",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lclat",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iform",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctim",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        20,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcinc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enfor",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ty",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXTRAJECTORY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXTRAJECTORY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXTRAJECTORY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXTRAJECTORY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXTRAJECTORY_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID containing segments that are potentially heated

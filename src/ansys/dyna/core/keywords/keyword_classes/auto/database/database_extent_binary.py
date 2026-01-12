@@ -23,7 +23,50 @@
 """Module providing the DatabaseExtentBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTBINARY_CARD0 = (
+    FieldSchema("neiph", int, 0, 10, 0),
+    FieldSchema("neips", int, 10, 10, 0),
+    FieldSchema("maxint", int, 20, 10, 3),
+    FieldSchema("strflg", int, 30, 10, 0),
+    FieldSchema("sigflg", int, 40, 10, 1),
+    FieldSchema("epsflg", int, 50, 10, 1),
+    FieldSchema("rltflg", int, 60, 10, 1),
+    FieldSchema("engflg", int, 70, 10, 1),
+)
+
+_DATABASEEXTENTBINARY_CARD1 = (
+    FieldSchema("cmpflg", int, 0, 10, 0),
+    FieldSchema("ieverp", int, 10, 10, 0),
+    FieldSchema("beamip", int, 20, 10, 0),
+    FieldSchema("dcomp", int, 30, 10, 1),
+    FieldSchema("shge", int, 40, 10, 1),
+    FieldSchema("stssz", int, 50, 10, 1),
+    FieldSchema("n3thdt", int, 60, 10, 2),
+    FieldSchema("ialemat", int, 70, 10, 1),
+)
+
+_DATABASEEXTENTBINARY_CARD2 = (
+    FieldSchema("nintsld", int, 0, 10, 0),
+    FieldSchema("pkp_sen", int, 10, 10, 0),
+    FieldSchema("sclp", float, 20, 10, 1.0),
+    FieldSchema("hydro", int, 30, 10, 0),
+    FieldSchema("msscl", int, 40, 10, 0),
+    FieldSchema("therm", int, 50, 10, 0),
+    FieldSchema("intout", str, 60, 10, " "),
+    FieldSchema("nodout", str, 70, 10, " "),
+)
+
+_DATABASEEXTENTBINARY_CARD3 = (
+    FieldSchema("dtdt", int, 0, 10, 0),
+    FieldSchema("resplt", int, 10, 10, 0),
+    FieldSchema("neipb", int, 20, 10, None),
+    FieldSchema("quadsld", int, 30, 10, 0),
+    FieldSchema("cubsld", int, 40, 10, 0),
+    FieldSchema("deleres", int, 50, 10, 0),
+)
 
 class DatabaseExtentBinary(KeywordBase):
     """DYNA DATABASE_EXTENT_BINARY keyword"""
@@ -35,263 +78,19 @@ class DatabaseExtentBinary(KeywordBase):
         """Initialize the DatabaseExtentBinary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "neiph",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neips",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxint",
-                        int,
-                        20,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strflg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigflg",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsflg",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rltflg",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "engflg",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cmpflg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ieverp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beamip",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcomp",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shge",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stssz",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3thdt",
-                        int,
-                        60,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ialemat",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nintsld",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pkp_sen",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclp",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hydro",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msscl",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "therm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intout",
-                        str,
-                        60,
-                        10,
-                        " ",
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodout",
-                        str,
-                        70,
-                        10,
-                        " ",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dtdt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "resplt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neipb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "quadsld",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cubsld",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deleres",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTBINARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTBINARY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTBINARY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTBINARY_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def neiph(self) -> int:
         """Get or set the Number of additional integration point history variables written to the binary database for solid elements. The integration point data is written in the same order that it is stored in memory-each material modal has its own history variables that are stored. For user defined materials it is important to store the history data that is needed for plotting before the data which is not of interest.

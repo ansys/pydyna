@@ -23,7 +23,23 @@
 """Module providing the LoadMask class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADMASK_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("vid1", int, 20, 10, 1),
+    FieldSchema("off", float, 30, 10, 0.0),
+    FieldSchema("boxid", int, 40, 10, 0),
+    FieldSchema("lcidm", int, 50, 10, 0),
+    FieldSchema("vid2", int, 60, 10, None),
+    FieldSchema("inout", int, 70, 10, 0),
+)
+
+_LOADMASK_CARD1 = (
+    FieldSchema("icycle", int, 0, 10, 200),
+)
 
 class LoadMask(KeywordBase):
     """DYNA LOAD_MASK keyword"""
@@ -35,85 +51,13 @@ class LoadMask(KeywordBase):
         """Initialize the LoadMask class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid1",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "off",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid2",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inout",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "icycle",
-                        int,
-                        0,
-                        10,
-                        200,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADMASK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADMASK_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID. This part must consist of 3D shell elements. To use this option with solid element the surface of the solid elements must be covered with null shells, see *MAT_NULL.

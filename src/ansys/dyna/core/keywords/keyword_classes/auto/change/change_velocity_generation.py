@@ -23,7 +23,30 @@
 """Module providing the ChangeVelocityGeneration class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGEVELOCITYGENERATION_CARD0 = (
+    FieldSchema("nsid/pid", int, 0, 10, None),
+    FieldSchema("styp", int, 10, 10, 1),
+    FieldSchema("omega", float, 20, 10, 0.0),
+    FieldSchema("vx", float, 30, 10, 0.0),
+    FieldSchema("vy", float, 40, 10, 0.0),
+    FieldSchema("vz", float, 50, 10, 0.0),
+    FieldSchema("ivatn", int, 60, 10, 0),
+    FieldSchema("icid", int, 70, 10, None),
+)
+
+_CHANGEVELOCITYGENERATION_CARD1 = (
+    FieldSchema("xc", float, 0, 10, 0.0),
+    FieldSchema("yc", float, 10, 10, 0.0),
+    FieldSchema("zc", float, 20, 10, 0.0),
+    FieldSchema("nx", float, 30, 10, 0.0),
+    FieldSchema("ny", float, 40, 10, 0.0),
+    FieldSchema("nz", float, 50, 10, 0.0),
+    FieldSchema("phase", int, 60, 10, 0),
+    FieldSchema("irigid", int, 70, 10, 0),
+)
 
 class ChangeVelocityGeneration(KeywordBase):
     """DYNA CHANGE_VELOCITY_GENERATION keyword"""
@@ -35,142 +58,13 @@ class ChangeVelocityGeneration(KeywordBase):
         """Initialize the ChangeVelocityGeneration class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid/pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "styp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivatn",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phase",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irigid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYGENERATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYGENERATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid_pid(self) -> typing.Optional[int]:
         """Get or set the Node set ID or part set ID.

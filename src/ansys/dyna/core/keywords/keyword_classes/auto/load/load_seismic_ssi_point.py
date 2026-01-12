@@ -23,7 +23,27 @@
 """Module providing the LoadSeismicSsiPoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEISMICSSIPOINT_CARD0 = (
+    FieldSchema("ssid", int, 0, 8, None),
+    FieldSchema("xp", float, 8, 16, 0.0),
+    FieldSchema("yp", float, 24, 16, 0.0),
+    FieldSchema("zp", float, 40, 16, 0.0),
+    FieldSchema("gmx", int, 56, 8, None),
+    FieldSchema("gmy", int, 64, 8, None),
+    FieldSchema("gmz", int, 72, 8, None),
+)
+
+_LOADSEISMICSSIPOINT_CARD1 = (
+    FieldSchema("sf", float, 0, 10, 1.0),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("birth", float, 20, 10, 0.0),
+    FieldSchema("death", float, 30, 10, 1e+28),
+    FieldSchema("isg", int, 40, 10, 0),
+    FieldSchema("igm", int, 50, 10, 0),
+)
 
 class LoadSeismicSsiPoint(KeywordBase):
     """DYNA LOAD_SEISMIC_SSI_POINT keyword"""
@@ -35,116 +55,13 @@ class LoadSeismicSsiPoint(KeywordBase):
         """Initialize the LoadSeismicSsiPoint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmx",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmy",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmz",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        30,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIPOINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIPOINT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID.

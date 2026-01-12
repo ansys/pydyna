@@ -23,7 +23,16 @@
 """Module providing the CeseBoundarySolidWallMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYSOLIDWALLMSURF_CARD0 = (
+    FieldSchema("surfprt", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("vx", float, 20, 10, 0.0),
+    FieldSchema("vy", float, 30, 10, 0.0),
+    FieldSchema("vz", float, 40, 10, 0.0),
+)
 
 class CeseBoundarySolidWallMsurf(KeywordBase):
     """DYNA CESE_BOUNDARY_SOLID_WALL_MSURF keyword"""
@@ -35,50 +44,10 @@ class CeseBoundarySolidWallMsurf(KeywordBase):
         """Initialize the CeseBoundarySolidWallMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfprt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSOLIDWALLMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.

@@ -23,7 +23,19 @@
 """Module providing the ControlFormingOutputIntfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGOUTPUTINTFOR_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("nout", int, 10, 10, None),
+    FieldSchema("tbeg", float, 20, 10, None),
+    FieldSchema("tend", float, 30, 10, None),
+    FieldSchema("y1/lcid", float, 40, 10, None),
+    FieldSchema("y2/lcid", float, 50, 10, None),
+    FieldSchema("y3", float, 60, 10, None),
+    FieldSchema("y4", float, 70, 10, None),
+)
 
 class ControlFormingOutputIntfor(KeywordBase):
     """DYNA CONTROL_FORMING_OUTPUT_INTFOR keyword"""
@@ -35,68 +47,10 @@ class ControlFormingOutputIntfor(KeywordBase):
         """Initialize the ControlFormingOutputIntfor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nout",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1/lcid",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2/lcid",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGOUTPUTINTFOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the ID of a tooling kinematics curve, as defined by *DEFINE_CURVE and used by *BOUNDARY_PRESCRIBED_MOTION_RIGID.

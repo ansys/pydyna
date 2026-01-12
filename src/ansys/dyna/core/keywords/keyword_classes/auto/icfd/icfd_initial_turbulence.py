@@ -23,7 +23,16 @@
 """Module providing the IcfdInitialTurbulence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDINITIALTURBULENCE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("i", float, 10, 10, None),
+    FieldSchema("r", float, 20, 10, None),
+    FieldSchema("k", float, 30, 10, None),
+    FieldSchema("ew", float, 40, 10, None),
+)
 
 class IcfdInitialTurbulence(KeywordBase):
     """DYNA ICFD_INITIAL_TURBULENCE keyword"""
@@ -35,47 +44,10 @@ class IcfdInitialTurbulence(KeywordBase):
         """Initialize the IcfdInitialTurbulence class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ew",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDINITIALTURBULENCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for the volume elements or the surface elements where the values are initialized (see *ICFD_PART_VOL and *ICFD_PART).PID = 0 to assign the initial condition to all nodes at once.

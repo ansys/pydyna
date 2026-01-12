@@ -23,7 +23,15 @@
 """Module providing the InterfaceCompensation3DFlange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACECOMPENSATION3DFLANGE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vx", float, 0, 10, None),
+    FieldSchema("vy", float, 0, 10, None),
+    FieldSchema("vz", float, 0, 10, None),
+)
 
 class InterfaceCompensation3DFlange(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_3D_FLANGE keyword"""
@@ -35,40 +43,10 @@ class InterfaceCompensation3DFlange(KeywordBase):
         """Initialize the InterfaceCompensation3DFlange class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3DFLANGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The part ID of the flanging steel to be compensated

@@ -23,7 +23,23 @@
 """Module providing the LoadBodyPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBODYPOROUS_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("sidtyp", int, 10, 10, 0),
+    FieldSchema("ax", float, 20, 10, 0.0),
+    FieldSchema("ay", float, 30, 10, 0.0),
+    FieldSchema("az", float, 40, 10, 0.0),
+    FieldSchema("bx", float, 50, 10, 0.0),
+    FieldSchema("by", float, 60, 10, 0.0),
+    FieldSchema("bz", float, 70, 10, 0.0),
+)
+
+_LOADBODYPOROUS_CARD1 = (
+    FieldSchema("aopt", int, 0, 10, 0),
+)
 
 class LoadBodyPorous(KeywordBase):
     """DYNA LOAD_BODY_POROUS keyword"""
@@ -35,87 +51,13 @@ class LoadBodyPorous(KeywordBase):
         """Initialize the LoadBodyPorous class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ay",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "az",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "by",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBODYPOROUS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBODYPOROUS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of the ALE fluid part subjected to porous flow condition

@@ -23,8 +23,68 @@
 """Module providing the MatPowder class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATPOWDER_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("p11", float, 20, 10, None),
+    FieldSchema("p22", float, 30, 10, None),
+    FieldSchema("p33", float, 40, 10, None),
+    FieldSchema("p12", float, 50, 10, None),
+    FieldSchema("p23", float, 50, 10, None),
+    FieldSchema("p13", float, 70, 10, None),
+)
+
+_MATPOWDER_CARD1 = (
+    FieldSchema("e0", float, 0, 10, None),
+    FieldSchema("lck", int, 10, 10, None),
+    FieldSchema("pr", float, 20, 10, None),
+    FieldSchema("lcx", int, 30, 10, None),
+    FieldSchema("lcy", int, 40, 10, None),
+    FieldSchema("lcc", int, 50, 10, None),
+    FieldSchema("l", float, 60, 10, None),
+    FieldSchema("r", float, 70, 10, None),
+)
+
+_MATPOWDER_CARD2 = (
+    FieldSchema("ca", float, 0, 10, None),
+    FieldSchema("cd", float, 10, 10, None),
+    FieldSchema("cv", float, 20, 10, None),
+    FieldSchema("p", float, 30, 10, None),
+    FieldSchema("lch", int, 40, 10, None),
+    FieldSchema("lcfi", int, 50, 10, None),
+    FieldSchema("sint", float, 60, 10, 0.0),
+    FieldSchema("tzro", float, 70, 10, None),
+)
+
+_MATPOWDER_CARD3 = (
+    FieldSchema("lcfk", int, 0, 10, None),
+    FieldSchema("lcfs2", int, 10, 10, None),
+    FieldSchema("dv1", float, 20, 10, None),
+    FieldSchema("dv2", float, 30, 10, None),
+    FieldSchema("ds1", float, 40, 10, None),
+    FieldSchema("ds2", float, 50, 10, None),
+    FieldSchema("omega", float, 60, 10, None),
+    FieldSchema("rgas", float, 70, 10, None),
+)
+
+_MATPOWDER_CARD4 = (
+    FieldSchema("lcpr", int, 0, 10, None),
+    FieldSchema("lcfs3", int, 10, 10, None),
+    FieldSchema("lctau", int, 20, 10, None),
+    FieldSchema("alpha", float, 30, 10, None),
+    FieldSchema("lcfs1", int, 40, 10, None),
+    FieldSchema("gamma", float, 50, 10, None),
+    FieldSchema("l0", float, 60, 10, None),
+    FieldSchema("lcfks", int, 70, 10, None),
+)
+
+_MATPOWDER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPowder(KeywordBase):
     """DYNA MAT_POWDER keyword"""
@@ -40,326 +100,32 @@ class MatPowder(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p22",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p33",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p12",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p23",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p13",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lck",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcc",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ca",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfi",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sint",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tzro",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcfk",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfs2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dv1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dv2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ds1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ds2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rgas",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfs3",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctau",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfs1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfks",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPOWDER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPOWDER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPOWDER_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPOWDER_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPOWDER_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPowder.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPOWDER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified

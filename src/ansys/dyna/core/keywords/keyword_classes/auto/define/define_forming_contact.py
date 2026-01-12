@@ -23,8 +23,20 @@
 """Module providing the DefineFormingContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFORMINGCONTACT_CARD0 = (
+    FieldSchema("ips", int, 0, 10, None),
+    FieldSchema("ipm", int, 10, 10, None),
+    FieldSchema("fs", float, 20, 10, None),
+    FieldSchema("oneway", int, 30, 10, 0),
+)
+
+_DEFINEFORMINGCONTACT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFormingContact(KeywordBase):
     """DYNA DEFINE_FORMING_CONTACT keyword"""
@@ -40,58 +52,20 @@ class DefineFormingContact(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ips",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipm",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oneway",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGCONTACT_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingContact.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGCONTACT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def ips(self) -> typing.Optional[int]:
         """Get or set the Part ID of a slave sliding member, typically a deformable sheet metal blank.

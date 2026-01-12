@@ -23,7 +23,30 @@
 """Module providing the AleReferenceSystemCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEREFERENCESYSTEMCURVE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_ALEREFERENCESYSTEMCURVE_CARD1 = (
+    FieldSchema("lc1", int, 0, 10, None),
+    FieldSchema("lc2", int, 10, 10, None),
+    FieldSchema("lc3", int, 20, 10, None),
+    FieldSchema("lc4", int, 30, 10, None),
+    FieldSchema("lc5", int, 40, 10, None),
+    FieldSchema("lc6", int, 50, 10, None),
+    FieldSchema("lc7", int, 60, 10, None),
+    FieldSchema("lc8", int, 70, 10, None),
+)
+
+_ALEREFERENCESYSTEMCURVE_CARD2 = (
+    FieldSchema("lc9", int, 0, 10, None),
+    FieldSchema("lc10", int, 10, 10, None),
+    FieldSchema("lc11", int, 20, 10, None),
+    FieldSchema("lc12", int, 30, 10, None),
+)
 
 class AleReferenceSystemCurve(KeywordBase):
     """DYNA ALE_REFERENCE_SYSTEM_CURVE keyword"""
@@ -35,111 +58,16 @@ class AleReferenceSystemCurve(KeywordBase):
         """Initialize the AleReferenceSystemCurve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc9",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc10",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc11",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Curve ID.

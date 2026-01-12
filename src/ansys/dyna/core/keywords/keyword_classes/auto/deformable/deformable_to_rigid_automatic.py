@@ -23,7 +23,40 @@
 """Module providing the DeformableToRigidAutomatic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFORMABLETORIGIDAUTOMATIC_CARD0 = (
+    FieldSchema("swset", int, 0, 10, None),
+    FieldSchema("code", int, 10, 10, 0),
+    FieldSchema("time1", float, 20, 10, 0.0),
+    FieldSchema("time2", float, 30, 10, 1e+20),
+    FieldSchema("time3", float, 40, 10, 0.0),
+    FieldSchema("entno", int, 50, 10, 0),
+    FieldSchema("relsw", int, 60, 10, 0),
+    FieldSchema("paired", int, 70, 10, 0),
+)
+
+_DEFORMABLETORIGIDAUTOMATIC_CARD1 = (
+    FieldSchema("nrbf", int, 0, 10, 0),
+    FieldSchema("ncsf", int, 10, 10, 0),
+    FieldSchema("rwf", int, 20, 10, 0),
+    FieldSchema("dtmax", float, 30, 10, 0.0),
+    FieldSchema("d2r", int, 40, 10, 0),
+    FieldSchema("r2d", int, 50, 10, 0),
+    FieldSchema("offset", int, 60, 10, 0),
+)
+
+_DEFORMABLETORIGIDAUTOMATIC_CARD2 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lrb", int, 10, 10, None),
+    FieldSchema("ptype", str, 20, 10, "PART"),
+)
+
+_DEFORMABLETORIGIDAUTOMATIC_CARD3 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ptype", str, 10, 10, "PART"),
+)
 
 class DeformableToRigidAutomatic(KeywordBase):
     """DYNA DEFORMABLE_TO_RIGID_AUTOMATIC keyword"""
@@ -35,180 +68,19 @@ class DeformableToRigidAutomatic(KeywordBase):
         """Initialize the DeformableToRigidAutomatic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "swset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "code",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time2",
-                        float,
-                        30,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time3",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "entno",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relsw",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "paired",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nrbf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncsf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2r",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2d",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lrb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        str,
-                        20,
-                        10,
-                        "PART",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        str,
-                        10,
-                        10,
-                        "PART",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDAUTOMATIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDAUTOMATIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDAUTOMATIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDAUTOMATIC_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def swset(self) -> typing.Optional[int]:
         """Get or set the Set number for this automatic switch set. Must be unique.

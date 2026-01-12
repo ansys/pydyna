@@ -23,7 +23,13 @@
 """Module providing the InterfaceLinkingDiscreteNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACELINKINGDISCRETENODESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+)
 
 class InterfaceLinkingDiscreteNodeSet(KeywordBase):
     """DYNA INTERFACE_LINKING_DISCRETE_NODE_SET keyword"""
@@ -35,26 +41,10 @@ class InterfaceLinkingDiscreteNodeSet(KeywordBase):
         """Initialize the InterfaceLinkingDiscreteNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGDISCRETENODESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID to be moved by interface file, see also *SET_NODE.

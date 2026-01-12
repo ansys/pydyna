@@ -23,7 +23,35 @@
 """Module providing the BoundaryTemperatureRsw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYTEMPERATURERSW_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("option", int, 10, 10, 0),
+    FieldSchema("nid1", int, 20, 10, None),
+    FieldSchema("nid2", int, 30, 10, None),
+    FieldSchema("tdeath", float, 40, 10, 1e+20),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+    FieldSchema("loc", int, 60, 10, 0),
+)
+
+_BOUNDARYTEMPERATURERSW_CARD1 = (
+    FieldSchema("dist", float, 0, 10, 0.0),
+    FieldSchema("h1", float, 10, 10, 0.0),
+    FieldSchema("h2", float, 20, 10, 0.0),
+    FieldSchema("r", float, 30, 10, 0.0),
+    FieldSchema("tempc", float, 40, 10, 0.0),
+    FieldSchema("tempb", float, 50, 10, 0.0),
+    FieldSchema("lcidt", int, 60, 10, None),
+)
+
+_BOUNDARYTEMPERATURERSW_CARD2 = (
+    FieldSchema("hz1", float, 0, 10, None),
+    FieldSchema("hz2", float, 10, 10, 0.0),
+    FieldSchema("rz", float, 20, 10, 0.0),
+    FieldSchema("tempzb", float, 30, 10, 0.0),
+)
 
 class BoundaryTemperatureRsw(KeywordBase):
     """DYNA BOUNDARY_TEMPERATURE_RSW keyword"""
@@ -35,159 +63,16 @@ class BoundaryTemperatureRsw(KeywordBase):
         """Initialize the BoundaryTemperatureRsw class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dist",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempb",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hz1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hz2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempzb",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATURERSW_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATURERSW_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATURERSW_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node Set ID; see *SET_‌NODE_‌OPTION. Nodes in the set will be checked to see if they are in the nugget or heat affected zone. If they are, the boundary condition will be applied. The boundary condition will not be applied to nodes in these regions if they are not included in the set..

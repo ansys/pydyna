@@ -23,7 +23,25 @@
 """Module providing the LoadSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEGMENT_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sf", float, 10, 10, 1.0),
+    FieldSchema("at", float, 20, 10, 0.0),
+    FieldSchema("n1", int, 30, 10, None),
+    FieldSchema("n2", int, 40, 10, None),
+    FieldSchema("n3", int, 50, 10, None),
+    FieldSchema("n4", int, 60, 10, None),
+    FieldSchema("n5", int, 70, 10, None),
+)
+
+_LOADSEGMENT_CARD1 = (
+    FieldSchema("n6", int, 0, 10, None),
+    FieldSchema("n7", int, 10, 10, None),
+    FieldSchema("n8", int, 20, 10, None),
+)
 
 class LoadSegment(KeywordBase):
     """DYNA LOAD_SEGMENT keyword"""
@@ -35,95 +53,13 @@ class LoadSegment(KeywordBase):
         """Initialize the LoadSegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n6",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.

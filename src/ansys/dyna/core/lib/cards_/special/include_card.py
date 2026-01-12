@@ -23,8 +23,9 @@
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line
-from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
@@ -34,11 +35,16 @@ from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
 class IncludeCard(Card):
     def __init__(self, **kwargs):
-        super().__init__(
-            [
-                Field("filename", str, 0, 80, kwargs.get("filename")),
-            ],
-        )
+        # Inline Card initialization (avoid deprecated constructor path)
+        fields = [Field("filename", str, 0, 80, kwargs.get("filename"))]
+        field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+        name_to_index = {f.name: i for i, f in enumerate(fields)}
+        self._schema = CardSchema(field_schemas, name_to_index)
+        self._signature = id(self._schema)
+        self._values = [f.value for f in fields]
+        self._active_func = None
+        self._format_type = format_type.default
+        self._card_format = card_format.fixed
 
     def _read_line(self, buf: typing.TextIO) -> str:
         line, to_exit = read_line(buf)

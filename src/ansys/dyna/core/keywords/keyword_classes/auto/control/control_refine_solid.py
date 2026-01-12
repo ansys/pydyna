@@ -23,7 +23,35 @@
 """Module providing the ControlRefineSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREFINESOLID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nlvl", int, 20, 10, 1),
+    FieldSchema("ibox", int, 30, 10, 0),
+    FieldSchema("ielout", int, 40, 10, 0),
+)
+
+_CONTROLREFINESOLID_CARD1 = (
+    FieldSchema("ntotrf", int, 0, 10, 0),
+    FieldSchema("ncycrf", float, 10, 10, 0.0),
+    FieldSchema("critrf", int, 20, 10, 0),
+    FieldSchema("valrf", float, 30, 10, 0.0),
+    FieldSchema("begrf", float, 40, 10, 0.0),
+    FieldSchema("endrf", float, 50, 10, 0.0),
+    FieldSchema("layrf", int, 60, 10, 0),
+)
+
+_CONTROLREFINESOLID_CARD2 = (
+    FieldSchema("maxrm", int, 0, 10, 0),
+    FieldSchema("ncycrm", float, 10, 10, 0.0),
+    FieldSchema("critrm", int, 20, 10, 0),
+    FieldSchema("valrm", float, 30, 10, 0.0),
+    FieldSchema("begrm", float, 40, 10, 0.0),
+    FieldSchema("endrm", float, 50, 10, 0.0),
+)
 
 class ControlRefineSolid(KeywordBase):
     """DYNA CONTROL_REFINE_SOLID keyword"""
@@ -35,163 +63,16 @@ class ControlRefineSolid(KeywordBase):
         """Initialize the ControlRefineSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlvl",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibox",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ielout",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ntotrf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycrf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "critrf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valrf",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "begrf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endrf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layrf",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "maxrm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycrm",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "critrm",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valrm",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "begrm",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endrm",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESOLID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESOLID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID.LT.0: parent elements can be hidden in lsprepost as they are replaced by their children

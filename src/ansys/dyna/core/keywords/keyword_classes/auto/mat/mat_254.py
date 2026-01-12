@@ -23,8 +23,97 @@
 """Module providing the Mat254 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT254_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("n", int, 20, 10, None),
+    FieldSchema("e", float, 30, 10, None),
+    FieldSchema("pr", float, 40, 10, None),
+    FieldSchema("mix", int, 50, 10, None),
+    FieldSchema("mixr", int, 60, 10, None),
+)
+
+_MAT254_CARD1 = (
+    FieldSchema("tastrt", float, 0, 10, None),
+    FieldSchema("tend", float, 10, 10, None),
+    FieldSchema("cte", float, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("epsini", int, 50, 10, None),
+    FieldSchema("dtemp", float, 60, 10, None),
+)
+
+_MAT254_CARD2 = (
+    FieldSchema("xastr", float, 0, 10, None),
+    FieldSchema("xaend", float, 10, 10, None),
+    FieldSchema("xa1pa1", int, 20, 10, None),
+    FieldSchema("xa1pa2", int, 30, 10, None),
+    FieldSchema("xa1pa3", int, 40, 10, None),
+    FieldSchema("xafpa", float, 50, 10, None),
+    FieldSchema("cteann", float, 60, 10, None),
+)
+
+_MAT254_CARD3 = (
+    FieldSchema("ptlaw", int, 0, 10, None),
+    FieldSchema("ptstr", int, 10, 10, None),
+    FieldSchema("ptend", int, 20, 10, None),
+    FieldSchema("ptx1", int, 30, 10, None),
+    FieldSchema("ptx2", int, 40, 10, None),
+    FieldSchema("ptx3", int, 50, 10, None),
+    FieldSchema("ptx4", int, 60, 10, None),
+    FieldSchema("ptx5", int, 70, 10, None),
+)
+
+_MAT254_CARD4 = (
+    FieldSchema("pttab1", int, 0, 10, None),
+    FieldSchema("pttab2", int, 10, 10, None),
+    FieldSchema("pttab3", int, 20, 10, None),
+    FieldSchema("pttab4", int, 30, 10, None),
+    FieldSchema("pttab5", int, 40, 10, None),
+    FieldSchema("pttab6", int, 50, 10, None),
+    FieldSchema("pttab7", int, 60, 10, None),
+)
+
+_MAT254_CARD5 = (
+    FieldSchema("pteps", int, 0, 10, None),
+    FieldSchema("ptrip", int, 10, 10, None),
+    FieldSchema("ptlat", int, 20, 10, None),
+    FieldSchema("postv", int, 30, 10, None),
+    FieldSchema("nushis", int, 40, 10, None),
+    FieldSchema("grai", float, 50, 10, None),
+    FieldSchema("t1phas", int, 60, 10, None),
+    FieldSchema("t2phas", int, 70, 10, None),
+)
+
+_MAT254_CARD6 = (
+    FieldSchema("fushi1", int, 0, 10, None),
+    FieldSchema("fushi2", int, 10, 10, None),
+    FieldSchema("fushi3", int, 20, 10, None),
+    FieldSchema("fushi4", int, 30, 10, None),
+    FieldSchema("fushi5", int, 40, 10, None),
+    FieldSchema("fushi6", int, 50, 10, None),
+    FieldSchema("fushi7", int, 60, 10, None),
+    FieldSchema("fushi8", int, 70, 10, None),
+)
+
+_MAT254_CARD7 = (
+    FieldSchema("sigy1", int, 0, 10, None),
+    FieldSchema("sigy2", int, 10, 10, None),
+    FieldSchema("sigy3", int, 20, 10, None),
+    FieldSchema("sigy4", int, 30, 10, None),
+    FieldSchema("sigy5", int, 40, 10, None),
+    FieldSchema("sigy6", int, 50, 10, None),
+    FieldSchema("sigy7", int, 60, 10, None),
+    FieldSchema("sigy8", int, 70, 10, None),
+)
+
+_MAT254_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat254(KeywordBase):
     """DYNA MAT_254 keyword"""
@@ -40,477 +129,41 @@ class Mat254(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mix",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mixr",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tastrt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cte",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsini",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtemp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xastr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xaend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xafpa",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cteann",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptlaw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptstr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptend",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx3",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx5",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pttab1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pteps",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptrip",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptlat",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "postv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nushis",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grai",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1phas",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2phas",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fushi1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigy1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT254_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat254.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT254_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

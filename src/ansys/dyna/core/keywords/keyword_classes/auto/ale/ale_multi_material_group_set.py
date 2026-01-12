@@ -23,7 +23,12 @@
 """Module providing the AleMultiMaterialGroupSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEMULTIMATERIALGROUPSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+)
 
 class AleMultiMaterialGroupSet(KeywordBase):
     """DYNA ALE_MULTI-MATERIAL_GROUP_SET keyword"""
@@ -35,19 +40,10 @@ class AleMultiMaterialGroupSet(KeywordBase):
         """Initialize the AleMultiMaterialGroupSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMULTIMATERIALGROUPSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.

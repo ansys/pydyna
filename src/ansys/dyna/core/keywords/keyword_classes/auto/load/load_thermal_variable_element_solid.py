@@ -23,7 +23,15 @@
 """Module providing the LoadThermalVariableElementSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALVARIABLEELEMENTSOLID_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("ts", float, 10, 10, None),
+    FieldSchema("tb", float, 20, 10, None),
+    FieldSchema("lcid", int, 30, 10, None),
+)
 
 class LoadThermalVariableElementSolid(KeywordBase):
     """DYNA LOAD_THERMAL_VARIABLE_ELEMENT_SOLID keyword"""
@@ -35,40 +43,10 @@ class LoadThermalVariableElementSolid(KeywordBase):
         """Initialize the LoadThermalVariableElementSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tb",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLEELEMENTSOLID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.

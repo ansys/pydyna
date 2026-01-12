@@ -23,7 +23,24 @@
 """Module providing the LoadBodyVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBODYVECTOR_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sf", float, 10, 10, 1.0),
+    FieldSchema("lciddr", int, 20, 10, 0),
+    FieldSchema("xc", float, 30, 10, 0.0),
+    FieldSchema("yc", float, 40, 10, 0.0),
+    FieldSchema("zc", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, 0),
+)
+
+_LOADBODYVECTOR_CARD1 = (
+    FieldSchema("v1", float, 0, 10, 0.0),
+    FieldSchema("v2", float, 10, 10, 0.0),
+    FieldSchema("v3", float, 20, 10, 0.0),
+)
 
 class LoadBodyVector(KeywordBase):
     """DYNA LOAD_BODY_VECTOR keyword"""
@@ -35,95 +52,13 @@ class LoadBodyVector(KeywordBase):
         """Initialize the LoadBodyVector class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lciddr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBODYVECTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBODYVECTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.

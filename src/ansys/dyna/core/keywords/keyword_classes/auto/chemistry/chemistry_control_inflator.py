@@ -23,7 +23,25 @@
 """Module providing the ChemistryControlInflator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROLINFLATOR_CARD0 = (
+    FieldSchema("model", int, 0, 10, 1),
+    FieldSchema("out_type", int, 10, 10, 0),
+    FieldSchema("truntim", float, 20, 10, None),
+    FieldSchema("delt", float, 30, 10, None),
+    FieldSchema("ptime", float, 40, 10, None),
+)
+
+_CHEMISTRYCONTROLINFLATOR_CARD1 = (
+    FieldSchema("file", str, 0, 80, None),
+)
+
+_CHEMISTRYCONTROLINFLATOR_CARD2 = (
+    FieldSchema("density", str, 0, 10, None),
+    FieldSchema("species name", str, 10, 70, None),
+)
 
 class ChemistryControlInflator(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_INFLATOR keyword"""
@@ -35,78 +53,16 @@ class ChemistryControlInflator(KeywordBase):
         """Initialize the ChemistryControlInflator class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "model",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "out_type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "truntim",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptime",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "density",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "species name",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLINFLATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLINFLATOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLINFLATOR_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def model(self) -> int:
         """Get or set the Type of inflator model to compute.

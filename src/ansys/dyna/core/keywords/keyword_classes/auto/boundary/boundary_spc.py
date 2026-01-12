@@ -23,7 +23,19 @@
 """Module providing the BoundarySpc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSPC_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("dofx", int, 20, 10, 0),
+    FieldSchema("dofy", int, 30, 10, 0),
+    FieldSchema("dofz", int, 40, 10, 0),
+    FieldSchema("dofrx", int, 50, 10, 0),
+    FieldSchema("dofry", int, 60, 10, 0),
+    FieldSchema("dofrz", int, 70, 10, 0),
+)
 
 class BoundarySpc(KeywordBase):
     """DYNA BOUNDARY_SPC keyword"""
@@ -35,75 +47,10 @@ class BoundarySpc(KeywordBase):
         """Initialize the BoundarySpc class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofx",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofy",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofz",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofrx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofry",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofrz",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

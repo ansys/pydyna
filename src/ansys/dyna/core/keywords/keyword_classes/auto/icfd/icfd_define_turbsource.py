@@ -23,7 +23,19 @@
 """Module providing the IcfdDefineTurbsource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDEFINETURBSOURCE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("lcidx", int, 10, 10, None),
+    FieldSchema("lcidy", int, 20, 10, None),
+    FieldSchema("lcidz", int, 30, 10, None),
+    FieldSchema("shape", int, 40, 10, 1),
+    FieldSchema("r", float, 50, 10, None),
+    FieldSchema("ptid1", int, 60, 10, None),
+    FieldSchema("ptid2", int, 70, 10, None),
+)
 
 class IcfdDefineTurbsource(KeywordBase):
     """DYNA ICFD_DEFINE_TURBSOURCE keyword"""
@@ -35,69 +47,10 @@ class IcfdDefineTurbsource(KeywordBase):
         """Initialize the IcfdDefineTurbsource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidx",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shape",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptid1",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptid2",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINETURBSOURCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the source ID

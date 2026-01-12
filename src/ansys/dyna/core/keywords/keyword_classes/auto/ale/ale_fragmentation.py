@@ -23,7 +23,14 @@
 """Module providing the AleFragmentation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEFRAGMENTATION_CARD0 = (
+    FieldSchema("fr_mmg", int, 0, 10, None),
+    FieldSchema("to_mmg", int, 10, 10, None),
+    FieldSchema("fragtyp", int, 20, 10, 1),
+)
 
 class AleFragmentation(KeywordBase):
     """DYNA ALE_FRAGMENTATION keyword"""
@@ -35,34 +42,10 @@ class AleFragmentation(KeywordBase):
         """Initialize the AleFragmentation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fr_mmg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "to_mmg",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fragtyp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEFRAGMENTATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMGID of the failed material

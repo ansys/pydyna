@@ -23,7 +23,17 @@
 """Module providing the ContactAutoMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTAUTOMOVE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("vid", int, 20, 10, None),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("atime", float, 40, 10, None),
+    FieldSchema("offset", float, 50, 10, 0.0),
+)
 
 class ContactAutoMove(KeywordBase):
     """DYNA CONTACT_AUTO_MOVE keyword"""
@@ -35,55 +45,10 @@ class ContactAutoMove(KeywordBase):
         """Initialize the ContactAutoMove class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atime",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTAUTOMOVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this auto positioning input

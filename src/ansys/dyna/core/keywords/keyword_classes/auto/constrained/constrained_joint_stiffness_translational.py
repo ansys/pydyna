@@ -23,7 +23,44 @@
 """Module providing the ConstrainedJointStiffnessTranslational class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD0 = (
+    FieldSchema("jsid", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("pidb", int, 20, 10, None),
+    FieldSchema("cida", int, 30, 10, None),
+    FieldSchema("cidb", int, 40, 10, 0),
+    FieldSchema("jid", int, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, None),
+    FieldSchema("lcidy", int, 10, 10, None),
+    FieldSchema("lcidz", int, 20, 10, None),
+    FieldSchema("dlcidx", int, 30, 10, None),
+    FieldSchema("dlcidy", int, 40, 10, None),
+    FieldSchema("dlcidz", int, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD2 = (
+    FieldSchema("esx", float, 0, 10, 0.0),
+    FieldSchema("ffx", float, 10, 10, 0.0),
+    FieldSchema("esy", float, 20, 10, 0.0),
+    FieldSchema("ffy", float, 30, 10, 0.0),
+    FieldSchema("esz", float, 40, 10, 0.0),
+    FieldSchema("ffz", float, 50, 10, 0.0),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD3 = (
+    FieldSchema("nsdx", float, 0, 10, None),
+    FieldSchema("psdx", float, 10, 10, None),
+    FieldSchema("nsdy", float, 20, 10, None),
+    FieldSchema("psdy", float, 30, 10, None),
+    FieldSchema("nsdz", float, 40, 10, None),
+    FieldSchema("psdz", float, 50, 10, None),
+)
 
 class ConstrainedJointStiffnessTranslational(KeywordBase):
     """DYNA CONSTRAINED_JOINT_STIFFNESS_TRANSLATIONAL keyword"""
@@ -35,199 +72,19 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         """Initialize the ConstrainedJointStiffnessTranslational class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "jsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cida",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cidb",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "esx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsdx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsdy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsdz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def jsid(self) -> typing.Optional[int]:
         """Get or set the Joint stiffness ID.

@@ -23,7 +23,22 @@
 """Module providing the InitialPwpNodalData class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALPWPNODALDATA_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nhisv", int, 10, 10, 0),
+    FieldSchema("pid", int, 20, 10, 0),
+)
+
+_INITIALPWPNODALDATA_CARD1 = (
+    FieldSchema("hisv1", float, 0, 16, None),
+    FieldSchema("hisv2", float, 16, 16, None),
+    FieldSchema("hisv3", float, 32, 16, None),
+    FieldSchema("hisv4", float, 48, 16, None),
+    FieldSchema("hisv5", float, 64, 16, None),
+)
 
 class InitialPwpNodalData(KeywordBase):
     """DYNA INITIAL_PWP_NODAL_DATA keyword"""
@@ -35,74 +50,13 @@ class InitialPwpNodalData(KeywordBase):
         """Initialize the InitialPwpNodalData class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hisv1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALPWPNODALDATA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALPWPNODALDATA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

@@ -23,7 +23,29 @@
 """Module providing the AleStructuredMeshVolumeFilling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHVOLUMEFILLING_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("ammgto", str, 20, 10, "0"),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("nsample", int, 40, 10, 3),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused-", int, 60, 10, None),
+    FieldSchema("vid", int, 70, 10, 0),
+)
+
+_ALESTRUCTUREDMESHVOLUMEFILLING_CARD1 = (
+    FieldSchema("geom", str, 0, 10, "ALL"),
+    FieldSchema("in/out", int, 10, 10, 0),
+    FieldSchema("e1", float, 20, 10, None),
+    FieldSchema("e2", float, 30, 10, None),
+    FieldSchema("e3", float, 40, 10, None),
+    FieldSchema("e4", float, 50, 10, None),
+    FieldSchema("e5", float, 60, 10, None),
+)
 
 class AleStructuredMeshVolumeFilling(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_VOLUME_FILLING keyword"""
@@ -35,127 +57,13 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
         """Initialize the AleStructuredMeshVolumeFilling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgto",
-                        str,
-                        20,
-                        10,
-                        "0",
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsample",
-                        int,
-                        40,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused-",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "geom",
-                        str,
-                        0,
-                        10,
-                        "ALL",
-                        **kwargs,
-                    ),
-                    Field(
-                        "in/out",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e5",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHVOLUMEFILLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHVOLUMEFILLING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. A unique number must be specified.

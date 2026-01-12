@@ -23,7 +23,16 @@
 """Module providing the ControlAcousticCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLACOUSTICCOUPLING_CARD0 = (
+    FieldSchema("maccpl", int, 0, 10, 3),
+    FieldSchema("acecf1", float, 10, 10, 1.5),
+    FieldSchema("acecf2", float, 20, 10, 0.79),
+    FieldSchema("acecf3", float, 30, 10, 0.5),
+    FieldSchema("acecf4", float, 40, 10, 0.95),
+)
 
 class ControlAcousticCoupling(KeywordBase):
     """DYNA CONTROL_ACOUSTIC_COUPLING keyword"""
@@ -35,52 +44,10 @@ class ControlAcousticCoupling(KeywordBase):
         """Initialize the ControlAcousticCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maccpl",
-                        int,
-                        0,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acecf1",
-                        float,
-                        10,
-                        10,
-                        1.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acecf2",
-                        float,
-                        20,
-                        10,
-                        0.79,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acecf3",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acecf4",
-                        float,
-                        40,
-                        10,
-                        0.95,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLACOUSTICCOUPLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def maccpl(self) -> int:
         """Get or set the Coupling method:

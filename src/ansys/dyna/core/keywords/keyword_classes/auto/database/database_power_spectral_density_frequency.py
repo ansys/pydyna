@@ -23,7 +23,15 @@
 """Module providing the DatabasePowerSpectralDensityFrequency class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEPOWERSPECTRALDENSITYFREQUENCY_CARD0 = (
+    FieldSchema("fbeg", float, 0, 10, 0.0),
+    FieldSchema("fend", float, 10, 10, 0.0),
+    FieldSchema("fintval", float, 20, 10, 1.0),
+    FieldSchema("ftrunk", float, 30, 10, 1.1),
+)
 
 class DatabasePowerSpectralDensityFrequency(KeywordBase):
     """DYNA DATABASE_POWER_SPECTRAL_DENSITY_FREQUENCY keyword"""
@@ -35,44 +43,10 @@ class DatabasePowerSpectralDensityFrequency(KeywordBase):
         """Initialize the DatabasePowerSpectralDensityFrequency class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fbeg",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fend",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fintval",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftrunk",
-                        float,
-                        30,
-                        10,
-                        1.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEPOWERSPECTRALDENSITYFREQUENCY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fbeg(self) -> float:
         """Get or set the Beginning frequency for PSD database output.

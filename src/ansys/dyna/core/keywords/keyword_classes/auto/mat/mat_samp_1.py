@@ -23,8 +23,60 @@
 """Module providing the MatSamp1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSAMP1_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("bulk", float, 20, 10, None),
+    FieldSchema("gmod", float, 30, 10, None),
+    FieldSchema("emod", float, 40, 10, None),
+    FieldSchema("nue", float, 50, 10, None),
+    FieldSchema("rbcfac", float, 60, 10, None),
+    FieldSchema("numint", int, 70, 10, None),
+)
+
+_MATSAMP1_CARD1 = (
+    FieldSchema("lcid-t", int, 0, 10, None),
+    FieldSchema("lcid-c", int, 10, 10, None),
+    FieldSchema("lcid-s", int, 20, 10, None),
+    FieldSchema("lcid-b", int, 30, 10, None),
+    FieldSchema("nuep", float, 40, 10, None),
+    FieldSchema("lcid-p", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("incdam", int, 70, 10, 0),
+)
+
+_MATSAMP1_CARD2 = (
+    FieldSchema("lcid_d", int, 0, 10, None),
+    FieldSchema("epfail", float, 10, 10, 100000.0),
+    FieldSchema("deprpt", float, 20, 10, None),
+    FieldSchema("lcid-tri", int, 30, 10, None),
+    FieldSchema("lcid_lc", int, 40, 10, None),
+)
+
+_MATSAMP1_CARD3 = (
+    FieldSchema("miter", int, 0, 10, None),
+    FieldSchema("mipds", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("incfail", int, 30, 10, 0),
+    FieldSchema("iconv", int, 40, 10, 0),
+    FieldSchema("asaf", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("nhsv", int, 70, 10, None),
+)
+
+_MATSAMP1_CARD4 = (
+    FieldSchema("lcemod", int, 0, 10, None),
+    FieldSchema("beta", float, 10, 10, None),
+    FieldSchema("filt", float, 20, 10, None),
+)
+
+_MATSAMP1_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSamp1(KeywordBase):
     """DYNA MAT_SAMP_1 keyword"""
@@ -40,273 +92,32 @@ class MatSamp1(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmod",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emod",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nue",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbcfac",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid-t",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid-c",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid-s",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid-b",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nuep",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid-p",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incdam",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid_d",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epfail",
-                        float,
-                        10,
-                        10,
-                        1.0E+5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deprpt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid-tri",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid_lc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "miter",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mipds",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incfail",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iconv",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asaf",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhsv",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcemod",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSAMP1_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSAMP1_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSAMP1_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSAMP1_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSAMP1_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSamp1.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSAMP1_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

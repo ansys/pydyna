@@ -23,7 +23,30 @@
 """Module providing the InitialImpulseMine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALIMPULSEMINE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("mtnt", float, 10, 10, 0.0),
+    FieldSchema("rhos", float, 20, 10, 0.0),
+    FieldSchema("depth", float, 30, 10, 0.0),
+    FieldSchema("area", float, 40, 10, 0.0),
+    FieldSchema("scale", float, 50, 10, 1.0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unit", int, 70, 10, 1),
+)
+
+_INITIALIMPULSEMINE_CARD1 = (
+    FieldSchema("x", float, 0, 10, 0.0),
+    FieldSchema("y", float, 10, 10, 0.0),
+    FieldSchema("z", float, 20, 10, 0.0),
+    FieldSchema("nidmc", int, 30, 10, 0),
+    FieldSchema("gvid", int, 40, 10, None),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+    FieldSchema("psid", int, 60, 10, 0),
+    FieldSchema("search", float, 70, 10, 0.0),
+)
 
 class InitialImpulseMine(KeywordBase):
     """DYNA INITIAL_IMPULSE_MINE keyword"""
@@ -35,141 +58,13 @@ class InitialImpulseMine(KeywordBase):
         """Initialize the InitialImpulseMine class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtnt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhos",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "depth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidmc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gvid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "search",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALIMPULSEMINE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALIMPULSEMINE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID

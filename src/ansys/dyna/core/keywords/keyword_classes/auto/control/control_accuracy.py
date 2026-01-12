@@ -23,7 +23,16 @@
 """Module providing the ControlAccuracy class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLACCURACY_CARD0 = (
+    FieldSchema("osu", int, 0, 10, 0),
+    FieldSchema("inn", int, 10, 10, 1),
+    FieldSchema("pidosu", int, 20, 10, None),
+    FieldSchema("iacc", int, 30, 10, None),
+    FieldSchema("exacc", float, 40, 10, None),
+)
 
 class ControlAccuracy(KeywordBase):
     """DYNA CONTROL_ACCURACY keyword"""
@@ -35,49 +44,10 @@ class ControlAccuracy(KeywordBase):
         """Initialize the ControlAccuracy class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "osu",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inn",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidosu",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iacc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exacc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLACCURACY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def osu(self) -> int:
         """Get or set the Global flag for 2nd order objective stress update:

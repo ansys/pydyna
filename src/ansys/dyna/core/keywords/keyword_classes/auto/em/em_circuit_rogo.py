@@ -23,7 +23,15 @@
 """Module providing the EmCircuitRogo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCIRCUITROGO_CARD0 = (
+    FieldSchema("rogoid", int, 0, 10, None),
+    FieldSchema("setid", int, 10, 10, None),
+    FieldSchema("settype", int, 20, 10, 1),
+    FieldSchema("curtyp", int, 30, 10, 1),
+)
 
 class EmCircuitRogo(KeywordBase):
     """DYNA EM_CIRCUIT_ROGO keyword"""
@@ -35,42 +43,10 @@ class EmCircuitRogo(KeywordBase):
         """Initialize the EmCircuitRogo class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rogoid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "settype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "curtyp",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCIRCUITROGO_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def rogoid(self) -> typing.Optional[int]:
         """Get or set the Rogowsky coil ID.

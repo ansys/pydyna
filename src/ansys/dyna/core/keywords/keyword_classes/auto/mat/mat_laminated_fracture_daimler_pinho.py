@@ -23,8 +23,80 @@
 """Module providing the MatLaminatedFractureDaimlerPinho class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ea", float, 20, 10, None),
+    FieldSchema("eb", float, 30, 10, None),
+    FieldSchema("ec", float, 40, 10, None),
+    FieldSchema("prba", float, 50, 10, None),
+    FieldSchema("prca", float, 60, 10, None),
+    FieldSchema("prcb", float, 70, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD1 = (
+    FieldSchema("gab", float, 0, 10, None),
+    FieldSchema("gbc", float, 10, 10, None),
+    FieldSchema("gca", float, 20, 10, None),
+    FieldSchema("aopt", float, 30, 10, None),
+    FieldSchema("daf", float, 40, 10, 0.0),
+    FieldSchema("dkf", float, 50, 10, 0.0),
+    FieldSchema("dmf", float, 60, 10, 0.0),
+    FieldSchema("efs", float, 70, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD2 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD3 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("mangle", float, 60, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD4 = (
+    FieldSchema("enkink", float, 0, 10, None),
+    FieldSchema("ena", float, 10, 10, None),
+    FieldSchema("enb", float, 20, 10, None),
+    FieldSchema("ent", float, 30, 10, None),
+    FieldSchema("enl", float, 40, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD5 = (
+    FieldSchema("xc", float, 0, 10, None),
+    FieldSchema("xt", float, 10, 10, None),
+    FieldSchema("yc", float, 20, 10, None),
+    FieldSchema("yt", float, 30, 10, None),
+    FieldSchema("sl", float, 40, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_CARD6 = (
+    FieldSchema("fio", float, 0, 10, 53.0),
+    FieldSchema("sigy", float, 10, 10, None),
+    FieldSchema("lcss", int, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("pfl", float, 40, 10, None),
+    FieldSchema("puck", float, 50, 10, 0.0),
+    FieldSchema("soft", float, 60, 10, 1.0),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERPINHO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatLaminatedFractureDaimlerPinho(KeywordBase):
     """DYNA MAT_LAMINATED_FRACTURE_DAIMLER_PINHO keyword"""
@@ -40,381 +112,38 @@ class MatLaminatedFractureDaimlerPinho(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prca",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcb",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "daf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dkf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efs",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mangle",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "enkink",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ena",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enb",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ent",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fio",
-                        float,
-                        0,
-                        10,
-                        53.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "puck",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatLaminatedFractureDaimlerPinho.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLAMINATEDFRACTUREDAIMLERPINHO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.

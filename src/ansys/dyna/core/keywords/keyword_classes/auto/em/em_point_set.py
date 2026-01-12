@@ -23,7 +23,24 @@
 """Module providing the EmPointSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMPOINTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, 0),
+    FieldSchema("pstype", int, 10, 10, 0),
+    FieldSchema("vx", float, 20, 10, 0.0),
+    FieldSchema("vy", float, 30, 10, 0.0),
+    FieldSchema("vz", float, 40, 10, 0.0),
+)
+
+_EMPOINTSET_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("x", float, 10, 10, None),
+    FieldSchema("y", float, 20, 10, None),
+    FieldSchema("z", float, 30, 10, None),
+    FieldSchema("pos", int, 40, 10, 0),
+)
 
 class EmPointSet(KeywordBase):
     """DYNA EM_POINT_SET keyword"""
@@ -35,92 +52,13 @@ class EmPointSet(KeywordBase):
         """Initialize the EmPointSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pos",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMPOINTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMPOINTSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> int:
         """Get or set the Point Set ID.

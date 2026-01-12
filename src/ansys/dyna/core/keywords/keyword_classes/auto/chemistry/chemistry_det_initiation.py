@@ -23,7 +23,23 @@
 """Module providing the ChemistryDetInitiation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYDETINITIATION_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("compid", int, 10, 10, None),
+    FieldSchema("nmesh", int, 20, 10, None),
+    FieldSchema("dlen", float, 30, 10, None),
+    FieldSchema("cfl", float, 40, 10, None),
+    FieldSchema("tlimit", float, 50, 10, None),
+    FieldSchema("xyzd", float, 60, 10, None),
+    FieldSchema("detdir", int, 70, 10, None),
+)
+
+_CHEMISTRYDETINITIATION_CARD1 = (
+    FieldSchema("file", str, 0, 256, None),
+)
 
 class ChemistryDetInitiation(KeywordBase):
     """DYNA CHEMISTRY_DET_INITIATION keyword"""
@@ -35,79 +51,13 @@ class ChemistryDetInitiation(KeywordBase):
         """Initialize the ChemistryDetInitiation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "compid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmesh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlen",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlimit",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xyzd",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detdir",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYDETINITIATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYDETINITIATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this one-dimensional detonation computation.

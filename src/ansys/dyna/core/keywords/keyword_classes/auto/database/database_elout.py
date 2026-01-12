@@ -23,7 +23,19 @@
 """Module providing the DatabaseElout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEELOUT_CARD0 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("binary", int, 10, 10, 0),
+    FieldSchema("lcur", int, 20, 10, 0),
+    FieldSchema("ioopt", int, 30, 10, 1),
+    FieldSchema("option1", int, 40, 10, 0),
+    FieldSchema("option2", int, 50, 10, 0),
+    FieldSchema("option3", int, 60, 10, 0),
+    FieldSchema("option4", int, 70, 10, 0),
+)
 
 class DatabaseElout(KeywordBase):
     """DYNA DATABASE_ELOUT keyword"""
@@ -35,76 +47,10 @@ class DatabaseElout(KeywordBase):
         """Initialize the DatabaseElout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioopt",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option2",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option3",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option4",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEELOUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified

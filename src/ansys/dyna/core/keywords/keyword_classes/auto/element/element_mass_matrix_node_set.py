@@ -23,7 +23,44 @@
 """Module providing the ElementMassMatrixNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTMASSMATRIXNODESET_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("id", int, 8, 8, None),
+    FieldSchema("cid", float, 16, 10, None),
+)
+
+_ELEMENTMASSMATRIXNODESET_CARD1 = (
+    FieldSchema("m11", float, 0, 10, 0.0),
+    FieldSchema("m21", float, 10, 10, 0.0),
+    FieldSchema("m22", float, 20, 10, 0.0),
+    FieldSchema("m31", float, 30, 10, 0.0),
+    FieldSchema("m32", float, 40, 10, 0.0),
+    FieldSchema("m33", float, 50, 10, 0.0),
+    FieldSchema("m41", float, 60, 10, 0.0),
+)
+
+_ELEMENTMASSMATRIXNODESET_CARD2 = (
+    FieldSchema("m41", float, 0, 10, 0.0),
+    FieldSchema("m43", float, 10, 10, 0.0),
+    FieldSchema("m44", float, 20, 10, 0.0),
+    FieldSchema("m51", float, 30, 10, 0.0),
+    FieldSchema("m52", float, 40, 10, 0.0),
+    FieldSchema("m53", float, 50, 10, 0.0),
+    FieldSchema("m54", float, 60, 10, 0.0),
+)
+
+_ELEMENTMASSMATRIXNODESET_CARD3 = (
+    FieldSchema("m55", float, 0, 10, 0.0),
+    FieldSchema("m61", float, 10, 10, 0.0),
+    FieldSchema("m62", float, 20, 10, 0.0),
+    FieldSchema("m63", float, 30, 10, 0.0),
+    FieldSchema("m64", float, 40, 10, 0.0),
+    FieldSchema("m65", float, 50, 10, 0.0),
+    FieldSchema("m66", float, 60, 10, 0.0),
+)
 
 class ElementMassMatrixNodeSet(KeywordBase):
     """DYNA ELEMENT_MASS_MATRIX_NODE_SET keyword"""
@@ -35,213 +72,19 @@ class ElementMassMatrixNodeSet(KeywordBase):
         """Initialize the ElementMassMatrixNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        float,
-                        16,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m11",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m21",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m22",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m31",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m32",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m33",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m41",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m41",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m43",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m44",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m51",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m52",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m53",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m54",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m55",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m61",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m62",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m63",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m64",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m65",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m66",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSMATRIXNODESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSMATRIXNODESET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSMATRIXNODESET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSMATRIXNODESET_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.  A unique number is recommended.  The nodes in a node set share the same element ID

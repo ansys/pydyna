@@ -23,7 +23,38 @@
 """Module providing the ConstrainedGeneralizedWeldCrossFillet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("filter", int, 20, 10, None),
+    FieldSchema("window", float, 30, 10, 0.0),
+    FieldSchema("npr", int, 40, 10, None),
+    FieldSchema("nprt", int, 50, 10, 0),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD2 = (
+    FieldSchema("tfail", float, 0, 10, 1e+20),
+    FieldSchema("epsf", float, 10, 10, None),
+    FieldSchema("sigy", float, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("l", float, 40, 10, None),
+    FieldSchema("w", float, 50, 10, None),
+    FieldSchema("a", float, 60, 10, None),
+    FieldSchema("alpha", float, 70, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD3 = (
+    FieldSchema("nodea", int, 0, 10, None),
+    FieldSchema("nodeb", int, 10, 10, None),
+    FieldSchema("ncid", int, 20, 10, 0),
+)
 
 class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
     """DYNA CONSTRAINED_GENERALIZED_WELD_CROSS_FILLET keyword"""
@@ -35,154 +66,19 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
         """Initialize the ConstrainedGeneralizedWeldCrossFillet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filter",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "window",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nprt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tfail",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodea",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodeb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID

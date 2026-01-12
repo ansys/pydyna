@@ -23,7 +23,70 @@
 """Module providing the ControllerPlant class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLLERPLANT_CARD0 = (
+    FieldSchema("plntid", int, 0, 10, None),
+    FieldSchema("nin", int, 10, 10, None),
+    FieldSchema("nout", int, 20, 10, None),
+    FieldSchema("nmode", int, 30, 10, None),
+    FieldSchema("mtxq", int, 40, 10, None),
+    FieldSchema("mtxr", int, 50, 10, None),
+    FieldSchema("mopt", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_CONTROLLERPLANT_CARD1 = (
+    FieldSchema("fscilab", str, 0, 20, None),
+    FieldSchema("flsdyna", str, 20, 20, None),
+    FieldSchema("fmatlab", str, 40, 20, None),
+    FieldSchema("unused", str, 60, 20, None),
+)
+
+_CONTROLLERPLANT_CARD2 = (
+    FieldSchema("nodi1", int, 0, 10, None),
+    FieldSchema("dofi1", int, 10, 10, 1),
+    FieldSchema("nodi2", int, 20, 10, None),
+    FieldSchema("dofi2", int, 30, 10, 1),
+    FieldSchema("nodi3", int, 40, 10, None),
+    FieldSchema("dofi3", int, 50, 10, 1),
+    FieldSchema("nodi4", int, 60, 10, None),
+    FieldSchema("dofi4", int, 70, 10, 1),
+)
+
+_CONTROLLERPLANT_CARD3 = (
+    FieldSchema("nodo1", int, 0, 10, None),
+    FieldSchema("dofo1", int, 10, 10, 1),
+    FieldSchema("nodo2", int, 20, 10, None),
+    FieldSchema("dofo2", int, 30, 10, 1),
+    FieldSchema("nodo3", int, 40, 10, None),
+    FieldSchema("dofo3", int, 50, 10, 1),
+    FieldSchema("nodo4", int, 60, 10, None),
+    FieldSchema("dofo4", int, 70, 10, 1),
+)
+
+_CONTROLLERPLANT_CARD4 = (
+    FieldSchema("nfeq", int, 0, 10, 1),
+    FieldSchema("deftol", float, 10, 10, 1e-09),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_CONTROLLERPLANT_CARD5 = (
+    FieldSchema("mod1", int, 0, 10, None),
+    FieldSchema("mod2", int, 10, 10, None),
+    FieldSchema("mod3", int, 20, 10, None),
+    FieldSchema("mod4", int, 30, 10, None),
+    FieldSchema("mod5", int, 40, 10, None),
+    FieldSchema("mod6", int, 50, 10, None),
+    FieldSchema("mod7", int, 60, 10, None),
+    FieldSchema("mod8", int, 70, 10, None),
+)
 
 class ControllerPlant(KeywordBase):
     """DYNA CONTROLLER_PLANT keyword"""
@@ -35,350 +98,25 @@ class ControllerPlant(KeywordBase):
         """Initialize the ControllerPlant class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "plntid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nin",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nout",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmode",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtxq",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtxr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mopt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fscilab",
-                        str,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flsdyna",
-                        str,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmatlab",
-                        str,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        str,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodi1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofi1",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodi2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofi2",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodi3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofi3",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodi4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofi4",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodo1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofo1",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodo2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofo2",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodo3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofo3",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodo4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofo4",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nfeq",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deftol",
-                        float,
-                        10,
-                        10,
-                        1.0e-9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mod1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mod8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLERPLANT_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def plntid(self) -> typing.Optional[int]:
         """Get or set the Plant ID

@@ -23,7 +23,29 @@
 """Module providing the ControlImplicitRotationalDynamics class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITROTATIONALDYNAMICS_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("omega", float, 20, 10, None),
+    FieldSchema("vid", int, 30, 10, None),
+    FieldSchema("nomeg", int, 40, 10, 0),
+    FieldSchema("iref", int, 50, 10, 0),
+    FieldSchema("omegadr", float, 60, 10, None),
+)
+
+_CONTROLIMPLICITROTATIONALDYNAMICS_CARD1 = (
+    FieldSchema("omeg1", float, 0, 10, None),
+    FieldSchema("omeg2", float, 10, 10, None),
+    FieldSchema("omeg3", float, 20, 10, None),
+    FieldSchema("omeg4", float, 30, 10, None),
+    FieldSchema("omeg5", float, 40, 10, None),
+    FieldSchema("omeg6", float, 50, 10, None),
+    FieldSchema("omeg7", float, 60, 10, None),
+    FieldSchema("omeg8", float, 70, 10, None),
+)
 
 class ControlImplicitRotationalDynamics(KeywordBase):
     """DYNA CONTROL_IMPLICIT_ROTATIONAL_DYNAMICS keyword"""
@@ -35,124 +57,13 @@ class ControlImplicitRotationalDynamics(KeywordBase):
         """Initialize the ControlImplicitRotationalDynamics class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nomeg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iref",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omegadr",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "omeg1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITROTATIONALDYNAMICS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITROTATIONALDYNAMICS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of the rotational components.

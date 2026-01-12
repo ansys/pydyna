@@ -23,7 +23,26 @@
 """Module providing the AleCouplingNodalConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALECOUPLINGNODALCONSTRAINT_CARD0 = (
+    FieldSchema("strsid", int, 0, 10, None),
+    FieldSchema("alesid", int, 10, 10, None),
+    FieldSchema("strsty", int, 20, 10, 0),
+    FieldSchema("alesty", int, 30, 10, 0),
+    FieldSchema("ctype", int, 40, 10, 0),
+    FieldSchema("mcoup", int, 50, 10, None),
+)
+
+_ALECOUPLINGNODALCONSTRAINT_CARD1 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 10000000000.0),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("frcmin", float, 50, 10, 0.5),
+)
 
 class AleCouplingNodalConstraint(KeywordBase):
     """DYNA ALE_COUPLING_NODAL_CONSTRAINT keyword"""
@@ -35,106 +54,13 @@ class AleCouplingNodalConstraint(KeywordBase):
         """Initialize the AleCouplingNodalConstraint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "strsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alesid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strsty",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alesty",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcoup",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        1.0E10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frcmin",
-                        float,
-                        50,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALECOUPLINGNODALCONSTRAINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALECOUPLINGNODALCONSTRAINT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def strsid(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set or segment set ID of the structure (see *PART, *SET_‌PART or *SET_‌SEGMENT). The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied

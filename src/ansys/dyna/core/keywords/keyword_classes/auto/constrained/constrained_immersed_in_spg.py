@@ -23,7 +23,23 @@
 """Module providing the ConstrainedImmersedInSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDIMMERSEDINSPG_CARD0 = (
+    FieldSchema("spgpid", int, 0, 10, None),
+)
+
+_CONSTRAINEDIMMERSEDINSPG_CARD1 = (
+    FieldSchema("ipid1", int, 0, 10, None),
+    FieldSchema("ipid2", int, 10, 10, None),
+    FieldSchema("ipid3", int, 20, 10, None),
+    FieldSchema("ipid4", int, 30, 10, None),
+    FieldSchema("ipid5", int, 40, 10, None),
+    FieldSchema("ipid6", int, 50, 10, None),
+    FieldSchema("ipid7", int, 60, 10, None),
+    FieldSchema("ipid8", int, 70, 10, None),
+)
 
 class ConstrainedImmersedInSpg(KeywordBase):
     """DYNA CONSTRAINED_IMMERSED_IN_SPG keyword"""
@@ -35,79 +51,13 @@ class ConstrainedImmersedInSpg(KeywordBase):
         """Initialize the ConstrainedImmersedInSpg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "spgpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDIMMERSEDINSPG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDIMMERSEDINSPG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def spgpid(self) -> typing.Optional[int]:
         """Get or set the Part ID of SPG solids where FEM beams are immersed into.

@@ -23,7 +23,23 @@
 """Module providing the ControlFormingOnestepQuad class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGONESTEPQUAD_CARD0 = (
+    FieldSchema("option", int, 0, 10, 6),
+    FieldSchema("tsclmax", float, 10, 10, 1.0),
+    FieldSchema("autobd", float, 20, 10, 0.3),
+    FieldSchema("tsclmin", float, 30, 10, 1.0),
+    FieldSchema("epsmax", float, 40, 10, 1.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("lcsdg", int, 60, 10, None),
+    FieldSchema("dmgexp", float, 70, 10, None),
+)
+
+_CONTROLFORMINGONESTEPQUAD_CARD1 = (
+    FieldSchema("flatname", str, 0, 256, None),
+)
 
 class ControlFormingOnestepQuad(KeywordBase):
     """DYNA CONTROL_FORMING_ONESTEP_QUAD keyword"""
@@ -35,84 +51,13 @@ class ControlFormingOnestepQuad(KeywordBase):
         """Initialize the ControlFormingOnestepQuad class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "option",
-                        int,
-                        0,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsclmax",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "autobd",
-                        float,
-                        20,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsclmin",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsmax",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsdg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgexp",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "flatname",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGONESTEPQUAD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGONESTEPQUAD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def option(self) -> int:
         """Get or set the One-step solution method: EQ.7: Invokes a one-step solution with blank unfolding that accounts for part undercut.

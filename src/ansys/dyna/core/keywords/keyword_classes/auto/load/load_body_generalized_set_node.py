@@ -23,7 +23,29 @@
 """Module providing the LoadBodyGeneralizedSetNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBODYGENERALIZEDSETNODE_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("drlcid", int, 30, 10, 0),
+    FieldSchema("xc", float, 40, 10, 0.0),
+    FieldSchema("yc", float, 50, 10, 0.0),
+    FieldSchema("zc", float, 60, 10, 0.0),
+)
+
+_LOADBODYGENERALIZEDSETNODE_CARD1 = (
+    FieldSchema("ax", float, 0, 10, 0.0),
+    FieldSchema("ay", float, 10, 10, 0.0),
+    FieldSchema("az", float, 20, 10, 0.0),
+    FieldSchema("omx", float, 30, 10, 0.0),
+    FieldSchema("omy", float, 40, 10, 0.0),
+    FieldSchema("omz", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, None),
+    FieldSchema("angtyp", str, 70, 10, "CENT"),
+)
 
 class LoadBodyGeneralizedSetNode(KeywordBase):
     """DYNA LOAD_BODY_GENERALIZED_SET_NODE keyword"""
@@ -35,132 +57,13 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
         """Initialize the LoadBodyGeneralizedSetNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drlcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ax",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ay",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "az",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angtyp",
-                        str,
-                        70,
-                        10,
-                        "CENT",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBODYGENERALIZEDSETNODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBODYGENERALIZEDSETNODE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID for body force load.

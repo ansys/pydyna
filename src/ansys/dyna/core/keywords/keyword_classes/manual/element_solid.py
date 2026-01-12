@@ -24,11 +24,31 @@
 
 import typing
 
-from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field import Field
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
+
+# Schema definitions for optimized Card creation
+_ELEMENTSOLID_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
+
+_ELEMENTSOLID_CARD1 = (
+    FieldSchema("n1", int, 0, 8, None),
+    FieldSchema("n2", int, 8, 8, None),
+    FieldSchema("n3", int, 16, 8, None),
+    FieldSchema("n4", int, 24, 8, None),
+    FieldSchema("n5", int, 32, 8, None),
+    FieldSchema("n6", int, 40, 8, None),
+    FieldSchema("n7", int, 48, 8, None),
+    FieldSchema("n8", int, 56, 8, None),
+    FieldSchema("n9", int, 64, 8, None),
+    FieldSchema("n10", int, 72, 8, None),
+)
 
 
 class ElementSolid(KeywordBase):
@@ -43,86 +63,8 @@ class ElementSolid(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                        [
-                            Field(
-                                "eid",
-                                int,
-                                0,
-                                8,
-                            ),
-                            Field(
-                                "pid",
-                                int,
-                                8,
-                                8,
-                            ),
-                        ],
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "n1",
-                                int,
-                                0,
-                                8,
-                            ),
-                            Field(
-                                "n2",
-                                int,
-                                8,
-                                8,
-                            ),
-                            Field(
-                                "n3",
-                                int,
-                                16,
-                                8,
-                            ),
-                            Field(
-                                "n4",
-                                int,
-                                24,
-                                8,
-                            ),
-                            Field(
-                                "n5",
-                                int,
-                                32,
-                                8,
-                            ),
-                            Field(
-                                "n6",
-                                int,
-                                40,
-                                8,
-                            ),
-                            Field(
-                                "n7",
-                                int,
-                                48,
-                                8,
-                            ),
-                            Field(
-                                "n8",
-                                int,
-                                56,
-                                8,
-                            ),
-                            Field(
-                                "n9",
-                                int,
-                                64,
-                                8,
-                            ),
-                            Field(
-                                "n10",
-                                int,
-                                72,
-                                8,
-                            ),
-                        ],
-                    ),
+                    _ELEMENTSOLID_CARD0,
+                    _ELEMENTSOLID_CARD1,
                 ],
                 None,
                 data=kwargs.get("elements"),

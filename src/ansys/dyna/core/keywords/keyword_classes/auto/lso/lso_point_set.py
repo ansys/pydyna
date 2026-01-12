@@ -23,7 +23,19 @@
 """Module providing the LsoPointSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LSOPOINTSET_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+    FieldSchema("use", int, 10, 10, 1),
+)
+
+_LSOPOINTSET_CARD1 = (
+    FieldSchema("x", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
+    FieldSchema("z", float, 20, 10, None),
+)
 
 class LsoPointSet(KeywordBase):
     """DYNA LSO_POINT_SET keyword"""
@@ -35,52 +47,13 @@ class LsoPointSet(KeywordBase):
         """Initialize the LsoPointSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "use",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LSOPOINTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOPOINTSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Identifier for this point set. Called by *LSO_DOMAIN.

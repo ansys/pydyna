@@ -23,7 +23,12 @@
 """Module providing the IcfdControlPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLPOROUS_CARD0 = (
+    FieldSchema("pmstype", int, 0, 10, 0),
+)
 
 class IcfdControlPorous(KeywordBase):
     """DYNA ICFD_CONTROL_POROUS keyword"""
@@ -35,20 +40,10 @@ class IcfdControlPorous(KeywordBase):
         """Initialize the IcfdControlPorous class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pmstype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLPOROUS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pmstype(self) -> int:
         """Get or set the Indicates the porous media solve type.

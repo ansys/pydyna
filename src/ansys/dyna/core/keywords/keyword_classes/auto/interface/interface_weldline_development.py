@@ -23,7 +23,12 @@
 """Module providing the InterfaceWeldlineDevelopment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEWELDLINEDEVELOPMENT_CARD0 = (
+    FieldSchema("ioption", int, 0, 10, 1),
+)
 
 class InterfaceWeldlineDevelopment(KeywordBase):
     """DYNA INTERFACE_WELDLINE_DEVELOPMENT keyword"""
@@ -35,20 +40,10 @@ class InterfaceWeldlineDevelopment(KeywordBase):
         """Initialize the InterfaceWeldlineDevelopment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ioption",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEWELDLINEDEVELOPMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ioption(self) -> int:
         """Get or set the Welding curve development options:

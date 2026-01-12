@@ -23,7 +23,17 @@
 """Module providing the ControlMppDecompositionRedecompositionOnce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONREDECOMPOSITIONONCE_CARD0 = (
+    FieldSchema("freq", float, 0, 10, None),
+    FieldSchema("defgeo", int, 10, 10, 1),
+    FieldSchema("weight", float, 20, 10, 1.0),
+    FieldSchema("remsph", int, 30, 10, 0),
+    FieldSchema("stime", float, 40, 10, 0.0),
+    FieldSchema("sampt ", float, 50, 10, None),
+)
 
 class ControlMppDecompositionRedecompositionOnce(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_REDECOMPOSITION_ONCE keyword"""
@@ -35,58 +45,10 @@ class ControlMppDecompositionRedecompositionOnce(KeywordBase):
         """Initialize the ControlMppDecompositionRedecompositionOnce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "freq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defgeo",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "weight",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "remsph",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stime",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sampt ",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONREDECOMPOSITIONONCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def freq(self) -> typing.Optional[float]:
         """Get or set the Determines the number of redecompositions during the solution.

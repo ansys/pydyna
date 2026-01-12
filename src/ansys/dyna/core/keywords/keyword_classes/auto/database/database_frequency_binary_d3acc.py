@@ -23,7 +23,23 @@
 """Module providing the DatabaseFrequencyBinaryD3Acc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFREQUENCYBINARYD3ACC_CARD0 = (
+    FieldSchema("binary", int, 0, 10, None),
+)
+
+_DATABASEFREQUENCYBINARYD3ACC_CARD1 = (
+    FieldSchema("nid1", int, 0, 10, 0),
+    FieldSchema("nid2", int, 10, 10, 0),
+    FieldSchema("nid3", int, 20, 10, 0),
+    FieldSchema("nid4", int, 30, 10, 0),
+    FieldSchema("nid5", int, 40, 10, 0),
+    FieldSchema("nid6", int, 50, 10, 0),
+    FieldSchema("nid7", int, 60, 10, 0),
+    FieldSchema("nid8", int, 70, 10, 0),
+)
 
 class DatabaseFrequencyBinaryD3Acc(KeywordBase):
     """DYNA DATABASE_FREQUENCY_BINARY_D3ACC keyword"""
@@ -35,87 +51,13 @@ class DatabaseFrequencyBinaryD3Acc(KeywordBase):
         """Initialize the DatabaseFrequencyBinaryD3Acc class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "binary",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3ACC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3ACC_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def binary(self) -> typing.Optional[int]:
         """Get or set the Flag for writing the binary plot file.  See Remark 1.

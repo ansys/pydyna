@@ -23,7 +23,11 @@
 """Module providing the ControlMppIoNobeamout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPIONOBEAMOUT_CARD0 = (
+)
 
 class ControlMppIoNobeamout(KeywordBase):
     """DYNA CONTROL_MPP_IO_NOBEAMOUT keyword"""
@@ -35,9 +39,7 @@ class ControlMppIoNobeamout(KeywordBase):
         """Initialize the ControlMppIoNobeamout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPIONOBEAMOUT_CARD0,
+                **kwargs,
+            ),        ]

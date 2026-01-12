@@ -23,7 +23,54 @@
 """Module providing the PerturbationMat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PERTURBATIONMAT_CARD0 = (
+    FieldSchema("type", int, 0, 10, 1),
+    FieldSchema("pid", int, 10, 10, 0),
+    FieldSchema("scl", float, 20, 10, 1.0),
+    FieldSchema("cmp", int, 30, 10, None),
+    FieldSchema("icoord", int, 40, 10, 0),
+    FieldSchema("cid", int, 50, 10, 0),
+)
+
+_PERTURBATIONMAT_CARD1 = (
+    FieldSchema("ampl", float, 0, 10, 1.0),
+    FieldSchema("xwl", float, 10, 10, 0.0),
+    FieldSchema("xoff", float, 20, 10, 0.0),
+    FieldSchema("ywl", float, 30, 10, 0.0),
+    FieldSchema("yoff", float, 40, 10, 0.0),
+    FieldSchema("zwl", float, 50, 10, 0.0),
+    FieldSchema("zoff", float, 60, 10, 0.0),
+)
+
+_PERTURBATIONMAT_CARD2 = (
+    FieldSchema("fade", float, 0, 10, 1.0),
+)
+
+_PERTURBATIONMAT_CARD3 = (
+    FieldSchema("fname", str, 0, 80, None),
+)
+
+_PERTURBATIONMAT_CARD4 = (
+    FieldSchema("cstype", int, 0, 10, 1),
+    FieldSchema("ellip1", float, 10, 10, 0.0),
+    FieldSchema("ellip2", float, 20, 10, 0.0),
+    FieldSchema("rnd", int, 30, 10, 0),
+)
+
+_PERTURBATIONMAT_CARD5 = (
+    FieldSchema("cftype", int, 0, 10, 1),
+    FieldSchema("cfc1", float, 10, 10, 1.0),
+    FieldSchema("cfc2", float, 20, 10, 1.0),
+    FieldSchema("cfc3", float, 30, 10, 1.0),
+)
+
+_PERTURBATIONMAT_CARD6 = (
+    FieldSchema("ampl", int, 0, 10, 1),
+    FieldSchema("dtype", float, 10, 10, 0.0),
+)
 
 class PerturbationMat(KeywordBase):
     """DYNA PERTURBATION_MAT keyword"""
@@ -35,234 +82,28 @@ class PerturbationMat(KeywordBase):
         """Initialize the PerturbationMat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "type",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scl",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmp",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icoord",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ampl",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xwl",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xoff",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ywl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yoff",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zwl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zoff",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fade",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fname",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cstype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ellip1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ellip2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rnd",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cftype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfc1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfc2",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfc3",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ampl",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtype",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PERTURBATIONMAT_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def type(self) -> int:
         """Get or set the Type of perturbation.

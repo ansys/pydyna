@@ -23,7 +23,24 @@
 """Module providing the LoadSuperplasticForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSUPERPLASTICFORMING_CARD0 = (
+    FieldSchema("lcp1", int, 0, 10, None),
+    FieldSchema("csp1", int, 10, 10, None),
+    FieldSchema("ncp1", float, 20, 10, None),
+    FieldSchema("lcp2", int, 30, 10, None),
+    FieldSchema("csp2", int, 40, 10, None),
+    FieldSchema("ncp2", float, 50, 10, None),
+)
+
+_LOADSUPERPLASTICFORMING_CARD1 = (
+    FieldSchema("erate", float, 0, 10, None),
+    FieldSchema("scmin", float, 10, 10, None),
+    FieldSchema("scmax", float, 20, 10, None),
+    FieldSchema("ncyl", int, 30, 10, 0),
+)
 
 class LoadSuperplasticForming(KeywordBase):
     """DYNA LOAD_SUPERPLASTIC_FORMING keyword"""
@@ -35,87 +52,13 @@ class LoadSuperplasticForming(KeywordBase):
         """Initialize the LoadSuperplasticForming class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcp1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncp1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcp2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncp2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "erate",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scmin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyl",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSUPERPLASTICFORMING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSUPERPLASTICFORMING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lcp1(self) -> typing.Optional[int]:
         """Get or set the Load curve number for Phase I pressure loading, see *DEFINE_CURVE.

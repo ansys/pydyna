@@ -23,7 +23,33 @@
 """Module providing the AleStructuredFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDFSI_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_ALESTRUCTUREDFSI_CARD1 = (
+    FieldSchema("lstrsid", int, 0, 10, None),
+    FieldSchema("alesid", int, 10, 10, None),
+    FieldSchema("lstrstyp", int, 20, 10, 0),
+    FieldSchema("alestyp", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("mcoup", int, 70, 10, None),
+)
+
+_ALESTRUCTUREDFSI_CARD2 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 10000000000.0),
+    FieldSchema("pfac", float, 20, 10, 0.1),
+    FieldSchema("fric", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("flip", int, 50, 10, 0),
+)
 
 class AleStructuredFsi(KeywordBase):
     """DYNA ALE_STRUCTURED_FSI keyword"""
@@ -35,139 +61,16 @@ class AleStructuredFsi(KeywordBase):
         """Initialize the AleStructuredFsi class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "coupid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lstrsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alesid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lstrstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alestyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcoup",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        1.0e10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac",
-                        float,
-                        20,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flip",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDFSI_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDFSI_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDFSI_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the Coupling (card) ID number.  If not defined, LS-DYNA will assign an internal coupling ID based on the order of appearance in the input deck.

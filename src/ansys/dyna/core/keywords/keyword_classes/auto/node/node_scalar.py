@@ -23,7 +23,13 @@
 """Module providing the NodeScalar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODESCALAR_CARD0 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("ndof", int, 8, 8, 0),
+)
 
 class NodeScalar(KeywordBase):
     """DYNA NODE_SCALAR keyword"""
@@ -35,27 +41,10 @@ class NodeScalar(KeywordBase):
         """Initialize the NodeScalar class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndof",
-                        int,
-                        8,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODESCALAR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Scalar node ID.

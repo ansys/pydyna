@@ -23,7 +23,13 @@
 """Module providing the DatabaseNodalForceGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASENODALFORCEGROUP_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+)
 
 class DatabaseNodalForceGroup(KeywordBase):
     """DYNA DATABASE_NODAL_FORCE_GROUP keyword"""
@@ -35,26 +41,10 @@ class DatabaseNodalForceGroup(KeywordBase):
         """Initialize the DatabaseNodalForceGroup class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASENODALFORCEGROUP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see *SET_NODE.

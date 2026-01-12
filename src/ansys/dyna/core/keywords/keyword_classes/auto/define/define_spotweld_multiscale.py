@@ -23,8 +23,24 @@
 """Module providing the DefineSpotweldMultiscale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPOTWELDMULTISCALE_CARD0 = (
+    FieldSchema("type", int, 0, 10, None),
+    FieldSchema("bset", int, 10, 10, None),
+    FieldSchema("type", int, 20, 10, None),
+    FieldSchema("bset", int, 30, 10, None),
+    FieldSchema("type", int, 40, 10, None),
+    FieldSchema("bset", int, 50, 10, None),
+    FieldSchema("type", int, 60, 10, None),
+    FieldSchema("bset", int, 70, 10, None),
+)
+
+_DEFINESPOTWELDMULTISCALE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSpotweldMultiscale(KeywordBase):
     """DYNA DEFINE_SPOTWELD_MULTISCALE keyword"""
@@ -40,85 +56,20 @@ class DefineSpotweldMultiscale(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "type",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bset",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bset",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bset",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDMULTISCALE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldMultiscale.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDMULTISCALE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def type(self) -> typing.Optional[int]:
         """Get or set the MULTISCALE spot weld type to use. See *INCLUDE_SPOTWELD_MULTISCALE

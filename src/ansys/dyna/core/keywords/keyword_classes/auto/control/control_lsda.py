@@ -23,7 +23,23 @@
 """Module providing the ControlLsda class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLLSDA_CARD0 = (
+    FieldSchema("npexcl", int, 0, 10, None),
+)
+
+_CONTROLLSDA_CARD1 = (
+    FieldSchema("p1", int, 0, 10, None),
+    FieldSchema("p2", int, 10, 10, None),
+    FieldSchema("p3", int, 20, 10, None),
+    FieldSchema("p4", int, 30, 10, None),
+    FieldSchema("p5", int, 40, 10, None),
+    FieldSchema("p6", int, 50, 10, None),
+    FieldSchema("p7", int, 60, 10, None),
+    FieldSchema("p8", int, 70, 10, None),
+)
 
 class ControlLsda(KeywordBase):
     """DYNA CONTROL_LSDA keyword"""
@@ -35,79 +51,13 @@ class ControlLsda(KeywordBase):
         """Initialize the ControlLsda class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "npexcl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLLSDA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLSDA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def npexcl(self) -> typing.Optional[int]:
         """Get or set the Number of parts to exclude from the dynain.lsda files.

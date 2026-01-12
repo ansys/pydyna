@@ -23,7 +23,27 @@
 """Module providing the AleStructuredMesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESH_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("dpid", int, 10, 10, None),
+    FieldSchema("nbid", int, 20, 10, 0),
+    FieldSchema("ebid", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("tdeath", float, 70, 10, 1e+16),
+)
+
+_ALESTRUCTUREDMESH_CARD1 = (
+    FieldSchema("cpidx", int, 0, 10, None),
+    FieldSchema("cpidy", int, 10, 10, None),
+    FieldSchema("cpidz", int, 20, 10, None),
+    FieldSchema("nid0", int, 30, 10, None),
+    FieldSchema("lcsid", int, 40, 10, None),
+)
 
 class AleStructuredMesh(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH keyword"""
@@ -35,111 +55,13 @@ class AleStructuredMesh(KeywordBase):
         """Initialize the AleStructuredMesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dpid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ebid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        70,
-                        10,
-                        1.0E16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cpidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid0",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESH_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. A unique number must be specified.

@@ -23,7 +23,38 @@
 """Module providing the AleInjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEINJECTION_CARD0 = (
+    FieldSchema("mmgset", int, 0, 10, None),
+    FieldSchema("segset", int, 10, 10, None),
+    FieldSchema("global", int, 20, 10, 0),
+    FieldSchema("lce", int, 30, 10, 0),
+    FieldSchema("lcrvl", int, 40, 10, 0),
+)
+
+_ALEINJECTION_CARD1 = (
+    FieldSchema("lcvt", int, 0, 10, 0),
+    FieldSchema("vect", int, 10, 10, 0),
+    FieldSchema("lcvr", int, 20, 10, 0),
+    FieldSchema("vecr", int, 30, 10, 0),
+    FieldSchema("boxv", int, 40, 10, 0),
+    FieldSchema("xg", float, 50, 10, 0.0),
+    FieldSchema("yg", float, 60, 10, 0.0),
+    FieldSchema("zg", float, 70, 10, 0.0),
+)
+
+_ALEINJECTION_CARD2 = (
+    FieldSchema("surfct", int, 0, 10, 0),
+    FieldSchema("ndiv", int, 10, 10, 3),
+    FieldSchema("xl", float, 20, 10, 0.0),
+    FieldSchema("yl", float, 30, 10, 0.0),
+    FieldSchema("zd", float, 40, 10, 0.0),
+    FieldSchema("zu", float, 50, 10, 0.0),
+    FieldSchema("xc", float, 60, 10, 0.0),
+    FieldSchema("yc", float, 70, 10, 0.0),
+)
 
 class AleInjection(KeywordBase):
     """DYNA ALE_INJECTION keyword"""
@@ -35,186 +66,16 @@ class AleInjection(KeywordBase):
         """Initialize the AleInjection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmgset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "global",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lce",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrvl",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcvt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vect",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxv",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xg",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yg",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zg",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "surfct",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndiv",
-                        int,
-                        10,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zd",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zu",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mmgset(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_MULTI-MATERIAL_GROUP_LIST).

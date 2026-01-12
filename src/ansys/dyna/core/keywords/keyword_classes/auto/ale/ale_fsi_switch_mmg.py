@@ -23,7 +23,30 @@
 """Module providing the AleFsiSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEFSISWITCHMMG_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_ALEFSISWITCHMMG_CARD1 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("nquad", int, 20, 10, 1),
+    FieldSchema("xoff", float, 30, 10, 0.0),
+    FieldSchema("btime", float, 40, 10, 0.0),
+    FieldSchema("dtime", float, 50, 10, 1e+20),
+    FieldSchema("nfreq", int, 60, 10, 1),
+    FieldSchema("nfold", int, 70, 10, 0),
+)
+
+_ALEFSISWITCHMMG_CARD2 = (
+    FieldSchema("fr_mmg", int, 0, 10, None),
+    FieldSchema("to_mmg", int, 10, 10, None),
+    FieldSchema("xclen", float, 20, 10, 0.0),
+)
 
 class AleFsiSwitchMmg(KeywordBase):
     """DYNA ALE_FSI_SWITCH_MMG keyword"""
@@ -35,119 +58,16 @@ class AleFsiSwitchMmg(KeywordBase):
         """Initialize the AleFsiSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nquad",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xoff",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "btime",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtime",
-                        float,
-                        50,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfold",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fr_mmg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "to_mmg",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xclen",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEFSISWITCHMMG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEFSISWITCHMMG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEFSISWITCHMMG_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Switch list ID,

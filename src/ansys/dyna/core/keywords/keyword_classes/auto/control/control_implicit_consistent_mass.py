@@ -23,7 +23,12 @@
 """Module providing the ControlImplicitConsistentMass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITCONSISTENTMASS_CARD0 = (
+    FieldSchema("iflag", int, 0, 10, 0),
+)
 
 class ControlImplicitConsistentMass(KeywordBase):
     """DYNA CONTROL_IMPLICIT_CONSISTENT_MASS keyword"""
@@ -35,20 +40,10 @@ class ControlImplicitConsistentMass(KeywordBase):
         """Initialize the ControlImplicitConsistentMass class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITCONSISTENTMASS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iflag(self) -> int:
         """Get or set the Consistent mass matrix flag

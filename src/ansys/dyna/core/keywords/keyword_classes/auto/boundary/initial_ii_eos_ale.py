@@ -23,7 +23,17 @@
 """Module providing the InitialIiEosAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALIIEOSALE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, None),
+    FieldSchema("mmg", int, 20, 10, None),
+    FieldSchema("e0", float, 30, 10, 0.0),
+    FieldSchema("v0", float, 40, 10, 0.0),
+    FieldSchema("p0", float, 50, 10, 0.0),
+)
 
 class InitialIiEosAle(KeywordBase):
     """DYNA INITIAL_II_EOS_ALE keyword"""
@@ -35,57 +45,10 @@ class InitialIiEosAle(KeywordBase):
         """Initialize the InitialIiEosAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p0",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALIIEOSALE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID or element set ID.

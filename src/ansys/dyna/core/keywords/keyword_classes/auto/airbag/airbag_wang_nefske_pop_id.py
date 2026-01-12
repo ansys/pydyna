@@ -23,7 +23,86 @@
 """Module providing the AirbagWangNefskePopId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_AIRBAGWANGNEFSKEPOPID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD1 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("sidtyp", int, 10, 10, 0),
+    FieldSchema("rbid", int, 20, 10, 0),
+    FieldSchema("vsca", float, 30, 10, 1.0),
+    FieldSchema("psca", float, 40, 10, 1.0),
+    FieldSchema("vini", float, 50, 10, 0.0),
+    FieldSchema("mwd", float, 60, 10, 0.0),
+    FieldSchema("spsf", float, 70, 10, 0.0),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD2 = (
+    FieldSchema("cv", float, 0, 10, None),
+    FieldSchema("cp", float, 10, 10, None),
+    FieldSchema("t", float, 20, 10, 0.0),
+    FieldSchema("lct", int, 30, 10, 0),
+    FieldSchema("lcmt", int, 40, 10, None),
+    FieldSchema("tvol", float, 50, 10, 0.0),
+    FieldSchema("lcdt", int, 60, 10, 0),
+    FieldSchema("iabt", float, 70, 10, None),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD3 = (
+    FieldSchema("c23", float, 0, 10, None),
+    FieldSchema("lcc23", int, 10, 10, 0),
+    FieldSchema("a23", float, 20, 10, None),
+    FieldSchema("lca23", int, 30, 10, 0),
+    FieldSchema("cp23", float, 40, 10, None),
+    FieldSchema("lccp23", int, 50, 10, 0),
+    FieldSchema("ap23", float, 60, 10, 0.0),
+    FieldSchema("lcap23", int, 70, 10, 0),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD4 = (
+    FieldSchema("pe", float, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("gc", float, 20, 10, None),
+    FieldSchema("lcefr", int, 30, 10, 0),
+    FieldSchema("pover", float, 40, 10, 0.0),
+    FieldSchema("ppop", float, 50, 10, 0.0),
+    FieldSchema("opt", int, 60, 10, 1),
+    FieldSchema("knkdn", int, 70, 10, 0),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD5 = (
+    FieldSchema("ioc", float, 0, 10, None),
+    FieldSchema("ioa", float, 10, 10, None),
+    FieldSchema("ivol", float, 20, 10, None),
+    FieldSchema("iro", float, 30, 10, None),
+    FieldSchema("it", float, 40, 10, None),
+    FieldSchema("lcbf", int, 50, 10, None),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD6 = (
+    FieldSchema("text", float, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("mw", float, 30, 10, None),
+    FieldSchema("gasc", float, 40, 10, None),
+    FieldSchema("hconv", float, 50, 10, 0.0),
+)
+
+_AIRBAGWANGNEFSKEPOPID_CARD7 = (
+    FieldSchema("tdp", float, 0, 10, 0.0),
+    FieldSchema("axp", float, 10, 10, 0.0),
+    FieldSchema("ayp", float, 20, 10, 0.0),
+    FieldSchema("azp", float, 30, 10, 0.0),
+    FieldSchema("amagp", float, 40, 10, 0.0),
+    FieldSchema("tdurp", float, 50, 10, 0.0),
+    FieldSchema("tda", float, 60, 10, 0.0),
+    FieldSchema("rbidp", int, 70, 10, None),
+)
 
 class AirbagWangNefskePopId(KeywordBase):
     """DYNA AIRBAG_WANG_NEFSKE_POP_ID keyword"""
@@ -35,448 +114,31 @@ class AirbagWangNefskePopId(KeywordBase):
         """Initialize the AirbagWangNefskePopId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsca",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psca",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vini",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mwd",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spsf",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cv",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tvol",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iabt",
-                        float,
-                        70,
-                        10,
-                        not used,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c23",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcc23",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a23",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lca23",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp23",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccp23",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ap23",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcap23",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pe",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcefr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pover",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ppop",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "opt",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "knkdn",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ioc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioa",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivol",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iro",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "it",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbf",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "text",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mw",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hconv",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ayp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "azp",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "amagp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdurp",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tda",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbidp",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGWANGNEFSKEPOPID_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -673,7 +335,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self._cards[2].set_value("lcdt", value)
 
     @property
-    def iabt(self) -> float:
+    def iabt(self) -> typing.Optional[float]:
         """Get or set the Initial airbag temperature. (Optional, generally not defined).
         """ # nopep8
         return self._cards[2].get_value("iabt")

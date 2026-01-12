@@ -23,7 +23,26 @@
 """Module providing the EmCircuitSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCIRCUITSOURCE_CARD0 = (
+    FieldSchema("circid", int, 0, 10, None),
+    FieldSchema("circtyp", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("r/f", float, 30, 10, None),
+    FieldSchema("l/a", float, 40, 10, None),
+    FieldSchema("c/t0", float, 50, 10, None),
+    FieldSchema("v0", float, 60, 10, None),
+    FieldSchema("t0", float, 70, 10, 0.0),
+)
+
+_EMCIRCUITSOURCE_CARD1 = (
+    FieldSchema("sidcurr", int, 0, 10, None),
+    FieldSchema("sidvin", int, 10, 10, None),
+    FieldSchema("sidvout", int, 20, 10, None),
+    FieldSchema("partid", int, 30, 10, None),
+)
 
 class EmCircuitSource(KeywordBase):
     """DYNA EM_CIRCUIT_SOURCE keyword"""
@@ -35,102 +54,13 @@ class EmCircuitSource(KeywordBase):
         """Initialize the EmCircuitSource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "circid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "circtyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r/f",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l/a",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c/t0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sidcurr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidvin",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidvout",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "partid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCIRCUITSOURCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMCIRCUITSOURCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def circid(self) -> typing.Optional[int]:
         """Get or set the Circuit ID.

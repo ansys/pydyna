@@ -23,7 +23,14 @@
 """Module providing the PartSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTSENSOR_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("sida", int, 10, 10, 0),
+    FieldSchema("active", int, 20, 10, 0),
+)
 
 class PartSensor(KeywordBase):
     """DYNA PART_SENSOR keyword"""
@@ -35,36 +42,10 @@ class PartSensor(KeywordBase):
         """Initialize the PartSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sida",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "active",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTSENSOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID, which is controlled by sensor.

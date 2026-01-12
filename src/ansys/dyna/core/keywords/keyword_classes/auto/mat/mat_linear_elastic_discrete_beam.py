@@ -23,8 +23,42 @@
 """Module providing the MatLinearElasticDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATLINEARELASTICDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("tkr", float, 20, 10, None),
+    FieldSchema("tks", float, 30, 10, None),
+    FieldSchema("tkt", float, 40, 10, None),
+    FieldSchema("rkr", float, 50, 10, None),
+    FieldSchema("rks", float, 60, 10, None),
+    FieldSchema("rkt", float, 70, 10, None),
+)
+
+_MATLINEARELASTICDISCRETEBEAM_CARD1 = (
+    FieldSchema("tdr", float, 0, 10, None),
+    FieldSchema("tds", float, 10, 10, None),
+    FieldSchema("tdt", float, 20, 10, None),
+    FieldSchema("rdr", float, 30, 10, None),
+    FieldSchema("rds", float, 40, 10, None),
+    FieldSchema("rdt", float, 50, 10, None),
+)
+
+_MATLINEARELASTICDISCRETEBEAM_CARD2 = (
+    FieldSchema("for", float, 0, 10, None),
+    FieldSchema("fos", float, 10, 10, None),
+    FieldSchema("fot", float, 20, 10, None),
+    FieldSchema("mor", float, 30, 10, None),
+    FieldSchema("mos", float, 40, 10, None),
+    FieldSchema("mot", float, 50, 10, None),
+)
+
+_MATLINEARELASTICDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatLinearElasticDiscreteBeam(KeywordBase):
     """DYNA MAT_LINEAR_ELASTIC_DISCRETE_BEAM keyword"""
@@ -40,177 +74,26 @@ class MatLinearElasticDiscreteBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tks",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rks",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkt",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tds",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rds",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "for",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fos",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fot",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mor",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mos",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mot",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATLINEARELASTICDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLINEARELASTICDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLINEARELASTICDISCRETEBEAM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatLinearElasticDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLINEARELASTICDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

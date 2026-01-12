@@ -23,7 +23,15 @@
 """Module providing the RigidDeformableControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_RIGIDDEFORMABLECONTROL_CARD0 = (
+    FieldSchema("nrbf", int, 0, 10, 0),
+    FieldSchema("ncsf", int, 10, 10, 0),
+    FieldSchema("rwf", int, 20, 10, 0),
+    FieldSchema("dtmax", float, 30, 10, None),
+)
 
 class RigidDeformableControl(KeywordBase):
     """DYNA RIGID_DEFORMABLE_CONTROL keyword"""
@@ -35,43 +43,10 @@ class RigidDeformableControl(KeywordBase):
         """Initialize the RigidDeformableControl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nrbf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncsf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RIGIDDEFORMABLECONTROL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nrbf(self) -> int:
         """Get or set the Flag to delete or activate nodal rigid bodies. If nodal rigid bodies or generalized, weld definitions are active in the deformable bodies that are switched to rigid, then the definitions should be deleted to avoid instabilities:

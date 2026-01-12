@@ -23,7 +23,44 @@
 """Module providing the AleReferenceSystemSwitch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEREFERENCESYSTEMSWITCH_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_ALEREFERENCESYSTEMSWITCH_CARD1 = (
+    FieldSchema("t1", float, 0, 10, 0.0),
+    FieldSchema("t2", float, 10, 10, 0.0),
+    FieldSchema("t3", float, 20, 10, 0.0),
+    FieldSchema("t4", float, 30, 10, 0.0),
+    FieldSchema("t5", float, 40, 10, 0.0),
+    FieldSchema("t6", float, 50, 10, 0.0),
+    FieldSchema("t7", float, 60, 10, 0.0),
+)
+
+_ALEREFERENCESYSTEMSWITCH_CARD2 = (
+    FieldSchema("type1", int, 0, 10, 0),
+    FieldSchema("type2", int, 10, 10, 0),
+    FieldSchema("type3", int, 20, 10, 0),
+    FieldSchema("type4", int, 30, 10, 0),
+    FieldSchema("type5", int, 40, 10, 0),
+    FieldSchema("type6", int, 50, 10, 0),
+    FieldSchema("type7", int, 60, 10, 0),
+    FieldSchema("type8", int, 70, 10, 0),
+)
+
+_ALEREFERENCESYSTEMSWITCH_CARD3 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+    FieldSchema("id6", int, 50, 10, None),
+    FieldSchema("id7", int, 60, 10, None),
+    FieldSchema("id8", int, 70, 10, None),
+)
 
 class AleReferenceSystemSwitch(KeywordBase):
     """DYNA ALE_REFERENCE_SYSTEM_SWITCH keyword"""
@@ -35,207 +72,19 @@ class AleReferenceSystemSwitch(KeywordBase):
         """Initialize the AleReferenceSystemSwitch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t6",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t7",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "type1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMSWITCH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMSWITCH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMSWITCH_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMSWITCH_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Switch list ID, see *ALE_REFERENCE_SYSTEM_GROUP.

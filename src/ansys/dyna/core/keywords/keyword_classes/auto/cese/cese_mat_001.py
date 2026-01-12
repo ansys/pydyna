@@ -23,7 +23,15 @@
 """Module providing the CeseMat001 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEMAT001_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("c1", float, 10, 10, 1.458e-06),
+    FieldSchema("c2", float, 20, 10, 110.4),
+    FieldSchema("pr", float, 30, 10, 0.72),
+)
 
 class CeseMat001(KeywordBase):
     """DYNA CESE_MAT_001 keyword"""
@@ -35,43 +43,10 @@ class CeseMat001(KeywordBase):
         """Initialize the CeseMat001 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        10,
-                        10,
-                        1.458e-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        20,
-                        10,
-                        110.4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        0.72,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEMAT001_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.

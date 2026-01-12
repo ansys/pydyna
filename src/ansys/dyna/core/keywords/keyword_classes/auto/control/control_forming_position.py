@@ -23,7 +23,14 @@
 """Module providing the ControlFormingPosition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGPOSITION_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("premove", float, 10, 10, None),
+    FieldSchema("target", int, 20, 10, None),
+)
 
 class ControlFormingPosition(KeywordBase):
     """DYNA CONTROL_FORMING_POSITION keyword"""
@@ -35,33 +42,10 @@ class ControlFormingPosition(KeywordBase):
         """Initialize the ControlFormingPosition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "premove",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "target",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPOSITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID

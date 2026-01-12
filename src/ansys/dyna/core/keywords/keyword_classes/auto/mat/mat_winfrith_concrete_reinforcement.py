@@ -23,8 +23,22 @@
 """Module providing the MatWinfrithConcreteReinforcement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATWINFRITHCONCRETEREINFORCEMENT_CARD0 = (
+    FieldSchema("eid1/unused", int, 0, 10, None),
+    FieldSchema("eid2/pid", int, 10, 10, None),
+    FieldSchema("inc/axis", int, 20, 10, None),
+    FieldSchema("xr/coor", float, 30, 10, None),
+    FieldSchema("yr/rqa", float, 40, 10, None),
+    FieldSchema("zr/rqb", float, 50, 10, None),
+)
+
+_MATWINFRITHCONCRETEREINFORCEMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatWinfrithConcreteReinforcement(KeywordBase):
     """DYNA MAT_WINFRITH_CONCRETE_REINFORCEMENT keyword"""
@@ -40,71 +54,20 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid1/unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid2/pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inc/axis",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xr/coor",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yr/rqa",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zr/rqb",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATWINFRITHCONCRETEREINFORCEMENT_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatWinfrithConcreteReinforcement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATWINFRITHCONCRETEREINFORCEMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def eid1_unused(self) -> typing.Optional[int]:
         """Get or set the First element ID in group. Left blank to active card of option 2.

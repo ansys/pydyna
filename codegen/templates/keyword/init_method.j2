@@ -1,0 +1,23 @@
+{# Template for generating the __init__ method #}
+    def __init__(self, **kwargs):
+        """Initialize the {{keyword_data.classname}} class."""
+        super().__init__(**kwargs)
+{% if keyword_data.card_sets %}
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+{% endif %}
+{% if keyword_data.options %}
+        kwargs["parent"] = self
+{% endif %}
+        self._cards = [
+{% for card in keyword_data.cards %}
+{% with parent_name = keyword_data.classname, card_index = loop.index0 %}
+{% include 'keyword/card.j2' %}
+{% endwith %}
+{% endfor %}
+{% if keyword_data.options %}
+{% with parent_name = keyword_data.classname, options = keyword_data.options %}
+{% include 'keyword/options.j2' %}
+{% endwith %}
+{% endif %}
+        ]

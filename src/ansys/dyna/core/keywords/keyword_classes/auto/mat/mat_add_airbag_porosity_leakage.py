@@ -23,8 +23,24 @@
 """Module providing the MatAddAirbagPorosityLeakage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDAIRBAGPOROSITYLEAKAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("x2/flc", float, 10, 10, None),
+    FieldSchema("x3/fac", float, 20, 10, 1.0),
+    FieldSchema("ela", float, 30, 10, None),
+    FieldSchema("fvopt", float, 40, 10, None),
+    FieldSchema("x0", float, 50, 10, None),
+    FieldSchema("x1", float, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MATADDAIRBAGPOROSITYLEAKAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddAirbagPorosityLeakage(KeywordBase):
     """DYNA MAT_ADD_AIRBAG_POROSITY_LEAKAGE keyword"""
@@ -40,86 +56,20 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2/flc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x3/fac",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ela",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fvopt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDAIRBAGPOROSITYLEAKAGE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddAirbagPorosityLeakage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDAIRBAGPOROSITYLEAKAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID for which the porosity leakage property applies

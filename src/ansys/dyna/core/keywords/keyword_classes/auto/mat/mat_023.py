@@ -25,9 +25,41 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT023_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("aopt", float, 20, 10, None),
+    FieldSchema("ref", float, 30, 10, 0.0),
+    FieldSchema("macf", int, 40, 10, 1),
+)
+
+_MAT023_CARD1 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MAT023_CARD2 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MAT023_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat023(KeywordBase):
     """DYNA MAT_023 keyword"""
@@ -43,259 +75,50 @@ class Mat023(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
+            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD2,
+                **kwargs,
+            ),            TableCardGroup(
                 [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
+                    (
+                        FieldSchema("eai", float, 0, 10, None),
+                        FieldSchema("ebi", float, 10, 10, None),
+                        FieldSchema("eci", float, 20, 10, None),
+                        FieldSchema("prabi", float, 30, 10, None),
+                        FieldSchema("prcai", float, 40, 10, None),
+                        FieldSchema("prcbi", float, 50, 10, None),
                     ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCardGroup(
-                [
-                    Card(
-                            [
-                                Field(
-                                    "eai",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "ebi",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "eci",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "prabi",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "prcai",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "prcbi",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                            ],
-                    ),
-                    Card(
-                            [
-                                Field(
-                                    "aai",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "abi",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "aci",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "gabi",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "gbci",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "gcai",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "ti",
-                                    float,
-                                    60,
-                                    10,
-                                ),
-                            ],
+                    (
+                        FieldSchema("aai", float, 0, 10, None),
+                        FieldSchema("abi", float, 10, 10, None),
+                        FieldSchema("aci", float, 20, 10, None),
+                        FieldSchema("gabi", float, 30, 10, None),
+                        FieldSchema("gbci", float, 40, 10, None),
+                        FieldSchema("gcai", float, 50, 10, None),
+                        FieldSchema("ti", float, 60, 10, None),
                     ),
                 ],
                 None,
                 None,
                 "temperature_points",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = Mat023.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT023_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

@@ -23,7 +23,12 @@
 """Module providing the RigidDeformableR2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_RIGIDDEFORMABLER2D_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
 
 class RigidDeformableR2D(KeywordBase):
     """DYNA RIGID_DEFORMABLE_R2D keyword"""
@@ -35,19 +40,10 @@ class RigidDeformableR2D(KeywordBase):
         """Initialize the RigidDeformableR2D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RIGIDDEFORMABLER2D_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the part which is switched to a deformable material.

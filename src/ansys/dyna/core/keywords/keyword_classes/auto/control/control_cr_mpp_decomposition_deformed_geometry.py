@@ -23,7 +23,12 @@
 """Module providing the ControlCrMppDecompositionDeformedGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCRMPPDECOMPOSITIONDEFORMEDGEOMETRY_CARD0 = (
+    FieldSchema("sph", int, 0, 10, None),
+)
 
 class ControlCrMppDecompositionDeformedGeometry(KeywordBase):
     """DYNA CONTROL_CR_MPP_DECOMPOSITION_DEFORMED_GEOMETRY keyword"""
@@ -35,19 +40,10 @@ class ControlCrMppDecompositionDeformedGeometry(KeywordBase):
         """Initialize the ControlCrMppDecompositionDeformedGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sph",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCRMPPDECOMPOSITIONDEFORMEDGEOMETRY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sph(self) -> typing.Optional[int]:
         """Get or set the Flag for inclusion of inactive SPH elements:

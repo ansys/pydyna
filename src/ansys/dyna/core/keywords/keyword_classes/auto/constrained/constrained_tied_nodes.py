@@ -23,7 +23,14 @@
 """Module providing the ConstrainedTiedNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDTIEDNODES_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("eppf", float, 10, 10, 0.0),
+    FieldSchema("etype", int, 20, 10, 0),
+)
 
 class ConstrainedTiedNodes(KeywordBase):
     """DYNA CONSTRAINED_TIED_NODES keyword"""
@@ -35,35 +42,10 @@ class ConstrainedTiedNodes(KeywordBase):
         """Initialize the ConstrainedTiedNodes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eppf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDTIEDNODES_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.

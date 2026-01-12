@@ -23,7 +23,17 @@
 """Module providing the BoundaryAcousticNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICNONREFLECTING_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("nrbtyp", int, 10, 10, None),
+    FieldSchema("crvopt", int, 20, 10, None),
+    FieldSchema("data1", float, 30, 10, None),
+    FieldSchema("data2", float, 40, 10, None),
+    FieldSchema("data3", float, 50, 10, None),
+)
 
 class BoundaryAcousticNonReflecting(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_NON_REFLECTING keyword"""
@@ -35,54 +45,10 @@ class BoundaryAcousticNonReflecting(KeywordBase):
         """Initialize the BoundaryAcousticNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrbtyp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crvopt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICNONREFLECTING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of an acoustic surface.

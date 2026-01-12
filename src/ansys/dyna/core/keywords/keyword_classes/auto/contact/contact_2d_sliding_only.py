@@ -23,7 +23,26 @@
 """Module providing the Contact2DSlidingOnly class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACT2DSLIDINGONLY_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("tbirth", float, 20, 10, 0.0),
+    FieldSchema("tdeath", float, 30, 10, 1e+20),
+)
+
+_CONTACT2DSLIDINGONLY_CARD1 = (
+    FieldSchema("ext_pas", int, 0, 10, 0),
+    FieldSchema("theta1", float, 10, 10, 0.0),
+    FieldSchema("theta2", float, 20, 10, 0.0),
+    FieldSchema("tol_ig", float, 30, 10, 0.001),
+    FieldSchema("pen", float, 40, 10, 0.1),
+    FieldSchema("toloff", float, 50, 10, 0.25),
+    FieldSchema("frcscl", float, 60, 10, 0.1),
+    FieldSchema("oneway", float, 70, 10, 0.0),
+)
 
 class Contact2DSlidingOnly(KeywordBase):
     """DYNA CONTACT_2D_SLIDING_ONLY keyword"""
@@ -35,110 +54,13 @@ class Contact2DSlidingOnly(KeywordBase):
         """Initialize the Contact2DSlidingOnly class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        30,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ext_pas",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol_ig",
-                        float,
-                        30,
-                        10,
-                        1.0E-03,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pen",
-                        float,
-                        40,
-                        10,
-                        1.0E-01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toloff",
-                        float,
-                        50,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frcscl",
-                        float,
-                        60,
-                        10,
-                        1.0E-01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oneway",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACT2DSLIDINGONLY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACT2DSLIDINGONLY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID for the SURFA nodes, see *SET_‌NODE.  The surface specified with SURFA must be to the left of the surface specified with SURFB. For nonsymmetric contact, this surface is the tracked surface (all contacts in this section except PENALTY and PENALTY_FRICTION).

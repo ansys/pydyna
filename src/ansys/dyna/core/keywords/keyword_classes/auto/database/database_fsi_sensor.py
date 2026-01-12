@@ -23,7 +23,23 @@
 """Module providing the DatabaseFsiSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFSISENSOR_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("binary", int, 10, 10, 1),
+)
+
+_DATABASEFSISENSOR_CARD1 = (
+    FieldSchema("dbfsi_id", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("segmid", int, 20, 10, None),
+    FieldSchema("offset", float, 30, 10, None),
+    FieldSchema("nd1", int, 40, 10, None),
+    FieldSchema("nd2", int, 50, 10, None),
+    FieldSchema("nd3", int, 60, 10, None),
+)
 
 class DatabaseFsiSensor(KeywordBase):
     """DYNA DATABASE_FSI_SENSOR keyword"""
@@ -35,80 +51,13 @@ class DatabaseFsiSensor(KeywordBase):
         """Initialize the DatabaseFsiSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dbfsi_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segmid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd3",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFSISENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFSISENSOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output interval

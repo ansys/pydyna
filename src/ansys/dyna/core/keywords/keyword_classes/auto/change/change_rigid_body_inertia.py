@@ -23,7 +23,23 @@
 """Module providing the ChangeRigidBodyInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGERIGIDBODYINERTIA_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, 0),
+    FieldSchema("tm", float, 20, 10, 0.0),
+)
+
+_CHANGERIGIDBODYINERTIA_CARD1 = (
+    FieldSchema("ixx", float, 0, 10, None),
+    FieldSchema("ixy", float, 10, 10, 0.0),
+    FieldSchema("ixz", float, 20, 10, 0.0),
+    FieldSchema("iyy", float, 30, 10, 0.0),
+    FieldSchema("iyz", float, 40, 10, 0.0),
+    FieldSchema("izz", float, 50, 10, 0.0),
+)
 
 class ChangeRigidBodyInertia(KeywordBase):
     """DYNA CHANGE_RIGID_BODY_INERTIA keyword"""
@@ -35,86 +51,13 @@ class ChangeRigidBodyInertia(KeywordBase):
         """Initialize the ChangeRigidBodyInertia class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tm",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ixx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixy",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixz",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyy",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyz",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izz",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYINERTIA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYINERTIA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this change inertia input.

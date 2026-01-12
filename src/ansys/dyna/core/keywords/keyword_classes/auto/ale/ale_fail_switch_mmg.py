@@ -23,7 +23,18 @@
 """Module providing the AleFailSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEFAILSWITCHMMG_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_ALEFAILSWITCHMMG_CARD1 = (
+    FieldSchema("fr_mmg", int, 0, 10, None),
+    FieldSchema("to_mmg", int, 10, 10, None),
+)
 
 class AleFailSwitchMmg(KeywordBase):
     """DYNA ALE_FAIL_SWITCH_MMG keyword"""
@@ -35,44 +46,13 @@ class AleFailSwitchMmg(KeywordBase):
         """Initialize the AleFailSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fr_mmg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "to_mmg",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEFAILSWITCHMMG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEFAILSWITCHMMG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Switch list ID,

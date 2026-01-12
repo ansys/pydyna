@@ -23,7 +23,13 @@
 """Module providing the DatabaseExtentSsstatId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTSSSTATID_CARD0 = (
+    FieldSchema("psidn", int, 0, 10, None),
+    FieldSchema("headingn", str, 10, 70, None),
+)
 
 class DatabaseExtentSsstatId(KeywordBase):
     """DYNA DATABASE_EXTENT_SSSTAT_ID keyword"""
@@ -35,26 +41,10 @@ class DatabaseExtentSsstatId(KeywordBase):
         """Initialize the DatabaseExtentSsstatId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psidn",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "headingn",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTSSSTATID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psidn(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem n, see *SET_PART.

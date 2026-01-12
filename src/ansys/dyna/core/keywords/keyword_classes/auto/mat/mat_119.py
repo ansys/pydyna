@@ -23,8 +23,88 @@
 """Module providing the Mat119 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT119_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("kt", float, 20, 10, None),
+    FieldSchema("kr", float, 30, 10, None),
+    FieldSchema("iunld", int, 40, 10, None),
+    FieldSchema("offset", float, 50, 10, None),
+    FieldSchema("dampf", float, 60, 10, None),
+    FieldSchema("iflag", int, 70, 10, 0),
+)
+
+_MAT119_CARD1 = (
+    FieldSchema("lcidtr", int, 0, 10, None),
+    FieldSchema("lcidts", int, 10, 10, None),
+    FieldSchema("lcidtt", int, 20, 10, None),
+    FieldSchema("lcidrr", int, 30, 10, None),
+    FieldSchema("lcidrs", int, 40, 10, None),
+    FieldSchema("lcidrt", int, 50, 10, None),
+)
+
+_MAT119_CARD2 = (
+    FieldSchema("lcidtur", int, 0, 10, None),
+    FieldSchema("lcidtus", int, 10, 10, None),
+    FieldSchema("lcidtut", int, 20, 10, None),
+    FieldSchema("lcidrur", int, 30, 10, None),
+    FieldSchema("lcidrus", int, 40, 10, None),
+    FieldSchema("lcidrut", int, 50, 10, None),
+)
+
+_MAT119_CARD3 = (
+    FieldSchema("lcidtdr", int, 0, 10, None),
+    FieldSchema("lcidtds", int, 10, 10, None),
+    FieldSchema("lcidtdt", int, 20, 10, None),
+    FieldSchema("lcidrdr", int, 30, 10, None),
+    FieldSchema("lcidrds", int, 40, 10, None),
+    FieldSchema("lcidrdt", int, 50, 10, None),
+)
+
+_MAT119_CARD4 = (
+    FieldSchema("lcidter", int, 0, 10, None),
+    FieldSchema("lcidtes", int, 10, 10, None),
+    FieldSchema("lcidtet", int, 20, 10, None),
+    FieldSchema("lcidrer", int, 30, 10, None),
+    FieldSchema("lcidres", int, 40, 10, None),
+    FieldSchema("lcidret", int, 50, 10, None),
+)
+
+_MAT119_CARD5 = (
+    FieldSchema("utfailr", float, 0, 10, None),
+    FieldSchema("utfails", float, 10, 10, None),
+    FieldSchema("utfailt", float, 20, 10, None),
+    FieldSchema("wtfailr", float, 30, 10, None),
+    FieldSchema("wtfails", float, 40, 10, None),
+    FieldSchema("wtfailt", float, 50, 10, None),
+    FieldSchema("fcrit", float, 60, 10, None),
+)
+
+_MAT119_CARD6 = (
+    FieldSchema("ucfailr", float, 0, 10, None),
+    FieldSchema("ucfails", float, 10, 10, None),
+    FieldSchema("ucfailt", float, 20, 10, None),
+    FieldSchema("wcfailr", float, 30, 10, None),
+    FieldSchema("wcfails", float, 40, 10, None),
+    FieldSchema("wcfailt", float, 50, 10, None),
+)
+
+_MAT119_CARD7 = (
+    FieldSchema("iur", float, 0, 10, None),
+    FieldSchema("ius", float, 10, 10, None),
+    FieldSchema("iut", float, 20, 10, None),
+    FieldSchema("iwr", float, 30, 10, None),
+    FieldSchema("iws", float, 40, 10, None),
+    FieldSchema("iwt", float, 50, 10, None),
+)
+
+_MAT119_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat119(KeywordBase):
     """DYNA MAT_119 keyword"""
@@ -40,415 +120,41 @@ class Mat119(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunld",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidtr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidts",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrs",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrt",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidtur",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtus",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtut",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrur",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrus",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrut",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidtdr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtds",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtdt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrds",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrdt",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidter",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtes",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtet",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrer",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidres",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidret",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "utfailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "utfails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "utfailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcrit",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ucfailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ucfails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ucfailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iur",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ius",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iut",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iwr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iws",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iwt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT119_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat119.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT119_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

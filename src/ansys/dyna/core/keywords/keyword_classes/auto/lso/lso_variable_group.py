@@ -23,7 +23,24 @@
 """Module providing the LsoVariableGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LSOVARIABLEGROUP_CARD0 = (
+    FieldSchema("solver_name", str, 0, 80, None),
+)
+
+_LSOVARIABLEGROUP_CARD1 = (
+    FieldSchema("domain_type", str, 0, 80, "NODE"),
+)
+
+_LSOVARIABLEGROUP_CARD2 = (
+    FieldSchema("group_name", str, 0, 80, None),
+)
+
+_LSOVARIABLEGROUP_CARD3 = (
+    FieldSchema("var_name", str, 0, 80, None),
+)
 
 class LsoVariableGroup(KeywordBase):
     """DYNA LSO_VARIABLE_GROUP keyword"""
@@ -35,53 +52,19 @@ class LsoVariableGroup(KeywordBase):
         """Initialize the LsoVariableGroup class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "solver_name",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "domain_type",
-                        str,
-                        0,
-                        80,
-                        "NODE",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "group_name",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var_name",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LSOVARIABLEGROUP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOVARIABLEGROUP_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOVARIABLEGROUP_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOVARIABLEGROUP_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def solver_name(self) -> typing.Optional[str]:
         """Get or set the Name of the solver.

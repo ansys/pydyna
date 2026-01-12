@@ -23,7 +23,13 @@
 """Module providing the ControlExplicitThermalAleCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEXPLICITTHERMALALECOUPLING_CARD0 = (
+    FieldSchema("partset", int, 0, 10, None),
+    FieldSchema("mmgset", int, 10, 10, None),
+)
 
 class ControlExplicitThermalAleCoupling(KeywordBase):
     """DYNA CONTROL_EXPLICIT_THERMAL_ALE_COUPLING keyword"""
@@ -35,26 +41,10 @@ class ControlExplicitThermalAleCoupling(KeywordBase):
         """Initialize the ControlExplicitThermalAleCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "partset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALALECOUPLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).

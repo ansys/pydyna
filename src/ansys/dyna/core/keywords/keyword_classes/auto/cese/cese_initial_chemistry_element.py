@@ -23,7 +23,34 @@
 """Module providing the CeseInitialChemistryElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEINITIALCHEMISTRYELEMENT_CARD0 = (
+    FieldSchema("chemid", int, 0, 10, None),
+    FieldSchema("compid", int, 10, 10, None),
+)
+
+_CESEINITIALCHEMISTRYELEMENT_CARD1 = (
+    FieldSchema("uic", float, 0, 10, None),
+    FieldSchema("vic", float, 10, 10, None),
+    FieldSchema("wic", float, 20, 10, None),
+    FieldSchema("rhoic", float, 30, 10, None),
+    FieldSchema("pic", float, 40, 10, None),
+    FieldSchema("tic", float, 50, 10, None),
+    FieldSchema("hic", float, 60, 10, None),
+)
+
+_CESEINITIALCHEMISTRYELEMENT_CARD2 = (
+    FieldSchema("ele1", int, 0, 10, None),
+    FieldSchema("ele2", int, 10, 10, None),
+    FieldSchema("ele3", int, 20, 10, None),
+    FieldSchema("ele4", int, 30, 10, None),
+    FieldSchema("ele5", int, 40, 10, None),
+    FieldSchema("ele6", int, 50, 10, None),
+    FieldSchema("ele7", int, 60, 10, None),
+    FieldSchema("ele8", int, 70, 10, None),
+)
 
 class CeseInitialChemistryElement(KeywordBase):
     """DYNA CESE_INITIAL_CHEMISTRY_ELEMENT keyword"""
@@ -35,139 +62,16 @@ class CeseInitialChemistryElement(KeywordBase):
         """Initialize the CeseInitialChemistryElement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "chemid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "compid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "uic",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pic",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hic",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ele1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ele8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEINITIALCHEMISTRYELEMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEINITIALCHEMISTRYELEMENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEINITIALCHEMISTRYELEMENT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def chemid(self) -> typing.Optional[int]:
         """Get or set the Identifier of chemistry control card to use.

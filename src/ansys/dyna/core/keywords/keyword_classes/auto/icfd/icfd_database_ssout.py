@@ -23,7 +23,19 @@
 """Module providing the IcfdDatabaseSsout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASESSOUT_CARD0 = (
+    FieldSchema("out", int, 0, 10, 0),
+    FieldSchema("outdt", int, 10, 10, 0),
+    FieldSchema("lcidsf", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("poff", float, 70, 10, 0.0),
+)
 
 class IcfdDatabaseSsout(KeywordBase):
     """DYNA ICFD_DATABASE_SSOUT keyword"""
@@ -35,71 +47,10 @@ class IcfdDatabaseSsout(KeywordBase):
         """Initialize the IcfdDatabaseSsout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "out",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outdt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidsf",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "poff",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASESSOUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should retrieve the pressure loads and how to output it:

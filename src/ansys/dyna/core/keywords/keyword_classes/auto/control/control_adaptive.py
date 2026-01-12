@@ -23,7 +23,52 @@
 """Module providing the ControlAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLADAPTIVE_CARD0 = (
+    FieldSchema("adpfreq", float, 0, 10, None),
+    FieldSchema("adptol", float, 10, 10, 1e+20),
+    FieldSchema("adptyp", int, 20, 10, 1),
+    FieldSchema("maxlvl", int, 30, 10, 3),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+    FieldSchema("lcadp", int, 60, 10, 0),
+    FieldSchema("ioflag", int, 70, 10, 0),
+)
+
+_CONTROLADAPTIVE_CARD1 = (
+    FieldSchema("adpsize", float, 0, 10, 0.0),
+    FieldSchema("adpass", int, 10, 10, 0),
+    FieldSchema("ireflg", int, 20, 10, 0),
+    FieldSchema("adpene", float, 30, 10, 0.0),
+    FieldSchema("adpth", float, 40, 10, 0.0),
+    FieldSchema("memory", int, 50, 10, 0),
+    FieldSchema("orient", int, 60, 10, 0),
+    FieldSchema("maxel", int, 70, 10, 0),
+)
+
+_CONTROLADAPTIVE_CARD2 = (
+    FieldSchema("ladpn90", int, 0, 10, 0),
+    FieldSchema("ladpgh", int, 10, 10, 0),
+    FieldSchema("ncfred", int, 20, 10, None),
+    FieldSchema("ladpcl", int, 30, 10, 1),
+    FieldSchema("adpctl", float, 40, 10, None),
+    FieldSchema("cbirth", float, 50, 10, 0.0),
+    FieldSchema("cdeath", float, 60, 10, 1e+20),
+    FieldSchema("lclvl", int, 70, 10, None),
+)
+
+_CONTROLADAPTIVE_CARD3 = (
+    FieldSchema("cnla", float, 0, 10, 110.0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("mmm2d", int, 30, 10, 0),
+    FieldSchema("adperr", str, 40, 10, "0"),
+    FieldSchema("d3trace", int, 50, 10, 0),
+    FieldSchema("iadpcf", int, 60, 10, 0),
+    FieldSchema("ifsand", int, 70, 10, 0),
+)
 
 class ControlAdaptive(KeywordBase):
     """DYNA CONTROL_ADAPTIVE keyword"""
@@ -35,274 +80,19 @@ class ControlAdaptive(KeywordBase):
         """Initialize the ControlAdaptive class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "adpfreq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adptol",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adptyp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxlvl",
-                        int,
-                        30,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcadp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioflag",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "adpsize",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpass",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ireflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpene",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memory",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orient",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ladpn90",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ladpgh",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncfred",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ladpcl",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpctl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cbirth",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdeath",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lclvl",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cnla",
-                        float,
-                        0,
-                        10,
-                        110.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmm2d",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adperr",
-                        str,
-                        40,
-                        10,
-                        "0",
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3trace",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iadpcf",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifsand",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPTIVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPTIVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPTIVE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPTIVE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def adpfreq(self) -> typing.Optional[float]:
         """Get or set the Time interval between adaptive refinements.

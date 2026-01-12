@@ -23,7 +23,12 @@
 """Module providing the InitialLagMappingWrite class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALLAGMAPPINGWRITE_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+)
 
 class InitialLagMappingWrite(KeywordBase):
     """DYNA INITIAL_LAG_MAPPING_WRITE keyword"""
@@ -35,19 +40,10 @@ class InitialLagMappingWrite(KeywordBase):
         """Initialize the InitialLagMappingWrite class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALLAGMAPPINGWRITE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the part set ID

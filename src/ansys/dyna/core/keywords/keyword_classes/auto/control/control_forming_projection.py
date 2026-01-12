@@ -23,7 +23,16 @@
 """Module providing the ControlFormingProjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGPROJECTION_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pidt", int, 10, 10, None),
+    FieldSchema("gap", float, 20, 10, None),
+    FieldSchema("nrbst", int, 30, 10, 0),
+    FieldSchema("nrtst", int, 40, 10, 0),
+)
 
 class ControlFormingProjection(KeywordBase):
     """DYNA CONTROL_FORMING_PROJECTION keyword"""
@@ -35,49 +44,10 @@ class ControlFormingProjection(KeywordBase):
         """Initialize the ControlFormingProjection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrbst",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrtst",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPROJECTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for the blank.

@@ -23,7 +23,27 @@
 """Module providing the ConstrainedRigidBodyInsert class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pidl", int, 10, 10, None),
+    FieldSchema("pidc", int, 20, 10, None),
+    FieldSchema("coordid", int, 30, 10, None),
+    FieldSchema("idir", int, 40, 10, 3),
+)
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD1 = (
+    FieldSchema("mflag", int, 0, 10, 0),
+    FieldSchema("mcid", int, 10, 10, None),
+    FieldSchema("deathm", float, 20, 10, 0.0),
+)
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD2 = (
+    FieldSchema("partb", int, 0, 10, None),
+    FieldSchema("deathb", float, 10, 10, 0.0),
+)
 
 class ConstrainedRigidBodyInsert(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODY_INSERT keyword"""
@@ -35,94 +55,16 @@ class ConstrainedRigidBodyInsert(KeywordBase):
         """Initialize the ConstrainedRigidBodyInsert class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coordid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        40,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deathm",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "partb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deathb",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Insert ID.

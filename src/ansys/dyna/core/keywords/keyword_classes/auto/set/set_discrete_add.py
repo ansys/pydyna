@@ -23,8 +23,28 @@
 """Module providing the SetDiscreteAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETDISCRETEADD_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETDISCRETEADD_CARD1 = (
+    FieldSchema("dsid1", int, 0, 10, None),
+    FieldSchema("dsid2", int, 10, 10, None),
+    FieldSchema("dsid3", int, 20, 10, None),
+    FieldSchema("dsid4", int, 30, 10, None),
+    FieldSchema("dsid5", int, 40, 10, None),
+    FieldSchema("dsid6", int, 50, 10, None),
+    FieldSchema("dsid7", int, 60, 10, None),
+    FieldSchema("dsid8", int, 70, 10, None),
+)
+
+_SETDISCRETEADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetDiscreteAdd(KeywordBase):
     """DYNA SET_DISCRETE_ADD keyword"""
@@ -40,96 +60,23 @@ class SetDiscreteAdd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dsid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETDISCRETEADD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETDISCRETEADD_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetDiscreteAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETDISCRETEADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new discrete set. All discrete sets should have a unique set ID.

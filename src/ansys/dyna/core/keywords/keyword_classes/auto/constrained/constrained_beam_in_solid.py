@@ -23,8 +23,41 @@
 """Module providing the ConstrainedBeamInSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDBEAMINSOLID_CARD0 = (
+    FieldSchema("bside", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("bstyp", int, 20, 10, 0),
+    FieldSchema("sstyp", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("ncoup", int, 60, 10, None),
+    FieldSchema("cdir", int, 70, 10, None),
+)
+
+_CONSTRAINEDBEAMINSOLID_CARD1 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 1e+21),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("axfor ", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("pssf", float, 50, 10, 0.1),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("xint", int, 70, 10, None),
+)
+
+_CONSTRAINEDBEAMINSOLID_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONSTRAINEDBEAMINSOLID_OPTION1_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
 
 class ConstrainedBeamInSolid(KeywordBase):
     """DYNA CONSTRAINED_BEAM_IN_SOLID keyword"""
@@ -41,151 +74,18 @@ class ConstrainedBeamInSolid(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bside",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncoup",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdir",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        10E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axfor ",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pssf",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xint",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDBEAMINSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDBEAMINSOLID_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ConstrainedBeamInSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "coupid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("coupid")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDBEAMINSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -193,29 +93,14 @@ class ConstrainedBeamInSolid(KeywordBase):
             OptionCardSet(
                 option_spec = ConstrainedBeamInSolid.option_specs[1],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "coupid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("coupid")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDBEAMINSOLID_OPTION1_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def bside(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID of the Lagrangian beam structure(see *PART,* SET_PART)

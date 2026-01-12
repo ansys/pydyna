@@ -23,7 +23,20 @@
 """Module providing the BoundaryAmbient class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYAMBIENT_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+    FieldSchema("mmg", int, 10, 10, None),
+    FieldSchema("ambtyp", int, 20, 10, None),
+    FieldSchema("sidr", int, 30, 10, 0),
+)
+
+_BOUNDARYAMBIENT_CARD1 = (
+    FieldSchema("lcid1", int, 0, 10, None),
+    FieldSchema("lcid2", int, 10, 10, None),
+)
 
 class BoundaryAmbient(KeywordBase):
     """DYNA BOUNDARY_AMBIENT keyword"""
@@ -35,59 +48,13 @@ class BoundaryAmbient(KeywordBase):
         """Initialize the BoundaryAmbient class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmg",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ambtyp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYAMBIENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYAMBIENT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the The ambient element set ID for which the thermodynamic state is being defined. The element set can be *SET_SOLID for a 3D ALE model, *SET_SHELL for a 2D ALE model or *SET_BEAM for a 1D ALE model.

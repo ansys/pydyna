@@ -23,7 +23,32 @@
 """Module providing the AlePrescribedMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEPRESCRIBEDMOTION_CARD0 = (
+    FieldSchema("mmsid", int, 0, 10, None),
+    FieldSchema("inside", int, 10, 10, 0),
+    FieldSchema("sidr", int, 20, 10, 0),
+)
+
+_ALEPRESCRIBEDMOTION_CARD1 = (
+    FieldSchema("lcvtx", int, 0, 10, None),
+    FieldSchema("lcvty", int, 10, 10, None),
+    FieldSchema("lcvtz", int, 20, 10, None),
+)
+
+_ALEPRESCRIBEDMOTION_CARD2 = (
+    FieldSchema("lcvrx", int, 0, 10, None),
+    FieldSchema("lcvry", int, 10, 10, None),
+    FieldSchema("lcvrz", int, 20, 10, None),
+)
+
+_ALEPRESCRIBEDMOTION_CARD3 = (
+    FieldSchema("xg", float, 0, 10, None),
+    FieldSchema("yg", float, 10, 10, None),
+    FieldSchema("zg", float, 20, 10, None),
+)
 
 class AlePrescribedMotion(KeywordBase):
     """DYNA ALE_PRESCRIBED_MOTION keyword"""
@@ -35,110 +60,19 @@ class AlePrescribedMotion(KeywordBase):
         """Initialize the AlePrescribedMotion class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inside",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcvtx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvty",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvtz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcvrx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvry",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvrz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xg",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yg",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zg",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEPRESCRIBEDMOTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEPRESCRIBEDMOTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEPRESCRIBEDMOTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEPRESCRIBEDMOTION_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def mmsid(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_‌MULTI-MATERIAL_‌GROUP_‌LIST).

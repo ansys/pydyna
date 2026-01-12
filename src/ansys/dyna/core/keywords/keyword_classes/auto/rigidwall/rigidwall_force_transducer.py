@@ -23,7 +23,21 @@
 """Module providing the RigidwallForceTransducer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_RIGIDWALLFORCETRANSDUCER_CARD0 = (
+    FieldSchema("tid", int, 0, 10, 0),
+    FieldSchema("rwid", int, 10, 10, 0),
+)
+
+_RIGIDWALLFORCETRANSDUCER_CARD1 = (
+    FieldSchema("heading", str, 0, 80, None),
+)
+
+_RIGIDWALLFORCETRANSDUCER_CARD2 = (
+    FieldSchema("nsid", int, 0, 10, 0),
+)
 
 class RigidwallForceTransducer(KeywordBase):
     """DYNA RIGIDWALL_FORCE_TRANSDUCER keyword"""
@@ -35,51 +49,16 @@ class RigidwallForceTransducer(KeywordBase):
         """Initialize the RigidwallForceTransducer class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "heading",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLFORCETRANSDUCER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLFORCETRANSDUCER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLFORCETRANSDUCER_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def tid(self) -> int:
         """Get or set the Transducer ID.

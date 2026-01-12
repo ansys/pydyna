@@ -21,17 +21,30 @@
 # SOFTWARE.
 
 """Legacy INITIAL_STRAIN_SHELL implementation (version 0.9.1)."""
-# flake8: noqa: E501
 import typing
 import warnings
 
 import pandas as pd
 
-from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
+from ansys.dyna.core.lib.field import Field
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.table_card import TableCard
+
+# Schema definitions for optimized Card creation
+_INITIALSTRAINSHELLLEGACYCARDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, None),
+    FieldSchema("nthick", int, 20, 10, None),
+    FieldSchema("large", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("ilocal", int, 70, 10, 0),
+)
 
 
 class InitialStrainShellLegacyCardSet(Cards):
@@ -43,67 +56,9 @@ class InitialStrainShellLegacyCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilocal",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLEGACYCARDSET_CARD0,
+                **kwargs,
             ),
             TableCard(
                 [

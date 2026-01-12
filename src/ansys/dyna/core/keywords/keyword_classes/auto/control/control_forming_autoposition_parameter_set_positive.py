@@ -23,7 +23,19 @@
 """Module providing the ControlFormingAutopositionParameterSetPositive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGAUTOPOSITIONPARAMETERSETPOSITIVE_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("dir", int, 20, 10, 1),
+    FieldSchema("mpsid", int, 30, 10, None),
+    FieldSchema("position", int, 40, 10, 1),
+    FieldSchema("premove", float, 50, 10, None),
+    FieldSchema("thick", float, 60, 10, None),
+    FieldSchema("porder", str, 70, 10, None),
+)
 
 class ControlFormingAutopositionParameterSetPositive(KeywordBase):
     """DYNA CONTROL_FORMING_AUTOPOSITION_PARAMETER_SET_POSITIVE keyword"""
@@ -35,70 +47,10 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
         """Initialize the ControlFormingAutopositionParameterSetPositive class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpsid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "position",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "premove",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "porder",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTOPOSITIONPARAMETERSETPOSITIVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID. This part will be moved based on the following controlling parameters.

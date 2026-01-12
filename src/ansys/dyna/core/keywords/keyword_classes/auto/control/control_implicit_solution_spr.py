@@ -23,7 +23,60 @@
 """Module providing the ControlImplicitSolutionSpr class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITSOLUTIONSPR_CARD0 = (
+    FieldSchema("nsolvr", int, 0, 10, 12),
+    FieldSchema("ilimit", int, 10, 10, 11),
+    FieldSchema("maxref", int, 20, 10, 15),
+    FieldSchema("dctol", float, 30, 10, 0.001),
+    FieldSchema("ectol", float, 40, 10, 0.01),
+    FieldSchema("rctol", float, 50, 10, 10000000000.0),
+    FieldSchema("lstol", float, 60, 10, 0.9),
+    FieldSchema("abstol", float, 70, 10, 1e-10),
+)
+
+_CONTROLIMPLICITSOLUTIONSPR_CARD1 = (
+    FieldSchema("dnorm", int, 0, 10, 2),
+    FieldSchema("diverg", int, 10, 10, 1),
+    FieldSchema("istif", int, 20, 10, 1),
+    FieldSchema("nlprint", int, 30, 10, 0),
+    FieldSchema("nlnorm", float, 40, 10, 2.0),
+    FieldSchema("d3itctl", int, 50, 10, 0),
+    FieldSchema("cpchk", int, 60, 10, 0),
+)
+
+_CONTROLIMPLICITSOLUTIONSPR_CARD2 = (
+    FieldSchema("dmtol", float, 0, 10, 0.0),
+    FieldSchema("emtol", float, 10, 10, 0.0),
+    FieldSchema("rmtol", float, 20, 10, 0.0),
+    FieldSchema("unused", str, 30, 10, None),
+    FieldSchema("nttol", float, 40, 10, 0.0),
+    FieldSchema("nrtol", float, 50, 10, 0.0),
+    FieldSchema("rttol", float, 60, 10, 0.0),
+    FieldSchema("rrtol", float, 70, 10, 0.0),
+)
+
+_CONTROLIMPLICITSOLUTIONSPR_CARD3 = (
+    FieldSchema("arcctl", int, 0, 10, 0),
+    FieldSchema("arcdir", int, 10, 10, 0),
+    FieldSchema("arclen", float, 20, 10, 0.0),
+    FieldSchema("arcmth", int, 30, 10, 1),
+    FieldSchema("arcdmp", int, 40, 10, 2),
+    FieldSchema("arcpsi", float, 50, 10, 0.0),
+    FieldSchema("arcalf", float, 60, 10, 0.0),
+    FieldSchema("arctim", float, 70, 10, 0.0),
+)
+
+_CONTROLIMPLICITSOLUTIONSPR_CARD4 = (
+    FieldSchema("lsmtd", int, 0, 10, 4),
+    FieldSchema("lsdir", int, 10, 10, 2),
+    FieldSchema("irad", float, 20, 10, 0.0),
+    FieldSchema("srad", float, 30, 10, 0.0),
+    FieldSchema("awgt", float, 40, 10, 0.0),
+    FieldSchema("sred", float, 50, 10, 0.0),
+)
 
 class ControlImplicitSolutionSpr(KeywordBase):
     """DYNA CONTROL_IMPLICIT_SOLUTION_SPR keyword"""
@@ -35,323 +88,22 @@ class ControlImplicitSolutionSpr(KeywordBase):
         """Initialize the ControlImplicitSolutionSpr class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsolvr",
-                        int,
-                        0,
-                        10,
-                        12,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilimit",
-                        int,
-                        10,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxref",
-                        int,
-                        20,
-                        10,
-                        15,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dctol",
-                        float,
-                        30,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ectol",
-                        float,
-                        40,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rctol",
-                        float,
-                        50,
-                        10,
-                        1.0E+10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lstol",
-                        float,
-                        60,
-                        10,
-                        0.9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abstol",
-                        float,
-                        70,
-                        10,
-                        1.0E-10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dnorm",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diverg",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istif",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlprint",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlnorm",
-                        float,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3itctl",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpchk",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dmtol",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emtol",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmtol",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nttol",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrtol",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rttol",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rrtol",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "arcctl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arcdir",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arclen",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arcmth",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arcdmp",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arcpsi",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arcalf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "arctim",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lsmtd",
-                        int,
-                        0,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lsdir",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irad",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srad",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "awgt",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sred",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSOLUTIONSPR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSOLUTIONSPR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSOLUTIONSPR_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSOLUTIONSPR_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSOLUTIONSPR_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def nsolvr(self) -> int:
         """Get or set the Solution method for implicit analysis:

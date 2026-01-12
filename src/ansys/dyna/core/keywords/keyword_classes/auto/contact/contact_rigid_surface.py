@@ -23,7 +23,36 @@
 """Module providing the ContactRigidSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTRIGIDSURFACE_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("segid", int, 30, 10, None),
+    FieldSchema("fs", float, 40, 10, 0.0),
+    FieldSchema("fd", float, 50, 10, 0.0),
+    FieldSchema("dc", float, 60, 10, 0.0),
+    FieldSchema("vc", float, 70, 10, 0.0),
+)
+
+_CONTACTRIGIDSURFACE_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, 0),
+    FieldSchema("lcidy", int, 10, 10, 0),
+    FieldSchema("lcidz", int, 20, 10, 0),
+    FieldSchema("fslcid", int, 30, 10, 0),
+    FieldSchema("fdlcid", int, 40, 10, 0),
+)
+
+_CONTACTRIGIDSURFACE_CARD2 = (
+    FieldSchema("sfs", float, 0, 10, 1.0),
+    FieldSchema("stthk", float, 10, 10, 0.0),
+    FieldSchema("sfthk", float, 20, 10, 1.0),
+    FieldSchema("xpene", float, 30, 10, 4.0),
+    FieldSchema("bsort", float, 40, 10, 10.0),
+    FieldSchema("ctype", int, 50, 10, 0),
+)
 
 class ContactRigidSurface(KeywordBase):
     """DYNA CONTACT_RIGID_SURFACE keyword"""
@@ -35,169 +64,16 @@ class ContactRigidSurface(KeywordBase):
         """Initialize the ContactRigidSurface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fslcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fdlcid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfs",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stthk",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfthk",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpene",
-                        float,
-                        30,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsort",
-                        float,
-                        40,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.

@@ -23,7 +23,15 @@
 """Module providing the ControlImplicitStabilizationSpr class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITSTABILIZATIONSPR_CARD0 = (
+    FieldSchema("ias", int, 0, 10, 2),
+    FieldSchema("scale", float, 10, 10, 1.0),
+    FieldSchema("tstart", float, 20, 10, 0.0),
+    FieldSchema("tend", float, 30, 10, 0.0),
+)
 
 class ControlImplicitStabilizationSpr(KeywordBase):
     """DYNA CONTROL_IMPLICIT_STABILIZATION_SPR keyword"""
@@ -35,44 +43,10 @@ class ControlImplicitStabilizationSpr(KeywordBase):
         """Initialize the ControlImplicitStabilizationSpr class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ias",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstart",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSTABILIZATIONSPR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ias(self) -> int:
         """Get or set the Artificial Stabilization flag

@@ -23,8 +23,32 @@
 """Module providing the MatAddPoreAir class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDPOREAIR_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("pa_rho", float, 10, 10, None),
+    FieldSchema("pa_pre", float, 20, 10, None),
+    FieldSchema("pore", float, 30, 10, 1.0),
+    FieldSchema("dvimin", float, 40, 10, None),
+)
+
+_MATADDPOREAIR_CARD1 = (
+    FieldSchema("perm1", float, 0, 10, 0.0),
+    FieldSchema("perm2", float, 10, 10, None),
+    FieldSchema("perm3", float, 20, 10, None),
+    FieldSchema("cdarcy", float, 30, 10, 1.0),
+    FieldSchema("cdf", float, 40, 10, 0.0),
+    FieldSchema("lcpgd1", int, 50, 10, 0),
+    FieldSchema("lcpgd2", int, 60, 10, None),
+    FieldSchema("lcpgd3", int, 70, 10, None),
+)
+
+_MATADDPOREAIR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddPoreAir(KeywordBase):
     """DYNA MAT_ADD_PORE_AIR keyword"""
@@ -40,129 +64,23 @@ class MatAddPoreAir(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pa_rho",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pa_pre",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pore",
-                        float,
-                        30,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dvimin",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "perm1",
-                        float,
-                        0,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perm2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perm3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdarcy",
-                        float,
-                        30,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdf",
-                        float,
-                        40,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpgd1",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpgd2",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpgd3",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDPOREAIR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPOREAIR_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddPoreAir.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPOREAIR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification - must be same as the structural material.

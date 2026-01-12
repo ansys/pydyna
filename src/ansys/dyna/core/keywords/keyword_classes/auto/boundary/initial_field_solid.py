@@ -23,7 +23,25 @@
 """Module providing the InitialFieldSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALFIELDSOLID_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nint", int, 10, 10, None),
+    FieldSchema("nhisv", int, 20, 10, None),
+)
+
+_INITIALFIELDSOLID_CARD1 = (
+    FieldSchema("fld1", int, 0, 10, None),
+    FieldSchema("fld2", int, 10, 10, None),
+    FieldSchema("fld3", int, 20, 10, None),
+    FieldSchema("fld4", int, 30, 10, None),
+    FieldSchema("fld5", int, 40, 10, None),
+    FieldSchema("fld6", int, 50, 10, None),
+    FieldSchema("fld7", int, 60, 10, None),
+    FieldSchema("fld8", int, 70, 10, None),
+)
 
 class InitialFieldSolid(KeywordBase):
     """DYNA INITIAL_FIELD_SOLID keyword"""
@@ -35,93 +53,13 @@ class InitialFieldSolid(KeywordBase):
         """Initialize the InitialFieldSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nint",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fld1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fld8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALFIELDSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALFIELDSOLID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.

@@ -23,7 +23,16 @@
 """Module providing the DualceseBoundarySolidWallSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYSOLIDWALLSEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("vx", float, 20, 10, None),
+    FieldSchema("vy", float, 30, 10, None),
+    FieldSchema("vz", float, 40, 10, None),
+)
 
 class DualceseBoundarySolidWallSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_SOLID_WALL_SEGMENT_SET keyword"""
@@ -35,47 +44,10 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
         """Initialize the DualceseBoundarySolidWallSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYSOLIDWALLSEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

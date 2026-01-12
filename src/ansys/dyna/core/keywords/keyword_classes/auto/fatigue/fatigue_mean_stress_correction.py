@@ -23,7 +23,17 @@
 """Module providing the FatigueMeanStressCorrection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FATIGUEMEANSTRESSCORRECTION_CARD0 = (
+    FieldSchema("method", int, 0, 10, 0),
+)
+
+_FATIGUEMEANSTRESSCORRECTION_CARD1 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("sigma", float, 10, 10, None),
+)
 
 class FatigueMeanStressCorrection(KeywordBase):
     """DYNA FATIGUE_MEAN_STRESS_CORRECTION keyword"""
@@ -35,38 +45,13 @@ class FatigueMeanStressCorrection(KeywordBase):
         """Initialize the FatigueMeanStressCorrection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FATIGUEMEANSTRESSCORRECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FATIGUEMEANSTRESSCORRECTION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def method(self) -> int:
         """Get or set the Mean stress correction method:
