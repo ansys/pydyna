@@ -38,6 +38,248 @@ class DynaNVH(DynaBase):
     def __init__(self):
         DynaBase.__init__(self)
 
+    def create_frequency_domain_frf(
+        self,
+        n1=0,
+        n1typ=0,
+        dof1=1,
+        vad1=1,
+        fnmax=0.0,
+        dampf=0.0,
+        lcdam=0,
+        lctyp=0,
+        n2=0,
+        n2typ=1,
+        dof2=1,
+        vad2=1,
+        fmin=0.0,
+        fmax=0.0,
+        nfreq=100,
+    ):
+        """Create a FREQUENCY_DOMAIN_FRF keyword.
+
+        Parameters
+        ----------
+        n1 : int, optional
+            Input node/set ID. Default is 0.
+        n1typ : int, optional
+            Input type (0=node, 1=node set, 2=segment set). Default is 0.
+        dof1 : int, optional
+            Input DOF (0=vector, 1=X, 2=Y, 3=Z). Default is 1.
+        vad1 : int, optional
+            Input type (0=velocity, 1=acceleration, 2=displacement, 3=force). Default is 1.
+        fnmax : float, optional
+            Maximum natural frequency. Default is 0.0.
+        dampf : float, optional
+            Modal damping coefficient. Default is 0.0.
+        lcdam : int, optional
+            Load curve ID for damping vs. frequency. Default is 0.
+        lctyp : int, optional
+            Load curve type (0=damping ratio, 1=damping coefficient). Default is 0.
+        n2 : int, optional
+            Output node/set ID. Default is 0.
+        n2typ : int, optional
+            Output type (0=node, 1=node set, 2=segment set). Default is 1.
+        dof2 : int, optional
+            Output DOF. Default is 1.
+        vad2 : int, optional
+            Output type. Default is 1.
+        fmin : float, optional
+            Minimum frequency for output. Default is 0.0.
+        fmax : float, optional
+            Maximum frequency for output. Default is 0.0.
+        nfreq : int, optional
+            Number of frequency points. Default is 100.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_frequency_domain_frf(
+                n1=n1,
+                n1typ=n1typ,
+                dof1=dof1,
+                vad1=vad1,
+                fnmax=fnmax,
+                dampf=dampf,
+                lcdam=lcdam,
+                lctyp=lctyp,
+                n2=n2,
+                n2typ=n2typ,
+                dof2=dof2,
+                vad2=vad2,
+                fmin=fmin,
+                fmax=fmax,
+                nfreq=nfreq,
+            )
+        else:
+            from ansys.dyna.core.pre.dynamech_pb2 import FrequencyDomainFRFRequest
+
+            self.stub.CreateFrequencyDomainFRF(
+                FrequencyDomainFRFRequest(
+                    n1=n1,
+                    n1typ=n1typ,
+                    dof1=dof1,
+                    vad1=vad1,
+                    fnmax=fnmax,
+                    dampf=dampf,
+                    lcdam=lcdam,
+                    lctyp=lctyp,
+                    n2=n2,
+                    n2typ=n2typ,
+                    dof2=dof2,
+                    vad2=vad2,
+                    fmin=fmin,
+                    fmax=fmax,
+                    nfreq=nfreq,
+                )
+            )
+            return True
+
+    def create_boundary_spc_set(
+        self,
+        nsid,
+        cid=0,
+        dofx=0,
+        dofy=0,
+        dofz=0,
+        dofrx=0,
+        dofry=0,
+        dofrz=0,
+    ):
+        """Create a BOUNDARY_SPC_SET keyword.
+
+        Parameters
+        ----------
+        nsid : int
+            Node set ID.
+        cid : int, optional
+            Coordinate system ID. Default is 0.
+        dofx : int, optional
+            Constrain X translation (0=free, 1=fixed). Default is 0.
+        dofy : int, optional
+            Constrain Y translation. Default is 0.
+        dofz : int, optional
+            Constrain Z translation. Default is 0.
+        dofrx : int, optional
+            Constrain X rotation. Default is 0.
+        dofry : int, optional
+            Constrain Y rotation. Default is 0.
+        dofrz : int, optional
+            Constrain Z rotation. Default is 0.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_boundary_spc_set(
+                nsid=nsid,
+                cid=cid,
+                dofx=dofx,
+                dofy=dofy,
+                dofz=dofz,
+                dofrx=dofrx,
+                dofry=dofry,
+                dofrz=dofrz,
+            )
+        else:
+            from ansys.dyna.core.pre.dynamech_pb2 import BoundarySPCSetRequest
+
+            self.stub.CreateBoundarySpcSet(
+                BoundarySPCSetRequest(
+                    nsid=nsid,
+                    cid=cid,
+                    dofx=dofx,
+                    dofy=dofy,
+                    dofz=dofz,
+                    dofrx=dofrx,
+                    dofry=dofry,
+                    dofrz=dofrz,
+                )
+            )
+            return True
+
+    def create_database_glstat(self, dt=0.0, binary=1, lcur=0, ioopt=0):
+        """Create a DATABASE_GLSTAT keyword.
+
+        Parameters
+        ----------
+        dt : float, optional
+            Time interval between outputs. Default is 0.0.
+        binary : int, optional
+            Binary file flag. Default is 1.
+        lcur : int, optional
+            Load curve ID. Default is 0.
+        ioopt : int, optional
+            Output option. Default is 0.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_database_glstat(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
+        else:
+            from ansys.dyna.core.pre.dynamech_pb2 import DatabaseGlstatRequest
+
+            self.stub.CreateDatabaseGlstat(DatabaseGlstatRequest(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt))
+            return True
+
+    def create_database_matsum(self, dt=0.0, binary=1, lcur=0, ioopt=0):
+        """Create a DATABASE_MATSUM keyword.
+
+        Parameters
+        ----------
+        dt : float, optional
+            Time interval between outputs. Default is 0.0.
+        binary : int, optional
+            Binary file flag. Default is 1.
+        lcur : int, optional
+            Load curve ID. Default is 0.
+        ioopt : int, optional
+            Output option. Default is 0.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_database_matsum(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
+        else:
+            from ansys.dyna.core.pre.dynamech_pb2 import DatabaseMatsumRequest
+
+            self.stub.CreateDatabaseMatsum(DatabaseMatsumRequest(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt))
+            return True
+
+    def create_section_solid(self, secid, elform=1):
+        """Create a SECTION_SOLID keyword.
+
+        Parameters
+        ----------
+        secid : int
+            Section ID.
+        elform : int, optional
+            Element formulation. Default is 1.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_section_solid(secid=secid, elform=elform)
+        else:
+            from ansys.dyna.core.pre.dynamech_pb2 import SectionSolidRequest
+
+            self.stub.CreateSectionSolid(SectionSolidRequest(secid=secid, elform=elform))
+            return True
+
     def save_file(self):
         """Save keyword files.
 

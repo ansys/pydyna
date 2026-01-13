@@ -4138,7 +4138,8 @@ class TestReferenceFileComparison:
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
         """test_frf_plate_damping.k - NVH FRF plate with damping curve."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
-        from ansys.dyna.core.pre.dynabase import DynaBase, ImplicitAnalysis, ShellSection, Curve, NodeSet
+        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, Curve, NodeSet
+        from ansys.dyna.core.pre.dynanvh import DynaNVH
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_plate_damping.k")
         reference_file = os.path.join(pre_reference_dir, "test_frf_plate_damping.k")
@@ -4150,9 +4151,9 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # Set up implicit analysis using high-level API
-            dbase = DynaBase()
-            solution.add(dbase)
+            # Set up DynaNVH using high-level API
+            nvh = DynaNVH()
+            solution.add(nvh)
 
             # Configure implicit analysis with eigenvalue extraction
             implicit = ImplicitAnalysis()
@@ -4181,7 +4182,7 @@ class TestReferenceFileComparison:
                 absolute_convergence_tolerance=1.0e-10,
                 nonlinear_print_flag=3,
             )
-            dbase.implicitanalysis = implicit
+            nvh.implicitanalysis = implicit
 
             # DEFINE_CURVE for damping vs. frequency (lcid=1) - using high-level API
             damping_freqs = [1.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 200.0]
@@ -4228,25 +4229,23 @@ class TestReferenceFileComparison:
                             kw.parts.at[idx, "secid"] = 1
                             kw.parts.at[idx, "mid"] = 1
 
-            # FREQUENCY_DOMAIN_FRF with damping curve
-            solution.stub.CreateFrequencyDomainFrf(
-                type("Request", (), {
-                    "n1": 131,
-                    "n1typ": 0,
-                    "dof1": 0,
-                    "vad1": 3,
-                    "fnmax": 2000.0,
-                    "dampf": 0.0,
-                    "lcdam": 1,
-                    "lctyp": 1,
-                    "n2": 2,
-                    "n2typ": 1,
-                    "dof2": 3,
-                    "vad2": 1,
-                    "fmin": 1.0,
-                    "fmax": 400.0,
-                    "nfreq": 400,
-                })()
+            # FREQUENCY_DOMAIN_FRF with damping curve - using high-level API
+            nvh.create_frequency_domain_frf(
+                n1=131,
+                n1typ=0,
+                dof1=0,
+                vad1=3,
+                fnmax=2000.0,
+                dampf=0.0,
+                lcdam=1,
+                lctyp=1,
+                n2=2,
+                n2typ=1,
+                dof2=3,
+                vad2=1,
+                fmin=1.0,
+                fmax=400.0,
+                nfreq=400,
             )
 
             output_path = solution.save_file()
@@ -4258,6 +4257,8 @@ class TestReferenceFileComparison:
     def test_frf_solid(self, initial_files_dir, pre_reference_dir):
         """test_frf_solid.k - NVH FRF analysis with implicit eigenvalue solver."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, EnergyFlag, NodeSet
+        from ansys.dyna.core.pre.dynanvh import DynaNVH
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_solid.k")
         reference_file = os.path.join(pre_reference_dir, "test_frf_solid.k")
@@ -4269,15 +4270,12 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # Set up DynaBase and implicit analysis using high-level API
-            from ansys.dyna.core.pre.dynabase import (
-                DynaBase, ImplicitAnalysis, SolidSection, EnergyFlag, NodeSet
-            )
-            dbase = DynaBase()
-            solution.add(dbase)
+            # Set up DynaNVH using high-level API
+            nvh = DynaNVH()
+            solution.add(nvh)
 
             # Configure energy options
-            dbase.set_energy(
+            nvh.set_energy(
                 hourglass_energy=EnergyFlag.COMPUTED,
                 rigidwall_energy=EnergyFlag.COMPUTED,
                 sliding_interface_energy=EnergyFlag.NOT_COMPUTED,
@@ -4311,21 +4309,16 @@ class TestReferenceFileComparison:
                 nonlinear_print_flag=3,
                 nonlinear_norm=0.0,
             )
-            dbase.implicitanalysis = implicit
+            nvh.implicitanalysis = implicit
 
             # Use backend directly to set ikedit and iflush
             solution._backend.create_control_output(npopt=1, neecho=3, ikedit=0, iflush=0)
 
             solution.set_termination(termination_time=1.0)
 
-            # Database keywords
-            solution.stub.CreateDatabaseGlstat(
-                type("Request", (), {"dt": 0.1, "binary": 1, "lcur": 0, "ioopt": 1})()
-            )
-
-            solution.stub.CreateDatabaseMatsum(
-                type("Request", (), {"dt": 0.1, "binary": 1, "lcur": 0, "ioopt": 1})()
-            )
+            # Database keywords - using high-level API
+            nvh.create_database_glstat(dt=0.1, binary=1, lcur=0, ioopt=1)
+            nvh.create_database_matsum(dt=0.1, binary=1, lcur=0, ioopt=1)
 
             solution.create_database_binary(dt=0.1)
 
@@ -4342,32 +4335,21 @@ class TestReferenceFileComparison:
             nodeset2 = NodeSet(nodes=nodes_set2, sid=2, solver="MECH")
             nodeset2.create(solution.stub)
 
-            # Boundary condition
-            solution.stub.CreateBoundarySpcSet(
-                type("Request", (), {
-                    "nsid": 1,
-                    "cid": 0,
-                    "dofx": 1,
-                    "dofy": 1,
-                    "dofz": 1,
-                    "dofrx": 1,
-                    "dofry": 1,
-                    "dofrz": 1
-                })()
+            # Boundary condition - using high-level API
+            nvh.create_boundary_spc_set(
+                nsid=1, cid=0, dofx=1, dofy=1, dofz=1, dofrx=1, dofry=1, dofrz=1
             )
 
-            # Section and Material for lower_post (Part 4)
-            SolidSection(element_formulation=18)
+            # Section and Material for lower_post (Part 4) - using high-level API
+            nvh.create_section_solid(secid=1, elform=18)
 
             # Use backend directly to set fail=0.0
             solution._backend.create_mat_piecewise_linear_plasticity(
                 mid=1, ro=4.99e-7, e=11.37, pr=0.32, sigy=0.0468, etan=0.0, fail=0.0
             )
 
-            # Section and Material for upper_post (Part 5)
-            solution.stub.CreateSectionSolid(
-                type("Request", (), {"secid": 2, "elform": 18})()
-            )
+            # Section and Material for upper_post (Part 5) - using high-level API
+            nvh.create_section_solid(secid=2, elform=18)
 
             # Use backend directly to set fail=0.0
             solution._backend.create_mat_piecewise_linear_plasticity(
@@ -4388,23 +4370,21 @@ class TestReferenceFileComparison:
                             kw.parts.at[idx, "secid"] = 2
                             kw.parts.at[idx, "mid"] = 2
 
-            # Frequency domain FRF
-            solution.stub.CreateFrequencyDomainFrf(
-                type("Request", (), {
-                    "n1": 0,
-                    "n1typ": 0,
-                    "dof1": 1,
-                    "vad1": 1,
-                    "fnmax": 20.0,
-                    "dampf": 0.01,
-                    "n2": 2,
-                    "n2typ": 1,
-                    "dof2": 1,
-                    "vad2": 1,
-                    "fmin": 0.01,
-                    "fmax": 10.0,
-                    "nfreq": 1000
-                })()
+            # Frequency domain FRF - using high-level API
+            nvh.create_frequency_domain_frf(
+                n1=0,
+                n1typ=0,
+                dof1=1,
+                vad1=1,
+                fnmax=20.0,
+                dampf=0.01,
+                n2=2,
+                n2typ=1,
+                dof2=1,
+                vad2=1,
+                fmin=0.01,
+                fmax=10.0,
+                nfreq=1000,
             )
 
             output_path = solution.save_file()
