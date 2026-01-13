@@ -783,29 +783,88 @@ class MatOgdenRubber:
 
 # MAT_T01
 class MatThermalIsotropic:
-    """Defines isotropic thermal properties."""
+    """Defines isotropic thermal properties.
 
-    def __init__(self, density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0):
+    Parameters
+    ----------
+    density : float, optional
+        Thermal density. The default is ``0``.
+    generation_rate : float, optional
+        Heat generation rate per unit volume. The default is ``0``.
+    generation_rate_multiplier : float, optional
+        Heat generation rate multiplier. The default is ``0``.
+    specific_heat : float, optional
+        Specific heat. The default is ``0``.
+    conductivity : float, optional
+        Thermal conductivity. The default is ``0``.
+    tmid : int, optional
+        Thermal material ID. If not provided, auto-assigned by the backend.
+    """
+
+    def __init__(
+        self,
+        density=0,
+        generation_rate=0,
+        generation_rate_multiplier=0,
+        specific_heat=0,
+        conductivity=0,
+        tmid=None,
+    ):
         self.tro = density
         self.tgrlc = generation_rate
         self.tgmult = generation_rate_multiplier
         self.hc = specific_heat
         self.tc = conductivity
+        self.tmid = tmid
+        self.material_id = None
 
-    def create(self, stub):
-        """Create isotropic thermal material."""
-        ret = stub.CreateMatThermalIsotropic(
-            MatThermalIsotropicRequest(
-                tro=self.tro,
+    def create(self, stub=None):
+        """Create isotropic thermal material.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The material ID.
+        """
+        from ansys.dyna.core.pre.dynabase import DynaBase
+
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            tmid = self.tmid if self.tmid is not None else backend.next_id("thermal_material")
+            backend.create_mat_thermal_isotropic(
+                tmid=tmid,
+                ro=self.tro,
                 tgrlc=self.tgrlc,
                 tgmult=self.tgmult,
                 hc=self.hc,
                 tc=self.tc,
             )
-        )
-        self.material_id = ret.mid
+            self.material_id = tmid
+        else:
+            # gRPC stub
+            ret = stub.CreateMatThermalIsotropic(
+                MatThermalIsotropicRequest(
+                    tro=self.tro,
+                    tgrlc=self.tgrlc,
+                    tgmult=self.tgmult,
+                    hc=self.hc,
+                    tc=self.tc,
+                )
+            )
+            self.material_id = ret.mid
+
         self.name = "Isotropic thermal"
         logging.info(f"Material {self.name} Created...")
+        return self.material_id
 
 
 # MAT_T02

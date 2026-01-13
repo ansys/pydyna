@@ -2549,8 +2549,14 @@ class TestReferenceFileComparison:
         """test_resistive_heating.k - EM resistive heating 3D."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
-        from ansys.dyna.core.pre.dynabase import Curve, NodeSet, SolidSection
-        from ansys.dyna.core.pre.dynamaterial import MatElastic
+        from ansys.dyna.core.pre.dynabase import (
+            Curve,
+            NodeSet,
+            SolidSection,
+            ThermalAnalysis,
+            ThermalAnalysisType,
+        )
+        from ansys.dyna.core.pre.dynamaterial import MatElastic, MatThermalIsotropic
         from ansys.dyna.core.pre.dynaem import DynaEM
 
         initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating.k")
@@ -2567,19 +2573,14 @@ class TestReferenceFileComparison:
             emobj = DynaEM()
             solution.add(emobj)
 
-            # CONTROL_SOLUTION with soln=2 (thermal)
-            kw_solution = keywords.ControlSolution()
-            kw_solution.soln = 2
-            solution._backend._deck.append(kw_solution)
+            # CONTROL_SOLUTION, CONTROL_THERMAL_SOLVER, CONTROL_THERMAL_TIMESTEP - using high-level API
+            tanalysis = ThermalAnalysis()
+            tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
+            tanalysis.set_timestep(initial_timestep=0.05)
+            tanalysis.create(solution.stub)
 
             # CONTROL_TERMINATION
             solution.set_termination(20.0)
-
-            # CONTROL_THERMAL_SOLVER with atype=1 (transient)
-            solution._backend.create_control_thermal_solver(atype=1)
-
-            # CONTROL_THERMAL_TIMESTEP with its=0.05
-            solution._backend.create_control_thermal_timestep(its=0.05)
 
             # CONTROL_TIMESTEP with dt2ms=0.01, lctm=1
             kw_timestep = keywords.ControlTimestep()
@@ -2618,16 +2619,13 @@ class TestReferenceFileComparison:
             mat2 = MatElastic(mass_density=8000.0, young_modulus=1e11, poisson_ratio=0.33, mid=2)
             mat2.create(solution.stub)
 
-            # MAT_THERMAL_ISOTROPIC materials
-            solution._backend.create_mat_thermal_isotropic(
-                tmid=1, ro=8000.0, hc=400.0, tc=400.0
-            )
-            solution._backend.create_mat_thermal_isotropic(
-                tmid=2, ro=8000.0, hc=400.0, tc=400.0
-            )
-            solution._backend.create_mat_thermal_isotropic(
-                tmid=3, ro=7000.0, hc=450.0, tc=40.0
-            )
+            # MAT_THERMAL_ISOTROPIC materials - using high-level API
+            matthermal1 = MatThermalIsotropic(density=8000.0, specific_heat=400.0, conductivity=400.0, tmid=1)
+            matthermal1.create(solution.stub)
+            matthermal2 = MatThermalIsotropic(density=8000.0, specific_heat=400.0, conductivity=400.0, tmid=2)
+            matthermal2.create(solution.stub)
+            matthermal3 = MatThermalIsotropic(density=7000.0, specific_heat=450.0, conductivity=40.0, tmid=3)
+            matthermal3.create(solution.stub)
 
             # INITIAL_TEMPERATURE_SET with temp=25
             solution._backend.create_initial_temperature_set(nsid=0, temp=25.0)

@@ -2495,16 +2495,38 @@ class ThermalAnalysis(BaseObj):
         self.tol = convergence_tol
         self.dcp = divergence
 
-    def create(self):
-        """Create a thermal analysis."""
-        if self.defined_timestep:
-            self.stub.CreateControlThermalTimestep(ControlThermalTimestepRequest(its=self.its))
-        if self.defined_solver:
-            self.stub.CreateControlThermalSolver(ControlThermalSolverRequest(atype=self.atype))
-        if self.defined_timestep or self.defined_solver:
-            self.stub.CreateControlSolution(ControlSolutionRequest(soln=2))
-        if self.defined_nonlinear:
-            self.stub.CreateControlThermalNonlinear(ControlThermalNonlinearRequest(tol=self.tol, dcp=self.dcp))
+    def create(self, stub=None):
+        """Create a thermal analysis.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+        """
+        if stub is None:
+            stub = self.stub
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            if self.defined_timestep:
+                backend.create_control_thermal_timestep(its=self.its)
+            if self.defined_solver:
+                backend.create_control_thermal_solver(atype=self.atype)
+            if self.defined_timestep or self.defined_solver:
+                backend.create_control_solution(soln=2)
+            if self.defined_nonlinear:
+                backend.create_control_thermal_nonlinear(tol=self.tol, dcp=self.dcp)
+        else:
+            # gRPC stub
+            if self.defined_timestep:
+                stub.CreateControlThermalTimestep(ControlThermalTimestepRequest(its=self.its))
+            if self.defined_solver:
+                stub.CreateControlThermalSolver(ControlThermalSolverRequest(atype=self.atype))
+            if self.defined_timestep or self.defined_solver:
+                stub.CreateControlSolution(ControlSolutionRequest(soln=2))
+            if self.defined_nonlinear:
+                stub.CreateControlThermalNonlinear(ControlThermalNonlinearRequest(tol=self.tol, dcp=self.dcp))
 
 
 class ContactCategory(Enum):

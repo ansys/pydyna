@@ -368,6 +368,55 @@ class ControlKeywordsMixin:
         logger.debug("Created CONTROL_THERMAL_TIMESTEP")
         return True
 
+    def create_control_thermal_nonlinear(
+        self,
+        refmax: int = 10,
+        tol: float = 1e-4,
+        dcp: float = 1.0,
+        lumpbc: int = 0,
+        thlstl: float = 0.0,
+        nlthpr: int = 0,
+        phchpn: float = 100.0,
+    ) -> bool:
+        """Create a CONTROL_THERMAL_NONLINEAR keyword.
+
+        Parameters
+        ----------
+        refmax : int
+            Maximum number of matrix reformations per time step.
+        tol : float
+            Convergence tolerance for temperature.
+        dcp : float
+            Divergence control parameter.
+        lumpbc : int
+            Flag for lumped boundary conditions.
+        thlstl : float
+            Thermal line search tolerance.
+        nlthpr : int
+            Nonlinear thermal printout flag.
+        phchpn : float
+            Phase change penalty.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlThermalNonlinear()
+        kw.refmax = refmax
+        kw.tol = tol
+        kw.dcp = dcp
+        kw.lumpbc = lumpbc
+        kw.thlstl = thlstl
+        kw.nlthpr = nlthpr
+        kw.phchpn = phchpn
+
+        self._deck.append(kw)
+        logger.debug("Created CONTROL_THERMAL_NONLINEAR")
+        return True
+
     def create_control_shell(
         self,
         wrpang: float = 20.0,
