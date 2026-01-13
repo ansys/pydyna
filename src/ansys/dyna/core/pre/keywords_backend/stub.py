@@ -948,6 +948,11 @@ class KeywordsStub:
         self._backend.create_icfd_boundary_fsi(pid=request.pid)
         return type("Response", (), {"success": True})()
 
+    # Alias for high-level API compatibility (ICFDPart.set_fsi uses this name)
+    def ICFDCreateBdyFSI(self, request):
+        """Create ICFD_BOUNDARY_FSI keyword (alias for ICFDCreateBoundaryFSI)."""
+        return self.ICFDCreateBoundaryFSI(request)
+
     def ICFDCreateControlFSI(self, request):
         """Create ICFD_CONTROL_FSI keyword."""
         self._backend.create_icfd_control_fsi(

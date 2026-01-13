@@ -483,29 +483,40 @@ class TestReferenceFileComparison:
         if missing_types:
             return [f"Missing keyword types: {missing_types}"]
 
-        # Metadata fields to skip
+        # =============================================================================
+        # SKIP LIST DOCUMENTATION
+        # =============================================================================
+        # These skip lists document differences between keywords backend and gRPC backend.
+        # Each category explains WHY items are skipped and what action (if any) is needed.
+        # =============================================================================
+
+        # Metadata fields to skip - these are keyword class internals that don't affect
+        # LS-DYNA simulation behavior. These are INTENTIONAL differences.
         skip_fields = {
-            "included_from",
-            "cards",
-            "title",
-            "heading",
-            "options",
-            "subkeywords",
-            "its",
-            "sets",
-            "tranid_link",  # Linked keyword property - references same data but different objects
+            "included_from",  # Internal tracking of file source
+            "cards",          # Internal card structure representation
+            "title",          # Keyword title (optional metadata)
+            "heading",        # Keyword heading (optional metadata)
+            "subkeywords",    # Internal subkeyword tracking
+            "tranid_link",    # Linked keyword property - references same data but different objects
+            # NOTE: The following are NOT skipped as they contain simulation-relevant data:
+            # - "options": Compared via compare_options() for active option states
+            # - "sets": Compared via compare_sets() for CardSet contents
+            # - "its": Co-simulation coupling type - a regular simulation field
         }
 
         # Auto-generated ID fields where exact values may differ between implementations
-        # but the structure is semantically equivalent
+        # but the structure is semantically equivalent. These are ACCEPTABLE differences.
         autogen_id_fields = {
-            ("EmIsopotentialRogo", "isoid"),  # Rogowski coil isopotential ID
+            ("EmIsopotentialRogo", "isoid"),  # Rogowski coil isopotential ID auto-generated
         }
 
         # Fields where keyword class parsing limitations cause None in reference
-        # These are typically conditional card fields that aren't parsed correctly
+        # These are CODEGEN ISSUES that should be fixed in the keyword generation system.
+        # TODO: File codegen issues to fix these conditional card parsing problems
         parsing_limitation_fields = {
             # MeshSizeShape BOX-specific fields on card 2 - not parsed correctly from file
+            # Issue: Conditional card structure where card 2 format depends on SNAME value
             ("MeshSizeShape", "msize"),
             ("MeshSizeShape", "pminx"),
             ("MeshSizeShape", "pminy"),
@@ -514,12 +525,14 @@ class TestReferenceFileComparison:
             ("MeshSizeShape", "pmaxy"),
             ("MeshSizeShape", "pmaxz"),
             # ElementDiscreteSphereVolume uses different card format in initial vs reference
+            # Issue: Format mismatch between generation and parsing
             ("ElementDiscreteSphereVolume", "nid2"),
             # ElementDiscreteSphereVolume volume values have precision differences between
             # initial file (computed) and reference file (formatted) - skip comparison
             ("ElementDiscreteSphereVolume", "volume"),
             # RigidwallGeometricCylinderMotionDisplay CARD3 (vl/height) is conditional but
             # keyword class always expects it, causing misaligned parsing of lcid/vx/vy/vz
+            # Issue: Conditional card based on DEATH value not handled in codegen
             ("RigidwallGeometricCylinderMotionDisplay", "lcid"),
             ("RigidwallGeometricCylinderMotionDisplay", "opt"),
             ("RigidwallGeometricCylinderMotionDisplay", "vx"),
@@ -529,18 +542,18 @@ class TestReferenceFileComparison:
             ("RigidwallGeometricCylinderMotionDisplay", "height"),
         }
 
-        # Keywords where count mismatches are expected due to consolidation in reference files
-        # The gRPC backend sometimes merges multiple keywords into one (e.g., MESH_SURFACE_* blocks)
-        # Also includes RIGIDWALL keywords where gRPC batches multiple cylinders into one keyword
-        # but keywords backend creates separate keywords (semantically identical in LS-DYNA)
+        # Keywords where count mismatches are expected due to consolidation in reference files.
+        # These are SIMULATION-EQUIVALENT differences - the LS-DYNA behavior is identical.
         skip_count_comparison = {
+            # Mesh keywords: gRPC consolidates multiple surface/volume definitions
             "MeshSurfaceElement",
             "MeshSurfaceNode",
             "MeshVolume",
+            # Rigidwall keywords: gRPC batches multiple cylinders into one keyword block
+            # Keywords backend creates separate keywords (semantically identical in LS-DYNA)
             "RigidwallGeometricCylinderDisplay",
             "RigidwallGeometricCylinderMotionDisplay",
             # ISPH test: gRPC backend consolidates multiple entries into one keyword
-            # but keyword class creates separate keywords (semantically identical in LS-DYNA)
             "BoundaryPrescribedMotionRigid",
             "PartInertia",
             # SALE test: ALE_STRUCTURED_MULTI-MATERIAL_GROUP uses duplicate cards in LS-DYNA
@@ -548,8 +561,10 @@ class TestReferenceFileComparison:
             "AleStructuredMulti_MaterialGroup",
         }
 
-        # Known keyword class defaults that are equivalent to None or 0 in reference
-        # Format: (keyword_type, field): (default_value, reference_value)
+        # Known keyword class defaults that are equivalent to None or 0 in reference.
+        # These are DEFAULT VALUE differences where keywords backend uses explicit defaults
+        # while gRPC backend leaves fields unset (relying on LS-DYNA defaults).
+        # Both produce identical simulation behavior.
         known_defaults = {
             ("ControlSolution", "ncdcf"): 1,
             ("ControlSolution", "lcint"): 100,
@@ -574,6 +589,9 @@ class TestReferenceFileComparison:
             # AirbagSimpleAirbagModel defaults
             ("AirbagSimpleAirbagModel", "vsca"): 1.0,
             ("AirbagSimpleAirbagModel", "psca"): 1.0,
+            # SetNodeList 'its' co-simulation coupling type default (1 = tied contact coupling)
+            # Keywords backend uses explicit default '1', gRPC backend leaves unset
+            ("SetNodeList", "its"): "1",
         }
 
         def values_equivalent(val1, val2, kw_type=None, field=None):
@@ -599,10 +617,71 @@ class TestReferenceFileComparison:
                     return True
             return False
 
-        def compare_keyword_values(kw1, kw2, kw_type=None):
+        def compare_options(kw1, kw2):
+            """Compare active options between two keywords.
+
+            Returns list of differences in option activation state.
+            """
+            diffs = []
+            # Get option specs from both keywords
+            try:
+                specs1 = list(kw1.option_specs) if hasattr(kw1, "option_specs") else []
+                specs2 = list(kw2.option_specs) if hasattr(kw2, "option_specs") else []
+            except Exception:
+                return []  # Can't compare options
+
+            # Get all option names
+            option_names1 = {s.name for s in specs1}
+            option_names2 = {s.name for s in specs2}
+            all_names = option_names1 | option_names2
+
+            for name in all_names:
+                try:
+                    active1 = kw1.is_option_active(name) if hasattr(kw1, "is_option_active") else False
+                    active2 = kw2.is_option_active(name) if hasattr(kw2, "is_option_active") else False
+                    if active1 != active2:
+                        diffs.append(("options", f"{name} active={active1}", f"{name} active={active2}"))
+                except Exception:
+                    pass
+            return diffs
+
+        def compare_sets(kw1, kw2, kw_type=None):
+            """Compare CardSet contents between two keywords.
+
+            Returns list of differences in set items and their field values.
+            """
+            diffs = []
+            try:
+                sets1 = kw1.sets if hasattr(kw1, "sets") else []
+                sets2 = kw2.sets if hasattr(kw2, "sets") else []
+            except Exception:
+                return []  # Can't compare sets
+
+            # Handle different types of sets (list vs DataFrame vs SeriesCard)
+            if hasattr(sets1, "__len__") and hasattr(sets2, "__len__"):
+                # Check if it's a list of CardSet items
+                if isinstance(sets1, list) and isinstance(sets2, list):
+                    if len(sets1) != len(sets2):
+                        diffs.append(("sets", f"count={len(sets1)}", f"count={len(sets2)}"))
+                        return diffs
+
+                    # Compare each set item's fields
+                    # Skip internal fields like 'parent' and 'keyword' that are object references
+                    cardset_skip_fields = {"parent", "keyword", "options", "cards", "sets"}
+                    for i, (s1, s2) in enumerate(zip(sets1, sets2)):
+                        set_diffs = compare_keyword_values(s1, s2, kw_type, extra_skip=cardset_skip_fields)
+                        for field, v1, v2 in set_diffs:
+                            diffs.append((f"sets[{i}].{field}", v1, v2))
+            return diffs
+
+        def compare_keyword_values(kw1, kw2, kw_type=None, extra_skip=None):
             differences = []
-            fields1 = {f for f in dir(kw1) if not f.startswith("_") and f not in skip_fields}
-            fields2 = {f for f in dir(kw2) if not f.startswith("_") and f not in skip_fields}
+            # Add 'options' and 'sets' to skip since they're handled by dedicated comparison functions
+            compare_skip_fields = skip_fields | {"options", "sets"}
+            if extra_skip:
+                compare_skip_fields = compare_skip_fields | extra_skip
+            fields1 = {f for f in dir(kw1) if not f.startswith("_") and f not in compare_skip_fields}
+            fields2 = {f for f in dir(kw2) if not f.startswith("_") and f not in compare_skip_fields}
 
             for field in fields1 & fields2:
                 # Skip auto-generated ID fields that may differ between implementations
@@ -660,8 +739,22 @@ class TestReferenceFileComparison:
             ref_kws_sorted = sorted(ref_kws, key=get_keyword_id)
             out_kws_sorted = sorted(out_kws, key=get_keyword_id)
             for i, (ref_kw, out_kw) in enumerate(zip(ref_kws_sorted, out_kws_sorted)):
+                # Compare regular field values
                 diffs = compare_keyword_values(out_kw, ref_kw, kw_type)
                 for field, out_val, ref_val in diffs:
+                    try:
+                        all_differences.append(f"{kw_type}[{i}].{field}: {out_val!r} vs {ref_val!r}")
+                    except Exception:
+                        all_differences.append(f"{kw_type}[{i}].{field}: <error formatting values>")
+
+                # Compare options (active state)
+                option_diffs = compare_options(out_kw, ref_kw)
+                for field, out_val, ref_val in option_diffs:
+                    all_differences.append(f"{kw_type}[{i}].{field}: {out_val!r} vs {ref_val!r}")
+
+                # Compare sets (CardSet contents)
+                set_diffs = compare_sets(out_kw, ref_kw, kw_type)
+                for field, out_val, ref_val in set_diffs:
                     try:
                         all_differences.append(f"{kw_type}[{i}].{field}: {out_val!r} vs {ref_val!r}")
                     except Exception:
@@ -1038,6 +1131,9 @@ class TestReferenceFileComparison:
             MatICFD,
             MeshedVolume,
             Compressible,
+            Curve,
+            Gravity,
+            GravityOption,
         )
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_dam_break.k")
@@ -1059,20 +1155,17 @@ class TestReferenceFileComparison:
             # Database output
             solution.create_database_binary(dt=0.2)
 
-            # Define gravity curve
-            curve1_id = solution.stub.CreateDefineCurve(
-                type("Request", (), {"sfo": 1.0, "abscissa": [0, 10000], "ordinate": [9.81, 9.81], "title": ""})()
-            ).id
+            # Define gravity curve using high-level Curve class
+            gravity_curve = Curve(x=[0, 10000], y=[9.81, 9.81])
 
             # Set ICFD analysis
             icfdanalysis = ICFDAnalysis()
             icfdanalysis.set_timestep()  # dt=0.0 means auto
             icfd.add(icfdanalysis)
 
-            # Create body load in Y direction (gravity)
-            solution.stub.CreateLoadBody(
-                type("Request", (), {"option": "Y", "lcid": curve1_id})()
-            )
+            # Add gravity using Gravity class (high-level API)
+            gravity = Gravity(dir=GravityOption.DIR_Y, load=gravity_curve)
+            icfd.add(gravity)
 
             # Part 1: Free slip wall
             mat1 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
@@ -1104,13 +1197,10 @@ class TestReferenceFileComparison:
             volpart5.set_material(mat2)
             icfd.parts.add(volpart5)
 
-            # Create meshed volume
+            # Create meshed volume with fluid interface for part 3 (high-level API)
             meshvol = MeshedVolume(surfaces=[1, 2, 3])
+            meshvol.set_fluid_interfaces(surfaces=[3])
             icfd.add(meshvol)
-
-            # MESH_INTERF for volume 1 with interface part 3
-            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [3]})()
-            )
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_dam_break.k")
@@ -1344,11 +1434,19 @@ class TestReferenceFileComparison:
             part2.set_prescribed_pressure(pressure=curve3)
             icfd.parts.add(part2)
 
-            # Part 3: No-slip wall
+            # Part 1 & 2: Use boundary layer symmetry condition (high-level API)
+            part1.set_boundary_layer_symmetry_condition()
+            part2.set_boundary_layer_symmetry_condition()
+
+            # Part 2: Compute flux (high-level API)
+            part2.compute_flux()
+
+            # Part 3: No-slip wall with boundary layer mesh (high-level API)
             mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part3 = ICFDPart(3)
             part3.set_material(mat3)
             part3.set_non_slip()
+            part3.set_boundary_layer(number=2)  # nelth = number - 1 = 1
             icfd.parts.add(part3)
 
             # Volume part 4 containing parts 1, 2, and 3 (use part IDs)
@@ -1360,27 +1458,11 @@ class TestReferenceFileComparison:
             meshvol = MeshedVolume(surfaces=[1, 2, 3])
             icfd.add(meshvol)
 
-            # MESH_BL for part 3 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 3, "nelth": 1, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
+            # Set volume mesh parameters (high-level API)
+            icfdanalysis.set_volume_mesh(mesh_growth_scale_factor=1.1)
 
-            # MESH_BL_SYM for parts 1 and 2 (symmetry surfaces)
-            solution.stub.MESHCreateBlSym(type("Request", (), {"pid": 1})())
-            solution.stub.MESHCreateBlSym(type("Request", (), {"pid": 2})())
-
-            # ICFD_CONTROL_MESH
-            solution.stub.ICFDCreateControlMesh(
-                type("Request", (), {"mgsf": 1.1, "mstrat": 0, "struct2d": 0, "nrmsh": 0, "aver": 14})()
-            )
-
-            # ICFD_CONTROL_SURFMESH
-            solution.stub.ICFDCreateControlSurfMesh(
-                type("Request", (), {"rsrf": 1, "sadapt": 0})()
-            )
-
-            # ICFD_DATABASE_FLUX for part 2
-            solution.stub.ICFDCreateDBFlux(type("Request", (), {"pid": 2, "dtout": 0.0})())
+            # Set surface mesh parameters (high-level API)
+            icfdanalysis.set_surface_mesh()
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_internal_3d_flow.k")
@@ -1547,19 +1629,18 @@ class TestReferenceFileComparison:
             part3.set_free_slip()
             icfd.parts.add(part3)
 
-            # Define curve functions for imposed Y velocity (curves 5 and 6)
-            curve5_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
-            curve6_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
+            # Define curve functions for imposed Y velocity using Curve with func parameter
+            curve5 = Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)")
+            curve6 = Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)")
 
-            # Part 4: No-slip wall with imposed movement
+            # Part 4: No-slip wall with boundary layer and imposed Y movement
             mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part4 = ICFDPart(4)
             part4.set_material(mat4)
             part4.set_non_slip()
+            part4.set_boundary_layer(number=2)  # nelth = number - 1 = 1
+            part4.set_imposed_move(vy=curve5)
+            part4.compute_drag_force()
             icfd.parts.add(part4)
 
             # Part 5: Interface surface
@@ -1574,40 +1655,20 @@ class TestReferenceFileComparison:
             icfd.parts.add(volpart6)
 
             # Volume part 7 containing parts 5 and 4 (inner volume with moving boundary)
+            # Set imposed move on volume part 7 using high-level API
             volpart7 = ICFDVolumePart([5, 4])
             volpart7.set_material(mat5)
+            volpart7.set_imposed_move(vy=curve6)
             icfd.parts.add(volpart7)
 
-            # Create meshed volume for part 6 (outer domain)
+            # Create meshed volume for part 6 (outer domain) with fluid interface on part 5
             meshvol1 = MeshedVolume(surfaces=[1, 2, 3, 5])
+            meshvol1.set_fluid_interfaces(surfaces=[5])
             icfd.add(meshvol1)
 
             # Create meshed volume for part 7 (inner domain)
             meshvol2 = MeshedVolume(surfaces=[5, 4])
             icfd.add(meshvol2)
-
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 1, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
-
-            # MESH_INTERF for volume 1 with interface part 5
-            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [5]})()
-            )
-
-            # ICFD_CONTROL_IMPOSED_MOVE for part 4 (Y direction movement)
-            solution.stub.ICFDCreateControlImposedMove(
-                type("Request", (), {"pid": 4, "lcvx": 0, "lcvy": curve5_id, "lcvz": 0, "vadt": 0, "idr": 0})()
-            )
-
-            # ICFD_CONTROL_IMPOSED_MOVE for part 7 (Y direction movement)
-            solution.stub.ICFDCreateControlImposedMove(
-                type("Request", (), {"pid": 7, "lcvx": 0, "lcvy": curve6_id, "lcvz": 0, "vadt": 0, "idr": 0})()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})()
-            )
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_mesh_morphing.k")
@@ -1799,6 +1860,9 @@ class TestReferenceFileComparison:
             MatICFD,
             MeshedVolume,
             Compressible,
+            Curve,
+            Gravity,
+            GravityOption,
         )
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_sloshing.k")
@@ -1820,35 +1884,23 @@ class TestReferenceFileComparison:
             # Database output
             solution.create_database_binary(dt=0.02)
 
-            # Define curves
+            # Define curves using high-level Curve class
             # Curve 1: Oscillating motion curve for imposed X movement
-            curve1_id = solution.stub.CreateDefineCurve(
-                type("Request", (), {
-                    "sfo": 1.0,
-                    "abscissa": [0.0, 0.5, 0.52, 0.8, 0.82, 2.0],
-                    "ordinate": [1.0, 1.0, -1.0, -1.0, 0.0, 0.0],
-                    "title": ""
-                })()
-            ).id
+            curve1 = Curve(x=[0.0, 0.5, 0.52, 0.8, 0.82, 2.0], y=[1.0, 1.0, -1.0, -1.0, 0.0, 0.0])
             # Curve 2: Constant gravity in Z direction
-            curve2_id = solution.stub.CreateDefineCurve(
-                type("Request", (), {
-                    "sfo": 1.0,
-                    "abscissa": [0, 10000],
-                    "ordinate": [9.81, 9.81],
-                    "title": ""
-                })()
-            ).id
+            curve2 = Curve(x=[0, 10000], y=[9.81, 9.81])
 
             # Set ICFD analysis
             icfdanalysis = ICFDAnalysis()
             icfdanalysis.set_timestep(timestep=0.02)
             icfd.add(icfdanalysis)
 
-            # Create body load in Z direction (gravity)
-            solution.stub.CreateLoadBody(
-                type("Request", (), {"option": "Z", "lcid": curve2_id})()
-            )
+            # Add gravity using Gravity class (high-level API)
+            gravity = Gravity(dir=GravityOption.DIR_Z, load=curve2)
+            icfd.add(gravity)
+
+            # Set global imposed movement (pid=0) in X direction using high-level API
+            icfd.set_imposed_move(vx=curve1)
 
             # Part 1: No-slip wall (bottom/sides)
             mat1 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
@@ -1880,18 +1932,10 @@ class TestReferenceFileComparison:
             volpart5.set_material(mat2)
             icfd.parts.add(volpart5)
 
-            # Create meshed volume
+            # Create meshed volume with fluid interface for part 3 (high-level API)
             meshvol = MeshedVolume(surfaces=[1, 2, 3])
+            meshvol.set_fluid_interfaces(surfaces=[3])
             icfd.add(meshvol)
-
-            # MESH_INTERF for volume 1 with interface part 3
-            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [3]})()
-            )
-
-            # ICFD_CONTROL_IMPOSED_MOVE for global imposed movement (pid=0) in X direction
-            solution.stub.ICFDCreateControlImposedMove(
-                type("Request", (), {"pid": 0, "lcvx": curve1_id, "lcvy": 0, "lcvz": 0, "vadt": 0, "idr": 0})()
-            )
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_sloshing.k")
@@ -1973,6 +2017,10 @@ class TestReferenceFileComparison:
             part4.set_material(mat4)
             part4.set_non_slip()
             part4.set_prescribed_temperature(temperature=curve5)
+            # Set boundary layer: number=3 means nelth=2 (nelth = number - 1)
+            part4.set_boundary_layer(number=3)
+            # Compute drag forces (creates ICFD_DATABASE_DRAG)
+            part4.compute_drag_force()
             icfd.parts.add(part4)
 
             # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
@@ -1984,18 +2032,8 @@ class TestReferenceFileComparison:
             meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
             icfd.add(meshvol)
 
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
-
-            # ICFD_INITIAL - set initial conditions for whole domain (pid=0)
-            solution.stub.ICFDCreateInit(
-                type("Request", (), {"pid": 0, "vx": 0.0, "vy": 0.0, "vz": 0.0, "t": 10.0, "p": 0.0})()
-            )
+            # Set initial conditions for whole domain (pid=0): temperature=10.0
+            icfd.set_initial(temperature=10.0)
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_thermal_flow.k")
@@ -2016,6 +2054,8 @@ class TestReferenceFileComparison:
             ICFDDOF,
             MeshedVolume,
         )
+        from ansys.dyna.core.pre.dynabase import ShellSection
+        from ansys.dyna.core.pre.dynamaterial import MatRigid
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_strong_fsi.k")
         reference_file = os.path.join(pre_reference_dir, "test_strong_fsi.k")
@@ -2107,23 +2147,28 @@ class TestReferenceFileComparison:
                 )()
             )
 
-            # SECTION_SHELL (secid=1, elform=12)
-            solution.stub.CreateSectionShell(
-                type(
-                    "Request",
-                    (),
-                    {"elform": 12, "shrf": 1.0, "nip": 5, "propt": 1, "t1": 1.0, "t2": 1.0, "t3": 1.0, "t4": 1.0},
-                )()
+            # SECTION_SHELL (secid=1, elform=12) - using high-level API
+            shell_section = ShellSection(
+                element_formulation=12,
+                shear_factor=1.0,
+                integration_points=5,
+                printout=1,
+                thickness1=1.0,
+                thickness2=1.0,
+                thickness3=1.0,
+                thickness4=1.0,
             )
 
-            # MAT_RIGID (mid=1, ro=1.2, e=2e11, pr=0.3)
-            solution.stub.CreateMatRigid(
-                type(
-                    "Request",
-                    (),
-                    {"mid": 1, "ro": 1.2, "e": 2.0e11, "pr": 0.3, "cmo": 0.0, "con1": 0, "con2": 0},
-                )()
+            # MAT_RIGID (mid=1, ro=1.2, e=2e11, pr=0.3) - using high-level API
+            mat_rigid = MatRigid(
+                mass_density=1.2,
+                young_modulus=2.0e11,
+                poisson_ratio=0.3,
+                center_of_mass_constraint=0,
+                translational_constraint=0,
+                rotational_constraint=0,
             )
+            mat_rigid.create(solution.stub)
 
             # Set ICFD analysis
             icfdanalysis = ICFDAnalysis()
@@ -2176,22 +2221,16 @@ class TestReferenceFileComparison:
             part4 = ICFDPart(4)
             part4.set_material(mat4)
             part4.set_non_slip()
+            # Enable FSI boundary on this part (creates ICFD_BOUNDARY_FSI)
+            part4.set_fsi()
+            # Compute drag forces (creates ICFD_DATABASE_DRAG)
+            part4.compute_drag_force()
+            # Set boundary layer: number=3 means nelth=2 (nelth = number - 1)
+            part4.set_boundary_layer(number=3)
             icfd.parts.add(part4)
 
-            # ICFD_BOUNDARY_FSI for part 4
-            solution.stub.ICFDCreateBoundaryFSI(type("Request", (), {"pid": 4})())
-
-            # ICFD_CONTROL_FSI
-            solution.stub.ICFDCreateControlFSI(
-                type(
-                    "Request",
-                    (),
-                    {"owc": 0, "bt": 0.0, "dt": 0.0, "idc": 0, "lcidsf": 0, "xproj": 0.0, "nsub": 0, "vforc": 0},
-                )()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
+            # Enable FSI control (creates ICFD_CONTROL_FSI with owc=0)
+            icfdanalysis.set_fsi()
 
             # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
             volpart = ICFDVolumePart([1, 2, 3, 4])
@@ -2201,11 +2240,6 @@ class TestReferenceFileComparison:
             # Create meshed volume (use part IDs)
             meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
             icfd.add(meshvol)
-
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_strong_fsi.k")
@@ -2226,6 +2260,8 @@ class TestReferenceFileComparison:
             ICFDDOF,
             MeshedVolume,
         )
+        from ansys.dyna.core.pre.dynabase import ShellSection
+        from ansys.dyna.core.pre.dynamaterial import MatRigid
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_weak_fsi.k")
         reference_file = os.path.join(pre_reference_dir, "test_weak_fsi.k")
@@ -2267,23 +2303,28 @@ class TestReferenceFileComparison:
             # Create the timestep curve (curve 1) FIRST - needed for CONTROL_TIMESTEP lctm reference
             solution._backend.create_define_curve(abscissa=[0, 10000], ordinate=[0.05, 0.05])
 
-            # SECTION_SHELL (secid=1, elform=12)
-            solution.stub.CreateSectionShell(
-                type(
-                    "Request",
-                    (),
-                    {"elform": 12, "shrf": 1.0, "nip": 5, "propt": 1, "t1": 1.0, "t2": 1.0, "t3": 1.0, "t4": 1.0},
-                )()
+            # SECTION_SHELL (secid=1, elform=12) - using high-level API
+            shell_section = ShellSection(
+                element_formulation=12,
+                shear_factor=1.0,
+                integration_points=5,
+                printout=1,
+                thickness1=1.0,
+                thickness2=1.0,
+                thickness3=1.0,
+                thickness4=1.0,
             )
 
-            # MAT_RIGID (mid=1, ro=1000.0, e=2e11, pr=0.3)
-            solution.stub.CreateMatRigid(
-                type(
-                    "Request",
-                    (),
-                    {"mid": 1, "ro": 1000.0, "e": 2.0e11, "pr": 0.3, "cmo": 0.0, "con1": 0, "con2": 0},
-                )()
+            # MAT_RIGID (mid=1, ro=1000.0, e=2e11, pr=0.3) - using high-level API
+            mat_rigid = MatRigid(
+                mass_density=1000.0,
+                young_modulus=2.0e11,
+                poisson_ratio=0.3,
+                center_of_mass_constraint=0,
+                translational_constraint=0,
+                rotational_constraint=0,
             )
+            mat_rigid.create(solution.stub)
 
             # Set ICFD analysis with timestep curve
             icfdanalysis = ICFDAnalysis()
@@ -2338,22 +2379,16 @@ class TestReferenceFileComparison:
             part4 = ICFDPart(4)
             part4.set_material(mat4)
             part4.set_non_slip()
+            # Enable FSI boundary on this part (creates ICFD_BOUNDARY_FSI)
+            part4.set_fsi()
+            # Compute drag forces (creates ICFD_DATABASE_DRAG)
+            part4.compute_drag_force()
+            # Set boundary layer: number=3 means nelth=2 (nelth = number - 1)
+            part4.set_boundary_layer(number=3)
             icfd.parts.add(part4)
 
-            # ICFD_BOUNDARY_FSI for part 4
-            solution.stub.ICFDCreateBoundaryFSI(type("Request", (), {"pid": 4})())
-
-            # ICFD_CONTROL_FSI
-            solution.stub.ICFDCreateControlFSI(
-                type(
-                    "Request",
-                    (),
-                    {"owc": 0, "bt": 0.0, "dt": 0.0, "idc": 0, "lcidsf": 0, "xproj": 0.0, "nsub": 0, "vforc": 0},
-                )()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
+            # Enable FSI control (creates ICFD_CONTROL_FSI with owc=0)
+            icfdanalysis.set_fsi()
 
             # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
             volpart = ICFDVolumePart([1, 2, 3, 4])
@@ -2363,11 +2398,6 @@ class TestReferenceFileComparison:
             # Create meshed volume (use part IDs)
             meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
             icfd.add(meshvol)
-
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_weak_fsi.k")
@@ -2433,11 +2463,6 @@ class TestReferenceFileComparison:
             part2.set_prescribed_pressure(pressure=curve3)
             icfd.parts.add(part2)
 
-            # Define curve function for imposed Y velocity (after regular curves)
-            curve4_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
-
             # Part 3: Free slip boundary (top/bottom walls)
             mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part3 = ICFDPart(3)
@@ -2446,10 +2471,18 @@ class TestReferenceFileComparison:
             icfd.parts.add(part3)
 
             # Part 4: No-slip wall with imposed movement
+            # Use function-based curve for Y velocity: sinusoidal motion
+            curve_imposed_vy = Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)")
             mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part4 = ICFDPart(4)
             part4.set_material(mat4)
             part4.set_non_slip()
+            # Set boundary layer: number=3 means nelth=2 (nelth = number - 1)
+            part4.set_boundary_layer(number=3)
+            # Set imposed movement in Y direction using the function curve
+            part4.set_imposed_move(vy=curve_imposed_vy)
+            # Compute drag forces (creates ICFD_DATABASE_DRAG)
+            part4.compute_drag_force()
             icfd.parts.add(part4)
 
             # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
@@ -2460,19 +2493,6 @@ class TestReferenceFileComparison:
             # Create meshed volume (use part IDs)
             meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
             icfd.add(meshvol)
-
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
-
-            # ICFD_CONTROL_IMPOSED_MOVE for part 4 (Y direction movement)
-            solution.stub.ICFDCreateControlImposedMove(
-                type("Request", (), {"pid": 4, "lcvx": 0, "lcvy": curve4_id, "lcvz": 0, "vadt": 0, "idr": 0})()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_imposed_move.k")
