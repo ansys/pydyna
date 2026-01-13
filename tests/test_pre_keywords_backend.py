@@ -2054,7 +2054,14 @@ class TestReferenceFileComparison:
             ICFDDOF,
             MeshedVolume,
         )
-        from ansys.dyna.core.pre.dynabase import ShellSection
+        from ansys.dyna.core.pre.dynabase import (
+            ShellSection,
+            PartSet,
+            BoundaryPrescribedMotionRigid,
+            DynaBase,
+            ImplicitAnalysis,
+            Integration,
+        )
         from ansys.dyna.core.pre.dynamaterial import MatRigid
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_strong_fsi.k")
@@ -2081,71 +2088,51 @@ class TestReferenceFileComparison:
             curve2 = Curve(x=[0, 10000], y=[0, 0])
             curve3 = Curve(x=[0, 10000], y=[0, 0])
 
-            # CONTROL_IMPLICIT_DYNAMICS
-            solution.stub.CreateControlImplicitDynamics(
-                type(
-                    "Request",
-                    (),
-                    {
-                        "imass": 1,
-                        "gamma": 0.6,
-                        "beta": 0.4,
-                        "tdybir": 0.0,
-                        "tdydth": 1.0e28,
-                        "tdybur": 1.0e28,
-                        "irate": 0,
-                        "alpha": 0.0,
-                    },
-                )()
-            )
+            # Create DynaBase for implicit analysis structure
+            dbase = DynaBase()
+            solution.add(dbase)
 
-            # CONTROL_IMPLICIT_GENERAL
-            solution.stub.CreateControlImplicitGeneral(
-                type(
-                    "Request",
-                    (),
-                    {"imflag": 1, "dt0": 10.0, "imform": 2, "nsbs": 1, "igs": 2, "cnstn": 0, "form": 0, "zero_v": 0},
-                )()
+            # Configure implicit analysis using high-level API
+            implicit = ImplicitAnalysis()
+            # CONTROL_IMPLICIT_DYNAMICS equivalent
+            implicit.set_dynamic(
+                integration_method=Integration.NEWMARK_TIME_INTEGRATION,
+                gamma=0.6,
+                beta=0.4,
+                birth_time=0.0,
+                death_time=1.0e28,
+                burial_time=1.0e28,
+                rate_effects=0,
+                hht_alpha=0.0,
             )
-
-            # CONTROL_IMPLICIT_SOLUTION with extended parameters
-            solution.stub.CreateControlImplicitSolution(
-                type(
-                    "Request",
-                    (),
-                    {
-                        "nsolvr": 12,
-                        "ilimit": 100,
-                        "maxref": 150,
-                        "dctol": 1.0,
-                        "ectol": 0.01,
-                        "rctol": 1.0e10,
-                        "lstol": 0.9,
-                        "abstol": 1.0e-10,
-                        "dnorm": 2,
-                        "diverg": 1,
-                        "istif": 1,
-                        "nlprint": 3,
-                        "nlnorm": 0,
-                        "d3itctl": 0,
-                        "cpchk": 0,
-                        "arcctl": 0,
-                        "arcdir": 0,
-                        "arclen": 0.0,
-                        "arcmth": 1,
-                        "arcdmp": 2,
-                        "arcpsi": 0.0,
-                        "arcalf": 0.0,
-                        "arctim": 0.0,
-                        "lsmtd": 4,
-                        "lsdir": 2,
-                        "irad": 0.0,
-                        "srad": 0.0,
-                        "awgt": 0.0,
-                        "sred": 0.0,
-                    },
-                )()
+            # CONTROL_IMPLICIT_GENERAL equivalent
+            implicit.set_general(
+                imflag=1,
+                dt0=10.0,
+                imform=2,
+                nsbs=1,
+                igs=2,
+                cnstn=0,
+                form=0,
+                zero_v=0,
             )
+            # CONTROL_IMPLICIT_SOLUTION equivalent
+            implicit.set_solution(
+                solution_method=12,
+                iteration_limit=100,
+                stiffness_reformation_limit=150,
+                displacement_convergence_tolerance=1.0,
+                energy_convergence_tolerance=0.01,
+                residual_convergence_tolerance=1.0e10,
+                line_search_tolerance=0.9,
+                absolute_convergence_tolerance=1.0e-10,
+                displacement_norm=2,
+                divergence_flag=1,
+                initial_stiffness_flag=1,
+                nonlinear_print_flag=3,
+                nonlinear_norm=0,
+            )
+            dbase.implicitanalysis = implicit
 
             # SECTION_SHELL (secid=1, elform=12) - using high-level API
             shell_section = ShellSection(
@@ -2191,23 +2178,17 @@ class TestReferenceFileComparison:
             icfd.parts.add(part2)
 
             # Create curve function for imposed Y velocity (AFTER parts 1-2 so regular curves get IDs 1-3)
-            curve4_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
+            # Using high-level Curve API
+            curve4 = Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)")
+            curve4.create(solution.stub)
 
-            # SET_PART_LIST (sid=1, MECH solver)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {"sid": 1, "pids": [1], "solver": "MECH"})()
-            )
+            # SET_PART_LIST (sid=1, MECH solver) - using high-level API
+            partset1 = PartSet(parts=[1], sid=1, solver="MECH")
+            partset1.create(solution.stub)
 
-            # BOUNDARY_PRESCRIBED_MOTION_RIGID (pid=1, dof=2=Y, lcid=curve4_id)
-            solution.stub.CreateBoundaryPrescribedMotionRigid(
-                type(
-                    "Request",
-                    (),
-                    {"pid": 1, "dof": 2, "vad": 0, "lcid": curve4_id, "sf": 1.0, "vid": 0, "death": 0.0, "birth": 0.0},
-                )()
-            )
+            # BOUNDARY_PRESCRIBED_MOTION_RIGID (pid=1, dof=2=Y, lcid=curve4.id) - using high-level API
+            bpm1 = BoundaryPrescribedMotionRigid(pid=1, dof=2, vad=0, curve=curve4.id, scale_factor=1.0)
+            bpm1.create(solution.stub)
 
             # Part 3: Free slip boundary (top/bottom walls)
             mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
@@ -2260,7 +2241,7 @@ class TestReferenceFileComparison:
             ICFDDOF,
             MeshedVolume,
         )
-        from ansys.dyna.core.pre.dynabase import ShellSection
+        from ansys.dyna.core.pre.dynabase import ShellSection, PartSet, BoundaryPrescribedMotionRigid
         from ansys.dyna.core.pre.dynamaterial import MatRigid
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_weak_fsi.k")
@@ -2301,7 +2282,9 @@ class TestReferenceFileComparison:
             curve_pre = Curve(x=[0, 10000], y=[0, 0])
 
             # Create the timestep curve (curve 1) FIRST - needed for CONTROL_TIMESTEP lctm reference
-            solution._backend.create_define_curve(abscissa=[0, 10000], ordinate=[0.05, 0.05])
+            # Using high-level Curve API
+            curve_ts_ref = Curve(x=[0, 10000], y=[0.05, 0.05])
+            curve_ts_ref.create(solution.stub)
 
             # SECTION_SHELL (secid=1, elform=12) - using high-level API
             shell_section = ShellSection(
@@ -2349,23 +2332,17 @@ class TestReferenceFileComparison:
             icfd.parts.add(part2)
 
             # Create curve function for imposed Y velocity (curve 5)
-            curve5_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
+            # Using high-level Curve API with function parameter
+            curve5 = Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)")
+            curve5.create(solution.stub)
 
-            # SET_PART_LIST (sid=1, MECH solver)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {"sid": 1, "pids": [1], "solver": "MECH"})()
-            )
+            # SET_PART_LIST (sid=1, MECH solver) - using high-level API
+            partset1 = PartSet(parts=[1], sid=1, solver="MECH")
+            partset1.create(solution.stub)
 
-            # BOUNDARY_PRESCRIBED_MOTION_RIGID (pid=1, dof=2=Y, lcid=curve5_id)
-            solution.stub.CreateBoundaryPrescribedMotionRigid(
-                type(
-                    "Request",
-                    (),
-                    {"pid": 1, "dof": 2, "vad": 0, "lcid": curve5_id, "sf": 1.0, "vid": 0, "death": 0.0, "birth": 0.0},
-                )()
-            )
+            # BOUNDARY_PRESCRIBED_MOTION_RIGID (pid=1, dof=2=Y, lcid=curve5.id) - using high-level API
+            bpm1 = BoundaryPrescribedMotionRigid(pid=1, dof=2, vad=0, curve=curve5.id, scale_factor=1.0)
+            bpm1.create(solution.stub)
 
             # Part 3: Free slip boundary (top/bottom walls)
             mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
@@ -2566,6 +2543,7 @@ class TestReferenceFileComparison:
         """test_resistive_heating.k - EM resistive heating 3D."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
+        from ansys.dyna.core.pre.dynabase import Curve, NodeSet
 
         initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating.k")
         reference_file = os.path.join(pre_reference_dir, "test_resistive_heating.k")
@@ -2601,11 +2579,9 @@ class TestReferenceFileComparison:
             # DATABASE_BINARY_D3PLOT
             solution.create_database_binary(dt=0.1)
 
-            # SET_NODE_LIST for boundary temperature (nodes 4507, 4508)
-            solution._backend.create_set_node_list(
-                sid=1,
-                nodes=[4507, 4508],
-            )
+            # SET_NODE_LIST for boundary temperature (nodes 4507, 4508) - using high-level API
+            temp_nodeset = NodeSet(nodes=[4507, 4508], sid=1)
+            temp_nodeset.create(solution.stub)
 
             # BOUNDARY_TEMPERATURE_SET with cmult=50 (temperature value)
             solution._backend.create_boundary_temperature_set(
@@ -2638,19 +2614,17 @@ class TestReferenceFileComparison:
             # INITIAL_TEMPERATURE_SET with temp=25
             solution._backend.create_initial_temperature_set(nsid=0, temp=25.0)
 
-            # DEFINE_CURVE 1 for max timestep
-            solution._backend.create_define_curve(
-                lcid=1,
-                abscissa=[0.0, 9.9999997474e-5],
-                ordinate=[0.01, 0.01],
-            )
+            # DEFINE_CURVE 1 for max timestep - using high-level API
+            curve1 = Curve(x=[0.0, 9.9999997474e-5], y=[0.01, 0.01], lcid=1)
+            curve1.create(solution.stub)
 
-            # DEFINE_CURVE 2 for EOS (conductivity vs temperature)
-            solution._backend.create_define_curve(
+            # DEFINE_CURVE 2 for EOS (conductivity vs temperature) - using high-level API
+            curve2 = Curve(
+                x=[0.0, 25.0, 50.0, 100.0],
+                y=[4000000.0, 4000000.0, 400000.0, 400000.0],
                 lcid=2,
-                abscissa=[0.0, 25.0, 50.0, 100.0],
-                ordinate=[4000000.0, 4000000.0, 400000.0, 400000.0],
             )
+            curve2.create(solution.stub)
 
             # EM_OUTPUT
             solution._backend.create_em_output(mats=2, matf=2, sols=2, solf=2)
@@ -2883,7 +2857,7 @@ class TestReferenceFileComparison:
             ThermalAnalysis,
             ThermalAnalysisType,
         )
-        from ansys.dyna.core.pre.dynabase import Curve, PartSet, SegmentSet
+        from ansys.dyna.core.pre.dynabase import Curve, PartSet, SegmentSet, NodeSet
 
         initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating_2d_multi_isopots.k")
         reference_file = os.path.join(pre_reference_dir, "test_resistive_heating_2d_multi_isopots.k")
@@ -2943,11 +2917,12 @@ class TestReferenceFileComparison:
             )
             emobj.set_init_temperature(temp=25)
 
-            # DEFINE_CURVE_FUNCTION for voltage source (lcid=1)
+            # DEFINE_CURVE_FUNCTION for voltage source (lcid=1) - using high-level API
             voltage_function = "-5./0.01*EXP(-TIME/((5.e-4+0.05+0.01)*0.04))"
-            solution._backend.create_define_curve_function(function=voltage_function)
+            voltage_curve = Curve(func=voltage_function)
+            voltage_curve.create(solution.stub)
 
-            # Create 6 SET_NODE_LIST entries
+            # Create 6 SET_NODE_LIST entries - using high-level API
             node_sets = [
                 [642, 652, 661, 670, 643],  # sid=1
                 [549, 548, 577, 597, 617],  # sid=2
@@ -2957,7 +2932,8 @@ class TestReferenceFileComparison:
                 [521, 517, 513, 509, 525],  # sid=6
             ]
             for idx, nodes in enumerate(node_sets, start=1):
-                solution._backend.create_set_node_list_with_solver(sid=idx, nodes=nodes, solver="MECH")
+                nodeset = NodeSet(nodes=nodes, sid=idx, solver="MECH")
+                nodeset.create(solution.stub)
 
             # Create 6 EM_ISOPOTENTIAL entries (isoid 1-6, referencing SET_NODE_LIST 1-6)
             from ansys.dyna.core.keywords import keywords
@@ -3021,6 +2997,7 @@ class TestReferenceFileComparison:
         )
         from ansys.dyna.core.pre.dynamech import SolidPart, SolidFormulation
         from ansys.dyna.core.pre.dynamaterial import MatRigid, EMMATTYPE
+        from ansys.dyna.core.pre.dynabase import NodeSet
 
         initial_file = os.path.join(initial_files_dir, "em", "test_rlc_define_func.k")
         reference_file = os.path.join(pre_reference_dir, "test_rlc_define_func.k")
@@ -3081,7 +3058,7 @@ class TestReferenceFileComparison:
             }"""
             solution._backend.create_define_function(function=rlc_function, fid=1)
 
-            # Create SET_NODE_LIST entries
+            # Create SET_NODE_LIST entries - using high-level API
             nset1_nodes = [
                 429, 433, 437, 441, 445, 449, 453, 457, 461, 465,
                 469, 473, 477, 481, 485, 489, 493, 497, 501, 505,
@@ -3092,8 +3069,10 @@ class TestReferenceFileComparison:
                 76, 81, 86, 91, 96, 101, 106, 111, 116, 121,
                 126, 131, 136, 141, 146,
             ]
-            solution._backend.create_set_node_list_with_solver(sid=1, nodes=nset1_nodes, solver="MECH")
-            solution._backend.create_set_node_list_with_solver(sid=2, nodes=nset2_nodes, solver="MECH")
+            nodeset1 = NodeSet(nodes=nset1_nodes, sid=1, solver="MECH")
+            nodeset1.create(solution.stub)
+            nodeset2 = NodeSet(nodes=nset2_nodes, sid=2, solver="MECH")
+            nodeset2.create(solution.stub)
 
             # Create EM_ISOPOTENTIAL entries
             kw_iso1 = keywords.EmIsopotential()
@@ -3409,6 +3388,7 @@ class TestReferenceFileComparison:
         """test_iga.k - Isogeometric analysis with rigidwall cylinders."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
+        from ansys.dyna.core.pre.dynabase import Curve
 
         initial_file = os.path.join(initial_files_dir, "test_iga.k")
         reference_file = os.path.join(pre_reference_dir, "test_iga.k")
@@ -3508,12 +3488,9 @@ class TestReferenceFileComparison:
             kw_rw3.pr = 0.3
             solution._backend._deck.append(kw_rw3)
 
-            # DEFINE_CURVE for motion
-            solution._backend.create_define_curve(
-                sfo=1.0,
-                abscissa=[0.0, 100.0],
-                ordinate=[20.0, 20.0],
-            )
+            # DEFINE_CURVE for motion - using high-level API
+            motion_curve = Curve(sfo=1.0, x=[0.0, 100.0], y=[20.0, 20.0])
+            motion_curve.create(solution.stub)
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_iga.k")
@@ -3524,6 +3501,7 @@ class TestReferenceFileComparison:
     def test_isph(self, initial_files_dir, pre_reference_dir):
         """test_isph.k - Incompressible SPH."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import PartSet
 
         initial_file = os.path.join(initial_files_dir, "test_isph.k")
         reference_file = os.path.join(pre_reference_dir, "test_isph.k")
@@ -3911,59 +3889,29 @@ class TestReferenceFileComparison:
                 })()
             )
 
-            # SET_PART_LIST 1 (walls mesh)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 1,
-                    "pids": [8],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 1 (walls mesh) - using high-level API
+            partset1 = PartSet(parts=[8], sid=1, solver="MECH")
+            partset1.create(solution.stub)
 
-            # SET_PART_LIST 2 (moving cube mesh)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 2,
-                    "pids": [7],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 2 (moving cube mesh) - using high-level API
+            partset2 = PartSet(parts=[7], sid=2, solver="MECH")
+            partset2.create(solution.stub)
 
-            # SET_PART_LIST 3 (water)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 3,
-                    "pids": [6],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 3 (water) - using high-level API
+            partset3 = PartSet(parts=[6], sid=3, solver="MECH")
+            partset3.create(solution.stub)
 
-            # SET_PART_LIST 4 (sensor plane)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 4,
-                    "pids": [1],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 4 (sensor plane) - using high-level API
+            partset4 = PartSet(parts=[1], sid=4, solver="MECH")
+            partset4.create(solution.stub)
 
-            # SET_PART_LIST 5 (moving cube mesh)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 5,
-                    "pids": [7],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 5 (moving cube mesh) - using high-level API
+            partset5 = PartSet(parts=[7], sid=5, solver="MECH")
+            partset5.create(solution.stub)
 
-            # SET_PART_LIST 6 (moving cube mesh)
-            solution.stub.CreateSetPartList(
-                type("Request", (), {
-                    "sid": 6,
-                    "pids": [7],
-                    "solver": "MECH",
-                })()
-            )
+            # SET_PART_LIST 6 (moving cube mesh) - using high-level API
+            partset6 = PartSet(parts=[7], sid=6, solver="MECH")
+            partset6.create(solution.stub)
 
             # CONSTRAINED_RIGID_BODIES
             solution.stub.CreateConstrainedRigidBodies(
@@ -4287,7 +4235,7 @@ class TestReferenceFileComparison:
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
         """test_frf_plate_damping.k - NVH FRF plate with damping curve."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
-        from ansys.dyna.core.pre.dynabase import DynaBase, ImplicitAnalysis, ShellSection
+        from ansys.dyna.core.pre.dynabase import DynaBase, ImplicitAnalysis, ShellSection, Curve, NodeSet
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_plate_damping.k")
         reference_file = os.path.join(pre_reference_dir, "test_frf_plate_damping.k")
@@ -4318,35 +4266,33 @@ class TestReferenceFileComparison:
                 nsbs=1,
                 igs=2,
             )
+            # Use enhanced set_solution() with all parameters
+            implicit.set_solution(
+                solution_method=1,
+                iteration_limit=11,
+                stiffness_reformation_limit=55,
+                displacement_convergence_tolerance=1.0,
+                energy_convergence_tolerance=0.01,
+                residual_convergence_tolerance=1.0e10,
+                line_search_tolerance=0.9,
+                absolute_convergence_tolerance=1.0e-10,
+                nonlinear_print_flag=3,
+            )
             dbase.implicitanalysis = implicit
 
-            # CONTROL_IMPLICIT_SOLUTION (more parameters than set_solution() supports)
-            solution._backend.create_control_implicit_solution(
-                nsolvr=1,
-                ilimit=11,
-                maxref=55,
-                dctol=1.0,
-                ectol=0.01,
-                rctol=1.0e10,
-                lstol=0.9,
-                abstol=1.0e-10,
-                nlprint=3,
-            )
-
-            # DEFINE_CURVE for damping vs. frequency (lcid=1)
+            # DEFINE_CURVE for damping vs. frequency (lcid=1) - using high-level API
             damping_freqs = [1.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 200.0]
             damping_vals = [0.0, 0.0, 0.0045, 0.00713, 0.00386, 0.00328, 0.0034, 0.00624, 0.00072, 0.00083, 0.0, 0.0]
-            solution._backend.create_define_curve(
-                sfo=1.0,
-                abscissa=damping_freqs,
-                ordinate=damping_vals,
-            )
+            damping_curve = Curve(sfo=1.0, x=damping_freqs, y=damping_vals)
+            damping_curve.create(solution.stub)
 
-            # SET_NODE_LIST for input node (sid=1, node 131)
-            solution._backend.create_set_node_list_with_solver(sid=1, nodes=[131], solver="MECH")
+            # SET_NODE_LIST for input node (sid=1, node 131) - using high-level API
+            input_nodeset = NodeSet(nodes=[131], sid=1, solver="MECH")
+            input_nodeset.create(solution.stub)
 
-            # SET_NODE_LIST for output nodes (sid=2, nodes 131 and 651)
-            solution._backend.create_set_node_list_with_solver(sid=2, nodes=[131, 651], solver="MECH")
+            # SET_NODE_LIST for output nodes (sid=2, nodes 131 and 651) - using high-level API
+            output_nodeset = NodeSet(nodes=[131, 651], sid=2, solver="MECH")
+            output_nodeset.create(solution.stub)
 
             # SECTION_SHELL (secid=1, elform=6, shrf=0.833, nip=5, propt=3.0)
             solution._backend.create_section_shell(
@@ -4422,7 +4368,7 @@ class TestReferenceFileComparison:
 
             # Set up DynaBase and implicit analysis using high-level API
             from ansys.dyna.core.pre.dynabase import (
-                DynaBase, ImplicitAnalysis, SolidSection, EnergyFlag
+                DynaBase, ImplicitAnalysis, SolidSection, EnergyFlag, NodeSet
             )
             dbase = DynaBase()
             solution.add(dbase)
@@ -4449,21 +4395,20 @@ class TestReferenceFileComparison:
                 imform=2,
                 nsbs=1,
             )
-            dbase.implicitanalysis = implicit
-
-            # Use backend directly to set nlprint and nlnorm
-            solution._backend.create_control_implicit_solution(
-                nsolvr=1,
-                ilimit=11,
-                maxref=55,
-                dctol=1.0,
-                ectol=0.01,
-                rctol=1.0e10,
-                lstol=0.9,
-                abstol=1.0e-10,
-                nlprint=3,
-                nlnorm=0.0,
+            # Use enhanced set_solution() with all parameters
+            implicit.set_solution(
+                solution_method=1,
+                iteration_limit=11,
+                stiffness_reformation_limit=55,
+                displacement_convergence_tolerance=1.0,
+                energy_convergence_tolerance=0.01,
+                residual_convergence_tolerance=1.0e10,
+                line_search_tolerance=0.9,
+                absolute_convergence_tolerance=1.0e-10,
+                nonlinear_print_flag=3,
+                nonlinear_norm=0.0,
             )
+            dbase.implicitanalysis = implicit
 
             # Use backend directly to set ikedit and iflush
             solution._backend.create_control_output(npopt=1, neecho=3, ikedit=0, iflush=0)
@@ -4481,16 +4426,18 @@ class TestReferenceFileComparison:
 
             solution.create_database_binary(dt=0.1)
 
-            # SET_NODE_LIST for boundary condition - use backend directly
+            # SET_NODE_LIST for boundary condition - using high-level API
             nodes_set1 = [163, 166, 169, 172, 175, 178, 181, 184, 187, 307, 310, 313,
                          316, 319, 322, 391, 394, 397, 400, 403, 406, 493, 496, 499,
                          589, 592, 645, 648]
-            solution._backend.create_set_node_list_with_solver(sid=1, nodes=nodes_set1, solver="MECH")
+            nodeset1 = NodeSet(nodes=nodes_set1, sid=1, solver="MECH")
+            nodeset1.create(solution.stub)
 
             nodes_set2 = [290, 292, 294, 296, 298, 300, 302, 304, 306, 380, 382, 384,
                          386, 388, 390, 482, 484, 486, 488, 490, 492, 578, 580, 582,
                          638, 640, 706, 708]
-            solution._backend.create_set_node_list_with_solver(sid=2, nodes=nodes_set2, solver="MECH")
+            nodeset2 = NodeSet(nodes=nodes_set2, sid=2, solver="MECH")
+            nodeset2.create(solution.stub)
 
             # Boundary condition
             solution.stub.CreateBoundarySpcSet(

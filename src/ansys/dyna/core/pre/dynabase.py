@@ -142,26 +142,76 @@ class Curve:
 
     For example, ``load (ordinate value)``.
 
+    Parameters
+    ----------
+    sfo : float, optional
+        Scale factor for ordinate values. Default is 1.
+    x : list, optional
+        X values (abscissa/independent variable).
+    y : list, optional
+        Y values (ordinate/dependent variable).
+    func : str, optional
+        Mathematical function expression (e.g., "sin(TIME)"). If provided,
+        creates a DEFINE_CURVE_FUNCTION instead of DEFINE_CURVE.
+    title : str, optional
+        Curve title.
+    lcid : int, optional
+        Curve ID. If not provided, will be auto-generated.
     """
 
-    def __init__(self, sfo=1, x=[], y=[], func=None, title=""):
+    def __init__(self, sfo=1, x=[], y=[], func=None, title="", lcid=None):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
         self.func = func
         self.title = title
+        self.lcid = lcid
 
     def create(self, stub=None):
-        """Create a curve."""
+        """Create a curve.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The curve ID.
+        """
         if stub is None:
             stub = DynaBase.get_stub()
-        if self.func != None:
-            ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func, title=self.title))
+
+        # Check if this is a keywords backend
+        if hasattr(stub, "_backend"):
+            # Keywords backend - use direct method
+            backend = stub._backend
+            if self.func is not None:
+                curve_id = backend.create_define_curve_function(
+                    function=self.func,
+                    sfo=self.sfo,
+                    title=self.title,
+                )
+            else:
+                curve_id = backend.create_define_curve(
+                    sfo=self.sfo,
+                    abscissa=list(self.abscissa),
+                    ordinate=list(self.ordinate),
+                    title=self.title,
+                    lcid=self.lcid,
+                )
+            self.id = curve_id
         else:
-            ret = stub.CreateDefineCurve(
-                DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate, title=self.title)
-            )
-        self.id = ret.id
+            # gRPC stub
+            if self.func is not None:
+                ret = stub.CreateDefineCurveFunction(DefineCurveFunctionRequest(function=self.func, title=self.title))
+            else:
+                ret = stub.CreateDefineCurve(
+                    DefineCurveRequest(sfo=self.sfo, abscissa=self.abscissa, ordinate=self.ordinate, title=self.title)
+                )
+            self.id = ret.id
+
         logging.info(f"Curve {self.id} defined...")
         return self.id
 
@@ -983,18 +1033,58 @@ class BaseSet:
 
 
 class NodeSet:
-    """Defines a nodal set with some identical or unique attributes."""
+    """Defines a nodal set with some identical or unique attributes.
 
-    def __init__(self, nodes=[]):
+    Parameters
+    ----------
+    nodes : list, optional
+        List of node IDs in the set.
+    sid : int, optional
+        Set ID. If not provided, will be auto-generated.
+    solver : str, optional
+        Solver type for the node set. Options are "MECH" (mechanical),
+        "THER" (thermal), etc. Default is None (no solver specification).
+    """
+
+    def __init__(self, nodes=[], sid=None, solver=None):
         self.nodes = nodes
         self.type = "NODESET"
+        self.sid = sid
+        self.solver = solver
 
-    def create(self, stub):
-        """Create a node set."""
+    def create(self, stub=None):
+        """Create a node set.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The set ID, or 0 if no nodes.
+        """
         if len(self.nodes) <= 0:
             return 0
-        ret = stub.CreateNodeSet(NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes))
-        self.id = ret.id
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if this is a keywords backend
+        if hasattr(stub, "_backend"):
+            # Keywords backend - use direct method
+            backend = stub._backend
+            sid = self.sid if self.sid is not None else backend.next_id("nodeset")
+            if self.solver:
+                backend.create_set_node_list_with_solver(sid=sid, nodes=self.nodes, solver=self.solver)
+            else:
+                backend.create_set_node_list(sid=sid, nodes=self.nodes)
+            self.id = sid
+        else:
+            # gRPC stub
+            ret = stub.CreateNodeSet(NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes))
+            self.id = ret.id
+
         if len(self.nodes) > 1:
             self.type = "NODESET"
         else:
@@ -1077,17 +1167,55 @@ class NodeSetBox(BaseSet):
 
 
 class PartSet(BaseSet):
-    """Defines a set of parts with optional attributes."""
+    """Defines a set of parts with optional attributes.
 
-    def __init__(self, parts=[]):
+    Parameters
+    ----------
+    parts : list, optional
+        List of part IDs in the set.
+    sid : int, optional
+        Set ID. If not provided, will be auto-generated.
+    solver : str, optional
+        Solver type for the part set. Options are "MECH" (mechanical),
+        "THER" (thermal), etc. Default is None (no solver specification).
+    """
+
+    def __init__(self, parts=[], sid=None, solver=None):
         self.parts = parts
+        self.sid = sid
+        self.solver = solver
 
-    def create(self, stub):
-        """Create a part set."""
+    def create(self, stub=None):
+        """Create a part set.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The set ID, or 0 if no parts.
+        """
         if len(self.parts) <= 0:
             return 0
-        ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
-        self.id = ret.id
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if this is a keywords backend
+        if hasattr(stub, "_backend"):
+            # Keywords backend - use direct method
+            backend = stub._backend
+            sid = self.sid if self.sid is not None else backend.next_id("partset")
+            solver = self.solver if self.solver else "MECH"
+            backend.create_set_part_list(sid=sid, parts=self.parts, solver=solver)
+            self.id = sid
+        else:
+            # gRPC stub
+            ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
+            self.id = ret.id
+
         if len(self.parts) > 1:
             self.type = "PARTSET"
         else:
@@ -1788,6 +1916,20 @@ class ImplicitAnalysis:
         self.shfscl = 0
         self.center = 0.0
         self.eigmth = 2
+        # Initialize solution parameters with defaults
+        self.nsolver = 12
+        self.ilimit = 11
+        self.maxref = 55
+        self.abstol = 1e-10
+        self.dctol = 0.001
+        self.ectol = 0.01
+        self.rctol = 1.0e10
+        self.lstol = 0.9
+        self.dnorm = 2
+        self.diverg = 1
+        self.istif = 1
+        self.nlprint = 0
+        self.nlnorm = 0.0
         self.stub = DynaBase.get_stub()
 
     def set_initial_timestep_size(self, size=0):
@@ -1823,6 +1965,11 @@ class ImplicitAnalysis:
         integration_method=Integration.NEWMARK_TIME_INTEGRATION,
         gamma=0.5,
         beta=0.25,
+        birth_time=0.0,
+        death_time=1.0e28,
+        burial_time=1.0e28,
+        rate_effects=0,
+        hht_alpha=0.0,
     ):
         """Activate implicit dynamic analysis and define time integration constants.
 
@@ -1834,6 +1981,21 @@ class ImplicitAnalysis:
             Newmark time integration constant. The default is ``0.5``.
         beta : float, optional
             Newmark time integration constant. The default is ``0.25``.
+        birth_time : float, optional
+            Birth time for dynamic analysis (TDYBIR). The default is ``0.0``.
+            Only supported with the keywords backend.
+        death_time : float, optional
+            Death time for dynamic analysis (TDYDTH). The default is ``1.0e28``.
+            Only supported with the keywords backend.
+        burial_time : float, optional
+            Burial time for dynamic analysis (TDYBUR). The default is ``1.0e28``.
+            Only supported with the keywords backend.
+        rate_effects : int, optional
+            Rate effects flag (IRATE). The default is ``0``.
+            Only supported with the keywords backend.
+        hht_alpha : float, optional
+            HHT time integration constant (ALPHA). The default is ``0.0``.
+            Only supported with the keywords backend.
 
         Returns
         -------
@@ -1844,6 +2006,12 @@ class ImplicitAnalysis:
         self.imass = integration_method.value
         self.gamma = gamma
         self.beta = beta
+        # Extended parameters (keywords backend only)
+        self.tdybir = birth_time
+        self.tdydth = death_time
+        self.tdybur = burial_time
+        self.irate = rate_effects
+        self.alpha = hht_alpha
 
     def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0, center=0.0, eigenvalue_method=2):
         """Activate implicit eigenvalue analysis and define associated input parameters.
@@ -1939,6 +2107,15 @@ class ImplicitAnalysis:
         iteration_limit=11,
         stiffness_reformation_limit=55,
         absolute_convergence_tolerance=1e-10,
+        displacement_convergence_tolerance=0.001,
+        energy_convergence_tolerance=0.01,
+        residual_convergence_tolerance=1.0e10,
+        line_search_tolerance=0.9,
+        displacement_norm=2,
+        divergence_flag=1,
+        initial_stiffness_flag=1,
+        nonlinear_print_flag=0,
+        nonlinear_norm=0.0,
     ):
         """Specify whether a linear or nonlinear solution is desired.
 
@@ -1954,6 +2131,24 @@ class ImplicitAnalysis:
             ``55``.
         absolute_convergence_tolerance : float, optional
             Absolute convergence tolerance. The default is ``1e-10``.
+        displacement_convergence_tolerance : float, optional
+            Displacement convergence tolerance (dctol). The default is ``0.001``.
+        energy_convergence_tolerance : float, optional
+            Energy convergence tolerance (ectol). The default is ``0.01``.
+        residual_convergence_tolerance : float, optional
+            Residual (force) convergence tolerance (rctol). The default is ``1.0e10``.
+        line_search_tolerance : float, optional
+            Line search convergence tolerance (lstol). The default is ``0.9``.
+        displacement_norm : int, optional
+            Displacement norm for convergence test (dnorm). The default is ``2``.
+        divergence_flag : int, optional
+            Divergence flag (diverg). The default is ``1``.
+        initial_stiffness_flag : int, optional
+            Initial stiffness formation flag (istif). The default is ``1``.
+        nonlinear_print_flag : int, optional
+            Nonlinear solver print level (nlprint). The default is ``0``.
+        nonlinear_norm : float, optional
+            Nonlinear residual norm type (nlnorm). The default is ``0.0``.
 
         Returns
         -------
@@ -1965,6 +2160,15 @@ class ImplicitAnalysis:
         self.ilimit = iteration_limit
         self.maxref = stiffness_reformation_limit
         self.abstol = absolute_convergence_tolerance
+        self.dctol = displacement_convergence_tolerance
+        self.ectol = energy_convergence_tolerance
+        self.rctol = residual_convergence_tolerance
+        self.lstol = line_search_tolerance
+        self.dnorm = displacement_norm
+        self.diverg = divergence_flag
+        self.istif = initial_stiffness_flag
+        self.nlprint = nonlinear_print_flag
+        self.nlnorm = nonlinear_norm
 
     def set_consistent_mass_matrix(self):
         """Use the consistent mass matrix in implicit dynamics and eigenvalue solutions."""
@@ -1998,9 +2202,29 @@ class ImplicitAnalysis:
         if self.defined_auto:
             self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
         if self.defined_dynamic:
-            self.stub.CreateControlImplicitDynamic(
-                ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta)
-            )
+            # Check if using keywords backend (has _backend attribute) vs gRPC stub
+            if hasattr(self.stub, "_backend"):
+                # Keywords backend - pass all extended parameters
+                request = type(
+                    "Request",
+                    (),
+                    {
+                        "imass": self.imass,
+                        "gamma": self.gamma,
+                        "beta": self.beta,
+                        "tdybir": self.tdybir,
+                        "tdydth": self.tdydth,
+                        "tdybur": self.tdybur,
+                        "irate": self.irate,
+                        "alpha": self.alpha,
+                    },
+                )()
+                self.stub.CreateControlImplicitDynamics(request)
+            else:
+                # gRPC stub - only pass original 3 parameters that protobuf supports
+                self.stub.CreateControlImplicitDynamic(
+                    ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta)
+                )
         if self.defined_eigenvalue:
             # Create a simple object with all attributes for keywords backend compatibility
             request = type(
@@ -2015,11 +2239,36 @@ class ImplicitAnalysis:
             )()
             self.stub.CreateControlImplicitEigenvalue(request)
         if self.defined_solution:
-            self.stub.CreateControlImplicitSolution(
-                ControlImplicitSolutionRequest(
-                    nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
+            # Check if using keywords backend (has _backend attribute) vs gRPC stub
+            if hasattr(self.stub, "_backend"):
+                # Keywords backend - pass all extended parameters
+                request = type(
+                    "Request",
+                    (),
+                    {
+                        "nsolvr": self.nsolver,
+                        "ilimit": self.ilimit,
+                        "maxref": self.maxref,
+                        "abstol": self.abstol,
+                        "dctol": self.dctol,
+                        "ectol": self.ectol,
+                        "rctol": self.rctol,
+                        "lstol": self.lstol,
+                        "dnorm": self.dnorm,
+                        "diverg": self.diverg,
+                        "istif": self.istif,
+                        "nlprint": self.nlprint,
+                        "nlnorm": self.nlnorm,
+                    },
+                )()
+                self.stub.CreateControlImplicitSolution(request)
+            else:
+                # gRPC stub - only pass original 4 parameters that protobuf supports
+                self.stub.CreateControlImplicitSolution(
+                    ControlImplicitSolutionRequest(
+                        nsolver=self.nsolver, ilimit=self.ilimit, maxref=self.maxref, abstol=self.abstol
+                    )
                 )
-            )
         if self.defined_mass_matrix:
             self.stub.CreateControlImplicitConsistentMass(ControlImplicitConsistentMassRequest(iflag=1))
 
@@ -2492,6 +2741,111 @@ class Constraint:
                 ConstrainedRigidBodiesRequest(pidl=self.mergerigidlist[i][0], pidc=self.mergerigidlist[i][1])
             )
             logging.info("constrained rigid bodies Created...")
+
+
+class BoundaryPrescribedMotionRigid:
+    """Defines prescribed motion for rigid bodies.
+
+    This class creates BOUNDARY_PRESCRIBED_MOTION_RIGID keywords.
+
+    Parameters
+    ----------
+    pid : int
+        Part ID for the rigid body.
+    dof : int
+        Degree of freedom:
+        - 1: x-translational
+        - 2: y-translational
+        - 3: z-translational
+        - 4: x-rotational
+        - 5: y-rotational
+        - 6: z-rotational
+    vad : int
+        Velocity/Acceleration/Displacement flag:
+        - 0: velocity (rigid body only)
+        - 1: acceleration
+        - 2: displacement
+    curve : Curve or int
+        Curve object or curve ID defining the motion.
+    scale_factor : float, optional
+        Scale factor for the curve. Default is 1.0.
+    birth : float, optional
+        Birth time for the motion. Default is 0.0.
+    death : float, optional
+        Death time for the motion. Default is 0.0 (inactive).
+    """
+
+    def __init__(
+        self,
+        pid: int,
+        dof: int,
+        vad: int,
+        curve,
+        scale_factor: float = 1.0,
+        birth: float = 0.0,
+        death: float = 0.0,
+    ):
+        self.pid = pid
+        self.dof = dof
+        self.vad = vad
+        self.curve = curve
+        self.scale_factor = scale_factor
+        self.birth = birth
+        self.death = death
+
+    def create(self, stub=None):
+        """Create the boundary prescribed motion rigid keyword.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Get curve ID if a Curve object was passed
+        if hasattr(self.curve, "id"):
+            lcid = self.curve.id
+        else:
+            lcid = self.curve
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            # Keywords backend - use direct method
+            stub._backend.create_boundary_prescribed_motion_rigid(
+                pid=self.pid,
+                dof=self.dof,
+                vad=self.vad,
+                lcid=lcid,
+                sf=self.scale_factor,
+                birth=self.birth,
+                death=self.death,
+            )
+        else:
+            # gRPC stub - use BdyPrescribedMotionRequest with option="RIGID"
+            stub.CreateBdyPrescribedMotion(
+                BdyPrescribedMotionRequest(
+                    id=0,
+                    heading="",
+                    option="RIGID",
+                    typeid=self.pid,
+                    dof=self.dof,
+                    vad=self.vad,
+                    lcid=lcid,
+                    sf=self.scale_factor,
+                    vid=0,
+                    birth=self.birth,
+                    death=self.death,
+                )
+            )
+        logging.info(f"BoundaryPrescribedMotionRigid for part {self.pid} created...")
+        return True
 
 
 class BoundaryCondition:
