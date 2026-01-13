@@ -25,9 +25,66 @@
 from dataclasses import dataclass, field
 import logging
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from ansys.dyna.core.lib.deck import Deck
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+
+# Keyword ordering priority for gRPC backend compatibility.
+# Lower numbers come first in the output file.
+# Keywords not in this list get priority 50 (middle).
+KEYWORD_PRIORITY = {
+    "CONTROL": 10,
+    "DATABASE": 20,
+    "CONTACT": 30,
+    "PART": 40,
+    "SECTION": 41,
+    "MAT": 42,
+    "INITIAL": 43,
+    "BOUNDARY": 44,
+    "LOAD": 45,
+    "RIGIDWALL": 46,
+    "DEFINE": 47,
+    "AIRBAG": 48,
+    "EOS": 49,
+    "SET": 60,
+    "CONSTRAINED": 61,
+    "ELEMENT": 90,
+    "NODE": 95,
+}
+
+
+def get_keyword_sort_key(keyword: Union[str, KeywordBase]) -> tuple:
+    """Get the sort key for a keyword to match gRPC backend output order.
+
+    Parameters
+    ----------
+    keyword : str or KeywordBase
+        The keyword to get the sort key for.
+
+    Returns
+    -------
+    tuple
+        A tuple (priority, full_name) for sorting.
+    """
+    if isinstance(keyword, str):
+        # Raw string keywords - put them at the end
+        return (100, keyword)
+
+    if not hasattr(keyword, "keyword"):
+        return (100, str(type(keyword).__name__))
+
+    kw_type = keyword.keyword
+    subkw = getattr(keyword, "subkeyword", None) or ""
+
+    # Build full name for secondary sorting
+    full_name = f"{kw_type}_{subkw}" if subkw else kw_type
+
+    # Get priority based on keyword type
+    priority = KEYWORD_PRIORITY.get(kw_type, 50)
+
+    return (priority, full_name)
 
 logger = logging.getLogger(__name__)
 
@@ -223,6 +280,16 @@ class KeywordsBackendBase:
             logger.error(f"Failed to load file {filepath}: {e}")
             return False
 
+    def _sort_keywords(self) -> None:
+        """Sort keywords in the deck to match gRPC backend output order.
+
+        This sorts the deck's internal keyword list in-place using the
+        priority ordering defined in KEYWORD_PRIORITY.
+        """
+        # Access the internal keyword list directly
+        self._deck._keywords.sort(key=get_keyword_sort_key)
+        logger.debug("Sorted keywords for output")
+
     def save_file(self, filename: Optional[str] = None) -> str:
         """Save the deck to a keyword file.
 
@@ -248,6 +315,9 @@ class KeywordsBackendBase:
 
         # Ensure the working directory exists
         os.makedirs(self._working_dir, exist_ok=True)
+
+        # Sort keywords to match gRPC backend output order
+        self._sort_keywords()
 
         self._deck.export_file(output_path)
         return self._working_dir

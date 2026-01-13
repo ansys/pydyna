@@ -299,6 +299,8 @@ class DynaSolution:
         if self._using_keywords_backend:
             # For keywords backend, write the deck directly to the destination
             os.makedirs(os.path.dirname(os.path.abspath(local_name)), exist_ok=True)
+            # Sort keywords before export to match gRPC backend output order
+            self._keywords_backend._sort_keywords()
             self._keywords_backend.deck.export_file(local_name)
             logging.info(f"Wrote deck to {local_name}")
             return
