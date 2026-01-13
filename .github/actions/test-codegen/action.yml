@@ -31,7 +31,7 @@ runs:
       shell: bash
       run: |
         python -m venv .venv
-  
+
     - name: Install library
       shell: bash
       run: |
@@ -42,4 +42,4 @@ runs:
       shell: bash
       run: |
         source .venv/bin/activate
-        bash codegen/validate.sh --skip-precommit --skip-deadcode --skip-tests
+        bash codegen/validate.sh --skip-precommit --skip-deadcode

@@ -266,7 +266,8 @@ class KeywordBase(Cards):
         title_line = title_line.strip()
 
         # the options are not activated yet, therefore get_title only returns title_prime
-        if self.get_title().strip("*") not in title_line:
+        expected_title = self.get_title().strip("*")
+        if expected_title not in title_line:
             raise ValueError(
                 f"Title line '{title_line}' does not match expected title '{self.get_title().strip('*')}'."
             )
