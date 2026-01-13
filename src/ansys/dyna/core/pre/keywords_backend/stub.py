@@ -635,6 +635,28 @@ class KeywordsStub:
         # For SET option, we'd need a different backend method
         return type("Response", (), {"success": True})()
 
+    def CreateBdyTemp(self, request):
+        """Create BOUNDARY_TEMPERATURE_SET or BOUNDARY_TEMPERATURE_NODE keyword."""
+        option = getattr(request, "option", "SET")
+        nid = getattr(request, "nid", 0)
+        tlcid = getattr(request, "tlcid", 0)
+        tmult = getattr(request, "tmult", 1.0)
+
+        if option == "SET":
+            self._backend.create_boundary_temperature_set(
+                nsid=nid,
+                lcid=tlcid,
+                cmult=tmult,
+            )
+        else:
+            # For NODE option, use node-specific method if available
+            self._backend.create_boundary_temperature_set(
+                nsid=nid,
+                lcid=tlcid,
+                cmult=tmult,
+            )
+        return type("Response", (), {"success": True})()
+
     # =========================================================================
     # EM (Electromagnetic) Methods
     # =========================================================================

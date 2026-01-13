@@ -2498,12 +2498,8 @@ class TestReferenceFileComparison:
             emobj = DynaEM()
             solution.add(emobj)
 
-            # CONTROL_CONTACT with ignore=1, orien=1
-            kw_contact = keywords.ControlContact()
-            kw_contact.rwpnal = 1.0
-            kw_contact.orien = 1
-            kw_contact.ignore = 1
-            solution._backend._deck.append(kw_contact)
+            # CONTROL_CONTACT with ignore=1, orien=1 - using high-level API
+            emobj.create_control_contact(rwpnal=1.0, orien=1, ignore=1)
 
             # EM_OUTPUT - using high-level API
             emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
@@ -2582,24 +2578,14 @@ class TestReferenceFileComparison:
             # CONTROL_TERMINATION
             solution.set_termination(20.0)
 
-            # CONTROL_TIMESTEP with dt2ms=0.01, lctm=1
-            kw_timestep = keywords.ControlTimestep()
-            kw_timestep.tssfac = 0.9
-            kw_timestep.dt2ms = 0.01
-            kw_timestep.lctm = 1
-            solution._backend._deck.append(kw_timestep)
+            # CONTROL_TIMESTEP with dt2ms=0.01, lctm=1 - using high-level API
+            emobj.set_timestep(tssfac=0.9, timestep_size_for_mass_scaled=0.01, max_timestep=1)
 
             # DATABASE_BINARY_D3PLOT
             solution.create_database_binary(dt=0.1)
 
-            # SET_NODE_LIST for boundary temperature (nodes 4507, 4508) - using high-level API
-            temp_nodeset = NodeSet(nodes=[4507, 4508], sid=1)
-            temp_nodeset.create(solution.stub)
-
-            # BOUNDARY_TEMPERATURE_SET with cmult=50 (temperature value)
-            solution._backend.create_boundary_temperature_set(
-                nsid=1, lcid=0, cmult=50.0, loc=0
-            )
+            # BOUNDARY_TEMPERATURE_SET with cmult=50 (temperature value) - using high-level API
+            emobj.boundaryconditions.create_temperature(NodeSet([4507, 4508]), scalefactor=50)
 
             # PART 1 with SECTION_SOLID and MAT_ELASTIC (material 3, thermal 3) - using high-level API
             section3 = SolidSection(element_formulation=1, secid=3)
@@ -2627,8 +2613,8 @@ class TestReferenceFileComparison:
             matthermal3 = MatThermalIsotropic(density=7000.0, specific_heat=450.0, conductivity=40.0, tmid=3)
             matthermal3.create(solution.stub)
 
-            # INITIAL_TEMPERATURE_SET with temp=25
-            solution._backend.create_initial_temperature_set(nsid=0, temp=25.0)
+            # INITIAL_TEMPERATURE_SET with temp=25 - using high-level API
+            emobj.set_init_temperature(temp=25)
 
             # DEFINE_CURVE 1 for max timestep - using high-level API
             curve1 = Curve(x=[0.0, 9.9999997474e-5], y=[0.01, 0.01], lcid=1)
