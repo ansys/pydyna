@@ -2050,10 +2050,167 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaICFD FSI not implemented in keywords backend")
     def test_weak_fsi(self, initial_files_dir, pre_reference_dir):
         """test_weak_fsi.k - Weak fluid-structure interaction."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            Curve,
+            ICFDDOF,
+            MeshedVolume,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_weak_fsi.k")
+        reference_file = os.path.join(pre_reference_dir, "test_weak_fsi.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=40.0)
+
+            # CONTROL_TIMESTEP (for weak coupling)
+            solution.stub.CreateControlTimestep(
+                type("Request", (), {"tssfac": 0.9, "lctm": 1})()
+            )
+
+            # Database output
+            solution.create_database_binary(dt=0.2)
+
+            # Define curves for boundary conditions
+            # Curve 1: timestep control curve (0.05 constant)
+            curve_ts = Curve(x=[0, 10000], y=[0.05, 0.05])
+
+            # Curve 2: inlet velocity X curve (ramp up)
+            curve_vel_x = Curve(x=[0, 5, 6, 10000], y=[0, 0, 1, 1])
+
+            # Curve 3: inlet velocity Y curve (zero)
+            curve_vel_y = Curve(x=[0, 10000], y=[0, 0])
+
+            # Curve 4: outlet pressure curve (zero)
+            curve_pre = Curve(x=[0, 10000], y=[0, 0])
+
+            # Create the timestep curve (curve 1) FIRST - needed for CONTROL_TIMESTEP lctm reference
+            solution._backend.create_define_curve(abscissa=[0, 10000], ordinate=[0.05, 0.05])
+
+            # SECTION_SHELL (secid=1, elform=12)
+            solution.stub.CreateSectionShell(
+                type(
+                    "Request",
+                    (),
+                    {"elform": 12, "shrf": 1.0, "nip": 5, "propt": 1, "t1": 1.0, "t2": 1.0, "t3": 1.0, "t4": 1.0},
+                )()
+            )
+
+            # MAT_RIGID (mid=1, ro=1000.0, e=2e11, pr=0.3)
+            solution.stub.CreateMatRigid(
+                type(
+                    "Request",
+                    (),
+                    {"mid": 1, "ro": 1000.0, "e": 2.0e11, "pr": 0.3, "cmo": 0.0, "con1": 0, "con2": 0},
+                )()
+            )
+
+            # Set ICFD analysis with timestep curve
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0.05)
+            icfd.add(icfdanalysis)
+
+            # Part 1: Inlet with prescribed velocity (X and Y components)
+            # These will create curves 2, 3
+            mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve_vel_x)
+            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve_vel_y)
+            icfd.parts.add(part1)
+
+            # Part 2: Outlet with prescribed pressure
+            # This will create curve 4
+            mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_prescribed_pressure(pressure=curve_pre)
+            icfd.parts.add(part2)
+
+            # Create curve function for imposed Y velocity (curve 5)
+            curve5_id = solution.stub.CreateDefineCurveFunction(
+                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
+            ).id
+
+            # SET_PART_LIST (sid=1, MECH solver)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {"sid": 1, "pids": [1], "solver": "MECH"})()
+            )
+
+            # BOUNDARY_PRESCRIBED_MOTION_RIGID (pid=1, dof=2=Y, lcid=curve5_id)
+            solution.stub.CreateBoundaryPrescribedMotionRigid(
+                type(
+                    "Request",
+                    (),
+                    {"pid": 1, "dof": 2, "vad": 0, "lcid": curve5_id, "sf": 1.0, "vid": 0, "death": 0.0, "birth": 0.0},
+                )()
+            )
+
+            # Part 3: Free slip boundary (top/bottom walls)
+            mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            part3.set_free_slip()
+            icfd.parts.add(part3)
+
+            # Part 4: FSI boundary (no-slip wall with FSI)
+            mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part4 = ICFDPart(4)
+            part4.set_material(mat4)
+            part4.set_non_slip()
+            icfd.parts.add(part4)
+
+            # ICFD_BOUNDARY_FSI for part 4
+            solution.stub.ICFDCreateBoundaryFSI(type("Request", (), {"pid": 4})())
+
+            # ICFD_CONTROL_FSI
+            solution.stub.ICFDCreateControlFSI(
+                type(
+                    "Request",
+                    (),
+                    {"owc": 0, "bt": 0.0, "dt": 0.0, "idc": 0, "lcidsf": 0, "xproj": 0.0, "nsub": 0, "vforc": 0},
+                )()
+            )
+
+            # ICFD_DATABASE_DRAG for part 4
+            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
+
+            # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
+            volpart = ICFDVolumePart([1, 2, 3, 4])
+            volpart.set_material(mat4)
+            icfd.parts.add(volpart)
+
+            # Create meshed volume (use part IDs)
+            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            icfd.add(meshvol)
+
+            # MESH_BL for part 4 (boundary layer)
+            solution.stub.MESHCreateBl(
+                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_weak_fsi.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_imposed_move(self, initial_files_dir, pre_reference_dir):
         """test_imposed_move.k - ICFD imposed movement."""
