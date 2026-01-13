@@ -155,17 +155,14 @@ class Curve:
         creates a DEFINE_CURVE_FUNCTION instead of DEFINE_CURVE.
     title : str, optional
         Curve title.
-    lcid : int, optional
-        Curve ID. If not provided, will be auto-generated.
     """
 
-    def __init__(self, sfo=1, x=[], y=[], func=None, title="", lcid=None):
+    def __init__(self, sfo=1, x=[], y=[], func=None, title=""):
         self.sfo = sfo
         self.abscissa = x
         self.ordinate = y
         self.func = func
         self.title = title
-        self.lcid = lcid
 
     def create(self, stub=None):
         """Create a curve.
@@ -199,7 +196,6 @@ class Curve:
                     abscissa=list(self.abscissa),
                     ordinate=list(self.ordinate),
                     title=self.title,
-                    lcid=self.lcid,
                 )
             self.id = curve_id
         else:
@@ -219,10 +215,9 @@ class Curve:
 class Function:
     """Defines a function that can be referenced by a limited number of keyword options."""
 
-    def __init__(self, Function=None, fid=None):
+    def __init__(self, Function=None):
         self.function = Function
         self.tabulated = False
-        self.fid = fid
 
     def set_tabulated(self, heading="", function="", x=[], y=[]):
         self.tabulated = True
@@ -239,11 +234,7 @@ class Function:
                     heading=self.heading, function=self.function_name, abscissa=self.x, ordinate=self.y
                 )
             )
-        # Pass fid if specified
-        req = DefineFunctionRequest(function=self.function)
-        if self.fid is not None:
-            req = type("Req", (), {"function": self.function, "fid": self.fid})()
-        ret = stub.CreateDefineFunction(req)
+        ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
         self.id = ret.id
         logging.info(f"Function {self.id} defined...")
 
@@ -297,11 +288,10 @@ class Direction:
 class Transform:
     """Defines a transformation."""
 
-    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0, tranid=None):
+    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
         param = [option, param1, param2, param3, param4, param5, param6, param7]
         self.paramlist = []
         self.paramlist.append(param)
-        self.tranid = tranid
 
     def add_transform(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
         """Defines a transformation matrix."""
@@ -317,7 +307,7 @@ class Transform:
             for i in range(1, 8):
                 params.append(obj[i])
         ret = stub.CreateDefineTransformation(
-            DefineTransformationRequest(option=options, param=params, tranid=self.tranid)
+            DefineTransformationRequest(option=options, param=params)
         )
         self.id = ret.id
         logging.info(f"Transformation {self.id} defined...")
@@ -950,9 +940,10 @@ class DynaBase:
 
         Parameters
         ----------
-        lcid : int, optional
+        lcid : int or Curve, optional
             Load curve ID, which specifies the system damping constant
-            versus the time. The default is ``0``.
+            versus the time. Can be an integer ID or a Curve object
+            (will extract its .id attribute). The default is ``0``.
         valdmp : float, optional
             System damping constant. The default is ``0.0``.
 
@@ -961,7 +952,10 @@ class DynaBase:
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateDampingGlobal(DampingGlobalRequest(lcid=lcid, valdmp=valdmp))
+        # Support both integer IDs and Curve objects
+        curve_id = lcid.id if hasattr(lcid, "id") else lcid
+
+        ret = self.stub.CreateDampingGlobal(DampingGlobalRequest(lcid=curve_id, valdmp=valdmp))
         logging.info("Damping global Created...")
         return ret
 
@@ -1124,17 +1118,14 @@ class NodeSet:
     ----------
     nodes : list, optional
         List of node IDs in the set.
-    sid : int, optional
-        Set ID. If not provided, will be auto-generated.
     solver : str, optional
         Solver type for the node set. Options are "MECH" (mechanical),
         "THER" (thermal), etc. Default is None (no solver specification).
     """
 
-    def __init__(self, nodes=[], sid=None, solver=None):
+    def __init__(self, nodes=[], solver=None):
         self.nodes = nodes
         self.type = "NODESET"
-        self.sid = sid
         self.solver = solver
 
     def create(self, stub=None):
@@ -1159,7 +1150,7 @@ class NodeSet:
         if hasattr(stub, "_backend"):
             # Keywords backend - use direct method
             backend = stub._backend
-            sid = self.sid if self.sid is not None else backend.next_id("nodeset")
+            sid = backend.next_id("nodeset")
             if self.solver:
                 backend.create_set_node_list_with_solver(sid=sid, nodes=self.nodes, solver=self.solver)
             else:
@@ -1258,16 +1249,13 @@ class PartSet(BaseSet):
     ----------
     parts : list, optional
         List of part IDs in the set.
-    sid : int, optional
-        Set ID. If not provided, will be auto-generated.
     solver : str, optional
         Solver type for the part set. Options are "MECH" (mechanical),
         "THER" (thermal), etc. Default is None (no solver specification).
     """
 
-    def __init__(self, parts=[], sid=None, solver=None):
+    def __init__(self, parts=[], solver=None):
         self.parts = parts
-        self.sid = sid
         self.solver = solver
 
     def create(self, stub=None):
@@ -1292,7 +1280,7 @@ class PartSet(BaseSet):
         if hasattr(stub, "_backend"):
             # Keywords backend - use direct method
             backend = stub._backend
-            sid = self.sid if self.sid is not None else backend.next_id("partset")
+            sid = backend.next_id("partset")
             solver = self.solver if self.solver else "MECH"
             backend.create_set_part_list(sid=sid, parts=self.parts, solver=solver)
             self.id = sid
@@ -1537,13 +1525,10 @@ class SolidSection:
         - EQ.10: 1 point tetrahedron
         - EQ.13: 1 point nodal pressure tetrahedron for bulk metal forming
         - EQ.18: 8 node enhanced strain solid for shell-solid assemblies (NVH)
-    secid : int, optional
-        Section ID. If not provided, auto-assigned by the backend.
     """
 
-    def __init__(self, element_formulation: int = 1, secid: int = None):
+    def __init__(self, element_formulation: int = 1):
         self.element_formulation = element_formulation
-        self.secid = secid
         self.id = None
 
     def create(self, stub=None):
@@ -1565,7 +1550,7 @@ class SolidSection:
         # Check if using keywords backend
         if hasattr(stub, "_backend"):
             backend = stub._backend
-            secid = self.secid if self.secid is not None else backend.next_id("section")
+            secid = backend.next_id("section")
             backend.create_section_solid(
                 secid=secid,
                 elform=self.element_formulation,

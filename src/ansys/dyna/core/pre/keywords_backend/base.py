@@ -34,9 +34,14 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class IdGenerator:
-    """Simple ID generator for keywords that need unique IDs."""
+    """Simple ID generator for keywords that need unique IDs.
+
+    Also provides an optional registry to track objects by their assigned IDs,
+    enabling lookups and validation of ID references.
+    """
 
     _counters: Dict[str, int] = field(default_factory=dict)
+    _registry: Dict[str, Dict[int, Any]] = field(default_factory=dict)
 
     def next_id(self, category: str = "default") -> int:
         """Get the next available ID for a category.
@@ -56,6 +61,55 @@ class IdGenerator:
         self._counters[category] += 1
         return self._counters[category]
 
+    def register(self, category: str, id_value: int, obj: Any) -> None:
+        """Register an object with its assigned ID for later lookup.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID (e.g., "curve", "part", "material").
+        id_value : int
+            The ID value assigned to the object.
+        obj : Any
+            The object (keyword instance or high-level API object) to register.
+        """
+        if category not in self._registry:
+            self._registry[category] = {}
+        self._registry[category][id_value] = obj
+        logger.debug(f"Registered {category} id={id_value}: {type(obj).__name__}")
+
+    def get(self, category: str, id_value: int) -> Optional[Any]:
+        """Get a registered object by category and ID.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+        id_value : int
+            The ID value to look up.
+
+        Returns
+        -------
+        Any or None
+            The registered object, or None if not found.
+        """
+        return self._registry.get(category, {}).get(id_value)
+
+    def get_all(self, category: str) -> Dict[int, Any]:
+        """Get all registered objects for a category.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+
+        Returns
+        -------
+        Dict[int, Any]
+            Dictionary mapping IDs to registered objects.
+        """
+        return self._registry.get(category, {}).copy()
+
     def ensure_min_id(self, category: str, min_id: int) -> None:
         """Ensure the counter is at least the given value.
 
@@ -72,7 +126,7 @@ class IdGenerator:
             self._counters[category] = max(self._counters[category], min_id)
 
     def reset(self, category: Optional[str] = None) -> None:
-        """Reset ID counters.
+        """Reset ID counters and registry.
 
         Parameters
         ----------
@@ -81,8 +135,12 @@ class IdGenerator:
         """
         if category is None:
             self._counters.clear()
-        elif category in self._counters:
-            del self._counters[category]
+            self._registry.clear()
+        else:
+            if category in self._counters:
+                del self._counters[category]
+            if category in self._registry:
+                del self._registry[category]
 
 
 class KeywordsBackendBase:
@@ -229,6 +287,52 @@ class KeywordsBackendBase:
             The next available ID.
         """
         return self._id_generator.next_id(category)
+
+    def register_id(self, category: str, id_value: int, obj: Any) -> None:
+        """Register an object with its assigned ID for later lookup.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID (e.g., "curve", "part", "material").
+        id_value : int
+            The ID value assigned to the object.
+        obj : Any
+            The object (keyword instance or high-level API object) to register.
+        """
+        self._id_generator.register(category, id_value, obj)
+
+    def get_registered(self, category: str, id_value: int) -> Optional[Any]:
+        """Get a registered object by category and ID.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+        id_value : int
+            The ID value to look up.
+
+        Returns
+        -------
+        Any or None
+            The registered object, or None if not found.
+        """
+        return self._id_generator.get(category, id_value)
+
+    def get_all_registered(self, category: str) -> Dict[int, Any]:
+        """Get all registered objects for a category.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+
+        Returns
+        -------
+        Dict[int, Any]
+            Dictionary mapping IDs to registered objects.
+        """
+        return self._id_generator.get_all(category)
 
     def ensure_min_id(self, category: str, min_id: int) -> None:
         """Ensure the ID counter is at least the given value.

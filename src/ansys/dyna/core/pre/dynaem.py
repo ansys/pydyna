@@ -404,7 +404,7 @@ class DynaEM(DynaBase):
             logging.info("EM Output Created...")
             return ret
 
-    def create_isopotential(self, setid, settype=2, isoid=None, rdltype=0):
+    def create_isopotential(self, setid, settype=2, rdltype=0):
         """Create an EM_ISOPOTENTIAL keyword.
 
         Parameters
@@ -415,8 +415,6 @@ class DynaEM(DynaBase):
             Type of set. Default is 2 (node set).
             - 1: Segment set
             - 2: Node set
-        isoid : int, optional
-            Isopotential ID. If not provided, auto-generates one.
         rdltype : int, optional
             Randles layer type. Default is 0.
 
@@ -426,14 +424,14 @@ class DynaEM(DynaBase):
             The isopotential ID.
         """
         if hasattr(self.stub, "_backend"):
-            # Keywords backend - use direct creation with optional isoid
-            return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype, isoid=isoid)
+            # Keywords backend - use direct creation
+            return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype)
         else:
             # gRPC stub
             ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=setid, rdltype=rdltype))
             return ret.id
 
-    def create_isopotential_connect(self, contype, isoid1, isoid2, value=0.0, lcid=0, conid=None):
+    def create_isopotential_connect(self, contype, isoid1, isoid2, value=0.0, lcid=0):
         """Create an EM_ISOPOTENTIAL_CONNECT keyword.
 
         Parameters
@@ -450,25 +448,27 @@ class DynaEM(DynaBase):
             Second isopotential ID.
         value : float, optional
             Value depending on contype (resistance, current, or voltage). Default is 0.0.
-        lcid : int, optional
-            Load curve ID for contype=4. Default is 0.
-        conid : int, optional
-            Connection ID. If not provided, auto-generates one.
+        lcid : int or Curve, optional
+            Load curve ID for contype=4. Can be an integer ID or a Curve object
+            (will extract its .id attribute). Default is 0.
 
         Returns
         -------
         int
             The connection ID.
         """
+        # Support both integer IDs and Curve objects
+        curve_id = lcid.id if hasattr(lcid, "id") else lcid
+
         if hasattr(self.stub, "_backend"):
-            # Keywords backend - use direct creation with optional conid
+            # Keywords backend - use direct creation
             return self.stub._backend.create_em_isopotential_connect(
-                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=lcid, conid=conid
+                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=curve_id
             )
         else:
             # gRPC stub
             ret = self.stub.CreateEMIsopotentialConnect(
-                EMIsopotentialConnectRequest(contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=lcid)
+                EMIsopotentialConnectRequest(contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=curve_id)
             )
             return ret.id
 
@@ -612,15 +612,19 @@ class DynaEM(DynaBase):
             - EQ.1: Permeability defined by a B function of the H curve
             - EQ.2: Permeability defined by an H function of the B curve
 
-        lcid : int
-            Load curve ID.
+        lcid : int or Curve
+            Load curve ID. Can be an integer ID or a Curve object
+            (will extract its .id attribute).
 
         Returns
         -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid))
+        # Support both integer IDs and Curve objects
+        curve_id = lcid.id if hasattr(lcid, "id") else lcid
+
+        ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=curve_id))
         logging.info("EM EOS Permeability Created...")
         return ret
 
@@ -798,8 +802,9 @@ class DynaEM(DynaBase):
         ----------
         eosid : int
             EOS ID.
-        lcid : int
-            Load curve ID for conductivity vs temperature.
+        lcid : int or Curve
+            Load curve ID for conductivity vs temperature. Can be an integer ID
+            or a Curve object (will extract its .id attribute).
 
         Returns
         -------
@@ -810,8 +815,11 @@ class DynaEM(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
+        # Support both integer IDs and Curve objects
+        curve_id = lcid.id if hasattr(lcid, "id") else lcid
+
         if hasattr(self.stub, "_backend"):
-            self.stub._backend.create_em_eos_tabulated1(eosid=eosid, lcid=lcid)
+            self.stub._backend.create_em_eos_tabulated1(eosid=eosid, lcid=curve_id)
             logging.info("EM EOS Tabulated1 Created...")
             return True
         else:

@@ -2614,14 +2614,15 @@ class TestReferenceFileComparison:
             emobj.set_init_temperature(temp=25)
 
             # DEFINE_CURVE 1 for max timestep - using high-level API
-            curve1 = Curve(x=[0.0, 9.9999997474e-5], y=[0.01, 0.01], lcid=1)
+            # Auto-generate curve ID by not specifying lcid
+            curve1 = Curve(x=[0.0, 9.9999997474e-5], y=[0.01, 0.01])
             curve1.create(solution.stub)
 
             # DEFINE_CURVE 2 for EOS (conductivity vs temperature) - using high-level API
+            # Auto-generate curve ID by not specifying lcid
             curve2 = Curve(
                 x=[0.0, 25.0, 50.0, 100.0],
                 y=[4000000.0, 4000000.0, 400000.0, 400000.0],
-                lcid=2,
             )
             curve2.create(solution.stub)
 
@@ -2642,8 +2643,8 @@ class TestReferenceFileComparison:
                 reltol=0.001, maxite=1000, stype=1, precon=1, uselast=1, ncyclfem=3
             )
 
-            # EM_EOS_TABULATED1 - using high-level API
-            emobj.create_em_eos_tabulated1(eosid=1, lcid=2)
+            # EM_EOS_TABULATED1 - using high-level API with Curve object instead of lcid
+            emobj.create_em_eos_tabulated1(eosid=1, lcid=curve2)
 
             # EM_MAT_001 for each part - using high-level API
             # Material 1 and 2: mtype=2 (conductor), sigma=6e7, no eos

@@ -37,7 +37,6 @@ class MiscKeywordsMixin:
         abscissa: List[float] = None,
         ordinate: List[float] = None,
         title: str = "",
-        lcid: int = None,
     ) -> int:
         """Create a DEFINE_CURVE keyword.
 
@@ -51,8 +50,6 @@ class MiscKeywordsMixin:
             Y values (dependent variable).
         title : str
             Curve title.
-        lcid : int, optional
-            Curve ID. If not provided, auto-generates one.
 
         Returns
         -------
@@ -68,8 +65,7 @@ class MiscKeywordsMixin:
         if ordinate is None:
             ordinate = []
 
-        # Treat lcid=0 as "not specified" since 0 is the protobuf default
-        curve_id = lcid if lcid else self.next_id("curve")
+        curve_id = self.next_id("curve")
 
         kw = keywords.DefineCurve()
         kw.lcid = curve_id
@@ -82,6 +78,8 @@ class MiscKeywordsMixin:
             kw.curves = pd.DataFrame(curve_data, columns=["a1", "o1"])
 
         self._deck.append(kw)
+        # Register the keyword for later lookup by ID
+        self.register_id("curve", curve_id, kw)
         logger.debug(f"Created DEFINE_CURVE with id={curve_id}")
         return curve_id
 
@@ -121,6 +119,8 @@ class MiscKeywordsMixin:
             kw.title = title
 
         self._deck.append(kw)
+        # Register the keyword for later lookup by ID
+        self.register_id("curve", curve_id, kw)
         logger.info(f"Created DEFINE_CURVE_FUNCTION keyword with lcid={curve_id}")
 
         return curve_id
@@ -410,15 +410,12 @@ class MiscKeywordsMixin:
 
     def create_define_transformation(
         self,
-        tranid: int = None,
         transforms: List[dict] = None,
     ) -> int:
         """Create a DEFINE_TRANSFORMATION keyword.
 
         Parameters
         ----------
-        tranid : int, optional
-            Transformation ID. If not provided, auto-generates one.
         transforms : List[dict]
             List of transformation operations. Each dict should have:
             - option: str (e.g., "MIRROR", "SCALE", "ROTATE", "TRANSL")
@@ -436,7 +433,7 @@ class MiscKeywordsMixin:
         if transforms is None:
             transforms = []
 
-        trans_id = tranid if tranid else self.next_id("transformation")
+        trans_id = self.next_id("transformation")
 
         logger.debug(f"Creating DEFINE_TRANSFORMATION: tranid={trans_id}")
 
@@ -573,7 +570,6 @@ class MiscKeywordsMixin:
         xh: float = 0.0,
         yh: float = 0.0,
         zh: float = 0.0,
-        rwid: int = None,
     ) -> int:
         """Create a RIGIDWALL_PLANAR_ID keyword.
 
@@ -599,8 +595,6 @@ class MiscKeywordsMixin:
             Y-coordinate of head of normal vector.
         zh : float
             Z-coordinate of head of normal vector.
-        rwid : int, optional
-            Rigidwall ID. If not provided, auto-generates one.
 
         Returns
         -------
@@ -609,7 +603,7 @@ class MiscKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        wall_id = rwid if rwid else self.next_id("rigidwall")
+        wall_id = self.next_id("rigidwall")
 
         logger.debug(f"Creating RIGIDWALL_PLANAR_ID: id={wall_id}")
 

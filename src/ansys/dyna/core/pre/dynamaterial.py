@@ -515,16 +515,13 @@ class MatElastic(MatAdditional):
         Young's modulus (E).
     poisson_ratio : float, optional
         Poisson's ratio (PR). Default is 0.3.
-    mid : int, optional
-        Material ID. If not provided, auto-assigned by the backend.
     """
 
-    def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3, mid=None):
+    def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
         MatAdditional.__init__(self)
         self.ro = mass_density
         self.e = young_modulus
         self.pr = poisson_ratio
-        self.mid = mid
 
     def create(self, stub=None):
         """Create an elastic material.
@@ -547,7 +544,7 @@ class MatElastic(MatAdditional):
         # Check if using keywords backend
         if hasattr(stub, "_backend"):
             backend = stub._backend
-            mid = self.mid if self.mid is not None else backend.next_id("material")
+            mid = backend.next_id("material")
             backend.create_mat_elastic(
                 mid=mid,
                 ro=self.ro,
@@ -797,8 +794,6 @@ class MatThermalIsotropic:
         Specific heat. The default is ``0``.
     conductivity : float, optional
         Thermal conductivity. The default is ``0``.
-    tmid : int, optional
-        Thermal material ID. If not provided, auto-assigned by the backend.
     """
 
     def __init__(
@@ -808,14 +803,12 @@ class MatThermalIsotropic:
         generation_rate_multiplier=0,
         specific_heat=0,
         conductivity=0,
-        tmid=None,
     ):
         self.tro = density
         self.tgrlc = generation_rate
         self.tgmult = generation_rate_multiplier
         self.hc = specific_heat
         self.tc = conductivity
-        self.tmid = tmid
         self.material_id = None
 
     def create(self, stub=None):
@@ -839,7 +832,7 @@ class MatThermalIsotropic:
         # Check if using keywords backend
         if hasattr(stub, "_backend"):
             backend = stub._backend
-            tmid = self.tmid if self.tmid is not None else backend.next_id("thermal_material")
+            tmid = backend.next_id("thermal_material")
             backend.create_mat_thermal_isotropic(
                 tmid=tmid,
                 ro=self.tro,
@@ -939,8 +932,6 @@ class MatPiecewiseLinearPlasticity:
     failure_strain : float, optional
         Effective plastic strain at failure (FAIL). Default is 0.0
         (no failure based on plastic strain).
-    mid : int, optional
-        Material ID. If not provided, auto-assigned by the backend.
     """
 
     def __init__(
@@ -951,7 +942,6 @@ class MatPiecewiseLinearPlasticity:
         yield_stress=0,
         tangent_modulus=0,
         failure_strain=0.0,
-        mid=None,
     ):
         self.ro = mass_density
         self.e = young_modulus
@@ -959,7 +949,6 @@ class MatPiecewiseLinearPlasticity:
         self.sigy = yield_stress
         self.etan = tangent_modulus
         self.fail = failure_strain
-        self.mid = mid
 
     def create(self, stub=None):
         """Create a piecewise linear plasticity material.
@@ -982,7 +971,7 @@ class MatPiecewiseLinearPlasticity:
         # Check if using keywords backend
         if hasattr(stub, "_backend"):
             backend = stub._backend
-            mid = self.mid if self.mid is not None else backend.next_id("material")
+            mid = backend.next_id("material")
             backend.create_mat_piecewise_linear_plasticity(
                 mid=mid,
                 ro=self.ro,
