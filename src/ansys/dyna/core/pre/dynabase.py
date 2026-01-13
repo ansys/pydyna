@@ -418,6 +418,11 @@ class DynaBase:
         """Get the stub of the ``DynaBase`` object."""
         return DynaBase.stub
 
+    @property
+    def no_grpc(self):
+        """Check if running without gRPC (using keywords backend)."""
+        return hasattr(self.stub, "_backend")
+
     def set_parent(self, parent=None):
         self._parent = parent
         model = self._parent.model
@@ -2167,6 +2172,11 @@ class ImplicitAnalysis:
         self.nlnorm = 0.0
         self.stub = DynaBase.get_stub()
 
+    @property
+    def no_grpc(self):
+        """Check if running without gRPC (using keywords backend)."""
+        return hasattr(self.stub, "_backend")
+
     def set_initial_timestep_size(self, size=0):
         """Define the initial time step size."""
         self.defined = True
@@ -2438,7 +2448,7 @@ class ImplicitAnalysis:
             self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
         if self.defined_dynamic:
             # Check if using keywords backend (has _backend attribute) vs gRPC stub
-            if hasattr(self.stub, "_backend"):
+            if self.no_grpc:
                 # Keywords backend - pass all extended parameters
                 request = type(
                     "Request",
@@ -2475,7 +2485,7 @@ class ImplicitAnalysis:
             self.stub.CreateControlImplicitEigenvalue(request)
         if self.defined_solution:
             # Check if using keywords backend (has _backend attribute) vs gRPC stub
-            if hasattr(self.stub, "_backend"):
+            if self.no_grpc:
                 # Keywords backend - pass all extended parameters
                 request = type(
                     "Request",

@@ -77,7 +77,7 @@ class DynaIGA(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             from ansys.dyna.core.keywords import keywords
 
             kw = keywords.ControlTimestep()
@@ -172,7 +172,7 @@ class DynaIGA(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             from ansys.dyna.core.keywords import keywords
 
             kw = keywords.RigidwallGeometricCylinderDisplay()
@@ -286,7 +286,7 @@ class DynaIGA(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             from ansys.dyna.core.keywords import keywords
 
             kw = keywords.RigidwallGeometricCylinderMotionDisplay()

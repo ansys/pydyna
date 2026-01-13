@@ -96,7 +96,7 @@ class DynaNVH(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_frequency_domain_frf(
                 n1=n1,
                 n1typ=n1typ,
@@ -175,7 +175,7 @@ class DynaNVH(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_boundary_spc_set(
                 nsid=nsid,
                 cid=cid,
@@ -222,7 +222,7 @@ class DynaNVH(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_database_glstat(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
         else:
             from ansys.dyna.core.pre.dynamech_pb2 import DatabaseGlstatRequest
@@ -249,7 +249,7 @@ class DynaNVH(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_database_matsum(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
         else:
             from ansys.dyna.core.pre.dynamech_pb2 import DatabaseMatsumRequest
@@ -272,7 +272,7 @@ class DynaNVH(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_section_solid(secid=secid, elform=elform)
         else:
             from ansys.dyna.core.pre.dynamech_pb2 import SectionSolidRequest

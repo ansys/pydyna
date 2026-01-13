@@ -65,7 +65,7 @@ class DynaDEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Use keywords backend
             ret = self.stub._backend.create_control_discrete_element(
                 ndamp=ndamp,
@@ -121,7 +121,7 @@ class DynaDEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Use keywords backend - create keyword directly
             from ansys.dyna.core.keywords import keywords
 
@@ -208,7 +208,7 @@ class DEMAnalysis(BaseObj):
     def create(self):
         """Create a DEM analysis."""
         if self.defined_des:
-            if hasattr(self.stub, "_backend"):
+            if self.no_grpc:
                 # Use keywords backend
                 self.stub._backend.create_control_discrete_element(
                     ndamp=self.ndamp,

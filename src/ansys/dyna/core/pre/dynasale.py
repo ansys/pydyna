@@ -276,7 +276,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_mat_vacuum(mid=mid, rho=rho)
         else:
             logging.warning("create_mat_vacuum is only available with the keywords backend")
@@ -305,7 +305,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_mat_null(mid=mid, ro=ro, pc=pc, mu=mu)
         else:
             logging.warning("create_mat_null is only available with the keywords backend")
@@ -334,7 +334,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_mat_high_explosive_burn(mid=mid, ro=ro, d=d, pcj=pcj)
         else:
             logging.warning("create_mat_high_explosive_burn is only available with the keywords backend")
@@ -415,7 +415,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_mat_johnson_cook(
                 mid=mid,
                 ro=ro,
@@ -469,7 +469,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_eos_linear_polynomial(
                 eosid=eosid, c0=c0, c1=c1, c2=c2, c3=c3, c4=c4, c5=c5, c6=c6, e0=e0, v0=v0
             )
@@ -508,7 +508,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_eos_jwl(eosid=eosid, a=a, b=b, r1=r1, r2=r2, omeg=omeg, e0=e0, vo=vo)
         else:
             logging.warning("create_eos_jwl is only available with the keywords backend")
@@ -543,7 +543,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             return self.stub._backend.create_eos_gruneisen(
                 eosid=eosid, c=c, s1=s1, s2=s2, s3=s3, gamao=gamao, a=a, e0=e0, v0=v0
             )
@@ -578,7 +578,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_initial_detonation(pid=pid, x=x, y=y, z=z, lt=lt, mmgset=mmgset)
             return True
         else:
@@ -618,7 +618,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_ale_structured_mesh(
                 mshid=mshid,
                 dpid=dpid,
@@ -659,7 +659,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_ale_structured_mesh_control_points(
                 cpid=cpid, icase=icase, sfo=sfo, offo=offo, points=points or []
             )
@@ -686,7 +686,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_ale_structured_multi_material_group(groups=groups or [])
             return True
         else:
@@ -720,7 +720,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_ale_structured_mesh_volume_filling(
                 mshid=mshid, ammgto=ammgto, nsample=nsample, geom=geom, in_out=in_out, e1=e1
             )
@@ -756,7 +756,7 @@ class DynaSALE(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_ale_structured_mesh_refine(
                 mshid=mshid, ityp=ityp, idir=idir, n1=n1, n2=n2, ntimes=ntimes
             )

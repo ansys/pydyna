@@ -94,7 +94,7 @@ class DynaEM(DynaBase):
             ``True`` when successful, ``False`` when failed.
         """
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - pass all parameters
             self.stub._backend.create_em_control(
                 emsol=emsol,
@@ -147,7 +147,7 @@ class DynaEM(DynaBase):
             ``True`` when successful, ``False`` when failed.
         """
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - pass all parameters
             self.stub._backend.create_em_timestep(
                 tstype=tstype,
@@ -274,7 +274,7 @@ class DynaEM(DynaBase):
             ``True`` when successful, ``False`` when failed.
         """
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - pass all parameters including eosid
             self.stub._backend.create_em_mat_001(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid)
             logging.info("EM Material 001 Created...")
@@ -393,7 +393,7 @@ class DynaEM(DynaBase):
             ``True`` when successful, ``False`` when failed.
         """
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend
             self.stub._backend.create_em_output(mats=mats, matf=matf, sols=sols, solf=solf)
             logging.info("EM Output Created...")
@@ -425,7 +425,7 @@ class DynaEM(DynaBase):
         int
             The isopotential ID.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - use direct creation
             return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype, isoid=isoid)
         else:
@@ -464,7 +464,7 @@ class DynaEM(DynaBase):
         # Support both integer IDs and Curve objects
         curve_id = lcid.id if hasattr(lcid, "id") else lcid
 
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - use direct creation
             return self.stub._backend.create_em_isopotential_connect(
                 contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=curve_id, conid=conid
@@ -557,7 +557,7 @@ class DynaEM(DynaBase):
             ``True`` when successful, ``False`` when failed.
         """
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend
             self.stub._backend.create_em_database_globalenergy(outlv=outlv)
             logging.info("EM Database Global Energy Created...")
@@ -663,7 +663,7 @@ class DynaEM(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_em_solver_bem(
                 stype=stype,
                 reltol=reltol,
@@ -709,7 +709,7 @@ class DynaEM(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_em_solver_fem(
                 stype=stype,
                 reltol=reltol,
@@ -743,7 +743,7 @@ class DynaEM(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_em_solver_bemmat(matid=matid, reltol=reltol)
             logging.info(f"EM Solver BEMMAT for material {matid} Created...")
             return True
@@ -782,7 +782,7 @@ class DynaEM(DynaBase):
         ----
         This method requires the keywords backend. It is not available with the gRPC stub.
         """
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_em_control_contact(
                 emct=emct,
                 cconly=cconly,
@@ -822,7 +822,7 @@ class DynaEM(DynaBase):
         # Support both integer IDs and Curve objects
         curve_id = lcid.id if hasattr(lcid, "id") else lcid
 
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             self.stub._backend.create_em_eos_tabulated1(eosid=eosid, lcid=curve_id)
             logging.info("EM EOS Tabulated1 Created...")
             return True
@@ -886,6 +886,11 @@ class EMAnalysis:
         self.defined_bem = False
         self.defined_fem = False
 
+    @property
+    def no_grpc(self):
+        """Check if running without gRPC (using keywords backend)."""
+        return hasattr(self.stub, "_backend")
+
     def set_timestep(self, timestep):
         """Set the EM time step and its evolution."""
         self.defined = True
@@ -932,7 +937,7 @@ class EMAnalysis:
         if self.defined == False:
             return
         # Check if using keywords backend (has _backend attribute) vs gRPC stub
-        if hasattr(self.stub, "_backend"):
+        if self.no_grpc:
             # Keywords backend - can pass nperio
             request = type(
                 "EMControlReq",
