@@ -3397,7 +3397,7 @@ class TestReferenceFileComparison:
     def test_iga(self, initial_files_dir, pre_reference_dir):
         """test_iga.k - Isogeometric analysis with rigidwall cylinders."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
-        from ansys.dyna.core.keywords import keywords
+        from ansys.dyna.core.pre.dynaiga import DynaIGA
         from ansys.dyna.core.pre.dynabase import Curve
 
         initial_file = os.path.join(initial_files_dir, "test_iga.k")
@@ -3410,93 +3410,42 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # CONTROL_CONTACT with ignore=1, igactc=1
-            kw_contact = keywords.ControlContact()
-            kw_contact.rwpnal = 1.0
-            kw_contact.orien = 1
-            kw_contact.ignore = 1
-            kw_contact.igactc = 1
-            solution._backend._deck.append(kw_contact)
+            # Create DynaIGA object - using high-level API
+            # Note: DynaIGA.save_file() automatically creates CONTROL_CONTACT with
+            # rwpnal=1.0, ignore=1, igactc=1, so we don't need to call it explicitly
+            iga = DynaIGA()
+            solution.add(iga)
 
-            # CONTROL_TIMESTEP with dt2ms=-4e-4
-            kw_timestep = keywords.ControlTimestep()
-            kw_timestep.tssfac = 0.9
-            kw_timestep.dt2ms = -4.0e-4
-            solution._backend._deck.append(kw_timestep)
+            # CONTROL_TIMESTEP with dt2ms=-4e-4 - using high-level API
+            iga.create_control_timestep(tssfac=0.9, dt2ms=-4.0e-4)
 
-            # RIGIDWALL_GEOMETRIC_CYLINDER_DISPLAY - first cylinder
-            kw_rw1 = keywords.RigidwallGeometricCylinderDisplay()
-            kw_rw1.nsid = 0
-            kw_rw1.nsidex = 0
-            kw_rw1.boxid = 0
-            kw_rw1.birth = 0.0
-            kw_rw1.death = 0.0
-            kw_rw1.xt = 2472.37
-            kw_rw1.yt = -600.0
-            kw_rw1.zt = 1270.98
-            kw_rw1.xh = 2472.37
-            kw_rw1.yh = -600.0
-            kw_rw1.zh = 2668.53
-            kw_rw1.fric = 0.0
-            kw_rw1.radcyl = 100.0
-            kw_rw1.lencyl = 1000.0
-            kw_rw1.nsegs = 0
-            kw_rw1.pid = 0
-            kw_rw1.ro = 1.0e-9
-            kw_rw1.e = 1.0e-4
-            kw_rw1.pr = 0.3
-            solution._backend._deck.append(kw_rw1)
+            # RIGIDWALL_GEOMETRIC_CYLINDER_DISPLAY - first cylinder - using high-level API
+            iga.create_rigidwall_cylinder(
+                xt=2472.37, yt=-600.0, zt=1270.98,
+                xh=2472.37, yh=-600.0, zh=2668.53,
+                fric=0.0, radcyl=100.0, lencyl=1000.0,
+                nsid=0, nsidex=0, boxid=0, birth=0.0, death=0.0, nsegs=0,
+                pid=0, ro=1.0e-9, e=1.0e-4, pr=0.3,
+            )
 
-            # RIGIDWALL_GEOMETRIC_CYLINDER_DISPLAY - second cylinder
-            kw_rw2 = keywords.RigidwallGeometricCylinderDisplay()
-            kw_rw2.nsid = 0
-            kw_rw2.nsidex = 0
-            kw_rw2.boxid = 0
-            kw_rw2.birth = 0.0
-            kw_rw2.death = 0.0
-            kw_rw2.xt = 3580.25
-            kw_rw2.yt = -600.0
-            kw_rw2.zt = 1261.37
-            kw_rw2.xh = 3580.25
-            kw_rw2.yh = -600.0
-            kw_rw2.zh = 3130.49
-            kw_rw2.fric = 0.0
-            kw_rw2.radcyl = 100.0
-            kw_rw2.lencyl = 1000.0
-            kw_rw2.nsegs = 0
-            kw_rw2.pid = 0
-            kw_rw2.ro = 1.0e-9
-            kw_rw2.e = 1.0e-4
-            kw_rw2.pr = 0.3
-            solution._backend._deck.append(kw_rw2)
+            # RIGIDWALL_GEOMETRIC_CYLINDER_DISPLAY - second cylinder - using high-level API
+            iga.create_rigidwall_cylinder(
+                xt=3580.25, yt=-600.0, zt=1261.37,
+                xh=3580.25, yh=-600.0, zh=3130.49,
+                fric=0.0, radcyl=100.0, lencyl=1000.0,
+                nsid=0, nsidex=0, boxid=0, birth=0.0, death=0.0, nsegs=0,
+                pid=0, ro=1.0e-9, e=1.0e-4, pr=0.3,
+            )
 
-            # RIGIDWALL_GEOMETRIC_CYLINDER_MOTION_DISPLAY - third cylinder with motion
-            kw_rw3 = keywords.RigidwallGeometricCylinderMotionDisplay()
-            kw_rw3.nsid = 0
-            kw_rw3.nsidex = 0
-            kw_rw3.boxid = 0
-            kw_rw3.birth = 0.0
-            kw_rw3.death = 0.0
-            kw_rw3.xt = 3090.59
-            kw_rw3.yt = -955.35
-            kw_rw3.zt = 1299.42
-            kw_rw3.xh = 3090.59
-            kw_rw3.yh = -955.35
-            kw_rw3.zh = 2958.43
-            kw_rw3.fric = 0.0
-            kw_rw3.radcyl = 100.0
-            kw_rw3.lencyl = 1000.0
-            kw_rw3.nsegs = 0
-            kw_rw3.lcid = 1
-            kw_rw3.opt = 0
-            kw_rw3.vx = 0.0
-            kw_rw3.vy = 1.0
-            kw_rw3.vz = 0.0
-            kw_rw3.pid = 0
-            kw_rw3.ro = 1.0e-9
-            kw_rw3.e = 1.0e-4
-            kw_rw3.pr = 0.3
-            solution._backend._deck.append(kw_rw3)
+            # RIGIDWALL_GEOMETRIC_CYLINDER_MOTION_DISPLAY - third cylinder with motion - using high-level API
+            iga.create_rigidwall_cylinder_motion(
+                xt=3090.59, yt=-955.35, zt=1299.42,
+                xh=3090.59, yh=-955.35, zh=2958.43,
+                fric=0.0, radcyl=100.0, lencyl=1000.0,
+                lcid=1, opt=0, vx=0.0, vy=1.0, vz=0.0,
+                nsid=0, nsidex=0, boxid=0, birth=0.0, death=0.0, nsegs=0,
+                pid=0, ro=1.0e-9, e=1.0e-4, pr=0.3,
+            )
 
             # DEFINE_CURVE for motion - using high-level API
             motion_curve = Curve(sfo=1.0, x=[0.0, 100.0], y=[20.0, 20.0])
