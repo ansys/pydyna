@@ -2145,6 +2145,7 @@ class TestReferenceFileComparison:
                 thickness3=1.0,
                 thickness4=1.0,
             )
+            shell_section.create(solution.stub)
 
             # MAT_RIGID (mid=1, ro=1.2, e=2e11, pr=0.3) - using high-level API
             mat_rigid = MatRigid(
@@ -2260,10 +2261,9 @@ class TestReferenceFileComparison:
             # Set termination time
             solution.set_termination(termination_time=40.0)
 
-            # CONTROL_TIMESTEP (for weak coupling)
-            solution.stub.CreateControlTimestep(
-                type("Request", (), {"tssfac": 0.9, "lctm": 1})()
-            )
+            # CONTROL_TIMESTEP (for weak coupling) - using high-level API
+            # lctm=1 references curve 1 which is created below
+            icfd.set_timestep(tssfac=0.9, max_timestep=1)
 
             # Database output
             solution.create_database_binary(dt=0.2)
@@ -2297,6 +2297,7 @@ class TestReferenceFileComparison:
                 thickness3=1.0,
                 thickness4=1.0,
             )
+            shell_section.create(solution.stub)
 
             # MAT_RIGID (mid=1, ro=1000.0, e=2e11, pr=0.3) - using high-level API
             mat_rigid = MatRigid(
@@ -2548,7 +2549,8 @@ class TestReferenceFileComparison:
         """test_resistive_heating.k - EM resistive heating 3D."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
-        from ansys.dyna.core.pre.dynabase import Curve, NodeSet
+        from ansys.dyna.core.pre.dynabase import Curve, NodeSet, SolidSection
+        from ansys.dyna.core.pre.dynamaterial import MatElastic
         from ansys.dyna.core.pre.dynaem import DynaEM
 
         initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating.k")
@@ -2598,17 +2600,23 @@ class TestReferenceFileComparison:
                 nsid=1, lcid=0, cmult=50.0, loc=0
             )
 
-            # PART 1 with SECTION_SOLID and MAT_ELASTIC (material 3, thermal 3)
-            solution._backend.create_section_solid(secid=3, elform=1)
-            solution._backend.create_mat_elastic(mid=3, ro=7000.0, e=1e11, pr=0.33)
+            # PART 1 with SECTION_SOLID and MAT_ELASTIC (material 3, thermal 3) - using high-level API
+            section3 = SolidSection(element_formulation=1, secid=3)
+            section3.create(solution.stub)
+            mat3 = MatElastic(mass_density=7000.0, young_modulus=1e11, poisson_ratio=0.33, mid=3)
+            mat3.create(solution.stub)
 
-            # PART 2 with SECTION_SOLID and MAT_ELASTIC (material 1, thermal 1)
-            solution._backend.create_section_solid(secid=1, elform=1)
-            solution._backend.create_mat_elastic(mid=1, ro=8000.0, e=1e11, pr=0.33)
+            # PART 2 with SECTION_SOLID and MAT_ELASTIC (material 1, thermal 1) - using high-level API
+            section1 = SolidSection(element_formulation=1, secid=1)
+            section1.create(solution.stub)
+            mat1 = MatElastic(mass_density=8000.0, young_modulus=1e11, poisson_ratio=0.33, mid=1)
+            mat1.create(solution.stub)
 
-            # PART 3 with SECTION_SOLID and MAT_ELASTIC (material 2, thermal 2)
-            solution._backend.create_section_solid(secid=2, elform=1)
-            solution._backend.create_mat_elastic(mid=2, ro=8000.0, e=1e11, pr=0.33)
+            # PART 3 with SECTION_SOLID and MAT_ELASTIC (material 2, thermal 2) - using high-level API
+            section2 = SolidSection(element_formulation=1, secid=2)
+            section2.create(solution.stub)
+            mat2 = MatElastic(mass_density=8000.0, young_modulus=1e11, poisson_ratio=0.33, mid=2)
+            mat2.create(solution.stub)
 
             # MAT_THERMAL_ISOTROPIC materials
             solution._backend.create_mat_thermal_isotropic(
@@ -3314,7 +3322,8 @@ class TestReferenceFileComparison:
             dbase.set_timestep(tssfac=0.8)
 
             # Create section and material for DEM particles using high-level API
-            SolidSection(element_formulation=0)
+            solid_section = SolidSection(element_formulation=0)
+            solid_section.create(dbase.stub)
             MatRigidDiscrete(mass_density=1000.0, young_modulus=10000.0, poisson_ratio=0.3).create(dbase.stub)
 
             icfd = DynaICFD()
@@ -4209,7 +4218,8 @@ class TestReferenceFileComparison:
     def test_frf_solid(self, initial_files_dir, pre_reference_dir):
         """test_frf_solid.k - NVH FRF analysis with implicit eigenvalue solver."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
-        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, EnergyFlag, NodeSet
+        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, EnergyFlag, NodeSet, OutputEcho, SolidSection
+        from ansys.dyna.core.pre.dynamaterial import MatPiecewiseLinearPlasticity
         from ansys.dyna.core.pre.dynanvh import DynaNVH
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_solid.k")
@@ -4263,8 +4273,13 @@ class TestReferenceFileComparison:
             )
             nvh.implicitanalysis = implicit
 
-            # Use backend directly to set ikedit and iflush
-            solution._backend.create_control_output(npopt=1, neecho=3, ikedit=0, iflush=0)
+            # CONTROL_OUTPUT with ikedit=0, iflush=0 - using high-level API
+            nvh.set_output(
+                print_suppression_d3hsp=True,
+                print_suppression_echo=OutputEcho.SUPPRESSED_NODAL_AND_ELEMENT_PRINTING,
+                edit_frequency=0,
+                flush_frequency=0,
+            )
 
             solution.set_termination(termination_time=1.0)
 
@@ -4293,20 +4308,34 @@ class TestReferenceFileComparison:
             )
 
             # Section and Material for lower_post (Part 4) - using high-level API
-            nvh.create_section_solid(secid=1, elform=18)
+            section1 = SolidSection(element_formulation=18, secid=1)
+            section1.create(solution.stub)
 
-            # Use backend directly to set fail=0.0
-            solution._backend.create_mat_piecewise_linear_plasticity(
-                mid=1, ro=4.99e-7, e=11.37, pr=0.32, sigy=0.0468, etan=0.0, fail=0.0
+            mat1 = MatPiecewiseLinearPlasticity(
+                mass_density=4.99e-7,
+                young_modulus=11.37,
+                poisson_ratio=0.32,
+                yield_stress=0.0468,
+                tangent_modulus=0.0,
+                failure_strain=0.0,
+                mid=1,
             )
+            mat1.create(solution.stub)
 
             # Section and Material for upper_post (Part 5) - using high-level API
-            nvh.create_section_solid(secid=2, elform=18)
+            section2 = SolidSection(element_formulation=18, secid=2)
+            section2.create(solution.stub)
 
-            # Use backend directly to set fail=0.0
-            solution._backend.create_mat_piecewise_linear_plasticity(
-                mid=2, ro=4.99e-7, e=110.37, pr=0.32, sigy=0.0468, etan=0.0, fail=0.0
+            mat2 = MatPiecewiseLinearPlasticity(
+                mass_density=4.99e-7,
+                young_modulus=110.37,
+                poisson_ratio=0.32,
+                yield_stress=0.0468,
+                tangent_modulus=0.0,
+                failure_strain=0.0,
+                mid=2,
             )
+            mat2.create(solution.stub)
 
             # Update PARTs to reference sections and materials by directly modifying the deck
             from ansys.dyna.core.keywords import keywords

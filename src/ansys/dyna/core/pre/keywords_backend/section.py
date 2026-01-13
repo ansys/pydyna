@@ -71,7 +71,9 @@ class SectionKeywordsMixin:
         kw.elform = elform
         kw.shrf = shrf
         kw.nip = nip
-        kw.propt = propt
+        # propt=0 means "use default" in the stub API, but SectionShell
+        # only accepts {1, 2, 3, None}. Convert 0 to None (which also uses default).
+        kw.propt = propt if propt in [1, 2, 3] else None
         kw.t1 = t1
         kw.t2 = t2
         kw.t3 = t3

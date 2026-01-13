@@ -406,18 +406,23 @@ class DynaBase:
             The default is ``0``.
         timestep_size_for_mass_scaled : float, optional
             Time step size for mass scaled solutions. The default is ``0.0``.
-        max_timestep : Curve, optional
-            Load curve that limits the maximum time step size. The default
-            is ``None``.
+        max_timestep : Curve or int, optional
+            Load curve that limits the maximum time step size. Can be a Curve
+            object (which will be created) or an integer curve ID referencing
+            an existing curve. The default is ``None`` (no curve limit).
 
         Returns
         -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        if max_timestep == None:
+        if max_timestep is None:
             cid = 0
+        elif isinstance(max_timestep, int):
+            # Direct curve ID reference
+            cid = max_timestep
         else:
+            # Curve object - create it
             cid = max_timestep.create(self.stub)
         if self._backend is not None:
             # Use keywords backend directly
@@ -1803,6 +1808,7 @@ class ShellPart(Part):
             thickness3=self.thickness,
             thickness4=self.thickness,
         )
+        sec.create(self.stub)
         self.secid = sec.id
         if self.hourglasstype > 0:
             ret = self.stub.CreateHourglass(

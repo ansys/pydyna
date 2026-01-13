@@ -867,12 +867,21 @@ class MatPiecewiseLinearPlasticity:
 
     Parameters
     ----------
-    mass_density :
-    young_modulus :
-    poisson_ratio :
-    yield_stress :
-    tangent_modulus :
-
+    mass_density : float
+        Mass density (RO).
+    young_modulus : float
+        Young's modulus (E).
+    poisson_ratio : float, optional
+        Poisson's ratio (PR). Default is 0.3.
+    yield_stress : float, optional
+        Yield stress (SIGY). Default is 0.
+    tangent_modulus : float, optional
+        Tangent modulus (ETAN). Default is 0.
+    failure_strain : float, optional
+        Effective plastic strain at failure (FAIL). Default is 0.0
+        (no failure based on plastic strain).
+    mid : int, optional
+        Material ID. If not provided, auto-assigned by the backend.
     """
 
     def __init__(
@@ -882,21 +891,59 @@ class MatPiecewiseLinearPlasticity:
         poisson_ratio=0.3,
         yield_stress=0,
         tangent_modulus=0,
+        failure_strain=0.0,
+        mid=None,
     ):
         self.ro = mass_density
         self.e = young_modulus
         self.pr = poisson_ratio
         self.sigy = yield_stress
         self.etan = tangent_modulus
+        self.fail = failure_strain
+        self.mid = mid
 
-    def create(self, stub):
-        """Create a piecewise linear plasticity material."""
-        ret = stub.CreateMatPiecewiseLinearPlasticity(
-            MatPiecewiseLinearPlasticityRequest(ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan)
-        )
-        self.material_id = ret.mid
+    def create(self, stub=None):
+        """Create a piecewise linear plasticity material.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The material ID.
+        """
+        from ansys.dyna.core.pre.dynabase import DynaBase
+
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            mid = self.mid if self.mid is not None else backend.next_id("material")
+            backend.create_mat_piecewise_linear_plasticity(
+                mid=mid,
+                ro=self.ro,
+                e=self.e,
+                pr=self.pr,
+                sigy=self.sigy,
+                etan=self.etan,
+                fail=self.fail,
+            )
+            self.material_id = mid
+        else:
+            # gRPC stub
+            ret = stub.CreateMatPiecewiseLinearPlasticity(
+                MatPiecewiseLinearPlasticityRequest(ro=self.ro, e=self.e, pr=self.pr, sigy=self.sigy, etan=self.etan)
+            )
+            self.material_id = ret.mid
+
         self.name = "Piecewise Linear Plasticity"
         logging.info(f"Material {self.name} Created...")
+        return self.material_id
 
 
 # MAT_123
