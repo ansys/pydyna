@@ -566,6 +566,14 @@ class TestReferenceFileComparison:
             ("ControlShell", "cstyp6"): 1,
             # IcfdMat Prandtl number default (gRPC backend sets 0.85 when not specified)
             ("IcfdMat", "prt"): 0.85,
+            # ContactNodesToSurface death time default (1e20 = never dies)
+            ("ContactNodesToSurface", "dt"): 1e20,
+            # RigidwallPlanarId defaults
+            ("RigidwallPlanarId", "rwksf"): 1.0,
+            ("RigidwallPlanarId", "death"): 1e20,
+            # AirbagSimpleAirbagModel defaults
+            ("AirbagSimpleAirbagModel", "vsca"): 1.0,
+            ("AirbagSimpleAirbagModel", "psca"): 1.0,
         }
 
         def values_equivalent(val1, val2, kw_type=None, field=None):
@@ -821,10 +829,77 @@ class TestReferenceFileComparison:
     # XFAIL TESTS - Need implementation in keywords backend
     # =========================================================================
 
-    @pytest.mark.xfail(reason="DynaMech not implemented in keywords backend")
     def test_mech(self, initial_files_dir, pre_reference_dir):
         """test_mech.k - DynaMech: airbag, rigidwall, contact."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynamech import (
+            DynaMech,
+            Airbag,
+            PartSet,
+            RigidwallPlanar,
+            Contact,
+            ContactSurface,
+            ContactCategory,
+            Curve,
+            Point,
+            AnalysisType,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "test_mech.k")
+        reference_file = os.path.join(pre_reference_dir, "test_mech.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            mech = DynaMech(analysis=AnalysisType.IMPLICIT)
+            solution.add(mech)
+
+            # Set termination time only (endeng and endmas are keyword defaults)
+            solution.set_termination(termination_time=0.03)
+
+            # Create airbag
+            airbag = Airbag(
+                set=PartSet([3]),
+                heat_capacity_at_constant_volume=1.736e3,
+                heat_capacity_at_constant_pressure=2.43e3,
+                input_gas_temperature=1.2e3,
+                input_mass_flow_rate=Curve(x=[0, 0.032, 0.045, 0.08], y=[0, 26, 0.6, 0.1]),
+                shape_factor_for_exit_hole=0.7,
+                ambient_pressure=14.7,
+                ambient_density=3.821e-6,
+            )
+            mech.add(airbag)
+
+            # Create rigidwall
+            rigidwall = RigidwallPlanar(Point(0, 0, 0), Point(0, 1, 0), coulomb_friction_coefficient=0.5)
+            mech.add(rigidwall)
+
+            # Create contact
+            contact = Contact(category=ContactCategory.NODES_TO_SURFACE)
+            contact.set_friction_coefficient(static=0.5, dynamic=0.5)
+            surf1 = ContactSurface(PartSet([3]))
+            surf2 = ContactSurface(PartSet([2]))
+            surf2.set_penalty_stiffness_scale_factor(0.06667)
+            contact.set_slave_surface(surf1)
+            contact.set_master_surface(surf2)
+            mech.contacts.add(contact)
+
+            # Set output database
+            solution.set_output_database(
+                abstat=2.0e-4, glstat=2.0e-4, matsum=2.0e-4,
+                rcforc=2.0e-4, rbdout=2.0e-4, rwforc=2.0e-4,
+            )
+            solution.create_database_binary(dt=5e-4, ieverp=1)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_mech.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_elementary_main(self, initial_files_dir, pre_reference_dir):
         """test_elementary_main.k - INCLUDE_TRANSFORM, DEFINE_TRANSFORMATION."""

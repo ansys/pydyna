@@ -198,6 +198,60 @@ class KeywordsStub:
         return type("Response", (), {"success": True})()
 
     # =========================================================================
+    # Rigidwall and Airbag Methods
+    # =========================================================================
+
+    def CreateRigidWallPlanar(self, request):
+        """Create rigidwall planar keyword."""
+        normal = list(request.normal) if hasattr(request, "normal") else [0, 0, 0, 0, 0, 0]
+        wall_id = self._backend.create_rigidwall_planar(
+            nsid=getattr(request, "nsid", 0),
+            nsidex=getattr(request, "nsidex", 0),
+            boxid=getattr(request, "boxid", 0),
+            fric=getattr(request, "fric", 0.5),
+            xt=normal[0] if len(normal) > 0 else 0.0,
+            yt=normal[1] if len(normal) > 1 else 0.0,
+            zt=normal[2] if len(normal) > 2 else 0.0,
+            xh=normal[3] if len(normal) > 3 else 0.0,
+            yh=normal[4] if len(normal) > 4 else 0.0,
+            zh=normal[5] if len(normal) > 5 else 0.0,
+        )
+        return type("Response", (), {"id": wall_id})()
+
+    def CreateAirbagModel(self, request):
+        """Create airbag model keyword."""
+        self._backend.create_airbag_model(
+            sid=request.sid,
+            sidtyp=getattr(request, "sidtyp", 0),
+            cv=getattr(request, "cv", 0.0),
+            cp=getattr(request, "cp", 0.0),
+            t=getattr(request, "t", 0.0),
+            lcid=getattr(request, "lcid", 0),
+            mu=getattr(request, "mu", 0.0),
+            area=getattr(request, "area", 0.0),
+            pe=getattr(request, "pe", 0.0),
+            ro=getattr(request, "ro", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateContact(self, request):
+        """Create contact keyword."""
+        contact_id = self._backend.create_contact(
+            contact_type=request.option1,
+            ssid=getattr(request, "ssid", 0),
+            msid=getattr(request, "msid", 0),
+            sstyp=getattr(request, "sstyp", 0),
+            mstyp=getattr(request, "mstyp", 0),
+            fs=getattr(request, "fs", 0.0),
+            fd=getattr(request, "fd", 0.0),
+            sfsa=getattr(request, "sfsa", 1.0),
+            sfsb=getattr(request, "sfsb", 1.0),
+            bt=getattr(request, "birthtime", 0.0),
+            dt=getattr(request, "deathtime", 0.0),
+        )
+        return type("Response", (), {"id": contact_id})()
+
+    # =========================================================================
     # Control Methods
     # =========================================================================
 

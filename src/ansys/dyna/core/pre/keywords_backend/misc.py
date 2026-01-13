@@ -292,25 +292,37 @@ class MiscKeywordsMixin:
         mstyp: int = 0,
         fs: float = 0.0,
         fd: float = 0.0,
+        sfsa: float = 1.0,
+        sfsb: float = 1.0,
+        bt: float = 0.0,
+        dt: float = 0.0,
     ) -> int:
         """Create a CONTACT keyword.
 
         Parameters
         ----------
         contact_type : str
-            Contact type (e.g., "AUTOMATIC_SINGLE_SURFACE").
+            Contact type (e.g., "AUTOMATIC_SINGLE_SURFACE", "NODES_TO_SURFACE").
         ssid : int
-            Slave set ID.
+            Slave set ID (surfa).
         msid : int
-            Master set ID.
+            Master set ID (surfb).
         sstyp : int
-            Slave set type.
+            Slave set type (surfatyp).
         mstyp : int
-            Master set type.
+            Master set type (surfbtyp).
         fs : float
             Static friction coefficient.
         fd : float
             Dynamic friction coefficient.
+        sfsa : float
+            Slave penalty scale factor.
+        sfsb : float
+            Master penalty scale factor.
+        bt : float
+            Birth time.
+        dt : float
+            Death time.
 
         Returns
         -------
@@ -331,12 +343,21 @@ class MiscKeywordsMixin:
         if contact_type.upper() in contact_type_map:
             kw_class = contact_type_map[contact_type.upper()]
             kw = kw_class()
-            kw.ssid = ssid
-            kw.msid = msid
-            kw.sstyp = sstyp
-            kw.mstyp = mstyp
+            # Card 0: surfa, surfb, surfatyp, surfbtyp
+            kw.surfa = ssid
+            kw.surfb = msid
+            kw.surfatyp = sstyp
+            kw.surfbtyp = mstyp
+            # Card 1: fs, fd, bt, dt
             kw.fs = fs
             kw.fd = fd
+            if bt:
+                kw.bt = bt
+            if dt:
+                kw.dt = dt
+            # Card 2: sfsa, sfsb
+            kw.sfsa = sfsa
+            kw.sfsb = sfsb
 
             self._deck.append(kw)
             logger.debug(f"Created CONTACT_{contact_type} with id={contact_id}")
@@ -539,3 +560,129 @@ class MiscKeywordsMixin:
 
         self._deck.append(kw)
         logger.info(f"Created INCLUDE_TRANSFORM keyword: filename={filename}")
+
+    def create_rigidwall_planar(
+        self,
+        nsid: int = 0,
+        nsidex: int = 0,
+        boxid: int = 0,
+        fric: float = 0.5,
+        xt: float = 0.0,
+        yt: float = 0.0,
+        zt: float = 0.0,
+        xh: float = 0.0,
+        yh: float = 0.0,
+        zh: float = 0.0,
+        rwid: int = None,
+    ) -> int:
+        """Create a RIGIDWALL_PLANAR_ID keyword.
+
+        Parameters
+        ----------
+        nsid : int
+            Node set ID containing tracked nodes.
+        nsidex : int
+            Node set ID containing exempted nodes.
+        boxid : int
+            Box ID for tracked nodes.
+        fric : float
+            Coulomb friction coefficient.
+        xt : float
+            X-coordinate of tail of normal vector.
+        yt : float
+            Y-coordinate of tail of normal vector.
+        zt : float
+            Z-coordinate of tail of normal vector.
+        xh : float
+            X-coordinate of head of normal vector.
+        yh : float
+            Y-coordinate of head of normal vector.
+        zh : float
+            Z-coordinate of head of normal vector.
+        rwid : int, optional
+            Rigidwall ID. If not provided, auto-generates one.
+
+        Returns
+        -------
+        int
+            The rigidwall ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        wall_id = rwid if rwid else self.next_id("rigidwall")
+
+        logger.debug(f"Creating RIGIDWALL_PLANAR_ID: id={wall_id}")
+
+        kw = keywords.RigidwallPlanarId()
+        kw.id = wall_id
+        kw.nsid = nsid
+        kw.nsidex = nsidex
+        kw.boxid = boxid
+        kw.xt = xt
+        kw.yt = yt
+        kw.zt = zt
+        kw.xh = xh
+        kw.yh = yh
+        kw.zh = zh
+        kw.fric = fric
+
+        self._deck.append(kw)
+        logger.info(f"Created RIGIDWALL_PLANAR_ID keyword with id={wall_id}")
+        return wall_id
+
+    def create_airbag_model(
+        self,
+        sid: int,
+        sidtyp: int = 0,
+        cv: float = 0.0,
+        cp: float = 0.0,
+        t: float = 0.0,
+        lcid: int = 0,
+        mu: float = 0.0,
+        area: float = 0.0,
+        pe: float = 0.0,
+        ro: float = 0.0,
+    ) -> None:
+        """Create an AIRBAG_SIMPLE_AIRBAG_MODEL keyword.
+
+        Parameters
+        ----------
+        sid : int
+            Set ID (segment or part set).
+        sidtyp : int
+            Set type (0=segment, 1=part IDs).
+        cv : float
+            Heat capacity at constant volume.
+        cp : float
+            Heat capacity at constant pressure.
+        t : float
+            Temperature of input gas.
+        lcid : int
+            Load curve ID for mass flow rate.
+        mu : float
+            Shape factor for exit hole.
+        area : float
+            Optional airbag reference area.
+        pe : float
+            Ambient pressure.
+        ro : float
+            Ambient density.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating AIRBAG_SIMPLE_AIRBAG_MODEL: sid={sid}")
+
+        kw = keywords.AirbagSimpleAirbagModel()
+        kw.sid = sid
+        kw.sidtyp = sidtyp
+        kw.cv = cv
+        kw.cp = cp
+        kw.t = t
+        kw.lcid = lcid
+        kw.mu = mu
+        kw.area = area
+        kw.pe = pe
+        kw.ro = ro
+
+        self._deck.append(kw)
+        logger.info(f"Created AIRBAG_SIMPLE_AIRBAG_MODEL keyword with sid={sid}")

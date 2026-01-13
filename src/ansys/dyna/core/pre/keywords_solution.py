@@ -424,7 +424,15 @@ class KeywordsModel(Model):
             The keywords backend instance.
         """
         self._backend = backend
-        # Don't call parent __init__ as it requires a gRPC stub
+        # Initialize attributes that parent Model normally initializes
+        # We don't call parent __init__ as it requires a gRPC stub
+        self._parts = []
+        self._solids = []
+        self._shells = []
+        self._nodes = []
+        self._bdy_spc = []
+        self._init_velocity = []
+        self._rigidwall = []
 
     def get_nodes(self):
         """Get nodes from the deck."""
