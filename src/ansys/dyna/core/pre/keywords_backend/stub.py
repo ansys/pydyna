@@ -140,6 +140,15 @@ class KeywordsStub:
     # Define Methods
     # =========================================================================
 
+    def CreateDefineFunction(self, request):
+        """Create define function keyword."""
+        fid = self._backend.create_define_function(
+            function=request.function,
+            fid=getattr(request, "fid", None),
+            heading=getattr(request, "heading", ""),
+        )
+        return type("Response", (), {"id": fid})()
+
     def CreateDefineCurve(self, request):
         """Create define curve keyword."""
         curve_id = self._backend.create_define_curve(
@@ -152,19 +161,29 @@ class KeywordsStub:
         return type("Response", (), {"id": curve_id})()
 
     def CreateDefineTransformation(self, request):
-        """Create define transformation keyword."""
+        """Create define transformation keyword.
+
+        Accepts grpc-style request with:
+        - option: list of option strings (e.g., ["MIRROR"])
+        - param: flat list of 7 params per option (a1, a2, a3, a4, a5, a6, a7)
+        """
         transforms = []
-        for t in getattr(request, "transforms", []):
+        options = getattr(request, "option", [])
+        params = getattr(request, "param", [])
+
+        # Each option has 7 parameters
+        for i, opt in enumerate(options):
+            base_idx = i * 7
             transforms.append(
                 {
-                    "option": getattr(t, "option", ""),
-                    "a1": getattr(t, "a1", 0.0),
-                    "a2": getattr(t, "a2", 0.0),
-                    "a3": getattr(t, "a3", 0.0),
-                    "a4": getattr(t, "a4", 0.0),
-                    "a5": getattr(t, "a5", 0.0),
-                    "a6": getattr(t, "a6", 0.0),
-                    "a7": getattr(t, "a7", 0.0),
+                    "option": opt,
+                    "a1": params[base_idx] if base_idx < len(params) else 0.0,
+                    "a2": params[base_idx + 1] if base_idx + 1 < len(params) else 0.0,
+                    "a3": params[base_idx + 2] if base_idx + 2 < len(params) else 0.0,
+                    "a4": params[base_idx + 3] if base_idx + 3 < len(params) else 0.0,
+                    "a5": params[base_idx + 4] if base_idx + 4 < len(params) else 0.0,
+                    "a6": params[base_idx + 5] if base_idx + 5 < len(params) else 0.0,
+                    "a7": params[base_idx + 6] if base_idx + 6 < len(params) else 0.0,
                 }
             )
         tranid = self._backend.create_define_transformation(

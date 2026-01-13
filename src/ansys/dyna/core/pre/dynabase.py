@@ -219,9 +219,10 @@ class Curve:
 class Function:
     """Defines a function that can be referenced by a limited number of keyword options."""
 
-    def __init__(self, Function=None):
+    def __init__(self, Function=None, fid=None):
         self.function = Function
         self.tabulated = False
+        self.fid = fid
 
     def set_tabulated(self, heading="", function="", x=[], y=[]):
         self.tabulated = True
@@ -238,7 +239,11 @@ class Function:
                     heading=self.heading, function=self.function_name, abscissa=self.x, ordinate=self.y
                 )
             )
-        ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
+        # Pass fid if specified
+        req = DefineFunctionRequest(function=self.function)
+        if self.fid is not None:
+            req = type("Req", (), {"function": self.function, "fid": self.fid})()
+        ret = stub.CreateDefineFunction(req)
         self.id = ret.id
         logging.info(f"Function {self.id} defined...")
 
@@ -292,10 +297,11 @@ class Direction:
 class Transform:
     """Defines a transformation."""
 
-    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
+    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0, tranid=None):
         param = [option, param1, param2, param3, param4, param5, param6, param7]
         self.paramlist = []
         self.paramlist.append(param)
+        self.tranid = tranid
 
     def add_transform(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
         """Defines a transformation matrix."""
@@ -310,7 +316,9 @@ class Transform:
             options.append(obj[0])
             for i in range(1, 8):
                 params.append(obj[i])
-        ret = stub.CreateDefineTransformation(DefineTransformationRequest(option=options, param=params))
+        ret = stub.CreateDefineTransformation(
+            DefineTransformationRequest(option=options, param=params, tranid=self.tranid)
+        )
         self.id = ret.id
         logging.info(f"Transformation {self.id} defined...")
         return self.id
@@ -1017,7 +1025,19 @@ class DynaBase:
                 model.add_rigidwall(data)
         self.entities.append(obj)
 
-    def set_transform(self, filename=None, idnoff=0, ideoff=0, idpoff=0, idmoff=0, idsoff=0, idfoff=0, transform=None):
+    def set_transform(
+        self,
+        filename=None,
+        idnoff=0,
+        ideoff=0,
+        idpoff=0,
+        idmoff=0,
+        idsoff=0,
+        idfoff=0,
+        iddoff=0,
+        fctlen=0.0,
+        transform=None,
+    ):
         """Include independent input files containing model data, allow for node, element, and set
         IDs to be offset and for coordinates and constitutive parameters to be transformed and scaled.
 
@@ -1037,22 +1057,32 @@ class DynaBase:
             Offset to set ID.
         idfoff : int
             Offset to function ID, table ID, and curve ID.
+        iddoff : int
+            Offset to define ID.
+        fctlen : float
+            Length scale factor for coordinates.
         transform : Transform
             Definition for the transformation.
         """
         tranid = transform.create(self.stub)
-        ret = self.stub.CreateIncludeTransform(
-            IncludeTransformRequest(
-                filename=filename,
-                idnoff=idnoff,
-                ideoff=ideoff,
-                idpoff=idpoff,
-                idmoff=idmoff,
-                idsoff=idsoff,
-                idfoff=idfoff,
-                tranid=tranid,
-            )
-        )
+        # Create request object with all fields (including extended fields not in gRPC)
+        request = type(
+            "IncludeTransformReq",
+            (),
+            {
+                "filename": filename,
+                "idnoff": idnoff,
+                "ideoff": ideoff,
+                "idpoff": idpoff,
+                "idmoff": idmoff,
+                "idsoff": idsoff,
+                "idfoff": idfoff,
+                "iddoff": iddoff,
+                "fctlen": fctlen,
+                "tranid": tranid,
+            },
+        )()
+        ret = self.stub.CreateIncludeTransform(request)
         logging.info("Include transform Created...")
         return ret
 

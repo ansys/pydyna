@@ -249,6 +249,7 @@ class EMKeywordsMixin:
         settype: int = 1,
         setid: int = 0,
         rdltype: int = 0,
+        isoid: int = None,
     ) -> int:
         """Create an EM_ISOPOTENTIAL keyword.
 
@@ -260,6 +261,8 @@ class EMKeywordsMixin:
             Set ID.
         rdltype : int
             Randles layer type.
+        isoid : int, optional
+            Isopotential ID. If not provided, auto-generates one.
 
         Returns
         -------
@@ -268,7 +271,8 @@ class EMKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        isoid = self.next_id("isopotential")
+        if isoid is None:
+            isoid = self.next_id("isopotential")
 
         kw = keywords.EmIsopotential()
         kw.isoid = isoid
@@ -290,6 +294,7 @@ class EMKeywordsMixin:
         l: float = 0.0,
         c: float = 0.0,
         v0: float = 0.0,
+        conid: int = None,
     ) -> int:
         """Create an EM_ISOPOTENTIAL_CONNECT keyword.
 
@@ -311,6 +316,8 @@ class EMKeywordsMixin:
             Capacitance (for RLC circuit).
         v0 : float
             Initial voltage (for RLC circuit).
+        conid : int, optional
+            Connection ID. If not provided, auto-generates one.
 
         Returns
         -------
@@ -319,7 +326,8 @@ class EMKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        conid = self.next_id("isopotential_connect")
+        if conid is None:
+            conid = self.next_id("isopotential_connect")
 
         kw = keywords.EmIsopotentialConnect()
         kw.conid = conid

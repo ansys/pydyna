@@ -1004,6 +1004,7 @@ class TestReferenceFileComparison:
             EnergyFlag,
             HourglassControl,
             BulkViscosity,
+            Transform,
         )
 
         initial_file = os.path.join(initial_files_dir, "solution", "test_elementary_main.k")
@@ -1052,13 +1053,9 @@ class TestReferenceFileComparison:
             # (don't add them again)
 
             # DEFINE_TRANSFORMATION: tranid=1, MIRROR with a1=-4.0, a4=-5.0
-            solution._backend.create_define_transformation(
-                tranid=1,
-                transforms=[{"option": "MIRROR", "a1": -4.0, "a2": 0.0, "a3": 0.0, "a4": -5.0, "a5": 0.0, "a6": 0.0, "a7": 0.0}],
-            )
-
             # INCLUDE_TRANSFORM: filename="transform.k", offsets=100 except iddoff=0, fctlen=1.0, tranid=1
-            solution._backend.create_include_transform(
+            transform = Transform(option="MIRROR", param1=-4.0, param2=0.0, param3=0.0, param4=-5.0, tranid=1)
+            dynabase.set_transform(
                 filename="transform.k",
                 idnoff=100,
                 ideoff=100,
@@ -1068,7 +1065,7 @@ class TestReferenceFileComparison:
                 idfoff=100,
                 iddoff=0,
                 fctlen=1.0,
-                tranid=1,
+                transform=transform,
             )
 
             output_path = solution.save_file()
@@ -2700,7 +2697,7 @@ class TestReferenceFileComparison:
 
             emobj.analysis.set_timestep(timestep=1e-4)
             # Note: Reference file has dimtype=0 (3D) despite being a "2D" test
-            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.SOLVER_3D)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.SOLVER_3D, nperio=2)
             emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
 
             tanalysis = ThermalAnalysis()
@@ -2792,7 +2789,7 @@ class TestReferenceFileComparison:
             emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
 
             emobj.analysis.set_timestep(timestep=1e-4)
-            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D, nperio=2)
             emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
 
             tanalysis = ThermalAnalysis()
@@ -2887,15 +2884,8 @@ class TestReferenceFileComparison:
             emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
 
             emobj.analysis.set_timestep(timestep=1e-4)
-            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D, nperio=2)
             emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
-
-            # Manually update EM_CONTROL to set nperio=2
-            from ansys.dyna.core.keywords import keywords
-            for kw in solution._backend._deck:
-                if isinstance(kw, keywords.EmControl):
-                    kw.nperio = 2
-                    break
 
             tanalysis = ThermalAnalysis()
             tanalysis.set_timestep(initial_timestep=1e-4)
@@ -2938,46 +2928,18 @@ class TestReferenceFileComparison:
                 nodeset.create(solution.stub)
 
             # Create 6 EM_ISOPOTENTIAL entries (isoid 1-6, referencing SET_NODE_LIST 1-6)
-            from ansys.dyna.core.keywords import keywords
             for isoid in range(1, 7):
-                kw = keywords.EmIsopotential()
-                kw.isoid = isoid
-                kw.settype = 2  # node set
-                kw.setid = isoid
-                kw.rdltype = 0
-                solution._backend._deck.append(kw)
+                emobj.create_isopotential(setid=isoid, settype=2, isoid=isoid, rdltype=0)
 
             # Create 3 EM_ISOPOTENTIAL_CONNECT entries
             # conid=1: contype=4 (voltage source with load curve), isoid1=1, isoid2=2, lcid=1
-            kw1 = keywords.EmIsopotentialConnect()
-            kw1.conid = 1
-            kw1.contype = 4
-            kw1.isoid1 = 1
-            kw1.isoid2 = 2
-            kw1.val = 0.0
-            kw1.lcid_rdlid = 1  # Field name is lcid_rdlid, not lcid
-            kw1.psid = 0
-            solution._backend._deck.append(kw1)
+            emobj.create_isopotential_connect(contype=4, isoid1=1, isoid2=2, value=0.0, lcid=1, conid=1)
 
             # conid=2: contype=2 (resistor), isoid1=3, isoid2=4, value=0.01
-            kw2 = keywords.EmIsopotentialConnect()
-            kw2.conid = 2
-            kw2.contype = 2
-            kw2.isoid1 = 3
-            kw2.isoid2 = 4
-            kw2.val = 0.01
-            kw2.psid = 0
-            solution._backend._deck.append(kw2)
+            emobj.create_isopotential_connect(contype=2, isoid1=3, isoid2=4, value=0.01, conid=2)
 
             # conid=3: contype=2 (resistor), isoid1=5, isoid2=6, value=0.05
-            kw3 = keywords.EmIsopotentialConnect()
-            kw3.conid = 3
-            kw3.contype = 2
-            kw3.isoid1 = 5
-            kw3.isoid2 = 6
-            kw3.val = 0.05
-            kw3.psid = 0
-            solution._backend._deck.append(kw3)
+            emobj.create_isopotential_connect(contype=2, isoid1=5, isoid2=6, value=0.05, conid=3)
 
             # Add RogoCoil - it creates SET_SEGMENT and EM_ISOPOTENTIAL_ROGO with isoid=1
             emobj.add(RogoCoil(SegmentSet(rogoseg)))
@@ -2999,7 +2961,7 @@ class TestReferenceFileComparison:
         )
         from ansys.dyna.core.pre.dynamech import SolidPart, SolidFormulation
         from ansys.dyna.core.pre.dynamaterial import MatRigid, EMMATTYPE
-        from ansys.dyna.core.pre.dynabase import NodeSet
+        from ansys.dyna.core.pre.dynabase import NodeSet, Function
 
         initial_file = os.path.join(initial_files_dir, "em", "test_rlc_define_func.k")
         reference_file = os.path.join(pre_reference_dir, "test_rlc_define_func.k")
@@ -3019,14 +2981,7 @@ class TestReferenceFileComparison:
             emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
 
             emobj.analysis.set_timestep(timestep=1e-4)
-            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING)
-
-            # Update EM_CONTROL to set nperio=2
-            from ansys.dyna.core.keywords import keywords
-            for kw in solution._backend._deck:
-                if isinstance(kw, keywords.EmControl):
-                    kw.nperio = 2
-                    break
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, nperio=2)
 
             matrigid = MatRigid(
                 mass_density=7000,
@@ -3058,7 +3013,8 @@ class TestReferenceFileComparison:
             xi=(Vc*emdt-L*curr)/((R+rmesh)*emdt+L);
             return xi*rmesh;
             }"""
-            solution._backend.create_define_function(function=rlc_function, fid=1)
+            func = Function(Function=rlc_function, fid=1)
+            func.create(solution.stub)
 
             # Create SET_NODE_LIST entries - using high-level API
             nset1_nodes = [
@@ -3077,42 +3033,15 @@ class TestReferenceFileComparison:
             nodeset2.create(solution.stub)
 
             # Create EM_ISOPOTENTIAL entries
-            kw_iso1 = keywords.EmIsopotential()
-            kw_iso1.isoid = 1
-            kw_iso1.settype = 2  # node set
-            kw_iso1.setid = 1
-            kw_iso1.rdltype = 0
-            solution._backend._deck.append(kw_iso1)
-
-            kw_iso2 = keywords.EmIsopotential()
-            kw_iso2.isoid = 2
-            kw_iso2.settype = 2
-            kw_iso2.setid = 2
-            kw_iso2.rdltype = 0
-            solution._backend._deck.append(kw_iso2)
+            emobj.create_isopotential(setid=1, settype=2, isoid=1, rdltype=0)
+            emobj.create_isopotential(setid=2, settype=2, isoid=2, rdltype=0)
 
             # Create EM_ISOPOTENTIAL_CONNECT entries
-            # conid=1: contype=3 (RLC), isoid1=1, isoid2=0, lcid_rdlid=-1 (negative = function ID)
-            kw_conn1 = keywords.EmIsopotentialConnect()
-            kw_conn1.conid = 1
-            kw_conn1.contype = 3  # RLC circuit
-            kw_conn1.isoid1 = 1
-            kw_conn1.isoid2 = 0
-            kw_conn1.val = 0.0
-            kw_conn1.lcid_rdlid = -1  # negative value references DEFINE_FUNCTION
-            kw_conn1.psid = 0
-            solution._backend._deck.append(kw_conn1)
+            # conid=1: contype=3 (RLC), isoid1=1, isoid2=0, lcid=-1 (negative = function ID)
+            emobj.create_isopotential_connect(contype=3, isoid1=1, isoid2=0, value=0.0, lcid=-1, conid=1)
 
-            # conid=2: contype=3 (RLC), isoid1=2, isoid2=0, lcid_rdlid=0
-            kw_conn2 = keywords.EmIsopotentialConnect()
-            kw_conn2.conid = 2
-            kw_conn2.contype = 3
-            kw_conn2.isoid1 = 2
-            kw_conn2.isoid2 = 0
-            kw_conn2.val = 0.0
-            kw_conn2.lcid_rdlid = 0
-            kw_conn2.psid = 0
-            solution._backend._deck.append(kw_conn2)
+            # conid=2: contype=3 (RLC), isoid1=2, isoid2=0, lcid=0
+            emobj.create_isopotential_connect(contype=3, isoid1=2, isoid2=0, value=0.0, lcid=0, conid=2)
 
             emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
@@ -3174,7 +3103,7 @@ class TestReferenceFileComparison:
             emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
 
             emobj.analysis.set_timestep(timestep=1e-4)
-            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, nperio=2)
 
             matrigid = MatRigid(
                 mass_density=7000,

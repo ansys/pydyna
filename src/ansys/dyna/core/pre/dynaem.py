@@ -404,6 +404,74 @@ class DynaEM(DynaBase):
             logging.info("EM Output Created...")
             return ret
 
+    def create_isopotential(self, setid, settype=2, isoid=None, rdltype=0):
+        """Create an EM_ISOPOTENTIAL keyword.
+
+        Parameters
+        ----------
+        setid : int
+            ID of the node set or segment set.
+        settype : int, optional
+            Type of set. Default is 2 (node set).
+            - 1: Segment set
+            - 2: Node set
+        isoid : int, optional
+            Isopotential ID. If not provided, auto-generates one.
+        rdltype : int, optional
+            Randles layer type. Default is 0.
+
+        Returns
+        -------
+        int
+            The isopotential ID.
+        """
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - use direct creation with optional isoid
+            return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype, isoid=isoid)
+        else:
+            # gRPC stub
+            ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=setid, rdltype=rdltype))
+            return ret.id
+
+    def create_isopotential_connect(self, contype, isoid1, isoid2, value=0.0, lcid=0, conid=None):
+        """Create an EM_ISOPOTENTIAL_CONNECT keyword.
+
+        Parameters
+        ----------
+        contype : int
+            Connection type:
+            - 1: Short circuit
+            - 2: Resistance
+            - 3: Current source
+            - 4: Voltage source with load curve
+        isoid1 : int
+            First isopotential ID.
+        isoid2 : int
+            Second isopotential ID.
+        value : float, optional
+            Value depending on contype (resistance, current, or voltage). Default is 0.0.
+        lcid : int, optional
+            Load curve ID for contype=4. Default is 0.
+        conid : int, optional
+            Connection ID. If not provided, auto-generates one.
+
+        Returns
+        -------
+        int
+            The connection ID.
+        """
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - use direct creation with optional conid
+            return self.stub._backend.create_em_isopotential_connect(
+                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=lcid, conid=conid
+            )
+        else:
+            # gRPC stub
+            ret = self.stub.CreateEMIsopotentialConnect(
+                EMIsopotentialConnectRequest(contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=lcid)
+            )
+            return ret.id
+
     def connect_isopotential(
         self,
         contype=Isopotential_ConnType.SHORT_CIRCUIT,
@@ -802,6 +870,7 @@ class EMAnalysis:
         self.stub = DynaBase.get_stub()
         self.type = type.value
         self.dimtype = 0
+        self.nperio = 0
         self.defined_bem = False
         self.defined_fem = False
 
@@ -810,10 +879,21 @@ class EMAnalysis:
         self.defined = True
         self.timestep = timestep
 
-    def set_em_solver(self, type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D):
-        """Set the EM solver."""
+    def set_em_solver(self, type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D, nperio=0):
+        """Set the EM solver.
+
+        Parameters
+        ----------
+        type : EMType
+            Type of EM solver to use.
+        dimtype : EMDimension
+            Dimension type for the solver.
+        nperio : int, optional
+            Number of periods for periodic boundary conditions. Default is 0.
+        """
         self.type = type.value
         self.dimtype = dimtype.value
+        self.nperio = nperio
 
     def set_solver_bem(self, solver=BEMSOLVER.PCG, relative_tol=1e-6, max_iteration=1000):
         """Set the type of linear solver, pre-conditioner, and tolerance for the EM BEM solver."""
@@ -839,9 +919,35 @@ class EMAnalysis:
         """Create an EM analysis."""
         if self.defined == False:
             return
-        self.stub.CreateEMControl(
-            EMControlRequest(emsol=self.type, numls=100, macrodt=0, dimtype=self.dimtype, ncylfem=5000, ncylbem=5000)
-        )
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - can pass nperio
+            request = type(
+                "EMControlReq",
+                (),
+                {
+                    "emsol": self.type,
+                    "numls": 100,
+                    "macrodt": 0,
+                    "dimtype": self.dimtype,
+                    "nperio": self.nperio,
+                    "ncylfem": 5000,
+                    "ncylbem": 5000,
+                },
+            )()
+            self.stub.CreateEMControl(request)
+        else:
+            # gRPC stub - EMControlRequest doesn't have nperio
+            self.stub.CreateEMControl(
+                EMControlRequest(
+                    emsol=self.type,
+                    numls=100,
+                    macrodt=0,
+                    dimtype=self.dimtype,
+                    ncylfem=5000,
+                    ncylbem=5000,
+                )
+            )
         self.stub.CreateEMTimestep(EMTimestepRequest(tstype=1, dtconst=self.timestep))
         logging.info("EM Timestep Created...")
         if self.defined_bem:
