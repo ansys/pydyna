@@ -1615,6 +1615,19 @@
             "id_title_card": 0
         }
     },
+    "ALE_STRUCTURED_MESH_CONTROL_POINTS": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "control_points",
+                    "ref": "control_points_card"
+                }
+            ]
+        },
+        "labels": {
+            "control_points_card": 1
+        }
+    },
     "RIGIDWALL_PLANAR": {
         "type": "multiple",
         "generations": [

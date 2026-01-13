@@ -378,25 +378,30 @@ class TestKeywordHandler:
         with pytest.raises(TypeError):
             KeywordHandler()
 
+    def test_handle_is_only_required_method(self):
+        """Test that implementing handle() is sufficient for instantiation.
+
+        post_process() has a default implementation so it's optional.
+        Python ABC doesn't check method signatures, only that the method exists.
+        """
+
+        class MinimalHandler(KeywordHandler):
+            def handle(self, kwd_data):
+                pass
+
+        # Should not raise - handle() is implemented, post_process() has default
+        handler = MinimalHandler()
+        assert isinstance(handler, KeywordHandler)
+
     def test_must_implement_handle(self):
         """Test that subclasses must implement handle method."""
 
-        class IncompleteHandler1(KeywordHandler):
-            def post_process(self, kwd_data):
+        class IncompleteHandler(KeywordHandler):
+            def post_process(self, kwd_data, settings):
                 pass
 
         with pytest.raises(TypeError):
-            IncompleteHandler1()
-
-    def test_must_implement_post_process(self):
-        """Test that subclasses must implement post_process method."""
-
-        class IncompleteHandler2(KeywordHandler):
-            def handle(self, kwd_data, settings):
-                pass
-
-        with pytest.raises(TypeError):
-            IncompleteHandler2()
+            IncompleteHandler()
 
     def test_complete_handler_can_be_instantiated(self):
         """Test that complete handler implementation can be instantiated."""

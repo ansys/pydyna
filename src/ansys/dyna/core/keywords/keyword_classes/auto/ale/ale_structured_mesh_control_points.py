@@ -22,8 +22,11 @@
 
 """Module providing the AleStructuredMeshControlPoints class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALESTRUCTUREDMESHCONTROLPOINTS_CARD0 = (
@@ -33,12 +36,6 @@ _ALESTRUCTUREDMESHCONTROLPOINTS_CARD0 = (
     FieldSchema("sfo", float, 30, 10, 1.0),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("offo", float, 50, 10, 0.0),
-)
-
-_ALESTRUCTUREDMESHCONTROLPOINTS_CARD1 = (
-    FieldSchema("n", int, 0, 20, 0),
-    FieldSchema("x", float, 20, 20, None),
-    FieldSchema("ratio", float, 40, 20, 0.0),
 )
 
 class AleStructuredMeshControlPoints(KeywordBase):
@@ -54,8 +51,14 @@ class AleStructuredMeshControlPoints(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHCONTROLPOINTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _ALESTRUCTUREDMESHCONTROLPOINTS_CARD1,
+            ),            TableCard(
+                [
+                    Field("n", int, 0, 20, 0),
+                    Field("x", float, 20, 20, None),
+                    Field("ratio", float, 40, 20, 0.0),
+                ],
+                None,
+                name="control_points",
                 **kwargs,
             ),        ]
     @property
@@ -104,37 +107,12 @@ class AleStructuredMeshControlPoints(KeywordBase):
         self._cards[0].set_value("offo", value)
 
     @property
-    def n(self) -> int:
-        """Get or set the Control point node number.
-        """ # nopep8
-        return self._cards[1].get_value("n")
+    def control_points(self) -> pd.DataFrame:
+        """Get the table of control_points."""
+        return self._cards[1].table
 
-    @n.setter
-    def n(self, value: int) -> None:
-        """Set the n property."""
-        self._cards[1].set_value("n", value)
-
-    @property
-    def x(self) -> typing.Optional[float]:
-        """Get or set the Control point position.
-        """ # nopep8
-        return self._cards[1].get_value("x")
-
-    @x.setter
-    def x(self, value: float) -> None:
-        """Set the x property."""
-        self._cards[1].set_value("x", value)
-
-    @property
-    def ratio(self) -> float:
-        """Get or set the Ratio for progressive mesh spacing.  Progressively larger or smaller mesh will be generated between the control point that has nonzero ratio specified and the control point following it.  See remark 2.
-        GT.0.0:	mesh size increases; dl(n+1)=dl_n*(1+ratio)
-        LT.0.0:	mesh size decreases; dl(n+1)=dl_n/(1-ratio).
-        """ # nopep8
-        return self._cards[1].get_value("ratio")
-
-    @ratio.setter
-    def ratio(self, value: float) -> None:
-        """Set the ratio property."""
-        self._cards[1].set_value("ratio", value)
+    @control_points.setter
+    def control_points(self, df: pd.DataFrame):
+        """Set control_points from the dataframe df"""
+        self._cards[1].table = df
 

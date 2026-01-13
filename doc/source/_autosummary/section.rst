@@ -188,10 +188,10 @@ SectionSpringDamper
     :members:
 
 
-SectionSpringDamper
--------------------
+SectionSpring_Damper
+--------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_spring_damper
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_spring__damper
     :members:
 
 
