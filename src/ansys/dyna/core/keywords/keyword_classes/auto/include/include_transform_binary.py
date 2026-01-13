@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
 
 _INCLUDETRANSFORMBINARY_CARD0 = (
@@ -66,6 +67,9 @@ class IncludeTransformBinary(KeywordBase):
 
     keyword = "INCLUDE"
     subkeyword = "TRANSFORM_BINARY"
+    _link_fields = {
+        "tranid": LinkType.DEFINE_TRANSFORMATION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeTransformBinary class."""

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDMODELPOROUS_CARD0 = (
     FieldSchema("pmmoid", int, 0, 10, None),
@@ -61,6 +63,11 @@ class IcfdModelPorous(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "MODEL_POROUS"
+    _link_fields = {
+        "pvlcidx": LinkType.DEFINE_CURVE,
+        "pvlcidy": LinkType.DEFINE_CURVE,
+        "pvlcidz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdModelPorous class."""
@@ -291,4 +298,49 @@ class IcfdModelPorous(KeywordBase):
     def projyp_z(self, value: float) -> None:
         """Set the projyp_z property."""
         self._cards[3].set_value("projyp_z", value)
+
+    @property
+    def pvlcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidx:
+                return kwd
+        return None
+
+    @pvlcidx_link.setter
+    def pvlcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidx."""
+        self.pvlcidx = value.lcid
+
+    @property
+    def pvlcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidy:
+                return kwd
+        return None
+
+    @pvlcidy_link.setter
+    def pvlcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidy."""
+        self.pvlcidy = value.lcid
+
+    @property
+    def pvlcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidz:
+                return kwd
+        return None
+
+    @pvlcidz_link.setter
+    def pvlcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidz."""
+        self.pvlcidz = value.lcid
 

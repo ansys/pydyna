@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATNONLINEARELASTICDISCRETEBEAM_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -86,6 +88,20 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcidtr": LinkType.DEFINE_CURVE,
+        "lcidts": LinkType.DEFINE_CURVE,
+        "lcidtt": LinkType.DEFINE_CURVE,
+        "lcidrr": LinkType.DEFINE_CURVE,
+        "lcidrs": LinkType.DEFINE_CURVE,
+        "lcidrt": LinkType.DEFINE_CURVE,
+        "lcidtdr": LinkType.DEFINE_CURVE,
+        "lcidtds": LinkType.DEFINE_CURVE,
+        "lcidtdt": LinkType.DEFINE_CURVE,
+        "lcidrdr": LinkType.DEFINE_CURVE,
+        "lcidrds": LinkType.DEFINE_CURVE,
+        "lcidrdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatNonlinearElasticDiscreteBeam class."""
@@ -483,4 +499,184 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidtr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtr:
+                return kwd
+        return None
+
+    @lcidtr_link.setter
+    def lcidtr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtr."""
+        self.lcidtr = value.lcid
+
+    @property
+    def lcidts_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidts."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidts:
+                return kwd
+        return None
+
+    @lcidts_link.setter
+    def lcidts_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidts."""
+        self.lcidts = value.lcid
+
+    @property
+    def lcidtt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtt:
+                return kwd
+        return None
+
+    @lcidtt_link.setter
+    def lcidtt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtt."""
+        self.lcidtt = value.lcid
+
+    @property
+    def lcidrr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrr:
+                return kwd
+        return None
+
+    @lcidrr_link.setter
+    def lcidrr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrr."""
+        self.lcidrr = value.lcid
+
+    @property
+    def lcidrs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrs:
+                return kwd
+        return None
+
+    @lcidrs_link.setter
+    def lcidrs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrs."""
+        self.lcidrs = value.lcid
+
+    @property
+    def lcidrt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrt:
+                return kwd
+        return None
+
+    @lcidrt_link.setter
+    def lcidrt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrt."""
+        self.lcidrt = value.lcid
+
+    @property
+    def lcidtdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtdr:
+                return kwd
+        return None
+
+    @lcidtdr_link.setter
+    def lcidtdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtdr."""
+        self.lcidtdr = value.lcid
+
+    @property
+    def lcidtds_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtds."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtds:
+                return kwd
+        return None
+
+    @lcidtds_link.setter
+    def lcidtds_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtds."""
+        self.lcidtds = value.lcid
+
+    @property
+    def lcidtdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtdt:
+                return kwd
+        return None
+
+    @lcidtdt_link.setter
+    def lcidtdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtdt."""
+        self.lcidtdt = value.lcid
+
+    @property
+    def lcidrdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrdr:
+                return kwd
+        return None
+
+    @lcidrdr_link.setter
+    def lcidrdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrdr."""
+        self.lcidrdr = value.lcid
+
+    @property
+    def lcidrds_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrds."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrds:
+                return kwd
+        return None
+
+    @lcidrds_link.setter
+    def lcidrds_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrds."""
+        self.lcidrds = value.lcid
+
+    @property
+    def lcidrdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrdt:
+                return kwd
+        return None
+
+    @lcidrdt_link.setter
+    def lcidrdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrdt."""
+        self.lcidrdt = value.lcid
 

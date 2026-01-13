@@ -34,6 +34,9 @@ from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 {% endif %}
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+{% if keyword_data.links %}
+from ansys.dyna.core.lib.keyword_base import LinkType
+{% endif %}
 {% for link in keyword_data.links %}
 from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{link.classname}}
 {% endfor %}

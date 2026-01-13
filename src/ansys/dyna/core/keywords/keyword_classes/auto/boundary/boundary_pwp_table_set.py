@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _BOUNDARYPWPTABLESET_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -47,6 +49,9 @@ class BoundaryPwpTableSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PWP_TABLE_SET"
+    _link_fields = {
+        "table": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPwpTableSet class."""
@@ -129,4 +134,19 @@ class BoundaryPwpTableSet(KeywordBase):
     def table(self, value: int) -> None:
         """Set the table property."""
         self._cards[1].set_value("table", value)
+
+    @property
+    def table_link(self) -> DefineCurve:
+        """Get the DefineCurve object for table."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.table:
+                return kwd
+        return None
+
+    @table_link.setter
+    def table_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for table."""
+        self.table = value.lcid
 

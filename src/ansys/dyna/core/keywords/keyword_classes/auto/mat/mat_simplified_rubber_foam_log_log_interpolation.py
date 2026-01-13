@@ -29,6 +29,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATION_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -73,6 +75,10 @@ class MatSimplifiedRubberFoamLogLogInterpolation(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcunld": LinkType.DEFINE_CURVE,
+        "stol": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSimplifiedRubberFoamLogLogInterpolation class."""
@@ -406,4 +412,34 @@ class MatSimplifiedRubberFoamLogLogInterpolation(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcunld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcunld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcunld:
+                return kwd
+        return None
+
+    @lcunld_link.setter
+    def lcunld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcunld."""
+        self.lcunld = value.lcid
+
+    @property
+    def stol_link(self) -> DefineCurve:
+        """Get the DefineCurve object for stol."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.stol:
+                return kwd
+        return None
+
+    @stol_link.setter
+    def stol_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for stol."""
+        self.stol = value.lcid
 

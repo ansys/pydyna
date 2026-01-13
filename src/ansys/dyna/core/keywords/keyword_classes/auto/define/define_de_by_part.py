@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINEDEBYPART_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -63,6 +65,10 @@ class DefineDeByPart(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lnorm": LinkType.DEFINE_CURVE,
+        "lshear": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeByPart class."""
@@ -258,4 +264,34 @@ class DefineDeByPart(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lnorm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lnorm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lnorm:
+                return kwd
+        return None
+
+    @lnorm_link.setter
+    def lnorm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lnorm."""
+        self.lnorm = value.lcid
+
+    @property
+    def lshear_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lshear."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lshear:
+                return kwd
+        return None
+
+    @lshear_link.setter
+    def lshear_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lshear."""
+        self.lshear = value.lcid
 

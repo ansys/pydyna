@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATSAMPLIGHT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -60,6 +62,10 @@ class MatSampLight(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcemod": LinkType.DEFINE_CURVE,
+        "lcid_p": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSampLight class."""
@@ -257,4 +263,34 @@ class MatSampLight(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcemod_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcemod."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcemod:
+                return kwd
+        return None
+
+    @lcemod_link.setter
+    def lcemod_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcemod."""
+        self.lcemod = value.lcid
+
+    @property
+    def lcid_p_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_p."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_p:
+                return kwd
+        return None
+
+    @lcid_p_link.setter
+    def lcid_p_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_p."""
+        self.lcid_p = value.lcid
 

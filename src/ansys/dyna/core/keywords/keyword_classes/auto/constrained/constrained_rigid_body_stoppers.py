@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONSTRAINEDRIGIDBODYSTOPPERS_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -49,6 +51,9 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODY_STOPPERS"
+    _link_fields = {
+        "lcvmnx": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodyStoppers class."""
@@ -198,4 +203,19 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
     def stiff(self, value: float) -> None:
         """Set the stiff property."""
         self._cards[1].set_value("stiff", value)
+
+    @property
+    def lcvmnx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvmnx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvmnx:
+                return kwd
+        return None
+
+    @lcvmnx_link.setter
+    def lcvmnx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvmnx."""
+        self.lcvmnx = value.lcid
 

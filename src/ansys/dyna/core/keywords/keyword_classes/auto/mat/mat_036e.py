@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT036E_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -86,6 +88,18 @@ class Mat036E(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lch00": LinkType.DEFINE_CURVE,
+        "lch45": LinkType.DEFINE_CURVE,
+        "lch90": LinkType.DEFINE_CURVE,
+        "lchbi": LinkType.DEFINE_CURVE,
+        "lchsh": LinkType.DEFINE_CURVE,
+        "lcr00": LinkType.DEFINE_CURVE,
+        "lcr45": LinkType.DEFINE_CURVE,
+        "lcr90": LinkType.DEFINE_CURVE,
+        "lcrbi": LinkType.DEFINE_CURVE,
+        "lcrsh": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat036E class."""
@@ -450,4 +464,154 @@ class Mat036E(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lch00_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lch00."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch00:
+                return kwd
+        return None
+
+    @lch00_link.setter
+    def lch00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch00."""
+        self.lch00 = value.lcid
+
+    @property
+    def lch45_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lch45."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch45:
+                return kwd
+        return None
+
+    @lch45_link.setter
+    def lch45_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch45."""
+        self.lch45 = value.lcid
+
+    @property
+    def lch90_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lch90."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch90:
+                return kwd
+        return None
+
+    @lch90_link.setter
+    def lch90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch90."""
+        self.lch90 = value.lcid
+
+    @property
+    def lchbi_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lchbi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lchbi:
+                return kwd
+        return None
+
+    @lchbi_link.setter
+    def lchbi_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lchbi."""
+        self.lchbi = value.lcid
+
+    @property
+    def lchsh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lchsh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lchsh:
+                return kwd
+        return None
+
+    @lchsh_link.setter
+    def lchsh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lchsh."""
+        self.lchsh = value.lcid
+
+    @property
+    def lcr00_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcr00."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcr00:
+                return kwd
+        return None
+
+    @lcr00_link.setter
+    def lcr00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcr00."""
+        self.lcr00 = value.lcid
+
+    @property
+    def lcr45_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcr45."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcr45:
+                return kwd
+        return None
+
+    @lcr45_link.setter
+    def lcr45_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcr45."""
+        self.lcr45 = value.lcid
+
+    @property
+    def lcr90_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcr90."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcr90:
+                return kwd
+        return None
+
+    @lcr90_link.setter
+    def lcr90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcr90."""
+        self.lcr90 = value.lcid
+
+    @property
+    def lcrbi_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcrbi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcrbi:
+                return kwd
+        return None
+
+    @lcrbi_link.setter
+    def lcrbi_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcrbi."""
+        self.lcrbi = value.lcid
+
+    @property
+    def lcrsh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcrsh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcrsh:
+                return kwd
+        return None
+
+    @lcrsh_link.setter
+    def lcrsh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcrsh."""
+        self.lcrsh = value.lcid
 

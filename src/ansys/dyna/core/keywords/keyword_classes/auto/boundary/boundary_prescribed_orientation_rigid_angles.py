@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD0 = (
     FieldSchema("pidb", int, 0, 10, None),
@@ -49,6 +51,11 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_ANGLES"
+    _link_fields = {
+        "lcidq1": LinkType.DEFINE_CURVE,
+        "lcidq2": LinkType.DEFINE_CURVE,
+        "lcidq3": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedOrientationRigidAngles class."""
@@ -222,4 +229,49 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""body must be `None` or one of {0,1}.""")
         self._cards[1].set_value("body", value)
+
+    @property
+    def lcidq1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq1:
+                return kwd
+        return None
+
+    @lcidq1_link.setter
+    def lcidq1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq1."""
+        self.lcidq1 = value.lcid
+
+    @property
+    def lcidq2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq2:
+                return kwd
+        return None
+
+    @lcidq2_link.setter
+    def lcidq2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq2."""
+        self.lcidq2 = value.lcid
+
+    @property
+    def lcidq3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq3:
+                return kwd
+        return None
+
+    @lcidq3_link.setter
+    def lcidq3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq3."""
+        self.lcidq3 = value.lcid
 

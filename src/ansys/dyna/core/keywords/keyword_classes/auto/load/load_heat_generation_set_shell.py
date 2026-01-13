@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADHEATGENERATIONSETSHELL_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -40,6 +42,11 @@ class LoadHeatGenerationSetShell(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "HEAT_GENERATION_SET_SHELL"
+    _link_fields = {
+        "wblcid": LinkType.DEFINE_CURVE,
+        "cblcid": LinkType.DEFINE_CURVE,
+        "tblcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadHeatGenerationSetShell class."""
@@ -117,4 +124,49 @@ class LoadHeatGenerationSetShell(KeywordBase):
     def tblcid(self, value: int) -> None:
         """Set the tblcid property."""
         self._cards[0].set_value("tblcid", value)
+
+    @property
+    def wblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for wblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.wblcid:
+                return kwd
+        return None
+
+    @wblcid_link.setter
+    def wblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for wblcid."""
+        self.wblcid = value.lcid
+
+    @property
+    def cblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for cblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.cblcid:
+                return kwd
+        return None
+
+    @cblcid_link.setter
+    def cblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for cblcid."""
+        self.cblcid = value.lcid
+
+    @property
+    def tblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tblcid:
+                return kwd
+        return None
+
+    @tblcid_link.setter
+    def tblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tblcid."""
+        self.tblcid = value.lcid
 

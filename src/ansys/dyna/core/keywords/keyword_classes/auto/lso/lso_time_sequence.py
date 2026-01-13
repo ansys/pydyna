@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LSOTIMESEQUENCE_CARD0 = (
     FieldSchema("solver_name", str, 0, 20, "MECH"),
@@ -59,6 +61,9 @@ class LsoTimeSequence(KeywordBase):
 
     keyword = "LSO"
     subkeyword = "TIME_SEQUENCE"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LsoTimeSequence class."""
@@ -282,4 +287,19 @@ class LsoTimeSequence(KeywordBase):
     def global_var(self, value: str) -> None:
         """Set the global_var property."""
         self._cards[3].set_value("global_var", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
 

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _AIRBAGFLUIDANDGAS_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -62,6 +64,10 @@ class AirbagFluidAndGas(KeywordBase):
 
     keyword = "AIRBAG"
     subkeyword = "FLUID_AND_GAS"
+    _link_fields = {
+        "lcxw": LinkType.DEFINE_CURVE,
+        "lcp": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagFluidAndGas class."""
@@ -328,4 +334,34 @@ class AirbagFluidAndGas(KeywordBase):
     def kbm(self, value: float) -> None:
         """Set the kbm property."""
         self._cards[2].set_value("kbm", value)
+
+    @property
+    def lcxw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcxw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcxw:
+                return kwd
+        return None
+
+    @lcxw_link.setter
+    def lcxw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcxw."""
+        self.lcxw = value.lcid
+
+    @property
+    def lcp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp:
+                return kwd
+        return None
+
+    @lcp_link.setter
+    def lcp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp."""
+        self.lcp = value.lcid
 

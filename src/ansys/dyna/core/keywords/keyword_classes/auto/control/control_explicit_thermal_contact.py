@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTROLEXPLICITTHERMALCONTACT_CARD0 = (
     FieldSchema("partset", int, 0, 10, None),
@@ -36,6 +38,9 @@ class ControlExplicitThermalContact(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "EXPLICIT_THERMAL_CONTACT"
+    _link_fields = {
+        "ncycle": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlExplicitThermalContact class."""
@@ -66,4 +71,19 @@ class ControlExplicitThermalContact(KeywordBase):
     def ncycle(self, value: int) -> None:
         """Set the ncycle property."""
         self._cards[0].set_value("ncycle", value)
+
+    @property
+    def ncycle_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ncycle."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ncycle:
+                return kwd
+        return None
+
+    @ncycle_link.setter
+    def ncycle_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ncycle."""
+        self.ncycle = value.lcid
 

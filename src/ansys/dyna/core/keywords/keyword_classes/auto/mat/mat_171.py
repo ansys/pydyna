@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT171_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -66,6 +68,9 @@ class Mat171(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "bcur": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat171 class."""
@@ -303,4 +308,19 @@ class Mat171(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def bcur_link(self) -> DefineCurve:
+        """Get the DefineCurve object for bcur."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.bcur:
+                return kwd
+        return None
+
+    @bcur_link.setter
+    def bcur_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for bcur."""
+        self.bcur = value.lcid
 

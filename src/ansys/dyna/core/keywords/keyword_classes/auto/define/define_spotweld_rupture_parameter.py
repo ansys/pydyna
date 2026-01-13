@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINESPOTWELDRUPTUREPARAMETER_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -76,6 +78,14 @@ class DefineSpotweldRuptureParameter(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcdpa": LinkType.DEFINE_CURVE,
+        "lcdpm": LinkType.DEFINE_CURVE,
+        "lcdps": LinkType.DEFINE_CURVE,
+        "lcdna": LinkType.DEFINE_CURVE,
+        "lcdnm": LinkType.DEFINE_CURVE,
+        "lcdns": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSpotweldRuptureParameter class."""
@@ -344,4 +354,94 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcdpa_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdpa."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdpa:
+                return kwd
+        return None
+
+    @lcdpa_link.setter
+    def lcdpa_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdpa."""
+        self.lcdpa = value.lcid
+
+    @property
+    def lcdpm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdpm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdpm:
+                return kwd
+        return None
+
+    @lcdpm_link.setter
+    def lcdpm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdpm."""
+        self.lcdpm = value.lcid
+
+    @property
+    def lcdps_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdps."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdps:
+                return kwd
+        return None
+
+    @lcdps_link.setter
+    def lcdps_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdps."""
+        self.lcdps = value.lcid
+
+    @property
+    def lcdna_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdna."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdna:
+                return kwd
+        return None
+
+    @lcdna_link.setter
+    def lcdna_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdna."""
+        self.lcdna = value.lcid
+
+    @property
+    def lcdnm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdnm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdnm:
+                return kwd
+        return None
+
+    @lcdnm_link.setter
+    def lcdnm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdnm."""
+        self.lcdnm = value.lcid
+
+    @property
+    def lcdns_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdns."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdns:
+                return kwd
+        return None
+
+    @lcdns_link.setter
+    def lcdns_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdns."""
+        self.lcdns = value.lcid
 
