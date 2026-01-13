@@ -30,13 +30,31 @@ logger = logging.getLogger(__name__)
 class ControlKeywordsMixin:
     """Mixin class providing control keyword creation methods."""
 
-    def create_termination(self, endtim: float) -> bool:
+    def create_termination(
+        self,
+        endtim: float,
+        endcyc: int = 0,
+        dtmin: float = 0.0,
+        endeng: float = 0.0,
+        endmas: float = 0.0,
+        nosol: int = 0,
+    ) -> bool:
         """Create a CONTROL_TERMINATION keyword.
 
         Parameters
         ----------
         endtim : float
             Termination time.
+        endcyc : int
+            Termination cycle.
+        dtmin : float
+            Reduction factor for initial timestep limit.
+        endeng : float
+            Energy ratio for termination.
+        endmas : float
+            Mass added for termination.
+        nosol : int
+            No solution flag.
 
         Returns
         -------
@@ -49,6 +67,16 @@ class ControlKeywordsMixin:
 
         kw = keywords.ControlTermination()
         kw.endtim = endtim
+        if endcyc:
+            kw.endcyc = endcyc
+        if dtmin:
+            kw.dtmin = dtmin
+        if endeng:
+            kw.endeng = endeng
+        if endmas:
+            kw.endmas = endmas
+        if nosol:
+            kw.nosol = nosol
 
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_TERMINATION with endtim={endtim}")
@@ -102,6 +130,9 @@ class ControlKeywordsMixin:
         slnten: int = 1,
         rylen: int = 1,
         irgen: int = 2,
+        maten: int = 1,
+        drlen: int = 1,
+        disen: int = 1,
     ) -> bool:
         """Create a CONTROL_ENERGY keyword.
 
@@ -117,6 +148,12 @@ class ControlKeywordsMixin:
             Rayleigh energy flag.
         irgen : int
             Initial geometry energy flag.
+        maten : int
+            Material energy flag.
+        drlen : int
+            Damping energy flag.
+        disen : int
+            Discrete element energy flag.
 
         Returns
         -------
@@ -131,6 +168,9 @@ class ControlKeywordsMixin:
         kw.slnten = slnten
         kw.rylen = rylen
         kw.irgen = irgen
+        kw.maten = maten
+        kw.drlen = drlen
+        kw.disen = disen
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_ENERGY")

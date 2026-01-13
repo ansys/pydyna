@@ -60,7 +60,14 @@ class KeywordsStub:
 
     def CreateTermination(self, request):
         """Create termination keyword."""
-        self._backend.create_termination(request.endtim)
+        self._backend.create_termination(
+            endtim=request.endtim,
+            endcyc=getattr(request, "endcyc", 0),
+            dtmin=getattr(request, "dtmin", 0.0),
+            endeng=getattr(request, "endeng", 0.0),
+            endmas=getattr(request, "endmas", 0.0),
+            nosol=getattr(request, "nosol", 0),
+        )
         return type("Response", (), {"success": True})()
 
     def SaveFile(self, request):
@@ -144,6 +151,52 @@ class KeywordsStub:
         )
         return type("Response", (), {"id": curve_id})()
 
+    def CreateDefineTransformation(self, request):
+        """Create define transformation keyword."""
+        transforms = []
+        for t in getattr(request, "transforms", []):
+            transforms.append(
+                {
+                    "option": getattr(t, "option", ""),
+                    "a1": getattr(t, "a1", 0.0),
+                    "a2": getattr(t, "a2", 0.0),
+                    "a3": getattr(t, "a3", 0.0),
+                    "a4": getattr(t, "a4", 0.0),
+                    "a5": getattr(t, "a5", 0.0),
+                    "a6": getattr(t, "a6", 0.0),
+                    "a7": getattr(t, "a7", 0.0),
+                }
+            )
+        tranid = self._backend.create_define_transformation(
+            tranid=getattr(request, "tranid", None),
+            transforms=transforms,
+        )
+        return type("Response", (), {"id": tranid})()
+
+    def CreateIncludeTransform(self, request):
+        """Create include transform keyword."""
+        self._backend.create_include_transform(
+            filename=request.filename,
+            idnoff=getattr(request, "idnoff", 0),
+            ideoff=getattr(request, "ideoff", 0),
+            idpoff=getattr(request, "idpoff", 0),
+            idmoff=getattr(request, "idmoff", 0),
+            idsoff=getattr(request, "idsoff", 0),
+            idfoff=getattr(request, "idfoff", 0),
+            iddoff=getattr(request, "iddoff", 0),
+            idroff=getattr(request, "idroff", 0),
+            prefix=getattr(request, "prefix", ""),
+            suffix=getattr(request, "suffix", ""),
+            fctmas=getattr(request, "fctmas", 0.0),
+            fcttim=getattr(request, "fcttim", 0.0),
+            fctlen=getattr(request, "fctlen", 0.0),
+            fcttem=getattr(request, "fcttem", ""),
+            incout1=getattr(request, "incout1", 0),
+            fctchg=getattr(request, "fctchg", 0.0),
+            tranid=getattr(request, "tranid", 0),
+        )
+        return type("Response", (), {"success": True})()
+
     # =========================================================================
     # Control Methods
     # =========================================================================
@@ -167,6 +220,9 @@ class KeywordsStub:
             slnten=getattr(request, "slnten", 2),
             rylen=getattr(request, "rylen", 1),
             irgen=getattr(request, "irgen", 2),
+            maten=getattr(request, "maten", 1),
+            drlen=getattr(request, "drlen", 1),
+            disen=getattr(request, "disen", 1),
         )
         return type("Response", (), {"success": True})()
 

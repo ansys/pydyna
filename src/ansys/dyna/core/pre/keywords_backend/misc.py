@@ -386,3 +386,156 @@ class MiscKeywordsMixin:
 
         self._deck.append(kw)
         logger.info(f"Created LOAD_BODY_Z keyword with lcid={lcid}")
+
+    def create_define_transformation(
+        self,
+        tranid: int = None,
+        transforms: List[dict] = None,
+    ) -> int:
+        """Create a DEFINE_TRANSFORMATION keyword.
+
+        Parameters
+        ----------
+        tranid : int, optional
+            Transformation ID. If not provided, auto-generates one.
+        transforms : List[dict]
+            List of transformation operations. Each dict should have:
+            - option: str (e.g., "MIRROR", "SCALE", "ROTATE", "TRANSL")
+            - a1-a7: float values for transformation parameters
+
+        Returns
+        -------
+        int
+            The transformation ID.
+        """
+        import pandas as pd
+
+        from ansys.dyna.core.keywords import keywords
+
+        if transforms is None:
+            transforms = []
+
+        trans_id = tranid if tranid else self.next_id("transformation")
+
+        logger.debug(f"Creating DEFINE_TRANSFORMATION: tranid={trans_id}")
+
+        kw = keywords.DefineTransformation()
+        kw.tranid = trans_id
+
+        # Build transforms table as DataFrame
+        if transforms:
+            data = []
+            for t in transforms:
+                row = [
+                    t.get("option", ""),
+                    t.get("a1", 0.0),
+                    t.get("a2", 0.0),
+                    t.get("a3", 0.0),
+                    t.get("a4", 0.0),
+                    t.get("a5", 0.0),
+                    t.get("a6", 0.0),
+                    t.get("a7", 0.0),
+                ]
+                data.append(row)
+            kw.transforms = pd.DataFrame(data, columns=["option", "a1", "a2", "a3", "a4", "a5", "a6", "a7"])
+
+        self._deck.append(kw)
+        logger.info(f"Created DEFINE_TRANSFORMATION keyword with tranid={trans_id}")
+        return trans_id
+
+    def create_include_transform(
+        self,
+        filename: str,
+        idnoff: int = 0,
+        ideoff: int = 0,
+        idpoff: int = 0,
+        idmoff: int = 0,
+        idsoff: int = 0,
+        idfoff: int = 0,
+        iddoff: int = 0,
+        idroff: int = 0,
+        prefix: str = "",
+        suffix: str = "",
+        fctmas: float = 0.0,
+        fcttim: float = 0.0,
+        fctlen: float = 0.0,
+        fcttem: str = "",
+        incout1: int = 0,
+        fctchg: float = 0.0,
+        tranid: int = 0,
+    ) -> None:
+        """Create an INCLUDE_TRANSFORM keyword.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file to include.
+        idnoff : int
+            Node ID offset.
+        ideoff : int
+            Element ID offset.
+        idpoff : int
+            Part ID offset.
+        idmoff : int
+            Material ID offset.
+        idsoff : int
+            Section ID offset.
+        idfoff : int
+            Function ID offset.
+        iddoff : int
+            Define ID offset.
+        idroff : int
+            Set ID offset.
+        prefix : str
+            Prefix added to titles in included file.
+        suffix : str
+            Suffix added to titles in included file.
+        fctmas : float
+            Mass transformation factor.
+        fcttim : float
+            Time transformation factor.
+        fctlen : float
+            Length transformation factor.
+        fcttem : str
+            Temperature transformation factor.
+        incout1 : int
+            Output control (1 to create DYNA.INC file).
+        fctchg : float
+            Electric charge transformation factor.
+        tranid : int
+            Transformation ID (references DEFINE_TRANSFORMATION).
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating INCLUDE_TRANSFORM: filename={filename}, tranid={tranid}")
+
+        kw = keywords.IncludeTransform()
+        kw.filename = filename
+        kw.idnoff = idnoff
+        kw.ideoff = ideoff
+        kw.idpoff = idpoff
+        kw.idmoff = idmoff
+        kw.idsoff = idsoff
+        kw.idfoff = idfoff
+        kw.iddoff = iddoff
+        kw.idroff = idroff
+        if prefix:
+            kw.prefix = prefix
+        if suffix:
+            kw.suffix = suffix
+        if fctmas:
+            kw.fctmas = fctmas
+        if fcttim:
+            kw.fcttim = fcttim
+        if fctlen:
+            kw.fctlen = fctlen
+        if fcttem:
+            kw.fcttem = fcttem
+        # incout1 accepts 0, 1, or None - explicitly set it
+        kw.incout1 = incout1 if incout1 else None
+        if fctchg:
+            kw.fctchg = fctchg
+        kw.tranid = tranid
+
+        self._deck.append(kw)
+        logger.info(f"Created INCLUDE_TRANSFORM keyword: filename={filename}")

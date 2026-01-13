@@ -150,13 +150,22 @@ class KeywordsDynaSolution:
 
         return True
 
-    def set_termination(self, termination_time: float) -> bool:
+    def set_termination(
+        self,
+        termination_time: float,
+        termination_endeng: float = 0.0,
+        termination_endmas: float = 0.0,
+    ) -> bool:
         """Set time for terminating the job.
 
         Parameters
         ----------
         termination_time : float
             Termination time.
+        termination_endeng : float, optional
+            Energy ratio for termination.
+        termination_endmas : float, optional
+            Mass added for termination.
 
         Returns
         -------
@@ -166,7 +175,11 @@ class KeywordsDynaSolution:
         KeywordsDynaSolution.termination_time = termination_time
         # Also set on DynaSolution for compatibility with classes that reference it directly
         DynaSolution.termination_time = termination_time
-        self._backend.create_termination(termination_time)
+        self._backend.create_termination(
+            endtim=termination_time,
+            endeng=termination_endeng,
+            endmas=termination_endmas,
+        )
         logger.info(f"Setting termination time to {termination_time}")
         return True
 

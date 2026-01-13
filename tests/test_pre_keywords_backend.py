@@ -484,7 +484,17 @@ class TestReferenceFileComparison:
             return [f"Missing keyword types: {missing_types}"]
 
         # Metadata fields to skip
-        skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords", "its", "sets"}
+        skip_fields = {
+            "included_from",
+            "cards",
+            "title",
+            "heading",
+            "options",
+            "subkeywords",
+            "its",
+            "sets",
+            "tranid_link",  # Linked keyword property - references same data but different objects
+        }
 
         # Auto-generated ID fields where exact values may differ between implementations
         # but the structure is semantically equivalent
@@ -816,10 +826,88 @@ class TestReferenceFileComparison:
         """test_mech.k - DynaMech: airbag, rigidwall, contact."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="Transform not implemented in keywords backend")
     def test_elementary_main(self, initial_files_dir, pre_reference_dir):
         """test_elementary_main.k - INCLUDE_TRANSFORM, DEFINE_TRANSFORMATION."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import (
+            DynaBase,
+            Switch,
+            InvariantNode,
+            EnergyFlag,
+            HourglassControl,
+            BulkViscosity,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "solution", "test_elementary_main.k")
+        reference_file = os.path.join(pre_reference_dir, "test_elementary_main.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            dynabase = DynaBase()
+            solution.add(dynabase)
+
+            # CONTROL_ACCURACY: osu=1, inn=4, pidosu=0, iacc=1, exacc=0.0
+            dynabase.set_accuracy(
+                objective_stress_updates=Switch.ON,
+                invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
+                implicit_accuracy_flag=Switch.ON,
+            )
+
+            # CONTROL_BULK_VISCOSITY: q1=1.5, q2=0.06, type=-2
+            dynabase.set_bulk_viscosity(
+                bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED,
+                quadratic_viscosity_coeff=1.5,
+                linear_viscosity_coeff=0.06,
+            )
+
+            # CONTROL_ENERGY: hgen=2, rwen=2, slnten=2, rylen=1, irgen=2, maten=1, drlen=1, disen=1
+            dynabase.set_energy(
+                hourglass_energy=EnergyFlag.COMPUTED,
+                rigidwall_energy=EnergyFlag.COMPUTED,
+                sliding_interface_energy=EnergyFlag.COMPUTED,
+                rayleigh_energy=EnergyFlag.NOT_COMPUTED,
+                initial_reference_geometry_energy=EnergyFlag.COMPUTED,
+            )
+
+            # CONTROL_HOURGLASS: ihq=2, qh=0.0
+            dynabase.set_hourglass(
+                controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
+                coefficient=0.0,
+            )
+
+            # Note: CONTROL_TERMINATION and CONTROL_TIMESTEP are in the initial file
+            # (don't add them again)
+
+            # DEFINE_TRANSFORMATION: tranid=1, MIRROR with a1=-4.0, a4=-5.0
+            solution._backend.create_define_transformation(
+                tranid=1,
+                transforms=[{"option": "MIRROR", "a1": -4.0, "a2": 0.0, "a3": 0.0, "a4": -5.0, "a5": 0.0, "a6": 0.0, "a7": 0.0}],
+            )
+
+            # INCLUDE_TRANSFORM: filename="transform.k", offsets=100 except iddoff=0, fctlen=1.0, tranid=1
+            solution._backend.create_include_transform(
+                filename="transform.k",
+                idnoff=100,
+                ideoff=100,
+                idpoff=100,
+                idmoff=100,
+                idsoff=100,
+                idfoff=100,
+                iddoff=0,
+                fctlen=1.0,
+                tranid=1,
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_elementary_main.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
 
     def test_cylinder_flow(self, initial_files_dir, pre_reference_dir):
