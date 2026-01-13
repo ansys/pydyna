@@ -533,6 +533,9 @@ class TestReferenceFileComparison:
             # but keyword class creates separate keywords (semantically identical in LS-DYNA)
             "BoundaryPrescribedMotionRigid",
             "PartInertia",
+            # SALE test: ALE_STRUCTURED_MULTI-MATERIAL_GROUP uses duplicate cards in LS-DYNA
+            # but keyword class is single-card, so we create one keyword per group
+            "AleStructuredMulti_MaterialGroup",
         }
 
         # Known keyword class defaults that are equivalent to None or 0 in reference
@@ -3433,10 +3436,308 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaSALE not implemented in keywords backend")
     def test_sale(self, initial_files_dir, pre_reference_dir):
         """test_sale.k - SALE (Simplified ALE)."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        initial_file = os.path.join(initial_files_dir, "test_sale.k")
+        reference_file = os.path.join(pre_reference_dir, "test_sale.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # CONTROL_ALE
+            solution.stub.ALECreateControl(
+                type("Request", (), {
+                    "dct": 0,
+                    "nadv": 1,
+                    "meth": 2,
+                    "afac": 0,
+                    "end": 1e20,
+                    "aafac": 1,
+                    "vfact": 1e-6,
+                    "pref": 0,
+                })()
+            )
+
+            # CONTROL_ENERGY with SALE-specific settings
+            solution.stub.CreateControlEnergy(
+                type("Request", (), {
+                    "hgen": 2,
+                    "rwen": 2,
+                    "slnten": 2,
+                    "rylen": 1,
+                    "irgen": 2,
+                    "maten": 1,
+                    "drlen": 1,
+                    "disen": 1,
+                })()
+            )
+
+            # DATABASE_GLSTAT
+            solution.stub.CreateDBAscii(
+                type("Request", (), {
+                    "type": "GLSTAT",
+                    "dt": 0.2,
+                    "binary": 1,
+                    "lcur": 0,
+                    "ioopt": 1,
+                })()
+            )
+
+            # DATABASE_MATSUM
+            solution.stub.CreateDBAscii(
+                type("Request", (), {
+                    "type": "MATSUM",
+                    "dt": 0.2,
+                    "binary": 1,
+                    "lcur": 0,
+                    "ioopt": 1,
+                })()
+            )
+
+            # DATABASE_SALE
+            solution.stub.CreateDBSALE(
+                type("Request", (), {"switch": 1})()
+            )
+
+            # DATABASE_BINARY_D3PLOT and DATABASE_EXTENT_BINARY
+            # CreateDBBinary creates both D3PLOT and EXTENT_BINARY
+            solution.stub.CreateDBBinary(
+                type("Request", (), {
+                    "filetype": "D3PLOT",
+                    "dt": 5.0,
+                    "maxint": 0,
+                    "ieverp": 0,
+                    "dcomp": 1,
+                    "nintsld": 0,
+                })()
+            )
+
+            # MAT_VACUUM (mid=1)
+            solution.stub.CreateMatVacuum(
+                type("Request", (), {
+                    "mid": 1,
+                    "rho": 1.0e-9,
+                })()
+            )
+
+            # MAT_NULL (mid=2)
+            solution.stub.CreateMatNull(
+                type("Request", (), {
+                    "mid": 2,
+                    "ro": 0.00128,
+                    "pc": -1.0e-9,
+                    "mu": 0.0,
+                })()
+            )
+
+            # MAT_HIGH_EXPLOSIVE_BURN (mid=3)
+            solution.stub.CreateMatHighExplosiveBurn(
+                type("Request", (), {
+                    "mid": 3,
+                    "ro": 1.835,
+                    "d": 0.88,
+                    "pcj": 0.37,
+                })()
+            )
+
+            # MAT_JOHNSON_COOK (mid=4)
+            solution.stub.CreateMatJohnsonCook(
+                type("Request", (), {
+                    "mid": 4,
+                    "ro": 8.96,
+                    "g": 0.46,
+                    "e": 0.0,
+                    "pr": 0.34,
+                    "a": 9.0e-4,
+                    "b": 0.00292,
+                    "n": 0.31,
+                    "c": 0.025,
+                    "m": 1.09,
+                    "tm": 1356.0,
+                    "tr": 293.0,
+                    "epso": 1.0e-6,
+                    "cp": 3.83e-6,
+                    "pc": -0.012,
+                    "spall": 2.0,
+                    "d1": 0.54,
+                    "d2": 4.89,
+                    "d3": 3.03,
+                    "d4": 0.014,
+                    "d5": 1.12,
+                    "c2_or_erod": 4.768372e7,
+                })()
+            )
+
+            # INITIAL_DETONATION
+            solution.stub.CreateInitialDetonation(
+                type("Request", (), {
+                    "pid": 2,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 19.33,
+                    "lt": 0.0,
+                    "mmgset": 0,
+                })()
+            )
+
+            # ALE_STRUCTURED_MESH
+            solution.stub.CreateAleStructuredMesh(
+                type("Request", (), {
+                    "mshid": 1,
+                    "dpid": 2,
+                    "nbid": 2000001,
+                    "ebid": 2000001,
+                    "tdeath": 0.0,
+                    "cpidx": 1,
+                    "cpidy": 2,
+                    "cpidz": 3,
+                })()
+            )
+
+            # ALE_STRUCTURED_MESH_CONTROL_POINTS x 3
+            # Control points for X
+            solution.stub.CreateAleStructuredMeshControlPoints(
+                type("Request", (), {
+                    "cpid": 1,
+                    "icase": 2,
+                    "sfo": 1.0,
+                    "offo": 0.0,
+                    "points": [(1, 0.0, 1.0), (11, -2.5, 0.5), (21, 0.0, 0.5), (31, 0.0, 1.0)],
+                })()
+            )
+            # Control points for Y
+            solution.stub.CreateAleStructuredMeshControlPoints(
+                type("Request", (), {
+                    "cpid": 2,
+                    "icase": 2,
+                    "sfo": 1.0,
+                    "offo": 0.0,
+                    "points": [(1, 0.0, 1.0), (11, -2.5, 0.5), (21, 0.0, 0.5), (31, 0.0, 1.0)],
+                })()
+            )
+            # Control points for Z
+            solution.stub.CreateAleStructuredMeshControlPoints(
+                type("Request", (), {
+                    "cpid": 3,
+                    "icase": 2,
+                    "sfo": 1.0,
+                    "offo": 0.0,
+                    "points": [(1, 0.0, 0.5), (269, 11.0, 0.25), (309, 21.0, 0.25), (339, 0.0, 5.0)],
+                })()
+            )
+
+            # ALE_STRUCTURED_MULTI-MATERIAL_GROUP
+            solution.stub.CreateAleStructuredMultiMaterialGroup(
+                type("Request", (), {
+                    "groups": [
+                        {"ammgnm": "vacuum", "mid": 1, "eosid": 0, "pref": 0.0},
+                        {"ammgnm": "air", "mid": 2, "eosid": 1, "pref": 1.01325e-6},
+                        {"ammgnm": "HE", "mid": 3, "eosid": 2, "pref": 0.0},
+                        {"ammgnm": "liner", "mid": 4, "eosid": 3, "pref": 0.0},
+                    ],
+                })()
+            )
+
+            # ALE_STRUCTURED_MESH_VOLUME_FILLING x 3
+            solution.stub.CreateAleStructuredMeshVolumeFilling(
+                type("Request", (), {
+                    "mshid": 1,
+                    "ammgto": "air",
+                    "nsample": 4,
+                    "geom": "ALL",
+                    "in_out": 0,
+                })()
+            )
+            solution.stub.CreateAleStructuredMeshVolumeFilling(
+                type("Request", (), {
+                    "mshid": 1,
+                    "ammgto": "HE",
+                    "nsample": 4,
+                    "geom": "PART",
+                    "in_out": 1,
+                    "e1": 23,
+                })()
+            )
+            solution.stub.CreateAleStructuredMeshVolumeFilling(
+                type("Request", (), {
+                    "mshid": 1,
+                    "ammgto": "liner",
+                    "nsample": 4,
+                    "geom": "PART",
+                    "in_out": 1,
+                    "e1": 22,
+                })()
+            )
+
+            # ALE_STRUCTURED_MESH_REFINE
+            solution.stub.CreateAleStructuredMeshRefine(
+                type("Request", (), {
+                    "mshid": 1,
+                    "ityp": 1,
+                    "idir": 1,
+                    "n1": 1,
+                    "n2": 0,
+                    "ntimes": 0,
+                })()
+            )
+
+            # EOS_LINEAR_POLYNOMIAL (eosid=1)
+            solution.stub.CreateEosLinearPolynomial(
+                type("Request", (), {
+                    "eosid": 1,
+                    "c0": 0.0,
+                    "c1": 0.0,
+                    "c2": 0.0,
+                    "c3": 0.0,
+                    "c4": 0.4,
+                    "c5": 0.4,
+                    "c6": 0.0,
+                    "e0": 2.5331e-6,
+                    "v0": 1.0,
+                })()
+            )
+
+            # EOS_JWL (eosid=2)
+            solution.stub.CreateEosJwl(
+                type("Request", (), {
+                    "eosid": 2,
+                    "a": 8.261,
+                    "b": 0.1724,
+                    "r1": 4.55,
+                    "r2": 1.32,
+                    "omeg": 0.38,
+                    "e0": 0.102,
+                    "vo": 1.0,
+                })()
+            )
+
+            # EOS_GRUNEISEN (eosid=3)
+            solution.stub.CreateEosGruneisen(
+                type("Request", (), {
+                    "eosid": 3,
+                    "c": 0.394,
+                    "s1": 1.489,
+                    "s2": 0.0,
+                    "s3": 0.0,
+                    "gamao": 2.02,
+                    "a": 0.47,
+                    "e0": 0.0,
+                    "v0": 0.0,
+                })()
+            )
+
+            # Save and compare
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_sale.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
         """test_frf_plate_damping.k - NVH FRF plate with damping curve."""

@@ -271,3 +271,25 @@ class DatabaseKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created DATABASE_BINARY_D3PLOT with dt={dt}")
         return True
+
+    def create_database_sale(self, switch: int = 1) -> bool:
+        """Create a DATABASE_SALE keyword.
+
+        Parameters
+        ----------
+        switch : int, optional
+            Switch to turn on/off SALE database output. Default is 1 (on).
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.DatabaseSale()
+        kw.on_off = switch
+
+        self._deck.append(kw)
+        logger.debug(f"Created DATABASE_SALE with switch={switch}")
+        return True

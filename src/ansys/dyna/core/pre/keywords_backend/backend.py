@@ -39,6 +39,7 @@ from ansys.dyna.core.pre.keywords_backend.icfd import ICFDKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.initial import InitialKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.material import MaterialKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.misc import MiscKeywordsMixin
+from ansys.dyna.core.pre.keywords_backend.sale import SALEKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.section import SectionKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.set import SetKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.sph import SPHKeywordsMixin
@@ -60,6 +61,7 @@ class KeywordsBackend(
     FrequencyKeywordsMixin,
     MiscKeywordsMixin,
     SPHKeywordsMixin,
+    SALEKeywordsMixin,
 ):
     """Keywords-based backend for the pre module.
 
@@ -78,6 +80,7 @@ class KeywordsBackend(
     - EMKeywordsMixin: EM_* keywords
     - ICFDKeywordsMixin: ICFD_* and MESH_* keywords
     - FrequencyKeywordsMixin: FREQUENCY_DOMAIN_* keywords
+    - SALEKeywordsMixin: ALE_* and SALE-related keywords
     - MiscKeywordsMixin: DEFINE_CURVE, PART, CONTACT, etc.
     - SPHKeywordsMixin: SPH/ISPH keywords including SECTION_SPH, MAT_SPH_*, DEFINE_SPH_*
     """

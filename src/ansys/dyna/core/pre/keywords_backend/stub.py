@@ -122,6 +122,13 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def CreateDBSALE(self, request):
+        """Create DATABASE_SALE keyword."""
+        self._backend.create_database_sale(
+            switch=getattr(request, "switch", 1),
+        )
+        return type("Response", (), {"success": True})()
+
     # =========================================================================
     # Define Methods
     # =========================================================================
@@ -260,6 +267,20 @@ class KeywordsStub:
             lctm=getattr(request, "lctm", 0),
             erode=getattr(request, "erode", 0),
             ms1st=getattr(request, "ms1st", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ALECreateControl(self, request):
+        """Create CONTROL_ALE keyword."""
+        self._backend.create_control_ale(
+            dct=getattr(request, "dct", 0),
+            nadv=getattr(request, "nadv", 1),
+            meth=getattr(request, "meth", 2),
+            afac=getattr(request, "afac", 0.0),
+            end=getattr(request, "end", 1.0e20),
+            aafac=getattr(request, "aafac", 1.0),
+            vfact=getattr(request, "vfact", 1.0e-6),
+            pref=getattr(request, "pref", 0.0),
         )
         return type("Response", (), {"success": True})()
 
@@ -1233,3 +1254,195 @@ class KeywordsStub:
             solver=getattr(request, "solver", "MECH"),
         )
         return type("Response", (), {"success": True})()
+
+    # =========================================================================
+    # SALE (Simplified ALE) Methods
+    # =========================================================================
+
+    def CreateMatVacuum(self, request):
+        """Create MAT_VACUUM keyword."""
+        mid = self._backend.create_mat_vacuum(
+            mid=getattr(request, "mid", None),
+            rho=getattr(request, "rho", 1.0e-9),
+        )
+        return type("Response", (), {"mid": mid})()
+
+    def CreateMatNull(self, request):
+        """Create MAT_NULL keyword."""
+        mid = self._backend.create_mat_null(
+            mid=getattr(request, "mid", None),
+            ro=getattr(request, "ro", 0.0),
+            pc=getattr(request, "pc", 0.0),
+            mu=getattr(request, "mu", 0.0),
+            terod=getattr(request, "terod", 0.0),
+            cerod=getattr(request, "cerod", 0.0),
+            ym=getattr(request, "ym", 0.0),
+            pr=getattr(request, "pr", 0.0),
+        )
+        return type("Response", (), {"mid": mid})()
+
+    def CreateMatHighExplosiveBurn(self, request):
+        """Create MAT_HIGH_EXPLOSIVE_BURN keyword."""
+        mid = self._backend.create_mat_high_explosive_burn(
+            mid=getattr(request, "mid", None),
+            ro=getattr(request, "ro", 0.0),
+            d=getattr(request, "d", 0.0),
+            pcj=getattr(request, "pcj", 0.0),
+            beta=getattr(request, "beta", 0.0),
+            k=getattr(request, "k", 0.0),
+            g=getattr(request, "g", 0.0),
+            sigy=getattr(request, "sigy", 0.0),
+        )
+        return type("Response", (), {"mid": mid})()
+
+    def CreateMatJohnsonCook(self, request):
+        """Create MAT_JOHNSON_COOK keyword."""
+        mid = self._backend.create_mat_johnson_cook(
+            mid=getattr(request, "mid", None),
+            ro=getattr(request, "ro", 0.0),
+            g=getattr(request, "g", 0.0),
+            e=getattr(request, "e", 0.0),
+            pr=getattr(request, "pr", 0.0),
+            dtf=getattr(request, "dtf", 0.0),
+            vp=getattr(request, "vp", 0.0),
+            rateop=getattr(request, "rateop", 0.0),
+            a=getattr(request, "a", 0.0),
+            b=getattr(request, "b", 0.0),
+            n=getattr(request, "n", 0.0),
+            c=getattr(request, "c", 0.0),
+            m=getattr(request, "m", 0.0),
+            tm=getattr(request, "tm", 0.0),
+            tr=getattr(request, "tr", 0.0),
+            epso=getattr(request, "epso", 0.0),
+            cp=getattr(request, "cp", 0.0),
+            pc=getattr(request, "pc", 0.0),
+            spall=getattr(request, "spall", 0.0),
+            it=getattr(request, "it", 0.0),
+            d1=getattr(request, "d1", 0.0),
+            d2=getattr(request, "d2", 0.0),
+            d3=getattr(request, "d3", 0.0),
+            d4=getattr(request, "d4", 0.0),
+            d5=getattr(request, "d5", 0.0),
+            c2_or_erod=getattr(request, "c2_or_erod", 0.0),
+        )
+        return type("Response", (), {"mid": mid})()
+
+    def CreateInitialDetonation(self, request):
+        """Create INITIAL_DETONATION keyword."""
+        self._backend.create_initial_detonation(
+            pid=request.pid,
+            x=getattr(request, "x", 0.0),
+            y=getattr(request, "y", 0.0),
+            z=getattr(request, "z", 0.0),
+            lt=getattr(request, "lt", 0.0),
+            mmgset=getattr(request, "mmgset", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateAleStructuredMesh(self, request):
+        """Create ALE_STRUCTURED_MESH keyword."""
+        self._backend.create_ale_structured_mesh(
+            mshid=request.mshid,
+            dpid=getattr(request, "dpid", 0),
+            nbid=getattr(request, "nbid", 0),
+            ebid=getattr(request, "ebid", 0),
+            tdeath=getattr(request, "tdeath", 0.0),
+            cpidx=getattr(request, "cpidx", 0),
+            cpidy=getattr(request, "cpidy", 0),
+            cpidz=getattr(request, "cpidz", 0),
+            nid0=getattr(request, "nid0", 0),
+            lcsid=getattr(request, "lcsid", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateAleStructuredMeshControlPoints(self, request):
+        """Create ALE_STRUCTURED_MESH_CONTROL_POINTS keyword."""
+        self._backend.create_ale_structured_mesh_control_points(
+            cpid=request.cpid,
+            icase=getattr(request, "icase", 2),
+            sfo=getattr(request, "sfo", 1.0),
+            offo=getattr(request, "offo", 0.0),
+            points=getattr(request, "points", []),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateAleStructuredMultiMaterialGroup(self, request):
+        """Create ALE_STRUCTURED_MULTI-MATERIAL_GROUP keyword."""
+        self._backend.create_ale_structured_multi_material_group(
+            groups=getattr(request, "groups", []),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateAleStructuredMeshVolumeFilling(self, request):
+        """Create ALE_STRUCTURED_MESH_VOLUME_FILLING keyword."""
+        self._backend.create_ale_structured_mesh_volume_filling(
+            mshid=request.mshid,
+            ammgto=getattr(request, "ammgto", ""),
+            nsample=getattr(request, "nsample", 0),
+            vid=getattr(request, "vid", 0),
+            geom=getattr(request, "geom", "ALL"),
+            in_out=getattr(request, "in_out", 0),
+            e1=getattr(request, "e1", 0.0),
+            e2=getattr(request, "e2", 0.0),
+            e3=getattr(request, "e3", 0.0),
+            e4=getattr(request, "e4", 0.0),
+            e5=getattr(request, "e5", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateAleStructuredMeshRefine(self, request):
+        """Create ALE_STRUCTURED_MESH_REFINE keyword."""
+        self._backend.create_ale_structured_mesh_refine(
+            mshid=request.mshid,
+            ityp=getattr(request, "ityp", 0),
+            idir=getattr(request, "idir", 0),
+            n1=getattr(request, "n1", 0),
+            n2=getattr(request, "n2", 0),
+            ntimes=getattr(request, "ntimes", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEosLinearPolynomial(self, request):
+        """Create EOS_LINEAR_POLYNOMIAL keyword."""
+        eosid = self._backend.create_eos_linear_polynomial(
+            eosid=getattr(request, "eosid", None),
+            c0=getattr(request, "c0", 0.0),
+            c1=getattr(request, "c1", 0.0),
+            c2=getattr(request, "c2", 0.0),
+            c3=getattr(request, "c3", 0.0),
+            c4=getattr(request, "c4", 0.0),
+            c5=getattr(request, "c5", 0.0),
+            c6=getattr(request, "c6", 0.0),
+            e0=getattr(request, "e0", 0.0),
+            v0=getattr(request, "v0", 0.0),
+        )
+        return type("Response", (), {"eosid": eosid})()
+
+    def CreateEosJwl(self, request):
+        """Create EOS_JWL keyword."""
+        eosid = self._backend.create_eos_jwl(
+            eosid=getattr(request, "eosid", None),
+            a=getattr(request, "a", 0.0),
+            b=getattr(request, "b", 0.0),
+            r1=getattr(request, "r1", 0.0),
+            r2=getattr(request, "r2", 0.0),
+            omeg=getattr(request, "omeg", 0.0),
+            e0=getattr(request, "e0", 0.0),
+            vo=getattr(request, "vo", 0.0),
+        )
+        return type("Response", (), {"eosid": eosid})()
+
+    def CreateEosGruneisen(self, request):
+        """Create EOS_GRUNEISEN keyword."""
+        eosid = self._backend.create_eos_gruneisen(
+            eosid=getattr(request, "eosid", None),
+            c=getattr(request, "c", 0.0),
+            s1=getattr(request, "s1", 0.0),
+            s2=getattr(request, "s2", 0.0),
+            s3=getattr(request, "s3", 0.0),
+            gamao=getattr(request, "gamao", 0.0),
+            a=getattr(request, "a", 0.0),
+            e0=getattr(request, "e0", 0.0),
+            v0=getattr(request, "v0", 0.0),
+        )
+        return type("Response", (), {"eosid": eosid})()

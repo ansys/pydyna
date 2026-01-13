@@ -747,3 +747,128 @@ class ControlKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_TIMESTEP: dtinit={dtinit}, tssfac={tssfac}")
         return True
+
+    def create_control_ale(
+        self,
+        dct: int = 0,
+        nadv: int = 1,
+        meth: int = 2,
+        afac: float = 0.0,
+        bfac: float = 0.0,
+        cfac: float = 0.0,
+        dfac: float = 0.0,
+        efac: float = 0.0,
+        start: float = 0.0,
+        end: float = 1.0e20,
+        aafac: float = 1.0,
+        vfact: float = 1.0e-6,
+        prit: int = 0,
+        ebc: int = 0,
+        pref: float = 0.0,
+        nsidebc: int = 0,
+        ncpl: int = 1,
+        nbkt: int = 50,
+        imascl: int = 0,
+        checkr: float = 0.0,
+        beamin: float = 0.0,
+        mmgpref: int = 0,
+        pdifmx: float = 0.0,
+        dtmufac: float = 0.0,
+        optimpp: int = 0,
+        ialedr: int = 0,
+        bndflx: int = 0,
+        minmas: float = 1.0e-5,
+    ) -> bool:
+        """Create a CONTROL_ALE keyword.
+
+        Parameters
+        ----------
+        dct : int, optional
+            Default continuum treatment. Default is 0.
+        nadv : int, optional
+            Number of cycles between advection. Default is 1.
+        meth : int, optional
+            Advection method. Default is 2.
+        afac-efac : float, optional
+            Various ALE factors. Default is 0.0.
+        start : float, optional
+            Start time. Default is 0.0.
+        end : float, optional
+            End time. Default is 1.0e20.
+        aafac : float, optional
+            ALE smoothing weight factor. Default is 1.0.
+        vfact : float, optional
+            Volume fraction limit. Default is 1.0e-6.
+        prit : int, optional
+            Print interval. Default is 0.
+        ebc : int, optional
+            Boundary condition type. Default is 0.
+        pref : float, optional
+            Reference pressure. Default is 0.0.
+        nsidebc : int, optional
+            Number of side boundary conditions. Default is 0.
+        ncpl : int, optional
+            Coupling frequency. Default is 1.
+        nbkt : int, optional
+            Number of buckets for contact. Default is 50.
+        imascl : int, optional
+            Mass scaling flag. Default is 0.
+        checkr : float, optional
+            Check ratio. Default is 0.0.
+        beamin : float, optional
+            Minimum beam diameter. Default is 0.0.
+        mmgpref : int, optional
+            Multi-material group preference. Default is 0.
+        pdifmx : float, optional
+            Maximum pressure difference. Default is 0.0.
+        dtmufac : float, optional
+            Time step multiplier factor. Default is 0.0.
+        optimpp : int, optional
+            Optimization for parallel processing. Default is 0.
+        ialedr : int, optional
+            ALE dump/restart flag. Default is 0.
+        bndflx : int, optional
+            Boundary flux flag. Default is 0.
+        minmas : float, optional
+            Minimum mass. Default is 1.0e-5.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlAle()
+        kw.dct = dct
+        kw.nadv = nadv
+        kw.meth = meth
+        kw.afac = afac
+        kw.bfac = bfac
+        kw.cfac = cfac
+        kw.dfac = dfac
+        kw.efac = efac
+        kw.start = start
+        kw.end = end
+        kw.aafac = aafac
+        kw.vfact = vfact
+        kw.prit = prit
+        kw.ebc = ebc
+        kw.pref = pref
+        kw.nsidebc = nsidebc
+        kw.ncpl = ncpl
+        kw.nbkt = nbkt
+        kw.imascl = imascl
+        kw.checkr = checkr
+        kw.beamin = beamin
+        kw.mmgpref = mmgpref
+        kw.pdifmx = pdifmx
+        kw.dtmufac = dtmufac
+        kw.optimpp = optimpp
+        kw.ialedr = ialedr
+        kw.bndflx = bndflx
+        kw.minmas = minmas
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_ALE: nadv={nadv}, meth={meth}")
+        return True
