@@ -404,7 +404,7 @@ class DynaEM(DynaBase):
             logging.info("EM Output Created...")
             return ret
 
-    def create_isopotential(self, setid, settype=2, rdltype=0):
+    def create_isopotential(self, setid, settype=2, rdltype=0, isoid=None):
         """Create an EM_ISOPOTENTIAL keyword.
 
         Parameters
@@ -417,6 +417,8 @@ class DynaEM(DynaBase):
             - 2: Node set
         rdltype : int, optional
             Randles layer type. Default is 0.
+        isoid : int, optional
+            Explicit isopotential ID. If None, auto-generated.
 
         Returns
         -------
@@ -425,13 +427,13 @@ class DynaEM(DynaBase):
         """
         if hasattr(self.stub, "_backend"):
             # Keywords backend - use direct creation
-            return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype)
+            return self.stub._backend.create_em_isopotential(settype=settype, setid=setid, rdltype=rdltype, isoid=isoid)
         else:
             # gRPC stub
             ret = self.stub.CreateEMIsopotential(EMIsopotentialRequest(settype=settype, setid=setid, rdltype=rdltype))
             return ret.id
 
-    def create_isopotential_connect(self, contype, isoid1, isoid2, value=0.0, lcid=0):
+    def create_isopotential_connect(self, contype, isoid1, isoid2, value=0.0, lcid=0, conid=None):
         """Create an EM_ISOPOTENTIAL_CONNECT keyword.
 
         Parameters
@@ -451,6 +453,8 @@ class DynaEM(DynaBase):
         lcid : int or Curve, optional
             Load curve ID for contype=4. Can be an integer ID or a Curve object
             (will extract its .id attribute). Default is 0.
+        conid : int, optional
+            Explicit connection ID. If None, auto-generated.
 
         Returns
         -------
@@ -463,7 +467,7 @@ class DynaEM(DynaBase):
         if hasattr(self.stub, "_backend"):
             # Keywords backend - use direct creation
             return self.stub._backend.create_em_isopotential_connect(
-                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=curve_id
+                contype=contype, isoid1=isoid1, isoid2=isoid2, val=value, lcid=curve_id, conid=conid
             )
         else:
             # gRPC stub

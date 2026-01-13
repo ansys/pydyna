@@ -4288,3 +4288,132 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\\n" + "\\n".join(diffs)
 
+
+# =============================================================================
+# Keywords Backend Behavior Tests
+# =============================================================================
+# These tests verify specific keywords backend behaviors that align with the
+# gRPC backend pattern but don't correspond to specific reference files.
+# =============================================================================
+
+
+class TestKeywordsBackendBehavior:
+    """Tests for specific keywords backend behaviors matching gRPC patterns."""
+
+    def test_solidpart_material_id_duplication(self):
+        """Test that SolidPart/set_material/parts.add pattern generates unique IDs.
+
+        This test verifies the gRPC backend behavior where:
+        1. Materials are created without explicit IDs
+        2. Parts are created with explicit part IDs
+        3. set_material() associates materials with parts
+        4. parts.add() collects parts for later processing
+        5. parts.set_property() triggers material/section creation with auto-generated IDs
+
+        Key behavior: Even if the same material object is used for multiple parts,
+        each part should get its own unique material ID (material duplication).
+        """
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaem import DynaEM, SolidPart, SolidFormulation
+        from ansys.dyna.core.pre.dynamaterial import MatElastic, MatThermalIsotropic
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+
+            emobj = DynaEM()
+            solution.add(emobj)
+
+            # Create materials WITHOUT explicit IDs (gRPC pattern)
+            matelastic1 = MatElastic(mass_density=8000, young_modulus=1e11, poisson_ratio=0.33)
+            matelastic2 = MatElastic(mass_density=7000, young_modulus=1e11, poisson_ratio=0.33)
+            matthermaliso1 = MatThermalIsotropic(density=8000, specific_heat=400, conductivity=400)
+            matthermaliso2 = MatThermalIsotropic(density=7000, specific_heat=450, conductivity=40)
+
+            # Create parts with explicit part IDs (matching mesh)
+            part2 = SolidPart(2)
+            part2.set_material(matelastic1, matthermaliso1)
+            part2.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+            emobj.parts.add(part2)
+
+            # Use SAME material objects for part3 - should get NEW material IDs
+            part3 = SolidPart(3)
+            part3.set_material(matelastic1, matthermaliso1)  # Same materials as part2
+            part3.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+            emobj.parts.add(part3)
+
+            # Use different materials for part1
+            part1 = SolidPart(1)
+            part1.set_material(matelastic2, matthermaliso2)
+            part1.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+            emobj.parts.add(part1)
+
+            # Verify material IDs are unique (material duplication per-part)
+            # Part2 and part3 use the same material object but should have different mids
+            assert part2.mid != part3.mid, (
+                f"Same material object used for different parts should generate unique IDs. "
+                f"part2.mid={part2.mid}, part3.mid={part3.mid}"
+            )
+            assert part2.tmid != part3.tmid, (
+                f"Same thermal material object used for different parts should generate unique IDs. "
+                f"part2.tmid={part2.tmid}, part3.tmid={part3.tmid}"
+            )
+
+            # Verify all material IDs are sequential starting from 1
+            all_mids = sorted([part1.mid, part2.mid, part3.mid])
+            all_tmids = sorted([part1.tmid, part2.tmid, part3.tmid])
+            assert all_mids == [1, 2, 3], f"Material IDs should be sequential: {all_mids}"
+            assert all_tmids == [1, 2, 3], f"Thermal material IDs should be sequential: {all_tmids}"
+
+            # Save and verify deck content
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, solution._backend.get_main_filename())
+
+            with open(output_file, "r") as f:
+                content = f.read()
+
+            # Verify 3 MAT_ELASTIC and 3 MAT_THERMAL_ISOTROPIC keywords were created
+            mat_elastic_count = content.count("*MAT_ELASTIC")
+            mat_thermal_count = content.count("*MAT_THERMAL_ISOTROPIC")
+            assert mat_elastic_count == 3, f"Expected 3 MAT_ELASTIC, got {mat_elastic_count}"
+            assert mat_thermal_count == 3, f"Expected 3 MAT_THERMAL_ISOTROPIC, got {mat_thermal_count}"
+
+    def test_explicit_material_id(self):
+        """Test that explicit material IDs are respected when provided."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynamaterial import MatElastic, MatThermalIsotropic
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+
+            # Create materials WITH explicit IDs
+            mat1 = MatElastic(mass_density=8000, young_modulus=1e11, poisson_ratio=0.33, mid=5)
+            mat2 = MatElastic(mass_density=7000, young_modulus=1e11, poisson_ratio=0.33, mid=10)
+            therm = MatThermalIsotropic(density=8000, specific_heat=400, conductivity=400, tmid=7)
+
+            mat1.create(solution.stub)
+            mat2.create(solution.stub)
+            therm.create(solution.stub)
+
+            # Verify explicit IDs are used
+            assert mat1.material_id == 5, f"Expected mid=5, got {mat1.material_id}"
+            assert mat2.material_id == 10, f"Expected mid=10, got {mat2.material_id}"
+            assert therm.material_id == 7, f"Expected tmid=7, got {therm.material_id}"
+
+    def test_explicit_section_id(self):
+        """Test that explicit section IDs are respected when provided."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import SolidSection
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+
+            # Create sections WITH explicit IDs
+            sec1 = SolidSection(element_formulation=1, secid=3)
+            sec2 = SolidSection(element_formulation=2, secid=8)
+
+            sec1.create(solution.stub)
+            sec2.create(solution.stub)
+
+            # Verify explicit IDs are used
+            assert sec1.id == 3, f"Expected secid=3, got {sec1.id}"
+            assert sec2.id == 8, f"Expected secid=8, got {sec2.id}"

@@ -249,6 +249,7 @@ class EMKeywordsMixin:
         settype: int = 1,
         setid: int = 0,
         rdltype: int = 0,
+        isoid: int = None,
     ) -> int:
         """Create an EM_ISOPOTENTIAL keyword.
 
@@ -260,6 +261,8 @@ class EMKeywordsMixin:
             Set ID.
         rdltype : int
             Randles layer type.
+        isoid : int, optional
+            Isopotential ID. If None, auto-generated.
 
         Returns
         -------
@@ -268,17 +271,17 @@ class EMKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        isoid = self.next_id("isopotential")
+        iso_id = isoid if isoid is not None else self.next_id("isopotential")
 
         kw = keywords.EmIsopotential()
-        kw.isoid = isoid
+        kw.isoid = iso_id
         kw.settype = settype
         kw.setid = setid
         kw.rdltype = rdltype
 
         self._deck.append(kw)
-        logger.debug(f"Created EM_ISOPOTENTIAL with isoid={isoid}, settype={settype}, setid={setid}")
-        return isoid
+        logger.debug(f"Created EM_ISOPOTENTIAL with isoid={iso_id}, settype={settype}, setid={setid}")
+        return iso_id
 
     def create_em_isopotential_connect(
         self,
@@ -290,6 +293,7 @@ class EMKeywordsMixin:
         l: float = 0.0,
         c: float = 0.0,
         v0: float = 0.0,
+        conid: int = None,
     ) -> int:
         """Create an EM_ISOPOTENTIAL_CONNECT keyword.
 
@@ -311,6 +315,8 @@ class EMKeywordsMixin:
             Capacitance (for RLC circuit).
         v0 : float
             Initial voltage (for RLC circuit).
+        conid : int, optional
+            Connection ID. If None, auto-generated.
 
         Returns
         -------
@@ -319,10 +325,10 @@ class EMKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        conid = self.next_id("isopotential_connect")
+        conn_id = conid if conid is not None else self.next_id("isopotential_connect")
 
         kw = keywords.EmIsopotentialConnect()
-        kw.conid = conid
+        kw.conid = conn_id
         kw.contype = contype
         kw.isoid1 = isoid1
         kw.isoid2 = isoid2
@@ -335,8 +341,8 @@ class EMKeywordsMixin:
             kw.v0 = v0
 
         self._deck.append(kw)
-        logger.debug(f"Created EM_ISOPOTENTIAL_CONNECT with conid={conid}, contype={contype}")
-        return conid
+        logger.debug(f"Created EM_ISOPOTENTIAL_CONNECT with conid={conn_id}, contype={contype}")
+        return conn_id
 
     def create_em_isopotential_rogo(
         self,

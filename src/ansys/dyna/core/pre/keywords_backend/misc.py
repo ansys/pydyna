@@ -37,6 +37,7 @@ class MiscKeywordsMixin:
         abscissa: List[float] = None,
         ordinate: List[float] = None,
         title: str = "",
+        lcid: int = None,
     ) -> int:
         """Create a DEFINE_CURVE keyword.
 
@@ -50,6 +51,8 @@ class MiscKeywordsMixin:
             Y values (dependent variable).
         title : str
             Curve title.
+        lcid : int, optional
+            Curve ID. If None, auto-generated.
 
         Returns
         -------
@@ -65,7 +68,7 @@ class MiscKeywordsMixin:
         if ordinate is None:
             ordinate = []
 
-        curve_id = self.next_id("curve")
+        curve_id = lcid if lcid is not None else self.next_id("curve")
 
         kw = keywords.DefineCurve()
         kw.lcid = curve_id
@@ -411,6 +414,7 @@ class MiscKeywordsMixin:
     def create_define_transformation(
         self,
         transforms: List[dict] = None,
+        tranid: int = None,
     ) -> int:
         """Create a DEFINE_TRANSFORMATION keyword.
 
@@ -420,6 +424,8 @@ class MiscKeywordsMixin:
             List of transformation operations. Each dict should have:
             - option: str (e.g., "MIRROR", "SCALE", "ROTATE", "TRANSL")
             - a1-a7: float values for transformation parameters
+        tranid : int, optional
+            Transformation ID. If None, auto-generated.
 
         Returns
         -------
@@ -433,7 +439,7 @@ class MiscKeywordsMixin:
         if transforms is None:
             transforms = []
 
-        trans_id = self.next_id("transformation")
+        trans_id = tranid if tranid is not None else self.next_id("transformation")
 
         logger.debug(f"Creating DEFINE_TRANSFORMATION: tranid={trans_id}")
 

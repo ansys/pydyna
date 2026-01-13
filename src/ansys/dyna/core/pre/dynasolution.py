@@ -123,6 +123,10 @@ class DynaSolution:
         DynaSolution.terminationtime = 0
         self._default_model: Model = None
 
+    @property
+    def no_grpc(self):
+        return hasattr(self.stub, "_backend")
+
     def get_download_path():
         system_type = os.name
         if system_type == "nt":  # Windows

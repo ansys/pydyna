@@ -213,11 +213,20 @@ class Curve:
 
 
 class Function:
-    """Defines a function that can be referenced by a limited number of keyword options."""
+    """Defines a function that can be referenced by a limited number of keyword options.
 
-    def __init__(self, Function=None):
+    Parameters
+    ----------
+    Function : str, optional
+        The function definition string.
+    fid : int, optional
+        Explicit function ID. If None, auto-generated.
+    """
+
+    def __init__(self, Function=None, fid=None):
         self.function = Function
         self.tabulated = False
+        self._explicit_fid = fid
 
     def set_tabulated(self, heading="", function="", x=[], y=[]):
         self.tabulated = True
@@ -234,7 +243,14 @@ class Function:
                     heading=self.heading, function=self.function_name, abscissa=self.x, ordinate=self.y
                 )
             )
-        ret = stub.CreateDefineFunction(DefineFunctionRequest(function=self.function))
+        # Check if using keywords backend (supports fid parameter)
+        if hasattr(stub, "_backend") and self._explicit_fid is not None:
+            # Keywords backend - use a simple object that supports attribute access
+            request = type("Request", (), {"function": self.function, "fid": self._explicit_fid})()
+        else:
+            # gRPC stub - DefineFunctionRequest doesn't support fid field
+            request = DefineFunctionRequest(function=self.function)
+        ret = stub.CreateDefineFunction(request)
         self.id = ret.id
         logging.info(f"Function {self.id} defined...")
 
@@ -286,12 +302,23 @@ class Direction:
 
 
 class Transform:
-    """Defines a transformation."""
+    """Defines a transformation.
 
-    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
+    Parameters
+    ----------
+    option : str, optional
+        Transformation option (e.g., 'MIRROR', 'SCALE', 'TRANSL', 'ROTATE').
+    param1-param7 : float, optional
+        Transformation parameters.
+    tranid : int, optional
+        Explicit transformation ID. If None, auto-generated.
+    """
+
+    def __init__(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0, tranid=None):
         param = [option, param1, param2, param3, param4, param5, param6, param7]
         self.paramlist = []
         self.paramlist.append(param)
+        self._explicit_tranid = tranid
 
     def add_transform(self, option=None, param1=0, param2=0, param3=0, param4=0, param5=0, param6=0, param7=0):
         """Defines a transformation matrix."""
@@ -306,9 +333,14 @@ class Transform:
             options.append(obj[0])
             for i in range(1, 8):
                 params.append(obj[i])
-        ret = stub.CreateDefineTransformation(
-            DefineTransformationRequest(option=options, param=params)
-        )
+        # Check if using keywords backend (supports tranid parameter)
+        if hasattr(stub, "_backend") and self._explicit_tranid is not None:
+            # Keywords backend - use a simple object that supports attribute access
+            request = type("Request", (), {"option": options, "param": params, "tranid": self._explicit_tranid})()
+        else:
+            # gRPC stub - DefineTransformationRequest doesn't support tranid field
+            request = DefineTransformationRequest(option=options, param=params)
+        ret = stub.CreateDefineTransformation(request)
         self.id = ret.id
         logging.info(f"Transformation {self.id} defined...")
         return self.id
@@ -1121,12 +1153,15 @@ class NodeSet:
     solver : str, optional
         Solver type for the node set. Options are "MECH" (mechanical),
         "THER" (thermal), etc. Default is None (no solver specification).
+    sid : int, optional
+        Explicit set ID. If None, auto-generated.
     """
 
-    def __init__(self, nodes=[], solver=None):
+    def __init__(self, nodes=[], solver=None, sid=None):
         self.nodes = nodes
         self.type = "NODESET"
         self.solver = solver
+        self._explicit_sid = sid
 
     def create(self, stub=None):
         """Create a node set.
@@ -1150,15 +1185,18 @@ class NodeSet:
         if hasattr(stub, "_backend"):
             # Keywords backend - use direct method
             backend = stub._backend
-            sid = backend.next_id("nodeset")
+            sid = self._explicit_sid if self._explicit_sid is not None else backend.next_id("nodeset")
             if self.solver:
                 backend.create_set_node_list_with_solver(sid=sid, nodes=self.nodes, solver=self.solver)
             else:
                 backend.create_set_node_list(sid=sid, nodes=self.nodes)
             self.id = sid
         else:
-            # gRPC stub
-            ret = stub.CreateNodeSet(NodeSetRequest(option="LIST", sid=0, genoption="NODE", entities=self.nodes))
+            # gRPC stub - use explicit sid if provided, otherwise 0 for auto-generation
+            explicit_sid = self._explicit_sid if self._explicit_sid is not None else 0
+            ret = stub.CreateNodeSet(
+                NodeSetRequest(option="LIST", sid=explicit_sid, genoption="NODE", entities=self.nodes)
+            )
             self.id = ret.id
 
         if len(self.nodes) > 1:
@@ -1252,11 +1290,14 @@ class PartSet(BaseSet):
     solver : str, optional
         Solver type for the part set. Options are "MECH" (mechanical),
         "THER" (thermal), etc. Default is None (no solver specification).
+    sid : int, optional
+        Explicit set ID. If None, auto-generated.
     """
 
-    def __init__(self, parts=[], solver=None):
+    def __init__(self, parts=[], solver=None, sid=None):
         self.parts = parts
         self.solver = solver
+        self._explicit_sid = sid
 
     def create(self, stub=None):
         """Create a part set.
@@ -1280,13 +1321,14 @@ class PartSet(BaseSet):
         if hasattr(stub, "_backend"):
             # Keywords backend - use direct method
             backend = stub._backend
-            sid = backend.next_id("partset")
+            sid = self._explicit_sid if self._explicit_sid is not None else backend.next_id("partset")
             solver = self.solver if self.solver else "MECH"
             backend.create_set_part_list(sid=sid, parts=self.parts, solver=solver)
             self.id = sid
         else:
-            # gRPC stub
-            ret = stub.CreatePartSet(PartSetRequest(sid=0, pids=self.parts))
+            # gRPC stub - use explicit sid if provided, otherwise 0 for auto-generation
+            explicit_sid = self._explicit_sid if self._explicit_sid is not None else 0
+            ret = stub.CreatePartSet(PartSetRequest(sid=explicit_sid, pids=self.parts))
             self.id = ret.id
 
         if len(self.parts) > 1:
@@ -1525,11 +1567,14 @@ class SolidSection:
         - EQ.10: 1 point tetrahedron
         - EQ.13: 1 point nodal pressure tetrahedron for bulk metal forming
         - EQ.18: 8 node enhanced strain solid for shell-solid assemblies (NVH)
+    secid : int, optional
+        Section ID. If not provided, an ID will be auto-generated.
     """
 
-    def __init__(self, element_formulation: int = 1):
+    def __init__(self, element_formulation: int = 1, secid: int = None):
         self.element_formulation = element_formulation
-        self.id = None
+        self.id = secid
+        self._explicit_id = secid is not None
 
     def create(self, stub=None):
         """Create the solid section.
@@ -1550,19 +1595,31 @@ class SolidSection:
         # Check if using keywords backend
         if hasattr(stub, "_backend"):
             backend = stub._backend
-            secid = backend.next_id("section")
+            # Use explicit ID if provided, otherwise auto-generate
+            if self._explicit_id:
+                secid = self.id
+            else:
+                secid = backend.next_id("section")
             backend.create_section_solid(
                 secid=secid,
                 elform=self.element_formulation,
             )
             self.id = secid
         else:
-            # gRPC stub
-            ret = stub.CreateSectionSolid(
-                SectionSolidRequest(
-                    elform=self.element_formulation,
+            # gRPC stub - use explicit ID if provided via request
+            if self._explicit_id:
+                ret = stub.CreateSectionSolid(
+                    SectionSolidRequest(
+                        secid=self.id,
+                        elform=self.element_formulation,
+                    )
                 )
-            )
+            else:
+                ret = stub.CreateSectionSolid(
+                    SectionSolidRequest(
+                        elform=self.element_formulation,
+                    )
+                )
             self.id = ret.id
 
         logging.info(f"SolidSection {self.id} created...")
