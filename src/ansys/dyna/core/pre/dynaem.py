@@ -47,7 +47,16 @@ class DynaEM(DynaBase):
         DynaBase.__init__(self)
         self.analysis = EMAnalysis()
 
-    def create_em_control(self, emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000):
+    def create_em_control(
+        self,
+        emsol=0,
+        numls=100,
+        macrodt=0,
+        ncylfem=5000,
+        ncylbem=5000,
+        dimtype=0,
+        nperio=2,
+    ):
         """Enable the EM solver and set its options.
 
         Parameters
@@ -74,25 +83,45 @@ class DynaEM(DynaBase):
         ncylbem : int, optional
             Number of electromagnetism cycles between the recalculation of BEM matrices.
             The default is ``5000``.
+        dimtype : int, optional
+            Problem dimension type. The default is ``0``. (Keywords backend only)
+        nperio : int, optional
+            Number of periods. The default is ``2``. (Keywords backend only)
 
         Returns
         -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMControl(
-            EMControlRequest(
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - pass all parameters
+            self.stub._backend.create_em_control(
                 emsol=emsol,
                 numls=numls,
                 macrodt=macrodt,
+                dimtype=dimtype,
+                nperio=nperio,
                 ncylfem=ncylfem,
                 ncylbem=ncylbem,
             )
-        )
-        logging.info("EM Control Created...")
-        return ret
+            logging.info("EM Control Created...")
+            return True
+        else:
+            # gRPC stub - only pass original parameters
+            ret = self.stub.CreateEMControl(
+                EMControlRequest(
+                    emsol=emsol,
+                    numls=numls,
+                    macrodt=macrodt,
+                    ncylfem=ncylfem,
+                    ncylbem=ncylbem,
+                )
+            )
+            logging.info("EM Control Created...")
+            return ret
 
-    def create_em_timestep(self, tstype, dtconst):
+    def create_em_timestep(self, tstype, dtconst, factor=1.0, rlcsf=25):
         """Control the EM time step and its evolution.
 
         Parameters
@@ -107,15 +136,32 @@ class DynaEM(DynaBase):
            This time step is then multiplied by FACTOR.
         dtconst : float
             Constant value for the time step for when ``tstype = 1``.
+        factor : float, optional
+            Time step multiplier factor. The default is ``1.0``. (Keywords backend only)
+        rlcsf : int, optional
+            RLC sub-cycling factor. The default is ``25``. (Keywords backend only)
 
         Returns
         -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMTimestep(EMTimestepRequest(tstype=tstype, dtconst=dtconst))
-        logging.info("EM Timestep Created...")
-        return ret
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - pass all parameters
+            self.stub._backend.create_em_timestep(
+                tstype=tstype,
+                dtconst=dtconst,
+                factor=factor,
+                rlcsf=rlcsf,
+            )
+            logging.info("EM Timestep Created...")
+            return True
+        else:
+            # gRPC stub - only pass original parameters
+            ret = self.stub.CreateEMTimestep(EMTimestepRequest(tstype=tstype, dtconst=dtconst))
+            logging.info("EM Timestep Created...")
+            return ret
 
     def create_em_contact(self, contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0):
         """Create an optional card for defining options on electromagnetic contacts between two sets of parts.
@@ -199,7 +245,7 @@ class DynaEM(DynaBase):
         logging.info("EM Circuit Rogo Created...")
         return ret.id
 
-    def create_em_mat001(self, mid, mtype, sigma):
+    def create_em_mat001(self, mid, mtype, sigma, eosid=0):
         """Create an electromagnetic material type and set properties
         for a material whose permeability equals the free space permeability.
 
@@ -218,15 +264,26 @@ class DynaEM(DynaBase):
 
         sigma : float
             Initial electrical conductivity of the material.
+        eosid : int, optional
+            EOS ID for temperature-dependent conductivity. The default is ``0``.
+            (Keywords backend only)
 
         Returns
         -------
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMMat001(EMMat001Request(mid=mid, mtype=mtype, sigma=sigma))
-        logging.info("EM Material 001 Created...")
-        return ret
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend - pass all parameters including eosid
+            self.stub._backend.create_em_mat_001(mid=mid, mtype=mtype, sigma=sigma, eosid=eosid)
+            logging.info("EM Material 001 Created...")
+            return True
+        else:
+            # gRPC stub - only pass original parameters (no eosid support)
+            ret = self.stub.CreateEMMat001(EMMat001Request(mid=mid, mtype=mtype, sigma=sigma))
+            logging.info("EM Material 001 Created...")
+            return ret
 
     def create_em_mat002(self, mid, mtype, sigma, eosid, murel):
         """Create an electromagnetic material type and set properties
@@ -335,9 +392,17 @@ class DynaEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMOutput(EMOutputRequest(mats=mats, matf=matf, sols=sols, solf=solf))
-        logging.info("EM Output Created...")
-        return ret
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend
+            self.stub._backend.create_em_output(mats=mats, matf=matf, sols=sols, solf=solf)
+            logging.info("EM Output Created...")
+            return True
+        else:
+            # gRPC stub
+            ret = self.stub.CreateEMOutput(EMOutputRequest(mats=mats, matf=matf, sols=sols, solf=solf))
+            logging.info("EM Output Created...")
+            return ret
 
     def connect_isopotential(
         self,
@@ -419,9 +484,17 @@ class DynaEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateEMDatabaseGlobalEnergy(EMDatabaseGlobalEnergyRequest(outlv=outlv))
-        logging.info("EM Database Global Energy Created...")
-        return ret
+        # Check if using keywords backend (has _backend attribute) vs gRPC stub
+        if hasattr(self.stub, "_backend"):
+            # Keywords backend
+            self.stub._backend.create_em_database_globalenergy(outlv=outlv)
+            logging.info("EM Database Global Energy Created...")
+            return True
+        else:
+            # gRPC stub
+            ret = self.stub.CreateEMDatabaseGlobalEnergy(EMDatabaseGlobalEnergyRequest(outlv=outlv))
+            logging.info("EM Database Global Energy Created...")
+            return ret
 
     def create_Permanent_magnet(self, id, partid, mtype, north, sourth, hc):
         """Create a permanent magnet.
@@ -482,6 +555,200 @@ class DynaEM(DynaBase):
         ret = self.stub.CreateEMEOSPermeability(EMEOSPermeabilityRequest(eosid=eosid, eostype=eostype, lcid=lcid))
         logging.info("EM EOS Permeability Created...")
         return ret
+
+    def create_em_solver_bem(self, stype=1, reltol=1e-6, maxite=1000, precon=1, uselast=1, ncyclbem=3):
+        """Define BEM solver options.
+
+        Parameters
+        ----------
+        stype : int, optional
+            Solver type. The default is ``1`` (direct). Options are:
+
+            - EQ.1: Direct solver
+            - EQ.2: PCG iterative solver
+
+        reltol : float, optional
+            Relative tolerance. The default is ``1e-6``.
+        maxite : int, optional
+            Maximum number of iterations. The default is ``1000``.
+        precon : int, optional
+            Preconditioner type. The default is ``1``.
+        uselast : int, optional
+            Use last solution as initial guess. The default is ``1``.
+        ncyclbem : int, optional
+            BEM solver sub-cycling. The default is ``3``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_em_solver_bem(
+                stype=stype,
+                reltol=reltol,
+                maxite=maxite,
+                precon=precon,
+                uselast=uselast,
+                ncyclbem=ncyclbem,
+            )
+            logging.info("EM Solver BEM Created...")
+            return True
+        else:
+            logging.warning("create_em_solver_bem is only available with the keywords backend")
+            return False
+
+    def create_em_solver_fem(self, stype=1, reltol=0.001, maxite=1000, precon=1, uselast=1, ncyclfem=3):
+        """Define FEM solver options.
+
+        Parameters
+        ----------
+        stype : int, optional
+            Solver type. The default is ``1`` (direct). Options are:
+
+            - EQ.1: Direct solver
+            - EQ.2: PCG iterative solver
+
+        reltol : float, optional
+            Relative tolerance. The default is ``0.001``.
+        maxite : int, optional
+            Maximum number of iterations. The default is ``1000``.
+        precon : int, optional
+            Preconditioner type. The default is ``1``.
+        uselast : int, optional
+            Use last solution as initial guess. The default is ``1``.
+        ncyclfem : int, optional
+            FEM solver sub-cycling. The default is ``3``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_em_solver_fem(
+                stype=stype,
+                reltol=reltol,
+                maxite=maxite,
+                precon=precon,
+                uselast=uselast,
+                ncyclfem=ncyclfem,
+            )
+            logging.info("EM Solver FEM Created...")
+            return True
+        else:
+            logging.warning("create_em_solver_fem is only available with the keywords backend")
+            return False
+
+    def create_em_solver_bemmat(self, matid, reltol=1e-6):
+        """Define BEM matrix solver tolerance for a specific material.
+
+        Parameters
+        ----------
+        matid : int
+            Material ID.
+        reltol : float, optional
+            Relative tolerance. The default is ``1e-6``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_em_solver_bemmat(matid=matid, reltol=reltol)
+            logging.info(f"EM Solver BEMMAT for material {matid} Created...")
+            return True
+        else:
+            logging.warning("create_em_solver_bemmat is only available with the keywords backend")
+            return False
+
+    def create_em_control_contact(self, emct=1, cconly=0, ctype=0, cotype=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0.0):
+        """Define EM contact control options.
+
+        Parameters
+        ----------
+        emct : int, optional
+            EM contact type. The default is ``1``.
+        cconly : int, optional
+            Contact calculation only flag. The default is ``0``.
+        ctype : int, optional
+            Contact type. The default is ``0``.
+        cotype : int, optional
+            Contact orientation type. The default is ``0``.
+        eps1 : float, optional
+            First contact coefficient. The default is ``0.3``.
+        eps2 : float, optional
+            Second contact coefficient. The default is ``0.3``.
+        eps3 : float, optional
+            Third contact coefficient. The default is ``0.3``.
+        d0 : float, optional
+            Contact distance. The default is ``0.0``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_em_control_contact(
+                emct=emct,
+                cconly=cconly,
+                ctype=ctype,
+                cotype=cotype,
+                eps1=eps1,
+                eps2=eps2,
+                eps3=eps3,
+                d0=d0,
+            )
+            logging.info("EM Control Contact Created...")
+            return True
+        else:
+            logging.warning("create_em_control_contact is only available with the keywords backend")
+            return False
+
+    def create_em_eos_tabulated1(self, eosid, lcid):
+        """Define temperature-dependent conductivity using a tabulated EOS.
+
+        Parameters
+        ----------
+        eosid : int
+            EOS ID.
+        lcid : int
+            Load curve ID for conductivity vs temperature.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_em_eos_tabulated1(eosid=eosid, lcid=lcid)
+            logging.info("EM EOS Tabulated1 Created...")
+            return True
+        else:
+            logging.warning("create_em_eos_tabulated1 is only available with the keywords backend")
+            return False
 
     def save_file(self):
         """Save keyword files."""

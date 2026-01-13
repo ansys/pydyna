@@ -2481,6 +2481,7 @@ class TestReferenceFileComparison:
         """test_railgun.k - EM railgun simulation."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
+        from ansys.dyna.core.pre.dynaem import DynaEM
 
         initial_file = os.path.join(initial_files_dir, "em", "test_railgun.k")
         reference_file = os.path.join(pre_reference_dir, "test_railgun.k")
@@ -2492,6 +2493,10 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
+            # Create DynaEM object for EM setup
+            emobj = DynaEM()
+            solution.add(emobj)
+
             # CONTROL_CONTACT with ignore=1, orien=1
             kw_contact = keywords.ControlContact()
             kw_contact.rwpnal = 1.0
@@ -2499,37 +2504,37 @@ class TestReferenceFileComparison:
             kw_contact.ignore = 1
             solution._backend._deck.append(kw_contact)
 
-            # EM_OUTPUT
-            solution._backend.create_em_output(mats=2, matf=2, sols=2, solf=2)
+            # EM_OUTPUT - using high-level API
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-            # EM_DATABASE_GLOBALENERGY
-            solution._backend.create_em_database_globalenergy(outlv=1)
+            # EM_DATABASE_GLOBALENERGY - using high-level API
+            emobj.create_em_database_globalenergy(outlv=1)
 
-            # EM_CONTROL - emsol=1, numls=100, nperio=2, ncylfem=5000, ncylbem=5000
-            solution._backend.create_em_control(
+            # EM_CONTROL - using high-level API with extended params
+            emobj.create_em_control(
                 emsol=1, numls=100, macrodt=0.0, dimtype=0, nperio=2, ncylfem=5000, ncylbem=5000
             )
 
-            # EM_CONTROL_TIMESTEP - tstype=1, dtcons=5e-6, rlcsf=25
-            solution._backend.create_em_timestep(tstype=1, dtconst=5e-6, factor=1.0, rlcsf=25)
+            # EM_CONTROL_TIMESTEP - using high-level API with extended params
+            emobj.create_em_timestep(tstype=1, dtconst=5e-6, factor=1.0, rlcsf=25)
 
-            # EM_SOLVER_BEM - stype=2 (PCG), reltol=1e-6, maxite=1000
-            solution._backend.create_em_solver_bem(
+            # EM_SOLVER_BEM - using high-level API
+            emobj.create_em_solver_bem(
                 reltol=1e-6, maxite=1000, stype=2, precon=1, uselast=1, ncyclbem=3
             )
 
-            # EM_SOLVER_FEM - stype=1 (direct), reltol=0.001
-            solution._backend.create_em_solver_fem(
+            # EM_SOLVER_FEM - using high-level API
+            emobj.create_em_solver_fem(
                 reltol=0.001, maxite=1000, stype=1, precon=1, uselast=1, ncyclfem=3
             )
 
-            # EM_SOLVER_BEMMAT for materials 1, 2, 3
-            solution._backend.create_em_solver_bemmat(matid=1, reltol=1e-6)
-            solution._backend.create_em_solver_bemmat(matid=2, reltol=1e-6)
-            solution._backend.create_em_solver_bemmat(matid=3, reltol=1e-6)
+            # EM_SOLVER_BEMMAT for materials 1, 2, 3 - using high-level API
+            emobj.create_em_solver_bemmat(matid=1, reltol=1e-6)
+            emobj.create_em_solver_bemmat(matid=2, reltol=1e-6)
+            emobj.create_em_solver_bemmat(matid=3, reltol=1e-6)
 
-            # EM_CONTROL_CONTACT
-            solution._backend.create_em_control_contact(
+            # EM_CONTROL_CONTACT - using high-level API
+            emobj.create_em_control_contact(
                 emct=1, cconly=0, ctype=0, cotype=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0.0
             )
 
@@ -2544,6 +2549,7 @@ class TestReferenceFileComparison:
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.keywords import keywords
         from ansys.dyna.core.pre.dynabase import Curve, NodeSet
+        from ansys.dyna.core.pre.dynaem import DynaEM
 
         initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating.k")
         reference_file = os.path.join(pre_reference_dir, "test_resistive_heating.k")
@@ -2554,6 +2560,10 @@ class TestReferenceFileComparison:
         with tempfile.TemporaryDirectory() as tmpdir:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
+
+            # Create DynaEM object for EM setup
+            emobj = DynaEM()
+            solution.add(emobj)
 
             # CONTROL_SOLUTION with soln=2 (thermal)
             kw_solution = keywords.ControlSolution()
@@ -2626,32 +2636,32 @@ class TestReferenceFileComparison:
             )
             curve2.create(solution.stub)
 
-            # EM_OUTPUT
-            solution._backend.create_em_output(mats=2, matf=2, sols=2, solf=2)
+            # EM_OUTPUT - using high-level API
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
 
-            # EM_CONTROL with emsol=3 (resistive heating)
-            solution._backend.create_em_control(
+            # EM_CONTROL with emsol=3 (resistive heating) - using high-level API
+            emobj.create_em_control(
                 emsol=3, numls=100, macrodt=0.0, dimtype=0, nperio=2,
                 ncylfem=5000, ncylbem=5000
             )
 
-            # EM_CONTROL_TIMESTEP with dtconst=0.01
-            solution._backend.create_em_timestep(tstype=1, dtconst=0.01, factor=1.0, rlcsf=25)
+            # EM_CONTROL_TIMESTEP with dtconst=0.01 - using high-level API
+            emobj.create_em_timestep(tstype=1, dtconst=0.01, factor=1.0, rlcsf=25)
 
-            # EM_SOLVER_FEM
-            solution._backend.create_em_solver_fem(
+            # EM_SOLVER_FEM - using high-level API
+            emobj.create_em_solver_fem(
                 reltol=0.001, maxite=1000, stype=1, precon=1, uselast=1, ncyclfem=3
             )
 
-            # EM_EOS_TABULATED1 - conductivity vs temperature curve
-            solution._backend.create_em_eos_tabulated1(eosid=1, lcid=2)
+            # EM_EOS_TABULATED1 - using high-level API
+            emobj.create_em_eos_tabulated1(eosid=1, lcid=2)
 
-            # EM_MAT_001 for each part (materials 1, 2, 3)
+            # EM_MAT_001 for each part - using high-level API
             # Material 1 and 2: mtype=2 (conductor), sigma=6e7, no eos
-            solution._backend.create_em_mat_001(mid=1, mtype=2, sigma=6e7)
-            solution._backend.create_em_mat_001(mid=2, mtype=2, sigma=6e7)
+            emobj.create_em_mat001(mid=1, mtype=2, sigma=6e7)
+            emobj.create_em_mat001(mid=2, mtype=2, sigma=6e7)
             # Material 3: mtype=2 (conductor), sigma=4e6, eosid=1
-            solution._backend.create_em_mat_001(mid=3, mtype=2, sigma=4e6, eosid=1)
+            emobj.create_em_mat001(mid=3, mtype=2, sigma=4e6, eosid=1)
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_resistive_heating.k")
