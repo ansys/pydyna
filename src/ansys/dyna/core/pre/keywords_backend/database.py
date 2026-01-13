@@ -24,6 +24,8 @@
 
 import logging
 
+from ansys.dyna.core.lib.config import disable_lspp_defaults
+
 logger = logging.getLogger(__name__)
 
 
@@ -73,25 +75,16 @@ class DatabaseKeywordsMixin:
             "nintsld": nintsld,
         }
 
-        # Create DATABASE_BINARY_D3PLOT
-        kw = keywords.DatabaseBinaryD3Plot()
-        kw.dt = dt
+        # Create DATABASE_BINARY_D3PLOT with only explicitly set fields
+        with disable_lspp_defaults():
+            kw = keywords.DatabaseBinaryD3Plot(dt=dt)
 
         self._deck.append(kw)
         logger.debug(f"Created DATABASE_BINARY_{filetype} with dt={dt}")
 
-        # Create DATABASE_EXTENT_BINARY
-        extent_kw = keywords.DatabaseExtentBinary()
-        extent_kw.maxint = maxint
-        extent_kw.ieverp = ieverp
-        extent_kw.dcomp = dcomp
-        extent_kw.nintsld = nintsld
-        # Match pre server defaults
-        extent_kw.ialemat = 0
-        extent_kw.sclp = float("nan")  # Leave unset like pre server
-
-        self._deck.append(extent_kw)
-        logger.debug("Created DATABASE_EXTENT_BINARY")
+        # Note: DATABASE_EXTENT_BINARY is not created by the gRPC backend
+        # for basic create_database_binary calls. It's only added when
+        # extent-specific options are needed.
         return True
 
     def create_database_ascii(
@@ -144,11 +137,8 @@ class DatabaseKeywordsMixin:
 
         if db_type.upper() in db_type_map:
             kw_class = db_type_map[db_type.upper()]
-            kw = kw_class()
-            kw.dt = dt
-            kw.binary = binary
-            kw.lcur = lcur
-            kw.ioopt = ioopt
+            with disable_lspp_defaults():
+                kw = kw_class(dt=dt, binary=binary, lcur=lcur, ioopt=ioopt)
 
             self._deck.append(kw)
             logger.debug(f"Created DATABASE_{db_type.upper()} with dt={dt}")

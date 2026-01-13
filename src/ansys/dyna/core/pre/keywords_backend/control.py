@@ -24,6 +24,8 @@
 
 import logging
 
+from ansys.dyna.core.lib.config import disable_lspp_defaults
+
 logger = logging.getLogger(__name__)
 
 
@@ -65,18 +67,16 @@ class ControlKeywordsMixin:
 
         self._termination_time = endtim
 
-        kw = keywords.ControlTermination()
-        kw.endtim = endtim
-        if endcyc:
-            kw.endcyc = endcyc
-        if dtmin:
-            kw.dtmin = dtmin
-        if endeng:
-            kw.endeng = endeng
-        if endmas:
-            kw.endmas = endmas
-        if nosol:
-            kw.nosol = nosol
+        # Pass all fields explicitly to match gRPC backend output
+        with disable_lspp_defaults():
+            kw = keywords.ControlTermination(
+                endtim=endtim,
+                endcyc=endcyc,
+                dtmin=dtmin,
+                endeng=endeng if endeng else 0.0,
+                endmas=endmas if endmas else 1e8,  # Default in gRPC
+                nosol=nosol,
+            )
 
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_TERMINATION with endtim={endtim}")
@@ -112,12 +112,14 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlAccuracy()
-        kw.osu = osu
-        kw.inn = inn
-        kw.pidosu = pidosu
-        kw.iacc = iacc
-        kw.exacc = exacc
+        with disable_lspp_defaults():
+            kw = keywords.ControlAccuracy(
+                osu=osu,
+                inn=inn,
+                pidosu=pidosu,
+                iacc=iacc,
+                exacc=exacc,
+            )
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_ACCURACY")
@@ -162,15 +164,17 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlEnergy()
-        kw.hgen = hgen
-        kw.rwen = rwen
-        kw.slnten = slnten
-        kw.rylen = rylen
-        kw.irgen = irgen
-        kw.maten = maten
-        kw.drlen = drlen
-        kw.disen = disen
+        with disable_lspp_defaults():
+            kw = keywords.ControlEnergy(
+                hgen=hgen,
+                rwen=rwen,
+                slnten=slnten,
+                rylen=rylen,
+                irgen=irgen,
+                maten=maten,
+                drlen=drlen,
+                disen=disen,
+            )
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_ENERGY")
@@ -193,9 +197,8 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlHourglass()
-        kw.ihq = ihq
-        kw.qh = qh
+        with disable_lspp_defaults():
+            kw = keywords.ControlHourglass(ihq=ihq, qh=qh)
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_HOURGLASS")
@@ -220,10 +223,8 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlBulkViscosity()
-        kw.q1 = q1
-        kw.q2 = q2
-        kw.type = bulk_type
+        with disable_lspp_defaults():
+            kw = keywords.ControlBulkViscosity(q1=q1, q2=q2, type=bulk_type)
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_BULK_VISCOSITY")
@@ -256,11 +257,13 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlTimestep()
-        kw.tssfac = tssfac
-        kw.isdo = isdo
-        kw.dt2ms = dt2ms
-        kw.lctm = lctm
+        with disable_lspp_defaults():
+            kw = keywords.ControlTimestep(
+                tssfac=tssfac,
+                isdo=isdo,
+                dt2ms=dt2ms,
+                lctm=lctm,
+            )
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_TIMESTEP")
@@ -459,21 +462,26 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlShell()
-        kw.wrpang = wrpang
-        kw.esort = esort
-        kw.irnxx = irnxx
-        kw.istupd = istupd
-        # theory=0 means use default, which the keyword class doesn't accept
-        # so we only set it if non-zero
-        if theory != 0:
-            kw.theory = theory
-        kw.bwc = bwc
-        kw.miter = miter
-        kw.proj = proj
-        # irquad=0 means use default, which the keyword class doesn't accept
-        if irquad != 0:
-            kw.irquad = irquad
+        # Pass all fields explicitly to match gRPC backend output
+        with disable_lspp_defaults():
+            kw = keywords.ControlShell(
+                wrpang=wrpang,
+                esort=esort,
+                irnxx=irnxx,
+                istupd=istupd,
+                theory=theory,
+                bwc=bwc,
+                miter=miter,
+                proj=proj,
+                psstupd=0,
+                sidt4tu=0,
+                cntco=0,
+                itsflg=0,
+                irquad=irquad if irquad != 0 else 3,  # Default in gRPC is 3
+                w_mode=0.0,
+                stretch=0.0,
+                icrq=0,
+            )
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_SHELL")
@@ -512,13 +520,35 @@ class ControlKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.ControlContact()
-        kw.rwpnal = rwpnal
-        kw.shlthk = shlthk
-        kw.orien = orien
-        kw.ssthk = ssthk
-        kw.ignore = ignore
-        kw.igactc = igactc
+        # Pass all fields explicitly to match gRPC backend output
+        # (gRPC writes explicit zeros rather than blanks)
+        with disable_lspp_defaults():
+            kw = keywords.ControlContact(
+                slsfac=0.0,
+                rwpnal=rwpnal,
+                islchk=0,
+                shlthk=shlthk,
+                penopt=0,
+                thkchg=0,
+                orien=orien,
+                enmass=0,
+                usrstr=0,
+                usrfrc=0,
+                nsbcs=0,
+                interm=0,
+                xpene=0.0,
+                ssthk=ssthk,
+                ecdt=0,
+                tiedprj=0,
+                ignore=ignore,
+                shledg=0,
+                pstiff=0,
+                ithcnt=0,
+                tdcnof=0,
+                ftall=0,
+                shltrw=0.0,
+                igactc=igactc,
+            )
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_CONTACT")
