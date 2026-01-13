@@ -65,8 +65,9 @@ class DynaDEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateControlDiscreteElement(
-            ControlDiscreteElementRequest(
+        if hasattr(self.stub, "_backend"):
+            # Use keywords backend
+            ret = self.stub._backend.create_control_discrete_element(
                 ndamp=ndamp,
                 tdamp=tdamp,
                 frics=frics,
@@ -74,7 +75,18 @@ class DynaDEM(DynaBase):
                 normk=normk,
                 sheark=sheark,
             )
-        )
+        else:
+            # Fall back to gRPC stub
+            ret = self.stub.CreateControlDiscreteElement(
+                ControlDiscreteElementRequest(
+                    ndamp=ndamp,
+                    tdamp=tdamp,
+                    frics=frics,
+                    fricr=fricr,
+                    normk=normk,
+                    sheark=sheark,
+                )
+            )
         logging.info("Control DES Created...")
         return ret
 
@@ -109,19 +121,36 @@ class DynaDEM(DynaBase):
         bool
             ``True`` when successful, ``False`` when failed.
         """
-        ret = self.stub.CreateDefineDEMeshSurface(
-            DefineDEMeshSurfaceRequest(
-                sid=sid,
-                type=type,
-                despid=despid,
-                desxid=desxid,
-                nquad=nquad,
-                nsid=nsid,
-                rsf=rsf,
+        if hasattr(self.stub, "_backend"):
+            # Use keywords backend - create keyword directly
+            from ansys.dyna.core.keywords import keywords
+
+            kw = keywords.DefineDeMeshSurface()
+            kw.sid = sid
+            kw.type = type
+            kw.despid = despid
+            kw.desxid = desxid
+            kw.nquad = nquad
+            kw.nsid = nsid
+            kw.rsf = rsf
+            self.stub._backend._deck.append(kw)
+            logging.info("Define discrete element mesh surface Created...")
+            return True
+        else:
+            # Fall back to gRPC stub
+            ret = self.stub.CreateDefineDEMeshSurface(
+                DefineDEMeshSurfaceRequest(
+                    sid=sid,
+                    type=type,
+                    despid=despid,
+                    desxid=desxid,
+                    nquad=nquad,
+                    nsid=nsid,
+                    rsf=rsf,
+                )
             )
-        )
-        logging.info("Define discrete element mesh surface Created...")
-        return ret
+            logging.info("Define discrete element mesh surface Created...")
+            return ret
 
     def save_file(self):
         """Save keyword files.
@@ -179,8 +208,9 @@ class DEMAnalysis(BaseObj):
     def create(self):
         """Create a DEM analysis."""
         if self.defined_des:
-            self.stub.CreateControlDiscreteElement(
-                ControlDiscreteElementRequest(
+            if hasattr(self.stub, "_backend"):
+                # Use keywords backend
+                self.stub._backend.create_control_discrete_element(
                     ndamp=self.ndamp,
                     tdamp=self.tdamp,
                     frics=self.frics,
@@ -188,4 +218,15 @@ class DEMAnalysis(BaseObj):
                     normk=self.normk,
                     sheark=self.sheark,
                 )
-            )
+            else:
+                # Fall back to gRPC stub
+                self.stub.CreateControlDiscreteElement(
+                    ControlDiscreteElementRequest(
+                        ndamp=self.ndamp,
+                        tdamp=self.tdamp,
+                        frics=self.frics,
+                        fricr=self.fricr,
+                        normk=self.normk,
+                        sheark=self.sheark,
+                    )
+                )
