@@ -133,6 +133,7 @@ class Card(CardInterface):
         # Use object id as signature - no cross-instance caching for legacy path
         self._signature = id(self._schema)
         self._values = [f.value for f in fields]
+        self._fields_set: bool = False  # Track whether fields were ever explicitly set
         self._active_func = active_func
         self._format_type = format
         self._card_format = card_format.fixed
@@ -196,6 +197,7 @@ class Card(CardInterface):
         else:
             instance._values = [fs.default for fs in field_schemas]
 
+        instance._fields_set: bool = False
         instance._active_func = active_func
         instance._format_type = format
         instance._card_format = card_format.fixed
@@ -400,6 +402,22 @@ class Card(CardInterface):
         """
         idx = self._schema.get_index(prop)
         self._values[idx] = value
+        self._fields_set = True  # Track that this field was explicitly set
+
+    def has_nondefault_values(self) -> bool:
+        """Check if any field in this card has been explicitly set.
+
+        This method returns True if any field has been set via set_value(),
+        which is typically called by property setters on keyword classes.
+        It is used for cascading card activation, where optional cards
+        become active when any of their fields are explicitly set.
+
+        Returns
+        -------
+        bool
+            True if at least one field has been explicitly set, False otherwise.
+        """
+        return self._fields_set
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the card."""
