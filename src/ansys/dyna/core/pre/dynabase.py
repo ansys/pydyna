@@ -594,6 +594,8 @@ class DynaBase:
         self,
         print_suppression_d3hsp=False,
         print_suppression_echo=OutputEcho.ALL_DATA_PRINTED,
+        edit_frequency=None,
+        flush_frequency=None,
     ):
         """Set miscellaneous output parameters.
 
@@ -614,17 +616,37 @@ class DynaBase:
             - SUPPRESSED_ELEMENT_PRINTING: Element printing is suppressed.
             - SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed.
 
+        edit_frequency : int, optional
+            Edit frequency for the d3hsp file (IKEDIT). The default is None (0).
+        flush_frequency : int, optional
+            Flush frequency for output files (IFLUSH). The default is None (0).
+
         """
         if print_suppression_d3hsp:
             npopt = 1
         else:
             npopt = 0
-        ret = self.stub.CreateControlOutput(
-            ControlOutputRequest(
+
+        ikedit = edit_frequency if edit_frequency is not None else 0
+        iflush = flush_frequency if flush_frequency is not None else 0
+
+        if self._backend is not None:
+            # Use keywords backend directly
+            self._backend.create_control_output(
                 npopt=npopt,
                 neecho=print_suppression_echo.value,
+                ikedit=ikedit,
+                iflush=iflush,
             )
-        )
+            ret = True
+        else:
+            # Fall back to gRPC stub
+            ret = self.stub.CreateControlOutput(
+                ControlOutputRequest(
+                    npopt=npopt,
+                    neecho=print_suppression_echo.value,
+                )
+            )
         logging.info("Control Output Created...")
         return ret
 
@@ -1361,7 +1383,32 @@ class BeamSection:
 
 
 class ShellSection:
-    """Defines section properties for shell elements."""
+    """Defines section properties for shell elements.
+
+    Parameters
+    ----------
+    element_formulation : int
+        Element formulation. Common options:
+        - 2: Belytschko-Tsay (default)
+        - 6: S/R Hughes-Liu
+        - 16: Fully integrated shell element (very accurate)
+    shear_factor : float, optional
+        Shear correction factor. Default is 1.0.
+    integration_points : int, optional
+        Number of through-thickness integration points. Default is 5.
+    printout : float, optional
+        Printout option. Default is 0.
+    thickness1 : float, optional
+        Shell thickness at node 1. Default is 0.
+    thickness2 : float, optional
+        Shell thickness at node 2. Default is 0.
+    thickness3 : float, optional
+        Shell thickness at node 3. Default is 0.
+    thickness4 : float, optional
+        Shell thickness at node 4. Default is 0.
+    secid : int, optional
+        Section ID. If not provided, auto-assigned by the backend.
+    """
 
     def __init__(
         self,
@@ -1373,21 +1420,69 @@ class ShellSection:
         thickness2=0,
         thickness3=0,
         thickness4=0,
+        secid=None,
     ):
-        stub = DynaBase.get_stub()
-        ret = stub.CreateSectionShell(
-            SectionShellRequest(
-                elform=element_formulation,
-                shrf=shear_factor,
-                nip=integration_points,
-                propt=printout,
-                t1=thickness1,
-                t2=thickness2,
-                t3=thickness3,
-                t4=thickness4,
+        self.element_formulation = element_formulation
+        self.shear_factor = shear_factor
+        self.integration_points = integration_points
+        self.printout = printout
+        self.thickness1 = thickness1
+        self.thickness2 = thickness2
+        self.thickness3 = thickness3
+        self.thickness4 = thickness4
+        self.secid = secid
+        self.id = None
+
+    def create(self, stub=None):
+        """Create the shell section.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The section ID.
+        """
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            secid = self.secid if self.secid is not None else backend.next_id("section")
+            backend.create_section_shell(
+                secid=secid,
+                elform=self.element_formulation,
+                shrf=self.shear_factor,
+                nip=self.integration_points,
+                propt=self.printout,
+                t1=self.thickness1,
+                t2=self.thickness2,
+                t3=self.thickness3,
+                t4=self.thickness4,
             )
-        )
-        self.id = ret.id
+            self.id = secid
+        else:
+            # gRPC stub
+            ret = stub.CreateSectionShell(
+                SectionShellRequest(
+                    elform=self.element_formulation,
+                    shrf=self.shear_factor,
+                    nip=self.integration_points,
+                    propt=self.printout,
+                    t1=self.thickness1,
+                    t2=self.thickness2,
+                    t3=self.thickness3,
+                    t4=self.thickness4,
+                )
+            )
+            self.id = ret.id
+
+        logging.info(f"ShellSection {self.id} created...")
+        return self.id
 
 
 class SolidSection:
@@ -1406,18 +1501,52 @@ class SolidSection:
         - EQ.-2: Fully integrated S/R solid with nodal rotations and edge contact
         - EQ.10: 1 point tetrahedron
         - EQ.13: 1 point nodal pressure tetrahedron for bulk metal forming
+        - EQ.18: 8 node enhanced strain solid for shell-solid assemblies (NVH)
     secid : int, optional
         Section ID. If not provided, auto-assigned by the backend.
     """
 
     def __init__(self, element_formulation: int = 1, secid: int = None):
-        stub = DynaBase.get_stub()
-        ret = stub.CreateSectionSolid(
-            SectionSolidRequest(
-                elform=element_formulation,
+        self.element_formulation = element_formulation
+        self.secid = secid
+        self.id = None
+
+    def create(self, stub=None):
+        """Create the solid section.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The section ID.
+        """
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            secid = self.secid if self.secid is not None else backend.next_id("section")
+            backend.create_section_solid(
+                secid=secid,
+                elform=self.element_formulation,
             )
-        )
-        self.id = ret.id
+            self.id = secid
+        else:
+            # gRPC stub
+            ret = stub.CreateSectionSolid(
+                SectionSolidRequest(
+                    elform=self.element_formulation,
+                )
+            )
+            self.id = ret.id
+
+        logging.info(f"SolidSection {self.id} created...")
+        return self.id
 
 
 class IGASection:

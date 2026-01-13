@@ -4087,7 +4087,8 @@ class TestReferenceFileComparison:
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
         """test_frf_plate_damping.k - NVH FRF plate with damping curve."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
-        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, Curve, NodeSet
+        from ansys.dyna.core.pre.dynabase import ImplicitAnalysis, Curve, NodeSet, ShellSection
+        from ansys.dyna.core.pre.dynamaterial import MatElastic
         from ansys.dyna.core.pre.dynanvh import DynaNVH
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_plate_damping.k")
@@ -4147,26 +4148,28 @@ class TestReferenceFileComparison:
             output_nodeset = NodeSet(nodes=[131, 651], sid=2, solver="MECH")
             output_nodeset.create(solution.stub)
 
-            # SECTION_SHELL (secid=1, elform=6, shrf=0.833, nip=5, propt=3.0)
-            solution._backend.create_section_shell(
+            # SECTION_SHELL (secid=1, elform=6, shrf=0.833, nip=5, propt=3.0) - using high-level API
+            shell_section = ShellSection(
+                element_formulation=6,
+                shear_factor=0.833,
+                integration_points=5,
+                printout=3.0,
+                thickness1=0.002,
+                thickness2=0.002,
+                thickness3=0.002,
+                thickness4=0.002,
                 secid=1,
-                elform=6,
-                shrf=0.833,
-                nip=5,
-                propt=3.0,
-                t1=0.002,
-                t2=0.002,
-                t3=0.002,
-                t4=0.002,
             )
+            shell_section.create(solution.stub)
 
-            # MAT_ELASTIC (mid=1, ro=7870.0, e=2.07e11, pr=0.292)
-            solution._backend.create_mat_elastic(
+            # MAT_ELASTIC (mid=1, ro=7870.0, e=2.07e11, pr=0.292) - using high-level API
+            mat_elastic = MatElastic(
+                mass_density=7870.0,
+                young_modulus=2.07e11,
+                poisson_ratio=0.292,
                 mid=1,
-                ro=7870.0,
-                e=2.07e11,
-                pr=0.292,
             )
+            mat_elastic.create(solution.stub)
 
             # Update PART to reference secid=1 and mid=1
             from ansys.dyna.core.keywords import keywords

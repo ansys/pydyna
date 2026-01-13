@@ -505,21 +505,65 @@ class MatAdditional:
 
 # MAT_001
 class MatElastic(MatAdditional):
-    """Defines an isotropic hypoelastic material."""
+    """Defines an isotropic hypoelastic material.
 
-    def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3):
+    Parameters
+    ----------
+    mass_density : float
+        Mass density (RO).
+    young_modulus : float
+        Young's modulus (E).
+    poisson_ratio : float, optional
+        Poisson's ratio (PR). Default is 0.3.
+    mid : int, optional
+        Material ID. If not provided, auto-assigned by the backend.
+    """
+
+    def __init__(self, mass_density=0, young_modulus=0, poisson_ratio=0.3, mid=None):
         MatAdditional.__init__(self)
         self.ro = mass_density
         self.e = young_modulus
         self.pr = poisson_ratio
+        self.mid = mid
 
-    def create(self, stub):
-        """Create an elastic material."""
-        ret = stub.CreateMatElastic(MatElasticRequest(ro=self.ro, e=self.e, pr=self.pr))
-        self.material_id = ret.mid
+    def create(self, stub=None):
+        """Create an elastic material.
+
+        Parameters
+        ----------
+        stub : object, optional
+            The stub to use for creation. If not provided, uses DynaBase.get_stub().
+
+        Returns
+        -------
+        int
+            The material ID.
+        """
+        from ansys.dyna.core.pre.dynabase import DynaBase
+
+        if stub is None:
+            stub = DynaBase.get_stub()
+
+        # Check if using keywords backend
+        if hasattr(stub, "_backend"):
+            backend = stub._backend
+            mid = self.mid if self.mid is not None else backend.next_id("material")
+            backend.create_mat_elastic(
+                mid=mid,
+                ro=self.ro,
+                e=self.e,
+                pr=self.pr,
+            )
+            self.material_id = mid
+        else:
+            # gRPC stub
+            ret = stub.CreateMatElastic(MatElasticRequest(ro=self.ro, e=self.e, pr=self.pr))
+            self.material_id = ret.mid
+
         self.name = "Elastic"
         MatAdditional.create(self, stub, self.material_id)
         logging.info(f"Material {self.name} Created...")
+        return self.material_id
 
 
 # MAT_003
