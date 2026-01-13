@@ -6,10 +6,43 @@ pytest as a sesson fixture
 import os
 import io
 import pathlib
+import tempfile
 
 import pytest
 from ansys.dyna.core.pre.launcher import ServerThread
 from ansys.dyna.core.run import run_dyna
+
+
+def pytest_addoption(parser):
+    """Add pytest command line options."""
+    parser.addoption(
+        "--keywords-backend",
+        action="store_true",
+        default=False,
+        help="Run tests using the keywords backend instead of gRPC",
+    )
+
+
+def pytest_configure(config):
+    """Configure pytest with custom markers and settings."""
+    config.addinivalue_line(
+        "markers", "keywords: mark test as using the keywords backend"
+    )
+
+    # Store whether keywords backend is being used
+    config._keywords_backend = config.getoption("--keywords-backend")
+
+    # If using keywords backend, set the environment variable so DynaSolution
+    # uses the keywords backend by default
+    if config._keywords_backend:
+        os.environ["PYDYNA_PRE_BACKEND"] = "keywords"
+
+
+@pytest.fixture(scope="session")
+def using_keywords_backend(request):
+    """Return True if tests are running with the keywords backend."""
+    return request.config._keywords_backend
+
 
 # from ansys.dyna.core.pre.Server.kwserver import *
 
@@ -146,13 +179,19 @@ def thermal_initialfile():
     return resolve_test_file("test_thermal_stress.k", "initial")
 
 
-@pytest.fixture(scope = "session",autouse=True)
-def Connect_Server():
-    """Connect to the kwserver."""
+@pytest.fixture(scope="session", autouse=True)
+def Connect_Server(request):
+    """Connect to the kwserver (or skip if using keywords backend)."""
+    # Skip server startup when using keywords backend
+    if request.config._keywords_backend:
+        yield None
+        return
+
     path = get_server_path()
-    threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
+    threadserver = ServerThread(1, port=50051, ip="127.0.0.1", server_path=path)
     threadserver.daemon = True
     threadserver.start()
+    yield threadserver
 
 
 def pytest_collection_modifyitems(config, items):

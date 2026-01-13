@@ -83,6 +83,11 @@ class DynaSolution:
        Host name. The default is ``"localhost"``.
     port : str, optional
        Port. the default is ``"50051"``.
+
+    Notes
+    -----
+    Set the environment variable ``PYDYNA_PRE_BACKEND=keywords`` to use the
+    local keywords-based backend instead of gRPC.
     """
 
     # Class-level backend reference for keywords backend support
@@ -90,6 +95,11 @@ class DynaSolution:
     _backend = None
 
     def __init__(self, hostname="localhost", port="50051", channel=None, server_path=""):
+        # Check if keywords backend is requested via environment variable
+        if os.environ.get("PYDYNA_PRE_BACKEND") == "keywords":
+            self._init_keywords_backend()
+            return
+
         # launch server
         # check_valid_ip(hostname)  # double check
         self.pim_client = None
@@ -122,6 +132,43 @@ class DynaSolution:
         DynaSolution.stub = self.stub
         DynaSolution.terminationtime = 0
         self._default_model: Model = None
+
+    def _init_keywords_backend(self):
+        """Initialize the keywords backend instead of gRPC."""
+        from ansys.dyna.core.pre.keywords_backend import KeywordsBackend, KeywordsStub
+
+        logging.info("Using keywords backend (no gRPC server required)")
+
+        self._keywords_backend = KeywordsBackend()
+        self._stub_adapter = KeywordsStub(self._keywords_backend)
+
+        self.object_list = []
+        self.mainname = ""
+        self._path = None
+        self._default_model = None
+        self._loaded_files = []
+
+        # Set stub to the adapter for compatibility
+        self.stub = self._stub_adapter
+        DynaSolution.stub = self._stub_adapter
+        DynaSolution.termination_time = 0
+        DynaSolution._backend = self._keywords_backend
+
+        # PIM client attributes (not used in keywords backend)
+        self.pim_client = None
+        self.remote_instance = None
+
+    @property
+    def _using_keywords_backend(self):
+        """Return True if using the keywords backend."""
+        return hasattr(self, "_keywords_backend")
+
+    @property
+    def deck(self):
+        """Get the underlying Deck instance (keywords backend only)."""
+        if self._using_keywords_backend:
+            return self._keywords_backend.deck
+        raise AttributeError("deck property is only available with keywords backend")
 
     @property
     def no_grpc(self):
@@ -249,6 +296,13 @@ class DynaSolution:
         local_name :
 
         """
+        if self._using_keywords_backend:
+            # For keywords backend, write the deck directly to the destination
+            os.makedirs(os.path.dirname(os.path.abspath(local_name)), exist_ok=True)
+            self._keywords_backend.deck.export_file(local_name)
+            logging.info(f"Wrote deck to {local_name}")
+            return
+
         response = self.stub.Download(DownloadRequest(url=remote_name))
         with open(local_name, "wb") as f:
             for chunk in response:
@@ -267,6 +321,21 @@ class DynaSolution:
         bool
             ``True`` when successful, ``False`` when failed.
         """
+        if self._using_keywords_backend:
+            if not filenames:
+                logging.warning("No files provided to open_files")
+                return False
+            self.mainname = os.path.basename(filenames[0])
+            self._keywords_backend.set_main_filename(self.mainname)
+            for filename in filenames:
+                if os.path.exists(filename):
+                    logging.info(f"Loading file: {filename}")
+                    self._keywords_backend.load_file(filename)
+                    self._loaded_files.append(filename)
+                else:
+                    logging.warning(f"File not found: {filename}")
+            return True
+
         splitfiles = os.path.split(filenames[0])
         path = splitfiles[0]
         for filename in filenames:
@@ -455,6 +524,12 @@ class DynaSolution:
 
         for obj in self.object_list:
             obj.save_file()
+
+        if self._using_keywords_backend:
+            # For keywords backend, return a placeholder path.
+            # The actual write happens in download().
+            logging.info(f"{self.mainname} prepared for output")
+            return "."
 
         ret = self.stub.SaveFile(SaveFileRequest(name=self.mainname))
         msg = self.mainname + " is outputed..."
