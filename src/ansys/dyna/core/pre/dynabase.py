@@ -500,6 +500,9 @@ class DynaBase:
         sliding_interface_energy=EnergyFlag.NOT_COMPUTED,
         rayleigh_energy=EnergyFlag.NOT_COMPUTED,
         initial_reference_geometry_energy=EnergyFlag.COMPUTED,
+        material_energy=None,
+        damping_energy=None,
+        discrete_element_energy=None,
     ):
         """Provide controls for energy dissipation options.
 
@@ -531,6 +534,24 @@ class DynaBase:
             - EQ.1: Initial reference geometry energy is not computed.
             - EQ.2: Initial reference geometry energy is computed.
 
+        material_energy : int, optional
+            Material energies output option (keywords backend only).
+
+            - EQ.1: Output material energies.
+            - EQ.2: Do not output material energies.
+
+        damping_energy : int, optional
+            Damping energy dissipation option (keywords backend only).
+
+            - EQ.1: Energy dissipation is computed.
+            - EQ.2: Energy dissipation is not computed.
+
+        discrete_element_energy : int, optional
+            Discrete element energy dissipation option (keywords backend only).
+
+            - EQ.1: Energy dissipation is computed.
+            - EQ.2: Energy dissipation is not computed.
+
         Returns
         -------
         bool
@@ -539,16 +560,23 @@ class DynaBase:
         ret = True
         if not self.have_energy:
             if self._backend is not None:
-                # Use keywords backend directly
-                self._backend.create_control_energy(
-                    hgen=hourglass_energy.value,
-                    rwen=rigidwall_energy.value,
-                    slnten=sliding_interface_energy.value,
-                    rylen=rayleigh_energy.value,
-                    irgen=initial_reference_geometry_energy.value,
-                )
+                # Use keywords backend directly with extended parameters
+                kwargs = {
+                    "hgen": hourglass_energy.value,
+                    "rwen": rigidwall_energy.value,
+                    "slnten": sliding_interface_energy.value,
+                    "rylen": rayleigh_energy.value,
+                    "irgen": initial_reference_geometry_energy.value,
+                }
+                if material_energy is not None:
+                    kwargs["maten"] = material_energy
+                if damping_energy is not None:
+                    kwargs["drlen"] = damping_energy
+                if discrete_element_energy is not None:
+                    kwargs["disen"] = discrete_element_energy
+                self._backend.create_control_energy(**kwargs)
             else:
-                # Fall back to gRPC stub
+                # Fall back to gRPC stub (does not support extended parameters)
                 ret = self.stub.CreateControlEnergy(
                     ControlEnergyRequest(
                         hgen=hourglass_energy.value,

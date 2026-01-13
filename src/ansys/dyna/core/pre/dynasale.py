@@ -257,6 +257,514 @@ class DynaSALE(DynaBase):
         DynaBase.__init__(self)
         self.stub.CreateDBSALE(DBSALERequest(switch=1))
 
+    def create_mat_vacuum(self, mid, rho=1.0e-9):
+        """Create a MAT_VACUUM keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        rho : float, optional
+            Density. The default is ``1.0e-9``.
+
+        Returns
+        -------
+        int
+            The material ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_mat_vacuum(mid=mid, rho=rho)
+        else:
+            logging.warning("create_mat_vacuum is only available with the keywords backend")
+            return None
+
+    def create_mat_null(self, mid, ro=0.0, pc=0.0, mu=0.0):
+        """Create a MAT_NULL keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        ro : float, optional
+            Density. The default is ``0.0``.
+        pc : float, optional
+            Pressure cutoff. The default is ``0.0``.
+        mu : float, optional
+            Dynamic viscosity. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The material ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_mat_null(mid=mid, ro=ro, pc=pc, mu=mu)
+        else:
+            logging.warning("create_mat_null is only available with the keywords backend")
+            return None
+
+    def create_mat_high_explosive_burn(self, mid, ro=0.0, d=0.0, pcj=0.0):
+        """Create a MAT_HIGH_EXPLOSIVE_BURN keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        ro : float, optional
+            Density. The default is ``0.0``.
+        d : float, optional
+            Detonation velocity. The default is ``0.0``.
+        pcj : float, optional
+            Chapman-Jouget pressure. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The material ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_mat_high_explosive_burn(mid=mid, ro=ro, d=d, pcj=pcj)
+        else:
+            logging.warning("create_mat_high_explosive_burn is only available with the keywords backend")
+            return None
+
+    def create_mat_johnson_cook(
+        self,
+        mid,
+        ro=0.0,
+        g=0.0,
+        e=0.0,
+        pr=0.0,
+        a=0.0,
+        b=0.0,
+        n=0.0,
+        c=0.0,
+        m=0.0,
+        tm=0.0,
+        tr=0.0,
+        epso=0.0,
+        cp=0.0,
+        pc=0.0,
+        spall=0.0,
+        d1=0.0,
+        d2=0.0,
+        d3=0.0,
+        d4=0.0,
+        d5=0.0,
+        c2_or_erod=0.0,
+    ):
+        """Create a MAT_JOHNSON_COOK keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        ro : float, optional
+            Density. The default is ``0.0``.
+        g : float, optional
+            Shear modulus. The default is ``0.0``.
+        e : float, optional
+            Young's modulus. The default is ``0.0``.
+        pr : float, optional
+            Poisson's ratio. The default is ``0.0``.
+        a : float, optional
+            Johnson-Cook parameter A. The default is ``0.0``.
+        b : float, optional
+            Johnson-Cook parameter B. The default is ``0.0``.
+        n : float, optional
+            Johnson-Cook parameter n. The default is ``0.0``.
+        c : float, optional
+            Johnson-Cook parameter C. The default is ``0.0``.
+        m : float, optional
+            Johnson-Cook parameter m. The default is ``0.0``.
+        tm : float, optional
+            Melt temperature. The default is ``0.0``.
+        tr : float, optional
+            Room temperature. The default is ``0.0``.
+        epso : float, optional
+            Reference strain rate. The default is ``0.0``.
+        cp : float, optional
+            Specific heat. The default is ``0.0``.
+        pc : float, optional
+            Pressure cutoff. The default is ``0.0``.
+        spall : float, optional
+            Spall type. The default is ``0.0``.
+        d1-d5 : float, optional
+            Damage parameters. The default is ``0.0``.
+        c2_or_erod : float, optional
+            C2 parameter or erosion flag. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The material ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_mat_johnson_cook(
+                mid=mid,
+                ro=ro,
+                g=g,
+                e=e,
+                pr=pr,
+                a=a,
+                b=b,
+                n=n,
+                c=c,
+                m=m,
+                tm=tm,
+                tr=tr,
+                epso=epso,
+                cp=cp,
+                pc=pc,
+                spall=spall,
+                d1=d1,
+                d2=d2,
+                d3=d3,
+                d4=d4,
+                d5=d5,
+                c2_or_erod=c2_or_erod,
+            )
+        else:
+            logging.warning("create_mat_johnson_cook is only available with the keywords backend")
+            return None
+
+    def create_eos_linear_polynomial(
+        self, eosid, c0=0.0, c1=0.0, c2=0.0, c3=0.0, c4=0.0, c5=0.0, c6=0.0, e0=0.0, v0=0.0
+    ):
+        """Create an EOS_LINEAR_POLYNOMIAL keyword.
+
+        Parameters
+        ----------
+        eosid : int
+            EOS ID.
+        c0-c6 : float, optional
+            Polynomial coefficients. The default is ``0.0``.
+        e0 : float, optional
+            Initial internal energy. The default is ``0.0``.
+        v0 : float, optional
+            Initial relative volume. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The EOS ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_eos_linear_polynomial(
+                eosid=eosid, c0=c0, c1=c1, c2=c2, c3=c3, c4=c4, c5=c5, c6=c6, e0=e0, v0=v0
+            )
+        else:
+            logging.warning("create_eos_linear_polynomial is only available with the keywords backend")
+            return None
+
+    def create_eos_jwl(self, eosid, a=0.0, b=0.0, r1=0.0, r2=0.0, omeg=0.0, e0=0.0, vo=0.0):
+        """Create an EOS_JWL keyword.
+
+        Parameters
+        ----------
+        eosid : int
+            EOS ID.
+        a : float, optional
+            JWL parameter A. The default is ``0.0``.
+        b : float, optional
+            JWL parameter B. The default is ``0.0``.
+        r1 : float, optional
+            JWL parameter R1. The default is ``0.0``.
+        r2 : float, optional
+            JWL parameter R2. The default is ``0.0``.
+        omeg : float, optional
+            JWL parameter omega. The default is ``0.0``.
+        e0 : float, optional
+            Initial internal energy. The default is ``0.0``.
+        vo : float, optional
+            Initial relative volume. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The EOS ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_eos_jwl(eosid=eosid, a=a, b=b, r1=r1, r2=r2, omeg=omeg, e0=e0, vo=vo)
+        else:
+            logging.warning("create_eos_jwl is only available with the keywords backend")
+            return None
+
+    def create_eos_gruneisen(self, eosid, c=0.0, s1=0.0, s2=0.0, s3=0.0, gamao=0.0, a=0.0, e0=0.0, v0=0.0):
+        """Create an EOS_GRUNEISEN keyword.
+
+        Parameters
+        ----------
+        eosid : int
+            EOS ID.
+        c : float, optional
+            Intercept of shock velocity vs particle velocity curve. The default is ``0.0``.
+        s1-s3 : float, optional
+            Slope coefficients. The default is ``0.0``.
+        gamao : float, optional
+            Gruneisen coefficient. The default is ``0.0``.
+        a : float, optional
+            First order volume correction. The default is ``0.0``.
+        e0 : float, optional
+            Initial internal energy. The default is ``0.0``.
+        v0 : float, optional
+            Initial relative volume. The default is ``0.0``.
+
+        Returns
+        -------
+        int
+            The EOS ID.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            return self.stub._backend.create_eos_gruneisen(
+                eosid=eosid, c=c, s1=s1, s2=s2, s3=s3, gamao=gamao, a=a, e0=e0, v0=v0
+            )
+        else:
+            logging.warning("create_eos_gruneisen is only available with the keywords backend")
+            return None
+
+    def create_initial_detonation(self, pid, x=0.0, y=0.0, z=0.0, lt=0.0, mmgset=0):
+        """Create an INITIAL_DETONATION keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID.
+        x : float, optional
+            X coordinate of detonation point. The default is ``0.0``.
+        y : float, optional
+            Y coordinate of detonation point. The default is ``0.0``.
+        z : float, optional
+            Z coordinate of detonation point. The default is ``0.0``.
+        lt : float, optional
+            Lighting time. The default is ``0.0``.
+        mmgset : int, optional
+            Multi-material group set ID. The default is ``0``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_initial_detonation(pid=pid, x=x, y=y, z=z, lt=lt, mmgset=mmgset)
+            return True
+        else:
+            logging.warning("create_initial_detonation is only available with the keywords backend")
+            return False
+
+    def create_ale_structured_mesh(
+        self, mshid=1, dpid=2, nbid=2000001, ebid=2000001, tdeath=0.0, cpidx=1, cpidy=2, cpidz=3
+    ):
+        """Create an ALE_STRUCTURED_MESH keyword.
+
+        Parameters
+        ----------
+        mshid : int, optional
+            Mesh ID. The default is ``1``.
+        dpid : int, optional
+            Default part ID. The default is ``2``.
+        nbid : int, optional
+            Beginning node ID. The default is ``2000001``.
+        ebid : int, optional
+            Beginning element ID. The default is ``2000001``.
+        tdeath : float, optional
+            Death time. The default is ``0.0``.
+        cpidx : int, optional
+            Control points ID for X. The default is ``1``.
+        cpidy : int, optional
+            Control points ID for Y. The default is ``2``.
+        cpidz : int, optional
+            Control points ID for Z. The default is ``3``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_ale_structured_mesh(
+                mshid=mshid,
+                dpid=dpid,
+                nbid=nbid,
+                ebid=ebid,
+                tdeath=tdeath,
+                cpidx=cpidx,
+                cpidy=cpidy,
+                cpidz=cpidz,
+            )
+            return True
+        else:
+            logging.warning("create_ale_structured_mesh is only available with the keywords backend")
+            return False
+
+    def create_ale_structured_mesh_control_points(self, cpid, icase=2, sfo=1.0, offo=0.0, points=None):
+        """Create an ALE_STRUCTURED_MESH_CONTROL_POINTS keyword.
+
+        Parameters
+        ----------
+        cpid : int
+            Control points ID.
+        icase : int, optional
+            Control point case type. The default is ``2``.
+        sfo : float, optional
+            Scale factor offset. The default is ``1.0``.
+        offo : float, optional
+            Offset factor offset. The default is ``0.0``.
+        points : list, optional
+            List of tuples (n, x, ratio) for each control point.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_ale_structured_mesh_control_points(
+                cpid=cpid, icase=icase, sfo=sfo, offo=offo, points=points or []
+            )
+            return True
+        else:
+            logging.warning("create_ale_structured_mesh_control_points is only available with the keywords backend")
+            return False
+
+    def create_ale_structured_multi_material_group(self, groups=None):
+        """Create an ALE_STRUCTURED_MULTI-MATERIAL_GROUP keyword.
+
+        Parameters
+        ----------
+        groups : list, optional
+            List of dicts with keys: ammgnm (name), mid (material ID),
+            eosid (EOS ID), pref (reference pressure).
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_ale_structured_multi_material_group(groups=groups or [])
+            return True
+        else:
+            logging.warning("create_ale_structured_multi_material_group is only available with the keywords backend")
+            return False
+
+    def create_ale_structured_mesh_volume_filling(self, mshid, ammgto, nsample=4, geom="ALL", in_out=0, e1=0):
+        """Create an ALE_STRUCTURED_MESH_VOLUME_FILLING keyword.
+
+        Parameters
+        ----------
+        mshid : int
+            Mesh ID.
+        ammgto : str
+            Multi-material group name to fill.
+        nsample : int, optional
+            Number of sampling points. The default is ``4``.
+        geom : str, optional
+            Geometry type ("ALL", "PART", etc.). The default is ``"ALL"``.
+        in_out : int, optional
+            Inside/outside fill flag. The default is ``0``.
+        e1 : int, optional
+            Geometry element/part ID. The default is ``0``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_ale_structured_mesh_volume_filling(
+                mshid=mshid, ammgto=ammgto, nsample=nsample, geom=geom, in_out=in_out, e1=e1
+            )
+            return True
+        else:
+            logging.warning("create_ale_structured_mesh_volume_filling is only available with the keywords backend")
+            return False
+
+    def create_ale_structured_mesh_refine(self, mshid, ityp=1, idir=1, n1=1, n2=0, ntimes=0):
+        """Create an ALE_STRUCTURED_MESH_REFINE keyword.
+
+        Parameters
+        ----------
+        mshid : int
+            Mesh ID.
+        ityp : int, optional
+            Refinement type. The default is ``1``.
+        idir : int, optional
+            Refinement direction. The default is ``1``.
+        n1 : int, optional
+            First parameter. The default is ``1``.
+        n2 : int, optional
+            Second parameter. The default is ``0``.
+        ntimes : int, optional
+            Number of refinement times. The default is ``0``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+
+        Note
+        ----
+        This method requires the keywords backend. It is not available with the gRPC stub.
+        """
+        if hasattr(self.stub, "_backend"):
+            self.stub._backend.create_ale_structured_mesh_refine(
+                mshid=mshid, ityp=ityp, idir=idir, n1=n1, n2=n2, ntimes=ntimes
+            )
+            return True
+        else:
+            logging.warning("create_ale_structured_mesh_refine is only available with the keywords backend")
+            return False
+
     def set_termination(self, endtime):
         """Set the time for ending the simulation.
 
