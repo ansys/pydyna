@@ -210,6 +210,43 @@ def test_read_keyword_no_defaults():
 
 
 @pytest.mark.keywords
+def test_disable_lspp_defaults_with_constructor_kwargs():
+    """Test that kwargs passed to constructor work even with disable_lspp_defaults.
+
+    When using disable_lspp_defaults(), schema defaults should be suppressed,
+    but explicitly passed kwargs should still be applied.
+    """
+    # Without disable_lspp_defaults, LSPP defaults are applied
+    kw = kwd.ControlContact()
+    assert kw.slsfac == 0.1  # LSPP default
+    assert kw.shlthk == 0  # LSPP default
+    assert kw.orien == 1  # LSPP default
+
+    # With disable_lspp_defaults but no kwargs, all values should be None
+    with disable_lspp_defaults():
+        kw = kwd.ControlContact()
+        assert kw.slsfac is None
+        assert kw.shlthk is None
+        assert kw.orien is None
+
+    # With disable_lspp_defaults AND kwargs, kwargs should be applied
+    with disable_lspp_defaults():
+        kw = kwd.ControlContact(
+            rwpnal=1.0, shlthk=0, orien=1, ssthk=0, ignore=1, igactc=0
+        )
+        # Explicitly set values should be preserved
+        assert kw.rwpnal == 1.0
+        assert kw.shlthk == 0
+        assert kw.orien == 1
+        assert kw.ssthk == 0
+        assert kw.ignore == 1
+        assert kw.igactc == 0
+        # Values not explicitly set should be None
+        assert kw.slsfac is None
+        assert kw.penopt is None
+
+
+@pytest.mark.keywords
 def test_boundary_prescribed_motion_set(ref_string):
     b = kwd.BoundaryPrescribedMotionSet()
     assert b.write() == ref_string.test_boundary_prescribed_motion_set

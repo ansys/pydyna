@@ -235,10 +235,12 @@ class Card(CardInterface):
         from ansys.dyna.core.lib.config import use_lspp_defaults
 
         # Build values list: respect use_lspp_defaults() setting
+        # Always apply kwargs if provided, but only fall back to schema defaults
+        # when use_lspp_defaults() is True
         if use_lspp_defaults():
             values = [kwargs.get(fs.name, fs.default) for fs in field_schemas]
         else:
-            values = [None] * len(field_schemas)
+            values = [kwargs.get(fs.name, None) for fs in field_schemas]
         return cls.from_field_schemas(field_schemas, values, active_func, format)
 
     @property
