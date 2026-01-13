@@ -517,12 +517,69 @@ class ControlKeywordsMixin:
         logger.debug(f"Created CONTROL_OUTPUT: npopt={npopt}, neecho={neecho}")
         return True
 
+    def create_control_implicit_dynamics(
+        self,
+        imass: int = 0,
+        gamma: float = 0.5,
+        beta: float = 0.25,
+        tdybir: float = 0.0,
+        tdydth: float = 1.0e28,
+        tdybur: float = 1.0e28,
+        irate: int = 0,
+        alpha: float = 0.0,
+    ) -> bool:
+        """Create a CONTROL_IMPLICIT_DYNAMICS keyword.
+
+        Parameters
+        ----------
+        imass : int, optional
+            Mass matrix formulation. Default is 0.
+        gamma : float, optional
+            Newmark gamma parameter. Default is 0.5.
+        beta : float, optional
+            Newmark beta parameter. Default is 0.25.
+        tdybir : float, optional
+            Dynamic birth time. Default is 0.0.
+        tdydth : float, optional
+            Dynamic death time. Default is 1.0e28.
+        tdybur : float, optional
+            Dynamic burial time. Default is 1.0e28.
+        irate : int, optional
+            Rate effects flag. Default is 0.
+        alpha : float, optional
+            Alpha parameter. Default is 0.0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlImplicitDynamics()
+        kw.imass = imass
+        kw.gamma = gamma
+        kw.beta = beta
+        kw.tdybir = tdybir
+        kw.tdydth = tdydth
+        kw.tdybur = tdybur
+        kw.irate = irate
+        kw.alpha = alpha
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_IMPLICIT_DYNAMICS: imass={imass}, gamma={gamma}, beta={beta}")
+        return True
+
     def create_control_implicit_general(
         self,
         imflag: int = 1,
         dt0: float = 0.0,
         imform: int = 2,
         nsbs: int = 1,
+        igs: int = 2,
+        cnstn: int = 0,
+        form: int = 0,
+        zero_v: int = 0,
     ) -> bool:
         """Create a CONTROL_IMPLICIT_GENERAL keyword.
 
@@ -536,6 +593,14 @@ class ControlKeywordsMixin:
             Implicit formulation. Default is 2.
         nsbs : int, optional
             Number of stiffness matrix reformations. Default is 1.
+        igs : int, optional
+            Geometric (initial stress) stiffness flag. Default is 2.
+        cnstn : int, optional
+            Indicator for consistent tangent stiffness. Default is 0.
+        form : int, optional
+            Element formulation when using IMFORM flag. Default is 0.
+        zero_v : int, optional
+            Zero velocity flag. Default is 0.
 
         Returns
         -------
@@ -549,6 +614,10 @@ class ControlKeywordsMixin:
         kw.dt0 = dt0
         kw.imform = imform
         kw.nsbs = nsbs
+        kw.igs = igs
+        kw.cnstn = cnstn
+        kw.form = form
+        kw.zero_v = zero_v
 
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_IMPLICIT_GENERAL: imflag={imflag}, dt0={dt0}")
@@ -563,8 +632,28 @@ class ControlKeywordsMixin:
         ectol: float = 0.01,
         rctol: float = 1.0e10,
         lstol: float = 0.9,
+        abstol: float = 0.0,
+        dnorm: int = 2,
+        diverg: int = 1,
+        istif: int = 1,
         nlprint: int = 0,
         nlnorm: float = 0.0,
+        d3itctl: int = 0,
+        cpchk: int = 0,
+        arcctl: int = 0,
+        arcdir: int = 0,
+        arclen: float = 0.0,
+        arcmth: int = 1,
+        arcdmp: int = 2,
+        arcpsi: float = 0.0,
+        arcalf: float = 0.0,
+        arctim: float = 0.0,
+        lsmtd: int = 4,
+        lsdir: int = 2,
+        irad: float = 0.0,
+        srad: float = 0.0,
+        awgt: float = 0.0,
+        sred: float = 0.0,
     ) -> bool:
         """Create a CONTROL_IMPLICIT_SOLUTION keyword.
 
@@ -584,10 +673,50 @@ class ControlKeywordsMixin:
             Residual convergence tolerance. Default is 1.0e10.
         lstol : float, optional
             Line search tolerance. Default is 0.9.
+        abstol : float, optional
+            Absolute convergence tolerance. Default is 0.0.
+        dnorm : int, optional
+            Displacement norm for convergence test. Default is 2.
+        diverg : int, optional
+            Divergence flag. Default is 1.
+        istif : int, optional
+            Initial stiffness formation flag. Default is 1.
         nlprint : int, optional
             Nonlinear solver print flag. Default is 0.
         nlnorm : float, optional
             Nonlinear residual norm type. Default is 0.0.
+        d3itctl : int, optional
+            Control D3ITER database. Default is 0.
+        cpchk : int, optional
+            Checkpoint flag. Default is 0.
+        arcctl : int, optional
+            Arc-length control flag. Default is 0.
+        arcdir : int, optional
+            Arc-length direction. Default is 0.
+        arclen : float, optional
+            Arc-length. Default is 0.0.
+        arcmth : int, optional
+            Arc-length method. Default is 1.
+        arcdmp : int, optional
+            Arc-length damping. Default is 2.
+        arcpsi : float, optional
+            Arc-length PSI parameter. Default is 0.0.
+        arcalf : float, optional
+            Arc-length ALF parameter. Default is 0.0.
+        arctim : float, optional
+            Arc-length time parameter. Default is 0.0.
+        lsmtd : int, optional
+            Line search method. Default is 0.
+        lsdir : int, optional
+            Line search direction. Default is 2.
+        irad : float, optional
+            Irad parameter. Default is 0.0.
+        srad : float, optional
+            Srad parameter. Default is 0.0.
+        awgt : float, optional
+            Awgt parameter. Default is 0.0.
+        sred : float, optional
+            Sred parameter. Default is 0.0.
 
         Returns
         -------
@@ -597,6 +726,7 @@ class ControlKeywordsMixin:
         from ansys.dyna.core.keywords import keywords
 
         kw = keywords.ControlImplicitSolution()
+        # Card 0
         kw.nsolvr = nsolvr
         kw.ilimit = ilimit
         kw.maxref = maxref
@@ -604,8 +734,31 @@ class ControlKeywordsMixin:
         kw.ectol = ectol
         kw.rctol = rctol
         kw.lstol = lstol
+        kw.abstol = abstol
+        # Card 1
+        kw.dnorm = dnorm
+        kw.diverg = diverg
+        kw.istif = istif
         kw.nlprint = nlprint
         kw.nlnorm = nlnorm
+        kw.d3itctl = d3itctl
+        kw.cpchk = cpchk
+        # Card 2 (arc-length, optional based on dnorm < 0)
+        kw.arcctl = arcctl
+        kw.arcdir = arcdir
+        kw.arclen = arclen
+        kw.arcmth = arcmth
+        kw.arcdmp = arcdmp
+        kw.arcpsi = arcpsi
+        kw.arcalf = arcalf
+        kw.arctim = arctim
+        # Card 3 (line search)
+        kw.lsmtd = lsmtd
+        kw.lsdir = lsdir
+        kw.irad = irad
+        kw.srad = srad
+        kw.awgt = awgt
+        kw.sred = sred
 
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_IMPLICIT_SOLUTION: nsolvr={nsolvr}, ilimit={ilimit}")

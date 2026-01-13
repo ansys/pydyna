@@ -193,10 +193,7 @@ class ICFDKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        logger.debug(
-            f"Creating ICFD_CONTROL_GENERAL: atype={atype}, mtype={mtype}, "
-            f"dvcl={dvcl}, rdvcl={rdvcl}"
-        )
+        logger.debug(f"Creating ICFD_CONTROL_GENERAL: atype={atype}, mtype={mtype}, " f"dvcl={dvcl}, rdvcl={rdvcl}")
 
         kw = keywords.IcfdControlGeneral()
         kw.atype = atype
@@ -316,7 +313,9 @@ class ICFDKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        logger.debug(f"Creating ICFD_MAT: mid={mid}, flg={flg}, ro={ro}, vis={vis}, hc={hc}, tc={tc}, beta={beta}, prt={prt}")
+        logger.debug(
+            f"Creating ICFD_MAT: mid={mid}, flg={flg}, ro={ro}, vis={vis}, hc={hc}, tc={tc}, beta={beta}, prt={prt}"
+        )
 
         kw = keywords.IcfdMat()
         kw.mid = mid
@@ -520,14 +519,11 @@ class ICFDKeywordsMixin:
         from ansys.dyna.core.keywords import keywords
 
         logger.debug(
-            f"Creating ICFD_BOUNDARY_PRESCRIBED_PRE: pid={pid}, lcid={lcid}, "
-            f"sf={sf}, death={death}, birth={birth}"
+            f"Creating ICFD_BOUNDARY_PRESCRIBED_PRE: pid={pid}, lcid={lcid}, " f"sf={sf}, death={death}, birth={birth}"
         )
 
         kw = keywords.IcfdBoundaryPrescribedPre()
-        kw.boundaries = pd.DataFrame(
-            {"pid": [pid], "lcid": [lcid], "sf": [sf], "death": [death], "birth": [birth]}
-        )
+        kw.boundaries = pd.DataFrame({"pid": [pid], "lcid": [lcid], "sf": [sf], "death": [death], "birth": [birth]})
 
         self._deck.append(kw)
         logger.info(f"Created ICFD_BOUNDARY_PRESCRIBED_PRE keyword with pid={pid}")
@@ -629,8 +625,7 @@ class ICFDKeywordsMixin:
         from ansys.dyna.core.keywords import keywords
 
         logger.debug(
-            f"Creating ICFD_BOUNDARY_PRESCRIBED_TEMP: pid={pid}, lcid={lcid}, "
-            f"sf={sf}, death={death}, birth={birth}"
+            f"Creating ICFD_BOUNDARY_PRESCRIBED_TEMP: pid={pid}, lcid={lcid}, " f"sf={sf}, death={death}, birth={birth}"
         )
 
         kw = keywords.IcfdBoundaryPrescribedTemp()
@@ -764,7 +759,7 @@ class ICFDKeywordsMixin:
         kw.dt = dt
         kw.sf = sf
         # Note: 'form' field may not exist in keyword class, check if available
-        if hasattr(kw, 'form'):
+        if hasattr(kw, "form"):
             kw.form = form
 
         self._deck.append(kw)
@@ -837,7 +832,9 @@ class ICFDKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        logger.debug(f"Creating ICFD_CONTROL_MESH: mgsf={mgsf}, mstrat={mstrat}, struct2d={struct2d}, nrmsh={nrmsh}, aver={aver}")
+        logger.debug(
+            f"Creating ICFD_CONTROL_MESH: mgsf={mgsf}, mstrat={mstrat}, struct2d={struct2d}, nrmsh={nrmsh}, aver={aver}"
+        )
 
         kw = keywords.IcfdControlMesh()
         kw.mgsf = mgsf
@@ -1058,8 +1055,78 @@ class ICFDKeywordsMixin:
         kw.volid = volid
         if pids:
             # Set pids using appropriate property
-            if hasattr(kw, 'pids'):
+            if hasattr(kw, "pids"):
                 kw.pids = pids
 
         self._deck.append(kw)
         logger.info(f"Created MESH_EMBEDSHELL keyword with volid={volid}")
+
+    def create_icfd_boundary_fsi(self, pid: int) -> None:
+        """Create ICFD_BOUNDARY_FSI keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID for FSI boundary.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_BOUNDARY_FSI: pid={pid}")
+
+        kw = keywords.IcfdBoundaryFsi()
+        kw.pid = pid
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_FSI keyword for pid={pid}")
+
+    def create_icfd_control_fsi(
+        self,
+        owc: int = 0,
+        bt: float = 0.0,
+        dt: float = 0.0,
+        idc: int = 0,
+        lcidsf: int = 0,
+        xproj: int = 0,
+        nsub: int = 0,
+        vforc: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_FSI keyword.
+
+        Parameters
+        ----------
+        owc : int, optional
+            One-way coupling flag. Default is 0.
+        bt : float, optional
+            Birth time for FSI. Default is 0.0.
+        dt : float, optional
+            Time step for FSI. Default is 0.0.
+        idc : int, optional
+            ID for coupling. Default is 0.
+        lcidsf : int, optional
+            Load curve ID for scaling factor. Default is 0.
+        xproj : int, optional
+            Projection flag. Default is 0.
+        nsub : int, optional
+            Number of substeps. Default is 0.
+        vforc : int, optional
+            Volume force flag. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_CONTROL_FSI: owc={owc}, bt={bt}, dt={dt}, "
+            f"idc={idc}, lcidsf={lcidsf}, xproj={xproj}, nsub={nsub}, vforc={vforc}"
+        )
+
+        kw = keywords.IcfdControlFsi()
+        kw.owc = owc
+        kw.bt = bt
+        kw.dt = dt
+        kw.idc = idc
+        kw.lcidsf = lcidsf
+        kw.xproj = xproj
+        kw.nsub = nsub
+        kw.vforc = vforc
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_FSI keyword")

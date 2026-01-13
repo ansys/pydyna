@@ -833,6 +833,25 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def ICFDCreateBoundaryFSI(self, request):
+        """Create ICFD_BOUNDARY_FSI keyword."""
+        self._backend.create_icfd_boundary_fsi(pid=request.pid)
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlFSI(self, request):
+        """Create ICFD_CONTROL_FSI keyword."""
+        self._backend.create_icfd_control_fsi(
+            owc=getattr(request, "owc", 0),
+            bt=getattr(request, "bt", 0.0),
+            dt=getattr(request, "dt", 0.0),
+            idc=getattr(request, "idc", 0),
+            lcidsf=getattr(request, "lcidsf", 0),
+            xproj=getattr(request, "xproj", 0.0),
+            nsub=getattr(request, "nsub", 0),
+            vforc=getattr(request, "vforc", 0),
+        )
+        return type("Response", (), {"success": True})()
+
     def MESHCreateBl(self, request):
         """Create MESH_BL keyword."""
         self._backend.create_mesh_bl(
@@ -868,6 +887,10 @@ class KeywordsStub:
             dt0=getattr(request, "dt0", 0.0),
             imform=getattr(request, "imform", 2),
             nsbs=getattr(request, "nsbs", 1),
+            igs=getattr(request, "igs", 2),
+            cnstn=getattr(request, "cnstn", 0),
+            form=getattr(request, "form", 0),
+            zero_v=getattr(request, "zero_v", 0),
         )
         return type("Response", (), {"success": True})()
 
@@ -881,6 +904,42 @@ class KeywordsStub:
             ectol=getattr(request, "ectol", 0.01),
             rctol=getattr(request, "rctol", 1.0e10),
             lstol=getattr(request, "lstol", 0.9),
+            abstol=getattr(request, "abstol", 0.0),
+            dnorm=getattr(request, "dnorm", 2),
+            diverg=getattr(request, "diverg", 1),
+            istif=getattr(request, "istif", 1),
+            nlprint=getattr(request, "nlprint", 0),
+            nlnorm=getattr(request, "nlnorm", 0.0),
+            d3itctl=getattr(request, "d3itctl", 0),
+            cpchk=getattr(request, "cpchk", 0),
+            arcctl=getattr(request, "arcctl", 0),
+            arcdir=getattr(request, "arcdir", 0),
+            arclen=getattr(request, "arclen", 0.0),
+            arcmth=getattr(request, "arcmth", 1),
+            arcdmp=getattr(request, "arcdmp", 2),
+            arcpsi=getattr(request, "arcpsi", 0.0),
+            arcalf=getattr(request, "arcalf", 0.0),
+            arctim=getattr(request, "arctim", 0.0),
+            lsmtd=getattr(request, "lsmtd", 4),
+            lsdir=getattr(request, "lsdir", 2),
+            irad=getattr(request, "irad", 0.0),
+            srad=getattr(request, "srad", 0.0),
+            awgt=getattr(request, "awgt", 0.0),
+            sred=getattr(request, "sred", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlImplicitDynamics(self, request):
+        """Create CONTROL_IMPLICIT_DYNAMICS keyword."""
+        self._backend.create_control_implicit_dynamics(
+            imass=getattr(request, "imass", 0),
+            gamma=getattr(request, "gamma", 0.5),
+            beta=getattr(request, "beta", 0.25),
+            tdybir=getattr(request, "tdybir", 0.0),
+            tdydth=getattr(request, "tdydth", 1.0e28),
+            tdybur=getattr(request, "tdybur", 1.0e28),
+            irate=getattr(request, "irate", 0),
+            alpha=getattr(request, "alpha", 0.0),
         )
         return type("Response", (), {"success": True})()
 
