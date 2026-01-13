@@ -290,6 +290,13 @@ class KeywordsBackendBase:
         self._deck._keywords.sort(key=get_keyword_sort_key)
         logger.debug("Sorted keywords for output")
 
+    def _prepare_deck_for_export(self) -> None:
+        """Prepare deck for export by sorting keywords and setting header."""
+        self._sort_keywords()
+
+        # Set comment header to indicate file was written by pydyna
+        self._deck.comment_header = None
+
     def save_file(self, filename: Optional[str] = None) -> str:
         """Save the deck to a keyword file.
 
@@ -316,8 +323,8 @@ class KeywordsBackendBase:
         # Ensure the working directory exists
         os.makedirs(self._working_dir, exist_ok=True)
 
-        # Sort keywords to match gRPC backend output order
-        self._sort_keywords()
+        # Prepare deck for export (sort keywords and set comment header)
+        self._prepare_deck_for_export()
 
         self._deck.export_file(output_path)
         return self._working_dir
