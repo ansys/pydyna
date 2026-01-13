@@ -1234,6 +1234,36 @@ class ShellSection:
         self.id = ret.id
 
 
+class SolidSection:
+    """Defines section properties for solid elements.
+
+    Parameters
+    ----------
+    element_formulation : int
+        Element formulation. The default is ``1`` (constant stress solid element).
+
+        Common options:
+        - EQ.0: One point corotational for *ELEMENT_SOLID_ORTHO
+        - EQ.1: Constant stress solid element (default)
+        - EQ.2: Fully integrated S/R solid (8-point Gauss)
+        - EQ.-1: Fully integrated S/R solid with nodal rotations (8-point Gauss)
+        - EQ.-2: Fully integrated S/R solid with nodal rotations and edge contact
+        - EQ.10: 1 point tetrahedron
+        - EQ.13: 1 point nodal pressure tetrahedron for bulk metal forming
+    secid : int, optional
+        Section ID. If not provided, auto-assigned by the backend.
+    """
+
+    def __init__(self, element_formulation: int = 1, secid: int = None):
+        stub = DynaBase.get_stub()
+        ret = stub.CreateSectionSolid(
+            SectionSolidRequest(
+                elform=element_formulation,
+            )
+        )
+        self.id = ret.id
+
+
 class IGASection:
     """Defines section properties for isogeometric shell elements."""
 
@@ -1743,8 +1773,21 @@ class ImplicitAnalysis:
         self.defined_eigenvalue = False
         self.defined_solution = False
         self.defined_mass_matrix = False
+        self.defined_general = False
         self.imflag = analysis_type.value
         self.dt0 = initial_timestep_size
+        # Initialize general parameters with defaults
+        self.imform = 2
+        self.nsbs = 1
+        self.igs = 2
+        self.cnstn = 0
+        self.form = 0
+        self.zero_v = 0
+        # Initialize eigenvalue parameters with defaults
+        self.neig = 0
+        self.shfscl = 0
+        self.center = 0.0
+        self.eigmth = 2
         self.stub = DynaBase.get_stub()
 
     def set_initial_timestep_size(self, size=0):
@@ -1802,7 +1845,7 @@ class ImplicitAnalysis:
         self.gamma = gamma
         self.beta = beta
 
-    def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0):
+    def set_eigenvalue(self, number_eigenvalues=0, shift_scale=0, center=0.0, eigenvalue_method=2):
         """Activate implicit eigenvalue analysis and define associated input parameters.
 
         Parameters
@@ -1811,6 +1854,19 @@ class ImplicitAnalysis:
             Number of eigenvalues to extract. The default is ``0``.
         shift_scale : float, optional
             Shift scale. The default is ``0``.
+        center : float, optional
+            Center frequency for eigenvalue extraction. The default is ``0.0``.
+        eigenvalue_method : int, optional
+            Eigenvalue extraction method. The default is ``2``.
+
+            - EQ.2: Block Shift and Invert Lanczos (default)
+            - EQ.3: Lanczos with [M] = [I]
+            - EQ.5: Same as 2 but includes a mass orthogonality check
+            - EQ.6: Same as 3 but includes a mass orthogonality check
+            - EQ.102: Block Shift and Invert Lanczos with BCSLIB-EXT
+            - EQ.103: Same as 102 with [M] = [I]
+            - EQ.105: Same as 102 but includes mass orthogonality check
+            - EQ.106: Same as 103 but includes mass orthogonality check
 
         Returns
         -------
@@ -1820,6 +1876,62 @@ class ImplicitAnalysis:
         self.defined_eigenvalue = True
         self.neig = number_eigenvalues
         self.shfscl = shift_scale
+        self.center = center
+        self.eigmth = eigenvalue_method
+
+    def set_general(self, imflag=1, dt0=0.0, imform=2, nsbs=1, igs=2, cnstn=0, form=0, zero_v=0):
+        """Set general implicit analysis parameters.
+
+        Parameters
+        ----------
+        imflag : int, optional
+            Implicit analysis flag. The default is ``1``.
+
+            - EQ.0: No implicit analysis
+            - EQ.1: Implicit analysis on
+            - EQ.2: Explicit/implicit switching
+            - EQ.4: Implicit with automatic implicit/explicit switching
+            - EQ.5: Implicit SMP with automatic switching
+            - EQ.6: Implicit MPP with automatic switching
+
+        dt0 : float, optional
+            Initial time step size for implicit analysis. The default is ``0.0``.
+        imform : int, optional
+            Implicit element formulation. The default is ``2``.
+
+            - EQ.1: Type 16 shell, fully integrated brick
+            - EQ.2: Type 16 shell, reduced integration brick (default)
+
+        nsbs : int, optional
+            Number of sub-steps per output time step. The default is ``1``.
+        igs : int, optional
+            Geometric (initial stress) stiffness flag. The default is ``2``.
+
+            - EQ.1: Off
+            - EQ.2: On (default)
+
+        cnstn : int, optional
+            Indicator for consistent tangent stiffness. The default is ``0``.
+        form : int, optional
+            Element formulation when using IMFORM flag. The default is ``0``.
+        zero_v : int, optional
+            Zero velocity flag. The default is ``0``.
+
+        Returns
+        -------
+        bool
+            ``True`` when successful, ``False`` when failed.
+        """
+        self.defined = True
+        self.defined_general = True
+        self.imflag = imflag
+        self.dt0 = dt0
+        self.imform = imform
+        self.nsbs = nsbs
+        self.igs = igs
+        self.cnstn = cnstn
+        self.form = form
+        self.zero_v = zero_v
 
     def set_solution(
         self,
@@ -1863,7 +1975,26 @@ class ImplicitAnalysis:
         if self.defined == False:
             return
         if self.defined:
-            self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
+            # Use extended parameters if set_general was called, otherwise use basic parameters
+            if self.defined_general:
+                # Create a simple object with all attributes for keywords backend compatibility
+                request = type(
+                    "Request",
+                    (),
+                    {
+                        "imflag": self.imflag,
+                        "dt0": self.dt0,
+                        "imform": self.imform,
+                        "nsbs": self.nsbs,
+                        "igs": self.igs,
+                        "cnstn": self.cnstn,
+                        "form": self.form,
+                        "zero_v": self.zero_v,
+                    },
+                )()
+                self.stub.CreateControlImplicitGeneral(request)
+            else:
+                self.stub.CreateControlImplicitGeneral(ControlImplicitGeneralRequest(imflag=self.imflag, dt0=self.dt0))
         if self.defined_auto:
             self.stub.CreateControlImplicitAuto(ControlImplicitAutoRequest(iauto=self.iauto, iteopt=self.iteopt))
         if self.defined_dynamic:
@@ -1871,9 +2002,18 @@ class ImplicitAnalysis:
                 ControlImplicitDynamicRequest(imass=self.imass, gamma=self.gamma, beta=self.beta)
             )
         if self.defined_eigenvalue:
-            self.stub.CreateControlImplicitEigenvalue(
-                ControlImplicitEigenvalueRequest(neig=self.neig, shfscl=self.shfscl)
-            )
+            # Create a simple object with all attributes for keywords backend compatibility
+            request = type(
+                "Request",
+                (),
+                {
+                    "neig": self.neig,
+                    "shfscl": self.shfscl,
+                    "center": self.center,
+                    "eigmth": self.eigmth,
+                },
+            )()
+            self.stub.CreateControlImplicitEigenvalue(request)
         if self.defined_solution:
             self.stub.CreateControlImplicitSolution(
                 ControlImplicitSolutionRequest(

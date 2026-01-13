@@ -3252,6 +3252,7 @@ class TestReferenceFileComparison:
     def test_dem(self, initial_files_dir, pre_reference_dir):
         """test_dem.k - DEM particle simulation with CONTROL_DISCRETE_ELEMENT."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynadem import DynaDEM
 
         initial_file = os.path.join(initial_files_dir, "test_dem.k")
         reference_file = os.path.join(pre_reference_dir, "test_dem.k")
@@ -3263,17 +3264,17 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # Add CONTROL_DISCRETE_ELEMENT
-            solution.stub.CreateControlDiscreteElement(
-                type("Request", (), {
-                    "ndamp": 0.99,
-                    "tdamp": 0.99,
-                    "frics": 0.9,
-                    "fricr": 0.9,
-                    "normk": 0.01,
-                    "sheark": 0.2857
-                })()
+            # Add CONTROL_DISCRETE_ELEMENT using high-level DynaDEM API
+            dem = DynaDEM()
+            dem.set_des(
+                ndamp=0.99,
+                tdamp=0.99,
+                frics=0.9,
+                fricr=0.9,
+                normk=0.01,
+                sheark=0.2857,
             )
+            solution.add(dem)
 
             output_path = solution.save_file()
             output_file = os.path.join(output_path, "test_dem.k")
@@ -3305,7 +3306,8 @@ class TestReferenceFileComparison:
             Velocity,
         )
         from ansys.dyna.core.pre.dynadem import DynaDEM, DEMAnalysis
-        from ansys.dyna.core.pre.dynabase import DynaBase
+        from ansys.dyna.core.pre.dynabase import DynaBase, SolidSection
+        from ansys.dyna.core.pre.dynamaterial import MatRigidDiscrete
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_dem_coupling.k")
         reference_file = os.path.join(pre_reference_dir, "test_dem_coupling.k")
@@ -3322,11 +3324,9 @@ class TestReferenceFileComparison:
             solution.add(dbase)
             dbase.set_timestep(tssfac=0.8)
 
-            # Create section and material for DEM particles using stub
-            dbase.stub.CreateSectionSolid(type("Request", (), {"elform": 0})())
-            dbase.stub.CreateMatRigidDiscrete(
-                type("Request", (), {"ro": 1000.0, "e": 10000.0, "pr": 0.3})()
-            )
+            # Create section and material for DEM particles using high-level API
+            SolidSection(element_formulation=0)
+            MatRigidDiscrete(mass_density=1000.0, young_modulus=10000.0, poisson_ratio=0.3).create(dbase.stub)
 
             icfd = DynaICFD()
             solution.add(icfd)
@@ -4287,6 +4287,7 @@ class TestReferenceFileComparison:
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
         """test_frf_plate_damping.k - NVH FRF plate with damping curve."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import DynaBase, ImplicitAnalysis, ShellSection
 
         initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_plate_damping.k")
         reference_file = os.path.join(pre_reference_dir, "test_frf_plate_damping.k")
@@ -4298,27 +4299,28 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # Control keywords
-            solution.stub.CreateControlImplicitEigenvalue(
-                type("Request", (), {
-                    "neig": 100,
-                    "center": 0.0,
-                    "eigmth": 2,
-                    "shfscl": 0.0
-                })()
-            )
+            # Set up implicit analysis using high-level API
+            dbase = DynaBase()
+            solution.add(dbase)
 
-            solution.stub.CreateControlImplicitGeneral(
-                type("Request", (), {
-                    "imflag": 1,
-                    "dt0": 1.0,
-                    "imform": 2,
-                    "nsbs": 1,
-                    "igs": 2,
-                })()
+            # Configure implicit analysis with eigenvalue extraction
+            implicit = ImplicitAnalysis()
+            implicit.set_eigenvalue(
+                number_eigenvalues=100,
+                shift_scale=0.0,
+                center=0.0,
+                eigenvalue_method=2,
             )
+            implicit.set_general(
+                imflag=1,
+                dt0=1.0,
+                imform=2,
+                nsbs=1,
+                igs=2,
+            )
+            dbase.implicitanalysis = implicit
 
-            # CONTROL_IMPLICIT_SOLUTION
+            # CONTROL_IMPLICIT_SOLUTION (more parameters than set_solution() supports)
             solution._backend.create_control_implicit_solution(
                 nsolvr=1,
                 ilimit=11,
@@ -4418,28 +4420,36 @@ class TestReferenceFileComparison:
             solution = KeywordsDynaSolution(working_dir=tmpdir)
             solution.open_files([initial_file])
 
-            # Control keywords
-            solution.stub.CreateControlEnergy(
-                type("Request", (), {"hgen": 2, "rwen": 2, "slnten": 1, "rylen": 1})()
+            # Set up DynaBase and implicit analysis using high-level API
+            from ansys.dyna.core.pre.dynabase import (
+                DynaBase, ImplicitAnalysis, SolidSection, EnergyFlag
+            )
+            dbase = DynaBase()
+            solution.add(dbase)
+
+            # Configure energy options
+            dbase.set_energy(
+                hourglass_energy=EnergyFlag.COMPUTED,
+                rigidwall_energy=EnergyFlag.COMPUTED,
+                sliding_interface_energy=EnergyFlag.NOT_COMPUTED,
+                rayleigh_energy=EnergyFlag.NOT_COMPUTED,
             )
 
-            solution.stub.CreateControlImplicitEigenvalue(
-                type("Request", (), {
-                    "neig": 100,
-                    "center": 0.0,
-                    "eigmth": 2,
-                    "shfscl": 0.0
-                })()
+            # Configure implicit analysis with eigenvalue extraction
+            implicit = ImplicitAnalysis()
+            implicit.set_eigenvalue(
+                number_eigenvalues=100,
+                shift_scale=0.0,
+                center=0.0,
+                eigenvalue_method=2,
             )
-
-            solution.stub.CreateControlImplicitGeneral(
-                type("Request", (), {
-                    "imflag": 1,
-                    "dt0": 1.0,
-                    "imform": 2,
-                    "nsbs": 1
-                })()
+            implicit.set_general(
+                imflag=1,
+                dt0=1.0,
+                imform=2,
+                nsbs=1,
             )
+            dbase.implicitanalysis = implicit
 
             # Use backend directly to set nlprint and nlnorm
             solution._backend.create_control_implicit_solution(
@@ -4497,9 +4507,7 @@ class TestReferenceFileComparison:
             )
 
             # Section and Material for lower_post (Part 4)
-            solution.stub.CreateSectionSolid(
-                type("Request", (), {"secid": 1, "elform": 18})()
-            )
+            SolidSection(element_formulation=18)
 
             # Use backend directly to set fail=0.0
             solution._backend.create_mat_piecewise_linear_plasticity(
