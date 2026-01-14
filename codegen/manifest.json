@@ -590,7 +590,8 @@
                         "heading_card",
                         "part_data_card"
                     ],
-                    "overall-name": "parts"
+                    "overall-name": "parts",
+                    "key-field": "pid"
                 }
             ]
         },

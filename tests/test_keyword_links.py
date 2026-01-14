@@ -511,3 +511,158 @@ class TestRecursiveLinkTraversal:
         # Check no duplicates by comparing ids
         link_ids = [id(l) for l in links]
         assert len(link_ids) == len(set(link_ids))
+
+
+class TestTableBasedLinks:
+    """Tests for table-based link properties (e.g., Part with multiple mid/secid per row)."""
+
+    def test_part_has_table_link_fields(self):
+        """Test that Part has _link_fields for mid and secid."""
+        assert hasattr(kwd.Part, "_link_fields")
+        assert "mid" in kwd.Part._link_fields
+        assert "secid" in kwd.Part._link_fields
+        assert kwd.Part._link_fields["mid"] == LinkType.MAT
+        assert kwd.Part._link_fields["secid"] == LinkType.SECTION
+
+    def test_mid_links_without_deck_returns_empty(self):
+        """Test that mid_links returns empty dict when keyword is not in a deck."""
+        import pandas as pd
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [200]})
+        assert part.mid_links == {}
+
+    def test_mid_links_returns_correct_mapping(self):
+        """Test that mid_links returns correct dict mapping pid to material."""
+        import pandas as pd
+
+        deck = Deck()
+        mat1 = kwd.Mat001()  # MAT_ELASTIC
+        mat1.mid = 100
+        mat2 = kwd.Mat001()
+        mat2.mid = 200
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        deck.extend([mat1, mat2, part])
+
+        mid_links = part.mid_links
+        assert len(mid_links) == 2
+        assert mid_links[1] is mat1
+        assert mid_links[2] is mat2
+
+    def test_get_mid_link_returns_correct_material(self):
+        """Test that get_mid_link(pid) returns the correct material for that pid."""
+        import pandas as pd
+
+        deck = Deck()
+        mat1 = kwd.Mat001()
+        mat1.mid = 100
+        mat2 = kwd.Mat001()
+        mat2.mid = 200
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        deck.extend([mat1, mat2, part])
+
+        assert part.get_mid_link(1) is mat1
+        assert part.get_mid_link(2) is mat2
+
+    def test_get_mid_link_returns_none_for_missing_pid(self):
+        """Test that get_mid_link returns None for non-existent pid."""
+        import pandas as pd
+
+        deck = Deck()
+        mat = kwd.Mat001()
+        mat.mid = 100
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        deck.extend([mat, part])
+
+        assert part.get_mid_link(999) is None
+
+    def test_get_mid_link_returns_none_when_material_not_found(self):
+        """Test that get_mid_link returns None when referenced material doesn't exist."""
+        import pandas as pd
+
+        deck = Deck()
+        mat = kwd.Mat001()
+        mat.mid = 999  # Different ID
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        deck.extend([mat, part])
+
+        assert part.get_mid_link(1) is None
+
+    def test_secid_links_returns_correct_mapping(self):
+        """Test that secid_links returns correct dict mapping pid to section."""
+        import pandas as pd
+
+        deck = Deck()
+        sec1 = kwd.SectionShell()
+        sec1.secid = 10
+        sec2 = kwd.SectionShell()
+        sec2.secid = 20
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        deck.extend([sec1, sec2, part])
+
+        secid_links = part.secid_links
+        assert len(secid_links) == 2
+        assert secid_links[1] is sec1
+        assert secid_links[2] is sec2
+
+    def test_get_secid_link_returns_correct_section(self):
+        """Test that get_secid_link(pid) returns the correct section for that pid."""
+        import pandas as pd
+
+        deck = Deck()
+        sec1 = kwd.SectionShell()
+        sec1.secid = 10
+        sec2 = kwd.SectionShell()
+        sec2.secid = 20
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        deck.extend([sec1, sec2, part])
+
+        assert part.get_secid_link(1) is sec1
+        assert part.get_secid_link(2) is sec2
+
+    def test_mid_links_handles_missing_materials(self):
+        """Test that mid_links only includes pids where material exists."""
+        import pandas as pd
+
+        deck = Deck()
+        mat1 = kwd.Mat001()
+        mat1.mid = 100
+        # mat2 with mid=200 not added
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        deck.extend([mat1, part])
+
+        mid_links = part.mid_links
+        assert len(mid_links) == 1
+        assert 1 in mid_links
+        assert 2 not in mid_links

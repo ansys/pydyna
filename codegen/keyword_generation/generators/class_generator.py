@@ -22,6 +22,8 @@
 
 import logging
 import typing
+from dataclasses import dataclass
+from typing import Optional
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
@@ -283,26 +285,53 @@ def _handle_keyword_data(
     logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.cards)}")
 
 
-def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+@dataclass
+class LinkFieldInfo:
+    """Information about a link field."""
+
+    name: str
+    is_table_group: bool = False
+    table_name: Optional[str] = None
+    key_field: Optional[str] = None
+
+
+def _convert_link_fields_to_template_format(
+    link_fields: typing.List[LinkFieldInfo],
+) -> typing.List[typing.Dict[str, typing.Any]]:
+    """Convert LinkFieldInfo objects to template-friendly dict format."""
+    return [
+        {
+            "name": f.name,
+            "is_table_group": f.is_table_group,
+            "table_name": f.table_name,
+            "key_field": f.key_field,
+        }
+        for f in link_fields
+    ]
+
+
+def _add_define_transform_link_data(
+    link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]
+):
     transform_link_data = {
         "classname": "DefineTransformation",
         "modulename": "define.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": "tranid",
         "link_type_name": "DEFINE_TRANSFORMATION",
     }
     link_data.append(transform_link_data)
 
 
-def _add_define_curve_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+def _add_define_curve_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     curve_link_data = {
         "classname": "DefineCurve",
         "modulename": "define.define_curve",
         "keyword_type": "DEFINE",
         "keyword_subtype": "CURVE",
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": "lcid",
         "link_type_name": "DEFINE_CURVE",
     }
@@ -322,14 +351,14 @@ class LinkIdentity:
     DEFINE_CURVE_OR_TABLE = 86
 
 
-def _add_mat_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+def _add_mat_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     """Add link data for MAT_* material keywords."""
     mat_link_data = {
         "classname": "KeywordBase",
         "modulename": None,
         "keyword_type": "MAT",
         "keyword_subtype": None,
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": "mid",
         "link_type_name": "MAT",
         "is_polymorphic": True,
@@ -337,14 +366,14 @@ def _add_mat_link_data(link_data: typing.List[typing.Dict], link_fields: typing.
     link_data.append(mat_link_data)
 
 
-def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     """Add link data for SECTION_* keywords."""
     section_link_data = {
         "classname": "KeywordBase",
         "modulename": None,
         "keyword_type": "SECTION",
         "keyword_subtype": None,
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": "secid",
         "link_type_name": "SECTION",
         "is_polymorphic": True,
@@ -352,14 +381,14 @@ def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typ
     link_data.append(section_link_data)
 
 
-def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     """Add link data for polymorphic DEFINE_CURVE or DEFINE_TABLE fields."""
     polymorphic_link_data = {
         "classname": "KeywordBase",
         "modulename": None,
         "keyword_type": None,
         "keyword_subtype": None,
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": None,
         "link_type_name": "DEFINE_CURVE_OR_TABLE",
         "is_polymorphic": True,
@@ -382,6 +411,11 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     }
     has_link = False
     for card in kwd_data.cards:
+        # Check if this is a table_group card
+        is_table_group = card.table_group if isinstance(card, Card) else card.get("table_group", False)
+        table_name = card.overall_name if isinstance(card, Card) else card.get("overall_name")
+        key_field = card.key_field if isinstance(card, Card) else card.get("key_field")
+
         # Use card.get_all_fields() instead of _get_fields helper
         fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
         for field in fields:
@@ -393,7 +427,13 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
             has_link = True
             # Use property_name for Python-safe identifiers (handles special chars like /)
             prop_name = field.get("property_name") or field["name"]
-            links[link].append(prop_name)
+            field_info = LinkFieldInfo(
+                name=prop_name,
+                is_table_group=is_table_group,
+                table_name=table_name,
+                key_field=key_field,
+            )
+            links[link].append(field_info)
     if not has_link:
         return None
     return links
