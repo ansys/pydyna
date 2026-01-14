@@ -435,6 +435,79 @@ class TestFromFieldSchemas:
         assert card.get_value("count") == 10
 
 
+class TestHasNondefaultValues:
+    """Tests for Card.has_nondefault_values() method."""
+
+    @pytest.mark.keywords
+    def test_new_card_has_no_nondefault_values(self):
+        """Test that a freshly created card has no nondefault values."""
+        field_schemas = (
+            FieldSchema("foo", int, 0, 10, 0),
+            FieldSchema("bar", float, 10, 10, 1.0),
+        )
+        card = Card.from_field_schemas(field_schemas)
+        assert card.has_nondefault_values() is False
+
+    @pytest.mark.keywords
+    def test_set_value_marks_nondefault(self):
+        """Test that set_value marks the card as having nondefault values."""
+        field_schemas = (
+            FieldSchema("foo", int, 0, 10, 0),
+            FieldSchema("bar", float, 10, 10, 1.0),
+        )
+        card = Card.from_field_schemas(field_schemas)
+
+        # Set a value
+        card.set_value("foo", 42)
+
+        assert card.has_nondefault_values() is True
+
+    @pytest.mark.keywords
+    def test_set_value_to_same_as_default_still_marks(self):
+        """Test that setting a value to the default still marks it as set.
+
+        This is important because we track explicit setter calls, not value
+        differences. Setting a field to its default value is still an explicit
+        user action.
+        """
+        field_schemas = (
+            FieldSchema("foo", int, 0, 10, 0),
+            FieldSchema("bar", float, 10, 10, 1.0),
+        )
+        card = Card.from_field_schemas(field_schemas)
+
+        # Set foo to its default value
+        card.set_value("foo", 0)
+
+        assert card.has_nondefault_values() is True
+
+    @pytest.mark.keywords
+    def test_multiple_set_values(self):
+        """Test that multiple set_value calls are tracked."""
+        field_schemas = (
+            FieldSchema("foo", int, 0, 10, 0),
+            FieldSchema("bar", float, 10, 10, 1.0),
+            FieldSchema("baz", str, 20, 10, None),
+        )
+        card = Card.from_field_schemas(field_schemas)
+
+        card.set_value("foo", 1)
+        card.set_value("bar", 2.0)
+
+        assert card.has_nondefault_values() is True
+        assert card._fields_set is True  # Now a simple bool
+
+    @pytest.mark.keywords
+    def test_from_field_schemas_with_defaults_no_nondefault(self):
+        """Test that from_field_schemas_with_defaults doesn't mark fields as set."""
+        field_schemas = (
+            FieldSchema("foo", int, 0, 10, 0),
+            FieldSchema("bar", float, 10, 10, 1.0),
+        )
+        card = Card.from_field_schemas_with_defaults(field_schemas)
+        assert card.has_nondefault_values() is False
+
+
 class TestFormatSpecCaching:
     """Tests for FormatSpec caching."""
 
