@@ -908,6 +908,16 @@
             ]
         }
     },
+    "CONTROL_TIME_STEP": {
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 1,
+                    "end": 1
+                }
+            ]
+        }
+    },
     "CONTROL_REFERENCE_CONFIGURAION": {
         "type": "multiple",
         "generations": [
