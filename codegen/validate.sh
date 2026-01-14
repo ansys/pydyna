@@ -20,6 +20,7 @@ SKIP_PRECOMMIT=false
 SKIP_DEADCODE=false
 COVERAGE_THRESHOLD=80
 VERBOSE=false
+USE_UV=false
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -48,6 +49,10 @@ while [[ $# -gt 0 ]]; do
             VERBOSE=true
             shift
             ;;
+        --uv)
+            USE_UV=true
+            shift
+            ;;
         --help|-h)
             echo "Usage: validate.sh [OPTIONS]"
             echo ""
@@ -58,6 +63,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --skip-deadcode      Skip dead code detection"
             echo "  --coverage-threshold Threshold for dead code detection (default: 80)"
             echo "  --verbose, -v        Verbose output"
+            echo "  --uv                 Use 'uv run --no-project python' instead of 'python'"
             echo "  --help, -h           Show this help message"
             echo ""
             echo "Examples:"
@@ -116,11 +122,18 @@ print_info() {
     fi
 }
 
+# Set Python command based on --uv flag
+if [ "$USE_UV" = true ]; then
+    PYTHON_CMD="uv run --no-project python"
+else
+    PYTHON_CMD="python"
+fi
+
 # Step 1: Clean and regenerate
 print_header "Step 1: Clean and Regenerate Keyword Classes"
-print_info "Running: python codegen/generate.py -c"
+print_info "Running: $PYTHON_CMD codegen/generate.py -c"
 
-if python codegen/generate.py -c >/dev/null 2>&1; then
+if $PYTHON_CMD codegen/generate.py -c >/dev/null 2>&1; then
     print_success "Clean completed"
 else
     print_error "Clean failed"
@@ -128,8 +141,8 @@ else
     EXIT_CODE=1
 fi
 
-print_info "Running: python codegen/generate.py"
-if python codegen/generate.py >/dev/null 2>&1; then
+print_info "Running: $PYTHON_CMD codegen/generate.py"
+if $PYTHON_CMD codegen/generate.py >/dev/null 2>&1; then
     print_success "Generation completed (3173+ classes expected)"
 else
     print_error "Generation failed"
@@ -230,9 +243,9 @@ fi
 # Step 4: Dead code detection
 if [ "$SKIP_DEADCODE" = false ]; then
     print_header "Step 4: Dead Code Detection"
-    print_info "Running: python codegen/find_dead_code.py --threshold $COVERAGE_THRESHOLD"
+    print_info "Running: $PYTHON_CMD codegen/find_dead_code.py --threshold $COVERAGE_THRESHOLD"
     
-    if python codegen/find_dead_code.py --threshold "$COVERAGE_THRESHOLD"; then
+    if $PYTHON_CMD codegen/find_dead_code.py --threshold "$COVERAGE_THRESHOLD"; then
         print_success "Dead code detection passed (threshold: ${COVERAGE_THRESHOLD}%)"
     else
         print_warning "Dead code detection found issues (threshold: ${COVERAGE_THRESHOLD}%)"
@@ -247,9 +260,9 @@ fi
 # Step 5: Unit tests
 if [ "$SKIP_TESTS" = false ]; then
     print_header "Step 5: Unit Tests"
-    print_info "Running: pytest -m codegen"
+    print_info "Running: $PYTHON_CMD -m pytest -m codegen"
     
-    if pytest -m codegen; then
+    if $PYTHON_CMD -m pytest -m codegen; then
         print_success "Unit tests passed"
     else
         print_error "Unit tests failed"
