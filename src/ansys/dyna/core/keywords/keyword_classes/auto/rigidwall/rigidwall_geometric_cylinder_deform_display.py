@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _RIGIDWALLGEOMETRICCYLINDERDEFORMDISPLAY_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
@@ -92,6 +94,12 @@ class RigidwallGeometricCylinderDeformDisplay(KeywordBase):
     option_specs = [
         OptionSpec("ID", -2, 1),
     ]
+    _link_fields = {
+        "lcidr": LinkType.DEFINE_CURVE,
+        "lcida": LinkType.DEFINE_CURVE,
+        "lcidb": LinkType.DEFINE_CURVE,
+        "lcidg": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallGeometricCylinderDeformDisplay class."""
@@ -502,4 +510,64 @@ class RigidwallGeometricCylinderDeformDisplay(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidr:
+                return kwd
+        return None
+
+    @lcidr_link.setter
+    def lcidr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidr."""
+        self.lcidr = value.lcid
+
+    @property
+    def lcida_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcida:
+                return kwd
+        return None
+
+    @lcida_link.setter
+    def lcida_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcida."""
+        self.lcida = value.lcid
+
+    @property
+    def lcidb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidb:
+                return kwd
+        return None
+
+    @lcidb_link.setter
+    def lcidb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidb."""
+        self.lcidb = value.lcid
+
+    @property
+    def lcidg_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidg."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidg:
+                return kwd
+        return None
+
+    @lcidg_link.setter
+    def lcidg_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidg."""
+        self.lcidg = value.lcid
 

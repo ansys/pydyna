@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _BOUNDARYPWPSET_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -50,6 +52,11 @@ class BoundaryPwpSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PWP_SET"
+    _link_fields = {
+        "lcdr": LinkType.DEFINE_CURVE,
+        "lcleak": LinkType.DEFINE_CURVE,
+        "lcpum": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPwpSet class."""
@@ -204,4 +211,49 @@ class BoundaryPwpSet(KeywordBase):
     def lcpum(self, value: int) -> None:
         """Set the lcpum property."""
         self._cards[1].set_value("lcpum", value)
+
+    @property
+    def lcdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdr:
+                return kwd
+        return None
+
+    @lcdr_link.setter
+    def lcdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdr."""
+        self.lcdr = value.lcid
+
+    @property
+    def lcleak_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcleak."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcleak:
+                return kwd
+        return None
+
+    @lcleak_link.setter
+    def lcleak_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcleak."""
+        self.lcleak = value.lcid
+
+    @property
+    def lcpum_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpum."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpum:
+                return kwd
+        return None
+
+    @lcpum_link.setter
+    def lcpum_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpum."""
+        self.lcpum = value.lcid
 

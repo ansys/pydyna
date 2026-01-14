@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ALEAMBIENTHYDROSTATIC_CARD0 = (
     FieldSchema("alesid", int, 0, 10, None),
@@ -45,6 +47,9 @@ class AleAmbientHydrostatic(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "AMBIENT_HYDROSTATIC"
+    _link_fields = {
+        "ramptlc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleAmbientHydrostatic class."""
@@ -147,4 +152,19 @@ class AleAmbientHydrostatic(KeywordBase):
     def mmgbl(self, value: int) -> None:
         """Set the mmgbl property."""
         self._cards[1].set_value("mmgbl", value)
+
+    @property
+    def ramptlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ramptlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ramptlc:
+                return kwd
+        return None
+
+    @ramptlc_link.setter
+    def ramptlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ramptlc."""
+        self.ramptlc = value.lcid
 

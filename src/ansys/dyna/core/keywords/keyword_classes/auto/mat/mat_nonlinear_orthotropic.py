@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATNONLINEARORTHOTROPIC_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -96,6 +98,14 @@ class MatNonlinearOrthotropic(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcida": LinkType.DEFINE_CURVE,
+        "lcidb": LinkType.DEFINE_CURVE,
+        "lcidc": LinkType.DEFINE_CURVE,
+        "lcidab": LinkType.DEFINE_CURVE,
+        "lcidbc": LinkType.DEFINE_CURVE,
+        "lcidca": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatNonlinearOrthotropic class."""
@@ -591,4 +601,94 @@ class MatNonlinearOrthotropic(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcida_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcida:
+                return kwd
+        return None
+
+    @lcida_link.setter
+    def lcida_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcida."""
+        self.lcida = value.lcid
+
+    @property
+    def lcidb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidb:
+                return kwd
+        return None
+
+    @lcidb_link.setter
+    def lcidb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidb."""
+        self.lcidb = value.lcid
+
+    @property
+    def lcidc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidc:
+                return kwd
+        return None
+
+    @lcidc_link.setter
+    def lcidc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidc."""
+        self.lcidc = value.lcid
+
+    @property
+    def lcidab_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidab."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidab:
+                return kwd
+        return None
+
+    @lcidab_link.setter
+    def lcidab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidab."""
+        self.lcidab = value.lcid
+
+    @property
+    def lcidbc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidbc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidbc:
+                return kwd
+        return None
+
+    @lcidbc_link.setter
+    def lcidbc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidbc."""
+        self.lcidbc = value.lcid
+
+    @property
+    def lcidca_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidca:
+                return kwd
+        return None
+
+    @lcidca_link.setter
+    def lcidca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidca."""
+        self.lcidca = value.lcid
 

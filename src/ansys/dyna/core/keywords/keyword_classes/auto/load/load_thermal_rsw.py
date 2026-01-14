@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADTHERMALRSW_CARD0 = (
     FieldSchema("deftemp", int, 0, 10, None),
@@ -64,6 +66,9 @@ class LoadThermalRsw(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "THERMAL_RSW"
+    _link_fields = {
+        "lcidt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadThermalRsw class."""
@@ -325,4 +330,19 @@ class LoadThermalRsw(KeywordBase):
     def tempzb(self, value: float) -> None:
         """Set the tempzb property."""
         self._cards[3].set_value("tempzb", value)
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
 

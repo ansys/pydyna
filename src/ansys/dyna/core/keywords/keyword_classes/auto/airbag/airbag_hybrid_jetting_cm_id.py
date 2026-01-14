@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _AIRBAGHYBRIDJETTINGCMID_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -116,6 +118,14 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     keyword = "AIRBAG"
     subkeyword = "HYBRID_JETTING_CM_ID"
+    _link_fields = {
+        "lcc23": LinkType.DEFINE_CURVE,
+        "lca23": LinkType.DEFINE_CURVE,
+        "lcp23": LinkType.DEFINE_CURVE,
+        "lcap23": LinkType.DEFINE_CURVE,
+        "lcidm": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagHybridJettingCmId class."""
@@ -783,4 +793,94 @@ class AirbagHybridJettingCmId(KeywordBase):
     def nreact(self, value: int) -> None:
         """Set the nreact property."""
         self._cards[9].set_value("nreact", value)
+
+    @property
+    def lcc23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcc23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcc23:
+                return kwd
+        return None
+
+    @lcc23_link.setter
+    def lcc23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcc23."""
+        self.lcc23 = value.lcid
+
+    @property
+    def lca23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lca23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lca23:
+                return kwd
+        return None
+
+    @lca23_link.setter
+    def lca23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lca23."""
+        self.lca23 = value.lcid
+
+    @property
+    def lcp23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp23:
+                return kwd
+        return None
+
+    @lcp23_link.setter
+    def lcp23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp23."""
+        self.lcp23 = value.lcid
+
+    @property
+    def lcap23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcap23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcap23:
+                return kwd
+        return None
+
+    @lcap23_link.setter
+    def lcap23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcap23."""
+        self.lcap23 = value.lcid
+
+    @property
+    def lcidm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidm:
+                return kwd
+        return None
+
+    @lcidm_link.setter
+    def lcidm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidm."""
+        self.lcidm = value.lcid
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
 

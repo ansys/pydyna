@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADSUPERPLASTICFORMING_CARD0 = (
     FieldSchema("lcp1", int, 0, 10, None),
@@ -47,6 +49,10 @@ class LoadSuperplasticForming(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SUPERPLASTIC_FORMING"
+    _link_fields = {
+        "lcp1": LinkType.DEFINE_CURVE,
+        "lcp2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSuperplasticForming class."""
@@ -168,4 +174,34 @@ class LoadSuperplasticForming(KeywordBase):
     def ncyl(self, value: int) -> None:
         """Set the ncyl property."""
         self._cards[1].set_value("ncyl", value)
+
+    @property
+    def lcp1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp1:
+                return kwd
+        return None
+
+    @lcp1_link.setter
+    def lcp1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp1."""
+        self.lcp1 = value.lcid
+
+    @property
+    def lcp2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp2:
+                return kwd
+        return None
+
+    @lcp2_link.setter
+    def lcp2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp2."""
+        self.lcp2 = value.lcid
 

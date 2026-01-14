@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADSEISMICSSINODE_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
@@ -48,6 +50,11 @@ class LoadSeismicSsiNode(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SEISMIC_SSI_NODE"
+    _link_fields = {
+        "gmx": LinkType.DEFINE_CURVE,
+        "gmy": LinkType.DEFINE_CURVE,
+        "gmz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSeismicSsiNode class."""
@@ -189,4 +196,49 @@ class LoadSeismicSsiNode(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[1].set_value("igm", value)
+
+    @property
+    def gmx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmx:
+                return kwd
+        return None
+
+    @gmx_link.setter
+    def gmx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmx."""
+        self.gmx = value.lcid
+
+    @property
+    def gmy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmy:
+                return kwd
+        return None
+
+    @gmy_link.setter
+    def gmy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmy."""
+        self.gmy = value.lcid
+
+    @property
+    def gmz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmz:
+                return kwd
+        return None
+
+    @gmz_link.setter
+    def gmz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmz."""
+        self.gmz = value.lcid
 

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DATABASEBINARYD3DRLF_CARD0 = (
     FieldSchema("cycl", float, 0, 10, None),
@@ -39,6 +41,9 @@ class DatabaseBinaryD3Drlf(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "BINARY_D3DRLF"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryD3Drlf class."""
@@ -108,4 +113,19 @@ class DatabaseBinaryD3Drlf(KeywordBase):
     def psetid(self, value: int) -> None:
         """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
 

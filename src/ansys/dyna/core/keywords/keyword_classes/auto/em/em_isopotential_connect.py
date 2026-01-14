@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _EMISOPOTENTIALCONNECT_CARD0 = (
     FieldSchema("conid", int, 0, 10, None),
@@ -47,6 +49,9 @@ class EmIsopotentialConnect(KeywordBase):
 
     keyword = "EM"
     subkeyword = "ISOPOTENTIAL_CONNECT"
+    _link_fields = {
+        "lcid_rdlid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmIsopotentialConnect class."""
@@ -178,4 +183,19 @@ class EmIsopotentialConnect(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[1].set_value("v0", value)
+
+    @property
+    def lcid_rdlid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_rdlid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_rdlid:
+                return kwd
+        return None
+
+    @lcid_rdlid_link.setter
+    def lcid_rdlid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_rdlid."""
+        self.lcid_rdlid = value.lcid
 

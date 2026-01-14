@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATCONSTRAINEDSPR3_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -72,6 +74,11 @@ class MatConstrainedSpr3(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcf": LinkType.DEFINE_CURVE,
+        "lcupf": LinkType.DEFINE_CURVE,
+        "lcupr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatConstrainedSpr3 class."""
@@ -355,4 +362,49 @@ class MatConstrainedSpr3(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcf:
+                return kwd
+        return None
+
+    @lcf_link.setter
+    def lcf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf."""
+        self.lcf = value.lcid
+
+    @property
+    def lcupf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcupf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcupf:
+                return kwd
+        return None
+
+    @lcupf_link.setter
+    def lcupf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcupf."""
+        self.lcupf = value.lcid
+
+    @property
+    def lcupr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcupr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcupr:
+                return kwd
+        return None
+
+    @lcupr_link.setter
+    def lcupr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcupr."""
+        self.lcupr = value.lcid
 

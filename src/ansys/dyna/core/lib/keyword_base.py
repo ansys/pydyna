@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import enum
 import io
 import typing
 import warnings
@@ -32,6 +33,23 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 # protected due to circular import
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.deck import Deck
+
+
+class LinkType(enum.Enum):
+    """Enumeration of link types for keyword references.
+
+    Link types identify which kind of keyword a field references.
+    Use with :meth:`KeywordBase.get_links` to filter by link type.
+    """
+
+    ALL = 0
+    """All link types."""
+
+    DEFINE_CURVE = 19
+    """Reference to a DEFINE_CURVE keyword."""
+
+    DEFINE_TRANSFORMATION = 40
+    """Reference to a DEFINE_TRANSFORMATION keyword."""
 
 
 class KeywordBase(Cards):
@@ -300,3 +318,54 @@ class KeywordBase(Cards):
         s.seek(0)
         self.read(s, parameters)
         return self
+
+    # Class attribute to be overridden by subclasses with link field metadata.
+    # Maps field names to their LinkType values.
+    # Example: {"lcsr": LinkType.DEFINE_CURVE, "tranid": LinkType.DEFINE_TRANSFORMATION}
+    _link_fields: typing.ClassVar[typing.Dict[str, "LinkType"]] = {}
+
+    def get_links(self, link_type: "LinkType" = None) -> typing.List["KeywordBase"]:
+        """Get all keywords referenced by this keyword.
+
+        Traverses the fields of this keyword that reference other keywords
+        and returns the linked keyword objects from the parent deck.
+
+        Parameters
+        ----------
+        link_type : LinkType, optional
+            Filter results by link type. If ``None`` or ``LinkType.ALL``,
+            returns all linked keywords. Otherwise, returns only keywords
+            matching the specified link type.
+
+        Returns
+        -------
+        List[KeywordBase]
+            List of referenced keyword objects. Returns an empty list if
+            the keyword is not associated with a deck or if no links are found.
+
+        Examples
+        --------
+        >>> mat = deck.keywords[0]  # A material keyword with curve references
+        >>> curves = mat.get_links(LinkType.DEFINE_CURVE)
+        >>> all_links = mat.get_links()  # Get all referenced keywords
+        """
+        if link_type is None:
+            link_type = LinkType.ALL
+
+        if self.deck is None:
+            return []
+
+        results = []
+        for field_name, field_link_type in self._link_fields.items():
+            # Filter by link type if specified
+            if link_type != LinkType.ALL and field_link_type != link_type:
+                continue
+
+            # Try to get the linked keyword using the *_link property
+            link_property_name = f"{field_name}_link"
+            if hasattr(self, link_property_name):
+                linked_kwd = getattr(self, link_property_name)
+                if linked_kwd is not None and linked_kwd not in results:
+                    results.append(linked_kwd)
+
+        return results

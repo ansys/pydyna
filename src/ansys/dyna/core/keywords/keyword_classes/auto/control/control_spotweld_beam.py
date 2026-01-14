@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTROLSPOTWELDBEAM_CARD0 = (
     FieldSchema("lct", int, 0, 10, 0),
@@ -42,6 +44,10 @@ class ControlSpotweldBeam(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "SPOTWELD_BEAM"
+    _link_fields = {
+        "lct": LinkType.DEFINE_CURVE,
+        "lcs": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSpotweldBeam class."""
@@ -138,4 +144,34 @@ class ControlSpotweldBeam(KeywordBase):
     def id_off(self, value: int) -> None:
         """Set the id_off property."""
         self._cards[0].set_value("id_off", value)
+
+    @property
+    def lct_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lct."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lct:
+                return kwd
+        return None
+
+    @lct_link.setter
+    def lct_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lct."""
+        self.lct = value.lcid
+
+    @property
+    def lcs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcs:
+                return kwd
+        return None
+
+    @lcs_link.setter
+    def lcs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcs."""
+        self.lcs = value.lcid
 

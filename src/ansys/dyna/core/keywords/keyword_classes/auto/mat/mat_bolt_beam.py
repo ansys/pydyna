@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATBOLTBEAM_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -70,6 +72,10 @@ class MatBoltBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcax": LinkType.DEFINE_CURVE,
+        "lcshr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatBoltBeam class."""
@@ -310,4 +316,34 @@ class MatBoltBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcax_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcax."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcax:
+                return kwd
+        return None
+
+    @lcax_link.setter
+    def lcax_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcax."""
+        self.lcax = value.lcid
+
+    @property
+    def lcshr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcshr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcshr:
+                return kwd
+        return None
+
+    @lcshr_link.setter
+    def lcshr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcshr."""
+        self.lcshr = value.lcid
 

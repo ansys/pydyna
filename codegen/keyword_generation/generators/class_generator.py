@@ -291,16 +291,39 @@ def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fi
         "keyword_subtype": "TRANSFORMATION",
         "fields": link_fields,
         "linkid": "tranid",
+        "link_type_name": "DEFINE_TRANSFORMATION",
     }
     link_data.append(transform_link_data)
 
 
+def _add_define_curve_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    curve_link_data = {
+        "classname": "DefineCurve",
+        "modulename": "define.define_curve",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "CURVE",
+        "fields": link_fields,
+        "linkid": "lcid",
+        "link_type_name": "DEFINE_CURVE",
+    }
+    link_data.append(curve_link_data)
+
+
 class LinkIdentity:
+    """Identifies the type of link a field references.
+
+    These values correspond to the "link" field values in kwd.json.
+    """
+
+    DEFINE_CURVE = 19
     DEFINE_TRANSFORMATION = 40
 
 
 def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
-    links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
+    links = {
+        LinkIdentity.DEFINE_CURVE: [],
+        LinkIdentity.DEFINE_TRANSFORMATION: [],
+    }
     has_link = False
     for card in kwd_data.cards:
         # Use card.get_all_fields() instead of _get_fields helper
@@ -312,7 +335,9 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
             if link not in links.keys():
                 continue
             has_link = True
-            links[link].append(field["name"])
+            # Use property_name for Python-safe identifiers (handles special chars like /)
+            prop_name = field.get("property_name") or field["name"]
+            links[link].append(prop_name)
     if not has_link:
         return None
     return links
@@ -327,8 +352,13 @@ def _add_links(kwd_data: KeywordData) -> None:
     link_data = []
     link_count = 0
     for link_type, link_fields in links.items():
+        if not link_fields:
+            continue
         if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_CURVE:
+            _add_define_curve_link_data(link_data, link_fields)
             link_count += len(link_fields)
     kwd_data.links = link_data
     logger.debug(f"Added {link_count} links to keyword data")

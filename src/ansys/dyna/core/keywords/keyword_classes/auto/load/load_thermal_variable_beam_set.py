@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADTHERMALVARIABLEBEAMSET_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -46,6 +48,10 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_BEAM_SET"
+    _link_fields = {
+        "tcurve": LinkType.DEFINE_CURVE,
+        "tcurdr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadThermalVariableBeamSet class."""
@@ -156,4 +162,34 @@ class LoadThermalVariableBeamSet(KeywordBase):
     def tcoor(self, value: float) -> None:
         """Set the tcoor property."""
         self._cards[1].set_value("tcoor", value)
+
+    @property
+    def tcurve_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcurve."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcurve:
+                return kwd
+        return None
+
+    @tcurve_link.setter
+    def tcurve_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcurve."""
+        self.tcurve = value.lcid
+
+    @property
+    def tcurdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcurdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcurdr:
+                return kwd
+        return None
+
+    @tcurdr_link.setter
+    def tcurdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcurdr."""
+        self.tcurdr = value.lcid
 

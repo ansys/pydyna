@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DATABASENODOUT_CARD0 = (
     FieldSchema("dt", float, 0, 10, 0.0),
@@ -40,6 +42,9 @@ class DatabaseNodout(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "NODOUT"
+    _link_fields = {
+        "lcur": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseNodout class."""
@@ -124,4 +129,19 @@ class DatabaseNodout(KeywordBase):
     def option2(self, value: int) -> None:
         """Set the option2 property."""
         self._cards[0].set_value("option2", value)
+
+    @property
+    def lcur_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur:
+                return kwd
+        return None
+
+    @lcur_link.setter
+    def lcur_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur."""
+        self.lcur = value.lcid
 

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADSTIFFENPART_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -39,6 +41,9 @@ class LoadStiffenPart(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "STIFFEN_PART"
+    _link_fields = {
+        "lc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadStiffenPart class."""
@@ -91,4 +96,19 @@ class LoadStiffenPart(KeywordBase):
     def stgr(self, value: int) -> None:
         """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
+
+    @property
+    def lc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc:
+                return kwd
+        return None
+
+    @lc_link.setter
+    def lc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc."""
+        self.lc = value.lcid
 

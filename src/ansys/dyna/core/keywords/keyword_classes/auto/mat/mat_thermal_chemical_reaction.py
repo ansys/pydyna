@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATTHERMALCHEMICALREACTION_CARD0 = (
     FieldSchema("tmid", int, 0, 10, None),
@@ -120,6 +122,12 @@ class MatThermalChemicalReaction(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lccf": LinkType.DEFINE_CURVE,
+        "lckf": LinkType.DEFINE_CURVE,
+        "lcci": LinkType.DEFINE_CURVE,
+        "lcki": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatThermalChemicalReaction class."""
@@ -805,4 +813,64 @@ class MatThermalChemicalReaction(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lccf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lccf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lccf:
+                return kwd
+        return None
+
+    @lccf_link.setter
+    def lccf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lccf."""
+        self.lccf = value.lcid
+
+    @property
+    def lckf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lckf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lckf:
+                return kwd
+        return None
+
+    @lckf_link.setter
+    def lckf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lckf."""
+        self.lckf = value.lcid
+
+    @property
+    def lcci_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcci."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcci:
+                return kwd
+        return None
+
+    @lcci_link.setter
+    def lcci_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcci."""
+        self.lcci = value.lcid
+
+    @property
+    def lcki_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcki."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcki:
+                return kwd
+        return None
+
+    @lcki_link.setter
+    def lcki_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcki."""
+        self.lcki = value.lcid
 

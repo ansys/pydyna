@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDMAT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -55,6 +57,10 @@ class IcfdMat(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "MAT"
+    _link_fields = {
+        "hcsflcid": LinkType.DEFINE_CURVE,
+        "tcsflcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdMat class."""
@@ -236,4 +242,34 @@ class IcfdMat(KeywordBase):
     def pmmoid(self, value: int) -> None:
         """Set the pmmoid property."""
         self._cards[2].set_value("pmmoid", value)
+
+    @property
+    def hcsflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hcsflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hcsflcid:
+                return kwd
+        return None
+
+    @hcsflcid_link.setter
+    def hcsflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hcsflcid."""
+        self.hcsflcid = value.lcid
+
+    @property
+    def tcsflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcsflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcsflcid:
+                return kwd
+        return None
+
+    @tcsflcid_link.setter
+    def tcsflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcsflcid."""
+        self.tcsflcid = value.lcid
 

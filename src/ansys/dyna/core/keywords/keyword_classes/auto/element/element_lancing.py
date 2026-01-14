@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ELEMENTLANCING_CARD0 = (
     FieldSchema("idpt", int, 0, 10, None),
@@ -41,6 +43,9 @@ class ElementLancing(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "LANCING"
+    _link_fields = {
+        "idcv": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementLancing class."""
@@ -133,4 +138,19 @@ class ElementLancing(KeywordBase):
     def ntimes(self, value: int) -> None:
         """Set the ntimes property."""
         self._cards[0].set_value("ntimes", value)
+
+    @property
+    def idcv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for idcv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.idcv:
+                return kwd
+        return None
+
+    @idcv_link.setter
+    def idcv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for idcv."""
+        self.idcv = value.lcid
 

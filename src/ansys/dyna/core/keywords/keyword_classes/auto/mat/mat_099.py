@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT099_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -61,6 +63,9 @@ class Mat099(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcdm": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat099 class."""
@@ -281,4 +286,19 @@ class Mat099(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcdm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdm:
+                return kwd
+        return None
+
+    @lcdm_link.setter
+    def lcdm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdm."""
+        self.lcdm = value.lcid
 

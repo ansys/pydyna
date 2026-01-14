@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DATABASEBINARYINTFORFILE_CARD0 = (
     FieldSchema("filename", str, 0, 80, None),
@@ -47,6 +49,9 @@ class DatabaseBinaryIntforFile(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "BINARY_INTFOR_FILE"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryIntforFile class."""
@@ -150,4 +155,19 @@ class DatabaseBinaryIntforFile(KeywordBase):
     def ioopt(self, value: int) -> None:
         """Set the ioopt property."""
         self._cards[2].set_value("ioopt", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
 
