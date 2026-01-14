@@ -57,6 +57,9 @@ class LinkType(enum.Enum):
     DEFINE_TRANSFORMATION = 40
     """Reference to a DEFINE_TRANSFORMATION keyword."""
 
+    PART = 69
+    """Reference to a PART keyword."""
+
     DEFINE_CURVE_OR_TABLE = 86
     """Reference to either DEFINE_CURVE or DEFINE_TABLE (polymorphic)."""
 
@@ -333,6 +336,103 @@ class KeywordBase(Cards):
     # Example: {"lcsr": LinkType.DEFINE_CURVE, "tranid": LinkType.DEFINE_TRANSFORMATION}
     _link_fields: typing.ClassVar[typing.Dict[str, "LinkType"]] = {}
 
+    def _get_link_by_attr(
+        self,
+        keyword_type: str,
+        attr_name: str,
+        value: typing.Any,
+        table_attr: typing.Optional[str] = None,
+    ) -> typing.Optional["KeywordBase"]:
+        """Get a keyword by matching an attribute value.
+
+        Searches keywords of the specified type for one where ``attr_name``
+        matches ``value``. If ``table_attr`` is provided, searches within
+        that DataFrame attribute instead of a scalar attribute.
+
+        Parameters
+        ----------
+        keyword_type : str
+            The keyword type to search (e.g., "PART", "MAT", "SECTION").
+        attr_name : str
+            The attribute/column name to match against.
+        value : Any
+            The value to search for.
+        table_attr : str, optional
+            If provided, search within this DataFrame attribute's column
+            instead of a scalar attribute.
+
+        Returns
+        -------
+        KeywordBase or None
+            The matching keyword, or None if not found.
+        """
+        if self.deck is None or value is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type(keyword_type):
+            if table_attr is not None:
+                table = getattr(kwd, table_attr, None)
+                if table is not None and not table[table[attr_name] == value].empty:
+                    return kwd
+            elif getattr(kwd, attr_name, None) == value:
+                return kwd
+        return None
+
+    def _get_links_from_table(
+        self,
+        keyword_type: str,
+        id_attr: str,
+        table_name: str,
+        id_column: str,
+        target_table_attr: typing.Optional[str] = None,
+    ) -> typing.Dict[int, "KeywordBase"]:
+        """Get keywords for IDs in a table, keyed by ID value.
+
+        Builds a mapping from each ID value in the specified table to the
+        keyword that contains that ID.
+
+        Parameters
+        ----------
+        keyword_type : str
+            The keyword type to search (e.g., "PART", "MAT").
+        id_attr : str
+            The attribute/column name on target keywords to match.
+        table_name : str
+            Name of the property on self containing the DataFrame with IDs.
+        id_column : str
+            Name of the column containing ID values in the table.
+        target_table_attr : str, optional
+            If provided, search within this DataFrame attribute on target
+            keywords instead of a scalar attribute.
+
+        Returns
+        -------
+        Dict[int, KeywordBase]
+            Mapping of ID values to keywords.
+        """
+        if self.deck is None:
+            return {}
+        table = getattr(self, table_name, None)
+        if table is None:
+            return {}
+        # Build id -> keyword map
+        id_to_kwd: typing.Dict[int, "KeywordBase"] = {}
+        for kwd in self.deck.get_kwds_by_type(keyword_type):
+            if target_table_attr is not None:
+                target_table = getattr(kwd, target_table_attr, None)
+                if target_table is not None:
+                    for id_val in target_table[id_attr].values:
+                        id_to_kwd[id_val] = kwd
+            else:
+                id_val = getattr(kwd, id_attr, None)
+                if id_val is not None:
+                    id_to_kwd[id_val] = kwd
+        # Map ids from our table
+        result: typing.Dict[int, "KeywordBase"] = {}
+        for id_val in table[id_column].values:
+            if id_val in id_to_kwd:
+                result[id_val] = id_to_kwd[id_val]
+        return result
+
     def get_links(
         self,
         link_type: "LinkType" = None,
@@ -389,13 +489,25 @@ class KeywordBase(Cards):
             if link_type != LinkType.ALL and field_link_type != link_type:
                 continue
 
-            # Try to get the linked keyword using the *_link property
+            # Collect linked keywords - check both singular and plural patterns
+            linked_kwds = []
+
+            # Try singular *_link property first (scalar fields)
             link_property_name = f"{field_name}_link"
             if hasattr(self, link_property_name):
                 linked_kwd = getattr(self, link_property_name)
-                if linked_kwd is None:
-                    continue
+                if linked_kwd is not None:
+                    linked_kwds.append(linked_kwd)
 
+            # Also try plural *_links property (TableCard fields return dict)
+            links_property_name = f"{field_name}_links"
+            if hasattr(self, links_property_name):
+                links_dict = getattr(self, links_property_name)
+                if links_dict:
+                    linked_kwds.extend(links_dict.values())
+
+            # Process all collected linked keywords
+            for linked_kwd in linked_kwds:
                 # Dedup using (keyword, subkeyword, object_id) to prevent cycles
                 kwd_identity = (linked_kwd.keyword, linked_kwd.subkeyword, id(linked_kwd))
                 if kwd_identity in _seen:

@@ -62,6 +62,7 @@ class IcfdDefinePoint(KeywordBase):
         "lcidy": LinkType.DEFINE_CURVE,
         "lcidz": LinkType.DEFINE_CURVE,
         "lcidw": LinkType.DEFINE_CURVE,
+        "constpid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -302,4 +303,9 @@ class IcfdDefinePoint(KeywordBase):
     def lcidw_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcidw."""
         self.lcidw = value.lcid
+
+    @property
+    def constpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given constpid."""
+        return self._get_link_by_attr("PART", "pid", self.constpid, "parts")
 

@@ -244,6 +244,7 @@ class Card:
         length_func: Function to determine card repetition count
         active_func: Function to determine if card is active
         overall_name: Name for card groups
+        key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
     """
 
     index: int
@@ -262,6 +263,7 @@ class Card:
     active_func: Optional[str] = None
     overall_name: Optional[str] = None
     active: Optional[str] = None  # Activation condition for option cards
+    key_field: Optional[str] = None  # Key field for table-aware link properties
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -301,6 +303,7 @@ class Card:
             active_func=data.get("active_func"),
             overall_name=data.get("overall_name"),
             active=data.get("active"),
+            key_field=data.get("key_field"),
         )
 
     def __getitem__(self, key: str) -> Any:

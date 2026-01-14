@@ -34,7 +34,7 @@ class {{keyword_data.classname}}(KeywordBase):
     _link_fields = {
 {% for link in keyword_data.links %}
 {% for field in link.fields %}
-        "{{field}}": LinkType.{{link.link_type_name}},
+        "{{field.name}}": LinkType.{{link.link_type_name}},
 {% endfor %}
 {% endfor %}
     }
