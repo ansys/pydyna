@@ -473,15 +473,17 @@ class ControlKeywordsMixin:
                 bwc=bwc,
                 miter=miter,
                 proj=proj,
-                psstupd=0,
-                sidt4tu=0,
-                cntco=0,
-                itsflg=0,
-                irquad=irquad if irquad != 0 else 3,  # Default in gRPC is 3
-                w_mode=0.0,
-                stretch=0.0,
-                icrq=0,
             )
+        # Set card 2 fields via property setters to ensure cascade activation
+        # (kwargs with hyphenated names like w-mode don't work)
+        kw.psstupd = 0
+        kw.sidt4tu = 0
+        kw.cntco = 0
+        kw.itsflg = 0
+        kw.irquad = irquad if irquad != 0 else 3
+        kw.w_mode = 0.0
+        kw.stretch = 0.0
+        kw.icrq = 0
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_SHELL")
