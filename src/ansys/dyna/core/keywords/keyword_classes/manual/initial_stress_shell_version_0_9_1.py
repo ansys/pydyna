@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Legacy INITIAL_STRESS_SHELL implementation (version 0.9.1)."""
+
 import typing
 import warnings
 
@@ -75,7 +76,8 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
     def t(self) -> typing.Optional[float]:
         """Get or set the Parametric coordinate of through thickness integration point.
 
-        Between -1 and 1 inclusive."""  # nopep8
+        Between -1 and 1 inclusive.
+        """  # nopep8
         return self._cards[0].get_value("t")
 
     @t.setter
