@@ -908,22 +908,13 @@
             ]
         }
     },
-    "CONTROL_TIME_STEP": {
-        "generation-options": {
-            "cascading-card": [
-                {
-                    "start": 1,
-                    "end": 1
-                }
-            ]
-        }
-    },
     "CONTROL_TIMESTEP": {
+        "alias": "CONTROL_TIME_STEP",
         "generation-options": {
             "cascading-card": [
                 {
                     "start": 1,
-                    "end": 1
+                    "end": 2
                 }
             ]
         }
