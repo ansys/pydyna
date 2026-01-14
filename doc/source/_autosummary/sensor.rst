@@ -23,28 +23,28 @@ SensorCpmAirbag
 SensorDefineCalcMath
 --------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc_math
-    :members:
-
-
-SensorDefineCalcMath
---------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc_math
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc__math
     :members:
 
 
 SensorDefineCalcMathUpdate
 --------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc_math_update
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc__math_update
     :members:
 
 
-SensorDefineCalcMathUpdate
---------------------------
+SensorDefineCalc_Math
+---------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc_math_update
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc__math
+    :members:
+
+
+SensorDefineCalc_MathUpdate
+---------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_define_calc__math_update
     :members:
 
 
@@ -156,14 +156,14 @@ SensorSwitch
 SensorSwitchCalcLogic
 ---------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_switch_calc_logic
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_switch_calc__logic
     :members:
 
 
-SensorSwitchCalcLogic
----------------------
+SensorSwitchCalc_Logic
+----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_switch_calc_logic
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.sensor_switch_calc__logic
     :members:
 
 
