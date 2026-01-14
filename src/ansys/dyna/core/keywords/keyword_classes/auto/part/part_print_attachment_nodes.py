@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTPRINTATTACHMENTNODES_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -54,6 +55,10 @@ class PartPrintAttachmentNodes(KeywordBase):
 
     keyword = "PART"
     subkeyword = "PRINT_ATTACHMENT_NODES"
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartPrintAttachmentNodes class."""
@@ -211,4 +216,34 @@ class PartPrintAttachmentNodes(KeywordBase):
     def ansid(self, value: int) -> None:
         """Set the ansid property."""
         self._cards[3].set_value("ansid", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def secid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for secid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.secid:
+                return kwd
+        return None
+
+    @secid_link.setter
+    def secid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for secid."""
+        self.secid = value.secid
 

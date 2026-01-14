@@ -126,6 +126,7 @@ class Mat244(KeywordBase):
         "lctre": LinkType.DEFINE_CURVE,
         "lcth1": LinkType.DEFINE_CURVE,
         "lcth5": LinkType.DEFINE_CURVE,
+        "lcy1": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -950,4 +951,28 @@ class Mat244(KeywordBase):
     def lcth5_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcth5."""
         self.lcth5 = value.lcid
+
+    @property
+    def lcy1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy1."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy1_link.setter
+    def lcy1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy1."""
+        if hasattr(value, "lcid"):
+            self.lcy1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy1 = value.tbid
 

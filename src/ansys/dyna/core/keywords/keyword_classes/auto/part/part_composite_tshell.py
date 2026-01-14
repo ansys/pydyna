@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTCOMPOSITETSHELL_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -57,6 +58,10 @@ class PartCompositeTshell(KeywordBase):
 
     keyword = "PART"
     subkeyword = "COMPOSITE_TSHELL"
+    _link_fields = {
+        "mid1": LinkType.MAT,
+        "mid2": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartCompositeTshell class."""
@@ -236,4 +241,34 @@ class PartCompositeTshell(KeywordBase):
     def tmid2(self, value: int) -> None:
         """Set the tmid2 property."""
         self._cards[2].set_value("tmid2", value)
+
+    @property
+    def mid1_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid1:
+                return kwd
+        return None
+
+    @mid1_link.setter
+    def mid1_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid1."""
+        self.mid1 = value.mid
+
+    @property
+    def mid2_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid2:
+                return kwd
+        return None
+
+    @mid2_link.setter
+    def mid2_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid2."""
+        self.mid2 = value.mid
 

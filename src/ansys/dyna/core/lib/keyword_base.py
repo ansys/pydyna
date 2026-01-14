@@ -45,11 +45,20 @@ class LinkType(enum.Enum):
     ALL = 0
     """All link types."""
 
+    MAT = 14
+    """Reference to a MAT_* material keyword."""
+
+    SECTION = 15
+    """Reference to a SECTION_* keyword."""
+
     DEFINE_CURVE = 19
     """Reference to a DEFINE_CURVE keyword."""
 
     DEFINE_TRANSFORMATION = 40
     """Reference to a DEFINE_TRANSFORMATION keyword."""
+
+    DEFINE_CURVE_OR_TABLE = 86
+    """Reference to either DEFINE_CURVE or DEFINE_TABLE (polymorphic)."""
 
 
 class KeywordBase(Cards):
@@ -324,7 +333,12 @@ class KeywordBase(Cards):
     # Example: {"lcsr": LinkType.DEFINE_CURVE, "tranid": LinkType.DEFINE_TRANSFORMATION}
     _link_fields: typing.ClassVar[typing.Dict[str, "LinkType"]] = {}
 
-    def get_links(self, link_type: "LinkType" = None) -> typing.List["KeywordBase"]:
+    def get_links(
+        self,
+        link_type: "LinkType" = None,
+        level: int = 1,
+        _seen: typing.Optional[typing.Set] = None,
+    ) -> typing.List["KeywordBase"]:
         """Get all keywords referenced by this keyword.
 
         Traverses the fields of this keyword that reference other keywords
@@ -336,6 +350,12 @@ class KeywordBase(Cards):
             Filter results by link type. If ``None`` or ``LinkType.ALL``,
             returns all linked keywords. Otherwise, returns only keywords
             matching the specified link type.
+        level : int, default=1
+            Traversal depth. ``1`` returns only direct links (default),
+            ``-1`` traverses recursively without limit, ``0`` returns empty list,
+            and any positive integer ``n`` traverses up to ``n`` levels deep.
+        _seen : set, optional
+            Internal parameter for cycle prevention. Do not pass explicitly.
 
         Returns
         -------
@@ -348,12 +368,20 @@ class KeywordBase(Cards):
         >>> mat = deck.keywords[0]  # A material keyword with curve references
         >>> curves = mat.get_links(LinkType.DEFINE_CURVE)
         >>> all_links = mat.get_links()  # Get all referenced keywords
+        >>> # Get full dependency tree
+        >>> all_deps = mat.get_links(level=-1)
         """
+        if level == 0:
+            return []
+
         if link_type is None:
             link_type = LinkType.ALL
 
         if self.deck is None:
             return []
+
+        if _seen is None:
+            _seen = set()
 
         results = []
         for field_name, field_link_type in self._link_fields.items():
@@ -365,7 +393,19 @@ class KeywordBase(Cards):
             link_property_name = f"{field_name}_link"
             if hasattr(self, link_property_name):
                 linked_kwd = getattr(self, link_property_name)
-                if linked_kwd is not None and linked_kwd not in results:
-                    results.append(linked_kwd)
+                if linked_kwd is None:
+                    continue
+
+                # Dedup using (keyword, subkeyword, object_id) to prevent cycles
+                kwd_identity = (linked_kwd.keyword, linked_kwd.subkeyword, id(linked_kwd))
+                if kwd_identity in _seen:
+                    continue
+                _seen.add(kwd_identity)
+                results.append(linked_kwd)
+
+                # Recurse if level allows
+                if level != 1:  # -1 (unlimited) or >1
+                    next_level = level - 1 if level > 1 else -1
+                    results.extend(linked_kwd.get_links(link_type, next_level, _seen))
 
         return results

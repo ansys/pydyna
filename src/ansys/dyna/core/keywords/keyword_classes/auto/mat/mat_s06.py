@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATS06_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -48,6 +49,10 @@ class MatS06(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcdl": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcdu": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatS06 class."""
@@ -150,4 +155,52 @@ class MatS06(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcdl_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdl."""
+        if self.deck is None:
+            return None
+        field_value = self.lcdl
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcdl_link.setter
+    def lcdl_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcdl."""
+        if hasattr(value, "lcid"):
+            self.lcdl = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcdl = value.tbid
+
+    @property
+    def lcdu_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdu."""
+        if self.deck is None:
+            return None
+        field_value = self.lcdu
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcdu_link.setter
+    def lcdu_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcdu."""
+        if hasattr(value, "lcid"):
+            self.lcdu = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcdu = value.tbid
 

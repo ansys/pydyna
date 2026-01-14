@@ -38,5 +38,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 {% endif %}
 {% for link in keyword_data.links %}
+{% if link.modulename %}
 from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{link.classname}}
+{% endif %}
 {% endfor %}

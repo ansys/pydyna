@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATADDDAMAGEDIEM_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -65,6 +66,10 @@ class MatAddDamageDiem(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "p1": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddDamageDiem class."""
@@ -343,4 +348,43 @@ class MatAddDamageDiem(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def p1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for p1."""
+        if self.deck is None:
+            return None
+        field_value = self.p1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @p1_link.setter
+    def p1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for p1."""
+        if hasattr(value, "lcid"):
+            self.p1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.p1 = value.tbid
 
