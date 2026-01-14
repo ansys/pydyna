@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CESEBOUNDARYSET_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
-    FieldSchema("dof ", int, 10, 10, 101),
+    FieldSchema("dof_", int, 10, 10, 101, "dof "),
     FieldSchema("lcid", int, 20, 10, None),
     FieldSchema("sf", float, 30, 10, 1.0),
 )
@@ -73,14 +73,14 @@ class CeseBoundarySet(KeywordBase):
         EQ.204:  y & z-velocity.
         .
         """ # nopep8
-        return self._cards[0].get_value("dof ")
+        return self._cards[0].get_value("dof_")
 
     @dof_.setter
     def dof_(self, value: int) -> None:
         """Set the dof_ property."""
         if value not in [101, 102, 103, 104, 105, 106, 201, 202, 203, 204, None]:
             raise Exception("""dof_ must be `None` or one of {101,102,103,104,105,106,201,202,203,204}.""")
-        self._cards[0].set_value("dof ", value)
+        self._cards[0].set_value("dof_", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:

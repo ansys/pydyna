@@ -56,10 +56,10 @@ _MAT143_CARD2 = (
 )
 
 _MAT143_CARD3 = (
-    FieldSchema("gf1||", float, 0, 10, None),
-    FieldSchema("gf2||", float, 10, 10, None),
+    FieldSchema("gf1__", float, 0, 10, None, "gf1||"),
+    FieldSchema("gf2__", float, 10, 10, None, "gf2||"),
     FieldSchema("bfit", float, 20, 10, None),
-    FieldSchema("dmax||", float, 30, 10, None),
+    FieldSchema("dmax__", float, 30, 10, None, "dmax||"),
     FieldSchema("gf1p", float, 40, 10, None),
     FieldSchema("gf2p", float, 50, 10, None),
     FieldSchema("dfit", float, 60, 10, None),
@@ -394,23 +394,23 @@ class Mat143(KeywordBase):
     def gf1__(self) -> typing.Optional[float]:
         """Get or set the Parallel fracture energy in tension.
         """ # nopep8
-        return self._cards[3].get_value("gf1||")
+        return self._cards[3].get_value("gf1__")
 
     @gf1__.setter
     def gf1__(self, value: float) -> None:
         """Set the gf1__ property."""
-        self._cards[3].set_value("gf1||", value)
+        self._cards[3].set_value("gf1__", value)
 
     @property
     def gf2__(self) -> typing.Optional[float]:
         """Get or set the Parallel fracture energy in shear.
         """ # nopep8
-        return self._cards[3].get_value("gf2||")
+        return self._cards[3].get_value("gf2__")
 
     @gf2__.setter
     def gf2__(self, value: float) -> None:
         """Set the gf2__ property."""
-        self._cards[3].set_value("gf2||", value)
+        self._cards[3].set_value("gf2__", value)
 
     @property
     def bfit(self) -> typing.Optional[float]:
@@ -427,12 +427,12 @@ class Mat143(KeywordBase):
     def dmax__(self) -> typing.Optional[float]:
         """Get or set the Parallel maximum damage.
         """ # nopep8
-        return self._cards[3].get_value("dmax||")
+        return self._cards[3].get_value("dmax__")
 
     @dmax__.setter
     def dmax__(self, value: float) -> None:
         """Set the dmax__ property."""
-        self._cards[3].set_value("dmax||", value)
+        self._cards[3].set_value("dmax__", value)
 
     @property
     def gf1p(self) -> typing.Optional[float]:

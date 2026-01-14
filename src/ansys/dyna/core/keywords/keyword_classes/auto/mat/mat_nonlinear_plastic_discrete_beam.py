@@ -75,7 +75,7 @@ _MATNONLINEARPLASTICDISCRETEBEAM_CARD4 = (
 )
 
 _MATNONLINEARPLASTICDISCRETEBEAM_CARD5 = (
-    FieldSchema("for", float, 0, 10, None),
+    FieldSchema("for_", float, 0, 10, None, "for"),
     FieldSchema("fos", float, 10, 10, None),
     FieldSchema("fot", float, 20, 10, None),
     FieldSchema("mor", float, 30, 10, None),
@@ -501,12 +501,12 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     def for_(self) -> typing.Optional[float]:
         """Get or set the Preload force in r-direction
         """ # nopep8
-        return self._cards[5].get_value("for")
+        return self._cards[5].get_value("for_")
 
     @for_.setter
     def for_(self, value: float) -> None:
         """Set the for_ property."""
-        self._cards[5].set_value("for", value)
+        self._cards[5].set_value("for_", value)
 
     @property
     def fos(self) -> typing.Optional[float]:

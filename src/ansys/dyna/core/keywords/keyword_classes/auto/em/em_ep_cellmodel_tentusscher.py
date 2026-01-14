@@ -31,9 +31,9 @@ _EMEPCELLMODELTENTUSSCHER_CARD0 = (
 )
 
 _EMEPCELLMODELTENTUSSCHER_CARD1 = (
-    FieldSchema("r", float, 0, 10, None),
+    FieldSchema("gas_constant", float, 0, 10, None, "r"),
     FieldSchema("t", float, 10, 10, None),
-    FieldSchema("f", float, 20, 10, None),
+    FieldSchema("faraday_constant", float, 20, 10, None, "f"),
     FieldSchema("cm", float, 30, 10, None),
     FieldSchema("vc", float, 40, 10, None),
     FieldSchema("vsr", float, 50, 10, None),
@@ -207,12 +207,12 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
         Note: Location in manual: card:2, field: R
         """ # nopep8
-        return self._cards[1].get_value("r")
+        return self._cards[1].get_value("gas_constant")
 
     @gas_constant.setter
     def gas_constant(self, value: float) -> None:
         """Set the gas_constant property."""
-        self._cards[1].set_value("r", value)
+        self._cards[1].set_value("gas_constant", value)
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -231,12 +231,12 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
         Note: Location in manual: card:2, field: F
         """ # nopep8
-        return self._cards[1].get_value("f")
+        return self._cards[1].get_value("faraday_constant")
 
     @faraday_constant.setter
     def faraday_constant(self, value: float) -> None:
         """Set the faraday_constant property."""
-        self._cards[1].set_value("f", value)
+        self._cards[1].set_value("faraday_constant", value)
 
     @property
     def cm(self) -> typing.Optional[float]:

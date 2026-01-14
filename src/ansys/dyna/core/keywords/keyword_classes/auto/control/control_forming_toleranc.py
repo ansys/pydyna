@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLFORMINGTOLERANC_CARD0 = (
-    FieldSchema("dt/cycle", float, 0, 10, None),
+    FieldSchema("dt_cycle", float, 0, 10, None, "dt/cycle"),
     FieldSchema("weight", float, 10, 10, None),
 )
 
@@ -51,12 +51,12 @@ class ControlFormingToleranc(KeywordBase):
         LT.0:	the absolute value is the time interval between outputs.
         GT.0:	number of cycles between outputs
         """ # nopep8
-        return self._cards[0].get_value("dt/cycle")
+        return self._cards[0].get_value("dt_cycle")
 
     @dt_cycle.setter
     def dt_cycle(self, value: float) -> None:
         """Set the dt_cycle property."""
-        self._cards[0].set_value("dt/cycle", value)
+        self._cards[0].set_value("dt_cycle", value)
 
     @property
     def weight(self) -> typing.Optional[float]:

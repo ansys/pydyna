@@ -33,7 +33,7 @@ _SECTIONSHELLXFEM_CARD0 = (
     FieldSchema("shrf", float, 20, 10, 1.0),
     FieldSchema("nip", int, 30, 10, 2),
     FieldSchema("propt", float, 40, 10, 1.0),
-    FieldSchema("qr/irid", int, 50, 10, 0),
+    FieldSchema("qr_irid", int, 50, 10, 0, "qr/irid"),
     FieldSchema("icomp", int, 60, 10, 0),
     FieldSchema("setyp", int, 70, 10, 1),
 )
@@ -54,8 +54,8 @@ _SECTIONSHELLXFEM_CARD2 = (
     FieldSchema("failcr", int, 30, 10, 1),
     FieldSchema("propcr", int, 40, 10, None),
     FieldSchema("fs", float, 50, 10, 0.0),
-    FieldSchema("ls/fs1", float, 60, 10, 0.0),
-    FieldSchema("nc/cl", float, 70, 10, None),
+    FieldSchema("ls_fs1", float, 60, 10, 0.0, "ls/fs1"),
+    FieldSchema("nc_cl", float, 70, 10, None, "nc/cl"),
 )
 
 _SECTIONSHELLXFEM_CARD3 = (
@@ -270,12 +270,12 @@ class SectionShellXfem(KeywordBase):
         EQ.0: Gauss (up to ten points are permitted),
         EQ.1: trapezoidal, not recommend for accuracy reasons.
         """ # nopep8
-        return self._cards[0].get_value("qr/irid")
+        return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
         """Set the qr_irid property."""
-        self._cards[0].set_value("qr/irid", value)
+        self._cards[0].set_value("qr_irid", value)
 
     @property
     def icomp(self) -> int:
@@ -471,24 +471,24 @@ class SectionShellXfem(KeywordBase):
         """Get or set the LS: Length scale for strain regularization (FAILCR = -1 only)
         FS1: Final failure plastic strain (FAILCR = -2 only)
         """ # nopep8
-        return self._cards[2].get_value("ls/fs1")
+        return self._cards[2].get_value("ls_fs1")
 
     @ls_fs1.setter
     def ls_fs1(self, value: float) -> None:
         """Set the ls_fs1 property."""
-        self._cards[2].set_value("ls/fs1", value)
+        self._cards[2].set_value("ls_fs1", value)
 
     @property
     def nc_cl(self) -> typing.Optional[float]:
         """Get or set the NC is the number of cracks allowed in the part FAILCR .NE. -2
         CL:Crack length at which the failure strain is FS1 (FAILCR = -2 only)
         """ # nopep8
-        return self._cards[2].get_value("nc/cl")
+        return self._cards[2].get_value("nc_cl")
 
     @nc_cl.setter
     def nc_cl(self, value: float) -> None:
         """Set the nc_cl property."""
-        self._cards[2].set_value("nc/cl", value)
+        self._cards[2].set_value("nc_cl", value)
 
     @property
     def nipp(self) -> int:

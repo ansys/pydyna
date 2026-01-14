@@ -36,7 +36,7 @@ _MAT194_CARD0 = (
 )
 
 _MAT194_CARD1 = (
-    FieldSchema("fc'", float, 0, 10, None),
+    FieldSchema("fc_", float, 0, 10, None, "fc'"),
     FieldSchema("pref", float, 10, 10, None),
     FieldSchema("fyield", float, 20, 10, None),
     FieldSchema("sig0", float, 30, 10, None),
@@ -208,12 +208,12 @@ class Mat194(KeywordBase):
         """Get or set the Unconfined Compressive Strength of concrete.
         Used in the calculation of ultimate shear stress; crushing behaviour is not modelled.
         """ # nopep8
-        return self._cards[1].get_value("fc'")
+        return self._cards[1].get_value("fc_")
 
     @fc_.setter
     def fc_(self, value: float) -> None:
         """Set the fc_ property."""
-        self._cards[1].set_value("fc'", value)
+        self._cards[1].set_value("fc_", value)
 
     @property
     def pref(self) -> typing.Optional[float]:

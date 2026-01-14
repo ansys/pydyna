@@ -78,11 +78,11 @@ _MATVEGTERSTANDARD_CARD4 = (
 )
 
 _MATVEGTERSTANDARD_CARD5 = (
-    FieldSchema("fun-i", float, 0, 10, None),
-    FieldSchema("run-i", float, 10, 10, None),
-    FieldSchema("fps1-i", float, 20, 10, None),
-    FieldSchema("alps-i", float, 30, 10, None),
-    FieldSchema("fsh-i", float, 40, 10, None),
+    FieldSchema("fun_i", float, 0, 10, None, "fun-i"),
+    FieldSchema("run_i", float, 10, 10, None, "run-i"),
+    FieldSchema("fps1_i", float, 20, 10, None, "fps1-i"),
+    FieldSchema("alps_i", float, 30, 10, None, "alps-i"),
+    FieldSchema("fsh_i", float, 40, 10, None, "fsh-i"),
 )
 
 _MATVEGTERSTANDARD_OPTION0_CARD0 = (
@@ -517,56 +517,56 @@ class MatVegterStandard(KeywordBase):
     def fun_i(self) -> typing.Optional[float]:
         """Get or set the Normalized yield stress for uniaxial test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fun-i")
+        return self._cards[5].get_value("fun_i")
 
     @fun_i.setter
     def fun_i(self, value: float) -> None:
         """Set the fun_i property."""
-        self._cards[5].set_value("fun-i", value)
+        self._cards[5].set_value("fun_i", value)
 
     @property
     def run_i(self) -> typing.Optional[float]:
         """Get or set the Strain ratio for uniaxial test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("run-i")
+        return self._cards[5].get_value("run_i")
 
     @run_i.setter
     def run_i(self, value: float) -> None:
         """Set the run_i property."""
-        self._cards[5].set_value("run-i", value)
+        self._cards[5].set_value("run_i", value)
 
     @property
     def fps1_i(self) -> typing.Optional[float]:
         """Get or set the First normalized yield stress for plain strain test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fps1-i")
+        return self._cards[5].get_value("fps1_i")
 
     @fps1_i.setter
     def fps1_i(self, value: float) -> None:
         """Set the fps1_i property."""
-        self._cards[5].set_value("fps1-i", value)
+        self._cards[5].set_value("fps1_i", value)
 
     @property
     def alps_i(self) -> typing.Optional[float]:
         """Get or set the Normalized distance of second component of plain stress point between the hinge points on both sides for the ith direction.  See Remarks for details
         """ # nopep8
-        return self._cards[5].get_value("alps-i")
+        return self._cards[5].get_value("alps_i")
 
     @alps_i.setter
     def alps_i(self, value: float) -> None:
         """Set the alps_i property."""
-        self._cards[5].set_value("alps-i", value)
+        self._cards[5].set_value("alps_i", value)
 
     @property
     def fsh_i(self) -> typing.Optional[float]:
         """Get or set the First normalized yield stress for pure shear test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fsh-i")
+        return self._cards[5].get_value("fsh_i")
 
     @fsh_i.setter
     def fsh_i(self, value: float) -> None:
         """Set the fsh_i property."""
-        self._cards[5].set_value("fsh-i", value)
+        self._cards[5].set_value("fsh_i", value)
 
     @property
     def title(self) -> typing.Optional[str]:

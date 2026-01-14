@@ -32,7 +32,7 @@ _CONTROLMPPDECOMPOSITIONREDECOMPOSITION_CARD0 = (
     FieldSchema("weight", float, 20, 10, 1.0),
     FieldSchema("remsph", int, 30, 10, 0),
     FieldSchema("stime", float, 40, 10, 0.0),
-    FieldSchema("sampt ", float, 50, 10, None),
+    FieldSchema("sampt_", float, 50, 10, None, "sampt "),
 )
 
 class ControlMppDecompositionRedecomposition(KeywordBase):
@@ -120,10 +120,10 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
     def sampt_(self) -> typing.Optional[float]:
         """Get or set the Time interval for collecting element cost profile to use in the next REDECOMP step.GT.0:	Sampling from beginning of each redecomposition for length SAMPT(t to t + SAMPT).If SAMPT ≥ FREQ, then the sampling will occur for the entire time interval, FREQ.LT.0 : Sampling from before ending of each redecomposition through to the next redecomposition(t + FREQ - SAMPT to t + FREQ
         """ # nopep8
-        return self._cards[0].get_value("sampt ")
+        return self._cards[0].get_value("sampt_")
 
     @sampt_.setter
     def sampt_(self, value: float) -> None:
         """Set the sampt_ property."""
-        self._cards[0].set_value("sampt ", value)
+        self._cards[0].set_value("sampt_", value)
 

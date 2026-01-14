@@ -35,7 +35,7 @@ _ELEMENTSHELLBEXTPATCH_CARD0 = (
 _ELEMENTSHELLBEXTPATCH_CARD1 = (
     FieldSchema("wfl", int, 0, 10, None),
     FieldSchema("form", int, 10, 10, 0),
-    FieldSchema("int", int, 20, 10, 0),
+    FieldSchema("int_", int, 20, 10, 0, "int"),
     FieldSchema("nisr", int, 30, 10, None),
     FieldSchema("niss", int, 40, 10, None),
     FieldSchema("imass", int, 50, 10, 0),
@@ -217,14 +217,14 @@ class ElementShellBextPatch(KeywordBase):
         the number of integration points may change from element to
         element depending on local element degree.
         """ # nopep8
-        return self._cards[1].get_value("int")
+        return self._cards[1].get_value("int_")
 
     @int_.setter
     def int_(self, value: int) -> None:
         """Set the int_ property."""
         if value not in [0, 1, None]:
             raise Exception("""int_ must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("int", value)
+        self._cards[1].set_value("int_", value)
 
     @property
     def nisr(self) -> typing.Optional[int]:

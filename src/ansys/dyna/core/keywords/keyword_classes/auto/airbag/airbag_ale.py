@@ -66,8 +66,8 @@ _AIRBAGALE_CARD3 = (
 )
 
 _AIRBAGALE_CARD4 = (
-    FieldSchema("nx/ida", int, 0, 10, None),
-    FieldSchema("ny/idg", int, 10, 10, None),
+    FieldSchema("nx_ida", int, 0, 10, None, "nx/ida"),
+    FieldSchema("ny_idg", int, 10, 10, None, "ny/idg"),
     FieldSchema("nz", int, 20, 10, 1),
     FieldSchema("movern", int, 30, 10, 0),
     FieldSchema("zoom", int, 40, 10, 0),
@@ -447,24 +447,24 @@ class AirbagAle(KeywordBase):
         """Get or set the NX is the number of ALE elements to be generated in the x-direction.
         IDA is the Part ID of the initial air mesh
         """ # nopep8
-        return self._cards[4].get_value("nx/ida")
+        return self._cards[4].get_value("nx_ida")
 
     @nx_ida.setter
     def nx_ida(self, value: int) -> None:
         """Set the nx_ida property."""
-        self._cards[4].set_value("nx/ida", value)
+        self._cards[4].set_value("nx_ida", value)
 
     @property
     def ny_idg(self) -> typing.Optional[int]:
         """Get or set the NY is the number of ALE elements to be generated in the y-direction
         IDG is the Part ID of the initial air mesh
         """ # nopep8
-        return self._cards[4].get_value("ny/idg")
+        return self._cards[4].get_value("ny_idg")
 
     @ny_idg.setter
     def ny_idg(self, value: int) -> None:
         """Set the ny_idg property."""
-        self._cards[4].set_value("ny/idg", value)
+        self._cards[4].set_value("ny_idg", value)
 
     @property
     def nz(self) -> int:

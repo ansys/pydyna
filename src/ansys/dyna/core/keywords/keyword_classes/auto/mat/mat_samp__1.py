@@ -39,12 +39,12 @@ _MATSAMP_1_CARD0 = (
 )
 
 _MATSAMP_1_CARD1 = (
-    FieldSchema("lcid-t", int, 0, 10, None),
-    FieldSchema("lcid-c", int, 10, 10, None),
-    FieldSchema("lcid-s", int, 20, 10, None),
-    FieldSchema("lcid-b", int, 30, 10, None),
+    FieldSchema("lcid_t", int, 0, 10, None, "lcid-t"),
+    FieldSchema("lcid_c", int, 10, 10, None, "lcid-c"),
+    FieldSchema("lcid_s", int, 20, 10, None, "lcid-s"),
+    FieldSchema("lcid_b", int, 30, 10, None, "lcid-b"),
     FieldSchema("nuep", float, 40, 10, None),
-    FieldSchema("lcid-p", int, 50, 10, None),
+    FieldSchema("lcid_p", int, 50, 10, None, "lcid-p"),
     FieldSchema("unused", int, 60, 10, None),
     FieldSchema("incdam", int, 70, 10, 0),
 )
@@ -53,7 +53,7 @@ _MATSAMP_1_CARD2 = (
     FieldSchema("lcid_d", int, 0, 10, None),
     FieldSchema("epfail", float, 10, 10, 100000.0),
     FieldSchema("deprpt", float, 20, 10, None),
-    FieldSchema("lcid-tri", int, 30, 10, None),
+    FieldSchema("lcid_tri", int, 30, 10, None, "lcid-tri"),
     FieldSchema("lcid_lc", int, 40, 10, None),
 )
 
@@ -210,45 +210,45 @@ class MatSamp_1(KeywordBase):
     def lcid_t(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain, these curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests, this input is mandatory and the material model will not work unless at least one tensile stress-strain curve is given.
         """ # nopep8
-        return self._cards[1].get_value("lcid-t")
+        return self._cards[1].get_value("lcid_t")
 
     @lcid_t.setter
     def lcid_t(self, value: int) -> None:
         """Set the lcid_t property."""
-        self._cards[1].set_value("lcid-t", value)
+        self._cards[1].set_value("lcid_t", value)
 
     @property
     def lcid_c(self) -> typing.Optional[int]:
         """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static uniaxial compression test, this input is optional.
         """ # nopep8
-        return self._cards[1].get_value("lcid-c")
+        return self._cards[1].get_value("lcid_c")
 
     @lcid_c.setter
     def lcid_c(self, value: int) -> None:
         """Set the lcid_c property."""
-        self._cards[1].set_value("lcid-c", value)
+        self._cards[1].set_value("lcid_c", value)
 
     @property
     def lcid_s(self) -> typing.Optional[int]:
         """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static shear test, this input is optional
         """ # nopep8
-        return self._cards[1].get_value("lcid-s")
+        return self._cards[1].get_value("lcid_s")
 
     @lcid_s.setter
     def lcid_s(self, value: int) -> None:
         """Set the lcid_s property."""
-        self._cards[1].set_value("lcid-s", value)
+        self._cards[1].set_value("lcid_s", value)
 
     @property
     def lcid_b(self) -> typing.Optional[int]:
         """Get or set the load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test, this input is optional.
         """ # nopep8
-        return self._cards[1].get_value("lcid-b")
+        return self._cards[1].get_value("lcid_b")
 
     @lcid_b.setter
     def lcid_b(self, value: int) -> None:
         """Set the lcid_b property."""
-        self._cards[1].set_value("lcid-b", value)
+        self._cards[1].set_value("lcid_b", value)
 
     @property
     def nuep(self) -> typing.Optional[float]:
@@ -265,12 +265,12 @@ class MatSamp_1(KeywordBase):
     def lcid_p(self) -> typing.Optional[int]:
         """Get or set the load curve ID giving the plastic Poisson's ratio as a function of equivalent plastic deformation during uniaxial tensile testing, if the (optional) load curve is given, the constant value in the previous field will be ignored.
         """ # nopep8
-        return self._cards[1].get_value("lcid-p")
+        return self._cards[1].get_value("lcid_p")
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
         """Set the lcid_p property."""
-        self._cards[1].set_value("lcid-p", value)
+        self._cards[1].set_value("lcid_p", value)
 
     @property
     def incdam(self) -> int:
@@ -322,12 +322,12 @@ class MatSamp_1(KeywordBase):
     def lcid_tri(self) -> typing.Optional[int]:
         """Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the triaxiality pressue/sigma_vm.. This option is active only if DC is given as a negative value (see above)..
         """ # nopep8
-        return self._cards[2].get_value("lcid-tri")
+        return self._cards[2].get_value("lcid_tri")
 
     @lcid_tri.setter
     def lcid_tri(self, value: int) -> None:
         """Set the lcid_tri property."""
-        self._cards[2].set_value("lcid-tri", value)
+        self._cards[2].set_value("lcid_tri", value)
 
     @property
     def lcid_lc(self) -> typing.Optional[int]:

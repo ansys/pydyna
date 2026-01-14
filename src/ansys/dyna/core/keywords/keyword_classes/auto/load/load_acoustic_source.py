@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _LOADACOUSTICSOURCE_CARD0 = (
-    FieldSchema("nid/ssid", int, 0, 10, None),
+    FieldSchema("nid_ssid", int, 0, 10, None, "nid/ssid"),
     FieldSchema("srctyp", int, 10, 10, 1),
     FieldSchema("lcid", int, 20, 10, None),
     FieldSchema("data1", float, 30, 10, 1.0),
@@ -56,12 +56,12 @@ class LoadAcousticSource(KeywordBase):
         """Get or set the Node ID of the acoustic point source for SRCTYP = 1 and 5.
         Segment set ID of structural faces on the external fluid-structure boundary exposed to the acoustic wave source for SRCTYP = 11 and 12
         """ # nopep8
-        return self._cards[0].get_value("nid/ssid")
+        return self._cards[0].get_value("nid_ssid")
 
     @nid_ssid.setter
     def nid_ssid(self, value: int) -> None:
         """Set the nid_ssid property."""
-        self._cards[0].set_value("nid/ssid", value)
+        self._cards[0].set_value("nid_ssid", value)
 
     @property
     def srctyp(self) -> int:

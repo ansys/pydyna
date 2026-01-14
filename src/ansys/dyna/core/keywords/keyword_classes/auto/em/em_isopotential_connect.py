@@ -32,7 +32,7 @@ _EMISOPOTENTIALCONNECT_CARD0 = (
     FieldSchema("isoid1", int, 20, 10, None),
     FieldSchema("isoid2", int, 30, 10, None),
     FieldSchema("val", float, 40, 10, None),
-    FieldSchema("lcid/rdlid", int, 50, 10, None),
+    FieldSchema("lcid_rdlid", int, 50, 10, None, "lcid/rdlid"),
     FieldSchema("psid", int, 60, 10, None),
 )
 
@@ -128,12 +128,12 @@ class EmIsopotentialConnect(KeywordBase):
         """Get or set the Load curve ID defining the value of the resistance,voltage,or current function of time and depending on CONTYPE.
         If not defined,VAL will be used.
         """ # nopep8
-        return self._cards[0].get_value("lcid/rdlid")
+        return self._cards[0].get_value("lcid_rdlid")
 
     @lcid_rdlid.setter
     def lcid_rdlid(self, value: int) -> None:
         """Set the lcid_rdlid property."""
-        self._cards[0].set_value("lcid/rdlid", value)
+        self._cards[0].set_value("lcid_rdlid", value)
 
     @property
     def psid(self) -> typing.Optional[int]:

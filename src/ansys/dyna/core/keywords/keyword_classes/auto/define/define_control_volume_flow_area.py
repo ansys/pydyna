@@ -31,9 +31,9 @@ _DEFINECONTROLVOLUMEFLOWAREA_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("sid", int, 10, 10, None),
     FieldSchema("stype", int, 20, 10, 1),
-    FieldSchema("pid ", int, 30, 10, 0),
-    FieldSchema("area ", float, 40, 10, None),
-    FieldSchema("cviid ", float, 50, 10, None),
+    FieldSchema("pid_", int, 30, 10, 0, "pid "),
+    FieldSchema("area_", float, 40, 10, None, "area "),
+    FieldSchema("cviid_", float, 50, 10, None, "cviid "),
 )
 
 _DEFINECONTROLVOLUMEFLOWAREA_OPTION0_CARD0 = (
@@ -109,34 +109,34 @@ class DefineControlVolumeFlowArea(KeywordBase):
     def pid_(self) -> int:
         """Get or set the PART ID for null shells for visualizing the flow area. It defaults to 0, in which case the area will not be visualized.
         """ # nopep8
-        return self._cards[0].get_value("pid ")
+        return self._cards[0].get_value("pid_")
 
     @pid_.setter
     def pid_(self, value: int) -> None:
         """Set the pid_ property."""
-        self._cards[0].set_value("pid ", value)
+        self._cards[0].set_value("pid_", value)
 
     @property
     def area_(self) -> typing.Optional[float]:
         """Get or set the This is a constant area for the case when a flow area definition is not defined
         """ # nopep8
-        return self._cards[0].get_value("area ")
+        return self._cards[0].get_value("area_")
 
     @area_.setter
     def area_(self, value: float) -> None:
         """Set the area_ property."""
-        self._cards[0].set_value("area ", value)
+        self._cards[0].set_value("area_", value)
 
     @property
     def cviid_(self) -> typing.Optional[float]:
         """Get or set the CONTROL_VOLUME_INTERACTION ID that uses the flow area
         """ # nopep8
-        return self._cards[0].get_value("cviid ")
+        return self._cards[0].get_value("cviid_")
 
     @cviid_.setter
     def cviid_(self, value: float) -> None:
         """Set the cviid_ property."""
-        self._cards[0].set_value("cviid ", value)
+        self._cards[0].set_value("cviid_", value)
 
     @property
     def title(self) -> typing.Optional[str]:

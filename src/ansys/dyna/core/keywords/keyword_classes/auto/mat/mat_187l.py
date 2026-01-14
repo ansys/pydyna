@@ -44,7 +44,7 @@ _MAT187L_CARD1 = (
     FieldSchema("ctflg", int, 20, 10, 0),
     FieldSchema("rateop", int, 30, 10, 0),
     FieldSchema("nuep", float, 40, 10, None),
-    FieldSchema("lcid-p", int, 50, 10, 0),
+    FieldSchema("lcid_p", int, 50, 10, 0, "lcid-p"),
     FieldSchema("rfiltf", float, 60, 10, 0.95),
 )
 
@@ -226,12 +226,12 @@ class Mat187L(KeywordBase):
         """Get or set the Load curve ID giving the plastic Poisson's ratio as a function of an equivalent plastic strain measure during uniaxial tensile and uniaxial compressive testing.The plastic strain measure on the abscissa is negative for compression and positive for tension.
         It is important to cover both tension and compression.  If LCID-P is given, NUEP is ignored
         """ # nopep8
-        return self._cards[1].get_value("lcid-p")
+        return self._cards[1].get_value("lcid_p")
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
         """Set the lcid_p property."""
-        self._cards[1].set_value("lcid-p", value)
+        self._cards[1].set_value("lcid_p", value)
 
     @property
     def rfiltf(self) -> float:

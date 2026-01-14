@@ -42,7 +42,7 @@ _MATSEATBELT2D_CARD1 = (
     FieldSchema("a", float, 0, 10, None),
     FieldSchema("i", float, 10, 10, None),
     FieldSchema("j", float, 20, 10, None),
-    FieldSchema("as", float, 30, 10, None),
+    FieldSchema("as_", float, 30, 10, None, "as"),
     FieldSchema("f", float, 40, 10, 1e+20),
     FieldSchema("m", float, 50, 10, 1e+20),
     FieldSchema("r", float, 60, 10, 0.05),
@@ -234,12 +234,12 @@ class MatSeatbelt2D(KeywordBase):
     def as_(self) -> typing.Optional[float]:
         """Get or set the Shear area for bending/compression stiffness
         """ # nopep8
-        return self._cards[1].get_value("as")
+        return self._cards[1].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[1].set_value("as", value)
+        self._cards[1].set_value("as_", value)
 
     @property
     def f(self) -> float:

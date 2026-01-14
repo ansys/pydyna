@@ -31,7 +31,7 @@ _SECTIONBEAM_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
     FieldSchema("elform", int, 10, 10, 1),
     FieldSchema("shrf", float, 20, 10, 1.0),
-    FieldSchema("qr/irid", int, 30, 10, 2),
+    FieldSchema("qr_irid", int, 30, 10, 2, "qr/irid"),
     FieldSchema("cst", int, 40, 10, 0),
     FieldSchema("scoor", float, 50, 10, 0.0),
     FieldSchema("nsm", float, 60, 10, 0.0),
@@ -205,12 +205,12 @@ class SectionBeam(KeywordBase):
         EQ.5: 4x4 Gauss quadrature,
         EQ.-n: where |n| is the number of the user defined rule. IRID integration rule n is defined using *INTEGRATION_BEAM card.
         """ # nopep8
-        return self._cards[0].get_value("qr/irid")
+        return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
         """Set the qr_irid property."""
-        self._cards[0].set_value("qr/irid", value)
+        self._cards[0].set_value("qr_irid", value)
 
     @property
     def cst(self) -> int:

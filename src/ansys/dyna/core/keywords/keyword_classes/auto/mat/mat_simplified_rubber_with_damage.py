@@ -40,7 +40,7 @@ _MATSIMPLIFIEDRUBBERWITHDAMAGE_CARD1 = (
     FieldSchema("sgl", float, 0, 10, None),
     FieldSchema("sw", float, 10, 10, None),
     FieldSchema("st", float, 20, 10, None),
-    FieldSchema("lc/tbid", float, 30, 10, None),
+    FieldSchema("lc_tbid", float, 30, 10, None, "lc/tbid"),
     FieldSchema("tension", float, 40, 10, -1.0),
     FieldSchema("rtype", float, 50, 10, 0.0),
     FieldSchema("avgopt", float, 60, 10, 0.0),
@@ -191,12 +191,12 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
     def lc_tbid(self) -> typing.Optional[float]:
         """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the force versus actual change in the gauge length. If the table definition is used a family of curves are defined for discrete strain rates. The load curves should cover the complete range of expected loading, i.e., the smallest stretch ratio to the largest.
         """ # nopep8
-        return self._cards[1].get_value("lc/tbid")
+        return self._cards[1].get_value("lc_tbid")
 
     @lc_tbid.setter
     def lc_tbid(self, value: float) -> None:
         """Set the lc_tbid property."""
-        self._cards[1].set_value("lc/tbid", value)
+        self._cards[1].set_value("lc_tbid", value)
 
     @property
     def tension(self) -> float:

@@ -42,7 +42,7 @@ _EMMAT003_CARD1 = (
     FieldSchema("sigma31", float, 40, 10, None),
     FieldSchema("sigma32", float, 50, 10, None),
     FieldSchema("aopt", int, 60, 10, 0),
-    FieldSchema("lambda", float, 70, 10, None),
+    FieldSchema("lambda_", float, 70, 10, None, "lambda"),
 )
 
 _EMMAT003_CARD2 = (
@@ -237,12 +237,12 @@ class EmMat003(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Intra- to extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials
         """ # nopep8
-        return self._cards[1].get_value("lambda")
+        return self._cards[1].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[1].set_value("lambda", value)
+        self._cards[1].set_value("lambda_", value)
 
     @property
     def xp(self) -> typing.Optional[float]:

@@ -30,7 +30,7 @@ _ICFDCONTROLMESH_CARD0 = (
     FieldSchema("mgsf", float, 0, 10, 1.41),
     FieldSchema("unused", int, 10, 10, None),
     FieldSchema("mstrat", int, 20, 10, 0),
-    FieldSchema("2dstruc", int, 30, 10, 0),
+    FieldSchema("_2dstruc", int, 30, 10, 0, "2dstruc"),
     FieldSchema("nrmsh", int, 40, 10, 0),
 )
 
@@ -86,14 +86,14 @@ class IcfdControlMesh(KeywordBase):
         """Get or set the Flag to decide between a unstructured mesh generation strategy in 2D or a structured mesh strategy: EQ.0: Structured mesh.
         EQ.1: Unstructured mesh.
         """ # nopep8
-        return self._cards[0].get_value("2dstruc")
+        return self._cards[0].get_value("_2dstruc")
 
     @_2dstruc.setter
     def _2dstruc(self, value: int) -> None:
         """Set the _2dstruc property."""
         if value not in [0, 1, None]:
             raise Exception("""_2dstruc must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("2dstruc", value)
+        self._cards[0].set_value("_2dstruc", value)
 
     @property
     def nrmsh(self) -> int:

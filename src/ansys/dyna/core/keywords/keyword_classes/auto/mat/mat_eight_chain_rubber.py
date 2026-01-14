@@ -102,37 +102,37 @@ _MATEIGHTCHAINRUBBER_CARD6 = (
 
 _MATEIGHTCHAINRUBBER_CARD7 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD8 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD9 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD10 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD11 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD12 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_CARD13 = (
     FieldSchema("taui", float, 0, 10, None),
-    FieldSchema("betai/gammai", float, 10, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
 )
 
 _MATEIGHTCHAINRUBBER_OPTION0_CARD0 = (
@@ -865,12 +865,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[7].get_value("betai/gammai")
+        return self._cards[7].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[7].set_value("betai/gammai", value)
+        self._cards[7].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -888,12 +888,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[8].get_value("betai/gammai")
+        return self._cards[8].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[8].set_value("betai/gammai", value)
+        self._cards[8].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -911,12 +911,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[9].get_value("betai/gammai")
+        return self._cards[9].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[9].set_value("betai/gammai", value)
+        self._cards[9].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -934,12 +934,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[10].get_value("betai/gammai")
+        return self._cards[10].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[10].set_value("betai/gammai", value)
+        self._cards[10].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -957,12 +957,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[11].get_value("betai/gammai")
+        return self._cards[11].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[11].set_value("betai/gammai", value)
+        self._cards[11].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -980,12 +980,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[12].get_value("betai/gammai")
+        return self._cards[12].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[12].set_value("betai/gammai", value)
+        self._cards[12].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1003,12 +1003,12 @@ class MatEightChainRubber(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[13].get_value("betai/gammai")
+        return self._cards[13].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[13].set_value("betai/gammai", value)
+        self._cards[13].set_value("betai_gammai", value)
 
     @property
     def title(self) -> typing.Optional[str]:

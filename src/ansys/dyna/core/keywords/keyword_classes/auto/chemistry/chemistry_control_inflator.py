@@ -40,7 +40,7 @@ _CHEMISTRYCONTROLINFLATOR_CARD1 = (
 
 _CHEMISTRYCONTROLINFLATOR_CARD2 = (
     FieldSchema("density", str, 0, 10, None),
-    FieldSchema("species name", str, 10, 70, None),
+    FieldSchema("species_name", str, 10, 70, None, "species name"),
 )
 
 class ChemistryControlInflator(KeywordBase):
@@ -155,10 +155,10 @@ class ChemistryControlInflator(KeywordBase):
     def species_name(self) -> typing.Optional[str]:
         """Get or set the Chemkin-compatible name of a condensed-phase species.
         """ # nopep8
-        return self._cards[2].get_value("species name")
+        return self._cards[2].get_value("species_name")
 
     @species_name.setter
     def species_name(self, value: str) -> None:
         """Set the species_name property."""
-        self._cards[2].set_value("species name", value)
+        self._cards[2].set_value("species_name", value)
 

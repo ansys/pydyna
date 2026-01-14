@@ -38,7 +38,7 @@ _MATSPHINCOMPRESSIBLEFLUID_CARD0 = (
 
 _MATSPHINCOMPRESSIBLEFLUID_CARD1 = (
     FieldSchema("cp", float, 0, 10, None),
-    FieldSchema("lambda", float, 10, 10, None),
+    FieldSchema("lambda_", float, 10, 10, None, "lambda"),
 )
 
 _MATSPHINCOMPRESSIBLEFLUID_OPTION0_CARD0 = (
@@ -157,12 +157,12 @@ class MatSphIncompressibleFluid(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Fluid thermal conductivity. Used to calculate heat transfer coefficients if IHTC=1 in *CONTROL_SPH_INCOMPRESSIBLE.
         """ # nopep8
-        return self._cards[1].get_value("lambda")
+        return self._cards[1].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[1].set_value("lambda", value)
+        self._cards[1].set_value("lambda_", value)
 
     @property
     def title(self) -> typing.Optional[str]:

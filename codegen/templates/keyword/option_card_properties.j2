@@ -9,7 +9,7 @@
         """Get or set the {% filter indent(width=8) %}{{field.help}}
         {% endfilter %}
         """ # nopep8
-        return self._cards[{{card.index}}].cards[{{card_loop.index-1}}].get_value("{{field.name}}")
+        return self._cards[{{card.index}}].cards[{{card_loop.index-1}}].get_value("{{field.property_name}}")
 
 {% if not field.readonly %}
     @{{field.property_name}}.setter
@@ -22,10 +22,10 @@
 {% if field.card_indices %}
 {# This is COMPLETELY wrong but it works for CONSTRAINED_BEAM_IN_SOLID. REVISIT! #}
 {% for card_index in field.card_indices %}
-        self._cards[{{card_index}}].cards[{{card_loop.index-1}}].set_value("{{field.name}}", value)
+        self._cards[{{card_index}}].cards[{{card_loop.index-1}}].set_value("{{field.property_name}}", value)
 {% endfor %}{# card_index in field.card_indices #}
 {% else %}
-        self._cards[{{card.index}}].cards[{{card_loop.index-1}}].set_value("{{field.name}}", value)
+        self._cards[{{card.index}}].cards[{{card_loop.index-1}}].set_value("{{field.property_name}}", value)
 {% endif %}{# card.indices #}
 
         if value:

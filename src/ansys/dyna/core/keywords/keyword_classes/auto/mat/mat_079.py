@@ -66,7 +66,7 @@ _MAT079_CARD3 = (
     FieldSchema("tau3", float, 20, 10, None),
     FieldSchema("tau4", float, 30, 10, None),
     FieldSchema("tau5", float, 40, 10, None),
-    FieldSchema("flag5 ", int, 50, 10, None),
+    FieldSchema("flag5_", int, 50, 10, None, "flag5 "),
 )
 
 _MAT079_CARD4 = (
@@ -450,12 +450,12 @@ class Mat079(KeywordBase):
     def flag5_(self) -> typing.Optional[int]:
         """Get or set the If FLAG5 = 1, optional Card 5 will be read. .
         """ # nopep8
-        return self._cards[3].get_value("flag5 ")
+        return self._cards[3].get_value("flag5_")
 
     @flag5_.setter
     def flag5_(self, value: int) -> None:
         """Set the flag5_ property."""
-        self._cards[3].set_value("flag5 ", value)
+        self._cards[3].set_value("flag5_", value)
 
     @property
     def sigth(self) -> typing.Optional[float]:

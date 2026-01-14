@@ -243,7 +243,12 @@ class Card(CardInterface):
             values = [kwargs.get(fs.name, fs.default) for fs in field_schemas]
         else:
             values = [kwargs.get(fs.name, None) for fs in field_schemas]
-        return cls.from_field_schemas(field_schemas, values, active_func, format)
+        card = cls.from_field_schemas(field_schemas, values, active_func, format)
+        # Mark card as having fields set if any kwargs matched this card's fields
+        field_names = {fs.name for fs in field_schemas}
+        if any(k in field_names for k in kwargs):
+            card._fields_set = True
+        return card
 
     @property
     def format(self):

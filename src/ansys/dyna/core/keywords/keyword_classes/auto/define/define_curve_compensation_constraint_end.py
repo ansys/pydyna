@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0 = (
     FieldSchema("crvid", int, 0, 10, None),
-    FieldSchema("in/out", int, 10, 10, None),
+    FieldSchema("in_out", int, 10, 10, None, "in/out"),
 )
 
 _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1 = (
@@ -89,12 +89,12 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
         """Get or set the Flag to indicate local area to be compensated:
         EQ.1: Compensate area includes enclosed curve under keyword 'BEGIN' and transition area between the two curves; no changes will be made to the area outside the curve under keyword , 'END'
         """ # nopep8
-        return self._cards[0].get_value("in/out")
+        return self._cards[0].get_value("in_out")
 
     @in_out.setter
     def in_out(self, value: int) -> None:
         """Set the in_out property."""
-        self._cards[0].set_value("in/out", value)
+        self._cards[0].set_value("in_out", value)
 
     @property
     def x(self) -> float:

@@ -30,9 +30,9 @@ _EMCIRCUITSOURCE_CARD0 = (
     FieldSchema("circid", int, 0, 10, None),
     FieldSchema("circtyp", int, 10, 10, 1),
     FieldSchema("lcid", int, 20, 10, None),
-    FieldSchema("r/f", float, 30, 10, None),
-    FieldSchema("l/a", float, 40, 10, None),
-    FieldSchema("c/t0", float, 50, 10, None),
+    FieldSchema("r_f", float, 30, 10, None, "r/f"),
+    FieldSchema("l_a", float, 40, 10, None, "l/a"),
+    FieldSchema("c_t0", float, 50, 10, None, "c/t0"),
     FieldSchema("v0", float, 60, 10, None),
     FieldSchema("t0", float, 70, 10, 0.0),
 )
@@ -108,12 +108,12 @@ class EmCircuitSource(KeywordBase):
         """Get or set the Value of the circuit resistance for CIRCTYP.EQ.3.
         Value of the Frequency for CIRCTYP.EQ.11,12,21 or 22.
         """ # nopep8
-        return self._cards[0].get_value("r/f")
+        return self._cards[0].get_value("r_f")
 
     @r_f.setter
     def r_f(self, value: float) -> None:
         """Set the r_f property."""
-        self._cards[0].set_value("r/f", value)
+        self._cards[0].set_value("r_f", value)
 
     @property
     def l_a(self) -> typing.Optional[float]:
@@ -121,12 +121,12 @@ class EmCircuitSource(KeywordBase):
         Value of the Amplitude for CIRCTYP.EQ.11 or 12
 
         """ # nopep8
-        return self._cards[0].get_value("l/a")
+        return self._cards[0].get_value("l_a")
 
     @l_a.setter
     def l_a(self, value: float) -> None:
         """Set the l_a property."""
-        self._cards[0].set_value("l/a", value)
+        self._cards[0].set_value("l_a", value)
 
     @property
     def c_t0(self) -> typing.Optional[float]:
@@ -134,12 +134,12 @@ class EmCircuitSource(KeywordBase):
         Value of the initial time t0 for CIRCTYP.EQ.11 or 12
 
         """ # nopep8
-        return self._cards[0].get_value("c/t0")
+        return self._cards[0].get_value("c_t0")
 
     @c_t0.setter
     def c_t0(self, value: float) -> None:
         """Set the c_t0 property."""
-        self._cards[0].set_value("c/t0", value)
+        self._cards[0].set_value("c_t0", value)
 
     @property
     def v0(self) -> typing.Optional[float]:

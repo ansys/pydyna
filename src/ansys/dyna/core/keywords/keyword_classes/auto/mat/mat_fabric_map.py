@@ -41,8 +41,8 @@ _MATFABRICMAP_CARD1 = (
     FieldSchema("fvopt", float, 0, 10, None),
     FieldSchema("x0", float, 10, 10, None),
     FieldSchema("x1", float, 20, 10, None),
-    FieldSchema("flc/x2", float, 30, 10, None),
-    FieldSchema("fac/x3", float, 40, 10, None),
+    FieldSchema("flc_x2", float, 30, 10, None, "flc/x2"),
+    FieldSchema("fac_x3", float, 40, 10, None, "fac/x3"),
 )
 
 _MATFABRICMAP_CARD2 = (
@@ -245,23 +245,23 @@ class MatFabricMap(KeywordBase):
     def flc_x2(self) -> typing.Optional[float]:
         """Get or set the Fabric venting option parameters, see *MAT_FABRIC.
         """ # nopep8
-        return self._cards[1].get_value("flc/x2")
+        return self._cards[1].get_value("flc_x2")
 
     @flc_x2.setter
     def flc_x2(self, value: float) -> None:
         """Set the flc_x2 property."""
-        self._cards[1].set_value("flc/x2", value)
+        self._cards[1].set_value("flc_x2", value)
 
     @property
     def fac_x3(self) -> typing.Optional[float]:
         """Get or set the Fabric venting option parameters, see *MAT_FABRIC.
         """ # nopep8
-        return self._cards[1].get_value("fac/x3")
+        return self._cards[1].get_value("fac_x3")
 
     @fac_x3.setter
     def fac_x3(self, value: float) -> None:
         """Set the fac_x3 property."""
-        self._cards[1].set_value("fac/x3", value)
+        self._cards[1].set_value("fac_x3", value)
 
     @property
     def isrefg(self) -> float:

@@ -52,9 +52,9 @@ _MAT103_CARD1 = (
 _MAT103_CARD2 = (
     FieldSchema("vk", float, 0, 10, None),
     FieldSchema("vm", float, 10, 10, None),
-    FieldSchema("r00/f", float, 20, 10, None),
-    FieldSchema("r45/g", float, 30, 10, None),
-    FieldSchema("r90/h", float, 40, 10, None),
+    FieldSchema("r00_f", float, 20, 10, None, "r00/f"),
+    FieldSchema("r45_g", float, 30, 10, None, "r45/g"),
+    FieldSchema("r90_h", float, 40, 10, None, "r90/h"),
     FieldSchema("l", float, 50, 10, None),
     FieldSchema("m", float, 60, 10, None),
     FieldSchema("n", float, 70, 10, None),
@@ -341,34 +341,34 @@ class Mat103(KeywordBase):
     def r00_f(self) -> typing.Optional[float]:
         """Get or set the R00 for shell, default=1.0, F for brick default =1/2.
         """ # nopep8
-        return self._cards[2].get_value("r00/f")
+        return self._cards[2].get_value("r00_f")
 
     @r00_f.setter
     def r00_f(self, value: float) -> None:
         """Set the r00_f property."""
-        self._cards[2].set_value("r00/f", value)
+        self._cards[2].set_value("r00_f", value)
 
     @property
     def r45_g(self) -> typing.Optional[float]:
         """Get or set the R45 for shell, default=1.0, G for brick default =1/2.
         """ # nopep8
-        return self._cards[2].get_value("r45/g")
+        return self._cards[2].get_value("r45_g")
 
     @r45_g.setter
     def r45_g(self, value: float) -> None:
         """Set the r45_g property."""
-        self._cards[2].set_value("r45/g", value)
+        self._cards[2].set_value("r45_g", value)
 
     @property
     def r90_h(self) -> typing.Optional[float]:
         """Get or set the R90 for shell, default=1.0, H for brick default =1/2.
         """ # nopep8
-        return self._cards[2].get_value("r90/h")
+        return self._cards[2].get_value("r90_h")
 
     @r90_h.setter
     def r90_h(self, value: float) -> None:
         """Set the r90_h property."""
-        self._cards[2].set_value("r90/h", value)
+        self._cards[2].set_value("r90_h", value)
 
     @property
     def l(self) -> typing.Optional[float]:

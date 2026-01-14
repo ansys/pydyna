@@ -62,7 +62,7 @@ _FREQUENCYDOMAINRESPONSESPECTRUM_CARD4 = (
 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD5 = (
     FieldSchema("lctyp", int, 0, 10, 0),
     FieldSchema("dof", int, 10, 10, 1),
-    FieldSchema("lc/tbid", int, 20, 10, None),
+    FieldSchema("lc_tbid", int, 20, 10, None, "lc/tbid"),
     FieldSchema("sf", float, 30, 10, 1.0),
     FieldSchema("vid", int, 40, 10, None),
     FieldSchema("lnid", int, 50, 10, None),
@@ -371,12 +371,12 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
     def lc_tbid(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the response spectrum for frequencies. If the table definition is used a family of curves are defined for discrete critical damping ratios.
         """ # nopep8
-        return self._cards[5].get_value("lc/tbid")
+        return self._cards[5].get_value("lc_tbid")
 
     @lc_tbid.setter
     def lc_tbid(self, value: int) -> None:
         """Set the lc_tbid property."""
-        self._cards[5].set_value("lc/tbid", value)
+        self._cards[5].set_value("lc_tbid", value)
 
     @property
     def sf(self) -> float:

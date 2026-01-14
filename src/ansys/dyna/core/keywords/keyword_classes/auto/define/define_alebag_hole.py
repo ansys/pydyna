@@ -35,7 +35,7 @@ _DEFINEALEBAGHOLE_CARD0 = (
     FieldSchema("xoff", float, 40, 10, 0.0),
     FieldSchema("nfold", int, 50, 10, 0),
     FieldSchema("xclen", float, 60, 10, 0.0),
-    FieldSchema("int/ext", int, 70, 10, 0),
+    FieldSchema("int_ext", int, 70, 10, 0, "int/ext"),
 )
 
 _DEFINEALEBAGHOLE_OPTION0_CARD0 = (
@@ -157,14 +157,14 @@ class DefineAlebagHole(KeywordBase):
         EQ: 0 'EXT' if the hole is an external hole
         EQ: 1 'INT' if the hole is an internal hole
         """ # nopep8
-        return self._cards[0].get_value("int/ext")
+        return self._cards[0].get_value("int_ext")
 
     @int_ext.setter
     def int_ext(self, value: int) -> None:
         """Set the int_ext property."""
         if value not in [0, 1, None]:
             raise Exception("""int_ext must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("int/ext", value)
+        self._cards[0].set_value("int_ext", value)
 
     @property
     def title(self) -> typing.Optional[str]:

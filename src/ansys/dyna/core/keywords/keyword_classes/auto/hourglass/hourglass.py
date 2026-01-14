@@ -156,12 +156,12 @@ class HourglassCardSet(Cards):
     def qb_vdc(self) -> float:
         """Get or set the Hourglass coefficient for shell bending. The default is QB=QM.
         """ # nopep8
-        return self._cards[0].get_value("qb/vdc")
+        return self._cards[0].get_value("qb_vdc")
 
     @qb_vdc.setter
     def qb_vdc(self, value: float) -> None:
         """Set the qb_vdc property."""
-        self._cards[0].set_value("qb/vdc", value)
+        self._cards[0].set_value("qb_vdc", value)
 
     @property
     def qw(self) -> float:
