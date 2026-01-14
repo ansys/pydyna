@@ -24,10 +24,20 @@ from contextlib import contextmanager
 
 USE_LSPP_DEFAULTS = True
 ENABLE_CSV_AUTODETECT = True
+USE_LEGACY_FLOAT_FORMAT = False
 
 
 def use_lspp_defaults():
     return USE_LSPP_DEFAULTS
+
+
+def use_legacy_float_format():
+    """Return whether legacy float formatting is enabled.
+
+    When enabled, floats are formatted with explicit exponent format (e.g., 1.000000E8)
+    instead of the default concise format (e.g., 1e+08).
+    """
+    return USE_LEGACY_FLOAT_FORMAT
 
 
 def csv_autodetect_enabled():
@@ -43,6 +53,28 @@ def disable_lspp_defaults():
         yield
     finally:
         USE_LSPP_DEFAULTS = True
+
+
+@contextmanager
+def legacy_float_format():
+    """Context manager to enable legacy float formatting.
+
+    When enabled, floats are formatted with explicit exponent format (e.g., 1.000000E8)
+    instead of the default concise format (e.g., 1e+08). This is useful for compatibility
+    with reference files or legacy LS-DYNA input decks.
+
+    Examples
+    --------
+    >>> from ansys.dyna.core.lib.config import legacy_float_format
+    >>> with legacy_float_format():
+    ...     output = str(deck)  # Floats formatted as 1.000000E8
+    """
+    global USE_LEGACY_FLOAT_FORMAT
+    USE_LEGACY_FLOAT_FORMAT = True
+    try:
+        yield
+    finally:
+        USE_LEGACY_FLOAT_FORMAT = False
 
 
 @contextmanager

@@ -214,3 +214,122 @@ def test_field_write_struct_comment():
     fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
     result = _get_comment_line(fields)
     assert result == "$#     foo       bar       foo       bar"
+
+
+@pytest.mark.keywords
+class TestLegacyFloatFormat:
+    """Tests for legacy float formatting functionality."""
+
+    def test_format_legacy_float_large_value(self):
+        """Test legacy format for large values requiring scientific notation."""
+        result = field_writer._format_legacy_float(1e8, 10)
+        assert result == "1.000000E8"
+
+    def test_format_legacy_float_very_large_value(self):
+        """Test legacy format for very large values."""
+        result = field_writer._format_legacy_float(1e12, 10)
+        assert result == "1.00000E12"
+
+    def test_format_legacy_float_small_value_uses_fixed(self):
+        """Test that normal-range floats use fixed-point notation."""
+        result = field_writer._format_legacy_float(1.5, 10)
+        assert result == "       1.5"
+
+    def test_format_legacy_float_zero(self):
+        """Test that zero uses fixed-point notation."""
+        result = field_writer._format_legacy_float(0.0, 10)
+        assert result == "       0.0"
+
+    def test_format_legacy_float_small_decimal(self):
+        """Test small decimal values use fixed-point notation."""
+        result = field_writer._format_legacy_float(0.06, 10)
+        assert result == "      0.06"
+
+    def test_format_legacy_float_very_small_value(self):
+        """Test very small values use scientific notation."""
+        result = field_writer._format_legacy_float(1e-8, 10)
+        assert result == "1.00000E-8"
+
+    def test_format_legacy_float_negative_large(self):
+        """Test negative large values."""
+        result = field_writer._format_legacy_float(-1e8, 10)
+        # Negative values need more space, may have less precision
+        assert "E8" in result or "E+8" in result
+
+    def test_legacy_float_context_manager(self):
+        """Test that the legacy_float_format context manager affects write_field_c."""
+        from ansys.dyna.core.lib.config import legacy_float_format, use_legacy_float_format
+
+        # Default should be False
+        assert use_legacy_float_format() is False
+
+        # Inside context manager should be True
+        with legacy_float_format():
+            assert use_legacy_float_format() is True
+
+        # After context manager should be False again
+        assert use_legacy_float_format() is False
+
+    def test_write_field_c_default_format(self):
+        """Test write_field_c uses hollerith format by default."""
+        buf = io.StringIO()
+        field_writer.write_field_c(buf, float, 1e8, 10)
+        result = buf.getvalue()
+        # Default format uses hollerith which produces "1e+08" style
+        assert result == "     1e+08"
+
+    def test_write_field_c_legacy_format(self):
+        """Test write_field_c uses legacy format when context manager is active."""
+        from ansys.dyna.core.lib.config import legacy_float_format
+
+        buf = io.StringIO()
+        with legacy_float_format():
+            field_writer.write_field_c(buf, float, 1e8, 10)
+        result = buf.getvalue()
+        # Legacy format produces "1.000000E8" style
+        assert result == "1.000000E8"
+
+    def test_write_fields_legacy_format(self):
+        """Test that write_fields respects legacy float format."""
+        from ansys.dyna.core.lib.config import legacy_float_format
+
+        fields = [
+            Field("a", float, 0, 10, 0.0),
+            Field("b", float, 10, 10, 1e8),
+        ]
+
+        # Default format
+        buf1 = io.StringIO()
+        field_writer.write_fields(buf1, fields)
+        default_result = buf1.getvalue()
+        assert "1e+08" in default_result
+
+        # Legacy format
+        buf2 = io.StringIO()
+        with legacy_float_format():
+            field_writer.write_fields(buf2, fields)
+        legacy_result = buf2.getvalue()
+        assert "1.000000E8" in legacy_result
+
+    def test_legacy_format_preserves_normal_floats(self):
+        """Test that legacy format doesn't change normal-range floats."""
+        from ansys.dyna.core.lib.config import legacy_float_format
+
+        fields = [
+            Field("a", float, 0, 10, 1.5),
+            Field("b", float, 10, 10, 0.06),
+        ]
+
+        # Both formats should produce same output for normal floats
+        buf1 = io.StringIO()
+        field_writer.write_fields(buf1, fields)
+        default_result = buf1.getvalue()
+
+        buf2 = io.StringIO()
+        with legacy_float_format():
+            field_writer.write_fields(buf2, fields)
+        legacy_result = buf2.getvalue()
+
+        assert default_result == legacy_result
+        assert "1.5" in default_result
+        assert "0.06" in default_result

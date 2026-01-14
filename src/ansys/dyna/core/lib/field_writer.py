@@ -92,7 +92,36 @@ def check_field_type(field_type: type):
         raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
+def _format_legacy_float(value: float, width: int) -> str:
+    """Format a float using legacy LS-DYNA style (e.g., 1.000000E8 instead of 1e+08).
+
+    This produces fixed-width output with explicit scientific notation format
+    and no '+' sign after the 'E'. Only uses scientific notation when necessary
+    (i.e., when the value cannot fit in fixed-point notation).
+    """
+    # First try fixed-point notation (what hollerith would produce for normal values)
+    # Check if the value fits in fixed-point format
+    abs_val = abs(value)
+    if abs_val == 0.0 or (1e-4 <= abs_val < 1e7):
+        # Use hollerith for normal range values - it handles these well
+        buf = io.StringIO()
+        holler.write_float(buf, value, width)
+        return buf.getvalue()
+
+    # For values requiring scientific notation, use legacy format
+    for precision in range(6, -1, -1):
+        formatted = f"{value:.{precision}E}"
+        # Remove '+' sign from exponent (e.g., E+08 -> E8, E-02 stays E-02)
+        formatted = formatted.replace("E+0", "E").replace("E+", "E").replace("E-0", "E-")
+        if len(formatted) <= width:
+            return f"{formatted:>{width}}"
+    # Fallback: just right-justify whatever we have
+    return f"{value:>{width}}"
+
+
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    from ansys.dyna.core.lib.config import use_legacy_float_format
+
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:
@@ -100,7 +129,10 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
     elif field_type == int:
         holler.write_int(buf, value, width)
     elif field_type == float:
-        holler.write_float(buf, value, width)
+        if use_legacy_float_format():
+            buf.write(_format_legacy_float(value, width))
+        else:
+            holler.write_float(buf, value, width)
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
