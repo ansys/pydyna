@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCELLMODELDEFINEFUNCTION_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -59,6 +60,9 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_DEFINEFUNCTION"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelDefinefunction class."""
@@ -288,4 +292,19 @@ class EmEpCellmodelDefinefunction(KeywordBase):
     def u7(self, value: int) -> None:
         """Set the u7 property."""
         self._cards[2].set_value("u7", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

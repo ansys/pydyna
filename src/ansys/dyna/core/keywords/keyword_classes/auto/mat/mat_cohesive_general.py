@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATCOHESIVEGENERAL_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -58,6 +60,10 @@ class MatCohesiveGeneral(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tslc": LinkType.DEFINE_CURVE,
+        "tslc2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatCohesiveGeneral class."""
@@ -244,4 +250,34 @@ class MatCohesiveGeneral(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tslc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tslc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tslc:
+                return kwd
+        return None
+
+    @tslc_link.setter
+    def tslc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tslc."""
+        self.tslc = value.lcid
+
+    @property
+    def tslc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tslc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tslc2:
+                return kwd
+        return None
+
+    @tslc2_link.setter
+    def tslc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tslc2."""
+        self.tslc2 = value.lcid
 

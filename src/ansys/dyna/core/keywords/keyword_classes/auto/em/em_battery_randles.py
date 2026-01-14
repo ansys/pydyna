@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _EMBATTERYRANDLES_CARD0 = (
     FieldSchema("rdlid", int, 0, 10, None),
@@ -72,6 +74,9 @@ class EmBatteryRandles(KeywordBase):
 
     keyword = "EM"
     subkeyword = "BATTERY_RANDLES"
+    _link_fields = {
+        "sicslcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmBatteryRandles class."""
@@ -411,4 +416,19 @@ class EmBatteryRandles(KeywordBase):
     def sicslcid(self, value: int) -> None:
         """Set the sicslcid property."""
         self._cards[4].set_value("sicslcid", value)
+
+    @property
+    def sicslcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sicslcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sicslcid:
+                return kwd
+        return None
+
+    @sicslcid_link.setter
+    def sicslcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sicslcid."""
+        self.sicslcid = value.lcid
 

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _BOUNDARYTEMPERATUREPERIODICSET_CARD0 = (
     FieldSchema("ssid1", int, 0, 10, None),
@@ -41,6 +43,9 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "TEMPERATURE_PERIODIC_SET"
+    _link_fields = {
+        "tdlcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryTemperaturePeriodicSet class."""
@@ -134,4 +139,19 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     def angle(self, value: float) -> None:
         """Set the angle property."""
         self._cards[0].set_value("angle", value)
+
+    @property
+    def tdlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tdlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tdlcid:
+                return kwd
+        return None
+
+    @tdlcid_link.setter
+    def tdlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tdlcid."""
+        self.tdlcid = value.lcid
 

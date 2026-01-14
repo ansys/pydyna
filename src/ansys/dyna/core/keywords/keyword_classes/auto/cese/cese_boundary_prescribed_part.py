@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CESEBOUNDARYPRESCRIBEDPART_CARD0 = (
     FieldSchema("surfprt", int, 0, 10, None),
@@ -54,6 +56,14 @@ class CeseBoundaryPrescribedPart(KeywordBase):
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_PRESCRIBED_PART"
+    _link_fields = {
+        "lc_u": LinkType.DEFINE_CURVE,
+        "lc_v_": LinkType.DEFINE_CURVE,
+        "lc_w": LinkType.DEFINE_CURVE,
+        "lc_rho": LinkType.DEFINE_CURVE,
+        "lc_p_": LinkType.DEFINE_CURVE,
+        "lc_t": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundaryPrescribedPart class."""
@@ -222,4 +232,94 @@ class CeseBoundaryPrescribedPart(KeywordBase):
     def sf_t(self, value: float) -> None:
         """Set the sf_t property."""
         self._cards[2].set_value("sf_t", value)
+
+    @property
+    def lc_u_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_u."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_u:
+                return kwd
+        return None
+
+    @lc_u_link.setter
+    def lc_u_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_u."""
+        self.lc_u = value.lcid
+
+    @property
+    def lc_v__link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_v_."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_v_:
+                return kwd
+        return None
+
+    @lc_v__link.setter
+    def lc_v__link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_v_."""
+        self.lc_v_ = value.lcid
+
+    @property
+    def lc_w_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_w."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_w:
+                return kwd
+        return None
+
+    @lc_w_link.setter
+    def lc_w_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_w."""
+        self.lc_w = value.lcid
+
+    @property
+    def lc_rho_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_rho."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_rho:
+                return kwd
+        return None
+
+    @lc_rho_link.setter
+    def lc_rho_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_rho."""
+        self.lc_rho = value.lcid
+
+    @property
+    def lc_p__link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_p_."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_p_:
+                return kwd
+        return None
+
+    @lc_p__link.setter
+    def lc_p__link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_p_."""
+        self.lc_p_ = value.lcid
+
+    @property
+    def lc_t_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_t."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_t:
+                return kwd
+        return None
+
+    @lc_t_link.setter
+    def lc_t_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_t."""
+        self.lc_t = value.lcid
 

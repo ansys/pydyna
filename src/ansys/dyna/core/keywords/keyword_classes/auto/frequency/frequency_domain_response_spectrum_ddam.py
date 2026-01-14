@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD0 = (
     FieldSchema("mdmin", int, 0, 10, 1),
@@ -82,6 +84,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_RESPONSE_SPECTRUM_DDAM"
+    _link_fields = {
+        "lcdamp": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainResponseSpectrumDdam class."""
@@ -499,4 +504,19 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
         if value not in [1, 2, None]:
             raise Exception("""mattyp must be `None` or one of {1,2}.""")
         self._cards[6].set_value("mattyp", value)
+
+    @property
+    def lcdamp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdamp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdamp:
+                return kwd
+        return None
+
+    @lcdamp_link.setter
+    def lcdamp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdamp."""
+        self.lcdamp = value.lcid
 

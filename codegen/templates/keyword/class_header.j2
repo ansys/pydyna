@@ -30,6 +30,15 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endfor %}
     ]
 {% endif %}
+{% if keyword_data.links %}
+    _link_fields = {
+{% for link in keyword_data.links %}
+{% for field in link.fields %}
+        "{{field}}": LinkType.{{link.link_type_name}},
+{% endfor %}
+{% endfor %}
+    }
+{% endif %}
 {% for dataclass in keyword_data.dataclasses %}
 
     @dataclasses.dataclass

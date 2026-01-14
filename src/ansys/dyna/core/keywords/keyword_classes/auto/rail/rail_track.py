@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _RAILTRACK_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -52,6 +54,10 @@ class RailTrack(KeywordBase):
 
     keyword = "RAIL"
     subkeyword = "TRACK"
+    _link_fields = {
+        "lcur1": LinkType.DEFINE_CURVE,
+        "lcur2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RailTrack class."""
@@ -222,4 +228,34 @@ class RailTrack(KeywordBase):
     def ga2(self, value: float) -> None:
         """Set the ga2 property."""
         self._cards[1].set_value("ga2", value)
+
+    @property
+    def lcur1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur1:
+                return kwd
+        return None
+
+    @lcur1_link.setter
+    def lcur1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur1."""
+        self.lcur1 = value.lcid
+
+    @property
+    def lcur2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur2:
+                return kwd
+        return None
+
+    @lcur2_link.setter
+    def lcur2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur2."""
+        self.lcur2 = value.lcid
 

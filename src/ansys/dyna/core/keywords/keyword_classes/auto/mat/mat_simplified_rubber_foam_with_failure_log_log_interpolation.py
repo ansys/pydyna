@@ -29,6 +29,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATSIMPLIFIEDRUBBERFOAMWITHFAILURELOGLOGINTERPOLATION_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -80,6 +82,11 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcunld": LinkType.DEFINE_CURVE,
+        "stol": LinkType.DEFINE_CURVE,
+        "lc_tbid": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSimplifiedRubberFoamWithFailureLogLogInterpolation class."""
@@ -462,4 +469,58 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcunld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcunld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcunld:
+                return kwd
+        return None
+
+    @lcunld_link.setter
+    def lcunld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcunld."""
+        self.lcunld = value.lcid
+
+    @property
+    def stol_link(self) -> DefineCurve:
+        """Get the DefineCurve object for stol."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.stol:
+                return kwd
+        return None
+
+    @stol_link.setter
+    def stol_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for stol."""
+        self.stol = value.lcid
+
+    @property
+    def lc_tbid_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
+        if self.deck is None:
+            return None
+        field_value = self.lc_tbid
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lc_tbid_link.setter
+    def lc_tbid_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lc_tbid."""
+        if hasattr(value, "lcid"):
+            self.lc_tbid = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lc_tbid = value.tbid
 

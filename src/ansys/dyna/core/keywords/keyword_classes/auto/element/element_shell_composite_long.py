@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ELEMENTSHELLCOMPOSITELONG_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -52,6 +53,9 @@ class ElementShellCompositeLong(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "SHELL_COMPOSITE_LONG"
+    _link_fields = {
+        "mid1": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementShellCompositeLong class."""
@@ -217,4 +221,19 @@ class ElementShellCompositeLong(KeywordBase):
     def plyid1(self, value: int) -> None:
         """Set the plyid1 property."""
         self._cards[1].set_value("plyid1", value)
+
+    @property
+    def mid1_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid1:
+                return kwd
+        return None
+
+    @mid1_link.setter
+    def mid1_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid1."""
+        self.mid1 = value.mid
 

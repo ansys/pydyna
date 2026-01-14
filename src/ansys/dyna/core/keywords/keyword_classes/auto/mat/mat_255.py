@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT255_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -61,6 +63,11 @@ class Mat255(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tabidc": LinkType.DEFINE_CURVE,
+        "tabidt": LinkType.DEFINE_CURVE,
+        "lalpha": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat255 class."""
@@ -243,4 +250,49 @@ class Mat255(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tabidc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tabidc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tabidc:
+                return kwd
+        return None
+
+    @tabidc_link.setter
+    def tabidc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tabidc."""
+        self.tabidc = value.lcid
+
+    @property
+    def tabidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tabidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tabidt:
+                return kwd
+        return None
+
+    @tabidt_link.setter
+    def tabidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tabidt."""
+        self.tabidt = value.lcid
+
+    @property
+    def lalpha_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lalpha."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lalpha:
+                return kwd
+        return None
+
+    @lalpha_link.setter
+    def lalpha_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lalpha."""
+        self.lalpha = value.lcid
 

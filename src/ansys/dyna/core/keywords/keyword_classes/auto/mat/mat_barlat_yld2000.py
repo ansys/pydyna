@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATBARLATYLD2000_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -159,6 +161,12 @@ class MatBarlatYld2000(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "hta": LinkType.DEFINE_CURVE,
+        "htb": LinkType.DEFINE_CURVE,
+        "htc": LinkType.DEFINE_CURVE,
+        "htd": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatBarlatYld2000 class."""
@@ -1169,4 +1177,64 @@ class MatBarlatYld2000(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def hta_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hta."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hta:
+                return kwd
+        return None
+
+    @hta_link.setter
+    def hta_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hta."""
+        self.hta = value.lcid
+
+    @property
+    def htb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for htb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.htb:
+                return kwd
+        return None
+
+    @htb_link.setter
+    def htb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for htb."""
+        self.htb = value.lcid
+
+    @property
+    def htc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for htc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.htc:
+                return kwd
+        return None
+
+    @htc_link.setter
+    def htc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for htc."""
+        self.htc = value.lcid
+
+    @property
+    def htd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for htd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.htd:
+                return kwd
+        return None
+
+    @htd_link.setter
+    def htd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for htd."""
+        self.htd = value.lcid
 

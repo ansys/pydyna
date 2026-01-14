@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATPSEUDOTENSOR_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -110,6 +112,10 @@ class MatPseudoTensor(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcp": LinkType.DEFINE_CURVE,
+        "lcr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPseudoTensor class."""
@@ -711,4 +717,34 @@ class MatPseudoTensor(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp:
+                return kwd
+        return None
+
+    @lcp_link.setter
+    def lcp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp."""
+        self.lcp = value.lcid
+
+    @property
+    def lcr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcr:
+                return kwd
+        return None
+
+    @lcr_link.setter
+    def lcr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcr."""
+        self.lcr = value.lcid
 

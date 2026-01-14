@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDCONTROLTURBULENCE_CARD0 = (
     FieldSchema("tmod", int, 0, 10, 0),
@@ -85,6 +87,10 @@ class IcfdControlTurbulence(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "CONTROL_TURBULENCE"
+    _link_fields = {
+        "lcids1": LinkType.DEFINE_CURVE,
+        "lcids2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdControlTurbulence class."""
@@ -481,4 +487,34 @@ class IcfdControlTurbulence(KeywordBase):
     def cw2(self, value: float) -> None:
         """Set the cw2 property."""
         self._cards[6].set_value("cw2", value)
+
+    @property
+    def lcids1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcids1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcids1:
+                return kwd
+        return None
+
+    @lcids1_link.setter
+    def lcids1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcids1."""
+        self.lcids1 = value.lcid
+
+    @property
+    def lcids2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcids2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcids2:
+                return kwd
+        return None
+
+    @lcids2_link.setter
+    def lcids2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcids2."""
+        self.lcids2 = value.lcid
 

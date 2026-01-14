@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATSEATBELT_CARD0 = (
     FieldSchema("mid", int, 0, 10, 0),
@@ -60,6 +62,10 @@ class MatSeatbelt(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "llcid": LinkType.DEFINE_CURVE,
+        "ulcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSeatbelt class."""
@@ -266,4 +272,34 @@ class MatSeatbelt(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def llcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for llcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.llcid:
+                return kwd
+        return None
+
+    @llcid_link.setter
+    def llcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for llcid."""
+        self.llcid = value.lcid
+
+    @property
+    def ulcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ulcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ulcid:
+                return kwd
+        return None
+
+    @ulcid_link.setter
+    def ulcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ulcid."""
+        self.ulcid = value.lcid
 

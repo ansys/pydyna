@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMMAT002_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -46,6 +47,9 @@ class EmMat002(KeywordBase):
 
     keyword = "EM"
     subkeyword = "MAT_002"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmMat002 class."""
@@ -152,4 +156,19 @@ class EmMat002(KeywordBase):
     def eosid2(self, value: int) -> None:
         """Set the eosid2 property."""
         self._cards[1].set_value("eosid2", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

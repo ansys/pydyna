@@ -29,6 +29,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT124_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -79,6 +81,13 @@ class Mat124(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcidc": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lcsrc": LinkType.DEFINE_CURVE,
+        "lcsrt": LinkType.DEFINE_CURVE,
+        "lcfail": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat124 class."""
@@ -401,6 +410,81 @@ class Mat124(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidc:
+                return kwd
+        return None
+
+    @lcidc_link.setter
+    def lcidc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidc."""
+        self.lcidc = value.lcid
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lcsrc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsrc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsrc:
+                return kwd
+        return None
+
+    @lcsrc_link.setter
+    def lcsrc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsrc."""
+        self.lcsrc = value.lcid
+
+    @property
+    def lcsrt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsrt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsrt:
+                return kwd
+        return None
+
+    @lcsrt_link.setter
+    def lcsrt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsrt."""
+        self.lcsrt = value.lcid
+
+    @property
+    def lcfail_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfail."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfail:
+                return kwd
+        return None
+
+    @lcfail_link.setter
+    def lcfail_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfail."""
+        self.lcfail = value.lcid
 
 
 class MatPlasticityCompressionTension(Mat124):

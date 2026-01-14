@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATADDAIRBAGPOROSITYLEAKAGE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -50,6 +51,9 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddAirbagPorosityLeakage class."""
@@ -175,4 +179,19 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

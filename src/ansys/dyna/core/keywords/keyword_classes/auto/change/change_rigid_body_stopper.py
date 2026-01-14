@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CHANGERIGIDBODYSTOPPER_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -47,6 +49,11 @@ class ChangeRigidBodyStopper(KeywordBase):
 
     keyword = "CHANGE"
     subkeyword = "RIGID_BODY_STOPPER"
+    _link_fields = {
+        "lcmax": LinkType.DEFINE_CURVE,
+        "lcmin": LinkType.DEFINE_CURVE,
+        "lcvmnx": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeRigidBodyStopper class."""
@@ -181,4 +188,49 @@ class ChangeRigidBodyStopper(KeywordBase):
     def death(self, value: float) -> None:
         """Set the death property."""
         self._cards[1].set_value("death", value)
+
+    @property
+    def lcmax_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmax."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmax:
+                return kwd
+        return None
+
+    @lcmax_link.setter
+    def lcmax_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmax."""
+        self.lcmax = value.lcid
+
+    @property
+    def lcmin_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmin."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmin:
+                return kwd
+        return None
+
+    @lcmin_link.setter
+    def lcmin_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmin."""
+        self.lcmin = value.lcid
+
+    @property
+    def lcvmnx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvmnx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvmnx:
+                return kwd
+        return None
+
+    @lcvmnx_link.setter
+    def lcvmnx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvmnx."""
+        self.lcvmnx = value.lcid
 

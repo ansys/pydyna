@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONSTRAINEDSOILPILESET_CARD0 = (
     FieldSchema("pbsid", int, 0, 10, None),
@@ -86,6 +88,9 @@ class ConstrainedSoilPileSet(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "SOIL_PILE_SET"
+    _link_fields = {
+        "vlc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedSoilPileSet class."""
@@ -543,4 +548,19 @@ class ConstrainedSoilPileSet(KeywordBase):
     def hlc(self, value: int) -> None:
         """Set the hlc property."""
         self._cards[4].set_value("hlc", value)
+
+    @property
+    def vlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlc:
+                return kwd
+        return None
+
+    @vlc_link.setter
+    def vlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlc."""
+        self.vlc = value.lcid
 

@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATORTHOTROPICTHERMALCURING_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -100,6 +102,14 @@ class MatOrthotropicThermalCuring(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lccha": LinkType.DEFINE_CURVE,
+        "lcchb": LinkType.DEFINE_CURVE,
+        "lcchc": LinkType.DEFINE_CURVE,
+        "lcab": LinkType.DEFINE_CURVE,
+        "lcac": LinkType.DEFINE_CURVE,
+        "lcaa": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatOrthotropicThermalCuring class."""
@@ -641,4 +651,103 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lccha_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lccha."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lccha:
+                return kwd
+        return None
+
+    @lccha_link.setter
+    def lccha_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lccha."""
+        self.lccha = value.lcid
+
+    @property
+    def lcchb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcchb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcchb:
+                return kwd
+        return None
+
+    @lcchb_link.setter
+    def lcchb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcchb."""
+        self.lcchb = value.lcid
+
+    @property
+    def lcchc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcchc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcchc:
+                return kwd
+        return None
+
+    @lcchc_link.setter
+    def lcchc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcchc."""
+        self.lcchc = value.lcid
+
+    @property
+    def lcab_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcab."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcab:
+                return kwd
+        return None
+
+    @lcab_link.setter
+    def lcab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcab."""
+        self.lcab = value.lcid
+
+    @property
+    def lcac_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcac."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcac:
+                return kwd
+        return None
+
+    @lcac_link.setter
+    def lcac_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcac."""
+        self.lcac = value.lcid
+
+    @property
+    def lcaa_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcaa."""
+        if self.deck is None:
+            return None
+        field_value = self.lcaa
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcaa_link.setter
+    def lcaa_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcaa."""
+        if hasattr(value, "lcid"):
+            self.lcaa = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcaa = value.tbid
 

@@ -28,6 +28,8 @@ from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _FIBERFAMILY_CARD0 = (
     FieldSchema("theta", float, 0, 10, None),
@@ -385,6 +387,11 @@ class Mat295(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "flid": LinkType.DEFINE_CURVE,
+        "fvid": LinkType.DEFINE_CURVE,
+        "alphaid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat295 class."""
@@ -1541,6 +1548,51 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def flid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for flid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.flid:
+                return kwd
+        return None
+
+    @flid_link.setter
+    def flid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for flid."""
+        self.flid = value.lcid
+
+    @property
+    def fvid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fvid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fvid:
+                return kwd
+        return None
+
+    @fvid_link.setter
+    def fvid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fvid."""
+        self.fvid = value.lcid
+
+    @property
+    def alphaid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for alphaid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.alphaid:
+                return kwd
+        return None
+
+    @alphaid_link.setter
+    def alphaid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for alphaid."""
+        self.alphaid = value.lcid
 
 
 class MatAnisotropicHyperelastic(Mat295):

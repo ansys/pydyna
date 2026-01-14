@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEDEMESHSURFACE_CARD0 = (
     FieldSchema("sid", int, 0, 10, 0),
@@ -50,6 +51,9 @@ class DefineDeMeshSurface(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "descid": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeMeshSurface class."""
@@ -179,4 +183,19 @@ class DefineDeMeshSurface(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def descid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for descid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.descid:
+                return kwd
+        return None
+
+    @descid_link.setter
+    def descid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for descid."""
+        self.descid = value.secid
 

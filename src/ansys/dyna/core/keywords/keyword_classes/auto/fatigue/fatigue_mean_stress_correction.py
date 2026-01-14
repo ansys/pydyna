@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _FATIGUEMEANSTRESSCORRECTION_CARD0 = (
     FieldSchema("method", int, 0, 10, 0),
@@ -40,6 +41,9 @@ class FatigueMeanStressCorrection(KeywordBase):
 
     keyword = "FATIGUE"
     subkeyword = "MEAN_STRESS_CORRECTION"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FatigueMeanStressCorrection class."""
@@ -95,4 +99,19 @@ class FatigueMeanStressCorrection(KeywordBase):
     def sigma(self, value: float) -> None:
         """Set the sigma property."""
         self._cards[1].set_value("sigma", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _FREQUENCYDOMAINFRF_CARD0 = (
     FieldSchema("n1", int, 0, 10, None),
@@ -69,6 +71,10 @@ class FrequencyDomainFrf(KeywordBase):
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_FRF"
+    _link_fields = {
+        "lcdam": LinkType.DEFINE_CURVE,
+        "lcfreq": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainFrf class."""
@@ -443,4 +449,34 @@ class FrequencyDomainFrf(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""output must be `None` or one of {0,1}.""")
         self._cards[3].set_value("output", value)
+
+    @property
+    def lcdam_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdam."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdam:
+                return kwd
+        return None
+
+    @lcdam_link.setter
+    def lcdam_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdam."""
+        self.lcdam = value.lcid
+
+    @property
+    def lcfreq_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfreq."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfreq:
+                return kwd
+        return None
+
+    @lcfreq_link.setter
+    def lcfreq_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfreq."""
+        self.lcfreq = value.lcid
 

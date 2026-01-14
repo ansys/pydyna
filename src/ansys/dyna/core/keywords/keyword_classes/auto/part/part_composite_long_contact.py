@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTCOMPOSITELONGCONTACT_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -68,6 +69,9 @@ class PartCompositeLongContact(KeywordBase):
 
     keyword = "PART"
     subkeyword = "COMPOSITE_LONG_CONTACT"
+    _link_fields = {
+        "mid1": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartCompositeLongContact class."""
@@ -368,4 +372,19 @@ class PartCompositeLongContact(KeywordBase):
     def shrfac(self, value: float) -> None:
         """Set the shrfac property."""
         self._cards[3].set_value("shrfac", value)
+
+    @property
+    def mid1_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid1:
+                return kwd
+        return None
+
+    @mid1_link.setter
+    def mid1_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid1."""
+        self.mid1 = value.mid
 
