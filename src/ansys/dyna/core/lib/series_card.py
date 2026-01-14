@@ -84,10 +84,12 @@ class SeriesCard(CardInterface):
 
     @property
     def format(self) -> format_type:
+        """Format type of the series card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the series card."""
         self._format_type = value
 
     def _uses_structure(self):
@@ -180,6 +182,7 @@ class SeriesCard(CardInterface):
 
     @property
     def active(self) -> bool:
+        """Indicates whether the series card is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -226,9 +229,11 @@ class SeriesCard(CardInterface):
         self._data[index] = self._wrap_value(value)
 
     def append(self, value) -> None:
+        """Append a value to the series card."""
         self._data.append(self._wrap_value(value))
 
     def extend(self, valuelist: typing.Iterable) -> None:
+        """Extend the series card with a list of values."""
         values = [self._wrap_value(value) for value in valuelist]
         self._data.extend(values)
 
@@ -312,6 +317,7 @@ class SeriesCard(CardInterface):
             self.extend(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Read the series card content from a buffer."""
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
             return False
@@ -337,6 +343,7 @@ class SeriesCard(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
+        """Write the series card to a string or buffer."""
         if format == None:
             format = self._format_type
         output = ""
@@ -373,6 +380,7 @@ class SeriesCard(CardInterface):
 
     @property
     def bounded(self) -> bool:
+        """Indicates whether the series card is bounded."""
         return self._bounded
 
     def __repr__(self) -> str:

@@ -76,6 +76,7 @@ class IncludeCard(Card):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> typing.Union[str, None]:
+        """Writes the card data to an output text buffer or returns it as a string."""
         if format == None:
             format = self._format_type
 

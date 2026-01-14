@@ -61,6 +61,7 @@ class DockerRunner(BaseRunner):
             raise Exception("Exception in DockerRunner, container image {name} not found!")
 
     def set_input(self, input_file: str, working_directory: str) -> None:
+        """Set the input file and working directory for the run."""
         self._input_file = input_file
         self._working_directory = os.path.abspath(working_directory)
         if not os.path.isdir(self._working_directory):
@@ -76,6 +77,7 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def run(self) -> None:
+        """Run LS-DYNA using the specified configuration."""
         # CASE option logic
         case_option = ""
         if self.activate_case:

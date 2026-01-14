@@ -312,6 +312,7 @@ class ParameterHandler(ImportHandler):
         pass
 
     def after_import(self, context: ImportContext, keyword: typing.Union["KeywordBase", str]) -> None:
+        """Handle actions after importing a keyword."""
         from ansys.dyna.core import keywords as kwd
 
         if isinstance(keyword, kwd.Parameter):
@@ -332,4 +333,5 @@ class ParameterHandler(ImportHandler):
             _load_parameter_expressions(context.deck, keyword, local=is_local)
 
     def on_error(self, error):
+        """Handle errors during import."""
         pass

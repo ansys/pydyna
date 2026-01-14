@@ -90,5 +90,6 @@ class ImportHandler:
         pass
 
     def on_error(self, error):
+        """Handle errors during import."""
         # TODO - use logging
         warnings.warn(f"error in importhandler {self}: {error}")

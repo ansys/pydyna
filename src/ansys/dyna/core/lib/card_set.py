@@ -91,10 +91,12 @@ class CardSet(CardInterface):
 
     @property
     def option_specs(self) -> typing.List[OptionSpec]:
+        """Returns all option specs for this card set."""
         return self._option_specs
 
     @property
     def active(self) -> bool:
+        """Get whether the card set is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -112,12 +114,14 @@ class CardSet(CardInterface):
         return len(self._items) - 1
 
     def items(self) -> typing.List[Cards]:
+        """Gets the list of items in the card set."""
         if not self._initialized:
             self._initialize()
         return self._items
 
     @property
     def bounded(self) -> bool:
+        """Get whether the card set is bounded (fixed length) or unbounded."""
         return self._bounded
 
     @property
@@ -200,6 +204,7 @@ class CardSet(CardInterface):
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Reads the card set from the given buffer."""
         if not self.active:
             return False
         self._initialize()

@@ -206,12 +206,14 @@ class TableCard(Card):
 
     @property
     def table(self) -> pd.DataFrame:
+        """Get the table as a pandas DataFrame."""
         if not self._initialized:
             self._initialize()
         return self._table
 
     @table.setter
     def table(self, value: pd.DataFrame):
+        """Set the table from a pandas DataFrame."""
         _check_type(value)
         # Build columns dict first, then create DataFrame (pandas 2.3+ compatibility)
         columns = {}
@@ -230,10 +232,12 @@ class TableCard(Card):
 
     @property
     def format(self) -> format_type:
+        """Format type of the table card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the table card."""
         self._format_type = value
 
     def _get_default_value(self, field: Field) -> typing.Optional[typing.Any]:
@@ -315,6 +319,7 @@ class TableCard(Card):
         self._load_lines(data_lines, parameter_set)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the table card content from a buffer."""
         if self.bounded:
             self._initialized = True
             self._load_bounded_from_buffer(buf, parameter_set)
@@ -382,6 +387,7 @@ class TableCard(Card):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
+        """Write the table card to a string or buffer."""
         if format == None:
             format = self._format_type
 
@@ -396,6 +402,7 @@ class TableCard(Card):
 
     @property
     def bounded(self) -> bool:
+        """Indicates whether the card is bounded."""
         return self._bounded
 
     def _num_rows(self) -> int:

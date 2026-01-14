@@ -74,6 +74,7 @@ class Deck(ValidationMixin):
 
     @property
     def transform_handler(self) -> TransformHandler:
+        """Handles transformations for the deck."""
         return self._transform_handler
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
@@ -87,6 +88,7 @@ class Deck(ValidationMixin):
 
     @parameters.setter
     def parameters(self, value: ParameterSet) -> None:
+        """Set the parameters for the deck."""
         import copy
 
         self._parameter_set = copy.copy(value)
@@ -594,10 +596,12 @@ class Deck(ValidationMixin):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title of the keyword database."""
         self._title = value
 
     @property
     def keyword_names(self) -> typing.List[str]:
+        """Get a list of all keyword names in the deck."""
         names = []
         for kw in self.all_keywords:
             if isinstance(kw, KeywordBase):

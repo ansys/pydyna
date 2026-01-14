@@ -55,6 +55,7 @@ class LinuxRunner(BaseRunner):
         self._find_solver(version, self.executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
+        """Set the input file and working directory for the run."""
         self.input_file = input_file
         self.working_directory = working_directory
 
@@ -91,6 +92,7 @@ class LinuxRunner(BaseRunner):
         return exe_name
 
     def run(self) -> None:
+        """Run LS-DYNA using the specified configuration."""
         os.chdir(self.working_directory)
         # CASE option logic
         case_option = ""

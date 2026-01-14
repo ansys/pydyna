@@ -51,12 +51,15 @@ class Cards(OptionsInterface):
         return self._options
 
     def is_option_active(self, option: str) -> bool:
+        """Returns True if the given option is active."""
         return option in self._active_options
 
     def activate_option(self, option: str) -> None:
+        """Activate the given option."""
         self._active_options.add(option)
 
     def deactivate_option(self, option: str) -> None:
+        """Deactivate the given option."""
         if option in self._active_options:
             self._active_options.remove(option)
 
@@ -72,6 +75,7 @@ class Cards(OptionsInterface):
         self._try_activate_options(title_list)
 
     def get_option_spec(self, name: str) -> OptionSpec:
+        """Gets the option spec for the given name."""
         for option_spec in self.option_specs:
             if option_spec.name == name:
                 return option_spec
@@ -79,6 +83,7 @@ class Cards(OptionsInterface):
 
     @property
     def option_specs(self) -> typing.Iterable[OptionSpec]:
+        """Gets all option specs for this keyword."""
         for card in self._cards:
             if hasattr(card, "option_spec"):
                 option_spec = card.option_spec
@@ -91,6 +96,7 @@ class Cards(OptionsInterface):
 
     @property
     def _cards(self) -> typing.List[CardInterface]:
+        """Gets the list of cards."""
         return self._base_cards
 
     @_cards.setter

@@ -107,11 +107,13 @@ class TableCardGroup(CardInterface):
 
     @property
     def table(self) -> pd.DataFrame:
+        """Get the table as a pandas DataFrame."""
         self._initialize()
         return self._table
 
     @table.setter
     def table(self, value: pd.DataFrame):
+        """Set the table from a pandas DataFrame."""
         # remove duplicate columns
         value = value.loc[:, ~value.columns.duplicated()]
         # store the table
@@ -122,6 +124,7 @@ class TableCardGroup(CardInterface):
 
     @property
     def format(self) -> format_type:
+        """Format type of the table card group."""
         return self._format
 
     def _propagate(self) -> None:
@@ -144,6 +147,7 @@ class TableCardGroup(CardInterface):
         self._load_lines(data_lines, parameter_set)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the table card group from a buffer."""
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
         else:
@@ -162,6 +166,7 @@ class TableCardGroup(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
+        """Write the table card group to a string or buffer."""
         if self.active:
             self._initialize()
             self._propagate()
@@ -220,6 +225,7 @@ class TableCardGroup(CardInterface):
 
     @property
     def active(self) -> bool:
+        """Indicates whether the card group is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -240,6 +246,7 @@ class TableCardGroup(CardInterface):
 
     @property
     def bounded(self) -> bool:
+        """Indicates whether the card group is bounded."""
         return self._bounded
 
     def _num_rows(self) -> int:

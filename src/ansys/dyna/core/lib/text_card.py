@@ -49,10 +49,12 @@ class TextCard(CardInterface):
 
     @property
     def format(self) -> format_type:
+        """Format type of the text card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the text card."""
         self._format_type = value
 
     def _get_comment(self, format: typing.Optional[format_type]):
@@ -64,6 +66,7 @@ class TextCard(CardInterface):
             return "$#" + f"{{0:>{158}}}".format(self._name)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the text card content from a buffer."""
         self._content_lines = []
         while True:
             line, exit_loop = read_line(buf)
@@ -77,6 +80,7 @@ class TextCard(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
     ) -> str:
+        """Write the text card to a string or buffer."""
         if format == None:
             format = self._format_type
         rows = []
@@ -91,10 +95,12 @@ class TextCard(CardInterface):
 
     @property
     def value(self) -> str:
+        """Value of the text card as a single string."""
         return "\n".join(self._content_lines)
 
     @value.setter
     def value(self, value: str):
+        """Set the value of the text card from a single string."""
         if value == None:
             self._content_lines = []
         else:

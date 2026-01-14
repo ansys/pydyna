@@ -34,33 +34,42 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class OptionSpec:
+    """Represents the specification of an option card."""
+
     def __init__(self, name: str, card_order: int, title_order: int):
+        """Initialize an OptionSpec with name, card order, and title order."""
         self._name = name
         self._card_order = card_order
         self._title_order = title_order
 
     @property
     def name(self) -> str:
+        """Get the name of the option."""
         return self._name
 
     @name.setter
     def name(self, value: str) -> None:
+        """Set the name of the option."""
         self._name = value
 
     @property
     def card_order(self) -> int:
+        """Get the card order of the option."""
         return self._card_order
 
     @card_order.setter
     def card_order(self, value: int) -> None:
+        """Set the card order of the option."""
         self._card_order = value
 
     @property
     def title_order(self) -> int:
+        """Get the title order of the option."""
         return self._title_order
 
     @title_order.setter
     def title_order(self, value: int) -> None:
+        """Set the title order of the option."""
         self._title_order = value
 
     def __repr__(self) -> str:
@@ -68,12 +77,15 @@ class OptionSpec:
 
 
 class OptionCardSet(CardInterface):
+    """Represents a set of option cards associated with an OptionSpec."""
+
     def __init__(
         self,
         option_spec: OptionSpec,
         cards: typing.List[CardInterface],
         **kwargs,
     ):
+        """Initialize an OptionCardSet with the given OptionSpec and cards."""
         self._keyword: typing.Any = kwargs.get("keyword", None)
         self._option_spec = option_spec
         self._cards: typing.List[CardInterface] = cards
@@ -81,30 +93,37 @@ class OptionCardSet(CardInterface):
 
     @property
     def cards(self) -> typing.List[CardInterface]:
+        """Get the list of cards in this OptionCardSet."""
         return self._cards
 
     @property
     def option_spec(self) -> OptionSpec:
+        """Get the OptionSpec associated with this OptionCardSet."""
         return self._option_spec
 
     @property
     def name(self) -> str:
+        """Get the name of the option."""
         return self._option_spec.name
 
     @property
     def title_order(self) -> int:
+        """Get the title order of the option."""
         return self._option_spec.title_order
 
     @property
     def card_order(self) -> int:
+        """Get the card order of the option."""
         return self._option_spec.card_order
 
     @property
     def active(self) -> bool:
+        """Indicates whether the option is active."""
         return self._keyword.is_option_active(self.name)
 
     @active.setter
     def active(self, value: bool) -> None:
+        """Set the option active or inactive."""
         if value:
             self._keyword.activate_option(self.name)
         else:
@@ -155,18 +174,22 @@ class OptionsInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def get_option_spec(self, name: str) -> OptionSpec:
+        """Get the option specification for the given name."""
         raise NotImplementedError
 
     @abc.abstractmethod
     def deactivate_option(self, name: str) -> None:
+        """Deactivate the option with the given name."""
         raise NotImplementedError
 
     @abc.abstractmethod
     def activate_option(self, name: str) -> None:
+        """Activate the option with the given name."""
         raise NotImplementedError
 
     @abc.abstractmethod
     def is_option_active(self, name: str) -> bool:
+        """Indicates whether the option is active."""
         raise NotImplementedError
 
     @property
@@ -185,10 +208,12 @@ class OptionAPI:
 
     @property
     def active(self) -> bool:
+        """Indicates whether the option is active."""
         return self._options_api.is_option_active(self._name)
 
     @active.setter
     def active(self, value: bool) -> None:
+        """Set the option active or inactive."""
         option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
 
         if value:
@@ -248,4 +273,5 @@ class Options:
 
     @property
     def api(self) -> OptionsInterface:
+        """Get the underlying options API interface."""
         return self._api

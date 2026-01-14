@@ -96,6 +96,7 @@ class ElementSolidOrtho(KeywordBase):
         ]
 
     def before_read(self, buf: typing.TextIO) -> None:
+        """Runs before reading the keyword from a buffer."""
         pos = buf.tell()
 
         lines = buffer_to_lines(buf)
@@ -107,6 +108,7 @@ class ElementSolidOrtho(KeywordBase):
         buf.seek(pos)
 
     def set_legacy_format(self):
+        """Set the card format to legacy."""
         self._cards = [
             TableCardGroup(
                 [

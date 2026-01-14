@@ -52,5 +52,6 @@ class BaseRunner:
         self.precision = kwargs.get("precision", Precision.DOUBLE)
 
     def get_memory_string(self) -> str:
+        """Return memory string for the runner."""
         unit = {MemoryUnit.MB: "m", MemoryUnit.GB: "G"}[self.memory_unit]
         return f"{self.memory}{unit}"

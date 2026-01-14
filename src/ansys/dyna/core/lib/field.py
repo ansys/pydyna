@@ -36,6 +36,8 @@ class Flag:
 
 
 class Field:
+    """Class to represent a field in a text card."""
+
     @dataclasses.dataclass
     class ReadOnlyValue:
         """Class to represent a read-only value for a field."""
@@ -43,6 +45,7 @@ class Field:
         value: typing.Any = None
 
     def __init__(self, name: str, type: type, offset: int, width: int, /, value: typing.Any = None, **kwargs):
+        """Initialize a Field with name, type, offset, width, and optional value."""
         self._name = name
         self._type = type
         self._offset = offset
@@ -64,44 +67,54 @@ class Field:
 
     @property
     def name(self) -> str:
+        """Get or set the name of the field."""
         return self._name
 
     @name.setter
     def name(self, value: str) -> None:
+        """Set the name of the field."""
         self._name = value
 
     @property
     def type(self) -> type:
+        """Get or set the type of the field."""
         return self._type
 
     @type.setter
     def type(self, value: type) -> None:
+        """Set the type of the field."""
         self._type = value
 
     @property
     def offset(self) -> int:
+        """Get or set the offset of the field."""
         return self._offset
 
     @offset.setter
     def offset(self, value: int) -> None:
+        """Set the offset of the field."""
         self._offset = value
 
     @property
     def width(self) -> int:
+        """Get or set the width of the field."""
         return self._width
 
     @width.setter
     def width(self, value: int) -> None:
+        """Set the width of the field."""
         self._width = value
 
     @property
     def value(self) -> typing.Any:
+        """Get or set the value of the field."""
         if self._is_flag():
             return self._value.value
         return self._value
 
     @value.setter
     def value(self, value: typing.Any) -> None:
+        """Set the value of the field."""
         if self._is_flag():
             self._value.value = value
         else:

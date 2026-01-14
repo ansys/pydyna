@@ -260,6 +260,7 @@ class KeywordBase(Cards):
         return self.write()
 
     def before_read(self, buf: typing.TextIO) -> None:
+        """Run any pre-processing before reading the keyword."""
         # subclasses can do custom logic before reading.
         return
 
@@ -282,6 +283,7 @@ class KeywordBase(Cards):
         return title_line
 
     def read(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
+        """Read the keyword from a buffer."""
         title_line = buf.readline()
         title_line = self._process_title(title_line)
         self.before_read(buf)

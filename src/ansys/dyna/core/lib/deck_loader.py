@@ -47,9 +47,11 @@ class DeckLoaderResult:
         self._unprocessed_keywords = []
 
     def add_unprocessed_keyword(self, name):
+        """Add a keyword that was not processed during the deck load."""
         self._unprocessed_keywords.append(name)
 
     def get_summary(self) -> str:
+        """Get a summary of unprocessed keywords."""
         summary = io.StringIO()
         for unprocessed_keyword in self._unprocessed_keywords:
             summary.write(f"Failed to process: {unprocessed_keyword}\n")
