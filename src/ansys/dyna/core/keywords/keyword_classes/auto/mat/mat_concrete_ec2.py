@@ -63,7 +63,7 @@ _MATCONCRETEEC2_CARD2 = (
 _MATCONCRETEEC2_CARD3 = (
     FieldSchema("aopt", float, 0, 10, None),
     FieldSchema("et36", float, 10, 10, None),
-    FieldSchema("prt36 ", float, 20, 10, 0.25),
+    FieldSchema("prt36_", float, 20, 10, 0.25, "prt36 "),
     FieldSchema("ecut36", float, 30, 10, None),
     FieldSchema("lcalpc", int, 40, 10, None),
     FieldSchema("degrad", float, 50, 10, None),
@@ -74,7 +74,7 @@ _MATCONCRETEEC2_CARD3 = (
 _MATCONCRETEEC2_CARD4 = (
     FieldSchema("xp", float, 0, 10, None),
     FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp ", float, 20, 10, None),
+    FieldSchema("zp_", float, 20, 10, None, "zp "),
     FieldSchema("a1", float, 30, 10, 1e+20),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -83,7 +83,7 @@ _MATCONCRETEEC2_CARD4 = (
 _MATCONCRETEEC2_CARD5 = (
     FieldSchema("v1", float, 0, 10, None),
     FieldSchema("v2", float, 10, 10, None),
-    FieldSchema("v3 ", float, 20, 10, None),
+    FieldSchema("v3_", float, 20, 10, None, "v3 "),
     FieldSchema("d1", float, 30, 10, None),
     FieldSchema("d2", float, 40, 10, None),
     FieldSchema("d3", float, 50, 10, None),
@@ -93,7 +93,7 @@ _MATCONCRETEEC2_CARD5 = (
 _MATCONCRETEEC2_CARD6 = (
     FieldSchema("typesc", float, 0, 10, 1.0),
     FieldSchema("p_or_f", float, 10, 10, None),
-    FieldSchema("effd ", float, 20, 10, None),
+    FieldSchema("effd_", float, 20, 10, None, "effd "),
     FieldSchema("gamsc", float, 30, 10, None),
     FieldSchema("erodet", float, 40, 10, 2.0),
     FieldSchema("erodec", float, 50, 10, 0.01),
@@ -488,12 +488,12 @@ class MatConcreteEc2(KeywordBase):
     def prt36_(self) -> float:
         """Get or set the Poisson's Ratio of concrete (TYPEC=3 and 6)
         """ # nopep8
-        return self._cards[3].get_value("prt36 ")
+        return self._cards[3].get_value("prt36_")
 
     @prt36_.setter
     def prt36_(self, value: float) -> None:
         """Set the prt36_ property."""
-        self._cards[3].set_value("prt36 ", value)
+        self._cards[3].set_value("prt36_", value)
 
     @property
     def ecut36(self) -> typing.Optional[float]:
@@ -578,12 +578,12 @@ class MatConcreteEc2(KeywordBase):
     def zp_(self) -> typing.Optional[float]:
         """Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
         """ # nopep8
-        return self._cards[4].get_value("zp ")
+        return self._cards[4].get_value("zp_")
 
     @zp_.setter
     def zp_(self, value: float) -> None:
         """Set the zp_ property."""
-        self._cards[4].set_value("zp ", value)
+        self._cards[4].set_value("zp_", value)
 
     @property
     def a1(self) -> float:
@@ -644,12 +644,12 @@ class MatConcreteEc2(KeywordBase):
     def v3_(self) -> typing.Optional[float]:
         """Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
         """ # nopep8
-        return self._cards[5].get_value("v3 ")
+        return self._cards[5].get_value("v3_")
 
     @v3_.setter
     def v3_(self, value: float) -> None:
         """Set the v3_ property."""
-        self._cards[5].set_value("v3 ", value)
+        self._cards[5].set_value("v3_", value)
 
     @property
     def d1(self) -> typing.Optional[float]:
@@ -727,12 +727,12 @@ class MatConcreteEc2(KeywordBase):
     def effd_(self) -> typing.Optional[float]:
         """Get or set the Effective section depth (length units), used in shear capacity check. This is usually the section depth excluding the cover concrete
         """ # nopep8
-        return self._cards[6].get_value("effd ")
+        return self._cards[6].get_value("effd_")
 
     @effd_.setter
     def effd_(self, value: float) -> None:
         """Set the effd_ property."""
-        self._cards[6].set_value("effd ", value)
+        self._cards[6].set_value("effd_", value)
 
     @property
     def gamsc(self) -> typing.Optional[float]:

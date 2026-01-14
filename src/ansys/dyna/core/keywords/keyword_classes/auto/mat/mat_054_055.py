@@ -32,19 +32,19 @@ _MAT054055_CARD0 = (
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("ea", float, 20, 10, None),
     FieldSchema("eb", float, 30, 10, None),
-    FieldSchema("(ec)", float, 40, 10, None),
+    FieldSchema("_ec_", float, 40, 10, None, "(ec)"),
     FieldSchema("prba", float, 50, 10, None),
-    FieldSchema("(prca)", float, 60, 10, None),
-    FieldSchema("(prcb)", float, 70, 10, None),
+    FieldSchema("_prca_", float, 60, 10, None, "(prca)"),
+    FieldSchema("_prcb_", float, 70, 10, None, "(prcb)"),
 )
 
 _MAT054055_CARD1 = (
     FieldSchema("gab", float, 0, 10, None),
     FieldSchema("gbc", float, 10, 10, None),
     FieldSchema("gca", float, 20, 10, None),
-    FieldSchema("(kf)", float, 30, 10, None),
+    FieldSchema("_kf_", float, 30, 10, None, "(kf)"),
     FieldSchema("aopt", float, 40, 10, None),
-    FieldSchema("2way", float, 50, 10, None),
+    FieldSchema("_2way", float, 50, 10, None, "2way"),
     FieldSchema("ti", float, 60, 10, None),
 )
 
@@ -221,12 +221,12 @@ class Mat054055(KeywordBase):
     def _ec_(self) -> typing.Optional[float]:
         """Get or set the Ec, Young's modulus - normal direction (not used).
         """ # nopep8
-        return self._cards[0].get_value("(ec)")
+        return self._cards[0].get_value("_ec_")
 
     @_ec_.setter
     def _ec_(self, value: float) -> None:
         """Set the _ec_ property."""
-        self._cards[0].set_value("(ec)", value)
+        self._cards[0].set_value("_ec_", value)
 
     @property
     def prba(self) -> typing.Optional[float]:
@@ -243,23 +243,23 @@ class Mat054055(KeywordBase):
     def _prca_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio ca (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prca)")
+        return self._cards[0].get_value("_prca_")
 
     @_prca_.setter
     def _prca_(self, value: float) -> None:
         """Set the _prca_ property."""
-        self._cards[0].set_value("(prca)", value)
+        self._cards[0].set_value("_prca_", value)
 
     @property
     def _prcb_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio cb (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prcb)")
+        return self._cards[0].get_value("_prcb_")
 
     @_prcb_.setter
     def _prcb_(self, value: float) -> None:
         """Set the _prcb_ property."""
-        self._cards[0].set_value("(prcb)", value)
+        self._cards[0].set_value("_prcb_", value)
 
     @property
     def gab(self) -> typing.Optional[float]:
@@ -298,12 +298,12 @@ class Mat054055(KeywordBase):
     def _kf_(self) -> typing.Optional[float]:
         """Get or set the Bulk modulus of failed material (not used)
         """ # nopep8
-        return self._cards[1].get_value("(kf)")
+        return self._cards[1].get_value("_kf_")
 
     @_kf_.setter
     def _kf_(self, value: float) -> None:
         """Set the _kf_ property."""
-        self._cards[1].set_value("(kf)", value)
+        self._cards[1].set_value("_kf_", value)
 
     @property
     def aopt(self) -> typing.Optional[float]:
@@ -328,12 +328,12 @@ class Mat054055(KeywordBase):
         EQ.0.0:	Standard unidirectional behavior.
         EQ.1.0:	2-way fiber behavior.  The meaning of the fields DFAILT, DFAILC, YC, YT, SLIMT2 and SLIMC are altered if this flag is set.  This option is only available for MAT 54 using thin shells.
         """ # nopep8
-        return self._cards[1].get_value("2way")
+        return self._cards[1].get_value("_2way")
 
     @_2way.setter
     def _2way(self, value: float) -> None:
         """Set the _2way property."""
-        self._cards[1].set_value("2way", value)
+        self._cards[1].set_value("_2way", value)
 
     @property
     def ti(self) -> typing.Optional[float]:

@@ -74,19 +74,19 @@ _DEFINETABLECOMPACT_CARD4 = (
 
 _DEFINETABLECOMPACT_CARD5 = (
     FieldSchema("o1", float, 0, 10, None),
-    FieldSchema("a1.1", float, 10, 10, None),
-    FieldSchema("a1.2", float, 20, 10, None),
-    FieldSchema("a1.3", float, 30, 10, None),
-    FieldSchema("a1.4", float, 40, 10, None),
-    FieldSchema("a1.5", float, 50, 10, None),
-    FieldSchema("a1.6", float, 60, 10, None),
-    FieldSchema("a1.7", float, 70, 10, None),
+    FieldSchema("a1_1", float, 10, 10, None, "a1.1"),
+    FieldSchema("a1_2", float, 20, 10, None, "a1.2"),
+    FieldSchema("a1_3", float, 30, 10, None, "a1.3"),
+    FieldSchema("a1_4", float, 40, 10, None, "a1.4"),
+    FieldSchema("a1_5", float, 50, 10, None, "a1.5"),
+    FieldSchema("a1_6", float, 60, 10, None, "a1.6"),
+    FieldSchema("a1_7", float, 70, 10, None, "a1.7"),
 )
 
 _DEFINETABLECOMPACT_CARD6 = (
     FieldSchema("unused", int, 0, 10, None),
-    FieldSchema("a1.8", float, 10, 10, None),
-    FieldSchema("a1.9", float, 20, 10, None),
+    FieldSchema("a1_8", float, 10, 10, None, "a1.8"),
+    FieldSchema("a1_9", float, 20, 10, None, "a1.9"),
 )
 
 _DEFINETABLECOMPACT_OPTION0_CARD0 = (
@@ -416,100 +416,100 @@ class DefineTableCompact(KeywordBase):
     def a1_1(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.1")
+        return self._cards[5].get_value("a1_1")
 
     @a1_1.setter
     def a1_1(self, value: float) -> None:
         """Set the a1_1 property."""
-        self._cards[5].set_value("a1.1", value)
+        self._cards[5].set_value("a1_1", value)
 
     @property
     def a1_2(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.2")
+        return self._cards[5].get_value("a1_2")
 
     @a1_2.setter
     def a1_2(self, value: float) -> None:
         """Set the a1_2 property."""
-        self._cards[5].set_value("a1.2", value)
+        self._cards[5].set_value("a1_2", value)
 
     @property
     def a1_3(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.3")
+        return self._cards[5].get_value("a1_3")
 
     @a1_3.setter
     def a1_3(self, value: float) -> None:
         """Set the a1_3 property."""
-        self._cards[5].set_value("a1.3", value)
+        self._cards[5].set_value("a1_3", value)
 
     @property
     def a1_4(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.4")
+        return self._cards[5].get_value("a1_4")
 
     @a1_4.setter
     def a1_4(self, value: float) -> None:
         """Set the a1_4 property."""
-        self._cards[5].set_value("a1.4", value)
+        self._cards[5].set_value("a1_4", value)
 
     @property
     def a1_5(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.5")
+        return self._cards[5].get_value("a1_5")
 
     @a1_5.setter
     def a1_5(self, value: float) -> None:
         """Set the a1_5 property."""
-        self._cards[5].set_value("a1.5", value)
+        self._cards[5].set_value("a1_5", value)
 
     @property
     def a1_6(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.6")
+        return self._cards[5].get_value("a1_6")
 
     @a1_6.setter
     def a1_6(self, value: float) -> None:
         """Set the a1_6 property."""
-        self._cards[5].set_value("a1.6", value)
+        self._cards[5].set_value("a1_6", value)
 
     @property
     def a1_7(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.7")
+        return self._cards[5].get_value("a1_7")
 
     @a1_7.setter
     def a1_7(self, value: float) -> None:
         """Set the a1_7 property."""
-        self._cards[5].set_value("a1.7", value)
+        self._cards[5].set_value("a1_7", value)
 
     @property
     def a1_8(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[6].get_value("a1.8")
+        return self._cards[6].get_value("a1_8")
 
     @a1_8.setter
     def a1_8(self, value: float) -> None:
         """Set the a1_8 property."""
-        self._cards[6].set_value("a1.8", value)
+        self._cards[6].set_value("a1_8", value)
 
     @property
     def a1_9(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[6].get_value("a1.9")
+        return self._cards[6].get_value("a1_9")
 
     @a1_9.setter
     def a1_9(self, value: float) -> None:
         """Set the a1_9 property."""
-        self._cards[6].set_value("a1.9", value)
+        self._cards[6].set_value("a1_9", value)
 
     @property
     def title(self) -> typing.Optional[str]:

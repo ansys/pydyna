@@ -37,6 +37,23 @@ class FieldSchema(NamedTuple):
 
     This is designed to be shared across all instances of a Card type.
     The `default` can be a value or a Flag instance for flag fields.
+
+    Attributes
+    ----------
+    name : str
+        The lookup key used for get_value/set_value and kwargs matching.
+        This should be the Python property name (e.g., "w_mode").
+    type : Type
+        The field type (int, float, str, bool).
+    offset : int
+        Column position in the card.
+    width : int
+        Column width.
+    default : Any
+        Default value, or a Flag instance for flag fields.
+    display_name : str, optional
+        The original field name for display in comments (e.g., "w-mode").
+        If not provided, uses `name`.
     """
 
     name: str
@@ -44,6 +61,11 @@ class FieldSchema(NamedTuple):
     offset: int
     width: int
     default: Any = None  # Can be a value or Flag instance
+    display_name: str = ""  # Original name for comments; empty means use name
+
+    def get_display_name(self) -> str:
+        """Get the display name for comments."""
+        return self.display_name if self.display_name else self.name
 
     def is_flag(self) -> bool:
         """Check if this field is a Flag type."""
@@ -62,6 +84,8 @@ class FieldSchema(NamedTuple):
         Field
             A new Field instance.
         """
+        # Use display_name for Field.name so comments show original names
+        field_name = self.get_display_name()
         if self.is_flag():
             # For flag fields, create a copy of the Flag with the value set
             flag = Flag(
@@ -69,9 +93,9 @@ class FieldSchema(NamedTuple):
                 true_value=self.default.true_value,
                 false_value=self.default.false_value,
             )
-            return Field(self.name, self.type, self.offset, self.width, flag)
+            return Field(field_name, self.type, self.offset, self.width, flag)
         else:
-            return Field(self.name, self.type, self.offset, self.width, value)
+            return Field(field_name, self.type, self.offset, self.width, value)
 
     @classmethod
     def from_field(cls, field: Field) -> "FieldSchema":

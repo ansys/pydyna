@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _CESECONTROLLIMITER_CARD0 = (
     FieldSchema("idlmt", int, 0, 10, 0),
     FieldSchema("alfa", float, 10, 10, 0.0),
-    FieldSchema("beta ", float, 20, 10, 0.0),
+    FieldSchema("beta_", float, 20, 10, 0.0, "beta "),
     FieldSchema("epsr", float, 30, 10, 0.0),
 )
 
@@ -77,12 +77,12 @@ class CeseControlLimiter(KeywordBase):
     def beta_(self) -> float:
         """Get or set the Numerical viscosity control coefficient (see <theory> Eq.6 for beta ).
         """ # nopep8
-        return self._cards[0].get_value("beta ")
+        return self._cards[0].get_value("beta_")
 
     @beta_.setter
     def beta_(self, value: float) -> None:
         """Set the beta_ property."""
-        self._cards[0].set_value("beta ", value)
+        self._cards[0].set_value("beta_", value)
 
     @property
     def epsr(self) -> float:

@@ -42,7 +42,7 @@ _CONSTRAINEDBEAMINSOLID_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 1e+21),
     FieldSchema("unused", int, 20, 10, None),
-    FieldSchema("axfor ", int, 30, 10, None),
+    FieldSchema("axfor_", int, 30, 10, None, "axfor "),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("pssf", float, 50, 10, 0.1),
     FieldSchema("unused", int, 60, 10, None),
@@ -209,12 +209,12 @@ class ConstrainedBeamInSolid(KeywordBase):
         GE.0: OFF
         EQ.-n: n is the function ID in *DEFINE_FUNCTION
         """ # nopep8
-        return self._cards[1].get_value("axfor ")
+        return self._cards[1].get_value("axfor_")
 
     @axfor_.setter
     def axfor_(self, value: int) -> None:
         """Set the axfor_ property."""
-        self._cards[1].set_value("axfor ", value)
+        self._cards[1].set_value("axfor_", value)
 
     @property
     def pssf(self) -> float:

@@ -44,7 +44,7 @@ _MAT273_CARD1 = (
     FieldSchema("bh", float, 20, 10, 0.003),
     FieldSchema("ch", float, 30, 10, 2.0),
     FieldSchema("dh", float, 40, 10, 1e-06),
-    FieldSchema("as", float, 50, 10, 15.0),
+    FieldSchema("as_", float, 50, 10, 15.0, "as"),
     FieldSchema("df", float, 60, 10, 0.85),
     FieldSchema("fc0", float, 70, 10, None),
 )
@@ -245,12 +245,12 @@ class Mat273(KeywordBase):
     def as_(self) -> float:
         """Get or set the Ductility parameter during damage.
         """ # nopep8
-        return self._cards[1].get_value("as")
+        return self._cards[1].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[1].set_value("as", value)
+        self._cards[1].set_value("as_", value)
 
     @property
     def df(self) -> float:

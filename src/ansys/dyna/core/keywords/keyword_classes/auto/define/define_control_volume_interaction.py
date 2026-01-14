@@ -31,8 +31,8 @@ _DEFINECONTROLVOLUMEINTERACTION_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("cvid1", int, 10, 10, None),
     FieldSchema("cvid2", int, 20, 10, None),
-    FieldSchema("lcid ", int, 30, 10, None),
-    FieldSchema("area ", float, 40, 10, None),
+    FieldSchema("lcid_", int, 30, 10, None, "lcid "),
+    FieldSchema("area_", float, 40, 10, None, "area "),
 )
 
 _DEFINECONTROLVOLUMEINTERACTION_OPTION0_CARD0 = (
@@ -106,23 +106,23 @@ class DefineControlVolumeInteraction(KeywordBase):
         LS-DYNA allows load curves IDs and table IDs to be used interchangeably.
         A unique number has to be defined.
         """ # nopep8
-        return self._cards[0].get_value("lcid ")
+        return self._cards[0].get_value("lcid_")
 
     @lcid_.setter
     def lcid_(self, value: int) -> None:
         """Set the lcid_ property."""
-        self._cards[0].set_value("lcid ", value)
+        self._cards[0].set_value("lcid_", value)
 
     @property
     def area_(self) -> typing.Optional[float]:
         """Get or set the This is a constant area for the case when a flow area definition is not defined
         """ # nopep8
-        return self._cards[0].get_value("area ")
+        return self._cards[0].get_value("area_")
 
     @area_.setter
     def area_(self, value: float) -> None:
         """Set the area_ property."""
-        self._cards[0].set_value("area ", value)
+        self._cards[0].set_value("area_", value)
 
     @property
     def title(self) -> typing.Optional[str]:

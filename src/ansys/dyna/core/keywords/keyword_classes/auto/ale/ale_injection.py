@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _ALEINJECTION_CARD0 = (
     FieldSchema("mmgset", int, 0, 10, None),
     FieldSchema("segset", int, 10, 10, None),
-    FieldSchema("global", int, 20, 10, 0),
+    FieldSchema("global_", int, 20, 10, 0, "global"),
     FieldSchema("lce", int, 30, 10, 0),
     FieldSchema("lcrvl", int, 40, 10, 0),
 )
@@ -118,12 +118,12 @@ class AleInjection(KeywordBase):
         formed by all the segments of SEGSET. Velocities are
         applied in the global coordinate system.
         """ # nopep8
-        return self._cards[0].get_value("global")
+        return self._cards[0].get_value("global_")
 
     @global_.setter
     def global_(self, value: int) -> None:
         """Set the global_ property."""
-        self._cards[0].set_value("global", value)
+        self._cards[0].set_value("global_", value)
 
     @property
     def lce(self) -> int:

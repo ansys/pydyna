@@ -31,8 +31,8 @@ _CONTROLFORMINGOUTPUT_CARD0 = (
     FieldSchema("nout", int, 10, 10, None),
     FieldSchema("tbeg", float, 20, 10, None),
     FieldSchema("tend", float, 30, 10, None),
-    FieldSchema("y1/lcid", float, 40, 10, None),
-    FieldSchema("y2/lcid", float, 50, 10, None),
+    FieldSchema("y1_lcid", float, 40, 10, None, "y1/lcid"),
+    FieldSchema("y2_lcid", float, 50, 10, None, "y2/lcid"),
     FieldSchema("y3", float, 60, 10, None),
     FieldSchema("y4", float, 70, 10, None),
 )
@@ -105,12 +105,12 @@ class ControlFormingOutput(KeywordBase):
         Available starting from Dev Revision 112604, the output will be skipped for any negative abscissa in the load curve.
         Note a curve with only negative abscissas is not allowed..
         """ # nopep8
-        return self._cards[0].get_value("y1/lcid")
+        return self._cards[0].get_value("y1_lcid")
 
     @y1_lcid.setter
     def y1_lcid(self, value: float) -> None:
         """Set the y1_lcid property."""
-        self._cards[0].set_value("y1/lcid", value)
+        self._cards[0].set_value("y1_lcid", value)
 
     @property
     def y2_lcid(self) -> typing.Optional[float]:
@@ -121,12 +121,12 @@ class ControlFormingOutput(KeywordBase):
         Note this time-dependent load curve will output additional d3plot files on top of the d3plot files already written in case Y1/LCID < 0 (if specified).
         Furthermore, when Y2/CIDT < 0, Y3 and Y4 are ignored.  See the example Using CIDT below.
         """ # nopep8
-        return self._cards[0].get_value("y2/lcid")
+        return self._cards[0].get_value("y2_lcid")
 
     @y2_lcid.setter
     def y2_lcid(self, value: float) -> None:
         """Set the y2_lcid property."""
-        self._cards[0].set_value("y2/lcid", value)
+        self._cards[0].set_value("y2_lcid", value)
 
     @property
     def y3(self) -> typing.Optional[float]:

@@ -43,7 +43,7 @@ _ELEMENTINERTIAOFFSET_CARD1 = (
 )
 
 _ELEMENTINERTIAOFFSET_CARD2 = (
-    FieldSchema("x-off", float, 0, 10, 0.0),
+    FieldSchema("x_off", float, 0, 10, 0.0, "x-off"),
     FieldSchema("y_off", float, 10, 10, 0.0),
     FieldSchema("z_off", float, 20, 10, 0.0),
 )
@@ -184,12 +184,12 @@ class ElementInertiaOffset(KeywordBase):
     def x_off(self) -> float:
         """Get or set the x-offset from nodal point.
         """ # nopep8
-        return self._cards[2].get_value("x-off")
+        return self._cards[2].get_value("x_off")
 
     @x_off.setter
     def x_off(self, value: float) -> None:
         """Set the x_off property."""
-        self._cards[2].set_value("x-off", value)
+        self._cards[2].set_value("x_off", value)
 
     @property
     def y_off(self) -> float:

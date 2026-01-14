@@ -35,7 +35,7 @@ _ICFDMODELNONNEWT_CARD1 = (
     FieldSchema("k", float, 0, 10, 0.0),
     FieldSchema("n", float, 10, 10, 0.0),
     FieldSchema("mumin", float, 20, 10, 0.0),
-    FieldSchema("lambda", float, 30, 10, 1e+30),
+    FieldSchema("lambda_", float, 30, 10, 1e+30, "lambda"),
     FieldSchema("alpha", float, 40, 10, 0.0),
     FieldSchema("talpha", float, 50, 10, 0.0),
 )
@@ -126,12 +126,12 @@ class IcfdModelNonnewt(KeywordBase):
     def lambda_(self) -> float:
         """Get or set the Maximum acceptable viscosity value if NNID = 1. Time constant if NNID = 2, 3, 5. Yield Stress Threshold if NNID = 4.Sutherland constant if NNID = 6. Not used if NNID = 7,8.
         """ # nopep8
-        return self._cards[1].get_value("lambda")
+        return self._cards[1].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[1].set_value("lambda", value)
+        self._cards[1].set_value("lambda_", value)
 
     @property
     def alpha(self) -> float:

@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CESEBOUNDARYPRESCRIBEDSEGMENT_CARD0 = (
     FieldSchema("n1", int, 0, 10, None),
-    FieldSchema("n2 ", int, 10, 10, None),
+    FieldSchema("n2_", int, 10, 10, None, "n2 "),
     FieldSchema("n3", int, 20, 10, None),
     FieldSchema("n4", int, 30, 10, None),
     FieldSchema("idcomp", int, 40, 10, None),
@@ -36,19 +36,19 @@ _CESEBOUNDARYPRESCRIBEDSEGMENT_CARD0 = (
 
 _CESEBOUNDARYPRESCRIBEDSEGMENT_CARD1 = (
     FieldSchema("lc_u", int, 0, 10, None),
-    FieldSchema("lc_v ", int, 10, 10, None),
+    FieldSchema("lc_v_", int, 10, 10, None, "lc_v "),
     FieldSchema("lc_w", int, 20, 10, None),
     FieldSchema("lc_rho", int, 30, 10, None),
-    FieldSchema("lc_p ", int, 40, 10, None),
+    FieldSchema("lc_p_", int, 40, 10, None, "lc_p "),
     FieldSchema("lc_t", int, 50, 10, None),
 )
 
 _CESEBOUNDARYPRESCRIBEDSEGMENT_CARD2 = (
     FieldSchema("sf_u", float, 0, 10, 1.0),
-    FieldSchema("sf_v ", float, 10, 10, 1.0),
+    FieldSchema("sf_v_", float, 10, 10, 1.0, "sf_v "),
     FieldSchema("sf_w", float, 20, 10, 1.0),
     FieldSchema("sf_rho", float, 30, 10, 1.0),
-    FieldSchema("sf_p ", float, 40, 10, 1.0),
+    FieldSchema("sf_p_", float, 40, 10, 1.0, "sf_p "),
     FieldSchema("sf_t", float, 50, 10, 1.0),
 )
 
@@ -87,12 +87,12 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     def n2_(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
         """ # nopep8
-        return self._cards[0].get_value("n2 ")
+        return self._cards[0].get_value("n2_")
 
     @n2_.setter
     def n2_(self, value: int) -> None:
         """Set the n2_ property."""
-        self._cards[0].set_value("n2 ", value)
+        self._cards[0].set_value("n2_", value)
 
     @property
     def n3(self) -> typing.Optional[int]:
@@ -142,12 +142,12 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     def lc_v_(self) -> typing.Optional[int]:
         """Get or set the Load curve ID to describe the y-component of the velocity versus time.
         """ # nopep8
-        return self._cards[1].get_value("lc_v ")
+        return self._cards[1].get_value("lc_v_")
 
     @lc_v_.setter
     def lc_v_(self, value: int) -> None:
         """Set the lc_v_ property."""
-        self._cards[1].set_value("lc_v ", value)
+        self._cards[1].set_value("lc_v_", value)
 
     @property
     def lc_w(self) -> typing.Optional[int]:
@@ -175,12 +175,12 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     def lc_p_(self) -> typing.Optional[int]:
         """Get or set the Load curve ID to describe the pressure versus time.
         """ # nopep8
-        return self._cards[1].get_value("lc_p ")
+        return self._cards[1].get_value("lc_p_")
 
     @lc_p_.setter
     def lc_p_(self, value: int) -> None:
         """Set the lc_p_ property."""
-        self._cards[1].set_value("lc_p ", value)
+        self._cards[1].set_value("lc_p_", value)
 
     @property
     def lc_t(self) -> typing.Optional[int]:
@@ -208,12 +208,12 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     def sf_v_(self) -> float:
         """Get or set the Scale factor for LC_V
         """ # nopep8
-        return self._cards[2].get_value("sf_v ")
+        return self._cards[2].get_value("sf_v_")
 
     @sf_v_.setter
     def sf_v_(self, value: float) -> None:
         """Set the sf_v_ property."""
-        self._cards[2].set_value("sf_v ", value)
+        self._cards[2].set_value("sf_v_", value)
 
     @property
     def sf_w(self) -> float:
@@ -241,12 +241,12 @@ class CeseBoundaryPrescribedSegment(KeywordBase):
     def sf_p_(self) -> float:
         """Get or set the Scale factor for LC_P
         """ # nopep8
-        return self._cards[2].get_value("sf_p ")
+        return self._cards[2].get_value("sf_p_")
 
     @sf_p_.setter
     def sf_p_(self, value: float) -> None:
         """Set the sf_p_ property."""
-        self._cards[2].set_value("sf_p ", value)
+        self._cards[2].set_value("sf_p_", value)
 
     @property
     def sf_t(self) -> float:

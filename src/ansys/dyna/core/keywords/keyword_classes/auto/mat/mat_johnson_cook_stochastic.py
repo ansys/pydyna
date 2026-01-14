@@ -62,7 +62,7 @@ _MATJOHNSONCOOKSTOCHASTIC_CARD2 = (
 
 _MATJOHNSONCOOKSTOCHASTIC_CARD3 = (
     FieldSchema("d5", float, 0, 10, None),
-    FieldSchema("c2/p/xnp/d", float, 10, 10, None),
+    FieldSchema("c2_p_xnp_d", float, 10, 10, None, "c2/p/xnp/d"),
     FieldSchema("erod", float, 20, 10, None),
     FieldSchema("efmin", float, 30, 10, 1e-06),
     FieldSchema("numint", float, 40, 10, None),
@@ -410,12 +410,12 @@ class MatJohnsonCookStochastic(KeywordBase):
     def c2_p_xnp_d(self) -> typing.Optional[float]:
         """Get or set the Optional strain-rate parameter for Huh-Kang (C2) or Cowper-Symonds (P) forms; see equations below
         """ # nopep8
-        return self._cards[3].get_value("c2/p/xnp/d")
+        return self._cards[3].get_value("c2_p_xnp_d")
 
     @c2_p_xnp_d.setter
     def c2_p_xnp_d(self, value: float) -> None:
         """Set the c2_p_xnp_d property."""
-        self._cards[3].set_value("c2/p/xnp/d", value)
+        self._cards[3].set_value("c2_p_xnp_d", value)
 
     @property
     def erod(self) -> typing.Optional[float]:

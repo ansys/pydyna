@@ -229,3 +229,25 @@ def test_control_shell_constructor_kwargs_card0_only():
 
     # Should have only 1 card (card 0)
     assert len(lines) == 1, f"Expected 1 data line, got {len(lines)}"
+
+
+@pytest.mark.keywords
+def test_control_shell_constructor_kwargs_hyphenated_field():
+    """Test that hyphenated field names work with constructor kwargs.
+
+    FieldSchema uses original names like 'w-mode', but Python kwargs use
+    underscores like 'w_mode'. The from_field_schemas_with_defaults method
+    must handle this translation.
+    """
+    with disable_lspp_defaults():
+        # w_mode is on card 2 (FieldSchema name is "w-mode")
+        kwd = ControlShell(w_mode=30.0)
+
+    output = kwd.write()
+    lines = [l for l in output.strip().split("\n") if not l.startswith("$") and not l.startswith("*")]
+
+    # Should have 3 cards (0-2) because w_mode is on card 2
+    assert len(lines) == 3, f"Expected 3 data lines, got {len(lines)}"
+
+    # Verify the value was actually set
+    assert kwd.w_mode == 30.0

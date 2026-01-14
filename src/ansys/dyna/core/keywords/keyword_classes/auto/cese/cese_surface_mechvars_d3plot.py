@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CESESURFACEMECHVARSD3PLOT_CARD0 = (
-    FieldSchema("output quantity", str, 0, 80, None),
+    FieldSchema("output_quantity", str, 0, 80, None, "output quantity"),
 )
 
 class CeseSurfaceMechvarsD3Plot(KeywordBase):
@@ -48,10 +48,10 @@ class CeseSurfaceMechvarsD3Plot(KeywordBase):
     def output_quantity(self) -> typing.Optional[str]:
         """Get or set the Descriptive phrase for the mechanics surface variable to output for the LSPP user.
         """ # nopep8
-        return self._cards[0].get_value("output quantity")
+        return self._cards[0].get_value("output_quantity")
 
     @output_quantity.setter
     def output_quantity(self, value: str) -> None:
         """Set the output_quantity property."""
-        self._cards[0].set_value("output quantity", value)
+        self._cards[0].set_value("output_quantity", value)
 

@@ -28,10 +28,10 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CESEBOUNDARYSEGMENT_CARD0 = (
     FieldSchema("n1", int, 0, 10, None),
-    FieldSchema("n2 ", int, 10, 10, None),
+    FieldSchema("n2_", int, 10, 10, None, "n2 "),
     FieldSchema("n3", int, 20, 10, None),
     FieldSchema("n4", int, 30, 10, None),
-    FieldSchema("dof ", int, 40, 10, None),
+    FieldSchema("dof_", int, 40, 10, None, "dof "),
     FieldSchema("lcid", int, 50, 10, None),
     FieldSchema("sf", float, 60, 10, 1.0),
 )
@@ -65,12 +65,12 @@ class CeseBoundarySegment(KeywordBase):
     def n2_(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
         """ # nopep8
-        return self._cards[0].get_value("n2 ")
+        return self._cards[0].get_value("n2_")
 
     @n2_.setter
     def n2_(self, value: int) -> None:
         """Set the n2_ property."""
-        self._cards[0].set_value("n2 ", value)
+        self._cards[0].set_value("n2_", value)
 
     @property
     def n3(self) -> typing.Optional[int]:
@@ -98,12 +98,12 @@ class CeseBoundarySegment(KeywordBase):
     def dof_(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
         """ # nopep8
-        return self._cards[0].get_value("dof ")
+        return self._cards[0].get_value("dof_")
 
     @dof_.setter
     def dof_(self, value: int) -> None:
         """Set the dof_ property."""
-        self._cards[0].set_value("dof ", value)
+        self._cards[0].set_value("dof_", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:

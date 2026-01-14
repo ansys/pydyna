@@ -65,7 +65,7 @@ _MAT248_CARD3 = (
     FieldSchema("cu", float, 10, 10, None),
     FieldSchema("p", float, 20, 10, None),
     FieldSchema("ai", float, 30, 10, None),
-    FieldSchema("as", float, 40, 10, None),
+    FieldSchema("as_", float, 40, 10, None, "as"),
     FieldSchema("ti", float, 50, 10, None),
     FieldSchema("b", float, 60, 10, None),
     FieldSchema("unused", int, 70, 10, None),
@@ -595,12 +595,12 @@ class Mat248(KeywordBase):
     def as_(self) -> typing.Optional[float]:
         """Get or set the Arsenic [weight %]
         """ # nopep8
-        return self._cards[3].get_value("as")
+        return self._cards[3].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[3].set_value("as", value)
+        self._cards[3].set_value("as_", value)
 
     @property
     def ti(self) -> typing.Optional[float]:

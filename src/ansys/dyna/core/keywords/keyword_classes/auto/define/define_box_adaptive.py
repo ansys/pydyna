@@ -40,7 +40,7 @@ _DEFINEBOXADAPTIVE_CARD0 = (
 _DEFINEBOXADAPTIVE_CARD1 = (
     FieldSchema("pid", int, 0, 10, 0),
     FieldSchema("level", int, 10, 10, 1),
-    FieldSchema("lidx/ndid", int, 20, 10, 0),
+    FieldSchema("lidx_ndid", int, 20, 10, 0, "lidx/ndid"),
     FieldSchema("lidy", int, 30, 10, 0),
     FieldSchema("lidz", int, 40, 10, 0),
     FieldSchema("brmin", float, 50, 10, 0.0),
@@ -191,12 +191,12 @@ class DefineBoxAdaptive(KeywordBase):
         on a moving rigid body.
         EQ.0: no movement.
         """ # nopep8
-        return self._cards[1].get_value("lidx/ndid")
+        return self._cards[1].get_value("lidx_ndid")
 
     @lidx_ndid.setter
     def lidx_ndid(self, value: int) -> None:
         """Set the lidx_ndid property."""
-        self._cards[1].set_value("lidx/ndid", value)
+        self._cards[1].set_value("lidx_ndid", value)
 
     @property
     def lidy(self) -> int:

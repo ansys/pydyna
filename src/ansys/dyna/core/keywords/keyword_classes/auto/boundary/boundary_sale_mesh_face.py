@@ -29,12 +29,12 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _BOUNDARYSALEMESHFACE_CARD0 = (
     FieldSchema("option", str, 0, 10, "FIXED"),
     FieldSchema("mshid", int, 10, 10, None),
-    FieldSchema("-x", int, 20, 10, 0),
-    FieldSchema("+x", int, 30, 10, 0),
-    FieldSchema("-y", int, 40, 10, 0),
-    FieldSchema("+y", int, 50, 10, 0),
-    FieldSchema("-z", int, 60, 10, 0),
-    FieldSchema("-z", int, 70, 10, 0),
+    FieldSchema("_x", int, 20, 10, 0, "-x"),
+    FieldSchema("_x", int, 30, 10, 0, "+x"),
+    FieldSchema("_y", int, 40, 10, 0, "-y"),
+    FieldSchema("_y", int, 50, 10, 0, "+y"),
+    FieldSchema("_z", int, 60, 10, 0, "-z"),
+    FieldSchema("_z", int, 70, 10, 0, "-z"),
 )
 
 class BoundarySaleMeshFace(KeywordBase):
@@ -85,12 +85,12 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("-x")
+        return self._cards[0].get_value("_x")
 
     @_x.setter
     def _x(self, value: int) -> None:
         """Set the _x property."""
-        self._cards[0].set_value("-x", value)
+        self._cards[0].set_value("_x", value)
 
     @property
     def _x(self) -> int:
@@ -98,12 +98,12 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("+x")
+        return self._cards[0].get_value("_x")
 
     @_x.setter
     def _x(self, value: int) -> None:
         """Set the _x property."""
-        self._cards[0].set_value("+x", value)
+        self._cards[0].set_value("_x", value)
 
     @property
     def _y(self) -> int:
@@ -111,12 +111,12 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("-y")
+        return self._cards[0].get_value("_y")
 
     @_y.setter
     def _y(self, value: int) -> None:
         """Set the _y property."""
-        self._cards[0].set_value("-y", value)
+        self._cards[0].set_value("_y", value)
 
     @property
     def _y(self) -> int:
@@ -124,12 +124,12 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("+y")
+        return self._cards[0].get_value("_y")
 
     @_y.setter
     def _y(self, value: int) -> None:
         """Set the _y property."""
-        self._cards[0].set_value("+y", value)
+        self._cards[0].set_value("_y", value)
 
     @property
     def _z(self) -> int:
@@ -137,12 +137,12 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("-z")
+        return self._cards[0].get_value("_z")
 
     @_z.setter
     def _z(self, value: int) -> None:
         """Set the _z property."""
-        self._cards[0].set_value("-z", value)
+        self._cards[0].set_value("_z", value)
 
     @property
     def _z(self) -> int:
@@ -150,10 +150,10 @@ class BoundarySaleMeshFace(KeywordBase):
         EQ 0: OFF
         EQ 1 : ON
         """ # nopep8
-        return self._cards[0].get_value("-z")
+        return self._cards[0].get_value("_z")
 
     @_z.setter
     def _z(self, value: int) -> None:
         """Set the _z property."""
-        self._cards[0].set_value("-z", value)
+        self._cards[0].set_value("_z", value)
 

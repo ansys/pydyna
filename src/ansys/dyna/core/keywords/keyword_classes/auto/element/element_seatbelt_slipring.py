@@ -39,7 +39,7 @@ _ELEMENTSEATBELTSLIPRING_CARD0 = (
 
 _ELEMENTSEATBELTSLIPRING_CARD1 = (
     FieldSchema("k", float, 0, 10, None),
-    FieldSchema("funcid ", int, 10, 10, None),
+    FieldSchema("funcid_", int, 10, 10, None, "funcid "),
     FieldSchema("direct", int, 20, 10, None),
     FieldSchema("dc", float, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
@@ -167,12 +167,12 @@ class ElementSeatbeltSlipring(KeywordBase):
     def funcid_(self) -> typing.Optional[int]:
         """Get or set the Function ID to determine friction coefficient
         """ # nopep8
-        return self._cards[1].get_value("funcid ")
+        return self._cards[1].get_value("funcid_")
 
     @funcid_.setter
     def funcid_(self, value: int) -> None:
         """Set the funcid_ property."""
-        self._cards[1].set_value("funcid ", value)
+        self._cards[1].set_value("funcid_", value)
 
     @property
     def direct(self) -> typing.Optional[int]:

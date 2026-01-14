@@ -30,7 +30,7 @@ _EMRANDLESLAYERED_CARD0 = (
     FieldSchema("rdlid", int, 0, 10, None),
     FieldSchema("rdltype", int, 10, 10, None),
     FieldSchema("psid", int, 20, 10, None),
-    FieldSchema("rdlarea ", int, 30, 10, None),
+    FieldSchema("rdlarea_", int, 30, 10, None, "rdlarea "),
 )
 
 _EMRANDLESLAYERED_CARD1 = (
@@ -130,12 +130,12 @@ class EmRandlesLayered(KeywordBase):
         EQ.1:	The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
         EQ.2:	The parameters are defined for the whole cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
         """ # nopep8
-        return self._cards[0].get_value("rdlarea ")
+        return self._cards[0].get_value("rdlarea_")
 
     @rdlarea_.setter
     def rdlarea_(self, value: int) -> None:
         """Set the rdlarea_ property."""
-        self._cards[0].set_value("rdlarea ", value)
+        self._cards[0].set_value("rdlarea_", value)
 
     @property
     def q(self) -> typing.Optional[float]:

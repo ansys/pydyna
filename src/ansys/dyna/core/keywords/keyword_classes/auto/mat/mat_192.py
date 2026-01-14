@@ -43,7 +43,7 @@ _MAT192_CARD1 = (
     FieldSchema("rlcid", float, 10, 10, None),
     FieldSchema("tol", float, 20, 10, 0.0005),
     FieldSchema("pgcl", float, 30, 10, None),
-    FieldSchema("sub-inc", float, 40, 10, None),
+    FieldSchema("sub_inc", float, 40, 10, None, "sub-inc"),
     FieldSchema("blk", float, 50, 10, None),
     FieldSchema("grav", float, 60, 10, 9.807),
     FieldSchema("theory", int, 70, 10, 0),
@@ -223,12 +223,12 @@ class Mat192(KeywordBase):
         """Get or set the User defined strain increment size. This is the maximum strain increment that the material model can normally cope with.
         If the value is exceeded a warning is echoed to the d3hsp file.
         """ # nopep8
-        return self._cards[1].get_value("sub-inc")
+        return self._cards[1].get_value("sub_inc")
 
     @sub_inc.setter
     def sub_inc(self, value: float) -> None:
         """Set the sub_inc property."""
-        self._cards[1].set_value("sub-inc", value)
+        self._cards[1].set_value("sub_inc", value)
 
     @property
     def blk(self) -> typing.Optional[float]:

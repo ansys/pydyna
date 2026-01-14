@@ -234,12 +234,12 @@ class SectionShellCardSet(Cards):
         EQ.0: Gauss (up to ten points are permitted),
         EQ.1: trapezoidal, not recommend for accuracy reasons.
         """ # nopep8
-        return self._cards[0].get_value("qr/irid")
+        return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
         """Set the qr_irid property."""
-        self._cards[0].set_value("qr/irid", value)
+        self._cards[0].set_value("qr_irid", value)
 
     @property
     def icomp(self) -> int:

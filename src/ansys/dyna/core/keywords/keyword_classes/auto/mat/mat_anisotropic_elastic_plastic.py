@@ -66,15 +66,15 @@ _MATANISOTROPICELASTICPLASTIC_CARD3 = (
     FieldSchema("c55", float, 20, 10, None),
     FieldSchema("c56", float, 30, 10, None),
     FieldSchema("c66", float, 40, 10, None),
-    FieldSchema("r00/f", float, 50, 10, None),
-    FieldSchema("r45/g", float, 60, 10, None),
-    FieldSchema("r90/h", float, 70, 10, None),
+    FieldSchema("r00_f", float, 50, 10, None, "r00/f"),
+    FieldSchema("r45_g", float, 60, 10, None, "r45/g"),
+    FieldSchema("r90_h", float, 70, 10, None, "r90/h"),
 )
 
 _MATANISOTROPICELASTICPLASTIC_CARD4 = (
-    FieldSchema("s11/l", float, 0, 10, None),
-    FieldSchema("s22/m", float, 10, 10, None),
-    FieldSchema("s33/n", float, 20, 10, None),
+    FieldSchema("s11_l", float, 0, 10, None, "s11/l"),
+    FieldSchema("s22_m", float, 10, 10, None, "s22/m"),
+    FieldSchema("s33_n", float, 20, 10, None, "s33/n"),
     FieldSchema("s12", float, 30, 10, None),
     FieldSchema("aopt", float, 40, 10, None),
     FieldSchema("vp", float, 50, 10, 0.0),
@@ -503,67 +503,67 @@ class MatAnisotropicElasticPlastic(KeywordBase):
     def r00_f(self) -> typing.Optional[float]:
         """Get or set the The 0,0 term in the 6 x 6 anisotropic constitutive matrix.
         """ # nopep8
-        return self._cards[3].get_value("r00/f")
+        return self._cards[3].get_value("r00_f")
 
     @r00_f.setter
     def r00_f(self, value: float) -> None:
         """Set the r00_f property."""
-        self._cards[3].set_value("r00/f", value)
+        self._cards[3].set_value("r00_f", value)
 
     @property
     def r45_g(self) -> typing.Optional[float]:
         """Get or set the R45, Lankford parmeter determined from experiments
         """ # nopep8
-        return self._cards[3].get_value("r45/g")
+        return self._cards[3].get_value("r45_g")
 
     @r45_g.setter
     def r45_g(self, value: float) -> None:
         """Set the r45_g property."""
-        self._cards[3].set_value("r45/g", value)
+        self._cards[3].set_value("r45_g", value)
 
     @property
     def r90_h(self) -> typing.Optional[float]:
         """Get or set the R90 , Lankford parmeter determined from experiments
         """ # nopep8
-        return self._cards[3].get_value("r90/h")
+        return self._cards[3].get_value("r90_h")
 
     @r90_h.setter
     def r90_h(self, value: float) -> None:
         """Set the r90_h property."""
-        self._cards[3].set_value("r90/h", value)
+        self._cards[3].set_value("r90_h", value)
 
     @property
     def s11_l(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local x-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s11/l")
+        return self._cards[4].get_value("s11_l")
 
     @s11_l.setter
     def s11_l(self, value: float) -> None:
         """Set the s11_l property."""
-        self._cards[4].set_value("s11/l", value)
+        self._cards[4].set_value("s11_l", value)
 
     @property
     def s22_m(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local y-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s22/m")
+        return self._cards[4].get_value("s22_m")
 
     @s22_m.setter
     def s22_m(self, value: float) -> None:
         """Set the s22_m property."""
-        self._cards[4].set_value("s22/m", value)
+        self._cards[4].set_value("s22_m", value)
 
     @property
     def s33_n(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local z-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s33/n")
+        return self._cards[4].get_value("s33_n")
 
     @s33_n.setter
     def s33_n(self, value: float) -> None:
         """Set the s33_n property."""
-        self._cards[4].set_value("s33/n", value)
+        self._cards[4].set_value("s33_n", value)
 
     @property
     def s12(self) -> typing.Optional[float]:

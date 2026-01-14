@@ -77,7 +77,7 @@ _MAT082_CARD4 = (
     FieldSchema("gamma", float, 20, 10, None),
     FieldSchema("d0", float, 30, 10, None),
     FieldSchema("b", float, 40, 10, None),
-    FieldSchema("lambda", float, 50, 10, None),
+    FieldSchema("lambda_", float, 50, 10, None, "lambda"),
     FieldSchema("ds", float, 60, 10, None),
     FieldSchema("l", float, 70, 10, None),
 )
@@ -540,12 +540,12 @@ class Mat082(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Parameter for the Rc-Dc Model
         """ # nopep8
-        return self._cards[4].get_value("lambda")
+        return self._cards[4].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[4].set_value("lambda", value)
+        self._cards[4].set_value("lambda_", value)
 
     @property
     def ds(self) -> typing.Optional[float]:

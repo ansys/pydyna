@@ -39,7 +39,7 @@ _MAT173_CARD0 = (
 )
 
 _MAT173_CARD1 = (
-    FieldSchema("novoid ", int, 0, 10, None),
+    FieldSchema("novoid_", int, 0, 10, None, "novoid "),
     FieldSchema("nplanes", int, 10, 10, None),
     FieldSchema("extra", int, 20, 10, None),
     FieldSchema("lccpdr", int, 30, 10, None),
@@ -205,12 +205,12 @@ class Mat173(KeywordBase):
         EQ.0:	Voiding behavior on
         EQ.1 : Voiding behavior off.
         """ # nopep8
-        return self._cards[1].get_value("novoid ")
+        return self._cards[1].get_value("novoid_")
 
     @novoid_.setter
     def novoid_(self, value: int) -> None:
         """Set the novoid_ property."""
-        self._cards[1].set_value("novoid ", value)
+        self._cards[1].set_value("novoid_", value)
 
     @property
     def nplanes(self) -> typing.Optional[int]:
