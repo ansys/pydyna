@@ -170,6 +170,7 @@ class DEMAnalysis(BaseObj):
         self.defined_des = False
         self.stub = DynaBase.get_stub()
         self.type = "analysis_dem"
+        self.no_grpc = os.environ.get("PYDYNA_PRE_BACKEND") == "keywords"
 
     def set_des(
         self,
