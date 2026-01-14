@@ -68,11 +68,10 @@ class ControlTimestep(KeywordBase):
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD1,
-                active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
+                active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD2,
-                active_func=lambda: self._cards[2].has_nondefault_values(),
                 **kwargs,
             ),        ]
     @property
@@ -272,7 +271,3 @@ class ControlTimestep(KeywordBase):
             raise Exception("""igado must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igado", value)
 
-
-class ControlTimeStep(ControlTimestep):
-    """Alias for CONTROL keyword."""
-    subkeyword = "TIME_STEP"
