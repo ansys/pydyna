@@ -56,6 +56,7 @@ class DatabaseBinaryD3Part(KeywordBase):
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3PART_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
             ),        ]
     @property
