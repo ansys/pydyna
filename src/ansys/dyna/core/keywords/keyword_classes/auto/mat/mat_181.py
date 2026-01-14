@@ -78,6 +78,7 @@ class Mat181(KeywordBase):
     _link_fields = {
         "lcunld": LinkType.DEFINE_CURVE,
         "stol": LinkType.DEFINE_CURVE,
+        "lc_tbid": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -442,6 +443,30 @@ class Mat181(KeywordBase):
     def stol_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for stol."""
         self.stol = value.lcid
+
+    @property
+    def lc_tbid_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
+        if self.deck is None:
+            return None
+        field_value = self.lc_tbid
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lc_tbid_link.setter
+    def lc_tbid_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lc_tbid."""
+        if hasattr(value, "lcid"):
+            self.lc_tbid = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lc_tbid = value.tbid
 
 
 class MatSimplifiedRubberFoam(Mat181):

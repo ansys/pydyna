@@ -130,6 +130,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         "lcef2": LinkType.DEFINE_CURVE,
         "lcg23": LinkType.DEFINE_CURVE,
         "lcef3": LinkType.DEFINE_CURVE,
+        "lcsigy": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -874,4 +875,28 @@ class MatReinforcedThermoplastic(KeywordBase):
     def lcef3_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcef3."""
         self.lcef3 = value.lcid
+
+    @property
+    def lcsigy_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsigy."""
+        if self.deck is None:
+            return None
+        field_value = self.lcsigy
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsigy_link.setter
+    def lcsigy_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsigy."""
+        if hasattr(value, "lcid"):
+            self.lcsigy = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsigy = value.tbid
 

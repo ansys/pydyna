@@ -315,14 +315,70 @@ class LinkIdentity:
     These values correspond to the "link" field values in kwd.json.
     """
 
+    MAT = 14
+    SECTION = 15
     DEFINE_CURVE = 19
     DEFINE_TRANSFORMATION = 40
+    DEFINE_CURVE_OR_TABLE = 86
+
+
+def _add_mat_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    """Add link data for MAT_* material keywords."""
+    mat_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "MAT",
+        "keyword_subtype": None,
+        "fields": link_fields,
+        "linkid": "mid",
+        "link_type_name": "MAT",
+        "is_polymorphic": True,
+    }
+    link_data.append(mat_link_data)
+
+
+def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    """Add link data for SECTION_* keywords."""
+    section_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "SECTION",
+        "keyword_subtype": None,
+        "fields": link_fields,
+        "linkid": "secid",
+        "link_type_name": "SECTION",
+        "is_polymorphic": True,
+    }
+    link_data.append(section_link_data)
+
+
+def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+    """Add link data for polymorphic DEFINE_CURVE or DEFINE_TABLE fields."""
+    polymorphic_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": None,
+        "keyword_subtype": None,
+        "fields": link_fields,
+        "linkid": None,
+        "link_type_name": "DEFINE_CURVE_OR_TABLE",
+        "is_polymorphic": True,
+        "is_multi_target": True,
+        "targets": [
+            {"type": "DEFINE", "subtype": "CURVE", "id_field": "lcid"},
+            {"type": "DEFINE", "subtype": "TABLE", "id_field": "tbid"},
+        ],
+    }
+    link_data.append(polymorphic_link_data)
 
 
 def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {
+        LinkIdentity.MAT: [],
+        LinkIdentity.SECTION: [],
         LinkIdentity.DEFINE_CURVE: [],
         LinkIdentity.DEFINE_TRANSFORMATION: [],
+        LinkIdentity.DEFINE_CURVE_OR_TABLE: [],
     }
     has_link = False
     for card in kwd_data.cards:
@@ -354,11 +410,20 @@ def _add_links(kwd_data: KeywordData) -> None:
     for link_type, link_fields in links.items():
         if not link_fields:
             continue
-        if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
+        if link_type == LinkIdentity.MAT:
+            _add_mat_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SECTION:
+            _add_section_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_CURVE:
             _add_define_curve_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_CURVE_OR_TABLE:
+            _add_define_curve_or_table_link_data(link_data, link_fields)
             link_count += len(link_fields)
     kwd_data.links = link_data
     logger.debug(f"Added {link_count} links to keyword data")

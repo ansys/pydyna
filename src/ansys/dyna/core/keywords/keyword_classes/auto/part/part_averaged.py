@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTAVERAGED_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -46,6 +47,10 @@ class PartAveraged(KeywordBase):
 
     keyword = "PART"
     subkeyword = "AVERAGED"
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartAveraged class."""
@@ -168,4 +173,34 @@ class PartAveraged(KeywordBase):
     def tmid(self, value: int) -> None:
         """Set the tmid property."""
         self._cards[1].set_value("tmid", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def secid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for secid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.secid:
+                return kwd
+        return None
+
+    @secid_link.setter
+    def secid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for secid."""
+        self.secid = value.secid
 

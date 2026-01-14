@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALESTRUCTUREDMULTI_MATERIALGROUP_CARD0 = (
     FieldSchema("ammg_name", str, 0, 10, None),
@@ -42,6 +43,9 @@ class AleStructuredMulti_MaterialGroup(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "STRUCTURED_MULTI-MATERIAL_GROUP"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleStructuredMulti_MaterialGroup class."""
@@ -94,6 +98,21 @@ class AleStructuredMulti_MaterialGroup(KeywordBase):
     def pref(self, value: float) -> None:
         """Set the pref property."""
         self._cards[0].set_value("pref", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 
 
 class AleStructuredMultiMaterialGroup(AleStructuredMulti_MaterialGroup):

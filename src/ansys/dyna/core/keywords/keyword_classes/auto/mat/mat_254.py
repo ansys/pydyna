@@ -127,6 +127,18 @@ class Mat254(KeywordBase):
     ]
     _link_fields = {
         "mix": LinkType.DEFINE_CURVE,
+        "mixr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy4": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy5": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy6": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy7": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy8": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -960,4 +972,292 @@ class Mat254(KeywordBase):
     def mix_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for mix."""
         self.mix = value.lcid
+
+    @property
+    def mixr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for mixr."""
+        if self.deck is None:
+            return None
+        field_value = self.mixr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @mixr_link.setter
+    def mixr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for mixr."""
+        if hasattr(value, "lcid"):
+            self.mixr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.mixr = value.tbid
+
+    @property
+    def xa1pa1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa1."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa1_link.setter
+    def xa1pa1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa1."""
+        if hasattr(value, "lcid"):
+            self.xa1pa1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa1 = value.tbid
+
+    @property
+    def xa1pa2_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa2."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa2_link.setter
+    def xa1pa2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa2."""
+        if hasattr(value, "lcid"):
+            self.xa1pa2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa2 = value.tbid
+
+    @property
+    def xa1pa3_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa3."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa3_link.setter
+    def xa1pa3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa3."""
+        if hasattr(value, "lcid"):
+            self.xa1pa3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa3 = value.tbid
+
+    @property
+    def sigy1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy1."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy1_link.setter
+    def sigy1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy1."""
+        if hasattr(value, "lcid"):
+            self.sigy1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy1 = value.tbid
+
+    @property
+    def sigy2_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy2."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy2_link.setter
+    def sigy2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy2."""
+        if hasattr(value, "lcid"):
+            self.sigy2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy2 = value.tbid
+
+    @property
+    def sigy3_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy3."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy3_link.setter
+    def sigy3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy3."""
+        if hasattr(value, "lcid"):
+            self.sigy3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy3 = value.tbid
+
+    @property
+    def sigy4_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy4."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy4
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy4_link.setter
+    def sigy4_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy4."""
+        if hasattr(value, "lcid"):
+            self.sigy4 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy4 = value.tbid
+
+    @property
+    def sigy5_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy5."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy5
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy5_link.setter
+    def sigy5_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy5."""
+        if hasattr(value, "lcid"):
+            self.sigy5 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy5 = value.tbid
+
+    @property
+    def sigy6_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy6."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy6
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy6_link.setter
+    def sigy6_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy6."""
+        if hasattr(value, "lcid"):
+            self.sigy6 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy6 = value.tbid
+
+    @property
+    def sigy7_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy7."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy7
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy7_link.setter
+    def sigy7_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy7."""
+        if hasattr(value, "lcid"):
+            self.sigy7 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy7 = value.tbid
+
+    @property
+    def sigy8_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy8."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy8
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy8_link.setter
+    def sigy8_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy8."""
+        if hasattr(value, "lcid"):
+            self.sigy8 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy8 = value.tbid
 

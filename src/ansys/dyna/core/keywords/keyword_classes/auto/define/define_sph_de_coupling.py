@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINESPHDECOUPLING_CARD0 = (
     FieldSchema("did", int, 0, 10, None),
@@ -54,6 +55,9 @@ class DefineSphDeCoupling(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pfact": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSphDeCoupling class."""
@@ -197,4 +201,19 @@ class DefineSphDeCoupling(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pfact_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for pfact."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.pfact:
+                return kwd
+        return None
+
+    @pfact_link.setter
+    def pfact_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for pfact."""
+        self.pfact = value.secid
 

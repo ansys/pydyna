@@ -108,6 +108,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         "lcchc": LinkType.DEFINE_CURVE,
         "lcab": LinkType.DEFINE_CURVE,
         "lcac": LinkType.DEFINE_CURVE,
+        "lcaa": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -725,4 +726,28 @@ class MatOrthotropicThermalCuring(KeywordBase):
     def lcac_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcac."""
         self.lcac = value.lcid
+
+    @property
+    def lcaa_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcaa."""
+        if self.deck is None:
+            return None
+        field_value = self.lcaa
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcaa_link.setter
+    def lcaa_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcaa."""
+        if hasattr(value, "lcid"):
+            self.lcaa = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcaa = value.tbid
 

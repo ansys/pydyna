@@ -48,6 +48,7 @@ class MatAddPropertyDependenceFreq(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
+        "mid": LinkType.MAT,
         "lcid": LinkType.DEFINE_CURVE,
     }
 
@@ -116,6 +117,21 @@ class MatAddPropertyDependenceFreq(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 
     @property
     def lcid_link(self) -> DefineCurve:

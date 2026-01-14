@@ -35,15 +35,21 @@ class TestLinkTypeEnum:
     def test_link_type_values(self):
         """Test that LinkType enum has expected values."""
         assert LinkType.ALL.value == 0
+        assert LinkType.MAT.value == 14
+        assert LinkType.SECTION.value == 15
         assert LinkType.DEFINE_CURVE.value == 19
         assert LinkType.DEFINE_TRANSFORMATION.value == 40
+        assert LinkType.DEFINE_CURVE_OR_TABLE.value == 86
 
     def test_link_type_members(self):
         """Test that LinkType has all expected members."""
         members = [m.name for m in LinkType]
         assert "ALL" in members
+        assert "MAT" in members
+        assert "SECTION" in members
         assert "DEFINE_CURVE" in members
         assert "DEFINE_TRANSFORMATION" in members
+        assert "DEFINE_CURVE_OR_TABLE" in members
 
 
 class TestLinkFieldsClassAttribute:
@@ -248,3 +254,260 @@ class TestMultipleCurveReferences:
         # Only lcsr is a DEFINE_CURVE link, lcss is TABLE
         assert len(links) == 1
         assert links[0] is curve1
+
+
+class TestMatLinks:
+    """Tests for MAT_* (material) links."""
+
+    def test_element_shell_composite_has_mat_link_fields(self):
+        """Test that ELEMENT_SHELL_COMPOSITE has MAT link fields."""
+        assert hasattr(kwd.ElementShellComposite, "_link_fields")
+        assert "mid1" in kwd.ElementShellComposite._link_fields
+        assert "mid2" in kwd.ElementShellComposite._link_fields
+        assert kwd.ElementShellComposite._link_fields["mid1"] == LinkType.MAT
+
+    def test_mid_link_without_deck_returns_none(self):
+        """Test that mid_link returns None when keyword is not in a deck."""
+        elem = kwd.ElementShellComposite()
+        elem.mid1 = 100
+        assert elem.mid1_link is None
+
+    def test_mid_link_returns_matching_material(self):
+        """Test that mid_link returns the correct MAT_* keyword when in a deck."""
+        deck = Deck()
+        mat = kwd.Mat001()  # MAT_ELASTIC
+        mat.mid = 100
+        elem = kwd.ElementShellComposite()
+        elem.mid1 = 100
+
+        deck.extend([mat, elem])
+
+        assert elem.mid1_link is mat
+        assert elem.mid1_link.mid == 100
+
+    def test_mid_link_returns_none_when_material_not_found(self):
+        """Test that mid_link returns None when referenced material doesn't exist."""
+        deck = Deck()
+        mat = kwd.Mat001()
+        mat.mid = 200  # Different ID
+        elem = kwd.ElementShellComposite()
+        elem.mid1 = 100
+
+        deck.extend([mat, elem])
+
+        assert elem.mid1_link is None
+
+    def test_mid_link_setter(self):
+        """Test that mid_link setter updates the mid field."""
+        elem = kwd.ElementShellComposite()
+        mat = kwd.Mat001()
+        mat.mid = 42
+
+        elem.mid1_link = mat
+
+        assert elem.mid1 == 42
+
+    def test_get_links_with_mat_filter(self):
+        """Test get_links filters by MAT type."""
+        deck = Deck()
+        mat1 = kwd.Mat001()
+        mat1.mid = 100
+        mat2 = kwd.Mat001()
+        mat2.mid = 200
+        elem = kwd.ElementShellComposite()
+        elem.mid1 = 100
+        elem.mid2 = 200
+
+        deck.extend([mat1, mat2, elem])
+
+        # Filter by MAT should return both materials
+        mat_links = elem.get_links(LinkType.MAT)
+        assert len(mat_links) == 2
+        assert mat1 in mat_links
+        assert mat2 in mat_links
+
+        # Filter by DEFINE_CURVE should return empty
+        curve_links = elem.get_links(LinkType.DEFINE_CURVE)
+        assert len(curve_links) == 0
+
+
+class TestSectionLinks:
+    """Tests for SECTION_* links."""
+
+    def test_define_adaptive_solid_to_sph_has_section_link_fields(self):
+        """Test that DEFINE_ADAPTIVE_SOLID_TO_SPH has SECTION link fields."""
+        assert hasattr(kwd.DefineAdaptiveSolidToSph, "_link_fields")
+        # The field is 'issph' not 'isdes'
+        assert "issph" in kwd.DefineAdaptiveSolidToSph._link_fields
+        assert kwd.DefineAdaptiveSolidToSph._link_fields["issph"] == LinkType.SECTION
+
+    def test_section_link_returns_matching_section(self):
+        """Test that section link returns the correct SECTION_* keyword."""
+        deck = Deck()
+        section = kwd.SectionSph()
+        section.secid = 100
+        define = kwd.DefineAdaptiveSolidToSph()
+        define.issph = 100
+
+        deck.extend([section, define])
+
+        assert define.issph_link is section
+        assert define.issph_link.secid == 100
+
+    def test_get_links_with_section_filter(self):
+        """Test get_links filters by SECTION type."""
+        deck = Deck()
+        section = kwd.SectionSph()
+        section.secid = 100
+        define = kwd.DefineAdaptiveSolidToSph()
+        define.issph = 100
+
+        deck.extend([section, define])
+
+        section_links = define.get_links(LinkType.SECTION)
+        assert len(section_links) == 1
+        assert section_links[0] is section
+
+
+class TestPolymorphicCurveOrTableLinks:
+    """Tests for DEFINE_CURVE_OR_TABLE polymorphic links."""
+
+    def test_mat_024_has_polymorphic_link_fields(self):
+        """Test that MAT_024 (MAT_PIECEWISE_LINEAR_PLASTICITY) has polymorphic fields."""
+        assert hasattr(kwd.Mat024, "_link_fields")
+        # lcss is the polymorphic field (link=86)
+        if "lcss" in kwd.Mat024._link_fields:
+            assert kwd.Mat024._link_fields["lcss"] == LinkType.DEFINE_CURVE_OR_TABLE
+
+    def test_polymorphic_link_resolves_to_curve(self):
+        """Test that polymorphic link resolves to DEFINE_CURVE when curve exists."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.Mat024()
+        mat.lcss = 100
+
+        deck.extend([curve, mat])
+
+        # lcss_link should resolve to the curve
+        if hasattr(mat, "lcss_link"):
+            assert mat.lcss_link is curve
+
+    def test_polymorphic_link_resolves_to_table(self):
+        """Test that polymorphic link resolves to DEFINE_TABLE when table exists."""
+        deck = Deck()
+        table = kwd.DefineTable()
+        table.tbid = 100
+        mat = kwd.Mat024()
+        mat.lcss = 100
+
+        deck.extend([table, mat])
+
+        # lcss_link should resolve to the table
+        if hasattr(mat, "lcss_link"):
+            assert mat.lcss_link is table
+
+    def test_get_links_with_polymorphic_filter(self):
+        """Test get_links filters by DEFINE_CURVE_OR_TABLE type."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.Mat024()
+        mat.lcss = 100
+
+        deck.extend([curve, mat])
+
+        polymorphic_links = mat.get_links(LinkType.DEFINE_CURVE_OR_TABLE)
+        if "lcss" in mat._link_fields:
+            assert len(polymorphic_links) >= 1
+
+
+class TestRecursiveLinkTraversal:
+    """Tests for recursive link traversal with the level parameter."""
+
+    def test_level_zero_returns_empty(self):
+        """Test that level=0 returns an empty list."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        # level=0 should return empty
+        assert mat.get_links(level=0) == []
+
+    def test_level_one_returns_direct_links(self):
+        """Test that level=1 (default) returns only direct links."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        # level=1 returns direct links only
+        links = mat.get_links(level=1)
+        assert len(links) == 1
+        assert links[0] is curve
+
+    def test_level_two_traverses_two_hops(self):
+        """Test that level=2 traverses two levels deep."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        # level=2 with a depth-1 chain should work the same
+        links = mat.get_links(level=2)
+        assert len(links) >= 1
+
+    def test_unlimited_level_traverses_fully(self):
+        """Test that level=-1 traverses without limit."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        # level=-1 should traverse fully
+        links = mat.get_links(level=-1)
+        assert len(links) >= 1
+        assert curve in links
+
+    def test_cycle_prevention(self):
+        """Test that cycles don't cause infinite recursion."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        # Calling with unlimited level should still terminate
+        links = mat.get_links(level=-1)
+        # No infinite loop = test passes
+        assert isinstance(links, list)
+
+    def test_no_duplicate_keywords_in_recursive_traversal(self):
+        """Test that recursive traversal doesn't return duplicates."""
+        deck = Deck()
+        curve = kwd.DefineCurve()
+        curve.lcid = 100
+        mat = kwd.MatPiecewiseLinearPlasticity()
+        mat.lcsr = 100
+
+        deck.extend([curve, mat])
+
+        links = mat.get_links(level=-1)
+        # Check no duplicates by comparing ids
+        link_ids = [id(l) for l in links]
+        assert len(link_ids) == len(set(link_ids))

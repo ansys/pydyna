@@ -75,6 +75,9 @@ class Mat224Gys(KeywordBase):
         "lcg": LinkType.DEFINE_CURVE,
         "lch": LinkType.DEFINE_CURVE,
         "lci": LinkType.DEFINE_CURVE,
+        "lck1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lckt": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcf": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -400,4 +403,76 @@ class Mat224Gys(KeywordBase):
     def lci_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lci."""
         self.lci = value.lcid
+
+    @property
+    def lck1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lck1."""
+        if self.deck is None:
+            return None
+        field_value = self.lck1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lck1_link.setter
+    def lck1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lck1."""
+        if hasattr(value, "lcid"):
+            self.lck1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lck1 = value.tbid
+
+    @property
+    def lckt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lckt."""
+        if self.deck is None:
+            return None
+        field_value = self.lckt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lckt_link.setter
+    def lckt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lckt."""
+        if hasattr(value, "lcid"):
+            self.lckt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lckt = value.tbid
+
+    @property
+    def lcf_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcf."""
+        if self.deck is None:
+            return None
+        field_value = self.lcf
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcf_link.setter
+    def lcf_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcf."""
+        if hasattr(value, "lcid"):
+            self.lcf = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcf = value.tbid
 

@@ -65,6 +65,8 @@ class Mat187L(KeywordBase):
     _link_fields = {
         "lcemod": LinkType.DEFINE_CURVE,
         "lcid_p": LinkType.DEFINE_CURVE,
+        "lcid_t": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcid_c": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -293,4 +295,52 @@ class Mat187L(KeywordBase):
     def lcid_p_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid_p."""
         self.lcid_p = value.lcid
+
+    @property
+    def lcid_t_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_t."""
+        if self.deck is None:
+            return None
+        field_value = self.lcid_t
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcid_t_link.setter
+    def lcid_t_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcid_t."""
+        if hasattr(value, "lcid"):
+            self.lcid_t = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcid_t = value.tbid
+
+    @property
+    def lcid_c_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_c."""
+        if self.deck is None:
+            return None
+        field_value = self.lcid_c
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcid_c_link.setter
+    def lcid_c_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcid_c."""
+        if hasattr(value, "lcid"):
+            self.lcid_c = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcid_c = value.tbid
 
