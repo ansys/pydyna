@@ -36,7 +36,7 @@ runs:
       shell: bash
       run: |
         source .venv/bin/activate
-        uv pip install -e .[codegen]
+        uv pip install -e .[codegen,tests]
 
     - name: Run codegen validation
       shell: bash
