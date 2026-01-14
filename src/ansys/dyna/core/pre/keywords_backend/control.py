@@ -224,7 +224,7 @@ class ControlKeywordsMixin:
         from ansys.dyna.core.keywords import keywords
 
         with disable_lspp_defaults():
-            kw = keywords.ControlBulkViscosity(q1=q1, q2=q2, type=bulk_type)
+            kw = keywords.ControlBulkViscosity(q1=q1, q2=q2, type=bulk_type, btype=0, tstype=0)
 
         self._deck.append(kw)
         logger.debug("Created CONTROL_BULK_VISCOSITY")

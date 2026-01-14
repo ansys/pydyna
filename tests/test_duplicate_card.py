@@ -303,3 +303,51 @@ def test_table_card_init_data_scalar():
     )
 
     _verify_dataframe(card.table)
+
+
+@pytest.mark.keywords
+def test_table_card_string_column_preserves_nan():
+    """Test that string columns preserve NaN values when table is assigned.
+
+    This is a regression test for an issue where setting a table on a TableCard
+    would convert NaN values in string columns to the literal string 'nan' via
+    .astype(str). The fix ensures string columns keep object dtype and preserve
+    NaN values, so they write as blank spaces instead of 'nan'.
+
+    This tests the TableCardGroup._propagate() scenario where a table containing
+    NaN values (from reading empty lines) is reassigned to child TableCards.
+
+    Note: assigining 'nan' to string fields when reading blank spaces isn't
+    correct but this test verifies that when that data is written we don't
+    write the literal string 'nan'. When reading is improved, this won't be
+    necessary (but the high-level test should remain)
+    """
+    import pandas._libs.missing as libmissing
+
+    # Create a TableCard with a string field (like PART's heading field)
+    card = TableCard(
+        [
+            Field("heading", str, 0, 70),
+        ],
+        None,  # unbounded
+    )
+
+    # Create a DataFrame with NaN in the string column
+    # This simulates what pandas.read_fwf produces for empty/whitespace lines
+    # (with skip_blank_lines=False, an empty line becomes NaN)
+    df = pd.DataFrame({"heading": [np.nan]})
+
+    # Assign to the card (this triggers the table setter)
+    # This is what TableCardGroup._propagate() does after reading
+    card.table = df
+
+    # Verify the value is still NaN, not the string 'nan'
+    val = card.table["heading"][0]
+    assert libmissing.checknull(val), f"Expected NaN but got {val!r}"
+    assert not isinstance(val, str), f"Expected float NaN but got string {val!r}"
+
+    # Verify it writes as spaces, not 'nan'
+    output = card.write(comment=False)
+    assert "nan" not in output.lower(), f"Output should not contain 'nan': {output!r}"
+    # The output should be 70 spaces followed by newline
+    assert output.strip() == "", f"Output should be blank spaces: {output!r}"

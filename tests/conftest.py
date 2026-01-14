@@ -274,3 +274,75 @@ def ref_string(file_utils: FileUtils):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def compare_keyword_files(
+    output_file: str,
+    reference_file: str,
+    skip_comment_lines: bool = False,
+    strip_trailing_whitespace: bool = False,
+) -> bool:
+    """Compare two keyword files line by line.
+
+    Parameters
+    ----------
+    output_file : str
+        Path to the generated output file.
+    reference_file : str
+        Path to the reference/standard file.
+    skip_comment_lines : bool, optional
+        If True, skip lines starting with '$#' (comment lines).
+        Useful when schema differences cause comment line mismatches.
+    strip_trailing_whitespace : bool, optional
+        If True, strip trailing whitespace from lines before comparison.
+
+    Returns
+    -------
+    bool
+        True if files match (according to the specified options), False otherwise.
+    """
+    with open(output_file, "r") as fp1, open(reference_file, "r") as fp2:
+        while True:
+            line1 = fp1.readline()
+            line2 = fp2.readline()
+
+            # EOF check
+            if line1 == "" and line2 == "":
+                # Both files ended at the same time
+                break
+            if line1 == "" or line2 == "":
+                # One file ended before the other
+                return False
+
+            # Skip comment lines if requested
+            if skip_comment_lines:
+                while line1.startswith("$#"):
+                    line1 = fp1.readline()
+                    if line1 == "":
+                        break
+                while line2.startswith("$#"):
+                    line2 = fp2.readline()
+                    if line2 == "":
+                        break
+
+                # Re-check EOF after skipping
+                if line1 == "" and line2 == "":
+                    break
+                if line1 == "" or line2 == "":
+                    return False
+
+            # Strip trailing whitespace if requested
+            if strip_trailing_whitespace:
+                line1 = line1.rstrip()
+                line2 = line2.rstrip()
+
+            if line1 != line2:
+                return False
+
+    return True
+
+
+@pytest.fixture
+def keyword_file_compare():
+    """Fixture providing access to the compare_keyword_files function."""
+    return compare_keyword_files

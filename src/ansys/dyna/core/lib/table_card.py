@@ -221,6 +221,11 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
+                elif field_type == str:
+                    # For string fields, astype(str) would convert NaN to 'nan'.
+                    # Instead, keep object dtype which preserves NaN values.
+                    columns[field.name] = value[field.name]
+                    continue
                 columns[field.name] = value[field.name].astype(field_type)
             else:
                 columns[field.name] = self._make_column(field, len(value))

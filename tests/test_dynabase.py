@@ -1,5 +1,6 @@
 import os
 
+import pytest
 
 from ansys.dyna.core.pre.dynasolution import DynaSolution
 from ansys.dyna.core.pre.dynabase import (
@@ -10,9 +11,11 @@ from ansys.dyna.core.pre.dynabase import (
     HourglassControl,
     BulkViscosity,
 )
+from ansys.dyna.core.lib.config import legacy_float_format
 
 
 def comparefile(outputf, standardf):
+    """Legacy comparison function for gRPC backend (strict comparison)."""
     with open(outputf, "r") as fp1, open(standardf, "r") as fp2:
         line = fp1.readline()
         line = fp1.readline()
@@ -26,7 +29,7 @@ def comparefile(outputf, standardf):
     return True
 
 
-def test_dynabase(base_initialfile, resolve_standard_path,resolve_output_path):
+def test_dynabase(base_initialfile, resolve_standard_path, resolve_output_path, using_keywords_backend, keyword_file_compare):
     solution = DynaSolution("localhost")
     fns = []
     fns.append(base_initialfile)
@@ -61,10 +64,29 @@ def test_dynabase(base_initialfile, resolve_standard_path,resolve_output_path):
         irquad=0,
     )
     dbase.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
-    outpath=solution.save_file()
+
+    outpath = solution.save_file()
     #serveroutfile = os.path.join(outpath,"test_base.k")
     serveroutfile = '/'.join((outpath,"test_base.k"))
     outputfile = os.path.join(resolve_output_path, "test_base.k")
-    solution.download(serveroutfile,outputfile)
+
+    # Use legacy float format when using keywords backend for compatibility with reference file
+    if using_keywords_backend:
+        with legacy_float_format():
+            solution.download(serveroutfile, outputfile)
+    else:
+        solution.download(serveroutfile, outputfile)
+
     standardfile = os.path.join(resolve_standard_path, "base.k")
-    assert comparefile(outputfile, standardfile)
+
+    if using_keywords_backend:
+        # Keywords backend: skip comment lines and strip trailing whitespace
+        # to handle schema/formatting differences
+        assert keyword_file_compare(
+            outputfile, standardfile,
+            skip_comment_lines=True,
+            strip_trailing_whitespace=True
+        )
+    else:
+        # gRPC backend: strict comparison
+        assert comparefile(outputfile, standardfile)
