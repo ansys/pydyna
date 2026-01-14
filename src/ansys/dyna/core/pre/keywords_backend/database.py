@@ -75,9 +75,8 @@ class DatabaseKeywordsMixin:
             "nintsld": nintsld,
         }
 
-        # Create DATABASE_BINARY_D3PLOT with only explicitly set fields
-        with disable_lspp_defaults():
-            kw = keywords.DatabaseBinaryD3Plot(dt=dt)
+        # Create DATABASE_BINARY_D3PLOT with explicit defaults to match gRPC backend output
+        kw = keywords.DatabaseBinaryD3Plot(dt=dt, lcdt=0, beam=0, npltc=0, psetid=0)
 
         self._deck.append(kw)
         logger.debug(f"Created DATABASE_BINARY_{filetype} with dt={dt}")

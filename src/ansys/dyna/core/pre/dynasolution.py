@@ -177,7 +177,7 @@ class DynaSolution:
     def get_download_path():
         system_type = os.name
         if system_type == "nt":  # Windows
-            downloads_folder = os.getenv("USERPROFILE") + "\Downloads"
+            downloads_folder = os.getenv("USERPROFILE") + "\\Downloads"
         elif system_type == "posix":  # Linux or Macos
             downloads_folder = "/home/user/Downloads"
         else:
@@ -189,7 +189,7 @@ class DynaSolution:
     def get_appdata_path():
         system_type = os.name
         if system_type == "nt":  # Windows
-            appdata_folder = os.getenv("APPDATA") + "\PYDYNA"
+            appdata_folder = os.getenv("APPDATA") + "\\PYDYNA"
             if not os.path.isdir(appdata_folder):
                 os.mkdir(appdata_folder)
         elif system_type == "posix":  # Linux or Macos
@@ -301,7 +301,7 @@ class DynaSolution:
             os.makedirs(os.path.dirname(os.path.abspath(local_name)), exist_ok=True)
             # Prepare deck for export (sort keywords and set comment header)
             self._keywords_backend._prepare_deck_for_export()
-            self._keywords_backend.deck.export_file(local_name)
+            self._keywords_backend.deck.export_file(local_name, trailing_newline=True)
             logging.info(f"Wrote deck to {local_name}")
             return
 

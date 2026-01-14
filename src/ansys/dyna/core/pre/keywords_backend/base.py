@@ -30,7 +30,6 @@ from typing import Any, Dict, List, Optional, Union
 from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-
 # Keyword ordering priority for gRPC backend compatibility.
 # Lower numbers come first in the output file.
 # Keywords not in this list get priority 50 (middle).
@@ -85,6 +84,7 @@ def get_keyword_sort_key(keyword: Union[str, KeywordBase]) -> tuple:
     priority = KEYWORD_PRIORITY.get(kw_type, 50)
 
     return (priority, full_name)
+
 
 logger = logging.getLogger(__name__)
 
@@ -326,7 +326,7 @@ class KeywordsBackendBase:
         # Prepare deck for export (sort keywords and set comment header)
         self._prepare_deck_for_export()
 
-        self._deck.export_file(output_path)
+        self._deck.export_file(output_path, trailing_newline=True)
         return self._working_dir
 
     def set_main_filename(self, filename: str) -> None:
