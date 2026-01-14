@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for configuration settings."""
 
 from contextlib import contextmanager
 
@@ -27,6 +28,7 @@ ENABLE_CSV_AUTODETECT = True
 
 
 def use_lspp_defaults():
+    """Return whether LSPP default values are currently enabled."""
     return USE_LSPP_DEFAULTS
 
 
@@ -37,6 +39,7 @@ def csv_autodetect_enabled():
 
 @contextmanager
 def disable_lspp_defaults():
+    """Disable LSPP default values within the context."""
     global USE_LSPP_DEFAULTS
     USE_LSPP_DEFAULTS = False
     try:

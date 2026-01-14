@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-IGA API
-==========
-
-Module for creating an IGA DYNA input deck.
-"""
+"""Module for creating an IGA DYNA input deck."""
 
 import logging
 
@@ -33,14 +28,14 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaIGA(DynaBase):
-    """Contains methods for creating a keyword related to IGA."""
+    """Contain methods for creating a keyword related to IGA."""
 
     def __init__(self):
         DynaBase.__init__(self)
         self.casetype = CaseType.IGA
 
     def create_section_igashell(self, secid, elform, shrf, thickness):
-        """Define section properties for isogeometric shell elements.
+        r"""Define section properties for isogeometric shell elements.
 
         Parameters
         ----------

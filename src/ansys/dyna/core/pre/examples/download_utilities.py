@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module provides a thread-safe singleton download manager for handling example file downloads."""
+
 import os
 from threading import Lock
 from typing import Optional
@@ -33,8 +35,11 @@ __all__ = ["DownloadManager"]
 
 class DownloadManagerMeta(type):
     """
+    Download Manager Metaclass.
+
     Provides a thread-safe implementation of ``Singleton`` from
     https://refactoring.guru/design-patterns/singleton/python/example#example-1.
+
     """
 
     _instances = {}

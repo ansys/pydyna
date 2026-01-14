@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-ICFD API
-========
-
-Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.
-"""
+"""Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck."""
 
 import logging
 
@@ -152,7 +147,7 @@ class DynaICFD(DynaBase):
         return ret
 
     def create_part_icfd(self, pid, secid, mid):
-        """Define parts for the ICFD solver.
+        r"""Define parts for the ICFD solver.
 
         Parameters
         ----------

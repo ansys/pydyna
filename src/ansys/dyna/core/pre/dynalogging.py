@@ -20,7 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Logging module supplying a general framework for logging in the PyDYNA
+"""Logging module supplying a general framework for logging in the PyDYNA.
+
+This module provides logging capabilities for the PyDYNA
 ``pre`` service.
 
 This module is built upon the `Python logging <https://docs.python.org/3/library/logging.html>`_
@@ -320,7 +322,7 @@ class Logger:
     _instances = {}
 
     def __init__(self, level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME):
-        """Customized the logger for the PyDYNA ``pre`` service.
+        """Customize the logger for the PyDYNA ``pre`` service.
 
         Parameters
         ----------
@@ -527,6 +529,7 @@ class Logger:
         return self._instances[new_name]
 
     def __getitem__(self, key):
+        """Get instance logger by name."""
         if key in self._instances.keys():
             return self._instances[key]
         else:

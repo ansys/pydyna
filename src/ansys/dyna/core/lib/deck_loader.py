@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for loading decks."""
 
 import io
 import typing
@@ -348,6 +349,7 @@ def load_deck(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text string."""
     result = DeckLoaderResult()
     buffer = io.StringIO()
     buffer.write(text)
@@ -362,6 +364,7 @@ def load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text buffer."""
     result = DeckLoaderResult()
     _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
     return result

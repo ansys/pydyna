@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling fields."""
 
 import copy
 import dataclasses
@@ -37,6 +38,8 @@ class Flag:
 class Field:
     @dataclasses.dataclass
     class ReadOnlyValue:
+        """Class to represent a read-only value for a field."""
+
         value: typing.Any = None
 
     def __init__(self, name: str, type: type, offset: int, width: int, /, value: typing.Any = None, **kwargs):
@@ -115,6 +118,7 @@ class Field:
 
 
 def to_long(field: Field, offset: int) -> Field:
+    """Convert a field to its long format representation."""
     field = copy.copy(field)
     width = field.width
     if width < 20:

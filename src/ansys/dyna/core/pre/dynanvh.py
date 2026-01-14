@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-NVH API
-==========
-
-Module for creating an NVH Dyna input deck.
-"""
+"""Module for creating an NVH Dyna input deck."""
 
 import logging
 

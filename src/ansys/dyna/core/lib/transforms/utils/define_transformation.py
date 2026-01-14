@@ -95,6 +95,7 @@ def _get_transform_matrix(transforms: pd.DataFrame) -> np.ndarray:
 
 
 def get_transform_matrix(kwd: typing.Optional[DefineTransformation]) -> typing.Optional[np.ndarray]:
+    r"""Get the 4x4 transformation matrix from a ``*DEFINE_TRANSFORMATION`` keyword."""
     if kwd is None:
         return None
     transforms = kwd.transforms

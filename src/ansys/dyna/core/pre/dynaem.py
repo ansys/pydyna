@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-EM API
-======
-
-Module for creating an electromagnetism (EM) input deck.
-"""
+"""Module for creating an electromagnetism (EM) input deck."""
 
 import logging
 
@@ -200,7 +195,9 @@ class DynaEM(DynaBase):
         return ret.id
 
     def create_em_mat001(self, mid, mtype, sigma):
-        """Create an electromagnetic material type and set properties
+        """Create an electromagnetic material type and set properties.
+
+        Create an electromagnetic material type and set properties
         for a material whose permeability equals the free space permeability.
 
         Parameters
@@ -229,7 +226,8 @@ class DynaEM(DynaBase):
         return ret
 
     def create_em_mat002(self, mid, mtype, sigma, eosid, murel):
-        """Create an electromagnetic material type and set properties
+        """Create an electromagnetic material type and set properties.
+
         whose permeability is different than the free space permeability.
 
         Parameters
@@ -818,7 +816,9 @@ class RandlesCell:
         self.r0toth = add_heating_to_thermal_solver
 
     def set_randles_short(self, resistances_func=None):
-        """Define conditions to turn on a Randles short (replace one or several Randles circuits by resistances),
+        """Define conditions to turn on a Randles short.
+
+        Define conditions to turn on a Randles short (replace one or several Randles circuits by resistances),
         and to define the value of the short resistance.
 
         Parameters
@@ -831,8 +831,9 @@ class RandlesCell:
         self.randles_short_function = resistances_func
 
     def set_extra_heat_source(self, heat_source_func=None):
-        """Add an extra heat source term to the Randles circuit nodes in order to account for thermal runaway
-        situations.
+        """Add an extra heat source term to the Randles circuit nodes.
+
+        In order to account for thermal runaway situations.
 
         Parameters
         ----------

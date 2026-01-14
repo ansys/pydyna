@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Solution
-========
-
-Module for providing the top object that sets up a DYNA solution.
-"""
+"""Module for providing the top object that sets up a DYNA solution."""
 
 import logging
 import os

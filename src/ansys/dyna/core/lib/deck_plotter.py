@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for plotting decks."""
 
 import typing
 
@@ -69,6 +70,7 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
+    """Process nodes DataFrame to extract XYZ coordinates as a numpy array."""
     nodes_xyz = nodes_df[["x", "y", "z"]]
     return nodes_xyz.to_numpy()
 
@@ -424,6 +426,7 @@ def extract_solids(solids: pd.DataFrame, mapping: np.ndarray):
 
 
 def get_pyvista():
+    """Method to import pyvista, raising an exception if not installed."""
     try:
         import pyvista as pv
     except ImportError:
