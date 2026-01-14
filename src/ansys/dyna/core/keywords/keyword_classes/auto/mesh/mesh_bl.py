@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MESHBL_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -39,6 +40,9 @@ class MeshBl(KeywordBase):
 
     keyword = "MESH"
     subkeyword = "BL"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MeshBl class."""
@@ -108,4 +112,9 @@ class MeshBl(KeywordBase):
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""blst must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("blst", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

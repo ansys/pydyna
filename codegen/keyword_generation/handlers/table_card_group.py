@@ -51,12 +51,14 @@ class TableCardGroupSettings:
         property_name: Name of the table card group property
         length_func: Optional function to compute group count
         active_func: Optional function to determine if group is active
+        key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
     """
 
     refs: List[str]
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
+    key_field: Optional[str] = None
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
@@ -65,6 +67,7 @@ class TableCardGroupSettings:
             property_name=data["overall-name"],
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
+            key_field=data.get("key-field"),
         )
 
     def resolve_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
@@ -88,6 +91,10 @@ class TableCardGroupSettings:
                 "overall-name": {"type": "string", "description": "Name of the table card group"},
                 "length-func": {"type": "string", "description": "Function to compute group count"},
                 "active-func": {"type": "string", "description": "Function to determine if group is active"},
+                "key-field": {
+                    "type": "string",
+                    "description": "Key field name for table-aware link properties (e.g., 'pid' for Part)",
+                },
             },
             "required": ["refs", "overall-name"],
         },
@@ -183,6 +190,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 overall_name=card_settings.property_name,
                 length_func=card_settings.length_func or "",
                 active_func=card_settings.active_func or "",
+                key_field=card_settings.key_field,
             )
 
             # Mark all source cards for removal and insert group at minimum position
