@@ -215,7 +215,7 @@ def read_cards_with_discriminator(
     cards: typing.List,
     buf: typing.TextIO,
     parameters,
-    discriminator: "Field",
+    discriminator: "Field",  # noqa: F821
     cards_with_field: typing.List[int],
 ) -> bool:
     """Read cards where a discriminator field determines which card variant to use.

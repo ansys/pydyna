@@ -63,7 +63,6 @@ def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
 
     whose behavior is according to the rules of *DEFINE_TRANSFORM
     """
-    mtx = tfm.identity_matrix()
     xf = transform.fillna(0.0)
     option, a1, a2, a3, a4, a5, a6, a7 = (
         xf["option"],

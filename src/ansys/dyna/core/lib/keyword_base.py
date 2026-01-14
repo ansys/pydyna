@@ -140,7 +140,7 @@ class KeywordBase(Cards):
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""
         max_rows = 60  # TODO - make these configurable somewhere
 
-        class TruncatedStringException(Exception):
+        class TruncatedStringException(Exception):  # noqa: N818
             pass
 
         class TruncatedStringIO(io.IOBase):

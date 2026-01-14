@@ -274,7 +274,7 @@ class Deck(ValidationMixin):
             context = ImportContext(xform, include_deck, expand_include_file)
             try:
                 include_deck._import_file(expand_include_file, "utf-8", context)
-            except UnicodeDecodeError as e:
+            except UnicodeDecodeError:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file)
@@ -606,7 +606,7 @@ class Deck(ValidationMixin):
                 try_title = kw.split("\n")[0]
                 names.append(f"str({try_title}...)")
             elif isinstance(kw, EncryptedKeyword):
-                names.append(f"Encrypted")
+                names.append("Encrypted")
         return names
 
     def __repr__(self) -> str:

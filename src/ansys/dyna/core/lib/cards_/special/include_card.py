@@ -82,7 +82,7 @@ class IncludeCard(Card):
                 if len(filename) > 236:
                     raise Exception("Maximum filename length is 236 characters")
                 if len(filename) <= 80:
-                    right_justified_filename = f"{{0:<80}}".format(filename)
+                    right_justified_filename = "{0:<80}".format(filename)
                     buf.write(right_justified_filename)
                 else:
                     buf.write(filename[0:78])

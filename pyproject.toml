@@ -124,9 +124,9 @@ extend-exclude = [
 lint.select = [
   "D",   # pydocstyle, see https://beta.ruff.rs/docs/rules/#pydocstyle-d
   "E",   # pycodestyle, see https://beta.ruff.rs/docs/rules/#pycodestyle-e-w
-  #"F",   # pyflakes, see https://beta.ruff.rs/docs/rules/#pyflakes-f
+  "F",   # pyflakes, see https://beta.ruff.rs/docs/rules/#pyflakes-f
   "I",   # isort, see https://beta.ruff.rs/docs/rules/#isort-i
-  #"N",   # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
+  "N",   # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
   #"PTH", # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
   "PYI", # flake8-pyi, see https://docs.astral.sh/ruff/rules/#flake8-pyi-pyi
   #"TD",  # flake8-todos, https://docs.astral.sh/ruff/rules/#flake8-todos-td
@@ -138,7 +138,6 @@ lint.ignore = [
   "D400",  # First line should end with a period
   "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
   "E743",  # Ambiguous function name. N802 and Python naming restrictions ensure unambiguous names.
-  "F821",  # Undefined name. PyFlakes can not handle forward reference annotations. Using flake8-pyi instead.
   "TD002", # Missing author in TODOs comment
   "E722",  # Do not use bare 'except' clauses
   "E402",  # Module level import not at top of file
@@ -151,6 +150,9 @@ lint.ignore = [
   "D205",  # 1 blank line required between summary line and description
 ]
 lint.per-file-ignores."!src/**.py" = [ "D" ]
+lint.per-file-ignores."__init__.py" = [ "F401" ]
+lint.per-file-ignores."examples/**.py" = [ "N" ]
+
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 

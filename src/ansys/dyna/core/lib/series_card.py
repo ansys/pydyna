@@ -190,7 +190,7 @@ class SeriesCard(CardInterface):
 
     def __getitem__(self, index):
         err_string = (
-            f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
+            "get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
         )
         if not isinstance(index, (slice, int)):
             raise TypeError(err_string)

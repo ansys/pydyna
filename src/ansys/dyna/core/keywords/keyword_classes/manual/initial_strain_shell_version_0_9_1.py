@@ -28,7 +28,7 @@ import warnings
 
 import pandas as pd
 
-from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
