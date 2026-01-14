@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from dataclasses import dataclass
 import logging
 import typing
-from dataclasses import dataclass
 from typing import Optional
 
 from jinja2 import Environment
@@ -291,6 +291,7 @@ class LinkFieldInfo:
 
     name: str
     is_table_group: bool = False
+    is_table: bool = False  # True for TableCard (not TableCardGroup)
     table_name: Optional[str] = None
     key_field: Optional[str] = None
 
@@ -303,6 +304,7 @@ def _convert_link_fields_to_template_format(
         {
             "name": f.name,
             "is_table_group": f.is_table_group,
+            "is_table": f.is_table,
             "table_name": f.table_name,
             "key_field": f.key_field,
         }
@@ -310,9 +312,7 @@ def _convert_link_fields_to_template_format(
     ]
 
 
-def _add_define_transform_link_data(
-    link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]
-):
+def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     transform_link_data = {
         "classname": "DefineTransformation",
         "modulename": "define.define_transformation",
@@ -348,6 +348,7 @@ class LinkIdentity:
     SECTION = 15
     DEFINE_CURVE = 19
     DEFINE_TRANSFORMATION = 40
+    PART = 69
     DEFINE_CURVE_OR_TABLE = 86
 
 
@@ -381,6 +382,27 @@ def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typ
     link_data.append(section_link_data)
 
 
+def _add_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for PART keywords (table lookup pattern).
+
+    PART links are special because PART keywords contain multiple parts in a
+    DataFrame. The lookup must search `kwd.parts["pid"]` to find which Part
+    keyword contains the referenced pid.
+    """
+    part_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "PART",
+        "keyword_subtype": None,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "pid",
+        "link_type_name": "PART",
+        "is_polymorphic": True,
+        "is_table_lookup": True,  # Triggers special lookup in parts DataFrame
+    }
+    link_data.append(part_link_data)
+
+
 def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     """Add link data for polymorphic DEFINE_CURVE or DEFINE_TABLE fields."""
     polymorphic_link_data = {
@@ -407,14 +429,22 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
         LinkIdentity.SECTION: [],
         LinkIdentity.DEFINE_CURVE: [],
         LinkIdentity.DEFINE_TRANSFORMATION: [],
+        LinkIdentity.PART: [],
         LinkIdentity.DEFINE_CURVE_OR_TABLE: [],
     }
     has_link = False
     for card in kwd_data.cards:
-        # Check if this is a table_group card
+        # Check if this is a table_group card (TableCardGroup)
         is_table_group = card.table_group if isinstance(card, Card) else card.get("table_group", False)
         table_name = card.overall_name if isinstance(card, Card) else card.get("overall_name")
         key_field = card.key_field if isinstance(card, Card) else card.get("key_field")
+
+        # Check if this is a table card (TableCard - simple repeating card)
+        table_meta = card.table if isinstance(card, Card) else card.get("table")
+        is_table = table_meta is not None
+        if is_table and not table_name:
+            # For TableCard, table name comes from the metadata
+            table_name = table_meta.name if hasattr(table_meta, "name") else table_meta.get("name")
 
         # Use card.get_all_fields() instead of _get_fields helper
         fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
@@ -430,6 +460,7 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
             field_info = LinkFieldInfo(
                 name=prop_name,
                 is_table_group=is_table_group,
+                is_table=is_table,
                 table_name=table_name,
                 key_field=key_field,
             )
@@ -461,6 +492,9 @@ def _add_links(kwd_data: KeywordData) -> None:
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_CURVE:
             _add_define_curve_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.PART:
+            _add_part_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_CURVE_OR_TABLE:
             _add_define_curve_or_table_link_data(link_data, link_fields)

@@ -39,6 +39,7 @@ class TestLinkTypeEnum:
         assert LinkType.SECTION.value == 15
         assert LinkType.DEFINE_CURVE.value == 19
         assert LinkType.DEFINE_TRANSFORMATION.value == 40
+        assert LinkType.PART.value == 69
         assert LinkType.DEFINE_CURVE_OR_TABLE.value == 86
 
     def test_link_type_members(self):
@@ -49,6 +50,7 @@ class TestLinkTypeEnum:
         assert "SECTION" in members
         assert "DEFINE_CURVE" in members
         assert "DEFINE_TRANSFORMATION" in members
+        assert "PART" in members
         assert "DEFINE_CURVE_OR_TABLE" in members
 
 
@@ -666,3 +668,443 @@ class TestTableBasedLinks:
         assert len(mid_links) == 1
         assert 1 in mid_links
         assert 2 not in mid_links
+
+
+class TestTableCardLinks:
+    """Tests for TableCard links (e.g., ICFD_BOUNDARY_FSI -> PART)."""
+
+    def test_icfd_boundary_fsi_has_part_link_fields(self):
+        """Test that IcfdBoundaryFsi has _link_fields for pid."""
+        assert hasattr(kwd.IcfdBoundaryFsi, "_link_fields")
+        assert "pid" in kwd.IcfdBoundaryFsi._link_fields
+        assert kwd.IcfdBoundaryFsi._link_fields["pid"] == LinkType.PART
+
+    def test_pid_links_without_deck_returns_empty(self):
+        """Test that pid_links returns empty dict when not in a deck."""
+        import pandas as pd
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2, 3]})
+
+        assert fsi.pid_links == {}
+
+    def test_pid_links_returns_correct_mapping(self):
+        """Test that pid_links returns correct dict mapping pid to Part."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        deck.extend([part, fsi])
+
+        pid_links = fsi.pid_links
+        assert len(pid_links) == 2
+        assert pid_links[1] is part
+        assert pid_links[2] is part
+
+    def test_pid_links_handles_multiple_part_keywords(self):
+        """Test that pid_links finds parts in different Part keywords."""
+        import pandas as pd
+
+        deck = Deck()
+        part1 = kwd.Part()
+        part1.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+        part2 = kwd.Part()
+        part2.parts = pd.DataFrame({"heading": ["Part 2"], "pid": [2], "mid": [200], "secid": [20]})
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        deck.extend([part1, part2, fsi])
+
+        pid_links = fsi.pid_links
+        assert len(pid_links) == 2
+        assert pid_links[1] is part1
+        assert pid_links[2] is part2
+
+    def test_pid_links_handles_missing_parts(self):
+        """Test that pid_links only includes pids where Part exists."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2, 3]})  # 2 and 3 don't exist
+
+        deck.extend([part, fsi])
+
+        pid_links = fsi.pid_links
+        assert len(pid_links) == 1
+        assert 1 in pid_links
+        assert 2 not in pid_links
+        assert 3 not in pid_links
+
+    def test_get_pid_link_returns_correct_part(self):
+        """Test that get_pid_link(pid) returns the correct Part keyword."""
+        import pandas as pd
+
+        deck = Deck()
+        part1 = kwd.Part()
+        part1.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+        part2 = kwd.Part()
+        part2.parts = pd.DataFrame({"heading": ["Part 2"], "pid": [2], "mid": [200], "secid": [20]})
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        deck.extend([part1, part2, fsi])
+
+        assert fsi.get_pid_link(1) is part1
+        assert fsi.get_pid_link(2) is part2
+
+    def test_get_pid_link_returns_none_for_missing_pid(self):
+        """Test that get_pid_link returns None for non-existent pid."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1]})
+
+        deck.extend([part, fsi])
+
+        assert fsi.get_pid_link(999) is None
+
+    def test_get_pid_link_without_deck_returns_none(self):
+        """Test that get_pid_link returns None when not in a deck."""
+        import pandas as pd
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        assert fsi.get_pid_link(1) is None
+
+    def test_pid_links_with_empty_boundaries(self):
+        """Test that pid_links handles empty boundaries table."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": []})
+
+        deck.extend([part, fsi])
+
+        assert fsi.pid_links == {}
+
+
+class TestScalarPartLinks:
+    """Tests for scalar PART links (e.g., MESH_BL -> PART)."""
+
+    def test_mesh_bl_has_part_link_fields(self):
+        """Test that MeshBl has _link_fields for pid."""
+        assert hasattr(kwd.MeshBl, "_link_fields")
+        assert "pid" in kwd.MeshBl._link_fields
+        assert kwd.MeshBl._link_fields["pid"] == LinkType.PART
+
+    def test_pid_link_without_deck_returns_none(self):
+        """Test that pid_link returns None when not in a deck."""
+        mesh = kwd.MeshBl()
+        mesh.pid = 1
+
+        assert mesh.pid_link is None
+
+    def test_pid_link_returns_correct_part(self):
+        """Test that pid_link returns the correct Part keyword."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1", "Part 2"], "pid": [1, 2], "mid": [100, 200], "secid": [10, 20]}
+        )
+
+        mesh = kwd.MeshBl()
+        mesh.pid = 1
+
+        deck.extend([part, mesh])
+
+        assert mesh.pid_link is part
+
+    def test_pid_link_finds_part_in_different_keywords(self):
+        """Test that pid_link finds the correct Part keyword when there are multiple."""
+        import pandas as pd
+
+        deck = Deck()
+        part1 = kwd.Part()
+        part1.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+        part2 = kwd.Part()
+        part2.parts = pd.DataFrame({"heading": ["Part 2"], "pid": [2], "mid": [200], "secid": [20]})
+
+        mesh = kwd.MeshBl()
+        mesh.pid = 2
+
+        deck.extend([part1, part2, mesh])
+
+        assert mesh.pid_link is part2
+
+    def test_pid_link_returns_none_when_part_not_found(self):
+        """Test that pid_link returns None when referenced part doesn't exist."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        mesh = kwd.MeshBl()
+        mesh.pid = 999  # Different ID
+
+        deck.extend([part, mesh])
+
+        assert mesh.pid_link is None
+
+    def test_pid_link_returns_none_when_pid_is_none(self):
+        """Test that pid_link returns None when pid field is None."""
+        import pandas as pd
+
+        deck = Deck()
+        part = kwd.Part()
+        part.parts = pd.DataFrame({"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]})
+
+        mesh = kwd.MeshBl()
+        # pid is None by default
+
+        deck.extend([part, mesh])
+
+        assert mesh.pid_link is None
+
+
+class TestRecursiveLinkChasingAcrossKeywords:
+    """Tests for recursive link chasing across keyword types (e.g., ICFD -> PART -> SECTION)."""
+
+    def test_icfd_to_part_to_section_chain(self):
+        """Test recursive link chasing: ICFD_BOUNDARY_FSI -> PART -> SECTION_SHELL."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create section
+        section = kwd.SectionShell()
+        section.secid = 10
+
+        # Create part referencing section
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+
+        # Create FSI referencing part
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1]})
+
+        deck.extend([section, part, fsi])
+
+        # Test level=1: should find Part only
+        direct_links = fsi.get_links(level=1)
+        assert len(direct_links) == 1
+        assert direct_links[0] is part
+
+        # Test level=2: should find Part and Section
+        two_level_links = fsi.get_links(level=2)
+        assert len(two_level_links) == 2
+        assert part in two_level_links
+        assert section in two_level_links
+
+        # Test level=-1: should find full dependency tree
+        all_links = fsi.get_links(level=-1)
+        assert len(all_links) >= 2
+        assert part in all_links
+        assert section in all_links
+
+    def test_icfd_to_part_to_material_and_section_chain(self):
+        """Test recursive link chasing: ICFD -> PART -> (MAT + SECTION)."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create material
+        mat = kwd.Mat001()
+        mat.mid = 100
+
+        # Create section
+        section = kwd.SectionShell()
+        section.secid = 10
+
+        # Create part referencing both
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+
+        # Create FSI referencing part
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1]})
+
+        deck.extend([mat, section, part, fsi])
+
+        # Full recursive traversal should find Part, Mat, and Section
+        all_links = fsi.get_links(level=-1)
+        assert len(all_links) == 3
+        assert part in all_links
+        assert mat in all_links
+        assert section in all_links
+
+    def test_multiple_parts_recursive_traversal(self):
+        """Test recursive traversal with multiple part references."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create materials
+        mat1 = kwd.Mat001()
+        mat1.mid = 100
+        mat2 = kwd.Mat001()
+        mat2.mid = 200
+
+        # Create sections
+        sec1 = kwd.SectionShell()
+        sec1.secid = 10
+        sec2 = kwd.SectionShell()
+        sec2.secid = 20
+
+        # Create parts
+        part1 = kwd.Part()
+        part1.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+        part2 = kwd.Part()
+        part2.parts = pd.DataFrame(
+            {"heading": ["Part 2"], "pid": [2], "mid": [200], "secid": [20]}
+        )
+
+        # Create FSI referencing both parts
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        deck.extend([mat1, mat2, sec1, sec2, part1, part2, fsi])
+
+        # Full recursive traversal
+        all_links = fsi.get_links(level=-1)
+        assert len(all_links) == 6
+        assert part1 in all_links
+        assert part2 in all_links
+        assert mat1 in all_links
+        assert mat2 in all_links
+        assert sec1 in all_links
+        assert sec2 in all_links
+
+    def test_filter_by_link_type_in_recursive_traversal(self):
+        """Test filtering by link type during recursive traversal."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create material and section
+        mat = kwd.Mat001()
+        mat.mid = 100
+        section = kwd.SectionShell()
+        section.secid = 10
+
+        # Create part
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+
+        # Create FSI
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1]})
+
+        deck.extend([mat, section, part, fsi])
+
+        # Filter by PART only
+        part_links = fsi.get_links(LinkType.PART, level=-1)
+        assert len(part_links) == 1
+        assert part in part_links
+
+        # Filter by SECTION only - should not find directly from FSI
+        section_links = fsi.get_links(LinkType.SECTION, level=-1)
+        # Section is linked from Part, but if we filter by SECTION, we only follow SECTION links
+        # which FSI doesn't have. So this should be empty.
+        assert len(section_links) == 0
+
+    def test_scalar_part_link_recursive_traversal(self):
+        """Test recursive traversal from scalar part link (MESH_BL -> PART -> SECTION)."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create section
+        section = kwd.SectionShell()
+        section.secid = 10
+
+        # Create part
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+
+        # Create MESH_BL with scalar pid
+        mesh = kwd.MeshBl()
+        mesh.pid = 1
+
+        deck.extend([section, part, mesh])
+
+        # Test level=1: should find Part only
+        direct_links = mesh.get_links(level=1)
+        assert len(direct_links) == 1
+        assert direct_links[0] is part
+
+        # Test level=-1: should find Part and Section
+        all_links = mesh.get_links(level=-1)
+        assert len(all_links) >= 2
+        assert part in all_links
+        assert section in all_links
+
+    def test_no_duplicate_in_recursive_chain(self):
+        """Test that duplicates are prevented in recursive traversal."""
+        import pandas as pd
+
+        deck = Deck()
+
+        # Create shared section
+        section = kwd.SectionShell()
+        section.secid = 10
+
+        # Create two parts referencing same section
+        part1 = kwd.Part()
+        part1.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [100], "secid": [10]}
+        )
+        part2 = kwd.Part()
+        part2.parts = pd.DataFrame(
+            {"heading": ["Part 2"], "pid": [2], "mid": [200], "secid": [10]}  # Same section
+        )
+
+        # Create FSI referencing both parts
+        fsi = kwd.IcfdBoundaryFsi()
+        fsi.boundaries = pd.DataFrame({"pid": [1, 2]})
+
+        deck.extend([section, part1, part2, fsi])
+
+        # Recursive traversal should not duplicate section
+        all_links = fsi.get_links(level=-1)
+
+        # Count occurrences of section
+        section_count = sum(1 for link in all_links if link is section)
+        assert section_count == 1, "Section should appear only once despite being referenced by two parts"
+
+        # Should have part1, part2, and section
+        assert len(all_links) == 3

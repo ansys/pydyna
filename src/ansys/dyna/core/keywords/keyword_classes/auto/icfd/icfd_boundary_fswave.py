@@ -50,6 +50,7 @@ class IcfdBoundaryFswave(KeywordBase):
     subkeyword = "BOUNDARY_FSWAVE"
     _link_fields = {
         "sflcid": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -183,4 +184,9 @@ class IcfdBoundaryFswave(KeywordBase):
     def sflcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for sflcid."""
         self.sflcid = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

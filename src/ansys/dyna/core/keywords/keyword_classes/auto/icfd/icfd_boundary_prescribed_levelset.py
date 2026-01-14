@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ICFDBOUNDARYPRESCRIBEDLEVELSET_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -37,6 +38,9 @@ class IcfdBoundaryPrescribedLevelset(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_PRESCRIBED_LEVELSET"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryPrescribedLevelset class."""
@@ -78,4 +82,9 @@ class IcfdBoundaryPrescribedLevelset(KeywordBase):
     def axe(self, value: int) -> None:
         """Set the axe property."""
         self._cards[0].set_value("axe", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

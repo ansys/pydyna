@@ -1,6 +1,17 @@
 {% for link in links %}
 {% for field in link.fields %}
-{% if field.is_table_group and field.key_field %}
+{% if field.is_table and link.is_table_lookup %}
+{# TableCard field with table lookup (e.g., pid -> PART): use helper methods #}
+    @property
+    def {{field.name}}_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all {{link.keyword_type}} keywords for {{field.name}}, keyed by {{field.name}} value."""
+        return self._get_links_from_table("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "parts")
+
+    def get_{{field.name}}_link(self, {{field.name}}: int) -> typing.Optional[KeywordBase]:
+        """Get the {{link.keyword_type}} keyword containing the given {{field.name}}."""
+        return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", {{field.name}}, "parts")
+
+{% elif field.is_table_group and field.key_field %}
 {# Table-group field: generate *_links dict property and get_*_link(key) method #}
     @property
     def {{field.name}}_links(self) -> typing.Dict[int, KeywordBase]:
@@ -52,6 +63,13 @@
             self.{{field.name}} = value.lcid
         elif hasattr(value, "tbid"):
             self.{{field.name}} = value.tbid
+
+{% elif link.is_table_lookup and not field.is_table %}
+{# Scalar PART link: use helper method #}
+    @property
+    def {{field.name}}_link(self) -> KeywordBase:
+        """Get the {{link.keyword_type}} keyword containing the given {{field.name}}."""
+        return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", self.{{field.name}}, "parts")
 
 {% elif link.is_polymorphic %}
     @property
