@@ -23,9 +23,25 @@
 """Module providing the SectionTShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONTSHELL_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("nip", int, 30, 10, 2),
+    FieldSchema("propt", float, 40, 10, 1.0),
+    FieldSchema("qr", int, 50, 10, 0),
+    FieldSchema("icomp", int, 60, 10, 0),
+    FieldSchema("tshear", int, 70, 10, 0),
+)
+
+_SECTIONTSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionTShell(KeywordBase):
     """DYNA SECTION_TSHELL keyword"""
@@ -41,100 +57,27 @@ class SectionTShell(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "propt",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icomp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tshear",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONTSHELL_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "bi",
                 8,
                 10,
                 float,
                 lambda: self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("bi")),
-            OptionCardSet(
+                data = kwargs.get("bi")),            OptionCardSet(
                 option_spec = SectionTShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONTSHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

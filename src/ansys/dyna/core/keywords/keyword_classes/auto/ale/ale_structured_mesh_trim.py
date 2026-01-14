@@ -23,7 +23,19 @@
 """Module providing the AleStructuredMeshTrim class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHTRIM_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("option", str, 10, 10, "PARTSET"),
+    FieldSchema("oper", int, 20, 10, 0),
+    FieldSchema("ioutin", int, 30, 10, 0),
+    FieldSchema("psid", int, 40, 10, None),
+    FieldSchema("dist", float, 50, 10, None),
+    FieldSchema("e3", float, 60, 10, None),
+    FieldSchema("e4", float, 70, 10, None),
+)
 
 class AleStructuredMeshTrim(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_TRIM keyword"""
@@ -35,72 +47,10 @@ class AleStructuredMeshTrim(KeywordBase):
         """Initialize the AleStructuredMeshTrim class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option",
-                        str,
-                        10,
-                        10,
-                        "PARTSET",
-                        **kwargs,
-                    ),
-                    Field(
-                        "oper",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioutin",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHTRIM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be trimed/un-trimed.

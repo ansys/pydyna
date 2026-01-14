@@ -23,7 +23,15 @@
 """Module providing the ElementMassPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTMASSPART_CARD0 = (
+    FieldSchema("pid", int, 0, 8, None),
+    FieldSchema("addmass", float, 8, 16, 0.0),
+    FieldSchema("finmass", float, 24, 16, 0.0),
+    FieldSchema("lcid", int, 40, 8, None),
+)
 
 class ElementMassPart(KeywordBase):
     """DYNA ELEMENT_MASS_PART keyword"""
@@ -35,42 +43,10 @@ class ElementMassPart(KeywordBase):
         """Initialize the ElementMassPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "addmass",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "finmass",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part id, a unique number must be used.

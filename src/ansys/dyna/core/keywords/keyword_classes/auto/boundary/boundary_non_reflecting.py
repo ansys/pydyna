@@ -23,7 +23,14 @@
 """Module providing the BoundaryNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYNONREFLECTING_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("ad", float, 10, 10, 0.0),
+    FieldSchema("as", float, 20, 10, 0.0),
+)
 
 class BoundaryNonReflecting(KeywordBase):
     """DYNA BOUNDARY_NON_REFLECTING keyword"""
@@ -35,35 +42,10 @@ class BoundaryNonReflecting(KeywordBase):
         """Initialize the BoundaryNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ad",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "as",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYNONREFLECTING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.

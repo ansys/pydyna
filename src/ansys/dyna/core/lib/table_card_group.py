@@ -27,34 +27,57 @@ import typing
 
 import pandas as pd
 
-from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
-from ansys.dyna.core.lib.table_card import TableCard, get_first_row, try_initialize_table
-
-
-def _to_table_card(card: Card, length_func: typing.Callable) -> TableCard:
-    return TableCard(card._fields, length_func, card._active_func)
+from ansys.dyna.core.lib.table_card import TableCard, _get_first_row_from_schemas, try_initialize_table
 
 
 class TableCardGroup(CardInterface):
     def __init__(
         self,
-        cards: typing.List[Card],
+        card_schemas: typing.List[typing.Tuple[FieldSchema, ...]],
         length_func: typing.Callable,
         active_func: typing.Callable = None,
         name: str = None,
         format: format_type = format_type.default,
+        card_active_funcs: typing.List[typing.Callable] = None,
         **kwargs,
     ):
-        self._cards = [_to_table_card(card, length_func) for card in cards]
+        """Initialize a TableCardGroup from field schemas.
+
+        Parameters
+        ----------
+        card_schemas : List[Tuple[FieldSchema, ...]]
+            List of FieldSchema tuples, one for each sub-card in the group.
+        length_func : callable
+            Function returning the number of rows, or None for unbounded.
+        active_func : callable, optional
+            Function returning bool to determine if card group is active.
+        name : str, optional
+            Name for table initialization from kwargs.
+        format : format_type, optional
+            The format type (default, standard, or long).
+        card_active_funcs : List[callable], optional
+            List of active functions for each sub-card. If provided, must have
+            the same length as card_schemas.
+        """
+        if card_active_funcs is None:
+            self._cards = [
+                TableCard.from_field_schemas(schemas, length_func, format=format) for schemas in card_schemas
+            ]
+        else:
+            self._cards = [
+                TableCard.from_field_schemas(schemas, length_func, active_func=af, format=format)
+                for schemas, af in zip(card_schemas, card_active_funcs)
+            ]
         self._length_func = length_func
         self._active_func = active_func
         self.format = format
-        if length_func == None:
+        if length_func is None:
             self._bounded = False
             self._length_func = self._get_unbounded_length
         else:
@@ -62,7 +85,9 @@ class TableCardGroup(CardInterface):
             self._length_func = length_func
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
-            first_row = get_first_row(self._get_fields(), **kwargs)
+            # Collect all field schemas for first row lookup
+            all_schemas = tuple(fs for schemas in card_schemas for fs in schemas)
+            first_row = _get_first_row_from_schemas(all_schemas, **kwargs)
             for card in self._cards:
                 card._first_row = first_row
 

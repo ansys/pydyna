@@ -23,8 +23,15 @@
 """Module providing the NodeTransform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
+
+_NODETRANSFORM_CARD0 = (
+    FieldSchema("trsid", int, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+    FieldSchema("immed", int, 20, 10, 0),
+)
 
 class NodeTransform(KeywordBase):
     """DYNA NODE_TRANSFORM keyword"""
@@ -36,34 +43,10 @@ class NodeTransform(KeywordBase):
         """Initialize the NodeTransform class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "trsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "immed",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODETRANSFORM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def trsid(self) -> typing.Optional[int]:
         """Get or set the The ID of the transformation defined under *DEFINE_TRANSFOR-MATION

@@ -23,7 +23,13 @@
 """Module providing the DatabaseRve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASERVE_CARD0 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("bina", int, 10, 10, 0),
+)
 
 class DatabaseRve(KeywordBase):
     """DYNA DATABASE_RVE keyword"""
@@ -35,28 +41,10 @@ class DatabaseRve(KeywordBase):
         """Initialize the DatabaseRve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bina",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASERVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval for the output of RVE homogenization results to the rveout file.

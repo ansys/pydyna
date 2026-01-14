@@ -23,7 +23,19 @@
 """Module providing the LoadBlastSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBLASTSEGMENT_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n2", int, 20, 10, None),
+    FieldSchema("n3", int, 30, 10, None),
+    FieldSchema("n4", int, 40, 10, None),
+    FieldSchema("alepid", int, 50, 10, None),
+    FieldSchema("sfnrb", float, 60, 10, 0.0),
+    FieldSchema("scalep", float, 70, 10, 1.0),
+)
 
 class LoadBlastSegment(KeywordBase):
     """DYNA LOAD_BLAST_SEGMENT keyword"""
@@ -35,70 +47,10 @@ class LoadBlastSegment(KeywordBase):
         """Initialize the LoadBlastSegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alepid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfnrb",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalep",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLASTSEGMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED).

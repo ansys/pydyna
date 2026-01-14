@@ -23,7 +23,19 @@
 """Module providing the ElementDiscreteSphere class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTDISCRETESPHERE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("mass", float, 20, 10, 0.0),
+    FieldSchema("inertia", float, 30, 10, 0.0),
+    FieldSchema("radii", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("nid2", int, 70, 10, None),
+)
 
 class ElementDiscreteSphere(KeywordBase):
     """DYNA ELEMENT_DISCRETE_SPHERE keyword"""
@@ -35,71 +47,10 @@ class ElementDiscreteSphere(KeywordBase):
         """Initialize the ElementDiscreteSphere class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inertia",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radii",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTDISCRETESPHERE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID and Element ID are the same for the discrete shpher

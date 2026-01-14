@@ -1,0 +1,10 @@
+{# Template for generating FieldSchema tuples for Cards in CardSets #}
+{# Context: card_set - the card set configuration, card - the card, card_index - index in source_cards #}
+{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
+# Schema for {{card_set.name}} card {{card_index}}
+_{{card_set.name | upper}}_CARD{{card_index}} = (
+{% for field in card.fields %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endfor %}
+)
+{% endif %}

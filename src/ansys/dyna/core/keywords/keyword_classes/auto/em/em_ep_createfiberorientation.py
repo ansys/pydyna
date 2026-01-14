@@ -23,7 +23,18 @@
 """Module providing the EmEpCreatefiberorientation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEPCREATEFIBERORIENTATION_CARD0 = (
+    FieldSchema("parstld", int, 0, 10, None),
+    FieldSchema("solvelde", int, 10, 10, None),
+    FieldSchema("solvelde", int, 20, 10, None),
+    FieldSchema("alpha", int, 30, 10, None),
+    FieldSchema("beta", int, 40, 10, None),
+    FieldSchema("w_file", int, 50, 10, None),
+    FieldSchema("prerun", int, 60, 10, None),
+)
 
 class EmEpCreatefiberorientation(KeywordBase):
     """DYNA EM_EP_CREATEFIBERORIENTATION keyword"""
@@ -35,61 +46,10 @@ class EmEpCreatefiberorientation(KeywordBase):
         """Initialize the EmEpCreatefiberorientation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "parstld",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solvelde",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solvelde",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w_file",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prerun",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCREATEFIBERORIENTATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def parstld(self) -> typing.Optional[int]:
         """Get or set the Part set on which the system is solved

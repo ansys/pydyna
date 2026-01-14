@@ -23,7 +23,88 @@
 """Module providing the ElementShellBextPatch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSHELLBEXTPATCH_CARD0 = (
+    FieldSchema("epid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("nel", int, 20, 10, None),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD1 = (
+    FieldSchema("wfl", int, 0, 10, None),
+    FieldSchema("form", int, 10, 10, 0),
+    FieldSchema("int", int, 20, 10, 0),
+    FieldSchema("nisr", int, 30, 10, None),
+    FieldSchema("niss", int, 40, 10, None),
+    FieldSchema("imass", int, 50, 10, 0),
+    FieldSchema("nl", int, 60, 10, None),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD2 = (
+    FieldSchema("shpe", int, 0, 10, 0),
+    FieldSchema("pr", int, 10, 10, None),
+    FieldSchema("ps", int, 20, 10, None),
+    FieldSchema("bdry", int, 30, 10, 0),
+    FieldSchema("trm", int, 40, 10, 0),
+    FieldSchema("smth", int, 50, 10, 0),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD3 = (
+    FieldSchema("b1", int, 0, 10, 0),
+    FieldSchema("b2", int, 10, 10, 0),
+    FieldSchema("b3", int, 20, 10, 0),
+    FieldSchema("b4", int, 30, 10, 0),
+    FieldSchema("b5", int, 40, 10, 0),
+    FieldSchema("b6", int, 50, 10, 0),
+    FieldSchema("b7", int, 60, 10, 0),
+    FieldSchema("b8", int, 70, 10, 0),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD4 = (
+    FieldSchema("s1", int, 0, 10, 0),
+    FieldSchema("s2", int, 10, 10, 0),
+    FieldSchema("s3", int, 20, 10, 0),
+    FieldSchema("s4", int, 30, 10, 0),
+    FieldSchema("s5", int, 40, 10, 0),
+    FieldSchema("s6", int, 50, 10, 0),
+    FieldSchema("s7", int, 60, 10, 0),
+    FieldSchema("s8", int, 70, 10, 0),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD5 = (
+    FieldSchema("n1", int, 0, 10, 0),
+    FieldSchema("n2", int, 10, 10, 0),
+    FieldSchema("n3", int, 20, 10, 0),
+    FieldSchema("n4", int, 30, 10, 0),
+    FieldSchema("n5", int, 40, 10, 0),
+    FieldSchema("n6", int, 50, 10, 0),
+    FieldSchema("n7", int, 60, 10, 0),
+    FieldSchema("n8", int, 70, 10, 0),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD6 = (
+    FieldSchema("w1", float, 0, 10, 0.0),
+    FieldSchema("w2", float, 10, 10, 0.0),
+    FieldSchema("w3", float, 20, 10, 0.0),
+    FieldSchema("w4", float, 30, 10, 0.0),
+    FieldSchema("w5", float, 40, 10, 0.0),
+    FieldSchema("w6", float, 50, 10, 0.0),
+    FieldSchema("w7", float, 60, 10, 0.0),
+    FieldSchema("w8", float, 70, 10, 0.0),
+)
+
+_ELEMENTSHELLBEXTPATCH_CARD7 = (
+    FieldSchema("o1", float, 0, 10, 0.0),
+    FieldSchema("o2", float, 10, 10, 0.0),
+    FieldSchema("o3", float, 20, 10, 0.0),
+    FieldSchema("o4", float, 30, 10, 0.0),
+    FieldSchema("o5", float, 40, 10, 0.0),
+    FieldSchema("o6", float, 50, 10, 0.0),
+    FieldSchema("o7", float, 60, 10, 0.0),
+    FieldSchema("o8", float, 70, 10, 0.0),
+)
 
 class ElementShellBextPatch(KeywordBase):
     """DYNA ELEMENT_SHELL_BEXT_PATCH keyword"""
@@ -35,479 +116,31 @@ class ElementShellBextPatch(KeywordBase):
         """Initialize the ElementShellBextPatch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "epid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nel",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wfl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "int",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nisr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niss",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imass",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shpe",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ps",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bdry",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trm",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smth",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "b1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "s1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w5",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w6",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w7",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w8",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "o1",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o2",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o3",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o4",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o5",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o6",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o7",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o8",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLBEXTPATCH_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def epid(self) -> typing.Optional[int]:
         """Get or set the Extraction patch element ID. A unique number has to be chosen.

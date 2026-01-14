@@ -23,7 +23,13 @@
 """Module providing the BoundaryAcousticImpedance class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICIMPEDANCE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("zee", float, 10, 10, 0.0),
+)
 
 class BoundaryAcousticImpedance(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_IMPEDANCE keyword"""
@@ -35,27 +41,10 @@ class BoundaryAcousticImpedance(KeywordBase):
         """Initialize the BoundaryAcousticImpedance class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zee",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICIMPEDANCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.

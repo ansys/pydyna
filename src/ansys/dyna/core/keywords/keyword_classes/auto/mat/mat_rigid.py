@@ -23,8 +23,39 @@
 """Module providing the MatRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATRIGID_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("n", float, 40, 10, 0.0),
+    FieldSchema("couple", float, 50, 10, 0.0),
+    FieldSchema("m", float, 60, 10, 0.0),
+    FieldSchema("alias", str, 70, 10, None),
+)
+
+_MATRIGID_CARD1 = (
+    FieldSchema("cmo", float, 0, 10, 0.0),
+    FieldSchema("con1", float, 10, 10, None),
+    FieldSchema("con2", float, 20, 10, None),
+)
+
+_MATRIGID_CARD2 = (
+    FieldSchema("lco or a1", float, 0, 10, None),
+    FieldSchema("a2", float, 10, 10, None),
+    FieldSchema("a3", float, 20, 10, None),
+    FieldSchema("v1", float, 30, 10, None),
+    FieldSchema("v2", float, 40, 10, None),
+    FieldSchema("v3", float, 50, 10, None),
+)
+
+_MATRIGID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatRigid(KeywordBase):
     """DYNA MAT_RIGID keyword"""
@@ -40,160 +71,26 @@ class MatRigid(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "couple",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alias",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cmo",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "con1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "con2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lco or a1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATRIGID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATRIGID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATRIGID_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatRigid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRIGID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

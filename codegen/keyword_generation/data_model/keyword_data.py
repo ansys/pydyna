@@ -205,6 +205,14 @@ class Field:
                 except (ValueError, TypeError):
                     # If conversion fails, leave as None
                     self.default = None
+        elif self.type == "float":
+            # Convert float defaults from strings
+            if self.default is not None:
+                try:
+                    self.default = float(self.default)
+                except (ValueError, TypeError):
+                    # If conversion fails (e.g., "not used"), leave as None
+                    self.default = None
 
         # Clean up help text (remove leading whitespace from each line)
         if self.help:

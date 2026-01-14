@@ -23,7 +23,26 @@
 """Module providing the EmControlCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLCOUPLING_CARD0 = (
+    FieldSchema("thcoupl", int, 0, 10, 0),
+    FieldSchema("smcoupl", int, 10, 10, 0),
+    FieldSchema("thlcid", int, 20, 10, 0),
+    FieldSchema("smlcid", int, 30, 10, 0),
+    FieldSchema("thcplfl", int, 40, 10, 0),
+    FieldSchema("smcplfl", int, 50, 10, 0),
+    FieldSchema("cflag", int, 60, 10, None),
+    FieldSchema("nflag", int, 70, 10, None),
+)
+
+_EMCONTROLCOUPLING_CARD1 = (
+    FieldSchema("smmod", int, 0, 10, 0),
+    FieldSchema("dfx", int, 10, 10, None),
+    FieldSchema("dfy", int, 20, 10, None),
+    FieldSchema("dfz", int, 30, 10, None),
+)
 
 class EmControlCoupling(KeywordBase):
     """DYNA EM_CONTROL_COUPLING keyword"""
@@ -35,107 +54,13 @@ class EmControlCoupling(KeywordBase):
         """Initialize the EmControlCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "thcoupl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smcoupl",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thlcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smlcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thcplfl",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smcplfl",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cflag",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nflag",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "smmod",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfx",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfy",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLCOUPLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMCONTROLCOUPLING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def thcoupl(self) -> int:
         """Get or set the Coupling to the thermal solver. When turned on, the EM solver will transfer the Joule heating terms to the solid mechanics thermal solver.

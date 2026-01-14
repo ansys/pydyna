@@ -23,7 +23,16 @@
 """Module providing the EmVoltageDrop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMVOLTAGEDROP_CARD0 = (
+    FieldSchema("vdid", int, 0, 10, None),
+    FieldSchema("vdtype", int, 10, 10, None),
+    FieldSchema("ssid1", int, 20, 10, None),
+    FieldSchema("ssid2 ", int, 30, 10, None),
+    FieldSchema("volt ", float, 40, 10, None),
+)
 
 class EmVoltageDrop(KeywordBase):
     """DYNA EM_VOLTAGE_DROP keyword"""
@@ -35,47 +44,10 @@ class EmVoltageDrop(KeywordBase):
         """Initialize the EmVoltageDrop class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vdid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdtype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid2 ",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "volt ",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMVOLTAGEDROP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def vdid(self) -> typing.Optional[int]:
         """Get or set the Voltage Drop ID

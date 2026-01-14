@@ -23,7 +23,12 @@
 """Module providing the InitialVelocityGenerationStartTime class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALVELOCITYGENERATIONSTARTTIME_CARD0 = (
+    FieldSchema("stime", float, 0, 10, 0.0),
+)
 
 class InitialVelocityGenerationStartTime(KeywordBase):
     """DYNA INITIAL_VELOCITY_GENERATION_START_TIME keyword"""
@@ -35,20 +40,10 @@ class InitialVelocityGenerationStartTime(KeywordBase):
         """Initialize the InitialVelocityGenerationStartTime class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "stime",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITYGENERATIONSTARTTIME_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def stime(self) -> float:
         """Get or set the Start time.

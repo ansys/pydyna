@@ -23,8 +23,94 @@
 """Module providing the MatThermalChemicalReaction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTHERMALCHEMICALREACTION_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("nchsp", int, 10, 10, None),
+    FieldSchema("nchrx", int, 20, 10, None),
+    FieldSchema("icend", int, 30, 10, None),
+    FieldSchema("cend", float, 40, 10, None),
+    FieldSchema("gasc", float, 50, 10, None),
+    FieldSchema("fid", int, 60, 10, None),
+    FieldSchema("mf", int, 70, 10, 0),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD1 = (
+    FieldSchema("rhof", float, 0, 10, None),
+    FieldSchema("lccf", int, 10, 10, None),
+    FieldSchema("lckf", int, 20, 10, None),
+    FieldSchema("vff", float, 30, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD2 = (
+    FieldSchema("rhoi", float, 0, 10, None),
+    FieldSchema("lcci", int, 10, 10, None),
+    FieldSchema("lcki", int, 20, 10, None),
+    FieldSchema("vfi", float, 30, 10, None),
+    FieldSchema("mwi", float, 40, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD3 = (
+    FieldSchema("rci1", float, 0, 10, None),
+    FieldSchema("rci2", float, 10, 10, None),
+    FieldSchema("rci3", float, 20, 10, None),
+    FieldSchema("rci4", float, 30, 10, None),
+    FieldSchema("rci5", float, 40, 10, None),
+    FieldSchema("rci6", float, 50, 10, None),
+    FieldSchema("rci7", float, 60, 10, None),
+    FieldSchema("rci8", float, 70, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD4 = (
+    FieldSchema("rxi1", float, 0, 10, None),
+    FieldSchema("rxi2", float, 10, 10, None),
+    FieldSchema("rxi3", float, 20, 10, None),
+    FieldSchema("rxi4", float, 30, 10, None),
+    FieldSchema("rxi5", float, 40, 10, None),
+    FieldSchema("rxi6", float, 50, 10, None),
+    FieldSchema("rxi7", float, 60, 10, None),
+    FieldSchema("rxi8", float, 70, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD5 = (
+    FieldSchema("lczi1", float, 0, 10, None),
+    FieldSchema("lczi2", float, 10, 10, None),
+    FieldSchema("lczi3", float, 20, 10, None),
+    FieldSchema("lczi4", float, 30, 10, None),
+    FieldSchema("lczi5", float, 40, 10, None),
+    FieldSchema("lczi6", float, 50, 10, None),
+    FieldSchema("lczi7", float, 60, 10, None),
+    FieldSchema("lczi8", float, 70, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD6 = (
+    FieldSchema("e1", float, 0, 10, None),
+    FieldSchema("e2", float, 10, 10, None),
+    FieldSchema("e3", float, 20, 10, None),
+    FieldSchema("e4", float, 30, 10, None),
+    FieldSchema("e5", float, 40, 10, None),
+    FieldSchema("e6", float, 50, 10, None),
+    FieldSchema("e7", float, 60, 10, None),
+    FieldSchema("e8", float, 70, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_CARD7 = (
+    FieldSchema("q1", float, 0, 10, None),
+    FieldSchema("q2", float, 10, 10, None),
+    FieldSchema("q3", float, 20, 10, None),
+    FieldSchema("q4", float, 30, 10, None),
+    FieldSchema("q5", float, 40, 10, None),
+    FieldSchema("q6", float, 50, 10, None),
+    FieldSchema("q7", float, 60, 10, None),
+    FieldSchema("q8", float, 70, 10, None),
+)
+
+_MATTHERMALCHEMICALREACTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatThermalChemicalReaction(KeywordBase):
     """DYNA MAT_THERMAL_CHEMICAL_REACTION keyword"""
@@ -40,457 +126,41 @@ class MatThermalChemicalReaction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nchsp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nchrx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icend",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cend",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mf",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhof",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccf",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lckf",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vff",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhoi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcci",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcki",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mwi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rci1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rci8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rxi1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rxi8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lczi1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lczi8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "q1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALCHEMICALREACTION_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermalChemicalReaction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALCHEMICALREACTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal material identification. A unique number or label must be specified.

@@ -23,7 +23,22 @@
 """Module providing the ControlFormingBestfitVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGBESTFITVECTOR_CARD0 = (
+    FieldSchema("ifit", int, 0, 10, 0),
+    FieldSchema("nskip", int, 10, 10, -3),
+    FieldSchema("gaponly", int, 20, 10, 0),
+    FieldSchema("ifast", int, 30, 10, 1),
+    FieldSchema("ifset", int, 40, 10, 0),
+    FieldSchema("nsets", int, 50, 10, None),
+    FieldSchema("nsett", int, 60, 10, None),
+)
+
+_CONTROLFORMINGBESTFITVECTOR_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class ControlFormingBestfitVector(KeywordBase):
     """DYNA CONTROL_FORMING_BESTFIT_VECTOR keyword"""
@@ -35,77 +50,13 @@ class ControlFormingBestfitVector(KeywordBase):
         """Initialize the ControlFormingBestfitVector class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ifit",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nskip",
-                        int,
-                        10,
-                        10,
-                        -3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gaponly",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifast",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifset",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsets",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsett",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGBESTFITVECTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGBESTFITVECTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ifit(self) -> int:
         """Get or set the Best fit program activation flag:

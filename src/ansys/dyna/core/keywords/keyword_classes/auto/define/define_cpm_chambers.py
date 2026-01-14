@@ -23,8 +23,31 @@
 """Module providing the DefineCpmChambers class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECPMCHAMBERS_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("nchm", int, 10, 10, 0),
+)
+
+_DEFINECPMCHAMBERS_CARD1 = (
+    FieldSchema("sid1", int, 0, 10, None),
+    FieldSchema("sid2", int, 10, 10, 0),
+    FieldSchema("ninter", int, 20, 10, 0),
+    FieldSchema("chm_id", int, 30, 10, 0),
+)
+
+_DEFINECPMCHAMBERS_CARD2 = (
+    FieldSchema("sid3", int, 0, 10, None),
+    FieldSchema("itype3", int, 10, 10, 0),
+    FieldSchema("tochm", int, 20, 10, None),
+)
+
+_DEFINECPMCHAMBERS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCpmChambers(KeywordBase):
     """DYNA DEFINE_CPM_CHAMBERS keyword"""
@@ -40,105 +63,26 @@ class DefineCpmChambers(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nchm",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ninter",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "chm_id",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid3",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype3",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tochm",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECPMCHAMBERS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMCHAMBERS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMCHAMBERS_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCpmChambers.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMCHAMBERS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for this card

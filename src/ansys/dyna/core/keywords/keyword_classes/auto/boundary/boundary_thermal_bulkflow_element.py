@@ -23,7 +23,14 @@
 """Module providing the BoundaryThermalBulkflowElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYTHERMALBULKFLOWELEMENT_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("mdot", float, 20, 10, None),
+)
 
 class BoundaryThermalBulkflowElement(KeywordBase):
     """DYNA BOUNDARY_THERMAL_BULKFLOW_ELEMENT keyword"""
@@ -35,33 +42,10 @@ class BoundaryThermalBulkflowElement(KeywordBase):
         """Initialize the BoundaryThermalBulkflowElement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdot",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALBULKFLOWELEMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Beam element ID.

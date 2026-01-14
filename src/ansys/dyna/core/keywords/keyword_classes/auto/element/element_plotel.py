@@ -23,7 +23,14 @@
 """Module providing the ElementPlotel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTPLOTEL_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("n1", int, 8, 8, None),
+    FieldSchema("n2", int, 16, 8, None),
+)
 
 class ElementPlotel(KeywordBase):
     """DYNA ELEMENT_PLOTEL keyword"""
@@ -35,33 +42,10 @@ class ElementPlotel(KeywordBase):
         """Initialize the ElementPlotel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTPLOTEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

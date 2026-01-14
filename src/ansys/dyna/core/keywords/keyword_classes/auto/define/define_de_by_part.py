@@ -23,8 +23,37 @@
 """Module providing the DefineDeByPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEBYPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ndamp", float, 10, 10, 0.0),
+    FieldSchema("tdamp", float, 20, 10, 0.0),
+    FieldSchema("fric", float, 30, 10, 0.0),
+    FieldSchema("fricr", float, 40, 10, 0.0),
+    FieldSchema("normk", float, 50, 10, 0.01),
+    FieldSchema("sheark", float, 60, 10, 0.2857),
+)
+
+_DEFINEDEBYPART_CARD1 = (
+    FieldSchema("gamma", float, 0, 10, 0.0),
+    FieldSchema("vol", float, 10, 10, 0.0),
+    FieldSchema("ang", float, 20, 10, 0.0),
+)
+
+_DEFINEDEBYPART_CARD2 = (
+    FieldSchema("lnorm", int, 0, 10, 0),
+    FieldSchema("lshear", int, 10, 10, 0),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("fricd", float, 30, 10, 0.0),
+    FieldSchema("dc", float, 40, 10, 0.0),
+)
+
+_DEFINEDEBYPART_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeByPart(KeywordBase):
     """DYNA DEFINE_DE_BY_PART keyword"""
@@ -40,155 +69,26 @@ class DefineDeByPart(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndamp",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdamp",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fricr",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normk",
-                        float,
-                        50,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sheark",
-                        float,
-                        60,
-                        10,
-                        0.2857,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gamma",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lnorm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lshear",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fricd",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBYPART_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBYPART_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBYPART_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeByPart.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEBYPART_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of DES nodes.

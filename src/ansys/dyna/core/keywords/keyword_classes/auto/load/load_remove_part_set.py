@@ -23,7 +23,15 @@
 """Module providing the LoadRemovePartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADREMOVEPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("time0", float, 10, 10, None),
+    FieldSchema("time1", float, 20, 10, None),
+    FieldSchema("stgr", int, 30, 10, None),
+)
 
 class LoadRemovePartSet(KeywordBase):
     """DYNA LOAD_REMOVE_PART_SET keyword"""
@@ -35,40 +43,10 @@ class LoadRemovePartSet(KeywordBase):
         """Initialize the LoadRemovePartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADREMOVEPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for deletion.

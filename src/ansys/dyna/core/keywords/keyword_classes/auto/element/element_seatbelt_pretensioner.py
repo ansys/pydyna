@@ -23,7 +23,24 @@
 """Module providing the ElementSeatbeltPretensioner class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSEATBELTPRETENSIONER_CARD0 = (
+    FieldSchema("sbprid", int, 0, 10, 0),
+    FieldSchema("sbprty", int, 10, 10, 1),
+    FieldSchema("sbsid1", int, 20, 10, 0),
+    FieldSchema("sbsid2", int, 30, 10, 0),
+    FieldSchema("sbsid3", int, 40, 10, 0),
+    FieldSchema("sbsid4", int, 50, 10, 0),
+)
+
+_ELEMENTSEATBELTPRETENSIONER_CARD1 = (
+    FieldSchema("sbrid", int, 0, 10, 0),
+    FieldSchema("time", float, 10, 10, 0.0),
+    FieldSchema("ptlcid", int, 20, 10, 0),
+    FieldSchema("lmtfrc", float, 30, 10, 0.0),
+)
 
 class ElementSeatbeltPretensioner(KeywordBase):
     """DYNA ELEMENT_SEATBELT_PRETENSIONER keyword"""
@@ -35,96 +52,13 @@ class ElementSeatbeltPretensioner(KeywordBase):
         """Initialize the ElementSeatbeltPretensioner class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbprid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbprty",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbsid1",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbsid2",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbsid3",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbsid4",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sbrid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptlcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmtfrc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTPRETENSIONER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTPRETENSIONER_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sbprid(self) -> int:
         """Get or set the Pretensioner ID. A unique number has to be used.

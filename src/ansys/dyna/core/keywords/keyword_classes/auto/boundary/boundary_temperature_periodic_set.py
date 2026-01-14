@@ -23,7 +23,18 @@
 """Module providing the BoundaryTemperaturePeriodicSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYTEMPERATUREPERIODICSET_CARD0 = (
+    FieldSchema("ssid1", int, 0, 10, None),
+    FieldSchema("ptype", int, 10, 10, None),
+    FieldSchema("ssid2", int, 20, 10, None),
+    FieldSchema("tdlcid", int, 30, 10, None),
+    FieldSchema("axe", int, 40, 10, None),
+    FieldSchema("nid", int, 50, 10, None),
+    FieldSchema("angle", float, 60, 10, None),
+)
 
 class BoundaryTemperaturePeriodicSet(KeywordBase):
     """DYNA BOUNDARY_TEMPERATURE_PERIODIC_SET keyword"""
@@ -35,61 +46,10 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
         """Initialize the BoundaryTemperaturePeriodicSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdlcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axe",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATUREPERIODICSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the First Segment set on which the periodic temperature boundary condition will be applied.

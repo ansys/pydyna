@@ -23,8 +23,74 @@
 """Module providing the MatAddPzelectric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDPZELECTRIC_CARD0 = (
+    FieldSchema("mid", str, 0, 10, None),
+    FieldSchema("dtype", str, 10, 10, "S"),
+    FieldSchema("gpt", int, 20, 10, 8),
+    FieldSchema("aopt", int, 30, 10, 0),
+)
+
+_MATADDPZELECTRIC_CARD1 = (
+    FieldSchema("dxx", float, 0, 10, None),
+    FieldSchema("dyy", float, 10, 10, None),
+    FieldSchema("dzz", float, 20, 10, None),
+    FieldSchema("dxy", float, 30, 10, None),
+    FieldSchema("dxz", float, 40, 10, None),
+    FieldSchema("dyz", float, 50, 10, None),
+)
+
+_MATADDPZELECTRIC_CARD2 = (
+    FieldSchema("px11", float, 0, 10, None),
+    FieldSchema("px22", float, 10, 10, None),
+    FieldSchema("px33", float, 20, 10, None),
+    FieldSchema("px12", float, 30, 10, None),
+    FieldSchema("px13", float, 40, 10, None),
+    FieldSchema("px23", float, 50, 10, None),
+    FieldSchema("py11", float, 60, 10, None),
+    FieldSchema("py22", float, 70, 10, None),
+)
+
+_MATADDPZELECTRIC_CARD3 = (
+    FieldSchema("py33", float, 0, 10, None),
+    FieldSchema("py12", float, 10, 10, None),
+    FieldSchema("px13", float, 20, 10, None),
+    FieldSchema("py23", float, 30, 10, None),
+    FieldSchema("pz11", float, 40, 10, None),
+    FieldSchema("pz22", float, 50, 10, None),
+    FieldSchema("pz33", float, 60, 10, None),
+    FieldSchema("pz12", float, 70, 10, None),
+)
+
+_MATADDPZELECTRIC_CARD4 = (
+    FieldSchema("pz13", float, 0, 10, None),
+    FieldSchema("pz23", float, 10, 10, None),
+)
+
+_MATADDPZELECTRIC_CARD5 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATADDPZELECTRIC_CARD6 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+)
+
+_MATADDPZELECTRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddPzelectric(KeywordBase):
     """DYNA MAT_ADD_PZELECTRIC keyword"""
@@ -40,336 +106,38 @@ class MatAddPzelectric(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtype",
-                        str,
-                        10,
-                        10,
-                        "S",
-                        **kwargs,
-                    ),
-                    Field(
-                        "gpt",
-                        int,
-                        20,
-                        10,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dxx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dyy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dzz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dxy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dxz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dyz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "px11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px22",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px33",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px13",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px23",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "py11",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "py22",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "py33",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "py12",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "px13",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "py23",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pz11",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pz22",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pz33",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pz12",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pz13",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pz23",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDPZELECTRIC_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddPzelectric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPZELECTRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[str]:
         """Get or set the Material ID for which the piezoelectric properties apply

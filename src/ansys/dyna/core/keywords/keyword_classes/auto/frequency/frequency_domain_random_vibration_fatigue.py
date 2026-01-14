@@ -23,7 +23,92 @@
 """Module providing the FrequencyDomainRandomVibrationFatigue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD0 = (
+    FieldSchema("mdmin", int, 0, 10, 1),
+    FieldSchema("mdmax", int, 10, 10, None),
+    FieldSchema("fnmin", float, 20, 10, 0.0),
+    FieldSchema("fnmax", float, 30, 10, None),
+    FieldSchema("restrt", int, 40, 10, 0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD1 = (
+    FieldSchema("dampf", float, 0, 10, 0.0),
+    FieldSchema("lcdam", int, 10, 10, 0),
+    FieldSchema("lctyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+    FieldSchema("dmptyp", int, 50, 10, 0),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD2 = (
+    FieldSchema("vaflag", int, 0, 10, 0),
+    FieldSchema("method", int, 10, 10, 0),
+    FieldSchema("unit", int, 20, 10, 0),
+    FieldSchema("umlt", float, 30, 10, None),
+    FieldSchema("vapsd", int, 40, 10, 0),
+    FieldSchema("varms", int, 50, 10, 0),
+    FieldSchema("napsd", int, 60, 10, 1),
+    FieldSchema("ncpsd", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD3 = (
+    FieldSchema("ldtyp", int, 0, 10, 0),
+    FieldSchema("ipanelu", int, 10, 10, None),
+    FieldSchema("ipanelv", int, 20, 10, None),
+    FieldSchema("temper", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ldflag", int, 50, 10, 0),
+    FieldSchema("icoarse", int, 60, 10, 0),
+    FieldSchema("tcoarse", float, 70, 10, 0.1),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD4 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, None),
+    FieldSchema("dof", int, 20, 10, 0),
+    FieldSchema("ldpsd", int, 30, 10, None),
+    FieldSchema("ldvel", int, 40, 10, None),
+    FieldSchema("ldflw", int, 50, 10, None),
+    FieldSchema("ldspn", int, 60, 10, None),
+    FieldSchema("cid", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD5 = (
+    FieldSchema("load_i", int, 0, 10, None),
+    FieldSchema("load_j", int, 10, 10, None),
+    FieldSchema("lctyp2", int, 20, 10, 0),
+    FieldSchema("ldpsd1", int, 30, 10, None),
+    FieldSchema("ldpsd2", int, 40, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD6 = (
+    FieldSchema("mftg", int, 0, 10, 0),
+    FieldSchema("nftg", int, 10, 10, 1),
+    FieldSchema("sntype", int, 20, 10, 0),
+    FieldSchema("texpos", float, 30, 10, 0.0),
+    FieldSchema("strsf", float, 40, 10, 1.0),
+    FieldSchema("inftg", int, 50, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD7 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("ptype", int, 20, 10, 0),
+    FieldSchema("ltype", int, 30, 10, 0),
+    FieldSchema("a", float, 40, 10, None),
+    FieldSchema("b", float, 50, 10, None),
+    FieldSchema("sthres", float, 60, 10, 0.0),
+    FieldSchema("snlimt", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD8 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class FrequencyDomainRandomVibrationFatigue(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_RANDOM_VIBRATION_FATIGUE keyword"""
@@ -35,475 +120,34 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         """Initialize the FrequencyDomainRandomVibrationFatigue class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdmin",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmptyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vaflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "umlt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vapsd",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varms",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "napsd",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncpsd",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ldtyp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelu",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelv",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temper",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflag",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icoarse",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcoarse",
-                        float,
-                        70,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldvel",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflw",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspn",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "load_i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "load_j",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mftg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nftg",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sntype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strsf",
-                        float,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inftg",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ltype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sthres",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "snlimt",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD8,
+                **kwargs,
+            ),        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).

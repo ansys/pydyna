@@ -23,8 +23,31 @@
 """Module providing the MatSoilConcrete class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSOILCONCRETE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("g", float, 20, 10, None),
+    FieldSchema("k", float, 30, 10, None),
+    FieldSchema("lcpv", int, 40, 10, None),
+    FieldSchema("lcyp", int, 50, 10, None),
+    FieldSchema("lcfp", int, 60, 10, 0),
+    FieldSchema("lcrp", int, 70, 10, 0),
+)
+
+_MATSOILCONCRETE_CARD1 = (
+    FieldSchema("pc", float, 0, 10, None),
+    FieldSchema("out", float, 10, 10, 0.0),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("fail", float, 30, 10, 0.0),
+)
+
+_MATSOILCONCRETE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSoilConcrete(KeywordBase):
     """DYNA MAT_SOIL_CONCRETE keyword"""
@@ -40,121 +63,23 @@ class MatSoilConcrete(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpv",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcyp",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "out",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSOILCONCRETE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSOILCONCRETE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSoilConcrete.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSOILCONCRETE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

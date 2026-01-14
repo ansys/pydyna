@@ -23,10 +23,22 @@
 """Module providing the InitialStressShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSSHELLTHICKNESSLARGECARDSET_CARD0 = (
+    FieldSchema("t", float, 0, 10, None),
+    FieldSchema("sigxx", float, 10, 10, 0.0),
+    FieldSchema("sigyy", float, 20, 10, 0.0),
+    FieldSchema("sigzz", float, 30, 10, 0.0),
+    FieldSchema("sigxy", float, 40, 10, 0.0),
+    FieldSchema("sigyz", float, 50, 10, 0.0),
+    FieldSchema("sigzx", float, 60, 10, 0.0),
+    FieldSchema("eps", float, 70, 10, 0.0),
+)
 
 class InitialStressShellThicknessLargeCardSet(Cards):
     """ CardSet."""
@@ -37,82 +49,17 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLTHICKNESSLARGECARDSET_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "hisv",
                 8,
                 10,
                 float,
                 lambda: self.parent.nhisv,
                 lambda: self.parent.large == None or self.parent.large == 0,
-                data = kwargs.get("hisv")),
-        ]
+                data = kwargs.get("hisv")),        ]
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -216,6 +163,20 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+_INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD0 = (
+    FieldSchema("t", float, 0, 20, None),
+    FieldSchema("sigxx", float, 20, 20, 0.0),
+    FieldSchema("sigyy", float, 40, 20, 0.0),
+    FieldSchema("sigzz", float, 60, 20, 0.0),
+    FieldSchema("sigxy", float, 80, 20, 0.0),
+)
+
+_INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD1 = (
+    FieldSchema("sigyz", float, 0, 20, 0.0),
+    FieldSchema("sigzx", float, 20, 20, 0.0),
+    FieldSchema("eps", float, 40, 20, 0.0),
+)
+
 class InitialStressShellThicknessLargeCardSetLarge(Cards):
     """ CardSet."""
 
@@ -225,86 +186,20 @@ class InitialStressShellThicknessLargeCardSetLarge(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        80,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigyz",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD1,
+                **kwargs,
+            ),            SeriesCard(
                 "hisv",
                 5,
                 20,
                 float,
                 lambda: self.parent.nhisv,
                 lambda: self.parent.large == 1,
-                data = kwargs.get("hisv")),
-        ]
+                data = kwargs.get("hisv")),        ]
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -408,6 +303,17 @@ class InitialStressShellThicknessLargeCardSetLarge(Cards):
         """Get the parent keyword."""
         return self._parent
 
+_INITIALSTRESSSHELLCARDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, 0),
+    FieldSchema("nthick", int, 20, 10, 0),
+    FieldSchema("nhisv", int, 30, 10, 0),
+    FieldSchema("ntensr", int, 40, 10, 0),
+    FieldSchema("large", int, 50, 10, 0),
+    FieldSchema("nthint", int, 60, 10, 0),
+    FieldSchema("nthhsv", int, 70, 10, 0),
+)
+
 class InitialStressShellCardSet(Cards):
     """ CardSet."""
 
@@ -417,86 +323,20 @@ class InitialStressShellCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntensr",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthint",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthhsv",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            CardSet(
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLCARDSET_CARD0,
+                **kwargs,
+            ),            CardSet(
                 InitialStressShellThicknessLargeCardSet,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
-            ),
-            CardSet(
+            ),            CardSet(
                 InitialStressShellThicknessLargeCardSetLarge,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == 1,
                 **kwargs
-            ),
-        ]
+            ),        ]
 
     @property
     def eid(self) -> typing.Optional[int]:
@@ -618,9 +458,7 @@ class InitialStressShell(KeywordBase):
             CardSet(
                 InitialStressShellCardSet,
                 **kwargs
-            ),
-        ]
-
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the eid

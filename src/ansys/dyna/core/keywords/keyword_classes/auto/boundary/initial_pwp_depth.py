@@ -23,7 +23,13 @@
 """Module providing the InitialPwpDepth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALPWPDEPTH_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+)
 
 class InitialPwpDepth(KeywordBase):
     """DYNA INITIAL_PWP_DEPTH keyword"""
@@ -35,26 +41,10 @@ class InitialPwpDepth(KeywordBase):
         """Initialize the InitialPwpDepth class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALPWPDEPTH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, see also *PART.

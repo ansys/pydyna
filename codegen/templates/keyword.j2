@@ -1,141 +1,80 @@
-{{license}}
-"""Module providing the {{keyword_data.classname}} class."""
-{% if keyword_data.dataclasses %}
-import dataclasses
-{% endif %}
-import typing
-{% if keyword_data.table %}
-import pandas as pd
+{#
+  Main keyword class template.
 
-{% elif keyword_data.table_group %}
-import pandas as pd
+  Generates:
+  1. License and imports
+  2. CardSet classes (if any)
+  3. Schema definitions for regular Cards and option Cards
+  4. Main keyword class with __init__ and properties
+#}
+{% include 'keyword/imports.j2' %}
 
-{% endif %}
-{# TODO - only do this if there's a keyword without a default #}
-{% if keyword_data.mixin_imports %}
-{% for mixin_import in keyword_data.mixin_imports %}
-from ansys.dyna.core.lib.cards_.special.{{mixin_import.source}} import{% for name in mixin_import.names %}{{ ", " if not loop.first else " " }}{{name}}{% endfor %}
-{% endfor %}
-
-{% endif %}
-from ansys.dyna.core.lib.card import Card, Field, Flag
-{% if keyword_data.table %}
-from ansys.dyna.core.lib.table_card import TableCard
-{% endif %}
-{% if keyword_data.card_sets %}
-from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
-from ansys.dyna.core.lib.cards import Cards
-{% endif %}
-{% if keyword_data.table_group %}
-from ansys.dyna.core.lib.table_card_group import TableCardGroup
-{% endif %}
-{% if keyword_data.variable %}
-from ansys.dyna.core.lib.series_card import SeriesCard
-{% endif %}
-{% if keyword_data.options %}
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
-{% elif keyword_data.card_sets %}
-{% if keyword_data.card_sets.options %}
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
-{% endif %}
-{% endif %}
-from ansys.dyna.core.lib.keyword_base import KeywordBase
-{% for link in keyword_data.links %}
-from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{link.classname}}
-{% endfor %}
-
+{# Generate CardSet classes before the main class #}
 {% if keyword_data.card_sets %}
 {% for card_set in keyword_data.card_sets.sets %}
 {% include 'keyword/card_set_class.j2' %}
 
-{% endfor %}{# card_set in keyword_data.card_sets.sets #}
-{% endif %}{# keyword_data.card_sets #}
-{% if keyword_data.mixins %}
-class {{keyword_data.classname}}(
-    KeywordBase
-    {% if keyword_data.mixins %}
-{% for mixin in keyword_data.mixins %}
-    , {{mixin}}
 {% endfor %}
-    {% endif %}
-    ):
-{% else %}
-class {{keyword_data.classname}}(KeywordBase):
 {% endif %}
-{% if keyword_data.renamed_properties %}
-    """DYNA {{keyword_data.title}} keyword
-
-    Fields with renamed properties:
-{% for rp in keyword_data.renamed_properties %}
-        {{rp.field_name}} (Card {{rp.card_index + 1}}) -> {{rp.property_name}}
-{% endfor %}
-    """
-{% else %}
-    """DYNA {{keyword_data.title}} keyword"""
-{% endif %}
-
-    keyword = "{{keyword_data.keyword}}"
-    subkeyword = "{{keyword_data.subkeyword}}"
-{% if keyword_data.options %}
-    option_specs = [
-{% for option in keyword_data.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
-{% endfor %}
-    ]
-{% endif %}
-{% for dataclass in keyword_data.dataclasses %}
-
-    @dataclasses.dataclass
-    class {{ dataclass.name }}:
-        """Dataclass for {{ dataclass.name }}."""
-{% for field in dataclass.fields %}
-        {{ field.name }}: {{field.type}} = None
-{% endfor %}
-{% endfor %}
-
-    def __init__(self, **kwargs):
-        """Initialize the {{keyword_data.classname}} class."""
-        super().__init__(**kwargs)
-{% if keyword_data.card_sets %}
-        kwargs["parent"] = self
-        kwargs["keyword"] = self
-{% endif %}
-{% if keyword_data.options %}
-        kwargs["parent"] = self
-{% endif %}
-        self._cards = [
+{# Generate schema definitions for regular Cards in the main keyword class #}
 {% for card in keyword_data.cards %}
-{% include 'keyword/card.j2' %}
+{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
+_{{keyword_data.classname | upper}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
 {% endfor %}
-{% if keyword_data.options %}
-{% with parent_name = keyword_data.classname %}
-{% with options = keyword_data.options %}
-{% include 'keyword/options.j2' %}
-{% endwith %}
-{% endwith %}
-{% endif %}{# keyword_data.options #}
-        ]
+)
 
+{% endif %}
+{% endfor %}
+{# Generate schema definitions for option Cards #}
+{% if keyword_data.options %}
+{% for option in keyword_data.options %}
+{% set option_loop = loop %}
+{% for card in option.cards %}
+_{{keyword_data.classname | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+{% if field.flag %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% else %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
+{% endfor %}
+)
+
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% include 'keyword/class_header.j2' %}
+
+{% include 'keyword/init_method.j2' %}
+
+{# CardSet property passthroughs #}
 {% for card in keyword_data.cards %}
 {% if card.set %}
 {% for card_set in keyword_data.card_sets.sets %}
 {% if card_set.name == card.set.name %}
 {% for card in card_set.source_cards %}
 {% include 'keyword/card_set_property_passthrough.j2' %}
-{% endfor %}{# card in card_set.source_cards #}
-{% endif %}{# card_set.name == card.set.name #}
-{% endfor %}{# card_set in keyword_data.card_sets.sets #}
-{% endif %}{# card.set #}
-{% endfor %}{# keyword_data.cards #}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{# Regular card properties #}
 {% for card in keyword_data.cards %}
 {% include 'keyword/card_properties.j2' %}
 {% endfor %}
+{# Option card properties #}
 {% if keyword_data.options %}
 {% for option in keyword_data.options %}
 {% include 'keyword/option_card_properties.j2' %}
-{% endfor %}{# option in keyword_data.options #}
-{% endif %}{# keyword_data.options #}
+{% endfor %}
+{% endif %}
+{# Link properties #}
 {% with links = keyword_data.links %}
 {% include 'keyword/links.j2' %}
 {% endwith %}
+{# Alias class #}
 {% include 'keyword/alias.j2' %}
+

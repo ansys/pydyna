@@ -23,7 +23,23 @@
 """Module providing the ConstrainedSpotweld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDSPOTWELD_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDSPOTWELD_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("sn", float, 20, 10, None),
+    FieldSchema("ss", float, 30, 10, None),
+    FieldSchema("n", float, 40, 10, None),
+    FieldSchema("m", float, 50, 10, None),
+    FieldSchema("tf", float, 60, 10, 1e+20),
+    FieldSchema("ep", float, 70, 10, 1e+20),
+)
 
 class ConstrainedSpotweld(KeywordBase):
     """DYNA CONSTRAINED_SPOTWELD keyword"""
@@ -35,81 +51,13 @@ class ConstrainedSpotweld(KeywordBase):
         """Initialize the ConstrainedSpotweld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tf",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ep",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPOTWELD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPOTWELD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID

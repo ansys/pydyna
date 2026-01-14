@@ -23,7 +23,19 @@
 """Module providing the ConstrainedJointRevolute class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDJOINTREVOLUTE_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("n5", int, 40, 10, 0),
+    FieldSchema("n6", int, 50, 10, 0),
+    FieldSchema("rps", float, 60, 10, 1.0),
+    FieldSchema("damp", float, 70, 10, 1.0),
+)
 
 class ConstrainedJointRevolute(KeywordBase):
     """DYNA CONSTRAINED_JOINT_REVOLUTE keyword"""
@@ -35,72 +47,10 @@ class ConstrainedJointRevolute(KeywordBase):
         """Initialize the ConstrainedJointRevolute class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rps",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTREVOLUTE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node 1, in rigid body A.

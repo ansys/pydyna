@@ -21,16 +21,38 @@
 # SOFTWARE.
 
 """Legacy INITIAL_STRESS_SHELL implementation (version 0.9.1)."""
-
-# flake8: noqa: E501
 import typing
 import warnings
 
-from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.series_card import SeriesCard  # noqa: F401
+from ansys.dyna.core.lib.series_card import SeriesCard
+
+# Schema definitions for optimized Card creation
+_INITIALSTRESSSHELLLEGACYTHICKNESSLARGECARDSET_CARD0 = (
+    FieldSchema("t", float, 0, 10, None),
+    FieldSchema("sigxx", float, 10, 10, 0.0),
+    FieldSchema("sigyy", float, 20, 10, 0.0),
+    FieldSchema("sigzz", float, 30, 10, 0.0),
+    FieldSchema("sigxy", float, 40, 10, 0.0),
+    FieldSchema("sigyz", float, 50, 10, 0.0),
+    FieldSchema("sigzx", float, 60, 10, 0.0),
+    FieldSchema("eps", float, 70, 10, 0.0),
+)
+
+_INITIALSTRESSSHELLLEGACYCARDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, 0),
+    FieldSchema("nthick", int, 20, 10, 0),
+    FieldSchema("nhisv", int, 30, 10, 0),
+    FieldSchema("ntensr", int, 40, 10, 0),
+    FieldSchema("large", int, 50, 10, 0),
+    FieldSchema("nthint", int, 60, 10, 0),
+    FieldSchema("nthhsv", int, 70, 10, 0),
+)
 
 
 class InitialStressShellLegacyThicknessLargeCardSet(Cards):
@@ -42,79 +64,18 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLLEGACYTHICKNESSLARGECARDSET_CARD0,
+                **kwargs,
             ),
             SeriesCard("hisv", 8, 10, float, lambda: self.parent.nhisv, data=kwargs.get("hisv")),
         ]
 
     @property
     def t(self) -> typing.Optional[float]:
-        """Get or set the Parametric coordinate of through thickness integration point. Between -1 and 1 inclusive."""  # nopep8
+        """Get or set the Parametric coordinate of through thickness integration point.
+
+        Between -1 and 1 inclusive."""  # nopep8
         return self._cards[0].get_value("t")
 
     @t.setter
@@ -216,77 +177,14 @@ class InitialStressShellLegacyCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntensr",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthint",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthhsv",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLLEGACYCARDSET_CARD0,
+                **kwargs,
             ),
             CardSet(
                 InitialStressShellLegacyThicknessLargeCardSet,
                 length_func=lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
-                active_func=lambda: self.large == None or self.large == 0,
+                active_func=lambda: self.large is None or self.large == 0,
                 **kwargs,
             ),
         ]

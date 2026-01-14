@@ -23,7 +23,41 @@
 """Module providing the FrequencyDomainAcousticFemEigenvalue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD0 = (
+    FieldSchema("ro", float, 0, 10, None),
+    FieldSchema("c", float, 10, 10, None),
+    FieldSchema("fmin", float, 20, 10, None),
+    FieldSchema("fmax", float, 30, 10, None),
+    FieldSchema("nfreq", int, 40, 10, 0),
+    FieldSchema("dtout", float, 50, 10, 0.0),
+    FieldSchema("tstart", float, 60, 10, 0.0),
+    FieldSchema("pref", float, 70, 10, 0.0),
+)
+
+_FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("fftwin", int, 10, 10, 0),
+    FieldSchema("mixdmp", int, 20, 10, 0),
+)
+
+_FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD2 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ptyp", int, 10, 10, 0),
+)
+
+_FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD3 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("styp", int, 10, 10, 0),
+    FieldSchema("vad", int, 20, 10, 0),
+    FieldSchema("dof", int, 30, 10, 0),
+    FieldSchema("lcid1", int, 40, 10, 0),
+    FieldSchema("lcid2", int, 50, 10, 0),
+    FieldSchema("sf", float, 60, 10, 1.0),
+    FieldSchema("vid", int, 70, 10, 0),
+)
 
 class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_FEM_EIGENVALUE keyword"""
@@ -35,185 +69,19 @@ class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
         """Initialize the FrequencyDomainAcousticFemEigenvalue class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ro",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstart",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pref",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fftwin",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mixdmp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "styp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid density.

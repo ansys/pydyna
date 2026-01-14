@@ -23,7 +23,33 @@
 """Module providing the BatteryEchemMatCathode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMMATCATHODE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("iocpa", int, 10, 10, None),
+    FieldSchema("capta", float, 20, 10, None),
+    FieldSchema("s_yc", float, 30, 10, None),
+    FieldSchema("s_rad", float, 40, 10, None),
+    FieldSchema("ratec", float, 50, 10, None),
+    FieldSchema("rcath", float, 60, 10, None),
+)
+
+_BATTERYECHEMMATCATHODE_CARD1 = (
+    FieldSchema("rhoec", float, 0, 10, None),
+    FieldSchema("rhofc", float, 10, 10, None),
+    FieldSchema("rhoccc", float, 20, 10, None),
+    FieldSchema("diffc", float, 30, 10, None),
+    FieldSchema("condc", float, 40, 10, None),
+)
+
+_BATTERYECHEMMATCATHODE_CARD2 = (
+    FieldSchema("vfec", float, 0, 10, None),
+    FieldSchema("vfpc", float, 10, 10, None),
+    FieldSchema("vffc", float, 20, 10, None),
+    FieldSchema("vfgc", float, 30, 10, None),
+)
 
 class BatteryEchemMatCathode(KeywordBase):
     """DYNA BATTERY_ECHEM_MAT_CATHODE keyword"""
@@ -35,132 +61,16 @@ class BatteryEchemMatCathode(KeywordBase):
         """Initialize the BatteryEchemMatCathode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iocpa",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "capta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s_yc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s_rad",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratec",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rcath",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhoec",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhofc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoccc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diffc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "condc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vfec",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfpc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vffc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfgc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATCATHODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATCATHODE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATCATHODE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part number identifier

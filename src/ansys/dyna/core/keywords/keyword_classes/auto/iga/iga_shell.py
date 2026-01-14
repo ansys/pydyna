@@ -23,7 +23,19 @@
 """Module providing the IgaShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGASHELL_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("nisr", float, 20, 10, 0.0),
+    FieldSchema("niss", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("idfne", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
+)
 
 class IgaShell(KeywordBase):
     """DYNA IGA_SHELL keyword"""
@@ -35,71 +47,10 @@ class IgaShell(KeywordBase):
         """Initialize the IgaShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nisr",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niss",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idfne",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGASHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Isogeometric shell (patch) ID, see Remark 1 and Remark 2. A unique number must be chosen.

@@ -23,8 +23,46 @@
 """Module providing the Mat174 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT174_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("eunl", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("fc", float, 40, 10, None),
+    FieldSchema("ec1", float, 50, 10, 0.0022),
+    FieldSchema("ec50", float, 60, 10, None),
+    FieldSchema("resid", float, 70, 10, 0.2),
+)
+
+_MAT174_CARD1 = (
+    FieldSchema("ft", float, 0, 10, None),
+    FieldSchema("unitc", float, 10, 10, 1.0),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("esoft", float, 50, 10, None),
+    FieldSchema("lchar", float, 60, 10, None),
+    FieldSchema("output", float, 70, 10, 0.0),
+)
+
+_MAT174_CARD2 = (
+    FieldSchema("fracr", float, 0, 10, None),
+    FieldSchema("ymreinf", float, 10, 10, None),
+    FieldSchema("prreinf", float, 20, 10, None),
+    FieldSchema("syreinf", float, 30, 10, None),
+    FieldSchema("sureinf", float, 40, 10, None),
+    FieldSchema("eshr", float, 50, 10, 0.03),
+    FieldSchema("eur", float, 60, 10, 0.2),
+    FieldSchema("rreinf", float, 70, 10, 4.0),
+)
+
+_MAT174_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat174(KeywordBase):
     """DYNA MAT_174 keyword"""
@@ -40,212 +78,26 @@ class Mat174(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eunl",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec1",
-                        float,
-                        50,
-                        10,
-                        2.2E-03,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec50",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "resid",
-                        float,
-                        70,
-                        10,
-                        0.2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ft",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unitc",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esoft",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lchar",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "output",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fracr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymreinf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prreinf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syreinf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sureinf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eshr",
-                        float,
-                        50,
-                        10,
-                        0.03,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eur",
-                        float,
-                        60,
-                        10,
-                        0.2 ,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rreinf",
-                        float,
-                        70,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT174_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT174_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT174_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat174.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT174_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.

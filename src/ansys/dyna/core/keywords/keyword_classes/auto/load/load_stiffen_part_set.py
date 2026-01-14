@@ -23,7 +23,16 @@
 """Module providing the LoadStiffenPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSTIFFENPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("stga", int, 30, 10, None),
+    FieldSchema("stgr", int, 40, 10, None),
+)
 
 class LoadStiffenPartSet(KeywordBase):
     """DYNA LOAD_STIFFEN_PART_SET keyword"""
@@ -35,47 +44,10 @@ class LoadStiffenPartSet(KeywordBase):
         """Initialize the LoadStiffenPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stga",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSTIFFENPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID

@@ -23,7 +23,15 @@
 """Module providing the DatabaseHistoryNodeSetLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEHISTORYNODESETLOCAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("ref", int, 20, 10, 0),
+    FieldSchema("hfo", int, 30, 10, 0),
+)
 
 class DatabaseHistoryNodeSetLocal(KeywordBase):
     """DYNA DATABASE_HISTORY_NODE_SET_LOCAL keyword"""
@@ -35,42 +43,10 @@ class DatabaseHistoryNodeSetLocal(KeywordBase):
         """Initialize the DatabaseHistoryNodeSetLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hfo",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEHISTORYNODESETLOCAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node set ID. The contents of the files are given in Table 9.1 in the Keyword Manual section 9.14 for nodes.

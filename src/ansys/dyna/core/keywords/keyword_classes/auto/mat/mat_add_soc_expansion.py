@@ -23,8 +23,23 @@
 """Module providing the MatAddSocExpansion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDSOCEXPANSION_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("mult", float, 20, 10, None),
+    FieldSchema("lcidy", int, 30, 10, None),
+    FieldSchema("multy", float, 40, 10, None),
+    FieldSchema("lcidz", int, 50, 10, None),
+    FieldSchema("multz", float, 60, 10, None),
+)
+
+_MATADDSOCEXPANSION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddSocExpansion(KeywordBase):
     """DYNA MAT_ADD_SOC_EXPANSION keyword"""
@@ -40,79 +55,20 @@ class MatAddSocExpansion(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mult",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "multy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "multz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDSOCEXPANSION_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddSocExpansion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDSOCEXPANSION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for which the SOC expansion property applies

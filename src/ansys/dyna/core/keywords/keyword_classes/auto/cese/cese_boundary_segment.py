@@ -23,7 +23,18 @@
 """Module providing the CeseBoundarySegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYSEGMENT_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2 ", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("dof ", int, 40, 10, None),
+    FieldSchema("lcid", int, 50, 10, None),
+    FieldSchema("sf", float, 60, 10, 1.0),
+)
 
 class CeseBoundarySegment(KeywordBase):
     """DYNA CESE_BOUNDARY_SEGMENT keyword"""
@@ -35,62 +46,10 @@ class CeseBoundarySegment(KeywordBase):
         """Initialize the CeseBoundarySegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2 ",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof ",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSEGMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.

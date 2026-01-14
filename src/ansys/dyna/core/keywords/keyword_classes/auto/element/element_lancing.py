@@ -23,7 +23,18 @@
 """Module providing the ElementLancing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTLANCING_CARD0 = (
+    FieldSchema("idpt", int, 0, 10, None),
+    FieldSchema("idcv", int, 10, 10, None),
+    FieldSchema("irefine", int, 20, 10, None),
+    FieldSchema("smin", float, 30, 10, None),
+    FieldSchema("at", float, 40, 10, None),
+    FieldSchema("endt", float, 50, 10, None),
+    FieldSchema("ntimes", int, 60, 10, None),
+)
 
 class ElementLancing(KeywordBase):
     """DYNA ELEMENT_LANCING keyword"""
@@ -35,61 +46,10 @@ class ElementLancing(KeywordBase):
         """Initialize the ElementLancing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idpt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcv",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irefine",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntimes",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTLANCING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idpt(self) -> typing.Optional[int]:
         """Get or set the PID of the sheet blank to be lanced, see *PART.

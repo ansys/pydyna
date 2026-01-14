@@ -23,7 +23,40 @@
 """Module providing the ElementBeamSectionOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTBEAMSECTIONOFFSET_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("rt1", int, 40, 8, 0),
+    FieldSchema("rr1", int, 48, 8, 0),
+    FieldSchema("rt2", int, 56, 8, 0),
+    FieldSchema("rr2", int, 64, 8, 0),
+    FieldSchema("local", int, 72, 8, 2),
+)
+
+_ELEMENTBEAMSECTIONOFFSET_CARD1 = (
+    FieldSchema("stype", str, 0, 10, "SECTION_01"),
+    FieldSchema("d1", float, 10, 10, None),
+    FieldSchema("d2", float, 20, 10, None),
+    FieldSchema("d3", float, 30, 10, None),
+    FieldSchema("d4", float, 40, 10, None),
+    FieldSchema("d5", float, 50, 10, None),
+    FieldSchema("d6", float, 60, 10, None),
+)
+
+_ELEMENTBEAMSECTIONOFFSET_CARD2 = (
+    FieldSchema("wx1", float, 0, 10, 0.0),
+    FieldSchema("wy1", float, 10, 10, 0.0),
+    FieldSchema("wz1", float, 20, 10, 0.0),
+    FieldSchema("wx2", float, 30, 10, 0.0),
+    FieldSchema("wy2", float, 40, 10, 0.0),
+    FieldSchema("wz2", float, 50, 10, 0.0),
+)
 
 class ElementBeamSectionOffset(KeywordBase):
     """DYNA ELEMENT_BEAM_SECTION_OFFSET keyword"""
@@ -35,193 +68,16 @@ class ElementBeamSectionOffset(KeywordBase):
         """Initialize the ElementBeamSectionOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt1",
-                        int,
-                        40,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr1",
-                        int,
-                        48,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt2",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr2",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        72,
-                        8,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "stype",
-                        str,
-                        0,
-                        10,
-                        "SECTION_01",
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d5",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d6",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wx1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wx2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONOFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONOFFSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONOFFSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

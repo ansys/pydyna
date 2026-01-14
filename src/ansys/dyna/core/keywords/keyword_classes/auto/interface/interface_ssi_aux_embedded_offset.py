@@ -23,7 +23,21 @@
 """Module providing the InterfaceSsiAuxEmbeddedOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACESSIAUXEMBEDDEDOFFSET_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_INTERFACESSIAUXEMBEDDEDOFFSET_CARD1 = (
+    FieldSchema("gmset", int, 0, 10, None),
+    FieldSchema("strid", int, 10, 10, None),
+    FieldSchema("soilid", int, 20, 10, None),
+    FieldSchema("spr", int, 30, 10, None),
+    FieldSchema("mpr", int, 40, 10, None),
+)
 
 class InterfaceSsiAuxEmbeddedOffset(KeywordBase):
     """DYNA INTERFACE_SSI_AUX_EMBEDDED_OFFSET keyword"""
@@ -35,65 +49,13 @@ class InterfaceSsiAuxEmbeddedOffset(KeywordBase):
         """Initialize the InterfaceSsiAuxEmbeddedOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gmset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soilid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIAUXEMBEDDEDOFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIAUXEMBEDDEDOFFSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID. This is required and must be unique amongst all the contact interface IDs in the model.

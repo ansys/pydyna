@@ -23,8 +23,28 @@
 """Module providing the Mat090Complex class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT090COMPLEX_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("rhor", float, 10, 10, None),
+    FieldSchema("bulkr", float, 20, 10, None),
+    FieldSchema("rhoi", float, 30, 10, None),
+    FieldSchema("bulki", float, 40, 10, None),
+)
+
+_MAT090COMPLEX_CARD1 = (
+    FieldSchema("lcidrr", int, 0, 10, None),
+    FieldSchema("lcidkr", int, 10, 10, None),
+    FieldSchema("lcidri", int, 20, 10, None),
+    FieldSchema("lcidki", int, 30, 10, None),
+)
+
+_MAT090COMPLEX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat090Complex(KeywordBase):
     """DYNA MAT_090_COMPLEX keyword"""
@@ -40,96 +60,23 @@ class Mat090Complex(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhor",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulkr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulki",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidrr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidkr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidri",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidki",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT090COMPLEX_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT090COMPLEX_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat090Complex.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT090COMPLEX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

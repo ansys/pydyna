@@ -23,7 +23,18 @@
 """Module providing the EosUserLibrary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSUSERLIBRARY_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("sesmid", int, 10, 10, None),
+)
+
+_EOSUSERLIBRARY_CARD1 = (
+    FieldSchema("e0", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, None),
+)
 
 class EosUserLibrary(KeywordBase):
     """DYNA EOS_USER_LIBRARY keyword"""
@@ -35,44 +46,13 @@ class EosUserLibrary(KeywordBase):
         """Initialize the EosUserLibrary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sesmid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSUSERLIBRARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSUSERLIBRARY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID. A unique number or label must be specified (see *PART)..

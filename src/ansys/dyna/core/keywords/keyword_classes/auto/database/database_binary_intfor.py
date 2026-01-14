@@ -23,7 +23,20 @@
 """Module providing the DatabaseBinaryIntfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEBINARYINTFOR_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("lcdt", int, 10, 10, None),
+    FieldSchema("beam", int, 20, 10, 0),
+    FieldSchema("npltc", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
+)
+
+_DATABASEBINARYINTFOR_CARD1 = (
+    FieldSchema("ioopt", int, 0, 10, 0),
+)
 
 class DatabaseBinaryIntfor(KeywordBase):
     """DYNA DATABASE_BINARY_INTFOR keyword"""
@@ -35,60 +48,13 @@ class DatabaseBinaryIntfor(KeywordBase):
         """Initialize the DatabaseBinaryIntfor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ioopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYINTFOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYINTFOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.

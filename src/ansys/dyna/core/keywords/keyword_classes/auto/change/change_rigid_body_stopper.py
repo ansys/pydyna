@@ -23,7 +23,24 @@
 """Module providing the ChangeRigidBodyStopper class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGERIGIDBODYSTOPPER_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcmax", int, 10, 10, 0),
+    FieldSchema("lcmin", int, 20, 10, 0),
+    FieldSchema("psidmx", int, 30, 10, 0),
+    FieldSchema("psidmn", int, 40, 10, 0),
+    FieldSchema("lcvmnx", int, 50, 10, 0),
+    FieldSchema("dir", int, 60, 10, 1),
+    FieldSchema("vid", int, 70, 10, 0),
+)
+
+_CHANGERIGIDBODYSTOPPER_CARD1 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+    FieldSchema("death", float, 10, 10, 1e+28),
+)
 
 class ChangeRigidBodyStopper(KeywordBase):
     """DYNA CHANGE_RIGID_BODY_STOPPER keyword"""
@@ -35,95 +52,13 @@ class ChangeRigidBodyStopper(KeywordBase):
         """Initialize the ChangeRigidBodyStopper class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmax",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmin",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidmx",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidmn",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvmnx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYSTOPPER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYSTOPPER_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of lead rigid body, see *PART.

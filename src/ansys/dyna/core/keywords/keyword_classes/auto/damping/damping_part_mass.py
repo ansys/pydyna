@@ -23,7 +23,24 @@
 """Module providing the DampingPartMass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DAMPINGPARTMASS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("flag", int, 30, 10, 0),
+)
+
+_DAMPINGPARTMASS_CARD1 = (
+    FieldSchema("stx", float, 0, 10, 0.0),
+    FieldSchema("sty", float, 10, 10, 0.0),
+    FieldSchema("stz", float, 20, 10, 0.0),
+    FieldSchema("srx", float, 30, 10, 0.0),
+    FieldSchema("sry", float, 40, 10, 0.0),
+    FieldSchema("srz", float, 50, 10, 0.0),
+)
 
 class DampingPartMass(KeywordBase):
     """DYNA DAMPING_PART_MASS keyword"""
@@ -35,96 +52,13 @@ class DampingPartMass(KeywordBase):
         """Initialize the DampingPartMass class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "stx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sty",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sry",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGPARTMASS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DAMPINGPARTMASS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID, see *PART.

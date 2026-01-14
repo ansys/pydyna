@@ -23,7 +23,22 @@
 """Module providing the BatteryEchemInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMINITIAL_CARD0 = (
+    FieldSchema("echemid", int, 0, 10, None),
+    FieldSchema("mid", int, 10, 10, None),
+)
+
+_BATTERYECHEMINITIAL_CARD1 = (
+    FieldSchema("lic", float, 0, 10, None),
+    FieldSchema("lisic", float, 10, 10, None),
+    FieldSchema("phi2ic", float, 20, 10, None),
+    FieldSchema("phi1ic", float, 30, 10, None),
+    FieldSchema("curic", float, 40, 10, None),
+    FieldSchema("fluxic", float, 50, 10, None),
+)
 
 class BatteryEchemInitial(KeywordBase):
     """DYNA BATTERY_ECHEM_INITIAL keyword"""
@@ -35,72 +50,13 @@ class BatteryEchemInitial(KeywordBase):
         """Initialize the BatteryEchemInitial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "echemid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lic",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lisic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi2ic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi1ic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "curic",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fluxic",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMINITIAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMINITIAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def echemid(self) -> typing.Optional[int]:
         """Get or set the Identifier of the electrochemistry control card to use

@@ -23,8 +23,43 @@
 """Module providing the IncludeTransformBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
+
+_INCLUDETRANSFORMBINARY_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_INCLUDETRANSFORMBINARY_CARD1 = (
+    FieldSchema("idnoff", int, 0, 10, 0),
+    FieldSchema("ideoff", int, 10, 10, 0),
+    FieldSchema("idpoff", int, 20, 10, 0),
+    FieldSchema("idmoff", int, 30, 10, 0),
+    FieldSchema("idsoff", int, 40, 10, 0),
+    FieldSchema("idfoff", int, 50, 10, 0),
+    FieldSchema("iddoff", int, 60, 10, 0),
+)
+
+_INCLUDETRANSFORMBINARY_CARD2 = (
+    FieldSchema("idroff", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("prefix", str, 20, 10, None),
+    FieldSchema("suffix", str, 30, 10, None),
+)
+
+_INCLUDETRANSFORMBINARY_CARD3 = (
+    FieldSchema("fctmas", float, 0, 10, 1.0),
+    FieldSchema("fcttim", float, 10, 10, 1.0),
+    FieldSchema("fctlen", float, 20, 10, 1.0),
+    FieldSchema("fcttem", str, 30, 10, "1.0"),
+    FieldSchema("incout1", int, 40, 10, 1),
+    FieldSchema("fctchg", float, 50, 10, None),
+)
+
+_INCLUDETRANSFORMBINARY_CARD4 = (
+    FieldSchema("tranid", int, 0, 10, 0),
+)
 
 class IncludeTransformBinary(KeywordBase):
     """DYNA INCLUDE_TRANSFORM_BINARY keyword"""
@@ -36,175 +71,22 @@ class IncludeTransformBinary(KeywordBase):
         """Initialize the IncludeTransformBinary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idnoff",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ideoff",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idpoff",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idmoff",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idsoff",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idfoff",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iddoff",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idroff",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prefix",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "suffix",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fctmas",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcttim",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fctlen",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcttem",
-                        str,
-                        30,
-                        10,
-                        "1.0",
-                        **kwargs,
-                    ),
-                    Field(
-                        "incout1",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fctchg",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tranid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDETRANSFORMBINARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDETRANSFORMBINARY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDETRANSFORMBINARY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDETRANSFORMBINARY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDETRANSFORMBINARY_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.

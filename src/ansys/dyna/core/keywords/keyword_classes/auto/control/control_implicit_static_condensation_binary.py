@@ -23,7 +23,21 @@
 """Module providing the ControlImplicitStaticCondensationBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD0 = (
+    FieldSchema("sc_flag", int, 0, 10, 0),
+    FieldSchema("sc_nsid", int, 10, 10, None),
+    FieldSchema("sc_psid", int, 20, 10, None),
+    FieldSchema("se_mass", str, 30, 10, None),
+    FieldSchema("se_stiff", str, 40, 10, None),
+    FieldSchema("se_inert", str, 50, 10, None),
+)
+
+_CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class ControlImplicitStaticCondensationBinary(KeywordBase):
     """DYNA CONTROL_IMPLICIT_STATIC_CONDENSATION_BINARY keyword"""
@@ -35,66 +49,13 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
         """Initialize the ControlImplicitStaticCondensationBinary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sc_flag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc_nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc_psid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_mass",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_stiff",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_inert",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sc_flag(self) -> int:
         """Get or set the Static Condensation Control Flag

@@ -23,7 +23,35 @@
 """Module providing the EmEpCellmodelFentonkarma class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEPCELLMODELFENTONKARMA_CARD0 = (
+    FieldSchema("matid", int, 0, 10, None),
+)
+
+_EMEPCELLMODELFENTONKARMA_CARD1 = (
+    FieldSchema("taud", float, 0, 10, None),
+    FieldSchema("taur", float, 10, 10, None),
+    FieldSchema("tausi", float, 20, 10, None),
+    FieldSchema("tauo", float, 30, 10, None),
+    FieldSchema("tauvp", float, 40, 10, None),
+    FieldSchema("tauvm", float, 50, 10, None),
+    FieldSchema("tauwp", float, 60, 10, None),
+    FieldSchema("tauwm", float, 70, 10, None),
+)
+
+_EMEPCELLMODELFENTONKARMA_CARD2 = (
+    FieldSchema("uc", float, 0, 10, None),
+    FieldSchema("ucsi", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+)
+
+_EMEPCELLMODELFENTONKARMA_CARD3 = (
+    FieldSchema("u0", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, None),
+    FieldSchema("w0", float, 20, 10, None),
+)
 
 class EmEpCellmodelFentonkarma(KeywordBase):
     """DYNA EM_EP_CELLMODEL_FENTONKARMA keyword"""
@@ -35,129 +63,19 @@ class EmEpCellmodelFentonkarma(KeywordBase):
         """Initialize the EmEpCellmodelFentonkarma class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "matid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taud",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taur",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tausi",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauo",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauvp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauvm",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauwp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauwm",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "uc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ucsi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "u0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFENTONKARMA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFENTONKARMA_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFENTONKARMA_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFENTONKARMA_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.

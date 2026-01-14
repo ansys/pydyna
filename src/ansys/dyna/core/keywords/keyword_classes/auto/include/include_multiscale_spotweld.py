@@ -23,7 +23,16 @@
 """Module providing the IncludeMultiscaleSpotweld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEMULTISCALESPOTWELD_CARD0 = (
+    FieldSchema("type", int, 0, 10, None),
+)
+
+_INCLUDEMULTISCALESPOTWELD_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class IncludeMultiscaleSpotweld(KeywordBase):
     """DYNA INCLUDE_MULTISCALE_SPOTWELD keyword"""
@@ -35,30 +44,13 @@ class IncludeMultiscaleSpotweld(KeywordBase):
         """Initialize the IncludeMultiscaleSpotweld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "type",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEMULTISCALESPOTWELD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEMULTISCALESPOTWELD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def type(self) -> typing.Optional[int]:
         """Get or set the TYPE for this multiscale spot weld. This type is used in the keyword

@@ -23,7 +23,25 @@
 """Module providing the BoundaryPrescribedOrientationRigidVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDVECTOR_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("intrp", int, 20, 10, 1),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+    FieldSchema("toffset", int, 50, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDVECTOR_CARD1 = (
+    FieldSchema("lcidv1", int, 0, 10, None),
+    FieldSchema("lcidv2", int, 10, 10, None),
+    FieldSchema("lcidv3", int, 20, 10, None),
+    FieldSchema("lcids", int, 30, 10, None),
+    FieldSchema("valspin", float, 40, 10, None),
+)
 
 class BoundaryPrescribedOrientationRigidVector(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_ORIENTATION_RIGID_VECTOR keyword"""
@@ -35,97 +53,13 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
         """Initialize the BoundaryPrescribedOrientationRigidVector class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intrp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toffset",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidv1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidv2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidv3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcids",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valspin",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDVECTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDVECTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed

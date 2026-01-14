@@ -205,6 +205,7 @@ class TestCardSetWithDiscriminator:
                             Field("theta", float, 0, 10),
                             Field("a", float, 10, 10),
                         ],
+                        
                     ),
                     Card(
                         [
@@ -212,6 +213,7 @@ class TestCardSetWithDiscriminator:
                             Field("val1", float, 10, 10),
                         ],
                         lambda: self.dtype == 1,
+                        
                     ),
                     Card(
                         [
@@ -220,6 +222,7 @@ class TestCardSetWithDiscriminator:
                             Field("val3", float, 20, 10),
                         ],
                         lambda: self.dtype == 2,
+                        
                     ),
                 ]
 
@@ -263,11 +266,12 @@ class TestCardSetWithDiscriminator:
                 super().__init__(kwargs.get("keyword"))
                 self._parent = kwargs.get("parent")
                 self._cards = [
-                    Card([Field("theta", float, 0, 10)]),
-                    Card([Field("dtype", int, 0, 10, 1), Field("val1", float, 10, 10)], lambda: self.dtype == 1),
+                    Card([Field("theta", float, 0, 10)], ),
+                    Card([Field("dtype", int, 0, 10, 1), Field("val1", float, 10, 10)], lambda: self.dtype == 1, ),
                     Card(
                         [Field("dtype", int, 0, 10, 1), Field("val2", float, 10, 10), Field("val3", float, 20, 10)],
                         lambda: self.dtype == 2,
+                        
                     ),
                 ]
 

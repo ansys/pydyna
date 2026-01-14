@@ -23,7 +23,52 @@
 """Module providing the ElementSolidH20Dof class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSOLIDH20DOF_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD1 = (
+    FieldSchema("n1", int, 0, 8, None),
+    FieldSchema("n2", int, 8, 8, None),
+    FieldSchema("n3", int, 16, 8, None),
+    FieldSchema("n4", int, 24, 8, None),
+    FieldSchema("n5", int, 32, 8, None),
+    FieldSchema("n6", int, 40, 8, None),
+    FieldSchema("n7", int, 48, 8, None),
+    FieldSchema("n8", int, 56, 8, None),
+    FieldSchema("n9", int, 64, 8, None),
+    FieldSchema("n10", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD2 = (
+    FieldSchema("n11", int, 0, 8, None),
+    FieldSchema("n12", int, 8, 8, None),
+    FieldSchema("n13", int, 16, 8, None),
+    FieldSchema("n14", int, 24, 8, None),
+    FieldSchema("n15", int, 32, 8, None),
+    FieldSchema("n16", int, 40, 8, None),
+    FieldSchema("n17", int, 48, 8, None),
+    FieldSchema("n18", int, 56, 8, None),
+    FieldSchema("n19", int, 64, 8, None),
+    FieldSchema("n20", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD3 = (
+    FieldSchema("unused", int, 0, 8, None),
+    FieldSchema("unused", int, 8, 8, None),
+    FieldSchema("ns1", int, 16, 8, None),
+    FieldSchema("ns2", int, 24, 8, None),
+    FieldSchema("ns3", int, 32, 8, None),
+    FieldSchema("ns4", int, 40, 8, None),
+    FieldSchema("ns5", int, 48, 8, None),
+    FieldSchema("ns6", int, 56, 8, None),
+    FieldSchema("ns7", int, 64, 8, None),
+    FieldSchema("ns8", int, 72, 8, None),
+)
 
 class ElementSolidH20Dof(KeywordBase):
     """DYNA ELEMENT_SOLID_H20_DOF keyword"""
@@ -35,248 +80,19 @@ class ElementSolidH20Dof(KeywordBase):
         """Initialize the ElementSolidH20Dof class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n9",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n10",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n11",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n12",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n13",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n14",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n15",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n16",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n17",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n18",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n19",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n20",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns4",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns5",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns6",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns7",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns8",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

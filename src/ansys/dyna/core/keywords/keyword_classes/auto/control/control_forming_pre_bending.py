@@ -23,7 +23,19 @@
 """Module providing the ControlFormingPreBending class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGPREBENDING_CARD0 = (
+    FieldSchema("pset", int, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("vx", float, 20, 10, None),
+    FieldSchema("vy", float, 30, 10, None),
+    FieldSchema("vz", float, 40, 10, None),
+    FieldSchema("xc", float, 50, 10, None),
+    FieldSchema("yc", float, 60, 10, None),
+    FieldSchema("zc", float, 70, 10, None),
+)
 
 class ControlFormingPreBending(KeywordBase):
     """DYNA CONTROL_FORMING_PRE_BENDING keyword"""
@@ -35,68 +47,10 @@ class ControlFormingPreBending(KeywordBase):
         """Initialize the ControlFormingPreBending class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPREBENDING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pset(self) -> typing.Optional[int]:
         """Get or set the Part set ID to be included in the pre-bending.

@@ -23,7 +23,15 @@
 """Module providing the IcfdBoundaryConjHeat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDBOUNDARYCONJHEAT_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ctype", int, 10, 10, 0),
+    FieldSchema("val", float, 20, 10, 0.0),
+    FieldSchema("sflcid", float, 30, 10, None),
+)
 
 class IcfdBoundaryConjHeat(KeywordBase):
     """DYNA ICFD_BOUNDARY_CONJ_HEAT keyword"""
@@ -35,42 +43,10 @@ class IcfdBoundaryConjHeat(KeywordBase):
         """Initialize the IcfdBoundaryConjHeat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sflcid",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYCONJHEAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface in contact with the solid

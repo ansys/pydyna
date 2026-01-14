@@ -23,7 +23,17 @@
 """Module providing the LoadHeatGenerationShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADHEATGENERATIONSHELL_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("cmult", float, 20, 10, 1.0),
+    FieldSchema("wblcid", int, 30, 10, None),
+    FieldSchema("cblcid", int, 40, 10, None),
+    FieldSchema("tblcid", int, 50, 10, None),
+)
 
 class LoadHeatGenerationShell(KeywordBase):
     """DYNA LOAD_HEAT_GENERATION_SHELL keyword"""
@@ -35,55 +45,10 @@ class LoadHeatGenerationShell(KeywordBase):
         """Initialize the LoadHeatGenerationShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wblcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cblcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tblcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADHEATGENERATIONSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the SHELL element ID, *ELEMENT_SHELL.

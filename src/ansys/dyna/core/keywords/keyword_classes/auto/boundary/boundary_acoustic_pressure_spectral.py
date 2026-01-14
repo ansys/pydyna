@@ -23,7 +23,15 @@
 """Module providing the BoundaryAcousticPressureSpectral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICPRESSURESPECTRAL_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("tdeath", float, 30, 10, 10000000000.0),
+)
 
 class BoundaryAcousticPressureSpectral(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_PRESSURE_SPECTRAL keyword"""
@@ -35,42 +43,10 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
         """Initialize the BoundaryAcousticPressureSpectral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        30,
-                        10,
-                        1.e10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICPRESSURESPECTRAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the fluid boundary faces.

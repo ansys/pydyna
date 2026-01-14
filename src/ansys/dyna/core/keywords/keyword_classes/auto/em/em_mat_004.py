@@ -23,7 +23,19 @@
 """Module providing the EmMat004 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMMAT004_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("mtype", int, 10, 10, 0),
+    FieldSchema("sigma", float, 20, 10, None),
+    FieldSchema("eosid", int, 30, 10, None),
+    FieldSchema("nele", int, 40, 10, 1),
+    FieldSchema("murel", float, 50, 10, 1.0),
+    FieldSchema("eosmu", int, 60, 10, None),
+    FieldSchema("deatht", float, 70, 10, 1e+28),
+)
 
 class EmMat004(KeywordBase):
     """DYNA EM_MAT_004 keyword"""
@@ -35,72 +47,10 @@ class EmMat004(KeywordBase):
         """Initialize the EmMat004 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nele",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "murel",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosmu",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deatht",
-                        float,
-                        70,
-                        10,
-                        1.0E28,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMMAT004_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card.

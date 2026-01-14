@@ -4,8 +4,7 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 ## Agent Hints
 
 **CRITICAL: Shell-specific output redirection**:
-- **In PowerShell**: Use `>$null 2>&1` (never use `/dev/null` - triggers VS Code security prompt)
-- **In Bash**: Use `>/dev/null 2>&1` (standard Unix redirection)
+- Don't try to write to /dev/null, this triggers VS code security prompt
 - For commands where you want to suppress output: Use appropriate shell redirection or just run without redirection
 - For commands where you want to check output: Capture in a variable or use `| Out-Null` (PowerShell)
 - For checking if a command succeeded: Just run it normally and check `$?` or `$LASTEXITCODE`

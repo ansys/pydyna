@@ -23,7 +23,18 @@
 """Module providing the ControlCheckShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCHECKSHELL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("ifauto", int, 10, 10, 0),
+    FieldSchema("convex", int, 20, 10, 1),
+    FieldSchema("adpt", int, 30, 10, 1),
+    FieldSchema("aratio", float, 40, 10, 0.25),
+    FieldSchema("angke", float, 50, 10, 150.0),
+    FieldSchema("smin", float, 60, 10, 0.0),
+)
 
 class ControlCheckShell(KeywordBase):
     """DYNA CONTROL_CHECK_SHELL keyword"""
@@ -35,68 +46,10 @@ class ControlCheckShell(KeywordBase):
         """Initialize the ControlCheckShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifauto",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "convex",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpt",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aratio",
-                        float,
-                        40,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angke",
-                        float,
-                        50,
-                        10,
-                        150.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smin",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCHECKSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID to be checked:

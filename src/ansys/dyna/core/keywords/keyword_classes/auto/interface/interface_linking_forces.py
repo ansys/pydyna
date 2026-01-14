@@ -23,7 +23,13 @@
 """Module providing the InterfaceLinkingForces class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACELINKINGFORCES_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+)
 
 class InterfaceLinkingForces(KeywordBase):
     """DYNA INTERFACE_LINKING_FORCES keyword"""
@@ -35,26 +41,10 @@ class InterfaceLinkingForces(KeywordBase):
         """Initialize the InterfaceLinkingForces class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGFORCES_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the 

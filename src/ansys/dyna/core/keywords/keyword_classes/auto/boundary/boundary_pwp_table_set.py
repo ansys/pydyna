@@ -23,7 +23,24 @@
 """Module providing the BoundaryPwpTableSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPWPTABLESET_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+)
+
+_BOUNDARYPWPTABLESET_CARD1 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("itotex", int, 10, 10, 0),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("table", int, 30, 10, 0),
+)
 
 class BoundaryPwpTableSet(KeywordBase):
     """DYNA BOUNDARY_PWP_TABLE_SET keyword"""
@@ -35,90 +52,13 @@ class BoundaryPwpTableSet(KeywordBase):
         """Initialize the BoundaryPwpTableSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itotex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "table",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPTABLESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPTABLESET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.

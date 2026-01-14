@@ -23,8 +23,32 @@
 """Module providing the Mat202 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT202_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sgy", float, 40, 10, None),
+)
+
+_MAT202_CARD1 = (
+    FieldSchema("lc_e", int, 0, 10, None),
+    FieldSchema("lc_pr", int, 10, 10, None),
+    FieldSchema("lc_al", int, 20, 10, None),
+    FieldSchema("tbl_ss", int, 30, 10, None),
+    FieldSchema("lc_fs", int, 40, 10, None),
+)
+
+_MAT202_CARD2 = (
+)
+
+_MAT202_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat202(KeywordBase):
     """DYNA MAT_202 keyword"""
@@ -40,107 +64,26 @@ class Mat202(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sgy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_e",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_pr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_al",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbl_ss",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_fs",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat202.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT202_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

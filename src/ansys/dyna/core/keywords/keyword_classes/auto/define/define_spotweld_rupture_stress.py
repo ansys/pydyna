@@ -23,8 +23,19 @@
 """Module providing the DefineSpotweldRuptureStress class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPOTWELDRUPTURESTRESS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("srsig", float, 10, 10, 0.0),
+    FieldSchema("sigtau", float, 20, 10, 0.0),
+)
+
+_DEFINESPOTWELDRUPTURESTRESS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSpotweldRuptureStress(KeywordBase):
     """DYNA DEFINE_SPOTWELD_RUPTURE_STRESS keyword"""
@@ -40,53 +51,20 @@ class DefineSpotweldRuptureStress(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srsig",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigtau",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDRUPTURESTRESS_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldRuptureStress.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDRUPTURESTRESS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> int:
         """Get or set the Part identification number

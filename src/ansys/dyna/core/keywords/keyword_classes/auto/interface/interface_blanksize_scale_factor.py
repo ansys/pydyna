@@ -23,7 +23,16 @@
 """Module providing the InterfaceBlanksizeScaleFactor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEBLANKSIZESCALEFACTOR_CARD0 = (
+    FieldSchema("idcrv", int, 0, 10, 1),
+    FieldSchema("sf", float, 10, 10, 0.0),
+    FieldSchema("offx", float, 20, 10, 0.0),
+    FieldSchema("offy", float, 30, 10, 0.0),
+    FieldSchema("offz", float, 40, 10, 0.0),
+)
 
 class InterfaceBlanksizeScaleFactor(KeywordBase):
     """DYNA INTERFACE_BLANKSIZE_SCALE_FACTOR keyword"""
@@ -35,52 +44,10 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
         """Initialize the InterfaceBlanksizeScaleFactor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idcrv",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZESCALEFACTOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idcrv(self) -> int:
         """Get or set the Curve ID in the order of appearance as in FILENAME1 in the target card, as defined by *DEFINE_TARGET_BOUNDARY.

@@ -23,7 +23,14 @@
 """Module providing the BoundaryNonReflecting2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYNONREFLECTING2D_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("ad", int, 10, 10, 0),
+    FieldSchema("as", int, 20, 10, 0),
+)
 
 class BoundaryNonReflecting2D(KeywordBase):
     """DYNA BOUNDARY_NON_REFLECTING_2D keyword"""
@@ -35,35 +42,10 @@ class BoundaryNonReflecting2D(KeywordBase):
         """Initialize the BoundaryNonReflecting2D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ad",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "as",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYNONREFLECTING2D_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.

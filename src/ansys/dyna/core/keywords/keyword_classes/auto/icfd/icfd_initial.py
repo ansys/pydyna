@@ -23,7 +23,19 @@
 """Module providing the IcfdInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDINITIAL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, None),
+    FieldSchema("vy", float, 20, 10, None),
+    FieldSchema("vz", float, 30, 10, None),
+    FieldSchema("t", float, 40, 10, None),
+    FieldSchema("p", float, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("dfunc", int, 70, 10, 0),
+)
 
 class IcfdInitial(KeywordBase):
     """DYNA ICFD_INITIAL keyword"""
@@ -35,69 +47,10 @@ class IcfdInitial(KeywordBase):
         """Initialize the IcfdInitial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfunc",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDINITIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for the volume elements or the surface elements where the values are initialized (see *ICFD_PART_VOL and *ICFD_PART).PID = 0 to assign the initial condition to all nodes at once.

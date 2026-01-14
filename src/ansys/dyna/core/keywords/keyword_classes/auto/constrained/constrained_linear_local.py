@@ -23,7 +23,19 @@
 """Module providing the ConstrainedLinearLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDLINEARLOCAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_CONSTRAINEDLINEARLOCAL_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, None),
+    FieldSchema("cid", int, 20, 10, None),
+    FieldSchema("coef", float, 30, 10, None),
+)
 
 class ConstrainedLinearLocal(KeywordBase):
     """DYNA CONSTRAINED_LINEAR_LOCAL keyword"""
@@ -35,51 +47,13 @@ class ConstrainedLinearLocal(KeywordBase):
         """Initialize the ConstrainedLinearLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coef",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARLOCAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for linear constraint definition

@@ -23,8 +23,30 @@
 """Module providing the DefineDeToSurfaceTied class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDETOSURFACETIED_CARD0 = (
+    FieldSchema("slave", int, 0, 10, 0),
+    FieldSchema("master", int, 10, 10, 0),
+    FieldSchema("stype", int, 20, 10, 0),
+    FieldSchema("mtype", int, 30, 10, 0),
+)
+
+_DEFINEDETOSURFACETIED_CARD1 = (
+    FieldSchema("nflf", float, 0, 10, None),
+    FieldSchema("sflf", float, 10, 10, None),
+    FieldSchema("nen", float, 20, 10, 2.0),
+    FieldSchema("mes", float, 30, 10, 2.0),
+    FieldSchema("lcid", int, 40, 10, None),
+    FieldSchema("nsort", int, 50, 10, 100),
+    FieldSchema("maxgap", float, 60, 10, None),
+)
+
+_DEFINEDETOSURFACETIED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeToSurfaceTied(KeywordBase):
     """DYNA DEFINE_DE_TO_SURFACE_TIED keyword"""
@@ -40,117 +62,23 @@ class DefineDeToSurfaceTied(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "slave",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "master",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nflf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sflf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nen",
-                        float,
-                        20,
-                        10,
-                        2.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mes",
-                        float,
-                        30,
-                        10,
-                        2.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsort",
-                        int,
-                        50,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxgap",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACETIED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACETIED_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeToSurfaceTied.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDETOSURFACETIED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def slave(self) -> int:
         """Get or set the DES nodes.

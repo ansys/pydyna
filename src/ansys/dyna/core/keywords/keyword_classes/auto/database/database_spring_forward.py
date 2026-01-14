@@ -23,7 +23,12 @@
 """Module providing the DatabaseSpringForward class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASESPRINGFORWARD_CARD0 = (
+    FieldSchema("iflag", int, 0, 10, 0),
+)
 
 class DatabaseSpringForward(KeywordBase):
     """DYNA DATABASE_SPRING_FORWARD keyword"""
@@ -35,20 +40,10 @@ class DatabaseSpringForward(KeywordBase):
         """Initialize the DatabaseSpringForward class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASESPRINGFORWARD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iflag(self) -> int:
         """Get or set the Output type:

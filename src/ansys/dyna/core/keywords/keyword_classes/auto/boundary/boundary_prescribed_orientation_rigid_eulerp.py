@@ -23,7 +23,24 @@
 """Module providing the BoundaryPrescribedOrientationRigidEulerp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("intrp", int, 20, 10, 1),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+    FieldSchema("toffset", int, 50, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD1 = (
+    FieldSchema("lcide1", int, 0, 10, None),
+    FieldSchema("lcide2", int, 10, 10, None),
+    FieldSchema("lcide3", int, 20, 10, None),
+    FieldSchema("lcide4", int, 30, 10, None),
+)
 
 class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_ORIENTATION_RIGID_EULERP keyword"""
@@ -35,90 +52,13 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
         """Initialize the BoundaryPrescribedOrientationRigidEulerp class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intrp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toffset",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcide1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcide2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcide3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcide4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed

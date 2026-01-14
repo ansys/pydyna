@@ -23,7 +23,15 @@
 """Module providing the LoadRemovePart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADREMOVEPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("time0", float, 10, 10, None),
+    FieldSchema("time1", float, 20, 10, None),
+    FieldSchema("stgr", int, 30, 10, None),
+)
 
 class LoadRemovePart(KeywordBase):
     """DYNA LOAD_REMOVE_PART keyword"""
@@ -35,40 +43,10 @@ class LoadRemovePart(KeywordBase):
         """Initialize the LoadRemovePart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADREMOVEPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for deletion.

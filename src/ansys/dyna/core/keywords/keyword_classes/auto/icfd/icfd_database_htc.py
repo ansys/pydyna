@@ -23,7 +23,19 @@
 """Module providing the IcfdDatabaseHtc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASEHTC_CARD0 = (
+    FieldSchema("out", int, 0, 10, 0),
+    FieldSchema("htc", int, 10, 10, 0),
+    FieldSchema("tb", float, 20, 10, 0.0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("outdt", float, 70, 10, 0.0),
+)
 
 class IcfdDatabaseHtc(KeywordBase):
     """DYNA ICFD_DATABASE_HTC keyword"""
@@ -35,72 +47,10 @@ class IcfdDatabaseHtc(KeywordBase):
         """Initialize the IcfdDatabaseHtc class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "out",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "htc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tb",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outdt",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASEHTC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should calculate the heat transfer coefficient and how to output it:

@@ -23,7 +23,15 @@
 """Module providing the LoadDensityDepth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADDENSITYDEPTH_CARD0 = (
+    FieldSchema("psid", int, 0, 10, 0),
+    FieldSchema("gc", float, 10, 10, 0.0),
+    FieldSchema("dir", int, 20, 10, 1),
+    FieldSchema("lcid", int, 30, 10, None),
+)
 
 class LoadDensityDepth(KeywordBase):
     """DYNA LOAD_DENSITY_DEPTH keyword"""
@@ -35,43 +43,10 @@ class LoadDensityDepth(KeywordBase):
         """Initialize the LoadDensityDepth class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADDENSITYDEPTH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> int:
         """Get or set the Part set ID, see *SET_PART.

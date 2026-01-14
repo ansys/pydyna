@@ -23,8 +23,68 @@
 """Module providing the MatElasticViscoplasticThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATELASTICVISCOPLASTICTHERMAL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("alpha", float, 50, 10, None),
+    FieldSchema("lcss", int, 60, 10, None),
+    FieldSchema("fail", float, 70, 10, None),
+)
+
+_MATELASTICVISCOPLASTICTHERMAL_CARD1 = (
+    FieldSchema("qr1", float, 0, 10, None),
+    FieldSchema("cr1", float, 10, 10, None),
+    FieldSchema("qr2", float, 20, 10, None),
+    FieldSchema("cr2", float, 30, 10, None),
+    FieldSchema("qx1", float, 40, 10, None),
+    FieldSchema("cx1", float, 50, 10, None),
+    FieldSchema("qx2", float, 60, 10, None),
+    FieldSchema("cx2", float, 70, 10, None),
+)
+
+_MATELASTICVISCOPLASTICTHERMAL_CARD2 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("lce", float, 20, 10, None),
+    FieldSchema("lcpr", float, 30, 10, None),
+    FieldSchema("lcsigy", float, 40, 10, None),
+    FieldSchema("lcr", float, 50, 10, None),
+    FieldSchema("lcx", float, 60, 10, None),
+    FieldSchema("lcalph", float, 70, 10, None),
+)
+
+_MATELASTICVISCOPLASTICTHERMAL_CARD3 = (
+    FieldSchema("lcc", int, 0, 10, None),
+    FieldSchema("lcp", int, 10, 10, None),
+    FieldSchema("tref", float, 20, 10, None),
+    FieldSchema("lcfail", float, 30, 10, None),
+    FieldSchema("nuhis", int, 40, 10, None),
+    FieldSchema("t1phas", float, 50, 10, None),
+    FieldSchema("t2phas", float, 60, 10, None),
+    FieldSchema("tol", float, 70, 10, None),
+)
+
+_MATELASTICVISCOPLASTICTHERMAL_CARD4 = (
+    FieldSchema("fushi1", int, 0, 10, None),
+    FieldSchema("fushi2", int, 10, 10, None),
+    FieldSchema("fushi3", int, 20, 10, None),
+    FieldSchema("fushi4", int, 30, 10, None),
+    FieldSchema("fushi5", int, 40, 10, None),
+    FieldSchema("fushi6", int, 50, 10, None),
+    FieldSchema("fushi7", int, 60, 10, None),
+    FieldSchema("fushi8", int, 70, 10, None),
+)
+
+_MATELASTICVISCOPLASTICTHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatElasticViscoplasticThermal(KeywordBase):
     """DYNA MAT_ELASTIC_VISCOPLASTIC_THERMAL keyword"""
@@ -40,325 +100,32 @@ class MatElasticViscoplasticThermal(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "qr1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qx1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cx1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qx2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cx2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lce",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcx",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcalph",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tref",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nuhis",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1phas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2phas",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fushi1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATELASTICVISCOPLASTICTHERMAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICVISCOPLASTICTHERMAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICVISCOPLASTICTHERMAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICVISCOPLASTICTHERMAL_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICVISCOPLASTICTHERMAL_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatElasticViscoplasticThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICVISCOPLASTICTHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

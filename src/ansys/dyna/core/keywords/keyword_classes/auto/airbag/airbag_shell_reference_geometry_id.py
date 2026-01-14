@@ -23,7 +23,25 @@
 """Module providing the AirbagShellReferenceGeometryId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_AIRBAGSHELLREFERENCEGEOMETRYID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("sx", float, 10, 10, None),
+    FieldSchema("sy", float, 20, 10, None),
+    FieldSchema("sz", float, 30, 10, None),
+    FieldSchema("nid", int, 40, 10, None),
+)
+
+_AIRBAGSHELLREFERENCEGEOMETRYID_CARD1 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("n4", int, 40, 8, None),
+)
 
 class AirbagShellReferenceGeometryId(KeywordBase):
     """DYNA AIRBAG_SHELL_REFERENCE_GEOMETRY_ID keyword"""
@@ -35,93 +53,13 @@ class AirbagShellReferenceGeometryId(KeywordBase):
         """Initialize the AirbagShellReferenceGeometryId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGSHELLREFERENCEGEOMETRYID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGSHELLREFERENCEGEOMETRYID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Card ID.

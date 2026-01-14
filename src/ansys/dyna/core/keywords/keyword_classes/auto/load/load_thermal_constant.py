@@ -23,7 +23,19 @@
 """Module providing the LoadThermalConstant class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALCONSTANT_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+)
+
+_LOADTHERMALCONSTANT_CARD1 = (
+    FieldSchema("t", float, 0, 10, 0.0),
+    FieldSchema("te", float, 10, 10, 0.0),
+)
 
 class LoadThermalConstant(KeywordBase):
     """DYNA LOAD_THERMAL_CONSTANT keyword"""
@@ -35,55 +47,13 @@ class LoadThermalConstant(KeywordBase):
         """Initialize the LoadThermalConstant class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "te",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALCONSTANT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALCONSTANT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing nodes for initial temperature, see *SET_NODE:

@@ -23,7 +23,17 @@
 """Module providing the BoundarySphSymmetryPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSPHSYMMETRYPLANE_CARD0 = (
+    FieldSchema("vtx", float, 0, 10, 0.0),
+    FieldSchema("vty", float, 10, 10, 0.0),
+    FieldSchema("vtz", float, 20, 10, 0.0),
+    FieldSchema("vhx", float, 30, 10, 0.0),
+    FieldSchema("vhy", float, 40, 10, 0.0),
+    FieldSchema("vhz", float, 50, 10, 0.0),
+)
 
 class BoundarySphSymmetryPlane(KeywordBase):
     """DYNA BOUNDARY_SPH_SYMMETRY_PLANE keyword"""
@@ -35,60 +45,10 @@ class BoundarySphSymmetryPlane(KeywordBase):
         """Initialize the BoundarySphSymmetryPlane class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vtx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vty",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHSYMMETRYPLANE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def vtx(self) -> float:
         """Get or set the x-coordinate of tail of a normal vector originating on the wall (tail) and terminating in the body (head) (i.e., vector points from the symmetry plane into the body).

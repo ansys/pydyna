@@ -23,7 +23,16 @@
 """Module providing the InitialMomentum class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALMOMENTUM_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("mx", float, 10, 10, 0.0),
+    FieldSchema("my", float, 20, 10, 0.0),
+    FieldSchema("mz", float, 30, 10, 0.0),
+    FieldSchema("dept", float, 40, 10, 0.0),
+)
 
 class InitialMomentum(KeywordBase):
     """DYNA INITIAL_MOMENTUM keyword"""
@@ -35,51 +44,10 @@ class InitialMomentum(KeywordBase):
         """Initialize the InitialMomentum class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "my",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dept",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALMOMENTUM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.

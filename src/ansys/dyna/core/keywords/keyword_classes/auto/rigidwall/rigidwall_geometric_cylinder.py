@@ -23,8 +23,43 @@
 """Module providing the RigidwallGeometricCylinder class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_RIGIDWALLGEOMETRICCYLINDER_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+)
+
+_RIGIDWALLGEOMETRICCYLINDER_CARD1 = (
+    FieldSchema("xt", float, 0, 10, 0.0),
+    FieldSchema("yt", float, 10, 10, 0.0),
+    FieldSchema("zt", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+    FieldSchema("fric", float, 60, 10, 0.0),
+)
+
+_RIGIDWALLGEOMETRICCYLINDER_CARD2 = (
+    FieldSchema("radcyl", float, 0, 10, None),
+    FieldSchema("lencyl", float, 10, 10, None),
+    FieldSchema("nsegs", int, 20, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDER_CARD3 = (
+    FieldSchema("vl", float, 0, 10, None),
+    FieldSchema("height", float, 10, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDER_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
 
 class RigidwallGeometricCylinder(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER keyword"""
@@ -40,178 +75,29 @@ class RigidwallGeometricCylinder(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "radcyl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lencyl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsegs",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "height",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDER_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDER_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinder.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICCYLINDER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.

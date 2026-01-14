@@ -23,7 +23,29 @@
 """Module providing the ControlImplicitEigenvalues class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITEIGENVALUES_CARD0 = (
+    FieldSchema("neig", int, 0, 10, 0),
+    FieldSchema("center", float, 10, 10, 0.0),
+    FieldSchema("lflag", int, 20, 10, 0),
+    FieldSchema("lftend", float, 30, 10, -1e+29),
+    FieldSchema("rflag", int, 40, 10, 0),
+    FieldSchema("rhtend", float, 50, 10, 1e+29),
+    FieldSchema("eigmth", int, 60, 10, 2),
+    FieldSchema("shfscl", float, 70, 10, 0.0),
+)
+
+_CONTROLIMPLICITEIGENVALUES_CARD1 = (
+    FieldSchema("isolid", int, 0, 10, 0),
+    FieldSchema("ibeam", int, 10, 10, 0),
+    FieldSchema("ishell", int, 20, 10, 0),
+    FieldSchema("itshell", int, 30, 10, 0),
+    FieldSchema("mstres", int, 40, 10, 0),
+    FieldSchema("evdump", int, 50, 10, None),
+    FieldSchema("mstrscl", float, 60, 10, 0.001),
+)
 
 class ControlImplicitEigenvalues(KeywordBase):
     """DYNA CONTROL_IMPLICIT_EIGENVALUES keyword"""
@@ -35,135 +57,13 @@ class ControlImplicitEigenvalues(KeywordBase):
         """Initialize the ControlImplicitEigenvalues class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "neig",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "center",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lflag",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lftend",
-                        float,
-                        30,
-                        10,
-                        -1E29,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rflag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhtend",
-                        float,
-                        50,
-                        10,
-                        +1E29,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eigmth",
-                        int,
-                        60,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shfscl",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "isolid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibeam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishell",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itshell",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstres",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "evdump",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstrscl",
-                        float,
-                        60,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITEIGENVALUES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITEIGENVALUES_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to extract. This must be specified. The other parameters below are optional.

@@ -23,7 +23,21 @@
 """Module providing the InitialStrainSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRAINSOLID_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+)
+
+_INITIALSTRAINSOLID_CARD1 = (
+    FieldSchema("epsxx", float, 0, 10, 0.0),
+    FieldSchema("epsyy", float, 10, 10, 0.0),
+    FieldSchema("epszz", float, 20, 10, 0.0),
+    FieldSchema("epsxy", float, 30, 10, 0.0),
+    FieldSchema("epsyz", float, 40, 10, 0.0),
+    FieldSchema("epszx", float, 50, 10, 0.0),
+)
 
 class InitialStrainSolid(KeywordBase):
     """DYNA INITIAL_STRAIN_SOLID keyword"""
@@ -35,71 +49,13 @@ class InitialStrainSolid(KeywordBase):
         """Initialize the InitialStrainSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsxx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsxy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSOLID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the element ID.

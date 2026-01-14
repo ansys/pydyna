@@ -23,7 +23,23 @@
 """Module providing the CosimFmiInterface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_COSIMFMIINTERFACE_CARD0 = (
+    FieldSchema("appid", str, 0, 20, None),
+)
+
+_COSIMFMIINTERFACE_CARD1 = (
+    FieldSchema("impexp", str, 0, 10, "IMP"),
+    FieldSchema("regtyp", str, 10, 10, "NODE"),
+    FieldSchema("regid", int, 20, 10, None),
+    FieldSchema("field", str, 30, 10, None),
+    FieldSchema("winit", float, 40, 10, None),
+    FieldSchema("ratio", float, 50, 10, None),
+    FieldSchema("cid", int, 60, 10, 0),
+    FieldSchema("ref", int, 70, 10, 0),
+)
 
 class CosimFmiInterface(KeywordBase):
     """DYNA COSIM_FMI_INTERFACE keyword"""
@@ -35,83 +51,13 @@ class CosimFmiInterface(KeywordBase):
         """Initialize the CosimFmiInterface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "appid",
-                        str,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "impexp",
-                        str,
-                        0,
-                        10,
-                        "IMP",
-                        **kwargs,
-                    ),
-                    Field(
-                        "regtyp",
-                        str,
-                        10,
-                        10,
-                        "NODE",
-                        **kwargs,
-                    ),
-                    Field(
-                        "regid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "field",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "winit",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratio",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COSIMFMIINTERFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COSIMFMIINTERFACE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def appid(self) -> typing.Optional[str]:
         """Get or set the FMU (functional mock-up unit) identification. Each FMU must have a unique APPID

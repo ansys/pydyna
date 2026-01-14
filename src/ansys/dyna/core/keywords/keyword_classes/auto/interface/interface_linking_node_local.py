@@ -23,7 +23,23 @@
 """Module providing the InterfaceLinkingNodeLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACELINKINGNODELOCAL_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+    FieldSchema("fx", int, 20, 10, None),
+    FieldSchema("fy", int, 30, 10, None),
+    FieldSchema("fz", int, 40, 10, None),
+)
+
+_INTERFACELINKINGNODELOCAL_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("lnid", int, 10, 10, None),
+    FieldSchema("usec", int, 20, 10, 0),
+    FieldSchema("usen", int, 30, 10, 0),
+)
 
 class InterfaceLinkingNodeLocal(KeywordBase):
     """DYNA INTERFACE_LINKING_NODE_LOCAL keyword"""
@@ -35,81 +51,13 @@ class InterfaceLinkingNodeLocal(KeywordBase):
         """Initialize the InterfaceLinkingNodeLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lnid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usec",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usen",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODELOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODELOCAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID to be moved by interface file, see *NODE.

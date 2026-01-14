@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -40,76 +41,25 @@ class Part(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "heading",
-                                    str,
-                                    0,
-                                    70,
-                                ),
-                            ],
+                    (
+                        FieldSchema("heading", str, 0, 70, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "pid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "secid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "mid",
-                                    int,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "eosid",
-                                    int,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "hgid",
-                                    int,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "grav",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "adpopt",
-                                    int,
-                                    60,
-                                    10,
-                                ),
-                                Field(
-                                    "tmid",
-                                    int,
-                                    70,
-                                    10,
-                                ),
-                            ],
+                    (
+                        FieldSchema("pid", int, 0, 10, None),
+                        FieldSchema("secid", int, 10, 10, None),
+                        FieldSchema("mid", int, 20, 10, None),
+                        FieldSchema("eosid", int, 30, 10, 0),
+                        FieldSchema("hgid", int, 40, 10, 0),
+                        FieldSchema("grav", int, 50, 10, 0),
+                        FieldSchema("adpopt", int, 60, 10, None),
+                        FieldSchema("tmid", int, 70, 10, 0),
                     ),
                 ],
                 None,
                 None,
                 "parts",
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def parts(self) -> pd.DataFrame:
         """Gets the full table of parts."""

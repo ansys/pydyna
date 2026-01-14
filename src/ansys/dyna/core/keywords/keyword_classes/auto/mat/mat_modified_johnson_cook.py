@@ -23,7 +23,58 @@
 """Module providing the MatModifiedJohnsonCook class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATMODIFIEDJOHNSONCOOK_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("beta", float, 40, 10, None),
+    FieldSchema("xsi", float, 50, 10, None),
+    FieldSchema("cp", float, 60, 10, None),
+    FieldSchema("alpha", float, 70, 10, None),
+)
+
+_MATMODIFIEDJOHNSONCOOK_CARD1 = (
+    FieldSchema("e0dot", float, 0, 10, None),
+    FieldSchema("tr", float, 10, 10, None),
+    FieldSchema("tm", float, 20, 10, None),
+    FieldSchema("t0", float, 30, 10, None),
+    FieldSchema("flag1", float, 40, 10, None),
+    FieldSchema("flag2", float, 50, 10, None),
+)
+
+_MATMODIFIEDJOHNSONCOOK_CARD2 = (
+    FieldSchema("a/siga", float, 0, 10, None),
+    FieldSchema("b/b", float, 10, 10, None),
+    FieldSchema("n/beta0", float, 20, 10, None),
+    FieldSchema("c/beta1", float, 30, 10, None),
+    FieldSchema("m/na", float, 40, 10, None),
+)
+
+_MATMODIFIEDJOHNSONCOOK_CARD3 = (
+    FieldSchema("q1/a", float, 0, 10, None),
+    FieldSchema("c1/n", float, 10, 10, None),
+    FieldSchema("q2/alpha0", float, 20, 10, None),
+    FieldSchema("c2/alpha1", float, 30, 10, None),
+)
+
+_MATMODIFIEDJOHNSONCOOK_CARD4 = (
+    FieldSchema("dc/dc", float, 0, 10, None),
+    FieldSchema("pd/wc", float, 10, 10, None),
+    FieldSchema("d1/na", float, 20, 10, None),
+    FieldSchema("d2/na", float, 30, 10, None),
+    FieldSchema("d3/na", float, 40, 10, None),
+    FieldSchema("d4/na", float, 50, 10, None),
+    FieldSchema("d5/na", float, 60, 10, None),
+)
+
+_MATMODIFIEDJOHNSONCOOK_CARD5 = (
+    FieldSchema("tc", float, 0, 10, None),
+    FieldSchema("tauc", float, 10, 10, None),
+)
 
 class MatModifiedJohnsonCook(KeywordBase):
     """DYNA MAT_MODIFIED_JOHNSON_COOK keyword"""
@@ -35,256 +86,25 @@ class MatModifiedJohnsonCook(KeywordBase):
         """Initialize the MatModifiedJohnsonCook class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xsi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e0dot",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tm",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a/siga",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b/b",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n/beta0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c/beta1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m/na",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "q1/a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1/n",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2/alpha0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2/alpha1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dc/dc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pd/wc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1/na",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2/na",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3/na",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d4/na",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d5/na",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMODIFIEDJOHNSONCOOK_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

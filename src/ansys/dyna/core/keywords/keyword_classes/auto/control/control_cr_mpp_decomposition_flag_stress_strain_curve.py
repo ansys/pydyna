@@ -23,7 +23,11 @@
 """Module providing the ControlCrMppDecompositionFlagStressStrainCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCRMPPDECOMPOSITIONFLAGSTRESSSTRAINCURVE_CARD0 = (
+)
 
 class ControlCrMppDecompositionFlagStressStrainCurve(KeywordBase):
     """DYNA CONTROL_CR_MPP_DECOMPOSITION_FLAG_STRESS_STRAIN_CURVE keyword"""
@@ -35,9 +39,7 @@ class ControlCrMppDecompositionFlagStressStrainCurve(KeywordBase):
         """Initialize the ControlCrMppDecompositionFlagStressStrainCurve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCRMPPDECOMPOSITIONFLAGSTRESSSTRAINCURVE_CARD0,
+                **kwargs,
+            ),        ]

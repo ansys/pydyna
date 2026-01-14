@@ -23,7 +23,21 @@
 """Module providing the DatabaseCpmSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASECPMSENSOR_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("binary", int, 10, 10, 1),
+)
+
+_DATABASECPMSENSOR_CARD1 = (
+    FieldSchema("segsid", int, 0, 10, None),
+    FieldSchema("offset", float, 10, 10, None),
+    FieldSchema("r/lx", float, 20, 10, None),
+    FieldSchema("len/ly", float, 30, 10, None),
+    FieldSchema("lz", float, 40, 10, None),
+)
 
 class DatabaseCpmSensor(KeywordBase):
     """DYNA DATABASE_CPM_SENSOR keyword"""
@@ -35,66 +49,13 @@ class DatabaseCpmSensor(KeywordBase):
         """Initialize the DatabaseCpmSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "segsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r/lx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "len/ly",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASECPMSENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASECPMSENSOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Output interval

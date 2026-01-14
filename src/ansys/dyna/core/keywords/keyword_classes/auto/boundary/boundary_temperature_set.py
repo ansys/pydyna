@@ -23,7 +23,17 @@
 """Module providing the BoundaryTemperatureSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYTEMPERATURESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("cmult", float, 20, 10, 1.0),
+    FieldSchema("loc", int, 30, 10, 0),
+    FieldSchema("tdeath", float, 40, 10, 1e+20),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+)
 
 class BoundaryTemperatureSet(KeywordBase):
     """DYNA BOUNDARY_TEMPERATURE_SET keyword"""
@@ -35,59 +45,10 @@ class BoundaryTemperatureSet(KeywordBase):
         """Initialize the BoundaryTemperatureSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATURESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see *SET_NODE.

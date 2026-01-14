@@ -23,7 +23,18 @@
 """Module providing the InterfaceEnsight class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEENSIGHT_CARD0 = (
+    FieldSchema("nset", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("nlfile", int, 20, 10, None),
+)
+
+_INTERFACEENSIGHT_CARD1 = (
+    FieldSchema("gfile", str, 0, 80, None),
+)
 
 class InterfaceEnsight(KeywordBase):
     """DYNA INTERFACE_ENSIGHT keyword"""
@@ -35,44 +46,13 @@ class InterfaceEnsight(KeywordBase):
         """Initialize the InterfaceEnsight class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlfile",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gfile",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEENSIGHT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEENSIGHT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nset(self) -> typing.Optional[int]:
         """Get or set the Set of node in ls-dyna input deck, which contains all nodes to be subject to transient loading mapped from the following Ensight-formatted geometry file and loading files.

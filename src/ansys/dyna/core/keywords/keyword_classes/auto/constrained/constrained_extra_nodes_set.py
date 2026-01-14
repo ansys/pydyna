@@ -23,7 +23,14 @@
 """Module providing the ConstrainedExtraNodesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDEXTRANODESSET_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+    FieldSchema("iflag", int, 20, 10, 0),
+)
 
 class ConstrainedExtraNodesSet(KeywordBase):
     """DYNA CONSTRAINED_EXTRA_NODES_SET keyword"""
@@ -35,34 +42,10 @@ class ConstrainedExtraNodesSet(KeywordBase):
         """Initialize the ConstrainedExtraNodesSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDEXTRANODESSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body to which the nodes will be added, see *PART.

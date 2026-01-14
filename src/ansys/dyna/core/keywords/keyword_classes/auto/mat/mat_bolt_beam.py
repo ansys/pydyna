@@ -23,8 +23,44 @@
 """Module providing the MatBoltBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATBOLTBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("kax", float, 20, 10, None),
+    FieldSchema("kshr", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("fpre", float, 60, 10, None),
+    FieldSchema("tramp", float, 70, 10, None),
+)
+
+_MATBOLTBEAM_CARD1 = (
+    FieldSchema("lcax", int, 0, 10, None),
+    FieldSchema("lcshr", int, 10, 10, None),
+    FieldSchema("fric", float, 20, 10, None),
+    FieldSchema("clear", float, 30, 10, None),
+    FieldSchema("dafail", float, 40, 10, 1e+20),
+    FieldSchema("drfail", float, 50, 10, 1e+20),
+    FieldSchema("damag", float, 60, 10, 0.1),
+    FieldSchema("t0pre", float, 70, 10, None),
+)
+
+_MATBOLTBEAM_CARD2 = (
+    FieldSchema("dacfail", float, 0, 10, 1e+20),
+    FieldSchema("axshel", int, 10, 10, 0),
+    FieldSchema("holshr", int, 20, 10, 0),
+)
+
+_MATBOLTBEAM_CARD3 = (
+)
+
+_MATBOLTBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatBoltBeam(KeywordBase):
     """DYNA MAT_BOLT_BEAM keyword"""
@@ -40,180 +76,29 @@ class MatBoltBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kshr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fpre",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tramp",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcax",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcshr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "clear",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dafail",
-                        float,
-                        40,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drfail",
-                        float,
-                        50,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damag",
-                        float,
-                        60,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0pre",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dacfail",
-                        float,
-                        0,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axshel",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "holshr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATBOLTBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATBOLTBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATBOLTBEAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATBOLTBEAM_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatBoltBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBOLTBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

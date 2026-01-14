@@ -23,7 +23,21 @@
 """Module providing the BoundaryMcol class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYMCOL_CARD0 = (
+    FieldSchema("nmcol", int, 0, 10, 2),
+    FieldSchema("mxstep", int, 10, 10, None),
+    FieldSchema("endtmcol", float, 20, 10, 0.0),
+    FieldSchema("tsubc", float, 30, 10, 0.0),
+    FieldSchema("prtmcol", float, 40, 10, None),
+)
+
+_BOUNDARYMCOL_CARD1 = (
+    FieldSchema("rbmcol", int, 0, 10, 2),
+    FieldSchema("mcolfile", str, 10, 60, None),
+)
 
 class BoundaryMcol(KeywordBase):
     """DYNA BOUNDARY_MCOL keyword"""
@@ -35,69 +49,13 @@ class BoundaryMcol(KeywordBase):
         """Initialize the BoundaryMcol class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmcol",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mxstep",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endtmcol",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsubc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prtmcol",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rbmcol",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcolfile",
-                        str,
-                        10,
-                        60,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYMCOL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYMCOL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nmcol(self) -> int:
         """Get or set the Number of ships in MCOL coupling.

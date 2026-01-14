@@ -23,7 +23,37 @@
 """Module providing the BoundaryFluxSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYFLUXSEGMENT_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+)
+
+_BOUNDARYFLUXSEGMENT_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("mlc1", float, 10, 10, 1.0),
+    FieldSchema("mlc2", float, 20, 10, 1.0),
+    FieldSchema("mlc3", float, 30, 10, 1.0),
+    FieldSchema("mlc4", float, 40, 10, 1.0),
+    FieldSchema("loc", int, 50, 10, 0),
+    FieldSchema("nhisv", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_BOUNDARYFLUXSEGMENT_CARD2 = (
+    FieldSchema("nhisv1", float, 0, 10, 0.0),
+    FieldSchema("nhisv2", float, 10, 10, 0.0),
+    FieldSchema("nhisv3", float, 20, 10, 0.0),
+    FieldSchema("nhisv4", float, 30, 10, 0.0),
+    FieldSchema("nhisv5", float, 40, 10, 0.0),
+    FieldSchema("nhisv6", float, 50, 10, 0.0),
+    FieldSchema("nhisv7", float, 60, 10, 0.0),
+    FieldSchema("nhisv8", float, 70, 10, 0.0),
+)
 
 class BoundaryFluxSegment(KeywordBase):
     """DYNA BOUNDARY_FLUX_SEGMENT keyword"""
@@ -35,174 +65,16 @@ class BoundaryFluxSegment(KeywordBase):
         """Initialize the BoundaryFluxSegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mlc1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mlc2",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mlc3",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mlc4",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nhisv1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv6",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv7",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv8",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXSEGMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXSEGMENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFLUXSEGMENT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the First node ID defining the segment.

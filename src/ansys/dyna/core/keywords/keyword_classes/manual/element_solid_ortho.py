@@ -23,10 +23,55 @@
 
 import typing
 
-from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
+
+# Schema definitions for optimized Card creation
+_ELEMENTSOLIDORTHO_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
+
+_ELEMENTSOLIDORTHO_CARD1 = (
+    FieldSchema("n1", int, 0, 8, None),
+    FieldSchema("n2", int, 8, 8, None),
+    FieldSchema("n3", int, 16, 8, None),
+    FieldSchema("n4", int, 24, 8, None),
+    FieldSchema("n5", int, 32, 8, None),
+    FieldSchema("n6", int, 40, 8, None),
+    FieldSchema("n7", int, 48, 8, None),
+    FieldSchema("n8", int, 56, 8, None),
+    FieldSchema("n9", int, 64, 8, None),
+    FieldSchema("n10", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDORTHO_CARD2 = (
+    FieldSchema("a1", float, 0, 16, None),
+    FieldSchema("a2", float, 16, 16, None),
+    FieldSchema("a3", float, 32, 16, None),
+)
+
+_ELEMENTSOLIDORTHO_CARD3 = (
+    FieldSchema("d1", float, 0, 16, None),
+    FieldSchema("d2", float, 16, 16, None),
+    FieldSchema("d3", float, 32, 16, None),
+)
+
+# Legacy format schemas
+_ELEMENTSOLIDORTHO_LEGACY_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("n4", int, 40, 8, None),
+    FieldSchema("n5", int, 48, 8, None),
+    FieldSchema("n6", int, 56, 8, None),
+    FieldSchema("n7", int, 64, 8, None),
+    FieldSchema("n8", int, 72, 8, None),
+)
 
 
 class ElementSolidOrtho(KeywordBase):
@@ -40,130 +85,10 @@ class ElementSolidOrtho(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                        [
-                            Field(
-                                "eid",
-                                int,
-                                0,
-                                8,
-                            ),
-                            Field(
-                                "pid",
-                                int,
-                                8,
-                                8,
-                            ),
-                        ]
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "n1",
-                                int,
-                                0,
-                                8,
-                            ),
-                            Field(
-                                "n2",
-                                int,
-                                8,
-                                8,
-                            ),
-                            Field(
-                                "n3",
-                                int,
-                                16,
-                                8,
-                            ),
-                            Field(
-                                "n4",
-                                int,
-                                24,
-                                8,
-                            ),
-                            Field(
-                                "n5",
-                                int,
-                                32,
-                                8,
-                            ),
-                            Field(
-                                "n6",
-                                int,
-                                40,
-                                8,
-                            ),
-                            Field(
-                                "n7",
-                                int,
-                                48,
-                                8,
-                            ),
-                            Field(
-                                "n8",
-                                int,
-                                56,
-                                8,
-                            ),
-                            Field(
-                                "n9",
-                                int,
-                                64,
-                                8,
-                            ),
-                            Field(
-                                "n10",
-                                int,
-                                72,
-                                8,
-                            ),
-                        ],
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "a1",
-                                float,
-                                0,
-                                16,
-                            ),
-                            Field(
-                                "a2",
-                                float,
-                                16,
-                                16,
-                            ),
-                            Field(
-                                "a3",
-                                float,
-                                32,
-                                16,
-                            ),
-                        ],
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "d1",
-                                float,
-                                0,
-                                16,
-                            ),
-                            Field(
-                                "d2",
-                                float,
-                                16,
-                                16,
-                            ),
-                            Field(
-                                "d3",
-                                float,
-                                32,
-                                16,
-                            ),
-                        ],
-                    ),
+                    _ELEMENTSOLIDORTHO_CARD0,
+                    _ELEMENTSOLIDORTHO_CARD1,
+                    _ELEMENTSOLIDORTHO_CARD2,
+                    _ELEMENTSOLIDORTHO_CARD3,
                 ],
                 None,
                 data=kwargs.get("elements"),
@@ -185,114 +110,9 @@ class ElementSolidOrtho(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                        [
-                            Field(
-                                "eid",
-                                int,
-                                0,
-                                8,
-                            ),
-                            Field(
-                                "pid",
-                                int,
-                                8,
-                                8,
-                            ),
-                            Field(
-                                "n1",
-                                int,
-                                16,
-                                8,
-                            ),
-                            Field(
-                                "n2",
-                                int,
-                                24,
-                                8,
-                            ),
-                            Field(
-                                "n3",
-                                int,
-                                32,
-                                8,
-                            ),
-                            Field(
-                                "n4",
-                                int,
-                                40,
-                                8,
-                            ),
-                            Field(
-                                "n5",
-                                int,
-                                48,
-                                8,
-                            ),
-                            Field(
-                                "n6",
-                                int,
-                                56,
-                                8,
-                            ),
-                            Field(
-                                "n7",
-                                int,
-                                64,
-                                8,
-                            ),
-                            Field(
-                                "n8",
-                                int,
-                                72,
-                                8,
-                            ),
-                        ],
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "a1",
-                                float,
-                                0,
-                                16,
-                            ),
-                            Field(
-                                "a2",
-                                float,
-                                16,
-                                16,
-                            ),
-                            Field(
-                                "a3",
-                                float,
-                                32,
-                                16,
-                            ),
-                        ],
-                    ),
-                    Card(
-                        [
-                            Field(
-                                "d1",
-                                float,
-                                0,
-                                16,
-                            ),
-                            Field(
-                                "d2",
-                                float,
-                                16,
-                                16,
-                            ),
-                            Field(
-                                "d3",
-                                float,
-                                32,
-                                16,
-                            ),
-                        ],
-                    ),
+                    _ELEMENTSOLIDORTHO_LEGACY_CARD0,
+                    _ELEMENTSOLIDORTHO_CARD2,
+                    _ELEMENTSOLIDORTHO_CARD3,
                 ],
                 None,
                 data=self.elements,

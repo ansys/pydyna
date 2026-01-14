@@ -23,7 +23,12 @@
 """Module providing the ControlNonlocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLNONLOCAL_CARD0 = (
+    FieldSchema("mem", int, 0, 10, None),
+)
 
 class ControlNonlocal(KeywordBase):
     """DYNA CONTROL_NONLOCAL keyword"""
@@ -35,19 +40,10 @@ class ControlNonlocal(KeywordBase):
         """Initialize the ControlNonlocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mem",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLNONLOCAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mem(self) -> typing.Optional[int]:
         """Get or set the Percentage increase of memory allocated for MAT_NONLOCAL option over that required initially. This is for additional storage that may be required due to geometry changes as the calculation proceeds. Generally, a value of 10 should be sufficient.

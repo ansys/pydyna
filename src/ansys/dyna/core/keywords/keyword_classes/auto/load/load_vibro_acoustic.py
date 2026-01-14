@@ -23,7 +23,26 @@
 """Module providing the LoadVibroAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADVIBROACOUSTIC_CARD0 = (
+    FieldSchema("nmode", float, 0, 10, None),
+    FieldSchema("texpos", float, 10, 10, 1.0),
+    FieldSchema("tscale", float, 20, 10, 0.0),
+    FieldSchema("temper", float, 30, 10, None),
+    FieldSchema("dampro", float, 40, 10, None),
+    FieldSchema("damptype", float, 50, 10, None),
+    FieldSchema("spltype", float, 60, 10, None),
+)
+
+_LOADVIBROACOUSTIC_CARD1 = (
+    FieldSchema("lddamp", int, 0, 10, None),
+    FieldSchema("ldspl", int, 10, 10, None),
+    FieldSchema("ldvel", int, 20, 10, None),
+    FieldSchema("ldflw", int, 30, 10, None),
+    FieldSchema("ldspn", int, 40, 10, None),
+)
 
 class LoadVibroAcoustic(KeywordBase):
     """DYNA LOAD_VIBRO_ACOUSTIC keyword"""
@@ -35,102 +54,13 @@ class LoadVibroAcoustic(KeywordBase):
         """Initialize the LoadVibroAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmode",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscale",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temper",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampro",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damptype",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spltype",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lddamp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldvel",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflw",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspn",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADVIBROACOUSTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADVIBROACOUSTIC_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nmode(self) -> typing.Optional[float]:
         """Get or set the Number of normal vibration modes employed for coupling with excitation pressure field

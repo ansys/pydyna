@@ -23,7 +23,28 @@
 """Module providing the DeformableToRigidInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFORMABLETORIGIDINERTIA_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
+
+_DEFORMABLETORIGIDINERTIA_CARD1 = (
+    FieldSchema("xc", float, 0, 10, None),
+    FieldSchema("yc", float, 10, 10, None),
+    FieldSchema("zc", float, 20, 10, None),
+    FieldSchema("tm", float, 30, 10, None),
+)
+
+_DEFORMABLETORIGIDINERTIA_CARD2 = (
+    FieldSchema("ixx", float, 0, 10, None),
+    FieldSchema("ixy", float, 10, 10, 0.0),
+    FieldSchema("ixz", float, 20, 10, 0.0),
+    FieldSchema("iyy", float, 30, 10, None),
+    FieldSchema("iyz", float, 40, 10, 0.0),
+    FieldSchema("izz", float, 50, 10, None),
+)
 
 class DeformableToRigidInertia(KeywordBase):
     """DYNA DEFORMABLE_TO_RIGID_INERTIA keyword"""
@@ -35,100 +56,16 @@ class DeformableToRigidInertia(KeywordBase):
         """Initialize the DeformableToRigidInertia class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ixx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDINERTIA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDINERTIA_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFORMABLETORIGIDINERTIA_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, see *PART.

@@ -23,7 +23,13 @@
 """Module providing the EmDatabaseRogo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMDATABASEROGO_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 1),
+    FieldSchema("dtout", float, 10, 10, 0.0),
+)
 
 class EmDatabaseRogo(KeywordBase):
     """DYNA EM_DATABASE_ROGO keyword"""
@@ -35,28 +41,10 @@ class EmDatabaseRogo(KeywordBase):
         """Initialize the EmDatabaseRogo class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASEROGO_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

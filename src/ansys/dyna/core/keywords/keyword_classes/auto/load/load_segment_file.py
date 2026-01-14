@@ -23,7 +23,16 @@
 """Module providing the LoadSegmentFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEGMENTFILE_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_LOADSEGMENTFILE_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
 
 class LoadSegmentFile(KeywordBase):
     """DYNA LOAD_SEGMENT_FILE keyword"""
@@ -35,30 +44,13 @@ class LoadSegmentFile(KeywordBase):
         """Initialize the LoadSegmentFile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTFILE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTFILE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Filename of the interface linking file

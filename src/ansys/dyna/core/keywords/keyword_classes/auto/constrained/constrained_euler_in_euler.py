@@ -23,7 +23,14 @@
 """Module providing the ConstrainedEulerInEuler class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDEULERINEULER_CARD0 = (
+    FieldSchema("psid1", int, 0, 10, 0),
+    FieldSchema("psid2", int, 10, 10, 0),
+    FieldSchema("pfac", float, 20, 10, 0.1),
+)
 
 class ConstrainedEulerInEuler(KeywordBase):
     """DYNA CONSTRAINED_EULER_IN_EULER keyword"""
@@ -35,36 +42,10 @@ class ConstrainedEulerInEuler(KeywordBase):
         """Initialize the ConstrainedEulerInEuler class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac",
-                        float,
-                        20,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDEULERINEULER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid1(self) -> int:
         """Get or set the Part set ID of the 1st ALE or Eulerian set of mesh(es.

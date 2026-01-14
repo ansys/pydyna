@@ -1,0 +1,39 @@
+{# Template for generating imports based on keyword features #}
+{{license}}
+"""Module providing the {{keyword_data.classname}} class."""
+{% if keyword_data.dataclasses %}
+import dataclasses
+{% endif %}
+import typing
+{% if keyword_data.table or keyword_data.table_group %}
+import pandas as pd
+
+{% endif %}
+{% if keyword_data.mixin_imports %}
+{% for mixin_import in keyword_data.mixin_imports %}
+from ansys.dyna.core.lib.cards_.special.{{mixin_import.source}} import{% for name in mixin_import.names %}{{ ", " if not loop.first else " " }}{{name}}{% endfor %}
+{% endfor %}
+
+{% endif %}
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+{% if keyword_data.table %}
+from ansys.dyna.core.lib.table_card import TableCard
+{% endif %}
+{% if keyword_data.card_sets %}
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
+{% endif %}
+{% if keyword_data.table_group %}
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
+{% endif %}
+{% if keyword_data.variable %}
+from ansys.dyna.core.lib.series_card import SeriesCard
+{% endif %}
+{% if keyword_data.options or (keyword_data.card_sets and keyword_data.card_sets.options) %}
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+{% endif %}
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+{% for link in keyword_data.links %}
+from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{link.classname}}
+{% endfor %}

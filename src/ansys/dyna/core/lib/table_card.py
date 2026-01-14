@@ -28,8 +28,9 @@ import numpy as np
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_c_dataframe
-from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import is_dataframe, write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -65,6 +66,17 @@ def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typi
     return result
 
 
+def _get_first_row_from_schemas(
+    field_schemas: typing.Tuple[FieldSchema, ...], **kwargs
+) -> typing.Optional[typing.Dict[str, typing.Any]]:
+    """Get the first row data from kwargs using field schemas."""
+    result = {}
+    for fs in field_schemas:
+        if fs.name in kwargs:
+            result[fs.name] = kwargs[fs.name]
+    return result if result else None
+
+
 class TableCard(Card):
     def __init__(
         self,
@@ -75,7 +87,17 @@ class TableCard(Card):
         format: format_type = format_type.default,
         **kwargs,
     ):
-        super().__init__(fields, active_func)
+        # Inline Card initialization (avoid deprecated constructor path)
+        field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+        name_to_index = {f.name: i for i, f in enumerate(fields)}
+        self._schema = CardSchema(field_schemas, name_to_index)
+        self._signature = id(self._schema)
+        self._values = [f.value for f in fields]
+        self._active_func = active_func
+        self._format_type = format
+        self._card_format = card_format.fixed
+
+        # TableCard-specific initialization
         self._format = [(field.offset, field.width) for field in self._fields]
         if length_func == None:
             self._bounded = False
@@ -88,6 +110,63 @@ class TableCard(Card):
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
             self._first_row = get_first_row(self._fields, **kwargs)
+
+    @classmethod
+    def from_field_schemas(
+        cls,
+        field_schemas: typing.Tuple[FieldSchema, ...],
+        length_func: typing.Callable,
+        active_func: typing.Callable = None,
+        name: str = None,
+        format: format_type = format_type.default,
+        **kwargs,
+    ) -> "TableCard":
+        """Create a TableCard from FieldSchema tuples.
+
+        This is the preferred way to create TableCard instances as it avoids
+        creating intermediate Field objects.
+
+        Parameters
+        ----------
+        field_schemas : Tuple[FieldSchema, ...]
+            Tuple of FieldSchema objects defining the card structure.
+        length_func : callable
+            Function returning the number of rows, or None for unbounded.
+        active_func : callable, optional
+            Function returning bool to determine if card is active.
+        name : str, optional
+            Name for table initialization from kwargs.
+        format : format_type, optional
+            The format type (default, standard, or long).
+
+        Returns
+        -------
+        TableCard
+            A new TableCard instance.
+        """
+        instance = cls.__new__(cls)
+        name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
+        instance._schema = CardSchema(field_schemas, name_to_index)
+        instance._signature = id(instance._schema)
+        instance._values = [fs.default if not fs.is_flag() else fs.default.value for fs in field_schemas]
+        instance._active_func = active_func
+        instance._format_type = format
+        instance._card_format = card_format.fixed
+
+        # TableCard-specific initialization
+        instance._format = [(fs.offset, fs.width) for fs in field_schemas]
+        if length_func is None:
+            instance._bounded = False
+            instance._length_func = lambda: len(instance.table)
+        else:
+            instance._bounded = True
+            instance._length_func = length_func
+
+        instance._initialized = try_initialize_table(instance, name, **kwargs)
+        if not instance._initialized:
+            instance._first_row = _get_first_row_from_schemas(field_schemas, **kwargs)
+
+        return instance
 
     def _initialize(self, check: bool = False):
         """Lazy initialization routine for the data frame.
@@ -204,11 +283,17 @@ class TableCard(Card):
         type_mapping = {float: np.float64, int: pd.Int32Dtype(), str: str}
         dtype = {field.name: type_mapping[field.type] for field in fields}
         names = [field.name for field in fields]
-        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
+        # Comment lines are already filtered by buffer_to_lines/read_line before
+        # data reaches this point, so we can skip pandas comment checking entirely.
+        # This provides ~30-40% speedup for large files (see GitHub issue #592)
+        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": None}
         return options
 
     def _read_buffer_as_dataframe(
-        self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet
+        self,
+        buffer: typing.TextIO,
+        fields: typing.Iterable[Field],
+        parameter_set: ParameterSet,
     ) -> pd.DataFrame:
         read_options = self._get_read_options()
         df = pd.read_fwf(buffer, **read_options)

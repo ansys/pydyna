@@ -23,7 +23,27 @@
 """Module providing the BoundaryPwpSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPWPSET_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+    FieldSchema("cmult", float, 20, 10, 0.0),
+    FieldSchema("lcdr", int, 30, 10, None),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+)
+
+_BOUNDARYPWPSET_CARD1 = (
+    FieldSchema("iphre", int, 0, 10, 0),
+    FieldSchema("itotex", int, 10, 10, 0),
+    FieldSchema("idrflag", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("lcleak", int, 40, 10, None),
+    FieldSchema("cleak", float, 50, 10, None),
+    FieldSchema("lcpum", int, 60, 10, None),
+)
 
 class BoundaryPwpSet(KeywordBase):
     """DYNA BOUNDARY_PWP_SET keyword"""
@@ -35,113 +55,13 @@ class BoundaryPwpSet(KeywordBase):
         """Initialize the BoundaryPwpSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iphre",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itotex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idrflag",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcleak",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cleak",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpum",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node SET ID.

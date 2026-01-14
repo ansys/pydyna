@@ -23,7 +23,15 @@
 """Module providing the BoundaryRadiationSetEfRead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYRADIATIONSETEFREAD_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("nmat", int, 10, 10, None),
+    FieldSchema("npht", int, 20, 10, 1),
+    FieldSchema("errmax", int, 30, 10, 0),
+)
 
 class BoundaryRadiationSetEfRead(KeywordBase):
     """DYNA BOUNDARY_RADIATION_SET_EF_READ keyword"""
@@ -35,42 +43,10 @@ class BoundaryRadiationSetEfRead(KeywordBase):
         """Initialize the BoundaryRadiationSetEfRead class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmat",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npht",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "errmax",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSETEFREAD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.

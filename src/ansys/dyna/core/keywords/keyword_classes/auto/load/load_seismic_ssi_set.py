@@ -23,7 +23,25 @@
 """Module providing the LoadSeismicSsiSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEISMICSSISET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("typeid", int, 10, 10, None),
+    FieldSchema("gmx", int, 20, 10, None),
+    FieldSchema("gmy", int, 30, 10, None),
+    FieldSchema("gmz", int, 40, 10, None),
+)
+
+_LOADSEISMICSSISET_CARD1 = (
+    FieldSchema("sf", float, 0, 10, 1.0),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("birth", float, 20, 10, 0.0),
+    FieldSchema("death", float, 30, 10, 1e+28),
+    FieldSchema("isg", int, 40, 10, 0),
+    FieldSchema("igm", int, 50, 10, 0),
+)
 
 class LoadSeismicSsiSet(KeywordBase):
     """DYNA LOAD_SEISMIC_SSI_SET keyword"""
@@ -35,99 +53,13 @@ class LoadSeismicSsiSet(KeywordBase):
         """Initialize the LoadSeismicSsiSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        30,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSISET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSISET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID.

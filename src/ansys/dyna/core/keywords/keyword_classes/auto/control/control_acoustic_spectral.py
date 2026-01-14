@@ -23,7 +23,15 @@
 """Module providing the ControlAcousticSpectral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLACOUSTICSPECTRAL_CARD0 = (
+    FieldSchema("maseord", int, 0, 10, None),
+    FieldSchema("masehrf", int, 10, 10, 0),
+    FieldSchema("masekfl", int, 20, 10, 0),
+    FieldSchema("maseigx", int, 30, 10, 1),
+)
 
 class ControlAcousticSpectral(KeywordBase):
     """DYNA CONTROL_ACOUSTIC_SPECTRAL keyword"""
@@ -35,43 +43,10 @@ class ControlAcousticSpectral(KeywordBase):
         """Initialize the ControlAcousticSpectral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maseord",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "masehrf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "masekfl",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maseigx",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLACOUSTICSPECTRAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def maseord(self) -> typing.Optional[int]:
         """Get or set the Spectral element integration order (2 <= MASEORD <=15). See Remark 2.

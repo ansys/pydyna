@@ -23,7 +23,35 @@
 """Module providing the ElementBeamPidOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTBEAMPIDOFFSET_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("rt1", int, 40, 8, 0),
+    FieldSchema("rr1", int, 48, 8, 0),
+    FieldSchema("rt2", int, 56, 8, 0),
+    FieldSchema("rr2", int, 64, 8, 0),
+    FieldSchema("local", int, 72, 8, 2),
+)
+
+_ELEMENTBEAMPIDOFFSET_CARD1 = (
+    FieldSchema("pid1", int, 0, 8, None),
+    FieldSchema("pid2", int, 8, 8, None),
+)
+
+_ELEMENTBEAMPIDOFFSET_CARD2 = (
+    FieldSchema("wx1", float, 0, 10, 0.0),
+    FieldSchema("wy1", float, 10, 10, 0.0),
+    FieldSchema("wz1", float, 20, 10, 0.0),
+    FieldSchema("wx2", float, 30, 10, 0.0),
+    FieldSchema("wy2", float, 40, 10, 0.0),
+    FieldSchema("wz2", float, 50, 10, 0.0),
+)
 
 class ElementBeamPidOffset(KeywordBase):
     """DYNA ELEMENT_BEAM_PID_OFFSET keyword"""
@@ -35,157 +63,16 @@ class ElementBeamPidOffset(KeywordBase):
         """Initialize the ElementBeamPidOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt1",
-                        int,
-                        40,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr1",
-                        int,
-                        48,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt2",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr2",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        72,
-                        8,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wx1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wx2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMPIDOFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMPIDOFFSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMPIDOFFSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

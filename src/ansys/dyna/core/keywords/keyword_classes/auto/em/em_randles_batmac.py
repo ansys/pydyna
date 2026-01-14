@@ -23,7 +23,56 @@
 """Module providing the EmRandlesBatmac class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMRANDLESBATMAC_CARD0 = (
+    FieldSchema("rdlid", int, 0, 10, None),
+    FieldSchema("rdltype", int, 10, 10, 0),
+    FieldSchema("rdlarea", int, 20, 10, 1),
+    FieldSchema("psid", int, 30, 10, None),
+)
+
+_EMRANDLESBATMAC_CARD1 = (
+    FieldSchema("q", float, 0, 10, None),
+    FieldSchema("cq", float, 10, 10, None),
+    FieldSchema("socinit", float, 20, 10, None),
+    FieldSchema("soctou", float, 30, 10, None),
+)
+
+_EMRANDLESBATMAC_CARD2 = (
+    FieldSchema("r0cha", float, 0, 10, None),
+    FieldSchema("r0dis", float, 10, 10, None),
+    FieldSchema("r10cha", float, 20, 10, None),
+    FieldSchema("r10dis", float, 30, 10, None),
+    FieldSchema("c10cha", float, 40, 10, None),
+    FieldSchema("c10dis", float, 50, 10, None),
+)
+
+_EMRANDLESBATMAC_CARD3 = (
+    FieldSchema("r20cha", float, 0, 10, None),
+    FieldSchema("r20dis", float, 10, 10, None),
+    FieldSchema("c20cha", float, 20, 10, None),
+    FieldSchema("c20dis", float, 30, 10, None),
+    FieldSchema("r30cha", float, 40, 10, None),
+    FieldSchema("r30dis", float, 50, 10, None),
+    FieldSchema("c30cha", float, 60, 10, None),
+    FieldSchema("c30dis", float, 70, 10, None),
+)
+
+_EMRANDLESBATMAC_CARD4 = (
+    FieldSchema("temp", float, 0, 10, 0.0),
+    FieldSchema("frther", int, 10, 10, 0),
+    FieldSchema("r0toth", int, 20, 10, 0),
+    FieldSchema("dudt", float, 30, 10, None),
+    FieldSchema("tempu", int, 40, 10, 0),
+)
+
+_EMRANDLESBATMAC_CARD5 = (
+    FieldSchema("usesocs", int, 0, 10, 0),
+    FieldSchema("tau", float, 10, 10, None),
+    FieldSchema("flcid", int, 20, 10, None),
+)
 
 class EmRandlesBatmac(KeywordBase):
     """DYNA EM_RANDLES_BATMAC keyword"""
@@ -35,250 +84,26 @@ class EmRandlesBatmac(KeywordBase):
         """Initialize the EmRandlesBatmac class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rdlid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdltype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdlarea",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "q",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cq",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "socinit",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soctou",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r0cha",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0dis",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r10cha",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r10dis",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10cha",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10dis",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r20cha",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r20dis",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c20cha",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c20dis",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r30cha",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r30dis",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c30cha",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c30dis",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.rdltype > 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "temp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frther",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0toth",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dudt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempu",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "usesocs",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tau",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD3,
+                active_func=lambda: self.rdltype > 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMRANDLESBATMAC_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def rdlid(self) -> typing.Optional[int]:
         """Get or set the Id of the Randles Cell.

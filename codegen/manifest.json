@@ -898,6 +898,16 @@
             "extended_vector_card": 1
         }
     },
+    "CONTROL_SHELL": {
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 1,
+                    "end": 4
+                }
+            ]
+        }
+    },
     "CONTROL_REFERENCE_CONFIGURAION": {
         "type": "multiple",
         "generations": [
@@ -1613,6 +1623,19 @@
         },
         "labels": {
             "id_title_card": 0
+        }
+    },
+    "ALE_STRUCTURED_MESH_CONTROL_POINTS": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "control_points",
+                    "ref": "control_points_card"
+                }
+            ]
+        },
+        "labels": {
+            "control_points_card": 1
         }
     },
     "RIGIDWALL_PLANAR": {

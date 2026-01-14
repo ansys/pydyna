@@ -23,8 +23,55 @@
 """Module providing the Mat205 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT205_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("stiff", float, 20, 10, None),
+    FieldSchema("fric", float, 30, 10, None),
+    FieldSchema("damp", float, 40, 10, None),
+    FieldSchema("dmxpz", float, 50, 10, 1e+20),
+    FieldSchema("limpz", float, 60, 10, None),
+)
+
+_MAT205_CARD1 = (
+    FieldSchema("dmxpx", float, 0, 10, 1e+20),
+    FieldSchema("dmxnx", float, 10, 10, 1e+20),
+    FieldSchema("dmxpy", float, 20, 10, 1e+20),
+    FieldSchema("dmxny", float, 30, 10, 1e+20),
+    FieldSchema("limpx", float, 40, 10, None),
+    FieldSchema("limnx", float, 50, 10, None),
+    FieldSchema("limpy", float, 60, 10, None),
+    FieldSchema("limny", float, 70, 10, None),
+)
+
+_MAT205_CARD2 = (
+    FieldSchema("krotx", float, 0, 10, None),
+    FieldSchema("kroty", float, 10, 10, None),
+    FieldSchema("krotz", float, 20, 10, None),
+    FieldSchema("tkrot", float, 30, 10, None),
+    FieldSchema("fbondh", float, 40, 10, None),
+    FieldSchema("fbondt", float, 50, 10, None),
+    FieldSchema("dbondh", float, 60, 10, 1e+20),
+    FieldSchema("dbondt", float, 70, 10, 1e+20),
+)
+
+_MAT205_CARD3 = (
+    FieldSchema("lcz", int, 0, 10, 0),
+    FieldSchema("dampz", float, 10, 10, None),
+    FieldSchema("stiffh", float, 20, 10, None),
+    FieldSchema("frmax", float, 30, 10, None),
+    FieldSchema("damph", float, 40, 10, None),
+    FieldSchema("gap0", float, 50, 10, None),
+    FieldSchema("afac", float, 60, 10, 1.0),
+)
+
+_MAT205_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat205(KeywordBase):
     """DYNA MAT_205 keyword"""
@@ -40,260 +87,29 @@ class Mat205(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiff",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmxpz",
-                        float,
-                        50,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "limpz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dmxpx",
-                        float,
-                        0,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmxnx",
-                        float,
-                        10,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmxpy",
-                        float,
-                        20,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmxny",
-                        float,
-                        30,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "limpx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "limnx",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "limpy",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "limny",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "krotx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kroty",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "krotz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkrot",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fbondh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fbondt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbondh",
-                        float,
-                        60,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbondt",
-                        float,
-                        70,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcz",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampz",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiffh",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damph",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "afac",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT205_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT205_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT205_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT205_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat205.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT205_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

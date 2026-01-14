@@ -23,7 +23,39 @@
 """Module providing the ControlSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSPH_CARD0 = (
+    FieldSchema("ncbs", int, 0, 10, 1),
+    FieldSchema("boxid", int, 10, 10, None),
+    FieldSchema("dt", float, 20, 10, 1e+20),
+    FieldSchema("idim", int, 30, 10, None),
+    FieldSchema("nmneigh", int, 40, 10, 150),
+    FieldSchema("form", int, 50, 10, 0),
+    FieldSchema("start", float, 60, 10, 0.0),
+    FieldSchema("maxv", float, 70, 10, 1000000000000000.0),
+)
+
+_CONTROLSPH_CARD1 = (
+    FieldSchema("cont", int, 0, 10, 0),
+    FieldSchema("deriv", int, 10, 10, 0),
+    FieldSchema("ini", int, 20, 10, 0),
+    FieldSchema("ishow", int, 30, 10, 0),
+    FieldSchema("ierod", int, 40, 10, 0),
+    FieldSchema("icont", int, 50, 10, 0),
+    FieldSchema("iavis", int, 60, 10, 0),
+    FieldSchema("isymp", int, 70, 10, 100),
+)
+
+_CONTROLSPH_CARD2 = (
+    FieldSchema("ithk", int, 0, 10, 0),
+    FieldSchema("istab", int, 10, 10, 0),
+    FieldSchema("ql", float, 20, 10, 0.01),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("sphsort", int, 40, 10, 0),
+    FieldSchema("ishift", int, 50, 10, 0),
+)
 
 class ControlSph(KeywordBase):
     """DYNA CONTROL_SPH keyword"""
@@ -35,193 +67,16 @@ class ControlSph(KeywordBase):
         """Initialize the ControlSph class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ncbs",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        20,
-                        10,
-                        1.E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idim",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmneigh",
-                        int,
-                        40,
-                        10,
-                        150,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "start",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxv",
-                        float,
-                        70,
-                        10,
-                        1.0E+15,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cont",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deriv",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ini",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishow",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ierod",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icont",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iavis",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isymp",
-                        int,
-                        70,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ithk",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istab",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ql",
-                        float,
-                        20,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphsort",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishift",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSPH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSPH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSPH_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def ncbs(self) -> int:
         """Get or set the Number of time steps between particle sorting.

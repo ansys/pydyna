@@ -23,7 +23,18 @@
 """Module providing the ConstrainedLinearGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDLINEARGLOBAL_CARD0 = (
+    FieldSchema("licd", int, 0, 10, None),
+)
+
+_CONSTRAINEDLINEARGLOBAL_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 1),
+    FieldSchema("coef", float, 20, 10, 0.0),
+)
 
 class ConstrainedLinearGlobal(KeywordBase):
     """DYNA CONSTRAINED_LINEAR_GLOBAL keyword"""
@@ -35,46 +46,13 @@ class ConstrainedLinearGlobal(KeywordBase):
         """Initialize the ConstrainedLinearGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "licd",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coef",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARGLOBAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARGLOBAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def licd(self) -> typing.Optional[int]:
         """Get or set the Linear constraint definition ID. This ID can be used to identify a set to which this constraint is a member.

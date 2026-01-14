@@ -241,6 +241,7 @@ def create_default_registry() -> HandlerRegistry:
         "add-option",
         "card-set",
         "conditional-card",
+        "cascading-card",  # Must run after conditional-card to not conflict with func
         "rename-property",
         "table-card-group",
         "external-card-implementation",

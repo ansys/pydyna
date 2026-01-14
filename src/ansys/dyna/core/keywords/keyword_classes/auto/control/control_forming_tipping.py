@@ -23,7 +23,38 @@
 """Module providing the ControlFormingTipping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGTIPPING_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 1),
+    FieldSchema("ifstrn", int, 20, 10, None),
+    FieldSchema("ifstrs", int, 30, 10, None),
+    FieldSchema("nmove", int, 40, 10, None),
+)
+
+_CONTROLFORMINGTIPPING_CARD1 = (
+    FieldSchema("rot/tran", int, 0, 10, 1),
+    FieldSchema("v11", float, 10, 10, None),
+    FieldSchema("v12", float, 20, 10, None),
+    FieldSchema("v13", float, 30, 10, None),
+    FieldSchema("x01", float, 40, 10, None),
+    FieldSchema("y01", float, 50, 10, None),
+    FieldSchema("z01", float, 60, 10, None),
+    FieldSchema("dista1", float, 70, 10, None),
+)
+
+_CONTROLFORMINGTIPPING_CARD2 = (
+    FieldSchema("rot/tran", int, 0, 10, 1),
+    FieldSchema("dx", float, 10, 10, None),
+    FieldSchema("dy", float, 20, 10, None),
+    FieldSchema("dz", float, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
 
 class ControlFormingTipping(KeywordBase):
     """DYNA CONTROL_FORMING_TIPPING keyword"""
@@ -35,170 +66,16 @@ class ControlFormingTipping(KeywordBase):
         """Initialize the ControlFormingTipping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifstrn",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifstrs",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmove",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rot/tran",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v11",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v12",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v13",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x01",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y01",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z01",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dista1",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rot/tran",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTIPPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTIPPING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTIPPING_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID or part set ID that requires tipping and/or translation

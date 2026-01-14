@@ -23,7 +23,25 @@
 """Module providing the ControlFormingStoning class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGSTONING_CARD0 = (
+    FieldSchema("istone", int, 0, 10, None),
+    FieldSchema("length", float, 10, 10, None),
+    FieldSchema("width", int, 20, 10, None),
+    FieldSchema("step", float, 30, 10, 0.5),
+    FieldSchema("direction", int, 40, 10, None),
+    FieldSchema("reverse", int, 50, 10, 0),
+    FieldSchema("method", int, 60, 10, 0),
+)
+
+_CONTROLFORMINGSTONING_CARD1 = (
+    FieldSchema("node1", int, 0, 10, None),
+    FieldSchema("node2", int, 10, 10, None),
+    FieldSchema("setid", int, 20, 10, None),
+    FieldSchema("itype", int, 30, 10, 1),
+)
 
 class ControlFormingStoning(KeywordBase):
     """DYNA CONTROL_FORMING_STONING keyword"""
@@ -35,97 +53,13 @@ class ControlFormingStoning(KeywordBase):
         """Initialize the ControlFormingStoning class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "istone",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "length",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "step",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "direction",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reverse",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "node1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSTONING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSTONING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def istone(self) -> typing.Optional[int]:
         """Get or set the activate this capability.

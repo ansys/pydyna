@@ -62,7 +62,7 @@ tests = [
     "openpyxl==3.1.5",
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
-    "ipython==8.37.0",
+    "ipython==8.38.0",
     "pyvista==0.46.4",
 ]
 dev = [
@@ -89,7 +89,7 @@ doc = [
     "ipywidgets==8.1.8",
     "joblib==1.5.3",
     "scikit-learn==1.7.2",
-    "ipython==8.37.0",
+    "ipython==8.38.0",
     "jupyterlab==4.5.1",
     "pyvista==0.46.4",
 ]

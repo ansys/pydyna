@@ -23,7 +23,14 @@
 """Module providing the FatigueLoadstep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FATIGUELOADSTEP_CARD0 = (
+    FieldSchema("tstart", float, 0, 10, None),
+    FieldSchema("tend", float, 10, 10, None),
+    FieldSchema("texpos", float, 30, 10, 0.0),
+)
 
 class FatigueLoadstep(KeywordBase):
     """DYNA FATIGUE_LOADSTEP keyword"""
@@ -35,34 +42,10 @@ class FatigueLoadstep(KeywordBase):
         """Initialize the FatigueLoadstep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tstart",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FATIGUELOADSTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def tstart(self) -> typing.Optional[float]:
         """Get or set the Start time of current load step

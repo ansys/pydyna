@@ -23,7 +23,63 @@
 """Module providing the ConstrainedSoilPile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDSOILPILE_CARD0 = (
+    FieldSchema("pbsid", int, 0, 10, None),
+    FieldSchema("diam", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("pidns", int, 30, 10, None),
+    FieldSchema("pidnb", int, 40, 10, None),
+    FieldSchema("error", int, 50, 10, 0),
+    FieldSchema("nring", int, 60, 10, 1),
+    FieldSchema("nringb", int, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILE_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("acu", float, 10, 10, None),
+    FieldSchema("bcu", float, 20, 10, None),
+    FieldSchema("lccu", int, 30, 10, None),
+    FieldSchema("astiffs", float, 40, 10, None),
+    FieldSchema("bstiffs", float, 50, 10, None),
+    FieldSchema("astiffb", float, 60, 10, None),
+    FieldSchema("zref", float, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILE_CARD2 = (
+    FieldSchema("kbcon", float, 0, 10, None),
+    FieldSchema("kbcu", float, 10, 10, None),
+    FieldSchema("kbsx", float, 20, 10, None),
+    FieldSchema("kbsy", float, 30, 10, None),
+    FieldSchema("kbsz", float, 40, 10, None),
+    FieldSchema("bstfac", float, 50, 10, 1.0),
+    FieldSchema("bhyper", float, 60, 10, None),
+    FieldSchema("blc", int, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILE_CARD3 = (
+    FieldSchema("kvcon", float, 0, 10, None),
+    FieldSchema("kvcu", float, 10, 10, None),
+    FieldSchema("kvsx", float, 20, 10, None),
+    FieldSchema("kvsy", float, 30, 10, None),
+    FieldSchema("kvsz", float, 40, 10, None),
+    FieldSchema("vstfac", float, 50, 10, 1.0),
+    FieldSchema("vhyper", float, 60, 10, None),
+    FieldSchema("vlc", int, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILE_CARD4 = (
+    FieldSchema("khcon", float, 0, 10, None),
+    FieldSchema("khcu", float, 10, 10, None),
+    FieldSchema("khsx", float, 20, 10, None),
+    FieldSchema("khsy", float, 30, 10, None),
+    FieldSchema("khsz", float, 40, 10, None),
+    FieldSchema("hstfac", float, 50, 10, 1.0),
+    FieldSchema("hhyper", float, 60, 10, None),
+    FieldSchema("hlc", int, 70, 10, None),
+)
 
 class ConstrainedSoilPile(KeywordBase):
     """DYNA CONSTRAINED_SOIL_PILE keyword"""
@@ -35,313 +91,22 @@ class ConstrainedSoilPile(KeywordBase):
         """Initialize the ConstrainedSoilPile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pbsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diam",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidns",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidnb",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "error",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nring",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nringb",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcu",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccu",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "astiffs",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstiffs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "astiffb",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zref",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kbcon",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbcu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbsx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbsy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbsz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstfac",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bhyper",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kvcon",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kvcu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kvsx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kvsy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kvsz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vstfac",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhyper",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "khcon",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "khcu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "khsx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "khsy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "khsz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hstfac",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hhyper",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILE_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def pbsid(self) -> typing.Optional[int]:
         """Get or set the Part set ID containing beam elements for coupling (the piles).

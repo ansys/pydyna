@@ -23,7 +23,34 @@
 """Module providing the PartComposite class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTCOMPOSITE_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTCOMPOSITE_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 2),
+    FieldSchema("shrf", float, 20, 10, None),
+    FieldSchema("nloc", float, 30, 10, 0.0),
+    FieldSchema("marea", float, 40, 10, 0.0),
+    FieldSchema("hgid", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, 0),
+    FieldSchema("thshel", int, 70, 10, 0),
+)
+
+_PARTCOMPOSITE_CARD2 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("thick1", float, 10, 10, None),
+    FieldSchema("b1", float, 20, 10, None),
+    FieldSchema("tmid1", int, 30, 10, None),
+    FieldSchema("mid2", int, 40, 10, None),
+    FieldSchema("thick2", float, 50, 10, None),
+    FieldSchema("b2", float, 60, 10, None),
+    FieldSchema("tmid2", int, 70, 10, None),
+)
 
 class PartComposite(KeywordBase):
     """DYNA PART_COMPOSITE keyword"""
@@ -35,145 +62,16 @@ class PartComposite(KeywordBase):
         """Initialize the PartComposite class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "marea",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thshel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid2",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

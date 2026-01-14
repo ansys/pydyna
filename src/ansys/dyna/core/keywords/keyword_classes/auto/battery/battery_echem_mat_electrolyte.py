@@ -23,7 +23,24 @@
 """Module providing the BatteryEchemMatElectrolyte class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMMATELECTROLYTE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ielyte", int, 10, 10, None),
+    FieldSchema("etype", int, 20, 10, None),
+    FieldSchema("rhoe", float, 30, 10, None),
+    FieldSchema("rhop", float, 40, 10, None),
+    FieldSchema("rhos", float, 50, 10, None),
+    FieldSchema("calmax", float, 60, 10, None),
+)
+
+_BATTERYECHEMMATELECTROLYTE_CARD1 = (
+    FieldSchema("vfes", float, 0, 10, None),
+    FieldSchema("vfps", float, 10, 10, None),
+    FieldSchema("vfgs", float, 20, 10, None),
+)
 
 class BatteryEchemMatElectrolyte(KeywordBase):
     """DYNA BATTERY_ECHEM_MAT_ELECTROLYTE keyword"""
@@ -35,86 +52,13 @@ class BatteryEchemMatElectrolyte(KeywordBase):
         """Initialize the BatteryEchemMatElectrolyte class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ielyte",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etype",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoe",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhop",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhos",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "calmax",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vfes",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfps",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfgs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATELECTROLYTE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATELECTROLYTE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part number identifier

@@ -23,7 +23,12 @@
 """Module providing the ChangeCurveDefinition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGECURVEDEFINITION_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
 
 class ChangeCurveDefinition(KeywordBase):
     """DYNA CHANGE_CURVE_DEFINITION keyword"""
@@ -35,19 +40,10 @@ class ChangeCurveDefinition(KeywordBase):
         """Initialize the ChangeCurveDefinition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGECURVEDEFINITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID.

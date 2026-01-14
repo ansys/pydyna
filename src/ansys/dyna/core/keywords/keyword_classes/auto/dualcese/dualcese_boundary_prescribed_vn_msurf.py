@@ -23,7 +23,34 @@
 """Module providing the DualceseBoundaryPrescribedVnMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD0 = (
+    FieldSchema("mspid", int, 0, 10, None),
+    FieldSchema("idcomp", int, 10, 10, None),
+    FieldSchema("dirx", float, 20, 10, None),
+    FieldSchema("diry", float, 30, 10, None),
+    FieldSchema("dirz", float, 40, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD1 = (
+    FieldSchema("lc_vn", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("lc_rho", int, 30, 10, None),
+    FieldSchema("lc_p", int, 40, 10, None),
+    FieldSchema("lc_t", int, 50, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD2 = (
+    FieldSchema("sf_vn", float, 0, 10, 1.0),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("sf_rho", float, 30, 10, 1.0),
+    FieldSchema("sf_p", float, 40, 10, 1.0),
+    FieldSchema("sf_t", float, 50, 10, 1.0),
+)
 
 class DualceseBoundaryPrescribedVnMsurf(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_PRESCRIBED_VN_MSURF keyword"""
@@ -35,143 +62,16 @@ class DualceseBoundaryPrescribedVnMsurf(KeywordBase):
         """Initialize the DualceseBoundaryPrescribedVnMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mspid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcomp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_vn",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_rho",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_p",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_t",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf_vn",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_rho",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_p",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_t",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

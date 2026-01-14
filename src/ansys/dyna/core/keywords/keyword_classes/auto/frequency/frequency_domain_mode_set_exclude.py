@@ -23,7 +23,12 @@
 """Module providing the FrequencyDomainModeSetExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINMODESETEXCLUDE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
 
 class FrequencyDomainModeSetExclude(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_MODE_SET_EXCLUDE keyword"""
@@ -35,19 +40,10 @@ class FrequencyDomainModeSetExclude(KeywordBase):
         """Initialize the FrequencyDomainModeSetExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINMODESETEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Mode set identification.

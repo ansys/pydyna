@@ -23,8 +23,39 @@
 """Module providing the MatAddDamageDiem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDDAMAGEDIEM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ndiemc", float, 10, 10, 0.0),
+    FieldSchema("dinit", int, 20, 10, 0),
+    FieldSchema("deps", float, 30, 10, 0.0),
+    FieldSchema("numfip", float, 40, 10, 1.0),
+)
+
+_MATADDDAMAGEDIEM_CARD1 = (
+    FieldSchema("dityp", float, 0, 10, 0.0),
+    FieldSchema("p1", float, 10, 10, None),
+    FieldSchema("p2", float, 20, 10, None),
+    FieldSchema("p3", float, 30, 10, None),
+    FieldSchema("p4", float, 40, 10, None),
+    FieldSchema("p5", float, 50, 10, None),
+)
+
+_MATADDDAMAGEDIEM_CARD2 = (
+    FieldSchema("detyp", float, 0, 10, 0.0),
+    FieldSchema("dctyp", float, 10, 10, 0.0),
+    FieldSchema("q1", float, 20, 10, None),
+    FieldSchema("q2", float, 30, 10, None),
+    FieldSchema("q3", float, 40, 10, None),
+    FieldSchema("q4", float, 50, 10, None),
+)
+
+_MATADDDAMAGEDIEM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddDamageDiem(KeywordBase):
     """DYNA MAT_ADD_DAMAGE_DIEM keyword"""
@@ -40,163 +71,26 @@ class MatAddDamageDiem(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndiemc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dinit",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deps",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numfip",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dityp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "detyp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dctyp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEDIEM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEDIEM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEDIEM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddDamageDiem.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDDAMAGEDIEM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which this erosion definition applies. A unique number or label must be specified.

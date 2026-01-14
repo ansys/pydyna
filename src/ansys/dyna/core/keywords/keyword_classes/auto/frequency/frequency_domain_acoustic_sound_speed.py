@@ -23,7 +23,17 @@
 """Module providing the FrequencyDomainAcousticSoundSpeed class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD1 = (
+    FieldSchema("lcid1", int, 0, 10, None),
+    FieldSchema("lcid2", int, 10, 10, None),
+)
 
 class FrequencyDomainAcousticSoundSpeed(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_SOUND_SPEED keyword"""
@@ -35,37 +45,13 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
         """Initialize the FrequencyDomainAcousticSoundSpeed class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Complex sound speed ID.

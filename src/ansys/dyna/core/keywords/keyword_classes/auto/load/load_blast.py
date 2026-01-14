@@ -23,7 +23,26 @@
 """Module providing the LoadBlast class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBLAST_CARD0 = (
+    FieldSchema("wgt", float, 0, 10, None),
+    FieldSchema("xbo", float, 10, 10, 0.0),
+    FieldSchema("ybo", float, 20, 10, 0.0),
+    FieldSchema("zbo", float, 30, 10, 0.0),
+    FieldSchema("tbo", float, 40, 10, 0.0),
+    FieldSchema("iunit", int, 50, 10, 2),
+    FieldSchema("isurf", int, 60, 10, 2),
+)
+
+_LOADBLAST_CARD1 = (
+    FieldSchema("cfm", float, 0, 10, 0.0),
+    FieldSchema("cfl", float, 10, 10, 0.0),
+    FieldSchema("cft", float, 20, 10, 0.0),
+    FieldSchema("cfp", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 0.0),
+)
 
 class LoadBlast(KeywordBase):
     """DYNA LOAD_BLAST keyword"""
@@ -35,111 +54,13 @@ class LoadBlast(KeywordBase):
         """Initialize the LoadBlast class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wgt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xbo",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ybo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zbo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbo",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunit",
-                        int,
-                        50,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isurf",
-                        int,
-                        60,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cfm",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cft",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfp",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLAST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBLAST_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def wgt(self) -> typing.Optional[float]:
         """Get or set the Equivalent mass of TNT.

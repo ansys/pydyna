@@ -23,7 +23,34 @@
 """Module providing the ControlFormingGenerateBlankmesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGGENERATEBLANKMESH_CARD0 = (
+    FieldSchema("gentyp", int, 0, 10, None),
+    FieldSchema("eleng", float, 10, 10, None),
+    FieldSchema("center", int, 20, 10, 0),
+    FieldSchema("xleng", float, 30, 10, None),
+    FieldSchema("yleng", float, 40, 10, None),
+    FieldSchema("align", float, 50, 10, None),
+    FieldSchema("plane", int, 60, 10, 1),
+    FieldSchema("cid", int, 70, 10, None),
+)
+
+_CONTROLFORMINGGENERATEBLANKMESH_CARD1 = (
+    FieldSchema("bpid", int, 0, 10, None),
+    FieldSchema("snid", int, 10, 10, None),
+    FieldSchema("seid", int, 20, 10, None),
+    FieldSchema("xcent", float, 30, 10, None),
+    FieldSchema("ycent", float, 40, 10, None),
+    FieldSchema("zcent", float, 50, 10, None),
+    FieldSchema("xshift", float, 60, 10, None),
+    FieldSchema("yshift", float, 70, 10, None),
+)
+
+_CONTROLFORMINGGENERATEBLANKMESH_CARD2 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class ControlFormingGenerateBlankmesh(KeywordBase):
     """DYNA CONTROL_FORMING_GENERATE_BLANKMESH keyword"""
@@ -35,141 +62,16 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
         """Initialize the ControlFormingGenerateBlankmesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "gentyp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eleng",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "center",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xleng",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yleng",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "align",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "plane",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "snid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "seid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xcent",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycent",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zcent",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xshift",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yshift",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGGENERATEBLANKMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGGENERATEBLANKMESH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGGENERATEBLANKMESH_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def gentyp(self) -> typing.Optional[int]:
         """Get or set the EQ.1: Rectangle shape.

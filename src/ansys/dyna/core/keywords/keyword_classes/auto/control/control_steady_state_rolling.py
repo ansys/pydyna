@@ -23,7 +23,16 @@
 """Module providing the ControlSteadyStateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSTEADYSTATEROLLING_CARD0 = (
+    FieldSchema("imass", int, 0, 10, 0),
+    FieldSchema("lcdmu", int, 10, 10, 0),
+    FieldSchema("lcdmur", int, 20, 10, 0),
+    FieldSchema("ivel", int, 30, 10, 0),
+    FieldSchema("scl_k", int, 40, 10, 0),
+)
 
 class ControlSteadyStateRolling(KeywordBase):
     """DYNA CONTROL_STEADY_STATE_ROLLING keyword"""
@@ -35,52 +44,10 @@ class ControlSteadyStateRolling(KeywordBase):
         """Initialize the ControlSteadyStateRolling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imass",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdmu",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdmur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivel",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scl_k",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSTEADYSTATEROLLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def imass(self) -> int:
         """Get or set the Inertia switching flag

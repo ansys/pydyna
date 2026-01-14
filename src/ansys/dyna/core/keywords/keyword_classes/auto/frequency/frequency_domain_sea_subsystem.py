@@ -23,7 +23,94 @@
 """Module providing the FrequencyDomainSeaSubsystem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD0 = (
+    FieldSchema("fmin", float, 0, 10, None),
+    FieldSchema("fmax", float, 10, 10, None),
+    FieldSchema("nfreq", int, 20, 10, None),
+    FieldSchema("nfspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, None),
+    FieldSchema("iread", int, 50, 10, 0),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD1 = (
+    FieldSchema("subid", int, 0, 10, None),
+    FieldSchema("subtyp", int, 10, 10, 1),
+    FieldSchema("density", float, 20, 10, None),
+    FieldSchema("e", float, 30, 10, None),
+    FieldSchema("pr", float, 40, 10, None),
+    FieldSchema("output", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD2 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("perim", float, 10, 10, None),
+    FieldSchema("thick", float, 20, 10, None),
+    FieldSchema("width", float, 30, 10, None),
+    FieldSchema("length", float, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD3 = (
+    FieldSchema("dampb", float, 0, 10, None),
+    FieldSchema("dampl", float, 10, 10, None),
+    FieldSchema("damps", float, 20, 10, None),
+    FieldSchema("lc1", int, 30, 10, 0),
+    FieldSchema("lc2", int, 40, 10, 0),
+    FieldSchema("lc3", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD4 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("perim", float, 10, 10, None),
+    FieldSchema("volume", float, 20, 10, None),
+    FieldSchema("width", float, 30, 10, None),
+    FieldSchema("length", float, 40, 10, None),
+    FieldSchema("height", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD5 = (
+    FieldSchema("dampb", float, 0, 10, None),
+    FieldSchema("lc1", int, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD6 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("iss", float, 10, 10, None),
+    FieldSchema("itt", float, 20, 10, None),
+    FieldSchema("j", float, 30, 10, None),
+    FieldSchema("length", float, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEASUBSYSTEM_CARD7 = (
+    FieldSchema("dampb", float, 0, 10, None),
+    FieldSchema("dampl", float, 10, 10, None),
+    FieldSchema("damps", float, 20, 10, None),
+    FieldSchema("dampt", float, 30, 10, None),
+    FieldSchema("lc1", int, 40, 10, 0),
+    FieldSchema("lc2", int, 50, 10, 0),
+    FieldSchema("lc3", int, 60, 10, 0),
+    FieldSchema("lc4", int, 70, 10, 0),
+)
 
 class FrequencyDomainSeaSubsystem(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_SEA_SUBSYSTEM keyword"""
@@ -35,485 +122,31 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         """Initialize the FrequencyDomainSeaSubsystem class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iread",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "subid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "subtyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "output",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perim",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "length",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damps",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perim",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "volume",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "length",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "height",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iss",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "j",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "length",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damps",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEASUBSYSTEM_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def fmin(self) -> typing.Optional[float]:
         """Get or set the Minimum frequency for SEA output (cycles/time).

@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -40,141 +41,42 @@ class ElementShellMcid(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "eid",
-                                    int,
-                                    0,
-                                    8,
-                                ),
-                                Field(
-                                    "pid",
-                                    int,
-                                    8,
-                                    8,
-                                ),
-                                Field(
-                                    "n1",
-                                    int,
-                                    16,
-                                    8,
-                                ),
-                                Field(
-                                    "n2",
-                                    int,
-                                    24,
-                                    8,
-                                ),
-                                Field(
-                                    "n3",
-                                    int,
-                                    32,
-                                    8,
-                                ),
-                                Field(
-                                    "n4",
-                                    int,
-                                    40,
-                                    8,
-                                ),
-                                Field(
-                                    "n5",
-                                    int,
-                                    48,
-                                    8,
-                                ),
-                                Field(
-                                    "n6",
-                                    int,
-                                    56,
-                                    8,
-                                ),
-                                Field(
-                                    "n7",
-                                    int,
-                                    64,
-                                    8,
-                                ),
-                                Field(
-                                    "n8",
-                                    int,
-                                    72,
-                                    8,
-                                ),
-                            ],
+                    (
+                        FieldSchema("eid", int, 0, 8, None),
+                        FieldSchema("pid", int, 8, 8, None),
+                        FieldSchema("n1", int, 16, 8, None),
+                        FieldSchema("n2", int, 24, 8, None),
+                        FieldSchema("n3", int, 32, 8, None),
+                        FieldSchema("n4", int, 40, 8, None),
+                        FieldSchema("n5", int, 48, 8, None),
+                        FieldSchema("n6", int, 56, 8, None),
+                        FieldSchema("n7", int, 64, 8, None),
+                        FieldSchema("n8", int, 72, 8, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "thic1",
-                                    float,
-                                    0,
-                                    16,
-                                ),
-                                Field(
-                                    "thic2",
-                                    float,
-                                    16,
-                                    16,
-                                ),
-                                Field(
-                                    "thic3",
-                                    float,
-                                    32,
-                                    16,
-                                ),
-                                Field(
-                                    "thic4",
-                                    float,
-                                    48,
-                                    16,
-                                ),
-                                Field(
-                                    "mcid",
-                                    int,
-                                    64,
-                                    16,
-                                ),
-                            ],
+                    (
+                        FieldSchema("thic1", float, 0, 16, 0.0),
+                        FieldSchema("thic2", float, 16, 16, 0.0),
+                        FieldSchema("thic3", float, 32, 16, 0.0),
+                        FieldSchema("thic4", float, 48, 16, 0.0),
+                        FieldSchema("mcid", int, 64, 16, 0),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "thic5",
-                                    float,
-                                    0,
-                                    16,
-                                ),
-                                Field(
-                                    "thic6",
-                                    float,
-                                    16,
-                                    16,
-                                ),
-                                Field(
-                                    "thic7",
-                                    float,
-                                    32,
-                                    16,
-                                ),
-                                Field(
-                                    "thic8",
-                                    float,
-                                    48,
-                                    16,
-                                ),
-                            ],
-                            lambda: self.elements['n5'].any(),
+                    (
+                        FieldSchema("thic5", float, 0, 16, 0.0),
+                        FieldSchema("thic6", float, 16, 16, 0.0),
+                        FieldSchema("thic7", float, 32, 16, 0.0),
+                        FieldSchema("thic8", float, 48, 16, 0.0),
                     ),
                 ],
                 None,
                 None,
                 "elements",
+                card_active_funcs=[
+                    None,
+                    None,
+                    lambda: self.elements['n5'].any(),
+                ],
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def elements(self) -> pd.DataFrame:
         """Gets the full table of elements."""

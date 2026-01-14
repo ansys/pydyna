@@ -23,7 +23,25 @@
 """Module providing the ElementGeneralizedShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTGENERALIZEDSHELL_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("nmnp", int, 20, 10, None),
+)
+
+_ELEMENTGENERALIZEDSHELL_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("n5", int, 40, 10, None),
+    FieldSchema("n6", int, 50, 10, None),
+    FieldSchema("n7", int, 60, 10, None),
+    FieldSchema("n8", int, 70, 10, None),
+)
 
 class ElementGeneralizedShell(KeywordBase):
     """DYNA ELEMENT_GENERALIZED_SHELL keyword"""
@@ -35,93 +53,13 @@ class ElementGeneralizedShell(KeywordBase):
         """Initialize the ElementGeneralizedShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmnp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTGENERALIZEDSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTGENERALIZEDSHELL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. Chose a unique number with respect to other elements

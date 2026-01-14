@@ -23,7 +23,15 @@
 """Module providing the BoundaryAcousticPrescribedMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICPRESCRIBEDMOTION_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("vad", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+)
 
 class BoundaryAcousticPrescribedMotion(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_PRESCRIBED_MOTION keyword"""
@@ -35,41 +43,10 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
         """Initialize the BoundaryAcousticPrescribedMotion class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICPRESCRIBEDMOTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the fluid boundary faces.

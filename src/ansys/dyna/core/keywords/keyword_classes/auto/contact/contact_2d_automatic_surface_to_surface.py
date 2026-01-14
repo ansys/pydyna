@@ -23,7 +23,47 @@
 """Module providing the Contact2DAutomaticSurfaceToSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACT2DAUTOMATICSURFACETOSURFACE_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("sfact", float, 20, 10, 1.0),
+    FieldSchema("freq", int, 30, 10, 50),
+    FieldSchema("fs", float, 40, 10, 0.0),
+    FieldSchema("fd", float, 50, 10, 0.0),
+    FieldSchema("dc", float, 60, 10, 0.0),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_CONTACT2DAUTOMATICSURFACETOSURFACE_CARD1 = (
+    FieldSchema("tbirth", float, 0, 10, 0.0),
+    FieldSchema("tdeath", float, 10, 10, 1e+20),
+    FieldSchema("soa", float, 20, 10, 1.0),
+    FieldSchema("sob", float, 30, 10, 1.0),
+    FieldSchema("nda", int, 40, 10, 0),
+    FieldSchema("ndb", int, 50, 10, 0),
+    FieldSchema("cof", int, 60, 10, 0),
+    FieldSchema("init", int, 70, 10, 0),
+)
+
+_CONTACT2DAUTOMATICSURFACETOSURFACE_CARD2 = (
+    FieldSchema("vc", float, 0, 10, 0.0),
+    FieldSchema("vdc", float, 10, 10, 10.0),
+    FieldSchema("ipf", int, 20, 10, 0),
+    FieldSchema("slide", int, 30, 10, 0),
+    FieldSchema("istiff", int, 40, 10, 0),
+    FieldSchema("tiedgap", float, 50, 10, 0.0),
+    FieldSchema("igapcl", int, 60, 10, 0),
+    FieldSchema("tietyp", int, 70, 10, 0),
+)
+
+_CONTACT2DAUTOMATICSURFACETOSURFACE_CARD3 = (
+    FieldSchema("sldsoa", float, 0, 10, 0.0),
+    FieldSchema("sldsob", float, 10, 10, 0.0),
+    FieldSchema("tdpen", float, 20, 10, 0.0),
+)
 
 class Contact2DAutomaticSurfaceToSurface(KeywordBase):
     """DYNA CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE keyword"""
@@ -35,237 +75,19 @@ class Contact2DAutomaticSurfaceToSurface(KeywordBase):
         """Initialize the Contact2DAutomaticSurfaceToSurface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfact",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq",
-                        int,
-                        30,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tbirth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soa",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sob",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nda",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndb",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cof",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "init",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdc",
-                        float,
-                        10,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slide",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istiff",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tiedgap",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igapcl",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tietyp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sldsoa",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sldsob",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdpen",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACT2DAUTOMATICSURFACETOSURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACT2DAUTOMATICSURFACETOSURFACE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACT2DAUTOMATICSURFACETOSURFACE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACT2DAUTOMATICSURFACETOSURFACE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Set ID for SURFA.  If SURFA > 0, a part set is assumed; see *SET_‌PART.  If SURFA < 0, a node set with ID equal to the absolute value of SURFA is assumed; see *SET_‌NODE. For nonsymmetric contact, this surface is the tracked surface.

@@ -23,8 +23,36 @@
 """Module providing the MatCohesiveGasket class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATCOHESIVEGASKET_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, 0),
+    FieldSchema("intfail", int, 30, 10, None),
+)
+
+_MATCOHESIVEGASKET_CARD1 = (
+    FieldSchema("lc", int, 0, 10, None),
+    FieldSchema("uc", int, 10, 10, None),
+    FieldSchema("eten", float, 20, 10, None),
+)
+
+_MATCOHESIVEGASKET_CARD2 = (
+    FieldSchema("etsr", float, 0, 10, None),
+)
+
+_MATCOHESIVEGASKET_CARD3 = (
+    FieldSchema("emem", float, 0, 10, None),
+    FieldSchema("pr", float, 10, 10, None),
+    FieldSchema("ps", int, 20, 10, 0),
+)
+
+_MATCOHESIVEGASKET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatCohesiveGasket(KeywordBase):
     """DYNA MAT_COHESIVE_GASKET keyword"""
@@ -40,120 +68,29 @@ class MatCohesiveGasket(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intfail",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eten",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "etsr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "emem",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ps",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGASKET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGASKET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGASKET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGASKET_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCohesiveGasket.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEGASKET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number

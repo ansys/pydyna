@@ -23,7 +23,14 @@
 """Module providing the ConstrainedRigidBodiesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDRIGIDBODIESSET_CARD0 = (
+    FieldSchema("pidl", int, 0, 10, None),
+    FieldSchema("pidc", int, 10, 10, None),
+    FieldSchema("iflag", int, 20, 10, None),
+)
 
 class ConstrainedRigidBodiesSet(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODIES_SET keyword"""
@@ -35,33 +42,10 @@ class ConstrainedRigidBodiesSet(KeywordBase):
         """Initialize the ConstrainedRigidBodiesSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODIESSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pidl(self) -> typing.Optional[int]:
         """Get or set the Lead rigid body part ID, see *PART.

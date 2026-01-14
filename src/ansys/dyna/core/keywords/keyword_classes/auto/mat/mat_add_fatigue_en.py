@@ -23,8 +23,28 @@
 """Module providing the MatAddFatigueEn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDFATIGUEEN_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("kp", float, 10, 10, None),
+    FieldSchema("np", float, 20, 10, None),
+    FieldSchema("sigmaf", float, 30, 10, None),
+    FieldSchema("epsp", float, 40, 10, None),
+    FieldSchema("bp", float, 50, 10, None),
+    FieldSchema("cp", float, 60, 10, None),
+)
+
+_MATADDFATIGUEEN_CARD1 = (
+    FieldSchema("e", int, 0, 10, None),
+    FieldSchema("pr", float, 10, 10, None),
+)
+
+_MATADDFATIGUEEN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddFatigueEn(KeywordBase):
     """DYNA MAT_ADD_FATIGUE_EN keyword"""
@@ -40,96 +60,23 @@ class MatAddFatigueEn(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigmaf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDFATIGUEEN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDFATIGUEEN_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddFatigueEn.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDFATIGUEEN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which the fatigue property applies.

@@ -23,8 +23,20 @@
 """Module providing the MatSpringInelastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSPRINGINELASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("lcfd", int, 10, 10, None),
+    FieldSchema("ku", float, 20, 10, None),
+    FieldSchema("ctf", float, 30, 10, 1.0),
+)
+
+_MATSPRINGINELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSpringInelastic(KeywordBase):
     """DYNA MAT_SPRING_INELASTIC keyword"""
@@ -40,58 +52,20 @@ class MatSpringInelastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfd",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ku",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSPRINGINELASTIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSpringInelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGINELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A uniques number has to be used.

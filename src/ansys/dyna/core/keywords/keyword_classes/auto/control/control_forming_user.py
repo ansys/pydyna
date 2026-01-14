@@ -23,7 +23,41 @@
 """Module providing the ControlFormingUser class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGUSER_CARD0 = (
+    FieldSchema("blank", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("thick", float, 20, 10, None),
+    FieldSchema("r00", float, 30, 10, 1.0),
+    FieldSchema("r45", float, 40, 10, 1.0),
+    FieldSchema("r90", float, 50, 10, 1.0),
+    FieldSchema("al/fe", str, 60, 10, "F"),
+    FieldSchema("unit", int, 70, 10, 1),
+)
+
+_CONTROLFORMINGUSER_CARD1 = (
+    FieldSchema("lcss", int, 0, 10, None),
+    FieldSchema("k", float, 10, 10, 2.0),
+    FieldSchema("n", float, 20, 10, None),
+    FieldSchema("e", float, 30, 10, None),
+    FieldSchema("density", float, 40, 10, None),
+    FieldSchema("pr", float, 50, 10, None),
+    FieldSchema("fs", float, 60, 10, 0.1),
+    FieldSchema("mtype", int, 70, 10, 37),
+)
+
+_CONTROLFORMINGUSER_CARD2 = (
+    FieldSchema("patern", int, 0, 10, 1),
+    FieldSchema("vmax", float, 10, 10, 1000.0),
+    FieldSchema("amax", float, 20, 10, 500000.0),
+    FieldSchema("lvlada", int, 30, 10, 0),
+    FieldSchema("sizeada", float, 40, 10, 0.0),
+    FieldSchema("adatims", int, 50, 10, 0),
+    FieldSchema("d3plot", int, 60, 10, 10),
+    FieldSchema("gap", float, 70, 10, 1.1),
+)
 
 class ControlFormingUser(KeywordBase):
     """DYNA CONTROL_FORMING_USER keyword"""
@@ -35,205 +69,16 @@ class ControlFormingUser(KeywordBase):
         """Initialize the ControlFormingUser class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "blank",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r00",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r45",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r90",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al/fe",
-                        str,
-                        60,
-                        10,
-                        "F",
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcss",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        60,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        70,
-                        10,
-                        37,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "patern",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vmax",
-                        float,
-                        10,
-                        10,
-                        1000.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "amax",
-                        float,
-                        20,
-                        10,
-                        500000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lvlada",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sizeada",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adatims",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3plot",
-                        int,
-                        60,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        70,
-                        10,
-                        1.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUSER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUSER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUSER_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def blank(self) -> typing.Optional[int]:
         """Get or set the Blank ID

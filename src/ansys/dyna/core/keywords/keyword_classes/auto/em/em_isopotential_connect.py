@@ -23,7 +23,24 @@
 """Module providing the EmIsopotentialConnect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMISOPOTENTIALCONNECT_CARD0 = (
+    FieldSchema("conid", int, 0, 10, None),
+    FieldSchema("contype", int, 10, 10, 1),
+    FieldSchema("isoid1", int, 20, 10, None),
+    FieldSchema("isoid2", int, 30, 10, None),
+    FieldSchema("val", float, 40, 10, None),
+    FieldSchema("lcid/rdlid", int, 50, 10, None),
+    FieldSchema("psid", int, 60, 10, None),
+)
+
+_EMISOPOTENTIALCONNECT_CARD1 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("c", float, 10, 10, None),
+    FieldSchema("v0", float, 20, 10, None),
+)
 
 class EmIsopotentialConnect(KeywordBase):
     """DYNA EM_ISOPOTENTIAL_CONNECT keyword"""
@@ -35,88 +52,14 @@ class EmIsopotentialConnect(KeywordBase):
         """Initialize the EmIsopotentialConnect class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "conid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "contype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isoid1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isoid2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid/rdlid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.contype == 6,
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMISOPOTENTIALCONNECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMISOPOTENTIALCONNECT_CARD1,
+                active_func=lambda: self.contype == 6,
+                **kwargs,
+            ),        ]
     @property
     def conid(self) -> typing.Optional[int]:
         """Get or set the Connection ID.

@@ -23,7 +23,13 @@
 """Module providing the FrequencyDomainModeLoadProjectionExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINMODELOADPROJECTIONEXCLUDE_CARD0 = (
+    FieldSchema("nmsort", int, 0, 10, None),
+    FieldSchema("dskip", float, 10, 10, None),
+)
 
 class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_MODE_LOAD_PROJECTION_EXCLUDE keyword"""
@@ -35,26 +41,10 @@ class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
         """Initialize the FrequencyDomainModeLoadProjectionExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmsort",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dskip",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINMODELOADPROJECTIONEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nmsort(self) -> typing.Optional[int]:
         """Get or set the Number of modes to be retained which have the largest load projection ratios.

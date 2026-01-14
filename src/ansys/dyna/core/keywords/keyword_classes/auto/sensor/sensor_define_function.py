@@ -23,8 +23,35 @@
 """Module providing the SensorDefineFunction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORDEFINEFUNCTION_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("func", int, 10, 10, None),
+    FieldSchema("sens1", int, 20, 10, None),
+    FieldSchema("sens2", int, 30, 10, None),
+    FieldSchema("sens3", int, 40, 10, None),
+    FieldSchema("sens4", int, 50, 10, None),
+    FieldSchema("sens5", int, 60, 10, None),
+    FieldSchema("sens6", int, 70, 10, None),
+)
+
+_SENSORDEFINEFUNCTION_CARD1 = (
+    FieldSchema("sensi", int, 0, 10, None),
+    FieldSchema("sensi+1", int, 10, 10, None),
+    FieldSchema("sensi+2", int, 20, 10, None),
+    FieldSchema("sensi+3", int, 30, 10, None),
+    FieldSchema("sensi+4", int, 40, 10, None),
+    FieldSchema("sensi+5", int, 50, 10, None),
+    FieldSchema("sensi+6", int, 60, 10, None),
+    FieldSchema("sensi+7", int, 70, 10, None),
+)
+
+_SENSORDEFINEFUNCTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineFunction(KeywordBase):
     """DYNA SENSOR_DEFINE_FUNCTION keyword"""
@@ -40,145 +67,23 @@ class SensorDefineFunction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "func",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens4",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens5",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sens6",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sensi",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sensi+7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEFUNCTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEFUNCTION_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineFunction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEFUNCTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.

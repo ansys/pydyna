@@ -23,7 +23,17 @@
 """Module providing the ConstrainedCoordinate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDCOORDINATE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("idir", int, 20, 10, 1),
+    FieldSchema("x", float, 30, 10, None),
+    FieldSchema("y", float, 40, 10, None),
+    FieldSchema("z", float, 50, 10, None),
+)
 
 class ConstrainedCoordinate(KeywordBase):
     """DYNA CONSTRAINED_COORDINATE keyword"""
@@ -35,55 +45,10 @@ class ConstrainedCoordinate(KeywordBase):
         """Initialize the ConstrainedCoordinate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDCOORDINATE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identification number of a constraint.

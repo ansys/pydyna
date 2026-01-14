@@ -23,7 +23,16 @@
 """Module providing the CeseBoundarySolidWallPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYSOLIDWALLPARTSET_CARD0 = (
+    FieldSchema("surfsid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("vx", float, 20, 10, 0.0),
+    FieldSchema("vy", float, 30, 10, 0.0),
+    FieldSchema("vz", float, 40, 10, 0.0),
+)
 
 class CeseBoundarySolidWallPartSet(KeywordBase):
     """DYNA CESE_BOUNDARY_SOLID_WALL_PART_SET keyword"""
@@ -35,51 +44,10 @@ class CeseBoundarySolidWallPartSet(KeywordBase):
         """Initialize the CeseBoundarySolidWallPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSOLIDWALLPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def surfsid(self) -> typing.Optional[int]:
         """Get or set the Identifier of a set of surface part IDs created with a *LSO_ID_SET card, where each surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.

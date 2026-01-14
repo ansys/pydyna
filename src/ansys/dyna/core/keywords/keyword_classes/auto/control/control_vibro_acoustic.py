@@ -23,7 +23,24 @@
 """Module providing the ControlVibroAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLVIBROACOUSTIC_CARD0 = (
+    FieldSchema("vaflag", int, 0, 10, 0),
+    FieldSchema("vaprld", int, 10, 10, 0),
+    FieldSchema("vastrs", int, 20, 10, 0),
+    FieldSchema("vapsd", int, 30, 10, 0),
+    FieldSchema("varms", int, 40, 10, 0),
+    FieldSchema("vaplot", int, 50, 10, 0),
+    FieldSchema("ipanelu", int, 60, 10, None),
+    FieldSchema("ipanelv", int, 70, 10, None),
+)
+
+_CONTROLVIBROACOUSTIC_CARD1 = (
+    FieldSchema("restart", int, 0, 10, 0),
+    FieldSchema("nmodstr", int, 10, 10, None),
+)
 
 class ControlVibroAcoustic(KeywordBase):
     """DYNA CONTROL_VIBRO_ACOUSTIC keyword"""
@@ -35,93 +52,13 @@ class ControlVibroAcoustic(KeywordBase):
         """Initialize the ControlVibroAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vaflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vaprld",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vastrs",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vapsd",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varms",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vaplot",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelu",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelv",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "restart",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmodstr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLVIBROACOUSTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLVIBROACOUSTIC_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def vaflag(self) -> int:
         """Get or set the Loading type:

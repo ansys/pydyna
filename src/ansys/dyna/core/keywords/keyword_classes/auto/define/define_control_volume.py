@@ -23,8 +23,19 @@
 """Module providing the DefineControlVolume class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONTROLVOLUME_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("p0", float, 20, 10, None),
+)
+
+_DEFINECONTROLVOLUME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineControlVolume(KeywordBase):
     """DYNA DEFINE_CONTROL_VOLUME keyword"""
@@ -40,50 +51,20 @@ class DefineControlVolume(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONTROLVOLUME_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineControlVolume.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTROLVOLUME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Control volume ID.

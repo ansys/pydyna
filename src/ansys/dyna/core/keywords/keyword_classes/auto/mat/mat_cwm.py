@@ -23,8 +23,39 @@
 """Module providing the MatCwm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATCWM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("lcem", int, 20, 10, None),
+    FieldSchema("lcpr", int, 30, 10, None),
+    FieldSchema("lcsy", int, 40, 10, None),
+    FieldSchema("lchr", int, 50, 10, None),
+    FieldSchema("lcat", int, 60, 10, None),
+    FieldSchema("beta", float, 70, 10, None),
+)
+
+_MATCWM_CARD1 = (
+    FieldSchema("tastart", float, 0, 10, None),
+    FieldSchema("taend", float, 10, 10, None),
+    FieldSchema("tlstart", float, 20, 10, None),
+    FieldSchema("tlend", float, 30, 10, None),
+    FieldSchema("eghost", float, 40, 10, None),
+    FieldSchema("pghost", float, 50, 10, None),
+    FieldSchema("aghost", float, 60, 10, None),
+)
+
+_MATCWM_CARD2 = (
+    FieldSchema("t2phase", float, 0, 10, None),
+    FieldSchema("t1phase", float, 10, 10, None),
+)
+
+_MATCWM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatCwm(KeywordBase):
     """DYNA MAT_CWM keyword"""
@@ -40,156 +71,26 @@ class MatCwm(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcem",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lchr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcat",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tastart",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlstart",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlend",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eghost",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pghost",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aghost",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t2phase",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1phase",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCwm.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCWM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.

@@ -23,7 +23,30 @@
 """Module providing the ControlMppDecompositionPartsDistribute class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+    FieldSchema("id6", int, 50, 10, None),
+    FieldSchema("id7", int, 60, 10, None),
+    FieldSchema("id8", int, 70, 10, None),
+)
+
+_CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD1 = (
+    FieldSchema("id9", int, 0, 10, None),
+    FieldSchema("id10", int, 10, 10, None),
+    FieldSchema("id11", int, 20, 10, None),
+    FieldSchema("id12", int, 30, 10, None),
+    FieldSchema("id13", int, 40, 10, None),
+    FieldSchema("id14", int, 50, 10, None),
+    FieldSchema("id15", int, 60, 10, None),
+    FieldSchema("id16", int, 70, 10, None),
+)
 
 class ControlMppDecompositionPartsDistribute(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_PARTS_DISTRIBUTE keyword"""
@@ -35,128 +58,13 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
         """Initialize the ControlMppDecompositionPartsDistribute class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id9",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id10",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id11",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id13",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id14",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id15",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id16",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Part ID to be distributed. If ID1,ID2,.. < 0, abs(ID1) will be used as part set ID.  All parts defined in this card will be treated as a single region to be decomposed

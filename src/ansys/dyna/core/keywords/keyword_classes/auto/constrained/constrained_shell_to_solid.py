@@ -23,7 +23,13 @@
 """Module providing the ConstrainedShellToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDSHELLTOSOLID_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+)
 
 class ConstrainedShellToSolid(KeywordBase):
     """DYNA CONSTRAINED_SHELL_TO_SOLID keyword"""
@@ -35,26 +41,10 @@ class ConstrainedShellToSolid(KeywordBase):
         """Initialize the ConstrainedShellToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSHELLTOSOLID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Shell node ID.

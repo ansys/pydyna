@@ -1,0 +1,35 @@
+            TableCardGroup(
+                [
+{% for sub_card in card.sub_cards %}
+                    (
+{% for field in sub_card.fields %}
+                        FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endfor %}
+                    ),
+{% endfor %}
+                ],
+{% if card.length_func %}
+                lambda: {{card.length_func}},
+{% else %}
+                None,
+{% endif %}
+{% if card.active_func %}
+                lambda: {{card.active_func}},
+{% else %}
+                None,
+{% endif %}
+                "{{card.overall_name}}",
+{% set has_sub_card_active_funcs = card.sub_cards | selectattr('func', 'defined') | selectattr('func') | list | length > 0 %}
+{% if has_sub_card_active_funcs %}
+                card_active_funcs=[
+{% for sub_card in card.sub_cards %}
+{% if sub_card.func %}
+                    lambda: {{sub_card.func}},
+{% else %}
+                    None,
+{% endif %}
+{% endfor %}
+                ],
+{% endif %}
+                **kwargs,
+            ),

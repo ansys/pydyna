@@ -23,7 +23,18 @@
 """Module providing the ElementSeatbeltAccelerometer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSEATBELTACCELEROMETER_CARD0 = (
+    FieldSchema("sbacid", int, 0, 10, 0),
+    FieldSchema("nid1", int, 10, 10, 0),
+    FieldSchema("nid2", int, 20, 10, 0),
+    FieldSchema("nid3", int, 30, 10, 0),
+    FieldSchema("igrav", int, 40, 10, 0),
+    FieldSchema("intopt", int, 50, 10, 0),
+    FieldSchema("mass", float, 60, 10, None),
+)
 
 class ElementSeatbeltAccelerometer(KeywordBase):
     """DYNA ELEMENT_SEATBELT_ACCELEROMETER keyword"""
@@ -35,67 +46,10 @@ class ElementSeatbeltAccelerometer(KeywordBase):
         """Initialize the ElementSeatbeltAccelerometer class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbacid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igrav",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intopt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTACCELEROMETER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sbacid(self) -> int:
         """Get or set the Accelerometer ID. A unique number has to be used.

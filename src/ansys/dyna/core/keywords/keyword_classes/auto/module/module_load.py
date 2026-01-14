@@ -23,7 +23,17 @@
 """Module providing the ModuleLoad class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MODULELOAD_CARD0 = (
+    FieldSchema("mdlid", int, 0, 20, None),
+    FieldSchema("title", str, 20, 60, None),
+)
+
+_MODULELOAD_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class ModuleLoad(KeywordBase):
     """DYNA MODULE_LOAD keyword"""
@@ -35,37 +45,13 @@ class ModuleLoad(KeywordBase):
         """Initialize the ModuleLoad class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdlid",
-                        int,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        20,
-                        60,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MODULELOAD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MODULELOAD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mdlid(self) -> typing.Optional[int]:
         """Get or set the Module identification. A unique string label must be specified.

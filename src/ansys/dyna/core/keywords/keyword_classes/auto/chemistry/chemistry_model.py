@@ -23,7 +23,26 @@
 """Module providing the ChemistryModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYMODEL_CARD0 = (
+    FieldSchema("modelid", int, 0, 10, None),
+    FieldSchema("jacsel", int, 10, 10, 1),
+    FieldSchema("errlim", float, 20, 10, 0.001),
+)
+
+_CHEMISTRYMODEL_CARD1 = (
+    FieldSchema("file1", str, 0, 256, None),
+)
+
+_CHEMISTRYMODEL_CARD2 = (
+    FieldSchema("file2", str, 0, 256, None),
+)
+
+_CHEMISTRYMODEL_CARD3 = (
+    FieldSchema("file3", str, 0, 256, None),
+)
 
 class ChemistryModel(KeywordBase):
     """DYNA CHEMISTRY_MODEL keyword"""
@@ -35,68 +54,19 @@ class ChemistryModel(KeywordBase):
         """Initialize the ChemistryModel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "modelid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jacsel",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "errlim",
-                        float,
-                        20,
-                        10,
-                        1.0e-3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file1",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file2",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file3",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYMODEL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYMODEL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYMODEL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYMODEL_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def modelid(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemkin-based chemistry model.

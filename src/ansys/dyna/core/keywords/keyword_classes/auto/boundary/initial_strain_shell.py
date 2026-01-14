@@ -23,9 +23,20 @@
 """Module providing the InitialStrainShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRAINSHELLLARGECARDSET_CARD0 = (
+    FieldSchema("epsxx", float, 0, 10, 0.0),
+    FieldSchema("epsyy", float, 10, 10, 0.0),
+    FieldSchema("epszz", float, 20, 10, 0.0),
+    FieldSchema("epsxy", float, 30, 10, 0.0),
+    FieldSchema("epsyz", float, 40, 10, 0.0),
+    FieldSchema("epszx", float, 50, 10, 0.0),
+    FieldSchema("t", float, 60, 10, 0.0),
+)
 
 class InitialStrainShellLargeCardSet(Cards):
     """ CardSet."""
@@ -36,67 +47,10 @@ class InitialStrainShellLargeCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "epsxx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsxy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSET_CARD0,
+                **kwargs,
+            ),        ]
 
     @property
     def epsxx(self) -> float:
@@ -180,6 +134,19 @@ class InitialStrainShellLargeCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+_INITIALSTRAINSHELLLARGECARDSETLARGE_CARD0 = (
+    FieldSchema("epsxx", float, 0, 20, 0.0),
+    FieldSchema("epsyy", float, 20, 20, 0.0),
+    FieldSchema("epszz", float, 40, 20, 0.0),
+    FieldSchema("epsxy", float, 60, 20, 0.0),
+    FieldSchema("epsyz", float, 80, 20, 0.0),
+)
+
+_INITIALSTRAINSHELLLARGECARDSETLARGE_CARD1 = (
+    FieldSchema("epszx", float, 0, 20, 0.0),
+    FieldSchema("t", float, 20, 20, 0.0),
+)
+
 class InitialStrainShellLargeCardSetLarge(Cards):
     """ CardSet."""
 
@@ -189,71 +156,13 @@ class InitialStrainShellLargeCardSetLarge(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "epsxx",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyy",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszz",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsxy",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyz",
-                        float,
-                        80,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epszx",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD1,
+                **kwargs,
+            ),        ]
 
     @property
     def epsxx(self) -> float:
@@ -337,6 +246,17 @@ class InitialStrainShellLargeCardSetLarge(Cards):
         """Get the parent keyword."""
         return self._parent
 
+_INITIALSTRAINSHELLCARDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, None),
+    FieldSchema("nthick", int, 20, 10, None),
+    FieldSchema("large", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("ilocal", int, 70, 10, 0),
+)
+
 class InitialStrainShellCardSet(Cards):
     """ CardSet."""
 
@@ -346,81 +266,20 @@ class InitialStrainShellCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilocal",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            CardSet(
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLCARDSET_CARD0,
+                **kwargs,
+            ),            CardSet(
                 InitialStrainShellLargeCardSet,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
-            ),
-            CardSet(
+            ),            CardSet(
                 InitialStrainShellLargeCardSetLarge,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == 1,
                 **kwargs
-            ),
-        ]
+            ),        ]
 
     @property
     def eid(self) -> typing.Optional[int]:
@@ -515,9 +374,7 @@ class InitialStrainShell(KeywordBase):
             CardSet(
                 InitialStrainShellCardSet,
                 **kwargs
-            ),
-        ]
-
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the eid

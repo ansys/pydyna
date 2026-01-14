@@ -23,7 +23,45 @@
 """Module providing the MeshSizeShape class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MESHSIZESHAPE_CARD0 = (
+    FieldSchema("sname", str, 0, 10, "BOX"),
+    FieldSchema("force", int, 10, 10, 0),
+    FieldSchema("method", int, 20, 10, 0),
+    FieldSchema("bt", float, 30, 10, 0.0),
+    FieldSchema("dt", float, 40, 10, 1000000000000.0),
+)
+
+_MESHSIZESHAPE_CARD1 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("pminx", float, 10, 10, None),
+    FieldSchema("pminy", float, 20, 10, None),
+    FieldSchema("pminz", float, 30, 10, None),
+    FieldSchema("pmaxx", float, 40, 10, None),
+    FieldSchema("pmaxy", float, 50, 10, None),
+    FieldSchema("pmaxz", float, 60, 10, None),
+)
+
+_MESHSIZESHAPE_CARD2 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("centerx", float, 20, 10, None),
+    FieldSchema("centery", float, 30, 10, None),
+    FieldSchema("centerz", float, 40, 10, None),
+)
+
+_MESHSIZESHAPE_CARD3 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("pminx", float, 20, 10, None),
+    FieldSchema("pminy", float, 30, 10, None),
+    FieldSchema("pminz", float, 40, 10, None),
+    FieldSchema("pmaxx", float, 50, 10, None),
+    FieldSchema("pmaxy", float, 60, 10, None),
+    FieldSchema("pmaxz", float, 70, 10, None),
+)
 
 class MeshSizeShape(KeywordBase):
     """DYNA MESH_SIZE_SHAPE keyword"""
@@ -35,204 +73,19 @@ class MeshSizeShape(KeywordBase):
         """Initialize the MeshSizeShape class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sname",
-                        str,
-                        0,
-                        10,
-                        "BOX",
-                        **kwargs,
-                    ),
-                    Field(
-                        "force",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        40,
-                        10,
-                        1.E12,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "msize",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxy",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "msize",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centerx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centery",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centerz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "msize",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxx",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxy",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxz",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def sname(self) -> str:
         """Get or set the Shape name. Possibilities include  box,  cylinder,  pol and  sphere

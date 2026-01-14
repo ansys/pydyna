@@ -23,7 +23,24 @@
 """Module providing the DatabaseCrossSectionSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASECROSSSECTIONSET_CARD0 = (
+    FieldSchema("csid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_DATABASECROSSSECTIONSET_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, 0),
+    FieldSchema("hsid", int, 10, 10, 0),
+    FieldSchema("bsid", int, 20, 10, 0),
+    FieldSchema("ssid", int, 30, 10, 0),
+    FieldSchema("tsid", int, 40, 10, 0),
+    FieldSchema("dsid", int, 50, 10, 0),
+    FieldSchema("id", int, 60, 10, None),
+    FieldSchema("itype", int, 70, 10, 0),
+)
 
 class DatabaseCrossSectionSet(KeywordBase):
     """DYNA DATABASE_CROSS_SECTION_SET keyword"""
@@ -35,93 +52,13 @@ class DatabaseCrossSectionSet(KeywordBase):
         """Initialize the DatabaseCrossSectionSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "csid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hsid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASECROSSSECTIONSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASECROSSSECTIONSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def csid(self) -> typing.Optional[int]:
         """Get or set the Optional ID for cross section. If not specified cross section ID is taken to be the cross section order in the input deck.

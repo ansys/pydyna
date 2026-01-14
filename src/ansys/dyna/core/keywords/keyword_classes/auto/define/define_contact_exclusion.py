@@ -23,8 +23,40 @@
 """Module providing the DefineContactExclusion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONTACTEXCLUSION_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_DEFINECONTACTEXCLUSION_CARD1 = (
+    FieldSchema("target", int, 0, 10, None),
+    FieldSchema("c1", int, 10, 10, None),
+    FieldSchema("c2", int, 20, 10, None),
+    FieldSchema("c3", int, 30, 10, None),
+    FieldSchema("c4", int, 40, 10, None),
+    FieldSchema("c5", int, 50, 10, None),
+    FieldSchema("c6", int, 60, 10, None),
+    FieldSchema("c7", int, 70, 10, None),
+)
+
+_DEFINECONTACTEXCLUSION_CARD2 = (
+    FieldSchema("c8", int, 0, 10, None),
+    FieldSchema("c9", int, 10, 10, None),
+    FieldSchema("c10", int, 20, 10, None),
+    FieldSchema("c11", int, 30, 10, None),
+    FieldSchema("c12", int, 40, 10, None),
+    FieldSchema("c13", int, 50, 10, None),
+    FieldSchema("c14", int, 60, 10, None),
+    FieldSchema("c15", int, 70, 10, None),
+)
+
+_DEFINECONTACTEXCLUSION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineContactExclusion(KeywordBase):
     """DYNA DEFINE_CONTACT_EXCLUSION keyword"""
@@ -40,163 +72,26 @@ class DefineContactExclusion(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "target",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c8",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c9",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c11",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c12",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c13",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c14",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c15",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTEXCLUSION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTEXCLUSION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTEXCLUSION_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineContactExclusion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTACTEXCLUSION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Exclusion ID.

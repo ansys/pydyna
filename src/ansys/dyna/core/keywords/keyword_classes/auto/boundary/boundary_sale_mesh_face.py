@@ -23,7 +23,19 @@
 """Module providing the BoundarySaleMeshFace class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSALEMESHFACE_CARD0 = (
+    FieldSchema("option", str, 0, 10, "FIXED"),
+    FieldSchema("mshid", int, 10, 10, None),
+    FieldSchema("-x", int, 20, 10, 0),
+    FieldSchema("+x", int, 30, 10, 0),
+    FieldSchema("-y", int, 40, 10, 0),
+    FieldSchema("+y", int, 50, 10, 0),
+    FieldSchema("-z", int, 60, 10, 0),
+    FieldSchema("-z", int, 70, 10, 0),
+)
 
 class BoundarySaleMeshFace(KeywordBase):
     """DYNA BOUNDARY_SALE_MESH_FACE keyword"""
@@ -35,75 +47,10 @@ class BoundarySaleMeshFace(KeywordBase):
         """Initialize the BoundarySaleMeshFace class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "option",
-                        str,
-                        0,
-                        10,
-                        "FIXED",
-                        **kwargs,
-                    ),
-                    Field(
-                        "mshid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "-x",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "+x",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "-y",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "+y",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "-z",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "-z",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSALEMESHFACE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def option(self) -> str:
         """Get or set the There are 3 options.

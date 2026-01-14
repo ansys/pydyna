@@ -23,7 +23,50 @@
 """Module providing the ConstrainedSoilPileCurvesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDSOILPILECURVESSET_CARD0 = (
+    FieldSchema("pbsid", int, 0, 10, None),
+    FieldSchema("diam", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("pidns", int, 30, 10, None),
+    FieldSchema("pidnb", int, 40, 10, None),
+    FieldSchema("error", int, 50, 10, 0),
+    FieldSchema("nring", int, 60, 10, 1),
+    FieldSchema("nringb", int, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVESSET_CARD1 = (
+    FieldSchema("damp", float, 0, 10, 0.0),
+    FieldSchema("local", int, 10, 10, 1),
+)
+
+_CONSTRAINEDSOILPILECURVESSET_CARD2 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("zref", float, 10, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVESSET_CARD3 = (
+    FieldSchema("blcz", int, 0, 10, None),
+    FieldSchema("blc", int, 10, 10, None),
+    FieldSchema("blcsh", int, 20, 10, None),
+    FieldSchema("blcsv", int, 30, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVESSET_CARD4 = (
+    FieldSchema("vlcz", int, 0, 10, None),
+    FieldSchema("vlc", int, 10, 10, None),
+    FieldSchema("vlcsh", int, 20, 10, None),
+    FieldSchema("vlcsv", int, 30, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVESSET_CARD5 = (
+    FieldSchema("hlcz", int, 0, 10, None),
+    FieldSchema("hlc", int, 10, 10, None),
+    FieldSchema("hlcsh", int, 20, 10, None),
+    FieldSchema("hlcsv", int, 30, 10, None),
+)
 
 class ConstrainedSoilPileCurvesSet(KeywordBase):
     """DYNA CONSTRAINED_SOIL_PILE_CURVES_SET keyword"""
@@ -35,204 +78,25 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
         """Initialize the ConstrainedSoilPileCurvesSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pbsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diam",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidns",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidnb",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "error",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nring",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nringb",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "damp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zref",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "blcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vlcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hlcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVESSET_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def pbsid(self) -> typing.Optional[int]:
         """Get or set the Part set ID containing beam elements for coupling (the piles).

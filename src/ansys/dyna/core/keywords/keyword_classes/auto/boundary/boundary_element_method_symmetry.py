@@ -23,7 +23,12 @@
 """Module providing the BoundaryElementMethodSymmetry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYELEMENTMETHODSYMMETRY_CARD0 = (
+    FieldSchema("bemsym", int, 0, 10, 0),
+)
 
 class BoundaryElementMethodSymmetry(KeywordBase):
     """DYNA BOUNDARY_ELEMENT_METHOD_SYMMETRY keyword"""
@@ -35,20 +40,10 @@ class BoundaryElementMethodSymmetry(KeywordBase):
         """Initialize the BoundaryElementMethodSymmetry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bemsym",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODSYMMETRY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bemsym(self) -> int:
         """Get or set the Defines a symmetry plane for boundary element method.

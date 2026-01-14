@@ -67,6 +67,6 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.19.0
+  rev: v1.20.0
   hooks:
     - id: zizmor

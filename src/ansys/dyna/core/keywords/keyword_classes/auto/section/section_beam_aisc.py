@@ -23,8 +23,50 @@
 """Module providing the SectionBeamAisc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONBEAMAISC_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("label", str, 10, 70, None),
+)
+
+_SECTIONBEAMAISC_CARD1 = (
+    FieldSchema("elform", int, 0, 10, 1),
+    FieldSchema("shrf", float, 10, 10, 0.0),
+    FieldSchema("nsm", float, 20, 10, 0.0),
+    FieldSchema("lfac", float, 30, 10, 0.0),
+    FieldSchema("nsloc", float, 40, 10, 0.0),
+    FieldSchema("ntloc", float, 50, 10, 0.0),
+    FieldSchema("k", int, 60, 10, 0),
+)
+
+_SECTIONBEAMAISC_CARD2 = (
+    FieldSchema("elform", int, 0, 10, 1),
+    FieldSchema("shrf", float, 10, 10, 0.0),
+    FieldSchema("nsm", float, 20, 10, 0.0),
+    FieldSchema("lfac", float, 30, 10, 0.0),
+)
+
+_SECTIONBEAMAISC_CARD3 = (
+    FieldSchema("elform", int, 0, 10, 1),
+    FieldSchema("lfac", float, 10, 10, 0.0),
+    FieldSchema("rampt", float, 20, 10, 0.0),
+    FieldSchema("stress", float, 30, 10, 0.0),
+)
+
+_SECTIONBEAMAISC_CARD4 = (
+    FieldSchema("elform", int, 0, 10, 1),
+    FieldSchema("shrf", float, 10, 10, 0.0),
+    FieldSchema("nsm", float, 20, 10, 0.0),
+    FieldSchema("lfac", float, 30, 10, 0.0),
+    FieldSchema("k", int, 40, 10, None),
+)
+
+_SECTIONBEAMAISC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionBeamAisc(KeywordBase):
     """DYNA SECTION_BEAM_AISC keyword"""
@@ -40,218 +82,32 @@ class SectionBeamAisc(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "label",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsm",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsloc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntloc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsm",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfac",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rampt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stress",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsm",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMAISC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMAISC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMAISC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMAISC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMAISC_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionBeamAisc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONBEAMAISC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID.  SECID is referenced on the *PART card.  A unique number or label not exceeding 8 characters must be specified.

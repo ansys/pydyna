@@ -23,7 +23,24 @@
 """Module providing the BoundarySphFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSPHFLOW_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("styp", int, 10, 10, 1),
+    FieldSchema("dof", int, 20, 10, 0),
+    FieldSchema("vad", int, 30, 10, 0),
+    FieldSchema("lcid", int, 40, 10, None),
+    FieldSchema("sf", float, 50, 10, 1.0),
+    FieldSchema("death", float, 60, 10, 1e+20),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYSPHFLOW_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("vid", int, 10, 10, None),
+)
 
 class BoundarySphFlow(KeywordBase):
     """DYNA BOUNDARY_SPH_FLOW keyword"""
@@ -35,92 +52,13 @@ class BoundarySphFlow(KeywordBase):
         """Initialize the BoundarySphFlow class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "styp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHFLOW_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHFLOW_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID (NSID), SEE *SET_NODE, or part ID (PID), see *PART.

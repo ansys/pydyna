@@ -23,8 +23,38 @@
 """Module providing the DefineAdaptiveSolidToDes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEADAPTIVESOLIDTODES_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_DEFINEADAPTIVESOLIDTODES_CARD1 = (
+    FieldSchema("ipid", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 0),
+    FieldSchema("nq", int, 20, 10, 1),
+    FieldSchema("ipdes", int, 30, 10, None),
+    FieldSchema("isdes", int, 40, 10, None),
+    FieldSchema("rsf", float, 50, 10, 1.0),
+    FieldSchema("outdes", int, 60, 10, 0),
+    FieldSchema("ibond", int, 70, 10, 0),
+)
+
+_DEFINEADAPTIVESOLIDTODES_CARD2 = (
+    FieldSchema("pbn", float, 0, 10, None),
+    FieldSchema("pbs", float, 10, 10, None),
+    FieldSchema("pbn_s", float, 20, 10, None),
+    FieldSchema("pbs_s", float, 30, 10, None),
+    FieldSchema("sfa", float, 40, 10, 1.0),
+    FieldSchema("alpha", float, 50, 10, 0.0),
+)
+
+_DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineAdaptiveSolidToDes(KeywordBase):
     """DYNA DEFINE_ADAPTIVE_SOLID_TO_DES keyword"""
@@ -40,156 +70,26 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nq",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipdes",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isdes",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rsf",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outdes",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibond",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pbn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbn_s",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs_s",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEADAPTIVESOLIDTODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEADAPTIVESOLIDTODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEADAPTIVESOLIDTODES_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAdaptiveSolidToDes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Definition ID. This must be a unique number..

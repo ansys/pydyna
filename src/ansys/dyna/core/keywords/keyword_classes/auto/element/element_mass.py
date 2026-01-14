@@ -23,7 +23,15 @@
 """Module providing the ElementMass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTMASS_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("nid", int, 8, 8, None),
+    FieldSchema("mass", float, 16, 16, 0.0),
+    FieldSchema("pid", int, 32, 8, None),
+)
 
 class ElementMass(KeywordBase):
     """DYNA ELEMENT_MASS keyword"""
@@ -35,41 +43,10 @@ class ElementMass(KeywordBase):
         """Initialize the ElementMass class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

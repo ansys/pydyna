@@ -25,9 +25,14 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDNODALRIGIDBODY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class ConstrainedNodalRigidBody(KeywordBase):
     """DYNA CONSTRAINED_NODAL_RIGID_BODY keyword"""
@@ -56,26 +61,17 @@ class ConstrainedNodalRigidBody(KeywordBase):
                 None,
                 name="constrained_nodal_rigid_bodies",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBody.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDNODALRIGIDBODY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def constrained_nodal_rigid_bodies(self) -> pd.DataFrame:
         """Get the table of constrained_nodal_rigid_bodies."""

@@ -23,7 +23,19 @@
 """Module providing the ControlEfg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEFG_CARD0 = (
+    FieldSchema("isplane", int, 0, 10, 0),
+    FieldSchema("idila", int, 10, 10, 0),
+    FieldSchema("inint", int, 20, 10, 12),
+)
+
+_CONTROLEFG_CARD1 = (
+    FieldSchema("imlm", int, 0, 10, 0),
+    FieldSchema("etol", float, 10, 10, 0.0001),
+)
 
 class ControlEfg(KeywordBase):
     """DYNA CONTROL_EFG keyword"""
@@ -35,56 +47,13 @@ class ControlEfg(KeywordBase):
         """Initialize the ControlEfg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "isplane",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idila",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inint",
-                        int,
-                        20,
-                        10,
-                        12,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "imlm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etol",
-                        float,
-                        10,
-                        10,
-                        1.e-4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEFG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLEFG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def isplane(self) -> int:
         """Get or set the Optional choice for the mesh-free kernal functions:

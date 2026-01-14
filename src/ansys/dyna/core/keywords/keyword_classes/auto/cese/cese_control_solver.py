@@ -23,7 +23,15 @@
 """Module providing the CeseControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESECONTROLSOLVER_CARD0 = (
+    FieldSchema("icese", int, 0, 10, 0),
+    FieldSchema("iflow", int, 10, 10, 0),
+    FieldSchema("igeom", int, 20, 10, 0),
+    FieldSchema("iframe", int, 30, 10, 0),
+)
 
 class CeseControlSolver(KeywordBase):
     """DYNA CESE_CONTROL_SOLVER keyword"""
@@ -35,44 +43,10 @@ class CeseControlSolver(KeywordBase):
         """Initialize the CeseControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "icese",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflow",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igeom",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iframe",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESECONTROLSOLVER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def icese(self) -> int:
         """Get or set the Sets the framework of the CESE solver:   EQ.0: Fixed Eulerian

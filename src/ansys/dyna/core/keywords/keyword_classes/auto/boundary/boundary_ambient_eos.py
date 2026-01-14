@@ -23,7 +23,14 @@
 """Module providing the BoundaryAmbientEos class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYAMBIENTEOS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc1", int, 10, 10, None),
+    FieldSchema("lc2", int, 20, 10, None),
+)
 
 class BoundaryAmbientEos(KeywordBase):
     """DYNA BOUNDARY_AMBIENT_EOS keyword"""
@@ -35,33 +42,10 @@ class BoundaryAmbientEos(KeywordBase):
         """Initialize the BoundaryAmbientEos class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYAMBIENTEOS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The ambient Part ID for which the thermodynamic state is being defined.

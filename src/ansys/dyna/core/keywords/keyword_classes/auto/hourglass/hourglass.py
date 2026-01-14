@@ -23,10 +23,26 @@
 """Module providing the Hourglass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_HOURGLASSCARDSET_CARD0 = (
+    FieldSchema("hgid", int, 0, 10, 0),
+    FieldSchema("ihq", int, 10, 10, 0),
+    FieldSchema("qm", float, 20, 10, 0.1),
+    FieldSchema("ibq", int, 30, 10, None),
+    FieldSchema("q1", float, 40, 10, 1.5),
+    FieldSchema("q2", float, 50, 10, 0.06),
+    FieldSchema("qb/vdc", float, 60, 10, 0.1),
+    FieldSchema("qw", float, 70, 10, 0.1),
+)
+
+_HOURGLASSCARDSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class HourglassCardSet(Cards):
     """ CardSet."""
@@ -41,86 +57,15 @@ class HourglassCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "hgid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihq",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qm",
-                        float,
-                        20,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibq",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q1",
-                        float,
-                        40,
-                        10,
-                        1.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        50,
-                        10,
-                        6.0E-02,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qb/vdc",
-                        float,
-                        60,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qw",
-                        float,
-                        70,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _HOURGLASSCARDSET_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = HourglassCardSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _HOURGLASSCARDSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -264,9 +209,7 @@ class Hourglass(KeywordBase):
                 HourglassCardSet,
                 option_specs = HourglassCardSet.option_specs,
                 **kwargs
-            ),
-        ]
-
+            ),        ]
     @property
     def hgid(self) -> int:
         """Get or set the hgid

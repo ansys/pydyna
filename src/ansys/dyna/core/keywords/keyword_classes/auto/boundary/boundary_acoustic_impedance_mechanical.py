@@ -23,7 +23,15 @@
 """Module providing the BoundaryAcousticImpedanceMechanical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICIMPEDANCEMECHANICAL_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("mparea", float, 10, 10, 0.0),
+    FieldSchema("cparea", float, 20, 10, 0.0),
+    FieldSchema("kparea", int, 30, 10, 0),
+)
 
 class BoundaryAcousticImpedanceMechanical(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_IMPEDANCE_MECHANICAL keyword"""
@@ -35,43 +43,10 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
         """Initialize the BoundaryAcousticImpedanceMechanical class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mparea",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cparea",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kparea",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICIMPEDANCEMECHANICAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of an acoustic surface.

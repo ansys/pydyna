@@ -23,8 +23,50 @@
 """Module providing the MatCohesiveMixedModeElastoplasticRateThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, 0),
+    FieldSchema("intfail", float, 30, 10, None),
+    FieldSchema("emod", float, 40, 10, None),
+    FieldSchema("gmod", float, 50, 10, None),
+    FieldSchema("thick", float, 60, 10, None),
+    FieldSchema("inicrt", float, 70, 10, 0.0),
+)
+
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD1 = (
+    FieldSchema("g1c_0", float, 0, 10, None),
+    FieldSchema("g1c_inf", float, 10, 10, None),
+    FieldSchema("edot_g1", float, 20, 10, None),
+    FieldSchema("t0", float, 30, 10, None),
+    FieldSchema("t1", float, 40, 10, None),
+    FieldSchema("edot_t", float, 50, 10, None),
+    FieldSchema("fg1", float, 60, 10, None),
+    FieldSchema("lcg1c", int, 70, 10, None),
+)
+
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD2 = (
+    FieldSchema("g2c_0", float, 0, 10, None),
+    FieldSchema("g2c_inf", float, 10, 10, None),
+    FieldSchema("edot_g2", float, 20, 10, None),
+    FieldSchema("s0", float, 30, 10, None),
+    FieldSchema("s1", float, 40, 10, None),
+    FieldSchema("edot_s", float, 50, 10, None),
+    FieldSchema("fg2", float, 60, 10, None),
+    FieldSchema("lcg2c", int, 70, 10, None),
+)
+
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD3 = (
+    FieldSchema("rfiltf", float, 0, 10, None),
+)
+
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
     """DYNA MAT_COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_THERMAL keyword"""
@@ -40,218 +82,29 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emod",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmod",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inicrt",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g1c_0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g1c_inf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_g1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_t",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fg1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg1c",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g2c_0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2c_inf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_g2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_s",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fg2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg2c",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rfiltf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCohesiveMixedModeElastoplasticRateThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

@@ -23,7 +23,23 @@
 """Module providing the BoundarySpcSymmetryPlaneSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSPCSYMMETRYPLANESET_CARD0 = (
+    FieldSchema("idsp", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("x", float, 20, 10, 0.0),
+    FieldSchema("y", float, 30, 10, 0.0),
+    FieldSchema("z", float, 40, 10, 0.0),
+    FieldSchema("vx", float, 50, 10, 0.0),
+    FieldSchema("vy", float, 60, 10, 0.0),
+    FieldSchema("vz", float, 70, 10, 0.0),
+)
+
+_BOUNDARYSPCSYMMETRYPLANESET_CARD1 = (
+    FieldSchema("tol", float, 0, 10, 0.0),
+)
 
 class BoundarySpcSymmetryPlaneSet(KeywordBase):
     """DYNA BOUNDARY_SPC_SYMMETRY_PLANE_SET keyword"""
@@ -35,86 +51,13 @@ class BoundarySpcSymmetryPlaneSet(KeywordBase):
         """Initialize the BoundarySpcSymmetryPlaneSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idsp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tol",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPCSYMMETRYPLANESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPCSYMMETRYPLANESET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def idsp(self) -> typing.Optional[int]:
         """Get or set the Identification number of the constraint. Must be unique.

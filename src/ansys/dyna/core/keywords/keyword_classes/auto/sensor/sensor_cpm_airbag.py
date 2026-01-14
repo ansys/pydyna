@@ -23,8 +23,23 @@
 """Module providing the SensorCpmAirbag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORCPMAIRBAG_CARD0 = (
+    FieldSchema("cpmid", int, 0, 10, None),
+    FieldSchema("switid", int, 10, 10, None),
+    FieldSchema("tbirth", float, 20, 10, None),
+    FieldSchema("tdeath", float, 30, 10, None),
+    FieldSchema("tdr", float, 40, 10, None),
+    FieldSchema("defps", int, 50, 10, None),
+    FieldSchema("rbpid", int, 60, 10, None),
+)
+
+_SENSORCPMAIRBAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorCpmAirbag(KeywordBase):
     """DYNA SENSOR_CPM_AIRBAG keyword"""
@@ -40,78 +55,20 @@ class SensorCpmAirbag(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cpmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "switid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defps",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbpid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORCPMAIRBAG_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorCpmAirbag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORCPMAIRBAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cpmid(self) -> typing.Optional[int]:
         """Get or set the Bag ID of *AIRBAG_PARTICLE_ID.

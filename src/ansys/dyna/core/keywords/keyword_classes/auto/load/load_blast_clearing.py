@@ -23,7 +23,19 @@
 """Module providing the LoadBlastClearing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBLASTCLEARING_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+)
+
+_LOADBLASTCLEARING_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+)
 
 class LoadBlastClearing(KeywordBase):
     """DYNA LOAD_BLAST_CLEARING keyword"""
@@ -35,51 +47,13 @@ class LoadBlastClearing(KeywordBase):
         """Initialize the LoadBlastClearing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLASTCLEARING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBLASTCLEARING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID .

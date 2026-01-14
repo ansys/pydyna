@@ -23,7 +23,99 @@
 """Module providing the InitialStressBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSBEAM_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("rule", int, 10, 10, 2),
+    FieldSchema("npts", int, 20, 10, 0),
+    FieldSchema("local", int, 30, 10, 0),
+    FieldSchema("large", int, 40, 10, 0),
+    FieldSchema("nhisv", int, 50, 10, None),
+    FieldSchema("naxes", int, 60, 10, 0),
+)
+
+_INITIALSTRESSBEAM_CARD1 = (
+    FieldSchema("f11", float, 0, 10, 0.0),
+    FieldSchema("t11", float, 10, 10, 0.0),
+    FieldSchema("m12", float, 20, 10, 0.0),
+    FieldSchema("m13", float, 30, 10, 0.0),
+    FieldSchema("m22", float, 40, 10, 0.0),
+    FieldSchema("m23", float, 50, 10, 0.0),
+    FieldSchema("parm", float, 60, 10, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD2 = (
+    FieldSchema("f11", float, 0, 16, 0.0),
+    FieldSchema("t11", float, 16, 16, 0.0),
+    FieldSchema("m12", float, 32, 16, 0.0),
+    FieldSchema("m13", float, 48, 16, 0.0),
+    FieldSchema("m22", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD3 = (
+    FieldSchema("m23", float, 0, 16, 0.0),
+    FieldSchema("parm", float, 16, 16, 0.0),
+    FieldSchema("hisv1", float, 32, 16, 0.0),
+    FieldSchema("hisv2", float, 48, 16, 0.0),
+    FieldSchema("hisv3", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD4 = (
+    FieldSchema("sig11", float, 0, 10, 0.0),
+    FieldSchema("sig22", float, 10, 10, 0.0),
+    FieldSchema("sig33", float, 20, 10, 0.0),
+    FieldSchema("sig12", float, 30, 10, 0.0),
+    FieldSchema("sig23", float, 40, 10, 0.0),
+    FieldSchema("sig31", float, 50, 10, 0.0),
+    FieldSchema("eps", float, 60, 10, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD5 = (
+    FieldSchema("sig11", float, 0, 16, 0.0),
+    FieldSchema("sig22", float, 16, 16, 0.0),
+    FieldSchema("sig33", float, 32, 16, 0.0),
+    FieldSchema("sig12", float, 48, 16, 0.0),
+    FieldSchema("sig23", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD6 = (
+    FieldSchema("sig31", float, 0, 16, 0.0),
+    FieldSchema("eps", float, 16, 16, 0.0),
+    FieldSchema("hisv1", float, 32, 16, 0.0),
+    FieldSchema("hisv2", float, 48, 16, 0.0),
+    FieldSchema("hisv3", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD7 = (
+    FieldSchema("hisv4", float, 0, 16, 0.0),
+    FieldSchema("hisv5", float, 16, 16, 0.0),
+    FieldSchema("hisv6", float, 32, 16, 0.0),
+    FieldSchema("hisv7", float, 48, 16, 0.0),
+    FieldSchema("hisv8", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD8 = (
+    FieldSchema("ax1", float, 0, 16, 0.0),
+    FieldSchema("ax2", float, 16, 16, 0.0),
+    FieldSchema("ax3", float, 32, 16, 0.0),
+    FieldSchema("ax4", float, 48, 16, 0.0),
+    FieldSchema("ax5", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD9 = (
+    FieldSchema("ax6", float, 0, 16, 0.0),
+    FieldSchema("ax7", float, 16, 16, 0.0),
+    FieldSchema("ax8", float, 32, 16, 0.0),
+    FieldSchema("ax9", float, 48, 16, 0.0),
+    FieldSchema("ax10", float, 64, 16, 0.0),
+)
+
+_INITIALSTRESSBEAM_CARD10 = (
+    FieldSchema("ax11", float, 0, 16, 0.0),
+    FieldSchema("ax12", float, 16, 16, 0.0),
+)
 
 class InitialStressBeam(KeywordBase):
     """DYNA INITIAL_STRESS_BEAM keyword"""
@@ -35,514 +127,40 @@ class InitialStressBeam(KeywordBase):
         """Initialize the InitialStressBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rule",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npts",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "naxes",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "f11",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t11",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m12",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m13",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m22",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m23",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "f11",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t11",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m12",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m13",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m22",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m23",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parm",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv1",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sig11",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig22",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig33",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig12",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig23",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig31",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sig11",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig22",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig33",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig12",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig23",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sig31",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv1",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hisv4",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv5",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv6",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv7",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv8",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ax1",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax2",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax3",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax4",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax5",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ax6",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax7",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax8",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax9",
-                        float,
-                        48,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax10",
-                        float,
-                        64,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ax11",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax12",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSBEAM_CARD10,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Beam element ID.

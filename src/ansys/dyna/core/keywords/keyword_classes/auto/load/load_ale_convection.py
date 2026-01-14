@@ -23,7 +23,21 @@
 """Module providing the LoadAleConvection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADALECONVECTION_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADALECONVECTION_CARD1 = (
+    FieldSchema("lagpid", int, 0, 10, None),
+    FieldSchema("lagt", float, 10, 10, None),
+    FieldSchema("lagcp", float, 20, 10, None),
+    FieldSchema("h", float, 30, 10, None),
+    FieldSchema("lagmas", float, 40, 10, None),
+)
 
 class LoadAleConvection(KeywordBase):
     """DYNA LOAD_ALE_CONVECTION keyword"""
@@ -35,65 +49,13 @@ class LoadAleConvection(KeywordBase):
         """Initialize the LoadAleConvection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lagpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagcp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagmas",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADALECONVECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADALECONVECTION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID

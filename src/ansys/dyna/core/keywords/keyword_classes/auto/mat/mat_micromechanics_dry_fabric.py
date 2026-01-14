@@ -23,8 +23,61 @@
 """Module providing the MatMicromechanicsDryFabric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATMICROMECHANICSDRYFABRIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e1", float, 20, 10, None),
+    FieldSchema("e2", float, 30, 10, None),
+    FieldSchema("g12", float, 40, 10, None),
+    FieldSchema("g23", float, 50, 10, None),
+    FieldSchema("v12", float, 60, 10, None),
+    FieldSchema("v23", float, 70, 10, None),
+)
+
+_MATMICROMECHANICSDRYFABRIC_CARD1 = (
+    FieldSchema("xt", float, 0, 10, None),
+    FieldSchema("thi", float, 10, 10, None),
+    FieldSchema("thl", float, 20, 10, None),
+    FieldSchema("bfi", float, 30, 10, None),
+    FieldSchema("bwi", float, 40, 10, None),
+    FieldSchema("dscf", float, 50, 10, None),
+    FieldSchema("cnst", float, 60, 10, None),
+    FieldSchema("atlr", float, 70, 10, None),
+)
+
+_MATMICROMECHANICSDRYFABRIC_CARD2 = (
+    FieldSchema("vmb", float, 0, 10, None),
+    FieldSchema("vme", float, 10, 10, None),
+    FieldSchema("trs", float, 20, 10, None),
+    FieldSchema("fflg", float, 30, 10, None),
+    FieldSchema("aopt", float, 40, 10, None),
+)
+
+_MATMICROMECHANICSDRYFABRIC_CARD3 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATMICROMECHANICSDRYFABRIC_CARD4 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+)
+
+_MATMICROMECHANICSDRYFABRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatMicromechanicsDryFabric(KeywordBase):
     """DYNA MAT_MICROMECHANICS_DRY_FABRIC keyword"""
@@ -40,276 +93,32 @@ class MatMicromechanicsDryFabric(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g12",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g23",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v12",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v23",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thl",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bfi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bwi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dscf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cnst",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atlr",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vmb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vme",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fflg",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATMICROMECHANICSDRYFABRIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMICROMECHANICSDRYFABRIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMICROMECHANICSDRYFABRIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMICROMECHANICSDRYFABRIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMICROMECHANICSDRYFABRIC_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatMicromechanicsDryFabric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMICROMECHANICSDRYFABRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.

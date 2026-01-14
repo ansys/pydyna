@@ -23,7 +23,42 @@
 """Module providing the IcfdControlImposedMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLIMPOSEDMOVE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcvx", int, 10, 10, None),
+    FieldSchema("lcvy", int, 20, 10, None),
+    FieldSchema("lcvz", int, 30, 10, None),
+    FieldSchema("vadt", int, 40, 10, 0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD1 = (
+    FieldSchema("alphal", int, 0, 10, None),
+    FieldSchema("betal", int, 10, 10, None),
+    FieldSchema("gammal", int, 20, 10, None),
+    FieldSchema("alphag", int, 30, 10, None),
+    FieldSchema("betag", int, 40, 10, None),
+    FieldSchema("gammag", int, 50, 10, None),
+    FieldSchema("vadr", int, 60, 10, 0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD2 = (
+    FieldSchema("ptid", int, 0, 10, 0),
+    FieldSchema("x1", float, 10, 10, 1.0),
+    FieldSchema("y1", float, 20, 10, 0.0),
+    FieldSchema("z1", float, 30, 10, 0.0),
+    FieldSchema("x2", float, 40, 10, 0.0),
+    FieldSchema("y2", float, 50, 10, 1.0),
+    FieldSchema("z2", float, 60, 10, 0.0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD3 = (
+    FieldSchema("ptido", int, 0, 10, 0),
+    FieldSchema("axe", int, 10, 10, 0),
+    FieldSchema("ptidv", int, 20, 10, 0),
+)
 
 class IcfdControlImposedMove(KeywordBase):
     """DYNA ICFD_CONTROL_IMPOSED_MOVE keyword"""
@@ -35,190 +70,19 @@ class IcfdControlImposedMove(KeywordBase):
         """Initialize the IcfdControlImposedMove class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvx",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvy",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vadt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alphal",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betal",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammal",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alphag",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betag",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammag",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vadr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptido",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axe",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptidv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.

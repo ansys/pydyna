@@ -72,10 +72,11 @@ class KeywordNames:
         fixed_kwd = fix_keyword(keyword)
 
         # Get classname from options or generate it
+        # Use original keyword (not fixed) to preserve hyphen distinction in classnames
         if keyword_options and "classname" in keyword_options:
             classname = keyword_options["classname"]
         else:
-            classname = get_classname(fixed_kwd)
+            classname = get_classname(keyword)
 
         filename = fixed_kwd.lower()
         domain = get_keyword_domain(keyword)

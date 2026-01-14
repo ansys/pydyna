@@ -23,8 +23,29 @@
 """Module providing the DefineAdaptiveSolidToSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEADAPTIVESOLIDTOSPH_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_DEFINEADAPTIVESOLIDTOSPH_CARD1 = (
+    FieldSchema("ipid", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 0),
+    FieldSchema("nq", int, 20, 10, 1),
+    FieldSchema("ipsph", int, 30, 10, None),
+    FieldSchema("issph", int, 40, 10, None),
+    FieldSchema("icpl", int, 50, 10, 0),
+    FieldSchema("iopt", int, 60, 10, 0),
+    FieldSchema("cpcd", float, 70, 10, None),
+)
+
+_DEFINEADAPTIVESOLIDTOSPH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineAdaptiveSolidToSph(KeywordBase):
     """DYNA DEFINE_ADAPTIVE_SOLID_TO_SPH keyword"""
@@ -40,107 +61,23 @@ class DefineAdaptiveSolidToSph(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nq",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipsph",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "issph",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icpl",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpcd",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEADAPTIVESOLIDTOSPH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEADAPTIVESOLIDTOSPH_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAdaptiveSolidToSph.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEADAPTIVESOLIDTOSPH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Definition ID. This must be a unique number..

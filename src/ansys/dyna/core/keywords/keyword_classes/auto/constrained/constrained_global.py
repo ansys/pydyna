@@ -23,7 +23,18 @@
 """Module providing the ConstrainedGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDGLOBAL_CARD0 = (
+    FieldSchema("tc", int, 0, 10, 0),
+    FieldSchema("rc", int, 10, 10, 0),
+    FieldSchema("dir", int, 20, 10, 0),
+    FieldSchema("x", float, 30, 10, 0.0),
+    FieldSchema("y", float, 40, 10, 0.0),
+    FieldSchema("z", float, 50, 10, 0.0),
+    FieldSchema("tol", float, 60, 10, 0.0),
+)
 
 class ConstrainedGlobal(KeywordBase):
     """DYNA CONSTRAINED_GLOBAL keyword"""
@@ -35,68 +46,10 @@ class ConstrainedGlobal(KeywordBase):
         """Initialize the ConstrainedGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGLOBAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def tc(self) -> int:
         """Get or set the Translational constraint:

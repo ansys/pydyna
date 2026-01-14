@@ -23,7 +23,19 @@
 """Module providing the EosPhaseChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSPHASECHANGE_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("rhol", float, 10, 10, None),
+    FieldSchema("rhov", float, 20, 10, None),
+    FieldSchema("cl", float, 30, 10, None),
+    FieldSchema("cv", float, 40, 10, None),
+    FieldSchema("gamal", float, 50, 10, None),
+    FieldSchema("pv", float, 60, 10, None),
+    FieldSchema("kl", float, 70, 10, None),
+)
 
 class EosPhaseChange(KeywordBase):
     """DYNA EOS_PHASE_CHANGE keyword"""
@@ -35,68 +47,10 @@ class EosPhaseChange(KeywordBase):
         """Initialize the EosPhaseChange class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhol",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhov",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamal",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pv",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kl",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSPHASECHANGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID, a unique number or label must be specified.

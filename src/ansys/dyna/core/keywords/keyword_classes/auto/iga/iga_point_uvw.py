@@ -23,7 +23,16 @@
 """Module providing the IgaPointUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGAPOINTUVW_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("u", float, 20, 20, 0.0),
+    FieldSchema("v", float, 40, 20, 0.0),
+    FieldSchema("w", float, 60, 20, 0.0),
+)
 
 class IgaPointUvw(KeywordBase):
     """DYNA IGA_POINT_UVW keyword"""
@@ -35,50 +44,10 @@ class IgaPointUvw(KeywordBase):
         """Initialize the IgaPointUvw class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGAPOINTUVW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Parametric point ID. A unique number must be chosen.

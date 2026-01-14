@@ -23,7 +23,23 @@
 """Module providing the LoadThermalVariableBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALVARIABLEBEAM_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("eid", int, 10, 10, None),
+    FieldSchema("ipolar", int, 20, 10, 0),
+)
+
+_LOADTHERMALVARIABLEBEAM_CARD1 = (
+    FieldSchema("tbase", float, 0, 10, 0.0),
+    FieldSchema("tscale", float, 10, 10, 1.0),
+    FieldSchema("tcurve", int, 20, 10, None),
+    FieldSchema("tcurdr", int, 30, 10, None),
+    FieldSchema("scoor", float, 40, 10, None),
+    FieldSchema("tcoor", float, 50, 10, None),
+)
 
 class LoadThermalVariableBeam(KeywordBase):
     """DYNA LOAD_THERMAL_VARIABLE_BEAM keyword"""
@@ -35,82 +51,13 @@ class LoadThermalVariableBeam(KeywordBase):
         """Initialize the LoadThermalVariableBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipolar",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tbase",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscale",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcurve",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcurdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scoor",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcoor",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLEBEAM_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Load case ID.

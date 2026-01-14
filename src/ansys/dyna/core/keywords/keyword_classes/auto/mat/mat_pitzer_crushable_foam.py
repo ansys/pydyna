@@ -23,8 +23,31 @@
 """Module providing the MatPitzerCrushableFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATPITZERCRUSHABLEFOAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("g", float, 30, 10, None),
+    FieldSchema("pr", float, 40, 10, None),
+    FieldSchema("ty", float, 50, 10, None),
+    FieldSchema("srtv", float, 60, 10, None),
+)
+
+_MATPITZERCRUSHABLEFOAM_CARD1 = (
+    FieldSchema("lcpy", int, 0, 10, None),
+    FieldSchema("lcuys", int, 10, 10, None),
+    FieldSchema("lcsr", int, 20, 10, None),
+    FieldSchema("vc", float, 30, 10, None),
+    FieldSchema("dflg", float, 40, 10, None),
+)
+
+_MATPITZERCRUSHABLEFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPitzerCrushableFoam(KeywordBase):
     """DYNA MAT_PITZER_CRUSHABLE_FOAM keyword"""
@@ -40,117 +63,23 @@ class MatPitzerCrushableFoam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ty",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srtv",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpy",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcuys",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dflg",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPITZERCRUSHABLEFOAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPITZERCRUSHABLEFOAM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPitzerCrushableFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPITZERCRUSHABLEFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number has to be chosen.

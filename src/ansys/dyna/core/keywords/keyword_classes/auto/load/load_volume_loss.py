@@ -23,7 +23,19 @@
 """Module providing the LoadVolumeLoss class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADVOLUMELOSS_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("coord", int, 10, 10, None),
+    FieldSchema("lcur", int, 20, 10, 0),
+    FieldSchema("fx", float, 30, 10, 1.0),
+    FieldSchema("fy", float, 40, 10, 1.0),
+    FieldSchema("fz", float, 50, 10, 1.0),
+    FieldSchema("pmin", float, 60, 10, -1e+21),
+    FieldSchema("factor", float, 70, 10, 0.01),
+)
 
 class LoadVolumeLoss(KeywordBase):
     """DYNA LOAD_VOLUME_LOSS keyword"""
@@ -35,74 +47,10 @@ class LoadVolumeLoss(KeywordBase):
         """Initialize the LoadVolumeLoss class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coord",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmin",
-                        float,
-                        60,
-                        10,
-                        -10E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "factor",
-                        float,
-                        70,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADVOLUMELOSS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.

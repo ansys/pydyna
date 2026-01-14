@@ -23,7 +23,34 @@
 """Module providing the LoadSteadyStateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSTEADYSTATEROLLING_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+)
+
+_LOADSTEADYSTATEROLLING_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("lcd1", int, 20, 10, None),
+    FieldSchema("lcd1r", int, 30, 10, None),
+)
+
+_LOADSTEADYSTATEROLLING_CARD2 = (
+    FieldSchema("n3", int, 0, 10, None),
+    FieldSchema("n4", int, 10, 10, None),
+    FieldSchema("lcd2", int, 20, 10, None),
+    FieldSchema("lcd2r", int, 30, 10, None),
+)
+
+_LOADSTEADYSTATEROLLING_CARD3 = (
+    FieldSchema("n5", int, 0, 10, None),
+    FieldSchema("n6", int, 10, 10, None),
+    FieldSchema("lcd3", int, 20, 10, None),
+    FieldSchema("lcd3r", int, 30, 10, None),
+)
 
 class LoadSteadyStateRolling(KeywordBase):
     """DYNA LOAD_STEADY_STATE_ROLLING keyword"""
@@ -35,122 +62,19 @@ class LoadSteadyStateRolling(KeywordBase):
         """Initialize the LoadSteadyStateRolling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd1r",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n3",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd2r",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n5",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcd3r",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSTEADYSTATEROLLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSTEADYSTATEROLLING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSTEADYSTATEROLLING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSTEADYSTATEROLLING_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Load steady state rolling ID

@@ -23,7 +23,12 @@
 """Module providing the CeseSurfaceMechvarsD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESESURFACEMECHVARSD3PLOT_CARD0 = (
+    FieldSchema("output quantity", str, 0, 80, None),
+)
 
 class CeseSurfaceMechvarsD3Plot(KeywordBase):
     """DYNA CESE_SURFACE_MECHVARS_D3PLOT keyword"""
@@ -35,19 +40,10 @@ class CeseSurfaceMechvarsD3Plot(KeywordBase):
         """Initialize the CeseSurfaceMechvarsD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "output quantity",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESESURFACEMECHVARSD3PLOT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def output_quantity(self) -> typing.Optional[str]:
         """Get or set the Descriptive phrase for the mechanics surface variable to output for the LSPP user.

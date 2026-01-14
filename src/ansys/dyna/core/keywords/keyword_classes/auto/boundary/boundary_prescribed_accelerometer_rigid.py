@@ -23,7 +23,20 @@
 """Module providing the BoundaryPrescribedAccelerometerRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
+
+_BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("lcidx", int, 20, 10, None),
+    FieldSchema("lcidy", int, 30, 10, None),
+    FieldSchema("lcidz", int, 40, 10, None),
+)
 
 class BoundaryPrescribedAccelerometerRigid(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_ACCELEROMETER_RIGID keyword"""
@@ -35,58 +48,13 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         """Initialize the BoundaryPrescribedAccelerometerRigid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body whose motion is prescribed.
