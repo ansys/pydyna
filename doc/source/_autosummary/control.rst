@@ -1486,7 +1486,7 @@ ControlThermalTimestep
 ControlTimeStep
 ---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_time_step
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_timestep
     :members:
 
 

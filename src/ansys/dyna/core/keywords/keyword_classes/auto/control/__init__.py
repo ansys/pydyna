@@ -234,6 +234,6 @@ from .control_thermal_nonlinear import ControlThermalNonlinear
 from .control_thermal_solver import ControlThermalSolver
 from .control_thermal_timestep import ControlThermalTimestep
 from .control_timestep import ControlTimestep
-from .control_time_step import ControlTimeStep
+from .control_timestep import ControlTimeStep
 from .control_units import ControlUnits
 from .control_vibro_acoustic import ControlVibroAcoustic
