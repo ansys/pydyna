@@ -34,6 +34,7 @@ required if a later card has values set.
 import pytest
 
 from ansys.dyna.core.keywords.keyword_classes.auto.control.control_shell import ControlShell
+from ansys.dyna.core.lib.config import disable_lspp_defaults
 
 
 @pytest.mark.keywords
@@ -180,3 +181,51 @@ def test_control_shell_fields_on_multiple_cards():
 
     # Should have 4 cards (0-3)
     assert len(lines) == 4, f"Expected 4 data lines, got {len(lines)}"
+
+
+@pytest.mark.keywords
+def test_control_shell_constructor_kwargs_with_disable_lspp_defaults():
+    """Test that constructor kwargs trigger cascading activation with disable_lspp_defaults.
+
+    This tests the fix for has_nondefault_values() not detecting kwargs passed
+    to the constructor. When using disable_lspp_defaults() and passing kwargs
+    like irquad (card 2 field), cards 1-2 should still be activated.
+    """
+    with disable_lspp_defaults():
+        kwd = ControlShell(
+            wrpang=0,
+            esort=1,
+            cntco=1,  # Card 2 field - should activate cards 1-2
+        )
+
+    output = kwd.write()
+    lines = [l for l in output.strip().split("\n") if not l.startswith("$") and not l.startswith("*")]
+
+    # Should have 3 cards (0-2) because cntco is on card 2
+    assert len(lines) == 3, f"Expected 3 data lines, got {len(lines)}"
+
+
+@pytest.mark.keywords
+def test_control_shell_constructor_kwargs_card4_activates_all():
+    """Test that setting card 4 field via constructor kwargs activates all cards."""
+    with disable_lspp_defaults():
+        kwd = ControlShell(nlocdt=1)  # Card 4 field
+
+    output = kwd.write()
+    lines = [l for l in output.strip().split("\n") if not l.startswith("$") and not l.startswith("*")]
+
+    # Should have 5 cards (0-4)
+    assert len(lines) == 5, f"Expected 5 data lines, got {len(lines)}"
+
+
+@pytest.mark.keywords
+def test_control_shell_constructor_kwargs_card0_only():
+    """Test that setting only card 0 fields via constructor writes only card 0."""
+    with disable_lspp_defaults():
+        kwd = ControlShell(wrpang=25.0, esort=1)  # Card 0 fields only
+
+    output = kwd.write()
+    lines = [l for l in output.strip().split("\n") if not l.startswith("$") and not l.startswith("*")]
+
+    # Should have only 1 card (card 0)
+    assert len(lines) == 1, f"Expected 1 data line, got {len(lines)}"
