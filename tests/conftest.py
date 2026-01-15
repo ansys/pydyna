@@ -8,7 +8,6 @@ import io
 import pathlib
 
 import pytest
-from ansys.dyna.core.pre.launcher import ServerThread
 from ansys.dyna.core.run import run_dyna
 
 # from ansys.dyna.core.pre.Server.kwserver import *
@@ -145,14 +144,6 @@ def thermal_initialfile():
     """Resolve the path for thermal initial file."""
     return resolve_test_file("test_thermal_stress.k", "initial")
 
-
-@pytest.fixture(scope = "session",autouse=True)
-def Connect_Server():
-    """Connect to the kwserver."""
-    path = get_server_path()
-    threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
-    threadserver.daemon = True
-    threadserver.start()
 
 
 def pytest_collection_modifyitems(config, items):
