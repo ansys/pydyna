@@ -46,8 +46,7 @@ from ansys.dpf.core import operators as ops
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from ansys.dyna.core import Deck
-from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 
 # from ansys.dyna.core.run.linux_runner import LinuxRunner

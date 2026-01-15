@@ -91,10 +91,12 @@ class CardSet(CardInterface):
 
     @property
     def option_specs(self) -> typing.List[OptionSpec]:
+        """Returns all option specs for this card set."""
         return self._option_specs
 
     @property
     def active(self) -> bool:
+        """Get whether the card set is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -112,12 +114,14 @@ class CardSet(CardInterface):
         return len(self._items) - 1
 
     def items(self) -> typing.List[Cards]:
+        """Gets the list of items in the card set."""
         if not self._initialized:
             self._initialize()
         return self._items
 
     @property
     def bounded(self) -> bool:
+        """Get whether the card set is bounded (fixed length) or unbounded."""
         return self._bounded
 
     @property
@@ -165,7 +169,8 @@ class CardSet(CardInterface):
             index: The index of the item to read.
             parameter_set: Optional parameter set for substitution.
 
-        Returns:
+        Returns
+        -------
             True if the reader hit the end of the keyword early, False otherwise.
             Custom `_read_data` methods should also return a boolean with this meaning.
         """
@@ -200,6 +205,7 @@ class CardSet(CardInterface):
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Reads the card set from the given buffer."""
         if not self.active:
             return False
         self._initialize()
@@ -215,7 +221,7 @@ def read_cards_with_discriminator(
     cards: typing.List,
     buf: typing.TextIO,
     parameters,
-    discriminator: "Field",
+    discriminator: "Field",  # noqa: F821
     cards_with_field: typing.List[int],
 ) -> bool:
     """Read cards where a discriminator field determines which card variant to use.
@@ -234,7 +240,8 @@ def read_cards_with_discriminator(
         discriminator: Field instance with name, offset, width, and default value
         cards_with_field: List of card indices that contain the discriminator field
 
-    Returns:
+    Returns
+    -------
         True if the reader hit end of keyword early, False otherwise.
     """
     from ansys.dyna.core.lib.kwd_line_formatter import read_line
@@ -278,7 +285,8 @@ def ensure_card_set_properties(kwd, for_setter: bool) -> None:
 
     For convenience the first card set can be manipulated by the keyword
     if it is currently empty. Getters, on the other hand, only work if
-    a card set has been added."""
+    a card set has been added.
+    """
     num_sets = len(kwd.sets)
     if num_sets == 0:
         if for_setter:

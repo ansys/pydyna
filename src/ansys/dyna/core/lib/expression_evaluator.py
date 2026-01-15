@@ -175,7 +175,7 @@ class ExpressionEvaluator:
 
         def replace_param(match):
             minus = match.group(1)
-            ampersand = match.group(2)
+            ampersand = match.group(2)  # noqa: F841
             param_name = match.group(3)
 
             # Check if this is actually a function name

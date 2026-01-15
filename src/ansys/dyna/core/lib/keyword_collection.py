@@ -61,7 +61,7 @@ class KeywordCollection:
             self._keywords = list(keywords)
         else:
             self._keywords = keywords
-        logger.debug(f"KeywordCollection created")
+        logger.debug("KeywordCollection created")
 
     def by_subtype(self, subkeyword: str) -> "KeywordCollection":
         """Filter keywords by subtype.
@@ -100,7 +100,7 @@ class KeywordCollection:
         --------
         >>> sections = deck.sections.where(lambda k: k.secid > 10)
         """
-        logger.debug(f"Filtering with custom predicate")
+        logger.debug("Filtering with custom predicate")
         return KeywordCollection(kwd for kwd in self._keywords if predicate(kwd))
 
     def first(self) -> Optional["KeywordBase"]:
@@ -115,7 +115,7 @@ class KeywordCollection:
         --------
         >>> first_section = deck.sections.first()
         """
-        logger.debug(f"Getting first keyword")
+        logger.debug("Getting first keyword")
         for kwd in self._keywords:
             return kwd
         return None
@@ -132,7 +132,7 @@ class KeywordCollection:
         --------
         >>> all_sections = deck.sections.to_list()
         """
-        logger.debug(f"Materializing collection to list")
+        logger.debug("Materializing collection to list")
         result = list(self._keywords)
         logger.debug(f"Materialized {len(result)} keywords")
         return result

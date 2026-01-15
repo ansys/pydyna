@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-ISPH API
-==========
-
-Module for creating an ISPH (incompressible smooth particle hydrodynamics) DYNA input deck.
-"""
+"""Module for creating an ISPH (incompressible smooth particle hydrodynamics) DYNA input deck."""
 
 import logging
 
@@ -33,7 +28,7 @@ from .dynabase import *  # noqa : F403
 
 
 class DynaISPH(DynaBase):
-    """Contains methods for creating a keyword related to ISPH."""
+    """Contain methods for creating a keyword related to ISPH."""
 
     def __init__(self):
         DynaBase.__init__(self)
@@ -373,8 +368,6 @@ class ISPHStructPart(Part):
     def set_smoothing_length(self, initial, min, max, optional):
         """Calculate the smoothing length of the particles.
 
-        Parameters
-        ----------
         Parameters
         ----------
         initial : float

@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Keyword base class and related functionality."""
 
 import enum
 import io
@@ -167,10 +168,9 @@ class KeywordBase(Cards):
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""
-
         max_rows = 60  # TODO - make these configurable somewhere
 
-        class TruncatedStringException(Exception):
+        class TruncatedStringException(Exception):  # noqa: N818
             pass
 
         class TruncatedStringIO(io.IOBase):
@@ -276,6 +276,7 @@ class KeywordBase(Cards):
             substituted values for fields that were read from parameters. Default is False.
 
         Returns
+        -------
         _______
         If `buf` is None, the output is returned as a string
         """
@@ -297,6 +298,7 @@ class KeywordBase(Cards):
         return self.write()
 
     def before_read(self, buf: typing.TextIO) -> None:
+        """Run any pre-processing before reading the keyword."""
         # subclasses can do custom logic before reading.
         return
 
@@ -319,6 +321,7 @@ class KeywordBase(Cards):
         return title_line
 
     def read(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
+        """Read the keyword from a buffer."""
         title_line = buf.readline()
         title_line = self._process_title(title_line)
         self.before_read(buf)

@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Material API
-=============
-
-Module for creating a material.
-"""
+"""Module for creating a material."""
 
 from enum import Enum
 import logging
@@ -34,7 +29,7 @@ from .dynabase import *  # noqa : F403
 
 
 class Air:
-    """Defines an air material.
+    """Define an air material.
 
     Parameters
     ----------
@@ -47,9 +42,9 @@ class Air:
     initial_internal_energy : float, optional
         Initial internal energy per unit reference volume.
         The default is ``2.5331e-06``.
-    initial_relative_volume : float, optional
+    Initial relative volume : float, optional
         Initial relative volume. The default is ``1.0``.
-    equation_coefficient : list, optional
+    Equation coefficient : list, optional
         Six polynomial equation coefficient. The default is
         ``[0, 0, 0, 0, 0.4, 0.4, 0])``.
 
@@ -326,8 +321,7 @@ class MatAdditional:
         self.thermal_isotropic = False
 
     def set_electromagnetic_property(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
-        """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability.
+        """Define the electromagnetic material type and properties.
 
         Parameters
         ----------
@@ -342,7 +336,9 @@ class MatAdditional:
         self.em_eos = eos
 
     def set_em_permeability_equal(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None):
-        """Define the electromagnetic material type and properties
+        """Define when permeability equals.
+
+        Define the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
 
         Parameters
@@ -350,7 +346,6 @@ class MatAdditional:
         material_type :
         initial_conductivity :
         eos :
-
         """
         self.em_mat_type = 1
         self.em_material_type = material_type.value
@@ -360,8 +355,10 @@ class MatAdditional:
     def set_em_permeability_different(
         self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None, murel=0
     ):
-        """Define the electromagnetic material type and properties
-        for a material whose permeability equals the free space permeability.
+        """Define when permeability differs.
+
+        Defines the electromagnetic material type and properties
+        for a material whose permeability differs from the free space permeability.
 
         Parameters
         ----------
@@ -369,7 +366,6 @@ class MatAdditional:
         initial_conductivity :
         eos :
         murel :
-
         """
         self.em_mat_type = 2
         self.em_material_type = material_type.value
@@ -378,7 +374,9 @@ class MatAdditional:
         self.murel = murel
 
     def set_em_conducting_shells_3d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
-        """Define the electromagnetic material type and properties
+        """Define the electromagnetic material type and properties for 3D conducting shells.
+
+        Defines the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
 
         Parameters
@@ -392,7 +390,9 @@ class MatAdditional:
         self.em_initial_conductivity = initial_conductivity
 
     def set_em_resistive_heating_2d(self, material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0):
-        """Define the electromagnetic material type and properties
+        """Define the electromagnetic material type and properties for 2D resistive heating.
+
+        Defines the electromagnetic material type and properties
         for a material whose permeability equals the free space permeability.
 
         Parameters
@@ -589,7 +589,8 @@ class MatElasticPlasticThermal(MatAdditional):
 class MatRigid(MatAdditional):
     """Defines a rigid material.
 
-    Parts made from a rigid material are considered to belong to a rigid body."""
+    Parts made from a rigid material are considered to belong to a rigid body.
+    """
 
     def __init__(
         self,
@@ -628,9 +629,12 @@ class MatRigid(MatAdditional):
 
 # MAT_030
 class MatShapeMemory:
-    """Describe the superelastic response present in shape-memory alloys,
+    """Describe the superelastic response present in shape-memory alloys.
+
+    Describes the specific behavior associated with
     the peculiar material ability to undergo large deformations
-    with a full recovery in loading-unloading cycles."""
+    with a full recovery in loading-unloading cycles.
+    """
 
     def __init__(
         self,

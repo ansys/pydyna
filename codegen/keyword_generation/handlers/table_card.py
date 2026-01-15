@@ -49,7 +49,8 @@ logger = logging.getLogger(__name__)
 class TableCardSettings(LabelRefSettings):
     """Configuration for marking a card as a repeating table structure.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference (resolved via LabelRegistry)
         property_name: Name for the table property in the generated class
         length_func: Optional Python expression for dynamic row count
@@ -67,10 +68,12 @@ class TableCardSettings(LabelRefSettings):
         Args:
             data: Dict with 'ref', 'property-name', optional 'length-func', 'active-func'
 
-        Returns:
+        Returns
+        -------
             TableCardSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If 'ref' or 'property-name' is missing
         """
         return cls(
@@ -127,7 +130,8 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref', 'property-name', etc.
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """

@@ -420,8 +420,7 @@ class GloballyUniqueKeywordValidator(Validator):
                 logger.warning(f"Globally unique keyword validation failed: {error}")
 
         logger.debug(
-            f"{self.get_name()} checked {len(keyword_counts)} unique keyword types, "
-            f"found {duplicates_found} duplicates"
+            f"{self.get_name()} checked {len(keyword_counts)} unique keyword types, found {duplicates_found} duplicates"
         )
 
 

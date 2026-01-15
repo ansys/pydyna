@@ -50,7 +50,8 @@ logger = logging.getLogger(__name__)
 class ReplaceCardSettings(LabelRefSettings):
     """Configuration for replacing card fields.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference to the card (resolved via LabelRegistry)
         card: Dict with 'source' and 'card-name' for loading replacement
     """
@@ -64,10 +65,12 @@ class ReplaceCardSettings(LabelRefSettings):
         Args:
             data: Dict with 'ref' and 'card'
 
-        Returns:
+        Returns
+        -------
             ReplaceCardSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If 'ref' or 'card' is missing
         """
         return cls(ref=data["ref"], card=data["card"])
@@ -127,7 +130,8 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref' and 'card'
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """

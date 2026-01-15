@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling series cards."""
 
 import dataclasses
 import io
@@ -78,15 +79,17 @@ class SeriesCard(CardInterface):
             dataclass_spec.append((type_name, type_type))
         return dataclasses.make_dataclass(self._name, dataclass_spec)
 
-    def __iter__(self) -> typing.Iterable:
+    def __iter__(self) -> typing.Iterator:
         return iter(self._data)
 
     @property
     def format(self) -> format_type:
+        """Format type of the series card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the series card."""
         self._format_type = value
 
     def _uses_structure(self):
@@ -179,6 +182,7 @@ class SeriesCard(CardInterface):
 
     @property
     def active(self) -> bool:
+        """Indicates whether the series card is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -188,7 +192,9 @@ class SeriesCard(CardInterface):
         return math.ceil(self._length_func() / fields_per_card)
 
     def __getitem__(self, index):
-        err_string = f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
+        err_string = (
+            "get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
+        )
         if not isinstance(index, (slice, int)):
             raise TypeError(err_string)
         if type(index) == int:
@@ -223,9 +229,11 @@ class SeriesCard(CardInterface):
         self._data[index] = self._wrap_value(value)
 
     def append(self, value) -> None:
+        """Append a value to the series card."""
         self._data.append(self._wrap_value(value))
 
     def extend(self, valuelist: typing.Iterable) -> None:
+        """Extend the series card with a list of values."""
         values = [self._wrap_value(value) for value in valuelist]
         self._data.extend(values)
 
@@ -342,6 +350,7 @@ class SeriesCard(CardInterface):
             element_offset += len(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Read the series card content from a buffer."""
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
             return False
@@ -386,6 +395,7 @@ class SeriesCard(CardInterface):
         uri_prefix: str = None,
         **kwargs,
     ) -> str:
+        """Write the series card to a string or buffer."""
         if format == None:
             format = self._format_type
         output = ""
@@ -417,7 +427,8 @@ class SeriesCard(CardInterface):
     ) -> str:
         """Fields aren't really the right abstraction for a series card,
         but its an easy way to reuse the code in write_fields so we create fields
-        on the fly here. TODO - reuse less of the code without creating fields on the fly"""
+        on the fly here. TODO - reuse less of the code without creating fields on the fly
+        """
         row_values = self[start_index:end_index]
         field_width = self._get_element_width()
         element_width = self._element_width
@@ -510,6 +521,7 @@ class SeriesCard(CardInterface):
 
     @property
     def bounded(self) -> bool:
+        """Indicates whether the series card is bounded."""
         return self._bounded
 
     def __repr__(self) -> str:

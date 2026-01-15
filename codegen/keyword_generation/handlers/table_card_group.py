@@ -46,7 +46,8 @@ logger = logging.getLogger(__name__)
 class TableCardGroupSettings:
     """Configuration for grouping multiple cards into a table.
 
-    Attributes:
+    Attributes
+    ----------
         refs: List of label references for cards to group
         property_name: Name of the table card group property
         length_func: Optional function to compute group count
@@ -100,8 +101,7 @@ class TableCardGroupSettings:
         },
     },
     output_description=(
-        "Sets kwd_data['table_group']=True, adds card insertion with table card group, "
-        "marks source cards for removal"
+        "Sets kwd_data['table_group']=True, adds card insertion with table card group, marks source cards for removal"
     ),
 )
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):
@@ -152,7 +152,8 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not initialized
         """
         if kwd_data.label_registry is None:

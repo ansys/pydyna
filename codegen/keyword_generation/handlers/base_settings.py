@@ -41,7 +41,8 @@ class LabelRefSettings:
     Provides common resolve_index() functionality for settings that need to
     reference cards by label.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label reference to a card (e.g., "header_card", "data_card")
     """
 
@@ -55,10 +56,12 @@ class LabelRefSettings:
             registry: Label registry for resolving card references
             cards: List of cards (used for validation)
 
-        Returns:
+        Returns
+        -------
             Integer index of the referenced card
 
-        Raises:
+        Raises
+        ------
             UndefinedLabelError: If label is not found in registry
         """
         return registry.resolve_index(self.ref, cards)
@@ -75,7 +78,8 @@ def parse_settings_list(settings_class, settings: List[Dict[str, Any]]) -> List[
         settings_class: The dataclass to instantiate (must have from_dict classmethod)
         settings: List of setting dictionaries from manifest.json
 
-    Returns:
+    Returns
+    -------
         List of typed settings instances
 
     Example:
@@ -96,7 +100,8 @@ def find_field_in_card(card: Any, field_name: str, case_sensitive: bool = False)
         field_name: Name of the field to find
         case_sensitive: Whether to use case-sensitive matching (default: False)
 
-    Returns:
+    Returns
+    -------
         Field instance if found, None otherwise
     """
     # During codegen, cards are dicts with "fields" key
@@ -129,7 +134,8 @@ def modify_field_in_cards(kwd_data: Any, card_index: int, field_name: str, modif
         field_name: Name of the field to modify
         modifications: Dict of field properties to update
 
-    Returns:
+    Returns
+    -------
         True if field was found and modified, False otherwise
     """
     card = kwd_data.cards[card_index]

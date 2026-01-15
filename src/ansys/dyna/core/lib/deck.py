@@ -74,6 +74,7 @@ class Deck(ValidationMixin):
 
     @property
     def transform_handler(self) -> TransformHandler:
+        """Handles transformations for the deck."""
         return self._transform_handler
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
@@ -87,6 +88,7 @@ class Deck(ValidationMixin):
 
     @parameters.setter
     def parameters(self, value: ParameterSet) -> None:
+        """Set the parameters for the deck."""
         import copy
 
         self._parameter_set = copy.copy(value)
@@ -287,7 +289,7 @@ class Deck(ValidationMixin):
             context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
             try:
                 include_deck._import_file(expand_include_file, "utf-8", context)
-            except UnicodeDecodeError as e:
+            except UnicodeDecodeError:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
@@ -573,9 +575,7 @@ class Deck(ValidationMixin):
             keyword.included_from = path
         return loader_result
 
-    def import_file(
-        self, path: str, encoding: str = "utf-8"
-    ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def import_file(self, path: str, encoding: str = "utf-8") -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821, E501
         """Import a keyword file.
 
         Parameters
@@ -634,10 +634,12 @@ class Deck(ValidationMixin):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title of the keyword database."""
         self._title = value
 
     @property
     def keyword_names(self) -> typing.List[str]:
+        """Get a list of all keyword names in the deck."""
         names = []
         for kw in self.all_keywords:
             if isinstance(kw, KeywordBase):
@@ -646,7 +648,7 @@ class Deck(ValidationMixin):
                 try_title = kw.split("\n")[0]
                 names.append(f"str({try_title}...)")
             elif isinstance(kw, EncryptedKeyword):
-                names.append(f"Encrypted")
+                names.append("Encrypted")
         return names
 
     def __repr__(self) -> str:

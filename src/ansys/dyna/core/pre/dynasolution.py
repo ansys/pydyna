@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Solution
-========
-
-Module for providing the top object that sets up a DYNA solution.
-"""
+"""Module for providing the top object that sets up a DYNA solution."""
 
 import logging
 import os
@@ -444,7 +439,6 @@ class DynaSolution:
         bool
             ``True`` when successful, ``False`` when failed.
         """
-
         for obj in self.object_list:
             obj.save_file()
 
@@ -455,7 +449,6 @@ class DynaSolution:
 
     def quit(self):
         """Delete remote instance."""
-
         if self.remote_instance is not None:
             self.remote_instance.delete()
         if self.pim_client is not None:

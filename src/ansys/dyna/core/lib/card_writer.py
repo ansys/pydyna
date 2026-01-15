@@ -57,7 +57,6 @@ def write_cards(
     keyword_id : str, optional
         The keyword's ID for building URI paths (when retain_parameters=True).
     """
-
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the
     # keyword, a single newline will be added before them. Streams are typically

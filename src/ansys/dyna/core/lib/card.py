@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for card handling."""
 
 import io
 import typing
@@ -252,10 +253,12 @@ class Card(CardInterface):
 
     @property
     def format(self):
+        """Field width format (default, standard, or long)."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the field width format (default, standard, or long)."""
         self._format_type = value
 
     @property
@@ -288,6 +291,7 @@ class Card(CardInterface):
         return fields
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Reads the card from the given buffer."""
         if not self.active:
             return False
         line, to_exit = read_line(buf)
@@ -399,6 +403,7 @@ class Card(CardInterface):
 
     @property
     def active(self) -> bool:
+        """Get whether the card is active."""
         if self._active_func is None:
             return True
         return True if self._active_func() else False

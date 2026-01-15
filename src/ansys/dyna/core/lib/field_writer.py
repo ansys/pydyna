@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for writing fields to buffers."""
 
 import copy
 import dataclasses
@@ -88,11 +89,13 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
 
 
 def check_field_type(field_type: type):
+    """Check that the field type is valid."""
     if field_type != str and field_type != int and field_type != float:
         raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    """Write a single field to the buffer."""
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:
@@ -104,6 +107,7 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    """Write a single field to the buffer."""
     check_field_type(field_type)
     write_field_c(buf, field_type, value, width)
 
@@ -111,7 +115,10 @@ def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.A
 def write_c_dataframe(
     buf: typing.IO[typing.AnyStr], fields: typing.List[Field], table: pd.DataFrame, format: format_type
 ) -> None:
+    """Method to write a DataFrame to a buffer using hollerith format."""
+
     def convert_field(field: Field) -> holler.Field:
+        """Method to convert a Field to a holler.Field."""
         return holler.Field(type=field.type, width=field.width)
 
     long_format = format == format_type.long

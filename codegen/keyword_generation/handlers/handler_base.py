@@ -61,7 +61,8 @@ class HandlerMetadata:
     """
     Metadata for a keyword handler.
 
-    Attributes:
+    Attributes
+    ----------
         name: Handler name (used as key in manifest.json configuration)
         handler_class: The handler class itself
         phase: Execution phase ('handle' or 'post_process')
@@ -108,7 +109,8 @@ def handler(
         input_schema: JSON Schema dict describing the expected settings structure
         output_description: Description of what keys/fields the handler adds to kwd_data
 
-    Returns:
+    Returns
+    -------
         Decorator function that registers the handler class
 
     Example:
@@ -163,7 +165,8 @@ def get_handler_metadata(name: str) -> Optional[HandlerMetadata]:
     Args:
         name: Handler name
 
-    Returns:
+    Returns
+    -------
         HandlerMetadata if found, None otherwise
     """
     return _HANDLER_METADATA.get(name)
@@ -173,7 +176,8 @@ def get_all_handler_metadata() -> Dict[str, HandlerMetadata]:
     """
     Retrieve metadata for all registered handlers.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping handler names to their metadata
     """
     return _HANDLER_METADATA.copy()
@@ -191,7 +195,8 @@ def validate_handler_settings(handler_name: str, settings: List[Dict[str, Any]])
         handler_name: Name of the handler
         settings: List of setting dictionaries from manifest.json
 
-    Raises:
+    Raises
+    ------
         ValueError: If settings are invalid or handler not found
         ImportError: If jsonschema package is not available
     """
@@ -260,7 +265,8 @@ class KeywordHandler(metaclass=abc.ABCMeta):
                       and label_registry for card referencing
             settings: List of handler-specific setting dictionaries from manifest.json "generation-options"
 
-        Raises:
+        Raises
+        ------
             NotImplementedError: Must be implemented by subclass
         """
         raise NotImplementedError

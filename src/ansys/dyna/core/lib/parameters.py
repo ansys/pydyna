@@ -223,7 +223,7 @@ class ParameterSet:
         return "/".join(self._uri_stack)
 
 
-def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, typing.Any]:
+def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, typing.Any]:  # noqa: F821
     """Converts parameter into type, name, and value of the given type."""
     name_field = param.name
     type_code = name_field[0]
@@ -240,7 +240,7 @@ def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, t
     return t, name, val
 
 
-def _load_parameters(deck, parameter: "kwd.Parameter", local: bool = False):
+def _load_parameters(deck, parameter: "kwd.Parameter", local: bool = False):  # noqa: F821
     """Load parameters from a PARAMETER or PARAMETER_LOCAL keyword into the deck.
 
     Parameters
@@ -398,6 +398,7 @@ class ParameterHandler(ImportHandler):
         pass
 
     def after_import(self, context: ImportContext, keyword: typing.Union["KeywordBase", str]) -> None:
+        """Handle actions after importing a keyword."""
         from ansys.dyna.core import keywords as kwd
 
         if isinstance(keyword, kwd.Parameter):
@@ -409,7 +410,7 @@ class ParameterHandler(ImportHandler):
             _load_parameters(context.deck, keyword, local=True)
         elif isinstance(keyword, kwd.ParameterExpressionNoecho):
             # NOECHO variant uses a Card, not a TableCard, so handle it separately
-            logger.debug(f"Processing PARAMETER_EXPRESSION_NOECHO keyword")
+            logger.debug("Processing PARAMETER_EXPRESSION_NOECHO keyword")
             _load_single_parameter_expression(context.deck, keyword, local=False)
         elif isinstance(keyword, (kwd.ParameterExpression, kwd.ParameterExpressionLocal)):
             # Handle PARAMETER_EXPRESSION and PARAMETER_EXPRESSION_LOCAL
@@ -418,4 +419,5 @@ class ParameterHandler(ImportHandler):
             _load_parameter_expressions(context.deck, keyword, local=is_local)
 
     def on_error(self, error):
+        """Handle errors during import."""
         pass
