@@ -4,6 +4,14 @@ See https://deepwiki.com/ansys/pydyna for codebase overview.
 
 **Detailed guides**: [agents/README.md](agents/README.md)
 
+## Code Search Policy
+
+**Avoid searching** (context bloat):
+- `src/ansys/dyna/core/keywords/keyword_classes/auto/` — 3000+ generated files
+- `codegen/kwd.json` — 80k+ line schema dump
+
+**When to search `auto/`**: stack traces, verifying codegen output, finding exact generated signatures. Scope to specific subdomain or file.
+
 ## Shell Hints (Critical)
 
 - Don't write to `/dev/null` - triggers VS Code security prompt
@@ -40,4 +48,3 @@ BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./doc/make.bat html
 | **Codegen** | [agents/codegen/](agents/codegen/) |
 | **Keywords** | [agents/keywords/](agents/keywords/) |
 | **Projects** | [agents/projects/](agents/projects/) |
-
