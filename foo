@@ -1,0 +1,119 @@
+
+====================================================================================== warnings summary =======================================================================================
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_with_custom_read_data
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:203: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_with_custom_read_data
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:210: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_with_custom_read_data
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:218: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_alternate_type
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:269: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card([Field("theta", float, 0, 10)], ),
+
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_alternate_type
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:270: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card([Field("dtype", int, 0, 10, 1), Field("val1", float, 10, 10)], lambda: self.dtype == 1, ),
+
+tests/test_card_set.py::TestCardSetWithDiscriminator::test_discriminator_read_alternate_type
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_card_set.py:271: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_deck.py::test_deck_expand_encoding
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1652210>: could not convert string to float: '<PAB_TTF-1.1>'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_encoding
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16528F0>: could not convert string to float: '<PAB_TTF-1.1>'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1650A50>: could not convert string to float: ' 1.00000+4'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16519A0>: could not convert string to float: ' 1.00000+4'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1650A50>: unsupported operand type(s) for /: 'NoneType' and 'int'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16519A0>: unsupported operand type(s) for /: 'NoneType' and 'int'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1650A50>: '>' not supported between instances of 'NoneType' and 'int'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16519A0>: '>' not supported between instances of 'NoneType' and 'int'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1650A50>: could not convert string to float: '1569,3136'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_recursive_include_path
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16519A0>: could not convert string to float: '1569,3136'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_with_define_transform
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16E6DA0>: Direction vector A1, A2, A3 cannot be all zero!
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_with_define_transform
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F16E4FA0>: Direction vector A1, A2, A3 cannot be all zero!
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_local_parameters_isolation
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1A37E30>: 'loc'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_local_parameters_sibling_isolation
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F15F8A50>: 'aloc'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_deck.py::test_deck_expand_local_parameters_sibling_isolation
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F15F9450>: 'aloc'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_option_card.py::test_options_basic
+tests/test_option_card.py::test_options_union
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_option_card.py:41: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_option_card.py::test_options_basic
+tests/test_option_card.py::test_options_union
+  C:\AnsysDev\code\pyansys\pydyna2\tests\test_option_card.py:57: DeprecationWarning: Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or Card.from_field_schemas_with_defaults() for better performance. This constructor is maintained for backward compatibility.
+    Card(
+
+tests/test_parameter_expression.py: 61 warnings
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\expression_evaluator.py:224: DeprecationWarning: ast.Num is deprecated and will be removed in Python 3.14; use ast.Constant instead
+    elif isinstance(node, ast.Num):
+
+tests/test_parameter_expression.py::TestDependencyResolution::test_circular_dependency_error
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1C132F0>: Circular dependency detected among parameters: {'a', 'b'}
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_parameter_expression.py::TestDependencyResolution::test_self_reference_error
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1C13160>: Circular dependency detected among parameters: {'a'}
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_parameter_expression.py::TestDependencyResolution::test_undefined_parameter_error
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1C12990>: 'Undefined parameter: undefined_param'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_parameter_expression.py::TestDependencyResolution::test_forward_reference_to_regular_parameter
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1C12B70>: 'Undefined parameter: base'
+    warnings.warn(f"error in importhandler {self}: {error}")
+
+tests/test_parameter_expression.py::TestEdgeCases::test_empty_expression_string
+  C:\AnsysDev\code\pyansys\pydyna2\src\ansys\dyna\core\lib\import_handler.py:94: UserWarning: error in importhandler <ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor object at 0x000002C0F1C232F0>: 'Undefined parameter: nan'
+    warnings.warn(f"error in importhandler {self}: {error}")

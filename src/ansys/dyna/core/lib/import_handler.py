@@ -24,7 +24,6 @@
 
 import dataclasses
 import typing
-import warnings
 
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -98,6 +97,9 @@ class ImportHandler:
         pass
 
     def on_error(self, error):
-        """Handle errors during import."""
-        # TODO - use logging
-        warnings.warn(f"error in importhandler {self}: {error}")
+        """Called when an error occurs in this handler's `after_import` method.
+
+        Handlers can override this to handle or log errors as needed.
+        The default implementation does nothing.
+        """
+        pass

@@ -25,6 +25,7 @@
 import contextlib
 import logging
 import typing
+import warnings
 
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 
@@ -419,5 +420,5 @@ class ParameterHandler(ImportHandler):
             _load_parameter_expressions(context.deck, keyword, local=is_local)
 
     def on_error(self, error):
-        """Handle errors during import."""
-        pass
+        """Emit a warning when parameter processing fails."""
+        warnings.warn(f"Error processing parameter: {error}")
