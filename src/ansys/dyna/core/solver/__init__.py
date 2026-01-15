@@ -20,5 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import warnings
+
+warnings.warn(
+    "The 'ansys.dyna.core.solver' module is deprecated and will be removed in the next release(v0.10.0) onwards. ",
+    DeprecationWarning,
+    stacklevel=2,
+)
+
 from ansys.dyna.core.solver.dynasolver import DynaSolver, NotFound, RunningError, UnexpectedResponse
 from ansys.dyna.core.solver.launcher import launch_dyna

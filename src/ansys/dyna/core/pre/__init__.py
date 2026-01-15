@@ -22,6 +22,13 @@
 
 # -*- coding: utf-8 -*-
 import os
+import warnings
+
+warnings.warn(
+    "The 'ansys.dyna.core.pre' module is deprecated and will be removed in the next release(v0.10.0) onwards. ",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 from ansys.dyna.core.pre.launcher import launch_dynapre
 from ansys.dyna.core.pre.model import Model
