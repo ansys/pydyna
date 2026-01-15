@@ -57,12 +57,20 @@ class ImportContext:
         ... )
         >>> context = ImportContext(keyword_overrides={"*MAT_295": Mat295Legacy})
         >>> deck.loads(data, context=context)
+    strict : bool, optional
+        If True, raise errors when keyword parsing fails for any reason
+        (undefined parameters, invalid field values, malformed data, etc.).
+        If False (default), keywords that fail to parse are retained as raw
+        strings and a warning is emitted. Default is False for backward
+        compatibility.
+        TODO: Consider making strict=True the default in a future version.
     """
 
     xform: typing.Any = None
     deck: typing.Any = None
     path: str = None
     keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
+    strict: bool = False
 
 
 class ImportHandler:

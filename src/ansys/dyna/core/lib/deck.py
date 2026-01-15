@@ -244,8 +244,21 @@ class Deck(ValidationMixin):
             include_deck.register_import_handler(self.transform_handler)
         return include_deck
 
-    def _expand_helper(self, search_paths: typing.List[str], recurse: bool) -> typing.List[KeywordBase]:
-        """Recursively outputs a list of keywords within Includes."""
+    def _expand_helper(
+        self, search_paths: typing.List[str], recurse: bool, strict: bool = False
+    ) -> typing.List[KeywordBase]:
+        """Recursively outputs a list of keywords within Includes.
+
+        Parameters
+        ----------
+        search_paths : List[str]
+            List of directories to search for include files.
+        recurse : bool
+            If True, recursively expand includes within includes.
+        strict : bool, optional
+            If True, raise errors instead of loading keywords as strings.
+            Default is False.
+        """
         keywords = []
         for keyword in self.all_keywords:
             if not isinstance(keyword, KeywordBase):
@@ -271,16 +284,16 @@ class Deck(ValidationMixin):
             if keyword.subkeyword == "TRANSFORM":
                 xform = keyword
             include_deck = self._prepare_deck_for_expand(keyword)
-            context = ImportContext(xform, include_deck, expand_include_file)
+            context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
             try:
                 include_deck._import_file(expand_include_file, "utf-8", context)
             except UnicodeDecodeError as e:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
-                context = ImportContext(xform, include_deck, expand_include_file)
+                context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
-                expanded = include_deck._expand_helper(search_paths, True)
+                expanded = include_deck._expand_helper(search_paths, True, strict)
                 keywords.extend(expanded)
             else:
                 keywords.extend(include_deck.all_keywords)
@@ -289,21 +302,34 @@ class Deck(ValidationMixin):
                 keyword.deck = None
         return keywords
 
-    def expand(self, cwd=None, recurse=True):
+    def expand(self, cwd=None, recurse=True, strict=False):
         """Get a new deck that is flattened copy of `self`.
 
         A flattened deck is one where the ``*INCLUDE`` keywords are replaced
         by the contents of the file that is included.
-        `cwd` is a working directory used to resolve the filename
-        If `recurse` is true, ``*INCLUDE`` keywords within included decks
-        are expanded, recursively.
+
+        Parameters
+        ----------
+        cwd : str, optional
+            Working directory used to resolve include filenames.
+            Defaults to the current working directory.
+        recurse : bool, optional
+            If True, ``*INCLUDE`` keywords within included decks
+            are expanded recursively. Default is True.
+        strict : bool, optional
+            If True, raise errors when keyword parsing fails for any reason
+            (undefined parameters, invalid field values, malformed data, etc.).
+            If False (default), keywords that fail to parse are retained as raw
+            strings and a warning is emitted. Default is False for backward
+            compatibility.
+            TODO: Consider making strict=True the default in a future version.
         """
         cwd = cwd or os.getcwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
         new_deck.parameters = self.parameters
         search_paths = [cwd]
-        new_deck.extend(self._expand_helper(search_paths, recurse))
+        new_deck.extend(self._expand_helper(search_paths, recurse, strict))
         return new_deck
 
     def _get_title_lines(self) -> typing.List[str]:
