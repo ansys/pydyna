@@ -696,7 +696,7 @@ def test_deck_expand_nonlocal_parameters(file_utils):
 
 
 @pytest.mark.keywords
-def test_deck_expand_local_parameters_isolation(file_utils):
+def test_deck_expand_local_parameters_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters are isolated to their definition file.
 
     This test demonstrates the BUG where PARAMETER_LOCAL leaks to parent decks.
@@ -716,8 +716,14 @@ def test_deck_expand_local_parameters_isolation(file_utils):
     with pytest.raises(KeyError):
         deck.parameters.get("loc")
 
-    # Expand the deck
+    # Expand the deck - a warning is expected when top.k tries to resolve &loc
+    # which is local to the include file (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
+
+    # Verify that the expected warning was emitted about 'loc' parameter isolation
+    assert any("'loc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'loc' parameter not being accessible"
+    )
 
     # After expansion, get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
@@ -746,7 +752,7 @@ def test_deck_expand_local_parameters_isolation(file_utils):
 
 
 @pytest.mark.keywords
-def test_deck_expand_local_parameters_sibling_isolation(file_utils):
+def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters don't leak between sibling includes.
 
     This test demonstrates the BUG where PARAMETER_LOCAL leaks between sibling includes.
@@ -757,8 +763,14 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils):
     filename = cwd / "sibling_test_top.k"
     deck.import_file(filename)
 
-    # Expand the deck
+    # Expand the deck - a warning is expected when sibling_b.k tries to resolve &aloc
+    # which is local to sibling_a.k (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
+
+    # Verify that the expected warning was emitted about 'aloc' parameter isolation
+    assert any("'aloc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'aloc' parameter not being accessible"
+    )
 
     # Get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
