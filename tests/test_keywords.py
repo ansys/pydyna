@@ -103,6 +103,39 @@ $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
 
 
 @pytest.mark.keywords
+def test_element_solid_read_legacy_format():
+    """Test reading ElementSolid from legacy format keyword string (all fields on one line)."""
+    legacy_string = """*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8
+       2       1       9      10      11      12      13      14      15      16"""
+
+    elements = kwd.ElementSolid()
+    elements.loads(legacy_string)
+
+    assert len(elements.elements) == 2, f"Expected 2 elements, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [1, 2]
+    assert elements.elements["pid"].tolist() == [1, 1]
+    assert elements.elements["n1"].tolist() == [1, 9]
+    assert elements.elements["n8"].tolist() == [8, 16]
+
+
+@pytest.mark.keywords
+def test_element_solid_read_single_element():
+    """Test reading ElementSolid with a single element."""
+    single_element_string = """*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8"""
+
+    elements = kwd.ElementSolid()
+    elements.loads(single_element_string)
+
+    assert len(elements.elements) == 1, f"Expected 1 element, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [1]
+    assert elements.elements["pid"].tolist() == [1]
+    assert elements.elements["n1"].tolist() == [1]
+    assert elements.elements["n8"].tolist() == [8]
+
+
+@pytest.mark.keywords
 def test_read_node(ref_string):
     n = kwd.Node()
     n.loads(ref_string.test_node_long_id)
