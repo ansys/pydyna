@@ -367,8 +367,10 @@ def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
 
     # If we know expected field count, check if CSV count matches
     if num_fields is not None:
-        # If CSV field count matches expected (within ±1), likely CSV
-        if num_csv_fields >= num_fields - 1 and num_csv_fields <= num_fields + 2:
+        # CSV format allows trailing fields to be omitted.
+        # If CSV field count is <= expected fields AND line looks like CSV
+        # (no significant leading spaces), treat as CSV.
+        if num_csv_fields <= num_fields + 2:
             # Additional check: first field shouldn't have many leading spaces
             # (which would indicate fixed-width format with embedded commas)
             first_field = csv_fields[0]
