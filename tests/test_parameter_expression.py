@@ -53,151 +53,183 @@ R result  1+2
     def test_simple_arithmetic_subtraction(self):
         """Test basic subtraction expression."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  10-3
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 7.0
 
     def test_simple_arithmetic_multiplication(self):
         """Test basic multiplication expression."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  4*5
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 20.0
 
     def test_simple_arithmetic_division(self):
         """Test basic division expression."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  20/4
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 5.0
 
     def test_arithmetic_with_operator_precedence(self):
         """Test expression with operator precedence (multiplication before addition)."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  1+2*3
-*END""")
+*END"""
+        )
         # Should be 1 + (2*3) = 7, not (1+2)*3 = 9
         assert deck.parameters.get("result") == 7.0
 
     def test_arithmetic_with_parentheses(self):
         """Test expression with parentheses to override precedence."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  (1+2)*3
-*END""")
+*END"""
+        )
         # Should be (1+2)*3 = 9
         assert deck.parameters.get("result") == 9.0
 
     def test_arithmetic_with_nested_parentheses(self):
         """Test expression with nested parentheses."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  ((2+3)*4)-5
-*END""")
+*END"""
+        )
         # Should be ((2+3)*4)-5 = (5*4)-5 = 20-5 = 15
         assert deck.parameters.get("result") == 15.0
 
     def test_power_operator(self):
         """Test exponentiation using ** operator."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  2**3
-*END""")
+*END"""
+        )
         # 2^3 = 8
         assert deck.parameters.get("result") == 8.0
 
     def test_unary_minus(self):
         """Test unary minus operator."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  -5+3
-*END""")
+*END"""
+        )
         # -5+3 = -2
         assert deck.parameters.get("result") == -2.0
 
     def test_function_sqrt(self):
         """Test sqrt function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  sqrt(16)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 4.0
 
     def test_function_abs(self):
         """Test abs function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  abs(-7.5)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 7.5
 
     def test_function_sin(self):
         """Test sin function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  sin(0.0)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 0.0
 
     def test_function_cos(self):
         """Test cos function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  cos(0.0)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 1.0
 
     def test_function_exp(self):
         """Test exp function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  exp(0.0)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 1.0
 
     def test_function_log(self):
         """Test log (natural logarithm) function."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  log(2.718281828459045)
-*END""")
+*END"""
+        )
         # ln(e) = 1
         assert abs(deck.parameters.get("result") - 1.0) < 1e-10
 
     def test_function_min(self):
         """Test min function with two arguments."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  min(5, 3)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 3.0
 
     def test_function_max(self):
         """Test max function with two arguments."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R result  max(5, 3)
-*END""")
+*END"""
+        )
         assert deck.parameters.get("result") == 5.0
 
     def test_integer_type_result(self):
@@ -311,9 +343,8 @@ R endtime  tramp1+(abs(diemv)-0.5*clsv*tramp)/clsv
         #         = 0.301 + 144.95/1000.0
         #         = 0.301 + 0.14495
         #         = 0.44595
-        expected_endtime = 0.301 + (abs(145.45) - 0.5*1000.0*0.001)/1000.0
+        expected_endtime = 0.301 + (abs(145.45) - 0.5 * 1000.0 * 0.001) / 1000.0
         assert abs(deck.parameters.get("endtime") - expected_endtime) < 1e-10
-
 
     def test_multiple_parameter_references(self):
         """Test expression with multiple parameter references."""
@@ -435,10 +466,12 @@ class TestScoping:
     def test_parameter_expression_global_scope(self):
         """Test that PARAMETER_EXPRESSION creates global parameters."""
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION
 R global   10.0
-*END""")
+*END"""
+        )
 
         # Should be accessible
         assert deck.parameters.get("global") == 10.0
@@ -448,10 +481,12 @@ R global   10.0
         # This test requires file-based includes to properly test scoping
         # For now, just verify the keyword is recognized
         deck = Deck()
-        deck.loads("""*KEYWORD
+        deck.loads(
+            """*KEYWORD
 *PARAMETER_EXPRESSION_LOCAL
 R local    10.0
-*END""")
+*END"""
+        )
 
         # Should be accessible in same file
         assert deck.parameters.get("local") == 10.0
@@ -625,3 +660,251 @@ R result   5+5
 
         # Should evaluate and be usable just like regular PARAMETER_EXPRESSION
         assert deck.parameters.get("result") == 10.0
+
+
+@pytest.mark.keywords
+class TestParameterExpressionLocalScoping:
+    """Test PARAMETER_EXPRESSION_LOCAL scoping with includes."""
+
+    def test_local_expression_does_not_leak_to_parent(self, tmp_path):
+        """Test that PARAMETER_EXPRESSION_LOCAL does not leak to parent scope."""
+        # Create include file with local expression
+        include_content = """*PARAMETER_EXPRESSION_LOCAL
+Rlocalexp,10+5
+*PARAMETER
+Rlocalval,&localexp"""
+
+        include_path = tmp_path / "include.k"
+        include_path.write_text(include_content)
+
+        # Main deck includes the file
+        deck_text = f"""*KEYWORD
+*INCLUDE
+{include_path}
+*END"""
+
+        deck = Deck()
+        deck.loads(deck_text)
+        expanded = deck.expand(cwd=str(tmp_path))
+
+        # The local expression parameter should NOT be accessible from parent
+        # after include processing
+        with pytest.raises(KeyError):
+            expanded.parameters.get("localexp")
+
+    def test_local_expression_visible_within_include(self, tmp_path):
+        """Test that PARAMETER_EXPRESSION_LOCAL is visible within same include."""
+        # Create include file that uses its own local expression
+        # PARAMETER_EXPRESSION_LOCAL format: prmr (10 chars), expression (70 chars)
+        include_content = (
+            "*PARAMETER_EXPRESSION_LOCAL\n"
+            "Rlocexp             100\n"
+            "*SET_NODE_LIST\n"
+            "         1       0.0       0.0       0.0       0.0    MECH         1\n"
+            "   &locexp\n"
+        )
+
+        include_path = tmp_path / "include.k"
+        include_path.write_text(include_content)
+
+        deck_text = f"""*KEYWORD
+*INCLUDE
+{include_path}
+*END"""
+
+        deck = Deck()
+        deck.loads(deck_text)
+        expanded = deck.expand(cwd=str(tmp_path))
+
+        # Find the SET_NODE_LIST keyword
+        set_node = None
+        for kw in expanded.keywords:
+            if hasattr(kw, "nodes"):
+                set_node = kw
+                break
+
+        # The local expression should have been substituted
+        assert set_node is not None
+        assert set_node.nodes[0] == 100  # &locexp substituted
+
+    def test_sibling_includes_cannot_see_each_others_local_expressions(self, tmp_path):
+        """Test that sibling includes cannot see each other's local expressions.
+
+        When a keyword references an undefined parameter, it cannot be parsed into
+        a keyword object. Instead, it is retained as a raw string in the deck with
+        the unresolved parameter reference (e.g., &locexp1) still present. A warning
+        is emitted.
+
+        This test verifies LOCAL scoping works (locexp1 is not visible to include2)
+        by checking that no parsed SET_NODE_LIST keyword object exists.
+
+        Use strict=True to raise an error instead of retaining unparsed keywords.
+        """
+        # First include defines a local expression
+        # PARAMETER_EXPRESSION_LOCAL format: prmr (10 chars), expression (70 chars)
+        include1_content = "*PARAMETER_EXPRESSION_LOCAL\n" "Rlocexp1            50\n"
+
+        include1_path = tmp_path / "include1.k"
+        include1_path.write_text(include1_content)
+
+        # Second include tries to use it (should fail because locexp1 is local to include1)
+        include2_content = (
+            "*SET_NODE_LIST\n" "         1       0.0       0.0       0.0       0.0    MECH         1\n" "  &locexp1\n"
+        )
+
+        include2_path = tmp_path / "include2.k"
+        include2_path.write_text(include2_content)
+
+        deck_text = f"""*KEYWORD
+*INCLUDE
+{include1_path}
+*INCLUDE
+{include2_path}
+*END"""
+
+        deck = Deck()
+        deck.loads(deck_text)
+
+        # Expand - keyword with undefined param is retained as string, not parsed
+        expanded = deck.expand(cwd=str(tmp_path))
+
+        # Verify the local parameter scoping worked - no parsed SET_NODE_LIST object
+        # because &locexp1 is local to include1 and not visible to include2.
+        # The keyword is retained as a raw string in expanded.all_keywords.
+        set_node = None
+        for kw in expanded.keywords:
+            if hasattr(kw, "nodes"):
+                set_node = kw
+                break
+
+        # No parsed SET_NODE_LIST object - it's retained as a string with &locexp1
+        assert set_node is None, "SET_NODE_LIST should not be parsed because &locexp1 is undefined"
+
+    def test_sibling_includes_strict_mode_raises_on_undefined_parameter(self, tmp_path):
+        """Test that strict mode raises an error for undefined parameter references.
+
+        When strict=True is passed to expand(), undefined parameter references
+        raise a KeyError instead of retaining the keyword as an unparsed string.
+        """
+        # First include defines a local expression
+        include1_content = "*PARAMETER_EXPRESSION_LOCAL\n" "Rlocexp1            50\n"
+
+        include1_path = tmp_path / "include1.k"
+        include1_path.write_text(include1_content)
+
+        # Second include tries to use it (should fail because locexp1 is local to include1)
+        include2_content = (
+            "*SET_NODE_LIST\n" "         1       0.0       0.0       0.0       0.0    MECH         1\n" "  &locexp1\n"
+        )
+
+        include2_path = tmp_path / "include2.k"
+        include2_path.write_text(include2_content)
+
+        deck_text = f"""*KEYWORD
+*INCLUDE
+{include1_path}
+*INCLUDE
+{include2_path}
+*END"""
+
+        deck = Deck()
+        deck.loads(deck_text)
+
+        # With strict=True, expand should raise KeyError for undefined parameter
+        with pytest.raises(KeyError, match="locexp1"):
+            deck.expand(cwd=str(tmp_path), strict=True)
+
+    def test_global_expression_visible_to_includes(self, tmp_path):
+        """Test that global PARAMETER_EXPRESSION is visible to includes."""
+        # Include file uses a parameter defined in parent
+        include_content = """*SET_NODE_LIST
+         1       0.0       0.0       0.0       0.0    MECH         1
+&globalexp"""
+
+        include_path = tmp_path / "include.k"
+        include_path.write_text(include_content)
+
+        deck_text = f"""*KEYWORD
+*PARAMETER_EXPRESSION
+Rglobalexp,200
+*INCLUDE
+{include_path}
+*END"""
+
+        deck = Deck()
+        deck.loads(deck_text)
+        expanded = deck.expand(cwd=str(tmp_path))
+
+        # Find the SET_NODE_LIST keyword
+        set_node = None
+        for kw in expanded.keywords:
+            if hasattr(kw, "nodes"):
+                set_node = kw
+                break
+
+        assert set_node is not None
+        assert set_node.nodes[0] == 200  # &globalexp substituted
+
+
+@pytest.mark.keywords
+class TestExpressionReferencingLocalParameter:
+    """Test expressions referencing local parameters."""
+
+    def test_expression_references_local_parameter(self):
+        """Test that PARAMETER_EXPRESSION can reference PARAMETER_LOCAL.
+
+        Verifies that an expression like:
+            *PARAMETER_LOCAL
+            Rlocalbase,10.0
+            *PARAMETER_EXPRESSION
+            Rresult,localbase*2
+
+        Works correctly where the expression references a local parameter.
+        """
+        deck_text = """*KEYWORD
+*PARAMETER_LOCAL
+Rlocalbase,10.0
+*PARAMETER_EXPRESSION
+Rresult,localbase*2
+*END"""
+        deck = Deck()
+        deck.loads(deck_text)
+
+        # Verify local parameter is accessible
+        assert deck.parameters.get("localbase") == 10.0
+        # Verify expression evaluated correctly using the local parameter
+        assert deck.parameters.get("result") == 20.0
+
+    def test_expression_references_local_parameter_in_include(self, tmp_path):
+        """Test that PARAMETER_EXPRESSION can reference PARAMETER_LOCAL within an include file."""
+        # Create include file with PARAMETER_LOCAL and PARAMETER_EXPRESSION that references it
+        include_content = (
+            "*PARAMETER_LOCAL\n"
+            "Rlocalbase  10.0\n"
+            "*PARAMETER_EXPRESSION\n"
+            "Rresult     localbase*2\n"
+            "*SET_NODE_LIST\n"
+            "         1       0.0       0.0       0.0       0.0    MECH         1\n"
+            "   &result\n"
+        )
+        include_path = tmp_path / "include.k"
+        include_path.write_text(include_content)
+
+        deck_text = f"""*KEYWORD
+*INCLUDE
+{include_path}
+*END"""
+        deck = Deck()
+        deck.loads(deck_text)
+        expanded = deck.expand(cwd=str(tmp_path))
+
+        # Find the SET_NODE_LIST keyword
+        set_node = None
+        for kw in expanded.keywords:
+            if hasattr(kw, "nodes"):
+                set_node = kw
+                break
+
+        assert set_node is not None
+        # &result should be 20.0 (localbase*2 = 10.0*2)
+        assert set_node.nodes[0] == 20

@@ -50,7 +50,7 @@ class TestSeriesCardParameters:
         """Test unbounded SeriesCard with one parameter reference."""
         parameter_set = ParameterSet()
         parameter_set.add("dens", 7850.0)
-        
+
         series = SeriesCard(
             name="values",
             fields_per_card=8,
@@ -58,11 +58,11 @@ class TestSeriesCardParameters:
             input_type=float,
             length_func=None,  # Unbounded
         )
-        
+
         card_text = """       1.0       2.0     &dens       4.0"""
         buf = io.StringIO(card_text)
         series.read(buf, parameter_set)
-        
+
         assert len(series.data) == 4
         assert series.data[0] == 1.0
         assert series.data[1] == 2.0
@@ -74,7 +74,7 @@ class TestSeriesCardParameters:
         """Test unbounded SeriesCard with negative parameter (-&param)."""
         parameter_set = ParameterSet()
         parameter_set.add("offs", 100.0)
-        
+
         series = SeriesCard(
             name="values",
             fields_per_card=8,
@@ -82,11 +82,11 @@ class TestSeriesCardParameters:
             input_type=float,
             length_func=None,
         )
-        
+
         card_text = """       1.0    -&offs       3.0"""
         buf = io.StringIO(card_text)
         series.read(buf, parameter_set)
-        
+
         assert len(series.data) == 3
         assert series.data[0] == 1.0
         assert series.data[1] == -100.0
@@ -98,7 +98,7 @@ class TestSeriesCardParameters:
         parameter_set = ParameterSet()
         parameter_set.add("val1", 10.0)
         parameter_set.add("val2", 20.0)
-        
+
         series = SeriesCard(
             name="values",
             fields_per_card=4,
@@ -106,12 +106,12 @@ class TestSeriesCardParameters:
             input_type=float,
             length_func=lambda: 6,  # Bounded to 6 elements
         )
-        
+
         card_text = """     &val1     &val2       3.0       4.0
        5.0       6.0"""
         buf = io.StringIO(card_text)
         series.read(buf, parameter_set)
-        
+
         assert len(series.data) == 6
         assert series.data[0] == 10.0
         assert series.data[1] == 20.0
@@ -125,7 +125,7 @@ class TestSeriesCardParameters:
         """Test SeriesCard with integer parameter."""
         parameter_set = ParameterSet()
         parameter_set.add("count", 42)
-        
+
         series = SeriesCard(
             name="ids",
             fields_per_card=4,
@@ -133,11 +133,11 @@ class TestSeriesCardParameters:
             input_type=int,
             length_func=None,
         )
-        
+
         card_text = """         1    &count         3"""
         buf = io.StringIO(card_text)
         series.read(buf, parameter_set)
-        
+
         assert len(series.data) == 3
         assert series.data[0] == 1
         assert series.data[1] == 42
@@ -151,7 +151,7 @@ class TestSeriesCardParameters:
         parameter_set.add("y1", 2.5)
         parameter_set.add("x2", 3.5)
         parameter_set.add("y2", 4.5)
-        
+
         series = SeriesCard(
             name="coords",
             fields_per_card=4,
@@ -159,12 +159,12 @@ class TestSeriesCardParameters:
             input_type=float,
             length_func=None,
         )
-        
+
         card_text = """      &x1       &y1       0.0       0.0
       &x2       &y2       0.0       0.0"""
         buf = io.StringIO(card_text)
         series.read(buf, parameter_set)
-        
+
         assert len(series.data) == 8
         assert series.data[0] == 1.5
         assert series.data[1] == 2.5
@@ -180,7 +180,7 @@ class TestTableCardParameters:
         """Test unbounded TableCard with parameter in one field."""
         parameter_set = ParameterSet()
         parameter_set.add("xcoord", 100.5)
-        
+
         table = TableCard(
             [
                 Field("nid", int, 0, 8),
@@ -190,12 +190,12 @@ class TestTableCardParameters:
             ],
             None,  # Unbounded
         )
-        
+
         card_text = """       1   &xcoord            10.0            20.0
        2      200.5            30.0            40.0"""
         buf = io.StringIO(card_text)
         table.read(buf, parameter_set)
-        
+
         assert len(table.table) == 2
         assert table.table["nid"][0] == 1
         assert table.table["x"][0] == 100.5
@@ -211,7 +211,7 @@ class TestTableCardParameters:
         parameter_set.add("x1", 10.0)
         parameter_set.add("y1", 20.0)
         parameter_set.add("z1", 30.0)
-        
+
         table = TableCard(
             [
                 Field("nid", int, 0, 8),
@@ -221,13 +221,13 @@ class TestTableCardParameters:
             ],
             lambda: 3,  # Bounded to 3 rows
         )
-        
+
         card_text = """       1        &x1            &y1            &z1
        2       11.0            21.0            31.0
        3       12.0            22.0            32.0"""
         buf = io.StringIO(card_text)
         table.read(buf, parameter_set)
-        
+
         assert len(table.table) == 3
         assert table.table["x"][0] == 10.0
         assert table.table["y"][0] == 20.0
@@ -238,7 +238,7 @@ class TestTableCardParameters:
         """Test TableCard with negative parameter."""
         parameter_set = ParameterSet()
         parameter_set.add("offset", 50.0)
-        
+
         table = TableCard(
             [
                 Field("id", int, 0, 8),
@@ -246,12 +246,12 @@ class TestTableCardParameters:
             ],
             None,
         )
-        
+
         card_text = """       1      -&offset
        2          25.0"""
         buf = io.StringIO(card_text)
         table.read(buf, parameter_set)
-        
+
         assert len(table.table) == 2
         assert table.table["value"][0] == -50.0
         assert table.table["value"][1] == 25.0
@@ -262,7 +262,7 @@ class TestTableCardParameters:
         parameter_set = ParameterSet()
         parameter_set.add("x_param", 100.0)
         parameter_set.add("z_param", 300.0)
-        
+
         table = TableCard(
             [
                 Field("nid", int, 0, 8),
@@ -272,12 +272,12 @@ class TestTableCardParameters:
             ],
             None,
         )
-        
+
         card_text = """       1    &x_param            50.0        &z_param
        2       200.0            60.0           400.0"""
         buf = io.StringIO(card_text)
         table.read(buf, parameter_set)
-        
+
         assert len(table.table) == 2
         assert table.table["x"][0] == 100.0
         assert table.table["y"][0] == 50.0
@@ -296,12 +296,12 @@ class TestTableCardParameters:
             ],
             None,
         )
-        
+
         card_text = """       1       100.0
        2       200.0"""
         buf = io.StringIO(card_text)
         table.read(buf, None)
-        
+
         assert len(table.table) == 2
         assert table.table["x"][0] == 100.0
         assert table.table["x"][1] == 200.0
@@ -311,7 +311,7 @@ class TestTableCardParameters:
         """Test TableCard with integer parameter."""
         parameter_set = ParameterSet()
         parameter_set.add("nid", 1000)
-        
+
         table = TableCard(
             [
                 Field("nid", int, 0, 8),
@@ -319,11 +319,11 @@ class TestTableCardParameters:
             ],
             None,
         )
-        
+
         card_text = """    &nid       100.0"""
         buf = io.StringIO(card_text)
         table.read(buf, parameter_set)
-        
+
         assert len(table.table) == 1
         assert table.table["nid"][0] == 1000
         assert table.table["x"][0] == 100.0
@@ -382,14 +382,14 @@ class TestTableCardGroupParameters:
         ]
 
         group = TableCardGroup(card_schemas, None)  # Unbounded
-        
+
         card_text = """       &x       &y
        3.0       4.0
        5.0       6.0
        7.0       8.0"""
         buf = io.StringIO(card_text)
         group.read(buf, parameter_set)
-        
+
         assert len(group.table) == 2
         assert group.table["a"][0] == 1.0
         assert group.table["b"][0] == 2.0
@@ -397,6 +397,132 @@ class TestTableCardGroupParameters:
         assert group.table["d"][0] == 4.0
         assert group.table["a"][1] == 5.0
         assert group.table["b"][1] == 6.0
+
+
+class TestCSVFormatParameterSubstitution:
+    """Test parameter substitution in CSV (comma-delimited) format."""
+
+    @pytest.mark.keywords
+    def test_table_card_csv_format_with_parameter(self):
+        """Test TableCard with CSV format and parameter reference."""
+        parameter_set = ParameterSet()
+        parameter_set.add("xcoord", 100.5)
+
+        table = TableCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+                Field("y", float, 24, 16),
+                Field("z", float, 40, 16),
+            ],
+            None,
+        )
+
+        # CSV format - fields separated by commas
+        card_text = """1,&xcoord,10.0,20.0
+2,200.5,30.0,40.0"""
+        buf = io.StringIO(card_text)
+        table.read(buf, parameter_set)
+
+        assert len(table.table) == 2
+        assert table.table["nid"][0] == 1
+        assert table.table["x"][0] == 100.5  # &xcoord substituted
+        assert table.table["y"][0] == 10.0
+        assert table.table["z"][0] == 20.0
+        assert table.table["nid"][1] == 2
+        assert table.table["x"][1] == 200.5
+
+    @pytest.mark.keywords
+    def test_table_card_csv_format_with_negative_parameter(self):
+        """Test TableCard CSV format with negative parameter (-&param)."""
+        parameter_set = ParameterSet()
+        parameter_set.add("offset", 50.0)
+
+        table = TableCard(
+            [
+                Field("id", int, 0, 8),
+                Field("value", float, 8, 16),
+            ],
+            None,
+        )
+
+        card_text = """1,-&offset
+2,25.0"""
+        buf = io.StringIO(card_text)
+        table.read(buf, parameter_set)
+
+        assert len(table.table) == 2
+        assert table.table["value"][0] == -50.0  # -&offset = -50.0
+        assert table.table["value"][1] == 25.0
+
+    @pytest.mark.keywords
+    def test_table_card_csv_format_multiple_parameters(self):
+        """Test TableCard CSV format with multiple parameters in one row."""
+        parameter_set = ParameterSet()
+        parameter_set.add("x1", 1.0)
+        parameter_set.add("y1", 2.0)
+        parameter_set.add("z1", 3.0)
+
+        table = TableCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+                Field("y", float, 24, 16),
+                Field("z", float, 40, 16),
+            ],
+            None,
+        )
+
+        card_text = """1,&x1,&y1,&z1"""
+        buf = io.StringIO(card_text)
+        table.read(buf, parameter_set)
+
+        assert len(table.table) == 1
+        assert table.table["x"][0] == 1.0
+        assert table.table["y"][0] == 2.0
+        assert table.table["z"][0] == 3.0
+
+    @pytest.mark.keywords
+    def test_table_card_csv_format_integer_parameter(self):
+        """Test TableCard CSV format with integer parameter."""
+        parameter_set = ParameterSet()
+        parameter_set.add("nodeid", 1000)
+
+        table = TableCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+            ],
+            None,
+        )
+
+        card_text = """&nodeid,100.0"""
+        buf = io.StringIO(card_text)
+        table.read(buf, parameter_set)
+
+        assert len(table.table) == 1
+        assert table.table["nid"][0] == 1000  # &nodeid substituted
+        assert table.table["x"][0] == 100.0
+
+    @pytest.mark.keywords
+    def test_table_card_csv_format_missing_parameter_raises_error(self):
+        """Test TableCard CSV format with missing parameter raises KeyError."""
+        parameter_set = ParameterSet()
+        # Don't add the parameter
+
+        table = TableCard(
+            [
+                Field("id", int, 0, 8),
+                Field("val", float, 8, 16),
+            ],
+            None,
+        )
+
+        card_text = """1,&missing"""
+        buf = io.StringIO(card_text)
+
+        with pytest.raises(KeyError):
+            table.read(buf, parameter_set)
 
 
 class TestParameterSubstitutionEdgeCases:
@@ -407,7 +533,7 @@ class TestParameterSubstitutionEdgeCases:
         """Test that missing parameter raises KeyError."""
         parameter_set = ParameterSet()
         # Don't add the parameter
-        
+
         series = SeriesCard(
             name="values",
             fields_per_card=4,
@@ -415,10 +541,10 @@ class TestParameterSubstitutionEdgeCases:
             input_type=float,
             length_func=None,
         )
-        
+
         card_text = """       1.0  &missing       3.0"""
         buf = io.StringIO(card_text)
-        
+
         with pytest.raises(KeyError):
             series.read(buf, parameter_set)
 
@@ -427,15 +553,15 @@ class TestParameterSubstitutionEdgeCases:
         """Test that TableCard with missing parameter raises KeyError."""
         parameter_set = ParameterSet()
         # Don't add the parameter
-        
+
         table = TableCard(
             [Field("id", int, 0, 8), Field("val", float, 8, 16)],
             None,
         )
-        
+
         card_text = """       1  &missing"""
         buf = io.StringIO(card_text)
-        
+
         with pytest.raises(KeyError):
             table.read(buf, parameter_set)
 
@@ -444,7 +570,7 @@ class TestParameterSubstitutionEdgeCases:
         """Test that parameter type mismatch raises TypeError."""
         parameter_set = ParameterSet()
         parameter_set.add("floatval", 1.5)  # Float value
-        
+
         series = SeriesCard(
             name="ids",
             fields_per_card=4,
@@ -452,10 +578,10 @@ class TestParameterSubstitutionEdgeCases:
             input_type=int,  # Expecting int
             length_func=None,
         )
-        
+
         card_text = """         1 &floatval         3"""
         buf = io.StringIO(card_text)
-        
+
         with pytest.raises(TypeError):
             series.read(buf, parameter_set)
 
@@ -466,9 +592,9 @@ class TestParameterSubstitutionEdgeCases:
             [Field("id", int, 0, 8), Field("val", float, 8, 16)],
             None,
         )
-        
+
         card_text = """       1     &param"""
         buf = io.StringIO(card_text)
-        
+
         with pytest.raises(ValueError):
             table.read(buf, None)  # No parameter set provided

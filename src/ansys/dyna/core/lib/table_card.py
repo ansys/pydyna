@@ -351,8 +351,13 @@ class TableCard(Card):
         format_spec = [(f.offset, f.width, f.type) for f in fields]
 
         rows = []
-        for line in data_lines:
-            values = load_dataline(format_spec, line, parameter_set)
+        for row_index, line in enumerate(data_lines):
+            # Use scope to record parameter refs with row context
+            if parameter_set is not None:
+                with parameter_set.scope(f"row{row_index}"):
+                    values = load_dataline(format_spec, line, parameter_set)
+            else:
+                values = load_dataline(format_spec, line, parameter_set)
             row_dict = {field.name: value for field, value in zip(fields, values)}
             rows.append(row_dict)
 
@@ -380,6 +385,10 @@ class TableCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
+        **kwargs,
     ) -> str:
         if format == None:
             format = self._format_type
@@ -389,9 +398,80 @@ class TableCard(Card):
                 if comment:
                     buf.write(self._get_comment(format))
                     buf.write("\n")
-                write_c_dataframe(buf, self._fields, self.table, format)
+
+                if retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    # Write row-by-row with parameter ref substitution
+                    self._write_with_parameters(buf, format, parameter_set, uri_prefix)
+                else:
+                    # Fast path: use holler.write_table
+                    write_c_dataframe(buf, self._fields, self.table, format)
 
         return write_or_return(buf, _write)
+
+    def _write_with_parameters(
+        self,
+        buf: typing.TextIO,
+        format: format_type,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> None:
+        """Write table data row-by-row, substituting parameter refs where recorded."""
+        from ansys.dyna.core.lib.field_writer import write_fields
+
+        fields = self._get_fields()
+        if format == format_type.long:
+            fields = self._convert_fields_to_long_format()
+
+        for row_index in range(len(self.table)):
+            # Get row values from DataFrame
+            row_values = [self.table[field.name].iloc[row_index] for field in fields if field.name in self.table]
+
+            # Check for parameter refs and substitute
+            row_fields, row_values = self._substitute_parameter_refs(
+                fields, row_values, parameter_set, uri_prefix, row_index
+            )
+
+            write_fields(buf, row_fields, row_values, format)
+            buf.write("\n")
+
+    def _substitute_parameter_refs(
+        self,
+        fields: typing.List[Field],
+        values: typing.List,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+        row_index: int,
+    ) -> typing.Tuple[typing.List[Field], typing.List]:
+        """Substitute parameter references for field values where applicable.
+
+        Creates new Field objects with parameter reference strings as values
+        for fields that were originally read from parameters.
+
+        Returns both modified fields and values lists.
+        """
+        result_fields = []
+        result_values = list(values)  # Make a copy
+        for i, field in enumerate(fields):
+            # Skip None-type fields (unused fields)
+            if field.type is None:
+                result_fields.append(field)
+                continue
+
+            # Look up ref using the URI pattern: uri_prefix/row{row_index}/{field_index}
+            # Filter out empty segments to handle empty uri_prefix
+            segments = [s for s in [uri_prefix, f"row{row_index}", str(i)] if s]
+            ref = parameter_set.get_ref(*segments)
+            if ref is not None:
+                # Create a new field with the reference string as the value
+                # The reference will be written as-is (e.g., "&myvar")
+                new_field = Field(field.name, str, field.offset, field.width, ref)
+                result_fields.append(new_field)
+                # Also update the value to be the ref string
+                if i < len(result_values):
+                    result_values[i] = ref
+            else:
+                result_fields.append(field)
+        return result_fields, result_values
 
     @property
     def bounded(self) -> bool:
