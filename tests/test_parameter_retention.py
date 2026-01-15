@@ -547,31 +547,40 @@ Rn2,103
         related table cards (e.g., element ID + thickness values).
         """
         from ansys.dyna.core.lib.deck import Deck
+        from ansys.dyna.core.lib.parameters import ParameterSet
         import ansys.dyna.core.keywords as kwd
 
-        # Use the keyword API directly since the format is complex
-        # Note: TableCardGroup doesn't easily support inline parameters,
-        # so we test that the write path works correctly
+        # Build parameter set with the parameter value
+        parameter_set = ParameterSet()
+        parameter_set.add("t1", 1.98)
+
+        # Create ELEMENT_SHELL_THICKNESS with a parameter reference
+        # Note: thic1 field is 16 chars wide, so &t1 fits perfectly
         elements = kwd.ElementShellThickness()
         elements.loads("""*ELEMENT_SHELL_THICKNESS
        1       1       1     105       2       2
- 1.98036024E+000 1.97992622E+000 1.97992622E+000 1.97992622E+000 1.49965326E+002
+             &t1 1.97992622E+000 1.97992622E+000 1.97992622E+000 1.49965326E+002
        2       1     136     133    2834    2834
- 1.98166233E+000 1.98166233E+000 1.98296441E+000 1.98296441E+000 1.46006557E+002""")
+ 1.98166233E+000 1.98166233E+000 1.98296441E+000 1.98296441E+000 1.46006557E+002""",
+            parameters=parameter_set,
+        )
 
-        # Verify read correctly
+        # Verify parameters were resolved correctly
         assert len(elements.elements) == 2
         assert elements.elements["eid"].iloc[0] == 1
-        assert elements.elements["eid"].iloc[1] == 2
+        assert elements.elements["thic1"].iloc[0] == pytest.approx(1.98, rel=1e-3)  # &t1 resolved
 
-        # Add to deck and write
+        # Add to deck
         deck = Deck()
-        deck.append(elements)
+        deck.extend([elements])
 
-        # Write without retain_parameters
+        # Write without retain_parameters - should show resolved value
         output = deck.write()
         assert "*ELEMENT_SHELL_THICKNESS" in output
+        assert "&t1" not in output
 
-        # Write with retain_parameters
+        # Write with retain_parameters - should show parameter reference
         output_retain = deck.write(retain_parameters=True)
         assert "*ELEMENT_SHELL_THICKNESS" in output_retain
+        assert "&t1" in output_retain  # parameter ref should appear
+

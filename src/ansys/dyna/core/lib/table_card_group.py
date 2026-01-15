@@ -149,10 +149,19 @@ class TableCardGroup(CardInterface):
             self._load_unbounded_from_buffer(buf, parameter_set)
 
     def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
-        """Load the card data from a list of strings."""
+        """Load the card data from a list of strings.
+
+        For parameter retention, each sub-card's refs are scoped with `subcard{index}`
+        so URIs are: uri_prefix/subcard{subcard_index}/row{row_index}/{field_index}
+        """
         card_lines = self._divide_data_lines(data_lines)
         for index, lines in enumerate(card_lines):
-            self._cards[index]._load_lines(lines, parameter_set)
+            # Scope by subcard index so refs from different sub-cards don't overlap
+            if parameter_set is not None:
+                with parameter_set.scope(f"subcard{index}"):
+                    self._cards[index]._load_lines(lines, parameter_set)
+            else:
+                self._cards[index]._load_lines(lines, parameter_set)
         self.table = pd.concat([card.table for card in self._cards], axis=1)
 
     def write(
@@ -160,9 +169,11 @@ class TableCardGroup(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
         **kwargs,
     ) -> str:
-        # kwargs may include retain_parameters, parameter_set, etc. - not used by TableCardGroup
         if self.active:
             self._initialize()
             self._propagate()
@@ -170,9 +181,22 @@ class TableCardGroup(CardInterface):
         if format == None:
             format = self.format
 
-        def _as_buffer(card: TableCard, add_newline: bool) -> io.StringIO:
+        def _as_buffer(card: TableCard, subcard_index: int, add_newline: bool) -> io.StringIO:
             card_buf = io.StringIO()
-            card.write(format, card_buf, True)
+            # Build sub-card URI prefix for parameter retention
+            # Join segments properly, filtering out empty strings
+            subcard_uri_prefix = None
+            if retain_parameters and uri_prefix is not None:
+                segments = [s for s in [uri_prefix, f"subcard{subcard_index}"] if s]
+                subcard_uri_prefix = "/".join(segments)
+            card.write(
+                format,
+                card_buf,
+                True,
+                retain_parameters=retain_parameters,
+                parameter_set=parameter_set,
+                uri_prefix=subcard_uri_prefix,
+            )
             if add_newline:
                 card_buf.write("\n")
             card_buf.seek(0)
@@ -183,7 +207,7 @@ class TableCardGroup(CardInterface):
                 card_buffers = []
                 active_cards = self._get_active_cards()
                 for idx, card in enumerate(active_cards):
-                    card_buffer = _as_buffer(card, idx != len(active_cards) - 1)
+                    card_buffer = _as_buffer(card, idx, idx != len(active_cards) - 1)
                     card_buffers.append(card_buffer)
 
                 iter = zip(*card_buffers)
