@@ -76,7 +76,7 @@ class ElementSolid(KeywordBase):
         pos = buf.tell()
 
         lines = buffer_to_lines(buf)
-        if len(lines) < 2:
+        if len(lines) < 1:
             return
         if len(lines[0].strip().split()) > 2:
             self.set_legacy_format()
