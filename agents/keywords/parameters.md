@@ -415,6 +415,7 @@ When implementing parameter-related features:
 
 ## Related Documentation
 
-- [Codegen Guide](codegen.md): Auto-generated keyword classes
-- [Linked Keywords](linked_keywords.md): Keyword relationships and properties
+- [../codegen/](../codegen/): Auto-generated keyword classes
+- [linking.md](linking.md): Keyword relationships and properties
+- [legacy.md](legacy.md): Legacy keyword handling
 - GitHub Issue #641: Parameter substitution for all card types
