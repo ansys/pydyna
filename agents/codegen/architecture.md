@@ -431,6 +431,13 @@ Benefits:
 - Codegen checks verify auto files match templates
 - Changes are isolated and clear
 
+## Related Documentation
+
+- [README.md](README.md) - Quick reference for agents
+- [handlers.md](handlers.md) - Handler pipeline details
+- [validation.md](validation.md) - Validation workflows
+- [../../codegen/README.md](../../codegen/README.md) - CLI usage
+
 ## What the Generator Produces
 
 The class generator uses Jinja templates to generate three distinct things:
