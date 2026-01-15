@@ -229,12 +229,20 @@ def _load_keyword(
     result: DeckLoaderResult,
     context: ImportContext,
 ) -> None:
-    """Load keyword data into object and append to deck, handling errors."""
+    """Load keyword data into object and append to deck, handling errors.
+
+    If context.strict is True, exceptions are re-raised. If False, keywords
+    that fail to parse for any reason (undefined parameters, invalid field
+    values, malformed data, etc.) are retained as raw strings and a warning
+    is emitted.
+    """
     try:
         keyword_object.loads(keyword_data, deck.parameters)
         deck.append(keyword_object)
         _after_import(keyword_object, import_handlers, context)
     except Exception as e:
+        if context is not None and context.strict:
+            raise
         _on_error(e, import_handlers)
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)

@@ -155,6 +155,7 @@ class OptionCardSet(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
         """Renders the card in the dyna keyword format.
         :param buf: Buffer to write to. If None, the output is returned as a string
@@ -164,7 +165,7 @@ class OptionCardSet(CardInterface):
         def _write(buf):
             # TODO - write_cards should check the active func
             if self.active:
-                write_cards(self._cards, buf, format, comment)
+                write_cards(self._cards, buf, format, comment, **kwargs)
 
         return write_or_return(buf, _write)
 

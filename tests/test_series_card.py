@@ -21,9 +21,11 @@
 # SOFTWARE.
 
 import dataclasses
+import io
 import math
 
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.parameters import ParameterSet
 from ansys.dyna.core.lib.series_card import SeriesCard
 
 import pytest
@@ -225,3 +227,139 @@ def test_series_card_write_struct(string_utils):
     result = v.write(comment=True)
     string = "$#     foo       bar       foo       bar\n       1.0       2.0       3.0          "
     assert result == string
+
+
+# =============================================================================
+# Parameter Retention Tests for SeriesCard
+# =============================================================================
+
+
+class TestSeriesCardParameterRetention:
+    """Test parameter retention (write-back) for SeriesCard."""
+
+    @pytest.mark.keywords
+    def test_series_card_write_with_parameter_retention_single_line(self):
+        """Test that a single-line series card retains parameter references when writing."""
+        parameter_set = ParameterSet()
+        parameter_set.add("val1", 100.0)
+        parameter_set.add("val2", 200.0)
+
+        series = SeriesCard(
+            name="nodes",
+            fields_per_card=8,
+            element_width=10,
+            input_type=int,
+            length_func=None,  # Unbounded
+        )
+
+        card_text = "       100     &val1       102     &val2"
+        buf = io.StringIO(card_text)
+        series.read(buf, parameter_set)
+
+        # Values should be resolved
+        assert series.data[0] == 100
+        assert series.data[1] == 100  # &val1 resolved to 100
+        assert series.data[2] == 102
+        assert series.data[3] == 200  # &val2 resolved to 200
+
+        # Write with retain_parameters=True should show parameter refs
+        # Empty uri_prefix since at unit test level there's no outer scope
+        output = series.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=parameter_set,
+            uri_prefix="",
+        )
+        assert "&val1" in output, f"Expected '&val1' in output: {output}"
+        assert "&val2" in output, f"Expected '&val2' in output: {output}"
+
+    @pytest.mark.keywords
+    def test_series_card_write_with_parameter_retention_multi_line(self):
+        """Test that multi-line series card retains parameter references when writing."""
+        parameter_set = ParameterSet()
+        parameter_set.add("n1", 102)
+        parameter_set.add("n2", 107)
+
+        series = SeriesCard(
+            name="nodes",
+            fields_per_card=8,
+            element_width=10,
+            input_type=int,
+            length_func=None,  # Unbounded
+        )
+
+        # Two lines of data with parameters spread across them
+        card_text = """       100       101      &n1       103       104       105       106      &n2
+       108       109       110"""
+        buf = io.StringIO(card_text)
+        series.read(buf, parameter_set)
+
+        # Values should be resolved
+        assert len(series.data) == 11
+        assert series.data[2] == 102  # &n1 resolved
+        assert series.data[7] == 107  # &n2 resolved
+
+        # Write with retain_parameters=True should show parameter refs
+        # Empty uri_prefix since at unit test level there's no outer scope
+        output = series.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=parameter_set,
+            uri_prefix="",
+        )
+        assert "&n1" in output, f"Expected '&n1' in output: {output}"
+        assert "&n2" in output, f"Expected '&n2' in output: {output}"
+
+    @pytest.mark.keywords
+    def test_series_card_write_without_parameter_retention(self):
+        """Test that series card without retain_parameters writes resolved values."""
+        parameter_set = ParameterSet()
+        parameter_set.add("val1", 100.0)
+
+        series = SeriesCard(
+            name="values",
+            fields_per_card=8,
+            element_width=10,
+            input_type=float,
+            length_func=None,
+        )
+
+        card_text = "       1.0     &val1       3.0"
+        buf = io.StringIO(card_text)
+        series.read(buf, parameter_set)
+
+        # Write without retain_parameters should show resolved values
+        output = series.write(comment=False)
+        assert "&val1" not in output
+        assert "100.0" in output
+
+    @pytest.mark.keywords
+    def test_series_card_write_with_negative_parameter(self):
+        """Test that negative parameter references are retained."""
+        parameter_set = ParameterSet()
+        parameter_set.add("offs", 50.0)
+
+        series = SeriesCard(
+            name="values",
+            fields_per_card=8,
+            element_width=10,
+            input_type=float,
+            length_func=None,
+        )
+
+        card_text = "       1.0    -&offs       3.0"
+        buf = io.StringIO(card_text)
+        series.read(buf, parameter_set)
+
+        # Value should be negated
+        assert series.data[1] == -50.0
+
+        # Write with retain_parameters should show -&offs
+        # Empty uri_prefix since at unit test level there's no outer scope
+        output = series.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=parameter_set,
+            uri_prefix="",
+        )
+        assert "-&offs" in output, f"Expected '-&offs' in output: {output}"

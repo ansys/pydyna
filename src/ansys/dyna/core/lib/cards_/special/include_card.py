@@ -75,8 +75,10 @@ class IncludeCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
         """Writes the card data to an output text buffer or returns it as a string."""
+        # kwargs may include retain_parameters, parameter_set, etc. - not used by IncludeCard
         if format == None:
             format = self._format_type
 

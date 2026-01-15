@@ -348,6 +348,7 @@ def _parse_csv_value(
     parameter_set: typing.Optional[ParameterSet],
     get_none_value: typing.Callable,
     get_parameter: typing.Callable,
+    field_index: int = 0,
 ) -> typing.Any:
     """Parse a single CSV field value.
 
@@ -362,7 +363,9 @@ def _parse_csv_value(
     get_none_value : callable
         Function to get the appropriate None/default value for the type.
     get_parameter : callable
-        Function to resolve parameter references.
+        Function to resolve parameter references. Signature: (text_block, item_type, field_index) -> value.
+    field_index : int, optional
+        The index of this field in the spec, used for recording parameter references.
 
     Returns
     -------
@@ -379,7 +382,7 @@ def _parse_csv_value(
     if "&" in text_block:
         if parameter_set is None:
             raise ValueError("Parameter set must be provided when using parameters in keyword data.")
-        return get_parameter(text_block, item_type)
+        return get_parameter(text_block, item_type, field_index)
 
     # Handle Flag type
     if _is_flag(item_type):
@@ -441,8 +444,9 @@ def _load_dataline_csv(
             )
         return None
 
-    def get_parameter(text_block: str, item_type: type) -> typing.Any:
-        text_block = text_block.strip()
+    def get_parameter(text_block: str, item_type: type, field_index: int) -> typing.Any:
+        original_ref = text_block.strip()  # Preserve original reference string
+        text_block = original_ref
         negative = False
         if text_block.startswith("-&"):
             negative = True
@@ -461,6 +465,10 @@ def _load_dataline_csv(
             )
         if negative:
             value *= -1.0
+
+        # Record the parameter reference for potential write-back
+        parameter_set.record_ref(str(field_index), original_ref)
+
         return value
 
     expanded_spec = _expand_spec(spec)
@@ -486,7 +494,7 @@ def _load_dataline_csv(
         _, _, item_type = item_spec
         if i < num_csv_fields:
             text_block = csv_fields[i]
-            value = _parse_csv_value(text_block, item_type, parameter_set, get_none_value, get_parameter)
+            value = _parse_csv_value(text_block, item_type, parameter_set, get_none_value, get_parameter, i)
         else:
             value = get_none_value(item_type)
         data.append(value)
@@ -580,8 +588,9 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     # Fixed-width format parsing (original implementation)
     logger.debug("Using fixed-width format for line")
 
-    def get_parameter(text_block: str, item_type: type) -> typing.Any:
-        text_block = text_block.strip()
+    def get_parameter(text_block: str, item_type: type, field_index: int) -> typing.Any:
+        original_ref = text_block.strip()  # Preserve original reference string
+        text_block = original_ref
         negative = False
         if text_block.startswith("-&"):
             negative = True
@@ -600,12 +609,16 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             )
         if negative:
             value *= -1.0
+
+        # Record the parameter reference for potential write-back
+        parameter_set.record_ref(str(field_index), original_ref)
+
         return value
 
     expanded_spec = _expand_spec(spec)
     data = []
     end_position = 0
-    for item_spec in expanded_spec:
+    for field_index, item_spec in enumerate(expanded_spec):
         position, width, item_type = item_spec
         end_position, text_block = seek_text_block(line_data, position, width)
         if not has_value(text_block):
@@ -628,7 +641,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         elif _has_parameter(text_block):
             if parameter_set is None:
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
-            value = get_parameter(text_block, item_type)
+            value = get_parameter(text_block, item_type, field_index)
         elif item_type is int:
             value = int(float(text_block))
         elif item_type is str:

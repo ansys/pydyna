@@ -22,6 +22,7 @@
 
 """Parameter classes."""
 
+import contextlib
 import logging
 import typing
 
@@ -56,6 +57,8 @@ class ParameterSet:
         """
         self._params = dict()  # Local parameters in this scope
         self._parent = parent  # Parent scope for lookup
+        self._uri_stack: typing.List[str] = []  # Stack for building current URI path
+        self._refs: typing.Dict[str, str] = {}  # URI -> parameter reference string (e.g., "&myvar")
         logger.debug(f"Created ParameterSet with parent={parent is not None}")
 
     def get(self, param: str) -> typing.Any:
@@ -135,6 +138,89 @@ class ParameterSet:
         """
         logger.debug("Creating child scope")
         return ParameterSet(parent=self)
+
+    @contextlib.contextmanager
+    def scope(self, segment: str) -> typing.Generator[None, None, None]:
+        """Context manager to scope a URI segment during card reading.
+
+        As the read stack descends (keyword -> card -> field), each layer
+        pushes its segment and pops on exit. Parameter references are
+        recorded at the current full URI path.
+
+        Parameters
+        ----------
+        segment : str
+            URI segment to push (e.g., keyword id, card index, field name).
+
+        Yields
+        ------
+        None
+
+        Examples
+        --------
+        >>> with parameter_set.scope("12345"):  # keyword id
+        ...     with parameter_set.scope("card0"):
+        ...         parameter_set.record_ref("secid", "&mysec")
+        ...         # Records at URI: "12345/card0/secid"
+        """
+        self._uri_stack.append(segment)
+        logger.debug(f"Pushed URI segment '{segment}', stack: {self._uri_stack}")
+        try:
+            yield
+        finally:
+            popped = self._uri_stack.pop()
+            logger.debug(f"Popped URI segment '{popped}', stack: {self._uri_stack}")
+
+    def record_ref(self, field: str, ref: str) -> None:
+        """Record a parameter reference at the current URI path.
+
+        Called during card reading when a parameter reference (e.g., &myvar)
+        is resolved. Stores the original reference string so it can be
+        written back instead of the resolved value.
+
+        Parameters
+        ----------
+        field : str
+            Field name or index to append to current URI path.
+        ref : str
+            The original parameter reference string (e.g., "&myvar", "-&density").
+        """
+        uri = "/".join(self._uri_stack + [field])
+        self._refs[uri] = ref
+        logger.debug(f"Recorded parameter ref at URI '{uri}': {ref}")
+
+    def get_ref(self, *path_segments: str) -> typing.Optional[str]:
+        """Get the parameter reference string for a URI path.
+
+        Called during card writing to check if a field value came from
+        a parameter reference that should be written instead of the value.
+
+        Parameters
+        ----------
+        *path_segments : str
+            URI path segments to join (e.g., keyword_id, card_index, field_name).
+
+        Returns
+        -------
+        str or None
+            The original parameter reference string if one was recorded,
+            or None if the value was a literal.
+        """
+        uri = "/".join(path_segments)
+        ref = self._refs.get(uri)
+        if ref:
+            logger.debug(f"Found parameter ref at URI '{uri}': {ref}")
+        return ref
+
+    def get_current_uri(self) -> str:
+        """Get the current URI path as a string.
+
+        Returns
+        -------
+        str
+            The current URI path joined with '/'.
+        """
+        return "/".join(self._uri_stack)
 
 
 def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, typing.Any]:  # noqa: F821

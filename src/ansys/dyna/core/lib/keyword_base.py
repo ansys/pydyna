@@ -80,6 +80,7 @@ class KeywordBase(Cards):
         self._format_type: format_type = kwargs.get("format", format_type.default)
         self._deck = None
         self._included_from = None
+        self._parameter_set: typing.Optional[ParameterSet] = None  # Stored for write-time ref lookup
 
     @property
     def deck(self) -> typing.Optional["Deck"]:
@@ -258,6 +259,7 @@ class KeywordBase(Cards):
         buf: typing.Optional[typing.TextIO] = None,
         format: typing.Optional[format_type] = None,
         deck_format: format_type = format_type.default,
+        retain_parameters: bool = False,
     ) -> str:
         """Renders the keyword in the dyna keyword format.
 
@@ -265,6 +267,13 @@ class KeywordBase(Cards):
         ----------
         buf: IO
             Optional - buffer to write to.
+        format: format_type, optional
+            Format to use for writing.
+        deck_format: format_type, optional
+            The deck's format (used to determine if format symbol needed).
+        retain_parameters: bool, optional
+            If True, write original parameter references (e.g., &myvar) instead of
+            substituted values for fields that were read from parameters. Default is False.
 
         Returns
         -------
@@ -278,7 +287,7 @@ class KeywordBase(Cards):
             buf = io.StringIO()
         self._write_header(buf, self._get_symbol(format, deck_format))
         format = self._get_write_format(format, deck_format)
-        Cards.write(self, buf, format)
+        Cards.write(self, buf, format, retain_parameters=retain_parameters)
         if will_return:
             keyword_string = buf.getvalue()[: buf.tell()]
             return keyword_string
@@ -320,7 +329,16 @@ class KeywordBase(Cards):
             self._activate_options(title_line.strip("*"))
         # TODO: self.user_comment should come from somewhere.
         # maybe after the keyword but before any $#
-        self._read_data(buf, parameters)
+
+        # Store parameter set for write-time reference lookup
+        self._parameter_set = parameters
+
+        # Scope the parameter references by this keyword's identity
+        if parameters is not None:
+            with parameters.scope(str(id(self))):
+                self._read_data(buf, parameters)
+        else:
+            self._read_data(buf, parameters)
 
     def loads(self, value: str, parameters: ParameterSet = None) -> typing.Any:
         """Load the keyword from string.
