@@ -205,7 +205,7 @@ class TestCardSetWithDiscriminator:
                             Field("theta", float, 0, 10),
                             Field("a", float, 10, 10),
                         ],
-                        
+
                     ),
                     Card(
                         [
@@ -213,7 +213,7 @@ class TestCardSetWithDiscriminator:
                             Field("val1", float, 10, 10),
                         ],
                         lambda: self.dtype == 1,
-                        
+
                     ),
                     Card(
                         [
@@ -222,7 +222,7 @@ class TestCardSetWithDiscriminator:
                             Field("val3", float, 20, 10),
                         ],
                         lambda: self.dtype == 2,
-                        
+
                     ),
                 ]
 
@@ -271,7 +271,7 @@ class TestCardSetWithDiscriminator:
                     Card(
                         [Field("dtype", int, 0, 10, 1), Field("val2", float, 10, 10), Field("val3", float, 20, 10)],
                         lambda: self.dtype == 2,
-                        
+
                     ),
                 ]
 
