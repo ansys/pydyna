@@ -189,7 +189,10 @@ class SeriesCard(CardInterface):
 
     def _num_rows(self):
         fields_per_card = self._get_fields_per_card()
-        return math.ceil(self._length_func() / fields_per_card)
+        length = self._length_func()
+        if length is None or length == 0:
+            return 0
+        return math.ceil(length / fields_per_card)
 
     def __getitem__(self, index):
         err_string = (

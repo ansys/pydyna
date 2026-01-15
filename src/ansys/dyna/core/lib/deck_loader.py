@@ -167,7 +167,10 @@ def _on_error(error, import_handlers: typing.List[ImportHandler]):
 
 def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
     for handler in import_handlers:
-        handler.after_import(context, keyword)
+        try:
+            handler.after_import(context, keyword)
+        except Exception as e:
+            handler.on_error(e)
 
 
 def _get_format_from_keyword_suffix(keyword: str) -> format_type:
@@ -238,8 +241,6 @@ def _load_keyword(
     """
     try:
         keyword_object.loads(keyword_data, deck.parameters)
-        deck.append(keyword_object)
-        _after_import(keyword_object, import_handlers, context)
     except Exception as e:
         if context is not None and context.strict:
             raise
@@ -247,6 +248,9 @@ def _load_keyword(
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
         _after_import(keyword_data, import_handlers, context)
+        return
+    deck.append(keyword_object)
+    _after_import(keyword_object, import_handlers, context)
 
 
 def _handle_keyword(

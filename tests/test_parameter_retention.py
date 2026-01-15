@@ -32,6 +32,7 @@ import pytest
 
 from ansys.dyna.core.lib.parameters import ParameterSet
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 
 
@@ -245,11 +246,11 @@ class TestCardReadRefRecording:
         ps = ParameterSet()
         ps.add("secid", 100)
 
-        card = Card(
-            [
-                Field("secid", int, 0, 10, None),
-                Field("elform", int, 10, 10, 1),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("secid", int, 0, 10, None),
+                FieldSchema("elform", int, 10, 10, 1),
+            )
         )
 
         line = "    &secid         2"
@@ -274,11 +275,11 @@ class TestCardWriteRetainParameters:
     @pytest.mark.keywords
     def test_card_write_without_retain_writes_values(self):
         """Test normal card write outputs substituted values."""
-        card = Card(
-            [
-                Field("secid", int, 0, 10, 100),
-                Field("elform", int, 10, 10, 2),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("secid", int, 0, 10, 100),
+                FieldSchema("elform", int, 10, 10, 2),
+            )
         )
         card.set_value("secid", 100)
         card.set_value("elform", 2)
@@ -297,11 +298,11 @@ class TestCardWriteRetainParameters:
         ps.add("secid", 100)
         ps._refs["kwd/card0/0"] = "&secid"
 
-        card = Card(
-            [
-                Field("secid", int, 0, 10, 100),
-                Field("elform", int, 10, 10, 2),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("secid", int, 0, 10, 100),
+                FieldSchema("elform", int, 10, 10, 2),
+            )
         )
         card.set_value("secid", 100)
         card.set_value("elform", 2)
@@ -324,10 +325,10 @@ class TestCardWriteRetainParameters:
         ps = ParameterSet()
         # No refs recorded
 
-        card = Card(
-            [
-                Field("secid", int, 0, 10, 100),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("secid", int, 0, 10, 100),
+            )
         )
         card.set_value("secid", 100)
 
@@ -348,10 +349,10 @@ class TestCardWriteRetainParameters:
         ps.add("offset", 50.0)
         ps._refs["kwd/card0/0"] = "-&offset"
 
-        card = Card(
-            [
-                Field("value", float, 0, 10, -50.0),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("value", float, 0, 10, -50.0),
+            )
         )
         card.set_value("value", -50.0)
 
@@ -375,11 +376,11 @@ class TestRoundTrip:
         ps.add("myval", 42)
 
         # Read
-        card = Card(
-            [
-                Field("id", int, 0, 10, None),
-                Field("val", int, 10, 10, None),
-            ]
+        card = Card.from_field_schemas(
+            (
+                FieldSchema("id", int, 0, 10, None),
+                FieldSchema("val", int, 10, 10, None),
+            )
         )
 
         line = "    &myval        99"

@@ -406,7 +406,11 @@ class Card(CardInterface):
         """Get whether the card is active."""
         if self._active_func is None:
             return True
-        return True if self._active_func() else False
+        try:
+            return True if self._active_func() else False
+        except TypeError:
+            # active_func may compare with None when fields are missing from input
+            return False
 
     # only used by tests, TODO move to conftest
     def _get_comment(self, format: format_type) -> str:

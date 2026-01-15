@@ -24,8 +24,15 @@ import typing
 
 import pytest
 
-from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.card import Card
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec, Options
+
+
+# Define field schemas as module-level tuples for reuse
+_FIELD_SCHEMAS_A = (FieldSchema("a", int, 0, 10),)
+_FIELD_SCHEMAS_B = (FieldSchema("b", int, 0, 10),)
+
 
 class OptionAPIImplementation:
     def __init__(self, **kwargs):
@@ -38,32 +45,14 @@ class OptionAPIImplementation:
             OptionCardSet(
                 option_spec = self._option_specs["FOO"],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "a",
-                                int,
-                                0,
-                                10,
-                            )
-                        ],
-                    ),
+                    Card.from_field_schemas(_FIELD_SCHEMAS_A),
                 ],
                 **kwargs
             ),
             OptionCardSet(
                 option_spec = self._option_specs["BAR"],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "b",
-                                int,
-                                0,
-                                10,
-                            )
-                        ],
-                    ),
+                    Card.from_field_schemas(_FIELD_SCHEMAS_B),
                 ],
                 **kwargs
             ),

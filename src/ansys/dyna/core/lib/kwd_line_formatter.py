@@ -256,6 +256,51 @@ def _spec_has_dataclass(spec: typing.List[tuple]) -> bool:
     return FormatSpec.from_list(spec).has_dataclass
 
 
+import re
+
+# Regex pattern to match Fortran/LS-DYNA compact scientific notation
+# Examples: "1.00000+4", "3.5-10", "-2.1+5", "1+4", "-3-2"
+# This matches a number (integer or float) followed directly by +/- and digits (exponent)
+# without an intervening 'E' or 'e' or 'D' or 'd'
+_COMPACT_SCIENTIFIC_RE = re.compile(r"^([+-]?\d*\.?\d+)([+-]\d+)$")
+
+
+def _normalize_dyna_float(text: str) -> str:
+    """Normalize LS-DYNA Fortran-style scientific notation to standard Python format.
+
+    LS-DYNA (and Fortran) allow scientific notation without the 'E' when the
+    exponent sign is present. For example:
+    - "1.00000+4" means 1.00000E+4 = 10000
+    - "3.5-10" means 3.5E-10
+    - "1+4" means 1E+4
+
+    Also handles 'D' notation from Fortran (e.g., "1.0D+4" -> "1.0E+4").
+
+    Parameters
+    ----------
+    text : str
+        The text to normalize (may contain leading/trailing whitespace).
+
+    Returns
+    -------
+    str
+        The normalized string suitable for Python's float() function.
+    """
+    # Strip whitespace first
+    text = text.strip()
+
+    # Handle Fortran 'D' notation
+    text = text.replace("D", "E").replace("d", "e")
+
+    # Check for compact notation (number followed by +/- digits with no E)
+    match = _COMPACT_SCIENTIFIC_RE.match(text)
+    if match:
+        mantissa, exponent = match.groups()
+        return f"{mantissa}E{exponent}"
+
+    return text
+
+
 def _convert_type(raw_value, item_type):
     if item_type is int and isinstance(raw_value, float):
         # ensure that float raw_values are convertible to int
@@ -322,8 +367,10 @@ def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
 
     # If we know expected field count, check if CSV count matches
     if num_fields is not None:
-        # If CSV field count matches expected (within ±1), likely CSV
-        if num_csv_fields >= num_fields - 1 and num_csv_fields <= num_fields + 2:
+        # CSV format allows trailing fields to be omitted.
+        # If CSV field count is <= expected fields AND line looks like CSV
+        # (no significant leading spaces), treat as CSV.
+        if num_csv_fields <= num_fields + 2:
             # Additional check: first field shouldn't have many leading spaces
             # (which would indicate fixed-width format with embedded commas)
             first_field = csv_fields[0]
@@ -398,11 +445,11 @@ def _parse_csv_value(
 
     # Parse by type
     if item_type is int:
-        return int(float(text_block))
+        return int(float(_normalize_dyna_float(text_block)))
     elif item_type is str:
         return text_block
     elif item_type is float:
-        return float(text_block)
+        return float(_normalize_dyna_float(text_block))
     else:
         raise Exception(f"Unexpected type in CSV field: {item_type}")
 
@@ -627,27 +674,24 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             flag: Flag = item_type
             true_value = flag.true_value
             false_value = flag.false_value
-            # check  the true value first, empty text may be false but not true
+            # check the true value first, empty text may be false but not true
             if true_value in text_block:
                 value = True
+            elif len(false_value) == 0 or false_value in text_block:
+                # If false_value is empty, any non-true value is considered False
+                value = False
             else:
-                if len(false_value) == 0:
-                    warnings.warn("value detected in field where false value was an empty string")
-                    value = False
-                else:
-                    if false_value in text_block:
-                        value = False
-                    raise Exception("Failed to find true or false value in flag")
+                raise Exception("Failed to find true or false value in flag")
         elif _has_parameter(text_block):
             if parameter_set is None:
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type, field_index)
         elif item_type is int:
-            value = int(float(text_block))
+            value = int(float(_normalize_dyna_float(text_block)))
         elif item_type is str:
             value = text_block.strip()
         elif item_type is float:
-            value = float(text_block)
+            value = float(_normalize_dyna_float(text_block))
         else:
             raise Exception(f"Unexpected type in load_dataline spec: {item_type}")
         data.append(value)
