@@ -49,8 +49,8 @@ import pandas as pd
 
 from ansys.dyna.core import Deck
 from ansys.dyna.core import keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 rundir = tempfile.TemporaryDirectory()
 mesh_file_name = "mesh.k"
