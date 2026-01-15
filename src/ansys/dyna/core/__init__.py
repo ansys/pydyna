@@ -23,8 +23,6 @@
 from ansys.dyna.core.keywords import keywords
 from ansys.dyna.core.lib.config import disable_csv_autodetect
 from ansys.dyna.core.lib.deck import Deck
-from ansys.dyna.core.solver.dynasolver import *
-import ansys.dyna.core.solver.grpc_tags
 
 # Version
 # ------------------------------------------------------------------------------
