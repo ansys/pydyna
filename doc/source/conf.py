@@ -154,7 +154,7 @@ html_theme_options = {
         ],
         "output": "api",
     },
-    "announcement": "ansys.dyna.core.pre and ansys.dyna.core.run subpackages are deprecated and will be removed in the next release(v0.10.0) onwards.",
+    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}</style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed in the next release(v0.10.0) onwards.",
 }
 
 # static path
