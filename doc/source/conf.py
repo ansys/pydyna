@@ -154,6 +154,7 @@ html_theme_options = {
         ],
         "output": "api",
     },
+    "announcement": "ansys.dyna.core.pre and ansys.dyna.core.run subpackages are deprecated and will be removed in the next release(v0.10.0) onwards.",
 }
 
 # static path
@@ -236,7 +237,8 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
-    sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    if BUILD_API:
+        sphinx.connect("autoapi-skip-member", skip_run_subpackage)
 
     # Add timing instrumentation for performance profiling
     import time
