@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINECURVEDUPLICATE_CARD0 = (
     FieldSchema("lcid", int, 0, 10, None),
@@ -49,6 +51,9 @@ class DefineCurveDuplicate(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "rlcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCurveDuplicate class."""
@@ -163,4 +168,19 @@ class DefineCurveDuplicate(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def rlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for rlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.rlcid:
+                return kwd
+        return None
+
+    @rlcid_link.setter
+    def rlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for rlcid."""
+        self.rlcid = value.lcid
 

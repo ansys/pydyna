@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDBOUNDARYPERIODIC_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -41,6 +43,10 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_PERIODIC"
+    _link_fields = {
+        "pdlcid": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryPeriodic class."""
@@ -139,4 +145,24 @@ class IcfdBoundaryPeriodic(KeywordBase):
     def angle(self, value: int) -> None:
         """Set the angle property."""
         self._cards[0].set_value("angle", value)
+
+    @property
+    def pdlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pdlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pdlcid:
+                return kwd
+        return None
+
+    @pdlcid_link.setter
+    def pdlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pdlcid."""
+        self.pdlcid = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

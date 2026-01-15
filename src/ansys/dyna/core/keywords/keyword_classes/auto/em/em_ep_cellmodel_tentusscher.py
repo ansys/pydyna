@@ -25,15 +25,16 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCELLMODELTENTUSSCHER_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
 )
 
 _EMEPCELLMODELTENTUSSCHER_CARD1 = (
-    FieldSchema("r", float, 0, 10, None),
+    FieldSchema("gas_constant", float, 0, 10, None, "r"),
     FieldSchema("t", float, 10, 10, None),
-    FieldSchema("f", float, 20, 10, None),
+    FieldSchema("faraday_constant", float, 20, 10, None, "f"),
     FieldSchema("cm", float, 30, 10, None),
     FieldSchema("vc", float, 40, 10, None),
     FieldSchema("vsr", float, 50, 10, None),
@@ -144,6 +145,9 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_TENTUSSCHER"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelTentusscher class."""
@@ -207,12 +211,12 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
         Note: Location in manual: card:2, field: R
         """ # nopep8
-        return self._cards[1].get_value("r")
+        return self._cards[1].get_value("gas_constant")
 
     @gas_constant.setter
     def gas_constant(self, value: float) -> None:
         """Set the gas_constant property."""
-        self._cards[1].set_value("r", value)
+        self._cards[1].set_value("gas_constant", value)
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -231,12 +235,12 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
         Note: Location in manual: card:2, field: F
         """ # nopep8
-        return self._cards[1].get_value("f")
+        return self._cards[1].get_value("faraday_constant")
 
     @faraday_constant.setter
     def faraday_constant(self, value: float) -> None:
         """Set the faraday_constant property."""
-        self._cards[1].set_value("f", value)
+        self._cards[1].set_value("faraday_constant", value)
 
     @property
     def cm(self) -> typing.Optional[float]:
@@ -956,4 +960,19 @@ class EmEpCellmodelTentusscher(KeywordBase):
     def r(self, value: float) -> None:
         """Set the r property."""
         self._cards[12].set_value("r", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

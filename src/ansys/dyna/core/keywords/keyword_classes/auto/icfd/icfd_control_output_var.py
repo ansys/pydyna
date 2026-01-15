@@ -49,7 +49,7 @@ _ICFDCONTROLOUTPUTVAR_CARD3 = (
     FieldSchema("kp", int, 0, 10, 0),
     FieldSchema("ep", int, 10, 10, 0),
     FieldSchema("mut", int, 20, 10, 0),
-    FieldSchema("int", int, 30, 10, 0),
+    FieldSchema("int_", int, 30, 10, 0, "int"),
     FieldSchema("cmu", int, 40, 10, 0),
 )
 
@@ -277,14 +277,14 @@ class IcfdControlOutputVar(KeywordBase):
         EQ.0:	Is output.
         EQ.1:	Is not output
         """ # nopep8
-        return self._cards[3].get_value("int")
+        return self._cards[3].get_value("int_")
 
     @int_.setter
     def int_(self, value: int) -> None:
         """Set the int_ property."""
         if value not in [0, 1, None]:
             raise Exception("""int_ must be `None` or one of {0,1}.""")
-        self._cards[3].set_value("int", value)
+        self._cards[3].set_value("int_", value)
 
     @property
     def cmu(self) -> int:

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADBODYGENERALIZEDSETNODE_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
@@ -52,6 +54,10 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "BODY_GENERALIZED_SET_NODE"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "drlcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBodyGeneralizedSetNode class."""
@@ -233,4 +239,34 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
         if value not in ["CENT", "CORI", "ROTA", None]:
             raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}.""")
         self._cards[1].set_value("angtyp", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def drlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for drlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.drlcid:
+                return kwd
+        return None
+
+    @drlcid_link.setter
+    def drlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for drlcid."""
+        self.drlcid = value.lcid
 

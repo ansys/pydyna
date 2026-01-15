@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD0 = (
     FieldSchema("mdmin", int, 0, 10, 1),
@@ -62,7 +64,7 @@ _FREQUENCYDOMAINRESPONSESPECTRUM_CARD4 = (
 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD5 = (
     FieldSchema("lctyp", int, 0, 10, 0),
     FieldSchema("dof", int, 10, 10, 1),
-    FieldSchema("lc/tbid", int, 20, 10, None),
+    FieldSchema("lc_tbid", int, 20, 10, None, "lc/tbid"),
     FieldSchema("sf", float, 30, 10, 1.0),
     FieldSchema("vid", int, 40, 10, None),
     FieldSchema("lnid", int, 50, 10, None),
@@ -75,6 +77,10 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_RESPONSE_SPECTRUM"
+    _link_fields = {
+        "lcdamp": LinkType.DEFINE_CURVE,
+        "lc_tbid": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainResponseSpectrum class."""
@@ -371,12 +377,12 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
     def lc_tbid(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the response spectrum for frequencies. If the table definition is used a family of curves are defined for discrete critical damping ratios.
         """ # nopep8
-        return self._cards[5].get_value("lc/tbid")
+        return self._cards[5].get_value("lc_tbid")
 
     @lc_tbid.setter
     def lc_tbid(self, value: int) -> None:
         """Set the lc_tbid property."""
-        self._cards[5].set_value("lc/tbid", value)
+        self._cards[5].set_value("lc_tbid", value)
 
     @property
     def sf(self) -> float:
@@ -444,4 +450,43 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""inflag must be `None` or one of {0,1,2}.""")
         self._cards[5].set_value("inflag", value)
+
+    @property
+    def lcdamp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdamp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdamp:
+                return kwd
+        return None
+
+    @lcdamp_link.setter
+    def lcdamp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdamp."""
+        self.lcdamp = value.lcid
+
+    @property
+    def lc_tbid_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
+        if self.deck is None:
+            return None
+        field_value = self.lc_tbid
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lc_tbid_link.setter
+    def lc_tbid_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lc_tbid."""
+        if hasattr(value, "lcid"):
+            self.lc_tbid = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lc_tbid = value.tbid
 

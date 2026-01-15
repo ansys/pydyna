@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATCAZACUBARLAT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -61,9 +63,9 @@ _MATCAZACUBARLAT_CARD2 = (
 )
 
 _MATCAZACUBARLAT_CARD3 = (
-    FieldSchema("xp ", int, 0, 10, None),
-    FieldSchema("yp ", int, 10, 10, None),
-    FieldSchema("zp ", int, 20, 10, None),
+    FieldSchema("xp_", int, 0, 10, None, "xp "),
+    FieldSchema("yp_", int, 10, 10, None, "yp "),
+    FieldSchema("zp_", int, 20, 10, None, "zp "),
     FieldSchema("a1", float, 30, 10, 0.0),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -92,6 +94,9 @@ class MatCazacuBarlat(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatCazacuBarlat class."""
@@ -385,34 +390,34 @@ class MatCazacuBarlat(KeywordBase):
     def xp_(self) -> typing.Optional[int]:
         """Get or set the Coordinates of point p for AOPT = 1 and 4
         """ # nopep8
-        return self._cards[3].get_value("xp ")
+        return self._cards[3].get_value("xp_")
 
     @xp_.setter
     def xp_(self, value: int) -> None:
         """Set the xp_ property."""
-        self._cards[3].set_value("xp ", value)
+        self._cards[3].set_value("xp_", value)
 
     @property
     def yp_(self) -> typing.Optional[int]:
         """Get or set the Coordinates of point p for AOPT = 1 and 4
         """ # nopep8
-        return self._cards[3].get_value("yp ")
+        return self._cards[3].get_value("yp_")
 
     @yp_.setter
     def yp_(self, value: int) -> None:
         """Set the yp_ property."""
-        self._cards[3].set_value("yp ", value)
+        self._cards[3].set_value("yp_", value)
 
     @property
     def zp_(self) -> typing.Optional[int]:
         """Get or set the Coordinates of point p for AOPT = 1 and 4
         """ # nopep8
-        return self._cards[3].get_value("zp ")
+        return self._cards[3].get_value("zp_")
 
     @zp_.setter
     def zp_(self, value: int) -> None:
         """Set the zp_ property."""
-        self._cards[3].set_value("zp ", value)
+        self._cards[3].set_value("zp_", value)
 
     @property
     def a1(self) -> float:
@@ -553,4 +558,19 @@ class MatCazacuBarlat(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

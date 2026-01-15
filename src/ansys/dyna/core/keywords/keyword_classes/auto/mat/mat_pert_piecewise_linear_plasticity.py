@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATPERTPIECEWISELINEARPLASTICITY_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -80,6 +82,10 @@ class MatPertPiecewiseLinearPlasticity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcsr": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPertPiecewiseLinearPlasticity class."""
@@ -453,4 +459,43 @@ class MatPertPiecewiseLinearPlasticity(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
+
+    @property
+    def lcss_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
+        if self.deck is None:
+            return None
+        field_value = self.lcss
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcss."""
+        if hasattr(value, "lcid"):
+            self.lcss = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcss = value.tbid
 

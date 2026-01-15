@@ -56,7 +56,7 @@ _INITIALVOLUMEFRACTIONGEOMETRY_CARD2 = (
 )
 
 _INITIALVOLUMEFRACTIONGEOMETRY_CARD3 = (
-    FieldSchema("sgsid ", int, 0, 10, None),
+    FieldSchema("sgsid_", int, 0, 10, None, "sgsid "),
     FieldSchema("normdir", int, 10, 10, None),
     FieldSchema("xoffset", float, 30, 10, 0.0),
     FieldSchema("unused", int, 30, 10, None),
@@ -330,12 +330,12 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def sgsid_(self) -> typing.Optional[int]:
         """Get or set the Segment Set ID defining the "container", see *SET_SEGMENT
         """ # nopep8
-        return self._cards[3].get_value("sgsid ")
+        return self._cards[3].get_value("sgsid_")
 
     @sgsid_.setter
     def sgsid_(self, value: int) -> None:
         """Set the sgsid_ property."""
-        self._cards[3].set_value("sgsid ", value)
+        self._cards[3].set_value("sgsid_", value)
 
     @property
     def normdir(self) -> typing.Optional[int]:

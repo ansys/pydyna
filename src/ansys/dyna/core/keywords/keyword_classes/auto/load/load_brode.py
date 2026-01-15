@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADBRODE_CARD0 = (
     FieldSchema("yld", float, 0, 10, 0.0),
@@ -48,6 +50,10 @@ class LoadBrode(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "BRODE"
+    _link_fields = {
+        "talc": LinkType.DEFINE_CURVE,
+        "sflc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBrode class."""
@@ -180,4 +186,34 @@ class LoadBrode(KeywordBase):
     def cfp(self, value: float) -> None:
         """Set the cfp property."""
         self._cards[1].set_value("cfp", value)
+
+    @property
+    def talc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for talc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.talc:
+                return kwd
+        return None
+
+    @talc_link.setter
+    def talc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for talc."""
+        self.talc = value.lcid
+
+    @property
+    def sflc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sflc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sflc:
+                return kwd
+        return None
+
+    @sflc_link.setter
+    def sflc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sflc."""
+        self.sflc = value.lcid
 

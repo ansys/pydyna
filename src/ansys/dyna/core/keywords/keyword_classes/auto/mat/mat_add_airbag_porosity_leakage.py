@@ -26,11 +26,12 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATADDAIRBAGPOROSITYLEAKAGE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
-    FieldSchema("x2/flc", float, 10, 10, None),
-    FieldSchema("x3/fac", float, 20, 10, 1.0),
+    FieldSchema("x2_flc", float, 10, 10, None, "x2/flc"),
+    FieldSchema("x3_fac", float, 20, 10, 1.0, "x3/fac"),
     FieldSchema("ela", float, 30, 10, None),
     FieldSchema("fvopt", float, 40, 10, None),
     FieldSchema("x0", float, 50, 10, None),
@@ -50,6 +51,9 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddAirbagPorosityLeakage class."""
@@ -88,12 +92,12 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
         GE.0.0:	fabric porous leakage flow coefficient
         LT.0.0 : | FLC | is the load curve ID of the curve defining FLC as a function of time.
         """ # nopep8
-        return self._cards[0].get_value("x2/flc")
+        return self._cards[0].get_value("x2_flc")
 
     @x2_flc.setter
     def x2_flc(self, value: float) -> None:
         """Set the x2_flc property."""
-        self._cards[0].set_value("x2/flc", value)
+        self._cards[0].set_value("x2_flc", value)
 
     @property
     def x3_fac(self) -> float:
@@ -102,12 +106,12 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
         GE.0.0:	optional fabric characteristic parameter
         LT.0.0 : | FAC | is the load curve ID of the curve defining FAC as a function of absolute pressure.
         """ # nopep8
-        return self._cards[0].get_value("x3/fac")
+        return self._cards[0].get_value("x3_fac")
 
     @x3_fac.setter
     def x3_fac(self, value: float) -> None:
         """Set the x3_fac property."""
-        self._cards[0].set_value("x3/fac", value)
+        self._cards[0].set_value("x3_fac", value)
 
     @property
     def ela(self) -> typing.Optional[float]:
@@ -175,4 +179,19 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

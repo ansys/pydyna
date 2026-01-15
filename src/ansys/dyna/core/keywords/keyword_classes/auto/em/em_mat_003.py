@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMMAT003_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -42,7 +43,7 @@ _EMMAT003_CARD1 = (
     FieldSchema("sigma31", float, 40, 10, None),
     FieldSchema("sigma32", float, 50, 10, None),
     FieldSchema("aopt", int, 60, 10, 0),
-    FieldSchema("lambda", float, 70, 10, None),
+    FieldSchema("lambda_", float, 70, 10, None, "lambda"),
 )
 
 _EMMAT003_CARD2 = (
@@ -69,6 +70,9 @@ class EmMat003(KeywordBase):
 
     keyword = "EM"
     subkeyword = "MAT_003"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmMat003 class."""
@@ -237,12 +241,12 @@ class EmMat003(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Intra- to extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials
         """ # nopep8
-        return self._cards[1].get_value("lambda")
+        return self._cards[1].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[1].set_value("lambda", value)
+        self._cards[1].set_value("lambda_", value)
 
     @property
     def xp(self) -> typing.Optional[float]:
@@ -387,4 +391,19 @@ class EmMat003(KeywordBase):
     def d3(self, value: float) -> None:
         """Set the d3 property."""
         self._cards[3].set_value("d3", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

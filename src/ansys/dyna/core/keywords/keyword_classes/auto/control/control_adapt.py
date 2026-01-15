@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTROLADAPT_CARD0 = (
     FieldSchema("adpfreq", float, 0, 10, None),
@@ -53,6 +55,9 @@ class ControlAdapt(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "ADAPT"
+    _link_fields = {
+        "lcadp": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlAdapt class."""
@@ -270,4 +275,19 @@ class ControlAdapt(KeywordBase):
     def maxel(self, value: int) -> None:
         """Set the maxel property."""
         self._cards[1].set_value("maxel", value)
+
+    @property
+    def lcadp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcadp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcadp:
+                return kwd
+        return None
+
+    @lcadp_link.setter
+    def lcadp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcadp."""
+        self.lcadp = value.lcid
 

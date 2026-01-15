@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATFABRICMAP_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -41,8 +43,8 @@ _MATFABRICMAP_CARD1 = (
     FieldSchema("fvopt", float, 0, 10, None),
     FieldSchema("x0", float, 10, 10, None),
     FieldSchema("x1", float, 20, 10, None),
-    FieldSchema("flc/x2", float, 30, 10, None),
-    FieldSchema("fac/x3", float, 40, 10, None),
+    FieldSchema("flc_x2", float, 30, 10, None, "flc/x2"),
+    FieldSchema("fac_x3", float, 40, 10, None, "fac/x3"),
 )
 
 _MATFABRICMAP_CARD2 = (
@@ -94,6 +96,13 @@ class MatFabricMap(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "sxy": LinkType.DEFINE_CURVE,
+        "th": LinkType.DEFINE_CURVE,
+        "srfac": LinkType.DEFINE_CURVE,
+        "fxx": LinkType.DEFINE_CURVE,
+        "fyy": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatFabricMap class."""
@@ -245,23 +254,23 @@ class MatFabricMap(KeywordBase):
     def flc_x2(self) -> typing.Optional[float]:
         """Get or set the Fabric venting option parameters, see *MAT_FABRIC.
         """ # nopep8
-        return self._cards[1].get_value("flc/x2")
+        return self._cards[1].get_value("flc_x2")
 
     @flc_x2.setter
     def flc_x2(self, value: float) -> None:
         """Set the flc_x2 property."""
-        self._cards[1].set_value("flc/x2", value)
+        self._cards[1].set_value("flc_x2", value)
 
     @property
     def fac_x3(self) -> typing.Optional[float]:
         """Get or set the Fabric venting option parameters, see *MAT_FABRIC.
         """ # nopep8
-        return self._cards[1].get_value("fac/x3")
+        return self._cards[1].get_value("fac_x3")
 
     @fac_x3.setter
     def fac_x3(self, value: float) -> None:
         """Set the fac_x3 property."""
-        self._cards[1].set_value("fac/x3", value)
+        self._cards[1].set_value("fac_x3", value)
 
     @property
     def isrefg(self) -> float:
@@ -559,4 +568,79 @@ class MatFabricMap(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def sxy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sxy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sxy:
+                return kwd
+        return None
+
+    @sxy_link.setter
+    def sxy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sxy."""
+        self.sxy = value.lcid
+
+    @property
+    def th_link(self) -> DefineCurve:
+        """Get the DefineCurve object for th."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.th:
+                return kwd
+        return None
+
+    @th_link.setter
+    def th_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for th."""
+        self.th = value.lcid
+
+    @property
+    def srfac_link(self) -> DefineCurve:
+        """Get the DefineCurve object for srfac."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.srfac:
+                return kwd
+        return None
+
+    @srfac_link.setter
+    def srfac_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for srfac."""
+        self.srfac = value.lcid
+
+    @property
+    def fxx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fxx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fxx:
+                return kwd
+        return None
+
+    @fxx_link.setter
+    def fxx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fxx."""
+        self.fxx = value.lcid
+
+    @property
+    def fyy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fyy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fyy:
+                return kwd
+        return None
+
+    @fyy_link.setter
+    def fyy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fyy."""
+        self.fyy = value.lcid
 

@@ -45,7 +45,7 @@ _MATRIGID_CARD1 = (
 )
 
 _MATRIGID_CARD2 = (
-    FieldSchema("lco or a1", float, 0, 10, None),
+    FieldSchema("lco_or_a1", float, 0, 10, None, "lco or a1"),
     FieldSchema("a2", float, 10, 10, None),
     FieldSchema("a3", float, 20, 10, None),
     FieldSchema("v1", float, 30, 10, None),
@@ -263,12 +263,12 @@ class MatRigid(KeywordBase):
         """Get or set the EQ.LCO: Local coordinate system number for output. See *DEFINE_COORDINATE,
         EQ.A1: Component of vector a which is fixed in the rigid body which are used for output and the user defined airbag sensor subroutines.
         """ # nopep8
-        return self._cards[2].get_value("lco or a1")
+        return self._cards[2].get_value("lco_or_a1")
 
     @lco_or_a1.setter
     def lco_or_a1(self, value: float) -> None:
         """Set the lco_or_a1 property."""
-        self._cards[2].set_value("lco or a1", value)
+        self._cards[2].set_value("lco_or_a1", value)
 
     @property
     def a2(self) -> typing.Optional[float]:

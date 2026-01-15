@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTSTACKEDELEMENTS_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -52,6 +53,10 @@ class PartStackedElements(KeywordBase):
 
     keyword = "PART"
     subkeyword = "STACKED_ELEMENTS"
+    _link_fields = {
+        "midi": LinkType.MAT,
+        "sidi": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartStackedElements class."""
@@ -202,4 +207,34 @@ class PartStackedElements(KeywordBase):
     def nsldi(self, value: int) -> None:
         """Set the nsldi property."""
         self._cards[2].set_value("nsldi", value)
+
+    @property
+    def midi_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for midi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.midi:
+                return kwd
+        return None
+
+    @midi_link.setter
+    def midi_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for midi."""
+        self.midi = value.mid
+
+    @property
+    def sidi_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for sidi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.sidi:
+                return kwd
+        return None
+
+    @sidi_link.setter
+    def sidi_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for sidi."""
+        self.sidi = value.secid
 

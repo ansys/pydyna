@@ -141,7 +141,7 @@ _CONTACTTIEDSHELLEDGETOSOLID_OPTION7_CARD0 = (
     FieldSchema("pstiff", int, 0, 10, 0),
     FieldSchema("ignroff", int, 10, 10, 0),
     FieldSchema("fstol", float, 30, 10, 2.0),
-    FieldSchema("2dbinr", int, 40, 10, 0),
+    FieldSchema("_2dbinr", int, 40, 10, 0, "2dbinr"),
     FieldSchema("ssftyp", int, 50, 10, 0),
     FieldSchema("swtpr", int, 60, 10, 0),
     FieldSchema("tetfac", float, 70, 10, 0.0),
@@ -1493,14 +1493,14 @@ class ContactTiedShellEdgeToSolid(KeywordBase):
         EQ.0:No 2D belt initially inside a retractor is involved.
         EQ.1 : 2D belts initially inside retractors are involved
         """ # nopep8
-        return self._cards[10].cards[0].get_value("2dbinr")
+        return self._cards[10].cards[0].get_value("_2dbinr")
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
         """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
-        self._cards[10].cards[0].set_value("2dbinr", value)
+        self._cards[10].cards[0].set_value("_2dbinr", value)
 
         if value:
             self.activate_option("_2DBINR")

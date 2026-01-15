@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CHANGEVELOCITYGENERATION_CARD0 = (
-    FieldSchema("nsid/pid", int, 0, 10, None),
+    FieldSchema("nsid_pid", int, 0, 10, None, "nsid/pid"),
     FieldSchema("styp", int, 10, 10, 1),
     FieldSchema("omega", float, 20, 10, 0.0),
     FieldSchema("vx", float, 30, 10, 0.0),
@@ -70,12 +70,12 @@ class ChangeVelocityGeneration(KeywordBase):
         """Get or set the Node set ID or part set ID.
         EQ.0: STYP is ignored and all velocities are set.
         """ # nopep8
-        return self._cards[0].get_value("nsid/pid")
+        return self._cards[0].get_value("nsid_pid")
 
     @nsid_pid.setter
     def nsid_pid(self, value: int) -> None:
         """Set the nsid_pid property."""
-        self._cards[0].set_value("nsid/pid", value)
+        self._cards[0].set_value("nsid_pid", value)
 
     @property
     def styp(self) -> int:

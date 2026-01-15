@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EOSUSERLIBRARY_CARD0 = (
     FieldSchema("eosid", int, 0, 10, None),
@@ -41,6 +42,9 @@ class EosUserLibrary(KeywordBase):
 
     keyword = "EOS"
     subkeyword = "USER_LIBRARY"
+    _link_fields = {
+        "sesmid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EosUserLibrary class."""
@@ -96,4 +100,19 @@ class EosUserLibrary(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[1].set_value("v0", value)
+
+    @property
+    def sesmid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for sesmid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.sesmid:
+                return kwd
+        return None
+
+    @sesmid_link.setter
+    def sesmid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for sesmid."""
+        self.sesmid = value.mid
 

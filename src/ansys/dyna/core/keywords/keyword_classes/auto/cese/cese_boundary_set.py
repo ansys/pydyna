@@ -25,10 +25,12 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CESEBOUNDARYSET_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
-    FieldSchema("dof ", int, 10, 10, 101),
+    FieldSchema("dof_", int, 10, 10, 101, "dof "),
     FieldSchema("lcid", int, 20, 10, None),
     FieldSchema("sf", float, 30, 10, 1.0),
 )
@@ -38,6 +40,9 @@ class CeseBoundarySet(KeywordBase):
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_SET"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundarySet class."""
@@ -73,14 +78,14 @@ class CeseBoundarySet(KeywordBase):
         EQ.204:  y & z-velocity.
         .
         """ # nopep8
-        return self._cards[0].get_value("dof ")
+        return self._cards[0].get_value("dof_")
 
     @dof_.setter
     def dof_(self, value: int) -> None:
         """Set the dof_ property."""
         if value not in [101, 102, 103, 104, 105, 106, 201, 202, 203, 204, None]:
             raise Exception("""dof_ must be `None` or one of {101,102,103,104,105,106,201,202,203,204}.""")
-        self._cards[0].set_value("dof ", value)
+        self._cards[0].set_value("dof_", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
@@ -103,4 +108,19 @@ class CeseBoundarySet(KeywordBase):
     def sf(self, value: float) -> None:
         """Set the sf property."""
         self._cards[0].set_value("sf", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

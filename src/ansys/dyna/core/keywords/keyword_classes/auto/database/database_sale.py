@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DATABASESALE_CARD0 = (
-    FieldSchema("on/off", int, 0, 10, 1),
+    FieldSchema("on_off", int, 0, 10, 1, "on/off"),
 )
 
 class DatabaseSale(KeywordBase):
@@ -48,10 +48,10 @@ class DatabaseSale(KeywordBase):
     def on_off(self) -> int:
         """Get or set the Output d3sale option flag.
         """ # nopep8
-        return self._cards[0].get_value("on/off")
+        return self._cards[0].get_value("on_off")
 
     @on_off.setter
     def on_off(self, value: int) -> None:
         """Set the on_off property."""
-        self._cards[0].set_value("on/off", value)
+        self._cards[0].set_value("on_off", value)
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCELLMODELFITZHUGHNAGUMO_CARD0 = (
     FieldSchema("matid", int, 0, 10, None),
@@ -49,6 +50,9 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_FITZHUGHNAGUMO"
+    _link_fields = {
+        "matid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelFitzhughnagumo class."""
@@ -163,4 +167,19 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
     def r(self, value: float) -> None:
         """Set the r property."""
         self._cards[2].set_value("r", value)
+
+    @property
+    def matid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for matid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.matid:
+                return kwd
+        return None
+
+    @matid_link.setter
+    def matid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for matid."""
+        self.matid = value.mid
 

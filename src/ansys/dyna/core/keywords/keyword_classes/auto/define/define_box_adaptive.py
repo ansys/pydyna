@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINEBOXADAPTIVE_CARD0 = (
     FieldSchema("boxid", int, 0, 10, None),
@@ -40,7 +42,7 @@ _DEFINEBOXADAPTIVE_CARD0 = (
 _DEFINEBOXADAPTIVE_CARD1 = (
     FieldSchema("pid", int, 0, 10, 0),
     FieldSchema("level", int, 10, 10, 1),
-    FieldSchema("lidx/ndid", int, 20, 10, 0),
+    FieldSchema("lidx_ndid", int, 20, 10, 0, "lidx/ndid"),
     FieldSchema("lidy", int, 30, 10, 0),
     FieldSchema("lidz", int, 40, 10, 0),
     FieldSchema("brmin", float, 50, 10, 0.0),
@@ -59,6 +61,11 @@ class DefineBoxAdaptive(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lidx_ndid": LinkType.DEFINE_CURVE,
+        "lidy": LinkType.DEFINE_CURVE,
+        "lidz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineBoxAdaptive class."""
@@ -191,12 +198,12 @@ class DefineBoxAdaptive(KeywordBase):
         on a moving rigid body.
         EQ.0: no movement.
         """ # nopep8
-        return self._cards[1].get_value("lidx/ndid")
+        return self._cards[1].get_value("lidx_ndid")
 
     @lidx_ndid.setter
     def lidx_ndid(self, value: int) -> None:
         """Set the lidx_ndid property."""
-        self._cards[1].set_value("lidx/ndid", value)
+        self._cards[1].set_value("lidx_ndid", value)
 
     @property
     def lidy(self) -> int:
@@ -261,4 +268,49 @@ class DefineBoxAdaptive(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lidx_ndid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lidx_ndid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lidx_ndid:
+                return kwd
+        return None
+
+    @lidx_ndid_link.setter
+    def lidx_ndid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lidx_ndid."""
+        self.lidx_ndid = value.lcid
+
+    @property
+    def lidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lidy:
+                return kwd
+        return None
+
+    @lidy_link.setter
+    def lidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lidy."""
+        self.lidy = value.lcid
+
+    @property
+    def lidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lidz:
+                return kwd
+        return None
+
+    @lidz_link.setter
+    def lidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lidz."""
+        self.lidz = value.lcid
 

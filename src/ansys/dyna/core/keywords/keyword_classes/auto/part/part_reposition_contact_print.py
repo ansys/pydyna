@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTREPOSITIONCONTACTPRINT_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -67,6 +68,10 @@ class PartRepositionContactPrint(KeywordBase):
 
     keyword = "PART"
     subkeyword = "REPOSITION_CONTACT_PRINT"
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartRepositionContactPrint class."""
@@ -346,4 +351,34 @@ class PartRepositionContactPrint(KeywordBase):
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""prbf must be `None` or one of {0,1,2,3}.""")
         self._cards[4].set_value("prbf", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def secid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for secid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.secid:
+                return kwd
+        return None
+
+    @secid_link.setter
+    def secid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for secid."""
+        self.secid = value.secid
 

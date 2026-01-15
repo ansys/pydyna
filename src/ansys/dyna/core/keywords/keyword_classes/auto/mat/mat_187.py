@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT187_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -39,12 +41,12 @@ _MAT187_CARD0 = (
 )
 
 _MAT187_CARD1 = (
-    FieldSchema("lcid-t", int, 0, 10, None),
-    FieldSchema("lcid-c", int, 10, 10, None),
-    FieldSchema("lcid-s", int, 20, 10, None),
-    FieldSchema("lcid-b", int, 30, 10, None),
+    FieldSchema("lcid_t", int, 0, 10, None, "lcid-t"),
+    FieldSchema("lcid_c", int, 10, 10, None, "lcid-c"),
+    FieldSchema("lcid_s", int, 20, 10, None, "lcid-s"),
+    FieldSchema("lcid_b", int, 30, 10, None, "lcid-b"),
     FieldSchema("nuep", float, 40, 10, None),
-    FieldSchema("lcid-p", int, 50, 10, None),
+    FieldSchema("lcid_p", int, 50, 10, None, "lcid-p"),
     FieldSchema("unused", int, 60, 10, None),
     FieldSchema("incdam", int, 70, 10, 0),
 )
@@ -53,7 +55,7 @@ _MAT187_CARD2 = (
     FieldSchema("lcid_d", int, 0, 10, None),
     FieldSchema("epfail", float, 10, 10, 100000.0),
     FieldSchema("deprpt", float, 20, 10, None),
-    FieldSchema("lcid-tri", int, 30, 10, None),
+    FieldSchema("lcid_tri", int, 30, 10, None, "lcid-tri"),
     FieldSchema("lcid_lc", int, 40, 10, None),
 )
 
@@ -86,6 +88,17 @@ class Mat187(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid_t": LinkType.DEFINE_CURVE,
+        "lcid_c": LinkType.DEFINE_CURVE,
+        "lcid_s": LinkType.DEFINE_CURVE,
+        "lcid_b": LinkType.DEFINE_CURVE,
+        "lcid_p": LinkType.DEFINE_CURVE,
+        "lcid_d": LinkType.DEFINE_CURVE,
+        "lcid_tri": LinkType.DEFINE_CURVE,
+        "lcid_lc": LinkType.DEFINE_CURVE,
+        "lcemod": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat187 class."""
@@ -210,45 +223,45 @@ class Mat187(KeywordBase):
     def lcid_t(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain, these curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests, this input is mandatory and the material model will not work unless at least one tensile stress-strain curve is given.
         """ # nopep8
-        return self._cards[1].get_value("lcid-t")
+        return self._cards[1].get_value("lcid_t")
 
     @lcid_t.setter
     def lcid_t(self, value: int) -> None:
         """Set the lcid_t property."""
-        self._cards[1].set_value("lcid-t", value)
+        self._cards[1].set_value("lcid_t", value)
 
     @property
     def lcid_c(self) -> typing.Optional[int]:
         """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static uniaxial compression test, this input is optional.
         """ # nopep8
-        return self._cards[1].get_value("lcid-c")
+        return self._cards[1].get_value("lcid_c")
 
     @lcid_c.setter
     def lcid_c(self, value: int) -> None:
         """Set the lcid_c property."""
-        self._cards[1].set_value("lcid-c", value)
+        self._cards[1].set_value("lcid_c", value)
 
     @property
     def lcid_s(self) -> typing.Optional[int]:
         """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static shear test, this input is optional
         """ # nopep8
-        return self._cards[1].get_value("lcid-s")
+        return self._cards[1].get_value("lcid_s")
 
     @lcid_s.setter
     def lcid_s(self, value: int) -> None:
         """Set the lcid_s property."""
-        self._cards[1].set_value("lcid-s", value)
+        self._cards[1].set_value("lcid_s", value)
 
     @property
     def lcid_b(self) -> typing.Optional[int]:
         """Get or set the load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test, this input is optional.
         """ # nopep8
-        return self._cards[1].get_value("lcid-b")
+        return self._cards[1].get_value("lcid_b")
 
     @lcid_b.setter
     def lcid_b(self, value: int) -> None:
         """Set the lcid_b property."""
-        self._cards[1].set_value("lcid-b", value)
+        self._cards[1].set_value("lcid_b", value)
 
     @property
     def nuep(self) -> typing.Optional[float]:
@@ -265,12 +278,12 @@ class Mat187(KeywordBase):
     def lcid_p(self) -> typing.Optional[int]:
         """Get or set the load curve ID giving the plastic Poisson's ratio as a function of equivalent plastic deformation during uniaxial tensile testing, if the (optional) load curve is given, the constant value in the previous field will be ignored.
         """ # nopep8
-        return self._cards[1].get_value("lcid-p")
+        return self._cards[1].get_value("lcid_p")
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
         """Set the lcid_p property."""
-        self._cards[1].set_value("lcid-p", value)
+        self._cards[1].set_value("lcid_p", value)
 
     @property
     def incdam(self) -> int:
@@ -322,12 +335,12 @@ class Mat187(KeywordBase):
     def lcid_tri(self) -> typing.Optional[int]:
         """Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the triaxiality pressue/sigma_vm.. This option is active only if DC is given as a negative value (see above)..
         """ # nopep8
-        return self._cards[2].get_value("lcid-tri")
+        return self._cards[2].get_value("lcid_tri")
 
     @lcid_tri.setter
     def lcid_tri(self, value: int) -> None:
         """Set the lcid_tri property."""
-        self._cards[2].set_value("lcid-tri", value)
+        self._cards[2].set_value("lcid_tri", value)
 
     @property
     def lcid_lc(self) -> typing.Optional[int]:
@@ -459,4 +472,139 @@ class Mat187(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_t_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_t."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_t:
+                return kwd
+        return None
+
+    @lcid_t_link.setter
+    def lcid_t_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_t."""
+        self.lcid_t = value.lcid
+
+    @property
+    def lcid_c_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_c."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_c:
+                return kwd
+        return None
+
+    @lcid_c_link.setter
+    def lcid_c_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_c."""
+        self.lcid_c = value.lcid
+
+    @property
+    def lcid_s_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_s."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_s:
+                return kwd
+        return None
+
+    @lcid_s_link.setter
+    def lcid_s_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_s."""
+        self.lcid_s = value.lcid
+
+    @property
+    def lcid_b_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_b."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_b:
+                return kwd
+        return None
+
+    @lcid_b_link.setter
+    def lcid_b_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_b."""
+        self.lcid_b = value.lcid
+
+    @property
+    def lcid_p_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_p."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_p:
+                return kwd
+        return None
+
+    @lcid_p_link.setter
+    def lcid_p_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_p."""
+        self.lcid_p = value.lcid
+
+    @property
+    def lcid_d_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_d."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_d:
+                return kwd
+        return None
+
+    @lcid_d_link.setter
+    def lcid_d_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_d."""
+        self.lcid_d = value.lcid
+
+    @property
+    def lcid_tri_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_tri."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_tri:
+                return kwd
+        return None
+
+    @lcid_tri_link.setter
+    def lcid_tri_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_tri."""
+        self.lcid_tri = value.lcid
+
+    @property
+    def lcid_lc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_lc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_lc:
+                return kwd
+        return None
+
+    @lcid_lc_link.setter
+    def lcid_lc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_lc."""
+        self.lcid_lc = value.lcid
+
+    @property
+    def lcemod_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcemod."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcemod:
+                return kwd
+        return None
+
+    @lcemod_link.setter
+    def lcemod_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcemod."""
+        self.lcemod = value.lcid
 

@@ -42,8 +42,8 @@ _MATRHT_CARD1 = (
     FieldSchema("a", float, 0, 10, None),
     FieldSchema("n", float, 10, 10, None),
     FieldSchema("fc", float, 20, 10, None),
-    FieldSchema("fs*", float, 30, 10, None),
-    FieldSchema("ft*", float, 40, 10, None),
+    FieldSchema("fs_", float, 30, 10, None, "fs*"),
+    FieldSchema("ft_", float, 40, 10, None, "ft*"),
     FieldSchema("q0", float, 50, 10, None),
     FieldSchema("b", float, 60, 10, None),
     FieldSchema("t2", float, 70, 10, None),
@@ -60,8 +60,8 @@ _MATRHT_CARD2 = (
 )
 
 _MATRHT_CARD3 = (
-    FieldSchema("gc*", float, 0, 10, None),
-    FieldSchema("gt*", float, 10, 10, None),
+    FieldSchema("gc_", float, 0, 10, None, "gc*"),
+    FieldSchema("gt_", float, 10, 10, None, "gt*"),
     FieldSchema("xi", float, 20, 10, None),
     FieldSchema("d1", float, 30, 10, None),
     FieldSchema("d2", float, 40, 10, None),
@@ -258,23 +258,23 @@ class MatRht(KeywordBase):
     def fs_(self) -> typing.Optional[float]:
         """Get or set the Relative shear strength.
         """ # nopep8
-        return self._cards[1].get_value("fs*")
+        return self._cards[1].get_value("fs_")
 
     @fs_.setter
     def fs_(self, value: float) -> None:
         """Set the fs_ property."""
-        self._cards[1].set_value("fs*", value)
+        self._cards[1].set_value("fs_", value)
 
     @property
     def ft_(self) -> typing.Optional[float]:
         """Get or set the Relative tensile strength.
         """ # nopep8
-        return self._cards[1].get_value("ft*")
+        return self._cards[1].get_value("ft_")
 
     @ft_.setter
     def ft_(self, value: float) -> None:
         """Set the ft_ property."""
-        self._cards[1].set_value("ft*", value)
+        self._cards[1].set_value("ft_", value)
 
     @property
     def q0(self) -> typing.Optional[float]:
@@ -390,23 +390,23 @@ class MatRht(KeywordBase):
     def gc_(self) -> typing.Optional[float]:
         """Get or set the Compressive yield surface parameter.
         """ # nopep8
-        return self._cards[3].get_value("gc*")
+        return self._cards[3].get_value("gc_")
 
     @gc_.setter
     def gc_(self, value: float) -> None:
         """Set the gc_ property."""
-        self._cards[3].set_value("gc*", value)
+        self._cards[3].set_value("gc_", value)
 
     @property
     def gt_(self) -> typing.Optional[float]:
         """Get or set the Tensile yield surface parameter.
         """ # nopep8
-        return self._cards[3].get_value("gt*")
+        return self._cards[3].get_value("gt_")
 
     @gt_.setter
     def gt_(self, value: float) -> None:
         """Set the gt_ property."""
-        self._cards[3].set_value("gt*", value)
+        self._cards[3].set_value("gt_", value)
 
     @property
     def xi(self) -> typing.Optional[float]:

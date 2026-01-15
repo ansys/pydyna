@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _BOUNDARYNONREFLECTING_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
     FieldSchema("ad", float, 10, 10, 0.0),
-    FieldSchema("as", float, 20, 10, 0.0),
+    FieldSchema("as_", float, 20, 10, 0.0, "as"),
 )
 
 class BoundaryNonReflecting(KeywordBase):
@@ -76,10 +76,10 @@ class BoundaryNonReflecting(KeywordBase):
         EQ.0.0: on (default),
         NE.0.0: off.
         """ # nopep8
-        return self._cards[0].get_value("as")
+        return self._cards[0].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[0].set_value("as", value)
+        self._cards[0].set_value("as_", value)
 

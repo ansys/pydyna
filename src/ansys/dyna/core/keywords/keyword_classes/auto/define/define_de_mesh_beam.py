@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEDEMESHBEAM_CARD0 = (
     FieldSchema("sid", int, 0, 10, 0),
@@ -56,6 +57,9 @@ class DefineDeMeshBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "desxid": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeMeshBeam class."""
@@ -222,4 +226,19 @@ class DefineDeMeshBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def desxid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for desxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.desxid:
+                return kwd
+        return None
+
+    @desxid_link.setter
+    def desxid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for desxid."""
+        self.desxid = value.secid
 

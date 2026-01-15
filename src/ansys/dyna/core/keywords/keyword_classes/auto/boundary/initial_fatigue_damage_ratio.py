@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _INITIALFATIGUEDAMAGERATIO_CARD0 = (
-    FieldSchema("pid/sid", int, 0, 10, None),
+    FieldSchema("pid_sid", int, 0, 10, None, "pid/sid"),
     FieldSchema("ptyp", int, 10, 10, 0),
     FieldSchema("dratio", float, 20, 10, None),
 )
@@ -50,12 +50,12 @@ class InitialFatigueDamageRatio(KeywordBase):
     def pid_sid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID for which the initial damage ratio is defined.
         """ # nopep8
-        return self._cards[0].get_value("pid/sid")
+        return self._cards[0].get_value("pid_sid")
 
     @pid_sid.setter
     def pid_sid(self, value: int) -> None:
         """Set the pid_sid property."""
-        self._cards[0].set_value("pid/sid", value)
+        self._cards[0].set_value("pid_sid", value)
 
     @property
     def ptyp(self) -> int:

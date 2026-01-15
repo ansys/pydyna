@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD0 = (
     FieldSchema("coupid", int, 0, 10, None),
@@ -79,6 +81,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "LAGRANGE_IN_SOLID_EDGES"
+    _link_fields = {
+        "lcidpor": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedLagrangeInSolidEdges class."""
@@ -511,4 +516,19 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
     def thkf(self, value: float) -> None:
         """Set the thkf property."""
         self._cards[4].set_value("thkf", value)
+
+    @property
+    def lcidpor_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidpor."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidpor:
+                return kwd
+        return None
+
+    @lcidpor_link.setter
+    def lcidpor_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidpor."""
+        self.lcidpor = value.lcid
 

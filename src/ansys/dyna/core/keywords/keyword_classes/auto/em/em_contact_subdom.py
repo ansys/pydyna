@@ -25,11 +25,13 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _EMCONTACTSUBDOM_CARD0 = (
     FieldSchema("sdtype", int, 0, 10, 1),
     FieldSchema("mvtype", int, 10, 10, 0),
-    FieldSchema("lcidx/nid", int, 20, 10, None),
+    FieldSchema("lcidx_nid", int, 20, 10, None, "lcidx/nid"),
     FieldSchema("lcidy", int, 30, 10, None),
     FieldSchema("lcidz", int, 40, 10, None),
 )
@@ -49,6 +51,10 @@ class EmContactSubdom(KeywordBase):
 
     keyword = "EM"
     subkeyword = "CONTACT_SUBDOM"
+    _link_fields = {
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmContactSubdom class."""
@@ -100,12 +106,12 @@ class EmContactSubdom(KeywordBase):
         """Get or set the Time dependent load curve ID for the translational velocity in the X direction for MVTYPE = 1, Node ID for MVTYPE = 2.
 
         """ # nopep8
-        return self._cards[0].get_value("lcidx/nid")
+        return self._cards[0].get_value("lcidx_nid")
 
     @lcidx_nid.setter
     def lcidx_nid(self, value: int) -> None:
         """Set the lcidx_nid property."""
-        self._cards[0].set_value("lcidx/nid", value)
+        self._cards[0].set_value("lcidx_nid", value)
 
     @property
     def lcidy(self) -> typing.Optional[int]:
@@ -214,4 +220,34 @@ class EmContactSubdom(KeywordBase):
     def pmaxz(self, value: float) -> None:
         """Set the pmaxz property."""
         self._cards[1].set_value("pmaxz", value)
+
+    @property
+    def lcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
 

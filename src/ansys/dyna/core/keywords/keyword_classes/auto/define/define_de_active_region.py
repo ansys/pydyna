@@ -30,7 +30,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DEFINEDEACTIVEREGION_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("type", int, 10, 10, 0),
-    FieldSchema("xm/r", float, 20, 10, None),
+    FieldSchema("xm_r", float, 20, 10, None, "xm/r"),
     FieldSchema("ym", float, 30, 10, None),
     FieldSchema("zm", float, 40, 10, None),
     FieldSchema("tbirth", float, 50, 10, None),
@@ -106,12 +106,12 @@ class DefineDeActiveRegion(KeywordBase):
         Xmax = Xmax + X_margin
         Xmin = Xmin - X_margin,R is the radius of the region with center at Node ID (TYPE=2),
         """ # nopep8
-        return self._cards[0].get_value("xm/r")
+        return self._cards[0].get_value("xm_r")
 
     @xm_r.setter
     def xm_r(self, value: float) -> None:
         """Set the xm_r property."""
-        self._cards[0].set_value("xm/r", value)
+        self._cards[0].set_value("xm_r", value)
 
     @property
     def ym(self) -> typing.Optional[float]:

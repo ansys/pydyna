@@ -33,7 +33,7 @@ _CONTROLFORMINGUSER_CARD0 = (
     FieldSchema("r00", float, 30, 10, 1.0),
     FieldSchema("r45", float, 40, 10, 1.0),
     FieldSchema("r90", float, 50, 10, 1.0),
-    FieldSchema("al/fe", str, 60, 10, "F"),
+    FieldSchema("al_fe", str, 60, 10, "F", "al/fe"),
     FieldSchema("unit", int, 70, 10, 1),
 )
 
@@ -154,14 +154,14 @@ class ControlFormingUser(KeywordBase):
         EQ. A:  the blank is aluminum
         EQ. F:   the blank is steel (default)
         """ # nopep8
-        return self._cards[0].get_value("al/fe")
+        return self._cards[0].get_value("al_fe")
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
         """Set the al_fe property."""
         if value not in ["F", "A", None]:
             raise Exception("""al_fe must be `None` or one of {"F","A"}.""")
-        self._cards[0].set_value("al/fe", value)
+        self._cards[0].set_value("al_fe", value)
 
     @property
     def unit(self) -> int:

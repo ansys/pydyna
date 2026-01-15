@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ICFDSETNODELIST_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -47,6 +48,9 @@ class IcfdSetNodeList(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "SET_NODE_LIST"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdSetNodeList class."""
@@ -168,4 +172,9 @@ class IcfdSetNodeList(KeywordBase):
     def nid8(self, value: int) -> None:
         """Set the nid8 property."""
         self._cards[1].set_value("nid8", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

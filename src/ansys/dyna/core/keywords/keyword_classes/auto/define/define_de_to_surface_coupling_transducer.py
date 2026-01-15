@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD0 = (
     FieldSchema("slave", int, 0, 10, None),
@@ -79,6 +81,11 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcvx": LinkType.DEFINE_CURVE,
+        "lcvy": LinkType.DEFINE_CURVE,
+        "lcvz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeToSurfaceCouplingTransducer class."""
@@ -406,4 +413,49 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcvx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvx:
+                return kwd
+        return None
+
+    @lcvx_link.setter
+    def lcvx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvx."""
+        self.lcvx = value.lcid
+
+    @property
+    def lcvy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvy:
+                return kwd
+        return None
+
+    @lcvy_link.setter
+    def lcvy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvy."""
+        self.lcvy = value.lcid
+
+    @property
+    def lcvz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvz:
+                return kwd
+        return None
+
+    @lcvz_link.setter
+    def lcvz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvz."""
+        self.lcvz = value.lcid
 

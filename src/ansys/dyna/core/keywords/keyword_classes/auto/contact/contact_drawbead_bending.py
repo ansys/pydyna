@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTACTDRAWBEADBENDING_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -166,7 +168,7 @@ _CONTACTDRAWBEADBENDING_OPTION7_CARD0 = (
     FieldSchema("pstiff", int, 0, 10, 0),
     FieldSchema("ignroff", int, 10, 10, 0),
     FieldSchema("fstol", float, 30, 10, 2.0),
-    FieldSchema("2dbinr", int, 40, 10, 0),
+    FieldSchema("_2dbinr", int, 40, 10, 0, "2dbinr"),
     FieldSchema("ssftyp", int, 50, 10, 0),
     FieldSchema("swtpr", int, 60, 10, 0),
     FieldSchema("tetfac", float, 70, 10, 0.0),
@@ -192,6 +194,10 @@ class ContactDrawbeadBending(KeywordBase):
         OptionSpec("F", 6, 0),
         OptionSpec("G", 7, 0),
     ]
+    _link_fields = {
+        "lcidrf": LinkType.DEFINE_CURVE,
+        "lcidnf": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactDrawbeadBending class."""
@@ -1695,14 +1701,14 @@ class ContactDrawbeadBending(KeywordBase):
         EQ.0:No 2D belt initially inside a retractor is involved.
         EQ.1 : 2D belts initially inside retractors are involved
         """ # nopep8
-        return self._cards[13].cards[0].get_value("2dbinr")
+        return self._cards[13].cards[0].get_value("_2dbinr")
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
         """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
-        self._cards[13].cards[0].set_value("2dbinr", value)
+        self._cards[13].cards[0].set_value("_2dbinr", value)
 
         if value:
             self.activate_option("_2DBINR")
@@ -1772,4 +1778,34 @@ class ContactDrawbeadBending(KeywordBase):
 
         if value:
             self.activate_option("SHLOFF")
+
+    @property
+    def lcidrf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrf:
+                return kwd
+        return None
+
+    @lcidrf_link.setter
+    def lcidrf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrf."""
+        self.lcidrf = value.lcid
+
+    @property
+    def lcidnf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidnf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidnf:
+                return kwd
+        return None
+
+    @lcidnf_link.setter
+    def lcidnf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidnf."""
+        self.lcidnf = value.lcid
 

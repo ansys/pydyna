@@ -35,7 +35,7 @@ _CONTROLFORMINGTIPPING_CARD0 = (
 )
 
 _CONTROLFORMINGTIPPING_CARD1 = (
-    FieldSchema("rot/tran", int, 0, 10, 1),
+    FieldSchema("rot_tran", int, 0, 10, 1, "rot/tran"),
     FieldSchema("v11", float, 10, 10, None),
     FieldSchema("v12", float, 20, 10, None),
     FieldSchema("v13", float, 30, 10, None),
@@ -46,7 +46,7 @@ _CONTROLFORMINGTIPPING_CARD1 = (
 )
 
 _CONTROLFORMINGTIPPING_CARD2 = (
-    FieldSchema("rot/tran", int, 0, 10, 1),
+    FieldSchema("rot_tran", int, 0, 10, 1, "rot/tran"),
     FieldSchema("dx", float, 10, 10, None),
     FieldSchema("dy", float, 20, 10, None),
     FieldSchema("dz", float, 30, 10, None),
@@ -144,14 +144,14 @@ class ControlFormingTipping(KeywordBase):
         EQ.1: rotation.
         EQ.2: translation.
         """ # nopep8
-        return self._cards[1].get_value("rot/tran")
+        return self._cards[1].get_value("rot_tran")
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
         """Set the rot_tran property."""
         if value not in [1, 2, None]:
             raise Exception("""rot_tran must be `None` or one of {1,2}.""")
-        self._cards[1].set_value("rot/tran", value)
+        self._cards[1].set_value("rot_tran", value)
 
     @property
     def v11(self) -> typing.Optional[float]:
@@ -236,14 +236,14 @@ class ControlFormingTipping(KeywordBase):
         EQ.1: rotation.
         EQ.2: translation
         """ # nopep8
-        return self._cards[2].get_value("rot/tran")
+        return self._cards[2].get_value("rot_tran")
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
         """Set the rot_tran property."""
         if value not in [1, 2, None]:
             raise Exception("""rot_tran must be `None` or one of {1,2}.""")
-        self._cards[2].set_value("rot/tran", value)
+        self._cards[2].set_value("rot_tran", value)
 
     @property
     def dx(self) -> typing.Optional[float]:

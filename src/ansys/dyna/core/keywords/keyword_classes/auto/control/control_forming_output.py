@@ -25,14 +25,16 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTROLFORMINGOUTPUT_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
     FieldSchema("nout", int, 10, 10, None),
     FieldSchema("tbeg", float, 20, 10, None),
     FieldSchema("tend", float, 30, 10, None),
-    FieldSchema("y1/lcid", float, 40, 10, None),
-    FieldSchema("y2/lcid", float, 50, 10, None),
+    FieldSchema("y1_lcid", float, 40, 10, None, "y1/lcid"),
+    FieldSchema("y2_lcid", float, 50, 10, None, "y2/lcid"),
     FieldSchema("y3", float, 60, 10, None),
     FieldSchema("y4", float, 70, 10, None),
 )
@@ -42,6 +44,9 @@ class ControlFormingOutput(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_OUTPUT"
+    _link_fields = {
+        "cid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingOutput class."""
@@ -105,12 +110,12 @@ class ControlFormingOutput(KeywordBase):
         Available starting from Dev Revision 112604, the output will be skipped for any negative abscissa in the load curve.
         Note a curve with only negative abscissas is not allowed..
         """ # nopep8
-        return self._cards[0].get_value("y1/lcid")
+        return self._cards[0].get_value("y1_lcid")
 
     @y1_lcid.setter
     def y1_lcid(self, value: float) -> None:
         """Set the y1_lcid property."""
-        self._cards[0].set_value("y1/lcid", value)
+        self._cards[0].set_value("y1_lcid", value)
 
     @property
     def y2_lcid(self) -> typing.Optional[float]:
@@ -121,12 +126,12 @@ class ControlFormingOutput(KeywordBase):
         Note this time-dependent load curve will output additional d3plot files on top of the d3plot files already written in case Y1/LCID < 0 (if specified).
         Furthermore, when Y2/CIDT < 0, Y3 and Y4 are ignored.  See the example Using CIDT below.
         """ # nopep8
-        return self._cards[0].get_value("y2/lcid")
+        return self._cards[0].get_value("y2_lcid")
 
     @y2_lcid.setter
     def y2_lcid(self, value: float) -> None:
         """Set the y2_lcid property."""
-        self._cards[0].set_value("y2/lcid", value)
+        self._cards[0].set_value("y2_lcid", value)
 
     @property
     def y3(self) -> typing.Optional[float]:
@@ -149,4 +154,19 @@ class ControlFormingOutput(KeywordBase):
     def y4(self, value: float) -> None:
         """Set the y4 property."""
         self._cards[0].set_value("y4", value)
+
+    @property
+    def cid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for cid."""
+        self.cid = value.lcid
 

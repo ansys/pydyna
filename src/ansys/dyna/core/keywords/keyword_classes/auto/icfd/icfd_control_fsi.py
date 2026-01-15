@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDCONTROLFSI_CARD0 = (
     FieldSchema("owc", int, 0, 10, 0),
@@ -44,6 +46,9 @@ class IcfdControlFsi(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "CONTROL_FSI"
+    _link_fields = {
+        "lcidsf": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdControlFsi class."""
@@ -144,4 +149,19 @@ class IcfdControlFsi(KeywordBase):
     def nsub(self, value: int) -> None:
         """Set the nsub property."""
         self._cards[1].set_value("nsub", value)
+
+    @property
+    def lcidsf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidsf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidsf:
+                return kwd
+        return None
+
+    @lcidsf_link.setter
+    def lcidsf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidsf."""
+        self.lcidsf = value.lcid
 

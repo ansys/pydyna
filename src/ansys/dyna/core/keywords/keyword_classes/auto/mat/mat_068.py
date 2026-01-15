@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MAT068_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -75,7 +76,7 @@ _MAT068_CARD4 = (
 )
 
 _MAT068_CARD5 = (
-    FieldSchema("for", float, 0, 10, None),
+    FieldSchema("for_", float, 0, 10, None, "for"),
     FieldSchema("fos", float, 10, 10, None),
     FieldSchema("fot", float, 20, 10, None),
     FieldSchema("mor", float, 30, 10, None),
@@ -95,6 +96,14 @@ class Mat068(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcpdr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpds": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpdt": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpmr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpms": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpmt": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat068 class."""
@@ -501,12 +510,12 @@ class Mat068(KeywordBase):
     def for_(self) -> typing.Optional[float]:
         """Get or set the Preload force in r-direction
         """ # nopep8
-        return self._cards[5].get_value("for")
+        return self._cards[5].get_value("for_")
 
     @for_.setter
     def for_(self, value: float) -> None:
         """Set the for_ property."""
-        self._cards[5].set_value("for", value)
+        self._cards[5].set_value("for_", value)
 
     @property
     def fos(self) -> typing.Optional[float]:
@@ -576,4 +585,148 @@ class Mat068(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcpdr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdr."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpdr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpdr_link.setter
+    def lcpdr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpdr."""
+        if hasattr(value, "lcid"):
+            self.lcpdr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpdr = value.tbid
+
+    @property
+    def lcpds_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpds."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpds
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpds_link.setter
+    def lcpds_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpds."""
+        if hasattr(value, "lcid"):
+            self.lcpds = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpds = value.tbid
+
+    @property
+    def lcpdt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdt."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpdt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpdt_link.setter
+    def lcpdt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpdt."""
+        if hasattr(value, "lcid"):
+            self.lcpdt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpdt = value.tbid
+
+    @property
+    def lcpmr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmr."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpmr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpmr_link.setter
+    def lcpmr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpmr."""
+        if hasattr(value, "lcid"):
+            self.lcpmr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpmr = value.tbid
+
+    @property
+    def lcpms_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpms."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpms
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpms_link.setter
+    def lcpms_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpms."""
+        if hasattr(value, "lcid"):
+            self.lcpms = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpms = value.tbid
+
+    @property
+    def lcpmt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmt."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpmt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpmt_link.setter
+    def lcpmt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpmt."""
+        if hasattr(value, "lcid"):
+            self.lcpmt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpmt = value.tbid
 

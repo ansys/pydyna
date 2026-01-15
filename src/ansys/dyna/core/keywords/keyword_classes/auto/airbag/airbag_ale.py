@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _AIRBAGALE_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -66,8 +68,8 @@ _AIRBAGALE_CARD3 = (
 )
 
 _AIRBAGALE_CARD4 = (
-    FieldSchema("nx/ida", int, 0, 10, None),
-    FieldSchema("ny/idg", int, 10, 10, None),
+    FieldSchema("nx_ida", int, 0, 10, None, "nx/ida"),
+    FieldSchema("ny_idg", int, 10, 10, None, "ny/idg"),
     FieldSchema("nz", int, 20, 10, 1),
     FieldSchema("movern", int, 30, 10, 0),
     FieldSchema("zoom", int, 40, 10, 0),
@@ -135,6 +137,11 @@ class AirbagAle(KeywordBase):
 
     keyword = "AIRBAG"
     subkeyword = "ALE"
+    _link_fields = {
+        "lcvel": LinkType.DEFINE_CURVE,
+        "lct": LinkType.DEFINE_CURVE,
+        "lcmf": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagAle class."""
@@ -447,24 +454,24 @@ class AirbagAle(KeywordBase):
         """Get or set the NX is the number of ALE elements to be generated in the x-direction.
         IDA is the Part ID of the initial air mesh
         """ # nopep8
-        return self._cards[4].get_value("nx/ida")
+        return self._cards[4].get_value("nx_ida")
 
     @nx_ida.setter
     def nx_ida(self, value: int) -> None:
         """Set the nx_ida property."""
-        self._cards[4].set_value("nx/ida", value)
+        self._cards[4].set_value("nx_ida", value)
 
     @property
     def ny_idg(self) -> typing.Optional[int]:
         """Get or set the NY is the number of ALE elements to be generated in the y-direction
         IDG is the Part ID of the initial air mesh
         """ # nopep8
-        return self._cards[4].get_value("ny/idg")
+        return self._cards[4].get_value("ny_idg")
 
     @ny_idg.setter
     def ny_idg(self, value: int) -> None:
         """Set the ny_idg property."""
-        self._cards[4].set_value("ny/idg", value)
+        self._cards[4].set_value("ny_idg", value)
 
     @property
     def nz(self) -> int:
@@ -857,4 +864,49 @@ class AirbagAle(KeywordBase):
     def orifare(self, value: float) -> None:
         """Set the orifare property."""
         self._cards[10].set_value("orifare", value)
+
+    @property
+    def lcvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvel:
+                return kwd
+        return None
+
+    @lcvel_link.setter
+    def lcvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvel."""
+        self.lcvel = value.lcid
+
+    @property
+    def lct_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lct."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lct:
+                return kwd
+        return None
+
+    @lct_link.setter
+    def lct_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lct."""
+        self.lct = value.lcid
+
+    @property
+    def lcmf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmf:
+                return kwd
+        return None
+
+    @lcmf_link.setter
+    def lcmf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmf."""
+        self.lcmf = value.lcid
 

@@ -34,8 +34,8 @@ _DATABASECPMSENSOR_CARD0 = (
 _DATABASECPMSENSOR_CARD1 = (
     FieldSchema("segsid", int, 0, 10, None),
     FieldSchema("offset", float, 10, 10, None),
-    FieldSchema("r/lx", float, 20, 10, None),
-    FieldSchema("len/ly", float, 30, 10, None),
+    FieldSchema("r_lx", float, 20, 10, None, "r/lx"),
+    FieldSchema("len_ly", float, 30, 10, None, "len/ly"),
     FieldSchema("lz", float, 40, 10, None),
 )
 
@@ -109,23 +109,23 @@ class DatabaseCpmSensor(KeywordBase):
     def r_lx(self) -> typing.Optional[float]:
         """Get or set the Radius(sphere)/length in local X direction(rectangular) of the sensor.
         """ # nopep8
-        return self._cards[1].get_value("r/lx")
+        return self._cards[1].get_value("r_lx")
 
     @r_lx.setter
     def r_lx(self, value: float) -> None:
         """Set the r_lx property."""
-        self._cards[1].set_value("r/lx", value)
+        self._cards[1].set_value("r_lx", value)
 
     @property
     def len_ly(self) -> typing.Optional[float]:
         """Get or set the Length(cylinder)/length in local Y direction(rectangular) of the sensor.
         """ # nopep8
-        return self._cards[1].get_value("len/ly")
+        return self._cards[1].get_value("len_ly")
 
     @len_ly.setter
     def len_ly(self, value: float) -> None:
         """Set the len_ly property."""
-        self._cards[1].set_value("len/ly", value)
+        self._cards[1].set_value("len_ly", value)
 
     @property
     def lz(self) -> typing.Optional[float]:

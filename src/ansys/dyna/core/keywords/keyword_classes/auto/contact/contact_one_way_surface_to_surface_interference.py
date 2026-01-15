@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTACTONEWAYSURFACETOSURFACEINTERFERENCE_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -146,7 +148,7 @@ _CONTACTONEWAYSURFACETOSURFACEINTERFERENCE_OPTION7_CARD0 = (
     FieldSchema("pstiff", int, 0, 10, 0),
     FieldSchema("ignroff", int, 10, 10, 0),
     FieldSchema("fstol", float, 30, 10, 2.0),
-    FieldSchema("2dbinr", int, 40, 10, 0),
+    FieldSchema("_2dbinr", int, 40, 10, 0, "2dbinr"),
     FieldSchema("ssftyp", int, 50, 10, 0),
     FieldSchema("swtpr", int, 60, 10, 0),
     FieldSchema("tetfac", float, 70, 10, 0.0),
@@ -172,6 +174,10 @@ class ContactOneWaySurfaceToSurfaceInterference(KeywordBase):
         OptionSpec("F", 6, 0),
         OptionSpec("G", 7, 0),
     ]
+    _link_fields = {
+        "lcid1": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactOneWaySurfaceToSurfaceInterference class."""
@@ -1523,14 +1529,14 @@ class ContactOneWaySurfaceToSurfaceInterference(KeywordBase):
         EQ.0:No 2D belt initially inside a retractor is involved.
         EQ.1 : 2D belts initially inside retractors are involved
         """ # nopep8
-        return self._cards[11].cards[0].get_value("2dbinr")
+        return self._cards[11].cards[0].get_value("_2dbinr")
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
         """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
-        self._cards[11].cards[0].set_value("2dbinr", value)
+        self._cards[11].cards[0].set_value("_2dbinr", value)
 
         if value:
             self.activate_option("_2DBINR")
@@ -1600,4 +1606,34 @@ class ContactOneWaySurfaceToSurfaceInterference(KeywordBase):
 
         if value:
             self.activate_option("SHLOFF")
+
+    @property
+    def lcid1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid1:
+                return kwd
+        return None
+
+    @lcid1_link.setter
+    def lcid1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid1."""
+        self.lcid1 = value.lcid
+
+    @property
+    def lcid2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid2:
+                return kwd
+        return None
+
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 

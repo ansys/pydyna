@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATPLASTICITYWITHDAMAGEORTHORCDC_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -77,7 +79,7 @@ _MATPLASTICITYWITHDAMAGEORTHORCDC_CARD4 = (
     FieldSchema("gamma", float, 20, 10, None),
     FieldSchema("d0", float, 30, 10, None),
     FieldSchema("b", float, 40, 10, None),
-    FieldSchema("lambda", float, 50, 10, None),
+    FieldSchema("lambda_", float, 50, 10, None, "lambda"),
     FieldSchema("ds", float, 60, 10, None),
     FieldSchema("l", float, 70, 10, None),
 )
@@ -94,6 +96,11 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+        "lcdm": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPlasticityWithDamageOrthoRcdc class."""
@@ -540,12 +547,12 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Parameter for the Rc-Dc Model
         """ # nopep8
-        return self._cards[4].get_value("lambda")
+        return self._cards[4].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[4].set_value("lambda", value)
+        self._cards[4].set_value("lambda_", value)
 
     @property
     def ds(self) -> typing.Optional[float]:
@@ -582,4 +589,49 @@ class MatPlasticityWithDamageOrthoRcdc(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
+
+    @property
+    def lcdm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdm:
+                return kwd
+        return None
+
+    @lcdm_link.setter
+    def lcdm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdm."""
+        self.lcdm = value.lcid
 

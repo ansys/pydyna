@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATSAMPLIGHT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -44,7 +46,7 @@ _MATSAMPLIGHT_CARD1 = (
     FieldSchema("ctflg", int, 20, 10, 0),
     FieldSchema("rateop", int, 30, 10, 0),
     FieldSchema("nuep", float, 40, 10, None),
-    FieldSchema("lcid-p", int, 50, 10, 0),
+    FieldSchema("lcid_p", int, 50, 10, 0, "lcid-p"),
     FieldSchema("rfiltf", float, 60, 10, 0.95),
 )
 
@@ -60,6 +62,12 @@ class MatSampLight(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcemod": LinkType.DEFINE_CURVE,
+        "lcid_p": LinkType.DEFINE_CURVE,
+        "lcid_t": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcid_c": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSampLight class."""
@@ -226,12 +234,12 @@ class MatSampLight(KeywordBase):
         """Get or set the Load curve ID giving the plastic Poisson's ratio as a function of an equivalent plastic strain measure during uniaxial tensile and uniaxial compressive testing.The plastic strain measure on the abscissa is negative for compression and positive for tension.
         It is important to cover both tension and compression.  If LCID-P is given, NUEP is ignored
         """ # nopep8
-        return self._cards[1].get_value("lcid-p")
+        return self._cards[1].get_value("lcid_p")
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
         """Set the lcid_p property."""
-        self._cards[1].set_value("lcid-p", value)
+        self._cards[1].set_value("lcid_p", value)
 
     @property
     def rfiltf(self) -> float:
@@ -257,4 +265,82 @@ class MatSampLight(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcemod_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcemod."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcemod:
+                return kwd
+        return None
+
+    @lcemod_link.setter
+    def lcemod_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcemod."""
+        self.lcemod = value.lcid
+
+    @property
+    def lcid_p_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_p."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_p:
+                return kwd
+        return None
+
+    @lcid_p_link.setter
+    def lcid_p_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_p."""
+        self.lcid_p = value.lcid
+
+    @property
+    def lcid_t_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_t."""
+        if self.deck is None:
+            return None
+        field_value = self.lcid_t
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcid_t_link.setter
+    def lcid_t_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcid_t."""
+        if hasattr(value, "lcid"):
+            self.lcid_t = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcid_t = value.tbid
+
+    @property
+    def lcid_c_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_c."""
+        if self.deck is None:
+            return None
+        field_value = self.lcid_c
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcid_c_link.setter
+    def lcid_c_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcid_c."""
+        if hasattr(value, "lcid"):
+            self.lcid_c = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcid_c = value.tbid
 

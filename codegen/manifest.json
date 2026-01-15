@@ -590,7 +590,8 @@
                         "heading_card",
                         "part_data_card"
                     ],
-                    "overall-name": "parts"
+                    "overall-name": "parts",
+                    "key-field": "pid"
                 }
             ]
         },
@@ -904,6 +905,17 @@
                 {
                     "start": 1,
                     "end": 4
+                }
+            ]
+        }
+    },
+    "CONTROL_TIMESTEP": {
+        "alias": "CONTROL_TIME_STEP",
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 1,
+                    "end": 2
                 }
             ]
         }
@@ -2709,6 +2721,58 @@
         },
         "labels": {
             "nodes_card": 0
+        }
+    },
+    "DATABASE_BINARY_D3DUMP": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self._cards[1].has_nondefault_values()",
+                    "ref": "ioopt_card"
+                }
+            ]
+        },
+        "labels": {
+            "ioopt_card": 1
+        }
+    },
+    "DATABASE_BINARY_D3PART": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self._cards[1].has_nondefault_values()",
+                    "ref": "d3part_card"
+                }
+            ]
+        },
+        "labels": {
+            "d3part_card": 1
+        }
+    },
+    "DATABASE_BINARY_D3PLOT": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self._cards[1].has_nondefault_values()",
+                    "ref": "d3plot_card"
+                }
+            ]
+        },
+        "labels": {
+            "d3plot_card": 1
+        }
+    },
+    "DATABASE_BINARY_INTFOR": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self._cards[1].has_nondefault_values()",
+                    "ref": "ioopt_card"
+                }
+            ]
+        },
+        "labels": {
+            "ioopt_card": 1
         }
     },
     "SET_NODE_ADD": {

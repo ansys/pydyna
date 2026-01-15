@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDBOUNDARYFSWAVE_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -46,6 +48,10 @@ class IcfdBoundaryFswave(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_FSWAVE"
+    _link_fields = {
+        "sflcid": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryFswave class."""
@@ -163,4 +169,24 @@ class IcfdBoundaryFswave(KeywordBase):
     def wpeak(self, value: float) -> None:
         """Set the wpeak property."""
         self._cards[1].set_value("wpeak", value)
+
+    @property
+    def sflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sflcid:
+                return kwd
+        return None
+
+    @sflcid_link.setter
+    def sflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sflcid."""
+        self.sflcid = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

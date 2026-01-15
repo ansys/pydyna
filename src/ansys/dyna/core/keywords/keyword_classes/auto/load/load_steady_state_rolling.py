@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADSTEADYSTATEROLLING_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -57,6 +59,14 @@ class LoadSteadyStateRolling(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "STEADY_STATE_ROLLING"
+    _link_fields = {
+        "lcd1": LinkType.DEFINE_CURVE,
+        "lcd1r": LinkType.DEFINE_CURVE,
+        "lcd2": LinkType.DEFINE_CURVE,
+        "lcd2r": LinkType.DEFINE_CURVE,
+        "lcd3": LinkType.DEFINE_CURVE,
+        "lcd3r": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSteadyStateRolling class."""
@@ -228,4 +238,94 @@ class LoadSteadyStateRolling(KeywordBase):
     def lcd3r(self, value: int) -> None:
         """Set the lcd3r property."""
         self._cards[3].set_value("lcd3r", value)
+
+    @property
+    def lcd1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd1:
+                return kwd
+        return None
+
+    @lcd1_link.setter
+    def lcd1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd1."""
+        self.lcd1 = value.lcid
+
+    @property
+    def lcd1r_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd1r."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd1r:
+                return kwd
+        return None
+
+    @lcd1r_link.setter
+    def lcd1r_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd1r."""
+        self.lcd1r = value.lcid
+
+    @property
+    def lcd2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd2:
+                return kwd
+        return None
+
+    @lcd2_link.setter
+    def lcd2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd2."""
+        self.lcd2 = value.lcid
+
+    @property
+    def lcd2r_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd2r."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd2r:
+                return kwd
+        return None
+
+    @lcd2r_link.setter
+    def lcd2r_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd2r."""
+        self.lcd2r = value.lcid
+
+    @property
+    def lcd3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd3:
+                return kwd
+        return None
+
+    @lcd3_link.setter
+    def lcd3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd3."""
+        self.lcd3 = value.lcid
+
+    @property
+    def lcd3r_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd3r."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd3r:
+                return kwd
+        return None
+
+    @lcd3r_link.setter
+    def lcd3r_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd3r."""
+        self.lcd3r = value.lcid
 

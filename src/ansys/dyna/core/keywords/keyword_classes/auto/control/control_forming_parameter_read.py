@@ -35,8 +35,8 @@ _CONTROLFORMINGPARAMETERREAD_CARD1 = (
     FieldSchema("imethod", int, 10, 10, None),
     FieldSchema("line", int, 20, 10, None),
     FieldSchema("nbegpa", int, 30, 10, None),
-    FieldSchema("nendpa ", int, 40, 10, None),
-    FieldSchema("value ", float, 50, 10, None),
+    FieldSchema("nendpa_", int, 40, 10, None, "nendpa "),
+    FieldSchema("value_", float, 50, 10, None, "value "),
 )
 
 class ControlFormingParameterRead(KeywordBase):
@@ -115,21 +115,21 @@ class ControlFormingParameterRead(KeywordBase):
     def nendpa_(self) -> typing.Optional[int]:
         """Get or set the the value defined between nbegpa and nendpa will be read for paraname
         """ # nopep8
-        return self._cards[1].get_value("nendpa ")
+        return self._cards[1].get_value("nendpa_")
 
     @nendpa_.setter
     def nendpa_(self, value: int) -> None:
         """Set the nendpa_ property."""
-        self._cards[1].set_value("nendpa ", value)
+        self._cards[1].set_value("nendpa_", value)
 
     @property
     def value_(self) -> typing.Optional[float]:
         """Get or set the the value of the defined parameter
         """ # nopep8
-        return self._cards[1].get_value("value ")
+        return self._cards[1].get_value("value_")
 
     @value_.setter
     def value_(self, value: float) -> None:
         """Set the value_ property."""
-        self._cards[1].set_value("value ", value)
+        self._cards[1].set_value("value_", value)
 

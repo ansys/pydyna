@@ -41,7 +41,7 @@ _CONTROLPOREFLUID_CARD1 = (
     FieldSchema("targ", float, 0, 10, 0.0),
     FieldSchema("fmin", float, 10, 10, 0.0),
     FieldSchema("fmax", float, 20, 10, 0.0),
-    FieldSchema("ftied ", float, 30, 10, 0.0),
+    FieldSchema("ftied_", float, 30, 10, 0.0, "ftied "),
     FieldSchema("conv", float, 40, 10, 0.0001),
     FieldSchema("conmax", float, 50, 10, 1e+20),
     FieldSchema("eterm", float, 60, 10, 0.0),
@@ -203,12 +203,12 @@ class ControlPoreFluid(KeywordBase):
         EQ.0.0:	Tied contacts act as impermeable membranes,
         EQ.1.0 : Fluid may flow freely through tied contacts.
         """ # nopep8
-        return self._cards[1].get_value("ftied ")
+        return self._cards[1].get_value("ftied_")
 
     @ftied_.setter
     def ftied_(self, value: float) -> None:
         """Set the ftied_ property."""
-        self._cards[1].set_value("ftied ", value)
+        self._cards[1].set_value("ftied_", value)
 
     @property
     def conv(self) -> float:

@@ -36,8 +36,8 @@ _EMPERMANENTMAGNET_CARD0 = (
 )
 
 _EMPERMANENTMAGNET_CARD1 = (
-    FieldSchema("x/nid1", float, 0, 10, None),
-    FieldSchema("y/nid2", float, 10, 10, None),
+    FieldSchema("x_nid1", float, 0, 10, None, "x/nid1"),
+    FieldSchema("y_nid2", float, 10, 10, None, "y/nid2"),
     FieldSchema("z", float, 20, 10, None),
 )
 
@@ -135,24 +135,24 @@ class EmPermanentMagnet(KeywordBase):
         """Get or set the Orientation of magnetization vector if MTYPE=3.
         Two node IDs defining the magnetization vector if MTYPE=4.
         """ # nopep8
-        return self._cards[1].get_value("x/nid1")
+        return self._cards[1].get_value("x_nid1")
 
     @x_nid1.setter
     def x_nid1(self, value: float) -> None:
         """Set the x_nid1 property."""
-        self._cards[1].set_value("x/nid1", value)
+        self._cards[1].set_value("x_nid1", value)
 
     @property
     def y_nid2(self) -> typing.Optional[float]:
         """Get or set the Orientation of magnetization vector if MTYPE=3.
         Two node IDs defining the magnetization vector if MTYPE=4.
         """ # nopep8
-        return self._cards[1].get_value("y/nid2")
+        return self._cards[1].get_value("y_nid2")
 
     @y_nid2.setter
     def y_nid2(self, value: float) -> None:
         """Set the y_nid2 property."""
-        self._cards[1].set_value("y/nid2", value)
+        self._cards[1].set_value("y_nid2", value)
 
     @property
     def z(self) -> typing.Optional[float]:

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _EMISOPOTENTIALCONNECT_CARD0 = (
     FieldSchema("conid", int, 0, 10, None),
@@ -32,7 +34,7 @@ _EMISOPOTENTIALCONNECT_CARD0 = (
     FieldSchema("isoid1", int, 20, 10, None),
     FieldSchema("isoid2", int, 30, 10, None),
     FieldSchema("val", float, 40, 10, None),
-    FieldSchema("lcid/rdlid", int, 50, 10, None),
+    FieldSchema("lcid_rdlid", int, 50, 10, None, "lcid/rdlid"),
     FieldSchema("psid", int, 60, 10, None),
 )
 
@@ -47,6 +49,9 @@ class EmIsopotentialConnect(KeywordBase):
 
     keyword = "EM"
     subkeyword = "ISOPOTENTIAL_CONNECT"
+    _link_fields = {
+        "lcid_rdlid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmIsopotentialConnect class."""
@@ -128,12 +133,12 @@ class EmIsopotentialConnect(KeywordBase):
         """Get or set the Load curve ID defining the value of the resistance,voltage,or current function of time and depending on CONTYPE.
         If not defined,VAL will be used.
         """ # nopep8
-        return self._cards[0].get_value("lcid/rdlid")
+        return self._cards[0].get_value("lcid_rdlid")
 
     @lcid_rdlid.setter
     def lcid_rdlid(self, value: int) -> None:
         """Set the lcid_rdlid property."""
-        self._cards[0].set_value("lcid/rdlid", value)
+        self._cards[0].set_value("lcid_rdlid", value)
 
     @property
     def psid(self) -> typing.Optional[int]:
@@ -178,4 +183,19 @@ class EmIsopotentialConnect(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[1].set_value("v0", value)
+
+    @property
+    def lcid_rdlid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid_rdlid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid_rdlid:
+                return kwd
+        return None
+
+    @lcid_rdlid_link.setter
+    def lcid_rdlid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid_rdlid."""
+        self.lcid_rdlid = value.lcid
 

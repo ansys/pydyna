@@ -33,13 +33,13 @@ _ALESTRUCTUREDMESHVOLUMEFILLING_CARD0 = (
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("nsample", int, 40, 10, 3),
     FieldSchema("unused", int, 50, 10, None),
-    FieldSchema("unused-", int, 60, 10, None),
+    FieldSchema("unused_", int, 60, 10, None, "unused-"),
     FieldSchema("vid", int, 70, 10, 0),
 )
 
 _ALESTRUCTUREDMESHVOLUMEFILLING_CARD1 = (
     FieldSchema("geom", str, 0, 10, "ALL"),
-    FieldSchema("in/out", int, 10, 10, 0),
+    FieldSchema("in_out", int, 10, 10, 0, "in/out"),
     FieldSchema("e1", float, 20, 10, None),
     FieldSchema("e2", float, 30, 10, None),
     FieldSchema("e3", float, 40, 10, None),
@@ -102,12 +102,12 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     def unused_(self) -> typing.Optional[int]:
         """Get or set the -.
         """ # nopep8
-        return self._cards[0].get_value("unused-")
+        return self._cards[0].get_value("unused_")
 
     @unused_.setter
     def unused_(self, value: int) -> None:
         """Set the unused_ property."""
-        self._cards[0].set_value("unused-", value)
+        self._cards[0].set_value("unused_", value)
 
     @property
     def vid(self) -> int:
@@ -141,14 +141,14 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
         EQ.0:	Inside(default)
         EQ.1 : Outside
         """ # nopep8
-        return self._cards[1].get_value("in/out")
+        return self._cards[1].get_value("in_out")
 
     @in_out.setter
     def in_out(self, value: int) -> None:
         """Set the in_out property."""
         if value not in [0, 1, None]:
             raise Exception("""in_out must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("in/out", value)
+        self._cards[1].set_value("in_out", value)
 
     @property
     def e1(self) -> typing.Optional[float]:

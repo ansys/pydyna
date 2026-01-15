@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT3_PARAMETERBARLAT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -111,6 +113,12 @@ class Mat3_ParameterBarlat(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "vlcid": LinkType.DEFINE_CURVE,
+        "hta": LinkType.DEFINE_CURVE_OR_TABLE,
+        "htb": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat3_ParameterBarlat class."""
@@ -753,4 +761,82 @@ class Mat3_ParameterBarlat(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def vlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlcid:
+                return kwd
+        return None
+
+    @vlcid_link.setter
+    def vlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlcid."""
+        self.vlcid = value.lcid
+
+    @property
+    def hta_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for hta."""
+        if self.deck is None:
+            return None
+        field_value = self.hta
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @hta_link.setter
+    def hta_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for hta."""
+        if hasattr(value, "lcid"):
+            self.hta = value.lcid
+        elif hasattr(value, "tbid"):
+            self.hta = value.tbid
+
+    @property
+    def htb_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for htb."""
+        if self.deck is None:
+            return None
+        field_value = self.htb
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @htb_link.setter
+    def htb_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for htb."""
+        if hasattr(value, "lcid"):
+            self.htb = value.lcid
+        elif hasattr(value, "tbid"):
+            self.htb = value.tbid
 

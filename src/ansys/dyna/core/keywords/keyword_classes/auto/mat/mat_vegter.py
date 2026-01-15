@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATVEGTER_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -73,11 +75,11 @@ _MATVEGTER_CARD4 = (
 )
 
 _MATVEGTER_CARD5 = (
-    FieldSchema("fun-i", float, 0, 10, None),
-    FieldSchema("run-i", float, 10, 10, None),
-    FieldSchema("fps1-i", float, 20, 10, None),
-    FieldSchema("fps2-i", float, 30, 10, None),
-    FieldSchema("fsh-i", float, 40, 10, None),
+    FieldSchema("fun_i", float, 0, 10, None, "fun-i"),
+    FieldSchema("run_i", float, 10, 10, None, "run-i"),
+    FieldSchema("fps1_i", float, 20, 10, None, "fps1-i"),
+    FieldSchema("fps2_i", float, 30, 10, None, "fps2-i"),
+    FieldSchema("fsh_i", float, 40, 10, None, "fsh-i"),
 )
 
 _MATVEGTER_OPTION0_CARD0 = (
@@ -92,6 +94,10 @@ class MatVegter(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatVegter class."""
@@ -468,56 +474,56 @@ class MatVegter(KeywordBase):
     def fun_i(self) -> typing.Optional[float]:
         """Get or set the Normalized yield stress for uniaxial test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fun-i")
+        return self._cards[5].get_value("fun_i")
 
     @fun_i.setter
     def fun_i(self, value: float) -> None:
         """Set the fun_i property."""
-        self._cards[5].set_value("fun-i", value)
+        self._cards[5].set_value("fun_i", value)
 
     @property
     def run_i(self) -> typing.Optional[float]:
         """Get or set the Strain ratio for uniaxial test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("run-i")
+        return self._cards[5].get_value("run_i")
 
     @run_i.setter
     def run_i(self, value: float) -> None:
         """Set the run_i property."""
-        self._cards[5].set_value("run-i", value)
+        self._cards[5].set_value("run_i", value)
 
     @property
     def fps1_i(self) -> typing.Optional[float]:
         """Get or set the First normalized yield stress for plain strain test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fps1-i")
+        return self._cards[5].get_value("fps1_i")
 
     @fps1_i.setter
     def fps1_i(self, value: float) -> None:
         """Set the fps1_i property."""
-        self._cards[5].set_value("fps1-i", value)
+        self._cards[5].set_value("fps1_i", value)
 
     @property
     def fps2_i(self) -> typing.Optional[float]:
         """Get or set the Second normalized yield stress for plain strain test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fps2-i")
+        return self._cards[5].get_value("fps2_i")
 
     @fps2_i.setter
     def fps2_i(self, value: float) -> None:
         """Set the fps2_i property."""
-        self._cards[5].set_value("fps2-i", value)
+        self._cards[5].set_value("fps2_i", value)
 
     @property
     def fsh_i(self) -> typing.Optional[float]:
         """Get or set the First normalized yield stress for pure shear test for the ith direction
         """ # nopep8
-        return self._cards[5].get_value("fsh-i")
+        return self._cards[5].get_value("fsh_i")
 
     @fsh_i.setter
     def fsh_i(self, value: float) -> None:
         """Set the fsh_i property."""
-        self._cards[5].set_value("fsh-i", value)
+        self._cards[5].set_value("fsh_i", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -532,4 +538,34 @@ class MatVegter(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def lcid2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid2:
+                return kwd
+        return None
+
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 

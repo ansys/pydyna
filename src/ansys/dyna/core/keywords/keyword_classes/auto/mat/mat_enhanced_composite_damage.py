@@ -26,25 +26,27 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATENHANCEDCOMPOSITEDAMAGE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("ea", float, 20, 10, None),
     FieldSchema("eb", float, 30, 10, None),
-    FieldSchema("(ec)", float, 40, 10, None),
+    FieldSchema("_ec_", float, 40, 10, None, "(ec)"),
     FieldSchema("prba", float, 50, 10, None),
-    FieldSchema("(prca)", float, 60, 10, None),
-    FieldSchema("(prcb)", float, 70, 10, None),
+    FieldSchema("_prca_", float, 60, 10, None, "(prca)"),
+    FieldSchema("_prcb_", float, 70, 10, None, "(prcb)"),
 )
 
 _MATENHANCEDCOMPOSITEDAMAGE_CARD1 = (
     FieldSchema("gab", float, 0, 10, None),
     FieldSchema("gbc", float, 10, 10, None),
     FieldSchema("gca", float, 20, 10, None),
-    FieldSchema("(kf)", float, 30, 10, None),
+    FieldSchema("_kf_", float, 30, 10, None, "(kf)"),
     FieldSchema("aopt", float, 40, 10, None),
-    FieldSchema("2way", float, 50, 10, None),
+    FieldSchema("_2way", float, 50, 10, None, "2way"),
     FieldSchema("ti", float, 60, 10, None),
 )
 
@@ -129,6 +131,13 @@ class MatEnhancedCompositeDamage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcxc": LinkType.DEFINE_CURVE,
+        "lcxt": LinkType.DEFINE_CURVE,
+        "lcyc": LinkType.DEFINE_CURVE,
+        "lcyt": LinkType.DEFINE_CURVE,
+        "lcsc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatEnhancedCompositeDamage class."""
@@ -221,12 +230,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _ec_(self) -> typing.Optional[float]:
         """Get or set the Ec, Young's modulus - normal direction (not used).
         """ # nopep8
-        return self._cards[0].get_value("(ec)")
+        return self._cards[0].get_value("_ec_")
 
     @_ec_.setter
     def _ec_(self, value: float) -> None:
         """Set the _ec_ property."""
-        self._cards[0].set_value("(ec)", value)
+        self._cards[0].set_value("_ec_", value)
 
     @property
     def prba(self) -> typing.Optional[float]:
@@ -243,23 +252,23 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _prca_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio ca (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prca)")
+        return self._cards[0].get_value("_prca_")
 
     @_prca_.setter
     def _prca_(self, value: float) -> None:
         """Set the _prca_ property."""
-        self._cards[0].set_value("(prca)", value)
+        self._cards[0].set_value("_prca_", value)
 
     @property
     def _prcb_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio cb (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prcb)")
+        return self._cards[0].get_value("_prcb_")
 
     @_prcb_.setter
     def _prcb_(self, value: float) -> None:
         """Set the _prcb_ property."""
-        self._cards[0].set_value("(prcb)", value)
+        self._cards[0].set_value("_prcb_", value)
 
     @property
     def gab(self) -> typing.Optional[float]:
@@ -298,12 +307,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _kf_(self) -> typing.Optional[float]:
         """Get or set the Bulk modulus of failed material (not used)
         """ # nopep8
-        return self._cards[1].get_value("(kf)")
+        return self._cards[1].get_value("_kf_")
 
     @_kf_.setter
     def _kf_(self, value: float) -> None:
         """Set the _kf_ property."""
-        self._cards[1].set_value("(kf)", value)
+        self._cards[1].set_value("_kf_", value)
 
     @property
     def aopt(self) -> typing.Optional[float]:
@@ -328,12 +337,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
         EQ.0.0:	Standard unidirectional behavior.
         EQ.1.0:	2-way fiber behavior.  The meaning of the fields DFAILT, DFAILC, YC, YT, SLIMT2 and SLIMC are altered if this flag is set.  This option is only available for MAT 54 using thin shells.
         """ # nopep8
-        return self._cards[1].get_value("2way")
+        return self._cards[1].get_value("_2way")
 
     @_2way.setter
     def _2way(self, value: float) -> None:
         """Set the _2way property."""
-        self._cards[1].set_value("2way", value)
+        self._cards[1].set_value("_2way", value)
 
     @property
     def ti(self) -> typing.Optional[float]:
@@ -902,4 +911,79 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcxc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcxc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcxc:
+                return kwd
+        return None
+
+    @lcxc_link.setter
+    def lcxc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcxc."""
+        self.lcxc = value.lcid
+
+    @property
+    def lcxt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcxt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcxt:
+                return kwd
+        return None
+
+    @lcxt_link.setter
+    def lcxt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcxt."""
+        self.lcxt = value.lcid
+
+    @property
+    def lcyc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcyc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcyc:
+                return kwd
+        return None
+
+    @lcyc_link.setter
+    def lcyc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcyc."""
+        self.lcyc = value.lcid
+
+    @property
+    def lcyt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcyt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcyt:
+                return kwd
+        return None
+
+    @lcyt_link.setter
+    def lcyt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcyt."""
+        self.lcyt = value.lcid
+
+    @property
+    def lcsc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsc:
+                return kwd
+        return None
+
+    @lcsc_link.setter
+    def lcsc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsc."""
+        self.lcsc = value.lcid
 

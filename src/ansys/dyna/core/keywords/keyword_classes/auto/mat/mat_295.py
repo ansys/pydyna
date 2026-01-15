@@ -28,6 +28,8 @@ from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _FIBERFAMILY_CARD0 = (
     FieldSchema("theta", float, 0, 10, None),
@@ -223,7 +225,7 @@ _MAT295_CARD0 = (
 )
 
 _MAT295_CARD1 = (
-    FieldSchema("title", str, 0, 10, "ISO"),
+    FieldSchema("isotropic_title", str, 0, 10, "ISO", "title"),
     FieldSchema("itype", int, 10, 10, None),
     FieldSchema("beta", float, 20, 10, None),
     FieldSchema("nu", float, 30, 10, None),
@@ -263,19 +265,19 @@ _MAT295_CARD5 = (
 )
 
 _MAT295_CARD6 = (
-    FieldSchema("title", str, 0, 10, "ANISO"),
+    FieldSchema("anisotropic_title", str, 0, 10, "ANISO", "title"),
     FieldSchema("atype", int, 10, 10, None),
     FieldSchema("intype", int, 20, 10, None),
     FieldSchema("nf", int, 30, 10, None),
 )
 
 _MAT295_CARD8 = (
-    FieldSchema("k1", float, 0, 10, None),
-    FieldSchema("k2", float, 10, 10, None),
+    FieldSchema("coupling_k1", float, 0, 10, None, "k1"),
+    FieldSchema("coupling_k2", float, 10, 10, None, "k2"),
 )
 
 _MAT295_CARD9 = (
-    FieldSchema("title", str, 0, 10, "ACTIVE"),
+    FieldSchema("active_title", str, 0, 10, "ACTIVE", "title"),
     FieldSchema("actype", int, 10, 10, None),
     FieldSchema("acdir", int, 20, 10, 0),
     FieldSchema("acid", int, 30, 10, None),
@@ -360,7 +362,7 @@ _MAT295_CARD18 = (
     FieldSchema("d1", float, 30, 10, None),
     FieldSchema("d2", float, 40, 10, None),
     FieldSchema("d3", float, 50, 10, None),
-    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("material_angle_beta", float, 60, 10, None, "beta"),
     FieldSchema("ref", float, 70, 10, None),
 )
 
@@ -385,6 +387,11 @@ class Mat295(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "flid": LinkType.DEFINE_CURVE,
+        "fvid": LinkType.DEFINE_CURVE,
+        "alphaid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat295 class."""
@@ -644,7 +651,7 @@ class Mat295(KeywordBase):
 
         Note: Location in manual: card:2, field: TITLE
         """ # nopep8
-        return self._cards[1].get_value("title")
+        return self._cards[1].get_value("isotropic_title")
 
     @property
     def itype(self) -> typing.Optional[int]:
@@ -925,7 +932,7 @@ class Mat295(KeywordBase):
 
         Note: Location in manual: card:7, field: TITLE
         """ # nopep8
-        return self._cards[6].get_value("title")
+        return self._cards[6].get_value("anisotropic_title")
 
     @property
     def atype(self) -> typing.Optional[int]:
@@ -974,12 +981,12 @@ class Mat295(KeywordBase):
 
         Note: Location in manual: card:11, field: K1
         """ # nopep8
-        return self._cards[8].get_value("k1")
+        return self._cards[8].get_value("coupling_k1")
 
     @coupling_k1.setter
     def coupling_k1(self, value: float) -> None:
         """Set the coupling_k1 property."""
-        self._cards[8].set_value("k1", value)
+        self._cards[8].set_value("coupling_k1", value)
 
     @property
     def coupling_k2(self) -> typing.Optional[float]:
@@ -987,12 +994,12 @@ class Mat295(KeywordBase):
 
         Note: Location in manual: card:11, field: K2
         """ # nopep8
-        return self._cards[8].get_value("k2")
+        return self._cards[8].get_value("coupling_k2")
 
     @coupling_k2.setter
     def coupling_k2(self, value: float) -> None:
         """Set the coupling_k2 property."""
-        self._cards[8].set_value("k2", value)
+        self._cards[8].set_value("coupling_k2", value)
 
     @property
     def active_title(self) -> str:
@@ -1000,7 +1007,7 @@ class Mat295(KeywordBase):
 
         Note: Location in manual: card:12, field: TITLE
         """ # nopep8
-        return self._cards[9].get_value("title")
+        return self._cards[9].get_value("active_title")
 
     @property
     def actype(self) -> typing.Optional[int]:
@@ -1507,12 +1514,12 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
 
         Note: Location in manual: card:21, field: BETA
         """ # nopep8
-        return self._cards[18].get_value("beta")
+        return self._cards[18].get_value("material_angle_beta")
 
     @material_angle_beta.setter
     def material_angle_beta(self, value: float) -> None:
         """Set the material_angle_beta property."""
-        self._cards[18].set_value("beta", value)
+        self._cards[18].set_value("material_angle_beta", value)
 
     @property
     def ref(self) -> typing.Optional[float]:
@@ -1541,6 +1548,51 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def flid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for flid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.flid:
+                return kwd
+        return None
+
+    @flid_link.setter
+    def flid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for flid."""
+        self.flid = value.lcid
+
+    @property
+    def fvid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fvid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fvid:
+                return kwd
+        return None
+
+    @fvid_link.setter
+    def fvid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fvid."""
+        self.fvid = value.lcid
+
+    @property
+    def alphaid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for alphaid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.alphaid:
+                return kwd
+        return None
+
+    @alphaid_link.setter
+    def alphaid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for alphaid."""
+        self.alphaid = value.lcid
 
 
 class MatAnisotropicHyperelastic(Mat295):

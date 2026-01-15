@@ -51,7 +51,7 @@ _CONTROLSHELL_CARD2 = (
     FieldSchema("cntco", int, 20, 10, 0),
     FieldSchema("itsflg", int, 30, 10, 0),
     FieldSchema("irquad", int, 40, 10, 3),
-    FieldSchema("w-mode", float, 50, 10, None),
+    FieldSchema("w_mode", float, 50, 10, None, "w-mode"),
     FieldSchema("stretch", float, 60, 10, None),
     FieldSchema("icrq", int, 70, 10, 0),
 )
@@ -382,12 +382,12 @@ class ControlShell(KeywordBase):
     def w_mode(self) -> typing.Optional[float]:
         """Get or set the W-Mode amplitude for element deletion, specified in degrees
         """ # nopep8
-        return self._cards[2].get_value("w-mode")
+        return self._cards[2].get_value("w_mode")
 
     @w_mode.setter
     def w_mode(self, value: float) -> None:
         """Set the w_mode property."""
-        self._cards[2].set_value("w-mode", value)
+        self._cards[2].set_value("w_mode", value)
 
     @property
     def stretch(self) -> typing.Optional[float]:

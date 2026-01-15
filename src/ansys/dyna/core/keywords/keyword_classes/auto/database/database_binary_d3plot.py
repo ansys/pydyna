@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DATABASEBINARYD3PLOT_CARD0 = (
     FieldSchema("dt", float, 0, 10, None),
@@ -48,6 +50,9 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "BINARY_D3PLOT"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryD3Plot class."""
@@ -58,6 +63,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3PLOT_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
             ),        ]
     @property
@@ -202,4 +208,19 @@ class DatabaseBinaryD3Plot(KeywordBase):
     def pset(self, value: int) -> None:
         """Set the pset property."""
         self._cards[1].set_value("pset", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
 

@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATHYSTERETICSOIL_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -66,7 +68,7 @@ _MATHYSTERETICSOIL_CARD3 = (
     FieldSchema("tau3", float, 20, 10, None),
     FieldSchema("tau4", float, 30, 10, None),
     FieldSchema("tau5", float, 40, 10, None),
-    FieldSchema("flag5 ", int, 50, 10, None),
+    FieldSchema("flag5_", int, 50, 10, None, "flag5 "),
 )
 
 _MATHYSTERETICSOIL_CARD4 = (
@@ -87,6 +89,11 @@ class MatHystereticSoil(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "lcd": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatHystereticSoil class."""
@@ -450,12 +457,12 @@ class MatHystereticSoil(KeywordBase):
     def flag5_(self) -> typing.Optional[int]:
         """Get or set the If FLAG5 = 1, optional Card 5 will be read. .
         """ # nopep8
-        return self._cards[3].get_value("flag5 ")
+        return self._cards[3].get_value("flag5_")
 
     @flag5_.setter
     def flag5_(self, value: int) -> None:
         """Set the flag5_ property."""
-        self._cards[3].set_value("flag5 ", value)
+        self._cards[3].set_value("flag5_", value)
 
     @property
     def sigth(self) -> typing.Optional[float]:
@@ -503,4 +510,49 @@ class MatHystereticSoil(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def lcd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcd:
+                return kwd
+        return None
+
+    @lcd_link.setter
+    def lcd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcd."""
+        self.lcd = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
 

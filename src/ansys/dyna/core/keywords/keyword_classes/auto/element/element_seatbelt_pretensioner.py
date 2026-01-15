@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ELEMENTSEATBELTPRETENSIONER_CARD0 = (
     FieldSchema("sbprid", int, 0, 10, 0),
@@ -47,6 +49,9 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_PRETENSIONER"
+    _link_fields = {
+        "ptlcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltPretensioner class."""
@@ -179,4 +184,19 @@ class ElementSeatbeltPretensioner(KeywordBase):
     def lmtfrc(self, value: float) -> None:
         """Set the lmtfrc property."""
         self._cards[1].set_value("lmtfrc", value)
+
+    @property
+    def ptlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ptlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ptlcid:
+                return kwd
+        return None
+
+    @ptlcid_link.setter
+    def ptlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ptlcid."""
+        self.ptlcid = value.lcid
 
