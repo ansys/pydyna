@@ -478,7 +478,7 @@ $#   nid               x               y               z      tc      rc
         assert len(node_kwd.nodes) == 3
         assert node_kwd.nodes["nid"].iloc[0] == 100
         assert node_kwd.nodes["x"].iloc[0] == -0.25  # &x1 substituted
-        assert node_kwd.nodes["y"].iloc[0] == 0.30   # &y1 substituted
+        assert node_kwd.nodes["y"].iloc[0] == 0.30  # &y1 substituted
 
         # Write without retain_parameters (default) - should have substituted values
         output = deck.write()
@@ -536,8 +536,8 @@ Rn2,103
         output_retain = deck.write(retain_parameters=True)
         assert "*SET_NODE_LIST" in output_retain
         assert "&da1" in output_retain  # parameter ref SHOULD appear
-        assert "&n1" in output_retain   # parameter ref SHOULD appear
-        assert "&n2" in output_retain   # parameter ref SHOULD appear
+        assert "&n1" in output_retain  # parameter ref SHOULD appear
+        assert "&n2" in output_retain  # parameter ref SHOULD appear
 
     @pytest.mark.keywords
     def test_deck_with_table_card_group_and_parameters(self):
@@ -557,7 +557,8 @@ Rn2,103
         # Create ELEMENT_SHELL_THICKNESS with a parameter reference
         # Note: thic1 field is 16 chars wide, so &t1 fits perfectly
         elements = kwd.ElementShellThickness()
-        elements.loads("""*ELEMENT_SHELL_THICKNESS
+        elements.loads(
+            """*ELEMENT_SHELL_THICKNESS
        1       1       1     105       2       2
              &t1 1.97992622E+000 1.97992622E+000 1.97992622E+000 1.49965326E+002
        2       1     136     133    2834    2834
@@ -584,3 +585,297 @@ Rn2,103
         assert "*ELEMENT_SHELL_THICKNESS" in output_retain
         assert "&t1" in output_retain  # parameter ref should appear
 
+
+class TestCSVFormatRetention:
+    """Test parameter retention with CSV (comma-delimited) format."""
+
+    @pytest.mark.keywords
+    def test_table_card_csv_roundtrip_with_parameter(self):
+        """Test CSV format TableCard read→write preserves parameter refs."""
+        from ansys.dyna.core.lib.table_card import TableCard
+
+        ps = ParameterSet()
+        ps.add("xval", 100.5)
+
+        table = TableCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+                Field("y", float, 24, 16),
+            ],
+            None,
+        )
+
+        # CSV format input with parameter
+        card_text = """1,&xval,20.0
+2,200.0,30.0"""
+        buf = io.StringIO(card_text)
+
+        with ps.scope("kwd"):
+            table.read(buf, ps)
+
+        # Values should be substituted
+        assert table.table["x"][0] == 100.5
+        assert table.table["y"][0] == 20.0
+
+        # Write with retain_parameters
+        output = table.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=ps,
+            uri_prefix="kwd",
+        )
+
+        # Should contain the parameter reference
+        assert "&xval" in output
+
+    @pytest.mark.keywords
+    def test_deck_csv_format_table_card_retention(self):
+        """Test deck-level CSV format table card parameter retention."""
+        from ansys.dyna.core.lib.deck import Deck
+
+        # NODE keyword supports CSV format
+        deck_string = """*PARAMETER
+Rx1,100.5
+*NODE
+1,&x1,20.0,30.0
+2,200.0,40.0,50.0"""
+
+        deck = Deck()
+        deck.loads(deck_string)
+
+        # Verify read
+        node_kwd = deck.keywords[1]
+        assert node_kwd.nodes["x"].iloc[0] == 100.5  # &x1 substituted
+
+        # Write with retain_parameters
+        output = deck.write(retain_parameters=True)
+        assert "&x1" in output
+
+
+class TestBoundedCardRetention:
+    """Test parameter retention with bounded card variants."""
+
+    @pytest.mark.keywords
+    def test_bounded_series_card_retention(self):
+        """Test bounded SeriesCard retains parameter refs."""
+        from ansys.dyna.core.lib.series_card import SeriesCard
+
+        ps = ParameterSet()
+        ps.add("val", 42.0)
+
+        series = SeriesCard(
+            name="values",
+            fields_per_card=4,
+            element_width=10,
+            input_type=float,
+            length_func=lambda: 4,  # Bounded to 4 elements
+        )
+
+        card_text = """     &val      20.0      30.0      40.0"""
+        buf = io.StringIO(card_text)
+
+        with ps.scope("kwd"):
+            with ps.scope("series"):
+                series.read(buf, ps)
+
+        # Values should be substituted
+        assert len(series.data) == 4
+        assert series.data[0] == 42.0
+
+        # Write with retain_parameters
+        output = series.write(
+            format=None,
+            buf=None,
+            comment=False,
+            retain_parameters=True,
+            parameter_set=ps,
+            uri_prefix="kwd/series",
+        )
+
+        assert "&val" in output
+
+    @pytest.mark.keywords
+    def test_bounded_table_card_retention(self):
+        """Test bounded TableCard retains parameter refs."""
+        from ansys.dyna.core.lib.table_card import TableCard
+
+        ps = ParameterSet()
+        ps.add("x1", 10.0)
+
+        table = TableCard(
+            [
+                Field("nid", int, 0, 8),
+                Field("x", float, 8, 16),
+            ],
+            lambda: 2,  # Bounded to 2 rows
+        )
+
+        card_text = """       1        &x1
+       2       20.0"""
+        buf = io.StringIO(card_text)
+
+        with ps.scope("kwd"):
+            table.read(buf, ps)
+
+        assert len(table.table) == 2
+        assert table.table["x"][0] == 10.0
+
+        output = table.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=ps,
+            uri_prefix="kwd",
+        )
+
+        assert "&x1" in output
+
+    @pytest.mark.keywords
+    def test_bounded_table_card_group_retention(self):
+        """Test bounded TableCardGroup retains parameter refs."""
+        from ansys.dyna.core.lib.table_card_group import TableCardGroup
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
+        ps = ParameterSet()
+        ps.add("id1", 100)
+        ps.add("val1", 10.5)
+
+        card_schemas = [
+            (FieldSchema("id", int, 0, 8, None), FieldSchema("value1", float, 8, 16, None)),
+            (FieldSchema("value2", float, 0, 16, None), FieldSchema("value3", float, 16, 16, None)),
+        ]
+
+        group = TableCardGroup(
+            card_schemas,
+            lambda: 1,  # Bounded to 1 row
+        )
+
+        card_text = """    &id1      &val1
+            5.0            6.0"""
+        buf = io.StringIO(card_text)
+
+        with ps.scope("kwd"):
+            group.read(buf, ps)
+
+        assert len(group.table) == 1
+        assert group.table["id"][0] == 100
+        assert group.table["value1"][0] == 10.5
+
+        output = group.write(
+            comment=False,
+            retain_parameters=True,
+            parameter_set=ps,
+            uri_prefix="kwd",
+        )
+
+        assert "&id1" in output
+        assert "&val1" in output
+
+
+class TestPostExpandRetention:
+    """Test parameter retention after deck expansion (includes)."""
+
+    @pytest.mark.keywords
+    def test_deck_expand_preserves_parameter_refs(self, tmp_path):
+        """Test that deck.expand() preserves parameter refs for retention."""
+        from ansys.dyna.core.lib.deck import Deck
+
+        # Create include file
+        include_content = """*SET_NODE_LIST
+         1       0.0       0.0       0.0       0.0    MECH         1
+       100      &n1       102"""
+
+        include_path = tmp_path / "include.k"
+        include_path.write_text(include_content)
+
+        # Main deck with parameter and include
+        deck_string = f"""*PARAMETER
+Rn1,101
+*INCLUDE
+{include_path}"""
+
+        deck = Deck()
+        deck.loads(deck_string)
+
+        # Expand includes - returns a NEW deck
+        expanded_deck = deck.expand(cwd=str(tmp_path))
+
+        # Verify the included keyword has the substituted value
+        set_node = None
+        for kw in expanded_deck.keywords:
+            if hasattr(kw, "nodes"):
+                set_node = kw
+                break
+
+        assert set_node is not None
+        assert set_node.nodes[1] == 101  # &n1 substituted
+
+        # Write with retain_parameters
+        output = expanded_deck.write(retain_parameters=True)
+
+        # The parameter ref should be retained
+        assert "&n1" in output
+
+
+class TestOptionCardRetention:
+    """Test parameter retention with option cards."""
+
+    @pytest.mark.keywords
+    def test_option_card_field_retention(self):
+        """Test that parameters in option card fields are retained."""
+        from ansys.dyna.core.lib.deck import Deck
+
+        # MAT_001 with TITLE option - mid field can have parameter
+        # Field widths: mid=10, ro=10, e=10, pr=10, da=10, db=10
+        deck_string = """*PARAMETER
+Rmid,100
+*MAT_ELASTIC_TITLE
+my_material_title
+$#     mid        ro         e        pr        da        db  not used
+      &mid    7870.02.07000E11     0.292       0.0       0.0       0.0"""
+
+        deck = Deck()
+        deck.loads(deck_string)
+
+        # Verify the material keyword read correctly
+        mat = deck.keywords[1]
+        assert mat.mid == 100  # &mid substituted
+
+        # Write without retain_parameters - should have numeric value
+        output = deck.write()
+        assert "*MAT_ELASTIC" in output
+        assert "100" in output
+        assert "&mid" not in output
+
+        # Write with retain_parameters - should have parameter reference
+        output_retain = deck.write(retain_parameters=True)
+        assert "&mid" in output_retain
+
+    @pytest.mark.keywords
+    def test_option_card_with_multiple_parameters(self):
+        """Test option card with parameters in base and option cards."""
+        from ansys.dyna.core.lib.deck import Deck
+
+        # SET_NODE_LIST with parameters
+        deck_string = """*PARAMETER
+Rsid,1
+Rda1,0.5
+Rn1,100
+*SET_NODE_LIST
+      &sid     &da1       0.0       0.0       0.0    MECH         1
+      &n1       101       102"""
+
+        deck = Deck()
+        deck.loads(deck_string)
+
+        # Verify read
+        set_node = deck.keywords[1]
+        assert set_node.sid == 1  # &sid substituted
+        assert set_node.da1 == 0.5  # &da1 substituted
+        assert set_node.nodes[0] == 100  # &n1 substituted
+
+        # Write with retain_parameters
+        output = deck.write(retain_parameters=True)
+        assert "&sid" in output
+        assert "&da1" in output
+        assert "&n1" in output
