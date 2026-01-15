@@ -674,17 +674,14 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             flag: Flag = item_type
             true_value = flag.true_value
             false_value = flag.false_value
-            # check  the true value first, empty text may be false but not true
+            # check the true value first, empty text may be false but not true
             if true_value in text_block:
                 value = True
+            elif len(false_value) == 0 or false_value in text_block:
+                # If false_value is empty, any non-true value is considered False
+                value = False
             else:
-                if len(false_value) == 0:
-                    warnings.warn("value detected in field where false value was an empty string")
-                    value = False
-                else:
-                    if false_value in text_block:
-                        value = False
-                    raise Exception("Failed to find true or false value in flag")
+                raise Exception("Failed to find true or false value in flag")
         elif _has_parameter(text_block):
             if parameter_set is None:
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
