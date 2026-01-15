@@ -48,7 +48,8 @@ logger = logging.getLogger(__name__)
 class ConditionalCardSettings(LabelRefSettings):
     """Configuration for conditional card inclusion.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference (inherited from LabelRefSettings)
         func: Python expression that determines if the card should be rendered
     """
@@ -62,10 +63,12 @@ class ConditionalCardSettings(LabelRefSettings):
         Args:
             data: Dict with 'ref' and 'func' keys
 
-        Returns:
+        Returns
+        -------
             ConditionalCardSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If 'ref' or 'func' is missing
         """
         return cls(ref=data["ref"], func=data["func"])
@@ -119,7 +122,8 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref' and 'func' keys
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """

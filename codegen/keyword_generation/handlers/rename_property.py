@@ -174,7 +174,7 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
                         )
                     else:
                         collision_note = (
-                            f"For the {rp.field_name} (Card {rp.card_index + 1}), " f"use ``{rp.property_name}``."
+                            f"For the {rp.field_name} (Card {rp.card_index + 1}), use ``{rp.property_name}``."
                         )
                     # Store in property_collisions map keyed by the property name
                     kwd_data.property_collisions[property_name] = collision_note

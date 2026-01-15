@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling the *INCLUDE card."""
 
 import typing
 
@@ -74,7 +75,10 @@ class IncludeCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
+        """Writes the card data to an output text buffer or returns it as a string."""
+        # kwargs may include retain_parameters, parameter_set, etc. - not used by IncludeCard
         if format == None:
             format = self._format_type
 
@@ -87,7 +91,7 @@ class IncludeCard(Card):
                 if len(filename) > 236:
                     raise Exception("Maximum filename length is 236 characters")
                 if len(filename) <= 80:
-                    right_justified_filename = f"{{0:<80}}".format(filename)
+                    right_justified_filename = "{0:<80}".format(filename)
                     buf.write(right_justified_filename)
                 else:
                     buf.write(filename[0:78])

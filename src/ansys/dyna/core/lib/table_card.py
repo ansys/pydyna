@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling table cards."""
 
 import io
 import typing
@@ -45,7 +46,7 @@ def _check_type(value):
 
 
 def try_initialize_table(card, name: str, **kwargs):
-    """card is a TableCard or a TableCardGroup"""
+    """Card is a TableCard or a TableCardGroup"""
     if name is not None:
         data = kwargs.get(name, None)
         if data is not None:
@@ -205,12 +206,14 @@ class TableCard(Card):
 
     @property
     def table(self) -> pd.DataFrame:
+        """Get the table as a pandas DataFrame."""
         if not self._initialized:
             self._initialize()
         return self._table
 
     @table.setter
     def table(self, value: pd.DataFrame):
+        """Set the table from a pandas DataFrame."""
         _check_type(value)
         # Build columns dict first, then create DataFrame (pandas 2.3+ compatibility)
         columns = {}
@@ -229,10 +232,12 @@ class TableCard(Card):
 
     @property
     def format(self) -> format_type:
+        """Format type of the table card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the table card."""
         self._format_type = value
 
     def _get_default_value(self, field: Field) -> typing.Optional[typing.Any]:
@@ -314,6 +319,7 @@ class TableCard(Card):
         self._load_lines(data_lines, parameter_set)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the table card content from a buffer."""
         if self.bounded:
             self._initialized = True
             self._load_bounded_from_buffer(buf, parameter_set)
@@ -351,8 +357,13 @@ class TableCard(Card):
         format_spec = [(f.offset, f.width, f.type) for f in fields]
 
         rows = []
-        for line in data_lines:
-            values = load_dataline(format_spec, line, parameter_set)
+        for row_index, line in enumerate(data_lines):
+            # Use scope to record parameter refs with row context
+            if parameter_set is not None:
+                with parameter_set.scope(f"row{row_index}"):
+                    values = load_dataline(format_spec, line, parameter_set)
+            else:
+                values = load_dataline(format_spec, line, parameter_set)
             row_dict = {field.name: value for field, value in zip(fields, values)}
             rows.append(row_dict)
 
@@ -380,7 +391,12 @@ class TableCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
+        **kwargs,
     ) -> str:
+        """Write the table card to a string or buffer."""
         if format == None:
             format = self._format_type
 
@@ -389,12 +405,84 @@ class TableCard(Card):
                 if comment:
                     buf.write(self._get_comment(format))
                     buf.write("\n")
-                write_c_dataframe(buf, self._fields, self.table, format)
+
+                if retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    # Write row-by-row with parameter ref substitution
+                    self._write_with_parameters(buf, format, parameter_set, uri_prefix)
+                else:
+                    # Fast path: use holler.write_table
+                    write_c_dataframe(buf, self._fields, self.table, format)
 
         return write_or_return(buf, _write)
 
+    def _write_with_parameters(
+        self,
+        buf: typing.TextIO,
+        format: format_type,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> None:
+        """Write table data row-by-row, substituting parameter refs where recorded."""
+        from ansys.dyna.core.lib.field_writer import write_fields
+
+        fields = self._get_fields()
+        if format == format_type.long:
+            fields = self._convert_fields_to_long_format()
+
+        for row_index in range(len(self.table)):
+            # Get row values from DataFrame
+            row_values = [self.table[field.name].iloc[row_index] for field in fields if field.name in self.table]
+
+            # Check for parameter refs and substitute
+            row_fields, row_values = self._substitute_parameter_refs(
+                fields, row_values, parameter_set, uri_prefix, row_index
+            )
+
+            write_fields(buf, row_fields, row_values, format)
+            buf.write("\n")
+
+    def _substitute_parameter_refs(
+        self,
+        fields: typing.List[Field],
+        values: typing.List,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+        row_index: int,
+    ) -> typing.Tuple[typing.List[Field], typing.List]:
+        """Substitute parameter references for field values where applicable.
+
+        Creates new Field objects with parameter reference strings as values
+        for fields that were originally read from parameters.
+
+        Returns both modified fields and values lists.
+        """
+        result_fields = []
+        result_values = list(values)  # Make a copy
+        for i, field in enumerate(fields):
+            # Skip None-type fields (unused fields)
+            if field.type is None:
+                result_fields.append(field)
+                continue
+
+            # Look up ref using the URI pattern: uri_prefix/row{row_index}/{field_index}
+            # Filter out empty segments to handle empty uri_prefix
+            segments = [s for s in [uri_prefix, f"row{row_index}", str(i)] if s]
+            ref = parameter_set.get_ref(*segments)
+            if ref is not None:
+                # Create a new field with the reference string as the value
+                # The reference will be written as-is (e.g., "&myvar")
+                new_field = Field(field.name, str, field.offset, field.width, ref)
+                result_fields.append(new_field)
+                # Also update the value to be the ref string
+                if i < len(result_values):
+                    result_values[i] = ref
+            else:
+                result_fields.append(field)
+        return result_fields, result_values
+
     @property
     def bounded(self) -> bool:
+        """Indicates whether the card is bounded."""
         return self._bounded
 
     def _num_rows(self) -> int:

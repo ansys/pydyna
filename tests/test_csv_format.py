@@ -33,6 +33,19 @@ class TestCommaDelimitedDetection:
         assert _is_comma_delimited("1,hello", num_fields=2) is True
         assert _is_comma_delimited("1.0,2.0", num_fields=2) is True
 
+    def test_detect_csv_with_fewer_fields_than_spec(self):
+        """CSV lines with fewer fields than card spec should still be detected.
+
+        This tests the SET_NODE_LIST_GENERATE case where the card has 8 fields
+        but only 2 values are provided in CSV format (e.g., "1569,3136").
+        """
+        # Card has 8 fields but only 2 are provided
+        assert _is_comma_delimited("1569,3136", num_fields=8) is True
+        # Similar case with different values
+        assert _is_comma_delimited("100,200", num_fields=8) is True
+        # Edge case: single comma separating two values
+        assert _is_comma_delimited("1,2", num_fields=8) is True
+
     def test_detect_fixed_width_no_commas(self):
         """Lines without commas should be detected as fixed-width."""
         assert _is_comma_delimited("         1     hello") is False

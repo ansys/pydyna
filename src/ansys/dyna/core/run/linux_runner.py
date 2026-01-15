@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for defining the PyDyna Linux runner."""
+
 import os
 from typing import Optional
 
@@ -31,8 +33,10 @@ from ansys.dyna.core.run.options import MpiOption, Precision
 
 
 class LinuxRunner(BaseRunner):
-    """Linux implementation to Run LS-DYNA. Tested with a custom exutable
-    and when LS-DYNA is installed as part of the unified Ansys installation
+    """Linux implementation to Run LS-DYNA.
+
+    Tested with a custom exutable and when LS-DYNA is
+    installed as part of the unified Ansys installation.
     """
 
     def __init__(self, **kwargs):
@@ -51,12 +55,12 @@ class LinuxRunner(BaseRunner):
         self._find_solver(version, self.executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
+        """Set the input file and working directory for the run."""
         self.input_file = input_file
         self.working_directory = working_directory
 
     def _find_solver(self, version: Optional[int], executable: Optional[str]) -> None:
         """Determine the appropriate LS-DYNA solver executable path."""
-
         if executable:
             # Use user-provided executable path
             if not os.path.isfile(executable):
@@ -88,6 +92,7 @@ class LinuxRunner(BaseRunner):
         return exe_name
 
     def run(self) -> None:
+        """Run LS-DYNA using the specified configuration."""
         os.chdir(self.working_directory)
         # CASE option logic
         case_option = ""

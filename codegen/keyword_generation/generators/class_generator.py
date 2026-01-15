@@ -26,6 +26,8 @@ import typing
 from typing import Optional
 
 from jinja2 import Environment
+from output_manager import OutputManager
+
 import keyword_generation.data_model as data_model
 from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.generators.template_context import KeywordTemplateContext
@@ -36,7 +38,6 @@ from keyword_generation.utils import (
 )
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 from keyword_generation.utils.keyword_utils import KeywordNames
-from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
 
@@ -68,7 +69,8 @@ def _create_template_context(
         keyword_options: Keyword configuration from manifest.json
         license: License header text
 
-    Returns:
+    Returns
+    -------
         KeywordTemplateContext instance ready for template rendering
     """
     source_keyword = _get_source_keyword(keyword, keyword_options)
@@ -176,17 +178,11 @@ def _do_insertions(kwd_data: KeywordData) -> None:
         else:
             # insert into another card set - may be CardSetsContainer or dict
             if kwd_data.card_sets:
-                sets = (
-                    kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]
-                )  # type: ignore
-                card_sets = [
-                    cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name
-                ]  # type: ignore
+                sets = kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]  # type: ignore # noqa: E501
+                card_sets = [cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name]  # type: ignore # noqa: E501
                 logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
                 for card_set in card_sets:
-                    container = (
-                        card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]
-                    )  # type: ignore
+                    container = card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]  # type: ignore # noqa: E501
                     index = _get_insertion_index_for_cards(insertion_index, container)
                     insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
@@ -554,7 +550,8 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
         output_manager: Handles writing output files to appropriate directories
         item: Keyword configuration dict with 'name' and 'options' keys
 
-    Returns:
+    Returns
+    -------
         Tuple of (classname, filename_stem) for the generated class
     """
     keyword = item["name"]

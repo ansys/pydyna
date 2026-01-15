@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """This script generates the keyword classes for the LSPP.  It uses the kwd.json file to get the keyword"""
+
 import argparse
 import copy
 import logging
@@ -175,7 +176,8 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
 def get_keyword_options(keyword: str, wildcards: bool = True) -> typing.Dict:
     """Returns the generation options of the given keyword from the manifest.  If apply_wildcards is True,
     this will return the generataion options of the keyword merged with the generation options of the
-    wildard that matches this keyword, if any."""
+    wildard that matches this keyword, if any.
+    """
     config = data_model.get_config()
     keyword_options = config.manifest.get(keyword, {})
     if wildcards:
@@ -372,7 +374,8 @@ def get_keywords_to_generate(
 ) -> typing.List[typing.Dict]:
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations. If subset_domains is provided, only generate keywords
-    from those domains (e.g., ['boundary', 'contact', 'control'])."""
+    from those domains (e.g., ['boundary', 'contact', 'control']).
+    """
     config = data_model.get_config()
     keywords = []
     kwd_list = config.keyword_data.get_keywords_list()

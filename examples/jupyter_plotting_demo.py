@@ -42,8 +42,7 @@ See GitHub issue #601 for details.
 
 import pandas as pd
 
-from ansys.dyna.core import Deck
-from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core import Deck, keywords as kwd
 
 ###############################################################################
 # Create a simple deck

@@ -189,9 +189,25 @@ class TestCardSetWithDiscriminator:
         The _read_data method is used when a CardSet item needs peek-ahead logic
         to determine card activation before reading (discriminator pattern).
         """
-        from ansys.dyna.core.lib.card import Card, Field
+        from ansys.dyna.core.lib.card import Card
         from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
         from ansys.dyna.core.lib.cards import Cards
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
+        # Define field schemas as tuples
+        _CARD0_SCHEMA = (
+            FieldSchema("theta", float, 0, 10),
+            FieldSchema("a", float, 10, 10),
+        )
+        _CARD1_SCHEMA = (
+            FieldSchema("dtype", int, 0, 10, 1),
+            FieldSchema("val1", float, 10, 10),
+        )
+        _CARD2_SCHEMA = (
+            FieldSchema("dtype", int, 0, 10, 1),
+            FieldSchema("val2", float, 10, 10),
+            FieldSchema("val3", float, 20, 10),
+        )
 
         class MockDiscriminatorItem(Cards):
             """Mock CardSet item with _read_data method for discriminator pattern."""
@@ -200,30 +216,9 @@ class TestCardSetWithDiscriminator:
                 super().__init__(kwargs.get("keyword"))
                 self._parent = kwargs.get("parent")
                 self._cards = [
-                    Card(
-                        [
-                            Field("theta", float, 0, 10),
-                            Field("a", float, 10, 10),
-                        ],
-                        
-                    ),
-                    Card(
-                        [
-                            Field("dtype", int, 0, 10, 1),
-                            Field("val1", float, 10, 10),
-                        ],
-                        lambda: self.dtype == 1,
-                        
-                    ),
-                    Card(
-                        [
-                            Field("dtype", int, 0, 10, 1),
-                            Field("val2", float, 10, 10),
-                            Field("val3", float, 20, 10),
-                        ],
-                        lambda: self.dtype == 2,
-                        
-                    ),
+                    Card.from_field_schemas(_CARD0_SCHEMA),
+                    Card.from_field_schemas(_CARD1_SCHEMA, active_func=lambda: self.dtype == 1),
+                    Card.from_field_schemas(_CARD2_SCHEMA, active_func=lambda: self.dtype == 2),
                 ]
 
             @property
@@ -257,22 +252,31 @@ class TestCardSetWithDiscriminator:
 
     def test_discriminator_read_alternate_type(self, string_utils):
         """Test reading with alternate discriminator value."""
-        from ansys.dyna.core.lib.card import Card, Field
+        from ansys.dyna.core.lib.card import Card
         from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
         from ansys.dyna.core.lib.cards import Cards
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
+        # Define field schemas as tuples
+        _CARD0_SCHEMA = (FieldSchema("theta", float, 0, 10),)
+        _CARD1_SCHEMA = (
+            FieldSchema("dtype", int, 0, 10, 1),
+            FieldSchema("val1", float, 10, 10),
+        )
+        _CARD2_SCHEMA = (
+            FieldSchema("dtype", int, 0, 10, 1),
+            FieldSchema("val2", float, 10, 10),
+            FieldSchema("val3", float, 20, 10),
+        )
 
         class MockDiscriminatorItem(Cards):
             def __init__(self, **kwargs):
                 super().__init__(kwargs.get("keyword"))
                 self._parent = kwargs.get("parent")
                 self._cards = [
-                    Card([Field("theta", float, 0, 10)], ),
-                    Card([Field("dtype", int, 0, 10, 1), Field("val1", float, 10, 10)], lambda: self.dtype == 1, ),
-                    Card(
-                        [Field("dtype", int, 0, 10, 1), Field("val2", float, 10, 10), Field("val3", float, 20, 10)],
-                        lambda: self.dtype == 2,
-                        
-                    ),
+                    Card.from_field_schemas(_CARD0_SCHEMA),
+                    Card.from_field_schemas(_CARD1_SCHEMA, active_func=lambda: self.dtype == 1),
+                    Card.from_field_schemas(_CARD2_SCHEMA, active_func=lambda: self.dtype == 2),
                 ]
 
             @property

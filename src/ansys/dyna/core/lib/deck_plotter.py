@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for plotting decks."""
 
 import typing
 
@@ -69,6 +70,7 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
+    """Process nodes DataFrame to extract XYZ coordinates as a numpy array."""
     nodes_xyz = nodes_df[["x", "y", "z"]]
     return nodes_xyz.to_numpy()
 
@@ -124,7 +126,6 @@ def solid_array(solids: pd.DataFrame):
     [1,2,3,0]=>[3,1,2,3]
     [1,2,3,NA]=>[3,1,2,3]
     """
-
     # FACES CREATED BY THE SOLIDS BASED ON MANUAL
     # A DUMMY ZERO IS PUT AS A PLACEHOLDER FOR THE LEN PREFIX
     four_node_faces = [[0, 1, 2, 3], [0, 1, 2, 4], [0, 1, 3, 4], [0, 2, 3, 4]]
@@ -239,7 +240,6 @@ def extract_shell_facets(shells: pd.DataFrame, mapping: np.ndarray):
     tuple
         (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
     """
-
     empty_return = (
         np.empty((0), dtype=np.int32),
         np.empty((0), dtype=np.int32),
@@ -426,6 +426,7 @@ def extract_solids(solids: pd.DataFrame, mapping: np.ndarray):
 
 
 def get_pyvista():
+    """Method to import pyvista, raising an exception if not installed."""
     try:
         import pyvista as pv
     except ImportError:
@@ -474,7 +475,6 @@ def get_polydata(deck: Deck, cwd=None, extract_surface=True):
     pyvista.UnstructuredGrid
         UnstructuredGrid containing the mesh for visualization
     """
-
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
 
@@ -598,7 +598,6 @@ def plot_deck(deck, **args):
     pyvista plot or camera position
         Depends on the plotting backend used
     """
-
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
 

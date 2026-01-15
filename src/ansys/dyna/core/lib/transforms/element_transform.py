@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for transforming element data."""
 
 import typing
 import warnings
@@ -31,6 +32,7 @@ from ansys.dyna.core.lib.transform import Transform
 
 class TransformElement(Transform):
     def transform(self, keyword: typing.Any):
+        """Transform element IDs, node IDs, and part IDs in the given keyword."""
         elements = self._get_elements_dataframe(keyword)
         if elements is None:
             return
@@ -39,6 +41,7 @@ class TransformElement(Transform):
         self._transform_part_ids(elements)
 
     def _get_elements_dataframe(self, keyword) -> typing.Optional[pd.DataFrame]:
+        """Get the elements DataFrame from the keyword, if available."""
         warning = f"keyword {keyword.keyword}_{keyword.subkeyword} not transformed!"
         if not hasattr(keyword, "elements"):
             warnings.warn(warning)
@@ -50,6 +53,7 @@ class TransformElement(Transform):
         return elements
 
     def _offset_column(self, df: pd.DataFrame, column: str, offset: int) -> None:
+        """Offset the specified column in the DataFrame by the given offset."""
         if column in df:
             # TODO - check if the value is na, not just != 0
             df[column] = df[column].mask(df[column] != 0, df[column] + offset)

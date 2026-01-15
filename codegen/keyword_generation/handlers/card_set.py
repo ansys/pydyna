@@ -269,7 +269,8 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: Complete keyword data
             settings: List of card set definitions
 
-        Raises:
+        Raises
+        ------
             Exception: If more than one default target (empty target-name) is specified
             ValueError: If label registry is not available when using refs
         """

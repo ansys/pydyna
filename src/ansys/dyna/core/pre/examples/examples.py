@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-
-Result Files Examples
-=====================
-Examples result files.
-"""
+"""Examples result files."""
 
 import inspect
 import os
