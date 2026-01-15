@@ -301,15 +301,52 @@ def test_solid_mesh_medium():
 
 
 @pytest.mark.keywords
-@pytest.mark.skip(reason="ElementSolid parsing from keyword strings has a known bug - skipping until fixed")
 def test_mixed_mesh_shells_and_solids():
-    """Test plotting with both shell and solid elements.
+    """Test plotting with both shell and solid elements."""
+    deck = Deck()
 
-    Note: There's a known bug with parsing ELEMENT_SOLID from keyword strings (#XXX),
-    which prevents testing mixed shell/solid meshes from keyword strings.
-    This test is skipped until that bug is fixed.
-    """
-    pass
+    # Create a mesh with both shell and solid elements
+    # Note: ElementSolid requires 2+ elements to parse correctly (known limitation)
+    kwd_str = """*KEYWORD
+*NODE
+$#   nid               x               y               z      tc      rc
+       1             0.0             0.0             0.0       0       0
+       2             1.0             0.0             0.0       0       0
+       3             1.0             1.0             0.0       0       0
+       4             0.0             1.0             0.0       0       0
+       5             0.0             0.0             1.0       0       0
+       6             1.0             0.0             1.0       0       0
+       7             1.0             1.0             1.0       0       0
+       8             0.0             1.0             1.0       0       0
+       9             0.0             0.0             2.0       0       0
+      10             1.0             0.0             2.0       0       0
+      11             1.0             1.0             2.0       0       0
+      12             0.0             1.0             2.0       0       0
+      13             2.0             0.0             0.0       0       0
+      14             2.0             1.0             0.0       0       0
+*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8
+       2       1       5       6       7       8       9      10      11      12
+*ELEMENT_SHELL
+       3       1       2      13      14       3
+*END
+"""
+    deck.loads(kwd_str)
+
+    # Get plot data with extract_surface=False to keep all elements
+    grid = get_polydata(deck, extract_surface=False)
+
+    # Should have 3 cells total (2 hex + 1 quad)
+    assert grid.n_cells == 3, f"Expected 3 cells, got {grid.n_cells}"
+
+    # Should have 14 nodes
+    assert grid.n_points == 14, f"Expected 14 points, got {grid.n_points}"
+
+    # Verify metadata
+    assert "part_ids" in grid.cell_data
+    assert "element_ids" in grid.cell_data
+    assert len(grid.cell_data["part_ids"]) == 3
+    assert len(grid.cell_data["element_ids"]) == 3
 
 @pytest.mark.keywords
 def test_extract_surface():
