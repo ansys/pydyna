@@ -256,6 +256,51 @@ def _spec_has_dataclass(spec: typing.List[tuple]) -> bool:
     return FormatSpec.from_list(spec).has_dataclass
 
 
+import re
+
+# Regex pattern to match Fortran/LS-DYNA compact scientific notation
+# Examples: "1.00000+4", "3.5-10", "-2.1+5", "1+4", "-3-2"
+# This matches a number (integer or float) followed directly by +/- and digits (exponent)
+# without an intervening 'E' or 'e' or 'D' or 'd'
+_COMPACT_SCIENTIFIC_RE = re.compile(r"^([+-]?\d*\.?\d+)([+-]\d+)$")
+
+
+def _normalize_dyna_float(text: str) -> str:
+    """Normalize LS-DYNA Fortran-style scientific notation to standard Python format.
+
+    LS-DYNA (and Fortran) allow scientific notation without the 'E' when the
+    exponent sign is present. For example:
+    - "1.00000+4" means 1.00000E+4 = 10000
+    - "3.5-10" means 3.5E-10
+    - "1+4" means 1E+4
+
+    Also handles 'D' notation from Fortran (e.g., "1.0D+4" -> "1.0E+4").
+
+    Parameters
+    ----------
+    text : str
+        The text to normalize (may contain leading/trailing whitespace).
+
+    Returns
+    -------
+    str
+        The normalized string suitable for Python's float() function.
+    """
+    # Strip whitespace first
+    text = text.strip()
+
+    # Handle Fortran 'D' notation
+    text = text.replace("D", "E").replace("d", "e")
+
+    # Check for compact notation (number followed by +/- digits with no E)
+    match = _COMPACT_SCIENTIFIC_RE.match(text)
+    if match:
+        mantissa, exponent = match.groups()
+        return f"{mantissa}E{exponent}"
+
+    return text
+
+
 def _convert_type(raw_value, item_type):
     if item_type is int and isinstance(raw_value, float):
         # ensure that float raw_values are convertible to int
@@ -398,11 +443,11 @@ def _parse_csv_value(
 
     # Parse by type
     if item_type is int:
-        return int(float(text_block))
+        return int(float(_normalize_dyna_float(text_block)))
     elif item_type is str:
         return text_block
     elif item_type is float:
-        return float(text_block)
+        return float(_normalize_dyna_float(text_block))
     else:
         raise Exception(f"Unexpected type in CSV field: {item_type}")
 
@@ -643,11 +688,11 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type, field_index)
         elif item_type is int:
-            value = int(float(text_block))
+            value = int(float(_normalize_dyna_float(text_block)))
         elif item_type is str:
             value = text_block.strip()
         elif item_type is float:
-            value = float(text_block)
+            value = float(_normalize_dyna_float(text_block))
         else:
             raise Exception(f"Unexpected type in load_dataline spec: {item_type}")
         data.append(value)
