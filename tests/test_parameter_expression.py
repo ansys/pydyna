@@ -771,7 +771,9 @@ Rlocalval,&localexp"""
         deck.loads(deck_text)
 
         # Expand - keyword with undefined param is retained as string, not parsed
-        expanded = deck.expand(cwd=str(tmp_path))
+        # A warning is expected because 'locexp1' is a local parameter not visible to include2
+        with pytest.warns(UserWarning, match="Error processing parameter.*locexp1"):
+            expanded = deck.expand(cwd=str(tmp_path))
 
         # Verify the local parameter scoping worked - no parsed SET_NODE_LIST object
         # because &locexp1 is local to include1 and not visible to include2.
