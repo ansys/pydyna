@@ -422,7 +422,8 @@ def test_deck_expand_encoding(file_utils):
     """Test that a long deck can read a standard deck."""
     deck = Deck(format=format_type.long)
     deck.append(kwd.Include(filename=file_utils.get_asset_file_path("encoding_sample.k"), format=format_type.standard))
-    expanded_deck = deck.expand()
+    with pytest.warns(UserWarning, match="could not convert string to float"):
+        expanded_deck = deck.expand()
 
     # check all_keywords instead of keywords because the deck has comma-delimited cards which is not yet supported
     assert len(expanded_deck.all_keywords) == 1
