@@ -317,6 +317,9 @@ class Card(CardInterface):
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
         output_format: typing.Optional[str] = None,
+        retain_parameters: bool = False,
+        parameter_set: typing.Optional[ParameterSet] = None,
+        uri_prefix: typing.Optional[str] = None,
     ) -> typing.Union[str, None]:
         """Write the card to a buffer or return as string.
 
@@ -331,6 +334,12 @@ class Card(CardInterface):
         output_format : str, optional
             Card serialization format: card_format.fixed or card_format.csv.
             If None (default), uses fixed unless the card was originally read as csv.
+        retain_parameters : bool, optional
+            If True, write original parameter references instead of values.
+        parameter_set : ParameterSet, optional
+            The parameter set to use for looking up stored refs.
+        uri_prefix : str, optional
+            The URI prefix for this card (e.g., "12345/card0") for ref lookup.
 
         Returns
         -------
@@ -349,6 +358,10 @@ class Card(CardInterface):
                 if format == format_type.long:
                     fields = self._convert_fields_to_long_format()
 
+                # If retaining parameters, substitute any refs we have stored
+                if retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    fields = self._substitute_parameter_refs(fields, parameter_set, uri_prefix)
+
                 if output_format == card_format.csv:
                     # CSV format: no comment line, comma-separated values
                     write_fields_csv(buf, fields)
@@ -360,6 +373,29 @@ class Card(CardInterface):
                     write_fields(buf, fields, None, format)
 
         return write_or_return(buf, _write)
+
+    def _substitute_parameter_refs(
+        self,
+        fields: typing.List[Field],
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> typing.List[Field]:
+        """Substitute parameter references for field values where applicable.
+
+        Creates new Field objects with parameter reference strings as values
+        for fields that were originally read from parameters.
+        """
+        result = []
+        for i, field in enumerate(fields):
+            ref = parameter_set.get_ref(uri_prefix, str(i))
+            if ref is not None:
+                # Create a new field with the reference string as the value
+                # The reference will be written as-is (e.g., "&myvar")
+                new_field = Field(field.name, str, field.offset, field.width, ref)
+                result.append(new_field)
+            else:
+                result.append(field)
+        return result
 
     @property
     def active(self) -> bool:

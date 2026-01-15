@@ -350,11 +350,15 @@ class Deck(ValidationMixin):
         return self.write()
 
     def _write_keyword(
-        self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type
+        self,
+        buf: typing.TextIO,
+        kwd: typing.Union[str, KeywordBase, EncryptedKeyword],
+        format: format_type,
+        retain_parameters: bool = False,
     ) -> None:
         """Write a keyword to the buffer."""
         if isinstance(kwd, KeywordBase):
-            kwd.write(buf, None, format)
+            kwd.write(buf, None, format, retain_parameters=retain_parameters)
         elif isinstance(kwd, str):
             buf.write(kwd)
         elif isinstance(kwd, EncryptedKeyword):
@@ -378,6 +382,7 @@ class Deck(ValidationMixin):
         buf: typing.Optional[typing.TextIO] = None,
         format: typing.Optional[format_type] = None,
         validate: bool = False,
+        retain_parameters: bool = False,
     ):
         """Write the card in the dyna keyword format.
 
@@ -391,6 +396,9 @@ class Deck(ValidationMixin):
         validate : bool, optional
             If True, validate the deck before writing. The default is False.
             Validation uses registered validators and raises ValidationError if errors are found.
+        retain_parameters : bool, optional
+            If True, write original parameter references (e.g., &myvar) instead of
+            substituted values for fields that were read from parameters. Default is False.
         """
         if validate:
             result = self.validate()
@@ -404,7 +412,7 @@ class Deck(ValidationMixin):
             for kwd in self._keywords:
                 self._remove_trailing_newline(buf)
                 buf.write("\n")
-                self._write_keyword(buf, kwd, format)
+                self._write_keyword(buf, kwd, format, retain_parameters=retain_parameters)
             buf.write("\n*END")
 
         return write_or_return(buf, _write)
@@ -554,7 +562,7 @@ class Deck(ValidationMixin):
         context = ImportContext(None, self, path)
         self._import_file(path, encoding, context)
 
-    def export_file(self, path: str, encoding="utf-8", validate: bool = False) -> None:
+    def export_file(self, path: str, encoding="utf-8", validate: bool = False, retain_parameters: bool = False) -> None:
         """Export the keyword file to a new keyword file.
 
         Parameters
@@ -566,18 +574,22 @@ class Deck(ValidationMixin):
         validate : bool, optional
             If True, validate the deck before export. The default is False.
             Validation uses registered validators and raises ValidationError if errors are found.
+        retain_parameters : bool, optional
+            If True, write original parameter references (e.g., &myvar) instead of
+            substituted values for fields that were read from parameters. Default is False.
 
         Examples
         --------
         >>> deck.export_file("output.k", validate=True)  # Validate before export
+        >>> deck.export_file("output.k", retain_parameters=True)  # Keep parameter references
         """
         with open(path, "w+", encoding=encoding) as f:
             if os.name == "nt":
-                self.write(f, validate=validate)
+                self.write(f, validate=validate, retain_parameters=retain_parameters)
             else:
                 # TODO - on linux writing to the buffer can insert a spurious newline
                 #        this is less performant but more correct until that is fixed
-                contents = self.write(validate=validate)
+                contents = self.write(validate=validate, retain_parameters=retain_parameters)
                 f.write(contents)
 
     @property

@@ -156,9 +156,25 @@ class Cards(OptionsInterface):
         buf: typing.TextIO,
         format: format_type,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        **kwargs,
     ):
         """Writes the cards to `buf` using `format`."""
-        write_cards(self._get_all_cards(), buf, format, comment)
+        # When retain_parameters is True, we pass the keyword's parameter set and ID
+        # so cards can look up stored parameter references
+        # Note: kwargs may contain parameter_set/keyword_id from parent CardSet, but we
+        # use our own parameter_set for this keyword's cards
+        parameter_set = getattr(self, "_parameter_set", None) if retain_parameters else None
+        keyword_id = str(id(self)) if retain_parameters else None
+        write_cards(
+            self._get_all_cards(),
+            buf,
+            format,
+            comment,
+            retain_parameters=retain_parameters,
+            parameter_set=parameter_set,
+            keyword_id=keyword_id,
+        )
 
     def _try_read_options_with_no_title(self, buf: typing.TextIO) -> None:
         # some cards are not active until we read.. how to handle?
@@ -204,11 +220,27 @@ class Cards(OptionsInterface):
         return True
 
     def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
+        card_index = 0
         for card in self._get_pre_option_cards():
-            self._read_card(card, buf, parameters)
+            if parameters is not None:
+                with parameters.scope(f"card{card_index}"):
+                    self._read_card(card, buf, parameters)
+            else:
+                self._read_card(card, buf, parameters)
+            card_index += 1
         for card in self._get_non_option_cards():
-            self._read_card(card, buf, parameters)
+            if parameters is not None:
+                with parameters.scope(f"card{card_index}"):
+                    self._read_card(card, buf, parameters)
+            else:
+                self._read_card(card, buf, parameters)
+            card_index += 1
         for card in self._get_post_option_cards():
-            self._read_card(card, buf, parameters)
+            if parameters is not None:
+                with parameters.scope(f"card{card_index}"):
+                    self._read_card(card, buf, parameters)
+            else:
+                self._read_card(card, buf, parameters)
+            card_index += 1
 
         self._try_read_options_with_no_title(buf)

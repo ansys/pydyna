@@ -380,7 +380,9 @@ class TableCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> str:
+        # kwargs may include retain_parameters, parameter_set, etc. - not used by TableCard
         if format == None:
             format = self._format_type
 

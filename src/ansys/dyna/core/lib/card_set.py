@@ -135,6 +135,7 @@ class CardSet(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
         """Renders the card in the dyna keyword format.
         :param buf: Buffer to write to. If None, the output is returned as a string
@@ -147,7 +148,7 @@ class CardSet(CardInterface):
                 write_comment = comment and item_index == 0
                 if item_index != 0:
                     buf.write("\n")
-                item.write(buf, format, write_comment)
+                item.write(buf, format, write_comment, **kwargs)
 
         return write_or_return(buf, _write)
 
