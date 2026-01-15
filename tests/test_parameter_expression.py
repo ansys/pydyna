@@ -407,7 +407,8 @@ R a        b+1
 R b        a+1
 *END"""
         deck = Deck()
-        deck.loads(deck_text)
+        with pytest.warns(UserWarning, match="Circular dependency detected"):
+            deck.loads(deck_text)
 
         # Parameters should not be created due to circular dependency error
         with pytest.raises(KeyError):
@@ -422,7 +423,8 @@ R b        a+1
 R a        a+1
 *END"""
         deck = Deck()
-        deck.loads(deck_text)
+        with pytest.warns(UserWarning, match="Circular dependency detected"):
+            deck.loads(deck_text)
 
         # Parameter should not be created due to self-reference error
         with pytest.raises(KeyError):
@@ -435,7 +437,8 @@ R a        a+1
 R result   undefined_param+1
 *END"""
         deck = Deck()
-        deck.loads(deck_text)
+        with pytest.warns(UserWarning, match="Undefined parameter: undefined_param"):
+            deck.loads(deck_text)
 
         # Parameter should not be created due to undefined reference
         with pytest.raises(KeyError):
@@ -450,7 +453,8 @@ R result   base*2
 R base     5.0
 *END"""
         deck = Deck()
-        deck.loads(deck_text)
+        with pytest.warns(UserWarning, match="Undefined parameter: base"):
+            deck.loads(deck_text)
 
         # 'result' should not be created because 'base' is not defined yet
         with pytest.raises(KeyError):
@@ -625,7 +629,8 @@ R result   1e10*2
 R result
 *END"""
         deck = Deck()
-        deck.loads(deck_text)
+        with pytest.warns(UserWarning, match="Undefined parameter: nan"):
+            deck.loads(deck_text)
 
         # Empty expression should not create the parameter
         with pytest.raises(KeyError):
