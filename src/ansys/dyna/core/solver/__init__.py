@@ -23,7 +23,7 @@
 import warnings
 
 warnings.warn(
-    "The 'ansys.dyna.core.solver' module is deprecated and will be removed in the next release(v0.10.0) onwards. ",
+    "The 'ansys.dyna.core.solver' module is deprecated and will be removed starting from version v0.10.0. ",
     DeprecationWarning,
     stacklevel=2,
 )
