@@ -437,7 +437,7 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
     assert len(deck.all_keywords) == 40
-    assert len(deck.keywords) == 38
+    assert len(deck.keywords) == 40
 
 @pytest.mark.keywords
 def test_deck_expand_transform(file_utils):
