@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTSOLIDT15_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -57,6 +59,23 @@ class ElementSolidT15(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "SOLID_T15"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "n9": LinkType.NODE,
+        "n10": LinkType.NODE,
+        "n11": LinkType.NODE,
+        "n12": LinkType.NODE,
+        "n13": LinkType.NODE,
+        "n14": LinkType.NODE,
+        "n15": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSolidT15 class."""
@@ -258,4 +277,79 @@ class ElementSolidT15(KeywordBase):
     def n15(self, value: int) -> None:
         """Set the n15 property."""
         self._cards[2].set_value("n15", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def n9_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n9."""
+        return self._get_link_by_attr("NODE", "nid", self.n9, "parts")
+
+    @property
+    def n10_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n10."""
+        return self._get_link_by_attr("NODE", "nid", self.n10, "parts")
+
+    @property
+    def n11_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n11."""
+        return self._get_link_by_attr("NODE", "nid", self.n11, "parts")
+
+    @property
+    def n12_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n12."""
+        return self._get_link_by_attr("NODE", "nid", self.n12, "parts")
+
+    @property
+    def n13_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n13."""
+        return self._get_link_by_attr("NODE", "nid", self.n13, "parts")
+
+    @property
+    def n14_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n14."""
+        return self._get_link_by_attr("NODE", "nid", self.n14, "parts")
+
+    @property
+    def n15_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n15."""
+        return self._get_link_by_attr("NODE", "nid", self.n15, "parts")
 

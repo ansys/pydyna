@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINECPMVENT_CARD0 = (
@@ -78,6 +79,9 @@ class DefineCpmVent(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid2": LinkType.NODE,
         "lctc23": LinkType.DEFINE_CURVE,
         "lcpc23": LinkType.DEFINE_CURVE,
         "lcred": LinkType.DEFINE_CURVE,
@@ -419,6 +423,21 @@ class DefineCpmVent(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
     def lctc23_link(self) -> DefineCurve:

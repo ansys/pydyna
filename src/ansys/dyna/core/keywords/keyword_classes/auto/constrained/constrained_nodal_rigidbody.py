@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDNODALRIGIDBODY_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -41,6 +44,10 @@ class ConstrainedNodalRigidbody(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGIDBODY"
+    _link_fields = {
+        "pnode": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedNodalRigidbody class."""
@@ -163,4 +170,24 @@ class ConstrainedNodalRigidbody(KeywordBase):
         if value not in [0, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""rrflag must be `None` or one of {0,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rrflag", value)
+
+    @property
+    def pnode_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given pnode."""
+        return self._get_link_by_attr("NODE", "nid", self.pnode, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

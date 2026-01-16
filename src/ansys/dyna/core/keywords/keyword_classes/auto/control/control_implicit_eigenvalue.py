@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _CONTROLIMPLICITEIGENVALUE_CARD0 = (
     FieldSchema("neig", int, 0, 10, 0),
@@ -78,6 +80,9 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_EIGENVALUE"
+    _link_fields = {
+        "rparm6": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitEigenvalue class."""
@@ -459,4 +464,19 @@ class ControlImplicitEigenvalue(KeywordBase):
     def rparm6(self, value: int) -> None:
         """Set the rparm6 property."""
         self._cards[4].set_value("rparm6", value)
+
+    @property
+    def rparm6_link(self) -> DefineVector:
+        """Get the DefineVector object for rparm6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.rparm6:
+                return kwd
+        return None
+
+    @rparm6_link.setter
+    def rparm6_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for rparm6."""
+        self.rparm6 = value.vid
 

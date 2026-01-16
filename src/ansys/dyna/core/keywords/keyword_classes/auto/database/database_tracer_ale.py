@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DATABASETRACERALE_CARD0 = (
     FieldSchema("nid", int, 0, 10, 0),
@@ -40,6 +42,9 @@ class DatabaseTracerAle(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "TRACER_ALE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseTracerAle class."""
@@ -118,4 +123,9 @@ class DatabaseTracerAle(KeywordBase):
     def time(self, value: float) -> None:
         """Set the time property."""
         self._cards[0].set_value("time", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

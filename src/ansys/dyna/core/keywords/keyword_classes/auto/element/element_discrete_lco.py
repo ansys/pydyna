@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ELEMENTDISCRETELCO_CARD0 = (
@@ -50,6 +51,8 @@ class ElementDiscreteLco(KeywordBase):
     keyword = "ELEMENT"
     subkeyword = "DISCRETE_LCO"
     _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
         "lcid": LinkType.DEFINE_CURVE,
         "lciddr": LinkType.DEFINE_CURVE,
     }
@@ -178,6 +181,16 @@ class ElementDiscreteLco(KeywordBase):
     def lciddr(self, value: int) -> None:
         """Set the lciddr property."""
         self._cards[1].set_value("lciddr", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
     def lcid_link(self) -> DefineCurve:

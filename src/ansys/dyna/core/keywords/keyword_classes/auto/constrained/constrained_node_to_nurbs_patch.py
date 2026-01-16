@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDNODETONURBSPATCH_CARD0 = (
     FieldSchema("patchid", int, 0, 10, None),
@@ -40,6 +43,10 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODE_TO_NURBS_PATCH"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedNodeToNurbsPatch class."""
@@ -117,4 +124,24 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""dbflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dbflg", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

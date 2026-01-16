@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DATABASEFSISENSOR_CARD0 = (
     FieldSchema("dtout", float, 0, 10, None),
@@ -46,6 +48,12 @@ class DatabaseFsiSensor(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "FSI_SENSOR"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "nd1": LinkType.NODE,
+        "nd2": LinkType.NODE,
+        "nd3": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseFsiSensor class."""
@@ -171,4 +179,24 @@ class DatabaseFsiSensor(KeywordBase):
     def nd3(self, value: int) -> None:
         """Set the nd3 property."""
         self._cards[1].set_value("nd3", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def nd1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd1."""
+        return self._get_link_by_attr("NODE", "nid", self.nd1, "parts")
+
+    @property
+    def nd2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd2."""
+        return self._get_link_by_attr("NODE", "nid", self.nd2, "parts")
+
+    @property
+    def nd3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd3."""
+        return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
 

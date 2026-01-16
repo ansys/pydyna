@@ -28,12 +28,19 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 class ConstrainedAdaptivity(KeywordBase):
     """DYNA CONSTRAINED_ADAPTIVITY keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "ADAPTIVITY"
+    _link_fields = {
+        "dnid": LinkType.NODE,
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedAdaptivity class."""
@@ -58,4 +65,31 @@ class ConstrainedAdaptivity(KeywordBase):
     def constrains(self, df: pd.DataFrame):
         """Set constrains from the dataframe df"""
         self._cards[0].table = df
+
+    @property
+    def dnid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for dnid, keyed by dnid value."""
+        return self._get_links_from_table("NODE", "nid", "constrains", "dnid", "parts")
+
+    def get_dnid_link(self, dnid: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given dnid."""
+        return self._get_link_by_attr("NODE", "nid", dnid, "parts")
+
+    @property
+    def nid1_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid1, keyed by nid1 value."""
+        return self._get_links_from_table("NODE", "nid", "constrains", "nid1", "parts")
+
+    def get_nid1_link(self, nid1: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", nid1, "parts")
+
+    @property
+    def nid2_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid2, keyed by nid2 value."""
+        return self._get_links_from_table("NODE", "nid", "constrains", "nid2", "parts")
+
+    def get_nid2_link(self, nid2: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", nid2, "parts")
 

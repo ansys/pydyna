@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDINTERPOLATIONLOCAL_CARD0 = (
     FieldSchema("icid", int, 0, 10, None),
@@ -56,6 +59,11 @@ class ConstrainedInterpolationLocal(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "INTERPOLATION_LOCAL"
+    _link_fields = {
+        "dnid": LinkType.NODE,
+        "cidd": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cidi": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedInterpolationLocal class."""
@@ -266,4 +274,39 @@ class ConstrainedInterpolationLocal(KeywordBase):
     def cidi(self, value: int) -> None:
         """Set the cidi property."""
         self._cards[2].set_value("cidi", value)
+
+    @property
+    def dnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given dnid."""
+        return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
+
+    @property
+    def cidd_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidd:
+                return kwd
+        return None
+
+    @cidd_link.setter
+    def cidd_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidd."""
+        self.cidd = value.cid
+
+    @property
+    def cidi_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidi:
+                return kwd
+        return None
+
+    @cidi_link.setter
+    def cidi_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidi."""
+        self.cidi = value.cid
 

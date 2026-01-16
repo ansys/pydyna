@@ -26,7 +26,9 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -46,9 +48,11 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_ACCELEROMETER_RIGID"
     _link_fields = {
+        "nid": LinkType.NODE,
         "lcidx": LinkType.DEFINE_CURVE,
         "lcidy": LinkType.DEFINE_CURVE,
         "lcidz": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -129,6 +133,11 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self._cards[1].set_value("lcidz", value)
 
     @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
     def lcidx_link(self) -> DefineCurve:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
@@ -172,4 +181,19 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
     def lcidz_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcidz."""
         self.lcidz = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

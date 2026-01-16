@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD0 = (
     FieldSchema("wid", int, 0, 10, None),
@@ -51,6 +53,10 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "SPOTWELD_FILTERED_FORCE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedSpotweldFilteredForce class."""
@@ -186,4 +192,14 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
     def tw(self, value: float) -> None:
         """Set the tw property."""
         self._cards[2].set_value("tw", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

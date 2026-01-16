@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _CONTROLFORMINGONESTEPORTHO_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -37,6 +39,10 @@ class ControlFormingOnestepOrtho(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_ONESTEP_ORTHO"
+    _link_fields = {
+        "node1": LinkType.NODE,
+        "node2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingOnestepOrtho class."""
@@ -78,4 +84,14 @@ class ControlFormingOnestepOrtho(KeywordBase):
     def node2(self, value: int) -> None:
         """Set the node2 property."""
         self._cards[0].set_value("node2", value)
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node1."""
+        return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node2."""
+        return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 

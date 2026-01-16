@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADTHERMALVARIABLENODE_CARD0 = (
@@ -41,6 +42,7 @@ class LoadThermalVariableNode(KeywordBase):
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_NODE"
     _link_fields = {
+        "nid": LinkType.NODE,
         "lcid": LinkType.DEFINE_CURVE,
     }
 
@@ -95,6 +97,11 @@ class LoadThermalVariableNode(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
     def lcid_link(self) -> DefineCurve:

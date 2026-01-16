@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTINTERPOLATIONSHELL_CARD0 = (
     FieldSchema("eids", int, 0, 10, None),
@@ -48,6 +50,12 @@ class ElementInterpolationShell(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "INTERPOLATION_SHELL"
+    _link_fields = {
+        "ip1": LinkType.NODE,
+        "ip2": LinkType.NODE,
+        "ip3": LinkType.NODE,
+        "ip4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementInterpolationShell class."""
@@ -182,4 +190,24 @@ class ElementInterpolationShell(KeywordBase):
     def w4(self, value: float) -> None:
         """Set the w4 property."""
         self._cards[1].set_value("w4", value)
+
+    @property
+    def ip1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip1."""
+        return self._get_link_by_attr("NODE", "nid", self.ip1, "parts")
+
+    @property
+    def ip2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip2."""
+        return self._get_link_by_attr("NODE", "nid", self.ip2, "parts")
+
+    @property
+    def ip3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip3."""
+        return self._get_link_by_attr("NODE", "nid", self.ip3, "parts")
+
+    @property
+    def ip4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip4."""
+        return self._get_link_by_attr("NODE", "nid", self.ip4, "parts")
 

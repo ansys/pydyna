@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _ELEMENTBEARING_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -72,6 +75,12 @@ class ElementBearing(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "BEARING"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "cid1": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ci2": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBearing class."""
@@ -387,4 +396,44 @@ class ElementBearing(KeywordBase):
     def yrot(self, value: float) -> None:
         """Set the yrot property."""
         self._cards[4].set_value("yrot", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def cid1_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid1:
+                return kwd
+        return None
+
+    @cid1_link.setter
+    def cid1_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid1."""
+        self.cid1 = value.cid
+
+    @property
+    def ci2_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for ci2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.ci2:
+                return kwd
+        return None
+
+    @ci2_link.setter
+    def ci2_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for ci2."""
+        self.ci2 = value.cid
 

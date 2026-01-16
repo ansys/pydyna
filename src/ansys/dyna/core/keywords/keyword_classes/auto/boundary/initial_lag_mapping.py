@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _INITIALLAGMAPPING_CARD0 = (
     FieldSchema("setid", int, 0, 10, None),
@@ -44,6 +46,9 @@ class InitialLagMapping(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "LAG_MAPPING"
+    _link_fields = {
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialLagMapping class."""
@@ -136,4 +141,19 @@ class InitialLagMapping(KeywordBase):
     def nelangl(self, value: int) -> None:
         """Set the nelangl property."""
         self._cards[1].set_value("nelangl", value)
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

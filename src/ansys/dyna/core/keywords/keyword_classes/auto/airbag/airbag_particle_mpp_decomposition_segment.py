@@ -26,7 +26,9 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENT_CARD0 = (
     FieldSchema("sx", float, 0, 10, None),
@@ -167,11 +169,16 @@ class AirbagParticleMppDecompositionSegment(KeywordBase):
     keyword = "AIRBAG"
     subkeyword = "PARTICLE_MPP_DECOMPOSITION_SEGMENT"
     _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+        "nidi": LinkType.NODE,
         "hconv": LinkType.DEFINE_CURVE,
         "lctc23": LinkType.DEFINE_CURVE,
         "lcpc23": LinkType.DEFINE_CURVE,
         "lcmi": LinkType.DEFINE_CURVE,
         "lcti": LinkType.DEFINE_CURVE,
+        "vdi": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -1271,6 +1278,26 @@ class AirbagParticleMppDecompositionSegment(KeywordBase):
         self._cards[14].set_value("chm_id", value)
 
     @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
+
+    @property
+    def nidi_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidi."""
+        return self._get_link_by_attr("NODE", "nid", self.nidi, "parts")
+
+    @property
     def hconv_link(self) -> DefineCurve:
         """Get the DefineCurve object for hconv."""
         if self.deck is None:
@@ -1344,4 +1371,19 @@ class AirbagParticleMppDecompositionSegment(KeywordBase):
     def lcti_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcti."""
         self.lcti = value.lcid
+
+    @property
+    def vdi_link(self) -> DefineVector:
+        """Get the DefineVector object for vdi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vdi:
+                return kwd
+        return None
+
+    @vdi_link.setter
+    def vdi_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vdi."""
+        self.vdi = value.vid
 

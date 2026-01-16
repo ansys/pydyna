@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _CONTROLIMPLICITROTATIONALDYNAMICS_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -52,6 +54,9 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_ROTATIONAL_DYNAMICS"
+    _link_fields = {
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitRotationalDynamics class."""
@@ -240,4 +245,19 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     def omeg8(self, value: float) -> None:
         """Set the omeg8 property."""
         self._cards[1].set_value("omeg8", value)
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

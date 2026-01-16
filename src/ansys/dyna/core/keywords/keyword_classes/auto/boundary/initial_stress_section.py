@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _INITIALSTRESSSECTION_CARD0 = (
     FieldSchema("issid", int, 0, 10, None),
@@ -46,6 +47,7 @@ class InitialStressSection(KeywordBase):
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
         "istiff": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -178,4 +180,19 @@ class InitialStressSection(KeywordBase):
     def istiff_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for istiff."""
         self.istiff = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

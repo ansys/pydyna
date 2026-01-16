@@ -340,9 +340,14 @@ class LinkIdentity:
     These values correspond to the "link" field values in kwd.json.
     """
 
+    NODE = 1
     MAT = 14
     SECTION = 15
+    HOURGLASS = 17
     DEFINE_CURVE = 19
+    DEFINE_BOX = 20
+    DEFINE_COORDINATE_SYSTEM = 21
+    DEFINE_VECTOR = 22
     DEFINE_TRANSFORMATION = 40
     PART = 69
     DEFINE_CURVE_OR_TABLE = 86
@@ -419,11 +424,88 @@ def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], li
     link_data.append(polymorphic_link_data)
 
 
+def _add_node_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for NODE keywords."""
+    node_link_data = {
+        "classname": "Node",
+        "modulename": "node.node",
+        "keyword_type": "NODE",
+        "keyword_subtype": "NODE",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "nid",
+        "link_type_name": "NODE",
+        "is_table_lookup": True,  # NODE uses table-based lookup
+    }
+    link_data.append(node_link_data)
+
+
+def _add_hourglass_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for HOURGLASS keywords."""
+    hourglass_link_data = {
+        "classname": "Hourglass",
+        "modulename": "hourglass.hourglass",
+        "keyword_type": "HOURGLASS",
+        "keyword_subtype": "HOURGLASS",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "hgid",
+        "link_type_name": "HOURGLASS",
+    }
+    link_data.append(hourglass_link_data)
+
+
+def _add_define_box_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_BOX keywords."""
+    define_box_link_data = {
+        "classname": "DefineBox",
+        "modulename": "define.define_box",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "BOX",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "boxid",
+        "link_type_name": "DEFINE_BOX",
+    }
+    link_data.append(define_box_link_data)
+
+
+def _add_define_coordinate_system_link_data(link_data: typing.List[typing.Dict],
+                                            link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_COORDINATE_SYSTEM keywords."""
+    define_coordinate_system_link_data = {
+        "classname": "DefineCoordinateSystem",
+        "modulename": "define.define_coordinate_system",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "COORDINATE_SYSTEM",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "cid",
+        "link_type_name": "DEFINE_COORDINATE_SYSTEM",
+    }
+    link_data.append(define_coordinate_system_link_data)
+
+
+def _add_define_vector_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_VECTOR keywords."""
+    define_vector_link_data = {
+        "classname": "DefineVector",
+        "modulename": "define.define_vector",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "VECTOR",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "vid",
+        "link_type_name": "DEFINE_VECTOR",
+    }
+    link_data.append(define_vector_link_data)
+
+
 def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {
+        LinkIdentity.NODE: [],
         LinkIdentity.MAT: [],
         LinkIdentity.SECTION: [],
+        LinkIdentity.HOURGLASS: [],
         LinkIdentity.DEFINE_CURVE: [],
+        LinkIdentity.DEFINE_BOX: [],
+        LinkIdentity.DEFINE_COORDINATE_SYSTEM: [],
+        LinkIdentity.DEFINE_VECTOR: [],
         LinkIdentity.DEFINE_TRANSFORMATION: [],
         LinkIdentity.PART: [],
         LinkIdentity.DEFINE_CURVE_OR_TABLE: [],
@@ -477,17 +559,32 @@ def _add_links(kwd_data: KeywordData) -> None:
     for link_type, link_fields in links.items():
         if not link_fields:
             continue
-        if link_type == LinkIdentity.MAT:
+        if link_type == LinkIdentity.NODE:
+            _add_node_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.MAT:
             _add_mat_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.SECTION:
             _add_section_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.HOURGLASS:
+            _add_hourglass_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_CURVE:
             _add_define_curve_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_BOX:
+            _add_define_box_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_COORDINATE_SYSTEM:
+            _add_define_coordinate_system_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_VECTOR:
+            _add_define_vector_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.PART:
             _add_part_link_data(link_data, link_fields)

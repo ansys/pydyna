@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _ALEINJECTION_CARD0 = (
     FieldSchema("mmgset", int, 0, 10, None),
@@ -61,6 +64,11 @@ class AleInjection(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "INJECTION"
+    _link_fields = {
+        "boxv": LinkType.DEFINE_BOX,
+        "vect": LinkType.DEFINE_VECTOR,
+        "vecr": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleInjection class."""
@@ -353,4 +361,49 @@ class AleInjection(KeywordBase):
     def yc(self, value: float) -> None:
         """Set the yc property."""
         self._cards[2].set_value("yc", value)
+
+    @property
+    def boxv_link(self) -> DefineBox:
+        """Get the DefineBox object for boxv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxv:
+                return kwd
+        return None
+
+    @boxv_link.setter
+    def boxv_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxv."""
+        self.boxv = value.boxid
+
+    @property
+    def vect_link(self) -> DefineVector:
+        """Get the DefineVector object for vect."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vect:
+                return kwd
+        return None
+
+    @vect_link.setter
+    def vect_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vect."""
+        self.vect = value.vid
+
+    @property
+    def vecr_link(self) -> DefineVector:
+        """Get the DefineVector object for vecr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecr:
+                return kwd
+        return None
+
+    @vecr_link.setter
+    def vecr_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecr."""
+        self.vecr = value.vid
 

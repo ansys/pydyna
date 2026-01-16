@@ -29,6 +29,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _SETSEGMENT_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -53,6 +55,12 @@ class SetSegment(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetSegment class."""
@@ -193,4 +201,40 @@ class SetSegment(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def n1_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n1, keyed by n1 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n1", "parts")
+
+    def get_n1_link(self, n1: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", n1, "parts")
+
+    @property
+    def n2_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n2, keyed by n2 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n2", "parts")
+
+    def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", n2, "parts")
+
+    @property
+    def n3_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n3, keyed by n3 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n3", "parts")
+
+    def get_n3_link(self, n3: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", n3, "parts")
+
+    @property
+    def n4_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n4, keyed by n4 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n4", "parts")
+
+    def get_n4_link(self, n4: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", n4, "parts")
 

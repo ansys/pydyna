@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
 
 _PARTREPOSITIONCONTACTPRINT_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -71,6 +72,7 @@ class PartRepositionContactPrint(KeywordBase):
     _link_fields = {
         "mid": LinkType.MAT,
         "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
     }
 
     def __init__(self, **kwargs):
@@ -381,4 +383,19 @@ class PartRepositionContactPrint(KeywordBase):
     def secid_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for secid."""
         self.secid = value.secid
+
+    @property
+    def hgid_link(self) -> Hourglass:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
 

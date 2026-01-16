@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 
 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
@@ -88,6 +89,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "boxid": LinkType.DEFINE_BOX,
     }
 
     def __init__(self, **kwargs):
@@ -459,4 +461,19 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
 

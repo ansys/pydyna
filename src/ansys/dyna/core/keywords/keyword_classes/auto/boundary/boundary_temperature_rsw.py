@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _BOUNDARYTEMPERATURERSW_CARD0 = (
@@ -61,6 +62,10 @@ class BoundaryTemperatureRsw(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "TEMPERATURE_RSW"
     _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "h2": LinkType.NODE,
+        "r": LinkType.NODE,
         "lcidt": LinkType.DEFINE_CURVE,
     }
 
@@ -298,6 +303,26 @@ class BoundaryTemperatureRsw(KeywordBase):
     def tempzb(self, value: float) -> None:
         """Set the tempzb property."""
         self._cards[2].set_value("tempzb", value)
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def h2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given h2."""
+        return self._get_link_by_attr("NODE", "nid", self.h2, "parts")
+
+    @property
+    def r_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given r."""
+        return self._get_link_by_attr("NODE", "nid", self.r, "parts")
 
     @property
     def lcidt_link(self) -> DefineCurve:

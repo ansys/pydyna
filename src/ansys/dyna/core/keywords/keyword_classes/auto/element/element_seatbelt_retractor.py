@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ELEMENTSEATBELTRETRACTOR_CARD0 = (
@@ -52,6 +53,7 @@ class ElementSeatbeltRetractor(KeywordBase):
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_RETRACTOR"
     _link_fields = {
+        "sbrnid": LinkType.NODE,
         "llcid": LinkType.DEFINE_CURVE,
         "ulcid": LinkType.DEFINE_CURVE,
     }
@@ -198,6 +200,11 @@ class ElementSeatbeltRetractor(KeywordBase):
     def lfed(self, value: float) -> None:
         """Set the lfed property."""
         self._cards[1].set_value("lfed", value)
+
+    @property
+    def sbrnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given sbrnid."""
+        return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
 
     @property
     def llcid_link(self) -> DefineCurve:

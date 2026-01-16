@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INCLUDEUNITCELL_CARD0 = (
     FieldSchema("filename", str, 0, 256, None),
@@ -70,6 +72,14 @@ class IncludeUnitcell(KeywordBase):
 
     keyword = "INCLUDE"
     subkeyword = "UNITCELL"
+    _link_fields = {
+        "cnx": LinkType.NODE,
+        "cny": LinkType.NODE,
+        "cnz": LinkType.NODE,
+        "ecnx": LinkType.NODE,
+        "ecny": LinkType.NODE,
+        "ecnz": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeUnitcell class."""
@@ -329,4 +339,34 @@ class IncludeUnitcell(KeywordBase):
     def ecnz(self, value: int) -> None:
         """Set the ecnz property."""
         self._cards[5].set_value("ecnz", value)
+
+    @property
+    def cnx_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cnx."""
+        return self._get_link_by_attr("NODE", "nid", self.cnx, "parts")
+
+    @property
+    def cny_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cny."""
+        return self._get_link_by_attr("NODE", "nid", self.cny, "parts")
+
+    @property
+    def cnz_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cnz."""
+        return self._get_link_by_attr("NODE", "nid", self.cnz, "parts")
+
+    @property
+    def ecnx_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecnx."""
+        return self._get_link_by_attr("NODE", "nid", self.ecnx, "parts")
+
+    @property
+    def ecny_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecny."""
+        return self._get_link_by_attr("NODE", "nid", self.ecny, "parts")
+
+    @property
+    def ecnz_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecnz."""
+        return self._get_link_by_attr("NODE", "nid", self.ecnz, "parts")
 

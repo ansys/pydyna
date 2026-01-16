@@ -27,6 +27,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _LOADMASK_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -51,6 +53,9 @@ class LoadMask(KeywordBase):
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
         "lcidm": LinkType.DEFINE_CURVE,
+        "boxid": LinkType.DEFINE_BOX,
+        "vid1": LinkType.DEFINE_VECTOR,
+        "vid2": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -195,4 +200,49 @@ class LoadMask(KeywordBase):
     def lcidm_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcidm."""
         self.lcidm = value.lcid
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def vid1_link(self) -> DefineVector:
+        """Get the DefineVector object for vid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid1:
+                return kwd
+        return None
+
+    @vid1_link.setter
+    def vid1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid1."""
+        self.vid1 = value.vid
+
+    @property
+    def vid2_link(self) -> DefineVector:
+        """Get the DefineVector object for vid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid2:
+                return kwd
+        return None
+
+    @vid2_link.setter
+    def vid2_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid2."""
+        self.vid2 = value.vid
 

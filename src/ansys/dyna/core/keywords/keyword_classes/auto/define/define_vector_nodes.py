@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DEFINEVECTORNODES_CARD0 = (
     FieldSchema("vid", int, 0, 10, 0),
@@ -45,6 +47,10 @@ class DefineVectorNodes(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nodet": LinkType.NODE,
+        "nodeh": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineVectorNodes class."""
@@ -111,4 +117,14 @@ class DefineVectorNodes(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nodet_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodet."""
+        return self._get_link_by_attr("NODE", "nid", self.nodet, "parts")
+
+    @property
+    def nodeh_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeh."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeh, "parts")
 

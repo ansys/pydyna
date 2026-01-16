@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _EMEPPURKINJENETWORK_CARD0 = (
     FieldSchema("purkid", int, 0, 10, None),
@@ -52,6 +53,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
     keyword = "EM"
     subkeyword = "EP_PURKINJE_NETWORK"
     _link_fields = {
+        "inodestld": LinkType.NODE,
         "mid": LinkType.MAT,
     }
 
@@ -209,6 +211,11 @@ class EmEpPurkinjeNetwork(KeywordBase):
     def iedgestld(self, value: int) -> None:
         """Set the iedgestld property."""
         self._cards[1].set_value("iedgestld", value)
+
+    @property
+    def inodestld_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given inodestld."""
+        return self._get_link_by_attr("NODE", "nid", self.inodestld, "parts")
 
     @property
     def mid_link(self) -> KeywordBase:

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTBEAMORIENTATION_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -50,6 +52,11 @@ class ElementBeamOrientation(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_ORIENTATION"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamOrientation class."""
@@ -258,4 +265,19 @@ class ElementBeamOrientation(KeywordBase):
     def vz(self, value: float) -> None:
         """Set the vz property."""
         self._cards[1].set_value("vz", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 

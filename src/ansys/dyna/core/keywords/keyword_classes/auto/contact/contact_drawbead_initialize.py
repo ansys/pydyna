@@ -27,7 +27,9 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 
 _CONTACTDRAWBEADINITIALIZE_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -195,9 +197,13 @@ class ContactDrawbeadInitialize(KeywordBase):
         OptionSpec("G", 7, 0),
     ]
     _link_fields = {
+        "point1": LinkType.NODE,
+        "point2": LinkType.NODE,
         "lcidrf": LinkType.DEFINE_CURVE,
         "lcidnf": LinkType.DEFINE_CURVE,
         "lceps": LinkType.DEFINE_CURVE,
+        "saboxid": LinkType.DEFINE_BOX,
+        "sbboxid": LinkType.DEFINE_BOX,
     }
 
     def __init__(self, **kwargs):
@@ -1792,6 +1798,16 @@ class ContactDrawbeadInitialize(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
+    def point1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given point1."""
+        return self._get_link_by_attr("NODE", "nid", self.point1, "parts")
+
+    @property
+    def point2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given point2."""
+        return self._get_link_by_attr("NODE", "nid", self.point2, "parts")
+
+    @property
     def lcidrf_link(self) -> DefineCurve:
         """Get the DefineCurve object for lcidrf."""
         if self.deck is None:
@@ -1835,4 +1851,34 @@ class ContactDrawbeadInitialize(KeywordBase):
     def lceps_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lceps."""
         self.lceps = value.lcid
+
+    @property
+    def saboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for saboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.saboxid:
+                return kwd
+        return None
+
+    @saboxid_link.setter
+    def saboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for saboxid."""
+        self.saboxid = value.boxid
+
+    @property
+    def sbboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for sbboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.sbboxid:
+                return kwd
+        return None
+
+    @sbboxid_link.setter
+    def sbboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for sbboxid."""
+        self.sbboxid = value.boxid
 

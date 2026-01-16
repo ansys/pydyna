@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _FREQUENCYDOMAINRANDOMVIBRATION_CARD0 = (
     FieldSchema("mdmin", int, 0, 10, 1),
@@ -101,6 +102,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         "ldspn": LinkType.DEFINE_CURVE,
         "ldpsd1": LinkType.DEFINE_CURVE,
         "ldpsd2": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -742,4 +744,19 @@ class FrequencyDomainRandomVibration(KeywordBase):
     def ldpsd2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for ldpsd2."""
         self.ldpsd2 = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

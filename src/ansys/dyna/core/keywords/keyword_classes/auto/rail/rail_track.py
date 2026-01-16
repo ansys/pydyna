@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _RAILTRACK_CARD0 = (
@@ -55,6 +56,8 @@ class RailTrack(KeywordBase):
     keyword = "RAIL"
     subkeyword = "TRACK"
     _link_fields = {
+        "norgn1": LinkType.NODE,
+        "norgn2": LinkType.NODE,
         "lcur1": LinkType.DEFINE_CURVE,
         "lcur2": LinkType.DEFINE_CURVE,
     }
@@ -228,6 +231,16 @@ class RailTrack(KeywordBase):
     def ga2(self, value: float) -> None:
         """Set the ga2 property."""
         self._cards[1].set_value("ga2", value)
+
+    @property
+    def norgn1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given norgn1."""
+        return self._get_link_by_attr("NODE", "nid", self.norgn1, "parts")
+
+    @property
+    def norgn2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given norgn2."""
+        return self._get_link_by_attr("NODE", "nid", self.norgn2, "parts")
 
     @property
     def lcur1_link(self) -> DefineCurve:

@@ -28,12 +28,18 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 class ElementDiscrete(KeywordBase):
     """DYNA ELEMENT_DISCRETE keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "DISCRETE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementDiscrete class."""
@@ -63,4 +69,22 @@ class ElementDiscrete(KeywordBase):
     def elements(self, df: pd.DataFrame):
         """Set elements from the dataframe df"""
         self._cards[0].table = df
+
+    @property
+    def n1_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n1, keyed by n1 value."""
+        return self._get_links_from_table("NODE", "nid", "elements", "n1", "parts")
+
+    def get_n1_link(self, n1: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", n1, "parts")
+
+    @property
+    def n2_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n2, keyed by n2 value."""
+        return self._get_links_from_table("NODE", "nid", "elements", "n2", "parts")
+
+    def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", n2, "parts")
 

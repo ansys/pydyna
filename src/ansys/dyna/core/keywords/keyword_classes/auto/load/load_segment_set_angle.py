@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _LOADSEGMENTSETANGLE_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -47,6 +49,12 @@ class LoadSegmentSetAngle(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SEGMENT_SET_ANGLE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "na": LinkType.NODE,
+        "ni": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSegmentSetAngle class."""
@@ -172,4 +180,24 @@ class LoadSegmentSetAngle(KeywordBase):
     def ni(self, value: int) -> None:
         """Set the ni property."""
         self._cards[1].set_value("ni", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def na_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given na."""
+        return self._get_link_by_attr("NODE", "nid", self.na, "parts")
+
+    @property
+    def ni_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ni."""
+        return self._get_link_by_attr("NODE", "nid", self.ni, "parts")
 

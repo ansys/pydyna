@@ -27,7 +27,9 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _SECTIONPOINTSOURCEMIXTURE_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
@@ -70,6 +72,10 @@ class SectionPointSourceMixture(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
+        "nidlc001": LinkType.NODE,
+        "nidlc002": LinkType.NODE,
+        "nidlc003": LinkType.NODE,
+        "nodeid": LinkType.NODE,
         "lcidt": LinkType.DEFINE_CURVE,
         "notused": LinkType.DEFINE_CURVE,
         "lcidvel": LinkType.DEFINE_CURVE,
@@ -81,6 +87,7 @@ class SectionPointSourceMixture(KeywordBase):
         "lcmdot6": LinkType.DEFINE_CURVE,
         "lcmdot7": LinkType.DEFINE_CURVE,
         "lcmdot8": LinkType.DEFINE_CURVE,
+        "vecid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -332,6 +339,26 @@ class SectionPointSourceMixture(KeywordBase):
             self.activate_option("TITLE")
 
     @property
+    def nidlc001_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc001."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc001, "parts")
+
+    @property
+    def nidlc002_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc002."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc002, "parts")
+
+    @property
+    def nidlc003_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc003."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc003, "parts")
+
+    @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
     def lcidt_link(self) -> DefineCurve:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
@@ -495,4 +522,19 @@ class SectionPointSourceMixture(KeywordBase):
     def lcmdot8_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcmdot8."""
         self.lcmdot8 = value.lcid
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

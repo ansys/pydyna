@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTSEATBELTSLIPRING_CARD0 = (
     FieldSchema("sbsrid", int, 0, 10, 0),
@@ -52,6 +54,10 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_SLIPRING"
+    _link_fields = {
+        "sbrnid": LinkType.NODE,
+        "onid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltSlipring class."""
@@ -225,4 +231,14 @@ class ElementSeatbeltSlipring(KeywordBase):
     def lcnffs(self, value: int) -> None:
         """Set the lcnffs property."""
         self._cards[1].set_value("lcnffs", value)
+
+    @property
+    def sbrnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given sbrnid."""
+        return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
+
+    @property
+    def onid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given onid."""
+        return self._get_link_by_attr("NODE", "nid", self.onid, "parts")
 

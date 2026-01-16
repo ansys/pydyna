@@ -46,14 +46,29 @@ class LinkType(enum.Enum):
     ALL = 0
     """All link types."""
 
+    NODE = 1
+    """Reference to a NODE keyword."""
+
     MAT = 14
     """Reference to a MAT_* material keyword."""
 
     SECTION = 15
     """Reference to a SECTION_* keyword."""
 
+    HOURGLASS = 17
+    """Reference to a HOURGLASS keyword."""
+
     DEFINE_CURVE = 19
     """Reference to a DEFINE_CURVE keyword."""
+
+    DEFINE_BOX = 20
+    """Reference to a DEFINE_BOX keyword."""
+
+    DEFINE_COORDINATE_SYSTEM = 21
+    """Reference to a DEFINE_COORDINATE_SYSTEM keyword."""
+
+    DEFINE_VECTOR = 22
+    """Reference to a DEFINE_VECTOR keyword."""
 
     DEFINE_TRANSFORMATION = 40
     """Reference to a DEFINE_TRANSFORMATION keyword."""
@@ -453,6 +468,96 @@ class KeywordBase(Cards):
             if id_val in id_to_kwd:
                 result[id_val] = id_to_kwd[id_val]
         return result
+
+    def _get_table_group_links(
+        self,
+        keyword_type: str,
+        linkid: str,
+        table_name: str,
+        field_name: str,
+        key_field: str,
+    ) -> typing.Dict[int, "KeywordBase"]:
+        """Get keywords for IDs in a table-group field, keyed by key_field.
+
+        Used for TableCardGroup patterns where a DataFrame column contains
+        references to other keywords.
+
+        Parameters
+        ----------
+        keyword_type : str
+            The keyword type to search (e.g., "HOURGLASS", "MAT").
+        linkid : str
+            The attribute name on target keywords to match (e.g., "hgid", "mid").
+        table_name : str
+            Name of the property on self containing the DataFrame.
+        field_name : str
+            Name of the column containing the link ID values.
+        key_field : str
+            Name of the column to use as keys in the result dict.
+
+        Returns
+        -------
+        Dict[int, KeywordBase]
+            Mapping of key_field values to keywords.
+        """
+        if self.deck is None:
+            return {}
+        table = getattr(self, table_name, None)
+        if table is None or field_name not in table.columns:
+            return {}
+        result = {}
+        kwd_map = {getattr(kwd, linkid): kwd for kwd in self.deck.get_kwds_by_type(keyword_type)}
+        for _, row in table.iterrows():
+            key = row[key_field]
+            link_id = row[field_name]
+            if link_id in kwd_map:
+                result[key] = kwd_map[link_id]
+        return result
+
+    def _get_table_group_link(
+        self,
+        keyword_type: str,
+        linkid: str,
+        table_name: str,
+        field_name: str,
+        key_field: str,
+        key_value: int,
+    ) -> typing.Optional["KeywordBase"]:
+        """Get a single keyword for a specific key in a table-group field.
+
+        Parameters
+        ----------
+        keyword_type : str
+            The keyword type to search (e.g., "HOURGLASS", "MAT").
+        linkid : str
+            The attribute name on target keywords to match.
+        table_name : str
+            Name of the property on self containing the DataFrame.
+        field_name : str
+            Name of the column containing the link ID values.
+        key_field : str
+            Name of the column used as keys.
+        key_value : int
+            The specific key value to look up.
+
+        Returns
+        -------
+        KeywordBase or None
+            The matching keyword, or None if not found.
+        """
+        if self.deck is None:
+            return None
+        table = getattr(self, table_name, None)
+        if table is None or field_name not in table.columns:
+            return None
+        row = table[table[key_field] == key_value]
+        if row.empty:
+            return None
+        link_id = row.iloc[0][field_name]
+        for kwd in self.deck.get_kwds_by_type(keyword_type):
+            if getattr(kwd, linkid) == link_id:
+                return kwd
+        return None
 
     def get_links(
         self,

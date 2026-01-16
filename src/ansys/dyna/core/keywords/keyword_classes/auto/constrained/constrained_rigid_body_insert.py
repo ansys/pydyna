@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDRIGIDBODYINSERT_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -54,6 +55,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     subkeyword = "RIGID_BODY_INSERT"
     _link_fields = {
         "mcid": LinkType.DEFINE_CURVE,
+        "coordid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -205,4 +207,19 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     def mcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for mcid."""
         self.mcid = value.lcid
+
+    @property
+    def coordid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for coordid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.coordid:
+                return kwd
+        return None
+
+    @coordid_link.setter
+    def coordid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for coordid."""
+        self.coordid = value.cid
 

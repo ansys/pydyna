@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _CONSTRAINEDNODEINTERPOLATION_CARD0 = (
     FieldSchema("nid", int, 0, 10, None),
@@ -47,6 +49,13 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODE_INTERPOLATION"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "cn1": LinkType.NODE,
+        "cn2": LinkType.NODE,
+        "cn3": LinkType.NODE,
+        "cn4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedNodeInterpolation class."""
@@ -168,4 +177,29 @@ class ConstrainedNodeInterpolation(KeywordBase):
     def w4(self, value: float) -> None:
         """Set the w4 property."""
         self._cards[1].set_value("w4", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def cn1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn1."""
+        return self._get_link_by_attr("NODE", "nid", self.cn1, "parts")
+
+    @property
+    def cn2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn2."""
+        return self._get_link_by_attr("NODE", "nid", self.cn2, "parts")
+
+    @property
+    def cn3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn3."""
+        return self._get_link_by_attr("NODE", "nid", self.cn3, "parts")
+
+    @property
+    def cn4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn4."""
+        return self._get_link_by_attr("NODE", "nid", self.cn4, "parts")
 

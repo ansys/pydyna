@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _INITIALVELOCITYNODE_CARD0 = (
     FieldSchema("nid", int, 0, 10, None),
@@ -42,6 +45,10 @@ class InitialVelocityNode(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "VELOCITY_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVelocityNode class."""
@@ -138,4 +145,24 @@ class InitialVelocityNode(KeywordBase):
     def icid(self, value: int) -> None:
         """Set the icid property."""
         self._cards[0].set_value("icid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def icid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for icid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.icid:
+                return kwd
+        return None
+
+    @icid_link.setter
+    def icid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for icid."""
+        self.icid = value.cid
 

@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
 
 class Part(KeywordBase):
     """DYNA PART keyword"""
@@ -38,6 +39,7 @@ class Part(KeywordBase):
     _link_fields = {
         "mid": LinkType.MAT,
         "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
     }
 
     def __init__(self, **kwargs):
@@ -78,54 +80,27 @@ class Part(KeywordBase):
     @property
     def mid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all MAT_* keywords for mid, keyed by pid."""
-        if self.deck is None:
-            return {}
-        result = {}
-        kwd_map = {kwd.mid: kwd for kwd in self.deck.get_kwds_by_type("MAT")}
-        for _, row in self.parts.iterrows():
-            key = row["pid"]
-            link_id = row["mid"]
-            if link_id in kwd_map:
-                result[key] = kwd_map[link_id]
-        return result
+        return self._get_table_group_links("MAT", "mid", "parts", "mid", "pid")
 
     def get_mid_link(self, pid: int) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for the given pid."""
-        if self.deck is None:
-            return None
-        row = self.parts[self.parts["pid"] == pid]
-        if row.empty:
-            return None
-        link_id = row.iloc[0]["mid"]
-        for kwd in self.deck.get_kwds_by_type("MAT"):
-            if kwd.mid == link_id:
-                return kwd
-        return None
+        return self._get_table_group_link("MAT", "mid", "parts", "mid", "pid", pid)
 
     @property
     def secid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all SECTION_* keywords for secid, keyed by pid."""
-        if self.deck is None:
-            return {}
-        result = {}
-        kwd_map = {kwd.secid: kwd for kwd in self.deck.get_kwds_by_type("SECTION")}
-        for _, row in self.parts.iterrows():
-            key = row["pid"]
-            link_id = row["secid"]
-            if link_id in kwd_map:
-                result[key] = kwd_map[link_id]
-        return result
+        return self._get_table_group_links("SECTION", "secid", "parts", "secid", "pid")
 
     def get_secid_link(self, pid: int) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for the given pid."""
-        if self.deck is None:
-            return None
-        row = self.parts[self.parts["pid"] == pid]
-        if row.empty:
-            return None
-        link_id = row.iloc[0]["secid"]
-        for kwd in self.deck.get_kwds_by_type("SECTION"):
-            if kwd.secid == link_id:
-                return kwd
-        return None
+        return self._get_table_group_link("SECTION", "secid", "parts", "secid", "pid", pid)
+
+    @property
+    def hgid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all HOURGLASS_* keywords for hgid, keyed by pid."""
+        return self._get_table_group_links("HOURGLASS", "hgid", "parts", "hgid", "pid")
+
+    def get_hgid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the HOURGLASS_* keyword for the given pid."""
+        return self._get_table_group_link("HOURGLASS", "hgid", "parts", "hgid", "pid", pid)
 

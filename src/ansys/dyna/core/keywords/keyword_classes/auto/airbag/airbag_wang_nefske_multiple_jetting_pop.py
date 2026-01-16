@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _AIRBAGWANGNEFSKEMULTIPLEJETTINGPOP_CARD0 = (
@@ -129,6 +130,9 @@ class AirbagWangNefskeMultipleJettingPop(KeywordBase):
     keyword = "AIRBAG"
     subkeyword = "WANG_NEFSKE_MULTIPLE_JETTING_POP"
     _link_fields = {
+        "node1": LinkType.NODE,
+        "node2": LinkType.NODE,
+        "node3": LinkType.NODE,
         "lct": LinkType.DEFINE_CURVE,
         "lcmt": LinkType.DEFINE_CURVE,
         "lcdt": LinkType.DEFINE_CURVE,
@@ -944,6 +948,21 @@ class AirbagWangNefskeMultipleJettingPop(KeywordBase):
     def node3(self, value: int) -> None:
         """Set the node3 property."""
         self._cards[8].set_value("node3", value)
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node1."""
+        return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node2."""
+        return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
+
+    @property
+    def node3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node3."""
+        return self._get_link_by_attr("NODE", "nid", self.node3, "parts")
 
     @property
     def lct_link(self) -> DefineCurve:

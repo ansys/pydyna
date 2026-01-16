@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _AIRBAGPARTICLEMPP_CARD0 = (
@@ -131,6 +132,9 @@ class AirbagParticleMpp(KeywordBase):
     keyword = "AIRBAG"
     subkeyword = "PARTICLE_MPP"
     _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
         "hconv": LinkType.DEFINE_CURVE,
         "lctc23": LinkType.DEFINE_CURVE,
         "lcpc23": LinkType.DEFINE_CURVE,
@@ -937,6 +941,21 @@ class AirbagParticleMpp(KeywordBase):
     def ppop(self, value: float) -> None:
         """Set the ppop property."""
         self._cards[10].set_value("ppop", value)
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 
     @property
     def hconv_link(self) -> DefineCurve:

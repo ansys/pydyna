@@ -26,7 +26,9 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _AIRBAGALE_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -138,9 +140,11 @@ class AirbagAle(KeywordBase):
     keyword = "AIRBAG"
     subkeyword = "ALE"
     _link_fields = {
+        "nodeid": LinkType.NODE,
         "lcvel": LinkType.DEFINE_CURVE,
         "lct": LinkType.DEFINE_CURVE,
         "lcmf": LinkType.DEFINE_CURVE,
+        "vecid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -866,6 +870,11 @@ class AirbagAle(KeywordBase):
         self._cards[10].set_value("orifare", value)
 
     @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
     def lcvel_link(self) -> DefineCurve:
         """Get the DefineCurve object for lcvel."""
         if self.deck is None:
@@ -909,4 +918,19 @@ class AirbagAle(KeywordBase):
     def lcmf_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcmf."""
         self.lcmf = value.lcid
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

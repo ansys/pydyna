@@ -26,6 +26,9 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -104,8 +107,11 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
     keyword = "PART"
     subkeyword = "INERTIA_CONTACT_PRINT_ATTACHMENT_NODES"
     _link_fields = {
+        "nodeid": LinkType.NODE,
         "mid": LinkType.MAT,
         "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -652,6 +658,11 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self._cards[8].set_value("ansid", value)
 
     @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
     def mid_link(self) -> KeywordBase:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
@@ -680,4 +691,34 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
     def secid_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for secid."""
         self.secid = value.secid
+
+    @property
+    def hgid_link(self) -> Hourglass:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

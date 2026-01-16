@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 
 _RIGIDWALLPLANAR_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
@@ -52,6 +54,9 @@ class RigidwallPlanar(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR"
+    _link_fields = {
+        "boxid": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanar class."""
@@ -233,4 +238,19 @@ class RigidwallPlanar(KeywordBase):
     def wvel(self, value: float) -> None:
         """Set the wvel property."""
         self._cards[1].set_value("wvel", value)
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
 
