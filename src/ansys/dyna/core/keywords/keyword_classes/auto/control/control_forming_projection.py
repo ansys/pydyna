@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLFORMINGPROJECTION_CARD0 = (
     FieldSchema("pidb", int, 0, 10, None),
@@ -39,6 +40,10 @@ class ControlFormingProjection(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_PROJECTION"
+    _link_fields = {
+        "pidb": LinkType.PART,
+        "pidt": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingProjection class."""
@@ -111,4 +116,14 @@ class ControlFormingProjection(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""nrtst must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nrtst", value)
+
+    @property
+    def pidb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidb."""
+        return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
+
+    @property
+    def pidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidt."""
+        return self._get_link_by_attr("PART", "pid", self.pidt, "parts")
 

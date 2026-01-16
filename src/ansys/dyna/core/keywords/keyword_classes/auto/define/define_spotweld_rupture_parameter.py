@@ -85,6 +85,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         "lcdna": LinkType.DEFINE_CURVE,
         "lcdnm": LinkType.DEFINE_CURVE,
         "lcdns": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -444,4 +445,9 @@ class DefineSpotweldRuptureParameter(KeywordBase):
     def lcdns_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdns."""
         self.lcdns = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

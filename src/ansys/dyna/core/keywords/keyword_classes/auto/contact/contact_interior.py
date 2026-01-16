@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACTINTERIOR_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
@@ -35,6 +36,9 @@ class ContactInterior(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "INTERIOR"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactInterior class."""
@@ -58,4 +62,14 @@ class ContactInterior(KeywordBase):
     def psid(self, value: int) -> None:
         """Set the psid property."""
         self._cards[0].set_value("psid", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINESPOTWELDMULTISCALE_CARD0 = (
     FieldSchema("type", int, 0, 10, None),
@@ -50,6 +51,12 @@ class DefineSpotweldMultiscale(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "bset": LinkType.SET_BEAM,
+        "bset": LinkType.SET_BEAM,
+        "bset": LinkType.SET_BEAM,
+        "bset": LinkType.SET_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSpotweldMultiscale class."""
@@ -171,4 +178,44 @@ class DefineSpotweldMultiscale(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def bset_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bset."""
+        return self._get_set_link("BEAM", self.bset)
+
+    @bset_link.setter
+    def bset_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bset."""
+        self.bset = value.sid
+
+    @property
+    def bset_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bset."""
+        return self._get_set_link("BEAM", self.bset)
+
+    @bset_link.setter
+    def bset_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bset."""
+        self.bset = value.sid
+
+    @property
+    def bset_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bset."""
+        return self._get_set_link("BEAM", self.bset)
+
+    @bset_link.setter
+    def bset_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bset."""
+        self.bset = value.sid
+
+    @property
+    def bset_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bset."""
+        return self._get_set_link("BEAM", self.bset)
+
+    @bset_link.setter
+    def bset_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bset."""
+        self.bset = value.sid
 

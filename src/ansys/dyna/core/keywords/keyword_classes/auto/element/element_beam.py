@@ -40,6 +40,7 @@ class ElementBeam(KeywordBase):
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -99,4 +100,13 @@ class ElementBeam(KeywordBase):
     def get_n3_link(self, n3: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", n3, "parts")
+
+    @property
+    def pid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pid, keyed by pid value."""
+        return self._get_links_from_table("PART", "pid", "elements", "pid", "parts")
+
+    def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", pid, "parts")
 

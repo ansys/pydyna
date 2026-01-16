@@ -80,6 +80,9 @@ class BoundaryFluxTrajectory(KeywordBase):
         "lclat": LinkType.DEFINE_CURVE,
         "lctim": LinkType.DEFINE_CURVE,
         "lcinc": LinkType.DEFINE_CURVE,
+        "nsid1": LinkType.SET_NODE,
+        "pserod": LinkType.SET_PART,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -508,4 +511,34 @@ class BoundaryFluxTrajectory(KeywordBase):
     def lcinc_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcinc."""
         self.lcinc = value.lcid
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
+
+    @property
+    def pserod_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pserod."""
+        return self._get_set_link("PART", self.pserod)
+
+    @pserod_link.setter
+    def pserod_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pserod."""
+        self.pserod = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

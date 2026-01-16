@@ -65,6 +65,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         "gmy": LinkType.DEFINE_CURVE,
         "gmz": LinkType.DEFINE_CURVE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pset": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -344,4 +345,14 @@ class LoadSeismicSsiDeconvId(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

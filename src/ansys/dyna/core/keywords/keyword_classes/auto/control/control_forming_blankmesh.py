@@ -56,6 +56,7 @@ class ControlFormingBlankmesh(KeywordBase):
     subkeyword = "FORMING_BLANKMESH"
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pidbk": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -253,4 +254,9 @@ class ControlFormingBlankmesh(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def pidbk_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidbk."""
+        return self._get_link_by_attr("PART", "pid", self.pidbk, "parts")
 

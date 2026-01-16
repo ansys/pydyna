@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _LOADALECONVECTION_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -44,6 +45,9 @@ class LoadAleConvection(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "ALE_CONVECTION"
+    _link_fields = {
+        "lagpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadAleConvection class."""
@@ -132,4 +136,9 @@ class LoadAleConvection(KeywordBase):
     def lagmas(self, value: float) -> None:
         """Set the lagmas property."""
         self._cards[1].set_value("lagmas", value)
+
+    @property
+    def lagpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lagpid."""
+        return self._get_link_by_attr("PART", "pid", self.lagpid, "parts")
 

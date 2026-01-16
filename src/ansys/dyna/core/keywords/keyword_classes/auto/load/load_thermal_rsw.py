@@ -73,6 +73,7 @@ class LoadThermalRsw(KeywordBase):
         "h2": LinkType.NODE,
         "r": LinkType.NODE,
         "lcidt": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -370,4 +371,14 @@ class LoadThermalRsw(KeywordBase):
     def lcidt_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcidt."""
         self.lcidt = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid."""
+        return self._get_set_link("NODE", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid."""
+        self.sid = value.sid
 

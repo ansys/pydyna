@@ -68,6 +68,7 @@ class DefineDeByPart(KeywordBase):
     _link_fields = {
         "lnorm": LinkType.DEFINE_CURVE,
         "lshear": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -294,4 +295,9 @@ class DefineDeByPart(KeywordBase):
     def lshear_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lshear."""
         self.lshear = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

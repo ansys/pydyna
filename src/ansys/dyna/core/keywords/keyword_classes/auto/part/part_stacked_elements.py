@@ -58,6 +58,7 @@ class PartStackedElements(KeywordBase):
         "midi": LinkType.MAT,
         "sidi": LinkType.SECTION,
         "hgidi": LinkType.HOURGLASS,
+        "pidref": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -254,4 +255,9 @@ class PartStackedElements(KeywordBase):
     def hgidi_link(self, value: Hourglass) -> None:
         """Set the Hourglass object for hgidi."""
         self.hgidi = value.hgid
+
+    @property
+    def pidref_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidref."""
+        return self._get_link_by_attr("PART", "pid", self.pidref, "parts")
 

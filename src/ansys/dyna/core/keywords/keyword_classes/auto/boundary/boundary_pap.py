@@ -46,6 +46,7 @@ class BoundaryPap(KeywordBase):
     subkeyword = "PAP"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "segid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -164,4 +165,14 @@ class BoundaryPap(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def segid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segid."""
+        return self._get_set_link("SEGMENT", self.segid)
+
+    @segid_link.setter
+    def segid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segid."""
+        self.segid = value.sid
 

@@ -54,6 +54,7 @@ class LoadSegmentSetAngle(KeywordBase):
         "n2": LinkType.NODE,
         "na": LinkType.NODE,
         "ni": LinkType.NODE,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -200,4 +201,14 @@ class LoadSegmentSetAngle(KeywordBase):
     def ni_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given ni."""
         return self._get_link_by_attr("NODE", "nid", self.ni, "parts")
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

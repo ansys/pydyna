@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACT1D_CARD0 = (
     FieldSchema("nsidr", int, 0, 10, None),
@@ -41,6 +42,10 @@ class Contact1D(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "1D"
+    _link_fields = {
+        "nsidr": LinkType.SET_NODE,
+        "nsidc": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Contact1D class."""
@@ -126,4 +131,24 @@ class Contact1D(KeywordBase):
     def exp(self, value: float) -> None:
         """Set the exp property."""
         self._cards[0].set_value("exp", value)
+
+    @property
+    def nsidr_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidr."""
+        return self._get_set_link("NODE", self.nsidr)
+
+    @nsidr_link.setter
+    def nsidr_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidr."""
+        self.nsidr = value.sid
+
+    @property
+    def nsidc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidc."""
+        return self._get_set_link("NODE", self.nsidc)
+
+    @nsidc_link.setter
+    def nsidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidc."""
+        self.nsidc = value.sid
 

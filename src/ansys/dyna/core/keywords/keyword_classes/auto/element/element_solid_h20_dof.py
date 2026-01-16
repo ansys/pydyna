@@ -106,6 +106,7 @@ class ElementSolidH20Dof(KeywordBase):
         "ns6": LinkType.NODE,
         "ns7": LinkType.NODE,
         "ns8": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -594,4 +595,9 @@ class ElementSolidH20Dof(KeywordBase):
     def ns8_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given ns8."""
         return self._get_link_by_attr("NODE", "nid", self.ns8, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

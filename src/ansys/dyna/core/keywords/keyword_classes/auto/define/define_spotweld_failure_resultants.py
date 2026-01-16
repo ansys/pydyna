@@ -63,6 +63,8 @@ class DefineSpotweldFailureResultants(KeywordBase):
         "dlcidss": LinkType.DEFINE_CURVE,
         "lcidsnij": LinkType.DEFINE_CURVE,
         "lcidssij": LinkType.DEFINE_CURVE,
+        "pid_i": LinkType.PART,
+        "pid_j": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -281,4 +283,14 @@ class DefineSpotweldFailureResultants(KeywordBase):
     def lcidssij_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcidssij."""
         self.lcidssij = value.lcid
+
+    @property
+    def pid_i_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_i."""
+        return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
+
+    @property
+    def pid_j_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_j."""
+        return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

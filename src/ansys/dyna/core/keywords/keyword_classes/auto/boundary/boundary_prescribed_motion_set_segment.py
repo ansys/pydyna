@@ -55,6 +55,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,
+        "sid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -233,4 +234,14 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sid."""
+        return self._get_set_link("SEGMENT", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sid."""
+        self.sid = value.sid
 

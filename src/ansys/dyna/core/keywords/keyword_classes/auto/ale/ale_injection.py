@@ -68,6 +68,7 @@ class AleInjection(KeywordBase):
         "boxv": LinkType.DEFINE_BOX,
         "vect": LinkType.DEFINE_VECTOR,
         "vecr": LinkType.DEFINE_VECTOR,
+        "segset": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -406,4 +407,14 @@ class AleInjection(KeywordBase):
     def vecr_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vecr."""
         self.vecr = value.vid
+
+    @property
+    def segset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segset."""
+        return self._get_set_link("SEGMENT", self.segset)
+
+    @segset_link.setter
+    def segset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segset."""
+        self.segset = value.sid
 

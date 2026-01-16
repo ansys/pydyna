@@ -90,6 +90,7 @@ class IncludeStampedSet(KeywordBase):
         "n1c": LinkType.NODE,
         "n2c": LinkType.NODE,
         "n3c": LinkType.NODE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -518,4 +519,14 @@ class IncludeStampedSet(KeywordBase):
     def n3c_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n3c."""
         return self._get_link_by_attr("NODE", "nid", self.n3c, "parts")
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

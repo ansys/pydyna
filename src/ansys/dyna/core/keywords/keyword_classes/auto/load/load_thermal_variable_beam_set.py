@@ -51,6 +51,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
     _link_fields = {
         "tcurve": LinkType.DEFINE_CURVE,
         "tcurdr": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -192,4 +193,14 @@ class LoadThermalVariableBeamSet(KeywordBase):
     def tcurdr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for tcurdr."""
         self.tcurdr = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for sid."""
+        return self._get_set_link("BEAM", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for sid."""
+        self.sid = value.sid
 

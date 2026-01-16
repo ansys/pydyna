@@ -80,6 +80,9 @@ class RigidwallGeometricCylinderDisplay(KeywordBase):
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -389,4 +392,29 @@ class RigidwallGeometricCylinderDisplay(KeywordBase):
     def boxid_link(self, value: DefineBox) -> None:
         """Set the DefineBox object for boxid."""
         self.boxid = value.boxid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

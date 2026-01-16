@@ -63,6 +63,8 @@ class InitialVelocity(KeywordBase):
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
         "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -301,4 +303,24 @@ class InitialVelocity(KeywordBase):
     def icid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for icid."""
         self.icid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
 

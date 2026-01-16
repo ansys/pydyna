@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _LOADSSA_CARD0 = (
     FieldSchema("vs", float, 0, 10, None),
@@ -59,6 +60,10 @@ class LoadSsa(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SSA"
+    _link_fields = {
+        "fpsid": LinkType.SET_PART,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSsa class."""
@@ -295,4 +300,24 @@ class LoadSsa(KeywordBase):
     def cz(self, value: float) -> None:
         """Set the cz property."""
         self._cards[2].set_value("cz", value)
+
+    @property
+    def fpsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for fpsid."""
+        return self._get_set_link("PART", self.fpsid)
+
+    @fpsid_link.setter
+    def fpsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for fpsid."""
+        self.fpsid = value.sid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

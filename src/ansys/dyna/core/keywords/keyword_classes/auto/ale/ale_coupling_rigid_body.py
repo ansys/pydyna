@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALECOUPLINGRIGIDBODY_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -43,6 +44,11 @@ class AleCouplingRigidBody(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "COUPLING_RIGID_BODY"
+    _link_fields = {
+        "esid": LinkType.SET_NODE,
+        "iexcle": LinkType.SET_SEGMENT,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleCouplingRigidBody class."""
@@ -128,4 +134,29 @@ class AleCouplingRigidBody(KeywordBase):
     def iexcle(self, value: int) -> None:
         """Set the iexcle property."""
         self._cards[1].set_value("iexcle", value)
+
+    @property
+    def esid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for esid."""
+        return self._get_set_link("NODE", self.esid)
+
+    @esid_link.setter
+    def esid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for esid."""
+        self.esid = value.sid
+
+    @property
+    def iexcle_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for iexcle."""
+        return self._get_set_link("SEGMENT", self.iexcle)
+
+    @iexcle_link.setter
+    def iexcle_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for iexcle."""
+        self.iexcle = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

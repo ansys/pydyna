@@ -45,6 +45,7 @@ class LoadHeatController(KeywordBase):
     subkeyword = "HEAT_CONTROLLER"
     _link_fields = {
         "node": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -138,4 +139,9 @@ class LoadHeatController(KeywordBase):
     def node_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

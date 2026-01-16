@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALEFSITOLOADNODE_CARD0 = (
     FieldSchema("dt", float, 0, 10, None),
@@ -41,6 +42,9 @@ class AleFsiToLoadNode(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "FSI_TO_LOAD_NODE"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleFsiToLoadNode class."""
@@ -104,4 +108,14 @@ class AleFsiToLoadNode(KeywordBase):
     def path(self, value: str) -> None:
         """Set the path property."""
         self._cards[1].set_value("path", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

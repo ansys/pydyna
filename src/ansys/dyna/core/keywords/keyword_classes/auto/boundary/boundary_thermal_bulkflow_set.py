@@ -41,6 +41,7 @@ class BoundaryThermalBulkflowSet(KeywordBase):
     subkeyword = "THERMAL_BULKFLOW_SET"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -98,4 +99,14 @@ class BoundaryThermalBulkflowSet(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for sid."""
+        return self._get_set_link("BEAM", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for sid."""
+        self.sid = value.sid
 

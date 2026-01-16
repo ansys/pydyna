@@ -55,6 +55,7 @@ class ElementDiscreteLco(KeywordBase):
         "n2": LinkType.NODE,
         "lcid": LinkType.DEFINE_CURVE,
         "lciddr": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -221,4 +222,9 @@ class ElementDiscreteLco(KeywordBase):
     def lciddr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lciddr."""
         self.lciddr = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

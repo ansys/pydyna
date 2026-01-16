@@ -55,6 +55,7 @@ class DefineElementDeathSolidSet(KeywordBase):
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "sid": LinkType.SET_SOLID,
     }
 
     def __init__(self, **kwargs):
@@ -212,4 +213,14 @@ class DefineElementDeathSolidSet(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for sid."""
+        return self._get_set_link("SOLID", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for sid."""
+        self.sid = value.sid
 

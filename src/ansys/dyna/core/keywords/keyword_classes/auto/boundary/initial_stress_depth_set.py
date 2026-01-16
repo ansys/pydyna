@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALSTRESSDEPTHSET_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
@@ -41,6 +42,9 @@ class InitialStressDepthSet(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "STRESS_DEPTH_SET"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressDepthSet class."""
@@ -126,4 +130,14 @@ class InitialStressDepthSet(KeywordBase):
     def lck0(self, value: int) -> None:
         """Set the lck0 property."""
         self._cards[0].set_value("lck0", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

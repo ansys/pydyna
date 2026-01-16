@@ -44,6 +44,8 @@ class DampingRelative(KeywordBase):
     subkeyword = "RELATIVE"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
+        "pidrb": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -134,4 +136,19 @@ class DampingRelative(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def pidrb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidrb."""
+        return self._get_link_by_attr("PART", "pid", self.pidrb, "parts")
 

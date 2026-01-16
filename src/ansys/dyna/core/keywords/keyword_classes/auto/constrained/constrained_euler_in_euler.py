@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDEULERINEULER_CARD0 = (
     FieldSchema("psid1", int, 0, 10, 0),
@@ -37,6 +38,10 @@ class ConstrainedEulerInEuler(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "EULER_IN_EULER"
+    _link_fields = {
+        "psid1": LinkType.SET_PART,
+        "psid2": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedEulerInEuler class."""
@@ -78,4 +83,24 @@ class ConstrainedEulerInEuler(KeywordBase):
     def pfac(self, value: float) -> None:
         """Set the pfac property."""
         self._cards[0].set_value("pfac", value)
+
+    @property
+    def psid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid1."""
+        return self._get_set_link("PART", self.psid1)
+
+    @psid1_link.setter
+    def psid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid1."""
+        self.psid1 = value.sid
+
+    @property
+    def psid2_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid2."""
+        return self._get_set_link("PART", self.psid2)
+
+    @psid2_link.setter
+    def psid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid2."""
+        self.psid2 = value.sid
 

@@ -51,6 +51,8 @@ class ControlFormingAutoNet(KeywordBase):
     subkeyword = "FORMING_AUTO_NET"
     _link_fields = {
         "idv": LinkType.DEFINE_VECTOR,
+        "idp": LinkType.PART,
+        "sx": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -190,4 +192,14 @@ class ControlFormingAutoNet(KeywordBase):
     def idv_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for idv."""
         self.idv = value.vid
+
+    @property
+    def idp_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idp."""
+        return self._get_link_by_attr("PART", "pid", self.idp, "parts")
+
+    @property
+    def sx_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given sx."""
+        return self._get_link_by_attr("PART", "pid", self.sx, "parts")
 

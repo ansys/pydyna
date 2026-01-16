@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLALE_CARD0 = (
     FieldSchema("dct", int, 0, 10, 1),
@@ -71,6 +72,9 @@ class ControlAle(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "ALE"
+    _link_fields = {
+        "nsidebc": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlAle class."""
@@ -444,4 +448,14 @@ class ControlAle(KeywordBase):
     def minmas(self, value: float) -> None:
         """Set the minmas property."""
         self._cards[3].set_value("minmas", value)
+
+    @property
+    def nsidebc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidebc."""
+        return self._get_set_link("NODE", self.nsidebc)
+
+    @nsidebc_link.setter
+    def nsidebc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidebc."""
+        self.nsidebc = value.sid
 

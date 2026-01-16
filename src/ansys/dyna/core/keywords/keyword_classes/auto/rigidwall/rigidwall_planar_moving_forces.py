@@ -75,6 +75,9 @@ class RigidwallPlanarMovingForces(KeywordBase):
         "n3": LinkType.NODE,
         "n4": LinkType.NODE,
         "boxid": LinkType.DEFINE_BOX,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -386,4 +389,34 @@ class RigidwallPlanarMovingForces(KeywordBase):
     def boxid_link(self, value: DefineBox) -> None:
         """Set the DefineBox object for boxid."""
         self.boxid = value.boxid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

@@ -82,7 +82,25 @@ class LinkType(enum.Enum):
     DEFINE_TRANSFORMATION = 40
     """Reference to a DEFINE_TRANSFORMATION keyword."""
 
-    PART = 69
+    SET_BEAM = 25
+    """Reference to a SET_BEAM keyword."""
+
+    SET_DISCRETE = 26
+    """Reference to a SET_DISCRETE keyword."""
+
+    SET_NODE = 27
+    """Reference to a SET_NODE keyword."""
+
+    SET_PART = 28
+    """Reference to a SET_PART keyword."""
+
+    SET_SEGMENT = 29
+    """Reference to a SET_SEGMENT keyword."""
+
+    SET_SOLID = 31
+    """Reference to a SET_SOLID keyword."""
+
+    PART = 13
     """Reference to a PART keyword."""
 
     DEFINE_CURVE_OR_TABLE = 86
@@ -380,6 +398,35 @@ class KeywordBase(Cards):
     # Maps field names to their LinkType values.
     # Example: {"lcsr": LinkType.DEFINE_CURVE, "tranid": LinkType.DEFINE_TRANSFORMATION}
     _link_fields: typing.ClassVar[typing.Dict[str, "LinkType"]] = {}
+
+    def _get_set_link(
+        self,
+        subtype_prefix: str,
+        value: typing.Any,
+    ) -> typing.Optional["KeywordBase"]:
+        """Get a SET_* keyword by matching sid with subtype prefix filtering.
+
+        Searches SET keywords where the subkeyword starts with the given prefix
+        and the sid matches the given value.
+
+        Parameters
+        ----------
+        subtype_prefix : str
+            The subtype prefix to match (e.g., "NODE", "PART", "BEAM").
+        value : Any
+            The sid value to search for.
+
+        Returns
+        -------
+        KeywordBase or None
+            The matching SET keyword, or None if not found.
+        """
+        if self.deck is None or value is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SET"):
+            if kwd.subkeyword.startswith(subtype_prefix) and kwd.sid == value:
+                return kwd
+        return None
 
     def _get_link_by_attr(
         self,

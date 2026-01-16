@@ -42,6 +42,7 @@ class InitialAxialForceBeam(KeywordBase):
     subkeyword = "AXIAL_FORCE_BEAM"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "bsid": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -115,4 +116,14 @@ class InitialAxialForceBeam(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def bsid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsid."""
+        return self._get_set_link("BEAM", self.bsid)
+
+    @bsid_link.setter
+    def bsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsid."""
+        self.bsid = value.sid
 

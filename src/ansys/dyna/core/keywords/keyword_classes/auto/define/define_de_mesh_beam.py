@@ -59,6 +59,7 @@ class DefineDeMeshBeam(KeywordBase):
     ]
     _link_fields = {
         "desxid": LinkType.SECTION,
+        "despid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -241,4 +242,9 @@ class DefineDeMeshBeam(KeywordBase):
     def desxid_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for desxid."""
         self.desxid = value.secid
+
+    @property
+    def despid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given despid."""
+        return self._get_link_by_attr("PART", "pid", self.despid, "parts")
 

@@ -46,6 +46,7 @@ class InitialVelocityRigidBody(KeywordBase):
     subkeyword = "VELOCITY_RIGID_BODY"
     _link_fields = {
         "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -158,4 +159,9 @@ class InitialVelocityRigidBody(KeywordBase):
     def icid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for icid."""
         self.icid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

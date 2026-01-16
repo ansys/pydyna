@@ -60,6 +60,7 @@ class ControlDynamicRelaxation(KeywordBase):
     subkeyword = "DYNAMIC_RELAXATION"
     _link_fields = {
         "vecid": LinkType.DEFINE_VECTOR,
+        "drpset": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -253,4 +254,14 @@ class ControlDynamicRelaxation(KeywordBase):
     def vecid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vecid."""
         self.vecid = value.vid
+
+    @property
+    def drpset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drpset."""
+        return self._get_set_link("PART", self.drpset)
+
+    @drpset_link.setter
+    def drpset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drpset."""
+        self.drpset = value.sid
 

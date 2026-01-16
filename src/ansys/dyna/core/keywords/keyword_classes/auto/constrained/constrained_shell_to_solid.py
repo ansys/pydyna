@@ -40,6 +40,7 @@ class ConstrainedShellToSolid(KeywordBase):
     subkeyword = "SHELL_TO_SOLID"
     _link_fields = {
         "nid": LinkType.NODE,
+        "nsid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -76,4 +77,14 @@ class ConstrainedShellToSolid(KeywordBase):
     def nid_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

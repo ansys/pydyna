@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EM2DAXI_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -41,6 +42,12 @@ class Em2Daxi(KeywordBase):
 
     keyword = "EM"
     subkeyword = "2DAXI"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+        "starssid": LinkType.SET_SEGMENT,
+        "endssid": LinkType.SET_SEGMENT,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Em2Daxi class."""
@@ -104,4 +111,39 @@ class Em2Daxi(KeywordBase):
     def numsec(self, value: int) -> None:
         """Set the numsec property."""
         self._cards[0].set_value("numsec", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
+
+    @property
+    def starssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for starssid."""
+        return self._get_set_link("SEGMENT", self.starssid)
+
+    @starssid_link.setter
+    def starssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for starssid."""
+        self.starssid = value.sid
+
+    @property
+    def endssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for endssid."""
+        return self._get_set_link("SEGMENT", self.endssid)
+
+    @endssid_link.setter
+    def endssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for endssid."""
+        self.endssid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

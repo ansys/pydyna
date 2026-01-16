@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASECPMSENSOR_CARD0 = (
     FieldSchema("dt", float, 0, 10, None),
@@ -44,6 +45,9 @@ class DatabaseCpmSensor(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "CPM_SENSOR"
+    _link_fields = {
+        "segsid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseCpmSensor class."""
@@ -137,4 +141,14 @@ class DatabaseCpmSensor(KeywordBase):
     def lz(self, value: float) -> None:
         """Set the lz property."""
         self._cards[1].set_value("lz", value)
+
+    @property
+    def segsid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segsid."""
+        return self._get_set_link("SEGMENT", self.segsid)
+
+    @segsid_link.setter
+    def segsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segsid."""
+        self.segsid = value.sid
 

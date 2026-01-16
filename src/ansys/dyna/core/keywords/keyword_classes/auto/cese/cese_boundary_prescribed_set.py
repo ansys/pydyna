@@ -63,6 +63,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         "lc_rho": LinkType.DEFINE_CURVE,
         "lc_p_": LinkType.DEFINE_CURVE,
         "lc_t": LinkType.DEFINE_CURVE,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -322,4 +323,14 @@ class CeseBoundaryPrescribedSet(KeywordBase):
     def lc_t_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc_t."""
         self.lc_t = value.lcid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

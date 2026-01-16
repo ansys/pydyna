@@ -71,6 +71,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
     subkeyword = "MASS_MATRIX_NODE_SET"
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "id": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -368,4 +369,14 @@ class ElementMassMatrixNodeSet(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def id_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for id."""
+        return self._get_set_link("NODE", self.id)
+
+    @id_link.setter
+    def id_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for id."""
+        self.id = value.sid
 

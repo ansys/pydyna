@@ -51,6 +51,7 @@ class DefineFrictionScaling(KeywordBase):
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -155,4 +156,14 @@ class DefineFrictionScaling(KeywordBase):
     def cid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for cid."""
         self.cid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

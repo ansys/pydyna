@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDRIGIDBODIESSET_CARD0 = (
     FieldSchema("pidl", int, 0, 10, None),
@@ -37,6 +38,10 @@ class ConstrainedRigidBodiesSet(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODIES_SET"
+    _link_fields = {
+        "pidc": LinkType.SET_PART,
+        "pidl": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodiesSet class."""
@@ -80,4 +85,19 @@ class ConstrainedRigidBodiesSet(KeywordBase):
     def iflag(self, value: int) -> None:
         """Set the iflag property."""
         self._cards[0].set_value("iflag", value)
+
+    @property
+    def pidc_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pidc."""
+        return self._get_set_link("PART", self.pidc)
+
+    @pidc_link.setter
+    def pidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pidc."""
+        self.pidc = value.sid
+
+    @property
+    def pidl_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidl."""
+        return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
 

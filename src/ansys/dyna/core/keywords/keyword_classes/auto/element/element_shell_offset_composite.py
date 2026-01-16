@@ -71,6 +71,7 @@ class ElementShellOffsetComposite(KeywordBase):
         "n8": LinkType.NODE,
         "mid1": LinkType.MAT,
         "mid2": LinkType.MAT,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -343,4 +344,9 @@ class ElementShellOffsetComposite(KeywordBase):
     def mid2_link(self, value: KeywordBase) -> None:
         """Set the MAT_* keyword for mid2."""
         self.mid2 = value.mid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

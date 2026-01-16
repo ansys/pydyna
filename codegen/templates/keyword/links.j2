@@ -69,6 +69,17 @@
         """Set the {{link.keyword_type}}_* keyword for {{field.name}}."""
         self.{{field.name}} = value.{{link.linkid}}
 
+{% elif link.is_subtype_prefix %}
+    @property
+    def {{field.name}}_link(self) -> KeywordBase:
+        """Get the {{link.keyword_type}}_{{link.keyword_subtype}}_* keyword for {{field.name}}."""
+        return self._get_set_link("{{link.keyword_subtype}}", self.{{field.name}})
+
+    @{{field.name}}_link.setter
+    def {{field.name}}_link(self, value: KeywordBase) -> None:
+        """Set the {{link.keyword_type}}_{{link.keyword_subtype}}_* keyword for {{field.name}}."""
+        self.{{field.name}} = value.{{link.linkid}}
+
 {% else %}
     @property
     def {{field.name}}_link(self) -> {{link.classname}}:

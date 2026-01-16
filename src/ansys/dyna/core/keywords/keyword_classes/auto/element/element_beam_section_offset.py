@@ -69,6 +69,7 @@ class ElementBeamSectionOffset(KeywordBase):
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -413,4 +414,9 @@ class ElementBeamSectionOffset(KeywordBase):
     def n3_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -108,6 +108,7 @@ class PartInertiaContactAttachmentNodes(KeywordBase):
         "secid": LinkType.SECTION,
         "hgid": LinkType.HOURGLASS,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ansid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -697,4 +698,14 @@ class PartInertiaContactAttachmentNodes(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def ansid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ansid."""
+        return self._get_set_link("NODE", self.ansid)
+
+    @ansid_link.setter
+    def ansid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ansid."""
+        self.ansid = value.sid
 

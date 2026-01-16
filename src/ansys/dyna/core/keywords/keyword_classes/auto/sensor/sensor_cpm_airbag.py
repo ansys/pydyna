@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _SENSORCPMAIRBAG_CARD0 = (
     FieldSchema("cpmid", int, 0, 10, None),
@@ -49,6 +50,10 @@ class SensorCpmAirbag(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "defps": LinkType.SET_PART,
+        "rbpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SensorCpmAirbag class."""
@@ -162,4 +167,19 @@ class SensorCpmAirbag(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def defps_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for defps."""
+        return self._get_set_link("PART", self.defps)
+
+    @defps_link.setter
+    def defps_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for defps."""
+        self.defps = value.sid
+
+    @property
+    def rbpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rbpid."""
+        return self._get_link_by_attr("PART", "pid", self.rbpid, "parts")
 

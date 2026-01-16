@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYRADIATIONSETEFREAD_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
@@ -38,6 +39,9 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "RADIATION_SET_EF_READ"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryRadiationSetEfRead class."""
@@ -90,4 +94,14 @@ class BoundaryRadiationSetEfRead(KeywordBase):
     def errmax(self, value: int) -> None:
         """Set the errmax property."""
         self._cards[0].set_value("errmax", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

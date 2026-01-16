@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLSEGMENTSINALECOUPLING_CARD0 = (
     FieldSchema("rankey", int, 0, 10, 0),
@@ -43,6 +44,9 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "SEGMENTS_IN_ALE_COUPLING"
+    _link_fields = {
+        "segset": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSegmentsInAleCoupling class."""
@@ -124,4 +128,14 @@ class ControlSegmentsInAleCoupling(KeywordBase):
     def conthk(self, value: float) -> None:
         """Set the conthk property."""
         self._cards[1].set_value("conthk", value)
+
+    @property
+    def segset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segset."""
+        return self._get_set_link("SEGMENT", self.segset)
+
+    @segset_link.setter
+    def segset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segset."""
+        self.segset = value.sid
 

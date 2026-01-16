@@ -50,6 +50,9 @@ class DatabaseBinaryD3Part(KeywordBase):
     subkeyword = "BINARY_D3PART"
     _link_fields = {
         "lcdt": LinkType.DEFINE_CURVE,
+        "bsetid": LinkType.SET_BEAM,
+        "psetid": LinkType.SET_PART,
+        "hsetid": LinkType.SET_SOLID,
     }
 
     def __init__(self, **kwargs):
@@ -183,4 +186,34 @@ class DatabaseBinaryD3Part(KeywordBase):
     def lcdt_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdt."""
         self.lcdt = value.lcid
+
+    @property
+    def bsetid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid."""
+        return self._get_set_link("BEAM", self.bsetid)
+
+    @bsetid_link.setter
+    def bsetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid."""
+        self.bsetid = value.sid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
+
+    @property
+    def hsetid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for hsetid."""
+        return self._get_set_link("SOLID", self.hsetid)
+
+    @hsetid_link.setter
+    def hsetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for hsetid."""
+        self.hsetid = value.sid
 

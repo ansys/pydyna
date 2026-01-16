@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACECOMPENSATION3D_CARD0 = (
     FieldSchema("method", int, 0, 10, 6),
@@ -46,6 +47,9 @@ class InterfaceCompensation3D(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "COMPENSATION_3D"
+    _link_fields = {
+        "psidp": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceCompensation3D class."""
@@ -187,4 +191,14 @@ class InterfaceCompensation3D(KeywordBase):
     def tangent(self, value: int) -> None:
         """Set the tangent property."""
         self._cards[1].set_value("tangent", value)
+
+    @property
+    def psidp_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidp."""
+        return self._get_set_link("PART", self.psidp)
+
+    @psidp_link.setter
+    def psidp_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidp."""
+        self.psidp = value.sid
 

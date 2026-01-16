@@ -49,6 +49,7 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
     subkeyword = "RADIATION_SET_VF_CALCULATE"
     _link_fields = {
         "selcid": LinkType.DEFINE_CURVE,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -176,4 +177,14 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
     def selcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for selcid."""
         self.selcid = value.lcid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLEXPLICITTHERMALBOUNDARY_CARD0 = (
     FieldSchema("partset", int, 0, 10, None),
@@ -36,6 +37,9 @@ class ControlExplicitThermalBoundary(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "EXPLICIT_THERMAL_BOUNDARY"
+    _link_fields = {
+        "partset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlExplicitThermalBoundary class."""
@@ -66,4 +70,14 @@ class ControlExplicitThermalBoundary(KeywordBase):
     def mmgset(self, value: int) -> None:
         """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
+
+    @property
+    def partset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for partset."""
+        return self._get_set_link("PART", self.partset)
+
+    @partset_link.setter
+    def partset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for partset."""
+        self.partset = value.sid
 

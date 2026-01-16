@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINESPHMESHBOX_CARD0 = (
     FieldSchema("xmin", float, 0, 10, None),
@@ -58,6 +59,10 @@ class DefineSphMeshBox(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "idseg": LinkType.SET_SEGMENT,
+        "ipid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSphMeshBox class."""
@@ -230,4 +235,19 @@ class DefineSphMeshBox(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def idseg_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for idseg."""
+        return self._get_set_link("SEGMENT", self.idseg)
+
+    @idseg_link.setter
+    def idseg_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for idseg."""
+        self.idseg = value.sid
+
+    @property
+    def ipid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid."""
+        return self._get_link_by_attr("PART", "pid", self.ipid, "parts")
 

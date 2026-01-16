@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLIMPLICITMODES_CARD0 = (
     FieldSchema("nsidc", int, 0, 10, 0),
@@ -46,6 +47,10 @@ class ControlImplicitModes(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_MODES"
+    _link_fields = {
+        "nsidc": LinkType.SET_NODE,
+        "nsida": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitModes class."""
@@ -158,4 +163,24 @@ class ControlImplicitModes(KeywordBase):
     def filename(self, value: str) -> None:
         """Set the filename property."""
         self._cards[1].set_value("filename", value)
+
+    @property
+    def nsidc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidc."""
+        return self._get_set_link("NODE", self.nsidc)
+
+    @nsidc_link.setter
+    def nsidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidc."""
+        self.nsidc = value.sid
+
+    @property
+    def nsida_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsida."""
+        return self._get_set_link("NODE", self.nsida)
+
+    @nsida_link.setter
+    def nsida_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsida."""
+        self.nsida = value.sid
 

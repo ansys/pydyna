@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALEMAPPINGFROMLAGRANGIAN_CARD0 = (
     FieldSchema("lagpid", int, 0, 10, None),
@@ -51,6 +52,9 @@ class AleMappingFromLagrangian(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "MAPPING_FROM_LAGRANGIAN"
+    _link_fields = {
+        "aleid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleMappingFromLagrangian class."""
@@ -193,4 +197,9 @@ class AleMappingFromLagrangian(KeywordBase):
     def div(self, value: int) -> None:
         """Set the div property."""
         self._cards[2].set_value("div", value)
+
+    @property
+    def aleid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given aleid."""
+        return self._get_link_by_attr("PART", "pid", self.aleid, "parts")
 

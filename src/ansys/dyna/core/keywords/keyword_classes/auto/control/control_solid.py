@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLSOLID_CARD0 = (
     FieldSchema("esort", int, 0, 10, 0),
@@ -59,6 +60,9 @@ class ControlSolid(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "SOLID"
+    _link_fields = {
+        "psfail": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSolid class."""
@@ -306,4 +310,14 @@ class ControlSolid(KeywordBase):
     def tet13v(self, value: int) -> None:
         """Set the tet13v property."""
         self._cards[2].set_value("tet13v", value)
+
+    @property
+    def psfail_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psfail."""
+        return self._get_set_link("PART", self.psfail)
+
+    @psfail_link.setter
+    def psfail_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psfail."""
+        self.psfail = value.sid
 

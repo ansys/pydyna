@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMCONTACT_CARD0 = (
     FieldSchema("contid", int, 0, 10, None),
@@ -42,6 +43,10 @@ class EmContact(KeywordBase):
 
     keyword = "EM"
     subkeyword = "CONTACT"
+    _link_fields = {
+        "psidm": LinkType.SET_PART,
+        "psids": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmContact class."""
@@ -139,4 +144,24 @@ class EmContact(KeywordBase):
     def d0(self, value: float) -> None:
         """Set the d0 property."""
         self._cards[0].set_value("d0", value)
+
+    @property
+    def psidm_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidm."""
+        return self._get_set_link("PART", self.psidm)
+
+    @psidm_link.setter
+    def psidm_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidm."""
+        self.psidm = value.sid
+
+    @property
+    def psids_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psids."""
+        return self._get_set_link("PART", self.psids)
+
+    @psids_link.setter
+    def psids_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psids."""
+        self.psids = value.sid
 

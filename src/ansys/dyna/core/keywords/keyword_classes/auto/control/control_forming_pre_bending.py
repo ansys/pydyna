@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLFORMINGPREBENDING_CARD0 = (
     FieldSchema("pset", int, 0, 10, None),
@@ -42,6 +43,9 @@ class ControlFormingPreBending(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_PRE_BENDING"
+    _link_fields = {
+        "pset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingPreBending class."""
@@ -141,4 +145,14 @@ class ControlFormingPreBending(KeywordBase):
     def zc(self, value: float) -> None:
         """Set the zc property."""
         self._cards[0].set_value("zc", value)
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

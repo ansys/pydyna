@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _RIGIDDEFORMABLED2R_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -36,6 +37,10 @@ class RigidDeformableD2R(KeywordBase):
 
     keyword = "RIGID"
     subkeyword = "DEFORMABLE_D2R"
+    _link_fields = {
+        "pid": LinkType.PART,
+        "lrb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidDeformableD2R class."""
@@ -67,4 +72,14 @@ class RigidDeformableD2R(KeywordBase):
     def lrb(self, value: int) -> None:
         """Set the lrb property."""
         self._cards[0].set_value("lrb", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def lrb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lrb."""
+        return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

@@ -65,6 +65,9 @@ class ElementBeamScalarPid(KeywordBase):
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -349,4 +352,19 @@ class ElementBeamScalarPid(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

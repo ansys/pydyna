@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYCONVECTIONSET_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
@@ -44,6 +45,10 @@ class BoundaryConvectionSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "CONVECTION_SET"
+    _link_fields = {
+        "pserod": LinkType.SET_PART,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryConvectionSet class."""
@@ -140,4 +145,24 @@ class BoundaryConvectionSet(KeywordBase):
         if value not in [0, -1, 1, None]:
             raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
+
+    @property
+    def pserod_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pserod."""
+        return self._get_set_link("PART", self.pserod)
+
+    @pserod_link.setter
+    def pserod_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pserod."""
+        self.pserod = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

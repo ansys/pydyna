@@ -74,6 +74,14 @@ class DefineDeathTimesSet(KeywordBase):
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
+        "sid1": LinkType.SET_NODE,
+        "sid2": LinkType.SET_NODE,
+        "sid3": LinkType.SET_NODE,
+        "sid4": LinkType.SET_NODE,
+        "sid5": LinkType.SET_NODE,
+        "sid6": LinkType.SET_NODE,
+        "sid7": LinkType.SET_NODE,
+        "sid8": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -349,4 +357,84 @@ class DefineDeathTimesSet(KeywordBase):
     def n3_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def sid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid1."""
+        return self._get_set_link("NODE", self.sid1)
+
+    @sid1_link.setter
+    def sid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid1."""
+        self.sid1 = value.sid
+
+    @property
+    def sid2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid2."""
+        return self._get_set_link("NODE", self.sid2)
+
+    @sid2_link.setter
+    def sid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid2."""
+        self.sid2 = value.sid
+
+    @property
+    def sid3_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid3."""
+        return self._get_set_link("NODE", self.sid3)
+
+    @sid3_link.setter
+    def sid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid3."""
+        self.sid3 = value.sid
+
+    @property
+    def sid4_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid4."""
+        return self._get_set_link("NODE", self.sid4)
+
+    @sid4_link.setter
+    def sid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid4."""
+        self.sid4 = value.sid
+
+    @property
+    def sid5_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid5."""
+        return self._get_set_link("NODE", self.sid5)
+
+    @sid5_link.setter
+    def sid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid5."""
+        self.sid5 = value.sid
+
+    @property
+    def sid6_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid6."""
+        return self._get_set_link("NODE", self.sid6)
+
+    @sid6_link.setter
+    def sid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid6."""
+        self.sid6 = value.sid
+
+    @property
+    def sid7_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid7."""
+        return self._get_set_link("NODE", self.sid7)
+
+    @sid7_link.setter
+    def sid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid7."""
+        self.sid7 = value.sid
+
+    @property
+    def sid8_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid8."""
+        return self._get_set_link("NODE", self.sid8)
+
+    @sid8_link.setter
+    def sid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid8."""
+        self.sid8 = value.sid
 

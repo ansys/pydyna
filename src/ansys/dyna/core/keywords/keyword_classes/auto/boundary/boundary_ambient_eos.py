@@ -42,6 +42,7 @@ class BoundaryAmbientEos(KeywordBase):
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,
         "lc2": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -114,4 +115,9 @@ class BoundaryAmbientEos(KeywordBase):
     def lc2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc2."""
         self.lc2 = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

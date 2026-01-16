@@ -351,8 +351,14 @@ class LinkIdentity:
     DEFINE_BOX = 20
     DEFINE_COORDINATE_SYSTEM = 21
     DEFINE_VECTOR = 22
+    PART = 13
+    SET_BEAM = 25
+    SET_DISCRETE = 26
+    SET_NODE = 27
+    SET_PART = 28
+    SET_SEGMENT = 29
+    SET_SOLID = 31
     DEFINE_TRANSFORMATION = 40
-    PART = 69
     DEFINE_CURVE_OR_TABLE = 86
 
 
@@ -405,6 +411,69 @@ def _add_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing
         "is_table_lookup": True,  # Triggers special lookup in parts DataFrame
     }
     link_data.append(part_link_data)
+
+
+def _add_set_link_data(
+    link_data: typing.List[typing.Dict],
+    link_fields: typing.List[LinkFieldInfo],
+    subtype: str,
+    link_type_name: str,
+):
+    """Add link data for SET_* keywords.
+
+    Each SET_* link type resolves only to its specific subtype (e.g., SET_BEAM
+    links only resolve to SET_BEAM keywords, not SET_NODE or SET_PART).
+
+    Uses subkeyword prefix matching since SET_PART includes SET_PART_LIST,
+    SET_PART_ADD, etc.
+
+    Args:
+        link_data: List to append link data to
+        link_fields: Fields that reference this link type
+        subtype: The SET subtype (e.g., "BEAM", "NODE", "PART")
+        link_type_name: The LinkType enum name (e.g., "SET_BEAM")
+    """
+    set_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "SET",
+        "keyword_subtype": subtype,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "sid",
+        "link_type_name": link_type_name,
+        "is_subtype_prefix": True,
+    }
+    link_data.append(set_link_data)
+
+
+def _add_set_beam_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_BEAM keywords."""
+    _add_set_link_data(link_data, link_fields, "BEAM", "SET_BEAM")
+
+
+def _add_set_discrete_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_DISCRETE keywords."""
+    _add_set_link_data(link_data, link_fields, "DISCRETE", "SET_DISCRETE")
+
+
+def _add_set_node_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_NODE keywords."""
+    _add_set_link_data(link_data, link_fields, "NODE", "SET_NODE")
+
+
+def _add_set_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_PART keywords."""
+    _add_set_link_data(link_data, link_fields, "PART", "SET_PART")
+
+
+def _add_set_segment_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_SEGMENT keywords."""
+    _add_set_link_data(link_data, link_fields, "SEGMENT", "SET_SEGMENT")
+
+
+def _add_set_solid_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_SOLID keywords."""
+    _add_set_link_data(link_data, link_fields, "SOLID", "SET_SOLID")
 
 
 def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
@@ -560,6 +629,12 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
         LinkIdentity.DEFINE_BOX: [],
         LinkIdentity.DEFINE_COORDINATE_SYSTEM: [],
         LinkIdentity.DEFINE_VECTOR: [],
+        LinkIdentity.SET_BEAM: [],
+        LinkIdentity.SET_DISCRETE: [],
+        LinkIdentity.SET_NODE: [],
+        LinkIdentity.SET_PART: [],
+        LinkIdentity.SET_SEGMENT: [],
+        LinkIdentity.SET_SOLID: [],
         LinkIdentity.DEFINE_TRANSFORMATION: [],
         LinkIdentity.PART: [],
         LinkIdentity.DEFINE_CURVE_OR_TABLE: [],
@@ -654,6 +729,24 @@ def _add_links(kwd_data: KeywordData) -> None:
             link_count += len(link_fields)
         elif link_type == LinkIdentity.DEFINE_CURVE_OR_TABLE:
             _add_define_curve_or_table_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_BEAM:
+            _add_set_beam_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_DISCRETE:
+            _add_set_discrete_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_NODE:
+            _add_set_node_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_PART:
+            _add_set_part_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_SEGMENT:
+            _add_set_segment_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_SOLID:
+            _add_set_solid_link_data(link_data, link_fields)
             link_count += len(link_fields)
     kwd_data.links = link_data
     logger.debug(f"Added {link_count} links to keyword data")

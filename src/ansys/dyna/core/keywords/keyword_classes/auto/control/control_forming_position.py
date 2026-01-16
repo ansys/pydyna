@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLFORMINGPOSITION_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -37,6 +38,10 @@ class ControlFormingPosition(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_POSITION"
+    _link_fields = {
+        "pid": LinkType.PART,
+        "target": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingPosition class."""
@@ -78,4 +83,14 @@ class ControlFormingPosition(KeywordBase):
     def target(self, value: int) -> None:
         """Set the target property."""
         self._cards[0].set_value("target", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def target_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given target."""
+        return self._get_link_by_attr("PART", "pid", self.target, "parts")
 

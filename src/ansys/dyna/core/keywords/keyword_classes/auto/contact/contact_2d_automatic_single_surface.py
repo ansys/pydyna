@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACT2DAUTOMATICSINGLESURFACE_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -70,6 +71,10 @@ class Contact2DAutomaticSingleSurface(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "2D_AUTOMATIC_SINGLE_SURFACE"
+    _link_fields = {
+        "surfa": LinkType.SET_PART,
+        "surfb": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Contact2DAutomaticSingleSurface class."""
@@ -423,4 +428,24 @@ class Contact2DAutomaticSingleSurface(KeywordBase):
     def tdpen(self, value: float) -> None:
         """Set the tdpen property."""
         self._cards[3].set_value("tdpen", value)
+
+    @property
+    def surfa_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for surfa."""
+        return self._get_set_link("PART", self.surfa)
+
+    @surfa_link.setter
+    def surfa_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for surfa."""
+        self.surfa = value.sid
+
+    @property
+    def surfb_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for surfb."""
+        return self._get_set_link("PART", self.surfb)
+
+    @surfb_link.setter
+    def surfb_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for surfb."""
+        self.surfb = value.sid
 

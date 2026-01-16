@@ -61,6 +61,7 @@ class LoadSeismicSsiSetId(KeywordBase):
         "gmy": LinkType.DEFINE_CURVE,
         "gmz": LinkType.DEFINE_CURVE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "typeid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -288,4 +289,14 @@ class LoadSeismicSsiSetId(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def typeid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for typeid."""
+        return self._get_set_link("NODE", self.typeid)
+
+    @typeid_link.setter
+    def typeid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for typeid."""
+        self.typeid = value.sid
 

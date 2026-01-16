@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CESEBOUNDARYCYCLICSET_CARD0 = (
     FieldSchema("ssid1", int, 0, 10, None),
@@ -53,6 +54,10 @@ class CeseBoundaryCyclicSet(KeywordBase):
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_CYCLIC_SET"
+    _link_fields = {
+        "ssid1": LinkType.SET_SEGMENT,
+        "ssid2": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundaryCyclicSet class."""
@@ -214,4 +219,24 @@ class CeseBoundaryCyclicSet(KeywordBase):
     def transz(self, value: float) -> None:
         """Set the transz property."""
         self._cards[2].set_value("transz", value)
+
+    @property
+    def ssid1_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid1."""
+        return self._get_set_link("SEGMENT", self.ssid1)
+
+    @ssid1_link.setter
+    def ssid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid1."""
+        self.ssid1 = value.sid
+
+    @property
+    def ssid2_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid2."""
+        return self._get_set_link("SEGMENT", self.ssid2)
+
+    @ssid2_link.setter
+    def ssid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid2."""
+        self.ssid2 = value.sid
 

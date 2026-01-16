@@ -45,7 +45,6 @@ class IcfdBoundaryPeriodic(KeywordBase):
     subkeyword = "BOUNDARY_PERIODIC"
     _link_fields = {
         "pdlcid": LinkType.DEFINE_CURVE,
-        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -160,9 +159,4 @@ class IcfdBoundaryPeriodic(KeywordBase):
     def pdlcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for pdlcid."""
         self.pdlcid = value.lcid
-
-    @property
-    def pid_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

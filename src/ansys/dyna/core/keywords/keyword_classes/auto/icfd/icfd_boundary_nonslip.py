@@ -28,16 +28,12 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
 class IcfdBoundaryNonslip(KeywordBase):
     """DYNA ICFD_BOUNDARY_NONSLIP keyword"""
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_NONSLIP"
-    _link_fields = {
-        "pid": LinkType.PART,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryNonslip class."""
@@ -60,13 +56,4 @@ class IcfdBoundaryNonslip(KeywordBase):
     def boundaries(self, df: pd.DataFrame):
         """Set boundaries from the dataframe df"""
         self._cards[0].table = df
-
-    @property
-    def pid_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for pid, keyed by pid value."""
-        return self._get_links_from_table("PART", "pid", "boundaries", "pid", "parts")
-
-    def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", pid, "parts")
 

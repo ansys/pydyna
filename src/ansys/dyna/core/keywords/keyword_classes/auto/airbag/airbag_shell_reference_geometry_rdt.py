@@ -48,6 +48,7 @@ class AirbagShellReferenceGeometryRdt(KeywordBase):
         "n3": LinkType.NODE,
         "n4": LinkType.NODE,
         "eid": LinkType.ELEMENT_SHELL,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -148,4 +149,9 @@ class AirbagShellReferenceGeometryRdt(KeywordBase):
     def eid_link(self) -> KeywordBase:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

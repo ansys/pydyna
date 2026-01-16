@@ -88,6 +88,10 @@ class ConstrainedSoilPileCurves(KeywordBase):
         "hlc": LinkType.DEFINE_CURVE,
         "hlcsh": LinkType.DEFINE_CURVE,
         "hlcsv": LinkType.DEFINE_CURVE,
+        "pbsid": LinkType.SET_PART,
+        "pidns": LinkType.PART,
+        "pidnb": LinkType.PART,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -557,4 +561,29 @@ class ConstrainedSoilPileCurves(KeywordBase):
     def hlcsv_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for hlcsv."""
         self.hlcsv = value.lcid
+
+    @property
+    def pbsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pbsid."""
+        return self._get_set_link("PART", self.pbsid)
+
+    @pbsid_link.setter
+    def pbsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pbsid."""
+        self.pbsid = value.sid
+
+    @property
+    def pidns_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidns."""
+        return self._get_link_by_attr("PART", "pid", self.pidns, "parts")
+
+    @property
+    def pidnb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidnb."""
+        return self._get_link_by_attr("PART", "pid", self.pidnb, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

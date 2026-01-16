@@ -52,6 +52,7 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
     _link_fields = {
         "lnid": LinkType.NODE,
         "lcid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -193,4 +194,14 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
     def lcid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for lcid."""
         self.lcid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

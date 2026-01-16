@@ -46,6 +46,8 @@ class ControlFormingAutopositionParameterSet(KeywordBase):
     subkeyword = "FORMING_AUTOPOSITION_PARAMETER_SET"
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psid": LinkType.SET_PART,
+        "mpsid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -165,4 +167,24 @@ class ControlFormingAutopositionParameterSet(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def mpsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for mpsid."""
+        return self._get_set_link("PART", self.mpsid)
+
+    @mpsid_link.setter
+    def mpsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for mpsid."""
+        self.mpsid = value.sid
 

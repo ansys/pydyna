@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFORMINGCLAMP_CARD0 = (
     FieldSchema("clp1", int, 0, 10, None),
@@ -48,6 +49,10 @@ class DefineFormingClamp(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "clp1": LinkType.PART,
+        "clp2": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFormingClamp class."""
@@ -149,4 +154,14 @@ class DefineFormingClamp(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def clp1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given clp1."""
+        return self._get_link_by_attr("PART", "pid", self.clp1, "parts")
+
+    @property
+    def clp2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given clp2."""
+        return self._get_link_by_attr("PART", "pid", self.clp2, "parts")
 

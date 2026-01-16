@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASEBINARYRUNRSF_CARD0 = (
     FieldSchema("cycl", float, 0, 10, None),
@@ -39,6 +40,9 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "BINARY_RUNRSF"
+    _link_fields = {
+        "psetid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryRunrsf class."""
@@ -106,4 +110,14 @@ class DatabaseBinaryRunrsf(KeywordBase):
     def psetid(self, value: int) -> None:
         """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

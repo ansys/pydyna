@@ -69,6 +69,8 @@ class ContactRigidSurface(KeywordBase):
         "fslcid": LinkType.DEFINE_CURVE,
         "fdlcid": LinkType.DEFINE_CURVE,
         "boxid": LinkType.DEFINE_BOX,
+        "psid": LinkType.SET_PART,
+        "segid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -393,4 +395,24 @@ class ContactRigidSurface(KeywordBase):
     def boxid_link(self, value: DefineBox) -> None:
         """Set the DefineBox object for boxid."""
         self.boxid = value.boxid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def segid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segid."""
+        return self._get_set_link("SEGMENT", self.segid)
+
+    @segid_link.setter
+    def segid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segid."""
+        self.segid = value.sid
 

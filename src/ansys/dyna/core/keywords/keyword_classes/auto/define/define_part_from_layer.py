@@ -51,6 +51,10 @@ class DefinePartFromLayer(KeywordBase):
     ]
     _link_fields = {
         "mid": LinkType.MAT,
+        "pid": LinkType.PART,
+        "layer": LinkType.PART,
+        "pidsrc": LinkType.PART,
+        "layold": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -166,4 +170,24 @@ class DefinePartFromLayer(KeywordBase):
     def mid_link(self, value: KeywordBase) -> None:
         """Set the MAT_* keyword for mid."""
         self.mid = value.mid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def layer_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given layer."""
+        return self._get_link_by_attr("PART", "pid", self.layer, "parts")
+
+    @property
+    def pidsrc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidsrc."""
+        return self._get_link_by_attr("PART", "pid", self.pidsrc, "parts")
+
+    @property
+    def layold_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given layold."""
+        return self._get_link_by_attr("PART", "pid", self.layold, "parts")
 

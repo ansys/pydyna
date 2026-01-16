@@ -74,6 +74,7 @@ class ElementSolidH8Toh27OrthoFormat2(KeywordBase):
         "n8": LinkType.NODE,
         "n9": LinkType.NODE,
         "n10": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -340,4 +341,9 @@ class ElementSolidH8Toh27OrthoFormat2(KeywordBase):
     def n10_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n10."""
         return self._get_link_by_attr("NODE", "nid", self.n10, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

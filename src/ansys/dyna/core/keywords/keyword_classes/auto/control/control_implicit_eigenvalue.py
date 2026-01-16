@@ -82,6 +82,10 @@ class ControlImplicitEigenvalue(KeywordBase):
     subkeyword = "IMPLICIT_EIGENVALUE"
     _link_fields = {
         "rparm6": LinkType.DEFINE_VECTOR,
+        "iparm3": LinkType.SET_NODE,
+        "iparm1": LinkType.SET_NODE,
+        "iparm2": LinkType.SET_NODE,
+        "iparm3": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -479,4 +483,44 @@ class ControlImplicitEigenvalue(KeywordBase):
     def rparm6_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for rparm6."""
         self.rparm6 = value.vid
+
+    @property
+    def iparm3_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for iparm3."""
+        return self._get_set_link("NODE", self.iparm3)
+
+    @iparm3_link.setter
+    def iparm3_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for iparm3."""
+        self.iparm3 = value.sid
+
+    @property
+    def iparm1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for iparm1."""
+        return self._get_set_link("NODE", self.iparm1)
+
+    @iparm1_link.setter
+    def iparm1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for iparm1."""
+        self.iparm1 = value.sid
+
+    @property
+    def iparm2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for iparm2."""
+        return self._get_set_link("NODE", self.iparm2)
+
+    @iparm2_link.setter
+    def iparm2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for iparm2."""
+        self.iparm2 = value.sid
+
+    @property
+    def iparm3_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for iparm3."""
+        return self._get_set_link("NODE", self.iparm3)
+
+    @iparm3_link.setter
+    def iparm3_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for iparm3."""
+        self.iparm3 = value.sid
 

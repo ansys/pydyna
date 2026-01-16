@@ -70,6 +70,7 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
         "node1": LinkType.NODE,
         "node2": LinkType.NODE,
         "vid": LinkType.DEFINE_VECTOR,
+        "lrb": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -334,4 +335,9 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def lrb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lrb."""
+        return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

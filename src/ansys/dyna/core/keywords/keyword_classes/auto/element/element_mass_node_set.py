@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ELEMENTMASSNODESET_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -38,6 +39,10 @@ class ElementMassNodeSet(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "MASS_NODE_SET"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementMassNodeSet class."""
@@ -90,4 +95,19 @@ class ElementMassNodeSet(KeywordBase):
     def pid(self, value: int) -> None:
         """Set the pid property."""
         self._cards[0].set_value("pid", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALPWPDEPTHSET_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -36,6 +37,9 @@ class InitialPwpDepthSet(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "PWP_DEPTH_SET"
+    _link_fields = {
+        "pid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialPwpDepthSet class."""
@@ -66,4 +70,14 @@ class InitialPwpDepthSet(KeywordBase):
     def lc(self, value: int) -> None:
         """Set the lc property."""
         self._cards[0].set_value("lc", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
 

@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFORMINGONESTEPMASTER_CARD0 = (
     FieldSchema("slpid", int, 0, 10, None),
@@ -43,6 +44,9 @@ class DefineFormingOnestepMaster(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "slpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFormingOnestepMaster class."""
@@ -87,4 +91,9 @@ class DefineFormingOnestepMaster(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def slpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given slpid."""
+        return self._get_link_by_attr("PART", "pid", self.slpid, "parts")
 

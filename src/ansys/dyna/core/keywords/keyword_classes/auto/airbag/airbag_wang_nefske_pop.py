@@ -117,6 +117,7 @@ class AirbagWangNefskePop(KeywordBase):
         "lcefr": LinkType.DEFINE_CURVE,
         "knkdn": LinkType.DEFINE_CURVE,
         "lcbf": LinkType.DEFINE_CURVE,
+        "rbidp": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -888,4 +889,9 @@ class AirbagWangNefskePop(KeywordBase):
     def lcbf_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcbf."""
         self.lcbf = value.lcid
+
+    @property
+    def rbidp_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rbidp."""
+        return self._get_link_by_attr("PART", "pid", self.rbidp, "parts")
 

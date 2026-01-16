@@ -61,6 +61,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
         "n1trgt": LinkType.NODE,
         "n2trgt": LinkType.NODE,
         "n3trgt": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -247,4 +248,9 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     def n3trgt_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n3trgt."""
         return self._get_link_by_attr("NODE", "nid", self.n3trgt, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

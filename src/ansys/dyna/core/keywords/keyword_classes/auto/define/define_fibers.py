@@ -70,6 +70,7 @@ class DefineFibers(KeywordBase):
     _link_fields = {
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
+        "idp": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -326,4 +327,9 @@ class DefineFibers(KeywordBase):
     def n2_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def idp_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idp."""
+        return self._get_link_by_attr("PART", "pid", self.idp, "parts")
 

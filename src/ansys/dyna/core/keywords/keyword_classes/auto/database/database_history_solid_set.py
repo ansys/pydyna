@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASEHISTORYSOLIDSET_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
@@ -42,6 +43,16 @@ class DatabaseHistorySolidSet(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "HISTORY_SOLID_SET"
+    _link_fields = {
+        "id1": LinkType.SET_SOLID,
+        "id2": LinkType.SET_SOLID,
+        "id3": LinkType.SET_SOLID,
+        "id4": LinkType.SET_SOLID,
+        "id5": LinkType.SET_SOLID,
+        "id6": LinkType.SET_SOLID,
+        "id7": LinkType.SET_SOLID,
+        "id8": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseHistorySolidSet class."""
@@ -138,4 +149,84 @@ class DatabaseHistorySolidSet(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id1."""
+        return self._get_set_link("SOLID", self.id1)
+
+    @id1_link.setter
+    def id1_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id1."""
+        self.id1 = value.sid
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id2."""
+        return self._get_set_link("SOLID", self.id2)
+
+    @id2_link.setter
+    def id2_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id2."""
+        self.id2 = value.sid
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id3."""
+        return self._get_set_link("SOLID", self.id3)
+
+    @id3_link.setter
+    def id3_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id3."""
+        self.id3 = value.sid
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id4."""
+        return self._get_set_link("SOLID", self.id4)
+
+    @id4_link.setter
+    def id4_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id4."""
+        self.id4 = value.sid
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id5."""
+        return self._get_set_link("SOLID", self.id5)
+
+    @id5_link.setter
+    def id5_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id5."""
+        self.id5 = value.sid
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id6."""
+        return self._get_set_link("SOLID", self.id6)
+
+    @id6_link.setter
+    def id6_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id6."""
+        self.id6 = value.sid
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id7."""
+        return self._get_set_link("SOLID", self.id7)
+
+    @id7_link.setter
+    def id7_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id7."""
+        self.id7 = value.sid
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for id8."""
+        return self._get_set_link("SOLID", self.id8)
+
+    @id8_link.setter
+    def id8_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for id8."""
+        self.id8 = value.sid
 

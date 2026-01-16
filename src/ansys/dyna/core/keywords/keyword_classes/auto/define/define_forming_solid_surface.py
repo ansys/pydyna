@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFORMINGSOLIDSURFACE_CARD0 = (
     FieldSchema("spid", int, 0, 10, None),
@@ -45,6 +46,10 @@ class DefineFormingSolidSurface(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "ssetlow": LinkType.SET_SEGMENT,
+        "ssetupp": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFormingSolidSurface class."""
@@ -111,4 +116,24 @@ class DefineFormingSolidSurface(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def ssetlow_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssetlow."""
+        return self._get_set_link("SEGMENT", self.ssetlow)
+
+    @ssetlow_link.setter
+    def ssetlow_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssetlow."""
+        self.ssetlow = value.sid
+
+    @property
+    def ssetupp_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssetupp."""
+        return self._get_set_link("SEGMENT", self.ssetupp)
+
+    @ssetupp_link.setter
+    def ssetupp_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssetupp."""
+        self.ssetupp = value.sid
 
