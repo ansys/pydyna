@@ -55,6 +55,7 @@ class ElementInterpolationShell(KeywordBase):
         "ip2": LinkType.NODE,
         "ip3": LinkType.NODE,
         "ip4": LinkType.NODE,
+        "eids": LinkType.ELEMENT_SHELL,
     }
 
     def __init__(self, **kwargs):
@@ -210,4 +211,9 @@ class ElementInterpolationShell(KeywordBase):
     def ip4_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given ip4."""
         return self._get_link_by_attr("NODE", "nid", self.ip4, "parts")
+
+    @property
+    def eids_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eids."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eids, "parts")
 

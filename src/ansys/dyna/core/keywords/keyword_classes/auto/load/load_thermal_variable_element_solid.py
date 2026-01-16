@@ -41,6 +41,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_ELEMENT_SOLID"
     _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
         "lcid": LinkType.DEFINE_CURVE,
     }
 
@@ -95,6 +96,11 @@ class LoadThermalVariableElementSolid(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
     def lcid_link(self) -> DefineCurve:

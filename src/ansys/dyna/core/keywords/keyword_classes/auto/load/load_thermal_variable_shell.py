@@ -47,6 +47,7 @@ class LoadThermalVariableShell(KeywordBase):
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_SHELL"
     _link_fields = {
+        "eid": LinkType.ELEMENT_SHELL,
         "tcurve": LinkType.DEFINE_CURVE,
         "tcurdr": LinkType.DEFINE_CURVE,
     }
@@ -138,6 +139,11 @@ class LoadThermalVariableShell(KeywordBase):
     def zco(self, value: float) -> None:
         """Set the zco property."""
         self._cards[1].set_value("zco", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
     def tcurve_link(self) -> DefineCurve:

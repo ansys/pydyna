@@ -341,6 +341,9 @@ class LinkIdentity:
     """
 
     NODE = 1
+    ELEMENT_BEAM = 3
+    ELEMENT_SHELL = 4
+    ELEMENT_SOLID = 5
     MAT = 14
     SECTION = 15
     HOURGLASS = 17
@@ -496,9 +499,60 @@ def _add_define_vector_link_data(link_data: typing.List[typing.Dict], link_field
     link_data.append(define_vector_link_data)
 
 
+def _add_element_beam_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_BEAM keywords."""
+    element_beam_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "BEAM",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_BEAM",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+    }
+    link_data.append(element_beam_link_data)
+
+
+def _add_element_shell_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_SHELL keywords."""
+    element_shell_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "SHELL",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_SHELL",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+    }
+    link_data.append(element_shell_link_data)
+
+
+def _add_element_solid_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_SOLID keywords."""
+    element_solid_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "SOLID",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_SOLID",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+    }
+    link_data.append(element_solid_link_data)
+
+
 def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {
         LinkIdentity.NODE: [],
+        LinkIdentity.ELEMENT_BEAM: [],
+        LinkIdentity.ELEMENT_SHELL: [],
+        LinkIdentity.ELEMENT_SOLID: [],
         LinkIdentity.MAT: [],
         LinkIdentity.SECTION: [],
         LinkIdentity.HOURGLASS: [],
@@ -561,6 +615,15 @@ def _add_links(kwd_data: KeywordData) -> None:
             continue
         if link_type == LinkIdentity.NODE:
             _add_node_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_BEAM:
+            _add_element_beam_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_SHELL:
+            _add_element_shell_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_SOLID:
+            _add_element_solid_link_data(link_data, link_fields)
             link_count += len(link_fields)
         elif link_type == LinkIdentity.MAT:
             _add_mat_link_data(link_data, link_fields)

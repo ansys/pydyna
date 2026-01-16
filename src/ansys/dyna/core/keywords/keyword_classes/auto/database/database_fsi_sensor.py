@@ -53,6 +53,7 @@ class DatabaseFsiSensor(KeywordBase):
         "nd1": LinkType.NODE,
         "nd2": LinkType.NODE,
         "nd3": LinkType.NODE,
+        "segmid": LinkType.ELEMENT_SHELL,
     }
 
     def __init__(self, **kwargs):
@@ -199,4 +200,9 @@ class DatabaseFsiSensor(KeywordBase):
     def nd3_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given nd3."""
         return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
+
+    @property
+    def segmid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given segmid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.segmid, "parts")
 

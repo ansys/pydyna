@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALVOLUMEFRACTION_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
@@ -42,6 +43,9 @@ class InitialVolumeFraction(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "VOLUME_FRACTION"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVolumeFraction class."""
@@ -140,4 +144,9 @@ class InitialVolumeFraction(KeywordBase):
     def vf7(self, value: float) -> None:
         """Set the vf7 property."""
         self._cards[0].set_value("vf7", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

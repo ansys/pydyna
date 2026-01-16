@@ -46,6 +46,7 @@ class LoadShellElement(KeywordBase):
     keyword = "LOAD"
     subkeyword = "SHELL_ELEMENT"
     _link_fields = {
+        "eid": LinkType.ELEMENT_SHELL,
         "lcid": LinkType.DEFINE_CURVE,
     }
 
@@ -125,6 +126,11 @@ class LoadShellElement(KeywordBase):
     def at(self, value: float) -> None:
         """Set the at property."""
         self._cards[1].set_value("at", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
     def lcid_link(self) -> DefineCurve:

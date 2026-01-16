@@ -49,6 +49,7 @@ class LoadThermalVariableBeam(KeywordBase):
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_BEAM"
     _link_fields = {
+        "eid": LinkType.ELEMENT_BEAM,
         "tcurve": LinkType.DEFINE_CURVE,
         "tcurdr": LinkType.DEFINE_CURVE,
     }
@@ -162,6 +163,11 @@ class LoadThermalVariableBeam(KeywordBase):
     def tcoor(self, value: float) -> None:
         """Set the tcoor property."""
         self._cards[1].set_value("tcoor", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
     def tcurve_link(self) -> DefineCurve:

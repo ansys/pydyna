@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALSTRESSBEAM_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
@@ -122,6 +123,9 @@ class InitialStressBeam(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "STRESS_BEAM"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressBeam class."""
@@ -815,4 +819,9 @@ class InitialStressBeam(KeywordBase):
     def ax12(self, value: float) -> None:
         """Set the ax12 property."""
         self._cards[10].set_value("ax12", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

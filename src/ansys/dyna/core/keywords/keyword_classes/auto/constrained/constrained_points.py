@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDPOINTS_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
@@ -56,6 +57,10 @@ class ConstrainedPoints(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "POINTS"
+    _link_fields = {
+        "eid1": LinkType.ELEMENT_SHELL,
+        "eid2": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedPoints class."""
@@ -216,4 +221,14 @@ class ConstrainedPoints(KeywordBase):
     def failm(self, value: float) -> None:
         """Set the failm property."""
         self._cards[3].set_value("failm", value)
+
+    @property
+    def eid1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
+
+    @property
+    def eid2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
 

@@ -36,6 +36,9 @@ class TestLinkTypeEnum:
         """Test that LinkType enum has expected values."""
         assert LinkType.ALL.value == 0
         assert LinkType.NODE.value == 1
+        assert LinkType.ELEMENT_BEAM.value == 3
+        assert LinkType.ELEMENT_SHELL.value == 4
+        assert LinkType.ELEMENT_SOLID.value == 5
         assert LinkType.MAT.value == 14
         assert LinkType.SECTION.value == 15
         assert LinkType.HOURGLASS.value == 17
@@ -52,6 +55,9 @@ class TestLinkTypeEnum:
         members = [m.name for m in LinkType]
         assert "ALL" in members
         assert "NODE" in members
+        assert "ELEMENT_BEAM" in members
+        assert "ELEMENT_SHELL" in members
+        assert "ELEMENT_SOLID" in members
         assert "MAT" in members
         assert "SECTION" in members
         assert "HOURGLASS" in members
@@ -1251,3 +1257,39 @@ class TestDefineVectorLinks:
     def test_define_vector_link_type_in_enum(self):
         """Test that DEFINE_VECTOR is a member of LinkType enum."""
         assert hasattr(LinkType, "DEFINE_VECTOR")
+
+
+class TestElementBeamLinks:
+    """Tests for ELEMENT_BEAM links (link type 3)."""
+
+    def test_element_beam_link_type_value(self):
+        """Test that ELEMENT_BEAM link type has correct value."""
+        assert LinkType.ELEMENT_BEAM.value == 3
+
+    def test_element_beam_link_type_in_enum(self):
+        """Test that ELEMENT_BEAM is a member of LinkType enum."""
+        assert hasattr(LinkType, "ELEMENT_BEAM")
+
+
+class TestElementShellLinks:
+    """Tests for ELEMENT_SHELL links (link type 4)."""
+
+    def test_element_shell_link_type_value(self):
+        """Test that ELEMENT_SHELL link type has correct value."""
+        assert LinkType.ELEMENT_SHELL.value == 4
+
+    def test_element_shell_link_type_in_enum(self):
+        """Test that ELEMENT_SHELL is a member of LinkType enum."""
+        assert hasattr(LinkType, "ELEMENT_SHELL")
+
+
+class TestElementSolidLinks:
+    """Tests for ELEMENT_SOLID links (link type 5)."""
+
+    def test_element_solid_link_type_value(self):
+        """Test that ELEMENT_SOLID link type has correct value."""
+        assert LinkType.ELEMENT_SOLID.value == 5
+
+    def test_element_solid_link_type_in_enum(self):
+        """Test that ELEMENT_SOLID is a member of LinkType enum."""
+        assert hasattr(LinkType, "ELEMENT_SOLID")

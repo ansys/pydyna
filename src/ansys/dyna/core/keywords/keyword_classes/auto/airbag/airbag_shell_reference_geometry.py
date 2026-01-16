@@ -47,6 +47,7 @@ class AirbagShellReferenceGeometry(KeywordBase):
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
         "n4": LinkType.NODE,
+        "eid": LinkType.ELEMENT_SHELL,
     }
 
     def __init__(self, **kwargs):
@@ -142,4 +143,9 @@ class AirbagShellReferenceGeometry(KeywordBase):
     def n4_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

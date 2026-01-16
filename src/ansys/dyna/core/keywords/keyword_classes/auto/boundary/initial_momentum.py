@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALMOMENTUM_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
@@ -39,6 +40,9 @@ class InitialMomentum(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "MOMENTUM"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialMomentum class."""
@@ -102,4 +106,9 @@ class InitialMomentum(KeywordBase):
     def dept(self, value: float) -> None:
         """Set the dept property."""
         self._cards[0].set_value("dept", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
