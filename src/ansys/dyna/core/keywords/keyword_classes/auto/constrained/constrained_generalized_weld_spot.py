@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDGENERALIZEDWELDSPOT_CARD0 = (
     FieldSchema("wid", int, 0, 10, None),
@@ -53,6 +55,9 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "GENERALIZED_WELD_SPOT"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedGeneralizedWeldSpot class."""
@@ -218,4 +223,19 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
     def m(self, value: float) -> None:
         """Set the m property."""
         self._cards[2].set_value("m", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

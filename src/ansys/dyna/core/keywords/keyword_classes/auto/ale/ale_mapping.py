@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _ALEMAPPING_CARD0 = (
     FieldSchema("ammsid", int, 0, 10, None),
@@ -67,6 +69,10 @@ class AleMapping(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "MAPPING"
+    _link_fields = {
+        "vecid": LinkType.DEFINE_VECTOR,
+        "vecid1": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleMapping class."""
@@ -362,4 +368,34 @@ class AleMapping(KeywordBase):
     def dv2(self, value: float) -> None:
         """Set the dv2 property."""
         self._cards[4].set_value("dv2", value)
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
+
+    @property
+    def vecid1_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid1:
+                return kwd
+        return None
+
+    @vecid1_link.setter
+    def vecid1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid1."""
+        self.vecid1 = value.vid
 

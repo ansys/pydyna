@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
 
 _PARTCOMPOSITEIGASHELL_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -61,6 +62,7 @@ class PartCompositeIgaShell(KeywordBase):
     _link_fields = {
         "mid1": LinkType.MAT,
         "mid2": LinkType.MAT,
+        "irl": LinkType.HOURGLASS,
     }
 
     def __init__(self, **kwargs):
@@ -269,4 +271,19 @@ class PartCompositeIgaShell(KeywordBase):
     def mid2_link(self, value: KeywordBase) -> None:
         """Set the MAT_* keyword for mid2."""
         self.mid2 = value.mid
+
+    @property
+    def irl_link(self) -> Hourglass:
+        """Get the Hourglass object for irl."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.irl:
+                return kwd
+        return None
+
+    @irl_link.setter
+    def irl_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for irl."""
+        self.irl = value.hgid
 

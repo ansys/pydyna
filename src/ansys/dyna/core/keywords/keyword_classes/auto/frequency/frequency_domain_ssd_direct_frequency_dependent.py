@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _FREQUENCYDOMAINSSDDIRECTFREQUENCYDEPENDENT_CARD0 = (
     FieldSchema("mdmin", int, 0, 10, 1),
@@ -79,6 +80,7 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
         "lcdam": LinkType.DEFINE_CURVE,
         "lc1": LinkType.DEFINE_CURVE,
         "lc2": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -532,4 +534,19 @@ class FrequencyDomainSsdDirectFrequencyDependent(KeywordBase):
     def lc2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc2."""
         self.lc2 = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

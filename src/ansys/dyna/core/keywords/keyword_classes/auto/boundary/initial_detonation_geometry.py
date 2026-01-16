@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _INITIALDETONATIONGEOMETRY_CARD0 = (
     FieldSchema("heid", int, 0, 10, None),
@@ -50,6 +52,12 @@ class InitialDetonationGeometry(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "DETONATION_GEOMETRY"
+    _link_fields = {
+        "v1": LinkType.DEFINE_VECTOR,
+        "v2": LinkType.DEFINE_VECTOR,
+        "v3": LinkType.DEFINE_VECTOR,
+        "v4": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialDetonationGeometry class."""
@@ -180,4 +188,64 @@ class InitialDetonationGeometry(KeywordBase):
     def v4(self, value: int) -> None:
         """Set the v4 property."""
         self._cards[2].set_value("v4", value)
+
+    @property
+    def v1_link(self) -> DefineVector:
+        """Get the DefineVector object for v1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.v1:
+                return kwd
+        return None
+
+    @v1_link.setter
+    def v1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for v1."""
+        self.v1 = value.vid
+
+    @property
+    def v2_link(self) -> DefineVector:
+        """Get the DefineVector object for v2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.v2:
+                return kwd
+        return None
+
+    @v2_link.setter
+    def v2_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for v2."""
+        self.v2 = value.vid
+
+    @property
+    def v3_link(self) -> DefineVector:
+        """Get the DefineVector object for v3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.v3:
+                return kwd
+        return None
+
+    @v3_link.setter
+    def v3_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for v3."""
+        self.v3 = value.vid
+
+    @property
+    def v4_link(self) -> DefineVector:
+        """Get the DefineVector object for v4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.v4:
+                return kwd
+        return None
+
+    @v4_link.setter
+    def v4_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for v4."""
+        self.v4 = value.vid
 

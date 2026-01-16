@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0 = (
     FieldSchema("wid", int, 0, 10, None),
@@ -61,6 +64,12 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "GENERALIZED_WELD_CROSS_FILLET"
+    _link_fields = {
+        "nodea": LinkType.NODE,
+        "nodeb": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ncid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedGeneralizedWeldCrossFillet class."""
@@ -284,4 +293,44 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
     def ncid(self, value: int) -> None:
         """Set the ncid property."""
         self._cards[3].set_value("ncid", value)
+
+    @property
+    def nodea_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodea."""
+        return self._get_link_by_attr("NODE", "nid", self.nodea, "parts")
+
+    @property
+    def nodeb_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeb."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeb, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def ncid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for ncid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.ncid:
+                return kwd
+        return None
+
+    @ncid_link.setter
+    def ncid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for ncid."""
+        self.ncid = value.cid
 

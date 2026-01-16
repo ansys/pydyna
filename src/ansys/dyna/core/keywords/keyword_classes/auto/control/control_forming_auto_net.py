@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _CONTROLFORMINGAUTONET_CARD0 = (
     FieldSchema("idnet", int, 0, 10, None),
@@ -47,6 +49,9 @@ class ControlFormingAutoNet(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_AUTO_NET"
+    _link_fields = {
+        "idv": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingAutoNet class."""
@@ -170,4 +175,19 @@ class ControlFormingAutoNet(KeywordBase):
     def offset(self, value: float) -> None:
         """Set the offset property."""
         self._cards[1].set_value("offset", value)
+
+    @property
+    def idv_link(self) -> DefineVector:
+        """Get the DefineVector object for idv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.idv:
+                return kwd
+        return None
+
+    @idv_link.setter
+    def idv_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for idv."""
+        self.idv = value.vid
 

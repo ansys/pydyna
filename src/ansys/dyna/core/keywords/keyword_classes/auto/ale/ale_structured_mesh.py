@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _ALESTRUCTUREDMESH_CARD0 = (
     FieldSchema("mshid", int, 0, 10, 0),
@@ -50,6 +53,10 @@ class AleStructuredMesh(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "STRUCTURED_MESH"
+    _link_fields = {
+        "nid0": LinkType.NODE,
+        "lcsid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleStructuredMesh class."""
@@ -177,4 +184,24 @@ class AleStructuredMesh(KeywordBase):
     def lcsid(self, value: int) -> None:
         """Set the lcsid property."""
         self._cards[1].set_value("lcsid", value)
+
+    @property
+    def nid0_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid0."""
+        return self._get_link_by_attr("NODE", "nid", self.nid0, "parts")
+
+    @property
+    def lcsid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for lcsid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.lcsid:
+                return kwd
+        return None
+
+    @lcsid_link.setter
+    def lcsid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for lcsid."""
+        self.lcsid = value.cid
 

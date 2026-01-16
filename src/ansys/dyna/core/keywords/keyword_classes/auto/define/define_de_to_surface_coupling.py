@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _DEFINEDETOSURFACECOUPLING_CARD0 = (
     FieldSchema("slave", int, 0, 10, None),
@@ -85,6 +86,7 @@ class DefineDeToSurfaceCoupling(KeywordBase):
         "lcvx": LinkType.DEFINE_CURVE,
         "lcvy": LinkType.DEFINE_CURVE,
         "lcvz": LinkType.DEFINE_CURVE,
+        "cid_rcf": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -457,4 +459,19 @@ class DefineDeToSurfaceCoupling(KeywordBase):
     def lcvz_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcvz."""
         self.lcvz = value.lcid
+
+    @property
+    def cid_rcf_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid_rcf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid_rcf:
+                return kwd
+        return None
+
+    @cid_rcf_link.setter
+    def cid_rcf_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid_rcf."""
+        self.cid_rcf = value.cid
 

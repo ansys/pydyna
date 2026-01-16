@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INCLUDESTAMPEDPARTSET_CARD0 = (
     FieldSchema("filename", str, 0, 80, None),
@@ -81,6 +83,14 @@ class IncludeStampedPartSet(KeywordBase):
 
     keyword = "INCLUDE"
     subkeyword = "STAMPED_PART_SET"
+    _link_fields = {
+        "n1s": LinkType.NODE,
+        "n2s": LinkType.NODE,
+        "n3s": LinkType.NODE,
+        "n1c": LinkType.NODE,
+        "n2c": LinkType.NODE,
+        "n3c": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeStampedPartSet class."""
@@ -478,4 +488,34 @@ class IncludeStampedPartSet(KeywordBase):
     def z03(self, value: float) -> None:
         """Set the z03 property."""
         self._cards[5].set_value("z03", value)
+
+    @property
+    def n1s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1s."""
+        return self._get_link_by_attr("NODE", "nid", self.n1s, "parts")
+
+    @property
+    def n2s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2s."""
+        return self._get_link_by_attr("NODE", "nid", self.n2s, "parts")
+
+    @property
+    def n3s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3s."""
+        return self._get_link_by_attr("NODE", "nid", self.n3s, "parts")
+
+    @property
+    def n1c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1c."""
+        return self._get_link_by_attr("NODE", "nid", self.n1c, "parts")
+
+    @property
+    def n2c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2c."""
+        return self._get_link_by_attr("NODE", "nid", self.n2c, "parts")
+
+    @property
+    def n3c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3c."""
+        return self._get_link_by_attr("NODE", "nid", self.n3c, "parts")
 

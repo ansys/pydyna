@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADPYROACTUATOR_CARD0 = (
@@ -52,6 +53,8 @@ class LoadPyroActuator(KeywordBase):
     keyword = "LOAD"
     subkeyword = "PYRO_ACTUATOR"
     _link_fields = {
+        "id1": LinkType.NODE,
+        "id2": LinkType.NODE,
         "mcid": LinkType.DEFINE_CURVE,
     }
 
@@ -200,6 +203,16 @@ class LoadPyroActuator(KeywordBase):
     def temp(self, value: float) -> None:
         """Set the temp property."""
         self._cards[1].set_value("temp", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id1."""
+        return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id2."""
+        return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
 
     @property
     def mcid_link(self) -> DefineCurve:

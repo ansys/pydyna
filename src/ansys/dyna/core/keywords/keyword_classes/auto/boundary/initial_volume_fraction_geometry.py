@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _INITIALVOLUMEFRACTIONGEOMETRY_CARD0 = (
     FieldSchema("fmsid", int, 0, 10, None),
@@ -115,6 +117,9 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "VOLUME_FRACTION_GEOMETRY"
+    _link_fields = {
+        "lcsid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVolumeFractionGeometry class."""
@@ -638,4 +643,19 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def r0(self, value: float) -> None:
         """Set the r0 property."""
         self._cards[7].set_value("r0", value)
+
+    @property
+    def lcsid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for lcsid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.lcsid:
+                return kwd
+        return None
+
+    @lcsid_link.setter
+    def lcsid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for lcsid."""
+        self.lcsid = value.cid
 

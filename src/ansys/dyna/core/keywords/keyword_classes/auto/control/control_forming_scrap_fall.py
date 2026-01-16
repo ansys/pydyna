@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _CONTROLFORMINGSCRAPFALL_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -57,6 +59,9 @@ class ControlFormingScrapFall(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_SCRAP_FALL"
+    _link_fields = {
+        "vectid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingScrapFall class."""
@@ -264,4 +269,19 @@ class ControlFormingScrapFall(KeywordBase):
     def newid(self, value: int) -> None:
         """Set the newid property."""
         self._cards[2].set_value("newid", value)
+
+    @property
+    def vectid_link(self) -> DefineVector:
+        """Get the DefineVector object for vectid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vectid:
+                return kwd
+        return None
+
+    @vectid_link.setter
+    def vectid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vectid."""
+        self.vectid = value.vid
 

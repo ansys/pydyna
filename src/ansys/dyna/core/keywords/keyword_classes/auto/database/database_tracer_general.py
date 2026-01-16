@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DATABASETRACERGENERAL_CARD0 = (
     FieldSchema("node", int, 0, 10, 0),
@@ -52,6 +54,9 @@ class DatabaseTracerGeneral(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "TRACER_GENERAL"
+    _link_fields = {
+        "node": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseTracerGeneral class."""
@@ -240,4 +245,9 @@ class DatabaseTracerGeneral(KeywordBase):
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""varepl must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("varepl", value)
+
+    @property
+    def node_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node."""
+        return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 

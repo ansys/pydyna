@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDFEMPERITIEBREAK_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
@@ -39,6 +41,9 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "FEM_PERI_TIE_BREAK"
+    _link_fields = {
+        "ft": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedFemPeriTieBreak class."""
@@ -102,4 +107,19 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
     def fs(self, value: int) -> None:
         """Set the fs property."""
         self._cards[0].set_value("fs", value)
+
+    @property
+    def ft_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for ft."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.ft:
+                return kwd
+        return None
+
+    @ft_link.setter
+    def ft_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for ft."""
+        self.ft = value.cid
 

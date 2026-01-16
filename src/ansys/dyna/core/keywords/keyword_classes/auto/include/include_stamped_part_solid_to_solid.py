@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0 = (
     FieldSchema("filename", str, 0, 256, None),
@@ -52,6 +54,14 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     keyword = "INCLUDE"
     subkeyword = "STAMPED_PART_SOLID_TO_SOLID"
+    _link_fields = {
+        "n1sorc": LinkType.NODE,
+        "n2sorc": LinkType.NODE,
+        "n3sorc": LinkType.NODE,
+        "n1trgt": LinkType.NODE,
+        "n2trgt": LinkType.NODE,
+        "n3trgt": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeStampedPartSolidToSolid class."""
@@ -207,4 +217,34 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     def n3trgt(self, value: int) -> None:
         """Set the n3trgt property."""
         self._cards[2].set_value("n3trgt", value)
+
+    @property
+    def n1sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n1sorc, "parts")
+
+    @property
+    def n2sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n2sorc, "parts")
+
+    @property
+    def n3sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n3sorc, "parts")
+
+    @property
+    def n1trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n1trgt, "parts")
+
+    @property
+    def n2trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n2trgt, "parts")
+
+    @property
+    def n3trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n3trgt, "parts")
 

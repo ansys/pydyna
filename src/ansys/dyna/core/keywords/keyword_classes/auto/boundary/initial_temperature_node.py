@@ -28,12 +28,17 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 class InitialTemperatureNode(KeywordBase):
     """DYNA INITIAL_TEMPERATURE_NODE keyword"""
 
     keyword = "INITIAL"
     subkeyword = "TEMPERATURE_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialTemperatureNode class."""
@@ -58,4 +63,13 @@ class InitialTemperatureNode(KeywordBase):
     def nodes(self, df: pd.DataFrame):
         """Set nodes from the dataframe df"""
         self._cards[0].table = df
+
+    @property
+    def nid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid, keyed by nid value."""
+        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "parts")
+
+    def get_nid_link(self, nid: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", nid, "parts")
 

@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _LOADVOLUMELOSS_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
@@ -46,6 +47,7 @@ class LoadVolumeLoss(KeywordBase):
     subkeyword = "VOLUME_LOSS"
     _link_fields = {
         "lcur": LinkType.DEFINE_CURVE,
+        "coord": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -158,4 +160,19 @@ class LoadVolumeLoss(KeywordBase):
     def lcur_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcur."""
         self.lcur = value.lcid
+
+    @property
+    def coord_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for coord."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.coord:
+                return kwd
+        return None
+
+    @coord_link.setter
+    def coord_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for coord."""
+        self.coord = value.cid
 

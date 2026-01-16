@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD0 = (
     FieldSchema("typeid", int, 0, 10, None),
@@ -55,6 +58,13 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET_LINE"
+    _link_fields = {
+        "node1": LinkType.NODE,
+        "node2": LinkType.NODE,
+        "nbeg": LinkType.NODE,
+        "nend": LinkType.NODE,
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedMotionSetLine class."""
@@ -265,4 +275,39 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
     def nend(self, value: int) -> None:
         """Set the nend property."""
         self._cards[2].set_value("nend", value)
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node1."""
+        return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node2."""
+        return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
+
+    @property
+    def nbeg_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nbeg."""
+        return self._get_link_by_attr("NODE", "nid", self.nbeg, "parts")
+
+    @property
+    def nend_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nend."""
+        return self._get_link_by_attr("NODE", "nid", self.nend, "parts")
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

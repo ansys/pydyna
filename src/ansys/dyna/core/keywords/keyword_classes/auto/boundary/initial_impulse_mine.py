@@ -25,6 +25,9 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _INITIALIMPULSEMINE_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
@@ -53,6 +56,10 @@ class InitialImpulseMine(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "IMPULSE_MINE"
+    _link_fields = {
+        "nidmc": LinkType.NODE,
+        "gvid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialImpulseMine class."""
@@ -239,4 +246,24 @@ class InitialImpulseMine(KeywordBase):
     def search(self, value: float) -> None:
         """Set the search property."""
         self._cards[1].set_value("search", value)
+
+    @property
+    def nidmc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidmc."""
+        return self._get_link_by_attr("NODE", "nid", self.nidmc, "parts")
+
+    @property
+    def gvid_link(self) -> DefineVector:
+        """Get the DefineVector object for gvid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.gvid:
+                return kwd
+        return None
+
+    @gvid_link.setter
+    def gvid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for gvid."""
+        self.gvid = value.vid
 

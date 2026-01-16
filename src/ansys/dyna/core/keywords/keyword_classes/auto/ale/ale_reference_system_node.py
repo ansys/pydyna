@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ALEREFERENCESYSTEMNODE_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -53,6 +55,20 @@ class AleReferenceSystemNode(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "REFERENCE_SYSTEM_NODE"
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+        "nid4": LinkType.NODE,
+        "nid5": LinkType.NODE,
+        "nid6": LinkType.NODE,
+        "nid7": LinkType.NODE,
+        "nid8": LinkType.NODE,
+        "nid9": LinkType.NODE,
+        "nid10": LinkType.NODE,
+        "nid11": LinkType.NODE,
+        "nid12": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleReferenceSystemNode class."""
@@ -210,4 +226,64 @@ class AleReferenceSystemNode(KeywordBase):
     def nid12(self, value: int) -> None:
         """Set the nid12 property."""
         self._cards[2].set_value("nid12", value)
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
+
+    @property
+    def nid4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid4."""
+        return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
+
+    @property
+    def nid5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid5."""
+        return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
+
+    @property
+    def nid6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid6."""
+        return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
+
+    @property
+    def nid7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid7."""
+        return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
+
+    @property
+    def nid8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid8."""
+        return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
+
+    @property
+    def nid9_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid9."""
+        return self._get_link_by_attr("NODE", "nid", self.nid9, "parts")
+
+    @property
+    def nid10_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid10."""
+        return self._get_link_by_attr("NODE", "nid", self.nid10, "parts")
+
+    @property
+    def nid11_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid11."""
+        return self._get_link_by_attr("NODE", "nid", self.nid11, "parts")
+
+    @property
+    def nid12_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid12."""
+        return self._get_link_by_attr("NODE", "nid", self.nid12, "parts")
 

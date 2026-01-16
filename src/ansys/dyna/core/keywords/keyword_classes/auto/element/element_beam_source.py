@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTBEAMSOURCE_CARD0 = (
     FieldSchema("bsid", int, 0, 10, 0),
@@ -41,6 +43,9 @@ class ElementBeamSource(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_SOURCE"
+    _link_fields = {
+        "bsnid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamSource class."""
@@ -126,4 +131,9 @@ class ElementBeamSource(KeywordBase):
     def lmin(self, value: float) -> None:
         """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
+
+    @property
+    def bsnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given bsnid."""
+        return self._get_link_by_attr("NODE", "nid", self.bsnid, "parts")
 

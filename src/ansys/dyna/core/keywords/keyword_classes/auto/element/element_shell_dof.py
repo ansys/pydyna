@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _ELEMENTSHELLDOF_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -53,6 +55,20 @@ class ElementShellDof(KeywordBase):
 
     keyword = "ELEMENT"
     subkeyword = "SHELL_DOF"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "ns1": LinkType.NODE,
+        "ns2": LinkType.NODE,
+        "ns3": LinkType.NODE,
+        "ns4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementShellDof class."""
@@ -218,4 +234,64 @@ class ElementShellDof(KeywordBase):
     def ns4(self, value: int) -> None:
         """Set the ns4 property."""
         self._cards[1].set_value("ns4", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def ns1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns1."""
+        return self._get_link_by_attr("NODE", "nid", self.ns1, "parts")
+
+    @property
+    def ns2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns2."""
+        return self._get_link_by_attr("NODE", "nid", self.ns2, "parts")
+
+    @property
+    def ns3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns3."""
+        return self._get_link_by_attr("NODE", "nid", self.ns3, "parts")
+
+    @property
+    def ns4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns4."""
+        return self._get_link_by_attr("NODE", "nid", self.ns4, "parts")
 

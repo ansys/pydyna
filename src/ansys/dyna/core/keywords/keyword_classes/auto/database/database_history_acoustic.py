@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DATABASEHISTORYACOUSTIC_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
@@ -42,6 +44,16 @@ class DatabaseHistoryAcoustic(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "HISTORY_ACOUSTIC"
+    _link_fields = {
+        "id1": LinkType.NODE,
+        "id2": LinkType.NODE,
+        "id3": LinkType.NODE,
+        "id4": LinkType.NODE,
+        "id5": LinkType.NODE,
+        "id6": LinkType.NODE,
+        "id7": LinkType.NODE,
+        "id8": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseHistoryAcoustic class."""
@@ -138,4 +150,44 @@ class DatabaseHistoryAcoustic(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id1."""
+        return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id2."""
+        return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id3."""
+        return self._get_link_by_attr("NODE", "nid", self.id3, "parts")
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id4."""
+        return self._get_link_by_attr("NODE", "nid", self.id4, "parts")
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id5."""
+        return self._get_link_by_attr("NODE", "nid", self.id5, "parts")
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id6."""
+        return self._get_link_by_attr("NODE", "nid", self.id6, "parts")
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id7."""
+        return self._get_link_by_attr("NODE", "nid", self.id7, "parts")
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id8."""
+        return self._get_link_by_attr("NODE", "nid", self.id8, "parts")
 

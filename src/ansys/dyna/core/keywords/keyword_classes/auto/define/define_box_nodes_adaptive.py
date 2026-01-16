@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINEBOXNODESADAPTIVE_CARD0 = (
@@ -58,6 +59,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
+        "node": LinkType.NODE,
         "lcx": LinkType.DEFINE_CURVE,
         "lcy": LinkType.DEFINE_CURVE,
         "lcz": LinkType.DEFINE_CURVE,
@@ -212,6 +214,11 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def node_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node."""
+        return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 
     @property
     def lcx_link(self) -> DefineCurve:

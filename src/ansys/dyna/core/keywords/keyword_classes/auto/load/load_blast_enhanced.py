@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _LOADBLASTENHANCED_CARD0 = (
     FieldSchema("bid", int, 0, 10, None),
@@ -52,6 +54,9 @@ class LoadBlastEnhanced(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "BLAST_ENHANCED"
+    _link_fields = {
+        "nidbo": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBlastEnhanced class."""
@@ -236,4 +241,9 @@ class LoadBlastEnhanced(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""negphs must be `None` or one of {0,1}.""")
         self._cards[1].set_value("negphs", value)
+
+    @property
+    def nidbo_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidbo."""
+        return self._get_link_by_attr("NODE", "nid", self.nidbo, "parts")
 

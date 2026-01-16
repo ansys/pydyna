@@ -26,7 +26,9 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _BOUNDARYSPHFLOW_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -50,7 +52,9 @@ class BoundarySphFlow(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "SPH_FLOW"
     _link_fields = {
+        "nid": LinkType.NODE,
         "lcid": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -193,6 +197,11 @@ class BoundarySphFlow(KeywordBase):
         self._cards[1].set_value("vid", value)
 
     @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
     def lcid_link(self) -> DefineCurve:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
@@ -206,4 +215,19 @@ class BoundarySphFlow(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

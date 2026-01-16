@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 
 _CONTACTAUTOMATICSURFACETOSURFACETIEBREAK_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -200,6 +202,10 @@ class ContactAutomaticSurfaceToSurfaceTiebreak(KeywordBase):
         OptionSpec("F", 6, 0),
         OptionSpec("G", 7, 0),
     ]
+    _link_fields = {
+        "saboxid": LinkType.DEFINE_BOX,
+        "sbboxid": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactAutomaticSurfaceToSurfaceTiebreak class."""
@@ -1914,4 +1920,34 @@ class ContactAutomaticSurfaceToSurfaceTiebreak(KeywordBase):
 
         if value:
             self.activate_option("SHLOFF")
+
+    @property
+    def saboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for saboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.saboxid:
+                return kwd
+        return None
+
+    @saboxid_link.setter
+    def saboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for saboxid."""
+        self.saboxid = value.boxid
+
+    @property
+    def sbboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for sbboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.sbboxid:
+                return kwd
+        return None
+
+    @sbboxid_link.setter
+    def sbboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for sbboxid."""
+        self.sbboxid = value.boxid
 

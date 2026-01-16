@@ -16,29 +16,11 @@
     @property
     def {{field.name}}_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all {{link.keyword_type}}_* keywords for {{field.name}}, keyed by {{field.key_field}}."""
-        if self.deck is None:
-            return {}
-        result = {}
-        kwd_map = {kwd.{{link.linkid}}: kwd for kwd in self.deck.get_kwds_by_type("{{link.keyword_type}}")}
-        for _, row in self.{{field.table_name}}.iterrows():
-            key = row["{{field.key_field}}"]
-            link_id = row["{{field.name}}"]
-            if link_id in kwd_map:
-                result[key] = kwd_map[link_id]
-        return result
+        return self._get_table_group_links("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "{{field.key_field}}")
 
     def get_{{field.name}}_link(self, {{field.key_field}}: int) -> typing.Optional[KeywordBase]:
         """Get the {{link.keyword_type}}_* keyword for the given {{field.key_field}}."""
-        if self.deck is None:
-            return None
-        row = self.{{field.table_name}}[self.{{field.table_name}}["{{field.key_field}}"] == {{field.key_field}}]
-        if row.empty:
-            return None
-        link_id = row.iloc[0]["{{field.name}}"]
-        for kwd in self.deck.get_kwds_by_type("{{link.keyword_type}}"):
-            if kwd.{{link.linkid}} == link_id:
-                return kwd
-        return None
+        return self._get_table_group_link("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "{{field.key_field}}", {{field.key_field}})
 
 {% elif link.is_multi_target %}
     @property

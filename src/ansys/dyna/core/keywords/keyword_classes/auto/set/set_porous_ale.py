@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _SETPOROUSALE_CARD0 = (
     FieldSchema("eidbeg", int, 0, 10, None),
@@ -75,6 +77,10 @@ class SetPorousAle(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "veccid1": LinkType.DEFINE_VECTOR,
+        "veccid2": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetPorousAle class."""
@@ -391,4 +397,34 @@ class SetPorousAle(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def veccid1_link(self) -> DefineVector:
+        """Get the DefineVector object for veccid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.veccid1:
+                return kwd
+        return None
+
+    @veccid1_link.setter
+    def veccid1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for veccid1."""
+        self.veccid1 = value.vid
+
+    @property
+    def veccid2_link(self) -> DefineVector:
+        """Get the DefineVector object for veccid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.veccid2:
+                return kwd
+        return None
+
+    @veccid2_link.setter
+    def veccid2_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for veccid2."""
+        self.veccid2 = value.vid
 

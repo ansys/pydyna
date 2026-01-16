@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _CONSTRAINEDINTERPOLATION_CARD0 = (
     FieldSchema("icid", int, 0, 10, None),
@@ -52,6 +54,9 @@ class ConstrainedInterpolation(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "INTERPOLATION"
+    _link_fields = {
+        "dnid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedInterpolation class."""
@@ -248,4 +253,9 @@ class ConstrainedInterpolation(KeywordBase):
     def rwghtz(self, value: float) -> None:
         """Set the rwghtz property."""
         self._cards[1].set_value("rwghtz", value)
+
+    @property
+    def dnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given dnid."""
+        return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
 

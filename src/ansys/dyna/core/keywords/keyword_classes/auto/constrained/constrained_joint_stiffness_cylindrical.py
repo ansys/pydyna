@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDJOINTSTIFFNESSCYLINDRICAL_CARD0 = (
     FieldSchema("jsid", int, 0, 10, None),
@@ -81,6 +82,8 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         "dlcidz": LinkType.DEFINE_CURVE,
         "lcidt": LinkType.DEFINE_CURVE,
         "dlcidt": LinkType.DEFINE_CURVE,
+        "cida": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cidb": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
     def __init__(self, **kwargs):
@@ -471,4 +474,34 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def dlcidt_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for dlcidt."""
         self.dlcidt = value.lcid
+
+    @property
+    def cida_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cida:
+                return kwd
+        return None
+
+    @cida_link.setter
+    def cida_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cida."""
+        self.cida = value.cid
+
+    @property
+    def cidb_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidb:
+                return kwd
+        return None
+
+    @cidb_link.setter
+    def cidb_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidb."""
+        self.cidb = value.cid
 

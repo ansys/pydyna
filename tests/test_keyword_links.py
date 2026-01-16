@@ -35,9 +35,14 @@ class TestLinkTypeEnum:
     def test_link_type_values(self):
         """Test that LinkType enum has expected values."""
         assert LinkType.ALL.value == 0
+        assert LinkType.NODE.value == 1
         assert LinkType.MAT.value == 14
         assert LinkType.SECTION.value == 15
+        assert LinkType.HOURGLASS.value == 17
         assert LinkType.DEFINE_CURVE.value == 19
+        assert LinkType.DEFINE_BOX.value == 20
+        assert LinkType.DEFINE_COORDINATE_SYSTEM.value == 21
+        assert LinkType.DEFINE_VECTOR.value == 22
         assert LinkType.DEFINE_TRANSFORMATION.value == 40
         assert LinkType.PART.value == 69
         assert LinkType.DEFINE_CURVE_OR_TABLE.value == 86
@@ -46,9 +51,14 @@ class TestLinkTypeEnum:
         """Test that LinkType has all expected members."""
         members = [m.name for m in LinkType]
         assert "ALL" in members
+        assert "NODE" in members
         assert "MAT" in members
         assert "SECTION" in members
+        assert "HOURGLASS" in members
         assert "DEFINE_CURVE" in members
+        assert "DEFINE_BOX" in members
+        assert "DEFINE_COORDINATE_SYSTEM" in members
+        assert "DEFINE_VECTOR" in members
         assert "DEFINE_TRANSFORMATION" in members
         assert "PART" in members
         assert "DEFINE_CURVE_OR_TABLE" in members
@@ -1108,3 +1118,136 @@ class TestRecursiveLinkChasingAcrossKeywords:
 
         # Should have part1, part2, and section
         assert len(all_links) == 3
+
+
+class TestNodeLinks:
+    """Tests for NODE links (link type 1)."""
+
+    def test_node_link_type_value(self):
+        """Test that NODE link type has correct value."""
+        assert LinkType.NODE.value == 1
+
+    def test_node_link_type_in_enum(self):
+        """Test that NODE is a member of LinkType enum."""
+        assert hasattr(LinkType, "NODE")
+
+
+class TestHourglassLinks:
+    """Tests for HOURGLASS links (link type 17)."""
+
+    def test_hourglass_link_type_value(self):
+        """Test that HOURGLASS link type has correct value."""
+        assert LinkType.HOURGLASS.value == 17
+
+    def test_hourglass_link_type_in_enum(self):
+        """Test that HOURGLASS is a member of LinkType enum."""
+        assert hasattr(LinkType, "HOURGLASS")
+
+    def test_part_has_hourglass_link_fields(self):
+        """Test that PART has HOURGLASS link fields (_link_fields)."""
+        assert hasattr(kwd.Part, "_link_fields")
+        assert "hgid" in kwd.Part._link_fields
+        assert kwd.Part._link_fields["hgid"] == LinkType.HOURGLASS
+
+    def test_hgid_link_returns_matching_hourglass(self):
+        """Test that hgid_link returns the correct Hourglass keyword when in a deck."""
+        import pandas as pd
+
+        deck = Deck()
+        hourglass = kwd.Hourglass()
+        hourglass.add_set()  # Hourglass is a CardSet keyword
+        hourglass.sets[0].hgid = 100
+        hourglass.sets[0].ihq = 1
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [10], "secid": [20], "hgid": [100]}
+        )
+
+        deck.extend([hourglass, part])
+
+        # Test get_hgid_link method
+        assert part.get_hgid_link(1) is hourglass
+
+        # Test hgid_links property
+        hgid_links = part.hgid_links
+        assert len(hgid_links) == 1
+        assert hgid_links[1] is hourglass
+
+    def test_hgid_link_returns_empty_when_column_missing(self):
+        """Test that hgid_link returns empty dict when hgid column is not in DataFrame."""
+        import pandas as pd
+
+        deck = Deck()
+        hourglass = kwd.Hourglass()
+        hourglass.add_set()  # Hourglass is a CardSet keyword
+        hourglass.sets[0].hgid = 100
+        hourglass.sets[0].ihq = 1
+
+        part = kwd.Part()
+        # DataFrame without hgid column
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [10], "secid": [20]}
+        )
+
+        deck.extend([hourglass, part])
+
+        # Should return empty dict, not raise KeyError
+        assert part.hgid_links == {}
+        assert part.get_hgid_link(1) is None
+
+    def test_hgid_link_returns_none_when_not_found(self):
+        """Test that hgid_link returns None when referenced hourglass doesn't exist."""
+        import pandas as pd
+
+        deck = Deck()
+        hourglass = kwd.Hourglass()
+        hourglass.add_set()  # Hourglass is a CardSet keyword
+        hourglass.sets[0].hgid = 200  # Different ID
+        hourglass.sets[0].ihq = 1
+
+        part = kwd.Part()
+        part.parts = pd.DataFrame(
+            {"heading": ["Part 1"], "pid": [1], "mid": [10], "secid": [20], "hgid": [100]}
+        )
+
+        deck.extend([hourglass, part])
+
+        # hgid 100 doesn't match hourglass with hgid 200
+        assert part.get_hgid_link(1) is None
+
+
+class TestDefineBoxLinks:
+    """Tests for DEFINE_BOX links (link type 20)."""
+
+    def test_define_box_link_type_value(self):
+        """Test that DEFINE_BOX link type has correct value."""
+        assert LinkType.DEFINE_BOX.value == 20
+
+    def test_define_box_link_type_in_enum(self):
+        """Test that DEFINE_BOX is a member of LinkType enum."""
+        assert hasattr(LinkType, "DEFINE_BOX")
+
+
+class TestDefineCoordinateSystemLinks:
+    """Tests for DEFINE_COORDINATE_SYSTEM links (link type 21)."""
+
+    def test_define_coordinate_system_link_type_value(self):
+        """Test that DEFINE_COORDINATE_SYSTEM link type has correct value."""
+        assert LinkType.DEFINE_COORDINATE_SYSTEM.value == 21
+
+    def test_define_coordinate_system_link_type_in_enum(self):
+        """Test that DEFINE_COORDINATE_SYSTEM is a member of LinkType enum."""
+        assert hasattr(LinkType, "DEFINE_COORDINATE_SYSTEM")
+
+
+class TestDefineVectorLinks:
+    """Tests for DEFINE_VECTOR links (link type 22)."""
+
+    def test_define_vector_link_type_value(self):
+        """Test that DEFINE_VECTOR link type has correct value."""
+        assert LinkType.DEFINE_VECTOR.value == 22
+
+    def test_define_vector_link_type_in_enum(self):
+        """Test that DEFINE_VECTOR is a member of LinkType enum."""
+        assert hasattr(LinkType, "DEFINE_VECTOR")

@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _AIRBAGREFERENCEGEOMETRYRDTBIRTH_CARD0 = (
     FieldSchema("birth", float, 0, 10, 0.0),
@@ -42,6 +44,9 @@ class AirbagReferenceGeometryRdtBirth(KeywordBase):
 
     keyword = "AIRBAG"
     subkeyword = "REFERENCE_GEOMETRY_RDT_BIRTH"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagReferenceGeometryRdtBirth class."""
@@ -108,4 +113,9 @@ class AirbagReferenceGeometryRdtBirth(KeywordBase):
     def z(self, value: float) -> None:
         """Set the z property."""
         self._cards[1].set_value("z", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

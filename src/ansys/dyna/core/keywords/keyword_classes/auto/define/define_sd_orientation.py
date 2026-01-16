@@ -29,6 +29,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DEFINESDORIENTATION_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
@@ -42,6 +44,10 @@ class DefineSdOrientation(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSdOrientation class."""
@@ -95,4 +101,22 @@ class DefineSdOrientation(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid1_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid1, keyed by nid1 value."""
+        return self._get_links_from_table("NODE", "nid", "vectors", "nid1", "parts")
+
+    def get_nid1_link(self, nid1: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", nid1, "parts")
+
+    @property
+    def nid2_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid2, keyed by nid2 value."""
+        return self._get_links_from_table("NODE", "nid", "vectors", "nid2", "parts")
+
+    def get_nid2_link(self, nid2: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", nid2, "parts")
 

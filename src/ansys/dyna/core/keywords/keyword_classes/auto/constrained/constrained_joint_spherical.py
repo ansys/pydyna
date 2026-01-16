@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _CONSTRAINEDJOINTSPHERICAL_CARD0 = (
     FieldSchema("n1", int, 0, 10, None),
@@ -42,6 +44,10 @@ class ConstrainedJointSpherical(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_SPHERICAL"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointSpherical class."""
@@ -139,4 +145,14 @@ class ConstrainedJointSpherical(KeywordBase):
     def damp(self, value: float) -> None:
         """Set the damp property."""
         self._cards[0].set_value("damp", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

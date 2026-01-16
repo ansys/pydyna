@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD0 = (
@@ -51,6 +52,10 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
     keyword = "CESE"
     subkeyword = "BOUNDARY_SOLID_WALL_SEGMENT_ROTATE"
     _link_fields = {
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
         "lcid": LinkType.DEFINE_CURVE,
     }
 
@@ -185,6 +190,26 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
     def nz(self, value: float) -> None:
         """Set the nz property."""
         self._cards[1].set_value("nz", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
     def lcid_link(self) -> DefineCurve:
