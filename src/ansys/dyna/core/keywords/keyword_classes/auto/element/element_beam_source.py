@@ -45,6 +45,7 @@ class ElementBeamSource(KeywordBase):
     subkeyword = "BEAM_SOURCE"
     _link_fields = {
         "bsnid": LinkType.NODE,
+        "bseid": LinkType.ELEMENT_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -136,4 +137,9 @@ class ElementBeamSource(KeywordBase):
     def bsnid_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given bsnid."""
         return self._get_link_by_attr("NODE", "nid", self.bsnid, "parts")
+
+    @property
+    def bseid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bseid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bseid, "parts")
 

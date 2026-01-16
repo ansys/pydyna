@@ -43,6 +43,7 @@ class LoadHeatGenerationShell(KeywordBase):
     keyword = "LOAD"
     subkeyword = "HEAT_GENERATION_SHELL"
     _link_fields = {
+        "sid": LinkType.ELEMENT_SHELL,
         "wblcid": LinkType.DEFINE_CURVE,
         "cblcid": LinkType.DEFINE_CURVE,
         "tblcid": LinkType.DEFINE_CURVE,
@@ -124,6 +125,11 @@ class LoadHeatGenerationShell(KeywordBase):
     def tblcid(self, value: int) -> None:
         """Set the tblcid property."""
         self._cards[0].set_value("tblcid", value)
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given sid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.sid, "parts")
 
     @property
     def wblcid_link(self) -> DefineCurve:

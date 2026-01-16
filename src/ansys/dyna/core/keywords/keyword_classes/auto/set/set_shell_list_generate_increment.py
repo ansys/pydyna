@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _SETSHELLLISTGENERATEINCREMENT_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -53,6 +54,10 @@ class SetShellListGenerateIncrement(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "bbeg": LinkType.ELEMENT_SHELL,
+        "bend": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetShellListGenerateIncrement class."""
@@ -177,4 +182,14 @@ class SetShellListGenerateIncrement(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def bbeg_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bbeg."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bbeg, "parts")
+
+    @property
+    def bend_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bend."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bend, "parts")
 

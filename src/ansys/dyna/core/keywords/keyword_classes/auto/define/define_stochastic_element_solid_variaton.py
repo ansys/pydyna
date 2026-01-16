@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINESTOCHASTICELEMENTSOLIDVARIATON_CARD0 = (
     FieldSchema("ide", int, 0, 10, 0),
@@ -47,6 +48,9 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "ide": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineStochasticElementSolidVariaton class."""
@@ -135,4 +139,9 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def ide_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given ide."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.ide, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALSTRESSSOLID_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
@@ -60,6 +61,9 @@ class InitialStressSolid(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "STRESS_SOLID"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressSolid class."""
@@ -309,4 +313,9 @@ class InitialStressSolid(KeywordBase):
     def sigyz(self, value: float) -> None:
         """Set the sigyz property."""
         self._cards[2].set_value("sigyz", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

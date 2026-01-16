@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INITIALINTERNALDOFSOLIDTYPE3_CARD0 = (
     FieldSchema("lid", int, 0, 10, None),
@@ -41,6 +42,9 @@ class InitialInternalDofSolidType3(KeywordBase):
 
     keyword = "INITIAL"
     subkeyword = "INTERNAL_DOF_SOLID_TYPE3"
+    _link_fields = {
+        "lid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialInternalDofSolidType3 class."""
@@ -96,4 +100,9 @@ class InitialInternalDofSolidType3(KeywordBase):
     def valz(self, value: float) -> None:
         """Set the valz property."""
         self._cards[1].set_value("valz", value)
+
+    @property
+    def lid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given lid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.lid, "parts")
 

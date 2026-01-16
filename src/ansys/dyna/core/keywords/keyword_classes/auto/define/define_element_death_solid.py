@@ -53,6 +53,7 @@ class DefineElementDeathSolid(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
         "boxid": LinkType.DEFINE_BOX,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
@@ -182,6 +183,11 @@ class DefineElementDeathSolid(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
     def boxid_link(self) -> DefineBox:

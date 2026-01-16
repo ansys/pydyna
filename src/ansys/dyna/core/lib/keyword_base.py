@@ -49,6 +49,15 @@ class LinkType(enum.Enum):
     NODE = 1
     """Reference to a NODE keyword."""
 
+    ELEMENT_BEAM = 3
+    """Reference to an ELEMENT_BEAM keyword."""
+
+    ELEMENT_SHELL = 4
+    """Reference to an ELEMENT_SHELL keyword."""
+
+    ELEMENT_SOLID = 5
+    """Reference to an ELEMENT_SOLID keyword."""
+
     MAT = 14
     """Reference to a MAT_* material keyword."""
 

@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEHEXSPOTWELDASSEMBLY16_CARD0 = (
     FieldSchema("id_sw", int, 0, 10, None),
@@ -65,6 +66,24 @@ class DefineHexSpotweldAssembly16(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "eid1": LinkType.ELEMENT_SOLID,
+        "eid2": LinkType.ELEMENT_SOLID,
+        "eid3": LinkType.ELEMENT_SOLID,
+        "eid4": LinkType.ELEMENT_SOLID,
+        "eid5": LinkType.ELEMENT_SOLID,
+        "eid6": LinkType.ELEMENT_SOLID,
+        "eid7": LinkType.ELEMENT_SOLID,
+        "eid8": LinkType.ELEMENT_SOLID,
+        "eid9": LinkType.ELEMENT_SOLID,
+        "eid10": LinkType.ELEMENT_SOLID,
+        "eid11": LinkType.ELEMENT_SOLID,
+        "eid12": LinkType.ELEMENT_SOLID,
+        "eid13": LinkType.ELEMENT_SOLID,
+        "eid14": LinkType.ELEMENT_SOLID,
+        "eid15": LinkType.ELEMENT_SOLID,
+        "eid16": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineHexSpotweldAssembly16 class."""
@@ -291,4 +310,84 @@ class DefineHexSpotweldAssembly16(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def eid1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
+
+    @property
+    def eid2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
+
+    @property
+    def eid3_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid3, "parts")
+
+    @property
+    def eid4_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid4, "parts")
+
+    @property
+    def eid5_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid5, "parts")
+
+    @property
+    def eid6_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid6, "parts")
+
+    @property
+    def eid7_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid7, "parts")
+
+    @property
+    def eid8_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid8."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid8, "parts")
+
+    @property
+    def eid9_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid9."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid9, "parts")
+
+    @property
+    def eid10_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid10."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid10, "parts")
+
+    @property
+    def eid11_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid11."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid11, "parts")
+
+    @property
+    def eid12_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid12."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid12, "parts")
+
+    @property
+    def eid13_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid13."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid13, "parts")
+
+    @property
+    def eid14_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid14."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid14, "parts")
+
+    @property
+    def eid15_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid15."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid15, "parts")
+
+    @property
+    def eid16_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid16."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid16, "parts")
 

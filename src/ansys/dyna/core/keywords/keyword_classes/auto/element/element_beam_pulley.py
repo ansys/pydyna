@@ -46,6 +46,8 @@ class ElementBeamPulley(KeywordBase):
     subkeyword = "BEAM_PULLEY"
     _link_fields = {
         "pnid": LinkType.NODE,
+        "bid1": LinkType.ELEMENT_BEAM,
+        "bid2": LinkType.ELEMENT_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -148,4 +150,14 @@ class ElementBeamPulley(KeywordBase):
     def pnid_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given pnid."""
         return self._get_link_by_attr("NODE", "nid", self.pnid, "parts")
+
+    @property
+    def bid1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bid1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bid1, "parts")
+
+    @property
+    def bid2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bid2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bid2, "parts")
 

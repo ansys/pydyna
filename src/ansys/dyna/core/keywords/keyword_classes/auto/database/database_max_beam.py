@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASEMAXBEAM_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
@@ -42,6 +43,16 @@ class DatabaseMaxBeam(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "MAX_BEAM"
+    _link_fields = {
+        "id1": LinkType.ELEMENT_BEAM,
+        "id2": LinkType.ELEMENT_BEAM,
+        "id3": LinkType.ELEMENT_BEAM,
+        "id4": LinkType.ELEMENT_BEAM,
+        "id5": LinkType.ELEMENT_BEAM,
+        "id6": LinkType.ELEMENT_BEAM,
+        "id7": LinkType.ELEMENT_BEAM,
+        "id8": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseMaxBeam class."""
@@ -138,4 +149,44 @@ class DatabaseMaxBeam(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id2, "parts")
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id3, "parts")
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id4, "parts")
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id5, "parts")
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id6, "parts")
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id7, "parts")
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id8."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id8, "parts")
 
