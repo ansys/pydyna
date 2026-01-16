@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFORMABLETORIGIDAUTOMATIC_CARD0 = (
     FieldSchema("swset", int, 0, 10, None),
@@ -63,6 +64,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     keyword = "DEFORMABLE"
     subkeyword = "TO_RIGID_AUTOMATIC"
+    _link_fields = {
+        "lrb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DeformableToRigidAutomatic class."""
@@ -342,4 +346,9 @@ class DeformableToRigidAutomatic(KeywordBase):
         if value not in ["PART", "PSET", None]:
             raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[3].set_value("ptype", value)
+
+    @property
+    def lrb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lrb."""
+        return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

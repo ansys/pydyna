@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATINELASTIC6DOFSPRINGDISCRETEBEAM_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -50,6 +51,14 @@ class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tpidr": LinkType.PART,
+        "tpids": LinkType.PART,
+        "tpidt": LinkType.PART,
+        "rpidr": LinkType.PART,
+        "rpids": LinkType.PART,
+        "rpidt": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatInelastic6DofSpringDiscreteBeam class."""
@@ -171,4 +180,34 @@ class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tpidr_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpidr."""
+        return self._get_link_by_attr("PART", "pid", self.tpidr, "parts")
+
+    @property
+    def tpids_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpids."""
+        return self._get_link_by_attr("PART", "pid", self.tpids, "parts")
+
+    @property
+    def tpidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpidt."""
+        return self._get_link_by_attr("PART", "pid", self.tpidt, "parts")
+
+    @property
+    def rpidr_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpidr."""
+        return self._get_link_by_attr("PART", "pid", self.rpidr, "parts")
+
+    @property
+    def rpids_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpids."""
+        return self._get_link_by_attr("PART", "pid", self.rpids, "parts")
+
+    @property
+    def rpidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpidt."""
+        return self._get_link_by_attr("PART", "pid", self.rpidt, "parts")
 

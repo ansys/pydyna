@@ -61,6 +61,8 @@ class DefineCurveDrawbead(KeywordBase):
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,
+        "pid": LinkType.PART,
+        "blkid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -219,4 +221,14 @@ class DefineCurveDrawbead(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def blkid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given blkid."""
+        return self._get_link_by_attr("PART", "pid", self.blkid, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACECOMPENSATIONNEWLOCALSMOOTH_CARD0 = (
     FieldSchema("method", int, 0, 10, 6),
@@ -42,6 +43,9 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "COMPENSATION_NEW_LOCAL_SMOOTH"
+    _link_fields = {
+        "psidm": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceCompensationNewLocalSmooth class."""
@@ -143,4 +147,14 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
     def nlinea(self, value: int) -> None:
         """Set the nlinea property."""
         self._cards[0].set_value("nlinea", value)
+
+    @property
+    def psidm_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidm."""
+        return self._get_set_link("PART", self.psidm)
+
+    @psidm_link.setter
+    def psidm_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidm."""
+        self.psidm = value.sid
 

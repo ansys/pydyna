@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMDATABASEELOUT_CARD0 = (
     FieldSchema("outlv", int, 0, 10, 0),
@@ -40,6 +41,9 @@ class EmDatabaseElout(KeywordBase):
 
     keyword = "EM"
     subkeyword = "DATABASE_ELOUT"
+    _link_fields = {
+        "elsid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmDatabaseElout class."""
@@ -88,4 +92,14 @@ class EmDatabaseElout(KeywordBase):
     def elsid(self, value: int) -> None:
         """Set the elsid property."""
         self._cards[1].set_value("elsid", value)
+
+    @property
+    def elsid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for elsid."""
+        return self._get_set_link("SOLID", self.elsid)
+
+    @elsid_link.setter
+    def elsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for elsid."""
+        self.elsid = value.sid
 

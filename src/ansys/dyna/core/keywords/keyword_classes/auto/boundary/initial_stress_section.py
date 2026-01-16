@@ -48,6 +48,7 @@ class InitialStressSection(KeywordBase):
         "lcid": LinkType.DEFINE_CURVE,
         "istiff": LinkType.DEFINE_CURVE,
         "vid": LinkType.DEFINE_VECTOR,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -195,4 +196,14 @@ class InitialStressSection(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

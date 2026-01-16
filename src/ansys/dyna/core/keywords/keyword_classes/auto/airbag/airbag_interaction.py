@@ -45,6 +45,7 @@ class AirbagInteraction(KeywordBase):
     subkeyword = "INTERACTION"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -152,4 +153,9 @@ class AirbagInteraction(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

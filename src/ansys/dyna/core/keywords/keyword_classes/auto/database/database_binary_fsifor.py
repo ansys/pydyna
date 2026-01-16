@@ -46,6 +46,7 @@ class DatabaseBinaryFsifor(KeywordBase):
     _link_fields = {
         "lcdt": LinkType.DEFINE_CURVE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psetid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -157,4 +158,14 @@ class DatabaseBinaryFsifor(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACTGUIDEDCABLESET_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
@@ -45,6 +46,10 @@ class ContactGuidedCableSet(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "GUIDED_CABLE_SET"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactGuidedCableSet class."""
@@ -144,4 +149,24 @@ class ContactGuidedCableSet(KeywordBase):
     def endtol(self, value: float) -> None:
         """Set the endtol property."""
         self._cards[1].set_value("endtol", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACEENSIGHT_CARD0 = (
     FieldSchema("nset", int, 0, 10, None),
@@ -41,6 +42,9 @@ class InterfaceEnsight(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "ENSIGHT"
+    _link_fields = {
+        "nset": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceEnsight class."""
@@ -85,4 +89,14 @@ class InterfaceEnsight(KeywordBase):
     def gfile(self, value: str) -> None:
         """Set the gfile property."""
         self._cards[1].set_value("gfile", value)
+
+    @property
+    def nset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nset."""
+        return self._get_set_link("NODE", self.nset)
+
+    @nset_link.setter
+    def nset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nset."""
+        self.nset = value.sid
 

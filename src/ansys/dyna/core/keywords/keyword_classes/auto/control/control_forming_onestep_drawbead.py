@@ -42,6 +42,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
     subkeyword = "FORMING_ONESTEP_DRAWBEAD"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "ndset": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -110,4 +111,14 @@ class ControlFormingOnestepDrawbead(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def ndset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ndset."""
+        return self._get_set_link("NODE", self.ndset)
+
+    @ndset_link.setter
+    def ndset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ndset."""
+        self.ndset = value.sid
 

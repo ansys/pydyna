@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDFEMPERITIE_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
@@ -37,6 +38,10 @@ class ConstrainedFemPeriTie(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "FEM_PERI_TIE"
+    _link_fields = {
+        "msid": LinkType.PART,
+        "ssid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedFemPeriTie class."""
@@ -78,4 +83,14 @@ class ConstrainedFemPeriTie(KeywordBase):
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
+
+    @property
+    def msid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given msid."""
+        return self._get_link_by_attr("PART", "pid", self.msid, "parts")
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ssid."""
+        return self._get_link_by_attr("PART", "pid", self.ssid, "parts")
 

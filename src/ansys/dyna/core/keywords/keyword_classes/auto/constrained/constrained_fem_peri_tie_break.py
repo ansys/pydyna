@@ -43,6 +43,8 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
     subkeyword = "FEM_PERI_TIE_BREAK"
     _link_fields = {
         "ft": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "msid": LinkType.PART,
+        "ssid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -122,4 +124,14 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
     def ft_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for ft."""
         self.ft = value.cid
+
+    @property
+    def msid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given msid."""
+        return self._get_link_by_attr("PART", "pid", self.msid, "parts")
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ssid."""
+        return self._get_link_by_attr("PART", "pid", self.ssid, "parts")
 

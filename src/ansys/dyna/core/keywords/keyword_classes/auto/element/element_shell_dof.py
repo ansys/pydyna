@@ -68,6 +68,7 @@ class ElementShellDof(KeywordBase):
         "ns2": LinkType.NODE,
         "ns3": LinkType.NODE,
         "ns4": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -294,4 +295,9 @@ class ElementShellDof(KeywordBase):
     def ns4_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given ns4."""
         return self._get_link_by_attr("NODE", "nid", self.ns4, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACTSPG_CARD0 = (
     FieldSchema("pid1", int, 0, 10, None),
@@ -71,6 +72,16 @@ class ContactSpg(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "SPG"
+    _link_fields = {
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
+        "pid3": LinkType.PART,
+        "pid4": LinkType.PART,
+        "pid5": LinkType.PART,
+        "pid6": LinkType.PART,
+        "pid7": LinkType.PART,
+        "pid8": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactSpg class."""
@@ -412,4 +423,44 @@ class ContactSpg(KeywordBase):
     def nfreq(self, value: float) -> None:
         """Set the nfreq property."""
         self._cards[3].set_value("nfreq", value)
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
+
+    @property
+    def pid3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid3."""
+        return self._get_link_by_attr("PART", "pid", self.pid3, "parts")
+
+    @property
+    def pid4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid4."""
+        return self._get_link_by_attr("PART", "pid", self.pid4, "parts")
+
+    @property
+    def pid5_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid5."""
+        return self._get_link_by_attr("PART", "pid", self.pid5, "parts")
+
+    @property
+    def pid6_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid6."""
+        return self._get_link_by_attr("PART", "pid", self.pid6, "parts")
+
+    @property
+    def pid7_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid7."""
+        return self._get_link_by_attr("PART", "pid", self.pid7, "parts")
+
+    @property
+    def pid8_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid8."""
+        return self._get_link_by_attr("PART", "pid", self.pid8, "parts")
 

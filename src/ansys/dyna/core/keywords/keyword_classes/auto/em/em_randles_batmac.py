@@ -83,6 +83,7 @@ class EmRandlesBatmac(KeywordBase):
     subkeyword = "RANDLES_BATMAC"
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -499,4 +500,14 @@ class EmRandlesBatmac(KeywordBase):
     def flcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for flcid."""
         self.flcid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

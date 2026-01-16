@@ -29,7 +29,6 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ICFDPARTVOL_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -49,16 +48,6 @@ class IcfdPartVol(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
-    _link_fields = {
-        "spid1": LinkType.PART,
-        "spid2": LinkType.PART,
-        "spid3": LinkType.PART,
-        "spid4": LinkType.PART,
-        "spid5": LinkType.PART,
-        "spid6": LinkType.PART,
-        "spid7": LinkType.PART,
-        "spid8": LinkType.PART,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdPartVol class."""
@@ -149,76 +138,4 @@ class IcfdPartVol(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def spid1_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid1, keyed by spid1 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid1", "parts")
-
-    def get_spid1_link(self, spid1: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid1."""
-        return self._get_link_by_attr("PART", "pid", spid1, "parts")
-
-    @property
-    def spid2_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid2, keyed by spid2 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid2", "parts")
-
-    def get_spid2_link(self, spid2: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid2."""
-        return self._get_link_by_attr("PART", "pid", spid2, "parts")
-
-    @property
-    def spid3_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid3, keyed by spid3 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid3", "parts")
-
-    def get_spid3_link(self, spid3: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid3."""
-        return self._get_link_by_attr("PART", "pid", spid3, "parts")
-
-    @property
-    def spid4_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid4, keyed by spid4 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid4", "parts")
-
-    def get_spid4_link(self, spid4: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid4."""
-        return self._get_link_by_attr("PART", "pid", spid4, "parts")
-
-    @property
-    def spid5_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid5, keyed by spid5 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid5", "parts")
-
-    def get_spid5_link(self, spid5: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid5."""
-        return self._get_link_by_attr("PART", "pid", spid5, "parts")
-
-    @property
-    def spid6_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid6, keyed by spid6 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid6", "parts")
-
-    def get_spid6_link(self, spid6: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid6."""
-        return self._get_link_by_attr("PART", "pid", spid6, "parts")
-
-    @property
-    def spid7_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid7, keyed by spid7 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid7", "parts")
-
-    def get_spid7_link(self, spid7: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid7."""
-        return self._get_link_by_attr("PART", "pid", spid7, "parts")
-
-    @property
-    def spid8_links(self) -> typing.Dict[int, KeywordBase]:
-        """Get all PART keywords for spid8, keyed by spid8 value."""
-        return self._get_links_from_table("PART", "pid", "nodes", "spid8", "parts")
-
-    def get_spid8_link(self, spid8: int) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given spid8."""
-        return self._get_link_by_attr("PART", "pid", spid8, "parts")
 

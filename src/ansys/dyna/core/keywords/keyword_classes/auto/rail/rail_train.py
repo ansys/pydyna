@@ -57,6 +57,7 @@ class RailTrain(KeywordBase):
     subkeyword = "TRAIN"
     _link_fields = {
         "lcur": LinkType.DEFINE_CURVE,
+        "nsetid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -241,4 +242,14 @@ class RailTrain(KeywordBase):
     def lcur_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcur."""
         self.lcur = value.lcid
+
+    @property
+    def nsetid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsetid."""
+        return self._get_set_link("NODE", self.nsetid)
+
+    @nsetid_link.setter
+    def nsetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsetid."""
+        self.nsetid = value.sid
 

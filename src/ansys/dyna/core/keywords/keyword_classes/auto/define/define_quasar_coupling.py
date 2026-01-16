@@ -77,6 +77,7 @@ class DefineQuasarCoupling(KeywordBase):
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_CURVE,
+        "ex_id": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -361,4 +362,14 @@ class DefineQuasarCoupling(KeywordBase):
     def cid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for cid."""
         self.cid = value.lcid
+
+    @property
+    def ex_id_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ex_id."""
+        return self._get_set_link("NODE", self.ex_id)
+
+    @ex_id_link.setter
+    def ex_id_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ex_id."""
+        self.ex_id = value.sid
 

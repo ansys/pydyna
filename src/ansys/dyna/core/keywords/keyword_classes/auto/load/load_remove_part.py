@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _LOADREMOVEPART_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -38,6 +39,9 @@ class LoadRemovePart(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "REMOVE_PART"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadRemovePart class."""
@@ -90,4 +94,9 @@ class LoadRemovePart(KeywordBase):
     def stgr(self, value: int) -> None:
         """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

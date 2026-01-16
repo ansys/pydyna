@@ -62,6 +62,7 @@ class InterfaceSpringbackLsdyna(KeywordBase):
     subkeyword = "SPRINGBACK_LSDYNA"
     _link_fields = {
         "nid": LinkType.NODE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -324,4 +325,14 @@ class InterfaceSpringbackLsdyna(KeywordBase):
     def nid_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

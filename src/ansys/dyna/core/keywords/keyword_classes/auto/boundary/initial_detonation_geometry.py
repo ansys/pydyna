@@ -57,6 +57,7 @@ class InitialDetonationGeometry(KeywordBase):
         "v2": LinkType.DEFINE_VECTOR,
         "v3": LinkType.DEFINE_VECTOR,
         "v4": LinkType.DEFINE_VECTOR,
+        "heid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -248,4 +249,14 @@ class InitialDetonationGeometry(KeywordBase):
     def v4_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for v4."""
         self.v4 = value.vid
+
+    @property
+    def heid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for heid."""
+        return self._get_set_link("NODE", self.heid)
+
+    @heid_link.setter
+    def heid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for heid."""
+        self.heid = value.sid
 

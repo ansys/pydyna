@@ -56,6 +56,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
     subkeyword = "SEGMENT_SET_NONUNIFORM"
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -222,4 +223,14 @@ class LoadSegmentSetNonuniform(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

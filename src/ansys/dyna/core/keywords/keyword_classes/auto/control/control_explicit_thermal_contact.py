@@ -40,6 +40,7 @@ class ControlExplicitThermalContact(KeywordBase):
     subkeyword = "EXPLICIT_THERMAL_CONTACT"
     _link_fields = {
         "ncycle": LinkType.DEFINE_CURVE,
+        "partset": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -86,4 +87,14 @@ class ControlExplicitThermalContact(KeywordBase):
     def ncycle_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for ncycle."""
         self.ncycle = value.lcid
+
+    @property
+    def partset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for partset."""
+        return self._get_set_link("PART", self.partset)
+
+    @partset_link.setter
+    def partset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for partset."""
+        self.partset = value.sid
 

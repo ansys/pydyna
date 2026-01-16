@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _IGASHELL_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
@@ -42,6 +43,9 @@ class IgaShell(KeywordBase):
 
     keyword = "IGA"
     subkeyword = "SHELL"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IgaShell class."""
@@ -114,4 +118,9 @@ class IgaShell(KeywordBase):
     def idfne(self, value: int) -> None:
         """Set the idfne property."""
         self._cards[0].set_value("idfne", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

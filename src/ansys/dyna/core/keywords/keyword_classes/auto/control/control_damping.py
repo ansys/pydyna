@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLDAMPING_CARD0 = (
     FieldSchema("nrcyck", int, 0, 10, 250),
@@ -46,6 +47,9 @@ class ControlDamping(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "DAMPING"
+    _link_fields = {
+        "drpset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlDamping class."""
@@ -173,4 +177,14 @@ class ControlDamping(KeywordBase):
     def drpset(self, value: int) -> None:
         """Set the drpset property."""
         self._cards[1].set_value("drpset", value)
+
+    @property
+    def drpset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drpset."""
+        return self._get_set_link("PART", self.drpset)
+
+    @drpset_link.setter
+    def drpset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drpset."""
+        self.drpset = value.sid
 

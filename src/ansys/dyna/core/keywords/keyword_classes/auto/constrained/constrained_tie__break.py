@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDTIE_BREAK_CARD0 = (
     FieldSchema("nsid1", int, 0, 10, None),
@@ -37,6 +38,10 @@ class ConstrainedTie_Break(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "TIE-BREAK"
+    _link_fields = {
+        "nsid1": LinkType.SET_NODE,
+        "nsid2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedTie_Break class."""
@@ -78,4 +83,24 @@ class ConstrainedTie_Break(KeywordBase):
     def eppf(self, value: float) -> None:
         """Set the eppf property."""
         self._cards[0].set_value("eppf", value)
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
+
+    @property
+    def nsid2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid2."""
+        return self._get_set_link("NODE", self.nsid2)
+
+    @nsid2_link.setter
+    def nsid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid2."""
+        self.nsid2 = value.sid
 

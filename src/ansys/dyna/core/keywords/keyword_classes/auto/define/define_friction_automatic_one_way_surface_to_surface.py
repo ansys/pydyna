@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFRICTIONAUTOMATICONEWAYSURFACETOSURFACE_CARD0 = (
     FieldSchema("id", int, 0, 10, 0),
@@ -59,6 +60,10 @@ class DefineFrictionAutomaticOneWaySurfaceToSurface(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid_i": LinkType.PART,
+        "pid_j": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFrictionAutomaticOneWaySurfaceToSurface class."""
@@ -253,4 +258,14 @@ class DefineFrictionAutomaticOneWaySurfaceToSurface(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid_i_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_i."""
+        return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
+
+    @property
+    def pid_j_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_j."""
+        return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

@@ -45,6 +45,7 @@ class ElementShell(KeywordBase):
         "n6": LinkType.NODE,
         "n7": LinkType.NODE,
         "n8": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -149,4 +150,13 @@ class ElementShell(KeywordBase):
     def get_n8_link(self, n8: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n8."""
         return self._get_link_by_attr("NODE", "nid", n8, "parts")
+
+    @property
+    def pid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pid, keyed by pid value."""
+        return self._get_links_from_table("PART", "pid", "elements", "pid", "parts")
+
+    def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", pid, "parts")
 

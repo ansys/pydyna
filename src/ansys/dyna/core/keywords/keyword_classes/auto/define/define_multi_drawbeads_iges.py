@@ -60,6 +60,8 @@ class DefineMultiDrawbeadsIges(KeywordBase):
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,
+        "blkid": LinkType.SET_PART,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -204,4 +206,19 @@ class DefineMultiDrawbeadsIges(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def blkid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for blkid."""
+        return self._get_set_link("PART", self.blkid)
+
+    @blkid_link.setter
+    def blkid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for blkid."""
+        self.blkid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

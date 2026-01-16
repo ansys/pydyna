@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLSHELL_CARD0 = (
     FieldSchema("wrpang", float, 0, 10, 20.0),
@@ -78,6 +79,12 @@ class ControlShell(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "SHELL"
+    _link_fields = {
+        "sidt4tu": LinkType.SET_PART,
+        "psnfail": LinkType.SET_PART,
+        "drcpsid": LinkType.SET_PART,
+        "lispsid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlShell class."""
@@ -589,4 +596,44 @@ class ControlShell(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""nlocdt must be `None` or one of {0,1}.""")
         self._cards[4].set_value("nlocdt", value)
+
+    @property
+    def sidt4tu_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sidt4tu."""
+        return self._get_set_link("PART", self.sidt4tu)
+
+    @sidt4tu_link.setter
+    def sidt4tu_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sidt4tu."""
+        self.sidt4tu = value.sid
+
+    @property
+    def psnfail_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psnfail."""
+        return self._get_set_link("PART", self.psnfail)
+
+    @psnfail_link.setter
+    def psnfail_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psnfail."""
+        self.psnfail = value.sid
+
+    @property
+    def drcpsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drcpsid."""
+        return self._get_set_link("PART", self.drcpsid)
+
+    @drcpsid_link.setter
+    def drcpsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drcpsid."""
+        self.drcpsid = value.sid
+
+    @property
+    def lispsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for lispsid."""
+        return self._get_set_link("PART", self.lispsid)
+
+    @lispsid_link.setter
+    def lispsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for lispsid."""
+        self.lispsid = value.sid
 

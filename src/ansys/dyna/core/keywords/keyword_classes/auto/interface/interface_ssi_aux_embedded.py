@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACESSIAUXEMBEDDED_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -44,6 +45,10 @@ class InterfaceSsiAuxEmbedded(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "SSI_AUX_EMBEDDED"
+    _link_fields = {
+        "strid": LinkType.SET_SEGMENT,
+        "soilid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceSsiAuxEmbedded class."""
@@ -136,4 +141,24 @@ class InterfaceSsiAuxEmbedded(KeywordBase):
     def mpr(self, value: int) -> None:
         """Set the mpr property."""
         self._cards[1].set_value("mpr", value)
+
+    @property
+    def strid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for strid."""
+        return self._get_set_link("SEGMENT", self.strid)
+
+    @strid_link.setter
+    def strid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for strid."""
+        self.strid = value.sid
+
+    @property
+    def soilid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for soilid."""
+        return self._get_set_link("SEGMENT", self.soilid)
+
+    @soilid_link.setter
+    def soilid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for soilid."""
+        self.soilid = value.sid
 

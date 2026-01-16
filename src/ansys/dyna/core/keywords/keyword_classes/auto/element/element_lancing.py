@@ -45,6 +45,7 @@ class ElementLancing(KeywordBase):
     subkeyword = "LANCING"
     _link_fields = {
         "idcv": LinkType.DEFINE_CURVE,
+        "idpt": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -153,4 +154,9 @@ class ElementLancing(KeywordBase):
     def idcv_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for idcv."""
         self.idcv = value.lcid
+
+    @property
+    def idpt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idpt."""
+        return self._get_link_by_attr("PART", "pid", self.idpt, "parts")
 

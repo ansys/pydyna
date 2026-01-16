@@ -86,6 +86,10 @@ class DefineCpmVent(KeywordBase):
         "lcpc23": LinkType.DEFINE_CURVE,
         "lcred": LinkType.DEFINE_CURVE,
         "lcac23": LinkType.DEFINE_CURVE,
+        "ids1": LinkType.PART,
+        "ids2": LinkType.PART,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -498,4 +502,24 @@ class DefineCpmVent(KeywordBase):
     def lcac23_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcac23."""
         self.lcac23 = value.lcid
+
+    @property
+    def ids1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ids1."""
+        return self._get_link_by_attr("PART", "pid", self.ids1, "parts")
+
+    @property
+    def ids2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ids2."""
+        return self._get_link_by_attr("PART", "pid", self.ids2, "parts")
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

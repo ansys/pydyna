@@ -56,6 +56,9 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     _link_fields = {
         "mcid": LinkType.DEFINE_CURVE,
         "coordid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pidl": LinkType.PART,
+        "pidc": LinkType.PART,
+        "partb": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -222,4 +225,19 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     def coordid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for coordid."""
         self.coordid = value.cid
+
+    @property
+    def pidl_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidl."""
+        return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
+
+    @property
+    def pidc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidc."""
+        return self._get_link_by_attr("PART", "pid", self.pidc, "parts")
+
+    @property
+    def partb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partb."""
+        return self._get_link_by_attr("PART", "pid", self.partb, "parts")
 

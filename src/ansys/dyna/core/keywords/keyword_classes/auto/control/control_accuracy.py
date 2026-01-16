@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLACCURACY_CARD0 = (
     FieldSchema("osu", int, 0, 10, 0),
@@ -39,6 +40,9 @@ class ControlAccuracy(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "ACCURACY"
+    _link_fields = {
+        "pidosu": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlAccuracy class."""
@@ -119,4 +123,14 @@ class ControlAccuracy(KeywordBase):
     def exacc(self, value: float) -> None:
         """Set the exacc property."""
         self._cards[0].set_value("exacc", value)
+
+    @property
+    def pidosu_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pidosu."""
+        return self._get_set_link("PART", self.pidosu)
+
+    @pidosu_link.setter
+    def pidosu_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pidosu."""
+        self.pidosu = value.sid
 

@@ -61,6 +61,7 @@ class DefineCurveFeedback(KeywordBase):
         "lcid": LinkType.DEFINE_CURVE,
         "fldid": LinkType.DEFINE_CURVE,
         "boxid": LinkType.DEFINE_BOX,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -242,4 +243,9 @@ class DefineCurveFeedback(KeywordBase):
     def boxid_link(self, value: DefineBox) -> None:
         """Set the DefineBox object for boxid."""
         self.boxid = value.boxid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

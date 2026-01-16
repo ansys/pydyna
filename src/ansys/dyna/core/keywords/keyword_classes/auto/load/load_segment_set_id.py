@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _LOADSEGMENTSETID_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -43,6 +44,9 @@ class LoadSegmentSetId(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SEGMENT_SET_ID"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSegmentSetId class."""
@@ -120,4 +124,14 @@ class LoadSegmentSetId(KeywordBase):
     def at(self, value: float) -> None:
         """Set the at property."""
         self._cards[1].set_value("at", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

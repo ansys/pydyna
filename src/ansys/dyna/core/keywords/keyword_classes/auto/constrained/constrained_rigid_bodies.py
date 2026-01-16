@@ -28,12 +28,17 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 class ConstrainedRigidBodies(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODIES keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODIES"
+    _link_fields = {
+        "pidl": LinkType.PART,
+        "pidc": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodies class."""
@@ -58,4 +63,22 @@ class ConstrainedRigidBodies(KeywordBase):
     def pairs(self, df: pd.DataFrame):
         """Set pairs from the dataframe df"""
         self._cards[0].table = df
+
+    @property
+    def pidl_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pidl, keyed by pidl value."""
+        return self._get_links_from_table("PART", "pid", "pairs", "pidl", "parts")
+
+    def get_pidl_link(self, pidl: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pidl."""
+        return self._get_link_by_attr("PART", "pid", pidl, "parts")
+
+    @property
+    def pidc_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pidc, keyed by pidc value."""
+        return self._get_links_from_table("PART", "pid", "pairs", "pidc", "parts")
+
+    def get_pidc_link(self, pidc: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pidc."""
+        return self._get_link_by_attr("PART", "pid", pidc, "parts")
 

@@ -98,6 +98,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,
         "lc2": LinkType.DEFINE_CURVE,
+        "nsidpc": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -707,4 +708,14 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
     def lc2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc2."""
         self.lc2 = value.lcid
+
+    @property
+    def nsidpc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidpc."""
+        return self._get_set_link("NODE", self.nsidpc)
+
+    @nsidpc_link.setter
+    def nsidpc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidpc."""
+        self.nsidpc = value.sid
 

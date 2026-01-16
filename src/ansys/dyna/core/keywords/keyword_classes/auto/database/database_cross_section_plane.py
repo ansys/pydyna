@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASECROSSSECTIONPLANE_CARD0 = (
     FieldSchema("csid", int, 0, 10, None),
@@ -57,6 +58,9 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_PLANE"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseCrossSectionPlane class."""
@@ -267,4 +271,14 @@ class DatabaseCrossSectionPlane(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("itype", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

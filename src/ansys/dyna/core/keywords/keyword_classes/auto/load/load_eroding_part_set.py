@@ -56,6 +56,7 @@ class LoadErodingPartSet(KeywordBase):
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
         "boxid": LinkType.DEFINE_BOX,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -241,4 +242,14 @@ class LoadErodingPartSet(KeywordBase):
     def boxid_link(self, value: DefineBox) -> None:
         """Set the DefineBox object for boxid."""
         self.boxid = value.boxid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

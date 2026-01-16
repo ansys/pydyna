@@ -42,6 +42,7 @@ class ControlFormingOnestepOrtho(KeywordBase):
     _link_fields = {
         "node1": LinkType.NODE,
         "node2": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -94,4 +95,9 @@ class ControlFormingOnestepOrtho(KeywordBase):
     def node2_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

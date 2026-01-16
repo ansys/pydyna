@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFORMINGCONTACT_CARD0 = (
     FieldSchema("ips", int, 0, 10, None),
@@ -46,6 +47,10 @@ class DefineFormingContact(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "ips": LinkType.PART,
+        "ipm": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFormingContact class."""
@@ -127,4 +132,14 @@ class DefineFormingContact(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def ips_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ips."""
+        return self._get_link_by_attr("PART", "pid", self.ips, "parts")
+
+    @property
+    def ipm_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipm."""
+        return self._get_link_by_attr("PART", "pid", self.ipm, "parts")
 

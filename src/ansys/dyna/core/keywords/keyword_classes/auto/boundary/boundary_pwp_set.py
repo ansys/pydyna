@@ -56,6 +56,7 @@ class BoundaryPwpSet(KeywordBase):
         "lcdr": LinkType.DEFINE_CURVE,
         "lcleak": LinkType.DEFINE_CURVE,
         "lcpum": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -256,4 +257,14 @@ class BoundaryPwpSet(KeywordBase):
     def lcpum_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcpum."""
         self.lcpum = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid."""
+        return self._get_set_link("NODE", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid."""
+        self.sid = value.sid
 

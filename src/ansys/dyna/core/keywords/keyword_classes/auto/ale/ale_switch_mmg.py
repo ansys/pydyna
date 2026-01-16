@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALESWITCHMMG_CARD0 = (
     FieldSchema("fr_mmg", int, 0, 10, None),
@@ -52,6 +53,10 @@ class AleSwitchMmg(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "SWITCH_MMG"
+    _link_fields = {
+        "idsegset": LinkType.SET_SEGMENT,
+        "idsldset": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleSwitchMmg class."""
@@ -673,4 +678,24 @@ class AleSwitchMmg(KeywordBase):
     def var8(self, value: int) -> None:
         """Set the var8 property."""
         self._cards[1].set_value("var8", value)
+
+    @property
+    def idsegset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for idsegset."""
+        return self._get_set_link("SEGMENT", self.idsegset)
+
+    @idsegset_link.setter
+    def idsegset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for idsegset."""
+        self.idsegset = value.sid
+
+    @property
+    def idsldset_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for idsldset."""
+        return self._get_set_link("SOLID", self.idsldset)
+
+    @idsldset_link.setter
+    def idsldset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for idsldset."""
+        self.idsldset = value.sid
 

@@ -48,6 +48,7 @@ class LoadVolumeLoss(KeywordBase):
     _link_fields = {
         "lcur": LinkType.DEFINE_CURVE,
         "coord": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -175,4 +176,14 @@ class LoadVolumeLoss(KeywordBase):
     def coord_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for coord."""
         self.coord = value.cid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFABRICASSEMBLIES_CARD0 = (
     FieldSchema("spid1", int, 0, 10, None),
@@ -50,6 +51,16 @@ class DefineFabricAssemblies(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "spid1": LinkType.SET_PART,
+        "spid2": LinkType.SET_PART,
+        "spid3": LinkType.SET_PART,
+        "spid4": LinkType.SET_PART,
+        "spid5": LinkType.SET_PART,
+        "spid6": LinkType.SET_PART,
+        "spid7": LinkType.SET_PART,
+        "spid8": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFabricAssemblies class."""
@@ -171,4 +182,84 @@ class DefineFabricAssemblies(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def spid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid1."""
+        return self._get_set_link("PART", self.spid1)
+
+    @spid1_link.setter
+    def spid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid1."""
+        self.spid1 = value.sid
+
+    @property
+    def spid2_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid2."""
+        return self._get_set_link("PART", self.spid2)
+
+    @spid2_link.setter
+    def spid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid2."""
+        self.spid2 = value.sid
+
+    @property
+    def spid3_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid3."""
+        return self._get_set_link("PART", self.spid3)
+
+    @spid3_link.setter
+    def spid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid3."""
+        self.spid3 = value.sid
+
+    @property
+    def spid4_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid4."""
+        return self._get_set_link("PART", self.spid4)
+
+    @spid4_link.setter
+    def spid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid4."""
+        self.spid4 = value.sid
+
+    @property
+    def spid5_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid5."""
+        return self._get_set_link("PART", self.spid5)
+
+    @spid5_link.setter
+    def spid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid5."""
+        self.spid5 = value.sid
+
+    @property
+    def spid6_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid6."""
+        return self._get_set_link("PART", self.spid6)
+
+    @spid6_link.setter
+    def spid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid6."""
+        self.spid6 = value.sid
+
+    @property
+    def spid7_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid7."""
+        return self._get_set_link("PART", self.spid7)
+
+    @spid7_link.setter
+    def spid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid7."""
+        self.spid7 = value.sid
+
+    @property
+    def spid8_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for spid8."""
+        return self._get_set_link("PART", self.spid8)
+
+    @spid8_link.setter
+    def spid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for spid8."""
+        self.spid8 = value.sid
 

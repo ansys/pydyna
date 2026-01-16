@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCREATEFIBERORIENTATION_CARD0 = (
     FieldSchema("parstld", int, 0, 10, None),
@@ -41,6 +42,9 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_CREATEFIBERORIENTATION"
+    _link_fields = {
+        "parstld": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCreatefiberorientation class."""
@@ -130,4 +134,9 @@ class EmEpCreatefiberorientation(KeywordBase):
     def prerun(self, value: int) -> None:
         """Set the prerun property."""
         self._cards[0].set_value("prerun", value)
+
+    @property
+    def parstld_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given parstld."""
+        return self._get_link_by_attr("PART", "pid", self.parstld, "parts")
 

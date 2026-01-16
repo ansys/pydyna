@@ -55,6 +55,7 @@ class DefineElementDeathBeamSet(KeywordBase):
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "sid": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -212,4 +213,14 @@ class DefineElementDeathBeamSet(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for sid."""
+        return self._get_set_link("BEAM", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for sid."""
+        self.sid = value.sid
 

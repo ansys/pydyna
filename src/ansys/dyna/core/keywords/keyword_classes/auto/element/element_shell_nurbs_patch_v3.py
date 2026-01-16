@@ -129,6 +129,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         "e6": LinkType.DEFINE_CURVE,
         "e7": LinkType.DEFINE_CURVE,
         "e8": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -928,4 +929,9 @@ class ElementShellNurbsPatchV3(KeywordBase):
     def e8_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for e8."""
         self.e8 = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

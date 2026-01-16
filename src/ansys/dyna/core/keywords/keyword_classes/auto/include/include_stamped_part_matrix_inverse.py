@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INCLUDESTAMPEDPARTMATRIXINVERSE_CARD0 = (
     FieldSchema("filename", str, 0, 80, None),
@@ -91,6 +92,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     keyword = "INCLUDE"
     subkeyword = "STAMPED_PART_MATRIX_INVERSE"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeStampedPartMatrixInverse class."""
@@ -534,4 +538,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     def z03(self, value: float) -> None:
         """Set the z03 property."""
         self._cards[7].set_value("z03", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

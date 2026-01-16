@@ -52,6 +52,8 @@ class DefineSphMeshSurface(KeywordBase):
     ]
     _link_fields = {
         "sphxid": LinkType.SECTION,
+        "nsid": LinkType.SET_NODE,
+        "sphpid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -186,4 +188,19 @@ class DefineSphMeshSurface(KeywordBase):
     def sphxid_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for sphxid."""
         self.sphxid = value.secid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def sphpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given sphpid."""
+        return self._get_link_by_attr("PART", "pid", self.sphpid, "parts")
 

@@ -67,6 +67,7 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
     ]
     _link_fields = {
         "isdes": LinkType.SECTION,
+        "ipdes": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -316,4 +317,9 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
     def isdes_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for isdes."""
         self.isdes = value.secid
+
+    @property
+    def ipdes_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipdes."""
+        return self._get_link_by_attr("PART", "pid", self.ipdes, "parts")
 

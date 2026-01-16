@@ -39,6 +39,7 @@ class ElementDiscrete(KeywordBase):
     _link_fields = {
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -87,4 +88,13 @@ class ElementDiscrete(KeywordBase):
     def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", n2, "parts")
+
+    @property
+    def pid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pid, keyed by pid value."""
+        return self._get_links_from_table("PART", "pid", "elements", "pid", "parts")
+
+    def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", pid, "parts")
 

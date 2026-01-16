@@ -59,6 +59,8 @@ class InitialImpulseMine(KeywordBase):
     _link_fields = {
         "nidmc": LinkType.NODE,
         "gvid": LinkType.DEFINE_VECTOR,
+        "psid": LinkType.SET_PART,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -266,4 +268,24 @@ class InitialImpulseMine(KeywordBase):
     def gvid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for gvid."""
         self.gvid = value.vid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

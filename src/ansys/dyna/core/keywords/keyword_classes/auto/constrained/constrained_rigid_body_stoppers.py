@@ -55,6 +55,9 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
     _link_fields = {
         "lcvmnx": LinkType.DEFINE_CURVE,
         "vid": LinkType.DEFINE_VECTOR,
+        "psidmx": LinkType.SET_PART,
+        "psidmn": LinkType.SET_PART,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -235,4 +238,29 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def psidmx_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidmx."""
+        return self._get_set_link("PART", self.psidmx)
+
+    @psidmx_link.setter
+    def psidmx_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidmx."""
+        self.psidmx = value.sid
+
+    @property
+    def psidmn_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidmn."""
+        return self._get_set_link("PART", self.psidmn)
+
+    @psidmn_link.setter
+    def psidmn_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidmn."""
+        self.psidmn = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLFORMINGONESTEPFRICTION_CARD0 = (
     FieldSchema("ndset", int, 0, 10, None),
@@ -37,6 +38,9 @@ class ControlFormingOnestepFriction(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_ONESTEP_FRICTION"
+    _link_fields = {
+        "ndset": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingOnestepFriction class."""
@@ -78,4 +82,14 @@ class ControlFormingOnestepFriction(KeywordBase):
     def frict(self, value: float) -> None:
         """Set the frict property."""
         self._cards[0].set_value("frict", value)
+
+    @property
+    def ndset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ndset."""
+        return self._get_set_link("NODE", self.ndset)
+
+    @ndset_link.setter
+    def ndset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ndset."""
+        self.ndset = value.sid
 

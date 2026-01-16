@@ -49,6 +49,7 @@ class ElementSeatbelt(KeywordBase):
         "n2": LinkType.NODE,
         "n3": LinkType.NODE,
         "n4": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -166,4 +167,9 @@ class ElementSeatbelt(KeywordBase):
     def n4_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYPOREFLUIDPART_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -42,6 +43,9 @@ class BoundaryPoreFluidPart(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PORE_FLUID_PART"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPoreFluidPart class."""
@@ -146,4 +150,9 @@ class BoundaryPoreFluidPart(KeywordBase):
     def suclim(self, value: float) -> None:
         """Set the suclim property."""
         self._cards[0].set_value("suclim", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -43,6 +43,7 @@ class LoadStiffenPart(KeywordBase):
     subkeyword = "STIFFEN_PART"
     _link_fields = {
         "lc": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -111,4 +112,9 @@ class LoadStiffenPart(KeywordBase):
     def lc_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc."""
         self.lc = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

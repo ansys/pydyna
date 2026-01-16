@@ -58,6 +58,7 @@ class DefineAdaptiveSolidToSphId(KeywordBase):
     ]
     _link_fields = {
         "issph": LinkType.SECTION,
+        "ipsph": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -240,4 +241,9 @@ class DefineAdaptiveSolidToSphId(KeywordBase):
     def issph_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for issph."""
         self.issph = value.secid
+
+    @property
+    def ipsph_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipsph."""
+        return self._get_link_by_attr("PART", "pid", self.ipsph, "parts")
 

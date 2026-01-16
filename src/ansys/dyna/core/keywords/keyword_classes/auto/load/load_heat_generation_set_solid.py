@@ -46,6 +46,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
         "wblcid": LinkType.DEFINE_CURVE,
         "cblcid": LinkType.DEFINE_CURVE,
         "tblcid": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_SOLID,
     }
 
     def __init__(self, **kwargs):
@@ -169,4 +170,14 @@ class LoadHeatGenerationSetSolid(KeywordBase):
     def tblcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for tblcid."""
         self.tblcid = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for sid."""
+        return self._get_set_link("SOLID", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for sid."""
+        self.sid = value.sid
 

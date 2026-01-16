@@ -178,6 +178,9 @@ class AirbagParticleDecompositionInflationSegmentTimeId(KeywordBase):
         "lcmi": LinkType.DEFINE_CURVE,
         "lcti": LinkType.DEFINE_CURVE,
         "vdi": LinkType.DEFINE_VECTOR,
+        "sidsv": LinkType.SET_PART,
+        "psid1": LinkType.SET_PART,
+        "segsid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -1374,4 +1377,34 @@ class AirbagParticleDecompositionInflationSegmentTimeId(KeywordBase):
     def vdi_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vdi."""
         self.vdi = value.vid
+
+    @property
+    def sidsv_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sidsv."""
+        return self._get_set_link("PART", self.sidsv)
+
+    @sidsv_link.setter
+    def sidsv_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sidsv."""
+        self.sidsv = value.sid
+
+    @property
+    def psid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid1."""
+        return self._get_set_link("PART", self.psid1)
+
+    @psid1_link.setter
+    def psid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid1."""
+        self.psid1 = value.sid
+
+    @property
+    def segsid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segsid."""
+        return self._get_set_link("SEGMENT", self.segsid)
+
+    @segsid_link.setter
+    def segsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segsid."""
+        self.segsid = value.sid
 

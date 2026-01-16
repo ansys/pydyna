@@ -90,6 +90,7 @@ class IncludeStampedPart(KeywordBase):
         "n1c": LinkType.NODE,
         "n2c": LinkType.NODE,
         "n3c": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -518,4 +519,9 @@ class IncludeStampedPart(KeywordBase):
     def n3c_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n3c."""
         return self._get_link_by_attr("NODE", "nid", self.n3c, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

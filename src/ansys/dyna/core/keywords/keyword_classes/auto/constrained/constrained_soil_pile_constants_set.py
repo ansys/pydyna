@@ -95,6 +95,11 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
     subkeyword = "SOIL_PILE_CONSTANTS_SET"
     _link_fields = {
         "vlc": LinkType.DEFINE_CURVE,
+        "pbsid": LinkType.SET_PART,
+        "pid": LinkType.SET_PART,
+        "pidns": LinkType.PART,
+        "pidnb": LinkType.PART,
+        "blc": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -597,4 +602,39 @@ class ConstrainedSoilPileConstantsSet(KeywordBase):
     def vlc_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for vlc."""
         self.vlc = value.lcid
+
+    @property
+    def pbsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pbsid."""
+        return self._get_set_link("PART", self.pbsid)
+
+    @pbsid_link.setter
+    def pbsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pbsid."""
+        self.pbsid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
+
+    @property
+    def pidns_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidns."""
+        return self._get_link_by_attr("PART", "pid", self.pidns, "parts")
+
+    @property
+    def pidnb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidnb."""
+        return self._get_link_by_attr("PART", "pid", self.pidnb, "parts")
+
+    @property
+    def blc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given blc."""
+        return self._get_link_by_attr("PART", "pid", self.blc, "parts")
 

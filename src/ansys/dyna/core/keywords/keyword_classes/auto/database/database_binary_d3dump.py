@@ -47,6 +47,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
     subkeyword = "BINARY_D3DUMP"
     _link_fields = {
         "lcdt": LinkType.DEFINE_CURVE,
+        "psetid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -153,4 +154,14 @@ class DatabaseBinaryD3Dump(KeywordBase):
     def lcdt_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdt."""
         self.lcdt = value.lcid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

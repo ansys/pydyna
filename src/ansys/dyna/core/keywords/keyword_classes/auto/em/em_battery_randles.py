@@ -76,6 +76,11 @@ class EmBatteryRandles(KeywordBase):
     subkeyword = "BATTERY_RANDLES"
     _link_fields = {
         "sicslcid": LinkType.DEFINE_CURVE,
+        "ccppart": LinkType.PART,
+        "ccnpart": LinkType.PART,
+        "seppart": LinkType.PART,
+        "poselpart": LinkType.PART,
+        "negelpart": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -431,4 +436,29 @@ class EmBatteryRandles(KeywordBase):
     def sicslcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for sicslcid."""
         self.sicslcid = value.lcid
+
+    @property
+    def ccppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccppart."""
+        return self._get_link_by_attr("PART", "pid", self.ccppart, "parts")
+
+    @property
+    def ccnpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccnpart."""
+        return self._get_link_by_attr("PART", "pid", self.ccnpart, "parts")
+
+    @property
+    def seppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given seppart."""
+        return self._get_link_by_attr("PART", "pid", self.seppart, "parts")
+
+    @property
+    def poselpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given poselpart."""
+        return self._get_link_by_attr("PART", "pid", self.poselpart, "parts")
+
+    @property
+    def negelpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given negelpart."""
+        return self._get_link_by_attr("PART", "pid", self.negelpart, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYCOUPLED_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -42,6 +43,9 @@ class BoundaryCoupled(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "COUPLED"
+    _link_fields = {
+        "set": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryCoupled class."""
@@ -112,4 +116,14 @@ class BoundaryCoupled(KeywordBase):
     def prog(self, value: int) -> None:
         """Set the prog property."""
         self._cards[1].set_value("prog", value)
+
+    @property
+    def set_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for set."""
+        return self._get_set_link("NODE", self.set)
+
+    @set_link.setter
+    def set_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for set."""
+        self.set = value.sid
 

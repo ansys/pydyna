@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _SENSORDEFINENODESETUPDATE_CARD0 = (
     FieldSchema("sensid", int, 0, 10, None),
@@ -55,6 +56,10 @@ class SensorDefineNodeSetUpdate(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "node1": LinkType.SET_NODE,
+        "node2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SensorDefineNodeSetUpdate class."""
@@ -206,4 +211,24 @@ class SensorDefineNodeSetUpdate(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node1."""
+        return self._get_set_link("NODE", self.node1)
+
+    @node1_link.setter
+    def node1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node1."""
+        self.node1 = value.sid
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node2."""
+        return self._get_set_link("NODE", self.node2)
+
+    @node2_link.setter
+    def node2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node2."""
+        self.node2 = value.sid
 

@@ -77,6 +77,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
         "lcrot": LinkType.DEFINE_CURVE,
         "lcmov": LinkType.DEFINE_CURVE,
         "lclat": LinkType.DEFINE_CURVE,
+        "nsid1": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -477,4 +478,14 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     def lclat_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lclat."""
         self.lclat = value.lcid
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
 

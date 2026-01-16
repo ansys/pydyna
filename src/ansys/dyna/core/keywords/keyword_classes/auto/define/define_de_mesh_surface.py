@@ -53,6 +53,7 @@ class DefineDeMeshSurface(KeywordBase):
     ]
     _link_fields = {
         "descid": LinkType.SECTION,
+        "despid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -198,4 +199,9 @@ class DefineDeMeshSurface(KeywordBase):
     def descid_link(self, value: KeywordBase) -> None:
         """Set the SECTION_* keyword for descid."""
         self.descid = value.secid
+
+    @property
+    def despid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given despid."""
+        return self._get_link_by_attr("PART", "pid", self.despid, "parts")
 

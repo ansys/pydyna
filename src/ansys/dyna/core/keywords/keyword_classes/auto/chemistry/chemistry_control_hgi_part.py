@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CHEMISTRYCONTROLHGIPART_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -41,6 +42,9 @@ class ChemistryControlHgiPart(KeywordBase):
 
     keyword = "CHEMISTRY"
     subkeyword = "CONTROL_HGI_PART"
+    _link_fields = {
+        "exit_bc": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChemistryControlHgiPart class."""
@@ -96,4 +100,9 @@ class ChemistryControlHgiPart(KeywordBase):
     def file(self, value: str) -> None:
         """Set the file property."""
         self._cards[1].set_value("file", value)
+
+    @property
+    def exit_bc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given exit_bc."""
+        return self._get_link_by_attr("PART", "pid", self.exit_bc, "parts")
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYSLIDINGPLANE_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
@@ -39,6 +40,9 @@ class BoundarySlidingPlane(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SLIDING_PLANE"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundarySlidingPlane class."""
@@ -106,4 +110,14 @@ class BoundarySlidingPlane(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""copt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("copt", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

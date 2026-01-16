@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACECOMPENSATION3DLOCALSMOOTH_CARD0 = (
     FieldSchema("method", int, 0, 10, 6),
@@ -42,6 +43,9 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "COMPENSATION_3D_LOCAL_SMOOTH"
+    _link_fields = {
+        "psidp": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceCompensation3DLocalSmooth class."""
@@ -169,4 +173,14 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
     def nlinear(self, value: int) -> None:
         """Set the nlinear property."""
         self._cards[0].set_value("nlinear", value)
+
+    @property
+    def psidp_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidp."""
+        return self._get_set_link("PART", self.psidp)
+
+    @psidp_link.setter
+    def psidp_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidp."""
+        self.psidp = value.sid
 

@@ -47,6 +47,8 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     _link_fields = {
         "nid": LinkType.NODE,
         "tdlcid": LinkType.DEFINE_CURVE,
+        "ssid1": LinkType.SET_SEGMENT,
+        "ssid2": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -161,4 +163,24 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     def tdlcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for tdlcid."""
         self.tdlcid = value.lcid
+
+    @property
+    def ssid1_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid1."""
+        return self._get_set_link("SEGMENT", self.ssid1)
+
+    @ssid1_link.setter
+    def ssid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid1."""
+        self.ssid1 = value.sid
+
+    @property
+    def ssid2_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid2."""
+        return self._get_set_link("SEGMENT", self.ssid2)
+
+    @ssid2_link.setter
+    def ssid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid2."""
+        self.ssid2 = value.sid
 

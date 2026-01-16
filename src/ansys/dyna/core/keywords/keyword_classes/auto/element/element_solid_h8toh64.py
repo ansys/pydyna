@@ -55,6 +55,7 @@ class ElementSolidH8Toh64(KeywordBase):
         "n6": LinkType.NODE,
         "n7": LinkType.NODE,
         "n8": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -214,4 +215,9 @@ class ElementSolidH8Toh64(KeywordBase):
     def n8_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n8."""
         return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

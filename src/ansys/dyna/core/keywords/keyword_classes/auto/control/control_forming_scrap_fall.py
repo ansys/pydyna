@@ -61,6 +61,9 @@ class ControlFormingScrapFall(KeywordBase):
     subkeyword = "FORMING_SCRAP_FALL"
     _link_fields = {
         "vectid": LinkType.DEFINE_VECTOR,
+        "ndset": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+        "idrgd": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -284,4 +287,24 @@ class ControlFormingScrapFall(KeywordBase):
     def vectid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vectid."""
         self.vectid = value.vid
+
+    @property
+    def ndset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ndset."""
+        return self._get_set_link("NODE", self.ndset)
+
+    @ndset_link.setter
+    def ndset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ndset."""
+        self.ndset = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def idrgd_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idrgd."""
+        return self._get_link_by_attr("PART", "pid", self.idrgd, "parts")
 

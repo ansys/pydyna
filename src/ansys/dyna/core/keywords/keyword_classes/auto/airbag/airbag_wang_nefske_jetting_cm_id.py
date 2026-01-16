@@ -141,6 +141,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         "lcap23": LinkType.DEFINE_CURVE,
         "lcefr": LinkType.DEFINE_CURVE,
         "lcbf": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -1047,4 +1048,14 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
     def lcbf_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcbf."""
         self.lcbf = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

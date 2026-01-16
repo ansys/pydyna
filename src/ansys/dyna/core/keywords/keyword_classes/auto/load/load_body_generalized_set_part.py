@@ -59,6 +59,7 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         "lcid": LinkType.DEFINE_CURVE,
         "drlcid": LinkType.DEFINE_CURVE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -286,4 +287,14 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

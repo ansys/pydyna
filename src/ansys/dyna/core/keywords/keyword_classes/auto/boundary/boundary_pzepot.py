@@ -42,6 +42,7 @@ class BoundaryPzepot(KeywordBase):
     subkeyword = "PZEPOT"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "nsid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -110,4 +111,14 @@ class BoundaryPzepot(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

@@ -60,6 +60,8 @@ class RailTrack(KeywordBase):
         "norgn2": LinkType.NODE,
         "lcur1": LinkType.DEFINE_CURVE,
         "lcur2": LinkType.DEFINE_CURVE,
+        "bsetid1": LinkType.SET_BEAM,
+        "bsetid2": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -271,4 +273,24 @@ class RailTrack(KeywordBase):
     def lcur2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcur2."""
         self.lcur2 = value.lcid
+
+    @property
+    def bsetid1_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid1."""
+        return self._get_set_link("BEAM", self.bsetid1)
+
+    @bsetid1_link.setter
+    def bsetid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid1."""
+        self.bsetid1 = value.sid
+
+    @property
+    def bsetid2_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid2."""
+        return self._get_set_link("BEAM", self.bsetid2)
+
+    @bsetid2_link.setter
+    def bsetid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid2."""
+        self.bsetid2 = value.sid
 

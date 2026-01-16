@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTMODES_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -63,6 +64,9 @@ class PartModes(KeywordBase):
 
     keyword = "PART"
     subkeyword = "MODES"
+    _link_fields = {
+        "ansid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartModes class."""
@@ -327,4 +331,14 @@ class PartModes(KeywordBase):
     def dampf(self, value: float) -> None:
         """Set the dampf property."""
         self._cards[3].set_value("dampf", value)
+
+    @property
+    def ansid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ansid."""
+        return self._get_set_link("NODE", self.ansid)
+
+    @ansid_link.setter
+    def ansid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ansid."""
+        self.ansid = value.sid
 

@@ -51,6 +51,7 @@ class EmIsopotentialConnect(KeywordBase):
     subkeyword = "ISOPOTENTIAL_CONNECT"
     _link_fields = {
         "lcid_rdlid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -198,4 +199,14 @@ class EmIsopotentialConnect(KeywordBase):
     def lcid_rdlid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid_rdlid."""
         self.lcid_rdlid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

@@ -119,6 +119,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
     subkeyword = "VOLUME_FRACTION_GEOMETRY"
     _link_fields = {
         "lcsid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "sgsid_": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -658,4 +659,14 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def lcsid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for lcsid."""
         self.lcsid = value.cid
+
+    @property
+    def sgsid__link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sgsid_."""
+        return self._get_set_link("SEGMENT", self.sgsid_)
+
+    @sgsid__link.setter
+    def sgsid__link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sgsid_."""
+        self.sgsid_ = value.sid
 

@@ -75,6 +75,7 @@ class ElementSolidT15(KeywordBase):
         "n13": LinkType.NODE,
         "n14": LinkType.NODE,
         "n15": LinkType.NODE,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -352,4 +353,9 @@ class ElementSolidT15(KeywordBase):
     def n15_link(self) -> KeywordBase:
         """Get the NODE keyword containing the given n15."""
         return self._get_link_by_attr("NODE", "nid", self.n15, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

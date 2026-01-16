@@ -46,6 +46,7 @@ class LoadGravityPartSet(KeywordBase):
     _link_fields = {
         "lc": LinkType.DEFINE_CURVE,
         "lcdr": LinkType.DEFINE_CURVE,
+        "pid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -162,4 +163,14 @@ class LoadGravityPartSet(KeywordBase):
     def lcdr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdr."""
         self.lcdr = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
 

@@ -56,6 +56,7 @@ class PartAttachmentNodes(KeywordBase):
         "mid": LinkType.MAT,
         "secid": LinkType.SECTION,
         "hgid": LinkType.HOURGLASS,
+        "ansid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -239,4 +240,14 @@ class PartAttachmentNodes(KeywordBase):
     def hgid_link(self, value: Hourglass) -> None:
         """Set the Hourglass object for hgid."""
         self.hgid = value.hgid
+
+    @property
+    def ansid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ansid."""
+        return self._get_set_link("NODE", self.ansid)
+
+    @ansid_link.setter
+    def ansid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ansid."""
+        self.ansid = value.sid
 

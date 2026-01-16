@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINECURVEBOXADAPTIVITY_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -52,6 +53,9 @@ class DefineCurveBoxAdaptivity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCurveBoxAdaptivity class."""
@@ -168,4 +172,9 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

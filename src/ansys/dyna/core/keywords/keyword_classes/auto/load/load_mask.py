@@ -56,6 +56,7 @@ class LoadMask(KeywordBase):
         "boxid": LinkType.DEFINE_BOX,
         "vid1": LinkType.DEFINE_VECTOR,
         "vid2": LinkType.DEFINE_VECTOR,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -245,4 +246,9 @@ class LoadMask(KeywordBase):
     def vid2_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid2."""
         self.vid2 = value.vid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

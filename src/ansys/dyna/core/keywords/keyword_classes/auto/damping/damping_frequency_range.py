@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DAMPINGFREQUENCYRANGE_CARD0 = (
     FieldSchema("cdamp", float, 0, 10, 0.0),
@@ -41,6 +42,10 @@ class DampingFrequencyRange(KeywordBase):
 
     keyword = "DAMPING"
     subkeyword = "FREQUENCY_RANGE"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+        "pidrel": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DampingFrequencyRange class."""
@@ -130,4 +135,19 @@ class DampingFrequencyRange(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""iflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflg", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def pidrel_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidrel."""
+        return self._get_link_by_attr("PART", "pid", self.pidrel, "parts")
 

@@ -66,6 +66,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
         "node1": LinkType.NODE,
         "node2": LinkType.NODE,
         "vid": LinkType.DEFINE_VECTOR,
+        "nsid": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -313,4 +314,14 @@ class BoundaryPrescribedMotionSet(KeywordBase):
     def vid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vid."""
         self.vid = value.vid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

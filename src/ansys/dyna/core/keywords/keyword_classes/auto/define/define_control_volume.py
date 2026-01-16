@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINECONTROLVOLUME_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -45,6 +46,9 @@ class DefineControlVolume(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "sid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineControlVolume class."""
@@ -111,4 +115,14 @@ class DefineControlVolume(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sid."""
+        return self._get_set_link("SEGMENT", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sid."""
+        self.sid = value.sid
 

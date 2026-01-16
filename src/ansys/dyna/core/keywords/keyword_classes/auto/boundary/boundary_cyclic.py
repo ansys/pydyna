@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _BOUNDARYCYCLIC_CARD0 = (
     FieldSchema("xc", float, 0, 10, None),
@@ -41,6 +42,10 @@ class BoundaryCyclic(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "CYCLIC"
+    _link_fields = {
+        "nsid1": LinkType.SET_NODE,
+        "nsid2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryCyclic class."""
@@ -136,4 +141,24 @@ class BoundaryCyclic(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""isort must be `None` or one of {0,1}.""")
         self._cards[0].set_value("isort", value)
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
+
+    @property
+    def nsid2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid2."""
+        return self._get_set_link("NODE", self.nsid2)
+
+    @nsid2_link.setter
+    def nsid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid2."""
+        self.nsid2 = value.sid
 

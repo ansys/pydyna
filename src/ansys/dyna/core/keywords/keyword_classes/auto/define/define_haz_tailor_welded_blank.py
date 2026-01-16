@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEHAZTAILORWELDEDBLANK_CARD0 = (
     FieldSchema("idtwb", int, 0, 10, 0),
@@ -47,6 +48,9 @@ class DefineHazTailorWeldedBlank(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "idns": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineHazTailorWeldedBlank class."""
@@ -143,4 +147,14 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def idns_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for idns."""
+        return self._get_set_link("NODE", self.idns)
+
+    @idns_link.setter
+    def idns_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for idns."""
+        self.idns = value.sid
 

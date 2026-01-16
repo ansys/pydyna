@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINETRACERPARTICLES2D_CARD0 = (
     FieldSchema("nset", int, 0, 10, None),
@@ -44,6 +45,10 @@ class DefineTracerParticles2D(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nset": LinkType.SET_NODE,
+        "pset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineTracerParticles2D class."""
@@ -101,4 +106,24 @@ class DefineTracerParticles2D(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nset."""
+        return self._get_set_link("NODE", self.nset)
+
+    @nset_link.setter
+    def nset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nset."""
+        self.nset = value.sid
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

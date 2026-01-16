@@ -84,6 +84,8 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         "dlcidt": LinkType.DEFINE_CURVE,
         "cida": LinkType.DEFINE_COORDINATE_SYSTEM,
         "cidb": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pida": LinkType.PART,
+        "pidb": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -504,4 +506,14 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def cidb_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cidb."""
         self.cidb = value.cid
+
+    @property
+    def pida_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pida."""
+        return self._get_link_by_attr("PART", "pid", self.pida, "parts")
+
+    @property
+    def pidb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidb."""
+        return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 

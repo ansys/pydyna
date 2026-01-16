@@ -75,6 +75,9 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         "lcf": LinkType.DEFINE_CURVE,
         "lcupf": LinkType.DEFINE_CURVE,
         "lcupr": LinkType.DEFINE_CURVE,
+        "nsid": LinkType.SET_NODE,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -443,4 +446,24 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
     def lcupr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcupr."""
         self.lcupr = value.lcid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

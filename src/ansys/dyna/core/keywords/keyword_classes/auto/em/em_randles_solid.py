@@ -87,6 +87,11 @@ class EmRandlesSolid(KeywordBase):
     subkeyword = "RANDLES_SOLID"
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,
+        "ccppart": LinkType.PART,
+        "ccnpart": LinkType.PART,
+        "seppart": LinkType.PART,
+        "pelpart": LinkType.PART,
+        "nelpart": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -555,4 +560,29 @@ class EmRandlesSolid(KeywordBase):
     def flcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for flcid."""
         self.flcid = value.lcid
+
+    @property
+    def ccppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccppart."""
+        return self._get_link_by_attr("PART", "pid", self.ccppart, "parts")
+
+    @property
+    def ccnpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccnpart."""
+        return self._get_link_by_attr("PART", "pid", self.ccnpart, "parts")
+
+    @property
+    def seppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given seppart."""
+        return self._get_link_by_attr("PART", "pid", self.seppart, "parts")
+
+    @property
+    def pelpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pelpart."""
+        return self._get_link_by_attr("PART", "pid", self.pelpart, "parts")
+
+    @property
+    def nelpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given nelpart."""
+        return self._get_link_by_attr("PART", "pid", self.nelpart, "parts")
 

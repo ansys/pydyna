@@ -51,6 +51,7 @@ class BoundaryPwpTableSet(KeywordBase):
     subkeyword = "PWP_TABLE_SET"
     _link_fields = {
         "table": LinkType.DEFINE_CURVE,
+        "pid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -149,4 +150,14 @@ class BoundaryPwpTableSet(KeywordBase):
     def table_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for table."""
         self.table = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
 

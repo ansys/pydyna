@@ -138,6 +138,8 @@ class AirbagParticleMpp(KeywordBase):
         "hconv": LinkType.DEFINE_CURVE,
         "lctc23": LinkType.DEFINE_CURVE,
         "lcpc23": LinkType.DEFINE_CURVE,
+        "sidsv": LinkType.SET_PART,
+        "psid1": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -1001,4 +1003,24 @@ class AirbagParticleMpp(KeywordBase):
     def lcpc23_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcpc23."""
         self.lcpc23 = value.lcid
+
+    @property
+    def sidsv_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sidsv."""
+        return self._get_set_link("PART", self.sidsv)
+
+    @sidsv_link.setter
+    def sidsv_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sidsv."""
+        self.sidsv = value.sid
+
+    @property
+    def psid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid1."""
+        return self._get_set_link("PART", self.psid1)
+
+    @psid1_link.setter
+    def psid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid1."""
+        self.psid1 = value.sid
 

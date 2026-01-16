@@ -48,6 +48,7 @@ class InitialLagMapping(KeywordBase):
     subkeyword = "LAG_MAPPING"
     _link_fields = {
         "vecid": LinkType.DEFINE_VECTOR,
+        "setid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -156,4 +157,14 @@ class InitialLagMapping(KeywordBase):
     def vecid_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vecid."""
         self.vecid = value.vid
+
+    @property
+    def setid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for setid."""
+        return self._get_set_link("PART", self.setid)
+
+    @setid_link.setter
+    def setid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for setid."""
+        self.setid = value.sid
 

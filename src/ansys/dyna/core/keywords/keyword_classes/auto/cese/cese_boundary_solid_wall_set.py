@@ -43,6 +43,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_SET"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -128,4 +129,14 @@ class CeseBoundarySolidWallSet(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _PARTANNEALSET_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
@@ -36,6 +37,9 @@ class PartAnnealSet(KeywordBase):
 
     keyword = "PART"
     subkeyword = "ANNEAL_SET"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartAnnealSet class."""
@@ -66,4 +70,14 @@ class PartAnnealSet(KeywordBase):
     def time(self, value: float) -> None:
         """Set the time property."""
         self._cards[0].set_value("time", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

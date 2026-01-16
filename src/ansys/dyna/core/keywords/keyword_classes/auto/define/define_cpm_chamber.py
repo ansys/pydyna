@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINECPMCHAMBER_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
@@ -57,6 +58,10 @@ class DefineCpmChamber(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "sid1": LinkType.SET_PART,
+        "sid2": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCpmChamber class."""
@@ -198,4 +203,24 @@ class DefineCpmChamber(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def sid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sid1."""
+        return self._get_set_link("PART", self.sid1)
+
+    @sid1_link.setter
+    def sid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sid1."""
+        self.sid1 = value.sid
+
+    @property
+    def sid2_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sid2."""
+        return self._get_set_link("PART", self.sid2)
+
+    @sid2_link.setter
+    def sid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sid2."""
+        self.sid2 = value.sid
 

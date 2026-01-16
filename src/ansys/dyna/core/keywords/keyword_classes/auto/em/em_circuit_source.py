@@ -53,6 +53,10 @@ class EmCircuitSource(KeywordBase):
     subkeyword = "CIRCUIT_SOURCE"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "sidcurr": LinkType.SET_SEGMENT,
+        "sidvin": LinkType.SET_SEGMENT,
+        "sidvout": LinkType.SET_SEGMENT,
+        "partid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -230,4 +234,39 @@ class EmCircuitSource(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def sidcurr_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidcurr."""
+        return self._get_set_link("SEGMENT", self.sidcurr)
+
+    @sidcurr_link.setter
+    def sidcurr_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidcurr."""
+        self.sidcurr = value.sid
+
+    @property
+    def sidvin_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidvin."""
+        return self._get_set_link("SEGMENT", self.sidvin)
+
+    @sidvin_link.setter
+    def sidvin_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidvin."""
+        self.sidvin = value.sid
+
+    @property
+    def sidvout_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidvout."""
+        return self._get_set_link("SEGMENT", self.sidvout)
+
+    @sidvout_link.setter
+    def sidvout_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidvout."""
+        self.sidvout = value.sid
+
+    @property
+    def partid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partid."""
+        return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

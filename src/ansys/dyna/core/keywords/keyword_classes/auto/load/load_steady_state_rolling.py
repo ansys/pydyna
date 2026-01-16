@@ -73,6 +73,7 @@ class LoadSteadyStateRolling(KeywordBase):
         "lcd2r": LinkType.DEFINE_CURVE,
         "lcd3": LinkType.DEFINE_CURVE,
         "lcd3r": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -365,4 +366,14 @@ class LoadSteadyStateRolling(KeywordBase):
     def lcd3r_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcd3r."""
         self.lcd3r = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

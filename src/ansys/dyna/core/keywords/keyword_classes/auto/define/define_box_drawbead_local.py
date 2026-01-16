@@ -68,6 +68,7 @@ class DefineBoxDrawbeadLocal(KeywordBase):
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -309,4 +310,9 @@ class DefineBoxDrawbeadLocal(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

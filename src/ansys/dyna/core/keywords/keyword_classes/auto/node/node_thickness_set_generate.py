@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _NODETHICKNESSSETGENERATE_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
@@ -38,6 +39,10 @@ class NodeThicknessSetGenerate(KeywordBase):
 
     keyword = "NODE"
     subkeyword = "THICKNESS_SET_GENERATE"
+    _link_fields = {
+        "id1": LinkType.SET_NODE,
+        "id2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the NodeThicknessSetGenerate class."""
@@ -90,4 +95,24 @@ class NodeThicknessSetGenerate(KeywordBase):
     def inc(self, value: int) -> None:
         """Set the inc property."""
         self._cards[0].set_value("inc", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for id1."""
+        return self._get_set_link("NODE", self.id1)
+
+    @id1_link.setter
+    def id1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for id1."""
+        self.id1 = value.sid
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for id2."""
+        return self._get_set_link("NODE", self.id2)
+
+    @id2_link.setter
+    def id2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for id2."""
+        self.id2 = value.sid
 

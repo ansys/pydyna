@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _RIGIDWALLFORCETRANSDUCER_CARD0 = (
     FieldSchema("tid", int, 0, 10, 0),
@@ -44,6 +45,9 @@ class RigidwallForceTransducer(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "FORCE_TRANSDUCER"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallForceTransducer class."""
@@ -102,4 +106,14 @@ class RigidwallForceTransducer(KeywordBase):
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
         self._cards[2].set_value("nsid", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

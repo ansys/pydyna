@@ -72,6 +72,7 @@ class ControlExplicitThermalProperties(KeywordBase):
     _link_fields = {
         "vecid1": LinkType.DEFINE_VECTOR,
         "vecid2": LinkType.DEFINE_VECTOR,
+        "partset": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -439,4 +440,14 @@ class ControlExplicitThermalProperties(KeywordBase):
     def vecid2_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for vecid2."""
         self.vecid2 = value.vid
+
+    @property
+    def partset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for partset."""
+        return self._get_set_link("PART", self.partset)
+
+    @partset_link.setter
+    def partset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for partset."""
+        self.partset = value.sid
 

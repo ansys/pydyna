@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASECROSSSECTIONSET_CARD0 = (
     FieldSchema("csid", int, 0, 10, None),
@@ -47,6 +48,12 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_SET"
+    _link_fields = {
+        "bsid": LinkType.SET_BEAM,
+        "dsid": LinkType.SET_DISCRETE,
+        "nsid": LinkType.SET_NODE,
+        "hsid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseCrossSectionSet class."""
@@ -173,4 +180,44 @@ class DatabaseCrossSectionSet(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("itype", value)
+
+    @property
+    def bsid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsid."""
+        return self._get_set_link("BEAM", self.bsid)
+
+    @bsid_link.setter
+    def bsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsid."""
+        self.bsid = value.sid
+
+    @property
+    def dsid_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid."""
+        return self._get_set_link("DISCRETE", self.dsid)
+
+    @dsid_link.setter
+    def dsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid."""
+        self.dsid = value.sid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def hsid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for hsid."""
+        return self._get_set_link("SOLID", self.hsid)
+
+    @hsid_link.setter
+    def hsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for hsid."""
+        self.hsid = value.sid
 

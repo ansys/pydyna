@@ -25,7 +25,6 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MESHVOLUMEELEMENT_CARD0 = (
     FieldSchema("eid", int, 0, 8, None),
@@ -41,9 +40,6 @@ class MeshVolumeElement(KeywordBase):
 
     keyword = "MESH"
     subkeyword = "VOLUME_ELEMENT"
-    _link_fields = {
-        "pid": LinkType.PART,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the MeshVolumeElement class."""
@@ -118,9 +114,4 @@ class MeshVolumeElement(KeywordBase):
     def n4(self, value: int) -> None:
         """Set the n4 property."""
         self._cards[0].set_value("n4", value)
-
-    @property
-    def pid_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

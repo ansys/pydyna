@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACTGUIDEDCABLE_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
@@ -44,6 +45,10 @@ class ContactGuidedCable(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "GUIDED_CABLE"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactGuidedCable class."""
@@ -132,4 +137,19 @@ class ContactGuidedCable(KeywordBase):
     def fric(self, value: float) -> None:
         """Set the fric property."""
         self._cards[1].set_value("fric", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

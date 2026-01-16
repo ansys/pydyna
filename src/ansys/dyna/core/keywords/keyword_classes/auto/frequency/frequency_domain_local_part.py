@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _FREQUENCYDOMAINLOCALPART_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
@@ -42,6 +43,16 @@ class FrequencyDomainLocalPart(KeywordBase):
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_LOCAL_PART"
+    _link_fields = {
+        "id1": LinkType.PART,
+        "id2": LinkType.PART,
+        "id3": LinkType.PART,
+        "id4": LinkType.PART,
+        "id5": LinkType.PART,
+        "id6": LinkType.PART,
+        "id7": LinkType.PART,
+        "id8": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainLocalPart class."""
@@ -138,4 +149,44 @@ class FrequencyDomainLocalPart(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id1."""
+        return self._get_link_by_attr("PART", "pid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id2."""
+        return self._get_link_by_attr("PART", "pid", self.id2, "parts")
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id3."""
+        return self._get_link_by_attr("PART", "pid", self.id3, "parts")
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id4."""
+        return self._get_link_by_attr("PART", "pid", self.id4, "parts")
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id5."""
+        return self._get_link_by_attr("PART", "pid", self.id5, "parts")
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id6."""
+        return self._get_link_by_attr("PART", "pid", self.id6, "parts")
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id7."""
+        return self._get_link_by_attr("PART", "pid", self.id7, "parts")
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given id8."""
+        return self._get_link_by_attr("PART", "pid", self.id8, "parts")
 

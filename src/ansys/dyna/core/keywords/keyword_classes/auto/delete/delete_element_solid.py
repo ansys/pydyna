@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DELETEELEMENTSOLID_CARD0 = (
     FieldSchema("esid", int, 0, 10, None),
@@ -35,6 +36,9 @@ class DeleteElementSolid(KeywordBase):
 
     keyword = "DELETE"
     subkeyword = "ELEMENT_SOLID"
+    _link_fields = {
+        "esid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DeleteElementSolid class."""
@@ -54,4 +58,14 @@ class DeleteElementSolid(KeywordBase):
     def esid(self, value: int) -> None:
         """Set the esid property."""
         self._cards[0].set_value("esid", value)
+
+    @property
+    def esid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for esid."""
+        return self._get_set_link("SOLID", self.esid)
+
+    @esid_link.setter
+    def esid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for esid."""
+        self.esid = value.sid
 
