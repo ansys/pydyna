@@ -467,7 +467,8 @@ def _add_define_box_link_data(link_data: typing.List[typing.Dict], link_fields: 
     link_data.append(define_box_link_data)
 
 
-def _add_define_coordinate_system_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+def _add_define_coordinate_system_link_data(link_data: typing.List[typing.Dict],
+                                            link_fields: typing.List[LinkFieldInfo]):
     """Add link data for DEFINE_COORDINATE_SYSTEM keywords."""
     define_coordinate_system_link_data = {
         "classname": "DefineCoordinateSystem",
