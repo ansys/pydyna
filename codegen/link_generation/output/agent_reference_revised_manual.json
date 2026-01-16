@@ -100472,73 +100472,73 @@
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR",
       "source_field": "ID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_RETRACTOR_ID",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT",
@@ -100546,7 +100546,7 @@
       "referenced_keywords": [
         "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_SENSOR",
@@ -100554,7 +100554,7 @@
       "referenced_keywords": [
         "ELEMENT_SEATBELT_RETRACTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "36": [
@@ -100562,73 +100562,73 @@
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING",
       "source_field": "ID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SEATBELT_SLIPRING_ID",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SEATBELT_SLIPRING"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "11": [
@@ -100636,74 +100636,73 @@
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SPH",
       "source_field": "ID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRESS_SPH",
       "source_field": "EID",
       "referenced_keywords": [
-        "ELEMENT",
-        "SET_ELEMENT"
+        "ELEMENT_SPH"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "6": [
@@ -100711,177 +100710,177 @@
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_TSHELL",
       "source_field": "ID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL",
       "source_field": "ID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_TSHELL_ID",
       "source_field": "ID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_ELEMENT_DEATH_THICK_SHELL",
       "source_field": "EID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRAIN_TSHELL",
       "source_field": "EID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRESS_TSHELL",
       "source_field": "EID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_THERMAL_CONSTANT_ELEMENT_TSHELL",
       "source_field": "EID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_THERMAL_VARIABLE_ELEMENT_TSHELL",
       "source_field": "EID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ELEMENT_TSHELL"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "15": [
@@ -101171,43 +101170,41 @@
       "source_keyword": "DEFINE_CONNECTION_PROPERTIES_ADD",
       "source_field": "CON_ID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_CONNECTION_PROPERTIES"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "MAT_100_DA",
       "source_field": "CON_ID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_CONNECTION_PROPERTIES"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "MAT_SPOTWELD_DAIMLERCHRYSLER",
       "source_field": "CON_ID",
       "referenced_keywords": [
-        "DEFINE_CONNEC",
-        "DEFINE_CONNECTION_PROPERTIES",
-        "DEFINE_MULTI_SHEET_CONNECTORS"
+        "DEFINE_CONNECTION_PROPERTIES"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "MAT_SPOTWELD_DAIMLERCHRYSLER_UNIAXIAL",
       "source_field": "CON_ID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_CONNECTION_PROPERTIES"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "156": [
     {
       "source_keyword": "DEFINE_CONTROL_VOLUME_FLOW_AREA",
-      "source_field": "CVIID ",
+      "source_field": "FVIID",
       "referenced_keywords": [
-        "DEFINE_"
+        "DEFINE_CONTROL_VOLUME_INTERACTION"
       ],
       "confidence": 0.9
     }
@@ -101217,8 +101214,7 @@
       "source_keyword": "DEFINE_CONTROL_VOLUME_INTERACTION",
       "source_field": "CVID1",
       "referenced_keywords": [
-        "DEFINE_CONTROL_VOLUME",
-        "DEFINE_CON"
+        "DEFINE_CONTROL_VOLUME"
       ],
       "confidence": 0.9
     },
@@ -101226,8 +101222,7 @@
       "source_keyword": "DEFINE_CONTROL_VOLUME_INTERACTION",
       "source_field": "CVID2",
       "referenced_keywords": [
-        "DEFINE_CONTROL_VOLUME",
-        "DEFINE_CON"
+        "DEFINE_CONTROL_VOLUME"
       ],
       "confidence": 0.9
     }
@@ -101245,9 +101240,9 @@
       "source_keyword": "DEFINE_DE_INJECT_BONDED_ELLIPSE",
       "source_field": "ISHAPE",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_DE_INJECT_SHAPE"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "159": [
@@ -101255,9 +101250,9 @@
       "source_keyword": "DEFINE_MULTISCALE",
       "source_field": "ID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "INCLUDE_MULTISCALE"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "122": [
@@ -101265,9 +101260,9 @@
       "source_keyword": "DEFINE_PARTICLE_BLAST",
       "source_field": "AIRCID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_PBLAST_AIRGEO ID"
       ],
-      "confidence": 0.7
+      "confidence": 0.9
     }
   ],
   "68": [
@@ -101275,8 +101270,7 @@
       "source_keyword": "DEFINE_STAGED_CONSTRUCTION_PART",
       "source_field": "STGA",
       "referenced_keywords": [
-        "PART",
-        "CON"
+        "DEFINE_CONSTRUCTION_STAGES"
       ],
       "confidence": 0.9
     },
@@ -101284,7 +101278,7 @@
       "source_keyword": "DEFINE_STAGED_CONSTRUCTION_PART",
       "source_field": "STGR",
       "referenced_keywords": [
-        "CON"
+        "DEFINE_CONSTRUCTION_STAGES"
       ],
       "confidence": 0.9
     },
@@ -101292,17 +101286,17 @@
       "source_keyword": "DEFINE_STAGED_CONSTRUCTION_PART_SET",
       "source_field": "STGA",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_CONSTRUCTION_STAGES"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     },
     {
       "source_keyword": "DEFINE_STAGED_CONSTRUCTION_PART_SET",
       "source_field": "STGR",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_CONSTRUCTION_STAGES"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "77": [
@@ -102172,193 +102166,193 @@
       "source_keyword": "DUALCESE_ELE2D",
       "source_field": "N1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE2D",
       "source_field": "N2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE2D",
       "source_field": "N3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE2D",
       "source_field": "N4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_ELE3D",
       "source_field": "N8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_NODESET",
       "source_field": "NID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_SEGMENTSET",
       "source_field": "N1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_SEGMENTSET",
       "source_field": "N2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_SEGMENTSET",
       "source_field": "N3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "DUALCESE_SEGMENTSET",
       "source_field": "N4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "139": [
@@ -102564,7 +102558,7 @@
       "source_keyword": "ELEMENT_BEAM_WARPAGE",
       "source_field": "SN1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
       "confidence": 0.0
     },
@@ -102572,7 +102566,7 @@
       "source_keyword": "ELEMENT_BEAM_WARPAGE",
       "source_field": "SN2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
       "confidence": 0.0
     }
@@ -102600,7 +102594,7 @@
       "source_keyword": "ELEMENT_INTERPOLATION_SHELL",
       "source_field": "EIDGS",
       "referenced_keywords": [
-        "DEFINE_ELEMENT_GENERALIZED_SHELL"
+        "ELEMENT_GENERALIZED_SHELL"
       ],
       "confidence": 0.9
     },
@@ -102608,8 +102602,6 @@
       "source_keyword": "ELEMENT_INTERPOLATION_SOLID",
       "source_field": "EIDGS",
       "referenced_keywords": [
-        "NODE",
-        "CONSTRAINED_NODE_INTERPOLATION",
         "ELEMENT_GENERALIZED_SOLID"
       ],
       "confidence": 0.9
@@ -103070,8 +103062,7 @@
       "source_keyword": "EM_ISOPOTENTIAL_CONNECT",
       "source_field": "ISOID1",
       "referenced_keywords": [
-        "DEFINE_CURVE",
-        "EM_CONTROL"
+        "EM_ISOPOTENTIAL"
       ],
       "confidence": 0.9
     },
@@ -103079,7 +103070,7 @@
       "source_keyword": "EM_ISOPOTENTIAL_CONNECT",
       "source_field": "ISOID2",
       "referenced_keywords": [
-        "EM_CONTROL"
+        "EM_ISOPOTENTIAL"
       ],
       "confidence": 0.9
     }
@@ -103089,67 +103080,65 @@
       "source_keyword": "EM_MAT_001",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EM_EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_002",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EM_EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_002",
       "source_field": "EOSMU",
       "referenced_keywords": [
-        "EM_SOLVER_FEMBEM_MONOLITHIC"
+        "EM_EOS"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_002",
       "source_field": "EOSID2",
       "referenced_keywords": [
-        "SET_"
+        "EM_EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_004",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EM_EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_004",
       "source_field": "EOSMU",
       "referenced_keywords": [
-        "MAT_",
-        "PARTICLE_BLAST",
-        "ICFD_PART_VOL"
+        "EM_EOS"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_006",
       "source_field": "EOSP",
       "referenced_keywords": [
-        "UNKNOWN"
+        "EM_EOS"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_MAT_006",
       "source_field": "EOSN",
       "referenced_keywords": [
-        "UNKNOWN"
+        "EM_EOS"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "-26368": [
@@ -103225,7 +103214,7 @@
       "source_keyword": "FREQUENCY_DOMAIN_MODE_SET",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MODE"
       ],
       "confidence": 0.6
     },
@@ -103233,7 +103222,7 @@
       "source_keyword": "FREQUENCY_DOMAIN_MODE_SET_EXCLUDE",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MODE"
       ],
       "confidence": 0.6
     }
@@ -103243,7 +103232,8 @@
       "source_keyword": "FREQUENCY_DOMAIN_RESPONSE_SPECTRUM",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103251,7 +103241,8 @@
       "source_keyword": "MAT_021",
       "source_field": "LCAA",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103259,7 +103250,8 @@
       "source_keyword": "MAT_024",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103267,7 +103259,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPDR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103275,7 +103268,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPDS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103283,7 +103277,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPDT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103291,7 +103286,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPMR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103299,7 +103295,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPMS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103307,7 +103304,8 @@
       "source_keyword": "MAT_068",
       "source_field": "LCPMT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103315,7 +103313,8 @@
       "source_keyword": "MAT_181",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103323,7 +103322,8 @@
       "source_keyword": "MAT_187L",
       "source_field": "LCID_T",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103331,7 +103331,8 @@
       "source_keyword": "MAT_187L",
       "source_field": "LCID_C",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103339,7 +103340,8 @@
       "source_keyword": "MAT_199",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103347,7 +103349,8 @@
       "source_keyword": "MAT_224",
       "source_field": "TABK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103355,7 +103358,8 @@
       "source_keyword": "MAT_224",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103363,7 +103367,8 @@
       "source_keyword": "MAT_224",
       "source_field": "LCI",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103371,7 +103376,8 @@
       "source_keyword": "MAT_224_GYS",
       "source_field": "LCK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103379,7 +103385,8 @@
       "source_keyword": "MAT_224_GYS",
       "source_field": "LCKT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103387,7 +103394,8 @@
       "source_keyword": "MAT_224_GYS",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103395,7 +103403,8 @@
       "source_keyword": "MAT_238",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103403,7 +103412,8 @@
       "source_keyword": "MAT_244",
       "source_field": "LCY1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103411,7 +103421,8 @@
       "source_keyword": "MAT_249",
       "source_field": "LCSIGY",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103419,7 +103430,8 @@
       "source_keyword": "MAT_252",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103427,7 +103439,8 @@
       "source_keyword": "MAT_254",
       "source_field": "MIXR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103435,7 +103448,8 @@
       "source_keyword": "MAT_254",
       "source_field": "XA1PA1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103443,7 +103457,8 @@
       "source_keyword": "MAT_254",
       "source_field": "XA1PA2",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103451,7 +103466,8 @@
       "source_keyword": "MAT_254",
       "source_field": "XA1PA3",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103459,7 +103475,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103467,7 +103484,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY2",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103475,7 +103493,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY3",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103483,7 +103502,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY4",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103491,7 +103511,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY5",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103499,7 +103520,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY6",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103507,7 +103529,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY7",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103515,7 +103538,8 @@
       "source_keyword": "MAT_254",
       "source_field": "SIGY8",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103523,7 +103547,8 @@
       "source_keyword": "MAT_3-PARAMETER_BARLAT",
       "source_field": "HTA",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103531,7 +103556,8 @@
       "source_keyword": "MAT_3-PARAMETER_BARLAT",
       "source_field": "HTB",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103539,7 +103565,8 @@
       "source_keyword": "MAT_3PARAMETER_BARLAT",
       "source_field": "HTA",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103547,7 +103574,8 @@
       "source_keyword": "MAT_3PARAMETER_BARLAT",
       "source_field": "HTB",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103555,7 +103583,8 @@
       "source_keyword": "MAT_ADD_DAMAGE_DIEM",
       "source_field": "P1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103563,7 +103592,8 @@
       "source_keyword": "MAT_ADD_DAMAGE_GISSMO",
       "source_field": "LCREGD",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103571,7 +103601,8 @@
       "source_keyword": "MAT_ADD_DAMAGE_GISSMO",
       "source_field": "LCSRS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103579,7 +103610,8 @@
       "source_keyword": "MAT_ADD_DAMAGE_GISSMO_STOCHASTIC",
       "source_field": "LCREGD",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103587,7 +103619,8 @@
       "source_keyword": "MAT_ADD_DAMAGE_GISSMO_STOCHASTIC",
       "source_field": "LCSRS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103595,7 +103628,8 @@
       "source_keyword": "MAT_BARLAT_YLD2004",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103603,7 +103637,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "MIXR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103611,7 +103646,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "XA1PA1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103619,7 +103655,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "XA1PA2",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103627,7 +103664,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "XA1PA3",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103635,7 +103673,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103643,7 +103682,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY2",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103651,7 +103691,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY3",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103659,7 +103700,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY4",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103667,7 +103709,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY5",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103675,7 +103718,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY6",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103683,7 +103727,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY7",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103691,7 +103736,8 @@
       "source_keyword": "MAT_GENERALIZED_PHASE_CHANGE",
       "source_field": "SIGY8",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103699,7 +103745,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPDR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103707,7 +103754,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPDS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103715,7 +103763,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPDT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103723,7 +103772,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPMR",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103731,7 +103781,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPMS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103739,7 +103790,8 @@
       "source_keyword": "MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM",
       "source_field": "LCPMT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103747,7 +103799,8 @@
       "source_keyword": "MAT_ORTHOTROPIC_THERMAL_CURING",
       "source_field": "LCAA",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103755,7 +103808,8 @@
       "source_keyword": "MAT_PERT_PIECEWISE_LINEAR_PLASTICITY",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103763,7 +103817,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103771,7 +103826,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY_2D",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103779,7 +103835,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY_HAZ",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103787,7 +103844,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY_LOG_INTERPOLATION",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103795,7 +103853,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY_MIDFAIL",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103803,7 +103862,8 @@
       "source_keyword": "MAT_PIECEWISE_LINEAR_PLASTICITY_STOCHASTIC",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103811,7 +103871,8 @@
       "source_keyword": "MAT_REINFORCED_THERMOPLASTIC",
       "source_field": "LCSIGY",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103819,7 +103880,8 @@
       "source_keyword": "MAT_S06",
       "source_field": "LCDL",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103827,7 +103889,8 @@
       "source_keyword": "MAT_S06",
       "source_field": "LCDU",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103835,7 +103898,8 @@
       "source_keyword": "MAT_SAMP_LIGHT",
       "source_field": "LCID_T",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103843,7 +103907,8 @@
       "source_keyword": "MAT_SAMP_LIGHT",
       "source_field": "LCID_C",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103851,7 +103916,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103859,7 +103925,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER/FOAM",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103867,7 +103934,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103875,7 +103943,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103883,7 +103952,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103891,7 +103961,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103899,7 +103970,8 @@
       "source_keyword": "MAT_SIMPLIFIED_RUBBERFOAM",
       "source_field": "LC/TBID",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103907,7 +103979,8 @@
       "source_keyword": "MAT_SPRING_GENERAL_NONLINEAR",
       "source_field": "LCDL",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103915,7 +103988,8 @@
       "source_keyword": "MAT_SPRING_GENERAL_NONLINEAR",
       "source_field": "LCDU",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103923,7 +103997,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK",
       "source_field": "TABK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103931,7 +104006,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103939,7 +104015,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK",
       "source_field": "LCI",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103947,7 +104024,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS",
       "source_field": "LCK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103955,7 +104033,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS",
       "source_field": "LCKT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103963,7 +104042,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103971,7 +104051,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS_LOG_INTERPOLATION",
       "source_field": "LCK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103979,7 +104060,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS_LOG_INTERPOLATION",
       "source_field": "LCKT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103987,7 +104069,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_GYS_LOG_INTERPOLATION",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -103995,7 +104078,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_LOG_INTERPOLATION",
       "source_field": "TABK1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -104003,7 +104087,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_LOG_INTERPOLATION",
       "source_field": "LCF",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -104011,7 +104096,8 @@
       "source_keyword": "MAT_TABULATED_JOHNSON_COOK_LOG_INTERPOLATION",
       "source_field": "LCI",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -104019,7 +104105,8 @@
       "source_keyword": "MAT_TOUGHENED_ADHESIVE_POLYMER",
       "source_field": "LCSS",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     },
@@ -104027,7 +104114,8 @@
       "source_keyword": "MAT_UHS_STEEL",
       "source_field": "LCY1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_CURVE",
+        "DEFINE_TABLE"
       ],
       "confidence": 0.95
     }
@@ -104631,66 +104719,65 @@
       "source_keyword": "ICFD_BOUNDARY_PERIODIC",
       "source_field": "PTID",
       "referenced_keywords": [
-        "ICFD_DE"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_BOUNDARY_PRESCRIBED_LEVELSET",
       "source_field": "PTID",
       "referenced_keywords": [
-        "ICFD_DE"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_BOUNDARY_PRESCRIBED_VEL",
       "source_field": "VID",
       "referenced_keywords": [
-        "ICFD_DE"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_HEATSOURCE",
       "source_field": "PTID1",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_HEATSOURCE",
       "source_field": "PTID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_NONINERTIAL",
       "source_field": "PTID",
       "referenced_keywords": [
-        "DEFINE_CURVE",
-        "ICFD_DEFINE_"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_SOURCE",
       "source_field": "PID1",
       "referenced_keywords": [
-        "PART"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_SOURCE",
       "source_field": "PID2",
       "referenced_keywords": [
-        "PART"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_TURBSOURCE",
@@ -104698,7 +104785,7 @@
       "referenced_keywords": [
         "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_TURBSOURCE",
@@ -104706,24 +104793,23 @@
       "referenced_keywords": [
         "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_WAVE_DAMPING",
       "source_field": "PID",
       "referenced_keywords": [
-        "PART"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_DEFINE_WAVE_DAMPING",
       "source_field": "NID",
       "referenced_keywords": [
-        "SET_NODE",
-        "NODE"
+        "ICFD_DEFINE_POINT"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "70": [
@@ -104741,8 +104827,7 @@
       "source_keyword": "ICFD_MAT",
       "source_field": "NNMOID",
       "referenced_keywords": [
-        "ICFD_MAT",
-        "DEFINE_CURVE_FUNCTION"
+        "ICFD_MODEL_NONNEWT"
       ],
       "confidence": 0.9
     }
@@ -104752,8 +104837,7 @@
       "source_keyword": "ICFD_MAT",
       "source_field": "PMMOID",
       "referenced_keywords": [
-        "ICFD_MAT",
-        "DEFINE_CURVE_FUNCTION"
+        "ICFD_MODEL_POROUS"
       ],
       "confidence": 0.9
     }
@@ -104763,17 +104847,17 @@
       "source_keyword": "ICFD_PART",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "ICFD_SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "ICFD_PART_VOL",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "ICFD_SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "71": [
@@ -104781,7 +104865,7 @@
       "source_keyword": "ICFD_PART",
       "source_field": "MID",
       "referenced_keywords": [
-        "MAT_"
+        "ICFD_MAT"
       ],
       "confidence": 0.95
     },
@@ -104789,7 +104873,7 @@
       "source_keyword": "ICFD_PART_VOL",
       "source_field": "MID",
       "referenced_keywords": [
-        "MAT_"
+        "ICFD_MAT"
       ],
       "confidence": 0.95
     }
@@ -104897,25 +104981,25 @@
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
@@ -104923,23 +105007,23 @@
       "referenced_keywords": [
         "IGA_FACE_UVW"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
@@ -104947,375 +105031,375 @@
       "referenced_keywords": [
         "IGA_FACE_UVW"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_2D_BREP",
       "source_field": "FID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_FACE_UVW",
       "source_field": "LUID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW",
       "source_field": "FID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST",
       "source_field": "FID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_COLLECT",
       "source_field": "FID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B1BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B1END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B2BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B2END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B3BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B3END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B4BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE",
       "source_field": "B4END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B1BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B1END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B2BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B2END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B3BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B3END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B4BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B4END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_INCREMENT",
       "source_field": "BBEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_INCREMENT",
       "source_field": "BEND",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BBEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_FACE_UVW_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BEND",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_FACE_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "124": [
@@ -105323,633 +105407,633 @@
       "source_keyword": "IGA_EDGE_UVW",
       "source_field": "EXYZID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_COLLECT",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_COLLECT",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B1BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B1END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B2BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B2END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B3BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B3END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B4BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_COLLECT",
       "source_field": "B4END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BBEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_UVW_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BEND",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_COLLECT",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_COLLECT",
       "source_field": "EID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B1BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B1END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B2BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B2END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B3BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B3END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B4BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE",
       "source_field": "B4END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B1BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B1END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B2BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B2END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B3BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B3END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B4BEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_COLLECT",
       "source_field": "B4END",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_INCREMENT",
       "source_field": "BBEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_INCREMENT",
       "source_field": "BEND",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BBEG",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_IGA_EDGE_XYZ_LIST_GENERATE_INCREMENT_COLLECT",
       "source_field": "BEND",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_EDGE_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "125": [
@@ -105957,8 +106041,7 @@
       "source_keyword": "IGA_EDGE_UVW",
       "source_field": "NID",
       "referenced_keywords": [
-        "SET_NODE",
-        "NODE"
+        "IGA_1D_NURBS_UVW"
       ],
       "confidence": 0.9
     }
@@ -105968,9 +106051,9 @@
       "source_keyword": "IGA_EDGE_XYZ",
       "source_field": "NID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_NURBS_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "128": [
@@ -105978,9 +106061,9 @@
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "NID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_2D_NURBS_UVW"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "129": [
@@ -105988,135 +106071,129 @@
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID2",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID3",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID4",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID5",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID6",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_UVW",
       "source_field": "BRID8",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANS",
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID5",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID6",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID7",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "BRID8",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_1D_BREP"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "130": [
@@ -106124,9 +106201,9 @@
       "source_keyword": "IGA_FACE_XYZ",
       "source_field": "NID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_2D_NURBS_XYZ"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     }
   ],
   "109": [
@@ -106142,9 +106219,9 @@
       "source_keyword": "LOAD_NURBS_SHELL",
       "source_field": "SSID",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SHELL_NURBS_PATCH"
       ],
-      "confidence": 0.6
+      "confidence": 0.9
     }
   ],
   "132": [
@@ -106152,7 +106229,7 @@
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "NID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "IGA_3D_NURBS_XYZ"
       ],
       "confidence": 0.0
     }
@@ -106162,65 +106239,65 @@
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID1",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID2",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID3",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID4",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID5",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID6",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID7",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "BRID8",
       "referenced_keywords": [
-        "IGA_3D_BASIS_TRANSFORM_XYZ"
+        "IGA_2D_BREP"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "40": [
@@ -106228,33 +106305,31 @@
       "source_keyword": "INCLUDE_TRANSFORM",
       "source_field": "TRANID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_TRANSFORMATION"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     },
     {
       "source_keyword": "INCLUDE_TRANSFORM_BINARY",
       "source_field": "TRANID",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_TRANSFORMATION"
       ],
-      "confidence": 0.0
+      "confidence": 0.9
     },
     {
       "source_keyword": "NODE_TRANSFORM",
       "source_field": "TRSID",
       "referenced_keywords": [
-        "SET_"
+        "DEFINE_TRANSFORMATION"
       ],
-      "confidence": 0.6
+      "confidence": 0.9
     },
     {
       "source_keyword": "PART_DUPLICATE",
       "source_field": "TRANID",
       "referenced_keywords": [
-        "DAMPING_FREQUENCY_RANGE_DEFORM",
-        "INCLUDE_TRANSFORM",
-        "PART_DUPLICATE_"
+        "DEFINE_TRANSFORMATION"
       ],
       "confidence": 0.9
     }
@@ -106453,1317 +106528,2789 @@
       "source_keyword": "MAT_002",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_002_ANIS",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_021",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "ELEMENT_SHELL_BETA"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_022",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_023",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_026",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_033",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_033_96",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_034",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_034M",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_036",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_036E",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_040",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "ELEMENT_SHELL_BETA"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_041_050",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_054/055",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_058",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_058_SOLID",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_059_SHELL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_059_SOLID",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_059_SPH",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_086",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_091",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_092",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_103",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_103_P",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_104",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_108",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_115_o",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_116",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_117",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_122",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "ELEMENT_SHELL_BETA"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_122_2D",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_126",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "MAT_ADD_",
-        "DEFINE_CURVE"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_128",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_130",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_132",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_133",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_135",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_136",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_136_2017",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_136_STD",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_142",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_143",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_143_FIR",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_143_PINE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_157",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_158",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_161",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_162",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_170",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_189",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_190",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_194",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_NODES",
-        "DEFINE_COORDI"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_199",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_213",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_219",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_221",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_226",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_226_NLP",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_233",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_234",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_235",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_242",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_243",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_249",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_249_CRASH",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_249_UDfiber",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_260A",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_260B",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_261",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_262",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_266",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_274",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_278",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_291",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_3-PARAMETER_BARLAT",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_3-PARAMETER_BARLAT_NLP",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_3PARAMETER_BARLAT",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ADD_INELASTICITY",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_ELASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_ELASTIC_PLASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_PLASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_THERMOELASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_VISCOPLASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_BARLAT_ANISOTROPIC_PLASTICITY",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_BARLAT_YLD2000",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_BARLAT_YLD2004",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_BARLAT_YLD96",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_CAZACU_BARLAT",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "DEFINE_CURVE"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_CAZACU_BARLAT_MAGNESIUM",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_CF_MICROMECHANICS",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_CODAM2",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_DAMAGE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_FAILURE_SHELL_MODEL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_FAILURE_SOLID_MODEL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_FAILURE_SPH_MODEL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_LAYUP",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_MATRIX",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_MSC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_MSC_DMG",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_COMPOSITE_TABULATED_PLASTICITY_DAMAGE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_CORUS_VEGTER",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_DAMAGE_1",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ENHANCED_COMPOSITE_DAMAGE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ENHANCED_COMPOSITE_DAMAGE_MODEL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_EXTENDED_3-PARAMETER_BARLAT",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_FABRIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_FABRIC_MAP",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_FLD_3-PARAMETER_BARLAT",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HEART_TISSUE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HILL_3R",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HILL_3R_3D",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HILL_3R_TABULATED",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HILL_90",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_HONEYCOMB",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_KINEMATIC_HARDENING_BARLAT2000",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_KINEMATIC_HARDENING_BARLAT89",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_KINEMATIC_HARDENING_BARLAT89_NLP",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_LAMINATED_COMPOSITE_FABRIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_LAMINATED_COMPOSITE_FABRIC_SOLID",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_LAMINATED_FRACTURE_DAIMLER_CAMANHO",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_LAMINATED_FRACTURE_DAIMLER_PINHO",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_MICROMECHANICS_DRY_FABRIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_MODIFIED_HONEYCOMB",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_MOHR_NON_ASSOCIATED_FLOW",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "DEFINE_CURVE",
-        "MAT_PIECEWISE_LINEAR_PLASTICITY"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_MOHR_NON_ASSOCIATED_FLOW_XUE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_NONLINEAR_ORTHOTROPIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_ELASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_SIMPLIFIED_DAMAGE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_SMEARED_CRACK",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_THERMAL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_THERMAL_CURING",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_THERMAL_FAILURE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHOTROPIC_VISCOELASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_ORTHO_ELASTIC_PLASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_PAPER",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_RATE_SENSITIVE_COMPOSITE_FABRIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_RC_SHEAR_WALL",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_REINFORCED_THERMOPLASTIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_REINFORCED_THERMOPLASTIC_CRASH",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_REINFORCED_THERMOPLASTIC_UDFIBER",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_RESULTANT_ANISOTROPIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_SHAPE_MEMORY_ALLOY",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_SHAPE_MEMORY_ALLOY_MEDTRONIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_SOFT_TISSUE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_SOFT_TISSUE_VISCO",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_SPECIAL_ORTHOTROPIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_STOUGHTON_NON_ASSOCIATED_FLOW",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_STOUGHTON_NON_ASSOCIATED_FLOW_XUE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_TEMPERATURE_DEPENDENT_ORTHOTROPIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_TISSUE_DISPERSED",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_TRANSVERSELY_ANISOTROPIC_CRUSHABLE_FOAM",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_TRANSVERSELY_ISOTROPIC_CRUSHABLE_FOAM",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_UNIFIED_CREEP_ORTHO",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_OPTION",
-        "ELEMENT_"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.9
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_USER_DEFINED_MATERIAL_MODELS",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_VEGTER",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_VEGTER_2017",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_VEGTER_STANDARD",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_VISCOELASTIC_LOOSE_FABRIC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_WOOD",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_WOOD_FIR",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_WOOD_PINE",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_WTM_STM",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "MAT_WTM_STM_PLC",
       "source_field": "AOPT",
       "referenced_keywords": [
-        "UNKNOWN"
+        "DEFINE_COORDINATE",
+        "DEFINE_COORDINATE_VECTOR"
       ],
-      "confidence": 0.0
+      "confidence": 0.95,
+      "condition": {
+        "field": "AOPT",
+        "value_map": {
+          "LT.0": "DEFINE_COORDINATE",
+          "2.0": "DEFINE_COORDINATE_VECTOR"
+        },
+        "confidence": 0.95
+      }
     }
   ],
   "76": [
@@ -107805,33 +109352,33 @@
       "source_keyword": "MESH_SURFACE_ELEMENT",
       "source_field": "N1",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "MESH_SURFACE_ELEMENT",
       "source_field": "N2",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "MESH_SURFACE_ELEMENT",
       "source_field": "N3",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     },
     {
       "source_keyword": "MESH_SURFACE_ELEMENT",
       "source_field": "N4",
       "referenced_keywords": [
-        "UNKNOWN"
+        "NODE"
       ],
-      "confidence": 0.0
+      "confidence": 0.95
     }
   ],
   "106": [
@@ -107839,8 +109386,7 @@
       "source_keyword": "MODULE_USE",
       "source_field": "MDLID",
       "referenced_keywords": [
-        "USER_INTERFACE_FRICTION",
-        "DUALCESE"
+        "MODULE_LOAD"
       ],
       "confidence": 0.9
     }
