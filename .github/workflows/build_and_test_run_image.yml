@@ -44,11 +44,12 @@ jobs:
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_PASSWORD=${FTP_PASSWORD} \
             --load \
-            -t lsdyna:test \
+            -t pydyna:run \
             docker/run || echo "Build completed"
 
           echo "Running Docker image to check functionality..."
-          docker run --rm lsdyna:test --help || echo "Run completed"
+          docker run -it -v $(pwd):/workspace pydyna:run ls /workspace || echo "Run completed"
+
         env:
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}

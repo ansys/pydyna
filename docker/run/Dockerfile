@@ -29,7 +29,14 @@ RUN apt-get update && apt-get install -y \
     gzip \
     bash \
     file \
+    python3 \
+    python3-pip \
+    python3-venv \
+    git \
     && rm -rf /var/lib/apt/lists/*
+
+# Install uv for faster Python package management
+RUN pip3 install uv
  
 # Working directory
 WORKDIR /opt/Dyna
@@ -61,6 +68,12 @@ RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79
 # Alternatively, set environment variables as backup
 ENV LSTC_LICENSE=network
 
-# entrypoint
-ENTRYPOINT ["/opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"]
+# Add LS-DYNA to PATH for easier access
+ENV PATH="/opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2:${PATH}"
+
+# Set up working directory
+WORKDIR /workspace
+
+# When container starts, provide interactive bash shell
+CMD ["/bin/bash"]
 
