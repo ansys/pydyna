@@ -5,6 +5,10 @@ on:
     paths:
       - 'docker/run/**'
       - '.github/workflows/build_and_test_run_image.yml'
+  push:
+    paths:
+      - 'docker/run/**'
+      - '.github/workflows/build_and_test_run_image.yml'
   workflow_dispatch:
 
 permissions:
