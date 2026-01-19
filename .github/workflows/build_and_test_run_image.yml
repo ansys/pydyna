@@ -22,6 +22,7 @@ concurrency:
 env:
   FTP_USER: ${{ secrets.FTP_USER }}
   FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+  license-server: ${{ secrets.LICENSE_SERVER }}
 
 jobs:
   test-docker-build:
@@ -48,7 +49,12 @@ jobs:
 
           echo "Running Docker image to check functionality..."
           docker run --rm lsdyna:test --help || echo "Run completed"
+        env:
+          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
+          LSTC_LICENSE: ansys
 
+          
       - name: Test Docker build validation
         run: |
           echo "Validating Dockerfile..."
