@@ -20,8 +20,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FTP_USER: ${{ secrets.LSTC_FTP_USER }}
-  FTP_PASSWORD: ${{ secrets.LSTC_FTP_PASSWORD }}
+  FTP_USER: ${{ secrets.FTP_USER }}
+  FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
 
 jobs:
   test-docker-build:
@@ -42,6 +42,7 @@ jobs:
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_PASSWORD=${FTP_PASSWORD} \
+            --build
             docker/run || echo "Dry run completed"
 
       - name: Test Docker build validation
