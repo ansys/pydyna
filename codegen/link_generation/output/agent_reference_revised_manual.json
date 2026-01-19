@@ -102434,9 +102434,17 @@
       "source_keyword": "DUALCESE_EOS_SET",
       "source_field": "EOSINID",
       "referenced_keywords": [
+        "DUALCESE_EOS_CAV_HOMOG_EQUILIB",
+        "DUALCESE_EOS_COCHRAN_CHAN",
+        "DUALCESE_EOS_COOLPROP",
         "DUALCESE_EOS_IDEAL_GAS",
-        "DUALCESE_SOLVER_HYBRID_MULTIPHASE",
-        "DUALCESE_"
+        "DUALCESE_EOS_INFLATOR1",
+        "DUALCESE_EOS_INFLATOR2",
+        "DUALCESE_EOS_JWL",
+        "DUALCESE_EOS_NASG",
+        "DUALCESE_EOS_REFPROP",
+        "DUALCESE_EOS_STIFFENED_GAS",
+        "DUALCESE_EOS_VAN_DER_WAALS_GENERALIZED"
       ],
       "confidence": 0.9
     },
@@ -102444,9 +102452,17 @@
       "source_keyword": "DUALCESE_EOS_SET",
       "source_field": "EOSRCTID",
       "referenced_keywords": [
+        "DUALCESE_EOS_CAV_HOMOG_EQUILIB",
+        "DUALCESE_EOS_COCHRAN_CHAN",
+        "DUALCESE_EOS_COOLPROP",
         "DUALCESE_EOS_IDEAL_GAS",
-        "DUALCESE_SOLVER_HYBRID_MULTIPHASE",
-        "DUALCESE_"
+        "DUALCESE_EOS_INFLATOR1",
+        "DUALCESE_EOS_INFLATOR2",
+        "DUALCESE_EOS_JWL",
+        "DUALCESE_EOS_NASG",
+        "DUALCESE_EOS_REFPROP",
+        "DUALCESE_EOS_STIFFENED_GAS",
+        "DUALCESE_EOS_VAN_DER_WAALS_GENERALIZED"
       ],
       "confidence": 0.9
     },
@@ -102454,9 +102470,17 @@
       "source_keyword": "DUALCESE_EOS_SET",
       "source_field": "EOSPRDI",
       "referenced_keywords": [
+        "DUALCESE_EOS_CAV_HOMOG_EQUILIB",
+        "DUALCESE_EOS_COCHRAN_CHAN",
+        "DUALCESE_EOS_COOLPROP",
         "DUALCESE_EOS_IDEAL_GAS",
-        "DUALCESE_SOLVER_HYBRID_MULTIPHASE",
-        "DUALCESE_"
+        "DUALCESE_EOS_INFLATOR1",
+        "DUALCESE_EOS_INFLATOR2",
+        "DUALCESE_EOS_JWL",
+        "DUALCESE_EOS_NASG",
+        "DUALCESE_EOS_REFPROP",
+        "DUALCESE_EOS_STIFFENED_GAS",
+        "DUALCESE_EOS_VAN_DER_WAALS_GENERALIZED"
       ],
       "confidence": 0.9
     },
@@ -102464,7 +102488,17 @@
       "source_keyword": "DUALCESE_PART",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "DUALCESE_EOS_CAV_HOMOG_EQUILIB",
+        "DUALCESE_EOS_COCHRAN_CHAN",
+        "DUALCESE_EOS_COOLPROP",
+        "DUALCESE_EOS_IDEAL_GAS",
+        "DUALCESE_EOS_INFLATOR1",
+        "DUALCESE_EOS_INFLATOR2",
+        "DUALCESE_EOS_JWL",
+        "DUALCESE_EOS_NASG",
+        "DUALCESE_EOS_REFPROP",
+        "DUALCESE_EOS_STIFFENED_GAS",
+        "DUALCESE_EOS_VAN_DER_WAALS_GENERALIZED"
       ],
       "confidence": 0.6
     }
