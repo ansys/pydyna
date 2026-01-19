@@ -42,7 +42,6 @@ jobs:
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_PASSWORD=${FTP_PASSWORD} \
-            --dry-run \
             docker/run || echo "Dry run completed"
 
       - name: Test Docker build validation
