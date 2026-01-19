@@ -15,6 +15,7 @@ RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then \
 # Environment variables for runtime (optional)
 ENV LSTC_LICENSE=""
 ENV LSTC_LICENSE_SERVER=""
+ENV ANSYSLMD_LICENSE_FILE=""
 
 # Metadata
 # Prevent interactive prompts
