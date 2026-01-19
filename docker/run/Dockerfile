@@ -13,8 +13,8 @@ RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then \
     fi
 
 # Environment variables for runtime (optional)
-ENV LSTC_LICENSE=""
-ENV LSTC_LICENSE_SERVER=""
+ENV LSTC_LICENSE="network"
+ENV LSTC_LICENSE_SERVER="localhost"
 ENV ANSYSLMD_LICENSE_FILE=""
 
 # Metadata
@@ -53,6 +53,13 @@ RUN ls -la && \
         ls -la; \
         exit 1; \
     fi
+
+# Create LSTC_FILE for license configuration
+RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/LSTC_FILE && \
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/LSTC_FILE
+
+# Alternatively, set environment variables as backup
+ENV LSTC_LICENSE=network
 
 # entrypoint
 ENTRYPOINT ["/opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"]
