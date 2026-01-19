@@ -796,3 +796,59 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     # FIXED: aloc should NOT be in the top-level parameters after expansion
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
+
+@pytest.mark.keywords
+def test_deck_nodeset_extraction(file_utils):
+    """Test extracting node set information from a deck.
+    
+    This test demonstrates basic node set extraction capabilities
+    similar to postprocessing workflows in set27_timehistory_analysis.ipynb.
+    Uses a real-world case file from lsdyna_python_parser test cases.
+    """
+    deck = Deck()
+    filename = file_utils.assets_folder / "test_node_sets.k"
+    deck.import_file(filename)
+    
+    # Get all SET keywords
+    sets = list(deck.get_kwds_by_type("SET"))
+
+    # Get all SET_NODE keywords
+    node_sets = list(deck.get_kwds_by_full_type("SET", "NODE"))
+    # assert len(node_sets) == 2, "There are 2 node sets in this input deck"    
+    define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE"))
+
+    # Test: There should be 2 node sets in the deck
+    assert len(sets) == 2, f"Expected 2 node sets, found {len(sets)}"
+    
+    # Extract set 1 and set 2 by searching through keywords
+    set_1 = None
+    set_2 = None
+    for node_set in sets:
+        if hasattr(node_set, 'sid'):
+            if node_set.sid == 1:
+                set_1 = node_set
+            elif node_set.sid == 2:
+                set_2 = node_set
+    
+    assert set_1 is not None, "Set 1 should exist in the deck"
+    assert set_2 is not None, "Set 2 should exist in the deck"
+    
+    # Test: Set 2 should have 164 nodes
+    assert hasattr(set_2, 'nodes'), "Set 2 should have nodes attribute"
+    assert hasattr(set_2.nodes, 'data'), "Nodes should have data attribute"
+    set_2_nodes = set_2.nodes.data
+    assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
+    
+    # Test: Largest node in set 1 should be 4964
+    assert hasattr(set_1, 'nodes'), "Set 1 should have nodes attribute"
+    assert hasattr(set_1.nodes, 'data'), "Nodes should have data attribute"
+    set_1_nodes = set_1.nodes.data
+    assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
+    largest_node = max(set_1_nodes)
+    assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
+    
+    # Test: All nodes in set 1 should be consecutive
+    sorted_nodes = sorted(set_1_nodes)
+    expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
+    assert sorted_nodes == expected_consecutive, \
+        f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
