@@ -28,7 +28,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 6ce4b4fc349b8881cbce40207dac3bf78824a88e # v0.14.11
+  rev: v0.14.13 # v0.14.11
   hooks:
     - id: ruff-check
       args: [--fix]
@@ -67,6 +67,6 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.20.0
+  rev: v1.22.0
   hooks:
     - id: zizmor
