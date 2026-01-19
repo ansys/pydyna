@@ -46,9 +46,9 @@ RUN echo "y" | ./ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.
 # Verify extraction succeeded
 RUN ls -la && \
     if [ -d "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2" ]; then \
-        echo "✅ LS-DYNA extracted successfully"; \
+        echo " LS-DYNA extracted successfully"; \
     else \
-        echo "❌ LS-DYNA extraction failed"; \
+        echo "LS-DYNA extraction failed"; \
         ls -la; \
         exit 1; \
     fi
