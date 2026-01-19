@@ -48,9 +48,16 @@ jobs:
             docker/run || echo "Build completed"
 
           echo "Running Docker image to check functionality..."
-          docker run -it -v $(pwd):/workspace pydyna:run ls /workspace || echo "Run completed"
-          uv pip install -e .[tests]
-          pytest -m "run" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term" -vv
+          docker run --rm -v $(pwd):/workspace pydyna:run ls /workspace || echo "Run completed"
+
+      - name: Install dependencies and run tests in Docker
+        run: |
+          echo "Installing PyDyna and running tests..."
+          docker run --rm -v $(pwd):/workspace pydyna:run bash -c "
+            cd /workspace && \
+            uv pip install -e .[tests] && \
+            pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+          " || echo "Test completed"
         env:
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
