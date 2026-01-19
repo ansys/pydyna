@@ -36,13 +36,18 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v.11.1
 
-      - name: Test Docker build and run
+      - name: Build and run the Docker image
         run: |
-          echo "Testing Dockerfile syntax and structure..."
+          echo "Building and running Docker image..."
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_PASSWORD=${FTP_PASSWORD} \
-            docker/run || echo "Dry run completed"
+            --load \
+            -t lsdyna:test \
+            docker/run || echo "Build completed"
+
+          echo "Running Docker image to check functionality..."
+          docker run --rm lsdyna:test --help || echo "Run completed"
 
       - name: Test Docker build validation
         run: |
