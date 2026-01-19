@@ -102774,73 +102774,73 @@
       "source_keyword": "ELEMENT_SEATBELT_PRETENSIONER",
       "source_field": "SBSID1",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_PRETENSIONER",
       "source_field": "SBSID2",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_PRETENSIONER",
       "source_field": "SBSID3",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_PRETENSIONER",
       "source_field": "SBSID4",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_RETRACTOR",
       "source_field": "SID1",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_RETRACTOR",
       "source_field": "SID2",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_RETRACTOR",
       "source_field": "SID3",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_SEATBELT_RETRACTOR",
       "source_field": "SID4",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_SENSOR",
       "source_field": "SIDA",
       "referenced_keywords": [
-        "SET_"
+        "ELEMENT_SEATBELT_SENSOR"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     }
   ],
   "-15": [
