@@ -97523,7 +97523,7 @@
       "source_keyword": "CESE_PART",
       "source_field": "MID",
       "referenced_keywords": [
-        "MAT_"
+        "CESE_MAT"
       ],
       "confidence": 0.95
     }
@@ -100204,281 +100204,281 @@
       "source_keyword": "DEFINE_ADAPTIVE_SOLID_TO_DES",
       "source_field": "ISDES",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_ADAPTIVE_SOLID_TO_DES_ID",
       "source_field": "ISDES",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_ADAPTIVE_SOLID_TO_SPH",
       "source_field": "ISSPH",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_ADAPTIVE_SOLID_TO_SPH_ID",
       "source_field": "ISSPH",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_DE_MESH_BEAM",
       "source_field": "DESXID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_DE_MESH_SURFACE",
       "source_field": "DESCID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_DE_COUPLING",
       "source_field": "PFACT",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_DE_COUPLING_ID",
       "source_field": "PFACT",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_MESH_SURFACE",
       "source_field": "SPHXID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_AVERAGED",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PART",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_PRINT",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_PRINT_ATTACHMENT_NODES",
       "source_field": "SECID",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_STACKED_ELEMENTS",
       "source_field": "SIDi",
       "referenced_keywords": [
-        "SECTION_"
+        "SECTION"
       ],
-      "confidence": 0.9
+      "confidence": 0.95
     }
   ],
   "60": [
