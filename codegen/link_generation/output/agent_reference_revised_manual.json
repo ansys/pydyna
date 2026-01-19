@@ -59690,4797 +59690,4113 @@
       "source_keyword": "AIRBAG_HYBRID_JETTING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_HYBRID_JETTING_CM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_HYBRID_JETTING_CM_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_HYBRID_JETTING_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_JET_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_DECOMPOSITION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_INFLATION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_JET_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MOLEFRACTION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_INFLATION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_JET_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_MOLEFRACTION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_DECOMPOSITION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_INFLATION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_JET_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_MOLEFRACTION_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_MPP_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_SEGMENT_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_TIME",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_TIME",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_TIME_ID",
       "source_field": "SIDSV",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_PARTICLE_TIME_ID",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_CM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_CM_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_POP",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_POP_CM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_POP_CM_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_JETTING_POP_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_CM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_CM_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP_CM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP_CM_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP_ID",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_MULTI-MATERIAL_GROUP_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MESH_TRIM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_CONVECTION_SET",
       "source_field": "PSEROD",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_FLUX_SET",
       "source_field": "PSEROD",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_FLUX_TRAJECTORY",
       "source_field": "PSEROD",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_PORE_FLUID_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_PWP_TABLE_SET",
       "source_field": "PID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_RADIATION_SET",
       "source_field": "PSEROD",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_SPC_SYMMETRY_PLANE_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CHANGE_RIGID_BODY_STOPPER",
       "source_field": "PSIDMX",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CHANGE_RIGID_BODY_STOPPER",
       "source_field": "PSIDMN",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_EULER_IN_EULER",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_EULER_IN_EULER",
       "source_field": "PSID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_RIGID_BODIES_SET",
       "source_field": "PIDC",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_RIGID_BODY_STOPPERS",
       "source_field": "PSIDMX",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_RIGID_BODY_STOPPERS",
       "source_field": "PSIDMN",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CONSTANTS",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CONSTANTS_SET",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CONSTANTS_SET",
       "source_field": "PID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CURVES",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CURVES_SET",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_CURVES_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_SET",
       "source_field": "PBSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOIL_PILE_SET",
       "source_field": "PID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_NODE_TO_SURFACE",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_NODE_TO_SURFACE",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_NODE_TO_SURFACE_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_NODE_TO_SURFACE_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_MORTAR",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_MORTAR",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_MORTAR_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_MORTAR_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SINGLE_SURFACE_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_IN_CONTINUUM",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_IN_CONTINUUM",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_IN_CONTINUUM_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_IN_CONTINUUM_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_SURFACE_TO_SURFACE_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_ONE_WAY",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_ONE_WAY",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_ONE_WAY_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_ONE_WAY_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_THERMAL",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_AUTOMATIC_TIED_THERMAL",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_FORCE_TRANSDUCER",
       "source_field": "SURFA",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_NODE",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFATYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "4": "SET_NODE",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_2D_FORCE_TRANSDUCER",
       "source_field": "SURFB",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "SET_SHELL",
-        "SET_PART",
-        "PART",
-        "SET_PART_TREE"
+        "SET_PART"
       ],
-      "confidence": 0.95,
-      "condition": {
-        "field": "SURFBTYP",
-        "value_map": {
-          "0": "SET_SEGMENT",
-          "1": "SET_SHELL",
-          "2": "SET_PART",
-          "3": "PART",
-          "5": "PART",
-          "6": "SET_PART",
-          "7": "SET_PART_TREE"
-        },
-        "confidence": 0.95
-      }
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_GUIDED_CABLE_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_INTERIOR",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_RIGID_SURFACE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_ACCURACY",
       "source_field": "PIDOSU",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_COARSEN",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_DAMPING",
       "source_field": "DRPSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_DYNAMIC_RELAXATION",
       "source_field": "DRPSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_ALE_COUPLING",
       "source_field": "PARTSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_BOUNDARY",
       "source_field": "PARTSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_CONTACT",
       "source_field": "PARTSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_PROPERTIES",
       "source_field": "PARTSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_SOLVER",
       "source_field": "PARTSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_AUTOPOSITION_PARAMETER_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_AUTOPOSITION_PARAMETER_SET",
       "source_field": "MPSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_AUTOPOSITION_PARAMETER_SET_POSITIVE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_AUTOPOSITION_PARAMETER_SET_POSITIVE",
       "source_field": "MPSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_PRE_BENDING",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_PRE_BENDING_LOCAL",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_TRIMMING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_IMPLICIT_DYNAMICS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_IMPLICIT_DYNAMICS_DYN",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_IMPLICIT_DYNAMICS_SPR",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_IMPLICIT_STATIC_CONDENSATION",
       "source_field": "SC_PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_IMPLICIT_STATIC_CONDENSATION_BINARY",
       "source_field": "SC_PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_MPP_DECOMPOSITION_PARTSET_DISTRIBUTE",
       "source_field": "ID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_REFERENCE_CONTROL_VOLUME_COORDINATES",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_SHELL",
       "source_field": "SIDT4TU",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_SHELL",
       "source_field": "PSNFAIL",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_SHELL",
       "source_field": "DRCPSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_SHELL",
       "source_field": "LISPSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_SOLID",
       "source_field": "PSFAIL",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DAMPING_FREQUENCY_RANGE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DAMPING_FREQUENCY_RANGE_DEFORM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DAMPING_PART_MASS_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DAMPING_PART_STIFFNESS_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DAMPING_RELATIVE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_BLSTFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_CPMFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3CRACK",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3DRLF",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3DUMP",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3PART",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3PLOT",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3PLOT",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3THDT",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_DEMFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_FSIFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_FSILNK",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_INTFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_INTFOR_FILE",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_ISPHFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_PBMFOR",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_RUNRSF",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_XTFILE",
       "source_field": "PSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_CROSS_SECTION_PLANE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT",
       "source_field": "PSID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_EXTENT_SSSTAT_ID",
       "source_field": "PSIDn",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_RECOVER_NODE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_CPM_CHAMBER",
       "source_field": "SID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_CPM_CHAMBER",
       "source_field": "SID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_CPM_CHAMBERS",
       "source_field": "SID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_CPM_CHAMBERS",
       "source_field": "SID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FABRIC_ASSEMBLIES",
       "source_field": "SPID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_FRICTION_SCALING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_MULTI_DRAWBEADS_IGES",
       "source_field": "BLKID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_STAGED_CONSTRUCTION_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_TRACER_PARTICLES_2D",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_MASS_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ELEMENT_TRIM",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_CONTACT",
       "source_field": "PSIDM",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_CONTACT",
       "source_field": "PSIDS",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_ISOPOTENTIAL_CONNECT",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_RANDLES_BATMAC",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_RANDLES_TSHELL",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_ACOUSTIC_FRINGE_PLOT_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET",
       "source_field": "ID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_LOCAL_PART_SET_EXCLUDE",
       "source_field": "ID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INCLUDE_STAMPED_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INCLUDE_STAMPED_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INCLUDE_STAMPED_SET_MATRIX",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INCLUDE_STAMPED_SET_MATRIX_INVERSE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_IMPULSE_MINE",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_LAG_MAPPING",
       "source_field": "SETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_LAG_MAPPING_WRITE",
       "source_field": "SETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_LAG_MAPPING_WRITE3DAXI",
       "source_field": "SETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_PWP_DEPTH_SET",
       "source_field": "PID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_SOLID_VOLUME",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRESS_DEPTH_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRESS_SECTION",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_VEHICLE_KINEMATICS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_VOID_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION",
       "source_field": "PSIDT",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION",
       "source_field": "PSIDB",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_3D",
       "source_field": "PSIDP",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_3D_LOCAL_SMOOTH",
       "source_field": "PSIDP",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_3D_MULTI_STEPS",
       "source_field": "PSIDP",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_NEW",
       "source_field": "PSIDM",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_NEW_LOCAL_SMOOTH",
       "source_field": "PSIDM",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_COMPENSATION_NEW_MULTI_STEPS",
       "source_field": "PSIDM",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_DYNA3D",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_DYNA3D_NOTHICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_DYNA3D_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_EXCLUDE_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_LSDYNA",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_LSDYNA_NOTHICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_LSDYNA_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_NASTRAN",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_NASTRAN_NOTHICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_NASTRAN_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_NIKE3D",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_NIKE3D_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_SEAMLESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_SPRINGBACK_SEAMLESS_THICKNESS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_BODY_GENERALIZED_SET_PART",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_BODY_PARTS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_DENSITY_DEPTH",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_ERODING_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_GRAVITY_PART_SET",
       "source_field": "PID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_REMOVE_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_SEISMIC_SSI_DECONV",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_SEISMIC_SSI_DECONV_ID",
       "source_field": "PSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_SSA",
       "source_field": "FPSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_SSA",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_STEADY_STATE_ROLLING",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_STIFFEN_PART_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_SURFACE_STRESS_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_VOLUME_LOSS",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_ANNEAL_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SENSOR_CPM_AIRBAG",
       "source_field": "DEFPS",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_2D_SEGMENT_SET",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_2D_SEGMENT_SET_COLLECT",
       "source_field": "PSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_PART_ADD",
       "source_field": "PSID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_PART"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     }
   ],
   "85": [
