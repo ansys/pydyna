@@ -102552,7 +102552,6 @@
       "source_keyword": "DUALCESE_PART",
       "source_field": "MMSHID",
       "referenced_keywords": [
-        "MAT_",
         "DUALCESE_CONTROL_MESH_MOV"
       ],
       "confidence": 0.9
@@ -102561,7 +102560,6 @@
       "source_keyword": "DUALCESE_PART_MULTIPHASE",
       "source_field": "MMSHID",
       "referenced_keywords": [
-        "MAT_",
         "DUALCESE_CONTROL_MESH_MOV"
       ],
       "confidence": 0.9
