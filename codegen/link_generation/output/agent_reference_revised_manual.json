@@ -88638,89 +88638,89 @@
       "source_keyword": "ALE_FSI_PROJECTION",
       "source_field": "SMMGID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_INJECTION",
       "source_field": "MMGSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_MAPPING",
       "source_field": "AMMSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_MESH_INTERFACE",
       "source_field": "MMGSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_PRESCRIBED_MOTION",
       "source_field": "MMSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MESH_MOTION",
       "source_field": "AMMGSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_ALE_MAPPING",
       "source_field": "AMMSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_ALE_COUPLING",
       "source_field": "MMGSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_BOUNDARY",
       "source_field": "MMGSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_ALE_MAPPING",
       "source_field": "AMMSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_DETONATION",
       "source_field": "MMGSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_MULTI-MATERIAL_GROUP_LIST"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     }
   ],
   "110": [
