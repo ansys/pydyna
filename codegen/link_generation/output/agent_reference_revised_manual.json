@@ -93583,233 +93583,233 @@
       "source_keyword": "ALE_STRUCTURED_MULTI-MATERIAL_GROUP",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MULTI-MATERIAL_GROUP_AXISYM",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MULTI-MATERIAL_GROUP_PLNEPS",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MULTI_MATERIAL_GROUP",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_AVERAGED",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_INERTIA_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PART",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_PRINT",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_REPOSITION_PRINT_ATTACHMENT_NODES",
       "source_field": "EOSID",
       "referenced_keywords": [
-        "SET_"
+        "EOS"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     }
   ],
   "31": [
