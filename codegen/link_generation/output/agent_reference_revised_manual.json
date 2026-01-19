@@ -93817,281 +93817,281 @@
       "source_keyword": "ALE_SWITCH_MMG",
       "source_field": "IDSLDSET",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CESE_INITIAL_SET",
       "source_field": "ESID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_BINARY_D3PART",
       "source_field": "HSETID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_CROSS_SECTION_SET",
       "source_field": "HSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_HISTORY_SOLID_SET",
       "source_field": "ID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DATABASE_MAX_SOLID_SET",
       "source_field": "ID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_ELEMENT_DEATH_SOLID_SET",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "DELETE_ELEMENT_SOLID",
       "source_field": "ESID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "EM_DATABASE_ELOUT",
       "source_field": "ELSID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRAIN_SOLID_SET",
       "source_field": "EID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "INITIAL_STRESS_SOLID_SET",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_HEAT_GENERATION_SET",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_HEAT_GENERATION_SET_SOLID",
       "source_field": "SID",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID1",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID2",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID3",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID4",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID5",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID6",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID7",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "SET_SOLID_ADD",
       "source_field": "DSID8",
       "referenced_keywords": [
-        "SET_"
+        "SET_SOLID"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     }
   ],
   "98": [
