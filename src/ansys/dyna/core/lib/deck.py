@@ -501,7 +501,8 @@ class Deck(ValidationMixin):
         str_type : str
             Keyword type.
         str_subtype : str
-            Keyword subtype.
+            Keyword subtype or prefix of subtype. Matches keywords where the subkeyword
+            starts with this value.
 
         Returns
         -------
@@ -512,9 +513,16 @@ class Deck(ValidationMixin):
         Get all ``*SECTION_SHELL`` keyword instances in the deck.
 
         >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+        
+        Get all ``*SET_NODE*`` keyword instances (matches NODE, NODE_LIST, NODE_LIST_TITLE, etc).
+        
+        >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type and kwd.subkeyword == str_subtype,
+            lambda kwd: isinstance(kwd, KeywordBase) 
+            and kwd.keyword == str_type 
+            and kwd.subkeyword is not None 
+            and kwd.subkeyword.startswith(str_subtype),
             self._keywords,
         )
 
