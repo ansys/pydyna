@@ -57852,7 +57852,7 @@
       "source_keyword": "AIRBAG_ALE",
       "source_field": "VECID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
       "confidence": 0.7
     },
@@ -58876,7 +58876,7 @@
       "source_keyword": "ALE_AMBIENT_HYDROSTATIC",
       "source_field": "VECID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
       "confidence": 0.7
     },
@@ -58900,17 +58900,17 @@
       "source_keyword": "ALE_MAPPING",
       "source_field": "VECID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_MAPPING",
       "source_field": "VECID1",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_MESH_VOLUME_FILLING",
@@ -58924,9 +58924,9 @@
       "source_keyword": "BOUNDARY_ALE_MAPPING",
       "source_field": "VECID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "BOUNDARY_PRESCRIBED_MOTION",
@@ -59252,25 +59252,25 @@
       "source_keyword": "CONTROL_DYNAMIC_RELAXATION",
       "source_field": "VECID",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_PROPERTIES",
       "source_field": "VECID1",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_EXPLICIT_THERMAL_PROPERTIES",
       "source_field": "VECID2",
       "referenced_keywords": [
-        "DEFINE_COORDINATE_SYSTEM"
+        "DEFINE_VECTOR"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTROL_FORMING_AUTO_NET",
@@ -80672,7 +80672,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80687,6 +80686,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80697,7 +80697,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80724,7 +80724,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80739,6 +80738,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80749,7 +80749,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80776,7 +80776,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80791,6 +80790,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80801,7 +80801,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80828,7 +80828,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80843,6 +80842,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80853,7 +80853,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80880,7 +80880,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80895,6 +80894,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80905,7 +80905,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80932,7 +80932,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80947,6 +80946,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -80957,7 +80957,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80984,7 +80984,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -80999,6 +80998,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81009,7 +81009,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81036,7 +81036,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81051,6 +81050,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81061,7 +81061,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81088,7 +81088,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81103,6 +81102,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81113,7 +81113,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81140,7 +81140,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81155,6 +81154,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81165,7 +81165,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81192,7 +81192,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81207,6 +81206,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81217,7 +81217,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81244,7 +81244,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81259,6 +81258,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81269,7 +81269,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81296,7 +81296,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81311,6 +81310,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81321,7 +81321,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81348,7 +81348,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81363,6 +81362,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81373,7 +81373,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81400,7 +81400,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81415,6 +81414,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81425,7 +81425,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81452,7 +81452,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81467,6 +81466,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81477,7 +81477,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81504,7 +81504,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81519,6 +81518,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81529,7 +81529,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81556,7 +81556,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81571,6 +81570,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81581,7 +81581,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81608,7 +81608,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81623,6 +81622,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81633,7 +81633,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81660,7 +81660,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81675,6 +81674,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81685,7 +81685,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81712,7 +81712,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81727,6 +81726,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81737,7 +81737,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81764,7 +81764,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81779,6 +81778,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81789,7 +81789,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81816,7 +81816,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81831,6 +81830,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81841,7 +81841,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81868,7 +81868,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81883,6 +81882,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81893,7 +81893,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81920,7 +81920,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81935,6 +81934,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81945,7 +81945,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81972,7 +81972,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -81987,6 +81986,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -81997,7 +81997,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82024,7 +82024,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82039,6 +82038,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82049,7 +82049,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82076,7 +82076,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82091,6 +82090,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82101,7 +82101,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82128,7 +82128,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82143,6 +82142,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82153,7 +82153,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82180,7 +82180,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82195,6 +82194,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82205,7 +82205,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82232,7 +82232,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82247,6 +82246,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82257,7 +82257,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82284,7 +82284,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82299,6 +82298,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82309,7 +82309,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82336,7 +82336,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82351,6 +82350,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82361,7 +82361,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82388,7 +82388,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82403,6 +82402,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82413,7 +82413,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82440,7 +82440,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82455,6 +82454,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82465,7 +82465,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82492,7 +82492,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82507,6 +82506,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82517,7 +82517,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82544,7 +82544,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82559,6 +82558,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82569,7 +82569,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82596,7 +82596,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82611,6 +82610,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82621,7 +82621,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82648,7 +82648,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82663,6 +82662,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82673,7 +82673,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82700,7 +82700,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82715,6 +82714,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82725,7 +82725,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82752,7 +82752,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82767,6 +82766,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82777,7 +82777,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82804,7 +82804,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82819,6 +82818,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82829,7 +82829,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82856,7 +82856,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82871,6 +82870,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82881,7 +82881,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82892,19 +82892,53 @@
       "source_keyword": "CONTACT_EXCLUDE_INTERACTION",
       "source_field": "SID2",
       "referenced_keywords": [
+        "SET_SEGMENT",
+        "SET_SHELL",
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_NODE",
+        "SET_PART_TREE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "SURFBTYP",
+        "value_map": {
+          "0": "SET_SEGMENT",
+          "1": "SET_SHELL",
+          "2": "SET_PART",
+          "3": "PART",
+          "4": "SET_NODE",
+          "6": "SET_PART",
+          "7": "SET_PART_TREE"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "CONTACT_EXCLUDE_INTERACTION",
       "source_field": "SID1",
       "referenced_keywords": [
+        "SET_SEGMENT",
+        "SET_SHELL",
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_NODE",
+        "SET_PART_TREE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "SURFBTYP",
+        "value_map": {
+          "0": "SET_SEGMENT",
+          "1": "SET_SHELL",
+          "2": "SET_PART",
+          "3": "PART",
+          "4": "SET_NODE",
+          "6": "SET_PART",
+          "7": "SET_PART_TREE"
+        },
+        "confidence": 0.95
+      }
     },
     {
       "source_keyword": "CONTACT_FORCE_TRANSDUCER",
@@ -82926,7 +82960,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82941,6 +82974,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -82951,7 +82985,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82978,7 +83012,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -82993,6 +83026,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83003,7 +83037,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83030,7 +83064,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83045,6 +83078,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83055,7 +83089,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83082,7 +83116,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83097,6 +83130,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83107,7 +83141,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83134,7 +83168,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83149,6 +83182,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83159,7 +83193,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83186,7 +83220,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83201,6 +83234,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83211,7 +83245,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83238,7 +83272,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83253,6 +83286,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83263,7 +83297,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83290,7 +83324,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83305,6 +83338,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83315,7 +83349,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83342,7 +83376,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83357,6 +83390,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83367,7 +83401,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83394,7 +83428,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83409,6 +83442,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83419,7 +83453,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83446,7 +83480,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83461,6 +83494,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83471,7 +83505,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83498,7 +83532,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83513,6 +83546,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83523,7 +83557,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83550,7 +83584,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83565,6 +83598,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83575,7 +83609,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83602,7 +83636,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83617,6 +83650,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83627,7 +83661,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83654,7 +83688,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83669,6 +83702,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83679,7 +83713,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83706,7 +83740,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83721,6 +83754,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83731,7 +83765,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83758,7 +83792,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83773,6 +83806,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83783,7 +83817,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83810,7 +83844,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83825,6 +83858,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83835,7 +83869,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83862,7 +83896,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83877,6 +83910,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83887,7 +83921,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83914,7 +83948,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83929,6 +83962,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83939,7 +83973,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83966,7 +84000,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -83981,6 +84014,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -83991,7 +84025,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84018,7 +84052,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84033,6 +84066,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84043,7 +84077,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84070,7 +84104,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84085,6 +84118,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84095,7 +84129,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84122,7 +84156,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84137,6 +84170,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84147,7 +84181,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84174,7 +84208,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84189,6 +84222,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84199,7 +84233,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84226,7 +84260,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84241,6 +84274,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84251,7 +84285,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84278,7 +84312,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84293,6 +84326,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84303,7 +84337,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84330,7 +84364,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84345,6 +84378,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84355,7 +84389,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84382,7 +84416,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84397,6 +84430,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84407,7 +84441,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84434,7 +84468,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84449,6 +84482,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84459,7 +84493,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84486,7 +84520,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84501,6 +84534,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84511,7 +84545,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84538,7 +84572,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84553,6 +84586,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84563,7 +84597,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84590,7 +84624,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84605,6 +84638,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84615,7 +84649,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84642,7 +84676,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84657,6 +84690,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84667,7 +84701,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84694,7 +84728,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84709,6 +84742,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84719,7 +84753,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84746,7 +84780,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84761,6 +84794,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84771,7 +84805,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84798,7 +84832,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84813,6 +84846,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84823,7 +84857,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84850,7 +84884,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84865,6 +84898,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84875,7 +84909,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84902,7 +84936,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84917,6 +84950,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84927,7 +84961,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84954,7 +84988,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -84969,6 +85002,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -84979,7 +85013,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85006,7 +85040,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85021,6 +85054,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85031,7 +85065,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85058,7 +85092,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85073,6 +85106,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85083,7 +85117,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85110,7 +85144,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85125,6 +85158,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85135,7 +85169,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85162,7 +85196,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85177,6 +85210,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85187,7 +85221,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85214,7 +85248,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85229,6 +85262,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85239,7 +85273,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85266,7 +85300,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85281,6 +85314,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85291,7 +85325,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85318,7 +85352,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85333,6 +85366,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85343,7 +85377,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85370,7 +85404,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85385,6 +85418,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85395,7 +85429,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85422,7 +85456,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85437,6 +85470,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85447,7 +85481,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85474,7 +85508,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85489,6 +85522,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85499,7 +85533,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85526,7 +85560,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85541,6 +85574,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85551,7 +85585,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85578,7 +85612,6 @@
           "2": "SET_PART",
           "3": "PART",
           "4": "SET_NODE",
-          "5": "PART",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
@@ -85593,6 +85626,7 @@
         "SET_SHELL",
         "SET_PART",
         "PART",
+        "SET_NODE",
         "SET_PART_TREE"
       ],
       "confidence": 0.95,
@@ -85603,7 +85637,7 @@
           "1": "SET_SHELL",
           "2": "SET_PART",
           "3": "PART",
-          "5": "PART",
+          "4": "SET_NODE",
           "6": "SET_PART",
           "7": "SET_PART_TREE"
         },
