@@ -822,5 +822,37 @@ def test_deck_nodeset_extraction(file_utils):
     define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE")) ## WORKS
 
     # Test: There should be 3 node sets in the deck
-    assert len(node_sets) == 3, "There are 3 node sets in this input deck"    
+    assert len(node_sets) == 3, "There are 3 node sets in this input deck"
     
+    # Test get_set_by_id method
+    set_1 = deck.get_set_by_id(1)
+    assert set_1 is not None, "Set with ID 1 should exist"
+    assert set_1.sid == 1, "Retrieved set should have sid=1"
+    assert set_1.keyword == "SET"
+    
+    set_2 = deck.get_set_by_id(2)
+    assert set_2 is not None, "Set with ID 2 should exist"
+    assert set_2.sid == 2, "Retrieved set should have sid=2"
+    
+    # Test that non-existent ID returns None
+    set_999 = deck.get_set_by_id(999)
+    assert set_999 is None, "Non-existent set ID should return None"    
+    
+    assert hasattr(set_2, 'nodes'), "Set 2 should have nodes attribute"
+    assert hasattr(set_2.nodes, 'data'), "Nodes should have data attribute"
+    set_2_nodes = set_2.nodes.data
+    assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
+    
+    # Test: Largest node in set 1 should be 4964
+    assert hasattr(set_1, 'nodes'), "Set 1 should have nodes attribute"
+    assert hasattr(set_1.nodes, 'data'), "Nodes should have data attribute"
+    set_1_nodes = set_1.nodes.data
+    assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
+    largest_node = max(set_1_nodes)
+    assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
+    
+    # Test: All nodes in set 1 should be consecutive
+    sorted_nodes = sorted(set_1_nodes)
+    expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
+    assert sorted_nodes == expected_consecutive, \
+        f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
