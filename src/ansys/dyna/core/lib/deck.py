@@ -553,6 +553,33 @@ class Deck(ValidationMixin):
             )
         return sections[0]
 
+    def get_set_by_id(self, id: int) -> typing.Optional[KeywordBase]:
+        """Get the SET keyword in the collection for a given set ID.
+
+        Parameters
+        ----------
+        id : int
+            Set ID.
+
+        Returns
+        -------
+        SET keyword or ``None`` if there is no SET keyword that matches the set ID.
+
+        Raises
+        ------
+        Exception
+            If multiple SET keywords use the given set ID.
+        """
+        sets = self.get(type="SET", filter=lambda kwd: kwd.sid == id)
+        if len(sets) == 0:
+            return None
+
+        if len(sets) != 1:
+            raise Exception(
+                f"Failure in `deck.get_set_by_id() method`. Multiple SET keywords use sid {id}."  # noqa: E501
+            )
+        return sets[0]
+
     def get(self, **kwargs) -> typing.List[KeywordBase]:
         """Get a list of keywords.
 
