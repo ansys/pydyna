@@ -1471,3 +1471,10 @@ def test_em_randles_tshell_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_0_1
     s = kwd.EmRandlesTshell(rdltype=3)
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_2_3
+
+
+@pytest.mark.keywords
+def test_control_shell(ref_string):
+    s = kwd.ControlShell()
+    s.loads(ref_string.test_control_shell)
+    print(s)

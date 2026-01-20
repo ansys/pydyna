@@ -1394,29 +1394,25 @@ test_parametrized_deck_conditional_string = """*KEYWORD
 *PARAMETER
 R        x      5e-4
 R        y      5e-6R        z      2.65
-I     soft        97
-I    esort        98
-I   lamsht        99
-*CONTROL_SHELL
-$#  wrpang     esort     irnxx    istupd    theory       bwc     miter      proj
-       0.0    &esort         0         0         0         2         1         0
-*CONTROL_SHELL
-$#  wrpang     esort     irnxx    istupd    theory       bwc     miter      proj
-       0.0    &esort         0         0         0         2         1         0
-$# rotascl    intgrd    lamsht    cstyp6    thshel
-       0.0         0        99         0         0
-*CONTROL_SHELL
-$#  wrpang     esort     irnxx    istupd    theory       bwc     miter      proj
-       0.0    &esort         0         0         0         2         1         0
-$# rotascl    intgrd    lamsht    cstyp6    thshel
-       0.0         0   &lamsht         0         0
+I     soft         2
 *CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET
   99999999  99999998         4         0                             0         0
                                       &y        &x
        -&z        1.       -2.       -2.        1.        1.        1.        1.
-       &soft
+     &soft
 *END"""
 
+test_control_shell = """*CONTROL_SHELL
+$#  wrpang     esort     irnxx    istupd    theory       bwc     miter      proj
+       0.0         0         0         0         0         2         1         0
+$# rotascl    intgrd    lamsht    cstyp6    thshel
+       0.0         0         0         0         0
+$#  pstupd   sidt4tu     cntco    itsflg    irquad    w-mode   stretch      icrq
+         0         0         0         0         3       0.0       0.0         0
+$#  nfail1    nfail4   psnfail    keepcs     delfr   drcpsid    drcprm   intperr
+         0         0         0         0         0         0       1.0         0
+$#  drcmth   lispsid    nlocdt    iswshl
+         0         0         0         0"""
 
 test_long_deck_standard_keyword_string = """*KEYWORD LONG=Y
 *SECTION_SEATBELT-

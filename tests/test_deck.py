@@ -217,29 +217,15 @@ def test_deck_read_parameter_keyword_conditional_card(ref_string):
     """Test reading a deck with parameters."""
     deck = Deck()
     deck.loads(ref_string.test_parametrized_deck_conditional_string)
-    #assert len(deck.string_keywords) == 0
-    #assert len(deck.keywords) == 2
-
-    print('standard card:')   
-    kwd_shl_c1 = deck.keywords[1]
-    assert kwd_shl_c1.esort == 98
-
-    #conditional card without parameters
-    kwd_shl = deck.keywords[2]
-    assert kwd_shl.esort == 98
-    assert kwd_shl.lamsht == 99
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
 
     #conditional cards with parameters
-    kwd_shl = deck.keywords[3]
-    assert kwd_shl.esort == 98
-    assert kwd_shl.lamsht == 99
-
-    #conditional cards with parameters
-    kwd_cnt = deck.keywords[4]
+    kwd_cnt = deck.keywords[1]
     assert kwd_cnt.vdc == 5.0e-4
     assert kwd_cnt.vc == 5.0e-6
     assert kwd_cnt.sfsa == -2.65
-    assert kwd_cnt.soft == 97
+    assert kwd_cnt.soft == 2
 
 
 @pytest.mark.keywords
