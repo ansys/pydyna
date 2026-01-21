@@ -96,7 +96,7 @@ jobs:
         run: |
           echo "Running existing run tests with Docker backend..."
           source .venv/bin/activate
-          python -m pytest -m 'run' tests/test_run.py -v -x
+          python -m pytest -m 'run' -v -x
         env:
           PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
