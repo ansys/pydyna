@@ -227,6 +227,21 @@ def test_deck_read_parameter_keyword_conditional_card(ref_string):
     assert kwd_cnt.sfsa == -2.65
     assert kwd_cnt.soft == 2
 
+@pytest.mark.keywords
+def test_deck_read_parameter_keyword_hardcoded_conditional_card(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_hardcoded_optional_card)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+
+    #conditional cards with parameters
+    kwd_cnt = deck.keywords[1]
+    assert kwd_cnt.vdc == 5.0e-4
+    assert kwd_cnt.vc == 5.0e-6
+    assert kwd_cnt.sfsa == -2.65
+    assert kwd_cnt.soft == 2
+
 
 @pytest.mark.keywords
 def test_deck_007():
