@@ -96,7 +96,7 @@ jobs:
         run: |
           echo "Running existing run tests with Docker backend..."
           source .venv/bin/activate
-          python -m pytest -m 'run' -v -x
+          python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
         env:
           PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
