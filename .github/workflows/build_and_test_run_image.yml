@@ -23,6 +23,7 @@ env:
   FTP_USER: ${{ secrets.FTP_USER }}
   FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
   license-server: ${{ secrets.LICENSE_SERVER }}
+  TEST_DOCKER_IMAGE: pydyna:run
 
 jobs:
   test-docker-build:
@@ -37,30 +38,49 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v.11.1
 
-      - name: Build and run the Docker image
+      - name: Build Docker image
         run: |
-          echo "Building and running Docker image..."
+          echo "Building Docker image with LS-DYNA..."
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_PASSWORD=${FTP_PASSWORD} \
             --load \
-            -t pydyna:run \
-            docker/run || echo "Build completed"
+            -t ${TEST_DOCKER_IMAGE} \
+            docker/run
+          
+          echo "Verifying Docker image was built successfully..."
+          docker images ${TEST_DOCKER_IMAGE}
+          
+          echo "Testing basic Docker image functionality..."
+          docker run --rm -v $(pwd):/run ${TEST_DOCKER_IMAGE} ls /run
 
-          echo "Running Docker image to check functionality..."
-          docker run --rm -v $(pwd):/workspace pydyna:run ls /workspace || echo "Run completed"
+      - name: Setup Python environment for testing
+        uses: actions/setup-python@5f51c2e89fcd7084b1325b05b97682e0c05c3b33 # v5.3.0
+        with:
+          python-version: '3.13'
 
-      - name: Install dependencies and run tests in Docker
+      - name: Install PyDyna and dependencies
         run: |
-          echo "Installing PyDyna and running tests..."
-          docker run --rm -v $(pwd):/workspace pydyna:run bash -c "
-            cd /workspace && \
-            python3 -m venv .venv && \
-            source .venv/bin/activate && \
-            uv pip install -e .[tests] && \
-            pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
-          " || echo "Test completed"
+          python -m pip install --upgrade pip
+          pip install uv
+          uv pip install -e .[tests]
+
+      - name: Test Docker Runner integration
+        run: |
+          echo "Testing Docker Runner integration..."
+          python test_docker_integration.py ${TEST_DOCKER_IMAGE}
         env:
+          PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
+          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
+          LSTC_LICENSE: ansys
+
+      - name: Run Docker Runner unit tests
+        run: |
+          echo "Running Docker Runner unit tests..."
+          pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+        env:
+          PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
           LSTC_LICENSE: ansys

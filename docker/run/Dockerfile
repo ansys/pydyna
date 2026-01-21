@@ -71,8 +71,8 @@ ENV LSTC_LICENSE=network
 # Add LS-DYNA to PATH for easier access
 ENV PATH="/opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2:${PATH}"
 
-# Set up working directory
-WORKDIR /workspace
+# Set up working directory to match DockerRunner expectations
+WORKDIR /run
 
 # When container starts, provide interactive bash shell
 CMD ["/bin/bash"]
