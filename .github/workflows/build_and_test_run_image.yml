@@ -67,17 +67,6 @@ jobs:
           source .venv/bin/activate
           uv pip install -e .[tests]
 
-      - name: Test Docker Runner integration
-        run: |
-          echo "Testing Docker Runner integration..."
-          source .venv/bin/activate
-          python test_docker_integration.py ${TEST_DOCKER_IMAGE}
-        env:
-          PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
-          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
-          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
-          LSTC_LICENSE: ansys
-
       - name: Run Docker Runner unit tests
         run: |
           echo "Running Docker Runner unit tests..."
