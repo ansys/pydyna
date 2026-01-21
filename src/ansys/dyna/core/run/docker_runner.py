@@ -28,7 +28,11 @@ import sys
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
-import docker
+
+try:
+    import docker
+except ImportError:
+    docker = None
 
 logger = logging.getLogger(__name__)
 
@@ -50,8 +54,16 @@ class DockerRunner(BaseRunner):
         executable_name : str, optional
             Name of the LS-DYNA executable. Default is auto-detected based on solver options.
         """
+        if docker is None:
+            raise ImportError("Docker SDK for Python is not installed. Install it with: pip install docker>=6.0.0")
+
         super().__init__(**kwargs)
-        self._client: docker.client.DockerClient = docker.from_env()
+        try:
+            self._client: docker.client.DockerClient = docker.from_env()
+        except Exception as e:
+            logger.error(f"Failed to connect to Docker: {e}")
+            raise Exception(f"Cannot connect to Docker daemon. Make sure Docker is running. Error: {e}")
+
         self.__ensure_image(kwargs["container"])
         self._container_env = kwargs.get("container_env", dict())
         self._stream = kwargs.get("stream", True)
