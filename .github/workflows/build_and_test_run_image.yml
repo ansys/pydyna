@@ -72,6 +72,7 @@ jobs:
           hadolint docker/run/Dockerfile || echo "Hadolint completed"
         continue-on-error: true
 
+
   # test-with-credentials:
   #   name: Test Full Build (With Credentials)
   #   runs-on: ubuntu-latest
