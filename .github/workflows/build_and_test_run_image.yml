@@ -9,6 +9,8 @@ on:
     paths:
       - 'docker/run/**'
       - '.github/workflows/build_and_test_run_image.yml'
+      - 'tests/'
+      - 'src/ansys/dyna/core/run/**'
   workflow_dispatch:
 
 permissions:
