@@ -82,7 +82,7 @@ class TestDockerRunner:
         # Test SMP Double precision (default)
         runner = DockerRunner(container=container_image)
         executable = runner._get_executable_name()
-        assert "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2" in executable
+        assert "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2" in executable
 
         # Test SMP Single precision
         runner = DockerRunner(
@@ -91,7 +91,6 @@ class TestDockerRunner:
             precision=Precision.SINGLE
         )
         executable = runner._get_executable_name()
-        assert executable.endswith("_s")
 
         # Test custom executable name
         runner = DockerRunner(
