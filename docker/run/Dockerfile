@@ -65,11 +65,11 @@ RUN ls -la && \
     fi
 
 # Create LSTC_FILE for license configuration
-RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
-    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
+RUN echo "LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
+    echo "LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
 
-# Alternatively, set environment variables as backup
-ENV LSTC_LICENSE=network
+# Set environment variables for ANSYS license (override LSTC for ANSYS license)
+ENV LSTC_LICENSE=ansys
 
 # Add LS-DYNA to PATH for easier access
 ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2:${PATH}"
