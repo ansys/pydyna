@@ -182,8 +182,35 @@ class DockerRunner(BaseRunner):
                 final_logs = cont.logs(tail=50)
                 if final_logs:
                     logger.error("Final container logs:")
-                    sys.stderr.write(final_logs.decode("utf-8"))
-                raise Exception(f"LS-DYNA execution failed with exit code {exit_code}")
+                    logs_str = final_logs.decode("utf-8")
+                    sys.stderr.write(logs_str)
+
+                    # Check for common issues and provide helpful error messages
+                    if "libmpifort" in logs_str or "libmpi" in logs_str:
+                        error_msg = (
+                            f"LS-DYNA execution failed with exit code {exit_code}. "
+                            "This appears to be an Intel MPI library dependency issue. "
+                            "The Docker container may be missing Intel MPI runtime libraries. "
+                            "Ensure the Docker image includes Intel oneAPI MPI runtime."
+                        )
+                    elif "cannot open shared object file" in logs_str:
+                        error_msg = (
+                            f"LS-DYNA execution failed with exit code {exit_code}. "
+                            "Missing shared library dependencies. Check that all required "
+                            "runtime libraries are installed in the Docker container."
+                        )
+                    elif exit_code == 127:
+                        error_msg = (
+                            f"LS-DYNA execution failed with exit code {exit_code}. "
+                            "Command not found or library dependency missing. "
+                            "Verify LS-DYNA executable and its dependencies are properly installed."
+                        )
+                    else:
+                        error_msg = f"LS-DYNA execution failed with exit code {exit_code}"
+                else:
+                    error_msg = f"LS-DYNA execution failed with exit code {exit_code}"
+
+                raise Exception(error_msg)
 
             # Clean up the container
             cont.remove()
