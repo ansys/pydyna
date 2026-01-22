@@ -101,13 +101,12 @@ class DockerRunner(BaseRunner):
         """Get the LS-DYNA executable name based on solver configuration."""
         if self.executable_name:
             return self.executable_name
-
-        # For the container built from the Dockerfile, we have a single precision SMP version
+        # For the container built from the Dockerfile, we have a double precision SMP version
         # The main executable is usually named after the extraction directory
-        # From Dockerfile: ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh
-        # This extracts to: /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/
+        # From Dockerfile: ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh
+        # This extracts to: /opt/Dyna/ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2/
         # Inside, the executable is typically named the same as the directory
-        main_executable = "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"
+        main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 
         # The container has this directory in PATH, so we can call the executable directly
         # For now, assume the main executable handles all cases
