@@ -16,8 +16,8 @@ RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then \
     fi
 
 # Environment variables for runtime (optional)
-ENV LSTC_LICENSE="network"
-ENV LSTC_LICENSE_SERVER="localhost"
+ENV LSTC_LICENSE="ansys"
+ENV LSTC_LICENSE_SERVER=""
 ENV ANSYSLMD_LICENSE_FILE=""
 
 # Metadata
@@ -64,12 +64,12 @@ RUN ls -la && \
         exit 1; \
     fi
 
-# Create LSTC_FILE for license configuration
-RUN echo "LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
-    echo "LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
+# # Create LSTC_FILE for license configuration
+# RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
+#     echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
 
-# Set environment variables for ANSYS license (override LSTC for ANSYS license)
-ENV LSTC_LICENSE=ansys
+# # Set environment variables for LSTC network licensing
+# ENV LSTC_LICENSE=network
 
 # Add LS-DYNA to PATH for easier access
 ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2:${PATH}"
