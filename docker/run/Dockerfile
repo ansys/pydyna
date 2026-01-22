@@ -46,9 +46,7 @@ WORKDIR /opt/Dyna
  
 # Download LS-DYNA solver
 RUN wget --user "${FTP_USER}" --password "${FTP_PASSWORD}" \
-    https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/${PRECISION}/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
-
-
+    https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
 
 # Make the extractor script executable
 RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
