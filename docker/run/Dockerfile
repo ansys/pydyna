@@ -46,17 +46,18 @@ WORKDIR /opt/Dyna
  
 # Download LS-DYNA solver
 RUN wget --user "${FTP_USER}" --password "${FTP_PASSWORD}" \
-    https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+    # https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+    https://ftp.lstc.com/user/mpp-dyna/${VERSION}linux/x86-64/ifort_190_sse2/MPP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
 
 # Make the extractor script executable
-RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
 
 # Extract the LS-DYNA solver (auto-accept license)
-RUN echo "y" | ./ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+RUN echo "y" | ./ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
 
 # Verify extraction succeeded
 RUN ls -la && \
-    if [ -d "ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2" ]; then \
+    if [ -d "ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018" ]; then \
         echo " LS-DYNA extracted successfully"; \
     else \
         echo "LS-DYNA extraction failed"; \
@@ -65,18 +66,17 @@ RUN ls -la && \
     fi
 
 # # Create LSTC_FILE for license configuration
-# RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
-#     echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
+# RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018/LSTC_FILE && \
+#     echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018/LSTC_FILE
 
 # # Set environment variables for LSTC network licensing
 # ENV LSTC_LICENSE=network
 
 # Add LS-DYNA to PATH for easier access
-ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2:${PATH}"
+ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018:${PATH}"
 
 # Set up working directory to match DockerRunner expectations
 WORKDIR /run
 
 # When container starts, provide interactive bash shell
 CMD ["/bin/bash"]
-
