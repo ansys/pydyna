@@ -6,7 +6,7 @@ ARG FTP_USER
 ARG FTP_PASSWORD
 ARG VERSION=R16.1.1
 ARG VERSION_SHORT=R16_1_1
-ARG PRECISION=smp_d
+ARG PRECISION=mpp_d
 
 # Validate build arguments
 RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then \
@@ -47,8 +47,7 @@ WORKDIR /opt/Dyna
 # Download LS-DYNA solver
 RUN wget --user "${FTP_USER}" --password "${FTP_PASSWORD}" \
     # https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
-    https://ftp.lstc.com/user/mpp-dyna/${VERSION}linux/x86-64/ifort_190_sse2/MPP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
-
+    https://ftp.lstc.com/user/mpp-dyna/${VERSION}/linux/x86-64/ifort_190_sse2/MPP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
 # Make the extractor script executable
 RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2_intelmpi-2018.tgz_extractor.sh
 
