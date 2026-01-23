@@ -205,7 +205,13 @@ class Cards(OptionsInterface):
             card = cards.pop(0)
             self.options.api.activate_option(card.name)
             any_options_read = True
-            card.read(buf, parameters)
+            
+            # Add parameter scoping for reference retention
+            if parameters is not None:
+                with parameters.scope(f"option_{card.name}"):
+                    card.read(buf, parameters)
+            else:
+                card.read(buf, parameters)
         if not any_options_read:
             buf.seek(pos)
 

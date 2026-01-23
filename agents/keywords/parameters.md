@@ -231,6 +231,25 @@ R_density    7850.0
         10  &density    $ OK
 ```
 
+**Option Cards Without Parameter Pass-Through**:
+```python
+# WRONG - option cards won't receive parameters
+def _try_read_options_with_no_title(self, buf):
+    # ...
+    card.read(buf)  # Missing parameter_set!
+
+# CORRECT - pass parameters to option cards
+def _try_read_options_with_no_title(self, buf, parameters=None):
+    # ...
+    if parameters is not None:
+        with parameters.scope(f"option_{card.name}"):
+            card.read(buf, parameters)
+    else:
+        card.read(buf, parameters)
+```
+
+Note: This was fixed in issue #1067. Option cards (cards with `title_order=0`) now properly receive the `ParameterSet` when being read, enabling parameter substitution in optional keyword cards like CONTACT's SOFT option.
+
 ## Testing Parameter Scoping
 
 ### Test Structure
@@ -314,6 +333,14 @@ All card types now support LS-DYNA parameter substitution (`&parameter` and `-&p
 - Used for keywords with multiple cards per row
 - Inherits parameter support from TableCard
 - Parameters work across all sub-cards in the group
+
+**OptionCardSet** (optional cards):
+- Used for keyword options (e.g., SOFT option in CONTACT keywords)
+- Parameters supported via pass-through to underlying cards
+- Implementation: Passes `parameter_set` to each card in the option
+- Parameter scoping: Uses `option_{name}` scope for reference retention
+- Example: `*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET` with `&soft` parameter on SOFT option card
+- Note: Fixed in issue #1067 to properly pass parameters to option cards read via `_try_read_options_with_no_title()`
 
 ### Parameter Name Constraints
 
