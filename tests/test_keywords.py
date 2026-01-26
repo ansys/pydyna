@@ -279,12 +279,12 @@ def test_disable_lspp_defaults_with_constructor_kwargs():
         assert kw.penopt is None
 
 
-# @pytest.mark.keywords
-# def test_boundary_prescribed_motion_set(ref_string):
-#     b = kwd.BoundaryPrescribedMotionSet()
-#     assert b.write() == ref_string.test_boundary_prescribed_motion_set
-#     b.loads(ref_string.test_boundary_prescribed_motion_set2)
-#     assert b.lcid == 100
+@pytest.mark.keywords
+def test_boundary_prescribed_motion_set(ref_string):
+    b = kwd.BoundaryPrescribedMotionSet()
+    assert b.write() == ref_string.test_boundary_prescribed_motion_set
+    b.loads(ref_string.test_boundary_prescribed_motion_set2)
+    assert b.lcid == 100
 
 
 @pytest.mark.keywords
