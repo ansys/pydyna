@@ -828,3 +828,65 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     # FIXED: aloc should NOT be in the top-level parameters after expansion
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
+
+@pytest.mark.keywords
+def test_deck_nodeset_extraction(file_utils):
+    """Test extracting node set information from a deck.
+    
+    This test demonstrates basic node set extraction capabilities
+    similar to postprocessing workflows in set27_timehistory_analysis.ipynb.
+    Uses a real-world case file from lsdyna_python_parser test cases.
+    """
+    deck = Deck()
+    filename = file_utils.assets_folder / "test_node_sets.k"
+    deck.import_file(filename)
+    
+    # Get all SET keywords
+    sets = list(deck.get_kwds_by_type("SET"))
+    assert len(sets) > 3, "There should be more than 3 SET keywords"
+
+    # Get all SET_NODE keywords using prefix matching
+    # This should match SET_NODE_LIST and other SET_NODE* variants
+    node_sets = list(deck.get_kwds_by_full_type("SET", "NODE"))
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST")) ##DOESN'T WORK
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST", "TITLE")) ##DOESN'T WORK
+    
+    define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE")) ## WORKS
+
+    # Test: There should be 3 node sets in the deck
+    assert len(node_sets) == 3, "There are 3 node sets in this input deck"
+    
+    # Test that access by list index and access with get_set_by_id are equivalent
+    set_1 = deck.get_set_by_id(1)
+    for set_1_access in [node_sets[0], set_1]:
+        assert set_1_access is not None, "Set with ID 1 should exist"
+        assert set_1_access.sid == 1, "Retrieved set should have sid=1"
+        assert set_1_access.keyword == "SET"
+        
+        # Test: Largest node in set 1 should be 4964
+        assert hasattr(set_1_access, 'nodes'), "Set 1 should have nodes attribute"
+        assert hasattr(set_1_access.nodes, 'data'), "Nodes should have data attribute"
+        set_1_nodes = set_1_access.nodes.data
+        assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
+        largest_node = max(set_1_nodes)
+        assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
+        
+        # Test: All nodes in set 1 should be consecutive
+        sorted_nodes = sorted(set_1_nodes)
+        expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
+        assert sorted_nodes == expected_consecutive, \
+            f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
+    
+    set_2 = deck.get_set_by_id(2)
+    for set_2_access in [node_sets[1], set_2]:
+        assert set_2_access is not None, "Set with ID 2 should exist"
+        assert set_2_access.sid == 2, "Retrieved set should have sid=2"        
+        
+        assert hasattr(set_2_access, 'nodes'), "Set 2 should have nodes attribute"
+        assert hasattr(set_2_access.nodes, 'data'), "Nodes should have data attribute"
+        set_2_nodes = set_2_access.nodes.data
+        assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
+    
+    # Test that non-existent ID returns None
+    set_999 = deck.get_set_by_id(999)
+    assert set_999 is None, "Non-existent set ID should return None"    
