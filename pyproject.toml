@@ -63,7 +63,7 @@ tests = [
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.38.0",
-    "pyvista==0.46.4",
+    "pyvista==0.46.5",
 ]
 dev = [
     "ansys-dyna-core[tests,codegen,graphics]",
@@ -91,7 +91,7 @@ doc = [
     "scikit-learn==1.7.2",
     "ipython==8.38.0",
     "jupyterlab==4.5.2",
-    "pyvista==0.46.4",
+    "pyvista==0.46.5",
 ]
 
 [tool.flit.module]
