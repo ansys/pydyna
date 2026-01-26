@@ -685,16 +685,16 @@ def test_control_mpp_decomposition_transformation(ref_string):
     )
 
 
-# @pytest.mark.keywords
-# def test_control_implicit_eigenvalue(ref_string):
-#     """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
-#     c = kwd.ControlImplicitEigenvalue(neig=100)
-#     assert (ref_string.test_control_implicit_eigenvalue_1 == c.write())
-#     c.ishell = 1
-#     assert (ref_string.test_control_implicit_eigenvalue_2 == c.write())
-#     c.ishell = 0
-#     c.eigmth = 102
-#     assert (ref_string.test_control_implicit_eigenvalue_3 == c.write())
+@pytest.mark.keywords
+def test_control_implicit_eigenvalue(ref_string):
+    """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
+    c = kwd.ControlImplicitEigenvalue(neig=100)
+    assert (ref_string.test_control_implicit_eigenvalue_1 == c.write())
+    c.ishell = 1
+    assert (ref_string.test_control_implicit_eigenvalue_2 == c.write())
+    c.ishell = 0
+    c.eigmth = 102
+    assert (ref_string.test_control_implicit_eigenvalue_3 == c.write())
 
 
 @pytest.mark.keywords
