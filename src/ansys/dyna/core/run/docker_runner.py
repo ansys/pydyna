@@ -145,6 +145,11 @@ class DockerRunner(BaseRunner):
         logger.info(f"Running LS-DYNA command: {command}")
 
         # Set up environment variables
+        if self._container_env == {}:
+            self._container_env = dict(
+                (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
+            )
+
         env = {}
         env.update(self._container_env)
 
