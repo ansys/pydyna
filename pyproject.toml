@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.9.dev0"
+version = "0.10.0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
