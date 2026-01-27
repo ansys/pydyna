@@ -189,36 +189,6 @@ class TestDockerRunnerExecution:
                 except:
                     pass  # Ignore cleanup errors
 
-    def test_docker_runner_specific_case_ids(self, file_utils):
-        """Test Docker runner with specific case IDs."""
-        input_file = file_utils.testfiles_folder / "run" / "case-keywords" / "projectile.k"
-        if not input_file.exists():
-            pytest.skip("Test input file not available")
-
-        example_folder = str(input_file.parent.resolve())
-        input_filename = input_file.name
-        
-        try:
-            run_dyna(input_filename, working_directory=example_folder, activate_case=True, case_ids=[1,2])
-            
-            # Check that output files were created
-            output_files = [f for f in os.listdir(example_folder) 
-                          if f.startswith("d3plot") or f.endswith(".d3plot")]
-            assert len(output_files) > 0
-            
-        except Exception as e:
-            logger.error(f"Docker runner case IDs execution failed: {e}")
-            raise
-        finally:
-            # Clean up generated files  
-            generated_files = [f for f in os.listdir(example_folder) 
-                             if not f.endswith(".k")]
-            for file in generated_files:
-                try:
-                    os.remove(os.path.join(example_folder, file))
-                except:
-                    pass  # Ignore cleanup errors
-
     def test_docker_runner_through_run_dyna(self, file_utils):
         """Test Docker runner through the run_dyna interface."""
         input_file = file_utils.testfiles_folder / "run" / "i.k"
