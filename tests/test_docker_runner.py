@@ -27,6 +27,7 @@ import os
 import pytest
 
 from ansys.dyna.core.run.docker_runner import DockerRunner
+from ansys.dyna.core.run import run_dyna
 from ansys.dyna.core.run.options import MpiOption, Precision
 from ansys.dyna.core.run.local_solver import run_dyna
 
@@ -164,31 +165,24 @@ class TestDockerRunnerExecution:
 
         example_folder = str(input_file.parent.resolve())
         input_filename = input_file.name
-
-        runner = DockerRunner(
-            container=container_image,
-            activate_case=True
-        )
-        runner.set_input(input_filename, example_folder)
-        
         try:
-            result_dir = runner.run()
-            assert result_dir == example_folder
-            
+            run_dyna(input_filename, working_directory=example_folder, activate_case=True)
+
+                
             # Check that output files from both cases were created
             d3plot_files = [f for f in os.listdir(example_folder) 
-                          if f.endswith(".d3plot")]
+                            if f.endswith(".d3plot")]
             assert len(d3plot_files) > 0
             assert any("ZERO_VELOCITY" in f for f in d3plot_files)
             assert any("LOW_VELOCITY" in f for f in d3plot_files)
-            
+        
         except Exception as e:
             logger.error(f"Docker runner CASE execution failed: {e}")
             raise
         finally:
             # Clean up generated files
             generated_files = [f for f in os.listdir(example_folder) 
-                             if not f.endswith(".k")]
+                                if not f.endswith(".k")]
             for file in generated_files:
                 try:
                     os.remove(os.path.join(example_folder, file))
@@ -203,17 +197,9 @@ class TestDockerRunnerExecution:
 
         example_folder = str(input_file.parent.resolve())
         input_filename = input_file.name
-
-        runner = DockerRunner(
-            container=container_image,
-            activate_case=True,
-            case_ids=[1, 2]  # Assuming these are valid case IDs
-        )
-        runner.set_input(input_filename, example_folder)
         
         try:
-            result_dir = runner.run()
-            assert result_dir == example_folder
+            run_dyna(input_filename, working_directory=example_folder, activate_case=True, case_ids=[1,2])
             
             # Check that output files were created
             output_files = [f for f in os.listdir(example_folder) 
