@@ -7,6 +7,484 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.10.0 <https://github.com/ansys/pydyna/releases/tag/v0.10.0>`_ - January 27, 2026
+===================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Add test coveragemarkers to ``pyproject.toml``
+          - `#847 <https://github.com/ansys/pydyna/pull/847>`_
+
+        * - Replace `assert` statements with explicit error handling
+          - `#860 <https://github.com/ansys/pydyna/pull/860>`_
+
+        * - Plate thickness optimization example
+          - `#868 <https://github.com/ansys/pydyna/pull/868>`_
+
+        * - Enable contact card options
+          - `#873 <https://github.com/ansys/pydyna/pull/873>`_
+
+        * - Enhance facet extraction functions to return element_ids and pa…
+          - `#882 <https://github.com/ansys/pydyna/pull/882>`_
+
+        * - Add coverage
+          - `#909 <https://github.com/ansys/pydyna/pull/909>`_
+
+        * - Add \`\`CASE\`\` command line argument
+          - `#917 <https://github.com/ansys/pydyna/pull/917>`_
+
+        * - Dataframe typehints
+          - `#921 <https://github.com/ansys/pydyna/pull/921>`_
+
+        * - Section shell card sets
+          - `#964 <https://github.com/ansys/pydyna/pull/964>`_
+
+        * - Add AGENTS.md and define_table linking
+          - `#968 <https://github.com/ansys/pydyna/pull/968>`_
+
+        * - Improve discoverability of renamed properties
+          - `#1021 <https://github.com/ansys/pydyna/pull/1021>`_
+
+        * - Add Pythonic keyword lookup API for Deck
+          - `#1022 <https://github.com/ansys/pydyna/pull/1022>`_
+
+        * - Implement validation
+          - `#1031 <https://github.com/ansys/pydyna/pull/1031>`_
+
+        * - Add global keyword validator
+          - `#1033 <https://github.com/ansys/pydyna/pull/1033>`_
+
+        * - Add CSV (comma-delimited) format support for keyword I/O
+          - `#1034 <https://github.com/ansys/pydyna/pull/1034>`_
+
+        * - Migrate to \`\`ruff\`\`
+          - `#1036 <https://github.com/ansys/pydyna/pull/1036>`_
+
+        * - Begin implementation of link handing for DEFINE_CURVE
+          - `#1045 <https://github.com/ansys/pydyna/pull/1045>`_
+
+        * - Expand scope of links
+          - `#1049 <https://github.com/ansys/pydyna/pull/1049>`_
+
+        * - Part links
+          - `#1050 <https://github.com/ansys/pydyna/pull/1050>`_
+
+        * - Add more link types
+          - `#1060 <https://github.com/ansys/pydyna/pull/1060>`_
+
+        * - Element links
+          - `#1061 <https://github.com/ansys/pydyna/pull/1061>`_
+
+        * - Set and part links
+          - `#1062 <https://github.com/ansys/pydyna/pull/1062>`_
+
+        * - Add Deck.get_set_by_id() and extend get_kwds_by_full_type()
+          - `#1066 <https://github.com/ansys/pydyna/pull/1066>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Improve ``subprocess``
+          - `#859 <https://github.com/ansys/pydyna/pull/859>`_
+
+        * - Update actions with vulnerability check
+          - `#861 <https://github.com/ansys/pydyna/pull/861>`_
+
+        * - Add `security.md` file
+          - `#862 <https://github.com/ansys/pydyna/pull/862>`_
+
+        * - Executables handling and add mock test
+          - `#869 <https://github.com/ansys/pydyna/pull/869>`_
+
+        * - Optimization plotting
+          - `#887 <https://github.com/ansys/pydyna/pull/887>`_
+
+        * - Add table-card generation option to CONSTRAINED_RIGID_BODIES (#913)
+          - `#914 <https://github.com/ansys/pydyna/pull/914>`_
+
+        * - Add \`\`dependabot\`\` cooldown and fix dependencies
+          - `#923 <https://github.com/ansys/pydyna/pull/923>`_
+
+        * - Code generation for element shell beta
+          - `#929 <https://github.com/ansys/pydyna/pull/929>`_
+
+        * - Card conditions for *CONTROL_IMPLICIT_EIGENVALUE
+          - `#941 <https://github.com/ansys/pydyna/pull/941>`_
+
+        * - Expand with parameters
+          - `#945 <https://github.com/ansys/pydyna/pull/945>`_
+
+        * - Allow out-of-bound insertions
+          - `#960 <https://github.com/ansys/pydyna/pull/960>`_
+
+        * - Code coverage
+          - `#965 <https://github.com/ansys/pydyna/pull/965>`_
+
+        * - Handle parameters with PARAMETER_LOCAL inside of includes
+          - `#979 <https://github.com/ansys/pydyna/pull/979>`_
+
+        * - Parameter substitution for all card types
+          - `#983 <https://github.com/ansys/pydyna/pull/983>`_
+
+        * - Implement expression parsing for PARAMETER_EXPRESSION
+          - `#984 <https://github.com/ansys/pydyna/pull/984>`_
+
+        * - Update pandas 2.3+
+          - `#988 <https://github.com/ansys/pydyna/pull/988>`_
+
+        * - Update the \`license\` year
+          - `#1006 <https://github.com/ansys/pydyna/pull/1006>`_
+
+        * - Mat295 with multiple fiber families
+          - `#1012 <https://github.com/ansys/pydyna/pull/1012>`_
+
+        * - Correctly handle nplane*nthick
+          - `#1013 <https://github.com/ansys/pydyna/pull/1013>`_
+
+        * - Add LARGE format support for INITIAL_STRESS_SHELL/INITIAL_STRAIN_SHELL
+          - `#1018 <https://github.com/ansys/pydyna/pull/1018>`_
+
+        * - Run plotting test and optimize implementations
+          - `#1027 <https://github.com/ansys/pydyna/pull/1027>`_
+
+        * - Rigidwall ID_TITLE card issue
+          - `#1029 <https://github.com/ansys/pydyna/pull/1029>`_
+
+        * - Jupyter for plotting
+          - `#1030 <https://github.com/ansys/pydyna/pull/1030>`_
+
+        * - Use TableCardGroup for mat 23
+          - `#1035 <https://github.com/ansys/pydyna/pull/1035>`_
+
+        * - Optimize card set load
+          - `#1037 <https://github.com/ansys/pydyna/pull/1037>`_
+
+        * - Respect kwargs when not using LSPP defaults
+          - `#1040 <https://github.com/ansys/pydyna/pull/1040>`_
+
+        * - Codegen enhacements for ALE_STRUCTURED_MESH_CONTROL_POINTS and aliases
+          - `#1041 <https://github.com/ansys/pydyna/pull/1041>`_
+
+        * - Handle *CONTROL_SHELL cascading cards structure
+          - `#1042 <https://github.com/ansys/pydyna/pull/1042>`_
+
+        * - Kwargs-initialized cascading card
+          - `#1043 <https://github.com/ansys/pydyna/pull/1043>`_
+
+        * - CONTROL_TIME_STEP and some DATABASE_BINARY keywords
+          - `#1044 <https://github.com/ansys/pydyna/pull/1044>`_
+
+        * - CONTROL_TIMESTEP
+          - `#1046 <https://github.com/ansys/pydyna/pull/1046>`_
+
+        * - Skipped plotting test and solid element parsing
+          - `#1054 <https://github.com/ansys/pydyna/pull/1054>`_
+
+        * - Retain parameters
+          - `#1055 <https://github.com/ansys/pydyna/pull/1055>`_
+
+        * - Warnings from keywords tests
+          - `#1056 <https://github.com/ansys/pydyna/pull/1056>`_
+
+        * - Params on conditional cards
+          - `#1068 <https://github.com/ansys/pydyna/pull/1068>`_
+
+        * - Keywords cache and ubuntu machine
+          - `#1074 <https://github.com/ansys/pydyna/pull/1074>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update ``CONTRIBUTORS.md`` with the latest contributors
+          - `#876 <https://github.com/ansys/pydyna/pull/876>`_, `#885 <https://github.com/ansys/pydyna/pull/885>`_
+
+        * - Update ``html_context`` with PyAnsys tags
+          - `#893 <https://github.com/ansys/pydyna/pull/893>`_
+
+        * - Update contributing to ref PyDYNA
+          - `#967 <https://github.com/ansys/pydyna/pull/967>`_
+
+        * - Docs: optimize doc build
+          - `#976 <https://github.com/ansys/pydyna/pull/976>`_
+
+        * - Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#992 <https://github.com/ansys/pydyna/pull/992>`_
+
+
+  .. tab-item:: Test
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Complete codegen testing coverage
+          - `#1026 <https://github.com/ansys/pydyna/pull/1026>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump the doc group with 2 updates
+          - `#935 <https://github.com/ansys/pydyna/pull/935>`_
+
+        * - Bump matplotlib from 3.10.6 to 3.10.7
+          - `#936 <https://github.com/ansys/pydyna/pull/936>`_
+
+        * - Bump the actions group across 1 directory with 2 updates
+          - `#942 <https://github.com/ansys/pydyna/pull/942>`_
+
+        * - Bump pyvista from 0.46.3 to 0.46.4
+          - `#946 <https://github.com/ansys/pydyna/pull/946>`_
+
+        * - Bump ipywidgets from 8.1.7 to 8.1.8
+          - `#948 <https://github.com/ansys/pydyna/pull/948>`_
+
+        * - Bump pytest from 8.4.2 to 9.0.0 in the tests group
+          - `#952 <https://github.com/ansys/pydyna/pull/952>`_
+
+        * - Bump pypandoc from 1.15 to 1.16
+          - `#953 <https://github.com/ansys/pydyna/pull/953>`_
+
+        * - Build: bump pypandoc from 1.16 to 1.16.2
+          - `#955 <https://github.com/ansys/pydyna/pull/955>`_
+
+        * - Bump ansys/actions from 10.2.0 to 10.2.2 in the actions group
+          - `#977 <https://github.com/ansys/pydyna/pull/977>`_
+
+        * - Bump pytest from 9.0.1 to 9.0.2 in the tests group
+          - `#993 <https://github.com/ansys/pydyna/pull/993>`_
+
+        * - Bump the doc group across 1 directory with 6 updates
+          - `#996 <https://github.com/ansys/pydyna/pull/996>`_
+
+        * - Bump matplotlib from 3.10.7 to 3.10.8
+          - `#997 <https://github.com/ansys/pydyna/pull/997>`_
+
+        * - Bump joblib from 1.5.2 to 1.5.3
+          - `#998 <https://github.com/ansys/pydyna/pull/998>`_
+
+        * - Bump jupyterlab from 4.5.0 to 4.5.1 in the doc group
+          - `#1001 <https://github.com/ansys/pydyna/pull/1001>`_
+
+        * - Bump ipython from 8.37.0 to 8.38.0 in the doc group
+          - `#1038 <https://github.com/ansys/pydyna/pull/1038>`_
+
+        * - Bump jsonschema from 4.25.1 to 4.26.0
+          - `#1048 <https://github.com/ansys/pydyna/pull/1048>`_
+
+        * - Bump jupyterlab from 4.5.1 to 4.5.2 in the doc group
+          - `#1063 <https://github.com/ansys/pydyna/pull/1063>`_
+
+        * - Bump pyvista from 0.46.4 to 0.46.5
+          - `#1070 <https://github.com/ansys/pydyna/pull/1070>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump pandas from 2.3.0 to 2.3.1
+          - `#857 <https://github.com/ansys/pydyna/pull/857>`_
+
+        * - Update changelog for v0.9.0
+          - `#858 <https://github.com/ansys/pydyna/pull/858>`_
+
+        * - Bump the doc group with 2 updates
+          - `#864 <https://github.com/ansys/pydyna/pull/864>`_, `#884 <https://github.com/ansys/pydyna/pull/884>`_, `#908 <https://github.com/ansys/pydyna/pull/908>`_, `#918 <https://github.com/ansys/pydyna/pull/918>`_
+
+        * - Bump pyvista from 0.45.2 to 0.45.3
+          - `#865 <https://github.com/ansys/pydyna/pull/865>`_
+
+        * - Bump scikit-learn from 1.7.0 to 1.7.1
+          - `#866 <https://github.com/ansys/pydyna/pull/866>`_
+
+        * - Bump ansys/actions from 10.0.12 to 10.0.13
+          - `#867 <https://github.com/ansys/pydyna/pull/867>`_
+
+        * - Bump matplotlib from 3.10.3 to 3.10.5
+          - `#872 <https://github.com/ansys/pydyna/pull/872>`_
+
+        * - Add trusted publishers for release
+          - `#875 <https://github.com/ansys/pydyna/pull/875>`_
+
+        * - Pre-commit automatic update
+          - `#877 <https://github.com/ansys/pydyna/pull/877>`_, `#883 <https://github.com/ansys/pydyna/pull/883>`_, `#905 <https://github.com/ansys/pydyna/pull/905>`_, `#912 <https://github.com/ansys/pydyna/pull/912>`_, `#926 <https://github.com/ansys/pydyna/pull/926>`_, `#932 <https://github.com/ansys/pydyna/pull/932>`_, `#937 <https://github.com/ansys/pydyna/pull/937>`_, `#943 <https://github.com/ansys/pydyna/pull/943>`_, `#954 <https://github.com/ansys/pydyna/pull/954>`_, `#961 <https://github.com/ansys/pydyna/pull/961>`_, `#986 <https://github.com/ansys/pydyna/pull/986>`_, `#994 <https://github.com/ansys/pydyna/pull/994>`_, `#1000 <https://github.com/ansys/pydyna/pull/1000>`_, `#1039 <https://github.com/ansys/pydyna/pull/1039>`_, `#1064 <https://github.com/ansys/pydyna/pull/1064>`_, `#1071 <https://github.com/ansys/pydyna/pull/1071>`_
+
+        * - Bump ansys/actions from 10.0.13 to 10.0.14
+          - `#878 <https://github.com/ansys/pydyna/pull/878>`_
+
+        * - Bump pyvista from 0.45.3 to 0.46.1
+          - `#880 <https://github.com/ansys/pydyna/pull/880>`_
+
+        * - Bump actions/checkout from 4 to 5
+          - `#881 <https://github.com/ansys/pydyna/pull/881>`_
+
+        * - Add labels for sub packages
+          - `#886 <https://github.com/ansys/pydyna/pull/886>`_
+
+        * - Bump requests from 2.32.4 to 2.32.5
+          - `#888 <https://github.com/ansys/pydyna/pull/888>`_
+
+        * - Bump actions/download-artifact from 4.3.0 to 5.0.0
+          - `#889 <https://github.com/ansys/pydyna/pull/889>`_
+
+        * - Bump pandas from 2.3.1 to 2.3.2
+          - `#890 <https://github.com/ansys/pydyna/pull/890>`_
+
+        * - Bump pyvista from 0.46.1 to 0.46.2
+          - `#891 <https://github.com/ansys/pydyna/pull/891>`_
+
+        * - Bump ansys/actions from 10.0.14 to 10.0.15
+          - `#894 <https://github.com/ansys/pydyna/pull/894>`_
+
+        * - Bump matplotlib from 3.10.5 to 3.10.6
+          - `#896 <https://github.com/ansys/pydyna/pull/896>`_
+
+        * - Bump joblib from 1.5.1 to 1.5.2
+          - `#897 <https://github.com/ansys/pydyna/pull/897>`_
+
+        * - Bump pyvista from 0.46.2 to 0.46.3
+          - `#898 <https://github.com/ansys/pydyna/pull/898>`_
+
+        * - Bump the doc group across 1 directory with 3 updates
+          - `#899 <https://github.com/ansys/pydyna/pull/899>`_
+
+        * - Bump pytest from 8.4.1 to 8.4.2
+          - `#900 <https://github.com/ansys/pydyna/pull/900>`_
+
+        * - Bump pytest-cov from 6.2.1 to 6.3.0
+          - `#901 <https://github.com/ansys/pydyna/pull/901>`_
+
+        * - Bump actions/labeler from 5.0.0 to 6.0.1
+          - `#902 <https://github.com/ansys/pydyna/pull/902>`_
+
+        * - Bump ansys/actions from 10.0.15 to 10.0.20
+          - `#903 <https://github.com/ansys/pydyna/pull/903>`_
+
+        * - Bump pypa/gh-action-pypi-publish from 1.12.4 to 1.13.0
+          - `#904 <https://github.com/ansys/pydyna/pull/904>`_
+
+        * - Bump scikit-learn from 1.7.1 to 1.7.2
+          - `#906 <https://github.com/ansys/pydyna/pull/906>`_
+
+        * - Bump ansys/actions from 10.0.20 to 10.1.0
+          - `#907 <https://github.com/ansys/pydyna/pull/907>`_
+
+        * - Bump ansys/actions from 10.1.0 to 10.1.1
+          - `#911 <https://github.com/ansys/pydyna/pull/911>`_
+
+        * - Bump ansys/actions from 10.1.1 to 10.1.3
+          - `#919 <https://github.com/ansys/pydyna/pull/919>`_
+
+        * - Add \`\`zizmor\`\` actions check
+          - `#922 <https://github.com/ansys/pydyna/pull/922>`_
+
+        * - Bump ansys/actions from 10.1.3 to 10.1.4
+          - `#924 <https://github.com/ansys/pydyna/pull/924>`_
+
+        * - Bump pandas from 2.3.2 to 2.3.3
+          - `#925 <https://github.com/ansys/pydyna/pull/925>`_
+
+        * - Ci: publish docker only on release
+          - `#950 <https://github.com/ansys/pydyna/pull/950>`_
+
+        * - Update missing or outdated files
+          - `#959 <https://github.com/ansys/pydyna/pull/959>`_
+
+        * - Cleanup doc build
+          - `#966 <https://github.com/ansys/pydyna/pull/966>`_
+
+        * - Chore: Add maintenance tools to codegen
+          - `#975 <https://github.com/ansys/pydyna/pull/975>`_
+
+        * - Doc build optimization plan
+          - `#981 <https://github.com/ansys/pydyna/pull/981>`_
+
+        * - Add agent doc for codegen project
+          - `#982 <https://github.com/ansys/pydyna/pull/982>`_
+
+        * - Update CHANGELOG for v0.9.1
+          - `#1004 <https://github.com/ansys/pydyna/pull/1004>`_
+
+        * - Add codegen test cases and improve coverage
+          - `#1014 <https://github.com/ansys/pydyna/pull/1014>`_
+
+        * - Optimize the \`\`ci/cd\`\`
+          - `#1017 <https://github.com/ansys/pydyna/pull/1017>`_
+
+        * - Refactor markdown files to optimize agent context window
+          - `#1051 <https://github.com/ansys/pydyna/pull/1051>`_
+
+        * - Deprecation warning for pre and solver module
+          - `#1052 <https://github.com/ansys/pydyna/pull/1052>`_
+
+        * - Add code search policy to agents.md
+          - `#1058 <https://github.com/ansys/pydyna/pull/1058>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Rework codegen
+          - `#969 <https://github.com/ansys/pydyna/pull/969>`_
+
+        * - Refactor: Rework codegen 2
+          - `#970 <https://github.com/ansys/pydyna/pull/970>`_
+
+        * - Refactor: Rework codegen 3
+          - `#971 <https://github.com/ansys/pydyna/pull/971>`_
+
+        * - Refactor: Add logging to codegen
+          - `#972 <https://github.com/ansys/pydyna/pull/972>`_
+
+        * - Refactor: Rework codegen 5
+          - `#973 <https://github.com/ansys/pydyna/pull/973>`_
+
+        * - Refactor: Rework codegen 6
+          - `#974 <https://github.com/ansys/pydyna/pull/974>`_
+
+        * - Change Codegen
+          - `#987 <https://github.com/ansys/pydyna/pull/987>`_
+
+        * - Improve codegen
+          - `#1007 <https://github.com/ansys/pydyna/pull/1007>`_
+
+        * - Complete rename duplicate->table
+          - `#1019 <https://github.com/ansys/pydyna/pull/1019>`_
+
+        * - Labeled codegen
+          - `#1023 <https://github.com/ansys/pydyna/pull/1023>`_
+
+        * - Codegen todo
+          - `#1024 <https://github.com/ansys/pydyna/pull/1024>`_
+
+        * - Codegen refactor complete
+          - `#1028 <https://github.com/ansys/pydyna/pull/1028>`_
+
+
 `0.9.1 <https://github.com/ansys/pydyna/releases/tag/v0.9.1>`_ - December 31, 2025
 ==================================================================================
 
