@@ -79,7 +79,9 @@ jobs:
             ls -la /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/ | head -10
           "
         env:
-          TEST_DOCKER_IMAGE: ${{ env.TEST_DOCKER_IMAGE }}
+          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
+          LSTC_LICENSE: ansys
 
       - name: Run Docker Runner unit tests
         run: |
