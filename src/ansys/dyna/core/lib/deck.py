@@ -501,7 +501,8 @@ class Deck(ValidationMixin):
         str_type : str
             Keyword type.
         str_subtype : str
-            Keyword subtype.
+            Keyword subtype or prefix of subtype. Matches keywords where the subkeyword
+            starts with this value.
 
         Returns
         -------
@@ -512,9 +513,16 @@ class Deck(ValidationMixin):
         Get all ``*SECTION_SHELL`` keyword instances in the deck.
 
         >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+
+        Get all ``*SET_NODE*`` keyword instances (matches NODE, NODE_LIST, NODE_LIST_TITLE, etc).
+
+        >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type and kwd.subkeyword == str_subtype,
+            lambda kwd: isinstance(kwd, KeywordBase)
+            and kwd.keyword == str_type
+            and kwd.subkeyword is not None
+            and kwd.subkeyword.startswith(str_subtype),
             self._keywords,
         )
 
@@ -544,6 +552,33 @@ class Deck(ValidationMixin):
                 f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}."  # noqa: E501
             )
         return sections[0]
+
+    def get_set_by_id(self, id: int) -> typing.Optional[KeywordBase]:
+        """Get the SET keyword in the collection for a given set ID.
+
+        Parameters
+        ----------
+        id : int
+            Set ID.
+
+        Returns
+        -------
+        SET keyword or ``None`` if there is no SET keyword that matches the set ID.
+
+        Raises
+        ------
+        Exception
+            If multiple SET keywords use the given set ID.
+        """
+        sets = self.get(type="SET", filter=lambda kwd: kwd.sid == id)
+        if len(sets) == 0:
+            return None
+
+        if len(sets) != 1:
+            raise Exception(
+                f"Failure in `deck.get_set_by_id() method`. Multiple SET keywords use sid {id}."  # noqa: E501
+            )
+        return sets[0]
 
     def get(self, **kwargs) -> typing.List[KeywordBase]:
         """Get a list of keywords.

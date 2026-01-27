@@ -28,7 +28,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 6ce4b4fc349b8881cbce40207dac3bf78824a88e # v0.14.11
+  rev: v0.14.14 # v0.14.11
   hooks:
     - id: ruff-check
       args: [--fix]
@@ -54,7 +54,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.36.0
+  rev: 0.36.1
   hooks:
     - id: check-github-workflows
 
@@ -67,6 +67,6 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.20.0
+  rev: v1.22.0
   hooks:
     - id: zizmor
