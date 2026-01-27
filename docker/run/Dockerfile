@@ -63,9 +63,12 @@ RUN ls -la && \
         exit 1; \
     fi
 
+COPY . .
+
+
 # # Create LSTC_FILE for license configuration
-# RUN echo "#LICENSE_TYPE: network" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
-#     echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
+RUN echo "#LICENSE_TYPE: ansys" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
 
 # # Set environment variables for LSTC network licensing
 # ENV LSTC_LICENSE=network
@@ -75,6 +78,3 @@ ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_
 
 # Set up working directory to match DockerRunner expectations
 WORKDIR /run
-
-# When container starts, provide interactive bash shell
-CMD ["/bin/bash"]
