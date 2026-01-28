@@ -23,76 +23,73 @@ env:
   REGISTRY: ghcr.io
   REPO_NAME: ${{ github.repository }}
   IMAGE_TAG: dev-test
-  PYDYNA_RUN_CONTAINER: ghcr.io/ansys/pydyna-run:dev-test
+  # PYDYNA_RUN_CONTAINER: ghcr.io/ansys/pydyna-run:dev-test
 
 jobs:
-  # test-docker-build:
-  #   name: Test Docker Build (No Push)
-  #   runs-on: ubuntu-latest
+  test-docker-build:
+    name: Test Docker Build (No Push)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
 
-  #   steps:
-  #     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-  #       with:
-  #         persist-credentials: false
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
 
-  #     - name: Setup Docker Buildx
-  #       uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
-
-  #     - name: Build Docker image
-  #       run: |
-  #         echo "Building Docker image with LS-DYNA..."
-  #         docker buildx build \
-  #           --build-arg FTP_USER=${FTP_USER} \
-  #           --build-arg FTP_LOGIN=${FTP_LOGIN} \
-  #           --load \
-  #           -t ${TEST_DOCKER_IMAGE} \
-  #           docker/run
+      - name: Build Docker image
+        run: |
+          echo "Building Docker image with LS-DYNA..."
+          docker buildx build \
+            --build-arg FTP_USER=${FTP_USER} \
+            --build-arg FTP_LOGIN=${FTP_LOGIN} \
+            --load \
+            -t ${TEST_DOCKER_IMAGE} \
+            docker/run
           
-  #         echo "Verifying Docker image was built successfully..."
-  #         docker images ${TEST_DOCKER_IMAGE}
+          echo "Verifying Docker image was built successfully..."
+          docker images ${TEST_DOCKER_IMAGE}
           
-  #         echo "Testing basic Docker image functionality..."
-  #         docker run --rm -v $(pwd):/run ${TEST_DOCKER_IMAGE} ls /run
+          echo "Testing basic Docker image functionality..."
+          docker run --rm -v $(pwd):/run ${TEST_DOCKER_IMAGE} ls /run
 
-  #     - name: Set up Python
-  #       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
-  #       with:
-  #         python-version: '3.13'
+      - name: Set up Python
+        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+        with:
+          python-version: '3.13'
+    
+      - name: Install PyDyna and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install uv
+          python -m venv .venv
+          source .venv/bin/activate
+          uv pip install -e .[tests]
 
-      # - name: Install PyDyna and dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install uv
-      #     python -m venv .venv
-      #     source .venv/bin/activate
-      #     uv pip install -e .[tests]
+      - name: Test Docker container functionality
+        run: |
+          echo "Testing Docker container with LS-DYNA..."
+          docker run --rm ${TEST_DOCKER_IMAGE} bash -c "
+            echo 'Container is working' && \
+            ls -la /opt/Dyna/ && \
+            echo 'LS-DYNA directory contents:' && \
+            ls -la /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/ | head -10
+          "
+        env:
+          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
+          LSTC_LICENSE: ansys
 
-      # - name: Test Docker container functionality
-      #   run: |
-      #     echo "Testing Docker container with LS-DYNA..."
-      #     docker run --rm ${TEST_DOCKER_IMAGE} bash -c "
-      #       echo 'Container is working' && \
-      #       ls -la /opt/Dyna/ && \
-      #       echo 'LS-DYNA directory contents:' && \
-      #       ls -la /opt/Dyna/ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2/ | head -10
-      #     "
-      #   env:
-      #     ANSYSLI_SERVERS: 2325@${{ env.license-server }}
-      #     ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
-      #     LSTC_LICENSE: ansys
-
-
-
-      # - name: Run existing tests with Docker backend
-      #   run: |
-      #     echo "Running existing run tests with Docker backend..."
-      #     source .venv/bin/activate
-      #     python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
-      #   env:
-      #     PYDYNA_RUN_CONTAINER: 
-      #     ANSYSLI_SERVERS: 2325@${{ env.license-server }}
-      #     ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
-      #     LSTC_LICENSE: ansys
+      - name: Run existing tests with Docker backend
+        run: |
+          echo "Running existing run tests with Docker backend..."
+          source .venv/bin/activate
+          python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+        env:
+          PYDYNA_RUN_CONTAINER: ${{ env.TEST_DOCKER_IMAGE }}
+          ANSYSLI_SERVERS: 2325@${{ env.license-server }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
+          LSTC_LICENSE: ansys
 
       # - name: Login to ghcr.io
       #   uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
@@ -112,19 +109,19 @@ jobs:
       #       FTP_USER=${{ env.FTP_USER }}
       #       FTP_LOGIN=${{ env.FTP_LOGIN }}
 
-  run-testing:
-    name: Test the "run" subpackage
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
+  # run-testing:
+  #   name: Test the "run" subpackage
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+  #       with:
+  #         persist-credentials: false
 
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
-          pytest-markers: run
-          license-server: ${{ secrets.LICENSE_SERVER }}
-          coverage-file: run
+  #     - uses: ./.github/actions/unit-test
+  #       with:
+  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+  #         pytest-markers: run
+  #         license-server: ${{ secrets.LICENSE_SERVER }}
+  #         coverage-file: run

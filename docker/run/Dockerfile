@@ -1,80 +1,83 @@
-# Base image
 FROM ubuntu:22.04
 
-# Build arguments for FTP credentials
+LABEL description="LS-DYNA runtime image"
+LABEL email="pyansys.core@nsys.com"
+
+# --------------------
+# Build arguments
+# --------------------
 ARG FTP_USER
 ARG FTP_LOGIN
-ARG VERSION=R16.1.1
-ARG VERSION_SHORT=R16_1_1
-ARG PRECISION=smp_d
 
-# Validate build arguments
-RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_LOGIN" ]; then \
-        echo "Error: FTP_USER and FTP_LOGIN must be provided as build arguments"; \
-        echo "Usage: docker build --build-arg FTP_USER=user --build-arg FTP_LOGIN=login ."; \
-        exit 1; \
-    fi
+# Relative path from https://ftp.lstc.com/user/
+# Example:
+#   ls-dyna/R16.1.1/linx.64/lsdyna/SMP/
+#   mpp-dyna/R16.1.1/linux/x86-64/ifort_190_sse2/MPP/
+ARG DYNA_URL="ls-dyna/R16.1.1/linx.64/lsdyna/SMP/"
 
-# Environment variables for runtime (optional)
-ENV LSTC_LICENSE="ansys"
+# Extractor script filename
+ARG DYNA_FILE="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh"
+
+# Folder created after extraction
+ARG DYNA_PATH="lsdyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
+
+# --------------------
+# Environment
+# --------------------
+ENV DEBIAN_FRONTEND=noninteractive
+ENV INSTALL_DIR=/opt/dyna
+
+ENV LSTC_LICENSE=ansys
 ENV LSTC_LICENSE_SERVER=""
 ENV ANSYSLMD_LICENSE_FILE=""
 
-# Metadata
-# Prevent interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive
- 
-# Install dependencies
+# --------------------
+# System dependencies
+# --------------------
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
     tar \
     gzip \
     bash \
-    file \
     python3 \
     python3-pip \
-    python3-venv \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv for faster Python package management
-RUN pip3 install uv
- 
-# Working directory
-WORKDIR /opt/Dyna
- 
-# Download LS-DYNA solver
-RUN wget --user "${FTP_USER}" --password "${FTP_LOGIN}" \
-    https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
-# Make the extractor script executable
-RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+RUN pip3 install --no-cache-dir uv
 
-# Extract the LS-DYNA solver (auto-accept license)
-RUN echo "y" | ./ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
+# --------------------
+# Install LS-DYNA
+# --------------------
+WORKDIR ${INSTALL_DIR}
 
-# Verify extraction succeeded
-RUN ls -la && \
-    if [ -d "ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2" ]; then \
-        echo " LS-DYNA extracted successfully"; \
-    else \
-        echo "LS-DYNA extraction failed"; \
-        ls -la; \
-        exit 1; \
-    fi
+# Validate required args
+RUN test -n "$FTP_USER" && \
+    test -n "$FTP_LOGIN" && \
+    test -n "$DYNA_URL" && \
+    test -n "$DYNA_FILE" && \
+    test -n "$DYNA_PATH"
 
-COPY . .
+# Download, extract, cleanup
+RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
+      "https://ftp.lstc.com/user/${DYNA_URL}/${DYNA_FILE}" && \
+    chmod +x "${DYNA_FILE}" && \
+    echo "y" | "./${DYNA_FILE}" && \
+    rm "${DYNA_FILE}"
 
+# --------------------
+# License config
+# --------------------
+RUN echo "#LICENSE_TYPE: ansys" > "${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE" && \
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> "${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE"
 
-# # Create LSTC_FILE for license configuration
-RUN echo "#LICENSE_TYPE: ansys" > /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE && \
-    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> /opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2/LSTC_FILE
+# --------------------
+# PATH
+# --------------------
+ENV PATH="${INSTALL_DIR}/${DYNA_PATH}:${PATH}"
 
-# # Set environment variables for LSTC network licensing
-# ENV LSTC_LICENSE=network
-
-# Add LS-DYNA to PATH for easier access
-ENV PATH="/opt/Dyna/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2:${PATH}"
-
-# Set up working directory to match DockerRunner expectations
+# --------------------
+# Runtime dir
+# --------------------
 WORKDIR /run
