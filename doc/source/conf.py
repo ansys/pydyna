@@ -174,8 +174,8 @@ BUILD_AUTOKEYWORDS_API = os.environ.get("BUILD_AUTOKEYWORDS_API", "false").lower
 
 if BUILD_AUTOKEYWORDS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
-    # Remove the auto-generated keywords from the ignore list
-    html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
+    # # Remove the auto-generated keywords from the ignore list
+    # html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
 
 BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
 if BUILD_EXAMPLES:
