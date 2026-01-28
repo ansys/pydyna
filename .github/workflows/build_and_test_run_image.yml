@@ -41,7 +41,7 @@ jobs:
             --build-arg FTP_LOGIN=${FTP_LOGIN} \
             --load \
             -t ${TEST_DOCKER_IMAGE} \
-            docker/run
+            docker/run/MPP/
           
           echo "Verifying Docker image was built successfully..."
           docker images ${TEST_DOCKER_IMAGE}

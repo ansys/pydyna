@@ -9,20 +9,14 @@ LABEL email="pyansys.core@nsys.com"
 ARG FTP_USER
 ARG FTP_LOGIN
 
-# Relative path from https://ftp.lstc.com/user/
-# Example:
-#   ls-dyna/R16.1.1/linx.64/lsdyna/SMP/
-#   mpp-dyna/R16.1.1/linux/x86-64/ifort_190_sse2/MPP/
-# ARG DYNA_URL="ls-dyna/R16.1.1/linx.64/lsdyna/SMP/"
-ARG DYNA_URL="mpp-dyna/R16.1.1/linux/x86-64/ifort_190_sse2/MPP/"
+
+ARG DYNA_URL="ls-dyna/R16.1.1/linx.64/lsdyna/SMP/"
 
 # Extractor script filename
-# ARG DYNA_FILE="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh"
-ARG DYNA_FILE="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405.tgz_extractor.sh"
+ARG DYNA_FILE="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh"
 
 # Folder created after extraction
-# ARG DYNA_PATH="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
-ARG DYNA_PATH="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405"
+ARG DYNA_PATH="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 
 # --------------------
 # Environment
@@ -49,17 +43,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
-# --------------------
-# Intel oneAPI MPI runtime (required for ifort builds)
-# --------------------
-RUN wget -O- https://apt.repos.intel.com/oneapi/gpgkey | gpg --dearmor \
-        > /usr/share/keyrings/oneapi-archive-keyring.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" \
-        > /etc/apt/sources.list.d/oneapi.list && \
-    apt-get update && \
-    apt-get install -y intel-oneapi-mpi-runtime && \
-    rm -rf /var/lib/apt/lists/*
-# --------------------
 
 RUN pip3 install --no-cache-dir uv
 
