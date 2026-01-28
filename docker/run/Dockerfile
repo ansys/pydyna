@@ -19,7 +19,7 @@ ARG DYNA_URL="ls-dyna/R16.1.1/linx.64/lsdyna/SMP/"
 ARG DYNA_FILE="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh"
 
 # Folder created after extraction
-ARG DYNA_PATH="lsdyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
+ARG DYNA_PATH="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 
 # --------------------
 # Environment
