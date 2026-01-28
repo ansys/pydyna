@@ -182,7 +182,7 @@ class Cards(OptionsInterface):
             keyword_id=keyword_id,
         )
 
-    def _try_read_options_with_no_title(self, buf: typing.TextIO) -> None:
+    def _try_read_options_with_no_title(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
         # some cards are not active until we read.. how to handle?
         # if there are monotonically increasing options with a title order of 0
         # *AND* all active cards have been read with the maximum title order less
@@ -205,7 +205,7 @@ class Cards(OptionsInterface):
             card = cards.pop(0)
             self.options.api.activate_option(card.name)
             any_options_read = True
-            card.read(buf)
+            card.read(buf, parameters)
         if not any_options_read:
             buf.seek(pos)
 
@@ -249,4 +249,4 @@ class Cards(OptionsInterface):
                 self._read_card(card, buf, parameters)
             card_index += 1
 
-        self._try_read_options_with_no_title(buf)
+        self._try_read_options_with_no_title(buf, parameters)
