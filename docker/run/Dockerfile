@@ -67,10 +67,15 @@ RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
     rm "${DYNA_FILE}"
 
 # --------------------
+# Verify installation   
+# --------------------
+RUN test -d "${INSTALL_DIR}/${DYNA_PATH}"
+
+# --------------------
 # License config
 # --------------------
-RUN echo "#LICENSE_TYPE: ansys" > "${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE" && \
-    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> "${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE"
+RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE && \
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE
 
 # --------------------
 # PATH
