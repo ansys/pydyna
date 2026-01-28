@@ -1,0 +1,48 @@
+ansys.dyna.core.pre.dynasale.AdvectionMethod
+============================================
+
+.. py:class:: ansys.dyna.core.pre.dynasale.AdvectionMethod(*args, **kwds)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Enumeration for advection method in the S-ALE mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: DONOR_CELL_WITH_HALF_INDEX_SHIFT
+      :value: 1
+
+
+
+   .. py:attribute:: VAN_LEER_WITH_HIS
+      :value: 2
+
+
+
+   .. py:attribute:: DONOR_CELL_WITH_HIS
+      :value: 3
+
+
+
+   .. py:attribute:: FINITE_VOLUME_METHOD
+      :value: 6
+
+

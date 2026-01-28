@@ -1,0 +1,1376 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.pre.dynabase.DynaBase &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=7e54ce6f"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/dyna/core/pre/dynabase/DynaBase';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.pre.dynabase.BaseSet" href="BaseSet.html" />
+    <link rel="prev" title="ansys.dyna.core.pre.dynabase.ParameterType" href="ParameterType.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/api/ansys/dyna/core/pre/dynabase/DynaBase.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html"><span class="nf nf-md-package"></span> ansys.dyna.core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../keywords/index.html">ansys.dyna.core.keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/index.html">ansys.dyna.core.lib</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">ansys.dyna.core.pre</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">ansys.dyna.core.pre.dynabase</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Motion.html">ansys.dyna.core.pre.dynabase.Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RWMotion.html">ansys.dyna.core.pre.dynabase.RWMotion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DOF.html">ansys.dyna.core.pre.dynabase.DOF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Switch.html">ansys.dyna.core.pre.dynabase.Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InvariantNode.html">ansys.dyna.core.pre.dynabase.InvariantNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EnergyFlag.html">ansys.dyna.core.pre.dynabase.EnergyFlag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HourglassControl.html">ansys.dyna.core.pre.dynabase.HourglassControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BulkViscosity.html">ansys.dyna.core.pre.dynabase.BulkViscosity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CaseType.html">ansys.dyna.core.pre.dynabase.CaseType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OutputEcho.html">ansys.dyna.core.pre.dynabase.OutputEcho</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Box.html">ansys.dyna.core.pre.dynabase.Box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Curve.html">ansys.dyna.core.pre.dynabase.Curve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Function.html">ansys.dyna.core.pre.dynabase.Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Table2D.html">ansys.dyna.core.pre.dynabase.Table2D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Point.html">ansys.dyna.core.pre.dynabase.Point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Direction.html">ansys.dyna.core.pre.dynabase.Direction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Transform.html">ansys.dyna.core.pre.dynabase.Transform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Velocity.html">ansys.dyna.core.pre.dynabase.Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RotVelocity.html">ansys.dyna.core.pre.dynabase.RotVelocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BaseObj.html">ansys.dyna.core.pre.dynabase.BaseObj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ParameterType.html">ansys.dyna.core.pre.dynabase.ParameterType</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">ansys.dyna.core.pre.dynabase.DynaBase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BaseSet.html">ansys.dyna.core.pre.dynabase.BaseSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NodeSet.html">ansys.dyna.core.pre.dynabase.NodeSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SetType.html">ansys.dyna.core.pre.dynabase.SetType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NodesetGeneral.html">ansys.dyna.core.pre.dynabase.NodesetGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NodeSetBox.html">ansys.dyna.core.pre.dynabase.NodeSetBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="PartSet.html">ansys.dyna.core.pre.dynabase.PartSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SegmentSet.html">ansys.dyna.core.pre.dynabase.SegmentSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BeamFormulation.html">ansys.dyna.core.pre.dynabase.BeamFormulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShellFormulation.html">ansys.dyna.core.pre.dynabase.ShellFormulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IGAFormulation.html">ansys.dyna.core.pre.dynabase.IGAFormulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SolidFormulation.html">ansys.dyna.core.pre.dynabase.SolidFormulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HourglassType.html">ansys.dyna.core.pre.dynabase.HourglassType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BeamSection.html">ansys.dyna.core.pre.dynabase.BeamSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShellSection.html">ansys.dyna.core.pre.dynabase.ShellSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IGASection.html">ansys.dyna.core.pre.dynabase.IGASection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Part.html">ansys.dyna.core.pre.dynabase.Part</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BeamPart.html">ansys.dyna.core.pre.dynabase.BeamPart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ShellPart.html">ansys.dyna.core.pre.dynabase.ShellPart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IGAPart.html">ansys.dyna.core.pre.dynabase.IGAPart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SolidPart.html">ansys.dyna.core.pre.dynabase.SolidPart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DRO.html">ansys.dyna.core.pre.dynabase.DRO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DiscretePart.html">ansys.dyna.core.pre.dynabase.DiscretePart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Parts.html">ansys.dyna.core.pre.dynabase.Parts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="AnalysisType.html">ansys.dyna.core.pre.dynabase.AnalysisType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TimestepCtrol.html">ansys.dyna.core.pre.dynabase.TimestepCtrol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Integration.html">ansys.dyna.core.pre.dynabase.Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ImplicitAnalysis.html">ansys.dyna.core.pre.dynabase.ImplicitAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThermalAnalysisType.html">ansys.dyna.core.pre.dynabase.ThermalAnalysisType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThermalAnalysisTimestep.html">ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ThermalAnalysis.html">ansys.dyna.core.pre.dynabase.ThermalAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContactCategory.html">ansys.dyna.core.pre.dynabase.ContactCategory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContactType.html">ansys.dyna.core.pre.dynabase.ContactType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="OffsetType.html">ansys.dyna.core.pre.dynabase.OffsetType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContactFormulation.html">ansys.dyna.core.pre.dynabase.ContactFormulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SBOPT.html">ansys.dyna.core.pre.dynabase.SBOPT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContactSurface.html">ansys.dyna.core.pre.dynabase.ContactSurface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Contact.html">ansys.dyna.core.pre.dynabase.Contact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ContactGroup.html">ansys.dyna.core.pre.dynabase.ContactGroup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Constraint.html">ansys.dyna.core.pre.dynabase.Constraint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BoundaryCondition.html">ansys.dyna.core.pre.dynabase.BoundaryCondition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InitialCondition.html">ansys.dyna.core.pre.dynabase.InitialCondition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RigidwallCylinder.html">ansys.dyna.core.pre.dynabase.RigidwallCylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RigidwallSphere.html">ansys.dyna.core.pre.dynabase.RigidwallSphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RigidwallPlanar.html">ansys.dyna.core.pre.dynabase.RigidwallPlanar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GravityOption.html">ansys.dyna.core.pre.dynabase.GravityOption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Gravity.html">ansys.dyna.core.pre.dynabase.Gravity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynadem/index.html">ansys.dyna.core.pre.dynadem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaem/index.html">ansys.dyna.core.pre.dynaem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaicfd/index.html">ansys.dyna.core.pre.dynaicfd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaiga/index.html">ansys.dyna.core.pre.dynaiga</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaisph/index.html">ansys.dyna.core.pre.dynaisph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynalogging/index.html">ansys.dyna.core.pre.dynalogging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamaterial/index.html">ansys.dyna.core.pre.dynamaterial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamech/index.html">ansys.dyna.core.pre.dynamech</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynanvh/index.html">ansys.dyna.core.pre.dynanvh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasale/index.html">ansys.dyna.core.pre.dynasale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasolution/index.html">ansys.dyna.core.pre.dynasolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../errors/index.html">ansys.dyna.core.pre.errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html">ansys.dyna.core.pre.examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graphics/index.html">ansys.dyna.core.pre.graphics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../launcher/index.html">ansys.dyna.core.pre.launcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/index.html">ansys.dyna.core.pre.misc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../model/index.html">ansys.dyna.core.pre.model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../part/index.html">ansys.dyna.core.pre.part</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../run/index.html">ansys.dyna.core.run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../solver/index.html">ansys.dyna.core.solver</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../_autosummary/index.html"><span class="nf nf-md-package"></span> Auto Keyword classes</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ansys.dyna.core.pre</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">ansys.dyna.core.pre.dynabase</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.pre.dynabase.DynaBase</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ansys-dyna-core-pre-dynabase-dynabase">
+<h1>ansys.dyna.core.pre.dynabase.DynaBase<a class="headerlink" href="#ansys-dyna-core-pre-dynabase-dynabase" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynabase.</span></span><span class="sig-name descname"><span class="pre">DynaBase</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase" title="Link to this definition">#</a></dt>
+<dd><p>Contains methods for creating a general LS-DYNA keyword.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.stub">
+<span class="sig-name descname"><span class="pre">stub</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.stub" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.mainname">
+<span class="sig-name descname"><span class="pre">mainname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.mainname" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.implicitanalysis">
+<span class="sig-name descname"><span class="pre">implicitanalysis</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.implicitanalysis" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.parts">
+<span class="sig-name descname"><span class="pre">parts</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.parts" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.boundaryconditions">
+<span class="sig-name descname"><span class="pre">boundaryconditions</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.boundaryconditions" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.initialconditions">
+<span class="sig-name descname"><span class="pre">initialconditions</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.initialconditions" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.constraints" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.contacts">
+<span class="sig-name descname"><span class="pre">contacts</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.contacts" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.entities">
+<span class="sig-name descname"><span class="pre">entities</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.entities" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.have_accuracy">
+<span class="sig-name descname"><span class="pre">have_accuracy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_accuracy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.have_energy">
+<span class="sig-name descname"><span class="pre">have_energy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_energy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.have_hourglass">
+<span class="sig-name descname"><span class="pre">have_hourglass</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_hourglass" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.have_bulk_viscosity">
+<span class="sig-name descname"><span class="pre">have_bulk_viscosity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_bulk_viscosity" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.have_control_shell">
+<span class="sig-name descname"><span class="pre">have_control_shell</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_control_shell" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.init_velocity">
+<span class="sig-name descname"><span class="pre">init_velocity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.init_velocity" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.bdy_spc">
+<span class="sig-name descname"><span class="pre">bdy_spc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.bdy_spc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.get_stub">
+<span class="sig-name descname"><span class="pre">get_stub</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.get_stub" title="Link to this definition">#</a></dt>
+<dd><p>Get the stub of the <code class="docutils literal notranslate"><span class="pre">DynaBase</span></code> object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_parent">
+<span class="sig-name descname"><span class="pre">set_parent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_parent" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_timestep">
+<span class="sig-name descname"><span class="pre">set_timestep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tssfac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isdo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestep_size_for_mass_scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_timestep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_timestep" title="Link to this definition">#</a></dt>
+<dd><p>Set the structural time step size control using different options.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>tssfac</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Scale factor for computed time step. The default is <code class="docutils literal notranslate"><span class="pre">0.9</span></code>.</p>
+</dd>
+<dt><strong>isdo</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Basis of the time size calculation for four-node shell elements.
+The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>timestep_size_for_mass_scaled</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Time step size for mass scaled solutions. The default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+</dd>
+<dt><strong>max_timestep</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Curve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Load curve that limits the maximum time step size. The default
+is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_accuracy">
+<span class="sig-name descname"><span class="pre">set_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective_stress_updates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Switch.OFF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_node_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">InvariantNode.OFF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partsetid_for_objective_stress_updates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">implicit_accuracy_flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Switch.OFF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explicit_accuracy_flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Switch.OFF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_accuracy" title="Link to this definition">#</a></dt>
+<dd><p>Define control parameters that can improve the accuracy of the calculation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>objective_stress_updates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Global flag for 2nd order objective stress updates.</p>
+</dd>
+<dt><strong>invariant_node_number</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Invariant node numbering for shell and solid elements.</p>
+</dd>
+<dt><strong>partsetid_for_objective_stress_updates</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Part set ID for objective stress updates. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>implicit_accuracy_flag</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Implicit accuracy flag.</p>
+</dd>
+<dt><strong>explicit_accuracy_flag</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Explicit accuracy parameter.</p>
+<ul class="simple">
+<li><p>EQ.0.0: Off</p></li>
+<li><p>GT.0.0: On</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_energy">
+<span class="sig-name descname"><span class="pre">set_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hourglass_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EnergyFlag.NOT_COMPUTED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rigidwall_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EnergyFlag.COMPUTED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_interface_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EnergyFlag.NOT_COMPUTED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rayleigh_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EnergyFlag.NOT_COMPUTED</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_reference_geometry_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EnergyFlag.COMPUTED</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_energy" title="Link to this definition">#</a></dt>
+<dd><p>Provide controls for energy dissipation options.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>hourglass_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enum</span></code></a></span></dt><dd><p>Hourglass energy calculation option.</p>
+</dd>
+<dt><strong>rigidwall_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Rigidwall energy dissipation option.</p>
+<ul class="simple">
+<li><p>EQ.1: Energy dissipation is not computed.</p></li>
+<li><p>EQ.2: Energy dissipation is computed.</p></li>
+</ul>
+</dd>
+<dt><strong>sliding_interface_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Sliding interface energy dissipation option.</p>
+<ul class="simple">
+<li><p>EQ.1: Energy dissipation is not computed.</p></li>
+<li><p>EQ.2: Energy dissipation is computed.</p></li>
+</ul>
+</dd>
+<dt><strong>rayleigh_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Rayleigh energy dissipation option.</p>
+<ul class="simple">
+<li><p>EQ.1: Energy dissipation is not computed.</p></li>
+<li><p>EQ.2: Energy dissipation is computed.</p></li>
+</ul>
+</dd>
+<dt><strong>initial_reference_geometry_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Initial reference geometry energy option.</p>
+<ul class="simple">
+<li><p>EQ.1: Initial reference geometry energy is not computed.</p></li>
+<li><p>EQ.2: Initial reference geometry energy is computed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_suppression_d3hsp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_suppression_echo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputEcho.ALL_DATA_PRINTED</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_output" title="Link to this definition">#</a></dt>
+<dd><p>Set miscellaneous output parameters.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>print_suppression_d3hsp</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Whether to suppress printing during the input phase flag for the D3HSP file.
+The default is <code class="docutils literal notranslate"><span class="pre">True</span></code>, which means that none of these are printed: nodal
+coordinates, element connectivities, rigid wall definitions, nodal SPCs,
+initial velocities, initial strains, adaptive constraints, and SPR2/SPR3
+constraints. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, no suppression occurs.</p>
+</dd>
+<dt><strong>print_suppression_echo</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputEcho</span></code></span></dt><dd><p>Print suppression setting during the input phase flag for the echo file.
+Options are:</p>
+<ul class="simple">
+<li><p>ALL_DATA_PRINTED: All data is printed.</p></li>
+<li><p>SUPPRESSED_NODAL_PRINTING: Nodal printing is suppressed.</p></li>
+<li><p>SUPPRESSED_ELEMENT_PRINTING: Element printing is suppressed.</p></li>
+<li><p>SUPPRESSED_NODAL_AND_ELEMENT_PRINTING : Both nodal and element printing is suppressed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_hourglass">
+<span class="sig-name descname"><span class="pre">set_hourglass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">controltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HourglassControl.STANDARD_VISCOSITY_FORM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_hourglass" title="Link to this definition">#</a></dt>
+<dd><p>Redefine the default values for the hourglass control type and coefficient.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>controltype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enum</span></code></a></span></dt><dd><p>Default hourglass control type.</p>
+</dd>
+<dt><strong>coefficient</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Default hourglass coefficient. The default is <code class="docutils literal notranslate"><span class="pre">0.</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_bulk_viscosity">
+<span class="sig-name descname"><span class="pre">set_bulk_viscosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quadratic_viscosity_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear_viscosity_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk_viscosity_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">BulkViscosity.STANDARD_BULK_VISCOSITY</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_bulk_viscosity" title="Link to this definition">#</a></dt>
+<dd><p>Reset the default values of the bulk viscosity coefficients globally.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>quadratic_viscosity_coeff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Default quadratic viscosity coefficient. The default is <code class="docutils literal notranslate"><span class="pre">1.5</span></code>.</p>
+</dd>
+<dt><strong>linear_viscosity_coeff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Default linear viscosity coefficient. The default is <code class="docutils literal notranslate"><span class="pre">0.06</span></code>.</p>
+</dd>
+<dt><strong>bulk_viscosity_type</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enum</span></code></a></span></dt><dd><p>Default bulk viscosity type.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_init_temperature">
+<span class="sig-name descname"><span class="pre">set_init_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_init_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Define initial nodal point temperatures on all nodes.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>temp</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Temperature at node. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.create_control_shell">
+<span class="sig-name descname"><span class="pre">create_control_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrpang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">esort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irnxx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">istupd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bwc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">miter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irquad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_shell" title="Link to this definition">#</a></dt>
+<dd><p>Provide controls for computing shell response.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>wrpang</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Shell element warpage angle in degrees. The default is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p>
+</dd>
+<dt><strong>esort</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Sorting of triangular shell elements to automatically switch
+degenerate quadrilateral shell formulations to more suitable
+triangular shell formulations. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>irnxx</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Shell normal update option. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>istupd</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Shell thickness change option for deformable shells. The
+default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>theory</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Default shell formulation. The default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+</dd>
+<dt><strong>bwc</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Warping stiffness for Belytschko-Tsay shells. The
+default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+</dd>
+<dt><strong>miter</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Plane stress plasticity option. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>proj</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Projection method for the warping stiffness in the Belytschko-Tsay
+shell and the Belytschko-Wong-Chiang elements. The default is
+<code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>irquad</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>In-plane integration rule for the eight-node quadratic shell element.
+The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<ul class="simple">
+<li><p>EQ.2: 2*2 Gauss quadrature</p></li>
+<li><p>EQ.3: 3*3 Gauss quadrature</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.create_control_solid">
+<span class="sig-name descname"><span class="pre">create_control_solid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">esort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmatrx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niptets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">swlocl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psfail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t10jtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icoh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tet13k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_solid" title="Link to this definition">#</a></dt>
+<dd><p>Provide controls for a solid element response.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>esort</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Automatic sorting of tetrahedral and pentahedral elements to avoid
+use of degenerate formulations for these shapes. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<ul class="simple">
+<li><p>EQ.0: No sorting</p></li>
+<li><p>EQ.1: Sort</p></li>
+</ul>
+</dd>
+<dt><strong>fmatrx</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Method to use in the calculation of the deformation gradient matrix.
+The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>niptets</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Number of integration points used in the quadratic tetrahedron elements.
+The default is <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
+</dd>
+<dt><strong>swlocl</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Output option for stresses in solid elements used as spot welds with
+material <code class="docutils literal notranslate"><span class="pre">\*MAT_SPOTWELD</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>psfail</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Solid element erosion from negative volume is limited only to solid elements in
+the part set indicated by PSFAIL. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>t10jtol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Tolerance for Jacobian in four-point, 10-noded quadratic tetrahedra. The
+default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+</dd>
+<dt><strong>icoh</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Breaking LS-DYNA convention ICOH is interpreted digit-wise. The default
+is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>tet13k</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to invoke a consistent tangent stiffness matrix
+for the pressure averaged tetrahedron. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>, in which
+case this matrix is not invoked. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>,
+this matrix is invoked.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.create_control_contact">
+<span class="sig-name descname"><span class="pre">create_control_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rwpnal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shlthk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orien</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssthk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">igactc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_contact" title="Link to this definition">#</a></dt>
+<dd><p>Change defaults for computation with contact surfaces.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>rwpnal</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Scale factor for rigid wall penalties, which treat nodal points interacting
+with rigid walls.</p>
+</dd>
+<dt><strong>shlthk</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to consider shell thickness offsets in non-automatic
+surface-to-surface and non-automatic nodes-to-surface type contacts.
+The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>, in which case these offsets are not considered.
+If this parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, these offsets are considered.</p>
+</dd>
+<dt><strong>orien</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to automatically reorient contact interface segments
+during initialization. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>, in which case reorientation
+automatically occurs. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, reorientation
+does not occur.</p>
+</dd>
+<dt><strong>ssthk</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to determine default contact thickness for shells in single
+surface contact types. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>, in which case default contact
+thickness is not determined. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, default
+contact thickness is determined.</p>
+</dd>
+<dt><strong>ignore</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to ignore initial penetrations in the <code class="docutils literal notranslate"><span class="pre">\*CONTACT_AUTOMATIC</span></code>
+options. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>, in which case initial penetrations are ignored.
+If this parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, initial penetrations are not ignored.</p>
+</dd>
+<dt><strong>igactc</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to use isogeometric shells for contact detection when the
+contact involves isogeometric shells. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>, which means
+isogeometric shells are not used. If this parameter is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, isogeometric
+shells are used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.create_damping_global">
+<span class="sig-name descname"><span class="pre">create_damping_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lcid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valdmp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_damping_global" title="Link to this definition">#</a></dt>
+<dd><p>Define mass-weighted nodal damping.</p>
+<p>Mass-weighted nodal damping applies globally to the
+nodes of deformable bodies and to the mass center of
+rigid bodies.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>lcid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Load curve ID, which specifies the system damping constant
+versus the time. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>valdmp</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>System damping constant. The default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.get_solid_elements">
+<span class="sig-name descname"><span class="pre">get_solid_elements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.get_solid_elements" title="Link to this definition">#</a></dt>
+<dd><p>Get solid elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></dt><dd><p>list[0],solid element connectivity,list[0] = [[n1,n2,n3,n4,n5,n6,n7,n8],[…],…]
+list[1],node coordinates,list[1] = [[x1,y1,z1],[x2,y2,z2],…]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.create_general_keyword">
+<span class="sig-name descname"><span class="pre">create_general_keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opcode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyworddata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_general_keyword" title="Link to this definition">#</a></dt>
+<dd><p>Create general keyword.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>opcode</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Keyword card name.</p>
+</dd>
+<dt><strong>keyworddata</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Keyword data.</p>
+</dd>
+<dt><strong>Example::</strong></dt><dd><p>Create a <code class="docutils literal notranslate"><span class="pre">\*INITIAL_VELOCITY</span></code> keyword.</p>
+<p>$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+*INITIAL_VELOCITY</p>
+<p>&amp;       vx        vy        vz       vxr       vyr       vzr
+1.480E+01 0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$</p>
+<p>opcode = “INITIAL_VELOCITY”
+keyworddata = “0n1.480E+01,0.000E+00,0.000E+00,0.000E+00,0.000E+00,0.000E+00”
+create_general_keyword(opcode = opcode,keyworddata=keyworddata)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.add" title="Link to this definition">#</a></dt>
+<dd><p>Add entities to an object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.set_transform">
+<span class="sig-name descname"><span class="pre">set_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idnoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ideoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idpoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idmoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idsoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idfoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_transform" title="Link to this definition">#</a></dt>
+<dd><p>Include independent input files containing model data, allow for node, element, and set
+IDs to be offset and for coordinates and constitutive parameters to be transformed and scaled.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>filename</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Name of file to include in the keyword file.</p>
+</dd>
+<dt><strong>idnoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to node ID.</p>
+</dd>
+<dt><strong>ideoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to element ID.</p>
+</dd>
+<dt><strong>idpoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to part ID.</p>
+</dd>
+<dt><strong>idmoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to material ID.</p>
+</dd>
+<dt><strong>idsoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to set ID.</p>
+</dd>
+<dt><strong>idfoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Offset to function ID, table ID, and curve ID.</p>
+</dd>
+<dt><strong>transform</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transform</span></code></span></dt><dd><p>Definition for the transformation.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynabase.DynaBase.save_file">
+<span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynabase.DynaBase.save_file" title="Link to this definition">#</a></dt>
+<dd><p>Save keyword files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.stub"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.stub</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.mainname"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.mainname</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.implicitanalysis"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.implicitanalysis</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.parts"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.parts</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.boundaryconditions"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.boundaryconditions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.initialconditions"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.initialconditions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.constraints"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.constraints</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.contacts"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.contacts</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.entities"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.entities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_accuracy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.have_accuracy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_energy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.have_energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_hourglass"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.have_hourglass</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_bulk_viscosity"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.have_bulk_viscosity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.have_control_shell"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.have_control_shell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.init_velocity"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.init_velocity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.bdy_spc"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.bdy_spc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.get_stub"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.get_stub()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_parent"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_parent()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_timestep"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_timestep()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_accuracy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_accuracy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_energy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_output"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_output()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_hourglass"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_hourglass()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_bulk_viscosity"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_bulk_viscosity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_init_temperature"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_init_temperature()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_shell"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.create_control_shell()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_solid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.create_control_solid()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_control_contact"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.create_control_contact()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_damping_global"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.create_damping_global()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.get_solid_elements"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.get_solid_elements()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.create_general_keyword"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.create_general_keyword()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.add"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.add()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.set_transform"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.set_transform()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynabase.DynaBase.save_file"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase.save_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pydyna/edit/main/ansys/dyna/core/pre/dynabase/DynaBase.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../_sources/api/ansys/dyna/core/pre/dynabase/DynaBase.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

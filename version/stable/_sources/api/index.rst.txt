@@ -1,0 +1,12 @@
+API reference
+=============
+
+This section describes PyDYNA's endpoints, their capabilities, and how
+to interact with them programmatically.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   <span class="nf nf-md-package"></span> ansys.dyna.core</api/ansys/dyna/core/index>
+   <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>

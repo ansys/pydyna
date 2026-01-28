@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.manual.define_function
+===============================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.define_function
+
+.. autoapi-nested-parse::
+
+   Module to define function.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/define_function/DefineFunction
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.define_function.DefineFunction
+
+
