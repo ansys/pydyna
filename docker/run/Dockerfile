@@ -3,15 +3,15 @@ FROM ubuntu:22.04
 
 # Build arguments for FTP credentials
 ARG FTP_USER
-ARG FTP_PASSWORD
+ARG FTP_LOGIN
 ARG VERSION=R16.1.1
 ARG VERSION_SHORT=R16_1_1
 ARG PRECISION=smp_d
 
 # Validate build arguments
-RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then \
-        echo "Error: FTP_USER and FTP_PASSWORD must be provided as build arguments"; \
-        echo "Usage: docker build --build-arg FTP_USER=user --build-arg FTP_PASSWORD=pass ."; \
+RUN if [ -z "$FTP_USER" ] || [ -z "$FTP_LOGIN" ]; then \
+        echo "Error: FTP_USER and FTP_LOGIN must be provided as build arguments"; \
+        echo "Usage: docker build --build-arg FTP_USER=user --build-arg FTP_LOGIN=login ."; \
         exit 1; \
     fi
 
@@ -45,7 +45,7 @@ RUN pip3 install uv
 WORKDIR /opt/Dyna
  
 # Download LS-DYNA solver
-RUN wget --user "${FTP_USER}" --password "${FTP_PASSWORD}" \
+RUN wget --user "${FTP_USER}" --password "${FTP_LOGIN}" \
     https://ftp.lstc.com/user/ls-dyna/${VERSION}/linx.64/lsdyna/SMP/ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
 # Make the extractor script executable
 RUN chmod +x ls-dyna_${PRECISION}_${VERSION_SHORT}_x64_centos79_ifort190_sse2.tgz_extractor.sh
