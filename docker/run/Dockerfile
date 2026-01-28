@@ -48,6 +48,19 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+
+# --------------------
+# Intel oneAPI MPI runtime (required for ifort builds)
+# --------------------
+RUN wget -O- https://apt.repos.intel.com/oneapi/gpgkey | gpg --dearmor \
+        > /usr/share/keyrings/oneapi-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" \
+        > /etc/apt/sources.list.d/oneapi.list && \
+    apt-get update && \
+    apt-get install -y intel-oneapi-mpi-runtime && \
+    rm -rf /var/lib/apt/lists/*
+# --------------------
+
 RUN pip3 install --no-cache-dir uv
 
 # --------------------
