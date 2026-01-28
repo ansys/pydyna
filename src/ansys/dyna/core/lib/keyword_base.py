@@ -230,6 +230,9 @@ class KeywordBase(Cards):
             def tell(self):
                 return self._io.tell()
 
+            def truncate(self, size=None):
+                return self._io.truncate(size)
+
             def write(self, value: str) -> None:
                 if "\n" not in value:
                     self._io.write(value)
