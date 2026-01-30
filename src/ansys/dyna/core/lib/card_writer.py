@@ -69,9 +69,12 @@ def write_cards(
 
     pos = buf.tell()  # record the position of the last newline
     for card_index, card in enumerate(cards):
+        # Skip inactive cards entirely - don't even write a newline for them
+        if not card.active:
+            continue
+            
         if buf.tell() != pos:
             # if we have written since the last newline, we need to prepend a new line
-            # (unless this is the last newline to write?)
             buf.write("\n")
             pos = buf.tell()
 
@@ -88,7 +91,3 @@ def write_cards(
             parameter_set=parameter_set,
             uri_prefix=uri_prefix,
         )
-    superfluous_newline = pos == buf.tell()
-    if superfluous_newline:
-        buf.seek(buf.tell() - 1)
-        buf.truncate()  # Required for StringIO - seek alone doesn't remove content
