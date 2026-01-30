@@ -151,3 +151,59 @@ def test_load_dataline_012():
     parameter_set.add("vdct", 1.0)
     res = load_dataline(spec, dataline, parameter_set)
     assert res[4] == 1
+
+
+@pytest.mark.keywords
+def test_load_dataline_013():
+    """Test loading LS-DYNA compact scientific notation (no E)."""
+    # Format: "1.00000+4" means 1.00000E+4 = 10000
+    # This is the actual format from bird_B.k: "         1 1.0000000 1.00000+4 0.0000000"
+    spec = [(0, 10, int), (10, 10, float), (20, 10, float), (30, 10, float)]
+    dataline = "         1 1.00000001.00000+4 0.0000000"
+    res = load_dataline(spec, dataline)
+    assert res[0] == 1
+    assert res[1] == 1.0
+    assert res[2] == 10000.0
+    assert res[3] == 0.0
+
+
+@pytest.mark.keywords
+def test_load_dataline_014():
+    """Test loading LS-DYNA compact scientific notation with negative exponent."""
+    spec = [(0, 10, float), (10, 10, float)]
+    dataline = "   3.5-10      1.0"
+    res = load_dataline(spec, dataline)
+    assert res[0] == 3.5e-10
+    assert res[1] == 1.0
+
+
+@pytest.mark.keywords
+def test_load_dataline_015():
+    """Test loading LS-DYNA compact notation for integers."""
+    spec = [(0, 10, int), (10, 10, int)]
+    # 1+4 = 1E4 = 10000
+    dataline = "       1+4       2+3"
+    res = load_dataline(spec, dataline)
+    assert res[0] == 10000
+    assert res[1] == 2000
+
+
+@pytest.mark.keywords
+def test_load_dataline_016():
+    """Test Fortran D notation (1.0D+4 -> 1.0E+4)."""
+    spec = [(0, 10, float), (10, 10, float)]
+    dataline = "  1.0D+04  2.5d-03"
+    res = load_dataline(spec, dataline)
+    assert res[0] == 10000.0
+    assert res[1] == 0.0025
+
+
+@pytest.mark.keywords
+def test_load_dataline_017():
+    """Test compact scientific notation in CSV format."""
+    spec = [(0, 10, float), (10, 10, float), (20, 10, float)]
+    dataline = "1.0,1.00000+4,0.0"
+    res = load_dataline(spec, dataline)
+    assert res[0] == 1.0
+    assert res[1] == 10000.0
+    assert res[2] == 0.0

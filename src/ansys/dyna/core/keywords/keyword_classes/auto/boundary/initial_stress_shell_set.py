@@ -23,7 +23,39 @@
 """Module providing the InitialStressShellSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSSHELLSET_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, 0),
+    FieldSchema("nthick", int, 20, 10, 0),
+    FieldSchema("nhisv", int, 30, 10, 0),
+    FieldSchema("ntensr", int, 40, 10, 0),
+    FieldSchema("large", int, 50, 10, 0),
+)
+
+_INITIALSTRESSSHELLSET_CARD1 = (
+    FieldSchema("t", float, 0, 10, None),
+    FieldSchema("sigxx", float, 10, 10, 0.0),
+    FieldSchema("sigyy", float, 20, 10, 0.0),
+    FieldSchema("sigzz", float, 30, 10, 0.0),
+    FieldSchema("sigxy", float, 40, 10, 0.0),
+    FieldSchema("sigyz", float, 50, 10, 0.0),
+    FieldSchema("sigzx", float, 60, 10, 0.0),
+    FieldSchema("eps", float, 70, 10, 0.0),
+)
+
+_INITIALSTRESSSHELLSET_CARD2 = (
+    FieldSchema("hisv1", float, 0, 10, None),
+    FieldSchema("hisv2", float, 10, 10, None),
+    FieldSchema("hisv3", float, 20, 10, None),
+    FieldSchema("hisv4", float, 30, 10, None),
+    FieldSchema("hisv5", float, 40, 10, None),
+    FieldSchema("hisv6", float, 50, 10, None),
+    FieldSchema("hisv7", float, 60, 10, None),
+    FieldSchema("hisv8", float, 70, 10, None),
+)
 
 class InitialStressShellSet(KeywordBase):
     """DYNA INITIAL_STRESS_SHELL_SET keyword"""
@@ -35,186 +67,16 @@ class InitialStressShellSet(KeywordBase):
         """Initialize the InitialStressShellSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntensr",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hisv1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the set Shell ID.

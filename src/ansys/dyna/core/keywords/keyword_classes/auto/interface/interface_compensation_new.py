@@ -23,87 +23,38 @@
 """Module providing the InterfaceCompensationNew class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INTERFACECOMPENSATIONNEW_CARD0 = (
+    FieldSchema("method", int, 0, 10, 6),
+    FieldSchema("sl", float, 10, 10, 5.0),
+    FieldSchema("sf", float, 20, 10, 0.75),
+    FieldSchema("elref", int, 30, 10, 1),
+    FieldSchema("psidm", float, 40, 10, None),
+    FieldSchema("undct", float, 50, 10, 0.0),
+    FieldSchema("angle", float, 60, 10, 0.0),
+    FieldSchema("nlinea", int, 70, 10, 1),
+)
 
 class InterfaceCompensationNew(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_NEW keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "COMPENSATION_NEW"
+    _link_fields = {
+        "psidm": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceCompensationNew class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sl",
-                        float,
-                        10,
-                        10,
-                        5.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        0.75,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elref",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidm",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "undct",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlinea",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATIONNEW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks
@@ -196,4 +147,14 @@ class InterfaceCompensationNew(KeywordBase):
     def nlinea(self, value: int) -> None:
         """Set the nlinea property."""
         self._cards[0].set_value("nlinea", value)
+
+    @property
+    def psidm_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidm."""
+        return self._get_set_link("PART", self.psidm)
+
+    @psidm_link.setter
+    def psidm_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidm."""
+        self.psidm = value.sid
 

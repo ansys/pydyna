@@ -23,38 +23,32 @@
 """Module providing the InterfaceSsiAuxNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INTERFACESSIAUXNODE_CARD0 = (
+    FieldSchema("gmset", int, 0, 10, None),
+    FieldSchema("setid", int, 10, 10, None),
+)
 
 class InterfaceSsiAuxNode(KeywordBase):
     """DYNA INTERFACE_SSI_AUX_NODE keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "SSI_AUX_NODE"
+    _link_fields = {
+        "setid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceSsiAuxNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "gmset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIAUXNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def gmset(self) -> typing.Optional[int]:
         """Get or set the Identifier for this set of recorded motions to be referred to in *INTERFACE_SSI. Must be unique.
@@ -76,4 +70,14 @@ class InterfaceSsiAuxNode(KeywordBase):
     def setid(self, value: int) -> None:
         """Set the setid property."""
         self._cards[0].set_value("setid", value)
+
+    @property
+    def setid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for setid."""
+        return self._get_set_link("NODE", self.setid)
+
+    @setid_link.setter
+    def setid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for setid."""
+        self.setid = value.sid
 

@@ -23,480 +23,134 @@
 """Module providing the InitialVolumeFractionGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD0 = (
+    FieldSchema("fmsid", int, 0, 10, None),
+    FieldSchema("fmidtyp", int, 10, 10, 0),
+    FieldSchema("bammg", int, 20, 10, 0),
+    FieldSchema("ntrace", int, 30, 10, 3),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD1 = (
+    FieldSchema("conttyp", int, 0, 10, 1),
+    FieldSchema("fillopt", int, 10, 10, 0),
+    FieldSchema("fammg", int, 20, 10, None),
+    FieldSchema("vx", float, 30, 10, None),
+    FieldSchema("vy", float, 40, 10, None),
+    FieldSchema("vz", float, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD2 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("normdir", int, 20, 10, None),
+    FieldSchema("xoffset", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD3 = (
+    FieldSchema("sgsid_", int, 0, 10, None, "sgsid "),
+    FieldSchema("normdir", int, 10, 10, None),
+    FieldSchema("xoffset", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD4 = (
+    FieldSchema("x0", float, 0, 10, None),
+    FieldSchema("y0", float, 10, 10, None),
+    FieldSchema("z0", float, 20, 10, None),
+    FieldSchema("xcos", float, 30, 10, None),
+    FieldSchema("ycos", float, 40, 10, None),
+    FieldSchema("zcos", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD5 = (
+    FieldSchema("x0", float, 0, 10, None),
+    FieldSchema("y0", float, 10, 10, None),
+    FieldSchema("z0", float, 20, 10, None),
+    FieldSchema("x1", float, 30, 10, None),
+    FieldSchema("y1", float, 40, 10, None),
+    FieldSchema("z1", float, 50, 10, None),
+    FieldSchema("r1", float, 60, 10, None),
+    FieldSchema("r2", float, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD6 = (
+    FieldSchema("x0", float, 0, 10, None),
+    FieldSchema("y0", float, 10, 10, None),
+    FieldSchema("z0", float, 20, 10, None),
+    FieldSchema("x1", float, 30, 10, None),
+    FieldSchema("y1", float, 40, 10, None),
+    FieldSchema("z1", float, 50, 10, None),
+    FieldSchema("lcsid", int, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_INITIALVOLUMEFRACTIONGEOMETRY_CARD7 = (
+    FieldSchema("x0", float, 0, 10, None),
+    FieldSchema("y0", float, 10, 10, None),
+    FieldSchema("z0", float, 20, 10, None),
+    FieldSchema("r0", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
 
 class InitialVolumeFractionGeometry(KeywordBase):
     """DYNA INITIAL_VOLUME_FRACTION_GEOMETRY keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VOLUME_FRACTION_GEOMETRY"
+    _link_fields = {
+        "lcsid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "sgsid_": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVolumeFractionGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fmsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmidtyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bammg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntrace",
-                        int,
-                        30,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "conttyp",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fillopt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fammg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normdir",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xoffset",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sgsid ",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normdir",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xoffset",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xcos",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycos",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zcos",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTIONGEOMETRY_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def fmsid(self) -> typing.Optional[int]:
         """Get or set the Background ALE (fluid) mesh SID to be initialized or filled with various AMMGs.  This set ID refers to one or more ALE parts
@@ -682,12 +336,12 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def sgsid_(self) -> typing.Optional[int]:
         """Get or set the Segment Set ID defining the "container", see *SET_SEGMENT
         """ # nopep8
-        return self._cards[3].get_value("sgsid ")
+        return self._cards[3].get_value("sgsid_")
 
     @sgsid_.setter
     def sgsid_(self, value: int) -> None:
         """Set the sgsid_ property."""
-        self._cards[3].set_value("sgsid ", value)
+        self._cards[3].set_value("sgsid_", value)
 
     @property
     def normdir(self) -> typing.Optional[int]:
@@ -990,4 +644,29 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def r0(self, value: float) -> None:
         """Set the r0 property."""
         self._cards[7].set_value("r0", value)
+
+    @property
+    def lcsid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for lcsid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.lcsid:
+                return kwd
+        return None
+
+    @lcsid_link.setter
+    def lcsid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for lcsid."""
+        self.lcsid = value.cid
+
+    @property
+    def sgsid__link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sgsid_."""
+        return self._get_set_link("SEGMENT", self.sgsid_)
+
+    @sgsid__link.setter
+    def sgsid__link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sgsid_."""
+        self.sgsid_ = value.sid
 

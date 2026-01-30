@@ -23,92 +23,45 @@
 """Module providing the EmPermanentMagnet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMPERMANENTMAGNET_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("partid", int, 10, 10, None),
+    FieldSchema("mtype", int, 20, 10, 0),
+    FieldSchema("north", int, 30, 10, None),
+    FieldSchema("south", int, 40, 10, None),
+    FieldSchema("hc", float, 50, 10, None),
+)
+
+_EMPERMANENTMAGNET_CARD1 = (
+    FieldSchema("x_nid1", float, 0, 10, None, "x/nid1"),
+    FieldSchema("y_nid2", float, 10, 10, None, "y/nid2"),
+    FieldSchema("z", float, 20, 10, None),
+)
 
 class EmPermanentMagnet(KeywordBase):
     """DYNA EM_PERMANENT_MAGNET keyword"""
 
     keyword = "EM"
     subkeyword = "PERMANENT_MAGNET"
+    _link_fields = {
+        "partid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmPermanentMagnet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "partid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "north",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "south",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x/nid1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y/nid2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMPERMANENTMAGNET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMPERMANENTMAGNET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the MID
@@ -186,24 +139,24 @@ class EmPermanentMagnet(KeywordBase):
         """Get or set the Orientation of magnetization vector if MTYPE=3.
         Two node IDs defining the magnetization vector if MTYPE=4.
         """ # nopep8
-        return self._cards[1].get_value("x/nid1")
+        return self._cards[1].get_value("x_nid1")
 
     @x_nid1.setter
     def x_nid1(self, value: float) -> None:
         """Set the x_nid1 property."""
-        self._cards[1].set_value("x/nid1", value)
+        self._cards[1].set_value("x_nid1", value)
 
     @property
     def y_nid2(self) -> typing.Optional[float]:
         """Get or set the Orientation of magnetization vector if MTYPE=3.
         Two node IDs defining the magnetization vector if MTYPE=4.
         """ # nopep8
-        return self._cards[1].get_value("y/nid2")
+        return self._cards[1].get_value("y_nid2")
 
     @y_nid2.setter
     def y_nid2(self, value: float) -> None:
         """Set the y_nid2 property."""
-        self._cards[1].set_value("y/nid2", value)
+        self._cards[1].set_value("y_nid2", value)
 
     @property
     def z(self) -> typing.Optional[float]:
@@ -215,4 +168,9 @@ class EmPermanentMagnet(KeywordBase):
     def z(self, value: float) -> None:
         """Set the z property."""
         self._cards[1].set_value("z", value)
+
+    @property
+    def partid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partid."""
+        return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

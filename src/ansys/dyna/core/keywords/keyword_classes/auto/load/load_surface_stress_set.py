@@ -23,151 +23,59 @@
 """Module providing the LoadSurfaceStressSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADSURFACESTRESSSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+)
+
+_LOADSURFACESTRESSSET_CARD1 = (
+    FieldSchema("lscid1", int, 0, 10, None),
+    FieldSchema("lscid2", int, 10, 10, None),
+    FieldSchema("lscid3", int, 20, 10, None),
+    FieldSchema("lscid4", int, 30, 10, None),
+    FieldSchema("lscid5", int, 40, 10, None),
+    FieldSchema("lscid6", int, 50, 10, None),
+    FieldSchema("lscid7", int, 60, 10, None),
+    FieldSchema("lscid8", int, 70, 10, None),
+)
+
+_LOADSURFACESTRESSSET_CARD2 = (
+    FieldSchema("uscid1", int, 0, 10, None),
+    FieldSchema("uscid2", int, 10, 10, None),
+    FieldSchema("uscid3", int, 20, 10, None),
+    FieldSchema("uscid4", int, 30, 10, None),
+    FieldSchema("uscid5", int, 40, 10, None),
+    FieldSchema("uscid6", int, 50, 10, None),
+    FieldSchema("uscid7", int, 60, 10, None),
+    FieldSchema("uscid8", int, 70, 10, None),
+)
 
 class LoadSurfaceStressSet(KeywordBase):
     """DYNA LOAD_SURFACE_STRESS_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "SURFACE_STRESS_SET"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSurfaceStressSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lscid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "uscid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESSSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESSSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESSSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the part set id
@@ -354,4 +262,14 @@ class LoadSurfaceStressSet(KeywordBase):
     def uscid8(self, value: int) -> None:
         """Set the uscid8 property."""
         self._cards[2].set_value("uscid8", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

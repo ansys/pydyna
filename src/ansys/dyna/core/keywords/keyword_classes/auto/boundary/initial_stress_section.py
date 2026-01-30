@@ -23,75 +23,42 @@
 """Module providing the InitialStressSection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_INITIALSTRESSSECTION_CARD0 = (
+    FieldSchema("issid", int, 0, 10, None),
+    FieldSchema("csid", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("psid", int, 30, 10, None),
+    FieldSchema("vid", int, 40, 10, None),
+    FieldSchema("izshear", int, 50, 10, 0),
+    FieldSchema("istiff", int, 60, 10, 0),
+)
 
 class InitialStressSection(KeywordBase):
     """DYNA INITIAL_STRESS_SECTION keyword"""
 
     keyword = "INITIAL"
     subkeyword = "STRESS_SECTION"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "istiff": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressSection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "issid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izshear",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istiff",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSECTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def issid(self) -> typing.Optional[int]:
         """Get or set the Section stress initialization ID.
@@ -184,4 +151,59 @@ class InitialStressSection(KeywordBase):
     def istiff(self, value: int) -> None:
         """Set the istiff property."""
         self._cards[0].set_value("istiff", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def istiff_link(self) -> DefineCurve:
+        """Get the DefineCurve object for istiff."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.istiff:
+                return kwd
+        return None
+
+    @istiff_link.setter
+    def istiff_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for istiff."""
+        self.istiff = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

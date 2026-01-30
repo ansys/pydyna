@@ -23,8 +23,36 @@
 """Module providing the Mat075 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT075_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ym", float, 20, 10, None),
+    FieldSchema("lcpy", int, 30, 10, None),
+    FieldSchema("lcuys", int, 40, 10, None),
+    FieldSchema("vc", float, 50, 10, None),
+    FieldSchema("pc", float, 60, 10, None),
+    FieldSchema("vpc", float, 70, 10, None),
+)
+
+_MAT075_CARD1 = (
+    FieldSchema("tsc", float, 0, 10, None),
+    FieldSchema("vtsc", float, 10, 10, None),
+    FieldSchema("lcrate", int, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("kcon", float, 40, 10, None),
+    FieldSchema("isflg", int, 50, 10, 0),
+    FieldSchema("ncycle", float, 60, 10, None),
+)
+
+_MAT075_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat075(KeywordBase):
     """DYNA MAT_075 keyword"""
@@ -34,145 +62,34 @@ class Mat075(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcpy": LinkType.DEFINE_CURVE,
+        "lcuys": LinkType.DEFINE_CURVE,
+        "lcrate": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat075 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ym",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcuys",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vpc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tsc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtsc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrate",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kcon",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isflg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycle",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT075_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT075_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat075.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT075_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -358,4 +275,49 @@ class Mat075(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcpy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpy:
+                return kwd
+        return None
+
+    @lcpy_link.setter
+    def lcpy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpy."""
+        self.lcpy = value.lcid
+
+    @property
+    def lcuys_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcuys."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcuys:
+                return kwd
+        return None
+
+    @lcuys_link.setter
+    def lcuys_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcuys."""
+        self.lcuys = value.lcid
+
+    @property
+    def lcrate_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcrate."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcrate:
+                return kwd
+        return None
+
+    @lcrate_link.setter
+    def lcrate_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcrate."""
+        self.lcrate = value.lcid
 

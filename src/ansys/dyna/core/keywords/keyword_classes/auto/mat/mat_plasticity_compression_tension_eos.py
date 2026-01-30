@@ -23,8 +23,53 @@
 """Module providing the MatPlasticityCompressionTensionEos class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("c", float, 40, 10, None),
+    FieldSchema("p", float, 50, 10, None),
+    FieldSchema("fail", float, 60, 10, 1e+20),
+    FieldSchema("tdel", float, 70, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD1 = (
+    FieldSchema("lcidc", int, 0, 10, 0),
+    FieldSchema("lcidt", int, 10, 10, 0),
+    FieldSchema("lcsrc", int, 20, 10, None),
+    FieldSchema("lcsrt", int, 30, 10, None),
+    FieldSchema("srflag", float, 40, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD2 = (
+    FieldSchema("pc", float, 0, 10, None),
+    FieldSchema("pt", float, 10, 10, None),
+    FieldSchema("pcutc", float, 20, 10, None),
+    FieldSchema("pcutt", float, 30, 10, None),
+    FieldSchema("pcutf", float, 40, 10, None),
+    FieldSchema("scalep", float, 50, 10, None),
+    FieldSchema("scalee", float, 60, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD3 = (
+    FieldSchema("k", float, 0, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD4 = (
+    FieldSchema("gi", float, 0, 10, None),
+    FieldSchema("betai", float, 10, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPlasticityCompressionTensionEos(KeywordBase):
     """DYNA MAT_PLASTICITY_COMPRESSION_TENSION_EOS keyword"""
@@ -34,215 +79,44 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcidc": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lcsrc": LinkType.DEFINE_CURVE,
+        "lcsrt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPlasticityCompressionTensionEos class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdel",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsrc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsrt",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srflag",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalep",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalee",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPlasticityCompressionTensionEos.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYCOMPRESSIONTENSIONEOS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -518,4 +392,64 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidc:
+                return kwd
+        return None
+
+    @lcidc_link.setter
+    def lcidc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidc."""
+        self.lcidc = value.lcid
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lcsrc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsrc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsrc:
+                return kwd
+        return None
+
+    @lcsrc_link.setter
+    def lcsrc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsrc."""
+        self.lcsrc = value.lcid
+
+    @property
+    def lcsrt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsrt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsrt:
+                return kwd
+        return None
+
+    @lcsrt_link.setter
+    def lcsrt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsrt."""
+        self.lcsrt = value.lcid
 

@@ -23,73 +23,38 @@
 """Module providing the IcfdDefineWaveDamping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDDEFINEWAVEDAMPING_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("l", float, 20, 10, None),
+    FieldSchema("f1", float, 30, 10, None),
+    FieldSchema("f2", float, 40, 10, None),
+    FieldSchema("n", int, 50, 10, None),
+    FieldSchema("lcid", int, 60, 10, None),
+)
 
 class IcfdDefineWaveDamping(KeywordBase):
     """DYNA ICFD_DEFINE_WAVE_DAMPING keyword"""
 
     keyword = "ICFD"
     subkeyword = "DEFINE_WAVE_DAMPING"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdDefineWaveDamping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEWAVEDAMPING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Point ID defining the start of the damping layer.
@@ -166,4 +131,19 @@ class IcfdDefineWaveDamping(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

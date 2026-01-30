@@ -23,128 +23,55 @@
 """Module providing the DatabaseTracerGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DATABASETRACERGENERAL_CARD0 = (
+    FieldSchema("node", int, 0, 10, 0),
+    FieldSchema("elem", int, 10, 10, 0),
+    FieldSchema("typm", int, 20, 10, 1),
+    FieldSchema("move", int, 30, 10, 0),
+    FieldSchema("set", int, 40, 10, 0),
+    FieldSchema("typs", int, 50, 10, 0),
+)
+
+_DATABASETRACERGENERAL_CARD1 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("tbeg", float, 10, 10, 0.0),
+    FieldSchema("tend", float, 20, 10, 1e+20),
+    FieldSchema("fid", int, 30, 10, 0),
+)
+
+_DATABASETRACERGENERAL_CARD2 = (
+    FieldSchema("varloc", int, 0, 10, 0),
+    FieldSchema("varepl", int, 10, 10, 0),
+)
 
 class DatabaseTracerGeneral(KeywordBase):
     """DYNA DATABASE_TRACER_GENERAL keyword"""
 
     keyword = "DATABASE"
     subkeyword = "TRACER_GENERAL"
+    _link_fields = {
+        "node": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseTracerGeneral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "node",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elem",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typm",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "move",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "set",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typs",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        20,
-                        10,
-                        1e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "varloc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varepl",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERGENERAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERGENERAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERGENERAL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def node(self) -> int:
         """Get or set the Node ID that locates the tracer (see Remark 1)
@@ -318,4 +245,9 @@ class DatabaseTracerGeneral(KeywordBase):
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""varepl must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("varepl", value)
+
+    @property
+    def node_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node."""
+        return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 

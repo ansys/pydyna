@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Transformation handler for *NODE."""
+
 import warnings
 
 import numpy as np
@@ -32,6 +33,7 @@ from ansys.dyna.core.lib.transforms.utils.define_transformation import get_trans
 
 
 def apply_rigid_transform(mtx: np.ndarray, nodes: pd.DataFrame) -> None:
+    """Apply a rigid transformation defined by a 4x4 matrix to a set of nodes."""
     locations = nodes[["x", "y", "z"]]
     locations = locations.fillna(0.0)
     locations["w"] = 1.0
@@ -45,7 +47,10 @@ def apply_rigid_transform(mtx: np.ndarray, nodes: pd.DataFrame) -> None:
 
 
 class TransformNode(Transform):
+    """Class to handle transformations for *NODE keywords."""
+
     def transform(self, keyword: kwd.Node) -> None:
+        """Apply the transformation to the given *NODE keyword."""
         self._apply_offset(keyword)
         try:
             self._apply_transform(keyword)
@@ -54,12 +59,14 @@ class TransformNode(Transform):
             raise e
 
     def _apply_offset(self, keyword: kwd.Node) -> None:
+        """Apply node ID offset."""
         offset = self._xform.idnoff
         if offset is None or offset == 0:
             return
         keyword.nodes["nid"] = keyword.nodes["nid"] + offset
 
     def _apply_transform(self, keyword: kwd.Node) -> None:
+        """Apply node coordinate transformation."""
         define_transform = self._xform.tranid_link
         mtx = get_transform_matrix(define_transform)
         if mtx is None:

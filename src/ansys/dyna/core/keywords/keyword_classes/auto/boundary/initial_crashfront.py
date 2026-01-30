@@ -23,38 +23,33 @@
 """Module providing the InitialCrashfront class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INITIALCRASHFRONT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, None),
+)
 
 class InitialCrashfront(KeywordBase):
     """DYNA INITIAL_CRASHFRONT keyword"""
 
     keyword = "INITIAL"
     subkeyword = "CRASHFRONT"
+    _link_fields = {
+        "stype": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialCrashfront class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALCRASHFRONT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID from which the initial crashfront nodes are defined
@@ -81,4 +76,9 @@ class InitialCrashfront(KeywordBase):
     def stype(self, value: int) -> None:
         """Set the stype property."""
         self._cards[0].set_value("stype", value)
+
+    @property
+    def stype_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given stype."""
+        return self._get_link_by_attr("NODE", "nid", self.stype, "parts")
 

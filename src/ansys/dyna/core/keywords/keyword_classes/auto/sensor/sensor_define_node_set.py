@@ -23,8 +23,24 @@
 """Module providing the SensorDefineNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SENSORDEFINENODESET_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("node1", int, 10, 10, None),
+    FieldSchema("node2", int, 20, 10, None),
+    FieldSchema("vid", str, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ctype", str, 50, 10, "ACC"),
+    FieldSchema("setopt", str, 60, 10, "AVG"),
+)
+
+_SENSORDEFINENODESET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineNodeSet(KeywordBase):
     """DYNA SENSOR_DEFINE_NODE_SET keyword"""
@@ -34,86 +50,30 @@ class SensorDefineNodeSet(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "node1": LinkType.SET_NODE,
+        "node2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SensorDefineNodeSet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        str,
-                        50,
-                        10,
-                        "ACC",
-                        **kwargs,
-                    ),
-                    Field(
-                        "setopt",
-                        str,
-                        60,
-                        10,
-                        "AVG",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINENODESET_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineNodeSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINENODESET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.
@@ -209,4 +169,24 @@ class SensorDefineNodeSet(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node1."""
+        return self._get_set_link("NODE", self.node1)
+
+    @node1_link.setter
+    def node1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node1."""
+        self.node1 = value.sid
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node2."""
+        return self._get_set_link("NODE", self.node2)
+
+    @node2_link.setter
+    def node2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node2."""
+        self.node2 = value.sid
 

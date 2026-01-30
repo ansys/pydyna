@@ -23,74 +23,38 @@
 """Module providing the ConstrainedCoordinateLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDCOORDINATELOCAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("idir", int, 20, 10, 1),
+    FieldSchema("x", float, 30, 10, None),
+    FieldSchema("y", float, 40, 10, None),
+    FieldSchema("z", float, 50, 10, None),
+    FieldSchema("cid", int, 60, 10, None),
+)
 
 class ConstrainedCoordinateLocal(KeywordBase):
     """DYNA CONSTRAINED_COORDINATE_LOCAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "COORDINATE_LOCAL"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedCoordinateLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDCOORDINATELOCAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identification number of a constraint.
@@ -172,4 +136,19 @@ class ConstrainedCoordinateLocal(KeywordBase):
     def cid(self, value: int) -> None:
         """Set the cid property."""
         self._cards[0].set_value("cid", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

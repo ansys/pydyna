@@ -23,54 +23,37 @@
 """Module providing the LoadThermalVariableNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADTHERMALVARIABLENODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("ts", float, 10, 10, 0.0),
+    FieldSchema("tb", float, 20, 10, 0.0),
+    FieldSchema("lcid", int, 30, 10, None),
+)
 
 class LoadThermalVariableNode(KeywordBase):
     """DYNA LOAD_THERMAL_VARIABLE_NODE keyword"""
 
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadThermalVariableNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tb",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLENODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -114,4 +97,24 @@ class LoadThermalVariableNode(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

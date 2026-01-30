@@ -23,8 +23,28 @@
 """Module providing the SetMultiMaterialGroupListGpname class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETMULTIMATERIALGROUPLISTGPNAME_CARD0 = (
+    FieldSchema("ammsid", int, 0, 10, 0),
+)
+
+_SETMULTIMATERIALGROUPLISTGPNAME_CARD1 = (
+    FieldSchema("ammgid1", str, 0, 10, None),
+    FieldSchema("ammgid2", str, 10, 10, None),
+    FieldSchema("ammgid3", str, 20, 10, None),
+    FieldSchema("ammgid4", str, 30, 10, None),
+    FieldSchema("ammgid5", str, 40, 10, None),
+    FieldSchema("ammgid6", str, 50, 10, None),
+    FieldSchema("ammgid7", str, 60, 10, None),
+    FieldSchema("ammgid8", str, 70, 10, None),
+)
+
+_SETMULTIMATERIALGROUPLISTGPNAME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetMultiMaterialGroupListGpname(KeywordBase):
     """DYNA SET_MULTI_MATERIAL_GROUP_LIST_GPNAME keyword"""
@@ -40,97 +60,23 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ammsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ammgid1",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid2",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid3",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid4",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid5",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid6",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid7",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid8",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETMULTIMATERIALGROUPLISTGPNAME_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETMULTIMATERIALGROUPLISTGPNAME_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetMultiMaterialGroupListGpname.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETMULTIMATERIALGROUPLISTGPNAME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def ammsid(self) -> int:
         """Get or set the An ALE multi-material set ID (AMMSID) which contains a collection of one or more ALE multi-material group ID(s) (AMMGID).

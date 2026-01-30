@@ -23,8 +23,41 @@
 """Module providing the DefineFibers class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DEFINEFIBERS_CARD0 = (
+    FieldSchema("idf", int, 0, 10, None),
+    FieldSchema("idp", int, 10, 10, None),
+    FieldSchema("numf", int, 20, 10, None),
+    FieldSchema("n1", int, 30, 10, None),
+    FieldSchema("n2", int, 40, 10, None),
+    FieldSchema("efb", float, 50, 10, None),
+    FieldSchema("shr", float, 50, 10, None),
+    FieldSchema("hrgls", float, 50, 10, 1.0),
+)
+
+_DEFINEFIBERS_CARD1 = (
+    FieldSchema("alpha1", float, 0, 10, None),
+    FieldSchema("alpha2", float, 10, 10, None),
+    FieldSchema("alpha3", float, 20, 10, None),
+)
+
+_DEFINEFIBERS_CARD2 = (
+    FieldSchema("x1", float, 0, 10, None),
+    FieldSchema("y1", float, 10, 10, None),
+    FieldSchema("z1", float, 20, 10, None),
+    FieldSchema("x2", float, 30, 10, None),
+    FieldSchema("y2", float, 40, 10, None),
+    FieldSchema("z2", float, 50, 10, None),
+)
+
+_DEFINEFIBERS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFibers(KeywordBase):
     """DYNA DEFINE_FIBERS keyword"""
@@ -34,163 +67,37 @@ class DefineFibers(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "idp": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFibers class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idf",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numf",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efb",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hrgls",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFIBERS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFIBERS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFIBERS_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFibers.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFIBERS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def idf(self) -> typing.Optional[int]:
         """Get or set the ID of a fiber set to be defined, must be unique number.
@@ -410,4 +317,19 @@ class DefineFibers(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def idp_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idp."""
+        return self._get_link_by_attr("PART", "pid", self.idp, "parts")
 

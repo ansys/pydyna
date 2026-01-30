@@ -23,7 +23,12 @@
 """Module providing the IcfdControlPartition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLPARTITION_CARD0 = (
+    FieldSchema("ptech", int, 0, 10, 1),
+)
 
 class IcfdControlPartition(KeywordBase):
     """DYNA ICFD_CONTROL_PARTITION keyword"""
@@ -35,20 +40,10 @@ class IcfdControlPartition(KeywordBase):
         """Initialize the IcfdControlPartition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ptech",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLPARTITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ptech(self) -> int:
         """Get or set the Indicates the type of partition.

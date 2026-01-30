@@ -23,8 +23,65 @@
 """Module providing the MatOrthoElasticPlastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATORTHOELASTICPLASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e11", float, 20, 10, None),
+    FieldSchema("e22", float, 30, 10, None),
+    FieldSchema("g12", float, 40, 10, None),
+    FieldSchema("pr12", float, 50, 10, None),
+    FieldSchema("pr23", float, 60, 10, None),
+    FieldSchema("pr31", float, 70, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_CARD1 = (
+    FieldSchema("sigma0", float, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+    FieldSchema("qr1", float, 20, 10, None),
+    FieldSchema("cr1", float, 30, 10, None),
+    FieldSchema("qr2", float, 40, 10, None),
+    FieldSchema("cr2", float, 50, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_CARD2 = (
+    FieldSchema("r11", float, 0, 10, None),
+    FieldSchema("r22", float, 10, 10, None),
+    FieldSchema("r33", float, 20, 10, None),
+    FieldSchema("r12", float, 30, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_CARD3 = (
+    FieldSchema("aopt", float, 0, 10, None),
+    FieldSchema("beta", float, 10, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_CARD4 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_CARD5 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+)
+
+_MATORTHOELASTICPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatOrthoElasticPlastic(KeywordBase):
     """DYNA MAT_ORTHO_ELASTIC_PLASTIC keyword"""
@@ -34,279 +91,44 @@ class MatOrthoElasticPlastic(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatOrthoElasticPlastic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e22",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g12",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr12",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr23",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr31",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigma0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r22",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r33",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOELASTICPLASTIC_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatOrthoElasticPlastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOELASTICPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -679,4 +501,19 @@ class MatOrthoElasticPlastic(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc:
+                return kwd
+        return None
+
+    @lc_link.setter
+    def lc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc."""
+        self.lc = value.lcid
 

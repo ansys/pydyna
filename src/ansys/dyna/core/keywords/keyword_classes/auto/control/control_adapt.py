@@ -23,155 +23,53 @@
 """Module providing the ControlAdapt class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLADAPT_CARD0 = (
+    FieldSchema("adpfreq", float, 0, 10, None),
+    FieldSchema("adptol", float, 10, 10, 1e+20),
+    FieldSchema("adptyp", int, 20, 10, 1),
+    FieldSchema("maxlvl", int, 30, 10, 3),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+    FieldSchema("lcadp", int, 60, 10, 0),
+    FieldSchema("ioflag", int, 70, 10, 0),
+)
+
+_CONTROLADAPT_CARD1 = (
+    FieldSchema("adpsize", float, 0, 10, 0.0),
+    FieldSchema("adpass", int, 10, 10, 0),
+    FieldSchema("ireflg", int, 20, 10, 0),
+    FieldSchema("adpene", float, 30, 10, 0.0),
+    FieldSchema("adpth", float, 40, 10, 0.0),
+    FieldSchema("memory", int, 50, 10, 0),
+    FieldSchema("orient", int, 60, 10, 0),
+    FieldSchema("maxel", int, 70, 10, 0),
+)
 
 class ControlAdapt(KeywordBase):
     """DYNA CONTROL_ADAPT keyword"""
 
     keyword = "CONTROL"
     subkeyword = "ADAPT"
+    _link_fields = {
+        "lcadp": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlAdapt class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "adpfreq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adptol",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adptyp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxlvl",
-                        int,
-                        30,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcadp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioflag",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "adpsize",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpass",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ireflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpene",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memory",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orient",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def adpfreq(self) -> typing.Optional[float]:
         """Get or set the Time interval between adaptive refinements.
@@ -377,4 +275,19 @@ class ControlAdapt(KeywordBase):
     def maxel(self, value: int) -> None:
         """Set the maxel property."""
         self._cards[1].set_value("maxel", value)
+
+    @property
+    def lcadp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcadp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcadp:
+                return kwd
+        return None
+
+    @lcadp_link.setter
+    def lcadp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcadp."""
+        self.lcadp = value.lcid
 

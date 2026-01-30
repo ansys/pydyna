@@ -23,176 +23,69 @@
 """Module providing the IcfdModelPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDMODELPOROUS_CARD0 = (
+    FieldSchema("pmmoid", int, 0, 10, None),
+    FieldSchema("pmid", int, 10, 10, 1),
+)
+
+_ICFDMODELPOROUS_CARD1 = (
+    FieldSchema("por", float, 0, 10, 0.0),
+    FieldSchema("per_thx", float, 10, 10, 0.0, "per/thx"),
+    FieldSchema("ff_thy", float, 20, 10, 0.0, "ff/thy"),
+    FieldSchema("thz", float, 30, 10, 0.0),
+    FieldSchema("pvlcidx", int, 40, 10, None),
+    FieldSchema("pvlcidy", int, 50, 10, None),
+    FieldSchema("pvlcidz", int, 60, 10, None),
+)
+
+_ICFDMODELPOROUS_CARD2 = (
+    FieldSchema("kxp_", float, 0, 10, 0.0, "kxp'"),
+    FieldSchema("kyp_", float, 10, 10, 0.0, "kyp'"),
+    FieldSchema("kzp_", float, 20, 10, 0.0, "kzp'"),
+)
+
+_ICFDMODELPOROUS_CARD3 = (
+    FieldSchema("p_x_pid1r", float, 0, 10, 0.0, "p-x/pid1r"),
+    FieldSchema("p_y_pid2r", float, 10, 10, 0.0, "p-y/pid2r"),
+    FieldSchema("projxp_z", float, 20, 10, 0.0, "projxp-z"),
+    FieldSchema("projyp_x", float, 30, 10, 0.0, "projyp-x"),
+    FieldSchema("projyp_y", float, 40, 10, 0.0, "projyp-y"),
+    FieldSchema("projyp_z", float, 50, 10, 0.0, "projyp-z"),
+)
 
 class IcfdModelPorous(KeywordBase):
     """DYNA ICFD_MODEL_POROUS keyword"""
 
     keyword = "ICFD"
     subkeyword = "MODEL_POROUS"
+    _link_fields = {
+        "pvlcidx": LinkType.DEFINE_CURVE,
+        "pvlcidy": LinkType.DEFINE_CURVE,
+        "pvlcidz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdModelPorous class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pmmoid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmid",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "por",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "per/thx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff/thy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidx",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidy",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidz",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kxp'",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyp'",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzp'",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p-x/pid1r",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p-y/pid2r",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projxp-z",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-x",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-y",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-z",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pmmoid(self) -> typing.Optional[int]:
         """Get or set the Porous media model ID.
@@ -245,23 +138,23 @@ class IcfdModelPorous(KeywordBase):
     def per_thx(self) -> float:
         """Get or set the Permeability k if PMID = 1 or 2. Probe Thickness delta x if PMID = 3 or PMID = 5.
         """ # nopep8
-        return self._cards[1].get_value("per/thx")
+        return self._cards[1].get_value("per_thx")
 
     @per_thx.setter
     def per_thx(self, value: float) -> None:
         """Set the per_thx property."""
-        self._cards[1].set_value("per/thx", value)
+        self._cards[1].set_value("per_thx", value)
 
     @property
     def ff_thy(self) -> float:
         """Get or set the Forchheimer factor. To Be defined if PMID = 2. Probe Thickness delta y if PMID = 5.
         """ # nopep8
-        return self._cards[1].get_value("ff/thy")
+        return self._cards[1].get_value("ff_thy")
 
     @ff_thy.setter
     def ff_thy(self, value: float) -> None:
         """Set the ff_thy property."""
-        self._cards[1].set_value("ff/thy", value)
+        self._cards[1].set_value("ff_thy", value)
 
     @property
     def thz(self) -> float:
@@ -311,98 +204,143 @@ class IcfdModelPorous(KeywordBase):
     def kxp_(self) -> float:
         """Get or set the Permeability vector in local reference frame (x', y', z'). To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
         """ # nopep8
-        return self._cards[2].get_value("kxp'")
+        return self._cards[2].get_value("kxp_")
 
     @kxp_.setter
     def kxp_(self, value: float) -> None:
         """Set the kxp_ property."""
-        self._cards[2].set_value("kxp'", value)
+        self._cards[2].set_value("kxp_", value)
 
     @property
     def kyp_(self) -> float:
         """Get or set the Permeability vector in local reference frame (x', y', z'). To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
         """ # nopep8
-        return self._cards[2].get_value("kyp'")
+        return self._cards[2].get_value("kyp_")
 
     @kyp_.setter
     def kyp_(self, value: float) -> None:
         """Set the kyp_ property."""
-        self._cards[2].set_value("kyp'", value)
+        self._cards[2].set_value("kyp_", value)
 
     @property
     def kzp_(self) -> float:
         """Get or set the Permeability vector in local reference frame (x', y', z'. To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
         """ # nopep8
-        return self._cards[2].get_value("kzp'")
+        return self._cards[2].get_value("kzp_")
 
     @kzp_.setter
     def kzp_(self, value: float) -> None:
         """Set the kzp_ property."""
-        self._cards[2].set_value("kzp'", value)
+        self._cards[2].set_value("kzp_", value)
 
     @property
     def p_x_pid1r(self) -> float:
         """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("p-x/pid1r")
+        return self._cards[3].get_value("p_x_pid1r")
 
     @p_x_pid1r.setter
     def p_x_pid1r(self, value: float) -> None:
         """Set the p_x_pid1r property."""
-        self._cards[3].set_value("p-x/pid1r", value)
+        self._cards[3].set_value("p_x_pid1r", value)
 
     @property
     def p_y_pid2r(self) -> float:
         """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("p-y/pid2r")
+        return self._cards[3].get_value("p_y_pid2r")
 
     @p_y_pid2r.setter
     def p_y_pid2r(self, value: float) -> None:
         """Set the p_y_pid2r property."""
-        self._cards[3].set_value("p-y/pid2r", value)
+        self._cards[3].set_value("p_y_pid2r", value)
 
     @property
     def projxp_z(self) -> float:
         """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("projxp-z")
+        return self._cards[3].get_value("projxp_z")
 
     @projxp_z.setter
     def projxp_z(self, value: float) -> None:
         """Set the projxp_z property."""
-        self._cards[3].set_value("projxp-z", value)
+        self._cards[3].set_value("projxp_z", value)
 
     @property
     def projyp_x(self) -> float:
         """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("projyp-x")
+        return self._cards[3].get_value("projyp_x")
 
     @projyp_x.setter
     def projyp_x(self, value: float) -> None:
         """Set the projyp_x property."""
-        self._cards[3].set_value("projyp-x", value)
+        self._cards[3].set_value("projyp_x", value)
 
     @property
     def projyp_y(self) -> float:
         """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("projyp-y")
+        return self._cards[3].get_value("projyp_y")
 
     @projyp_y.setter
     def projyp_y(self, value: float) -> None:
         """Set the projyp_y property."""
-        self._cards[3].set_value("projyp-y", value)
+        self._cards[3].set_value("projyp_y", value)
 
     @property
     def projyp_z(self) -> float:
         """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
         """ # nopep8
-        return self._cards[3].get_value("projyp-z")
+        return self._cards[3].get_value("projyp_z")
 
     @projyp_z.setter
     def projyp_z(self, value: float) -> None:
         """Set the projyp_z property."""
-        self._cards[3].set_value("projyp-z", value)
+        self._cards[3].set_value("projyp_z", value)
+
+    @property
+    def pvlcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidx:
+                return kwd
+        return None
+
+    @pvlcidx_link.setter
+    def pvlcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidx."""
+        self.pvlcidx = value.lcid
+
+    @property
+    def pvlcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidy:
+                return kwd
+        return None
+
+    @pvlcidy_link.setter
+    def pvlcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidy."""
+        self.pvlcidy = value.lcid
+
+    @property
+    def pvlcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for pvlcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.pvlcidz:
+                return kwd
+        return None
+
+    @pvlcidz_link.setter
+    def pvlcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for pvlcidz."""
+        self.pvlcidz = value.lcid
 

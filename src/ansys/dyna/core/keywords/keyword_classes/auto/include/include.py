@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard, IncludeCardMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class Include(
@@ -41,4 +42,3 @@ class Include(
         self._cards = [
             IncludeCard(**kwargs)
         ]
-

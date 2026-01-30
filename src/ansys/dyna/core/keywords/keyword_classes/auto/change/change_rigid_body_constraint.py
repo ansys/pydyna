@@ -23,47 +23,33 @@
 """Module providing the ChangeRigidBodyConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CHANGERIGIDBODYCONSTRAINT_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("tc", int, 10, 10, 0),
+    FieldSchema("rc", int, 20, 10, 0),
+)
 
 class ChangeRigidBodyConstraint(KeywordBase):
     """DYNA CHANGE_RIGID_BODY_CONSTRAINT keyword"""
 
     keyword = "CHANGE"
     subkeyword = "RIGID_BODY_CONSTRAINT"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeRigidBodyConstraint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYCONSTRAINT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, see *PART.
@@ -116,4 +102,9 @@ class ChangeRigidBodyConstraint(KeywordBase):
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rc", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

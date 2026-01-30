@@ -23,96 +23,49 @@
 """Module providing the BoundaryPrescribedFinalGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD0 = (
+    FieldSchema("bpfgid", int, 0, 10, 0),
+    FieldSchema("lcidf", int, 10, 10, 0),
+    FieldSchema("deathd", float, 20, 10, None),
+)
+
+_BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+    FieldSchema("lcid", int, 56, 8, None),
+    FieldSchema("death", float, 64, 16, None),
+)
 
 class BoundaryPrescribedFinalGeometry(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_FINAL_GEOMETRY keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_FINAL_GEOMETRY"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lcidf": LinkType.DEFINE_CURVE,
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedFinalGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bpfgid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deathd",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def bpfgid(self) -> int:
         """Get or set the ID for this set of imposed boundary conditions.
@@ -211,4 +164,39 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
     def death(self, value: float) -> None:
         """Set the death property."""
         self._cards[1].set_value("death", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcidf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidf:
+                return kwd
+        return None
+
+    @lcidf_link.setter
+    def lcidf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidf."""
+        self.lcidf = value.lcid
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

@@ -23,75 +23,38 @@
 """Module providing the BoundaryCyclic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYCYCLIC_CARD0 = (
+    FieldSchema("xc", float, 0, 10, None),
+    FieldSchema("yc", float, 10, 10, None),
+    FieldSchema("zc", float, 20, 10, None),
+    FieldSchema("nsid1", int, 30, 10, None),
+    FieldSchema("nsid2", int, 40, 10, None),
+    FieldSchema("iglobal", int, 50, 10, 0),
+    FieldSchema("isort", int, 60, 10, 0),
+)
 
 class BoundaryCyclic(KeywordBase):
     """DYNA BOUNDARY_CYCLIC keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "CYCLIC"
+    _link_fields = {
+        "nsid1": LinkType.SET_NODE,
+        "nsid2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryCyclic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iglobal",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isort",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYCYCLIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the x-component axis vector of axis of rotation.
@@ -178,4 +141,24 @@ class BoundaryCyclic(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""isort must be `None` or one of {0,1}.""")
         self._cards[0].set_value("isort", value)
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
+
+    @property
+    def nsid2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid2."""
+        return self._get_set_link("NODE", self.nsid2)
+
+    @nsid2_link.setter
+    def nsid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid2."""
+        self.nsid2 = value.sid
 

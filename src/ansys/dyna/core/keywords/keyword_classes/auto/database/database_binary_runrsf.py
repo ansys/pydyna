@@ -23,60 +23,35 @@
 """Module providing the DatabaseBinaryRunrsf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEBINARYRUNRSF_CARD0 = (
+    FieldSchema("cycl", float, 0, 10, None),
+    FieldSchema("nr", int, 10, 10, None),
+    FieldSchema("beam", int, 20, 10, 0),
+    FieldSchema("npltc", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
+)
 
 class DatabaseBinaryRunrsf(KeywordBase):
     """DYNA DATABASE_BINARY_RUNRSF keyword"""
 
     keyword = "DATABASE"
     subkeyword = "BINARY_RUNRSF"
+    _link_fields = {
+        "psetid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryRunrsf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cycl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYRUNRSF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the Output interval in time steps (a time step is a cycle). For the D3DRFL
@@ -135,4 +110,14 @@ class DatabaseBinaryRunrsf(KeywordBase):
     def psetid(self, value: int) -> None:
         """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

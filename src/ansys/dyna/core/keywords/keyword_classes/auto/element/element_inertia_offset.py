@@ -23,133 +23,58 @@
 """Module providing the ElementInertiaOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_ELEMENTINERTIAOFFSET_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("nid", int, 8, 8, None),
+    FieldSchema("csid", int, 16, 8, None),
+)
+
+_ELEMENTINERTIAOFFSET_CARD1 = (
+    FieldSchema("ixx", float, 0, 10, 0.0),
+    FieldSchema("ixy", float, 10, 10, 0.0),
+    FieldSchema("ixz", float, 20, 10, 0.0),
+    FieldSchema("iyy", float, 30, 10, 0.0),
+    FieldSchema("iyz", float, 40, 10, 0.0),
+    FieldSchema("izz", float, 50, 10, 0.0),
+    FieldSchema("mass", float, 60, 10, 0.0),
+)
+
+_ELEMENTINERTIAOFFSET_CARD2 = (
+    FieldSchema("x_off", float, 0, 10, 0.0, "x-off"),
+    FieldSchema("y_off", float, 10, 10, 0.0),
+    FieldSchema("z_off", float, 20, 10, 0.0),
+)
 
 class ElementInertiaOffset(KeywordBase):
     """DYNA ELEMENT_INERTIA_OFFSET keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "INERTIA_OFFSET"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "csid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementInertiaOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csid",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ixx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x-off",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y_off",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z_off",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIAOFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIAOFFSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIAOFFSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -266,12 +191,12 @@ class ElementInertiaOffset(KeywordBase):
     def x_off(self) -> float:
         """Get or set the x-offset from nodal point.
         """ # nopep8
-        return self._cards[2].get_value("x-off")
+        return self._cards[2].get_value("x_off")
 
     @x_off.setter
     def x_off(self, value: float) -> None:
         """Set the x_off property."""
-        self._cards[2].set_value("x-off", value)
+        self._cards[2].set_value("x_off", value)
 
     @property
     def y_off(self) -> float:
@@ -294,4 +219,24 @@ class ElementInertiaOffset(KeywordBase):
     def z_off(self, value: float) -> None:
         """Set the z_off property."""
         self._cards[2].set_value("z_off", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def csid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for csid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.csid:
+                return kwd
+        return None
+
+    @csid_link.setter
+    def csid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for csid."""
+        self.csid = value.cid
 

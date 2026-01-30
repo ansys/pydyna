@@ -23,8 +23,44 @@
 """Module providing the Mat069 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT069_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("st", float, 20, 10, None),
+    FieldSchema("d", float, 30, 10, None),
+    FieldSchema("r", float, 40, 10, None),
+    FieldSchema("h", float, 50, 10, None),
+    FieldSchema("k", float, 60, 10, None),
+    FieldSchema("c", float, 70, 10, None),
+)
+
+_MAT069_CARD1 = (
+    FieldSchema("c3", float, 0, 10, None),
+    FieldSchema("stf", float, 10, 10, None),
+    FieldSchema("rhof", float, 20, 10, None),
+    FieldSchema("c1", float, 30, 10, None),
+    FieldSchema("c2", float, 40, 10, None),
+    FieldSchema("lcidf", float, 50, 10, 0.0),
+    FieldSchema("lcidd", float, 60, 10, 0.0),
+    FieldSchema("s0", float, 70, 10, None),
+)
+
+_MAT069_CARD2 = (
+    FieldSchema("orfloc", float, 0, 10, None),
+    FieldSchema("orfrad", float, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("dc", float, 30, 10, None),
+)
+
+_MAT069_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat069(KeywordBase):
     """DYNA MAT_069 keyword"""
@@ -34,186 +70,36 @@ class Mat069(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcidf": LinkType.DEFINE_CURVE,
+        "lcidd": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat069 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c3",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhof",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidf",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidd",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "orfloc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orfrad",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT069_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT069_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT069_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat069.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT069_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -448,4 +334,34 @@ class Mat069(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidf:
+                return kwd
+        return None
+
+    @lcidf_link.setter
+    def lcidf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidf."""
+        self.lcidf = value.lcid
+
+    @property
+    def lcidd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidd:
+                return kwd
+        return None
+
+    @lcidd_link.setter
+    def lcidd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidd."""
+        self.lcidd = value.lcid
 

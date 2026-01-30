@@ -23,8 +23,32 @@
 """Module providing the BoundarySpcSetBirthDeath class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_BOUNDARYSPCSETBIRTHDEATH_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("dofx", int, 20, 10, 0),
+    FieldSchema("dofy", int, 30, 10, 0),
+    FieldSchema("dofz", int, 40, 10, 0),
+    FieldSchema("dofrx", int, 50, 10, 0),
+    FieldSchema("dofry", int, 60, 10, 0),
+    FieldSchema("dofrz", int, 70, 10, 0),
+)
+
+_BOUNDARYSPCSETBIRTHDEATH_CARD1 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+    FieldSchema("death", float, 10, 10, 1e+20),
+)
+
+_BOUNDARYSPCSETBIRTHDEATH_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class BoundarySpcSetBirthDeath(KeywordBase):
     """DYNA BOUNDARY_SPC_SET_BIRTH_DEATH keyword"""
@@ -34,125 +58,33 @@ class BoundarySpcSetBirthDeath(KeywordBase):
     option_specs = [
         OptionSpec("ID", -2, 1),
     ]
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundarySpcSetBirthDeath class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofx",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofy",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofz",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofrx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofry",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofrz",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPCSETBIRTHDEATH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPCSETBIRTHDEATH_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = BoundarySpcSetBirthDeath.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYSPCSETBIRTHDEATH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see also *SET_NODE.
@@ -308,4 +240,29 @@ class BoundarySpcSetBirthDeath(KeywordBase):
 
         if value:
             self.activate_option("HEADING")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

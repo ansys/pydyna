@@ -23,8 +23,116 @@
 """Module providing the MatReinforcedThermoplasticCrash class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("em", float, 20, 10, None),
+    FieldSchema("prm", float, 30, 10, None),
+    FieldSchema("lcsigy", int, 40, 10, None),
+    FieldSchema("beta", float, 50, 10, None),
+    FieldSchema("pfl", float, 60, 10, None),
+    FieldSchema("visc", float, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD1 = (
+    FieldSchema("nfib", int, 0, 10, None),
+    FieldSchema("aopt", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("a1", float, 50, 10, None),
+    FieldSchema("a2", float, 60, 10, None),
+    FieldSchema("a3", float, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD2 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("mangl", float, 60, 10, None),
+    FieldSchema("thick", float, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD3 = (
+    FieldSchema("vg1", float, 0, 10, None),
+    FieldSchema("vb1", float, 10, 10, None),
+    FieldSchema("vg2", float, 20, 10, None),
+    FieldSchema("vb2", float, 30, 10, None),
+    FieldSchema("vg3", float, 40, 10, None),
+    FieldSchema("vb3", float, 50, 10, None),
+    FieldSchema("vg4", float, 40, 10, None),
+    FieldSchema("vb4", float, 50, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD4 = (
+    FieldSchema("idf1", int, 0, 10, None),
+    FieldSchema("alph1", int, 10, 10, None),
+    FieldSchema("ef1", int, 20, 10, None),
+    FieldSchema("lcef1", int, 30, 10, None),
+    FieldSchema("g23_1", int, 40, 10, None),
+    FieldSchema("g31_1", int, 50, 10, None),
+    FieldSchema("daf1", int, 60, 10, None),
+    FieldSchema("dam1", int, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD5 = (
+    FieldSchema("g12", int, 0, 10, None),
+    FieldSchema("lcg12", int, 10, 10, None),
+    FieldSchema("aloc12", int, 20, 10, None),
+    FieldSchema("gloc12", int, 30, 10, None),
+    FieldSchema("meth12", int, 40, 10, None),
+    FieldSchema("dam12", int, 50, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD6 = (
+    FieldSchema("idf2", int, 0, 10, None),
+    FieldSchema("alph2", float, 10, 10, None),
+    FieldSchema("ef2", float, 20, 10, None),
+    FieldSchema("lcef2", int, 30, 10, None),
+    FieldSchema("g23_2", float, 40, 10, None),
+    FieldSchema("g31_2", float, 50, 10, None),
+    FieldSchema("daf2", int, 60, 10, None),
+    FieldSchema("dam2", int, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD7 = (
+    FieldSchema("g23", float, 0, 10, None),
+    FieldSchema("lcg23", int, 10, 10, None),
+    FieldSchema("aloc23", float, 20, 10, None),
+    FieldSchema("gloc23", float, 30, 10, None),
+    FieldSchema("meth23", int, 40, 10, None),
+    FieldSchema("dam23", int, 50, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD8 = (
+    FieldSchema("idf3", int, 0, 10, None),
+    FieldSchema("alph3", float, 10, 10, None),
+    FieldSchema("ef3", float, 20, 10, None),
+    FieldSchema("lcef3", int, 30, 10, None),
+    FieldSchema("g23_3", float, 40, 10, None),
+    FieldSchema("g31_3", float, 50, 10, None),
+    FieldSchema("daf3", int, 60, 10, None),
+    FieldSchema("dam3", int, 70, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_CARD9 = (
+    FieldSchema("postv", float, 0, 10, None),
+    FieldSchema("viscs", float, 10, 10, None),
+    FieldSchema("ihis", float, 20, 10, None),
+)
+
+_MATREINFORCEDTHERMOPLASTICCRASH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatReinforcedThermoplasticCrash(KeywordBase):
     """DYNA MAT_REINFORCED_THERMOPLASTIC_CRASH keyword"""
@@ -34,568 +142,69 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcsigy": LinkType.DEFINE_CURVE,
+        "lcef1": LinkType.DEFINE_CURVE,
+        "daf1": LinkType.DEFINE_CURVE,
+        "dam1": LinkType.DEFINE_CURVE,
+        "lcg12": LinkType.DEFINE_CURVE,
+        "dam12": LinkType.DEFINE_CURVE,
+        "lcef2": LinkType.DEFINE_CURVE,
+        "daf2": LinkType.DEFINE_CURVE,
+        "dam2": LinkType.DEFINE_CURVE,
+        "lcg23": LinkType.DEFINE_CURVE,
+        "dam23": LinkType.DEFINE_CURVE,
+        "lcef3": LinkType.DEFINE_CURVE,
+        "daf3": LinkType.DEFINE_CURVE,
+        "dam3": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatReinforcedThermoplasticCrash class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "em",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsigy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfl",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "visc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nfib",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mangl",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vg1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vb1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vg2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vb2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vg3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vb3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vg4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vb4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idf1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alph1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ef1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcef1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g23_1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g31_1",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "daf1",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dam1",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g12",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg12",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aloc12",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gloc12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "meth12",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dam12",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idf2",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alph2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ef2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcef2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g23_2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g31_2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "daf2",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dam2",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g23",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg23",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aloc23",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gloc23",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "meth23",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dam23",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idf3",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alph3",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ef3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcef3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g23_3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g31_3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "daf3",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dam3",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "postv",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "viscs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihis",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATREINFORCEDTHERMOPLASTICCRASH_CARD9,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatReinforcedThermoplasticCrash.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATREINFORCEDTHERMOPLASTICCRASH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -1390,4 +999,214 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcsigy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsigy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsigy:
+                return kwd
+        return None
+
+    @lcsigy_link.setter
+    def lcsigy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsigy."""
+        self.lcsigy = value.lcid
+
+    @property
+    def lcef1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcef1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcef1:
+                return kwd
+        return None
+
+    @lcef1_link.setter
+    def lcef1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcef1."""
+        self.lcef1 = value.lcid
+
+    @property
+    def daf1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for daf1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.daf1:
+                return kwd
+        return None
+
+    @daf1_link.setter
+    def daf1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for daf1."""
+        self.daf1 = value.lcid
+
+    @property
+    def dam1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dam1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dam1:
+                return kwd
+        return None
+
+    @dam1_link.setter
+    def dam1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dam1."""
+        self.dam1 = value.lcid
+
+    @property
+    def lcg12_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcg12."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcg12:
+                return kwd
+        return None
+
+    @lcg12_link.setter
+    def lcg12_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg12."""
+        self.lcg12 = value.lcid
+
+    @property
+    def dam12_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dam12."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dam12:
+                return kwd
+        return None
+
+    @dam12_link.setter
+    def dam12_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dam12."""
+        self.dam12 = value.lcid
+
+    @property
+    def lcef2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcef2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcef2:
+                return kwd
+        return None
+
+    @lcef2_link.setter
+    def lcef2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcef2."""
+        self.lcef2 = value.lcid
+
+    @property
+    def daf2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for daf2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.daf2:
+                return kwd
+        return None
+
+    @daf2_link.setter
+    def daf2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for daf2."""
+        self.daf2 = value.lcid
+
+    @property
+    def dam2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dam2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dam2:
+                return kwd
+        return None
+
+    @dam2_link.setter
+    def dam2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dam2."""
+        self.dam2 = value.lcid
+
+    @property
+    def lcg23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcg23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcg23:
+                return kwd
+        return None
+
+    @lcg23_link.setter
+    def lcg23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg23."""
+        self.lcg23 = value.lcid
+
+    @property
+    def dam23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dam23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dam23:
+                return kwd
+        return None
+
+    @dam23_link.setter
+    def dam23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dam23."""
+        self.dam23 = value.lcid
+
+    @property
+    def lcef3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcef3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcef3:
+                return kwd
+        return None
+
+    @lcef3_link.setter
+    def lcef3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcef3."""
+        self.lcef3 = value.lcid
+
+    @property
+    def daf3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for daf3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.daf3:
+                return kwd
+        return None
+
+    @daf3_link.setter
+    def daf3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for daf3."""
+        self.daf3 = value.lcid
+
+    @property
+    def dam3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dam3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dam3:
+                return kwd
+        return None
+
+    @dam3_link.setter
+    def dam3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dam3."""
+        self.dam3 = value.lcid
 

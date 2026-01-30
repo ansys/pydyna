@@ -23,173 +23,61 @@
 """Module providing the ControlSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLSOLID_CARD0 = (
+    FieldSchema("esort", int, 0, 10, 0),
+    FieldSchema("fmatrix", int, 10, 10, 0),
+    FieldSchema("niptets", int, 20, 10, 4),
+    FieldSchema("swlocl", int, 30, 10, 1),
+    FieldSchema("psfail", int, 40, 10, 0),
+    FieldSchema("t10jtol", float, 50, 10, 0.0),
+    FieldSchema("icoh", int, 60, 10, 0),
+    FieldSchema("tet13k", int, 70, 10, 0),
+)
+
+_CONTROLSOLID_CARD1 = (
+    FieldSchema("pm1", int, 0, 8, None),
+    FieldSchema("pm2", int, 8, 8, None),
+    FieldSchema("pm3", int, 16, 8, None),
+    FieldSchema("pm4", int, 24, 8, None),
+    FieldSchema("pm5", int, 32, 8, None),
+    FieldSchema("pm6", int, 40, 8, None),
+    FieldSchema("pm7", int, 48, 8, None),
+    FieldSchema("pm8", int, 56, 8, None),
+    FieldSchema("pm9", int, 64, 8, None),
+    FieldSchema("pm10", int, 72, 8, None),
+)
+
+_CONTROLSOLID_CARD2 = (
+    FieldSchema("tet13v", int, 0, 10, None),
+)
 
 class ControlSolid(KeywordBase):
     """DYNA CONTROL_SOLID keyword"""
 
     keyword = "CONTROL"
     subkeyword = "SOLID"
+    _link_fields = {
+        "psfail": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esort",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmatrix",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niptets",
-                        int,
-                        20,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swlocl",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psfail",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t10jtol",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icoh",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tet13k",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pm1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm3",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm4",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm5",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm6",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm7",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm8",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm9",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pm10",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tet13v",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSOLID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSOLID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def esort(self) -> int:
         """Get or set the Automatic sorting of tetrahedron and pentahedron elements to treat degenerate tetrahedron and pentahedron elements as tetrahedron (formulation 10)  and pentahedron (formulation 15) solids, respective. See *SECTION_SOLID.
@@ -422,4 +310,14 @@ class ControlSolid(KeywordBase):
     def tet13v(self, value: int) -> None:
         """Set the tet13v property."""
         self._cards[2].set_value("tet13v", value)
+
+    @property
+    def psfail_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psfail."""
+        return self._get_set_link("PART", self.psfail)
+
+    @psfail_link.setter
+    def psfail_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psfail."""
+        self.psfail = value.sid
 

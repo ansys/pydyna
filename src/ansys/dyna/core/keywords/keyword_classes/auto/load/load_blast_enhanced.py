@@ -23,146 +23,52 @@
 """Module providing the LoadBlastEnhanced class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_LOADBLASTENHANCED_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+    FieldSchema("m", float, 10, 10, 0.0),
+    FieldSchema("xbo", float, 20, 10, 0.0),
+    FieldSchema("ybo", float, 30, 10, 0.0),
+    FieldSchema("zbo", float, 40, 10, 0.0),
+    FieldSchema("tbo", float, 50, 10, 0.0),
+    FieldSchema("unit", int, 60, 10, 2),
+    FieldSchema("blast", int, 70, 10, 2),
+)
+
+_LOADBLASTENHANCED_CARD1 = (
+    FieldSchema("cfm", float, 0, 10, 0.0),
+    FieldSchema("cfl", float, 10, 10, 0.0),
+    FieldSchema("cft", float, 20, 10, 0.0),
+    FieldSchema("cfp", float, 30, 10, 0.0),
+    FieldSchema("nidbo", int, 40, 10, None),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("negphs", int, 60, 10, 0),
+)
 
 class LoadBlastEnhanced(KeywordBase):
     """DYNA LOAD_BLAST_ENHANCED keyword"""
 
     keyword = "LOAD"
     subkeyword = "BLAST_ENHANCED"
+    _link_fields = {
+        "nidbo": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBlastEnhanced class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xbo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ybo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zbo",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbo",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        60,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blast",
-                        int,
-                        70,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cfm",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cft",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfp",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidbo",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1.e+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "negphs",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLASTENHANCED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBLASTENHANCED_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast ID.  A unique number must be defined for each blast source (charge).  Multiple charges may be defined, however, interaction of the waves in air is not considered.
@@ -335,4 +241,9 @@ class LoadBlastEnhanced(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""negphs must be `None` or one of {0,1}.""")
         self._cards[1].set_value("negphs", value)
+
+    @property
+    def nidbo_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidbo."""
+        return self._get_link_by_attr("NODE", "nid", self.nidbo, "parts")
 

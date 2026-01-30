@@ -23,7 +23,29 @@
 """Module providing the EmEosBurgess class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEOSBURGESS_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, None),
+    FieldSchema("gamma", float, 20, 10, None),
+    FieldSchema("theta", float, 30, 10, None),
+    FieldSchema("lf", float, 40, 10, None),
+    FieldSchema("c1", float, 50, 10, None),
+    FieldSchema("c2", float, 60, 10, None),
+    FieldSchema("c3", float, 70, 10, None),
+)
+
+_EMEOSBURGESS_CARD1 = (
+    FieldSchema("c4", float, 0, 10, None),
+    FieldSchema("k", float, 10, 10, None),
+    FieldSchema("expon", int, 20, 10, None),
+    FieldSchema("lgtunit", float, 30, 10, None),
+    FieldSchema("timunit", float, 40, 10, None),
+    FieldSchema("temuni", int, 50, 10, 1),
+    FieldSchema("adjust", int, 60, 10, 0),
+)
 
 class EmEosBurgess(KeywordBase):
     """DYNA EM_EOS_BURGESS keyword"""
@@ -35,123 +57,13 @@ class EmEosBurgess(KeywordBase):
         """Initialize the EmEosBurgess class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c4",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "expon",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lgtunit",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timunit",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temuni",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adjust",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEOSBURGESS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEOSBURGESS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS (specified in *EM_MAT card).

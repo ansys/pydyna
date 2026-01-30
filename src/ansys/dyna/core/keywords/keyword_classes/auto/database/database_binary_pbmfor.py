@@ -23,60 +23,37 @@
 """Module providing the DatabaseBinaryPbmfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DATABASEBINARYPBMFOR_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("lcdt", int, 10, 10, None),
+    FieldSchema("beam", int, 20, 10, 0),
+    FieldSchema("npltc", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
+)
 
 class DatabaseBinaryPbmfor(KeywordBase):
     """DYNA DATABASE_BINARY_PBMFOR keyword"""
 
     keyword = "DATABASE"
     subkeyword = "BINARY_PBMFOR"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+        "psetid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryPbmfor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYPBMFOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.
@@ -137,4 +114,29 @@ class DatabaseBinaryPbmfor(KeywordBase):
     def psetid(self, value: int) -> None:
         """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

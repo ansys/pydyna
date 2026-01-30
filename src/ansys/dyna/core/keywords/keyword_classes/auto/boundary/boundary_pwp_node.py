@@ -23,125 +23,54 @@
 """Module providing the BoundaryPwpNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYPWPNODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("lc", float, 10, 10, None),
+    FieldSchema("cmult", float, 20, 10, 0.0),
+    FieldSchema("lcdr", int, 30, 10, None),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+)
+
+_BOUNDARYPWPNODE_CARD1 = (
+    FieldSchema("iphre", int, 0, 10, 0),
+    FieldSchema("itotex", int, 10, 10, 0),
+    FieldSchema("idrflag", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("lcleak", int, 40, 10, None),
+    FieldSchema("cleak", float, 50, 10, None),
+    FieldSchema("lcpum", int, 60, 10, None),
+)
 
 class BoundaryPwpNode(KeywordBase):
     """DYNA BOUNDARY_PWP_NODE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PWP_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lcdr": LinkType.DEFINE_CURVE,
+        "lcleak": LinkType.DEFINE_CURVE,
+        "lcpum": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPwpNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iphre",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itotex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idrflag",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcleak",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cleak",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpum",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPNODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPNODE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the NODE ID.
@@ -284,4 +213,54 @@ class BoundaryPwpNode(KeywordBase):
     def lcpum(self, value: int) -> None:
         """Set the lcpum property."""
         self._cards[1].set_value("lcpum", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdr:
+                return kwd
+        return None
+
+    @lcdr_link.setter
+    def lcdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdr."""
+        self.lcdr = value.lcid
+
+    @property
+    def lcleak_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcleak."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcleak:
+                return kwd
+        return None
+
+    @lcleak_link.setter
+    def lcleak_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcleak."""
+        self.lcleak = value.lcid
+
+    @property
+    def lcpum_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpum."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpum:
+                return kwd
+        return None
+
+    @lcpum_link.setter
+    def lcpum_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpum."""
+        self.lcpum = value.lcid
 

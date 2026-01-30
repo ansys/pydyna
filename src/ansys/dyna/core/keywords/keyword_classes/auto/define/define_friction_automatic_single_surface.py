@@ -23,8 +23,34 @@
 """Module providing the DefineFrictionAutomaticSingleSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINEFRICTIONAUTOMATICSINGLESURFACE_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("fs_d", float, 10, 10, 0.0),
+    FieldSchema("fd_d", float, 20, 10, 0.0),
+    FieldSchema("dc_d", float, 30, 10, 0.0),
+    FieldSchema("vc_d", float, 40, 10, 0.0),
+    FieldSchema("icnep", int, 50, 10, 0),
+)
+
+_DEFINEFRICTIONAUTOMATICSINGLESURFACE_CARD1 = (
+    FieldSchema("pid_i", int, 0, 10, None),
+    FieldSchema("pid_j", int, 10, 10, None),
+    FieldSchema("fs_ij", float, 20, 10, 0.0),
+    FieldSchema("fd_ij", float, 30, 10, 0.0),
+    FieldSchema("dc_ij", float, 40, 10, 0.0),
+    FieldSchema("vc_ij", float, 50, 10, 0.0),
+    FieldSchema("ptypei", str, 60, 10, None),
+    FieldSchema("ptypej", str, 70, 10, None),
+)
+
+_DEFINEFRICTIONAUTOMATICSINGLESURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFrictionAutomaticSingleSurface(KeywordBase):
     """DYNA DEFINE_FRICTION_AUTOMATIC_SINGLE_SURFACE keyword"""
@@ -34,147 +60,33 @@ class DefineFrictionAutomaticSingleSurface(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid_i": LinkType.PART,
+        "pid_j": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFrictionAutomaticSingleSurface class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs_d",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd_d",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc_d",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc_d",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icnep",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid_i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid_j",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs_ij",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd_ij",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc_ij",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc_ij",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptypei",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptypej",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFRICTIONAUTOMATICSINGLESURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFRICTIONAUTOMATICSINGLESURFACE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFrictionAutomaticSingleSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONAUTOMATICSINGLESURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> int:
         """Get or set the Identification number. Only one table is allowed
@@ -346,4 +258,14 @@ class DefineFrictionAutomaticSingleSurface(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid_i_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_i."""
+        return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
+
+    @property
+    def pid_j_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_j."""
+        return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

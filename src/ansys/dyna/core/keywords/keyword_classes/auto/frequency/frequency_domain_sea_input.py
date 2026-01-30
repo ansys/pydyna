@@ -23,7 +23,21 @@
 """Module providing the FrequencyDomainSeaInput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINSEAINPUT_CARD0 = (
+    FieldSchema("subid", int, 0, 10, None),
+    FieldSchema("subtyp", int, 10, 10, 1),
+    FieldSchema("loadtyp", int, 20, 10, 0),
+)
+
+_FREQUENCYDOMAINSEAINPUT_CARD1 = (
+    FieldSchema("bwave", float, 0, 10, None),
+    FieldSchema("lwave", float, 10, 10, None),
+    FieldSchema("swave", float, 20, 10, None),
+    FieldSchema("twave", float, 30, 10, None),
+)
 
 class FrequencyDomainSeaInput(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_SEA_INPUT keyword"""
@@ -35,67 +49,13 @@ class FrequencyDomainSeaInput(KeywordBase):
         """Initialize the FrequencyDomainSeaInput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "subid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "subtyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loadtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bwave",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lwave",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swave",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "twave",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEAINPUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEAINPUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def subid(self) -> typing.Optional[int]:
         """Get or set the Subsystem ID.

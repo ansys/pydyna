@@ -23,166 +23,61 @@
 """Module providing the EmEpCellmodelDefinefunction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMEPCELLMODELDEFINEFUNCTION_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("nstate", int, 10, 10, None),
+    FieldSchema("fswitch", int, 20, 10, 0),
+)
+
+_EMEPCELLMODELDEFINEFUNCTION_CARD1 = (
+    FieldSchema("dvdt", int, 0, 10, None),
+    FieldSchema("du1dt", int, 10, 10, None),
+    FieldSchema("du2dt", int, 20, 10, None),
+    FieldSchema("du3dt", int, 30, 10, None),
+    FieldSchema("du4dt", int, 40, 10, None),
+    FieldSchema("du5dt", int, 50, 10, None),
+    FieldSchema("du6dt", int, 60, 10, None),
+    FieldSchema("du7dt", int, 70, 10, None),
+)
+
+_EMEPCELLMODELDEFINEFUNCTION_CARD2 = (
+    FieldSchema("v0", int, 0, 10, None),
+    FieldSchema("u1", int, 10, 10, None),
+    FieldSchema("u2", int, 20, 10, None),
+    FieldSchema("u3", int, 30, 10, None),
+    FieldSchema("u4", int, 40, 10, None),
+    FieldSchema("u5", int, 50, 10, None),
+    FieldSchema("u6", int, 60, 10, None),
+    FieldSchema("u7", int, 70, 10, None),
+)
 
 class EmEpCellmodelDefinefunction(KeywordBase):
     """DYNA EM_EP_CELLMODEL_DEFINEFUNCTION keyword"""
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_DEFINEFUNCTION"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelDefinefunction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nstate",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fswitch",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dvdt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du1dt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du2dt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du3dt",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du4dt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du5dt",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du6dt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "du7dt",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v0",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELDEFINEFUNCTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELDEFINEFUNCTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELDEFINEFUNCTION_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -397,4 +292,19 @@ class EmEpCellmodelDefinefunction(KeywordBase):
     def u7(self, value: int) -> None:
         """Set the u7 property."""
         self._cards[2].set_value("u7", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

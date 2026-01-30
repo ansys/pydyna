@@ -23,79 +23,38 @@
 """Module providing the ChangeVelocityNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CHANGEVELOCITYNODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("vy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("vxr", float, 40, 10, 0.0),
+    FieldSchema("vyr", float, 50, 10, 0.0),
+    FieldSchema("vzr", float, 60, 10, 0.0),
+)
 
 class ChangeVelocityNode(KeywordBase):
     """DYNA CHANGE_VELOCITY_NODE keyword"""
 
     keyword = "CHANGE"
     subkeyword = "VELOCITY_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeVelocityNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -172,4 +131,9 @@ class ChangeVelocityNode(KeywordBase):
     def vzr(self, value: float) -> None:
         """Set the vzr property."""
         self._cards[0].set_value("vzr", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

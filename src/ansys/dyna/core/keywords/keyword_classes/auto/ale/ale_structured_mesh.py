@@ -23,123 +23,52 @@
 """Module providing the AleStructuredMesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_ALESTRUCTUREDMESH_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("dpid", int, 10, 10, None),
+    FieldSchema("nbid", int, 20, 10, 0),
+    FieldSchema("ebid", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("tdeath", float, 70, 10, 1e+16),
+)
+
+_ALESTRUCTUREDMESH_CARD1 = (
+    FieldSchema("cpidx", int, 0, 10, None),
+    FieldSchema("cpidy", int, 10, 10, None),
+    FieldSchema("cpidz", int, 20, 10, None),
+    FieldSchema("nid0", int, 30, 10, None),
+    FieldSchema("lcsid", int, 40, 10, None),
+)
 
 class AleStructuredMesh(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH keyword"""
 
     keyword = "ALE"
     subkeyword = "STRUCTURED_MESH"
+    _link_fields = {
+        "nid0": LinkType.NODE,
+        "lcsid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleStructuredMesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dpid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ebid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        70,
-                        10,
-                        1.0E16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cpidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid0",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESH_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. A unique number must be specified.
@@ -255,4 +184,24 @@ class AleStructuredMesh(KeywordBase):
     def lcsid(self, value: int) -> None:
         """Set the lcsid property."""
         self._cards[1].set_value("lcsid", value)
+
+    @property
+    def nid0_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid0."""
+        return self._get_link_by_attr("NODE", "nid", self.nid0, "parts")
+
+    @property
+    def lcsid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for lcsid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.lcsid:
+                return kwd
+        return None
+
+    @lcsid_link.setter
+    def lcsid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for lcsid."""
+        self.lcsid = value.cid
 

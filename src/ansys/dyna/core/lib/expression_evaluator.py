@@ -175,7 +175,7 @@ class ExpressionEvaluator:
 
         def replace_param(match):
             minus = match.group(1)
-            ampersand = match.group(2)
+            ampersand = match.group(2)  # noqa: F841
             param_name = match.group(3)
 
             # Check if this is actually a function name
@@ -219,11 +219,7 @@ class ExpressionEvaluator:
             If node contains unsupported operations.
         """
         if isinstance(node, ast.Constant):
-            # Python 3.8+ uses ast.Constant for literals
             return node.value
-        elif isinstance(node, ast.Num):
-            # Python 3.7 and earlier use ast.Num
-            return node.n
         elif isinstance(node, ast.UnaryOp):
             operand = self._eval_node(node.operand)
             if isinstance(node.op, ast.UAdd):

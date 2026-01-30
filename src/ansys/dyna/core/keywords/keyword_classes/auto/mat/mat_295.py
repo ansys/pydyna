@@ -23,10 +23,34 @@
 """Module providing the Mat295 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_FIBERFAMILY_CARD0 = (
+    FieldSchema("theta", float, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+)
+
+_FIBERFAMILY_CARD1 = (
+    FieldSchema("ftype", int, 0, 10, 1),
+    FieldSchema("fcid", int, 10, 10, None),
+    FieldSchema("k1", float, 20, 10, None),
+    FieldSchema("k2", float, 30, 10, None),
+)
+
+_FIBERFAMILY_CARD2 = (
+    FieldSchema("ftype", int, 0, 10, 1),
+    FieldSchema("flcid", int, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("r0norm", float, 30, 10, None),
+    FieldSchema("h0norm", float, 40, 10, None),
+)
 
 class FiberFamily(Cards):
     """ CardSet."""
@@ -37,107 +61,18 @@ class FiberFamily(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "theta",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ftype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.ftype == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "ftype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0norm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h0norm",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.ftype == 2,
-            ),
-        ]
+            Card.from_field_schemas_with_defaults(
+                _FIBERFAMILY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FIBERFAMILY_CARD1,
+                active_func=lambda: self.ftype == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FIBERFAMILY_CARD2,
+                active_func=lambda: self.ftype == 2,
+                **kwargs,
+            ),        ]
 
     def _read_data(self, buf: typing.TextIO, parameters) -> bool:
         """Custom read logic to handle ftype-dependent cards."""
@@ -198,6 +133,8 @@ class FiberFamily(Cards):
     @property
     def k1(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Gasser-Ogden modulus.
+
+        Note: For the K1 (Card 11), use ``coupling_k1``.
         """ # nopep8
         return self._cards[1].get_value("k1")
 
@@ -209,6 +146,8 @@ class FiberFamily(Cards):
     @property
     def k2(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Gasser-Ogden constant.
+
+        Note: For the K2 (Card 11), use ``coupling_k2``.
         """ # nopep8
         return self._cards[1].get_value("k2")
 
@@ -279,14 +218,180 @@ EQ.2:	Freed-Doehring [2].
         """Get the parent keyword."""
         return self._parent
 
+_MAT295_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("rho", float, 10, 10, None),
+    FieldSchema("aopt", float, 20, 10, None),
+)
+
+_MAT295_CARD1 = (
+    FieldSchema("isotropic_title", str, 0, 10, "ISO", "title"),
+    FieldSchema("itype", int, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("nu", float, 30, 10, None),
+)
+
+_MAT295_CARD2 = (
+    FieldSchema("mu1", float, 0, 10, None),
+    FieldSchema("mu2", float, 10, 10, None),
+    FieldSchema("mu3", float, 20, 10, None),
+    FieldSchema("mu4", float, 30, 10, None),
+    FieldSchema("mu5", float, 40, 10, None),
+    FieldSchema("mu6", float, 50, 10, None),
+    FieldSchema("mu7", float, 60, 10, None),
+    FieldSchema("mu8", float, 70, 10, None),
+)
+
+_MAT295_CARD3 = (
+    FieldSchema("alpha1", float, 0, 10, None),
+    FieldSchema("alpha2", float, 10, 10, None),
+    FieldSchema("alpha3", float, 20, 10, None),
+    FieldSchema("alpha4", float, 30, 10, None),
+    FieldSchema("alpha5", float, 40, 10, None),
+    FieldSchema("alpha6", float, 50, 10, None),
+    FieldSchema("alpha7", float, 60, 10, None),
+    FieldSchema("alpha8", float, 70, 10, None),
+)
+
+_MAT295_CARD4 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+)
+
+_MAT295_CARD5 = (
+    FieldSchema("k1", float, 0, 10, None),
+    FieldSchema("k2", float, 10, 10, None),
+)
+
+_MAT295_CARD6 = (
+    FieldSchema("anisotropic_title", str, 0, 10, "ANISO", "title"),
+    FieldSchema("atype", int, 10, 10, None),
+    FieldSchema("intype", int, 20, 10, None),
+    FieldSchema("nf", int, 30, 10, None),
+)
+
+_MAT295_CARD8 = (
+    FieldSchema("coupling_k1", float, 0, 10, None, "k1"),
+    FieldSchema("coupling_k2", float, 10, 10, None, "k2"),
+)
+
+_MAT295_CARD9 = (
+    FieldSchema("active_title", str, 0, 10, "ACTIVE", "title"),
+    FieldSchema("actype", int, 10, 10, None),
+    FieldSchema("acdir", int, 20, 10, 0),
+    FieldSchema("acid", int, 30, 10, None),
+    FieldSchema("acthr", float, 40, 10, 0.0),
+    FieldSchema("sf", float, 50, 10, 1.0),
+    FieldSchema("ss", float, 60, 10, 0.0),
+    FieldSchema("sn", float, 70, 10, 0.0),
+)
+
+_MAT295_CARD10 = (
+    FieldSchema("t0", float, 0, 10, None),
+    FieldSchema("ca2ion", float, 10, 10, None),
+    FieldSchema("ca2ionm", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+    FieldSchema("taumax", float, 40, 10, None),
+    FieldSchema("stf", float, 50, 10, None),
+    FieldSchema("b", float, 60, 10, None),
+    FieldSchema("l0", float, 70, 10, None),
+)
+
+_MAT295_CARD11 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("dtmax", float, 10, 10, None),
+    FieldSchema("mr", float, 20, 10, None),
+    FieldSchema("tr", float, 30, 10, None),
+)
+
+_MAT295_CARD12 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("eta", float, 10, 10, None),
+)
+
+_MAT295_CARD13 = (
+    FieldSchema("t0", float, 0, 10, None),
+    FieldSchema("ca2ion", float, 10, 10, None),
+    FieldSchema("ca2ion50", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+    FieldSchema("sigmax", float, 40, 10, None),
+    FieldSchema("f", float, 50, 10, None),
+    FieldSchema("l", float, 60, 10, None),
+    FieldSchema("eta", float, 70, 10, None),
+)
+
+_MAT295_CARD14 = (
+    FieldSchema("t0", float, 0, 10, None),
+    FieldSchema("ca2ion50", float, 10, 10, None),
+    FieldSchema("ca2ionmax", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+    FieldSchema("sigmax", float, 40, 10, None),
+    FieldSchema("f", float, 50, 10, None),
+    FieldSchema("ca2ion0", float, 60, 10, None),
+    FieldSchema("tca", float, 70, 10, None),
+)
+
+_MAT295_CARD15 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("eta", float, 10, 10, None),
+)
+
+_MAT295_CARD16 = (
+    FieldSchema("fseid", int, 0, 10, None),
+    FieldSchema("flid", int, 10, 10, None),
+    FieldSchema("fvid", int, 20, 10, None),
+    FieldSchema("alphaid", int, 30, 10, None),
+)
+
+_MAT295_CARD17 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+    FieldSchema("macf", int, 60, 10, 1),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MAT295_CARD18 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("material_angle_beta", float, 60, 10, None, "beta"),
+    FieldSchema("ref", float, 70, 10, None),
+)
+
+_MAT295_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat295(KeywordBase):
-    """DYNA MAT_295 keyword"""
+    """DYNA MAT_295 keyword
+
+    Fields with renamed properties:
+        TITLE (Card 2) -> isotropic_title
+        TITLE (Card 7) -> anisotropic_title
+        TITLE (Card 12) -> active_title
+        K1 (Card 11) -> coupling_k1
+        K2 (Card 11) -> coupling_k2
+        BETA (Card 21) -> material_angle_beta
+    """
 
     keyword = "MAT"
     subkeyword = "295"
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "flid": LinkType.DEFINE_CURVE,
+        "fvid": LinkType.DEFINE_CURVE,
+        "alphaid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat295 class."""
@@ -295,786 +400,92 @@ class Mat295(KeywordBase):
         kwargs["keyword"] = self
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        10,
-                        Field.ReadOnlyValue("ISO"),
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mu1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.itype and abs(self.itype) == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.itype and abs(self.itype) == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.itype and abs(self.itype) == 2,
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.itype and abs(self.itype) == 3,
-            ),
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        10,
-                        Field.ReadOnlyValue("ANISO"),
-                        **kwargs,
-                    ),
-                    Field(
-                        "atype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intype",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nf",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1,
-            ),
-            CardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD2,
+                active_func=lambda: self.itype and abs(self.itype) == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD3,
+                active_func=lambda: self.itype and abs(self.itype) == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD4,
+                active_func=lambda: self.itype and abs(self.itype) == 2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD5,
+                active_func=lambda: self.itype and abs(self.itype) == 3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD6,
+                active_func=lambda: self.atype and abs(self.atype) == 1,
+                **kwargs,
+            ),            CardSet(
                 FiberFamily,
                 length_func = lambda: self.nf or 0,
                 active_func = lambda: self.atype and abs(self.atype) == 1,
                 **kwargs
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.intype == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        10,
-                        Field.ReadOnlyValue("ACTIVE"),
-                        **kwargs,
-                    ),
-                    Field(
-                        "actype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acdir",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acthr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
-            ),
-            Card(
-                [
-                    Field(
-                        "t0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ion",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ionm",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taumax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2],
-            ),
-            Card(
-                [
-                    Field(
-                        "l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 2,
-            ),
-            Card(
-                [
-                    Field(
-                        "t0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ion",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ion50",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 3,
-            ),
-            Card(
-                [
-                    Field(
-                        "t0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ion50",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ionmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca2ion0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tca",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
-            ),
-            Card(
-                [
-                    Field(
-                        "l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
-            ),
-            Card(
-                [
-                    Field(
-                        "fseid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fvid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alphaid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype == 5,
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.atype and abs(self.atype) == 1,
-            ),
-            OptionCardSet(
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD8,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.intype == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD9,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD10,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2],
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD11,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD12,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD13,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD14,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD15,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD16,
+                active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD17,
+                active_func=lambda: self.atype and abs(self.atype) == 1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT295_CARD18,
+                active_func=lambda: self.atype and abs(self.atype) == 1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat295.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT295_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def theta(self) -> typing.Optional[float]:
         """Get or set the theta
@@ -1237,8 +648,10 @@ class Mat295(KeywordBase):
     @property
     def isotropic_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:2, field: TITLE
         """ # nopep8
-        return self._cards[1].get_value("title")
+        return self._cards[1].get_value("isotropic_title")
 
     @property
     def itype(self) -> typing.Optional[int]:
@@ -1257,6 +670,8 @@ class Mat295(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Volumetric response function coefficient.
+
+        Note: For the BETA (Card 21), use ``material_angle_beta``.
         """ # nopep8
         return self._cards[1].get_value("beta")
 
@@ -1488,6 +903,8 @@ class Mat295(KeywordBase):
     @property
     def k1(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Ogden modulus.
+
+        Note: For the K1 (Card 11), use ``coupling_k1``.
         """ # nopep8
         return self._cards[5].get_value("k1")
 
@@ -1499,6 +916,8 @@ class Mat295(KeywordBase):
     @property
     def k2(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Ogden constant.
+
+        Note: For the K2 (Card 11), use ``coupling_k2``.
         """ # nopep8
         return self._cards[5].get_value("k2")
 
@@ -1510,8 +929,10 @@ class Mat295(KeywordBase):
     @property
     def anisotropic_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:7, field: TITLE
         """ # nopep8
-        return self._cards[6].get_value("title")
+        return self._cards[6].get_value("anisotropic_title")
 
     @property
     def atype(self) -> typing.Optional[int]:
@@ -1557,30 +978,36 @@ class Mat295(KeywordBase):
     @property
     def coupling_k1(self) -> typing.Optional[float]:
         """Get or set the Coupling modulus between the fiber and sheet directions
+
+        Note: Location in manual: card:11, field: K1
         """ # nopep8
-        return self._cards[8].get_value("k1")
+        return self._cards[8].get_value("coupling_k1")
 
     @coupling_k1.setter
     def coupling_k1(self, value: float) -> None:
         """Set the coupling_k1 property."""
-        self._cards[8].set_value("k1", value)
+        self._cards[8].set_value("coupling_k1", value)
 
     @property
     def coupling_k2(self) -> typing.Optional[float]:
         """Get or set the Coupling constant between the fiber and sheet directions
+
+        Note: Location in manual: card:11, field: K2
         """ # nopep8
-        return self._cards[8].get_value("k2")
+        return self._cards[8].get_value("coupling_k2")
 
     @coupling_k2.setter
     def coupling_k2(self, value: float) -> None:
         """Set the coupling_k2 property."""
-        self._cards[8].set_value("k2", value)
+        self._cards[8].set_value("coupling_k2", value)
 
     @property
     def active_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:12, field: TITLE
         """ # nopep8
-        return self._cards[9].get_value("title")
+        return self._cards[9].get_value("active_title")
 
     @property
     def actype(self) -> typing.Optional[int]:
@@ -2082,15 +1509,17 @@ class Mat295(KeywordBase):
     @property
     def material_angle_beta(self) -> typing.Optional[float]:
         """Get or set the Material angle in degrees for AOPT = 0 (shells and thick shells only) and AOPT = 3 (all element types).
-        This angle may be overridden on the element card;
-        see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
+This angle may be overridden on the element card;
+see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
+
+        Note: Location in manual: card:21, field: BETA
         """ # nopep8
-        return self._cards[18].get_value("beta")
+        return self._cards[18].get_value("material_angle_beta")
 
     @material_angle_beta.setter
     def material_angle_beta(self, value: float) -> None:
         """Set the material_angle_beta property."""
-        self._cards[18].set_value("beta", value)
+        self._cards[18].set_value("material_angle_beta", value)
 
     @property
     def ref(self) -> typing.Optional[float]:
@@ -2119,6 +1548,51 @@ class Mat295(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def flid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for flid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.flid:
+                return kwd
+        return None
+
+    @flid_link.setter
+    def flid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for flid."""
+        self.flid = value.lcid
+
+    @property
+    def fvid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fvid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fvid:
+                return kwd
+        return None
+
+    @fvid_link.setter
+    def fvid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fvid."""
+        self.fvid = value.lcid
+
+    @property
+    def alphaid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for alphaid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.alphaid:
+                return kwd
+        return None
+
+    @alphaid_link.setter
+    def alphaid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for alphaid."""
+        self.alphaid = value.lcid
 
 
 class MatAnisotropicHyperelastic(Mat295):

@@ -23,7 +23,16 @@
 """Module providing the InterfaceComponentFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACECOMPONENTFILE_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_INTERFACECOMPONENTFILE_CARD1 = (
+    FieldSchema("format", int, 0, 10, 2),
+)
 
 class InterfaceComponentFile(KeywordBase):
     """DYNA INTERFACE_COMPONENT_FILE keyword"""
@@ -35,31 +44,13 @@ class InterfaceComponentFile(KeywordBase):
         """Initialize the InterfaceComponentFile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "format",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPONENTFILE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPONENTFILE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the file where the component data will be written.

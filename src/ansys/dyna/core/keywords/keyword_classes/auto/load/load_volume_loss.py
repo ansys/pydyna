@@ -23,86 +23,42 @@
 """Module providing the LoadVolumeLoss class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADVOLUMELOSS_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("coord", int, 10, 10, None),
+    FieldSchema("lcur", int, 20, 10, 0),
+    FieldSchema("fx", float, 30, 10, 1.0),
+    FieldSchema("fy", float, 40, 10, 1.0),
+    FieldSchema("fz", float, 50, 10, 1.0),
+    FieldSchema("pmin", float, 60, 10, -1e+21),
+    FieldSchema("factor", float, 70, 10, 0.01),
+)
 
 class LoadVolumeLoss(KeywordBase):
     """DYNA LOAD_VOLUME_LOSS keyword"""
 
     keyword = "LOAD"
     subkeyword = "VOLUME_LOSS"
+    _link_fields = {
+        "lcur": LinkType.DEFINE_CURVE,
+        "coord": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadVolumeLoss class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coord",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmin",
-                        float,
-                        60,
-                        10,
-                        -10E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "factor",
-                        float,
-                        70,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADVOLUMELOSS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.
@@ -190,4 +146,44 @@ class LoadVolumeLoss(KeywordBase):
     def factor(self, value: float) -> None:
         """Set the factor property."""
         self._cards[0].set_value("factor", value)
+
+    @property
+    def lcur_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur:
+                return kwd
+        return None
+
+    @lcur_link.setter
+    def lcur_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur."""
+        self.lcur = value.lcid
+
+    @property
+    def coord_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for coord."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.coord:
+                return kwd
+        return None
+
+    @coord_link.setter
+    def coord_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for coord."""
+        self.coord = value.cid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

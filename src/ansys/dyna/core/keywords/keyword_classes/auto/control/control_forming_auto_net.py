@@ -23,106 +23,49 @@
 """Module providing the ControlFormingAutoNet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLFORMINGAUTONET_CARD0 = (
+    FieldSchema("idnet", int, 0, 10, None),
+    FieldSchema("itype", str, 10, 10, None),
+    FieldSchema("idv", int, 20, 10, 0),
+    FieldSchema("idp", int, 30, 10, 0),
+    FieldSchema("x", float, 40, 10, 0.0),
+    FieldSchema("y", float, 50, 10, 0.0),
+    FieldSchema("z", float, 60, 10, 0.0),
+)
+
+_CONTROLFORMINGAUTONET_CARD1 = (
+    FieldSchema("sx", float, 0, 10, 0.0),
+    FieldSchema("sy", float, 10, 10, 0.0),
+    FieldSchema("offset", float, 20, 10, 0.0),
+)
 
 class ControlFormingAutoNet(KeywordBase):
     """DYNA CONTROL_FORMING_AUTO_NET keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_AUTO_NET"
+    _link_fields = {
+        "idv": LinkType.DEFINE_VECTOR,
+        "idp": LinkType.PART,
+        "sx": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingAutoNet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idnet",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTONET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTONET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def idnet(self) -> typing.Optional[int]:
         """Get or set the ID of the net; must be unique.
@@ -234,4 +177,29 @@ class ControlFormingAutoNet(KeywordBase):
     def offset(self, value: float) -> None:
         """Set the offset property."""
         self._cards[1].set_value("offset", value)
+
+    @property
+    def idv_link(self) -> DefineVector:
+        """Get the DefineVector object for idv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.idv:
+                return kwd
+        return None
+
+    @idv_link.setter
+    def idv_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for idv."""
+        self.idv = value.vid
+
+    @property
+    def idp_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idp."""
+        return self._get_link_by_attr("PART", "pid", self.idp, "parts")
+
+    @property
+    def sx_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given sx."""
+        return self._get_link_by_attr("PART", "pid", self.sx, "parts")
 

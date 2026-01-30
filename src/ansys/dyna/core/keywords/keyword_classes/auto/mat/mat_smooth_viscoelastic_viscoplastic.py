@@ -23,8 +23,85 @@
 """Module providing the MatSmoothViscoelasticViscoplastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD1 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD2 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD3 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD4 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD5 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD6 = (
+    FieldSchema("a0", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("b1", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("kapas", float, 50, 10, None),
+    FieldSchema("kapa0", float, 60, 10, None),
+    FieldSchema("shear", float, 70, 10, None),
+)
+
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSmoothViscoelasticViscoplastic(KeywordBase):
     """DYNA MAT_SMOOTH_VISCOELASTIC_VISCOPLASTIC keyword"""
@@ -40,410 +117,38 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kapa0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSmoothViscoelasticViscoplastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSMOOTHVISCOELASTICVISCOPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

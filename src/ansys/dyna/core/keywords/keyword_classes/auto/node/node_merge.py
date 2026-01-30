@@ -23,31 +23,32 @@
 """Module providing the NodeMerge class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_NODEMERGE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+)
 
 class NodeMerge(KeywordBase):
     """DYNA NODE_MERGE keyword"""
 
     keyword = "NODE"
     subkeyword = "MERGE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the NodeMerge class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODEMERGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID containing list of node to be considered for merging.
@@ -58,4 +59,9 @@ class NodeMerge(KeywordBase):
     def nid(self, value: int) -> None:
         """Set the nid property."""
         self._cards[0].set_value("nid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

@@ -23,211 +23,73 @@
 """Module providing the ComponentGebodJointLeftAnkle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_COMPONENTGEBODJOINTLEFTANKLE_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("lc1", int, 10, 10, 0),
+    FieldSchema("lc2", int, 20, 10, 0),
+    FieldSchema("lc3", int, 30, 10, 0),
+    FieldSchema("scf1", float, 40, 10, 1.0),
+    FieldSchema("scf2", float, 50, 10, 1.0),
+    FieldSchema("scf3", float, 60, 10, 1.0),
+)
+
+_COMPONENTGEBODJOINTLEFTANKLE_CARD1 = (
+    FieldSchema("c1", float, 0, 10, 0.0),
+    FieldSchema("c2", float, 10, 10, 0.0),
+    FieldSchema("c3", float, 20, 10, 0.0),
+    FieldSchema("neut1", float, 30, 10, 0.0),
+    FieldSchema("neut2", float, 40, 10, 0.0),
+    FieldSchema("neut3", float, 50, 10, 0.0),
+)
+
+_COMPONENTGEBODJOINTLEFTANKLE_CARD2 = (
+    FieldSchema("losa1", float, 0, 10, 0.0),
+    FieldSchema("hisa1", float, 10, 10, 0.0),
+    FieldSchema("losa2", float, 20, 10, 0.0),
+    FieldSchema("hisa2", float, 30, 10, 0.0),
+    FieldSchema("losa3", float, 40, 10, 0.0),
+    FieldSchema("hisa3", float, 50, 10, 0.0),
+)
+
+_COMPONENTGEBODJOINTLEFTANKLE_CARD3 = (
+    FieldSchema("unk1", float, 0, 10, 0.0),
+    FieldSchema("unk2", float, 10, 10, 0.0),
+    FieldSchema("unk3", float, 20, 10, 0.0),
+)
 
 class ComponentGebodJointLeftAnkle(KeywordBase):
     """DYNA COMPONENT_GEBOD_JOINT_LEFT_ANKLE keyword"""
 
     keyword = "COMPONENT"
     subkeyword = "GEBOD_JOINT_LEFT_ANKLE"
+    _link_fields = {
+        "lc1": LinkType.DEFINE_CURVE,
+        "lc2": LinkType.DEFINE_CURVE,
+        "lc3": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ComponentGebodJointLeftAnkle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scf1",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scf2",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scf3",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neut1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neut2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neut3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "losa1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisa1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "losa2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisa2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "losa3",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisa3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unk1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unk2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unk3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODJOINTLEFTANKLE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODJOINTLEFTANKLE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODJOINTLEFTANKLE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODJOINTLEFTANKLE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID, see *COMPONENT_GEBOD_MALE, *COMPONENT_GEBOD_FEMALE, *COMPONENT_GEBOD_CHILD.
@@ -469,4 +331,49 @@ class ComponentGebodJointLeftAnkle(KeywordBase):
     def unk3(self, value: float) -> None:
         """Set the unk3 property."""
         self._cards[3].set_value("unk3", value)
+
+    @property
+    def lc1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc1:
+                return kwd
+        return None
+
+    @lc1_link.setter
+    def lc1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc1."""
+        self.lc1 = value.lcid
+
+    @property
+    def lc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc2:
+                return kwd
+        return None
+
+    @lc2_link.setter
+    def lc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc2."""
+        self.lc2 = value.lcid
+
+    @property
+    def lc3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc3:
+                return kwd
+        return None
+
+    @lc3_link.setter
+    def lc3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc3."""
+        self.lc3 = value.lcid
 

@@ -23,140 +23,58 @@
 """Module providing the RailTrack class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_RAILTRACK_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("bsetid1", int, 10, 10, None),
+    FieldSchema("norgn1", int, 20, 10, None),
+    FieldSchema("lcur1", int, 30, 10, None),
+    FieldSchema("oset1", float, 40, 10, 0.0),
+    FieldSchema("sf1", float, 50, 10, 1.0),
+    FieldSchema("ga1", float, 60, 10, 0.0),
+    FieldSchema("idir", int, 70, 10, 0),
+)
+
+_RAILTRACK_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("bsetid2", int, 10, 10, None),
+    FieldSchema("norgn2", int, 20, 10, None),
+    FieldSchema("lcur2", int, 30, 10, None),
+    FieldSchema("oset2", float, 40, 10, 0.0),
+    FieldSchema("sf2", float, 50, 10, 1.0),
+    FieldSchema("ga2", float, 60, 10, 0.0),
+)
 
 class RailTrack(KeywordBase):
     """DYNA RAIL_TRACK keyword"""
 
     keyword = "RAIL"
     subkeyword = "TRACK"
+    _link_fields = {
+        "norgn1": LinkType.NODE,
+        "norgn2": LinkType.NODE,
+        "lcur1": LinkType.DEFINE_CURVE,
+        "lcur2": LinkType.DEFINE_CURVE,
+        "bsetid1": LinkType.SET_BEAM,
+        "bsetid2": LinkType.SET_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RailTrack class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsetid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norgn1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oset1",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf1",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ga1",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsetid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norgn2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oset2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf2",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ga2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RAILTRACK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RAILTRACK_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Track ID
@@ -315,4 +233,64 @@ class RailTrack(KeywordBase):
     def ga2(self, value: float) -> None:
         """Set the ga2 property."""
         self._cards[1].set_value("ga2", value)
+
+    @property
+    def norgn1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given norgn1."""
+        return self._get_link_by_attr("NODE", "nid", self.norgn1, "parts")
+
+    @property
+    def norgn2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given norgn2."""
+        return self._get_link_by_attr("NODE", "nid", self.norgn2, "parts")
+
+    @property
+    def lcur1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur1:
+                return kwd
+        return None
+
+    @lcur1_link.setter
+    def lcur1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur1."""
+        self.lcur1 = value.lcid
+
+    @property
+    def lcur2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcur2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcur2:
+                return kwd
+        return None
+
+    @lcur2_link.setter
+    def lcur2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcur2."""
+        self.lcur2 = value.lcid
+
+    @property
+    def bsetid1_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid1."""
+        return self._get_set_link("BEAM", self.bsetid1)
+
+    @bsetid1_link.setter
+    def bsetid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid1."""
+        self.bsetid1 = value.sid
+
+    @property
+    def bsetid2_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid2."""
+        return self._get_set_link("BEAM", self.bsetid2)
+
+    @bsetid2_link.setter
+    def bsetid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid2."""
+        self.bsetid2 = value.sid
 

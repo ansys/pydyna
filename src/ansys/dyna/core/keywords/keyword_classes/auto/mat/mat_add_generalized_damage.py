@@ -23,8 +23,71 @@
 """Module providing the MatAddGeneralizedDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATADDGENERALIZEDDAMAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("idam", int, 10, 10, 0),
+    FieldSchema("dtyp", int, 20, 10, 0),
+    FieldSchema("refsz", float, 30, 10, None),
+    FieldSchema("numfip", float, 40, 10, 1.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("pddt", int, 60, 10, 0),
+    FieldSchema("nhis", int, 70, 10, 1),
+)
+
+_MATADDGENERALIZEDDAMAGE_CARD1 = (
+    FieldSchema("his1", int, 0, 10, 0),
+    FieldSchema("his2", int, 10, 10, None),
+    FieldSchema("his3", int, 20, 10, None),
+    FieldSchema("iflg1", int, 30, 10, 0),
+    FieldSchema("iflg2", int, 40, 10, 0),
+    FieldSchema("iflg3", int, 50, 10, 0),
+)
+
+_MATADDGENERALIZEDDAMAGE_CARD2 = (
+    FieldSchema("d11", int, 0, 10, None),
+    FieldSchema("d22", int, 10, 10, None),
+    FieldSchema("d33", int, 20, 10, None),
+    FieldSchema("d44", int, 30, 10, None),
+    FieldSchema("d55", int, 40, 10, None),
+    FieldSchema("d66", int, 50, 10, None),
+)
+
+_MATADDGENERALIZEDDAMAGE_CARD3 = (
+    FieldSchema("d12", int, 0, 10, None),
+    FieldSchema("d21", int, 10, 10, None),
+    FieldSchema("d24", int, 20, 10, None),
+    FieldSchema("d42", int, 30, 10, None),
+    FieldSchema("d14", int, 40, 10, None),
+    FieldSchema("d41", int, 50, 10, None),
+)
+
+_MATADDGENERALIZEDDAMAGE_CARD4 = (
+    FieldSchema("lcsdg", int, 0, 10, 0),
+    FieldSchema("ecrit", float, 10, 10, None),
+    FieldSchema("dmgexp", float, 20, 10, 1.0),
+    FieldSchema("dcrit", float, 30, 10, None),
+    FieldSchema("fadexp", float, 40, 10, 1.0),
+    FieldSchema("lcreg", int, 50, 10, 0),
+)
+
+_MATADDGENERALIZEDDAMAGE_CARD5 = (
+    FieldSchema("lcsrs", int, 0, 10, 0),
+    FieldSchema("shrf", float, 10, 10, None),
+    FieldSchema("biaxf", float, 20, 10, None),
+    FieldSchema("lcdlim", int, 30, 10, 0),
+    FieldSchema("midfail", float, 40, 10, 0.0),
+    FieldSchema("nfloc", float, 50, 10, None),
+)
+
+_MATADDGENERALIZEDDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddGeneralizedDamage(KeywordBase):
     """DYNA MAT_ADD_GENERALIZED_DAMAGE keyword"""
@@ -34,337 +97,48 @@ class MatAddGeneralizedDamage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "lcsdg": LinkType.DEFINE_CURVE,
+        "lcreg": LinkType.DEFINE_CURVE,
+        "lcsrs": LinkType.DEFINE_CURVE,
+        "lcdlim": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddGeneralizedDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refsz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numfip",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pddt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhis",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "his1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflg1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflg2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflg3",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d11",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d22",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d33",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d44",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d55",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d66",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d12",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d21",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d24",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d42",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d14",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d41",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsdg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecrit",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgexp",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcrit",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fadexp",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcreg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsrs",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "biaxf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdlim",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "midfail",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfloc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDGENERALIZEDDAMAGE_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddGeneralizedDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDGENERALIZEDDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID for which this generalized damage definition applies.
@@ -860,4 +634,79 @@ class MatAddGeneralizedDamage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def lcsdg_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsdg."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsdg:
+                return kwd
+        return None
+
+    @lcsdg_link.setter
+    def lcsdg_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsdg."""
+        self.lcsdg = value.lcid
+
+    @property
+    def lcreg_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcreg."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcreg:
+                return kwd
+        return None
+
+    @lcreg_link.setter
+    def lcreg_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcreg."""
+        self.lcreg = value.lcid
+
+    @property
+    def lcsrs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsrs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsrs:
+                return kwd
+        return None
+
+    @lcsrs_link.setter
+    def lcsrs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsrs."""
+        self.lcsrs = value.lcid
+
+    @property
+    def lcdlim_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdlim."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdlim:
+                return kwd
+        return None
+
+    @lcdlim_link.setter
+    def lcdlim_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdlim."""
+        self.lcdlim = value.lcid
 

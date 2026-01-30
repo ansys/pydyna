@@ -23,76 +23,42 @@
 """Module providing the ControlSegmentsInAleCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLSEGMENTSINALECOUPLING_CARD0 = (
+    FieldSchema("rankey", int, 0, 10, 0),
+    FieldSchema("segset", int, 10, 10, 0),
+    FieldSchema("ncychk", int, 20, 10, 10),
+    FieldSchema("sym", int, 30, 10, 0),
+)
+
+_CONTROLSEGMENTSINALECOUPLING_CARD1 = (
+    FieldSchema("ninthk", int, 0, 10, 0),
+    FieldSchema("conthk", float, 10, 10, 0.0),
+)
 
 class ControlSegmentsInAleCoupling(KeywordBase):
     """DYNA CONTROL_SEGMENTS_IN_ALE_COUPLING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "SEGMENTS_IN_ALE_COUPLING"
+    _link_fields = {
+        "segset": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSegmentsInAleCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rankey",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segset",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncychk",
-                        int,
-                        20,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sym",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ninthk",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conthk",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSEGMENTSINALECOUPLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSEGMENTSINALECOUPLING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def rankey(self) -> int:
         """Get or set the Rank of *CONSTRAINED_LAGRANGE_IN_SOLID in the input deck. (see Remark 2).
@@ -162,4 +128,14 @@ class ControlSegmentsInAleCoupling(KeywordBase):
     def conthk(self, value: float) -> None:
         """Set the conthk property."""
         self._cards[1].set_value("conthk", value)
+
+    @property
+    def segset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segset."""
+        return self._get_set_link("SEGMENT", self.segset)
+
+    @segset_link.setter
+    def segset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segset."""
+        self.segset = value.sid
 

@@ -23,8 +23,44 @@
 """Module providing the DefineDeathTimesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DEFINEDEATHTIMESSET_CARD0 = (
+    FieldSchema("geo", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n2", int, 20, 10, None),
+    FieldSchema("n3", int, 30, 10, None),
+)
+
+_DEFINEDEATHTIMESSET_CARD1 = (
+    FieldSchema("x_t", float, 0, 10, None),
+    FieldSchema("y_t", float, 10, 10, None),
+    FieldSchema("z_t", float, 20, 10, None),
+    FieldSchema("x_h", float, 30, 10, None),
+    FieldSchema("y_h", float, 40, 10, None),
+    FieldSchema("x_h", float, 50, 10, None),
+    FieldSchema("r", float, 60, 10, None),
+    FieldSchema("flag", int, 70, 10, None),
+)
+
+_DEFINEDEATHTIMESSET_CARD2 = (
+    FieldSchema("sid1", int, 0, 10, None),
+    FieldSchema("sid2", int, 10, 10, None),
+    FieldSchema("sid3", int, 20, 10, None),
+    FieldSchema("sid4", int, 30, 10, None),
+    FieldSchema("sid5", int, 40, 10, None),
+    FieldSchema("sid6", int, 50, 10, None),
+    FieldSchema("sid7", int, 60, 10, None),
+    FieldSchema("sid8", int, 70, 10, None),
+)
+
+_DEFINEDEATHTIMESSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeathTimesSet(KeywordBase):
     """DYNA DEFINE_DEATH_TIMES_SET keyword"""
@@ -34,183 +70,45 @@ class DefineDeathTimesSet(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "sid1": LinkType.SET_NODE,
+        "sid2": LinkType.SET_NODE,
+        "sid3": LinkType.SET_NODE,
+        "sid4": LinkType.SET_NODE,
+        "sid5": LinkType.SET_NODE,
+        "sid6": LinkType.SET_NODE,
+        "sid7": LinkType.SET_NODE,
+        "sid8": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeathTimesSet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "geo",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x_t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y_t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z_t",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x_h",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y_h",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x_h",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESSET_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeathTimesSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEATHTIMESSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def geo(self) -> typing.Optional[int]:
         """Get or set the Geometric entity type. =1 plane, =2 infinite cylinder, =3 sphere
@@ -444,4 +342,99 @@ class DefineDeathTimesSet(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def sid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid1."""
+        return self._get_set_link("NODE", self.sid1)
+
+    @sid1_link.setter
+    def sid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid1."""
+        self.sid1 = value.sid
+
+    @property
+    def sid2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid2."""
+        return self._get_set_link("NODE", self.sid2)
+
+    @sid2_link.setter
+    def sid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid2."""
+        self.sid2 = value.sid
+
+    @property
+    def sid3_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid3."""
+        return self._get_set_link("NODE", self.sid3)
+
+    @sid3_link.setter
+    def sid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid3."""
+        self.sid3 = value.sid
+
+    @property
+    def sid4_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid4."""
+        return self._get_set_link("NODE", self.sid4)
+
+    @sid4_link.setter
+    def sid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid4."""
+        self.sid4 = value.sid
+
+    @property
+    def sid5_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid5."""
+        return self._get_set_link("NODE", self.sid5)
+
+    @sid5_link.setter
+    def sid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid5."""
+        self.sid5 = value.sid
+
+    @property
+    def sid6_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid6."""
+        return self._get_set_link("NODE", self.sid6)
+
+    @sid6_link.setter
+    def sid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid6."""
+        self.sid6 = value.sid
+
+    @property
+    def sid7_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid7."""
+        return self._get_set_link("NODE", self.sid7)
+
+    @sid7_link.setter
+    def sid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid7."""
+        self.sid7 = value.sid
+
+    @property
+    def sid8_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid8."""
+        return self._get_set_link("NODE", self.sid8)
+
+    @sid8_link.setter
+    def sid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid8."""
+        self.sid8 = value.sid
 

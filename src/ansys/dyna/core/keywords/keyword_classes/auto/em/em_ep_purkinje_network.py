@@ -23,119 +23,52 @@
 """Module providing the EmEpPurkinjeNetwork class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_EMEPPURKINJENETWORK_CARD0 = (
+    FieldSchema("purkid", int, 0, 10, None),
+    FieldSchema("buildnet", int, 10, 10, None),
+    FieldSchema("ssid", int, 20, 10, None),
+    FieldSchema("mid", int, 30, 10, None),
+    FieldSchema("pointstx", float, 40, 10, None),
+    FieldSchema("pointsty", float, 50, 10, None),
+    FieldSchema("pointstz", float, 60, 10, None),
+    FieldSchema("edgetlen", float, 70, 10, None),
+)
+
+_EMEPPURKINJENETWORK_CARD1 = (
+    FieldSchema("numgen", int, 0, 10, None),
+    FieldSchema("numbrinit", int, 10, 10, None),
+    FieldSchema("numsplit", int, 20, 10, None),
+    FieldSchema("inodestld", int, 30, 10, None),
+    FieldSchema("iedgestld", int, 40, 10, None),
+)
 
 class EmEpPurkinjeNetwork(KeywordBase):
     """DYNA EM_EP_PURKINJE_NETWORK keyword"""
 
     keyword = "EM"
     subkeyword = "EP_PURKINJE_NETWORK"
+    _link_fields = {
+        "inodestld": LinkType.NODE,
+        "mid": LinkType.MAT,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpPurkinjeNetwork class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "purkid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "buildnet",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pointstx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pointsty",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pointstz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edgetlen",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "numgen",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numbrinit",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numsplit",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inodestld",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iedgestld",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPPURKINJENETWORK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPPURKINJENETWORK_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def purkid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card
@@ -279,4 +212,34 @@ class EmEpPurkinjeNetwork(KeywordBase):
     def iedgestld(self, value: int) -> None:
         """Set the iedgestld property."""
         self._cards[1].set_value("iedgestld", value)
+
+    @property
+    def inodestld_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given inodestld."""
+        return self._get_link_by_attr("NODE", "nid", self.inodestld, "parts")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

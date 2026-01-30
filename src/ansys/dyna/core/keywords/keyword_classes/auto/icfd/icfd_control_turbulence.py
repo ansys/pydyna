@@ -23,316 +23,106 @@
 """Module providing the IcfdControlTurbulence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDCONTROLTURBULENCE_CARD0 = (
+    FieldSchema("tmod", int, 0, 10, 0),
+    FieldSchema("submod", int, 10, 10, 0),
+    FieldSchema("wlaw", int, 20, 10, 0),
+    FieldSchema("ks", float, 30, 10, 0.0),
+    FieldSchema("cs", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("lcids1", int, 60, 10, 0),
+    FieldSchema("lcids2", int, 70, 10, 0),
+)
+
+_ICFDCONTROLTURBULENCE_CARD1 = (
+    FieldSchema("ce1", float, 0, 10, 1.44),
+    FieldSchema("ce2", float, 10, 10, 1.92),
+    FieldSchema("qe", float, 20, 10, 1.3),
+    FieldSchema("qk", float, 30, 10, 1.0),
+    FieldSchema("cu", float, 40, 10, 0.09),
+    FieldSchema("ccut", float, 50, 10, -1.0),
+)
+
+_ICFDCONTROLTURBULENCE_CARD2 = (
+    FieldSchema("cs", float, 0, 10, 0.18),
+)
+
+_ICFDCONTROLTURBULENCE_CARD3 = (
+    FieldSchema("cs", float, 0, 10, 0.18),
+)
+
+_ICFDCONTROLTURBULENCE_CARD4 = (
+    FieldSchema("r", float, 0, 10, 1.44),
+    FieldSchema("beta_01", float, 10, 10, 0.072, "beta-01"),
+    FieldSchema("beta_w1", float, 20, 10, 2.0, "beta-w1"),
+    FieldSchema("sigma_w1", float, 30, 10, 2.0, "sigma-w1"),
+    FieldSchema("sigma_k1", float, 40, 10, 0.09, "sigma-k1"),
+    FieldSchema("ccut", float, 50, 10, -1.0),
+)
+
+_ICFDCONTROLTURBULENCE_CARD5 = (
+    FieldSchema("alpha1", float, 0, 10, 0.31),
+    FieldSchema("beta_02", float, 10, 10, 0.0828, "beta-02"),
+    FieldSchema("sigma_w2", float, 20, 10, 2.0, "sigma-w2"),
+    FieldSchema("sigma_k2", float, 30, 10, 2.0, "sigma-k2"),
+    FieldSchema("cl", float, 40, 10, 0.875),
+)
+
+_ICFDCONTROLTURBULENCE_CARD6 = (
+    FieldSchema("cb1", float, 0, 10, 0.1355),
+    FieldSchema("cb2", float, 10, 10, 0.622),
+    FieldSchema("sigma_v", float, 20, 10, 0.66, "sigma-v"),
+    FieldSchema("cv1", float, 30, 10, 7.2),
+    FieldSchema("cw1", float, 40, 10, 0.3),
+    FieldSchema("cw2", float, 50, 10, 2.0),
+)
 
 class IcfdControlTurbulence(KeywordBase):
     """DYNA ICFD_CONTROL_TURBULENCE keyword"""
 
     keyword = "ICFD"
     subkeyword = "CONTROL_TURBULENCE"
+    _link_fields = {
+        "lcids1": LinkType.DEFINE_CURVE,
+        "lcids2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdControlTurbulence class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmod",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "submod",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wlaw",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ks",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cs",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcids1",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcids2",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ce1",
-                        float,
-                        0,
-                        10,
-                        1.44,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ce2",
-                        float,
-                        10,
-                        10,
-                        1.92,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qe",
-                        float,
-                        20,
-                        10,
-                        1.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qk",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cu",
-                        float,
-                        40,
-                        10,
-                        0.09,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ccut",
-                        float,
-                        50,
-                        10,
-                        -1.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.tmod==1,
-            ),
-            Card(
-                [
-                    Field(
-                        "cs",
-                        float,
-                        0,
-                        10,
-                        0.18,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.tmod==2 or self.tmod==3,
-            ),
-            Card(
-                [
-                    Field(
-                        "cs",
-                        float,
-                        0,
-                        10,
-                        0.18,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.tmod==4,
-            ),
-            Card(
-                [
-                    Field(
-                        "r",
-                        float,
-                        0,
-                        10,
-                        1.44,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta-01",
-                        float,
-                        10,
-                        10,
-                        0.072,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta-w1",
-                        float,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma-w1",
-                        float,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma-k1",
-                        float,
-                        40,
-                        10,
-                        0.09,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ccut",
-                        float,
-                        50,
-                        10,
-                        -1.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.tmod==4,
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha1",
-                        float,
-                        0,
-                        10,
-                        0.31,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta-02",
-                        float,
-                        10,
-                        10,
-                        0.0828,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma-w2",
-                        float,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma-k2",
-                        float,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cl",
-                        float,
-                        40,
-                        10,
-                        0.875,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.tmod==5,
-            ),
-            Card(
-                [
-                    Field(
-                        "cb1",
-                        float,
-                        0,
-                        10,
-                        0.1355,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cb2",
-                        float,
-                        10,
-                        10,
-                        0.622,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma-v",
-                        float,
-                        20,
-                        10,
-                        0.66,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv1",
-                        float,
-                        30,
-                        10,
-                        7.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cw1",
-                        float,
-                        40,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cw2",
-                        float,
-                        50,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD1,
+                active_func=lambda: self.tmod==1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD2,
+                active_func=lambda: self.tmod==2 or self.tmod==3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD3,
+                active_func=lambda: self.tmod==4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD4,
+                active_func=lambda: self.tmod==4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD5,
+                active_func=lambda: self.tmod==5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBULENCE_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def tmod(self) -> int:
         """Get or set the Indicates what turbulence model will be used.
@@ -537,45 +327,45 @@ class IcfdControlTurbulence(KeywordBase):
     def beta_01(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[4].get_value("beta-01")
+        return self._cards[4].get_value("beta_01")
 
     @beta_01.setter
     def beta_01(self, value: float) -> None:
         """Set the beta_01 property."""
-        self._cards[4].set_value("beta-01", value)
+        self._cards[4].set_value("beta_01", value)
 
     @property
     def beta_w1(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[4].get_value("beta-w1")
+        return self._cards[4].get_value("beta_w1")
 
     @beta_w1.setter
     def beta_w1(self, value: float) -> None:
         """Set the beta_w1 property."""
-        self._cards[4].set_value("beta-w1", value)
+        self._cards[4].set_value("beta_w1", value)
 
     @property
     def sigma_w1(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[4].get_value("sigma-w1")
+        return self._cards[4].get_value("sigma_w1")
 
     @sigma_w1.setter
     def sigma_w1(self, value: float) -> None:
         """Set the sigma_w1 property."""
-        self._cards[4].set_value("sigma-w1", value)
+        self._cards[4].set_value("sigma_w1", value)
 
     @property
     def sigma_k1(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[4].get_value("sigma-k1")
+        return self._cards[4].get_value("sigma_k1")
 
     @sigma_k1.setter
     def sigma_k1(self, value: float) -> None:
         """Set the sigma_k1 property."""
-        self._cards[4].set_value("sigma-k1", value)
+        self._cards[4].set_value("sigma_k1", value)
 
     @property
     def alpha1(self) -> float:
@@ -592,34 +382,34 @@ class IcfdControlTurbulence(KeywordBase):
     def beta_02(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[5].get_value("beta-02")
+        return self._cards[5].get_value("beta_02")
 
     @beta_02.setter
     def beta_02(self, value: float) -> None:
         """Set the beta_02 property."""
-        self._cards[5].set_value("beta-02", value)
+        self._cards[5].set_value("beta_02", value)
 
     @property
     def sigma_w2(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[5].get_value("sigma-w2")
+        return self._cards[5].get_value("sigma_w2")
 
     @sigma_w2.setter
     def sigma_w2(self, value: float) -> None:
         """Set the sigma_w2 property."""
-        self._cards[5].set_value("sigma-w2", value)
+        self._cards[5].set_value("sigma_w2", value)
 
     @property
     def sigma_k2(self) -> float:
         """Get or set the k-omega model constants
         """ # nopep8
-        return self._cards[5].get_value("sigma-k2")
+        return self._cards[5].get_value("sigma_k2")
 
     @sigma_k2.setter
     def sigma_k2(self, value: float) -> None:
         """Set the sigma_k2 property."""
-        self._cards[5].set_value("sigma-k2", value)
+        self._cards[5].set_value("sigma_k2", value)
 
     @property
     def cl(self) -> float:
@@ -658,12 +448,12 @@ class IcfdControlTurbulence(KeywordBase):
     def sigma_v(self) -> float:
         """Get or set the Spalart-Allmaras constants
         """ # nopep8
-        return self._cards[6].get_value("sigma-v")
+        return self._cards[6].get_value("sigma_v")
 
     @sigma_v.setter
     def sigma_v(self, value: float) -> None:
         """Set the sigma_v property."""
-        self._cards[6].set_value("sigma-v", value)
+        self._cards[6].set_value("sigma_v", value)
 
     @property
     def cv1(self) -> float:
@@ -697,4 +487,34 @@ class IcfdControlTurbulence(KeywordBase):
     def cw2(self, value: float) -> None:
         """Set the cw2 property."""
         self._cards[6].set_value("cw2", value)
+
+    @property
+    def lcids1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcids1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcids1:
+                return kwd
+        return None
+
+    @lcids1_link.setter
+    def lcids1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcids1."""
+        self.lcids1 = value.lcid
+
+    @property
+    def lcids2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcids2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcids2:
+                return kwd
+        return None
+
+    @lcids2_link.setter
+    def lcids2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcids2."""
+        self.lcids2 = value.lcid
 

@@ -23,7 +23,72 @@
 """Module providing the ControlContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCONTACT_CARD0 = (
+    FieldSchema("slsfac", float, 0, 10, 0.1),
+    FieldSchema("rwpnal", float, 10, 10, None),
+    FieldSchema("islchk", int, 20, 10, 1),
+    FieldSchema("shlthk", int, 30, 10, 0),
+    FieldSchema("penopt", int, 40, 10, 1),
+    FieldSchema("thkchg", int, 50, 10, 0),
+    FieldSchema("orien", int, 60, 10, 1),
+    FieldSchema("enmass", int, 70, 10, 0),
+)
+
+_CONTROLCONTACT_CARD1 = (
+    FieldSchema("usrstr", int, 0, 10, 0),
+    FieldSchema("usrfrc", int, 10, 10, 0),
+    FieldSchema("nsbcs", int, 20, 10, 0),
+    FieldSchema("interm", int, 30, 10, 0),
+    FieldSchema("xpene", float, 40, 10, 4.0),
+    FieldSchema("ssthk", int, 50, 10, 0),
+    FieldSchema("ecdt", int, 60, 10, 0),
+    FieldSchema("tiedprj", int, 70, 10, 0),
+)
+
+_CONTROLCONTACT_CARD2 = (
+    FieldSchema("sfric", float, 0, 10, 0.0),
+    FieldSchema("dfric", float, 10, 10, 0.0),
+    FieldSchema("edc", float, 20, 10, 0.0),
+    FieldSchema("vfc", float, 30, 10, 0.0),
+    FieldSchema("th", float, 40, 10, 0.0),
+    FieldSchema("th_sf", float, 50, 10, 0.0),
+    FieldSchema("pen_sf", float, 60, 10, 0.0),
+)
+
+_CONTROLCONTACT_CARD3 = (
+    FieldSchema("ignore", int, 0, 10, 0),
+    FieldSchema("frceng", int, 10, 10, 0),
+    FieldSchema("skiprwg", int, 20, 10, 0),
+    FieldSchema("outseg", int, 30, 10, 0),
+    FieldSchema("spotstp", int, 40, 10, 0),
+    FieldSchema("spotdel", int, 50, 10, 0),
+    FieldSchema("spothin", float, 60, 10, None),
+)
+
+_CONTROLCONTACT_CARD4 = (
+    FieldSchema("isym", int, 0, 10, 0),
+    FieldSchema("nserod", int, 10, 10, 0),
+    FieldSchema("rwgaps", int, 20, 10, 1),
+    FieldSchema("rwgdth", float, 30, 10, 0.0),
+    FieldSchema("rwksf", float, 40, 10, 1.0),
+    FieldSchema("icov", int, 50, 10, 0),
+    FieldSchema("swradf", float, 60, 10, 0.0),
+    FieldSchema("ithoff", int, 70, 10, 0),
+)
+
+_CONTROLCONTACT_CARD5 = (
+    FieldSchema("shledg", int, 0, 10, 0),
+    FieldSchema("pstiff", int, 10, 10, 0),
+    FieldSchema("ithcnt", int, 20, 10, 0),
+    FieldSchema("tdcnof", int, 30, 10, 0),
+    FieldSchema("ftall", int, 40, 10, 0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("shltrw", float, 60, 10, 0.0),
+    FieldSchema("igactc", int, 70, 10, 0),
+)
 
 class ControlContact(KeywordBase):
     """DYNA CONTROL_CONTACT keyword"""
@@ -35,397 +100,25 @@ class ControlContact(KeywordBase):
         """Initialize the ControlContact class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "slsfac",
-                        float,
-                        0,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwpnal",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "islchk",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shlthk",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penopt",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thkchg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orien",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enmass",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "usrstr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usrfrc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsbcs",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "interm",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpene",
-                        float,
-                        40,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssthk",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecdt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tiedprj",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfric",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfric",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "th",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "th_sf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pen_sf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ignore",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frceng",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "skiprwg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outseg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spotstp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spotdel",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spothin",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "isym",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nserod",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwgaps",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwgdth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwksf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icov",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swradf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ithoff",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shledg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstiff",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ithcnt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdcnof",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftall",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shltrw",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igactc",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def slsfac(self) -> float:
         """Get or set the Scale factor for sliding interface penalties (default = 0.1)

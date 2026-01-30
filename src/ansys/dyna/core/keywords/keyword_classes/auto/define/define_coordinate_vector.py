@@ -23,8 +23,26 @@
 """Module providing the DefineCoordinateVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DEFINECOORDINATEVECTOR_CARD0 = (
+    FieldSchema("cid", int, 0, 10, 0),
+    FieldSchema("xx", float, 10, 10, 0.0),
+    FieldSchema("yx", float, 20, 10, 0.0),
+    FieldSchema("zx", float, 30, 10, 0.0),
+    FieldSchema("xv", float, 40, 10, 0.0),
+    FieldSchema("yv", float, 50, 10, 0.0),
+    FieldSchema("zv", float, 60, 10, 0.0),
+    FieldSchema("nid", int, 70, 10, 0),
+)
+
+_DEFINECOORDINATEVECTOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCoordinateVector(KeywordBase):
     """DYNA DEFINE_COORDINATE_VECTOR keyword"""
@@ -34,99 +52,29 @@ class DefineCoordinateVector(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCoordinateVector class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xv",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yv",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zv",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECOORDINATEVECTOR_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCoordinateVector.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECOORDINATEVECTOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cid(self) -> int:
         """Get or set the Coordinate system ID. A unique number has to be defined.
@@ -228,4 +176,9 @@ class DefineCoordinateVector(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

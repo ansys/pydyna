@@ -23,7 +23,13 @@
 """Module providing the DualceseBoundaryFsiMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYFSIMSURF_CARD0 = (
+    FieldSchema("mspid", int, 0, 10, None),
+    FieldSchema("ref_p", float, 10, 10, 0.0),
+)
 
 class DualceseBoundaryFsiMsurf(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_FSI_MSURF keyword"""
@@ -35,27 +41,10 @@ class DualceseBoundaryFsiMsurf(KeywordBase):
         """Initialize the DualceseBoundaryFsiMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mspid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref_p",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYFSIMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

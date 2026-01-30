@@ -23,31 +23,31 @@
 """Module providing the BoundaryAcousticCouplingMismatch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYACOUSTICCOUPLINGMISMATCH_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+)
 
 class BoundaryAcousticCouplingMismatch(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_COUPLING_MISMATCH keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "ACOUSTIC_COUPLING_MISMATCH"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryAcousticCouplingMismatch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICCOUPLINGMISMATCH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.
@@ -58,4 +58,14 @@ class BoundaryAcousticCouplingMismatch(KeywordBase):
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

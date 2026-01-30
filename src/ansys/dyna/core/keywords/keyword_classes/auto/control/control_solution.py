@@ -23,7 +23,18 @@
 """Module providing the ControlSolution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSOLUTION_CARD0 = (
+    FieldSchema("soln", int, 0, 10, 0),
+    FieldSchema("nlq", int, 10, 10, None),
+    FieldSchema("isnan", int, 20, 10, 0),
+    FieldSchema("lcint", int, 30, 10, 100),
+    FieldSchema("lcacc", int, 40, 10, 0),
+    FieldSchema("ncdcf", int, 50, 10, 1),
+    FieldSchema("nocop", int, 60, 10, 0),
+)
 
 class ControlSolution(KeywordBase):
     """DYNA CONTROL_SOLUTION keyword"""
@@ -35,67 +46,10 @@ class ControlSolution(KeywordBase):
         """Initialize the ControlSolution class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "soln",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlq",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isnan",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcint",
-                        int,
-                        30,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcacc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncdcf",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nocop",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSOLUTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def soln(self) -> int:
         """Get or set the Analysis solution procedure:

@@ -23,8 +23,41 @@
 """Module providing the MatCwm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATCWM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("lcem", int, 20, 10, None),
+    FieldSchema("lcpr", int, 30, 10, None),
+    FieldSchema("lcsy", int, 40, 10, None),
+    FieldSchema("lchr", int, 50, 10, None),
+    FieldSchema("lcat", int, 60, 10, None),
+    FieldSchema("beta", float, 70, 10, None),
+)
+
+_MATCWM_CARD1 = (
+    FieldSchema("tastart", float, 0, 10, None),
+    FieldSchema("taend", float, 10, 10, None),
+    FieldSchema("tlstart", float, 20, 10, None),
+    FieldSchema("tlend", float, 30, 10, None),
+    FieldSchema("eghost", float, 40, 10, None),
+    FieldSchema("pghost", float, 50, 10, None),
+    FieldSchema("aghost", float, 60, 10, None),
+)
+
+_MATCWM_CARD2 = (
+    FieldSchema("t2phase", float, 0, 10, None),
+    FieldSchema("t1phase", float, 10, 10, None),
+)
+
+_MATCWM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatCwm(KeywordBase):
     """DYNA MAT_CWM keyword"""
@@ -34,162 +67,39 @@ class MatCwm(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcem": LinkType.DEFINE_CURVE,
+        "lcpr": LinkType.DEFINE_CURVE,
+        "lcsy": LinkType.DEFINE_CURVE,
+        "lchr": LinkType.DEFINE_CURVE,
+        "lcat": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatCwm class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcem",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lchr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcat",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tastart",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlstart",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlend",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eghost",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pghost",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aghost",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t2phase",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1phase",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCWM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCwm.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCWM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.
@@ -392,4 +302,79 @@ class MatCwm(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcem_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcem."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcem:
+                return kwd
+        return None
+
+    @lcem_link.setter
+    def lcem_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcem."""
+        self.lcem = value.lcid
+
+    @property
+    def lcpr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpr:
+                return kwd
+        return None
+
+    @lcpr_link.setter
+    def lcpr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpr."""
+        self.lcpr = value.lcid
+
+    @property
+    def lcsy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsy:
+                return kwd
+        return None
+
+    @lcsy_link.setter
+    def lcsy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsy."""
+        self.lcsy = value.lcid
+
+    @property
+    def lchr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lchr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lchr:
+                return kwd
+        return None
+
+    @lchr_link.setter
+    def lchr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lchr."""
+        self.lchr = value.lcid
+
+    @property
+    def lcat_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcat."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcat:
+                return kwd
+        return None
+
+    @lcat_link.setter
+    def lcat_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcat."""
+        self.lcat = value.lcid
 

@@ -23,8 +23,25 @@
 """Module providing the MatElastic6DofSpringDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_MATELASTIC6DOFSPRINGDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("tpidr", int, 20, 10, None),
+    FieldSchema("tpids", int, 30, 10, None),
+    FieldSchema("tpidt", int, 40, 10, None),
+    FieldSchema("rpidr", int, 50, 10, None),
+    FieldSchema("rpids", int, 60, 10, None),
+    FieldSchema("rpidt", int, 70, 10, None),
+)
+
+_MATELASTIC6DOFSPRINGDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatElastic6DofSpringDiscreteBeam(KeywordBase):
     """DYNA MAT_ELASTIC_6DOF_SPRING_DISCRETE_BEAM keyword"""
@@ -34,91 +51,34 @@ class MatElastic6DofSpringDiscreteBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tpidr": LinkType.PART,
+        "tpids": LinkType.PART,
+        "tpidt": LinkType.PART,
+        "rpidr": LinkType.PART,
+        "rpids": LinkType.PART,
+        "rpidt": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatElastic6DofSpringDiscreteBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tpidr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tpids",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tpidt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpidr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpids",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpidt",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATELASTIC6DOFSPRINGDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatElastic6DofSpringDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTIC6DOFSPRINGDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -220,4 +180,34 @@ class MatElastic6DofSpringDiscreteBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tpidr_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpidr."""
+        return self._get_link_by_attr("PART", "pid", self.tpidr, "parts")
+
+    @property
+    def tpids_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpids."""
+        return self._get_link_by_attr("PART", "pid", self.tpids, "parts")
+
+    @property
+    def tpidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given tpidt."""
+        return self._get_link_by_attr("PART", "pid", self.tpidt, "parts")
+
+    @property
+    def rpidr_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpidr."""
+        return self._get_link_by_attr("PART", "pid", self.rpidr, "parts")
+
+    @property
+    def rpids_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpids."""
+        return self._get_link_by_attr("PART", "pid", self.rpids, "parts")
+
+    @property
+    def rpidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given rpidt."""
+        return self._get_link_by_attr("PART", "pid", self.rpidt, "parts")
 

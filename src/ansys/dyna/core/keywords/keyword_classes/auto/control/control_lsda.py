@@ -23,91 +23,52 @@
 """Module providing the ControlLsda class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLLSDA_CARD0 = (
+    FieldSchema("npexcl", int, 0, 10, None),
+)
+
+_CONTROLLSDA_CARD1 = (
+    FieldSchema("p1", int, 0, 10, None),
+    FieldSchema("p2", int, 10, 10, None),
+    FieldSchema("p3", int, 20, 10, None),
+    FieldSchema("p4", int, 30, 10, None),
+    FieldSchema("p5", int, 40, 10, None),
+    FieldSchema("p6", int, 50, 10, None),
+    FieldSchema("p7", int, 60, 10, None),
+    FieldSchema("p8", int, 70, 10, None),
+)
 
 class ControlLsda(KeywordBase):
     """DYNA CONTROL_LSDA keyword"""
 
     keyword = "CONTROL"
     subkeyword = "LSDA"
+    _link_fields = {
+        "p1": LinkType.PART,
+        "p2": LinkType.PART,
+        "p3": LinkType.PART,
+        "p4": LinkType.PART,
+        "p5": LinkType.PART,
+        "p6": LinkType.PART,
+        "p7": LinkType.PART,
+        "p8": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlLsda class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "npexcl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLLSDA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLLSDA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def npexcl(self) -> typing.Optional[int]:
         """Get or set the Number of parts to exclude from the dynain.lsda files.
@@ -206,4 +167,44 @@ class ControlLsda(KeywordBase):
     def p8(self, value: int) -> None:
         """Set the p8 property."""
         self._cards[1].set_value("p8", value)
+
+    @property
+    def p1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p1."""
+        return self._get_link_by_attr("PART", "pid", self.p1, "parts")
+
+    @property
+    def p2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p2."""
+        return self._get_link_by_attr("PART", "pid", self.p2, "parts")
+
+    @property
+    def p3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p3."""
+        return self._get_link_by_attr("PART", "pid", self.p3, "parts")
+
+    @property
+    def p4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p4."""
+        return self._get_link_by_attr("PART", "pid", self.p4, "parts")
+
+    @property
+    def p5_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p5."""
+        return self._get_link_by_attr("PART", "pid", self.p5, "parts")
+
+    @property
+    def p6_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p6."""
+        return self._get_link_by_attr("PART", "pid", self.p6, "parts")
+
+    @property
+    def p7_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p7."""
+        return self._get_link_by_attr("PART", "pid", self.p7, "parts")
+
+    @property
+    def p8_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given p8."""
+        return self._get_link_by_attr("PART", "pid", self.p8, "parts")
 

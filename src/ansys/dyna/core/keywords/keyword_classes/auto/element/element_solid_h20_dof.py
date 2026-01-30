@@ -23,260 +23,109 @@
 """Module providing the ElementSolidH20Dof class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTSOLIDH20DOF_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD1 = (
+    FieldSchema("n1", int, 0, 8, None),
+    FieldSchema("n2", int, 8, 8, None),
+    FieldSchema("n3", int, 16, 8, None),
+    FieldSchema("n4", int, 24, 8, None),
+    FieldSchema("n5", int, 32, 8, None),
+    FieldSchema("n6", int, 40, 8, None),
+    FieldSchema("n7", int, 48, 8, None),
+    FieldSchema("n8", int, 56, 8, None),
+    FieldSchema("n9", int, 64, 8, None),
+    FieldSchema("n10", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD2 = (
+    FieldSchema("n11", int, 0, 8, None),
+    FieldSchema("n12", int, 8, 8, None),
+    FieldSchema("n13", int, 16, 8, None),
+    FieldSchema("n14", int, 24, 8, None),
+    FieldSchema("n15", int, 32, 8, None),
+    FieldSchema("n16", int, 40, 8, None),
+    FieldSchema("n17", int, 48, 8, None),
+    FieldSchema("n18", int, 56, 8, None),
+    FieldSchema("n19", int, 64, 8, None),
+    FieldSchema("n20", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDH20DOF_CARD3 = (
+    FieldSchema("unused", int, 0, 8, None),
+    FieldSchema("unused", int, 8, 8, None),
+    FieldSchema("ns1", int, 16, 8, None),
+    FieldSchema("ns2", int, 24, 8, None),
+    FieldSchema("ns3", int, 32, 8, None),
+    FieldSchema("ns4", int, 40, 8, None),
+    FieldSchema("ns5", int, 48, 8, None),
+    FieldSchema("ns6", int, 56, 8, None),
+    FieldSchema("ns7", int, 64, 8, None),
+    FieldSchema("ns8", int, 72, 8, None),
+)
 
 class ElementSolidH20Dof(KeywordBase):
     """DYNA ELEMENT_SOLID_H20_DOF keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SOLID_H20_DOF"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "n9": LinkType.NODE,
+        "n10": LinkType.NODE,
+        "n11": LinkType.NODE,
+        "n12": LinkType.NODE,
+        "n13": LinkType.NODE,
+        "n14": LinkType.NODE,
+        "n15": LinkType.NODE,
+        "n16": LinkType.NODE,
+        "n17": LinkType.NODE,
+        "n18": LinkType.NODE,
+        "n19": LinkType.NODE,
+        "n20": LinkType.NODE,
+        "ns1": LinkType.NODE,
+        "ns2": LinkType.NODE,
+        "ns3": LinkType.NODE,
+        "ns4": LinkType.NODE,
+        "ns5": LinkType.NODE,
+        "ns6": LinkType.NODE,
+        "ns7": LinkType.NODE,
+        "ns8": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSolidH20Dof class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n9",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n10",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n11",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n12",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n13",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n14",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n15",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n16",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n17",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n18",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n19",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n20",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns4",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns5",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns6",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns7",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns8",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH20DOF_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.
@@ -606,4 +455,149 @@ class ElementSolidH20Dof(KeywordBase):
     def ns8(self, value: int) -> None:
         """Set the ns8 property."""
         self._cards[3].set_value("ns8", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def n9_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n9."""
+        return self._get_link_by_attr("NODE", "nid", self.n9, "parts")
+
+    @property
+    def n10_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n10."""
+        return self._get_link_by_attr("NODE", "nid", self.n10, "parts")
+
+    @property
+    def n11_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n11."""
+        return self._get_link_by_attr("NODE", "nid", self.n11, "parts")
+
+    @property
+    def n12_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n12."""
+        return self._get_link_by_attr("NODE", "nid", self.n12, "parts")
+
+    @property
+    def n13_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n13."""
+        return self._get_link_by_attr("NODE", "nid", self.n13, "parts")
+
+    @property
+    def n14_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n14."""
+        return self._get_link_by_attr("NODE", "nid", self.n14, "parts")
+
+    @property
+    def n15_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n15."""
+        return self._get_link_by_attr("NODE", "nid", self.n15, "parts")
+
+    @property
+    def n16_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n16."""
+        return self._get_link_by_attr("NODE", "nid", self.n16, "parts")
+
+    @property
+    def n17_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n17."""
+        return self._get_link_by_attr("NODE", "nid", self.n17, "parts")
+
+    @property
+    def n18_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n18."""
+        return self._get_link_by_attr("NODE", "nid", self.n18, "parts")
+
+    @property
+    def n19_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n19."""
+        return self._get_link_by_attr("NODE", "nid", self.n19, "parts")
+
+    @property
+    def n20_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n20."""
+        return self._get_link_by_attr("NODE", "nid", self.n20, "parts")
+
+    @property
+    def ns1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns1."""
+        return self._get_link_by_attr("NODE", "nid", self.ns1, "parts")
+
+    @property
+    def ns2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns2."""
+        return self._get_link_by_attr("NODE", "nid", self.ns2, "parts")
+
+    @property
+    def ns3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns3."""
+        return self._get_link_by_attr("NODE", "nid", self.ns3, "parts")
+
+    @property
+    def ns4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns4."""
+        return self._get_link_by_attr("NODE", "nid", self.ns4, "parts")
+
+    @property
+    def ns5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns5."""
+        return self._get_link_by_attr("NODE", "nid", self.ns5, "parts")
+
+    @property
+    def ns6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns6."""
+        return self._get_link_by_attr("NODE", "nid", self.ns6, "parts")
+
+    @property
+    def ns7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns7."""
+        return self._get_link_by_attr("NODE", "nid", self.ns7, "parts")
+
+    @property
+    def ns8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns8."""
+        return self._get_link_by_attr("NODE", "nid", self.ns8, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

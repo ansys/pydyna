@@ -23,7 +23,14 @@
 """Module providing the CeseControlTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESECONTROLTIMESTEP_CARD0 = (
+    FieldSchema("iddt", int, 0, 10, 0),
+    FieldSchema("cfl", float, 10, 10, 0.9),
+    FieldSchema("dtint", float, 20, 10, 0.001),
+)
 
 class CeseControlTimestep(KeywordBase):
     """DYNA CESE_CONTROL_TIMESTEP keyword"""
@@ -35,36 +42,10 @@ class CeseControlTimestep(KeywordBase):
         """Initialize the CeseControlTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iddt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        10,
-                        10,
-                        0.9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtint",
-                        float,
-                        20,
-                        10,
-                        1.0e-3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESECONTROLTIMESTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iddt(self) -> int:
         """Get or set the Set the time step option:

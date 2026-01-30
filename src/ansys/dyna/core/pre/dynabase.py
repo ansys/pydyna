@@ -41,17 +41,23 @@ from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
 
 
 class Motion(Enum):
+    """Degree of freedom type for motion (velocity, acceleration, displacement)."""
+
     VELOCITY = 0
     ACCELERATION = 1
     DISPLACEMENT = 2
 
 
 class RWMotion(Enum):
+    """Rigid wall motion type (velocity or displacement)."""
+
     VELOCITY = 0
     DISPLACEMENT = 1
 
 
 class DOF(Enum):
+    """Degrees of freedom for translation and rotation."""
+
     X_TRANSLATIONAL = 1
     Y_TRANSLATIONAL = 2
     Z_TRANSLATIONAL = 3
@@ -300,7 +306,8 @@ class ParameterType(Enum):
     """Contains the parameter types."""
 
     R = 1
-    I = 2
+    # ignore E741 for ambiguous variable I
+    I = 2  # noqa: E741
     C = 3
 
 
@@ -666,7 +673,7 @@ class DynaBase:
         icoh=0,
         tet13k=0,
     ):
-        """Provide controls for a solid element response.
+        r"""Provide controls for a solid element response.
 
         Parameters
         ----------
@@ -722,7 +729,7 @@ class DynaBase:
         return ret
 
     def create_control_contact(self, rwpnal, shlthk=0, orien=1, ssthk=0, ignore=0, igactc=0):
-        """Change defaults for computation with contact surfaces.
+        r"""Change defaults for computation with contact surfaces.
 
         Parameters
         ----------
@@ -817,7 +824,7 @@ class DynaBase:
         return elements
 
     def create_general_keyword(self, opcode, keyworddata):
-        """Create general keyword.
+        r"""Create general keyword.
 
         Parameters
         ----------
@@ -848,7 +855,6 @@ class DynaBase:
 
     def add(self, obj):
         """Add entities to an object."""
-
         if obj.type == "rigidwall_cylinder" or obj.type == "rigidwall_sphere" or obj.type == "rigidwall_planar":
             data = obj.get_data()
             if data != None:
@@ -997,7 +1003,7 @@ class NodeSetBox(BaseSet):
     """include the nodes inside boxes.
 
     Parameters
-        ----------
+    ----------
         boxes : list
             A list of BOX.
     """
@@ -1668,11 +1674,15 @@ class AnalysisType(Enum):
 
 
 class TimestepCtrol(Enum):
+    """Timestep control options for analysis."""
+
     CONSTANT_TIMESTEP_SIZE = 0
     AUTOMATICALLY_ADJUST_TIMESTEP_SIZE = 1
 
 
 class Integration(Enum):
+    """Integration method for implicit analysis."""
+
     NEWMARK_TIME_INTEGRATION = 1
     MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE = 2
 
@@ -1829,11 +1839,15 @@ class ImplicitAnalysis:
 
 
 class ThermalAnalysisType(Enum):
+    """Thermal analysis type (steady-state or transient)."""
+
     STEADY_STATE = 0
     TRANSIENT = 1
 
 
 class ThermalAnalysisTimestep(Enum):
+    """Thermal analysis timestep control (fixed or variable)."""
+
     FIXED = 0
     VARIABLE = 1
 
@@ -1900,6 +1914,8 @@ class ThermalAnalysis(BaseObj):
 
 
 class ContactCategory(Enum):
+    """Contact category for contact definitions."""
+
     SURFACE_TO_SURFACE_CONTACT = 2
     SINGLE_SURFACE_CONTACT = 3
     SHELL_EDGE_TO_SURFACE_CONTACT = 4
@@ -1907,6 +1923,8 @@ class ContactCategory(Enum):
 
 
 class ContactType(Enum):
+    """Contact type for contact interface definitions."""
+
     NULL = 0
     AUTOMATIC = 1
     GENERAL = 2
@@ -1923,6 +1941,8 @@ class ContactType(Enum):
 
 
 class OffsetType(Enum):
+    """Offset type for contact or beam definitions."""
+
     NULL = ""
     OFFSET = "OFFSET"
     BEAM_OFFSET = "BEAM_OFFSET"
@@ -1930,12 +1950,16 @@ class OffsetType(Enum):
 
 
 class ContactFormulation(Enum):
+    """Contact formulation for penalty or constraint methods."""
+
     STANDARD_PENALTY = 0
     SOFT_CONSTRAINT_PENALTY = 1
     SEGMENT_BASED_CONTACT_PENALTY = 2
 
 
 class SBOPT(Enum):
+    """Segment-based contact options."""
+
     ASSUME_PLANER_SEGMENTS = 2
     WRAPED_SEGMENT_CHECKING = 3
     SLDING_OPTION = 4

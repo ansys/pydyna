@@ -23,105 +23,52 @@
 """Module providing the ElementInterpolationShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTINTERPOLATIONSHELL_CARD0 = (
+    FieldSchema("eids", int, 0, 10, None),
+    FieldSchema("eidgs", int, 10, 10, None),
+    FieldSchema("ngp", int, 20, 10, None),
+)
+
+_ELEMENTINTERPOLATIONSHELL_CARD1 = (
+    FieldSchema("ip1", int, 0, 10, None),
+    FieldSchema("w1", float, 10, 10, None),
+    FieldSchema("ip2", int, 20, 10, None),
+    FieldSchema("w2", float, 30, 10, None),
+    FieldSchema("ip3", int, 40, 10, None),
+    FieldSchema("w3", float, 50, 10, None),
+    FieldSchema("ip4", int, 60, 10, None),
+    FieldSchema("w4", float, 70, 10, None),
+)
 
 class ElementInterpolationShell(KeywordBase):
     """DYNA ELEMENT_INTERPOLATION_SHELL keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "INTERPOLATION_SHELL"
+    _link_fields = {
+        "ip1": LinkType.NODE,
+        "ip2": LinkType.NODE,
+        "ip3": LinkType.NODE,
+        "ip4": LinkType.NODE,
+        "eids": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementInterpolationShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eids",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eidgs",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ip1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ip2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ip3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ip4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTINTERPOLATIONSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTINTERPOLATIONSHELL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eids(self) -> typing.Optional[int]:
         """Get or set the Element ID of the interpolation solid. This needs to coincide with a
@@ -244,4 +191,29 @@ class ElementInterpolationShell(KeywordBase):
     def w4(self, value: float) -> None:
         """Set the w4 property."""
         self._cards[1].set_value("w4", value)
+
+    @property
+    def ip1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip1."""
+        return self._get_link_by_attr("NODE", "nid", self.ip1, "parts")
+
+    @property
+    def ip2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip2."""
+        return self._get_link_by_attr("NODE", "nid", self.ip2, "parts")
+
+    @property
+    def ip3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip3."""
+        return self._get_link_by_attr("NODE", "nid", self.ip3, "parts")
+
+    @property
+    def ip4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ip4."""
+        return self._get_link_by_attr("NODE", "nid", self.ip4, "parts")
+
+    @property
+    def eids_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eids."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eids, "parts")
 

@@ -23,7 +23,21 @@
 """Module providing the ControlFormingParameterRead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGPARAMETERREAD_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_CONTROLFORMINGPARAMETERREAD_CARD1 = (
+    FieldSchema("paraname", str, 0, 10, None),
+    FieldSchema("imethod", int, 10, 10, None),
+    FieldSchema("line", int, 20, 10, None),
+    FieldSchema("nbegpa", int, 30, 10, None),
+    FieldSchema("nendpa_", int, 40, 10, None, "nendpa "),
+    FieldSchema("value_", float, 50, 10, None, "value "),
+)
 
 class ControlFormingParameterRead(KeywordBase):
     """DYNA CONTROL_FORMING_PARAMETER_READ keyword"""
@@ -35,65 +49,13 @@ class ControlFormingParameterRead(KeywordBase):
         """Initialize the ControlFormingParameterRead class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "paraname",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imethod",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "line",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbegpa",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nendpa ",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "value ",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPARAMETERREAD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPARAMETERREAD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the file name will be opened to read
@@ -153,21 +115,21 @@ class ControlFormingParameterRead(KeywordBase):
     def nendpa_(self) -> typing.Optional[int]:
         """Get or set the the value defined between nbegpa and nendpa will be read for paraname
         """ # nopep8
-        return self._cards[1].get_value("nendpa ")
+        return self._cards[1].get_value("nendpa_")
 
     @nendpa_.setter
     def nendpa_(self, value: int) -> None:
         """Set the nendpa_ property."""
-        self._cards[1].set_value("nendpa ", value)
+        self._cards[1].set_value("nendpa_", value)
 
     @property
     def value_(self) -> typing.Optional[float]:
         """Get or set the the value of the defined parameter
         """ # nopep8
-        return self._cards[1].get_value("value ")
+        return self._cards[1].get_value("value_")
 
     @value_.setter
     def value_(self, value: float) -> None:
         """Set the value_ property."""
-        self._cards[1].set_value("value ", value)
+        self._cards[1].set_value("value_", value)
 

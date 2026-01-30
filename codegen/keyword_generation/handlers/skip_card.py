@@ -25,37 +25,46 @@ Skip Card Handler: Marks cards for deletion from generated code.
 
 Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
+
+Uses label-based card references:
+    {"ref": "id_title_card"}
 """
 
 from dataclasses import dataclass
+import logging
 from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
-class SkipCardSettings:
-    """Configuration for marking a card for removal."""
+class SkipCardSettings(LabelRefSettings):
+    """Configuration for marking a card for removal.
 
-    index: int
+    Inherits ref and resolve_index from LabelRefSettings.
+    """
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
-        return cls(index=data["index"])
+        return cls(ref=data["ref"])
 
 
 @handler(
     name="skip-card",
-    dependencies=[],
     description="Marks cards for removal from the generated keyword class",
     input_schema={
         "type": "array",
         "items": {
             "type": "object",
-            "properties": {"index": {"type": "integer"}},
-            "required": ["index"],
+            "properties": {
+                "ref": {"type": "string", "description": "Label reference to card to skip"},
+            },
+            "required": ["ref"],
         },
     },
     output_description="Sets 'mark_for_removal' flag on specified cards",
@@ -63,26 +72,21 @@ class SkipCardSettings:
 class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """Marks cards for removal from the generated keyword class."""
 
-    @classmethod
-    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[SkipCardSettings]:
-        """Convert dict settings to typed SkipCardSettings instances."""
-        return [SkipCardSettings.from_dict(s) for s in settings]
-
     def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
         """
         Mark specified cards for removal.
 
         Args:
-            kwd_data: KeywordData instance (or dict during transition)
-            settings: List of dicts, each containing a single card index to skip
+            kwd_data: KeywordData instance containing cards and label_registry
+            settings: List of dicts with 'ref' key for label reference
         """
-        # Parse settings into typed instances
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(SkipCardSettings, settings)
+        registry = kwd_data.label_registry
 
-        # Use attribute access on typed settings
+        if registry is None:
+            raise ValueError("skip-card handler requires label_registry to be initialized")
+
         for setting in typed_settings:
-            kwd_data.cards[setting.index]["mark_for_removal"] = 1
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
+            index = setting.resolve_index(registry, kwd_data.cards)
+            logger.debug(f"Marking card {index} for removal (ref={setting.ref})")
+            kwd_data.cards[index]["mark_for_removal"] = 1

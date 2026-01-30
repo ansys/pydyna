@@ -23,8 +23,52 @@
 """Module providing the DefineCpmVent class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINECPMVENT_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("c23", float, 10, 10, 1.0),
+    FieldSchema("lctc23", int, 20, 10, None),
+    FieldSchema("lcpc23", int, 30, 10, None),
+    FieldSchema("enh_v", int, 40, 10, 0),
+    FieldSchema("ppop", float, 50, 10, None),
+    FieldSchema("c23up", float, 60, 10, None),
+    FieldSchema("iopt", int, 70, 10, None),
+)
+
+_DEFINECPMVENT_CARD1 = (
+    FieldSchema("jt", int, 0, 10, 0),
+    FieldSchema("ids1", int, 10, 10, None),
+    FieldSchema("ids2", int, 20, 10, None),
+    FieldSchema("iopt1", int, 30, 10, None),
+    FieldSchema("pid1", int, 40, 10, None),
+    FieldSchema("pid2", int, 50, 10, None),
+    FieldSchema("vang", float, 60, 10, 0.0),
+    FieldSchema("lcred", int, 70, 10, None),
+)
+
+_DEFINECPMVENT_CARD2 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid2", int, 20, 10, None),
+    FieldSchema("lcac23", int, 30, 10, None),
+    FieldSchema("psetpv", int, 40, 10, None),
+    FieldSchema("sfpv", int, 50, 10, None),
+    FieldSchema("lpatm", int, 60, 10, None),
+)
+
+_DEFINECPMVENT_CARD3 = (
+    FieldSchema("jtnd", int, 0, 10, None),
+)
+
+_DEFINECPMVENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCpmVent(KeywordBase):
     """DYNA DEFINE_CPM_VENT keyword"""
@@ -34,219 +78,48 @@ class DefineCpmVent(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "lctc23": LinkType.DEFINE_CURVE,
+        "lcpc23": LinkType.DEFINE_CURVE,
+        "lcred": LinkType.DEFINE_CURVE,
+        "lcac23": LinkType.DEFINE_CURVE,
+        "ids1": LinkType.PART,
+        "ids2": LinkType.PART,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCpmVent class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctc23",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpc23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enh_v",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ppop",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23up",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "jt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ids1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ids2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vang",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcred",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcac23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetpv",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfpv",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpatm",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "jtnd",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCpmVent.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMVENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for this card
@@ -554,4 +427,99 @@ class DefineCpmVent(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def lctc23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lctc23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lctc23:
+                return kwd
+        return None
+
+    @lctc23_link.setter
+    def lctc23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lctc23."""
+        self.lctc23 = value.lcid
+
+    @property
+    def lcpc23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpc23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpc23:
+                return kwd
+        return None
+
+    @lcpc23_link.setter
+    def lcpc23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpc23."""
+        self.lcpc23 = value.lcid
+
+    @property
+    def lcred_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcred."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcred:
+                return kwd
+        return None
+
+    @lcred_link.setter
+    def lcred_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcred."""
+        self.lcred = value.lcid
+
+    @property
+    def lcac23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcac23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcac23:
+                return kwd
+        return None
+
+    @lcac23_link.setter
+    def lcac23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcac23."""
+        self.lcac23 = value.lcid
+
+    @property
+    def ids1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ids1."""
+        return self._get_link_by_attr("PART", "pid", self.ids1, "parts")
+
+    @property
+    def ids2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ids2."""
+        return self._get_link_by_attr("PART", "pid", self.ids2, "parts")
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

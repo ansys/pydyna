@@ -23,86 +23,40 @@
 """Module providing the ConstrainedJointSpherical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDJOINTSPHERICAL_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, 0),
+    FieldSchema("n4", int, 30, 10, 0),
+    FieldSchema("n5", int, 40, 10, 0),
+    FieldSchema("n6", int, 50, 10, 0),
+    FieldSchema("rps", float, 60, 10, 1.0),
+    FieldSchema("damp", float, 70, 10, 1.0),
+)
 
 class ConstrainedJointSpherical(KeywordBase):
     """DYNA CONSTRAINED_JOINT_SPHERICAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_SPHERICAL"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointSpherical class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rps",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSPHERICAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node 1, in rigid body A.
@@ -191,4 +145,14 @@ class ConstrainedJointSpherical(KeywordBase):
     def damp(self, value: float) -> None:
         """Set the damp property."""
         self._cards[0].set_value("damp", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

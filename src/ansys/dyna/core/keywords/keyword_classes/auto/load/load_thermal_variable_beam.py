@@ -23,94 +23,48 @@
 """Module providing the LoadThermalVariableBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADTHERMALVARIABLEBEAM_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("eid", int, 10, 10, None),
+    FieldSchema("ipolar", int, 20, 10, 0),
+)
+
+_LOADTHERMALVARIABLEBEAM_CARD1 = (
+    FieldSchema("tbase", float, 0, 10, 0.0),
+    FieldSchema("tscale", float, 10, 10, 1.0),
+    FieldSchema("tcurve", int, 20, 10, None),
+    FieldSchema("tcurdr", int, 30, 10, None),
+    FieldSchema("scoor", float, 40, 10, None),
+    FieldSchema("tcoor", float, 50, 10, None),
+)
 
 class LoadThermalVariableBeam(KeywordBase):
     """DYNA LOAD_THERMAL_VARIABLE_BEAM keyword"""
 
     keyword = "LOAD"
     subkeyword = "THERMAL_VARIABLE_BEAM"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_BEAM,
+        "tcurve": LinkType.DEFINE_CURVE,
+        "tcurdr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadThermalVariableBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipolar",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tbase",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscale",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcurve",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcurdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scoor",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcoor",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLEBEAM_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Load case ID.
@@ -209,4 +163,39 @@ class LoadThermalVariableBeam(KeywordBase):
     def tcoor(self, value: float) -> None:
         """Set the tcoor property."""
         self._cards[1].set_value("tcoor", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
+
+    @property
+    def tcurve_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcurve."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcurve:
+                return kwd
+        return None
+
+    @tcurve_link.setter
+    def tcurve_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcurve."""
+        self.tcurve = value.lcid
+
+    @property
+    def tcurdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcurdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcurdr:
+                return kwd
+        return None
+
+    @tcurdr_link.setter
+    def tcurdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcurdr."""
+        self.tcurdr = value.lcid
 

@@ -23,151 +23,63 @@
 """Module providing the ControlFormingScrapFall class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLFORMINGSCRAPFALL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vectid", int, 10, 10, None),
+    FieldSchema("ndset", int, 20, 10, None),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("depth", float, 40, 10, None),
+    FieldSchema("dist", float, 50, 10, None),
+    FieldSchema("idrgd", int, 60, 10, None),
+    FieldSchema("ifseed", int, 70, 10, None),
+)
+
+_CONTROLFORMINGSCRAPFALL_CARD1 = (
+    FieldSchema("nobead", int, 0, 10, None),
+    FieldSchema("seedx", float, 10, 10, None),
+    FieldSchema("seedy", float, 20, 10, None),
+    FieldSchema("seedz", float, 30, 10, None),
+    FieldSchema("effset", float, 40, 10, None),
+    FieldSchema("gap", float, 50, 10, None),
+    FieldSchema("ipset", int, 60, 10, None),
+    FieldSchema("extend", int, 70, 10, None),
+)
+
+_CONTROLFORMINGSCRAPFALL_CARD2 = (
+    FieldSchema("newid", int, 0, 10, None),
+)
 
 class ControlFormingScrapFall(KeywordBase):
     """DYNA CONTROL_FORMING_SCRAP_FALL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_SCRAP_FALL"
+    _link_fields = {
+        "vectid": LinkType.DEFINE_VECTOR,
+        "ndset": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+        "idrgd": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingScrapFall class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vectid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndset",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "depth",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idrgd",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifseed",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nobead",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "seedx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "seedy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "seedz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "effset",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipset",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "extend",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "newid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSCRAPFALL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSCRAPFALL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSCRAPFALL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of a scrap piece.  This part ID becomes a dummy ID if all trimmed scrap pieces are defined by NEWID. See definition for NEWID and Figure 0-3.
@@ -360,4 +272,39 @@ class ControlFormingScrapFall(KeywordBase):
     def newid(self, value: int) -> None:
         """Set the newid property."""
         self._cards[2].set_value("newid", value)
+
+    @property
+    def vectid_link(self) -> DefineVector:
+        """Get the DefineVector object for vectid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vectid:
+                return kwd
+        return None
+
+    @vectid_link.setter
+    def vectid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vectid."""
+        self.vectid = value.vid
+
+    @property
+    def ndset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ndset."""
+        return self._get_set_link("NODE", self.ndset)
+
+    @ndset_link.setter
+    def ndset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ndset."""
+        self.ndset = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def idrgd_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idrgd."""
+        return self._get_link_by_attr("PART", "pid", self.idrgd, "parts")
 

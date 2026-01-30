@@ -23,60 +23,35 @@
 """Module providing the EmEpFiberinitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMEPFIBERINITIAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("partid", int, 10, 10, None),
+    FieldSchema("stype", int, 20, 10, 1),
+    FieldSchema("ssid1", int, 30, 10, None),
+    FieldSchema("ssid0", int, 40, 10, None),
+)
 
 class EmEpFiberinitial(KeywordBase):
     """DYNA EM_EP_FIBERINITIAL keyword"""
 
     keyword = "EM"
     subkeyword = "EP_FIBERINITIAL"
+    _link_fields = {
+        "partid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpFiberinitial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "partid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid0",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPFIBERINITIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID of the Laplace system to solve (define new id with each new line)
@@ -135,4 +110,9 @@ class EmEpFiberinitial(KeywordBase):
     def ssid0(self, value: int) -> None:
         """Set the ssid0 property."""
         self._cards[0].set_value("ssid0", value)
+
+    @property
+    def partid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partid."""
+        return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

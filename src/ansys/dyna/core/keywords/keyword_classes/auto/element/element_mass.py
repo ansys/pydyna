@@ -23,53 +23,36 @@
 """Module providing the ElementMass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTMASS_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("nid", int, 8, 8, None),
+    FieldSchema("mass", float, 16, 16, 0.0),
+    FieldSchema("pid", int, 32, 8, None),
+)
 
 class ElementMass(KeywordBase):
     """DYNA ELEMENT_MASS keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "MASS"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementMass class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -113,4 +96,14 @@ class ElementMass(KeywordBase):
     def pid(self, value: int) -> None:
         """Set the pid property."""
         self._cards[0].set_value("pid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

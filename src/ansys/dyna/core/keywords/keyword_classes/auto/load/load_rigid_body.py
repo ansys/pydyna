@@ -23,86 +23,44 @@
 """Module providing the LoadRigidBody class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADRIGIDBODY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("cid", int, 40, 10, 0),
+    FieldSchema("m1", int, 50, 10, 0),
+    FieldSchema("m2", int, 60, 10, 0),
+    FieldSchema("m3", int, 70, 10, 0),
+)
 
 class LoadRigidBody(KeywordBase):
     """DYNA LOAD_RIGID_BODY keyword"""
 
     keyword = "LOAD"
     subkeyword = "RIGID_BODY"
+    _link_fields = {
+        "m1": LinkType.NODE,
+        "m2": LinkType.NODE,
+        "m3": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadRigidBody class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m1",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADRIGIDBODY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the rigid body.
@@ -202,4 +160,39 @@ class LoadRigidBody(KeywordBase):
     def m3(self, value: int) -> None:
         """Set the m3 property."""
         self._cards[0].set_value("m3", value)
+
+    @property
+    def m1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m1."""
+        return self._get_link_by_attr("NODE", "nid", self.m1, "parts")
+
+    @property
+    def m2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m2."""
+        return self._get_link_by_attr("NODE", "nid", self.m2, "parts")
+
+    @property
+    def m3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m3."""
+        return self._get_link_by_attr("NODE", "nid", self.m3, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

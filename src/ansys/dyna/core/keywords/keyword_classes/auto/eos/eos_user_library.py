@@ -23,56 +23,40 @@
 """Module providing the EosUserLibrary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EOSUSERLIBRARY_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("sesmid", int, 10, 10, None),
+)
+
+_EOSUSERLIBRARY_CARD1 = (
+    FieldSchema("e0", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, None),
+)
 
 class EosUserLibrary(KeywordBase):
     """DYNA EOS_USER_LIBRARY keyword"""
 
     keyword = "EOS"
     subkeyword = "USER_LIBRARY"
+    _link_fields = {
+        "sesmid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EosUserLibrary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sesmid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSUSERLIBRARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSUSERLIBRARY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID. A unique number or label must be specified (see *PART)..
@@ -116,4 +100,19 @@ class EosUserLibrary(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[1].set_value("v0", value)
+
+    @property
+    def sesmid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for sesmid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.sesmid:
+                return kwd
+        return None
+
+    @sesmid_link.setter
+    def sesmid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for sesmid."""
+        self.sesmid = value.mid
 

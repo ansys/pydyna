@@ -23,38 +23,32 @@
 """Module providing the DatabaseMaxBeamId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEMAXBEAMID_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class DatabaseMaxBeamId(KeywordBase):
     """DYNA DATABASE_MAX_BEAM_ID keyword"""
 
     keyword = "DATABASE"
     subkeyword = "MAX_BEAM_ID"
+    _link_fields = {
+        "id1": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseMaxBeamId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEMAXBEAMID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Beam element ID.
@@ -76,4 +70,9 @@ class DatabaseMaxBeamId(KeywordBase):
     def heading(self, value: str) -> None:
         """Set the heading property."""
         self._cards[0].set_value("heading", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id1, "parts")
 

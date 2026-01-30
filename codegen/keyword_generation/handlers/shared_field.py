@@ -149,7 +149,6 @@ def handle_shared_field(kwd_data, settings):
 
 @handler(
     name="shared-field",
-    dependencies=["reorder-card"],
     description="Marks fields shared across multiple cards to prevent duplication",
     input_schema={
         "type": "array",
@@ -167,7 +166,7 @@ def handle_shared_field(kwd_data, settings):
         },
     },
     output_description=(
-        "Adds 'card_indices' to first field, marks duplicates as 'redundant', " "may add 'negative_shared_fields'"
+        "Adds 'card_indices' to first field, marks duplicates as 'redundant', may add 'negative_shared_fields'"
     ),
 )
 class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler):
@@ -210,7 +209,11 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         """Keep dict settings for shared-field - uses 'name' and 'cards' directly."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Mark shared fields, handling positive indices immediately.
 

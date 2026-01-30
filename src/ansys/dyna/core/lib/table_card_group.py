@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling groups of table cards."""
 
 import io
 import math
@@ -26,34 +27,57 @@ import typing
 
 import pandas as pd
 
-from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
-from ansys.dyna.core.lib.table_card import TableCard, get_first_row, try_initialize_table
-
-
-def _to_table_card(card: Card, length_func: typing.Callable) -> TableCard:
-    return TableCard(card._fields, length_func, card._active_func)
+from ansys.dyna.core.lib.table_card import TableCard, _get_first_row_from_schemas, try_initialize_table
 
 
 class TableCardGroup(CardInterface):
     def __init__(
         self,
-        cards: typing.List[Card],
+        card_schemas: typing.List[typing.Tuple[FieldSchema, ...]],
         length_func: typing.Callable,
         active_func: typing.Callable = None,
         name: str = None,
         format: format_type = format_type.default,
+        card_active_funcs: typing.List[typing.Callable] = None,
         **kwargs,
     ):
-        self._cards = [_to_table_card(card, length_func) for card in cards]
+        """Initialize a TableCardGroup from field schemas.
+
+        Parameters
+        ----------
+        card_schemas : List[Tuple[FieldSchema, ...]]
+            List of FieldSchema tuples, one for each sub-card in the group.
+        length_func : callable
+            Function returning the number of rows, or None for unbounded.
+        active_func : callable, optional
+            Function returning bool to determine if card group is active.
+        name : str, optional
+            Name for table initialization from kwargs.
+        format : format_type, optional
+            The format type (default, standard, or long).
+        card_active_funcs : List[callable], optional
+            List of active functions for each sub-card. If provided, must have
+            the same length as card_schemas.
+        """
+        if card_active_funcs is None:
+            self._cards = [
+                TableCard.from_field_schemas(schemas, length_func, format=format) for schemas in card_schemas
+            ]
+        else:
+            self._cards = [
+                TableCard.from_field_schemas(schemas, length_func, active_func=af, format=format)
+                for schemas, af in zip(card_schemas, card_active_funcs)
+            ]
         self._length_func = length_func
         self._active_func = active_func
         self.format = format
-        if length_func == None:
+        if length_func is None:
             self._bounded = False
             self._length_func = self._get_unbounded_length
         else:
@@ -61,7 +85,9 @@ class TableCardGroup(CardInterface):
             self._length_func = length_func
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
-            first_row = get_first_row(self._get_fields(), **kwargs)
+            # Collect all field schemas for first row lookup
+            all_schemas = tuple(fs for schemas in card_schemas for fs in schemas)
+            first_row = _get_first_row_from_schemas(all_schemas, **kwargs)
             for card in self._cards:
                 card._first_row = first_row
 
@@ -81,11 +107,13 @@ class TableCardGroup(CardInterface):
 
     @property
     def table(self) -> pd.DataFrame:
+        """Get the table as a pandas DataFrame."""
         self._initialize()
         return self._table
 
     @table.setter
     def table(self, value: pd.DataFrame):
+        """Set the table from a pandas DataFrame."""
         # remove duplicate columns
         value = value.loc[:, ~value.columns.duplicated()]
         # store the table
@@ -96,6 +124,7 @@ class TableCardGroup(CardInterface):
 
     @property
     def format(self) -> format_type:
+        """Format type of the table card group."""
         return self._format
 
     def _propagate(self) -> None:
@@ -118,16 +147,26 @@ class TableCardGroup(CardInterface):
         self._load_lines(data_lines, parameter_set)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the table card group from a buffer."""
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
 
     def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
-        """Load the card data from a list of strings."""
+        """Load the card data from a list of strings.
+
+        For parameter retention, each sub-card's refs are scoped with `subcard{index}`
+        so URIs are: uri_prefix/subcard{subcard_index}/row{row_index}/{field_index}
+        """
         card_lines = self._divide_data_lines(data_lines)
         for index, lines in enumerate(card_lines):
-            self._cards[index]._load_lines(lines, parameter_set)
+            # Scope by subcard index so refs from different sub-cards don't overlap
+            if parameter_set is not None:
+                with parameter_set.scope(f"subcard{index}"):
+                    self._cards[index]._load_lines(lines, parameter_set)
+            else:
+                self._cards[index]._load_lines(lines, parameter_set)
         self.table = pd.concat([card.table for card in self._cards], axis=1)
 
     def write(
@@ -135,7 +174,12 @@ class TableCardGroup(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
+        **kwargs,
     ) -> str:
+        """Write the table card group to a string or buffer."""
         if self.active:
             self._initialize()
             self._propagate()
@@ -143,9 +187,22 @@ class TableCardGroup(CardInterface):
         if format == None:
             format = self.format
 
-        def _as_buffer(card: TableCard, add_newline: bool) -> io.StringIO:
+        def _as_buffer(card: TableCard, subcard_index: int, add_newline: bool) -> io.StringIO:
             card_buf = io.StringIO()
-            card.write(format, card_buf, True)
+            # Build sub-card URI prefix for parameter retention
+            # Join segments properly, filtering out empty strings
+            subcard_uri_prefix = None
+            if retain_parameters and uri_prefix is not None:
+                segments = [s for s in [uri_prefix, f"subcard{subcard_index}"] if s]
+                subcard_uri_prefix = "/".join(segments)
+            card.write(
+                format,
+                card_buf,
+                True,
+                retain_parameters=retain_parameters,
+                parameter_set=parameter_set,
+                uri_prefix=subcard_uri_prefix,
+            )
             if add_newline:
                 card_buf.write("\n")
             card_buf.seek(0)
@@ -156,7 +213,7 @@ class TableCardGroup(CardInterface):
                 card_buffers = []
                 active_cards = self._get_active_cards()
                 for idx, card in enumerate(active_cards):
-                    card_buffer = _as_buffer(card, idx != len(active_cards) - 1)
+                    card_buffer = _as_buffer(card, idx, idx != len(active_cards) - 1)
                     card_buffers.append(card_buffer)
 
                 iter = zip(*card_buffers)
@@ -173,7 +230,7 @@ class TableCardGroup(CardInterface):
         return write_or_return(buf, _write)
 
     def _divide_data_lines(self, data_lines: typing.List[str]) -> typing.List:
-        """divides the data lines into a set of lines, one for each sub-card"""
+        """Divides the data lines into a set of lines, one for each sub-card"""
         card_lines = [[] for i in range(len(self._cards))]
         for index, line in enumerate(data_lines):
             card_index = self._get_index_of_which_card(index)
@@ -181,17 +238,20 @@ class TableCardGroup(CardInterface):
         return card_lines
 
     def _get_index_of_which_card(self, overall_index: int) -> int:
-        """given the overall index, returns the index into self._cards
-        to identify which sub-card the overall index indexes into"""
+        """Given the overall index, returns the index into self._cards
+        to identify which sub-card the overall index indexes into
+        """
         return overall_index % len(self._get_active_cards())
 
     def _get_index_of_given_card(self, overall_index: int) -> int:
-        """given the overall index, returns the index to be used to
-        index into the card given by _get_index_of_which_card"""
+        """Given the overall index, returns the index to be used to
+        index into the card given by _get_index_of_which_card
+        """
         return math.floor(overall_index / len(self._get_active_cards()))
 
     @property
     def active(self) -> bool:
+        """Indicates whether the card group is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -205,13 +265,14 @@ class TableCardGroup(CardInterface):
         return [card for card in self._cards if self._is_card_active(card)]
 
     def _get_unbounded_length(self) -> int:
-        """the unbounded length is the minimum of all sub-card's unbounded length"""
+        """The unbounded length is the minimum of all sub-card's unbounded length"""
         self._initialize()  # Need to initialize first, so that the sub card can calculate num_rows
         lens = [card._num_rows() for card in self._get_active_cards()]
         return min(lens)
 
     @property
     def bounded(self) -> bool:
+        """Indicates whether the card group is bounded."""
         return self._bounded
 
     def _num_rows(self) -> int:

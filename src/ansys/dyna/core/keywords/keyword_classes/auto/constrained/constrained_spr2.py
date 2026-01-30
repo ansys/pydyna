@@ -23,200 +23,77 @@
 """Module providing the ConstrainedSpr2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONSTRAINEDSPR2_CARD0 = (
+    FieldSchema("upid", int, 0, 10, None),
+    FieldSchema("lpid", int, 10, 10, None),
+    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("thick", float, 30, 10, None),
+    FieldSchema("d", float, 40, 10, None),
+    FieldSchema("fn", float, 50, 10, None),
+    FieldSchema("ft", float, 60, 10, None),
+    FieldSchema("dn", float, 70, 10, None),
+)
+
+_CONSTRAINEDSPR2_CARD1 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("xin", float, 10, 10, None),
+    FieldSchema("xit", float, 20, 10, None),
+    FieldSchema("alpha1", float, 30, 10, None),
+    FieldSchema("alpha2", float, 40, 10, None),
+    FieldSchema("alpha3", float, 50, 10, None),
+    FieldSchema("dens", float, 60, 10, None),
+    FieldSchema("intp", int, 70, 10, 0),
+)
+
+_CONSTRAINEDSPR2_CARD2 = (
+    FieldSchema("expn", float, 0, 10, 8.0),
+    FieldSchema("expt", float, 10, 10, 8.0),
+    FieldSchema("pidvb", int, 20, 10, None),
+)
+
+_CONSTRAINEDSPR2_CARD3 = (
+    FieldSchema("xpid1", int, 0, 10, None),
+    FieldSchema("xpid2", int, 10, 10, None),
+    FieldSchema("xpid3", int, 20, 10, None),
+    FieldSchema("xpid4", int, 30, 10, None),
+)
 
 class ConstrainedSpr2(KeywordBase):
     """DYNA CONSTRAINED_SPR2 keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "SPR2"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+        "upid": LinkType.PART,
+        "lpid": LinkType.PART,
+        "xpid1": LinkType.PART,
+        "xpid2": LinkType.PART,
+        "xpid3": LinkType.PART,
+        "xpid4": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedSpr2 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "upid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ft",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dn",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xit",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "expn",
-                        float,
-                        0,
-                        10,
-                        8.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "expt",
-                        float,
-                        10,
-                        10,
-                        8.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidvb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xpid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPR2_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPR2_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPR2_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPR2_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def upid(self) -> typing.Optional[int]:
         """Get or set the Upper sheet part ID
@@ -480,4 +357,44 @@ class ConstrainedSpr2(KeywordBase):
     def xpid4(self, value: int) -> None:
         """Set the xpid4 property."""
         self._cards[3].set_value("xpid4", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def upid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given upid."""
+        return self._get_link_by_attr("PART", "pid", self.upid, "parts")
+
+    @property
+    def lpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lpid."""
+        return self._get_link_by_attr("PART", "pid", self.lpid, "parts")
+
+    @property
+    def xpid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given xpid1."""
+        return self._get_link_by_attr("PART", "pid", self.xpid1, "parts")
+
+    @property
+    def xpid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given xpid2."""
+        return self._get_link_by_attr("PART", "pid", self.xpid2, "parts")
+
+    @property
+    def xpid3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given xpid3."""
+        return self._get_link_by_attr("PART", "pid", self.xpid3, "parts")
+
+    @property
+    def xpid4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given xpid4."""
+        return self._get_link_by_attr("PART", "pid", self.xpid4, "parts")
 

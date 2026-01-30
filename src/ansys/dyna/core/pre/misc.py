@@ -35,9 +35,10 @@ MODULE_PATH = os.path.dirname(inspect.getfile(inspect.currentframe()))
 
 
 class Plain_Report:
+    """Provides the base class for a plain report."""
+
     def __init__(self, core, optional=None, additional=None, **kwargs):
-        """
-        Provides the base class for a plain report.
+        """Provide the base class for a plain report.
 
         This class is based on the `scooby <https://github.com/banesullivan/scooby>`_
         package.
@@ -55,7 +56,6 @@ class Plain_Report:
         **kwargs : dict
             Dictionary of keyword arguments.
         """
-
         self.additional = additional
         self.core = core
         self.optional = optional
@@ -91,6 +91,7 @@ class Plain_Report:
             return "Package not found"
 
     def __repr__(self):
+        """Return a string representation of the report."""
         header = [
             "-" * 79,
             "\n",
@@ -137,7 +138,8 @@ def is_float(input_string):
 
     Returns
     -------
-        ``True`` when the string can be converted to a float, ``False`` otherwise."""
+        ``True`` when the string can be converted to a float, ``False`` otherwise.
+    """
     try:
         float(input_string)
         return True
@@ -185,9 +187,7 @@ def create_temp_dir(tmpdir=None):
     try:
         os.mkdir(path)
     except:
-        raise RuntimeError(
-            "Unable to create temporary working " "directory %s\n" % path + "Please specify run_location="
-        )
+        raise RuntimeError("Unable to create temporary working directory %s\n" % path + "Please specify run_location=")
 
     return path
 

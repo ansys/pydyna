@@ -23,223 +23,83 @@
 """Module providing the ConstrainedJointStiffnessGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD0 = (
+    FieldSchema("jsid", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("pidb", int, 20, 10, None),
+    FieldSchema("cida", int, 30, 10, None),
+    FieldSchema("cidb", int, 40, 10, 0),
+    FieldSchema("jid", int, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD1 = (
+    FieldSchema("lcidph", int, 0, 10, 0),
+    FieldSchema("lcidt", int, 10, 10, 0),
+    FieldSchema("lcidps", int, 20, 10, 0),
+    FieldSchema("dlcidph", int, 30, 10, 0),
+    FieldSchema("dlcidt", int, 40, 10, 0),
+    FieldSchema("dlcidps", int, 50, 10, 0),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD2 = (
+    FieldSchema("esph", float, 0, 10, 0.0),
+    FieldSchema("fmph", float, 10, 10, 0.0),
+    FieldSchema("est", float, 20, 10, 0.0),
+    FieldSchema("fmt", float, 30, 10, 0.0),
+    FieldSchema("esps", float, 40, 10, 0.0),
+    FieldSchema("fmps", float, 50, 10, 0.0),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD3 = (
+    FieldSchema("nsaph", float, 0, 10, 0.0),
+    FieldSchema("psaph", float, 10, 10, 0.0),
+    FieldSchema("nsat", float, 20, 10, 0.0),
+    FieldSchema("psat", float, 30, 10, 0.0),
+    FieldSchema("nsaps", float, 40, 10, 0.0),
+    FieldSchema("psaps", float, 50, 10, 0.0),
+)
 
 class ConstrainedJointStiffnessGeneral(KeywordBase):
     """DYNA CONSTRAINED_JOINT_STIFFNESS_GENERAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_STIFFNESS_GENERAL"
+    _link_fields = {
+        "lcidph": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lcidps": LinkType.DEFINE_CURVE,
+        "dlcidph": LinkType.DEFINE_CURVE,
+        "dlcidt": LinkType.DEFINE_CURVE,
+        "dlcidps": LinkType.DEFINE_CURVE,
+        "cida": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cidb": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pida": LinkType.PART,
+        "pidb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointStiffnessGeneral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "jsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cida",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cidb",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidph",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidps",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidph",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidps",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "esph",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmph",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "est",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esps",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmps",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsaph",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psaph",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsat",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psat",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsaps",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psaps",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def jsid(self) -> typing.Optional[int]:
         """Get or set the Joint stiffness ID.
@@ -520,4 +380,134 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
     def psaps(self, value: float) -> None:
         """Set the psaps property."""
         self._cards[3].set_value("psaps", value)
+
+    @property
+    def lcidph_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidph."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidph:
+                return kwd
+        return None
+
+    @lcidph_link.setter
+    def lcidph_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidph."""
+        self.lcidph = value.lcid
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lcidps_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidps."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidps:
+                return kwd
+        return None
+
+    @lcidps_link.setter
+    def lcidps_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidps."""
+        self.lcidps = value.lcid
+
+    @property
+    def dlcidph_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidph."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidph:
+                return kwd
+        return None
+
+    @dlcidph_link.setter
+    def dlcidph_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidph."""
+        self.dlcidph = value.lcid
+
+    @property
+    def dlcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidt:
+                return kwd
+        return None
+
+    @dlcidt_link.setter
+    def dlcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidt."""
+        self.dlcidt = value.lcid
+
+    @property
+    def dlcidps_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidps."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidps:
+                return kwd
+        return None
+
+    @dlcidps_link.setter
+    def dlcidps_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidps."""
+        self.dlcidps = value.lcid
+
+    @property
+    def cida_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cida:
+                return kwd
+        return None
+
+    @cida_link.setter
+    def cida_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cida."""
+        self.cida = value.cid
+
+    @property
+    def cidb_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidb:
+                return kwd
+        return None
+
+    @cidb_link.setter
+    def cidb_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidb."""
+        self.cidb = value.cid
+
+    @property
+    def pida_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pida."""
+        return self._get_link_by_attr("PART", "pid", self.pida, "parts")
+
+    @property
+    def pidb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidb."""
+        return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 

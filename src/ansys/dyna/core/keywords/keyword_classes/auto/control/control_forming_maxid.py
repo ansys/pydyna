@@ -23,59 +23,35 @@
 """Module providing the ControlFormingMaxid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLFORMINGMAXID_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("maxidn", int, 10, 10, None),
+    FieldSchema("maxide", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("i2dynain", int, 40, 10, None),
+)
 
 class ControlFormingMaxid(KeywordBase):
     """DYNA CONTROL_FORMING_MAXID keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_MAXID"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingMaxid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxidn",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxide",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i2dynain",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGMAXID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the sheet blank, as in *PART.
@@ -119,4 +95,9 @@ class ControlFormingMaxid(KeywordBase):
     def i2dynain(self, value: int) -> None:
         """Set the i2dynain property."""
         self._cards[0].set_value("i2dynain", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

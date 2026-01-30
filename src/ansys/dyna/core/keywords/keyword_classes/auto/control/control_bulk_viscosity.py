@@ -23,7 +23,16 @@
 """Module providing the ControlBulkViscosity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLBULKVISCOSITY_CARD0 = (
+    FieldSchema("q1", float, 0, 10, 1.5),
+    FieldSchema("q2", float, 10, 10, 0.06),
+    FieldSchema("type", int, 20, 10, 1),
+    FieldSchema("btype", int, 30, 10, 0),
+    FieldSchema("tstype", int, 40, 10, 0),
+)
 
 class ControlBulkViscosity(KeywordBase):
     """DYNA CONTROL_BULK_VISCOSITY keyword"""
@@ -35,52 +44,10 @@ class ControlBulkViscosity(KeywordBase):
         """Initialize the ControlBulkViscosity class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "q1",
-                        float,
-                        0,
-                        10,
-                        1.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        10,
-                        10,
-                        0.06,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "btype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstype",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLBULKVISCOSITY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def q1(self) -> float:
         """Get or set the Default quadratic viscosity coefficient (default = 1.5).

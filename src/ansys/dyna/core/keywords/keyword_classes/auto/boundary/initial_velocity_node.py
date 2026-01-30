@@ -23,86 +23,41 @@
 """Module providing the InitialVelocityNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_INITIALVELOCITYNODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("vy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("vxr", float, 40, 10, 0.0),
+    FieldSchema("vyr", float, 50, 10, 0.0),
+    FieldSchema("vzr", float, 60, 10, 0.0),
+    FieldSchema("icid", int, 70, 10, None),
+)
 
 class InitialVelocityNode(KeywordBase):
     """DYNA INITIAL_VELOCITY_NODE keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VELOCITY_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVelocityNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITYNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -190,4 +145,24 @@ class InitialVelocityNode(KeywordBase):
     def icid(self, value: int) -> None:
         """Set the icid property."""
         self._cards[0].set_value("icid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def icid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for icid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.icid:
+                return kwd
+        return None
+
+    @icid_link.setter
+    def icid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for icid."""
+        self.icid = value.cid
 

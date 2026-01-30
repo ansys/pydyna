@@ -23,52 +23,34 @@
 """Module providing the LoadRemovePartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADREMOVEPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("time0", float, 10, 10, None),
+    FieldSchema("time1", float, 20, 10, None),
+    FieldSchema("stgr", int, 30, 10, None),
+)
 
 class LoadRemovePartSet(KeywordBase):
     """DYNA LOAD_REMOVE_PART_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "REMOVE_PART_SET"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadRemovePartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADREMOVEPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for deletion.
@@ -112,4 +94,14 @@ class LoadRemovePartSet(KeywordBase):
     def stgr(self, value: int) -> None:
         """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

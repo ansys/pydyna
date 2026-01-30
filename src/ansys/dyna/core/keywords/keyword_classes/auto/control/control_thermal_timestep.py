@@ -23,84 +23,39 @@
 """Module providing the ControlThermalTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLTHERMALTIMESTEP_CARD0 = (
+    FieldSchema("ts", int, 0, 10, 0),
+    FieldSchema("tip", float, 10, 10, 0.5),
+    FieldSchema("its", float, 20, 10, None),
+    FieldSchema("tmin", float, 30, 10, None),
+    FieldSchema("tmax", float, 40, 10, None),
+    FieldSchema("dtemp", float, 50, 10, 1.0),
+    FieldSchema("tscp", float, 60, 10, 0.5),
+    FieldSchema("lcts", int, 70, 10, None),
+)
 
 class ControlThermalTimestep(KeywordBase):
     """DYNA CONTROL_THERMAL_TIMESTEP keyword"""
 
     keyword = "CONTROL"
     subkeyword = "THERMAL_TIMESTEP"
+    _link_fields = {
+        "lcts": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlThermalTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ts",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tip",
-                        float,
-                        10,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "its",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtemp",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscp",
-                        float,
-                        60,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcts",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALTIMESTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ts(self) -> int:
         """Get or set the Time step control:
@@ -199,4 +154,19 @@ class ControlThermalTimestep(KeywordBase):
     def lcts(self, value: int) -> None:
         """Set the lcts property."""
         self._cards[0].set_value("lcts", value)
+
+    @property
+    def lcts_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcts."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcts:
+                return kwd
+        return None
+
+    @lcts_link.setter
+    def lcts_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcts."""
+        self.lcts = value.lcid
 

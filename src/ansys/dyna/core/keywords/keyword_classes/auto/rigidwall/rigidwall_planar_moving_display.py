@@ -23,166 +23,62 @@
 """Module providing the RigidwallPlanarMovingDisplay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_RIGIDWALLPLANARMOVINGDISPLAY_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("offset", float, 30, 10, 0.0),
+    FieldSchema("birth", float, 40, 10, 0.0),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("rwksf", float, 60, 10, 1.0),
+)
+
+_RIGIDWALLPLANARMOVINGDISPLAY_CARD1 = (
+    FieldSchema("xt", float, 0, 10, 0.0),
+    FieldSchema("yt", float, 10, 10, 0.0),
+    FieldSchema("zt", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+    FieldSchema("fric", float, 60, 10, 0.0),
+    FieldSchema("wvel", float, 70, 10, 0.0),
+)
+
+_RIGIDWALLPLANARMOVINGDISPLAY_CARD2 = (
+    FieldSchema("mass", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, 0.0),
+)
 
 class RigidwallPlanarMovingDisplay(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_MOVING_DISPLAY keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_DISPLAY"
+    _link_fields = {
+        "boxid": LinkType.DEFINE_BOX,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarMovingDisplay class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwksf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wvel",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mass",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGDISPLAY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGDISPLAY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGDISPLAY_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
@@ -374,4 +270,39 @@ class RigidwallPlanarMovingDisplay(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[2].set_value("v0", value)
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
 

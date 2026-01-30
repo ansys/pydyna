@@ -23,190 +23,76 @@
 """Module providing the AirbagLinearFluidId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_AIRBAGLINEARFLUIDID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_AIRBAGLINEARFLUIDID_CARD1 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("sidtyp", int, 10, 10, 0),
+    FieldSchema("rbid", int, 20, 10, 0),
+    FieldSchema("vsca", float, 30, 10, 1.0),
+    FieldSchema("psca", float, 40, 10, 1.0),
+    FieldSchema("vini", float, 50, 10, 0.0),
+    FieldSchema("mwd", float, 60, 10, 0.0),
+    FieldSchema("spsf", float, 70, 10, 0.0),
+)
+
+_AIRBAGLINEARFLUIDID_CARD2 = (
+    FieldSchema("bulk", float, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("lcint", int, 20, 10, None),
+    FieldSchema("lcoutt", int, 30, 10, None),
+    FieldSchema("lcoutp", int, 40, 10, None),
+    FieldSchema("lcfit", int, 50, 10, None),
+    FieldSchema("lcbulk", int, 60, 10, None),
+    FieldSchema("lcid", int, 70, 10, None),
+)
+
+_AIRBAGLINEARFLUIDID_CARD3 = (
+    FieldSchema("p_limit", float, 0, 10, None),
+    FieldSchema("p_limlc", int, 10, 10, None),
+    FieldSchema("nonull", int, 20, 10, None),
+)
 
 class AirbagLinearFluidId(KeywordBase):
     """DYNA AIRBAG_LINEAR_FLUID_ID keyword"""
 
     keyword = "AIRBAG"
     subkeyword = "LINEAR_FLUID_ID"
+    _link_fields = {
+        "lcint": LinkType.DEFINE_CURVE,
+        "lcoutt": LinkType.DEFINE_CURVE,
+        "lcoutp": LinkType.DEFINE_CURVE,
+        "lcfit": LinkType.DEFINE_CURVE,
+        "lcbulk": LinkType.DEFINE_CURVE,
+        "lcid": LinkType.DEFINE_CURVE,
+        "p_limlc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagLinearFluidId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsca",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psca",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vini",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mwd",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spsf",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bulk",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcint",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcoutt",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcoutp",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfit",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbulk",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p_limit",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p_limlc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nonull",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGLINEARFLUIDID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGLINEARFLUIDID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGLINEARFLUIDID_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGLINEARFLUIDID_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -450,4 +336,109 @@ class AirbagLinearFluidId(KeywordBase):
     def nonull(self, value: int) -> None:
         """Set the nonull property."""
         self._cards[3].set_value("nonull", value)
+
+    @property
+    def lcint_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcint."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcint:
+                return kwd
+        return None
+
+    @lcint_link.setter
+    def lcint_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcint."""
+        self.lcint = value.lcid
+
+    @property
+    def lcoutt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcoutt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcoutt:
+                return kwd
+        return None
+
+    @lcoutt_link.setter
+    def lcoutt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcoutt."""
+        self.lcoutt = value.lcid
+
+    @property
+    def lcoutp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcoutp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcoutp:
+                return kwd
+        return None
+
+    @lcoutp_link.setter
+    def lcoutp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcoutp."""
+        self.lcoutp = value.lcid
+
+    @property
+    def lcfit_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfit."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfit:
+                return kwd
+        return None
+
+    @lcfit_link.setter
+    def lcfit_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfit."""
+        self.lcfit = value.lcid
+
+    @property
+    def lcbulk_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcbulk."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcbulk:
+                return kwd
+        return None
+
+    @lcbulk_link.setter
+    def lcbulk_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcbulk."""
+        self.lcbulk = value.lcid
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def p_limlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for p_limlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.p_limlc:
+                return kwd
+        return None
+
+    @p_limlc_link.setter
+    def p_limlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for p_limlc."""
+        self.p_limlc = value.lcid
 

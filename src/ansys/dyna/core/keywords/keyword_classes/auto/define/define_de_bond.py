@@ -23,8 +23,30 @@
 """Module providing the DefineDeBond class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEBOND_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("bdform", int, 20, 10, 1),
+)
+
+_DEFINEDEBOND_CARD1 = (
+    FieldSchema("pbn", float, 0, 10, None),
+    FieldSchema("pbs", float, 10, 10, None),
+    FieldSchema("pbn_s", float, 20, 10, None),
+    FieldSchema("pbs_s", float, 30, 10, None),
+    FieldSchema("sfa", float, 40, 10, 1.0),
+    FieldSchema("alpha", float, 50, 10, 0.0),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("maxgap", float, 70, 10, 0.0001),
+)
+
+_DEFINEDEBOND_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeBond(KeywordBase):
     """DYNA DEFINE_DE_BOND keyword"""
@@ -40,115 +62,23 @@ class DefineDeBond(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bdform",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pbn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbn_s",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs_s",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxgap",
-                        float,
-                        70,
-                        10,
-                        1.E-4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBOND_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBOND_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeBond.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEBOND_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node set, part set, or part ID for which bond properties apply

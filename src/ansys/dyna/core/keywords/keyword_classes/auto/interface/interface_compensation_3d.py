@@ -23,98 +23,45 @@
 """Module providing the InterfaceCompensation3D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INTERFACECOMPENSATION3D_CARD0 = (
+    FieldSchema("method", int, 0, 10, 6),
+    FieldSchema("sl", float, 10, 10, 5.0),
+    FieldSchema("sf", float, 20, 10, 0.75),
+    FieldSchema("elref", int, 30, 10, 1),
+    FieldSchema("psidp", float, 40, 10, None),
+    FieldSchema("undct", float, 50, 10, None),
+    FieldSchema("angle", float, 60, 10, 0.0),
+    FieldSchema("nlinear", int, 70, 10, 1),
+)
+
+_INTERFACECOMPENSATION3D_CARD1 = (
+    FieldSchema("tangent", int, 0, 10, 0),
+)
 
 class InterfaceCompensation3D(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_3D keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "COMPENSATION_3D"
+    _link_fields = {
+        "psidp": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceCompensation3D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sl",
-                        float,
-                        10,
-                        10,
-                        5.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        0.75,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elref",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "undct",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlinear",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tangent",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3D_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks.
@@ -244,4 +191,14 @@ class InterfaceCompensation3D(KeywordBase):
     def tangent(self, value: int) -> None:
         """Set the tangent property."""
         self._cards[1].set_value("tangent", value)
+
+    @property
+    def psidp_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidp."""
+        return self._get_set_link("PART", self.psidp)
+
+    @psidp_link.setter
+    def psidp_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidp."""
+        self.psidp = value.sid
 

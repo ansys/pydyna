@@ -25,14 +25,22 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
 
 class Part(KeywordBase):
     """DYNA PART keyword"""
 
     keyword = "PART"
     subkeyword = "PART"
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Part class."""
@@ -40,76 +48,25 @@ class Part(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "heading",
-                                    str,
-                                    0,
-                                    70,
-                                ),
-                            ],
+                    (
+                        FieldSchema("heading", str, 0, 70, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "pid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "secid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "mid",
-                                    int,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "eosid",
-                                    int,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "hgid",
-                                    int,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "grav",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "adpopt",
-                                    int,
-                                    60,
-                                    10,
-                                ),
-                                Field(
-                                    "tmid",
-                                    int,
-                                    70,
-                                    10,
-                                ),
-                            ],
+                    (
+                        FieldSchema("pid", int, 0, 10, None),
+                        FieldSchema("secid", int, 10, 10, None),
+                        FieldSchema("mid", int, 20, 10, None),
+                        FieldSchema("eosid", int, 30, 10, 0),
+                        FieldSchema("hgid", int, 40, 10, 0),
+                        FieldSchema("grav", int, 50, 10, 0),
+                        FieldSchema("adpopt", int, 60, 10, None),
+                        FieldSchema("tmid", int, 70, 10, 0),
                     ),
                 ],
                 None,
                 None,
                 "parts",
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def parts(self) -> pd.DataFrame:
         """Gets the full table of parts."""
@@ -120,111 +77,30 @@ class Part(KeywordBase):
         """sets parts from the dataframe df."""
         self._cards[0].table = df
 
-    def _secid_link(self, secid: int) -> typing.Optional[KeywordBase]:
-        """Get the SECTION object referenced by secid (link: 15)."""
-        if secid is None or secid == 0:
-            return None
-        for kwd in self.deck.get_kwds_by_type("SECTION"):
-            if hasattr(kwd, 'secid') and kwd.secid == secid:
-                return kwd
-        return None
+    @property
+    def mid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all MAT_* keywords for mid, keyed by pid."""
+        return self._get_table_group_links("MAT", "mid", "parts", "mid", "pid")
 
-    def _mid_link(self, mid: int) -> typing.Optional[KeywordBase]:
-        """Get the MAT object referenced by mid (link: 14)."""
-        if mid is None or mid == 0:
-            return None
-        for kwd in self.deck.get_kwds_by_type("MAT"):
-            if hasattr(kwd, 'mid') and kwd.mid == mid:
-                return kwd
-        return None
+    def get_mid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the MAT_* keyword for the given pid."""
+        return self._get_table_group_link("MAT", "mid", "parts", "mid", "pid", pid)
 
-    def get_referenced_keywords(self, level: int = -1) -> typing.List[KeywordBase]:
-        """Get keywords referenced by this Part with optional recursion depth control.
+    @property
+    def secid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all SECTION_* keywords for secid, keyed by pid."""
+        return self._get_table_group_links("SECTION", "secid", "parts", "secid", "pid")
 
-        Parameters
-        ----------
-        level : int, optional
-            Recursion depth. Default is -1 (unlimited).
-            - level=-1: All downstream references (default)
-            - level=1: Direct references only (SECTION, MAT)
-            - level=2: Direct + their references
-            - level=0: No references
+    def get_secid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the SECTION_* keyword for the given pid."""
+        return self._get_table_group_link("SECTION", "secid", "parts", "secid", "pid", pid)
 
-        Returns
-        -------
-        List[KeywordBase]
-            List of referenced keywords.
+    @property
+    def hgid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all HOURGLASS_* keywords for hgid, keyed by pid."""
+        return self._get_table_group_links("HOURGLASS", "hgid", "parts", "hgid", "pid")
 
-        Examples
-        --------
-        >>> part = deck.keywords[0]
-        >>> refs = part.get_referenced_keywords()  # All downstream
-        >>> refs = part.get_referenced_keywords(level=1)  # Direct only
-        """
-        if self.deck is None or level == 0:
-            return []
-
-        parts_df = self.parts
-        if parts_df is None or parts_df.empty:
-            return []
-
-        referenced = []
-        seen_ids = set()
-
-        # Iterate through each row in the parts DataFrame
-        for idx, row in parts_df.iterrows():
-            # Use private link methods
-            secid = row.get('secid')
-            self._add_reference(self._secid_link(secid), referenced, seen_ids)
-
-            mid = row.get('mid')
-            self._add_reference(self._mid_link(mid), referenced, seen_ids)
-
-        # Recurse if level allows (level > 1 or level == -1 for unlimited)
-        if level > 1 or level == -1:
-            next_level = -1 if level == -1 else level - 1
-            for ref in list(referenced):
-                if hasattr(ref, 'get_referenced_keywords'):
-                    sub_refs = ref.get_referenced_keywords(level=next_level)
-                    for sub_ref in sub_refs:
-                        self._add_reference(sub_ref, referenced, seen_ids)
-
-        return referenced
-
-    def _add_reference(
-        self,
-        ref: typing.Optional[KeywordBase],
-        referenced: typing.List[KeywordBase],
-        seen_ids: typing.Set[typing.Tuple[str, typing.Any]]
-    ) -> None:
-        """Add a reference keyword to the list if not already present.
-
-        Parameters
-        ----------
-        ref : KeywordBase or None
-            The referenced keyword to add
-        referenced : List[KeywordBase]
-            List to append reference to
-        seen_ids : Set[Tuple[str, Any]]
-            Set of (keyword, id) tuples already seen
-        """
-        if ref is None:
-            return
-
-        ref_id = self._get_id_for_keyword(ref)
-        key = (ref.keyword, ref_id)
-
-        if key in seen_ids:
-            return
-
-        referenced.append(ref)
-        seen_ids.add(key)
-
-    def _get_id_for_keyword(self, kwd: KeywordBase) -> typing.Any:
-        """Get the ID value for a keyword."""
-        if kwd.keyword == "SECTION":
-            return getattr(kwd, 'secid', id(kwd))
-        elif kwd.keyword == "MAT":
-            return getattr(kwd, 'mid', id(kwd))
-        return id(kwd)
+    def get_hgid_link(self, pid: int) -> typing.Optional[KeywordBase]:
+        """Get the HOURGLASS_* keyword for the given pid."""
+        return self._get_table_group_link("HOURGLASS", "hgid", "parts", "hgid", "pid", pid)
 

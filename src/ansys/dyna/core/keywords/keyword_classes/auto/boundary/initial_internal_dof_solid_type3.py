@@ -23,56 +23,40 @@
 """Module providing the InitialInternalDofSolidType3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALINTERNALDOFSOLIDTYPE3_CARD0 = (
+    FieldSchema("lid", int, 0, 10, None),
+)
+
+_INITIALINTERNALDOFSOLIDTYPE3_CARD1 = (
+    FieldSchema("valx", float, 0, 10, None),
+    FieldSchema("valy", float, 10, 10, None),
+    FieldSchema("valz", float, 20, 10, None),
+)
 
 class InitialInternalDofSolidType3(KeywordBase):
     """DYNA INITIAL_INTERNAL_DOF_SOLID_TYPE3 keyword"""
 
     keyword = "INITIAL"
     subkeyword = "INTERNAL_DOF_SOLID_TYPE3"
+    _link_fields = {
+        "lid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialInternalDofSolidType3 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "valx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALINTERNALDOFSOLIDTYPE3_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALINTERNALDOFSOLIDTYPE3_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lid(self) -> typing.Optional[int]:
         """Get or set the Element ID.
@@ -116,4 +100,9 @@ class InitialInternalDofSolidType3(KeywordBase):
     def valz(self, value: float) -> None:
         """Set the valz property."""
         self._cards[1].set_value("valz", value)
+
+    @property
+    def lid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given lid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.lid, "parts")
 

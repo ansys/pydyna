@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Transformation handler for ``INCLUDE_TRANSFORM``."""
+
 import typing
 import warnings
 
@@ -32,7 +33,6 @@ from ansys.dyna.core.lib.transforms.node_transform import TransformNode
 
 
 class TransformHandler(ImportHandler):
-
     def __init__(self):
         self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str, str]], Transform] = {
             "NODE": TransformNode,
@@ -42,9 +42,11 @@ class TransformHandler(ImportHandler):
     def register_transform_handler(
         self, identity: typing.Union[str, typing.Tuple[str, str]], handler: Transform
     ) -> None:
+        """Register a transform handler for a specific keyword or keyword+subkeyword."""
         self._handlers[identity] = handler
 
     def after_import(self, context: ImportContext, keyword: typing.Union[KeywordBase, str]) -> None:
+        """Handle actions after importing a keyword."""
         if not isinstance(keyword, KeywordBase):
             return
         if context.xform is None:
@@ -65,4 +67,5 @@ class TransformHandler(ImportHandler):
         handler(context.xform).transform(keyword)
 
     def on_error(self, error):
+        """Handle errors during import."""
         pass

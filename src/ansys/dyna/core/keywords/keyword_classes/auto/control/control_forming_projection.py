@@ -23,61 +23,36 @@
 """Module providing the ControlFormingProjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLFORMINGPROJECTION_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pidt", int, 10, 10, None),
+    FieldSchema("gap", float, 20, 10, None),
+    FieldSchema("nrbst", int, 30, 10, 0),
+    FieldSchema("nrtst", int, 40, 10, 0),
+)
 
 class ControlFormingProjection(KeywordBase):
     """DYNA CONTROL_FORMING_PROJECTION keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_PROJECTION"
+    _link_fields = {
+        "pidb": LinkType.PART,
+        "pidt": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingProjection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrbst",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrtst",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPROJECTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for the blank.
@@ -141,4 +116,14 @@ class ControlFormingProjection(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""nrtst must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nrtst", value)
+
+    @property
+    def pidb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidb."""
+        return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
+
+    @property
+    def pidt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidt."""
+        return self._get_link_by_attr("PART", "pid", self.pidt, "parts")
 

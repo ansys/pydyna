@@ -23,77 +23,40 @@
 """Module providing the AleSmoothing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ALESMOOTHING_CARD0 = (
+    FieldSchema("dnid", int, 0, 10, None),
+    FieldSchema("nid1", int, 10, 10, None),
+    FieldSchema("nid2", int, 20, 10, None),
+    FieldSchema("ipre", int, 30, 10, 0),
+    FieldSchema("xco", float, 40, 10, 0.0),
+    FieldSchema("yco", float, 50, 10, 0.0),
+    FieldSchema("zco", float, 60, 10, 0.0),
+)
 
 class AleSmoothing(KeywordBase):
     """DYNA ALE_SMOOTHING keyword"""
 
     keyword = "ALE"
     subkeyword = "SMOOTHING"
+    _link_fields = {
+        "dnid": LinkType.NODE,
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleSmoothing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dnid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipre",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xco",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yco",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zco",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESMOOTHING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dnid(self) -> typing.Optional[int]:
         """Get or set the Dependent node or node set ID:
@@ -183,4 +146,19 @@ class AleSmoothing(KeywordBase):
     def zco(self, value: float) -> None:
         """Set the zco property."""
         self._cards[0].set_value("zco", value)
+
+    @property
+    def dnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given dnid."""
+        return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 

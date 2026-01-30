@@ -23,7 +23,15 @@
 """Module providing the ControlMppDecompositionArrangeParts class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONARRANGEPARTS_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nproc", int, 20, 10, None),
+    FieldSchema("frstp", int, 30, 10, None),
+)
 
 class ControlMppDecompositionArrangeParts(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_ARRANGE_PARTS keyword"""
@@ -35,41 +43,10 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
         """Initialize the ControlMppDecompositionArrangeParts class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nproc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frstp",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONARRANGEPARTS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID/Part set ID

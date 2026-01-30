@@ -23,79 +23,41 @@
 """Module providing the LoadBodyX class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADBODYX_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sf", float, 10, 10, 1.0),
+    FieldSchema("lciddr", int, 20, 10, 0),
+    FieldSchema("xc", float, 30, 10, 0.0),
+    FieldSchema("yc", float, 40, 10, 0.0),
+    FieldSchema("zc", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, 0),
+)
 
 class LoadBodyX(KeywordBase):
     """DYNA LOAD_BODY_X keyword"""
 
     keyword = "LOAD"
     subkeyword = "BODY_X"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "lciddr": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBodyX class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lciddr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBODYX_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.
@@ -172,4 +134,49 @@ class LoadBodyX(KeywordBase):
     def cid(self, value: int) -> None:
         """Set the cid property."""
         self._cards[0].set_value("cid", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def lciddr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lciddr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lciddr:
+                return kwd
+        return None
+
+    @lciddr_link.setter
+    def lciddr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lciddr."""
+        self.lciddr = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

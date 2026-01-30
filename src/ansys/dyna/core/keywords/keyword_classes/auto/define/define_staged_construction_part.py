@@ -23,8 +23,20 @@
 """Module providing the DefineStagedConstructionPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESTAGEDCONSTRUCTIONPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("stga", int, 10, 10, None),
+    FieldSchema("stgr", int, 20, 10, None),
+)
+
+_DEFINESTAGEDCONSTRUCTIONPART_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineStagedConstructionPart(KeywordBase):
     """DYNA DEFINE_STAGED_CONSTRUCTION_PART keyword"""
@@ -34,56 +46,29 @@ class DefineStagedConstructionPart(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineStagedConstructionPart class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stga",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESTAGEDCONSTRUCTIONPART_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineStagedConstructionPart.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESTAGEDCONSTRUCTIONPART_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID.
@@ -130,4 +115,9 @@ class DefineStagedConstructionPart(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

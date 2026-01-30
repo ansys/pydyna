@@ -23,284 +23,99 @@
 """Module providing the IncludeStampedPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INCLUDESTAMPEDPARTSET_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_INCLUDESTAMPEDPARTSET_CARD1 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("thick", int, 10, 10, 0),
+    FieldSchema("pstrn", int, 20, 10, 0),
+    FieldSchema("strain", int, 30, 10, 0),
+    FieldSchema("stress", int, 40, 10, 0),
+    FieldSchema("incout", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("rmax", float, 70, 10, 20.0),
+)
+
+_INCLUDESTAMPEDPARTSET_CARD2 = (
+    FieldSchema("n1s", int, 0, 10, 0),
+    FieldSchema("n2s", int, 10, 10, 0),
+    FieldSchema("n3s", int, 20, 10, 0),
+    FieldSchema("n1c", int, 30, 10, 0),
+    FieldSchema("n2c", int, 40, 10, 0),
+    FieldSchema("n3c", int, 50, 10, 0),
+    FieldSchema("tensor", int, 60, 10, 0),
+    FieldSchema("thkscl", float, 70, 10, 1.0),
+)
+
+_INCLUDESTAMPEDPARTSET_CARD3 = (
+    FieldSchema("isym", int, 0, 10, 0),
+    FieldSchema("iafter", int, 10, 10, 0),
+    FieldSchema("percele", float, 20, 10, None),
+    FieldSchema("iortho", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("isrocut", int, 50, 10, None),
+)
+
+_INCLUDESTAMPEDPARTSET_CARD4 = (
+    FieldSchema("x01", float, 0, 10, None),
+    FieldSchema("y01", float, 10, 10, None),
+    FieldSchema("z01", float, 20, 10, None),
+)
+
+_INCLUDESTAMPEDPARTSET_CARD5 = (
+    FieldSchema("x02", float, 0, 10, None),
+    FieldSchema("y02", float, 10, 10, None),
+    FieldSchema("z02", float, 20, 10, None),
+    FieldSchema("x03", float, 30, 10, None),
+    FieldSchema("y03", float, 40, 10, None),
+    FieldSchema("z03", float, 50, 10, None),
+)
 
 class IncludeStampedPartSet(KeywordBase):
     """DYNA INCLUDE_STAMPED_PART_SET keyword"""
 
     keyword = "INCLUDE"
     subkeyword = "STAMPED_PART_SET"
+    _link_fields = {
+        "n1s": LinkType.NODE,
+        "n2s": LinkType.NODE,
+        "n3s": LinkType.NODE,
+        "n1c": LinkType.NODE,
+        "n2c": LinkType.NODE,
+        "n3c": LinkType.NODE,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeStampedPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstrn",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strain",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stress",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incout",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        70,
-                        10,
-                        20.,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1s",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2s",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3s",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1c",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2c",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3c",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tensor",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thkscl",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "isym",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iafter",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "percele",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iortho",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isrocut",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x01",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y01",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z01",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x02",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y02",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z02",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x03",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y03",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z03",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSET_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.
@@ -674,4 +489,44 @@ class IncludeStampedPartSet(KeywordBase):
     def z03(self, value: float) -> None:
         """Set the z03 property."""
         self._cards[5].set_value("z03", value)
+
+    @property
+    def n1s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1s."""
+        return self._get_link_by_attr("NODE", "nid", self.n1s, "parts")
+
+    @property
+    def n2s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2s."""
+        return self._get_link_by_attr("NODE", "nid", self.n2s, "parts")
+
+    @property
+    def n3s_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3s."""
+        return self._get_link_by_attr("NODE", "nid", self.n3s, "parts")
+
+    @property
+    def n1c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1c."""
+        return self._get_link_by_attr("NODE", "nid", self.n1c, "parts")
+
+    @property
+    def n2c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2c."""
+        return self._get_link_by_attr("NODE", "nid", self.n2c, "parts")
+
+    @property
+    def n3c_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3c."""
+        return self._get_link_by_attr("NODE", "nid", self.n3c, "parts")
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

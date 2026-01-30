@@ -23,8 +23,28 @@
 """Module providing the SetModeListGenerate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETMODELISTGENERATE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETMODELISTGENERATE_CARD1 = (
+    FieldSchema("m1beg", int, 0, 10, None),
+    FieldSchema("m1end", int, 10, 10, None),
+    FieldSchema("m2beg", int, 20, 10, None),
+    FieldSchema("m2end", int, 30, 10, None),
+    FieldSchema("m3beg", int, 40, 10, None),
+    FieldSchema("m3end", int, 50, 10, None),
+    FieldSchema("m4beg", int, 60, 10, None),
+    FieldSchema("m4end", int, 70, 10, None),
+)
+
+_SETMODELISTGENERATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetModeListGenerate(KeywordBase):
     """DYNA SET_MODE_LIST_GENERATE keyword"""
@@ -40,96 +60,23 @@ class SetModeListGenerate(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m1beg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m1end",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2beg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2end",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3beg",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3end",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4beg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4end",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETMODELISTGENERATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETMODELISTGENERATE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetModeListGenerate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETMODELISTGENERATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set identification. All mode sets should have a unique set ID.

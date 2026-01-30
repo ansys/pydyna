@@ -23,7 +23,15 @@
 """Module providing the ControlFormingOnestepAutoConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGONESTEPAUTOCONSTRAINT_CARD0 = (
+    FieldSchema("icon", int, 0, 10, None),
+    FieldSchema("node1", int, 10, 10, None),
+    FieldSchema("node2", int, 20, 10, None),
+    FieldSchema("node3", int, 30, 10, None),
+)
 
 class ControlFormingOnestepAutoConstraint(KeywordBase):
     """DYNA CONTROL_FORMING_ONESTEP_AUTO_CONSTRAINT keyword"""
@@ -35,40 +43,10 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
         """Initialize the ControlFormingOnestepAutoConstraint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "icon",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGONESTEPAUTOCONSTRAINT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def icon(self) -> typing.Optional[int]:
         """Get or set the Automatic nodal constraining option to eliminate the rigid body motion:EQ. 1: Apply.

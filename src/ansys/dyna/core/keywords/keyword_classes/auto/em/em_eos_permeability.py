@@ -23,46 +23,34 @@
 """Module providing the EmEosPermeability class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_EMEOSPERMEABILITY_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("eostype", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+)
 
 class EmEosPermeability(KeywordBase):
     """DYNA EM_EOS_PERMEABILITY keyword"""
 
     keyword = "EM"
     subkeyword = "EOS_PERMEABILITY"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEosPermeability class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eostype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEOSPERMEABILITY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS.
@@ -100,4 +88,19 @@ class EmEosPermeability(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

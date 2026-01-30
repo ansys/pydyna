@@ -23,8 +23,56 @@
 """Module providing the MatPiecewiseLinearPlasticity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATPIECEWISELINEARPLASTICITY_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("etan", float, 50, 10, None),
+    FieldSchema("fail", float, 60, 10, 1e+21),
+    FieldSchema("tdel", float, 70, 10, None),
+)
+
+_MATPIECEWISELINEARPLASTICITY_CARD1 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("lcss", int, 20, 10, 0),
+    FieldSchema("lcsr", int, 30, 10, 0),
+    FieldSchema("vp", float, 40, 10, 0.0),
+)
+
+_MATPIECEWISELINEARPLASTICITY_CARD2 = (
+    FieldSchema("eps1", float, 0, 10, None),
+    FieldSchema("eps2", float, 10, 10, None),
+    FieldSchema("eps3", float, 20, 10, None),
+    FieldSchema("eps4", float, 30, 10, None),
+    FieldSchema("eps5", float, 40, 10, None),
+    FieldSchema("eps6", float, 50, 10, None),
+    FieldSchema("eps7", float, 60, 10, None),
+    FieldSchema("eps8", float, 70, 10, None),
+)
+
+_MATPIECEWISELINEARPLASTICITY_CARD3 = (
+    FieldSchema("es1", float, 0, 10, None),
+    FieldSchema("es2", float, 10, 10, None),
+    FieldSchema("es3", float, 20, 10, None),
+    FieldSchema("es4", float, 30, 10, None),
+    FieldSchema("es5", float, 40, 10, None),
+    FieldSchema("es6", float, 50, 10, None),
+    FieldSchema("es7", float, 60, 10, None),
+    FieldSchema("es8", float, 70, 10, None),
+)
+
+_MATPIECEWISELINEARPLASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPiecewiseLinearPlasticity(KeywordBase):
     """DYNA MAT_PIECEWISE_LINEAR_PLASTICITY keyword"""
@@ -34,254 +82,39 @@ class MatPiecewiseLinearPlasticity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcsr": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPiecewiseLinearPlasticity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        60,
-                        10,
-                        10.E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdel",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eps1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "es1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPIECEWISELINEARPLASTICITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPIECEWISELINEARPLASTICITY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPIECEWISELINEARPLASTICITY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPIECEWISELINEARPLASTICITY_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPiecewiseLinearPlasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPIECEWISELINEARPLASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -627,102 +460,42 @@ class MatPiecewiseLinearPlasticity(KeywordBase):
         if value:
             self.activate_option("TITLE")
 
-    def _lcss_link(self) -> typing.Optional[KeywordBase]:
-        """Get the DEFINE_CURVE or DEFINE_TABLE object referenced by lcss (link: 86)."""
-        if self.lcss is None or self.lcss == 0:
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if hasattr(kwd, 'lcid') and kwd.lcid == self.lcss:
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
+
+    @property
+    def lcss_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
+        if self.deck is None:
+            return None
+        field_value = self.lcss
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
                 return kwd
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
-            if hasattr(kwd, 'tbid') and kwd.tbid == self.lcss:
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
-    def _lcsr_link(self) -> typing.Optional[KeywordBase]:
-        """Get the DEFINE_CURVE object referenced by lcsr (link: 19)."""
-        if self.lcsr is None or self.lcsr == 0:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if hasattr(kwd, 'lcid') and kwd.lcid == self.lcsr:
-                return kwd
-        return None
-
-    def get_referenced_keywords(self, level: int = -1) -> typing.List[KeywordBase]:
-        """Get keywords referenced by this material with optional recursion depth control.
-
-        Parameters
-        ----------
-        level : int, optional
-            Recursion depth. Default is -1 (unlimited).
-            - level=-1: All downstream references (default)
-            - level=1: Direct references only (DEFINE_CURVE, DEFINE_TABLE)
-            - level=2: Direct + their references
-            - level=0: No references
-
-        Returns
-        -------
-        List[KeywordBase]
-            List of referenced keywords.
-        """
-        if self.deck is None or level == 0:
-            return []
-
-        referenced = []
-        seen_ids = set()
-
-        self._add_reference(self._lcss_link(), referenced, seen_ids)
-        self._add_reference(self._lcsr_link(), referenced, seen_ids)
-
-        # Recurse if level allows (level > 1 or level == -1 for unlimited)
-        if level > 1 or level == -1:
-            next_level = -1 if level == -1 else level - 1
-            for ref in list(referenced):
-                if hasattr(ref, 'get_referenced_keywords'):
-                    sub_refs = ref.get_referenced_keywords(level=next_level)
-                    for sub_ref in sub_refs:
-                        self._add_reference(sub_ref, referenced, seen_ids)
-
-        return referenced
-
-    def _add_reference(
-        self,
-        ref: typing.Optional[KeywordBase],
-        referenced: typing.List[KeywordBase],
-        seen_ids: typing.Set[typing.Tuple[str, typing.Any]]
-    ) -> None:
-        """Add a reference keyword to the list if not already present.
-
-        Parameters
-        ----------
-        ref : KeywordBase or None
-            The referenced keyword to add
-        referenced : List[KeywordBase]
-            List to append reference to
-        seen_ids : Set[Tuple[str, Any]]
-            Set of (keyword, id) tuples already seen
-        """
-        if ref is None:
-            return
-
-        ref_id = self._get_id_for_keyword(ref)
-        key = (ref.keyword, ref_id)
-
-        if key in seen_ids:
-            return
-
-        referenced.append(ref)
-        seen_ids.add(key)
-
-    def _get_id_for_keyword(self, kwd: KeywordBase) -> typing.Any:
-        """Get the ID value for a keyword."""
-        if kwd.keyword == "DEFINE" and kwd.subkeyword == "CURVE":
-            return getattr(kwd, 'lcid', id(kwd))
-        elif kwd.keyword == "DEFINE" and kwd.subkeyword == "TABLE":
-            return getattr(kwd, 'tbid', id(kwd))
-        elif kwd.keyword == "MAT":
-            return getattr(kwd, 'mid', id(kwd))
-        elif kwd.keyword == "SECTION":
-            return getattr(kwd, 'secid', id(kwd))
-        return id(kwd)
+    @lcss_link.setter
+    def lcss_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcss."""
+        if hasattr(value, "lcid"):
+            self.lcss = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcss = value.tbid
 

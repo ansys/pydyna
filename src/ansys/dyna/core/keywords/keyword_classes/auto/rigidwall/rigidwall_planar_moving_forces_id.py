@@ -23,236 +23,88 @@
 """Module providing the RigidwallPlanarMovingForcesId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_RIGIDWALLPLANARMOVINGFORCESID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_RIGIDWALLPLANARMOVINGFORCESID_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("offset", float, 30, 10, 0.0),
+    FieldSchema("birth", float, 40, 10, 0.0),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("rwksf", float, 60, 10, 1.0),
+)
+
+_RIGIDWALLPLANARMOVINGFORCESID_CARD2 = (
+    FieldSchema("xt", float, 0, 10, 0.0),
+    FieldSchema("yt", float, 10, 10, 0.0),
+    FieldSchema("zt", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+    FieldSchema("fric", float, 60, 10, 0.0),
+    FieldSchema("wvel", float, 70, 10, 0.0),
+)
+
+_RIGIDWALLPLANARMOVINGFORCESID_CARD3 = (
+    FieldSchema("mass", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, 0.0),
+)
+
+_RIGIDWALLPLANARMOVINGFORCESID_CARD4 = (
+    FieldSchema("soft", int, 0, 10, 0),
+    FieldSchema("ssid", int, 10, 10, 0),
+    FieldSchema("n1", int, 20, 10, 0),
+    FieldSchema("n2", int, 30, 10, 0),
+    FieldSchema("n3", int, 40, 10, 0),
+    FieldSchema("n4", int, 50, 10, 0),
+)
 
 class RigidwallPlanarMovingForcesId(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_MOVING_FORCES_ID keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_FORCES_ID"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "boxid": LinkType.DEFINE_BOX,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarMovingForcesId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwksf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wvel",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mass",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "soft",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGFORCESID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGFORCESID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGFORCESID_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGFORCESID_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLPLANARMOVINGFORCESID_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Rigidwall ID.
@@ -532,4 +384,69 @@ class RigidwallPlanarMovingForcesId(KeywordBase):
     def n4(self, value: int) -> None:
         """Set the n4 property."""
         self._cards[4].set_value("n4", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

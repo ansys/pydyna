@@ -23,126 +23,61 @@
 """Module providing the IncludeStampedPartSolidToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("thick", int, 10, 10, 0),
+    FieldSchema("pstrn", int, 20, 10, 0),
+    FieldSchema("strain", int, 30, 10, 0),
+    FieldSchema("stress", int, 40, 10, 0),
+)
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD2 = (
+    FieldSchema("n1sorc", int, 0, 10, 0),
+    FieldSchema("n2sorc", int, 10, 10, 0),
+    FieldSchema("n3sorc", int, 20, 10, 0),
+    FieldSchema("n1trgt", int, 30, 10, 0),
+    FieldSchema("n2trgt", int, 40, 10, 0),
+    FieldSchema("n3trgt", int, 50, 10, 0),
+)
 
 class IncludeStampedPartSolidToSolid(KeywordBase):
     """DYNA INCLUDE_STAMPED_PART_SOLID_TO_SOLID keyword"""
 
     keyword = "INCLUDE"
     subkeyword = "STAMPED_PART_SOLID_TO_SOLID"
+    _link_fields = {
+        "n1sorc": LinkType.NODE,
+        "n2sorc": LinkType.NODE,
+        "n3sorc": LinkType.NODE,
+        "n1trgt": LinkType.NODE,
+        "n2trgt": LinkType.NODE,
+        "n3trgt": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeStampedPartSolidToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstrn",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strain",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stress",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1sorc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2sorc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3sorc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1trgt",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2trgt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3trgt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the dynain file to be included to map the results from, with maximum of 80 characters.
@@ -283,4 +218,39 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     def n3trgt(self, value: int) -> None:
         """Set the n3trgt property."""
         self._cards[2].set_value("n3trgt", value)
+
+    @property
+    def n1sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n1sorc, "parts")
+
+    @property
+    def n2sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n2sorc, "parts")
+
+    @property
+    def n3sorc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3sorc."""
+        return self._get_link_by_attr("NODE", "nid", self.n3sorc, "parts")
+
+    @property
+    def n1trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n1trgt, "parts")
+
+    @property
+    def n2trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n2trgt, "parts")
+
+    @property
+    def n3trgt_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3trgt."""
+        return self._get_link_by_attr("NODE", "nid", self.n3trgt, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

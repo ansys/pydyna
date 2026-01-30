@@ -23,7 +23,30 @@
 """Module providing the DualceseReactionRateIg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEREACTIONRATEIG_CARD0 = (
+    FieldSchema("react_id", int, 0, 10, None),
+    FieldSchema("ign", float, 10, 10, None),
+    FieldSchema("aa", float, 20, 10, None),
+    FieldSchema("bb", float, 30, 10, None),
+    FieldSchema("xx", float, 40, 10, None),
+    FieldSchema("grow1", float, 50, 10, None),
+    FieldSchema("cc", float, 60, 10, None),
+    FieldSchema("dd", float, 70, 10, None),
+)
+
+_DUALCESEREACTIONRATEIG_CARD1 = (
+    FieldSchema("yy", float, 0, 10, None),
+    FieldSchema("grow2", float, 10, 10, None),
+    FieldSchema("ee", float, 20, 10, None),
+    FieldSchema("gg", float, 30, 10, None),
+    FieldSchema("zz", float, 40, 10, None),
+    FieldSchema("igmax", float, 50, 10, None),
+    FieldSchema("g1max", float, 60, 10, None),
+    FieldSchema("g2max", float, 70, 10, None),
+)
 
 class DualceseReactionRateIg(KeywordBase):
     """DYNA DUALCESE_REACTION_RATE_IG keyword"""
@@ -35,128 +58,13 @@ class DualceseReactionRateIg(KeywordBase):
         """Initialize the DualceseReactionRateIg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "react_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ign",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aa",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grow1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dd",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "yy",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grow2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ee",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gg",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igmax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g1max",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2max",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEREACTIONRATEIG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEREACTIONRATEIG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def react_id(self) -> typing.Optional[int]:
         """Get or set the ID of reaction rate law

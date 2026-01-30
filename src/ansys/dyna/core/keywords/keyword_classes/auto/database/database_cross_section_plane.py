@@ -23,163 +23,59 @@
 """Module providing the DatabaseCrossSectionPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASECROSSSECTIONPLANE_CARD0 = (
+    FieldSchema("csid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_DATABASECROSSSECTIONPLANE_CARD1 = (
+    FieldSchema("psid", int, 0, 10, 0),
+    FieldSchema("xct", float, 10, 10, 0.0),
+    FieldSchema("yct", float, 20, 10, 0.0),
+    FieldSchema("zct", float, 30, 10, 0.0),
+    FieldSchema("xch", float, 40, 10, 0.0),
+    FieldSchema("ych", float, 50, 10, 0.0),
+    FieldSchema("zch", float, 60, 10, 0.0),
+    FieldSchema("radius", float, 70, 10, 0.0),
+)
+
+_DATABASECROSSSECTIONPLANE_CARD2 = (
+    FieldSchema("xhev", float, 0, 10, 0.0),
+    FieldSchema("yhev", float, 10, 10, 0.0),
+    FieldSchema("zhev", float, 20, 10, 0.0),
+    FieldSchema("lenl", float, 30, 10, None),
+    FieldSchema("lenm", float, 40, 10, None),
+    FieldSchema("id", int, 50, 10, None),
+    FieldSchema("itype", int, 60, 10, 0),
+)
 
 class DatabaseCrossSectionPlane(KeywordBase):
     """DYNA DATABASE_CROSS_SECTION_PLANE keyword"""
 
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_PLANE"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseCrossSectionPlane class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "csid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xct",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yct",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zct",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xch",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ych",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zch",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xhev",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yhev",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zhev",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lenl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lenm",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASECROSSSECTIONPLANE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASECROSSSECTIONPLANE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASECROSSSECTIONPLANE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def csid(self) -> typing.Optional[int]:
         """Get or set the Optional ID for cross section. If not specified cross section ID is taken to be the cross section order in the input deck.
@@ -375,4 +271,14 @@ class DatabaseCrossSectionPlane(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("itype", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

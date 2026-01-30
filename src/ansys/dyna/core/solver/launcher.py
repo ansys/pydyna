@@ -324,7 +324,6 @@ def launch_dyna(
     >>> solution = launch_dyna(ip='192.168.1.30',port=5000)
 
     """
-
     # check_valid_ip(ip)  # double check
 
     # check_valid_port(port)

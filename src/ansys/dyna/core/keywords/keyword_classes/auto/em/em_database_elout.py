@@ -23,51 +23,39 @@
 """Module providing the EmDatabaseElout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMDATABASEELOUT_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 0),
+    FieldSchema("dtout", float, 10, 10, 0.0),
+)
+
+_EMDATABASEELOUT_CARD1 = (
+    FieldSchema("elsid", int, 0, 10, None),
+)
 
 class EmDatabaseElout(KeywordBase):
     """DYNA EM_DATABASE_ELOUT keyword"""
 
     keyword = "EM"
     subkeyword = "DATABASE_ELOUT"
+    _link_fields = {
+        "elsid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmDatabaseElout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "elsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASEELOUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMDATABASEELOUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.
@@ -104,4 +92,14 @@ class EmDatabaseElout(KeywordBase):
     def elsid(self, value: int) -> None:
         """Set the elsid property."""
         self._cards[1].set_value("elsid", value)
+
+    @property
+    def elsid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for elsid."""
+        return self._get_set_link("SOLID", self.elsid)
+
+    @elsid_link.setter
+    def elsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for elsid."""
+        self.elsid = value.sid
 

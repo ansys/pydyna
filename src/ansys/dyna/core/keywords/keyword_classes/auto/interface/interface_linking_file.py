@@ -23,7 +23,12 @@
 """Module providing the InterfaceLinkingFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACELINKINGFILE_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class InterfaceLinkingFile(KeywordBase):
     """DYNA INTERFACE_LINKING_FILE keyword"""
@@ -35,19 +40,10 @@ class InterfaceLinkingFile(KeywordBase):
         """Initialize the InterfaceLinkingFile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGFILE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the file from which the component data will be read.

@@ -23,7 +23,15 @@
 """Module providing the CeseControlMeshMov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESECONTROLMESHMOV_CARD0 = (
+    FieldSchema("mmsh", int, 0, 10, 1),
+    FieldSchema("lim_iter", int, 10, 10, 100),
+    FieldSchema("reltol", float, 20, 10, 0.001),
+    FieldSchema("abstol", float, 30, 10, 0.001),
+)
 
 class CeseControlMeshMov(KeywordBase):
     """DYNA CESE_CONTROL_MESH_MOV keyword"""
@@ -35,44 +43,10 @@ class CeseControlMeshMov(KeywordBase):
         """Initialize the CeseControlMeshMov class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmsh",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lim_iter",
-                        int,
-                        10,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        float,
-                        20,
-                        10,
-                        1.0e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abstol",
-                        float,
-                        30,
-                        10,
-                        1.0e-3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESECONTROLMESHMOV_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mmsh(self) -> int:
         """Get or set the Mesh motion selector:

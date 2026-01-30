@@ -23,90 +23,50 @@
 """Module providing the ControlImplicitModalDynamic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLIMPLICITMODALDYNAMIC_CARD0 = (
+    FieldSchema("mdflag", int, 0, 10, 0),
+    FieldSchema("zeta", float, 10, 10, None),
+    FieldSchema("md_strs", int, 20, 10, None),
+    FieldSchema("dtout", float, 30, 10, None),
+    FieldSchema("integ", int, 40, 10, 0),
+    FieldSchema("nsid", int, 50, 10, None),
+)
+
+_CONTROLIMPLICITMODALDYNAMIC_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_CONTROLIMPLICITMODALDYNAMIC_CARD2 = (
+    FieldSchema("filename2", str, 0, 80, None),
+)
 
 class ControlImplicitModalDynamic(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODAL_DYNAMIC keyword"""
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_MODAL_DYNAMIC"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitModalDynamic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "md_strs",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "integ",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename2",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMIC_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mdflag(self) -> int:
         """Get or set the Modal Dynamic flag
@@ -206,4 +166,14 @@ class ControlImplicitModalDynamic(KeywordBase):
     def filename2(self, value: str) -> None:
         """Set the filename2 property."""
         self._cards[2].set_value("filename2", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

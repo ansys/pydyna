@@ -23,7 +23,22 @@
 """Module providing the ChangeThermalParameters class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGETHERMALPARAMETERS_CARD0 = (
+    FieldSchema("ts", int, 0, 10, 0),
+    FieldSchema("dt", float, 10, 10, 0.0),
+    FieldSchema("tmin", float, 20, 10, 0.0),
+    FieldSchema("tmax", float, 30, 10, 0.0),
+    FieldSchema("dtemp", float, 40, 10, 0.0),
+    FieldSchema("tscp", float, 50, 10, 0.0),
+)
+
+_CHANGETHERMALPARAMETERS_CARD1 = (
+    FieldSchema("refmax", int, 0, 10, 0),
+    FieldSchema("tol", float, 10, 10, 0.0),
+)
 
 class ChangeThermalParameters(KeywordBase):
     """DYNA CHANGE_THERMAL_PARAMETERS keyword"""
@@ -35,80 +50,13 @@ class ChangeThermalParameters(KeywordBase):
         """Initialize the ChangeThermalParameters class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ts",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtemp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscp",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "refmax",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGETHERMALPARAMETERS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGETHERMALPARAMETERS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ts(self) -> int:
         """Get or set the Thermal time step code:

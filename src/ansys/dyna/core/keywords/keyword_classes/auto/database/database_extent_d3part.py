@@ -23,7 +23,32 @@
 """Module providing the DatabaseExtentD3Part class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTD3PART_CARD0 = (
+    FieldSchema("neiph", int, 0, 10, 0),
+    FieldSchema("neips", int, 10, 10, 0),
+    FieldSchema("maxint", int, 20, 10, 3),
+    FieldSchema("strflg", int, 30, 10, 0),
+    FieldSchema("sigflg", int, 40, 10, 1),
+    FieldSchema("epsflg", int, 50, 10, 1),
+    FieldSchema("rltflg", int, 60, 10, 1),
+    FieldSchema("engflg", int, 70, 10, 1),
+)
+
+_DATABASEEXTENTD3PART_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("ieverp", int, 10, 10, 0),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("shge", int, 40, 10, 1),
+    FieldSchema("stssz", int, 50, 10, 1),
+)
+
+_DATABASEEXTENTD3PART_CARD2 = (
+    FieldSchema("nintsld", int, 0, 10, 1),
+)
 
 class DatabaseExtentD3Part(KeywordBase):
     """DYNA DATABASE_EXTENT_D3PART keyword"""
@@ -35,137 +60,16 @@ class DatabaseExtentD3Part(KeywordBase):
         """Initialize the DatabaseExtentD3Part class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "neiph",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neips",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxint",
-                        int,
-                        20,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strflg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigflg",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsflg",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rltflg",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "engflg",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ieverp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shge",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stssz",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nintsld",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTD3PART_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTD3PART_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTD3PART_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def neiph(self) -> int:
         """Get or set the Number of additional integration point history variables written to the

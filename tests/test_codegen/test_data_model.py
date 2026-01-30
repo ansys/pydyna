@@ -22,9 +22,12 @@
 
 """Tests for keyword_generation data model classes."""
 
+import pytest
+
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
 
 
+@pytest.mark.codegen
 class TestField:
     """Test Field dataclass functionality."""
 
@@ -128,6 +131,7 @@ class TestField:
         assert field.help == "Line 1\nLine 2"
 
 
+@pytest.mark.codegen
 class TestCard:
     """Test Card dataclass functionality."""
 
@@ -171,6 +175,7 @@ class TestCard:
         assert len(card.fields) == 0
 
 
+@pytest.mark.codegen
 class TestKeywordData:
     """Test KeywordData dataclass functionality."""
 

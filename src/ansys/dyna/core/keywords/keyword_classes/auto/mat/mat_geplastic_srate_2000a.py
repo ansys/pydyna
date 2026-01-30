@@ -23,8 +23,32 @@
 """Module providing the MatGeplasticSrate2000A class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATGEPLASTICSRATE2000A_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("ratesf", float, 40, 10, None),
+    FieldSchema("edot0", float, 50, 10, None),
+    FieldSchema("alpha", float, 60, 10, None),
+)
+
+_MATGEPLASTICSRATE2000A_CARD1 = (
+    FieldSchema("lcss", int, 0, 10, None),
+    FieldSchema("lcfeps", int, 10, 10, None),
+    FieldSchema("lcfsig", int, 20, 10, None),
+    FieldSchema("lce", int, 30, 10, None),
+)
+
+_MATGEPLASTICSRATE2000A_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatGeplasticSrate2000A(KeywordBase):
     """DYNA MAT_GEPLASTIC_SRATE_2000A keyword"""
@@ -34,116 +58,35 @@ class MatGeplasticSrate2000A(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lcfeps": LinkType.DEFINE_CURVE,
+        "lcfsig": LinkType.DEFINE_CURVE,
+        "lce": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatGeplasticSrate2000A class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratesf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcss",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfeps",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfsig",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lce",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATGEPLASTICSRATE2000A_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGEPLASTICSRATE2000A_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatGeplasticSrate2000A.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGEPLASTICSRATE2000A_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. An unique number has to be used.
@@ -279,4 +222,64 @@ class MatGeplasticSrate2000A(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lcfeps_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfeps."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfeps:
+                return kwd
+        return None
+
+    @lcfeps_link.setter
+    def lcfeps_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfeps."""
+        self.lcfeps = value.lcid
+
+    @property
+    def lcfsig_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfsig."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfsig:
+                return kwd
+        return None
+
+    @lcfsig_link.setter
+    def lcfsig_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfsig."""
+        self.lcfsig = value.lcid
+
+    @property
+    def lce_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lce."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lce:
+                return kwd
+        return None
+
+    @lce_link.setter
+    def lce_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lce."""
+        self.lce = value.lcid
 

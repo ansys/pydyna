@@ -23,192 +23,69 @@
 """Module providing the ElementBeamScalarOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_ELEMENTBEAMSCALAROFFSET_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("rt1", int, 40, 8, 0),
+    FieldSchema("rr1", int, 48, 8, 0),
+    FieldSchema("rt2", int, 56, 8, 0),
+    FieldSchema("rr2", int, 64, 8, 0),
+    FieldSchema("local", int, 72, 8, 2),
+)
+
+_ELEMENTBEAMSCALAROFFSET_CARD1 = (
+    FieldSchema("vol", float, 0, 16, None),
+    FieldSchema("iner", float, 16, 16, None),
+    FieldSchema("cid", int, 32, 16, None),
+    FieldSchema("dofn1", float, 48, 16, 1.0),
+    FieldSchema("dofn2", float, 64, 16, 1.0),
+)
+
+_ELEMENTBEAMSCALAROFFSET_CARD2 = (
+    FieldSchema("wx1", float, 0, 10, 0.0),
+    FieldSchema("wy1", float, 10, 10, 0.0),
+    FieldSchema("wz1", float, 20, 10, 0.0),
+    FieldSchema("wx2", float, 30, 10, 0.0),
+    FieldSchema("wy2", float, 40, 10, 0.0),
+    FieldSchema("wz2", float, 50, 10, 0.0),
+)
 
 class ElementBeamScalarOffset(KeywordBase):
     """DYNA ELEMENT_BEAM_SCALAR_OFFSET keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_SCALAR_OFFSET"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamScalarOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt1",
-                        int,
-                        40,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr1",
-                        int,
-                        48,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt2",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr2",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        72,
-                        8,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vol",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iner",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofn1",
-                        float,
-                        48,
-                        16,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dofn2",
-                        float,
-                        64,
-                        16,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wx1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wx2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wy2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wz2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSCALAROFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSCALAROFFSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSCALAROFFSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -491,4 +368,39 @@ class ElementBeamScalarOffset(KeywordBase):
     def wz2(self, value: float) -> None:
         """Set the wz2 property."""
         self._cards[2].set_value("wz2", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

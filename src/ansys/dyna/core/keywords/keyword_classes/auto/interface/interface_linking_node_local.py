@@ -23,93 +23,49 @@
 """Module providing the InterfaceLinkingNodeLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_INTERFACELINKINGNODELOCAL_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+    FieldSchema("fx", int, 20, 10, None),
+    FieldSchema("fy", int, 30, 10, None),
+    FieldSchema("fz", int, 40, 10, None),
+)
+
+_INTERFACELINKINGNODELOCAL_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("lnid", int, 10, 10, None),
+    FieldSchema("usec", int, 20, 10, 0),
+    FieldSchema("usen", int, 30, 10, 0),
+)
 
 class InterfaceLinkingNodeLocal(KeywordBase):
     """DYNA INTERFACE_LINKING_NODE_LOCAL keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "LINKING_NODE_LOCAL"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lnid": LinkType.NODE,
+        "lcid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceLinkingNodeLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lnid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usec",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usen",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODELOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODELOCAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID to be moved by interface file, see *NODE.
@@ -218,4 +174,29 @@ class InterfaceLinkingNodeLocal(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""usen must be `None` or one of {0,1}.""")
         self._cards[1].set_value("usen", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given lnid."""
+        return self._get_link_by_attr("NODE", "nid", self.lnid, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for lcid."""
+        self.lcid = value.cid
 

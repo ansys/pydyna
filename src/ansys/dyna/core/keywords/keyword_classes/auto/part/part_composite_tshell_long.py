@@ -23,155 +23,61 @@
 """Module providing the PartCompositeTshellLong class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+
+_PARTCOMPOSITETSHELLLONG_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTCOMPOSITETSHELLLONG_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("hgid", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("tshear", int, 70, 10, 0),
+)
+
+_PARTCOMPOSITETSHELLLONG_CARD2 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("thick1", float, 10, 10, None),
+    FieldSchema("b1", float, 20, 10, None),
+    FieldSchema("tmid1", int, 30, 10, None),
+    FieldSchema("plyid", int, 40, 10, None),
+    FieldSchema("shrfac", float, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
 
 class PartCompositeTshellLong(KeywordBase):
     """DYNA PART_COMPOSITE_TSHELL_LONG keyword"""
 
     keyword = "PART"
     subkeyword = "COMPOSITE_TSHELL_LONG"
+    _link_fields = {
+        "mid1": LinkType.MAT,
+        "hgid": LinkType.HOURGLASS,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartCompositeTshellLong class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tshear",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "plyid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrfac",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITETSHELLLONG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITETSHELLLONG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITETSHELLLONG_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -314,4 +220,34 @@ class PartCompositeTshellLong(KeywordBase):
     def shrfac(self, value: float) -> None:
         """Set the shrfac property."""
         self._cards[2].set_value("shrfac", value)
+
+    @property
+    def mid1_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid1:
+                return kwd
+        return None
+
+    @mid1_link.setter
+    def mid1_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid1."""
+        self.mid1 = value.mid
+
+    @property
+    def hgid_link(self) -> Hourglass:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
 

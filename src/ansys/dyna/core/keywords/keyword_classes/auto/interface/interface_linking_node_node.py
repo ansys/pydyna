@@ -23,59 +23,36 @@
 """Module providing the InterfaceLinkingNodeNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INTERFACELINKINGNODENODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+    FieldSchema("fx", int, 20, 10, None),
+    FieldSchema("fy", int, 30, 10, None),
+    FieldSchema("fz", int, 40, 10, None),
+)
 
 class InterfaceLinkingNodeNode(KeywordBase):
     """DYNA INTERFACE_LINKING_NODE_NODE keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "LINKING_NODE_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceLinkingNodeNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODENODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID to be moved by interface file, see *NODE.
@@ -130,4 +107,9 @@ class InterfaceLinkingNodeNode(KeywordBase):
     def fz(self, value: int) -> None:
         """Set the fz property."""
         self._cards[0].set_value("fz", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

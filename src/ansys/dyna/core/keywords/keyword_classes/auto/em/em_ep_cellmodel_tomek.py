@@ -23,7 +23,14 @@
 """Module providing the EmEpCellmodelTomek class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEPCELLMODELTOMEK_CARD0 = (
+    FieldSchema("matid", int, 0, 10, None),
+    FieldSchema("phiendmid", float, 10, 10, None),
+    FieldSchema("phimidepl", float, 20, 10, None),
+)
 
 class EmEpCellmodelTomek(KeywordBase):
     """DYNA EM_EP_CELLMODEL_TOMEK keyword"""
@@ -35,33 +42,10 @@ class EmEpCellmodelTomek(KeywordBase):
         """Initialize the EmEpCellmodelTomek class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "matid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phiendmid",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phimidepl",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTOMEK_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card

@@ -23,8 +23,37 @@
 """Module providing the MatGeneralNonlinear1DofDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("iunld", int, 30, 10, None),
+    FieldSchema("offset", float, 40, 10, None),
+    FieldSchema("dampf", float, 50, 10, None),
+)
+
+_MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD1 = (
+    FieldSchema("lcidt", int, 0, 10, None),
+    FieldSchema("lcidtu", int, 10, 10, None),
+    FieldSchema("lcidtd", int, 20, 10, None),
+    FieldSchema("lcidte", int, 30, 10, None),
+)
+
+_MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD2 = (
+    FieldSchema("utfail", float, 0, 10, None),
+    FieldSchema("ucfail", float, 10, 10, None),
+    FieldSchema("iu", float, 20, 10, None),
+)
+
+_MATGENERALNONLINEAR1DOFDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
     """DYNA MAT_GENERAL_NONLINEAR_1DOF_DISCRETE_BEAM keyword"""
@@ -34,134 +63,38 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lcidtu": LinkType.DEFINE_CURVE,
+        "lcidtd": LinkType.DEFINE_CURVE,
+        "lcidte": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatGeneralNonlinear1DofDiscreteBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunld",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtu",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtd",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidte",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "utfail",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ucfail",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iu",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatGeneralNonlinear1DofDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGENERALNONLINEAR1DOFDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number has to be chosen.
@@ -322,4 +255,64 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lcidtu_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtu."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtu:
+                return kwd
+        return None
+
+    @lcidtu_link.setter
+    def lcidtu_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtu."""
+        self.lcidtu = value.lcid
+
+    @property
+    def lcidtd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidtd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidtd:
+                return kwd
+        return None
+
+    @lcidtd_link.setter
+    def lcidtd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidtd."""
+        self.lcidtd = value.lcid
+
+    @property
+    def lcidte_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidte."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidte:
+                return kwd
+        return None
+
+    @lcidte_link.setter
+    def lcidte_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidte."""
+        self.lcidte = value.lcid
 

@@ -23,8 +23,24 @@
 """Module providing the DefineSphMeshSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESPHMESHSURFACE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("sphpid", int, 20, 10, None),
+    FieldSchema("sphxid", int, 30, 10, None),
+    FieldSchema("nsid", int, 40, 10, None),
+    FieldSchema("space", float, 50, 10, 0.0),
+    FieldSchema("iout", int, 60, 10, 0),
+)
+
+_DEFINESPHMESHSURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSphMeshSurface(KeywordBase):
     """DYNA DEFINE_SPH_MESH_SURFACE keyword"""
@@ -34,87 +50,31 @@ class DefineSphMeshSurface(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "sphxid": LinkType.SECTION,
+        "nsid": LinkType.SET_NODE,
+        "sphpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSphMeshSurface class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphpid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphxid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "space",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iout",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHMESHSURFACE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphMeshSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHMESHSURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID for the region of the mesh upon which the SPH elements will be placed.
@@ -213,4 +173,34 @@ class DefineSphMeshSurface(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def sphxid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for sphxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.sphxid:
+                return kwd
+        return None
+
+    @sphxid_link.setter
+    def sphxid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for sphxid."""
+        self.sphxid = value.secid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def sphpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given sphpid."""
+        return self._get_link_by_attr("PART", "pid", self.sphpid, "parts")
 

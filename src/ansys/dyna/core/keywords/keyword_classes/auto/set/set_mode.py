@@ -23,8 +23,28 @@
 """Module providing the SetMode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETMODE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETMODE_CARD1 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("mid2", int, 10, 10, None),
+    FieldSchema("mid3", int, 20, 10, None),
+    FieldSchema("mid4", int, 30, 10, None),
+    FieldSchema("mid5", int, 40, 10, None),
+    FieldSchema("mid6", int, 50, 10, None),
+    FieldSchema("mid7", int, 60, 10, None),
+    FieldSchema("mid8", int, 70, 10, None),
+)
+
+_SETMODE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetMode(KeywordBase):
     """DYNA SET_MODE keyword"""
@@ -40,96 +60,23 @@ class SetMode(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETMODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETMODE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetMode.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETMODE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set identification. All mode sets should have a unique set ID.

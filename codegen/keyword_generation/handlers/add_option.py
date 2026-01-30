@@ -60,7 +60,6 @@ class AddOptionSettings:
 
 @handler(
     name="add-option",
-    dependencies=["reorder-card"],
     description="Adds optional card groups that appear based on keyword title options",
     input_schema={
         "type": "array",
@@ -126,7 +125,11 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Keep dict settings for add-option - uses 'option-name' not 'name'."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Create optional card groups from settings.
 
@@ -153,7 +156,3 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             }
             new_options.append(new_option)
         kwd_data.options = new_options
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

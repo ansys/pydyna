@@ -23,8 +23,37 @@
 """Module providing the MatElasticPhaseChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATELASTICPHASECHANGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro1", float, 10, 10, None),
+    FieldSchema("e1", float, 20, 10, None),
+    FieldSchema("pr1", float, 30, 10, None),
+)
+
+_MATELASTICPHASECHANGE_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("ro2", float, 10, 10, None),
+    FieldSchema("e2", float, 20, 10, None),
+    FieldSchema("pr2", float, 30, 10, None),
+)
+
+_MATELASTICPHASECHANGE_CARD2 = (
+    FieldSchema("x1", float, 0, 10, None),
+    FieldSchema("y1", float, 10, 10, None),
+    FieldSchema("z1", float, 20, 10, None),
+    FieldSchema("x2", float, 30, 10, None),
+    FieldSchema("y2", float, 40, 10, None),
+    FieldSchema("z2", float, 50, 10, None),
+    FieldSchema("thkfac", float, 60, 10, 1.0),
+)
+
+_MATELASTICPHASECHANGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatElasticPhaseChange(KeywordBase):
     """DYNA MAT_ELASTIC_PHASE_CHANGE keyword"""
@@ -40,143 +69,26 @@ class MatElasticPhaseChange(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thkfac",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATELASTICPHASECHANGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICPHASECHANGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICPHASECHANGE_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatElasticPhaseChange.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICPHASECHANGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label not exceeding 8	characters must be specified..

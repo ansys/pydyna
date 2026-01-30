@@ -23,7 +23,12 @@
 """Module providing the DatabaseFrequencyBinaryD3PsdSummation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFREQUENCYBINARYD3PSDSUMMATION_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class DatabaseFrequencyBinaryD3PsdSummation(KeywordBase):
     """DYNA DATABASE_FREQUENCY_BINARY_D3PSD_SUMMATION keyword"""
@@ -35,19 +40,10 @@ class DatabaseFrequencyBinaryD3PsdSummation(KeywordBase):
         """Initialize the DatabaseFrequencyBinaryD3PsdSummation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3PSDSUMMATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Path and file name of precomputed PSD or RMS binary databases (See Remark 3)

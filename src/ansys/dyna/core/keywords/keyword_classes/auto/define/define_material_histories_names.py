@@ -23,8 +23,25 @@
 """Module providing the DefineMaterialHistoriesNames class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEMATERIALHISTORIESNAMES_CARD0 = (
+    FieldSchema("label", str, 0, 40, None),
+    FieldSchema("a1", float, 40, 10, 0.0),
+    FieldSchema("a2", float, 50, 10, 0.0),
+    FieldSchema("a3", float, 60, 10, 0.0),
+    FieldSchema("a4", float, 70, 10, 0.0),
+)
+
+_DEFINEMATERIALHISTORIESNAMES_CARD1 = (
+    FieldSchema("name", str, 0, 80, None),
+)
+
+_DEFINEMATERIALHISTORIESNAMES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineMaterialHistoriesNames(KeywordBase):
     """DYNA DEFINE_MATERIAL_HISTORIES_NAMES keyword"""
@@ -40,79 +57,23 @@ class DefineMaterialHistoriesNames(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "label",
-                        str,
-                        0,
-                        40,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a4",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "name",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEMATERIALHISTORIESNAMES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEMATERIALHISTORIESNAMES_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineMaterialHistoriesNames.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEMATERIALHISTORIESNAMES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def label(self) -> typing.Optional[str]:
         """Get or set the String identifying history variable type.

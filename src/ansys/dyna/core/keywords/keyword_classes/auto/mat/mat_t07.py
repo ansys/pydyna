@@ -23,8 +23,37 @@
 """Module providing the MatT07 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATT07_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+    FieldSchema("tgrlc", float, 20, 10, None),
+    FieldSchema("tgmult", float, 30, 10, None),
+    FieldSchema("hdead", float, 40, 10, None),
+    FieldSchema("tdead", float, 50, 10, None),
+    FieldSchema("tlat", float, 60, 10, None),
+    FieldSchema("hlat", float, 70, 10, None),
+)
+
+_MATT07_CARD1 = (
+    FieldSchema("lchc", int, 0, 10, None),
+    FieldSchema("lctc", int, 10, 10, None),
+    FieldSchema("tlstart", float, 20, 10, None),
+    FieldSchema("tlend", float, 30, 10, None),
+    FieldSchema("tistart", float, 40, 10, None),
+    FieldSchema("tiend", float, 50, 10, None),
+    FieldSchema("hghost", float, 60, 10, None),
+    FieldSchema("tghost", float, 70, 10, None),
+)
+
+_MATT07_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatT07(KeywordBase):
     """DYNA MAT_T07 keyword"""
@@ -34,151 +63,34 @@ class MatT07(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tgrlc": LinkType.DEFINE_CURVE,
+        "lchc": LinkType.DEFINE_CURVE,
+        "lctc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatT07 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgrlc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgmult",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hdead",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdead",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlat",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlat",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lchc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlstart",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlend",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tistart",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tiend",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hghost",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tghost",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATT07_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT07_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatT07.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATT07_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal material identification. A unique number or label must be specified.
@@ -372,4 +284,49 @@ class MatT07(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tgrlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tgrlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tgrlc:
+                return kwd
+        return None
+
+    @tgrlc_link.setter
+    def tgrlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tgrlc."""
+        self.tgrlc = value.lcid
+
+    @property
+    def lchc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lchc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lchc:
+                return kwd
+        return None
+
+    @lchc_link.setter
+    def lchc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lchc."""
+        self.lchc = value.lcid
+
+    @property
+    def lctc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lctc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lctc:
+                return kwd
+        return None
+
+    @lctc_link.setter
+    def lctc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lctc."""
+        self.lctc = value.lcid
 

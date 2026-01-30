@@ -23,88 +23,41 @@
 """Module providing the PartDuplicate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
+
+_PARTDUPLICATE_CARD0 = (
+    FieldSchema("ptype", str, 0, 10, "PART"),
+    FieldSchema("typeid", int, 10, 10, None),
+    FieldSchema("idpoff", int, 20, 10, 0),
+    FieldSchema("ideoff", int, 30, 10, 0),
+    FieldSchema("idnoff", int, 40, 10, 0),
+    FieldSchema("tranid", int, 50, 10, 0),
+    FieldSchema("boxid", int, 60, 10, 0),
+    FieldSchema("zmin", float, 70, 10, 0.0),
+)
 
 class PartDuplicate(KeywordBase):
     """DYNA PART_DUPLICATE keyword"""
 
     keyword = "PART"
     subkeyword = "DUPLICATE"
+    _link_fields = {
+        "boxid": LinkType.DEFINE_BOX,
+        "tranid": LinkType.DEFINE_TRANSFORMATION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartDuplicate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ptype",
-                        str,
-                        0,
-                        10,
-                        "PART",
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idpoff",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ideoff",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idnoff",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tranid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmin",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTDUPLICATE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ptype(self) -> str:
         """Get or set the Set to "PART" to duplicate a single part or "PSET" to duplicate a part set.
@@ -194,6 +147,21 @@ class PartDuplicate(KeywordBase):
     def zmin(self, value: float) -> None:
         """Set the zmin property."""
         self._cards[0].set_value("zmin", value)
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
 
     @property
     def tranid_link(self) -> DefineTransformation:

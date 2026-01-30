@@ -23,98 +23,51 @@
 """Module providing the ConstrainedNodeInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDNODEINTERPOLATION_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("numcn", int, 10, 10, None),
+)
+
+_CONSTRAINEDNODEINTERPOLATION_CARD1 = (
+    FieldSchema("cn1", int, 0, 10, None),
+    FieldSchema("w1", float, 10, 10, None),
+    FieldSchema("cn2", int, 20, 10, None),
+    FieldSchema("w2", float, 30, 10, None),
+    FieldSchema("cn3", int, 40, 10, None),
+    FieldSchema("w3", float, 50, 10, None),
+    FieldSchema("cn4", int, 60, 10, None),
+    FieldSchema("w4", float, 70, 10, None),
+)
 
 class ConstrainedNodeInterpolation(KeywordBase):
     """DYNA CONSTRAINED_NODE_INTERPOLATION keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "NODE_INTERPOLATION"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "cn1": LinkType.NODE,
+        "cn2": LinkType.NODE,
+        "cn3": LinkType.NODE,
+        "cn4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedNodeInterpolation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numcn",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cn1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cn2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cn3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cn4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDNODEINTERPOLATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDNODEINTERPOLATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID of the interpolation node as defined in *NODE (see Remark 1).
@@ -224,4 +177,29 @@ class ConstrainedNodeInterpolation(KeywordBase):
     def w4(self, value: float) -> None:
         """Set the w4 property."""
         self._cards[1].set_value("w4", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def cn1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn1."""
+        return self._get_link_by_attr("NODE", "nid", self.cn1, "parts")
+
+    @property
+    def cn2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn2."""
+        return self._get_link_by_attr("NODE", "nid", self.cn2, "parts")
+
+    @property
+    def cn3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn3."""
+        return self._get_link_by_attr("NODE", "nid", self.cn3, "parts")
+
+    @property
+    def cn4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cn4."""
+        return self._get_link_by_attr("NODE", "nid", self.cn4, "parts")
 

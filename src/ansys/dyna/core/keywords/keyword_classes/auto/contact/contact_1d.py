@@ -23,78 +23,38 @@
 """Module providing the Contact1D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTACT1D_CARD0 = (
+    FieldSchema("nsidr", int, 0, 10, None),
+    FieldSchema("nsidc", int, 10, 10, None),
+    FieldSchema("err", float, 20, 10, 0.0),
+    FieldSchema("sigc", float, 30, 10, 0.0),
+    FieldSchema("gb", float, 40, 10, 0.0),
+    FieldSchema("smax", float, 50, 10, 0.0),
+    FieldSchema("exp", float, 60, 10, 0.0),
+)
 
 class Contact1D(KeywordBase):
     """DYNA CONTACT_1D keyword"""
 
     keyword = "CONTACT"
     subkeyword = "1D"
+    _link_fields = {
+        "nsidr": LinkType.SET_NODE,
+        "nsidc": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Contact1D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsidr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "err",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gb",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exp",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACT1D_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsidr(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID for the rebar nodes that slide along the concrete; see* SET_NODE
@@ -171,4 +131,24 @@ class Contact1D(KeywordBase):
     def exp(self, value: float) -> None:
         """Set the exp property."""
         self._cards[0].set_value("exp", value)
+
+    @property
+    def nsidr_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidr."""
+        return self._get_set_link("NODE", self.nsidr)
+
+    @nsidr_link.setter
+    def nsidr_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidr."""
+        self.nsidr = value.sid
+
+    @property
+    def nsidc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidc."""
+        return self._get_set_link("NODE", self.nsidc)
+
+    @nsidc_link.setter
+    def nsidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidc."""
+        self.nsidc = value.sid
 

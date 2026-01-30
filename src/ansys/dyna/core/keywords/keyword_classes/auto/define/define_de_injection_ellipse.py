@@ -23,8 +23,59 @@
 """Module providing the DefineDeInjectionEllipse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_DEFINEDEINJECTIONELLIPSE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("xc", float, 20, 10, 0.0),
+    FieldSchema("yc", float, 30, 10, 0.0),
+    FieldSchema("zc", float, 40, 10, 0.0),
+    FieldSchema("xl", float, 50, 10, 0.0),
+    FieldSchema("yl", float, 60, 10, 0.0),
+    FieldSchema("cid", int, 70, 10, 0),
+)
+
+_DEFINEDEINJECTIONELLIPSE_CARD1 = (
+    FieldSchema("rmass", float, 0, 10, None),
+    FieldSchema("rmin", float, 10, 10, None),
+    FieldSchema("rmax", float, 20, 10, None),
+    FieldSchema("vx", float, 30, 10, 0.0),
+    FieldSchema("vy", float, 40, 10, 0.0),
+    FieldSchema("vz", float, 50, 10, 0.0),
+    FieldSchema("tbeg", float, 60, 10, 0.0),
+    FieldSchema("tend", float, 70, 10, 1e+20),
+)
+
+_DEFINEDEINJECTIONELLIPSE_CARD2 = (
+    FieldSchema("ifunc", int, 0, 10, 0),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("imulti", int, 20, 10, None),
+    FieldSchema("lcvx", int, 30, 10, None),
+    FieldSchema("lcvy", int, 40, 10, None),
+    FieldSchema("lcvz", int, 50, 10, None),
+)
+
+_DEFINEDEINJECTIONELLIPSE_CARD3 = (
+    FieldSchema("r1", float, 0, 10, 0.0),
+    FieldSchema("p1", float, 10, 10, 0.0),
+    FieldSchema("r2", float, 20, 10, 0.0),
+    FieldSchema("p2", float, 30, 10, 0.0),
+    FieldSchema("r3", float, 40, 10, 0.0),
+    FieldSchema("p3", float, 50, 10, 0.0),
+    FieldSchema("r4", float, 60, 10, 0.0),
+    FieldSchema("p4", float, 70, 10, 0.0),
+)
+
+_DEFINEDEINJECTIONELLIPSE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeInjectionEllipse(KeywordBase):
     """DYNA DEFINE_DE_INJECTION_ELLIPSE keyword"""
@@ -34,277 +85,44 @@ class DefineDeInjectionEllipse(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lcvx": LinkType.DEFINE_CURVE,
+        "lcvy": LinkType.DEFINE_CURVE,
+        "lcvz": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "sid": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeInjectionEllipse class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rmass",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        70,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ifunc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imulti",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r4",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTIONELLIPSE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTIONELLIPSE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTIONELLIPSE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTIONELLIPSE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeInjectionEllipse.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINJECTIONELLIPSE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of new generated DES nodes
@@ -654,4 +472,84 @@ class DefineDeInjectionEllipse(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcvx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvx:
+                return kwd
+        return None
+
+    @lcvx_link.setter
+    def lcvx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvx."""
+        self.lcvx = value.lcid
+
+    @property
+    def lcvy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvy:
+                return kwd
+        return None
+
+    @lcvy_link.setter
+    def lcvy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvy."""
+        self.lcvy = value.lcid
+
+    @property
+    def lcvz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvz:
+                return kwd
+        return None
+
+    @lcvz_link.setter
+    def lcvz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvz."""
+        self.lcvz = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid."""
+        return self._get_set_link("NODE", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid."""
+        self.sid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

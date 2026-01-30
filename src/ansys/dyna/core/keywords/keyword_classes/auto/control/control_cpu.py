@@ -23,7 +23,13 @@
 """Module providing the ControlCpu class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCPU_CARD0 = (
+    FieldSchema("cputim", float, 0, 10, 0.0),
+    FieldSchema("iglst", int, 0, 10, 0),
+)
 
 class ControlCpu(KeywordBase):
     """DYNA CONTROL_CPU keyword"""
@@ -35,28 +41,10 @@ class ControlCpu(KeywordBase):
         """Initialize the ControlCpu class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cputim",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iglst",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCPU_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cputim(self) -> float:
         """Get or set the Seconds of cpu time:

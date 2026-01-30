@@ -23,8 +23,30 @@
 """Module providing the MatS15 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATS15_CARD0 = (
+    FieldSchema("mid", int, 0, 10, 0),
+    FieldSchema("lo", float, 10, 10, None),
+    FieldSchema("vmax", float, 20, 10, None),
+    FieldSchema("sv", float, 30, 10, 1.0),
+    FieldSchema("a", float, 40, 10, None),
+    FieldSchema("fmax", float, 50, 10, None),
+    FieldSchema("tl", float, 60, 10, 1.0),
+    FieldSchema("tv", float, 70, 10, 1.0),
+)
+
+_MATS15_CARD1 = (
+    FieldSchema("fpe", float, 0, 10, None),
+    FieldSchema("lmax", float, 10, 10, None),
+    FieldSchema("ksh", float, 20, 10, None),
+)
+
+_MATS15_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatS15(KeywordBase):
     """DYNA MAT_S15 keyword"""
@@ -40,114 +62,23 @@ class MatS15(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lo",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sv",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tl",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tv",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fpe",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ksh",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATS15_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATS15_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatS15.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATS15_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> int:
         """Get or set the Material identification. A uniques number has to be used.

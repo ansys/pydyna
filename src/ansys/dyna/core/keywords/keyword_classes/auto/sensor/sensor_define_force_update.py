@@ -23,8 +23,29 @@
 """Module providing the SensorDefineForceUpdate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_SENSORDEFINEFORCEUPDATE_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("ftype", str, 10, 10, "AIRBAG"),
+    FieldSchema("typeid", int, 20, 10, None),
+    FieldSchema("vid", str, 30, 10, None),
+    FieldSchema("crd", int, 40, 10, None),
+)
+
+_SENSORDEFINEFORCEUPDATE_CARD1 = (
+    FieldSchema("birth", float, 0, 10, None),
+    FieldSchema("death", float, 10, 10, None),
+    FieldSchema("dtupd", float, 20, 10, None),
+)
+
+_SENSORDEFINEFORCEUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineForceUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_FORCE_UPDATE keyword"""
@@ -34,96 +55,33 @@ class SensorDefineForceUpdate(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "vid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "crd": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SensorDefineForceUpdate class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftype",
-                        str,
-                        10,
-                        10,
-                        "AIRBAG",
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crd",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtupd",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEFORCEUPDATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEFORCEUPDATE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineForceUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEFORCEUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.
@@ -242,4 +200,34 @@ class SensorDefineForceUpdate(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def vid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for vid."""
+        self.vid = value.cid
+
+    @property
+    def crd_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for crd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.crd:
+                return kwd
+        return None
+
+    @crd_link.setter
+    def crd_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for crd."""
+        self.crd = value.cid
 

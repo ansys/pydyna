@@ -20,5 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for running LS-DYNA simulations."""
+
 from .local_solver import run_dyna  # noqa: F401
 from .options import MemoryUnit, MpiOption, Precision  # noqa: F401

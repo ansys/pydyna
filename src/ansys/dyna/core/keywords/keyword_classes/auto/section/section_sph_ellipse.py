@@ -23,8 +23,33 @@
 """Module providing the SectionSphEllipse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSPHELLIPSE_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("cslh", float, 10, 10, 1.2),
+    FieldSchema("hmin", float, 20, 10, 0.2),
+    FieldSchema("hmax", float, 30, 10, 2.0),
+    FieldSchema("sphini", float, 40, 10, 0.0),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("start", float, 60, 10, 0.0),
+    FieldSchema("sphkern", int, 70, 10, 0),
+)
+
+_SECTIONSPHELLIPSE_CARD1 = (
+    FieldSchema("hxcslh", float, 0, 10, None),
+    FieldSchema("hycslh", float, 10, 10, None),
+    FieldSchema("hzcslh", float, 20, 10, None),
+    FieldSchema("hxini", float, 30, 10, None),
+    FieldSchema("hyini", float, 40, 10, None),
+    FieldSchema("hzini", float, 50, 10, None),
+)
+
+_SECTIONSPHELLIPSE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionSphEllipse(KeywordBase):
     """DYNA SECTION_SPH_ELLIPSE keyword"""
@@ -40,138 +65,23 @@ class SectionSphEllipse(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cslh",
-                        float,
-                        10,
-                        10,
-                        1.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmin",
-                        float,
-                        20,
-                        10,
-                        0.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmax",
-                        float,
-                        30,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphini",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "start",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphkern",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hxcslh",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hycslh",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hzcslh",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hxini",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hyini",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hzini",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSPHELLIPSE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSPHELLIPSE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionSphEllipse.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPHELLIPSE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

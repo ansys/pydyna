@@ -23,8 +23,34 @@
 """Module providing the Mat202 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT202_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sgy", float, 40, 10, None),
+)
+
+_MAT202_CARD1 = (
+    FieldSchema("lc_e", int, 0, 10, None),
+    FieldSchema("lc_pr", int, 10, 10, None),
+    FieldSchema("lc_al", int, 20, 10, None),
+    FieldSchema("tbl_ss", int, 30, 10, None),
+    FieldSchema("lc_fs", int, 40, 10, None),
+)
+
+_MAT202_CARD2 = (
+)
+
+_MAT202_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat202(KeywordBase):
     """DYNA MAT_202 keyword"""
@@ -34,113 +60,39 @@ class Mat202(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lc_e": LinkType.DEFINE_CURVE,
+        "lc_pr": LinkType.DEFINE_CURVE,
+        "lc_al": LinkType.DEFINE_CURVE,
+        "tbl_ss": LinkType.DEFINE_CURVE,
+        "lc_fs": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat202 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sgy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_e",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_pr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_al",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbl_ss",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_fs",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT202_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat202.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT202_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -264,4 +216,79 @@ class Mat202(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc_e_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_e."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_e:
+                return kwd
+        return None
+
+    @lc_e_link.setter
+    def lc_e_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_e."""
+        self.lc_e = value.lcid
+
+    @property
+    def lc_pr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_pr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_pr:
+                return kwd
+        return None
+
+    @lc_pr_link.setter
+    def lc_pr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_pr."""
+        self.lc_pr = value.lcid
+
+    @property
+    def lc_al_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_al."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_al:
+                return kwd
+        return None
+
+    @lc_al_link.setter
+    def lc_al_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_al."""
+        self.lc_al = value.lcid
+
+    @property
+    def tbl_ss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tbl_ss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tbl_ss:
+                return kwd
+        return None
+
+    @tbl_ss_link.setter
+    def tbl_ss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tbl_ss."""
+        self.tbl_ss = value.lcid
+
+    @property
+    def lc_fs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_fs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_fs:
+                return kwd
+        return None
+
+    @lc_fs_link.setter
+    def lc_fs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_fs."""
+        self.lc_fs = value.lcid
 

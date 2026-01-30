@@ -23,293 +23,87 @@
 """Module providing the ControlDiscreteElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLDISCRETEELEMENT_CARD0 = (
+    FieldSchema("ndamp", float, 0, 10, 0.0),
+    FieldSchema("tdamp", float, 10, 10, 0.0),
+    FieldSchema("frics", float, 20, 10, 0.0),
+    FieldSchema("fricr", float, 30, 10, 0.0),
+    FieldSchema("normk", float, 40, 10, 0.01),
+    FieldSchema("sheark", float, 50, 10, 0.0),
+    FieldSchema("cap", int, 60, 10, 0),
+    FieldSchema("vtk", int, 70, 10, 0),
+)
+
+_CONTROLDISCRETEELEMENT_CARD1 = (
+    FieldSchema("gamma", float, 0, 10, 0.0),
+    FieldSchema("vol", float, 10, 10, 0.0),
+    FieldSchema("ang", float, 20, 10, 0.0),
+    FieldSchema("gap", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ignore", int, 50, 10, 0),
+    FieldSchema("nbuf", int, 60, 10, 6),
+    FieldSchema("parallel", int, 70, 10, 0),
+)
+
+_CONTROLDISCRETEELEMENT_CARD2 = (
+    FieldSchema("lnorm", int, 0, 10, 0),
+    FieldSchema("lshear", int, 10, 10, 0),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("fricd", float, 30, 10, 0.0),
+    FieldSchema("dc", float, 40, 10, 0.0),
+    FieldSchema("ncrb", int, 50, 10, 0),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 1e+20),
+)
+
+_CONTROLDISCRETEELEMENT_CARD3 = (
+    FieldSchema("cp", float, 0, 10, 0.0),
+    FieldSchema("tc", float, 10, 10, 0.0),
+    FieldSchema("tfac", float, 20, 10, 0.0),
+)
+
+_CONTROLDISCRETEELEMENT_CARD4 = (
+    FieldSchema("idesoft", int, 0, 10, 0),
+    FieldSchema("sofscl", float, 10, 10, 0.1),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("iskip", int, 30, 10, 0),
+    FieldSchema("maxnei", int, 40, 10, 20),
+)
 
 class ControlDiscreteElement(KeywordBase):
     """DYNA CONTROL_DISCRETE_ELEMENT keyword"""
 
     keyword = "CONTROL"
     subkeyword = "DISCRETE_ELEMENT"
+    _link_fields = {
+        "lnorm": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlDiscreteElement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ndamp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdamp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frics",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fricr",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normk",
-                        float,
-                        40,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sheark",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cap",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtk",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gamma",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ignore",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbuf",
-                        int,
-                        60,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "parallel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lnorm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lshear",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fricd",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncrb",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfac",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idesoft",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sofscl",
-                        float,
-                        10,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iskip",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxnei",
-                        int,
-                        40,
-                        10,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLDISCRETEELEMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDISCRETEELEMENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDISCRETEELEMENT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDISCRETEELEMENT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDISCRETEELEMENT_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def ndamp(self) -> float:
         """Get or set the Normal damping coefficient.
@@ -648,4 +442,19 @@ class ControlDiscreteElement(KeywordBase):
     def maxnei(self, value: int) -> None:
         """Set the maxnei property."""
         self._cards[4].set_value("maxnei", value)
+
+    @property
+    def lnorm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lnorm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lnorm:
+                return kwd
+        return None
+
+    @lnorm_link.setter
+    def lnorm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lnorm."""
+        self.lnorm = value.lcid
 

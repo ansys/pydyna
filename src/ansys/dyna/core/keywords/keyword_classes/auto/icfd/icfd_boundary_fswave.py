@@ -23,91 +23,46 @@
 """Module providing the IcfdBoundaryFswave class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDBOUNDARYFSWAVE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("wtype", int, 10, 10, None),
+    FieldSchema("h0", float, 20, 10, None),
+    FieldSchema("wamp", float, 30, 10, None),
+    FieldSchema("wleng", float, 40, 10, None),
+    FieldSchema("wmax", float, 50, 10, None),
+    FieldSchema("sflcid", int, 60, 10, None),
+    FieldSchema("wang", float, 70, 10, None),
+)
+
+_ICFDBOUNDARYFSWAVE_CARD1 = (
+    FieldSchema("wpeak", float, 0, 10, None),
+)
 
 class IcfdBoundaryFswave(KeywordBase):
     """DYNA ICFD_BOUNDARY_FSWAVE keyword"""
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_FSWAVE"
+    _link_fields = {
+        "sflcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryFswave class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wamp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wleng",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wmax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sflcid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wang",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wpeak",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYFSWAVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYFSWAVE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID for a fluid surface.
@@ -213,4 +168,19 @@ class IcfdBoundaryFswave(KeywordBase):
     def wpeak(self, value: float) -> None:
         """Set the wpeak property."""
         self._cards[1].set_value("wpeak", value)
+
+    @property
+    def sflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sflcid:
+                return kwd
+        return None
+
+    @sflcid_link.setter
+    def sflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sflcid."""
+        self.sflcid = value.lcid
 

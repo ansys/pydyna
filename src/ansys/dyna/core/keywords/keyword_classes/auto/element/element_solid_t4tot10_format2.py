@@ -23,38 +23,32 @@
 """Module providing the ElementSolidT4Tot10Format2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ELEMENTSOLIDT4TOT10FORMAT2_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
 
 class ElementSolidT4Tot10Format2(KeywordBase):
     """DYNA ELEMENT_SOLID_T4TOT10_FORMAT2 keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SOLID_T4TOT10_FORMAT2"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSolidT4Tot10Format2 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDT4TOT10FORMAT2_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.
@@ -76,4 +70,9 @@ class ElementSolidT4Tot10Format2(KeywordBase):
     def pid(self, value: int) -> None:
         """Set the pid property."""
         self._cards[0].set_value("pid", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

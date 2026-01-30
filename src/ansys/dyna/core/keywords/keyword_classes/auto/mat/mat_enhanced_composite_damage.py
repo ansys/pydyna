@@ -23,8 +23,105 @@
 """Module providing the MatEnhancedCompositeDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ea", float, 20, 10, None),
+    FieldSchema("eb", float, 30, 10, None),
+    FieldSchema("_ec_", float, 40, 10, None, "(ec)"),
+    FieldSchema("prba", float, 50, 10, None),
+    FieldSchema("_prca_", float, 60, 10, None, "(prca)"),
+    FieldSchema("_prcb_", float, 70, 10, None, "(prcb)"),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD1 = (
+    FieldSchema("gab", float, 0, 10, None),
+    FieldSchema("gbc", float, 10, 10, None),
+    FieldSchema("gca", float, 20, 10, None),
+    FieldSchema("_kf_", float, 30, 10, None, "(kf)"),
+    FieldSchema("aopt", float, 40, 10, None),
+    FieldSchema("_2way", float, 50, 10, None, "2way"),
+    FieldSchema("ti", float, 60, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD2 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+    FieldSchema("mangle", float, 60, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD3 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("dfailm", float, 60, 10, None),
+    FieldSchema("dfails", float, 70, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD4 = (
+    FieldSchema("tfail", float, 0, 10, None),
+    FieldSchema("alph", float, 10, 10, None),
+    FieldSchema("soft", float, 20, 10, 1.0),
+    FieldSchema("fbrt", float, 30, 10, None),
+    FieldSchema("ycfac", float, 40, 10, 2.0),
+    FieldSchema("dfailt", float, 50, 10, None),
+    FieldSchema("dfailc", float, 60, 10, None),
+    FieldSchema("efs", float, 70, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD5 = (
+    FieldSchema("xc", float, 0, 10, None),
+    FieldSchema("xt", float, 10, 10, None),
+    FieldSchema("yc", float, 20, 10, None),
+    FieldSchema("yt", float, 30, 10, None),
+    FieldSchema("sc", float, 40, 10, None),
+    FieldSchema("crit", float, 50, 10, 54.0),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD6 = (
+    FieldSchema("pel", float, 0, 10, None),
+    FieldSchema("epsf", float, 10, 10, None),
+    FieldSchema("epsr", float, 20, 10, None),
+    FieldSchema("tsmd", float, 30, 10, None),
+    FieldSchema("soft2", float, 40, 10, 1.0),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD7 = (
+    FieldSchema("slimt1", float, 0, 10, None),
+    FieldSchema("slimc1", float, 10, 10, None),
+    FieldSchema("slimt2", float, 20, 10, None),
+    FieldSchema("slimc2", float, 30, 10, None),
+    FieldSchema("slims", float, 40, 10, None),
+    FieldSchema("ncyred", float, 50, 10, None),
+    FieldSchema("softg", float, 60, 10, 1.0),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_CARD8 = (
+    FieldSchema("lcxc", int, 0, 10, None),
+    FieldSchema("lcxt", int, 10, 10, None),
+    FieldSchema("lcyc", int, 20, 10, None),
+    FieldSchema("lcyt", int, 30, 10, None),
+    FieldSchema("lcsc", int, 40, 10, None),
+    FieldSchema("dt", float, 50, 10, None),
+)
+
+_MATENHANCEDCOMPOSITEDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatEnhancedCompositeDamage(KeywordBase):
     """DYNA MAT_ENHANCED_COMPOSITE_DAMAGE keyword"""
@@ -34,513 +131,57 @@ class MatEnhancedCompositeDamage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcxc": LinkType.DEFINE_CURVE,
+        "lcxt": LinkType.DEFINE_CURVE,
+        "lcyc": LinkType.DEFINE_CURVE,
+        "lcyt": LinkType.DEFINE_CURVE,
+        "lcsc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatEnhancedCompositeDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(ec)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(prca)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(prcb)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(kf)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "2way",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ti",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mangle",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfailm",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfails",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tfail",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alph",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fbrt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycfac",
-                        float,
-                        40,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfailc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efs",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crit",
-                        float,
-                        50,
-                        10,
-                        54.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pel",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsmd",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft2",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "slimt1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slimc1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slimt2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slimc2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slims",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyred",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "softg",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcxc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcxt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcyc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcyt",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATENHANCEDCOMPOSITEDAMAGE_CARD8,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatEnhancedCompositeDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATENHANCEDCOMPOSITEDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -589,12 +230,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _ec_(self) -> typing.Optional[float]:
         """Get or set the Ec, Young's modulus - normal direction (not used).
         """ # nopep8
-        return self._cards[0].get_value("(ec)")
+        return self._cards[0].get_value("_ec_")
 
     @_ec_.setter
     def _ec_(self, value: float) -> None:
         """Set the _ec_ property."""
-        self._cards[0].set_value("(ec)", value)
+        self._cards[0].set_value("_ec_", value)
 
     @property
     def prba(self) -> typing.Optional[float]:
@@ -611,23 +252,23 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _prca_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio ca (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prca)")
+        return self._cards[0].get_value("_prca_")
 
     @_prca_.setter
     def _prca_(self, value: float) -> None:
         """Set the _prca_ property."""
-        self._cards[0].set_value("(prca)", value)
+        self._cards[0].set_value("_prca_", value)
 
     @property
     def _prcb_(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio cb (not used).
         """ # nopep8
-        return self._cards[0].get_value("(prcb)")
+        return self._cards[0].get_value("_prcb_")
 
     @_prcb_.setter
     def _prcb_(self, value: float) -> None:
         """Set the _prcb_ property."""
-        self._cards[0].set_value("(prcb)", value)
+        self._cards[0].set_value("_prcb_", value)
 
     @property
     def gab(self) -> typing.Optional[float]:
@@ -666,12 +307,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
     def _kf_(self) -> typing.Optional[float]:
         """Get or set the Bulk modulus of failed material (not used)
         """ # nopep8
-        return self._cards[1].get_value("(kf)")
+        return self._cards[1].get_value("_kf_")
 
     @_kf_.setter
     def _kf_(self, value: float) -> None:
         """Set the _kf_ property."""
-        self._cards[1].set_value("(kf)", value)
+        self._cards[1].set_value("_kf_", value)
 
     @property
     def aopt(self) -> typing.Optional[float]:
@@ -696,12 +337,12 @@ class MatEnhancedCompositeDamage(KeywordBase):
         EQ.0.0:	Standard unidirectional behavior.
         EQ.1.0:	2-way fiber behavior.  The meaning of the fields DFAILT, DFAILC, YC, YT, SLIMT2 and SLIMC are altered if this flag is set.  This option is only available for MAT 54 using thin shells.
         """ # nopep8
-        return self._cards[1].get_value("2way")
+        return self._cards[1].get_value("_2way")
 
     @_2way.setter
     def _2way(self, value: float) -> None:
         """Set the _2way property."""
-        self._cards[1].set_value("2way", value)
+        self._cards[1].set_value("_2way", value)
 
     @property
     def ti(self) -> typing.Optional[float]:
@@ -1270,4 +911,79 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcxc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcxc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcxc:
+                return kwd
+        return None
+
+    @lcxc_link.setter
+    def lcxc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcxc."""
+        self.lcxc = value.lcid
+
+    @property
+    def lcxt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcxt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcxt:
+                return kwd
+        return None
+
+    @lcxt_link.setter
+    def lcxt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcxt."""
+        self.lcxt = value.lcid
+
+    @property
+    def lcyc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcyc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcyc:
+                return kwd
+        return None
+
+    @lcyc_link.setter
+    def lcyc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcyc."""
+        self.lcyc = value.lcid
+
+    @property
+    def lcyt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcyt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcyt:
+                return kwd
+        return None
+
+    @lcyt_link.setter
+    def lcyt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcyt."""
+        self.lcyt = value.lcid
+
+    @property
+    def lcsc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsc:
+                return kwd
+        return None
+
+    @lcsc_link.setter
+    def lcsc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsc."""
+        self.lcsc = value.lcid
 

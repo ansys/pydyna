@@ -23,79 +23,37 @@
 """Module providing the ChangeVelocityRigidBody class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CHANGEVELOCITYRIGIDBODY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("vy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("vxr", float, 40, 10, 0.0),
+    FieldSchema("vyr", float, 50, 10, 0.0),
+    FieldSchema("vzr", float, 60, 10, 0.0),
+)
 
 class ChangeVelocityRigidBody(KeywordBase):
     """DYNA CHANGE_VELOCITY_RIGID_BODY keyword"""
 
     keyword = "CHANGE"
     subkeyword = "VELOCITY_RIGID_BODY"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeVelocityRigidBody class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYRIGIDBODY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body.
@@ -172,4 +130,9 @@ class ChangeVelocityRigidBody(KeywordBase):
     def vzr(self, value: float) -> None:
         """Set the vzr property."""
         self._cards[0].set_value("vzr", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

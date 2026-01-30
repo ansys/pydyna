@@ -23,7 +23,16 @@
 """Module providing the EmVoltageDrop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMVOLTAGEDROP_CARD0 = (
+    FieldSchema("vdid", int, 0, 10, None),
+    FieldSchema("vdtype", int, 10, 10, None),
+    FieldSchema("ssid1", int, 20, 10, None),
+    FieldSchema("ssid2_", int, 30, 10, None, "ssid2 "),
+    FieldSchema("volt_", float, 40, 10, None, "volt "),
+)
 
 class EmVoltageDrop(KeywordBase):
     """DYNA EM_VOLTAGE_DROP keyword"""
@@ -35,47 +44,10 @@ class EmVoltageDrop(KeywordBase):
         """Initialize the EmVoltageDrop class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vdid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdtype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid2 ",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "volt ",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMVOLTAGEDROP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def vdid(self) -> typing.Optional[int]:
         """Get or set the Voltage Drop ID
@@ -113,21 +85,21 @@ class EmVoltageDrop(KeywordBase):
     def ssid2_(self) -> typing.Optional[int]:
         """Get or set the Segment Set ID 2
         """ # nopep8
-        return self._cards[0].get_value("ssid2 ")
+        return self._cards[0].get_value("ssid2_")
 
     @ssid2_.setter
     def ssid2_(self, value: int) -> None:
         """Set the ssid2_ property."""
-        self._cards[0].set_value("ssid2 ", value)
+        self._cards[0].set_value("ssid2_", value)
 
     @property
     def volt_(self) -> typing.Optional[float]:
         """Get or set the Value of the voltage drop
         """ # nopep8
-        return self._cards[0].get_value("volt ")
+        return self._cards[0].get_value("volt_")
 
     @volt_.setter
     def volt_(self, value: float) -> None:
         """Set the volt_ property."""
-        self._cards[0].set_value("volt ", value)
+        self._cards[0].set_value("volt_", value)
 

@@ -23,8 +23,25 @@
 """Module providing the SetSolidGenerateIncrementCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETSOLIDGENERATEINCREMENTCOLLECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("solver", str, 10, 10, "MECH"),
+)
+
+_SETSOLIDGENERATEINCREMENTCOLLECT_CARD1 = (
+    FieldSchema("bbeg", int, 0, 10, None),
+    FieldSchema("bend", int, 10, 10, None),
+    FieldSchema("incr", int, 20, 10, None),
+)
+
+_SETSOLIDGENERATEINCREMENTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetSolidGenerateIncrementCollect(KeywordBase):
     """DYNA SET_SOLID_GENERATE_INCREMENT_COLLECT keyword"""
@@ -34,75 +51,33 @@ class SetSolidGenerateIncrementCollect(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "bbeg": LinkType.ELEMENT_SOLID,
+        "bend": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetSolidGenerateIncrementCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        10,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bend",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERATEINCREMENTCOLLECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERATEINCREMENTCOLLECT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetSolidGenerateIncrementCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSOLIDGENERATEINCREMENTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID. All solid sets should have a unique set ID.
@@ -175,4 +150,14 @@ class SetSolidGenerateIncrementCollect(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def bbeg_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bbeg."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bbeg, "parts")
+
+    @property
+    def bend_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bend."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bend, "parts")
 

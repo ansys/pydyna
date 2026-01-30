@@ -25,9 +25,52 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT077H_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("pr", float, 20, 10, None),
+    FieldSchema("n", int, 30, 10, 0),
+    FieldSchema("nv", int, 40, 10, None),
+    FieldSchema("g", float, 50, 10, None),
+    FieldSchema("sigf", float, 60, 10, None),
+    FieldSchema("ref", float, 70, 10, 0.0),
+)
+
+_MAT077H_CARD1 = (
+    FieldSchema("tbhys", float, 0, 10, None),
+)
+
+_MAT077H_CARD2 = (
+    FieldSchema("sgl", float, 0, 10, None),
+    FieldSchema("sw", float, 10, 10, None),
+    FieldSchema("st", float, 20, 10, None),
+    FieldSchema("lcid1", int, 30, 10, None),
+    FieldSchema("data", float, 40, 10, None),
+    FieldSchema("lcid2", int, 50, 10, None),
+    FieldSchema("bstart", float, 60, 10, None),
+    FieldSchema("tramp", float, 70, 10, None),
+)
+
+_MAT077H_CARD3 = (
+    FieldSchema("c10", float, 0, 10, None),
+    FieldSchema("c01", float, 10, 10, None),
+    FieldSchema("c11", float, 20, 10, None),
+    FieldSchema("c20", float, 30, 10, None),
+    FieldSchema("c02", float, 40, 10, None),
+    FieldSchema("c30", float, 50, 10, None),
+    FieldSchema("therml", float, 60, 10, None),
+)
+
+_MAT077H_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat077H(KeywordBase):
     """DYNA MAT_077_H keyword"""
@@ -37,202 +80,32 @@ class Mat077H(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid1": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat077H class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nv",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tbhys",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.pr and self.pr < 0,
-            ),
-            Card(
-                [
-                    Field(
-                        "sgl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sw",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstart",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tramp",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.n > 0,
-            ),
-            Card(
-                [
-                    Field(
-                        "c10",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c01",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c20",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c02",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c30",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "therml",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.n == 0,
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _MAT077H_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT077H_CARD1,
+                active_func=lambda: self.pr and self.pr < 0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT077H_CARD2,
+                active_func=lambda: self.n > 0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT077H_CARD3,
+                active_func=lambda: self.n == 0,
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -243,26 +116,17 @@ class Mat077H(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = Mat077H.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT077H_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -564,6 +428,36 @@ class Mat077H(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid1:
+                return kwd
+        return None
+
+    @lcid1_link.setter
+    def lcid1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid1."""
+        self.lcid1 = value.lcid
+
+    @property
+    def lcid2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid2:
+                return kwd
+        return None
+
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 
 
 class MatHyperelasticRubber(Mat077H):

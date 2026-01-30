@@ -23,153 +23,57 @@
 """Module providing the InitialImpulseMine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_INITIALIMPULSEMINE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("mtnt", float, 10, 10, 0.0),
+    FieldSchema("rhos", float, 20, 10, 0.0),
+    FieldSchema("depth", float, 30, 10, 0.0),
+    FieldSchema("area", float, 40, 10, 0.0),
+    FieldSchema("scale", float, 50, 10, 1.0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unit", int, 70, 10, 1),
+)
+
+_INITIALIMPULSEMINE_CARD1 = (
+    FieldSchema("x", float, 0, 10, 0.0),
+    FieldSchema("y", float, 10, 10, 0.0),
+    FieldSchema("z", float, 20, 10, 0.0),
+    FieldSchema("nidmc", int, 30, 10, 0),
+    FieldSchema("gvid", int, 40, 10, None),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+    FieldSchema("psid", int, 60, 10, 0),
+    FieldSchema("search", float, 70, 10, 0.0),
+)
 
 class InitialImpulseMine(KeywordBase):
     """DYNA INITIAL_IMPULSE_MINE keyword"""
 
     keyword = "INITIAL"
     subkeyword = "IMPULSE_MINE"
+    _link_fields = {
+        "nidmc": LinkType.NODE,
+        "gvid": LinkType.DEFINE_VECTOR,
+        "psid": LinkType.SET_PART,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialImpulseMine class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtnt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhos",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "depth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidmc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gvid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "search",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALIMPULSEMINE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALIMPULSEMINE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID
@@ -344,4 +248,44 @@ class InitialImpulseMine(KeywordBase):
     def search(self, value: float) -> None:
         """Set the search property."""
         self._cards[1].set_value("search", value)
+
+    @property
+    def nidmc_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidmc."""
+        return self._get_link_by_attr("NODE", "nid", self.nidmc, "parts")
+
+    @property
+    def gvid_link(self) -> DefineVector:
+        """Get the DefineVector object for gvid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.gvid:
+                return kwd
+        return None
+
+    @gvid_link.setter
+    def gvid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for gvid."""
+        self.gvid = value.vid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

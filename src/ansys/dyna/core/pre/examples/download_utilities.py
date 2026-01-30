@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module provides a thread-safe singleton download manager for handling example file downloads."""
+
 import os
 from threading import Lock
 from typing import Optional
@@ -33,15 +35,19 @@ __all__ = ["DownloadManager"]
 
 class DownloadManagerMeta(type):
     """
+    Download Manager Metaclass.
+
     Provides a thread-safe implementation of ``Singleton`` from
     https://refactoring.guru/design-patterns/singleton/python/example#example-1.
+
     """
 
     _instances = {}
     _lock: Lock = Lock()
 
     def __call__(cls, *args, **kwargs):
-        """
+        """Create or return the singleton instance.
+
         Possible changes to the value of the ``__init__`` argument do not affect
         the returned instance.
         """
@@ -85,7 +91,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
     def download_file(
         self, filename: str, *directory: str, destination: Optional[str] = None, force: bool = False
     ) -> str:
-        """Download an example file from the PyPrimeMesh repository.
+        """Download an example file from the PyAnsys Github examples repository.
 
         Parameters
         ----------

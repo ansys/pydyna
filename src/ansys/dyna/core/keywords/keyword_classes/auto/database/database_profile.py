@@ -23,7 +23,18 @@
 """Module providing the DatabaseProfile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEPROFILE_CARD0 = (
+    FieldSchema("dt", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("stype", int, 20, 10, 1),
+    FieldSchema("data", int, 30, 10, 1),
+    FieldSchema("dir", int, 40, 10, 1),
+    FieldSchema("updloc", int, 50, 10, 0),
+    FieldSchema("mmg", int, 60, 10, None),
+)
 
 class DatabaseProfile(KeywordBase):
     """DYNA DATABASE_PROFILE keyword"""
@@ -35,65 +46,10 @@ class DatabaseProfile(KeywordBase):
         """Initialize the DatabaseProfile class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "updloc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEPROFILE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[int]:
         """Get or set the Interval time.

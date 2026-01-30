@@ -23,137 +23,61 @@
 """Module providing the IcfdDefinePoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDDEFINEPOINT_CARD0 = (
+    FieldSchema("poid", int, 0, 10, None),
+    FieldSchema("x", float, 10, 10, None),
+    FieldSchema("y", float, 20, 10, None),
+    FieldSchema("z", float, 30, 10, None),
+    FieldSchema("constpid", int, 40, 10, None),
+)
+
+_ICFDDEFINEPOINT_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, None),
+    FieldSchema("lcidy", int, 10, 10, None),
+    FieldSchema("lcidz", int, 20, 10, None),
+)
+
+_ICFDDEFINEPOINT_CARD2 = (
+    FieldSchema("lcidw", int, 0, 10, None),
+    FieldSchema("xt", float, 10, 10, None),
+    FieldSchema("yt", float, 20, 10, None),
+    FieldSchema("zt", float, 30, 10, None),
+    FieldSchema("xh", float, 40, 10, None),
+    FieldSchema("yh", float, 50, 10, None),
+    FieldSchema("zh", float, 60, 10, None),
+)
 
 class IcfdDefinePoint(KeywordBase):
     """DYNA ICFD_DEFINE_POINT keyword"""
 
     keyword = "ICFD"
     subkeyword = "DEFINE_POINT"
+    _link_fields = {
+        "lcidx": LinkType.DEFINE_CURVE,
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
+        "lcidw": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdDefinePoint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "poid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "constpid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def poid(self) -> typing.Optional[int]:
         """Get or set the Point ID.
@@ -318,4 +242,64 @@ class IcfdDefinePoint(KeywordBase):
     def zh(self, value: float) -> None:
         """Set the zh property."""
         self._cards[2].set_value("zh", value)
+
+    @property
+    def lcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidx:
+                return kwd
+        return None
+
+    @lcidx_link.setter
+    def lcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidx."""
+        self.lcidx = value.lcid
+
+    @property
+    def lcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
+
+    @property
+    def lcidw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidw:
+                return kwd
+        return None
+
+    @lcidw_link.setter
+    def lcidw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidw."""
+        self.lcidw = value.lcid
 

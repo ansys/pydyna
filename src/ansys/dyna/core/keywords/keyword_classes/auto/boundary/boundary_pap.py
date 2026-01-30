@@ -23,84 +23,40 @@
 """Module providing the BoundaryPap class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYPAP_CARD0 = (
+    FieldSchema("segid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("cmult", float, 20, 10, None),
+    FieldSchema("cvmass", float, 30, 10, None),
+    FieldSchema("block", float, 40, 10, 0.0),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+    FieldSchema("tdeath", float, 60, 10, 1e+20),
+    FieldSchema("cvrper", float, 70, 10, 1.0),
+)
 
 class BoundaryPap(KeywordBase):
     """DYNA BOUNDARY_PAP keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PAP"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "segid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPap class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "segid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "block",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        60,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvrper",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPAP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def segid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID.
@@ -194,4 +150,29 @@ class BoundaryPap(KeywordBase):
     def cvrper(self, value: float) -> None:
         """Set the cvrper property."""
         self._cards[0].set_value("cvrper", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def segid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segid."""
+        return self._get_set_link("SEGMENT", self.segid)
+
+    @segid_link.setter
+    def segid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segid."""
+        self.segid = value.sid
 

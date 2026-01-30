@@ -23,7 +23,14 @@
 """Module providing the IcfdControlMeshMov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLMESHMOV_CARD0 = (
+    FieldSchema("mmsh", int, 0, 10, 2),
+    FieldSchema("lim_iter", int, 10, 10, 100),
+    FieldSchema("reltol", float, 20, 10, 0.001),
+)
 
 class IcfdControlMeshMov(KeywordBase):
     """DYNA ICFD_CONTROL_MESH_MOV keyword"""
@@ -35,36 +42,10 @@ class IcfdControlMeshMov(KeywordBase):
         """Initialize the IcfdControlMeshMov class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmsh",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lim_iter",
-                        int,
-                        10,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        float,
-                        20,
-                        10,
-                        1.0e-3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLMESHMOV_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mmsh(self) -> int:
         """Get or set the Mesh motion selector:

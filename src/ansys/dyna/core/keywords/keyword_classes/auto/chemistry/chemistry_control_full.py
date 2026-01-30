@@ -23,7 +23,15 @@
 """Module providing the ChemistryControlFull class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROLFULL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("errlim", float, 10, 10, None),
+    FieldSchema("rhomin", float, 20, 10, None),
+    FieldSchema("tmin", float, 30, 10, None),
+)
 
 class ChemistryControlFull(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_FULL keyword"""
@@ -35,40 +43,10 @@ class ChemistryControlFull(KeywordBase):
         """Initialize the ChemistryControlFull class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "errlim",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhomin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLFULL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this full chemistry calculation.

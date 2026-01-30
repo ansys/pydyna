@@ -23,202 +23,79 @@
 """Module providing the IcfdControlImposedMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDCONTROLIMPOSEDMOVE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcvx", int, 10, 10, None),
+    FieldSchema("lcvy", int, 20, 10, None),
+    FieldSchema("lcvz", int, 30, 10, None),
+    FieldSchema("vadt", int, 40, 10, 0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD1 = (
+    FieldSchema("alphal", int, 0, 10, None),
+    FieldSchema("betal", int, 10, 10, None),
+    FieldSchema("gammal", int, 20, 10, None),
+    FieldSchema("alphag", int, 30, 10, None),
+    FieldSchema("betag", int, 40, 10, None),
+    FieldSchema("gammag", int, 50, 10, None),
+    FieldSchema("vadr", int, 60, 10, 0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD2 = (
+    FieldSchema("ptid", int, 0, 10, 0),
+    FieldSchema("x1", float, 10, 10, 1.0),
+    FieldSchema("y1", float, 20, 10, 0.0),
+    FieldSchema("z1", float, 30, 10, 0.0),
+    FieldSchema("x2", float, 40, 10, 0.0),
+    FieldSchema("y2", float, 50, 10, 1.0),
+    FieldSchema("z2", float, 60, 10, 0.0),
+)
+
+_ICFDCONTROLIMPOSEDMOVE_CARD3 = (
+    FieldSchema("ptido", int, 0, 10, 0),
+    FieldSchema("axe", int, 10, 10, 0),
+    FieldSchema("ptidv", int, 20, 10, 0),
+)
 
 class IcfdControlImposedMove(KeywordBase):
     """DYNA ICFD_CONTROL_IMPOSED_MOVE keyword"""
 
     keyword = "ICFD"
     subkeyword = "CONTROL_IMPOSED_MOVE"
+    _link_fields = {
+        "lcvx": LinkType.DEFINE_CURVE,
+        "lcvy": LinkType.DEFINE_CURVE,
+        "lcvz": LinkType.DEFINE_CURVE,
+        "alphal": LinkType.DEFINE_CURVE,
+        "betal": LinkType.DEFINE_CURVE,
+        "gammal": LinkType.DEFINE_CURVE,
+        "alphag": LinkType.DEFINE_CURVE,
+        "betag": LinkType.DEFINE_CURVE,
+        "gammag": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdControlImposedMove class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvx",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvy",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vadt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alphal",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betal",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammal",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alphag",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betag",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammag",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vadr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptido",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axe",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptidv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLIMPOSEDMOVE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.
@@ -464,4 +341,139 @@ class IcfdControlImposedMove(KeywordBase):
     def ptidv(self, value: int) -> None:
         """Set the ptidv property."""
         self._cards[3].set_value("ptidv", value)
+
+    @property
+    def lcvx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvx:
+                return kwd
+        return None
+
+    @lcvx_link.setter
+    def lcvx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvx."""
+        self.lcvx = value.lcid
+
+    @property
+    def lcvy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvy:
+                return kwd
+        return None
+
+    @lcvy_link.setter
+    def lcvy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvy."""
+        self.lcvy = value.lcid
+
+    @property
+    def lcvz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvz:
+                return kwd
+        return None
+
+    @lcvz_link.setter
+    def lcvz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvz."""
+        self.lcvz = value.lcid
+
+    @property
+    def alphal_link(self) -> DefineCurve:
+        """Get the DefineCurve object for alphal."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.alphal:
+                return kwd
+        return None
+
+    @alphal_link.setter
+    def alphal_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for alphal."""
+        self.alphal = value.lcid
+
+    @property
+    def betal_link(self) -> DefineCurve:
+        """Get the DefineCurve object for betal."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.betal:
+                return kwd
+        return None
+
+    @betal_link.setter
+    def betal_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for betal."""
+        self.betal = value.lcid
+
+    @property
+    def gammal_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gammal."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gammal:
+                return kwd
+        return None
+
+    @gammal_link.setter
+    def gammal_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gammal."""
+        self.gammal = value.lcid
+
+    @property
+    def alphag_link(self) -> DefineCurve:
+        """Get the DefineCurve object for alphag."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.alphag:
+                return kwd
+        return None
+
+    @alphag_link.setter
+    def alphag_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for alphag."""
+        self.alphag = value.lcid
+
+    @property
+    def betag_link(self) -> DefineCurve:
+        """Get the DefineCurve object for betag."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.betag:
+                return kwd
+        return None
+
+    @betag_link.setter
+    def betag_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for betag."""
+        self.betag = value.lcid
+
+    @property
+    def gammag_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gammag."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gammag:
+                return kwd
+        return None
+
+    @gammag_link.setter
+    def gammag_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gammag."""
+        self.gammag = value.lcid
 

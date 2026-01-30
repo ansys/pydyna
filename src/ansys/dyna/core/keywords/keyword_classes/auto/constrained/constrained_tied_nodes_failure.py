@@ -23,47 +23,33 @@
 """Module providing the ConstrainedTiedNodesFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONSTRAINEDTIEDNODESFAILURE_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("eppf", float, 10, 10, 0.0),
+    FieldSchema("etype", int, 20, 10, 0),
+)
 
 class ConstrainedTiedNodesFailure(KeywordBase):
     """DYNA CONSTRAINED_TIED_NODES_FAILURE keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "TIED_NODES_FAILURE"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedTiedNodesFailure class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eppf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDTIEDNODESFAILURE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.
@@ -100,4 +86,14 @@ class ConstrainedTiedNodesFailure(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""etype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("etype", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

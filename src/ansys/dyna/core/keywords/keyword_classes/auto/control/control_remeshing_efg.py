@@ -23,7 +23,33 @@
 """Module providing the ControlRemeshingEfg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREMESHINGEFG_CARD0 = (
+    FieldSchema("rmin", float, 0, 10, None),
+    FieldSchema("rmax", float, 10, 10, None),
+    FieldSchema("vf_loss", float, 20, 10, 1.0),
+    FieldSchema("mfrac", float, 30, 10, 0.0),
+    FieldSchema("dt_min", float, 40, 10, 0.0),
+    FieldSchema("icurv", int, 50, 10, 4),
+    FieldSchema("iadp10", int, 60, 10, 0),
+    FieldSchema("sefang", float, 70, 10, 0.0),
+)
+
+_CONTROLREMESHINGEFG_CARD1 = (
+    FieldSchema("ivt", int, 0, 10, 1),
+    FieldSchema("iat", int, 10, 10, 0),
+    FieldSchema("iaat", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("mm", int, 40, 10, 0),
+)
+
+_CONTROLREMESHINGEFG_CARD2 = (
+    FieldSchema("iat1", float, 0, 10, 1e+20),
+    FieldSchema("iat2", float, 10, 10, 1e+20),
+    FieldSchema("iat3", float, 20, 10, 1e+20),
+)
 
 class ControlRemeshingEfg(KeywordBase):
     """DYNA CONTROL_REMESHING_EFG keyword"""
@@ -35,145 +61,16 @@ class ControlRemeshingEfg(KeywordBase):
         """Initialize the ControlRemeshingEfg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf_loss",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfrac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt_min",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icurv",
-                        int,
-                        50,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iadp10",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sefang",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ivt",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iat",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaat",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mm",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iat1",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iat2",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iat3",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREMESHINGEFG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREMESHINGEFG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREMESHINGEFG_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def rmin(self) -> typing.Optional[float]:
         """Get or set the Minimum edge length for the surface mesh surrounding the parts which should be remeshed.

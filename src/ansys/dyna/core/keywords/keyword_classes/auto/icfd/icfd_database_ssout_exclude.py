@@ -23,31 +23,31 @@
 """Module providing the IcfdDatabaseSsoutExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ICFDDATABASESSOUTEXCLUDE_CARD0 = (
+    FieldSchema("ssoutid", int, 0, 10, None),
+)
 
 class IcfdDatabaseSsoutExclude(KeywordBase):
     """DYNA ICFD_DATABASE_SSOUT_EXCLUDE keyword"""
 
     keyword = "ICFD"
     subkeyword = "DATABASE_SSOUT_EXCLUDE"
+    _link_fields = {
+        "ssoutid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdDatabaseSsoutExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssoutid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASESSOUTEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssoutid(self) -> typing.Optional[int]:
         """Get or set the Segment Set ID of the solid mechanics problem which is to be excluded from the output of the fluid forces on the solid boundaries.
@@ -58,4 +58,14 @@ class IcfdDatabaseSsoutExclude(KeywordBase):
     def ssoutid(self, value: int) -> None:
         """Set the ssoutid property."""
         self._cards[0].set_value("ssoutid", value)
+
+    @property
+    def ssoutid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssoutid."""
+        return self._get_set_link("SEGMENT", self.ssoutid)
+
+    @ssoutid_link.setter
+    def ssoutid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssoutid."""
+        self.ssoutid = value.sid
 

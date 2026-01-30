@@ -23,167 +23,60 @@
 """Module providing the ControlRefineShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_CONTROLREFINESHELL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nlvl", int, 20, 10, 1),
+    FieldSchema("ibox", int, 30, 10, 0),
+)
+
+_CONTROLREFINESHELL_CARD1 = (
+    FieldSchema("ntotrf", int, 0, 10, 0),
+    FieldSchema("ncycrf", float, 10, 10, 0.0),
+    FieldSchema("critrf", int, 20, 10, 0),
+    FieldSchema("valrf", float, 30, 10, 0.0),
+    FieldSchema("begrf", float, 40, 10, 0.0),
+    FieldSchema("endrf", float, 50, 10, 0.0),
+    FieldSchema("layrf", int, 60, 10, 0),
+)
+
+_CONTROLREFINESHELL_CARD2 = (
+    FieldSchema("maxrm", int, 0, 10, 0),
+    FieldSchema("ncycrm", float, 10, 10, 0.0),
+    FieldSchema("critrm", int, 20, 10, 0),
+    FieldSchema("valrm", float, 30, 10, 0.0),
+    FieldSchema("begrm", float, 40, 10, 0.0),
+    FieldSchema("endrm", float, 50, 10, 0.0),
+)
 
 class ControlRefineShell(KeywordBase):
     """DYNA CONTROL_REFINE_SHELL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "REFINE_SHELL"
+    _link_fields = {
+        "ibox": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlRefineShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlvl",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibox",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ntotrf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycrf",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "critrf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valrf",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "begrf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endrf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layrf",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "maxrm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycrm",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "critrm",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valrm",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "begrm",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endrm",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESHELL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINESHELL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID.LT.0: parent elements can be hidden in lsprepost as they are replaced by their children
@@ -403,4 +296,19 @@ class ControlRefineShell(KeywordBase):
     def endrm(self, value: float) -> None:
         """Set the endrm property."""
         self._cards[2].set_value("endrm", value)
+
+    @property
+    def ibox_link(self) -> DefineBox:
+        """Get the DefineBox object for ibox."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.ibox:
+                return kwd
+        return None
+
+    @ibox_link.setter
+    def ibox_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for ibox."""
+        self.ibox = value.boxid
 

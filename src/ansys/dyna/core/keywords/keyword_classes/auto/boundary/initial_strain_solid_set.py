@@ -23,83 +23,43 @@
 """Module providing the InitialStrainSolidSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALSTRAINSOLIDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+)
+
+_INITIALSTRAINSOLIDSET_CARD1 = (
+    FieldSchema("epsxx", float, 0, 10, 0.0),
+    FieldSchema("epsyy", float, 10, 10, 0.0),
+    FieldSchema("epszz", float, 20, 10, 0.0),
+    FieldSchema("epsxy", float, 30, 10, 0.0),
+    FieldSchema("epsyz", float, 40, 10, 0.0),
+    FieldSchema("epszx", float, 50, 10, 0.0),
+)
 
 class InitialStrainSolidSet(KeywordBase):
     """DYNA INITIAL_STRAIN_SOLID_SET keyword"""
 
     keyword = "INITIAL"
     subkeyword = "STRAIN_SOLID_SET"
+    _link_fields = {
+        "eid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStrainSolidSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsxx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsxy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epszx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSOLIDSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSOLIDSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID .
@@ -176,4 +136,14 @@ class InitialStrainSolidSet(KeywordBase):
     def epszx(self, value: float) -> None:
         """Set the epszx property."""
         self._cards[1].set_value("epszx", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for eid."""
+        return self._get_set_link("SOLID", self.eid)
+
+    @eid_link.setter
+    def eid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for eid."""
+        self.eid = value.sid
 

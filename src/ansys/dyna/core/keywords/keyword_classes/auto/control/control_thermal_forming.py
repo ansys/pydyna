@@ -23,203 +23,71 @@
 """Module providing the ControlThermalForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLTHERMALFORMING_CARD0 = (
+    FieldSchema("its", float, 0, 10, None),
+    FieldSchema("ptype", int, 10, 10, 0),
+    FieldSchema("tsf", float, 20, 10, 1.0),
+    FieldSchema("thshel", int, 30, 10, 0),
+    FieldSchema("ithoff", int, 40, 10, 0),
+    FieldSchema("solver", int, 50, 10, 3),
+    FieldSchema("fwork", float, 60, 10, 1.0),
+)
+
+_CONTROLTHERMALFORMING_CARD1 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("frad", float, 10, 10, None),
+    FieldSchema("h0", float, 20, 10, None),
+    FieldSchema("lmin", float, 30, 10, None),
+    FieldSchema("lmax", float, 40, 10, None),
+    FieldSchema("ftoslv", float, 50, 10, 0.5),
+    FieldSchema("bc_flg", int, 60, 10, 0),
+    FieldSchema("algo", int, 70, 10, 0),
+)
+
+_CONTROLTHERMALFORMING_CARD2 = (
+    FieldSchema("lcfst", int, 0, 10, None),
+    FieldSchema("lcfdt", int, 10, 10, None),
+    FieldSchema("formula", int, 20, 10, 1),
+    FieldSchema("a", int, 30, 10, None),
+    FieldSchema("b", int, 40, 10, None),
+    FieldSchema("c", int, 50, 10, None),
+    FieldSchema("d", int, 60, 10, None),
+    FieldSchema("lch", int, 70, 10, None),
+)
 
 class ControlThermalForming(KeywordBase):
     """DYNA CONTROL_THERMAL_FORMING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "THERMAL_FORMING"
+    _link_fields = {
+        "lcfst": LinkType.DEFINE_CURVE,
+        "lcfdt": LinkType.DEFINE_CURVE,
+        "a": LinkType.DEFINE_CURVE,
+        "b": LinkType.DEFINE_CURVE,
+        "c": LinkType.DEFINE_CURVE,
+        "d": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlThermalForming class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "its",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thshel",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ithoff",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        int,
-                        50,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fwork",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frad",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftoslv",
-                        float,
-                        50,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bc_flg",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "algo",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcfst",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "formula",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALFORMING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALFORMING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALFORMING_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def its(self) -> typing.Optional[float]:
         """Get or set the Initial thermal time step size.
@@ -538,4 +406,94 @@ class ControlThermalForming(KeywordBase):
     def lch(self, value: int) -> None:
         """Set the lch property."""
         self._cards[2].set_value("lch", value)
+
+    @property
+    def lcfst_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfst."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfst:
+                return kwd
+        return None
+
+    @lcfst_link.setter
+    def lcfst_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfst."""
+        self.lcfst = value.lcid
+
+    @property
+    def lcfdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfdt:
+                return kwd
+        return None
+
+    @lcfdt_link.setter
+    def lcfdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfdt."""
+        self.lcfdt = value.lcid
+
+    @property
+    def a_link(self) -> DefineCurve:
+        """Get the DefineCurve object for a."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.a:
+                return kwd
+        return None
+
+    @a_link.setter
+    def a_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for a."""
+        self.a = value.lcid
+
+    @property
+    def b_link(self) -> DefineCurve:
+        """Get the DefineCurve object for b."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.b:
+                return kwd
+        return None
+
+    @b_link.setter
+    def b_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for b."""
+        self.b = value.lcid
+
+    @property
+    def c_link(self) -> DefineCurve:
+        """Get the DefineCurve object for c."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.c:
+                return kwd
+        return None
+
+    @c_link.setter
+    def c_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for c."""
+        self.c = value.lcid
+
+    @property
+    def d_link(self) -> DefineCurve:
+        """Get the DefineCurve object for d."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.d:
+                return kwd
+        return None
+
+    @d_link.setter
+    def d_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for d."""
+        self.d = value.lcid
 

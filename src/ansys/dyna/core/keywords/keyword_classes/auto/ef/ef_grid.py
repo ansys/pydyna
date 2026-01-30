@@ -23,7 +23,14 @@
 """Module providing the EfGrid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EFGRID_CARD0 = (
+    FieldSchema("ngx", int, 0, 10, None),
+    FieldSchema("ngy", int, 10, 10, None),
+    FieldSchema("ngz", int, 20, 10, None),
+)
 
 class EfGrid(KeywordBase):
     """DYNA EF_GRID keyword"""
@@ -35,33 +42,10 @@ class EfGrid(KeywordBase):
         """Initialize the EfGrid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ngx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EFGRID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ngx(self) -> typing.Optional[int]:
         """Get or set the The mathematical algorithm underlying the ray tracer, involves gridding the enclosure.  NGX specify the number of grid divisions along the x axis.  This parameter does not affect LS-DYNA’s ability to obtain a solution, but it does affect the amount of CPU time consumed to process each photon.  There is no fixed rule for picking NGX, NGY, and NGZ, however for large geometries involving 1,000 to 15,000 surfaces NGX = NGY = NGZ = 25 is often optimal.  For smaller geometries smaller values are recommended

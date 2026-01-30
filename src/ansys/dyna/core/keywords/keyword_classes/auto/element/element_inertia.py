@@ -23,105 +23,49 @@
 """Module providing the ElementInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_ELEMENTINERTIA_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("nid", int, 8, 8, None),
+    FieldSchema("csid", int, 16, 8, None),
+)
+
+_ELEMENTINERTIA_CARD1 = (
+    FieldSchema("ixx", float, 0, 10, 0.0),
+    FieldSchema("ixy", float, 10, 10, 0.0),
+    FieldSchema("ixz", float, 20, 10, 0.0),
+    FieldSchema("iyy", float, 30, 10, 0.0),
+    FieldSchema("iyz", float, 40, 10, 0.0),
+    FieldSchema("izz", float, 50, 10, 0.0),
+    FieldSchema("mass", float, 60, 10, 0.0),
+)
 
 class ElementInertia(KeywordBase):
     """DYNA ELEMENT_INERTIA keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "INERTIA"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "csid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementInertia class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csid",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ixx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -233,4 +177,24 @@ class ElementInertia(KeywordBase):
     def mass(self, value: float) -> None:
         """Set the mass property."""
         self._cards[1].set_value("mass", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def csid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for csid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.csid:
+                return kwd
+        return None
+
+    @csid_link.setter
+    def csid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for csid."""
+        self.csid = value.cid
 

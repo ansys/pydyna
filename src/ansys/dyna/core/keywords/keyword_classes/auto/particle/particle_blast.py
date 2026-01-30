@@ -23,324 +23,96 @@
 """Module providing the ParticleBlast class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_PARTICLEBLAST_CARD0 = (
+    FieldSchema("lagsid", int, 0, 10, 0),
+    FieldSchema("lagstype", int, 10, 10, 0),
+    FieldSchema("dodid", int, 20, 10, 0),
+    FieldSchema("dodtype", int, 30, 10, 0),
+    FieldSchema("hecid", int, 40, 10, 0),
+    FieldSchema("hectype", int, 50, 10, 0),
+    FieldSchema("aircid", int, 60, 10, 0),
+)
+
+_PARTICLEBLAST_CARD1 = (
+    FieldSchema("nphe", int, 0, 10, 0),
+    FieldSchema("npair", int, 10, 10, 0),
+    FieldSchema("iunit", int, 20, 10, 0),
+)
+
+_PARTICLEBLAST_CARD2 = (
+    FieldSchema("ihetype", int, 0, 10, 0),
+    FieldSchema("densit", float, 10, 10, 0.0),
+    FieldSchema("energy", float, 20, 10, 0.0),
+    FieldSchema("gamma", float, 30, 10, 0.0),
+    FieldSchema("covol", float, 40, 10, 0.0),
+    FieldSchema("deto_v", float, 50, 10, 0.0),
+)
+
+_PARTICLEBLAST_CARD3 = (
+    FieldSchema("detx", float, 0, 10, 0.0),
+    FieldSchema("dety", float, 10, 10, 0.0),
+    FieldSchema("detz", float, 20, 10, 0.0),
+    FieldSchema("tdet", float, 30, 10, 0.0),
+    FieldSchema("btend", float, 40, 10, 0.0),
+    FieldSchema("nid", int, 50, 10, 0),
+)
+
+_PARTICLEBLAST_CARD4 = (
+    FieldSchema("bcxo", float, 0, 10, 0.0),
+    FieldSchema("bcx1", float, 10, 10, 0.0),
+    FieldSchema("bcy0", float, 20, 10, 0.0),
+    FieldSchema("bcy1", float, 30, 10, 0.0),
+    FieldSchema("bcz0", float, 40, 10, 0.0),
+    FieldSchema("bcz1", float, 50, 10, 0.0),
+)
+
+_PARTICLEBLAST_CARD5 = (
+    FieldSchema("ibcx0", int, 0, 10, 0),
+    FieldSchema("ibcx1", int, 10, 10, 0),
+    FieldSchema("ibcy0", int, 20, 10, 0),
+    FieldSchema("ibcy1", int, 30, 10, 0),
+    FieldSchema("ibcz0", int, 40, 10, 0),
+    FieldSchema("ibcz1", int, 50, 10, 0),
+    FieldSchema("bc_p", int, 60, 10, 0),
+)
 
 class ParticleBlast(KeywordBase):
     """DYNA PARTICLE_BLAST keyword"""
 
     keyword = "PARTICLE"
     subkeyword = "BLAST"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ParticleBlast class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lagsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagstype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dodid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dodtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hecid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hectype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aircid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nphe",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npair",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunit",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ihetype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "densit",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "energy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "covol",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deto_v",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "detx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dety",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdet",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "btend",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bcxo",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcx1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcy0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcy1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcz0",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcz1",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ibcx0",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcx1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcy0",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcy1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcz0",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcz1",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bc_p",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTICLEBLAST_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def lagsid(self) -> int:
         """Get or set the Structure id for particle structure interaction
@@ -779,4 +551,9 @@ class ParticleBlast(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""bc_p must be `None` or one of {0,1}.""")
         self._cards[5].set_value("bc_p", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

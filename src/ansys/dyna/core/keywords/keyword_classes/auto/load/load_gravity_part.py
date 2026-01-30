@@ -23,76 +23,40 @@
 """Module providing the LoadGravityPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADGRAVITYPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, None),
+    FieldSchema("lc", int, 20, 10, None),
+    FieldSchema("accel", float, 30, 10, 0.0),
+    FieldSchema("lcdr", int, 40, 10, None),
+    FieldSchema("stga", int, 50, 10, 0),
+    FieldSchema("stgr", int, 60, 10, 0),
+)
 
 class LoadGravityPart(KeywordBase):
     """DYNA LOAD_GRAVITY_PART keyword"""
 
     keyword = "LOAD"
     subkeyword = "GRAVITY_PART"
+    _link_fields = {
+        "lc": LinkType.DEFINE_CURVE,
+        "lcdr": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadGravityPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "accel",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stga",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADGRAVITYPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for application of gravity load
@@ -169,4 +133,39 @@ class LoadGravityPart(KeywordBase):
     def stgr(self, value: int) -> None:
         """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
+
+    @property
+    def lc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc:
+                return kwd
+        return None
+
+    @lc_link.setter
+    def lc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc."""
+        self.lc = value.lcid
+
+    @property
+    def lcdr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdr:
+                return kwd
+        return None
+
+    @lcdr_link.setter
+    def lcdr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdr."""
+        self.lcdr = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

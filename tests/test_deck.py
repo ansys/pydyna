@@ -211,6 +211,38 @@ def test_deck_read_parameter_keyword(ref_string):
     assert kwd.vc == 5.0e-6
     assert kwd.sfsa == -2.65
 
+
+@pytest.mark.keywords
+def test_deck_read_parameter_keyword_conditional_card(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_conditional_string)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+
+    #conditional cards with parameters
+    kwd_cnt = deck.keywords[1]
+    assert kwd_cnt.vdc == 5.0e-4
+    assert kwd_cnt.vc == 5.0e-6
+    assert kwd_cnt.sfsa == -2.65
+    assert kwd_cnt.soft == 2
+
+@pytest.mark.keywords
+def test_deck_read_parameter_keyword_hardcoded_conditional_card(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_hardcoded_optional_card)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+
+    #conditional cards with parameters
+    kwd_cnt = deck.keywords[1]
+    assert kwd_cnt.vdc == 5.0e-4
+    assert kwd_cnt.vc == 5.0e-6
+    assert kwd_cnt.sfsa == -2.65
+    assert kwd_cnt.soft == 2
+
+
 @pytest.mark.keywords
 def test_deck_007():
     "unit testing for .extend"
@@ -422,7 +454,8 @@ def test_deck_expand_encoding(file_utils):
     """Test that a long deck can read a standard deck."""
     deck = Deck(format=format_type.long)
     deck.append(kwd.Include(filename=file_utils.get_asset_file_path("encoding_sample.k"), format=format_type.standard))
-    expanded_deck = deck.expand()
+    with pytest.warns(UserWarning, match="could not convert string to float"):
+        expanded_deck = deck.expand()
 
     # check all_keywords instead of keywords because the deck has comma-delimited cards which is not yet supported
     assert len(expanded_deck.all_keywords) == 1
@@ -437,7 +470,7 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
     assert len(deck.all_keywords) == 40
-    assert len(deck.keywords) == 36
+    assert len(deck.keywords) == 40
 
 @pytest.mark.keywords
 def test_deck_expand_transform(file_utils):
@@ -696,9 +729,9 @@ def test_deck_expand_nonlocal_parameters(file_utils):
 
 
 @pytest.mark.keywords
-def test_deck_expand_local_parameters_isolation(file_utils):
+def test_deck_expand_local_parameters_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters are isolated to their definition file.
-    
+
     This test demonstrates the BUG where PARAMETER_LOCAL leaks to parent decks.
     After the fix, local parameters should NOT be accessible outside their definition file.
     """
@@ -706,49 +739,55 @@ def test_deck_expand_local_parameters_isolation(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "local"
     filename = cwd / "top.k"
     deck.import_file(filename)
-    
+
     # Before expansion, we should have loaded PARAMETER but not PARAMETER_LOCAL from include
     # Only gbl should be in the top-level deck's parameters
     pm_global_value = deck.parameters.get("gbl")
     assert pm_global_value == 200.0
-    
+
     # loc should NOT be accessible from top-level deck before expansion
     with pytest.raises(KeyError):
         deck.parameters.get("loc")
-    
-    # Expand the deck
+
+    # Expand the deck - a warning is expected when top.k tries to resolve &loc
+    # which is local to the include file (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
-    
+
+    # Verify that the expected warning was emitted about 'loc' parameter isolation
+    assert any("'loc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'loc' parameter not being accessible"
+    )
+
     # After expansion, get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
     # FIXED BEHAVIOR: 3 sections (10, 20, 30) - section 40 fails because it can't resolve &loc
     assert len(sections) == 3
-    
+
     # Section 10 uses gbl (200.0) from top-level
     section_10 = next(s for s in sections if s.secid == 10)
     assert section_10.elform == 200
-    
+
     # Section 20 uses loc (999.0) - substituted during include processing
     section_20 = next(s for s in sections if s.secid == 20)
     assert section_20.elform == 999
-    
+
     # Section 30 uses gbl (200.0) - global param visible in include
     section_30 = next(s for s in sections if s.secid == 30)
     assert section_30.elform == 200
-    
+
     # Section 40 tries to use loc from top level - should fail
     # The substitution happens during loads() before PARAMETER_LOCAL from the include is loaded
     assert len(deck.string_keywords) == 1  # Section 40
-    
+
     # FIXED: After expansion, loc should NOT be in the top-level parameters
     with pytest.raises(KeyError):
         deck.parameters.get("loc")
 
 
 @pytest.mark.keywords
-def test_deck_expand_local_parameters_sibling_isolation(file_utils):
+def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters don't leak between sibling includes.
-    
+
     This test demonstrates the BUG where PARAMETER_LOCAL leaks between sibling includes.
     After the fix, sibling includes should not see each other's local parameters.
     """
@@ -756,84 +795,98 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "local"
     filename = cwd / "sibling_test_top.k"
     deck.import_file(filename)
-    
-    # Expand the deck
+
+    # Expand the deck - a warning is expected when sibling_b.k tries to resolve &aloc
+    # which is local to sibling_a.k (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
-    
+
+    # Verify that the expected warning was emitted about 'aloc' parameter isolation
+    assert any("'aloc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'aloc' parameter not being accessible"
+    )
+
     # Get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
     # FIXED BEHAVIOR: 3 sections (50, 51, 61) - section 60 fails because it can't resolve &aloc
     assert len(sections) == 3
-    
+
     # Section 50 uses aloc (111.0) from sibling_a.k
     section_50 = next(s for s in sections if s.secid == 50)
     assert section_50.elform == 111
-    
+
     # Section 51 uses shr (100.0) from top
     section_51 = next(s for s in sections if s.secid == 51)
     assert section_51.elform == 100
-    
+
     # Section 60 - FIXED: Should not be created because aloc is not accessible
     assert len(deck.string_keywords) == 1  # Section 60 failed to parse
-    
+
     # Section 61 uses shr (100.0) from top
     section_61 = next(s for s in sections if s.secid == 61)
     assert section_61.elform == 100
-    
+
     # FIXED: aloc should NOT be in the top-level parameters after expansion
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
 
-
 @pytest.mark.keywords
-def test_reference_kwd(ref_string):
-    """Test keyword reference linking functionality."""
+def test_deck_nodeset_extraction(file_utils):
+    """Test extracting node set information from a deck.
+    
+    This test demonstrates basic node set extraction capabilities
+    similar to postprocessing workflows in set27_timehistory_analysis.ipynb.
+    Uses a real-world case file from lsdyna_python_parser test cases.
+    """
     deck = Deck()
-    deck.loads(ref_string.test_reference_kwd)
+    filename = file_utils.assets_folder / "test_node_sets.k"
+    deck.import_file(filename)
     
-    # Verify deck loaded correctly
-    assert len(deck.keywords) == 5  # PART, SECTION_SHELL, 2x MAT, DEFINE_CURVE
+    # Get all SET keywords
+    sets = list(deck.get_kwds_by_type("SET"))
+    assert len(sets) > 3, "There should be more than 3 SET keywords"
+
+    # Get all SET_NODE keywords using prefix matching
+    # This should match SET_NODE_LIST and other SET_NODE* variants
+    node_sets = list(deck.get_kwds_by_full_type("SET", "NODE"))
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST")) ##DOESN'T WORK
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST", "TITLE")) ##DOESN'T WORK
     
-    # Get the PART keyword (first keyword)
-    part = deck.keywords[0]
-    assert part.keyword == "PART"
-    assert part.subkeyword == "PART"
+    define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE")) ## WORKS
+
+    # Test: There should be 3 node sets in the deck
+    assert len(node_sets) == 3, "There are 3 node sets in this input deck"
     
-    # Test direct references (SECTION and MAT) with level=1
-    refs_direct = part.get_referenced_keywords(level=1)
-    print(f"\nDirect references (level=1): {len(refs_direct)}")
-    for ref in refs_direct:
-        print(f"  - {ref.keyword} {ref.subkeyword}")
+    # Test that access by list index and access with get_set_by_id are equivalent
+    set_1 = deck.get_set_by_id(1)
+    for set_1_access in [node_sets[0], set_1]:
+        assert set_1_access is not None, "Set with ID 1 should exist"
+        assert set_1_access.sid == 1, "Retrieved set should have sid=1"
+        assert set_1_access.keyword == "SET"
+        
+        # Test: Largest node in set 1 should be 4964
+        assert hasattr(set_1_access, 'nodes'), "Set 1 should have nodes attribute"
+        assert hasattr(set_1_access.nodes, 'data'), "Nodes should have data attribute"
+        set_1_nodes = set_1_access.nodes.data
+        assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
+        largest_node = max(set_1_nodes)
+        assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
+        
+        # Test: All nodes in set 1 should be consecutive
+        sorted_nodes = sorted(set_1_nodes)
+        expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
+        assert sorted_nodes == expected_consecutive, \
+            f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
     
-    # Should find 1 SECTION and 2 MAT keywords
-    section_refs = [kwd for kwd in refs_direct if kwd.keyword == "SECTION"]
-    mat_refs = [kwd for kwd in refs_direct if kwd.keyword == "MAT"]
-    assert len(section_refs) == 1
-    assert len(mat_refs) == 2
+    set_2 = deck.get_set_by_id(2)
+    for set_2_access in [node_sets[1], set_2]:
+        assert set_2_access is not None, "Set with ID 2 should exist"
+        assert set_2_access.sid == 2, "Retrieved set should have sid=2"        
+        
+        assert hasattr(set_2_access, 'nodes'), "Set 2 should have nodes attribute"
+        assert hasattr(set_2_access.nodes, 'data'), "Nodes should have data attribute"
+        set_2_nodes = set_2_access.nodes.data
+        assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
     
-    # Test unlimited recursion (default)
-    refs_all = part.get_referenced_keywords()
-    print(f"\nAll downstream references (unlimited): {len(refs_all)}")
-    for ref in refs_all:
-        print(f"  - {ref.keyword} {ref.subkeyword}")
-    
-    # Should find 1 SECTION, 2 MAT, and 1 DEFINE_CURVE
-    all_sections = [kwd for kwd in refs_all if kwd.keyword == "SECTION"]
-    all_mats = [kwd for kwd in refs_all if kwd.keyword == "MAT"]
-    all_curves = [kwd for kwd in refs_all if kwd.keyword == "DEFINE" and kwd.subkeyword == "CURVE"]
-    assert len(all_sections) == 1
-    assert len(all_mats) == 2
-    assert len(all_curves) == 1
-    assert all_curves[0].lcid == 3000
-    
-    # Test individual material references
-    mat_200 = [mat for mat in all_mats if hasattr(mat, 'mid') and mat.mid == 200][0]
-    mat_refs_level1 = mat_200.get_referenced_keywords(level=1)
-    print(f"\nMAT 200 direct references (level=1): {len(mat_refs_level1)}")
-    for ref in mat_refs_level1:
-        print(f"  - {ref.keyword} {ref.subkeyword}")
-    
-    # MAT 200 should reference DEFINE_CURVE (lcss=3000)
-    curve_refs = [kwd for kwd in mat_refs_level1 if kwd.keyword == "DEFINE" and kwd.subkeyword == "CURVE"]
-    assert len(curve_refs) == 1
-    assert curve_refs[0].lcid == 3000
+    # Test that non-existent ID returns None
+    set_999 = deck.get_set_by_id(999)
+    assert set_999 is None, "Non-existent set ID should return None"    

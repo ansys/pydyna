@@ -4,37 +4,12 @@
                 option_spec = {{parent_name}}.option_specs[{{option_loop.index-1}}],
                 cards = [
 {% for card in option.cards %}
-                    Card(
-                        [
-{% for field in card.fields %}
-                            Field(
-                                "{{field.name}}",
-                                {{field.type}},
-                                {{field.position}},
-                                {{field.width}},
-{% if field.flag %}
-                                Flag(
-                                    kwargs.get("{{field.name}}", {{field.default}}),
-                                    "{{field.on}}",
-                                    "{{field.off}}"
-                                )
-{% else %}{# field.flag #}
-{% if field.default is not none %}
-{% if field.readonly %}
-                                {{field.default}}
-{% else %}{# field.readonly #}
-                                kwargs.get("{{field.name}}", {{field.default}})
-{% endif %}{# field.readonly #}
-{% else %}{# field.readonly #}
-                                kwargs.get("{{field.name}}")
-{% endif %}{# field.default is not none #}
-{% endif %}{# field.flag #}
-                            ),
-{% endfor %}{# field in card.fields #}
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _{{parent_name | upper}}_OPTION{{option_loop.index-1}}_CARD{{loop.index0}},
 {% if card.func %}
-                        lambda: {{card.func}},
+                        active_func=lambda: {{card.func}},
 {% endif %}{# card.func #}
+                        **kwargs,
                     ),
 {% endfor %}{# card in option.cards #}
                 ],

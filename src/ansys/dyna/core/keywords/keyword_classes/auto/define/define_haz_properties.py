@@ -23,8 +23,33 @@
 """Module providing the DefineHazProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINEHAZPROPERTIES_CARD0 = (
+    FieldSchema("id_haz", int, 0, 10, 0),
+    FieldSchema("iop", int, 10, 10, 0),
+    FieldSchema("pid", int, 20, 10, 0),
+    FieldSchema("pid_typ", int, 30, 10, 0),
+)
+
+_DEFINEHAZPROPERTIES_CARD1 = (
+    FieldSchema("iss", int, 0, 10, 0),
+    FieldSchema("ifs", int, 10, 10, 0),
+    FieldSchema("isb", int, 20, 10, 0),
+    FieldSchema("ifb", int, 30, 10, 0),
+    FieldSchema("isc", int, 40, 10, 0),
+    FieldSchema("ifc", int, 50, 10, 0),
+    FieldSchema("isw", int, 60, 10, 0),
+    FieldSchema("ifw", int, 70, 10, 0),
+)
+
+_DEFINEHAZPROPERTIES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineHazProperties(KeywordBase):
     """DYNA DEFINE_HAZ_PROPERTIES keyword"""
@@ -34,135 +59,39 @@ class DefineHazProperties(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "iss": LinkType.DEFINE_CURVE,
+        "ifs": LinkType.DEFINE_CURVE,
+        "isb": LinkType.DEFINE_CURVE,
+        "ifb": LinkType.DEFINE_CURVE,
+        "isc": LinkType.DEFINE_CURVE,
+        "ifc": LinkType.DEFINE_CURVE,
+        "isw": LinkType.DEFINE_CURVE,
+        "ifw": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineHazProperties class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id_haz",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iop",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid_typ",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iss",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifs",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isb",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifb",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isw",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifw",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEHAZPROPERTIES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEHAZPROPERTIES_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineHazProperties.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEHAZPROPERTIES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id_haz(self) -> int:
         """Get or set the Property set ID. A unique ID number must be used.
@@ -312,4 +241,124 @@ class DefineHazProperties(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def iss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for iss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.iss:
+                return kwd
+        return None
+
+    @iss_link.setter
+    def iss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for iss."""
+        self.iss = value.lcid
+
+    @property
+    def ifs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ifs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ifs:
+                return kwd
+        return None
+
+    @ifs_link.setter
+    def ifs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ifs."""
+        self.ifs = value.lcid
+
+    @property
+    def isb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for isb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.isb:
+                return kwd
+        return None
+
+    @isb_link.setter
+    def isb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for isb."""
+        self.isb = value.lcid
+
+    @property
+    def ifb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ifb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ifb:
+                return kwd
+        return None
+
+    @ifb_link.setter
+    def ifb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ifb."""
+        self.ifb = value.lcid
+
+    @property
+    def isc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for isc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.isc:
+                return kwd
+        return None
+
+    @isc_link.setter
+    def isc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for isc."""
+        self.isc = value.lcid
+
+    @property
+    def ifc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ifc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ifc:
+                return kwd
+        return None
+
+    @ifc_link.setter
+    def ifc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ifc."""
+        self.ifc = value.lcid
+
+    @property
+    def isw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for isw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.isw:
+                return kwd
+        return None
+
+    @isw_link.setter
+    def isw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for isw."""
+        self.isw = value.lcid
+
+    @property
+    def ifw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ifw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ifw:
+                return kwd
+        return None
+
+    @ifw_link.setter
+    def ifw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ifw."""
+        self.ifw = value.lcid
 

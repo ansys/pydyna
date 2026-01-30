@@ -23,47 +23,33 @@
 """Module providing the BoundaryUsaSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYUSASURFACE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("wetdry", int, 10, 10, 0),
+    FieldSchema("nbeam", int, 20, 10, 0),
+)
 
 class BoundaryUsaSurface(KeywordBase):
     """DYNA BOUNDARY_USA_SURFACE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "USA_SURFACE"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryUsaSurface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wetdry",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbeam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYUSASURFACE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.
@@ -100,4 +86,14 @@ class BoundaryUsaSurface(KeywordBase):
     def nbeam(self, value: int) -> None:
         """Set the nbeam property."""
         self._cards[0].set_value("nbeam", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

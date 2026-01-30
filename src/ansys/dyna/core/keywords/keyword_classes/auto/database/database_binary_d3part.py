@@ -23,96 +23,50 @@
 """Module providing the DatabaseBinaryD3Part class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DATABASEBINARYD3PART_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("lcdt", int, 10, 10, None),
+    FieldSchema("beam", int, 20, 10, 0),
+    FieldSchema("npltc", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
+)
+
+_DATABASEBINARYD3PART_CARD1 = (
+    FieldSchema("hsetid", int, 0, 10, 0),
+    FieldSchema("bsetid", int, 10, 10, 0),
+    FieldSchema("ssetid", int, 20, 10, 0),
+    FieldSchema("tsetid", int, 30, 10, 0),
+)
 
 class DatabaseBinaryD3Part(KeywordBase):
     """DYNA DATABASE_BINARY_D3PART keyword"""
 
     keyword = "DATABASE"
     subkeyword = "BINARY_D3PART"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+        "bsetid": LinkType.SET_BEAM,
+        "psetid": LinkType.SET_PART,
+        "hsetid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryD3Part class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hsetid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsetid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssetid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsetid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYD3PART_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYD3PART_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values(),
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.
@@ -217,4 +171,49 @@ class DatabaseBinaryD3Part(KeywordBase):
     def tsetid(self, value: int) -> None:
         """Set the tsetid property."""
         self._cards[1].set_value("tsetid", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
+
+    @property
+    def bsetid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for bsetid."""
+        return self._get_set_link("BEAM", self.bsetid)
+
+    @bsetid_link.setter
+    def bsetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for bsetid."""
+        self.bsetid = value.sid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
+
+    @property
+    def hsetid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for hsetid."""
+        return self._get_set_link("SOLID", self.hsetid)
+
+    @hsetid_link.setter
+    def hsetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for hsetid."""
+        self.hsetid = value.sid
 

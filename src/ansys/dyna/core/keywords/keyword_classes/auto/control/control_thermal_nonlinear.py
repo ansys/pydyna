@@ -23,7 +23,18 @@
 """Module providing the ControlThermalNonlinear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLTHERMALNONLINEAR_CARD0 = (
+    FieldSchema("refmax", int, 0, 10, 10),
+    FieldSchema("tol", float, 10, 10, 0.0001),
+    FieldSchema("dcp", float, 20, 10, 1.0),
+    FieldSchema("lumpbc", int, 30, 10, 0),
+    FieldSchema("thlstl", float, 40, 10, 0.0),
+    FieldSchema("nlthpr", int, 50, 10, 0),
+    FieldSchema("phchpn", float, 60, 10, 100.0),
+)
 
 class ControlThermalNonlinear(KeywordBase):
     """DYNA CONTROL_THERMAL_NONLINEAR keyword"""
@@ -35,68 +46,10 @@ class ControlThermalNonlinear(KeywordBase):
         """Initialize the ControlThermalNonlinear class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "refmax",
-                        int,
-                        0,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        10,
-                        10,
-                        1.0E-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcp",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lumpbc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thlstl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlthpr",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phchpn",
-                        float,
-                        60,
-                        10,
-                        100.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALNONLINEAR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def refmax(self) -> int:
         """Get or set the Maximum number of matrix reformations per time step (default = 10)

@@ -23,8 +23,66 @@
 """Module providing the MatAddErosion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATADDEROSION_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("excl", float, 10, 10, None),
+    FieldSchema("mxpres", float, 20, 10, None),
+    FieldSchema("mneps", float, 30, 10, None),
+    FieldSchema("effeps", float, 40, 10, None),
+    FieldSchema("voleps", float, 50, 10, None),
+    FieldSchema("numfip", float, 60, 10, 1.0),
+    FieldSchema("ncs", float, 70, 10, 1.0),
+)
+
+_MATADDEROSION_CARD1 = (
+    FieldSchema("mnpres", float, 0, 10, None),
+    FieldSchema("sigp1", float, 10, 10, None),
+    FieldSchema("sigvm", float, 20, 10, None),
+    FieldSchema("mxeps", float, 30, 10, None),
+    FieldSchema("epssh", float, 40, 10, None),
+    FieldSchema("sigth", float, 50, 10, None),
+    FieldSchema("impulse", float, 60, 10, None),
+    FieldSchema("failtm", float, 70, 10, None),
+)
+
+_MATADDEROSION_CARD2 = (
+    FieldSchema("idam", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("lcregd", int, 70, 10, None),
+)
+
+_MATADDEROSION_CARD3 = (
+    FieldSchema("lcfld", int, 0, 10, None),
+    FieldSchema("nsff", int, 10, 10, 10),
+    FieldSchema("epsthin", float, 20, 10, None),
+    FieldSchema("engcrt", float, 30, 10, None),
+    FieldSchema("radcrt", float, 40, 10, None),
+    FieldSchema("lceps12", int, 50, 10, None),
+    FieldSchema("lceps13", int, 60, 10, None),
+    FieldSchema("lcepsmx", int, 70, 10, None),
+)
+
+_MATADDEROSION_CARD4 = (
+    FieldSchema("dteflt", float, 0, 10, None),
+    FieldSchema("volfrac", float, 10, 10, None),
+    FieldSchema("mxtmp", float, 20, 10, None),
+    FieldSchema("dtmin", float, 30, 10, None),
+)
+
+_MATADDEROSION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddErosion(KeywordBase):
     """DYNA MAT_ADD_EROSION keyword"""
@@ -34,306 +92,46 @@ class MatAddErosion(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "lcregd": LinkType.DEFINE_CURVE,
+        "lcfld": LinkType.DEFINE_CURVE,
+        "lceps12": LinkType.DEFINE_CURVE,
+        "lceps13": LinkType.DEFINE_CURVE,
+        "lcepsmx": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddErosion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "excl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mxpres",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mneps",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "effeps",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "voleps",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numfip",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncs",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mnpres",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigp1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigvm",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mxeps",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epssh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigth",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "impulse",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "failtm",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idam",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcregd",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcfld",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsff",
-                        int,
-                        10,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsthin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "engcrt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radcrt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lceps12",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lceps13",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcepsmx",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dteflt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "volfrac",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mxtmp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDEROSION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDEROSION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDEROSION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDEROSION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDEROSION_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddErosion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDEROSION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which this erosion definition applies.
@@ -701,4 +499,94 @@ class MatAddErosion(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def lcregd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcregd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcregd:
+                return kwd
+        return None
+
+    @lcregd_link.setter
+    def lcregd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcregd."""
+        self.lcregd = value.lcid
+
+    @property
+    def lcfld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfld:
+                return kwd
+        return None
+
+    @lcfld_link.setter
+    def lcfld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfld."""
+        self.lcfld = value.lcid
+
+    @property
+    def lceps12_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lceps12."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lceps12:
+                return kwd
+        return None
+
+    @lceps12_link.setter
+    def lceps12_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lceps12."""
+        self.lceps12 = value.lcid
+
+    @property
+    def lceps13_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lceps13."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lceps13:
+                return kwd
+        return None
+
+    @lceps13_link.setter
+    def lceps13_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lceps13."""
+        self.lceps13 = value.lcid
+
+    @property
+    def lcepsmx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcepsmx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcepsmx:
+                return kwd
+        return None
+
+    @lcepsmx_link.setter
+    def lcepsmx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcepsmx."""
+        self.lcepsmx = value.lcid
 

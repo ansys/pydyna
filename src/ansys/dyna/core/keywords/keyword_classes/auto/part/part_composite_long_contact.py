@@ -23,217 +23,75 @@
 """Module providing the PartCompositeLongContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+
+_PARTCOMPOSITELONGCONTACT_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTCOMPOSITELONGCONTACT_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 2),
+    FieldSchema("shrf", float, 20, 10, None),
+    FieldSchema("nloc", float, 30, 10, 0.0),
+    FieldSchema("marea", float, 40, 10, 0.0),
+    FieldSchema("hgid", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, 0),
+    FieldSchema("thshel", int, 70, 10, 0),
+)
+
+_PARTCOMPOSITELONGCONTACT_CARD2 = (
+    FieldSchema("fs", float, 0, 10, None),
+    FieldSchema("fd", float, 10, 10, None),
+    FieldSchema("dc", float, 20, 10, None),
+    FieldSchema("vc", float, 30, 10, None),
+    FieldSchema("optt", float, 40, 10, None),
+    FieldSchema("sft", float, 50, 10, None),
+    FieldSchema("ssf", float, 60, 10, None),
+    FieldSchema("cparm8", float, 70, 10, None),
+)
+
+_PARTCOMPOSITELONGCONTACT_CARD3 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("thick1", float, 10, 10, None),
+    FieldSchema("b1", float, 20, 10, None),
+    FieldSchema("tmid1", int, 30, 10, None),
+    FieldSchema("plyid", int, 40, 10, None),
+    FieldSchema("shrfac", float, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
 
 class PartCompositeLongContact(KeywordBase):
     """DYNA PART_COMPOSITE_LONG_CONTACT keyword"""
 
     keyword = "PART"
     subkeyword = "COMPOSITE_LONG_CONTACT"
+    _link_fields = {
+        "mid1": LinkType.MAT,
+        "hgid": LinkType.HOURGLASS,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartCompositeLongContact class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "marea",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thshel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "optt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cparm8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "plyid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrfac",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITELONGCONTACT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITELONGCONTACT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITELONGCONTACT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTCOMPOSITELONGCONTACT_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -516,4 +374,34 @@ class PartCompositeLongContact(KeywordBase):
     def shrfac(self, value: float) -> None:
         """Set the shrfac property."""
         self._cards[3].set_value("shrfac", value)
+
+    @property
+    def mid1_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid1:
+                return kwd
+        return None
+
+    @mid1_link.setter
+    def mid1_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid1."""
+        self.mid1 = value.mid
+
+    @property
+    def hgid_link(self) -> Hourglass:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
 

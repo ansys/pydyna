@@ -23,7 +23,19 @@
 """Module providing the InitialStressSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSSPH_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("sigxx", float, 10, 10, 0.0),
+    FieldSchema("sigyy", float, 20, 10, 0.0),
+    FieldSchema("sigzz", float, 30, 10, 0.0),
+    FieldSchema("sigxy", float, 40, 10, 0.0),
+    FieldSchema("sigyz", float, 50, 10, 0.0),
+    FieldSchema("sigzx", float, 60, 10, 0.0),
+    FieldSchema("eps", float, 70, 10, 0.0),
+)
 
 class InitialStressSph(KeywordBase):
     """DYNA INITIAL_STRESS_SPH keyword"""
@@ -35,75 +47,10 @@ class InitialStressSph(KeywordBase):
         """Initialize the InitialStressSph class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSPH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the SPH particle ID.

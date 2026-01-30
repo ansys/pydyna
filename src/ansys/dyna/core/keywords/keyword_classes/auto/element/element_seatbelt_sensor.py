@@ -23,188 +23,81 @@
 """Module providing the ElementSeatbeltSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTSEATBELTSENSOR_CARD0 = (
+    FieldSchema("sbsid", int, 0, 10, 0),
+    FieldSchema("sbstyp", int, 10, 10, 1),
+    FieldSchema("sbsfl", int, 20, 10, 0),
+)
+
+_ELEMENTSEATBELTSENSOR_CARD1 = (
+    FieldSchema("nid", int, 0, 10, 0),
+    FieldSchema("dof", int, 10, 10, 1),
+    FieldSchema("acc", float, 20, 10, 0.0),
+    FieldSchema("atime", float, 30, 10, 0.0),
+)
+
+_ELEMENTSEATBELTSENSOR_CARD2 = (
+    FieldSchema("sbrid", int, 0, 10, 0),
+    FieldSchema("pulrat", float, 10, 10, 0.0),
+    FieldSchema("pultim", float, 20, 10, 0.0),
+)
+
+_ELEMENTSEATBELTSENSOR_CARD3 = (
+    FieldSchema("time", float, 0, 10, 0.0),
+)
+
+_ELEMENTSEATBELTSENSOR_CARD4 = (
+    FieldSchema("nid1", int, 0, 10, 0),
+    FieldSchema("nid2", int, 10, 10, 0),
+    FieldSchema("dmx", float, 20, 10, 0.0),
+    FieldSchema("dmn", float, 30, 10, 0.0),
+)
+
+_ELEMENTSEATBELTSENSOR_CARD5 = (
+    FieldSchema("sbrid", int, 0, 10, 0),
+    FieldSchema("pulmx", float, 10, 10, 1e+16),
+    FieldSchema("pulmn", float, 20, 10, -1e+16),
+)
 
 class ElementSeatbeltSensor(KeywordBase):
     """DYNA ELEMENT_SEATBELT_SENSOR keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_SENSOR"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbstyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbsfl",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atime",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sbrid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pulrat",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pultim",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "time",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmn",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sbrid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pulmx",
-                        float,
-                        10,
-                        10,
-                        1.0E+16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pulmn",
-                        float,
-                        20,
-                        10,
-                        -1.0E+16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSENSOR_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def sbsid(self) -> int:
         """Get or set the Sensor ID. A unique number has to be used.
@@ -418,4 +311,19 @@ class ElementSeatbeltSensor(KeywordBase):
     def pulmn(self, value: float) -> None:
         """Set the pulmn property."""
         self._cards[5].set_value("pulmn", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 

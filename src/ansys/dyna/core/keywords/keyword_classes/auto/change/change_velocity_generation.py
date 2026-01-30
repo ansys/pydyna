@@ -23,165 +23,64 @@
 """Module providing the ChangeVelocityGeneration class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CHANGEVELOCITYGENERATION_CARD0 = (
+    FieldSchema("nsid_pid", int, 0, 10, None, "nsid/pid"),
+    FieldSchema("styp", int, 10, 10, 1),
+    FieldSchema("omega", float, 20, 10, 0.0),
+    FieldSchema("vx", float, 30, 10, 0.0),
+    FieldSchema("vy", float, 40, 10, 0.0),
+    FieldSchema("vz", float, 50, 10, 0.0),
+    FieldSchema("ivatn", int, 60, 10, 0),
+    FieldSchema("icid", int, 70, 10, None),
+)
+
+_CHANGEVELOCITYGENERATION_CARD1 = (
+    FieldSchema("xc", float, 0, 10, 0.0),
+    FieldSchema("yc", float, 10, 10, 0.0),
+    FieldSchema("zc", float, 20, 10, 0.0),
+    FieldSchema("nx", float, 30, 10, 0.0),
+    FieldSchema("ny", float, 40, 10, 0.0),
+    FieldSchema("nz", float, 50, 10, 0.0),
+    FieldSchema("phase", int, 60, 10, 0),
+    FieldSchema("irigid", int, 70, 10, 0),
+)
 
 class ChangeVelocityGeneration(KeywordBase):
     """DYNA CHANGE_VELOCITY_GENERATION keyword"""
 
     keyword = "CHANGE"
     subkeyword = "VELOCITY_GENERATION"
+    _link_fields = {
+        "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeVelocityGeneration class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid/pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "styp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivatn",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phase",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irigid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYGENERATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITYGENERATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid_pid(self) -> typing.Optional[int]:
         """Get or set the Node set ID or part set ID.
         EQ.0: STYP is ignored and all velocities are set.
         """ # nopep8
-        return self._cards[0].get_value("nsid/pid")
+        return self._cards[0].get_value("nsid_pid")
 
     @nsid_pid.setter
     def nsid_pid(self, value: int) -> None:
         """Set the nsid_pid property."""
-        self._cards[0].set_value("nsid/pid", value)
+        self._cards[0].set_value("nsid_pid", value)
 
     @property
     def styp(self) -> int:
@@ -360,4 +259,19 @@ class ChangeVelocityGeneration(KeywordBase):
     def irigid(self, value: int) -> None:
         """Set the irigid property."""
         self._cards[1].set_value("irigid", value)
+
+    @property
+    def icid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for icid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.icid:
+                return kwd
+        return None
+
+    @icid_link.setter
+    def icid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for icid."""
+        self.icid = value.cid
 

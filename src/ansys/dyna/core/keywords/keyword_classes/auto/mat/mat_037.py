@@ -23,8 +23,35 @@
 """Module providing the Mat037 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT037_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("etan", float, 50, 10, None),
+    FieldSchema("r", float, 60, 10, None),
+    FieldSchema("hlcid", int, 70, 10, 0),
+)
+
+_MAT037_CARD1 = (
+    FieldSchema("idscale", int, 0, 10, None),
+    FieldSchema("ea", float, 10, 10, None),
+    FieldSchema("coe", float, 20, 10, None),
+    FieldSchema("icfld", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("strainlt", float, 50, 10, None),
+)
+
+_MAT037_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat037(KeywordBase):
     """DYNA MAT_037 keyword"""
@@ -34,138 +61,34 @@ class Mat037(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "hlcid": LinkType.DEFINE_CURVE,
+        "idscale": LinkType.DEFINE_CURVE,
+        "icfld": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat037 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idscale",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coe",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icfld",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strainlt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT037_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT037_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat037.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT037_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -322,4 +245,49 @@ class Mat037(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def hlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlcid:
+                return kwd
+        return None
+
+    @hlcid_link.setter
+    def hlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlcid."""
+        self.hlcid = value.lcid
+
+    @property
+    def idscale_link(self) -> DefineCurve:
+        """Get the DefineCurve object for idscale."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.idscale:
+                return kwd
+        return None
+
+    @idscale_link.setter
+    def idscale_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for idscale."""
+        self.idscale = value.lcid
+
+    @property
+    def icfld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for icfld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.icfld:
+                return kwd
+        return None
+
+    @icfld_link.setter
+    def icfld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for icfld."""
+        self.icfld = value.lcid
 

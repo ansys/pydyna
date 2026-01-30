@@ -23,8 +23,19 @@
 """Module providing the DefineTracerParticles2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINETRACERPARTICLES2D_CARD0 = (
+    FieldSchema("nset", int, 0, 10, None),
+    FieldSchema("pset", int, 10, 10, None),
+)
+
+_DEFINETRACERPARTICLES2D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineTracerParticles2D(KeywordBase):
     """DYNA DEFINE_TRACER_PARTICLES_2D keyword"""
@@ -34,49 +45,30 @@ class DefineTracerParticles2D(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nset": LinkType.SET_NODE,
+        "pset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineTracerParticles2D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETRACERPARTICLES2D_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTracerParticles2D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETRACERPARTICLES2D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def nset(self) -> typing.Optional[int]:
         """Get or set the The node set ID for the nodes used as tracer particles.
@@ -114,4 +106,24 @@ class DefineTracerParticles2D(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nset_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nset."""
+        return self._get_set_link("NODE", self.nset)
+
+    @nset_link.setter
+    def nset_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nset."""
+        self.nset = value.sid
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

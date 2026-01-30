@@ -23,86 +23,47 @@
 """Module providing the InitialHydrostaticAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_INITIALHYDROSTATICALE_CARD0 = (
+    FieldSchema("alesid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("vecid", int, 20, 10, None),
+    FieldSchema("grav", float, 30, 10, None),
+    FieldSchema("pbase", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+)
+
+_INITIALHYDROSTATICALE_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("mmgblo", int, 10, 10, None),
+)
 
 class InitialHydrostaticAle(KeywordBase):
     """DYNA INITIAL_HYDROSTATIC_ALE keyword"""
 
     keyword = "INITIAL"
     subkeyword = "HYDROSTATIC_ALE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialHydrostaticAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "alesid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbase",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgblo",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALHYDROSTATICALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALHYDROSTATICALE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the Set ID.
@@ -182,4 +143,24 @@ class InitialHydrostaticAle(KeywordBase):
     def mmgblo(self, value: int) -> None:
         """Set the mmgblo property."""
         self._cards[1].set_value("mmgblo", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

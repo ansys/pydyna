@@ -23,54 +23,34 @@
 """Module providing the LoadBeamElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADBEAMELEMENT_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("dal", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+)
 
 class LoadBeamElement(KeywordBase):
     """DYNA LOAD_BEAM_ELEMENT keyword"""
 
     keyword = "LOAD"
     subkeyword = "BEAM_ELEMENT"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBeamElement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dal",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBEAMELEMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Beam element ID, see *ELEMENT_BEAM.
@@ -119,4 +99,9 @@ class LoadBeamElement(KeywordBase):
     def sf(self, value: float) -> None:
         """Set the sf property."""
         self._cards[0].set_value("sf", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

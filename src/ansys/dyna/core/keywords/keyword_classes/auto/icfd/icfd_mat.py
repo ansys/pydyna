@@ -23,146 +23,59 @@
 """Module providing the IcfdMat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDMAT_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("flg", int, 10, 10, 1),
+    FieldSchema("ro", float, 20, 10, 0.0),
+    FieldSchema("vis", float, 30, 10, 0.0),
+    FieldSchema("st", float, 40, 10, 0.0),
+    FieldSchema("stsflcid", int, 50, 10, None),
+    FieldSchema("ca", float, 60, 10, 0.0),
+)
+
+_ICFDMAT_CARD1 = (
+    FieldSchema("hc", float, 0, 10, 0.0),
+    FieldSchema("tc", float, 10, 10, 0.0),
+    FieldSchema("beta", float, 20, 10, 0.0),
+    FieldSchema("prt", float, 30, 10, 0.85),
+    FieldSchema("hcsflcid", int, 40, 10, None),
+    FieldSchema("tcsflcid", int, 50, 10, None),
+)
+
+_ICFDMAT_CARD2 = (
+    FieldSchema("nnmoid", int, 0, 10, None),
+    FieldSchema("pmmoid", int, 10, 10, None),
+)
 
 class IcfdMat(KeywordBase):
     """DYNA ICFD_MAT keyword"""
 
     keyword = "ICFD"
     subkeyword = "MAT"
+    _link_fields = {
+        "hcsflcid": LinkType.DEFINE_CURVE,
+        "tcsflcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdMat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flg",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vis",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stsflcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hc",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prt",
-                        float,
-                        30,
-                        10,
-                        0.85,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hcsflcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcsflcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nnmoid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmmoid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDMAT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMAT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMAT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID.
@@ -329,4 +242,34 @@ class IcfdMat(KeywordBase):
     def pmmoid(self, value: int) -> None:
         """Set the pmmoid property."""
         self._cards[2].set_value("pmmoid", value)
+
+    @property
+    def hcsflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hcsflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hcsflcid:
+                return kwd
+        return None
+
+    @hcsflcid_link.setter
+    def hcsflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hcsflcid."""
+        self.hcsflcid = value.lcid
+
+    @property
+    def tcsflcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tcsflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tcsflcid:
+                return kwd
+        return None
+
+    @tcsflcid_link.setter
+    def tcsflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tcsflcid."""
+        self.tcsflcid = value.lcid
 

@@ -23,87 +23,38 @@
 """Module providing the DatabaseRecoverNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASERECOVERNODE_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("iax", str, 10, 10, "SMNPD"),
+    FieldSchema("iay", str, 20, 10, "SMNPD"),
+    FieldSchema("iaz", str, 30, 10, "SMNPD"),
+    FieldSchema("method", int, 40, 10, 0),
+    FieldSchema("ivx", str, 50, 10, "SMNPD"),
+    FieldSchema("ivy", str, 60, 10, "SMNPD"),
+    FieldSchema("ivz", str, 70, 10, "SMNPD"),
+)
 
 class DatabaseRecoverNode(KeywordBase):
     """DYNA DATABASE_RECOVER_NODE keyword"""
 
     keyword = "DATABASE"
     subkeyword = "RECOVER_NODE"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseRecoverNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iax",
-                        str,
-                        10,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "iay",
-                        str,
-                        20,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaz",
-                        str,
-                        30,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivx",
-                        str,
-                        50,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivy",
-                        str,
-                        60,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivz",
-                        str,
-                        70,
-                        10,
-                        "SMNPD",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASERECOVERNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID of solid elements whose nodal stress will be recovered.
@@ -303,4 +254,14 @@ class DatabaseRecoverNode(KeywordBase):
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
             raise Exception("""ivz must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("ivz", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

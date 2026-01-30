@@ -23,39 +23,33 @@
 """Module providing the ChangeBoundaryCondition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CHANGEBOUNDARYCONDITION_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("bcc", int, 10, 10, 1),
+)
 
 class ChangeBoundaryCondition(KeywordBase):
     """DYNA CHANGE_BOUNDARY_CONDITION keyword"""
 
     keyword = "CHANGE"
     subkeyword = "BOUNDARY_CONDITION"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChangeBoundaryCondition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcc",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEBOUNDARYCONDITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Nodal point ID, see also *NODE.
@@ -86,4 +80,9 @@ class ChangeBoundaryCondition(KeywordBase):
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""bcc must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("bcc", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

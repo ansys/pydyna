@@ -23,168 +23,73 @@
 """Module providing the ElementSolidDof class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTSOLIDDOF_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("n4", int, 40, 8, None),
+    FieldSchema("n5", int, 48, 8, None),
+    FieldSchema("n6", int, 56, 8, None),
+    FieldSchema("n7", int, 64, 8, None),
+    FieldSchema("n8", int, 72, 8, None),
+)
+
+_ELEMENTSOLIDDOF_CARD1 = (
+    FieldSchema("unused", int, 0, 8, None),
+    FieldSchema("unused", int, 8, 8, None),
+    FieldSchema("ns1", int, 16, 8, None),
+    FieldSchema("ns2", int, 24, 8, None),
+    FieldSchema("ns3", int, 32, 8, None),
+    FieldSchema("ns4", int, 40, 8, None),
+    FieldSchema("ns5", int, 48, 8, None),
+    FieldSchema("ns6", int, 56, 8, None),
+    FieldSchema("ns7", int, 64, 8, None),
+    FieldSchema("ns8", int, 72, 8, None),
+)
 
 class ElementSolidDof(KeywordBase):
     """DYNA ELEMENT_SOLID_DOF keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SOLID_DOF"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "ns1": LinkType.NODE,
+        "ns2": LinkType.NODE,
+        "ns3": LinkType.NODE,
+        "ns4": LinkType.NODE,
+        "ns5": LinkType.NODE,
+        "ns6": LinkType.NODE,
+        "ns7": LinkType.NODE,
+        "ns8": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSolidDof class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns4",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns5",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns6",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns7",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns8",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDDOF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDDOF_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.
@@ -382,4 +287,89 @@ class ElementSolidDof(KeywordBase):
     def ns8(self, value: int) -> None:
         """Set the ns8 property."""
         self._cards[1].set_value("ns8", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def ns1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns1."""
+        return self._get_link_by_attr("NODE", "nid", self.ns1, "parts")
+
+    @property
+    def ns2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns2."""
+        return self._get_link_by_attr("NODE", "nid", self.ns2, "parts")
+
+    @property
+    def ns3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns3."""
+        return self._get_link_by_attr("NODE", "nid", self.ns3, "parts")
+
+    @property
+    def ns4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns4."""
+        return self._get_link_by_attr("NODE", "nid", self.ns4, "parts")
+
+    @property
+    def ns5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns5."""
+        return self._get_link_by_attr("NODE", "nid", self.ns5, "parts")
+
+    @property
+    def ns6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns6."""
+        return self._get_link_by_attr("NODE", "nid", self.ns6, "parts")
+
+    @property
+    def ns7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns7."""
+        return self._get_link_by_attr("NODE", "nid", self.ns7, "parts")
+
+    @property
+    def ns8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ns8."""
+        return self._get_link_by_attr("NODE", "nid", self.ns8, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

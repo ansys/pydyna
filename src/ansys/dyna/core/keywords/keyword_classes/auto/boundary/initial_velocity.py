@@ -23,168 +23,65 @@
 """Module providing the InitialVelocity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_INITIALVELOCITY_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("irigid", int, 30, 10, 0),
+    FieldSchema("icid", int, 40, 10, 0),
+)
+
+_INITIALVELOCITY_CARD1 = (
+    FieldSchema("vx", float, 0, 10, 0.0),
+    FieldSchema("vy", float, 10, 10, 0.0),
+    FieldSchema("vz", float, 20, 10, 0.0),
+    FieldSchema("vxr", float, 30, 10, 0.0),
+    FieldSchema("vyr", float, 40, 10, 0.0),
+    FieldSchema("vzr", float, 50, 10, 0.0),
+)
+
+_INITIALVELOCITY_CARD2 = (
+    FieldSchema("vxe", float, 0, 10, 0.0),
+    FieldSchema("vye", float, 10, 10, 0.0),
+    FieldSchema("vze", float, 20, 10, 0.0),
+    FieldSchema("vxre", float, 30, 10, 0.0),
+    FieldSchema("vyre", float, 40, 10, 0.0),
+    FieldSchema("vzre", float, 50, 10, 0.0),
+)
 
 class InitialVelocity(KeywordBase):
     """DYNA INITIAL_VELOCITY keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VELOCITY"
+    _link_fields = {
+        "boxid": LinkType.DEFINE_BOX,
+        "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVelocity class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irigid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vxe",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vye",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vze",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxre",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyre",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzre",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.nsidex > 0,
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITY_CARD2,
+                active_func=lambda: self.nsidex > 0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see *SET_NODE, containing nodes for initial velocity:
@@ -376,4 +273,54 @@ class InitialVelocity(KeywordBase):
     def vzre(self, value: float) -> None:
         """Set the vzre property."""
         self._cards[2].set_value("vzre", value)
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def icid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for icid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.icid:
+                return kwd
+        return None
+
+    @icid_link.setter
+    def icid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for icid."""
+        self.icid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
 

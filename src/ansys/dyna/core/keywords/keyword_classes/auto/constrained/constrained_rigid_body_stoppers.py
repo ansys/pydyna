@@ -23,122 +23,54 @@
 """Module providing the ConstrainedRigidBodyStoppers class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONSTRAINEDRIGIDBODYSTOPPERS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcmax", int, 10, 10, 0),
+    FieldSchema("lcmin", int, 20, 10, 0),
+    FieldSchema("psidmx", int, 30, 10, 0),
+    FieldSchema("psidmn", int, 40, 10, 0),
+    FieldSchema("lcvmnx", int, 50, 10, 0),
+    FieldSchema("dir", int, 60, 10, 1),
+    FieldSchema("vid", int, 70, 10, 0),
+)
+
+_CONSTRAINEDRIGIDBODYSTOPPERS_CARD1 = (
+    FieldSchema("tb", float, 0, 10, 0.0),
+    FieldSchema("td", float, 10, 10, 1e+21),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("stiff", float, 30, 10, 0.0),
+)
 
 class ConstrainedRigidBodyStoppers(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODY_STOPPERS keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODY_STOPPERS"
+    _link_fields = {
+        "lcvmnx": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
+        "psidmx": LinkType.SET_PART,
+        "psidmn": LinkType.SET_PART,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodyStoppers class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmax",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmin",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidmx",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidmn",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvmnx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tb",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "td",
-                        float,
-                        10,
-                        10,
-                        1.0E+21,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiff",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYSTOPPERS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYSTOPPERS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of lead rigid body, see *PART.
@@ -276,4 +208,59 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
     def stiff(self, value: float) -> None:
         """Set the stiff property."""
         self._cards[1].set_value("stiff", value)
+
+    @property
+    def lcvmnx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvmnx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvmnx:
+                return kwd
+        return None
+
+    @lcvmnx_link.setter
+    def lcvmnx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvmnx."""
+        self.lcvmnx = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def psidmx_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidmx."""
+        return self._get_set_link("PART", self.psidmx)
+
+    @psidmx_link.setter
+    def psidmx_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidmx."""
+        self.psidmx = value.sid
+
+    @property
+    def psidmn_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidmn."""
+        return self._get_set_link("PART", self.psidmn)
+
+    @psidmn_link.setter
+    def psidmn_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidmn."""
+        self.psidmn = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

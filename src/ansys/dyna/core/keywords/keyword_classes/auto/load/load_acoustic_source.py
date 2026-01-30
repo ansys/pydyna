@@ -23,97 +23,50 @@
 """Module providing the LoadAcousticSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADACOUSTICSOURCE_CARD0 = (
+    FieldSchema("nid_ssid", int, 0, 10, None, "nid/ssid"),
+    FieldSchema("srctyp", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("data1", float, 30, 10, 1.0),
+    FieldSchema("data2", float, 40, 10, 0.0),
+    FieldSchema("data3", float, 50, 10, 0.0),
+    FieldSchema("data4", float, 60, 10, 0.0),
+    FieldSchema("data5", float, 70, 10, 0.0),
+)
 
 class LoadAcousticSource(KeywordBase):
     """DYNA LOAD_ACOUSTIC_SOURCE keyword"""
 
     keyword = "LOAD"
     subkeyword = "ACOUSTIC_SOURCE"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadAcousticSource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid/ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srctyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data1",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data4",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data5",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADACOUSTICSOURCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid_ssid(self) -> typing.Optional[int]:
         """Get or set the Node ID of the acoustic point source for SRCTYP = 1 and 5.
         Segment set ID of structural faces on the external fluid-structure boundary exposed to the acoustic wave source for SRCTYP = 11 and 12
         """ # nopep8
-        return self._cards[0].get_value("nid/ssid")
+        return self._cards[0].get_value("nid_ssid")
 
     @nid_ssid.setter
     def nid_ssid(self, value: int) -> None:
         """Set the nid_ssid property."""
-        self._cards[0].set_value("nid/ssid", value)
+        self._cards[0].set_value("nid_ssid", value)
 
     @property
     def srctyp(self) -> int:
@@ -208,4 +161,19 @@ class LoadAcousticSource(KeywordBase):
     def data5(self, value: float) -> None:
         """Set the data5 property."""
         self._cards[0].set_value("data5", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

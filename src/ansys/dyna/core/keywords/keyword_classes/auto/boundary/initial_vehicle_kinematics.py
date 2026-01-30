@@ -23,191 +23,62 @@
 """Module providing the InitialVehicleKinematics class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALVEHICLEKINEMATICS_CARD0 = (
+    FieldSchema("grav", int, 0, 10, 1),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("xo", float, 20, 10, 0.0),
+    FieldSchema("yo", float, 30, 10, 0.0),
+    FieldSchema("zo", float, 40, 10, 0.0),
+    FieldSchema("xf", float, 50, 10, 0.0),
+    FieldSchema("yf", float, 60, 10, 0.0),
+    FieldSchema("zf", float, 70, 10, 0.0),
+)
+
+_INITIALVEHICLEKINEMATICS_CARD1 = (
+    FieldSchema("vx", float, 0, 10, 0.0),
+    FieldSchema("vy", float, 10, 10, 0.0),
+    FieldSchema("vz", float, 20, 10, 0.0),
+    FieldSchema("aaxis", int, 30, 10, 1),
+    FieldSchema("baxis", int, 40, 10, 1),
+    FieldSchema("caxis", int, 50, 10, 1),
+)
+
+_INITIALVEHICLEKINEMATICS_CARD2 = (
+    FieldSchema("aang", float, 0, 10, 0.0),
+    FieldSchema("bang", float, 10, 10, 0.0),
+    FieldSchema("cang", float, 20, 10, 0.0),
+    FieldSchema("wa", float, 30, 10, 0.0),
+    FieldSchema("wb", float, 40, 10, 0.0),
+    FieldSchema("wc", float, 50, 10, 0.0),
+)
 
 class InitialVehicleKinematics(KeywordBase):
     """DYNA INITIAL_VEHICLE_KINEMATICS keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VEHICLE_KINEMATICS"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVehicleKinematics class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "grav",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zo",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zf",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aaxis",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "baxis",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "caxis",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aang",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bang",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cang",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wa",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wb",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVEHICLEKINEMATICS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVEHICLEKINEMATICS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALVEHICLEKINEMATICS_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def grav(self) -> int:
         """Get or set the Gravity direction code:
@@ -451,4 +322,14 @@ class InitialVehicleKinematics(KeywordBase):
     def wc(self, value: float) -> None:
         """Set the wc property."""
         self._cards[2].set_value("wc", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

@@ -23,102 +23,48 @@
 """Module providing the BoundaryPwpTableSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYPWPTABLESET_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("tbirth", float, 40, 10, 0.0),
+    FieldSchema("tdeath", float, 50, 10, 1e+20),
+)
+
+_BOUNDARYPWPTABLESET_CARD1 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("itotex", int, 10, 10, 0),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("table", int, 30, 10, 0),
+)
 
 class BoundaryPwpTableSet(KeywordBase):
     """DYNA BOUNDARY_PWP_TABLE_SET keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PWP_TABLE_SET"
+    _link_fields = {
+        "table": LinkType.DEFINE_CURVE,
+        "pid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPwpTableSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        50,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itotex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "table",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPTABLESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPWPTABLESET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.
@@ -189,4 +135,29 @@ class BoundaryPwpTableSet(KeywordBase):
     def table(self, value: int) -> None:
         """Set the table property."""
         self._cards[1].set_value("table", value)
+
+    @property
+    def table_link(self) -> DefineCurve:
+        """Get the DefineCurve object for table."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.table:
+                return kwd
+        return None
+
+    @table_link.setter
+    def table_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for table."""
+        self.table = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
 

@@ -23,8 +23,72 @@
 """Module providing the MatNonlinearOrthotropic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATNONLINEARORTHOTROPIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ea", float, 20, 10, None),
+    FieldSchema("eb", float, 30, 10, None),
+    FieldSchema("ec", float, 40, 10, None),
+    FieldSchema("prba", float, 50, 10, None),
+    FieldSchema("prca", float, 60, 10, None),
+    FieldSchema("prcb", float, 70, 10, None),
+)
+
+_MATNONLINEARORTHOTROPIC_CARD1 = (
+    FieldSchema("gab", float, 0, 10, None),
+    FieldSchema("gbc", float, 10, 10, None),
+    FieldSchema("gca", float, 20, 10, None),
+    FieldSchema("dt", float, 30, 10, None),
+    FieldSchema("tramp", float, 40, 10, None),
+    FieldSchema("alpha", float, 50, 10, None),
+)
+
+_MATNONLINEARORTHOTROPIC_CARD2 = (
+    FieldSchema("lcida", float, 0, 10, 0.0),
+    FieldSchema("lcidb", float, 10, 10, 0.0),
+    FieldSchema("efail", float, 20, 10, None),
+    FieldSchema("dtfail", float, 30, 10, None),
+    FieldSchema("cdamp", float, 40, 10, None),
+    FieldSchema("aopt", float, 50, 10, None),
+    FieldSchema("macf", int, 60, 10, 1),
+    FieldSchema("atrack", int, 70, 10, 0),
+)
+
+_MATNONLINEARORTHOTROPIC_CARD3 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATNONLINEARORTHOTROPIC_CARD4 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MATNONLINEARORTHOTROPIC_CARD5 = (
+    FieldSchema("lcidc", int, 0, 10, 0),
+    FieldSchema("lcidab", int, 10, 10, 0),
+    FieldSchema("lcidbc", int, 20, 10, 0),
+    FieldSchema("lcidca", int, 30, 10, 0),
+)
+
+_MATNONLINEARORTHOTROPIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatNonlinearOrthotropic(KeywordBase):
     """DYNA MAT_NONLINEAR_ORTHOTROPIC keyword"""
@@ -34,336 +98,49 @@ class MatNonlinearOrthotropic(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcida": LinkType.DEFINE_CURVE,
+        "lcidb": LinkType.DEFINE_CURVE,
+        "lcidc": LinkType.DEFINE_CURVE,
+        "lcidab": LinkType.DEFINE_CURVE,
+        "lcidbc": LinkType.DEFINE_CURVE,
+        "lcidca": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatNonlinearOrthotropic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prca",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcb",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tramp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcida",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidb",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efail",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdamp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atrack",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidab",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidbc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidca",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARORTHOTROPIC_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatNonlinearOrthotropic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATNONLINEARORTHOTROPIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -824,4 +601,94 @@ class MatNonlinearOrthotropic(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcida_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcida:
+                return kwd
+        return None
+
+    @lcida_link.setter
+    def lcida_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcida."""
+        self.lcida = value.lcid
+
+    @property
+    def lcidb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidb:
+                return kwd
+        return None
+
+    @lcidb_link.setter
+    def lcidb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidb."""
+        self.lcidb = value.lcid
+
+    @property
+    def lcidc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidc:
+                return kwd
+        return None
+
+    @lcidc_link.setter
+    def lcidc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidc."""
+        self.lcidc = value.lcid
+
+    @property
+    def lcidab_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidab."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidab:
+                return kwd
+        return None
+
+    @lcidab_link.setter
+    def lcidab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidab."""
+        self.lcidab = value.lcid
+
+    @property
+    def lcidbc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidbc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidbc:
+                return kwd
+        return None
+
+    @lcidbc_link.setter
+    def lcidbc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidbc."""
+        self.lcidbc = value.lcid
+
+    @property
+    def lcidca_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidca:
+                return kwd
+        return None
+
+    @lcidca_link.setter
+    def lcidca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidca."""
+        self.lcidca = value.lcid
 

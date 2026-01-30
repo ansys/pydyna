@@ -23,148 +23,66 @@
 """Module providing the BoundaryPrescribedMotionSetLine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD0 = (
+    FieldSchema("typeid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("vad", int, 20, 10, 0),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, 1e+28),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD1 = (
+    FieldSchema("offset1", float, 0, 10, 0.0),
+    FieldSchema("offset2", float, 10, 10, 0.0),
+    FieldSchema("lrb", int, 20, 10, 0),
+    FieldSchema("node1", int, 30, 10, 0),
+    FieldSchema("node2", int, 40, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD2 = (
+    FieldSchema("nbeg", int, 0, 10, None),
+    FieldSchema("nend", int, 10, 10, None),
+)
 
 class BoundaryPrescribedMotionSetLine(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_SET_LINE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET_LINE"
+    _link_fields = {
+        "node1": LinkType.NODE,
+        "node2": LinkType.NODE,
+        "nbeg": LinkType.NODE,
+        "nend": LinkType.NODE,
+        "vid": LinkType.DEFINE_VECTOR,
+        "typeid": LinkType.SET_NODE,
+        "lrb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedMotionSetLine class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "typeid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "offset1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lrb",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
-            ),
-            Card(
-                [
-                    Field(
-                        "nbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nend",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD1,
+                active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def typeid(self) -> typing.Optional[int]:
         """Get or set the nodal set ID (SID in *SET_NODE)
@@ -359,4 +277,54 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
     def nend(self, value: int) -> None:
         """Set the nend property."""
         self._cards[2].set_value("nend", value)
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node1."""
+        return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node2."""
+        return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
+
+    @property
+    def nbeg_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nbeg."""
+        return self._get_link_by_attr("NODE", "nid", self.nbeg, "parts")
+
+    @property
+    def nend_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nend."""
+        return self._get_link_by_attr("NODE", "nid", self.nend, "parts")
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def typeid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for typeid."""
+        return self._get_set_link("NODE", self.typeid)
+
+    @typeid_link.setter
+    def typeid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for typeid."""
+        self.typeid = value.sid
+
+    @property
+    def lrb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given lrb."""
+        return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

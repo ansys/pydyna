@@ -23,8 +23,33 @@
 """Module providing the DefineCurveDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_DEFINECURVEDRAWBEAD_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("tcype", int, 10, 10, 1),
+    FieldSchema("vid", int, 20, 10, None),
+    FieldSchema("pid", int, 30, 10, None),
+    FieldSchema("blkid", int, 40, 10, None),
+    FieldSchema("perct", int, 50, 10, None),
+)
+
+_DEFINECURVEDRAWBEAD_CARD1 = (
+    FieldSchema("cx", float, 0, 20, 0.0),
+    FieldSchema("cy", float, 20, 20, 0.0),
+)
+
+_DEFINECURVEDRAWBEAD_CARD2 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_DEFINECURVEDRAWBEAD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCurveDrawbead(KeywordBase):
     """DYNA DEFINE_CURVE_DRAWBEAD keyword"""
@@ -34,109 +59,37 @@ class DefineCurveDrawbead(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "vid": LinkType.DEFINE_VECTOR,
+        "pid": LinkType.PART,
+        "blkid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCurveDrawbead class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blkid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perct",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cx",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cy",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEDRAWBEAD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEDRAWBEAD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEDRAWBEAD_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveDrawbead.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVEDRAWBEAD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Curve ID.
@@ -253,4 +206,29 @@ class DefineCurveDrawbead(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def blkid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given blkid."""
+        return self._get_link_by_attr("PART", "pid", self.blkid, "parts")
 

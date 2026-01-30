@@ -23,114 +23,53 @@
 """Module providing the EmCircuitSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_EMCIRCUITSOURCE_CARD0 = (
+    FieldSchema("circid", int, 0, 10, None),
+    FieldSchema("circtyp", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("r_f", float, 30, 10, None, "r/f"),
+    FieldSchema("l_a", float, 40, 10, None, "l/a"),
+    FieldSchema("c_t0", float, 50, 10, None, "c/t0"),
+    FieldSchema("v0", float, 60, 10, None),
+    FieldSchema("t0", float, 70, 10, 0.0),
+)
+
+_EMCIRCUITSOURCE_CARD1 = (
+    FieldSchema("sidcurr", int, 0, 10, None),
+    FieldSchema("sidvin", int, 10, 10, None),
+    FieldSchema("sidvout", int, 20, 10, None),
+    FieldSchema("partid", int, 30, 10, None),
+)
 
 class EmCircuitSource(KeywordBase):
     """DYNA EM_CIRCUIT_SOURCE keyword"""
 
     keyword = "EM"
     subkeyword = "CIRCUIT_SOURCE"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "sidcurr": LinkType.SET_SEGMENT,
+        "sidvin": LinkType.SET_SEGMENT,
+        "sidvout": LinkType.SET_SEGMENT,
+        "partid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmCircuitSource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "circid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "circtyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r/f",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l/a",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c/t0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sidcurr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidvin",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidvout",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "partid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCIRCUITSOURCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMCIRCUITSOURCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def circid(self) -> typing.Optional[int]:
         """Get or set the Circuit ID.
@@ -178,12 +117,12 @@ class EmCircuitSource(KeywordBase):
         """Get or set the Value of the circuit resistance for CIRCTYP.EQ.3.
         Value of the Frequency for CIRCTYP.EQ.11,12,21 or 22.
         """ # nopep8
-        return self._cards[0].get_value("r/f")
+        return self._cards[0].get_value("r_f")
 
     @r_f.setter
     def r_f(self, value: float) -> None:
         """Set the r_f property."""
-        self._cards[0].set_value("r/f", value)
+        self._cards[0].set_value("r_f", value)
 
     @property
     def l_a(self) -> typing.Optional[float]:
@@ -191,12 +130,12 @@ class EmCircuitSource(KeywordBase):
         Value of the Amplitude for CIRCTYP.EQ.11 or 12
 
         """ # nopep8
-        return self._cards[0].get_value("l/a")
+        return self._cards[0].get_value("l_a")
 
     @l_a.setter
     def l_a(self, value: float) -> None:
         """Set the l_a property."""
-        self._cards[0].set_value("l/a", value)
+        self._cards[0].set_value("l_a", value)
 
     @property
     def c_t0(self) -> typing.Optional[float]:
@@ -204,12 +143,12 @@ class EmCircuitSource(KeywordBase):
         Value of the initial time t0 for CIRCTYP.EQ.11 or 12
 
         """ # nopep8
-        return self._cards[0].get_value("c/t0")
+        return self._cards[0].get_value("c_t0")
 
     @c_t0.setter
     def c_t0(self, value: float) -> None:
         """Set the c_t0 property."""
-        self._cards[0].set_value("c/t0", value)
+        self._cards[0].set_value("c_t0", value)
 
     @property
     def v0(self) -> typing.Optional[float]:
@@ -280,4 +219,54 @@ class EmCircuitSource(KeywordBase):
     def partid(self, value: int) -> None:
         """Set the partid property."""
         self._cards[1].set_value("partid", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def sidcurr_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidcurr."""
+        return self._get_set_link("SEGMENT", self.sidcurr)
+
+    @sidcurr_link.setter
+    def sidcurr_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidcurr."""
+        self.sidcurr = value.sid
+
+    @property
+    def sidvin_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidvin."""
+        return self._get_set_link("SEGMENT", self.sidvin)
+
+    @sidvin_link.setter
+    def sidvin_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidvin."""
+        self.sidvin = value.sid
+
+    @property
+    def sidvout_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sidvout."""
+        return self._get_set_link("SEGMENT", self.sidvout)
+
+    @sidvout_link.setter
+    def sidvout_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sidvout."""
+        self.sidvout = value.sid
+
+    @property
+    def partid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partid."""
+        return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

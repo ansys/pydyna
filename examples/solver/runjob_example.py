@@ -37,7 +37,8 @@ import ansys.dyna.core.solver as solver
 
 def get_from_minikube():
     """Get the IP address and port of the DYNA server service when running
-    under minikube locally"""
+    under minikube locally
+    """
     f = os.popen("minikube ip", "r")
     ip = f.readline().strip()
     f.close

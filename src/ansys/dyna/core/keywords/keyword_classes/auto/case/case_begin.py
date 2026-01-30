@@ -23,7 +23,11 @@
 """Module providing the CaseBegin class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CASEBEGIN_CARD0 = (
+)
 
 class CaseBegin(KeywordBase):
     """DYNA CASE_BEGIN keyword"""
@@ -35,9 +39,7 @@ class CaseBegin(KeywordBase):
         """Initialize the CaseBegin class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CASEBEGIN_CARD0,
+                **kwargs,
+            ),        ]

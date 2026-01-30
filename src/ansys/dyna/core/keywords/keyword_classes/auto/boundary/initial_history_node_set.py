@@ -23,57 +23,41 @@
 """Module providing the InitialHistoryNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INITIALHISTORYNODESET_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nhisv", int, 10, 10, None),
+)
+
+_INITIALHISTORYNODESET_CARD1 = (
+    FieldSchema("hindex", int, 0, 10, None),
+    FieldSchema("val", float, 10, 10, 0.0),
+)
 
 class InitialHistoryNodeSet(KeywordBase):
     """DYNA INITIAL_HISTORY_NODE_SET keyword"""
 
     keyword = "INITIAL"
     subkeyword = "HISTORY_NODE_SET"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialHistoryNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hindex",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALHISTORYNODESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALHISTORYNODESET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node id.
@@ -117,4 +101,9 @@ class InitialHistoryNodeSet(KeywordBase):
     def val(self, value: float) -> None:
         """Set the val property."""
         self._cards[1].set_value("val", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

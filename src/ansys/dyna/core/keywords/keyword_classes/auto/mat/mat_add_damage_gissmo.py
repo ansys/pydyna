@@ -23,8 +23,44 @@
 """Module providing the MatAddDamageGissmo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATADDDAMAGEGISSMO_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("dtyp", float, 20, 10, 0.0),
+    FieldSchema("refsz", float, 30, 10, None),
+    FieldSchema("numfip", float, 40, 10, 1.0),
+)
+
+_MATADDDAMAGEGISSMO_CARD1 = (
+    FieldSchema("lcsdg", int, 0, 10, 0),
+    FieldSchema("ecrit", float, 10, 10, None),
+    FieldSchema("dmgexp", float, 20, 10, 1.0),
+    FieldSchema("dcrit", float, 30, 10, None),
+    FieldSchema("fadexp", float, 40, 10, 1.0),
+    FieldSchema("lcregd", int, 50, 10, 0),
+    FieldSchema("instf", int, 60, 10, None),
+)
+
+_MATADDDAMAGEGISSMO_CARD2 = (
+    FieldSchema("lcsrs", int, 0, 10, None),
+    FieldSchema("shrf", float, 10, 10, None),
+    FieldSchema("biaxf", float, 20, 10, None),
+    FieldSchema("lcdlim", int, 30, 10, 0),
+    FieldSchema("midfail", float, 40, 10, None),
+    FieldSchema("hisvn", float, 50, 10, None),
+    FieldSchema("soft", float, 60, 10, None),
+    FieldSchema("lp2bi", float, 70, 10, None),
+)
+
+_MATADDDAMAGEGISSMO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddDamageGissmo(KeywordBase):
     """DYNA MAT_ADD_DAMAGE_GISSMO keyword"""
@@ -34,190 +70,38 @@ class MatAddDamageGissmo(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "lcdlim": LinkType.DEFINE_CURVE,
+        "lcregd": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcsrs": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddDamageGissmo class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtyp",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refsz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numfip",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsdg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecrit",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgexp",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcrit",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fadexp",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcregd",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "instf",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsrs",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "biaxf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdlim",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "midfail",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisvn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lp2bi",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddDamageGissmo.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDDAMAGEGISSMO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which this erosion definition applies. A unique number or label must be specified.
@@ -483,4 +367,82 @@ class MatAddDamageGissmo(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def lcdlim_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdlim."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdlim:
+                return kwd
+        return None
+
+    @lcdlim_link.setter
+    def lcdlim_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdlim."""
+        self.lcdlim = value.lcid
+
+    @property
+    def lcregd_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcregd."""
+        if self.deck is None:
+            return None
+        field_value = self.lcregd
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcregd_link.setter
+    def lcregd_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcregd."""
+        if hasattr(value, "lcid"):
+            self.lcregd = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcregd = value.tbid
+
+    @property
+    def lcsrs_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsrs."""
+        if self.deck is None:
+            return None
+        field_value = self.lcsrs
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsrs_link.setter
+    def lcsrs_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsrs."""
+        if hasattr(value, "lcid"):
+            self.lcsrs = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsrs = value.tbid
 

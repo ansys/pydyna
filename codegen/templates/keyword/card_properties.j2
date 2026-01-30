@@ -1,12 +1,12 @@
-{% if card.duplicate %}
+{% if card.table %}
     @property
-    def {{card.duplicate.name}}(self) -> pd.DataFrame:
-        """Get the table of {{card.duplicate.name}}."""
+    def {{card.table.name}}(self) -> pd.DataFrame:
+        """Get the table of {{card.table.name}}."""
         return self._cards[{{card.index}}].table
 
-    @{{card.duplicate.name}}.setter
-    def {{card.duplicate.name}}(self, df: pd.DataFrame):
-        """Set {{card.duplicate.name}} from the dataframe df"""
+    @{{card.table.name}}.setter
+    def {{card.table.name}}(self, df: pd.DataFrame):
+        """Set {{card.table.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
 {% elif card.variable %}
@@ -23,7 +23,7 @@
     @property
     def {{card.items_name}}(self) -> typing.List[{{card.set.name}}]:
         """Gets the list of {{card.items_name}}."""
-        return self._cards[{{card.target_index}}].items()
+        return self._cards[{{card.index}}].items()
 {% if not card.bounded %}
 
     def add_{{card.item_name}}(self, **kwargs):
@@ -31,7 +31,7 @@
         self._cards[{{card.target_index}}].add_item(**kwargs)
 {% endif %}
 
-{% elif card.duplicate_group %}
+{% elif card.table_group %}
     @property
     def {{card.overall_name}}(self) -> pd.DataFrame:
         """Gets the full table of {{card.overall_name}}."""
@@ -47,13 +47,31 @@
 {% for field in card.fields %}
 {% if field.used %}
 {% if not field.redundant %}
+{% set rename_info = namespace(found=none) %}
+{% for rp in keyword_data.renamed_properties %}
+{% if rp.property_name == field.property_name %}
+{% set rename_info.found = rp %}
+{% endif %}
+{% endfor %}
     @property
     def {{field.property_name}}(self) -> {%- if field.default is none %} typing.Optional[
                 {%- else %} {% endif %}{{field.type}}{%- if field.default is none %}]{%- endif %}:
+{% if rename_info.found %}
+        """Get or set the {{field.help}}
+
+        Note: Location in manual: card:{{rename_info.found.card_index + 1}}, field: {{rename_info.found.field_name}}
+        """ # nopep8
+{% elif field.property_name in keyword_data.property_collisions %}
+        """Get or set the {{field.help}}
+
+        Note: {{keyword_data.property_collisions[field.property_name]}}
+        """ # nopep8
+{% else %}
         """Get or set the {% filter indent(width=8) %}{{field.help}}
         {% endfilter %}
         """ # nopep8
-        return self._cards[{{card.index}}].get_value("{{field.name}}")
+{% endif %}
+        return self._cards[{{card.index}}].get_value("{{field.property_name}}")
 
 {% if not field.readonly %}
     @{{field.property_name}}.setter
@@ -65,14 +83,14 @@
         {% endif %}
 {% if field.card_indices %}
 {% for card_index in field.card_indices %}
-        self._cards[{{card_index}}].set_value("{{field.name}}", value)
+        self._cards[{{card_index}}].set_value("{{field.property_name}}", value)
 {% endfor %}{# card_index in field.card_indices #}
 {% else %}
-        self._cards[{{card.index}}].set_value("{{field.name}}", value)
+        self._cards[{{card.index}}].set_value("{{field.property_name}}", value)
 {% endif %}{# card.indices #}
 
 {% endif %}{# not field.readonly #}
 {% endif %}{# not field.redundant #}
 {% endif %}{# field.used #}
-{% endfor %}
+{% endfor %}{#field in card.fields #}
 {% endif %}

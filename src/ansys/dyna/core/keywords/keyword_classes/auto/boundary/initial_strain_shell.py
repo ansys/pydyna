@@ -22,13 +22,240 @@
 
 """Module providing the InitialStrainShell class."""
 import typing
-import pandas as pd
-
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRAINSHELLLARGECARDSET_CARD0 = (
+    FieldSchema("epsxx", float, 0, 10, 0.0),
+    FieldSchema("epsyy", float, 10, 10, 0.0),
+    FieldSchema("epszz", float, 20, 10, 0.0),
+    FieldSchema("epsxy", float, 30, 10, 0.0),
+    FieldSchema("epsyz", float, 40, 10, 0.0),
+    FieldSchema("epszx", float, 50, 10, 0.0),
+    FieldSchema("t", float, 60, 10, 0.0),
+)
+
+class InitialStrainShellLargeCardSet(Cards):
+    """ CardSet."""
+
+    def __init__(self, **kwargs):
+        """Initialize the InitialStrainShellLargeCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSET_CARD0,
+                **kwargs,
+            ),        ]
+
+    @property
+    def epsxx(self) -> float:
+        """Get or set the Define the xx strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsxx")
+
+    @epsxx.setter
+    def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
+        self._cards[0].set_value("epsxx", value)
+
+    @property
+    def epsyy(self) -> float:
+        """Get or set the Define the yy strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsyy")
+
+    @epsyy.setter
+    def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
+        self._cards[0].set_value("epsyy", value)
+
+    @property
+    def epszz(self) -> float:
+        """Get or set the Define the zz strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epszz")
+
+    @epszz.setter
+    def epszz(self, value: float) -> None:
+        """Set the epszz property."""
+        self._cards[0].set_value("epszz", value)
+
+    @property
+    def epsxy(self) -> float:
+        """Get or set the Define the xy strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsxy")
+
+    @epsxy.setter
+    def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
+        self._cards[0].set_value("epsxy", value)
+
+    @property
+    def epsyz(self) -> float:
+        """Get or set the Define the yz strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsyz")
+
+    @epsyz.setter
+    def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
+        self._cards[0].set_value("epsyz", value)
+
+    @property
+    def epszx(self) -> float:
+        """Get or set the Define the zx strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epszx")
+
+    @epszx.setter
+    def epszx(self, value: float) -> None:
+        """Set the epszx property."""
+        self._cards[0].set_value("epszx", value)
+
+    @property
+    def t(self) -> float:
+        """Get or set the Parametric coordinate of through thickness integration point between -1and 1 inclusive.
+        """ # nopep8
+        return self._cards[0].get_value("t")
+
+    @t.setter
+    def t(self, value: float) -> None:
+        """Set the t property."""
+        self._cards[0].set_value("t", value)
+
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+_INITIALSTRAINSHELLLARGECARDSETLARGE_CARD0 = (
+    FieldSchema("epsxx", float, 0, 20, 0.0),
+    FieldSchema("epsyy", float, 20, 20, 0.0),
+    FieldSchema("epszz", float, 40, 20, 0.0),
+    FieldSchema("epsxy", float, 60, 20, 0.0),
+    FieldSchema("epsyz", float, 80, 20, 0.0),
+)
+
+_INITIALSTRAINSHELLLARGECARDSETLARGE_CARD1 = (
+    FieldSchema("epszx", float, 0, 20, 0.0),
+    FieldSchema("t", float, 20, 20, 0.0),
+)
+
+class InitialStrainShellLargeCardSetLarge(Cards):
+    """ CardSet."""
+
+    def __init__(self, **kwargs):
+        """Initialize the InitialStrainShellLargeCardSetLarge CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD1,
+                **kwargs,
+            ),        ]
+
+    @property
+    def epsxx(self) -> float:
+        """Get or set the Define the xx strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsxx")
+
+    @epsxx.setter
+    def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
+        self._cards[0].set_value("epsxx", value)
+
+    @property
+    def epsyy(self) -> float:
+        """Get or set the Define the yy strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsyy")
+
+    @epsyy.setter
+    def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
+        self._cards[0].set_value("epsyy", value)
+
+    @property
+    def epszz(self) -> float:
+        """Get or set the Define the zz strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epszz")
+
+    @epszz.setter
+    def epszz(self, value: float) -> None:
+        """Set the epszz property."""
+        self._cards[0].set_value("epszz", value)
+
+    @property
+    def epsxy(self) -> float:
+        """Get or set the Define the xy strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsxy")
+
+    @epsxy.setter
+    def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
+        self._cards[0].set_value("epsxy", value)
+
+    @property
+    def epsyz(self) -> float:
+        """Get or set the Define the yz strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("epsyz")
+
+    @epsyz.setter
+    def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
+        self._cards[0].set_value("epsyz", value)
+
+    @property
+    def epszx(self) -> float:
+        """Get or set the Define the zx strain component at inner integration (global cartesian system).
+        """ # nopep8
+        return self._cards[1].get_value("epszx")
+
+    @epszx.setter
+    def epszx(self, value: float) -> None:
+        """Set the epszx property."""
+        self._cards[1].set_value("epszx", value)
+
+    @property
+    def t(self) -> float:
+        """Get or set the Parametric coordinate of through thickness integration point between -1and 1 inclusive.
+        """ # nopep8
+        return self._cards[1].get_value("t")
+
+    @t.setter
+    def t(self, value: float) -> None:
+        """Set the t property."""
+        self._cards[1].set_value("t", value)
+
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+_INITIALSTRAINSHELLCARDSET_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, None),
+    FieldSchema("nthick", int, 20, 10, None),
+    FieldSchema("large", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("ilocal", int, 70, 10, 0),
+)
 
 class InitialStrainShellCardSet(Cards):
     """ CardSet."""
@@ -39,84 +266,20 @@ class InitialStrainShellCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilocal",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCard(
-                [
-                    Field("epsxx", float, 0, 10, 0.0),
-                    Field("epsyy", float, 10, 10, 0.0),
-                    Field("epszz", float, 20, 10, 0.0),
-                    Field("epsxy", float, 30, 10, 0.0),
-                    Field("epsyz", float, 40, 10, 0.0),
-                    Field("epszx", float, 50, 10, 0.0),
-                    Field("t", float, 60, 10, 0.0),
-                ],
-                lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
-                lambda: self.large == None or self.large == 0,
-                name="strains",
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINSHELLCARDSET_CARD0,
                 **kwargs,
-            ),
-        ]
+            ),            CardSet(
+                InitialStrainShellLargeCardSet,
+                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
+                active_func = lambda: self.large == None or self.large == 0,
+                **kwargs
+            ),            CardSet(
+                InitialStrainShellLargeCardSetLarge,
+                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
+                active_func = lambda: self.large == 1,
+                **kwargs
+            ),        ]
 
     @property
     def eid(self) -> typing.Optional[int]:
@@ -182,14 +345,14 @@ class InitialStrainShellCardSet(Cards):
         self._cards[0].set_value("ilocal", value)
 
     @property
-    def strains(self) -> pd.DataFrame:
-        """Get the table of strains."""
-        return self._cards[1].table
+    def strains(self) -> typing.List[InitialStrainShellLargeCardSet]:
+        """Gets the list of strains."""
+        return self._cards[1].items()
 
-    @strains.setter
-    def strains(self, df: pd.DataFrame):
-        """Set strains from the dataframe df"""
-        self._cards[1].table = df
+    @property
+    def large_strains(self) -> typing.List[InitialStrainShellLargeCardSetLarge]:
+        """Gets the list of large_strains."""
+        return self._cards[2].items()
 
     @property
     def parent(self) -> KeywordBase:
@@ -211,9 +374,7 @@ class InitialStrainShell(KeywordBase):
             CardSet(
                 InitialStrainShellCardSet,
                 **kwargs
-            ),
-        ]
-
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the eid
@@ -273,17 +434,6 @@ class InitialStrainShell(KeywordBase):
     def ilocal(self, value: int) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].ilocal = value
-
-    @property
-    def strains(self) -> pd.DataFrame:
-        """Get the strains."""
-        ensure_card_set_properties(self, False)
-        return self.sets[0].strains
-
-    @strains.setter
-    def strains(self, df: pd.DataFrame):
-        ensure_card_set_properties(self, True)
-        self.sets[0].strains = df
 
     @property
     def sets(self) -> typing.List[InitialStrainShellCardSet]:

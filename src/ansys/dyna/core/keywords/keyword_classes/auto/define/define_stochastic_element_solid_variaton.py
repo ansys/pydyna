@@ -23,8 +23,22 @@
 """Module providing the DefineStochasticElementSolidVariaton class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESTOCHASTICELEMENTSOLIDVARIATON_CARD0 = (
+    FieldSchema("ide", int, 0, 10, 0),
+    FieldSchema("varsy", float, 10, 10, 0.0),
+    FieldSchema("varf", float, 20, 10, 0.0),
+    FieldSchema("varro", float, 30, 10, 0.0),
+    FieldSchema("vare", float, 40, 10, 0.0),
+)
+
+_DEFINESTOCHASTICELEMENTSOLIDVARIATON_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineStochasticElementSolidVariaton(KeywordBase):
     """DYNA DEFINE_STOCHASTIC_ELEMENT_SOLID_VARIATON keyword"""
@@ -34,75 +48,29 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "ide": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineStochasticElementSolidVariaton class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ide",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varsy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varf",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varro",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vare",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICELEMENTSOLIDVARIATON_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineStochasticElementSolidVariaton.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESTOCHASTICELEMENTSOLIDVARIATON_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def ide(self) -> int:
         """Get or set the Element ID.
@@ -171,4 +139,9 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def ide_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given ide."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.ide, "parts")
 

@@ -23,47 +23,33 @@
 """Module providing the ElementMassPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ELEMENTMASSPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 8, None),
+    FieldSchema("addmass", float, 8, 16, 0.0),
+    FieldSchema("finmass", float, 24, 16, 0.0),
+)
 
 class ElementMassPartSet(KeywordBase):
     """DYNA ELEMENT_MASS_PART_SET keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "MASS_PART_SET"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementMassPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "addmass",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "finmass",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTMASSPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set id, a unique number must be used.
@@ -96,4 +82,14 @@ class ElementMassPartSet(KeywordBase):
     def finmass(self, value: float) -> None:
         """Set the finmass property."""
         self._cards[0].set_value("finmass", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

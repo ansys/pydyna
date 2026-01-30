@@ -23,45 +23,35 @@
 """Module providing the DatabaseRcforcMoment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DATABASERCFORCMOMENT_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("nodes", int, 10, 10, None),
+    FieldSchema("nodem", int, 20, 10, None),
+)
 
 class DatabaseRcforcMoment(KeywordBase):
     """DYNA DATABASE_RCFORC_MOMENT keyword"""
 
     keyword = "DATABASE"
     subkeyword = "RCFORC_MOMENT"
+    _link_fields = {
+        "nodes": LinkType.NODE,
+        "nodem": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseRcforcMoment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodes",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodem",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASERCFORCMOMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact ID.
@@ -94,4 +84,14 @@ class DatabaseRcforcMoment(KeywordBase):
     def nodem(self, value: int) -> None:
         """Set the nodem property."""
         self._cards[0].set_value("nodem", value)
+
+    @property
+    def nodes_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodes."""
+        return self._get_link_by_attr("NODE", "nid", self.nodes, "parts")
+
+    @property
+    def nodem_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodem."""
+        return self._get_link_by_attr("NODE", "nid", self.nodem, "parts")
 

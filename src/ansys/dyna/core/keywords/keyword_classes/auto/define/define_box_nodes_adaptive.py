@@ -23,8 +23,32 @@
 """Module providing the DefineBoxNodesAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINEBOXNODESADAPTIVE_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, 0),
+    FieldSchema("node", int, 10, 10, 0),
+    FieldSchema("lcx", int, 20, 10, None),
+    FieldSchema("lcy", int, 30, 10, None),
+    FieldSchema("lcz", int, 40, 10, None),
+    FieldSchema("itype", int, 50, 10, 0),
+    FieldSchema("radius", float, 60, 10, 0.0),
+    FieldSchema("npiece", int, 70, 10, 0),
+)
+
+_DEFINEBOXNODESADAPTIVE_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("level", int, 10, 10, None),
+)
+
+_DEFINEBOXNODESADAPTIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineBoxNodesAdaptive(KeywordBase):
     """DYNA DEFINE_BOX_NODES_ADAPTIVE keyword"""
@@ -34,114 +58,36 @@ class DefineBoxNodesAdaptive(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "node": LinkType.NODE,
+        "lcx": LinkType.DEFINE_CURVE,
+        "lcy": LinkType.DEFINE_CURVE,
+        "lcz": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineBoxNodesAdaptive class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npiece",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "level",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXNODESADAPTIVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXNODESADAPTIVE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxNodesAdaptive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXNODESADAPTIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> int:
         """Get or set the Box ID. Define unique numbers.
@@ -269,4 +215,59 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def node_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node."""
+        return self._get_link_by_attr("NODE", "nid", self.node, "parts")
+
+    @property
+    def lcx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcx:
+                return kwd
+        return None
+
+    @lcx_link.setter
+    def lcx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcx."""
+        self.lcx = value.lcid
+
+    @property
+    def lcy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcy:
+                return kwd
+        return None
+
+    @lcy_link.setter
+    def lcy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcy."""
+        self.lcy = value.lcid
+
+    @property
+    def lcz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcz:
+                return kwd
+        return None
+
+    @lcz_link.setter
+    def lcz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcz."""
+        self.lcz = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

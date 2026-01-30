@@ -23,61 +23,36 @@
 """Module providing the LoadBlastSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADBLASTSEGMENTSET_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("alepid", int, 20, 10, None),
+    FieldSchema("sfnrb", float, 30, 10, 0.0),
+    FieldSchema("scalep", float, 40, 10, 1.0),
+)
 
 class LoadBlastSegmentSet(KeywordBase):
     """DYNA LOAD_BLAST_SEGMENT_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "BLAST_SEGMENT_SET"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+        "alepid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBlastSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alepid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfnrb",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalep",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLASTSEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED).
@@ -132,4 +107,19 @@ class LoadBlastSegmentSet(KeywordBase):
     def scalep(self, value: float) -> None:
         """Set the scalep property."""
         self._cards[0].set_value("scalep", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
+
+    @property
+    def alepid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given alepid."""
+        return self._get_link_by_attr("PART", "pid", self.alepid, "parts")
 

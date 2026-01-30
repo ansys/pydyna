@@ -23,8 +23,45 @@
 """Module providing the SectionPointSourceMixture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_SECTIONPOINTSOURCEMIXTURE_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("lcidt", int, 10, 10, None),
+    FieldSchema("notused", int, 20, 10, None),
+    FieldSchema("lcidvel", int, 30, 10, None),
+    FieldSchema("nidlc001", int, 40, 10, None),
+    FieldSchema("nidlc002", int, 50, 10, None),
+    FieldSchema("nidlc003", int, 60, 10, None),
+    FieldSchema("idir", int, 70, 10, None),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_CARD1 = (
+    FieldSchema("lcmdot1", int, 0, 10, 0),
+    FieldSchema("lcmdot2", int, 10, 10, 0),
+    FieldSchema("lcmdot3", int, 20, 10, 0),
+    FieldSchema("lcmdot4", int, 30, 10, 0),
+    FieldSchema("lcmdot5", int, 40, 10, 0),
+    FieldSchema("lcmdot6", int, 50, 10, 0),
+    FieldSchema("lcmdot7", int, 60, 10, 0),
+    FieldSchema("lcmdot8", int, 70, 10, 0),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_CARD2 = (
+    FieldSchema("nodeid", int, 0, 10, 0),
+    FieldSchema("vecid", int, 10, 10, 0),
+    FieldSchema("orifarea", float, 20, 10, 0.0),
+)
+
+_SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionPointSourceMixture(KeywordBase):
     """DYNA SECTION_POINT_SOURCE_MIXTURE keyword"""
@@ -34,187 +71,50 @@ class SectionPointSourceMixture(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nidlc001": LinkType.NODE,
+        "nidlc002": LinkType.NODE,
+        "nidlc003": LinkType.NODE,
+        "nodeid": LinkType.NODE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "notused": LinkType.DEFINE_CURVE,
+        "lcidvel": LinkType.DEFINE_CURVE,
+        "lcmdot1": LinkType.DEFINE_CURVE,
+        "lcmdot2": LinkType.DEFINE_CURVE,
+        "lcmdot3": LinkType.DEFINE_CURVE,
+        "lcmdot4": LinkType.DEFINE_CURVE,
+        "lcmdot5": LinkType.DEFINE_CURVE,
+        "lcmdot6": LinkType.DEFINE_CURVE,
+        "lcmdot7": LinkType.DEFINE_CURVE,
+        "lcmdot8": LinkType.DEFINE_CURVE,
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SectionPointSourceMixture class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "notused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidvel",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc001",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc002",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nidlc003",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcmdot1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmdot8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodeid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orifarea",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCEMIXTURE_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionPointSourceMixture.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID Number
@@ -437,4 +337,204 @@ class SectionPointSourceMixture(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nidlc001_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc001."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc001, "parts")
+
+    @property
+    def nidlc002_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc002."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc002, "parts")
+
+    @property
+    def nidlc003_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nidlc003."""
+        return self._get_link_by_attr("NODE", "nid", self.nidlc003, "parts")
+
+    @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def notused_link(self) -> DefineCurve:
+        """Get the DefineCurve object for notused."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.notused:
+                return kwd
+        return None
+
+    @notused_link.setter
+    def notused_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for notused."""
+        self.notused = value.lcid
+
+    @property
+    def lcidvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidvel:
+                return kwd
+        return None
+
+    @lcidvel_link.setter
+    def lcidvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidvel."""
+        self.lcidvel = value.lcid
+
+    @property
+    def lcmdot1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot1:
+                return kwd
+        return None
+
+    @lcmdot1_link.setter
+    def lcmdot1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot1."""
+        self.lcmdot1 = value.lcid
+
+    @property
+    def lcmdot2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot2:
+                return kwd
+        return None
+
+    @lcmdot2_link.setter
+    def lcmdot2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot2."""
+        self.lcmdot2 = value.lcid
+
+    @property
+    def lcmdot3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot3:
+                return kwd
+        return None
+
+    @lcmdot3_link.setter
+    def lcmdot3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot3."""
+        self.lcmdot3 = value.lcid
+
+    @property
+    def lcmdot4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot4:
+                return kwd
+        return None
+
+    @lcmdot4_link.setter
+    def lcmdot4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot4."""
+        self.lcmdot4 = value.lcid
+
+    @property
+    def lcmdot5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot5:
+                return kwd
+        return None
+
+    @lcmdot5_link.setter
+    def lcmdot5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot5."""
+        self.lcmdot5 = value.lcid
+
+    @property
+    def lcmdot6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot6:
+                return kwd
+        return None
+
+    @lcmdot6_link.setter
+    def lcmdot6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot6."""
+        self.lcmdot6 = value.lcid
+
+    @property
+    def lcmdot7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot7:
+                return kwd
+        return None
+
+    @lcmdot7_link.setter
+    def lcmdot7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot7."""
+        self.lcmdot7 = value.lcid
+
+    @property
+    def lcmdot8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmdot8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmdot8:
+                return kwd
+        return None
+
+    @lcmdot8_link.setter
+    def lcmdot8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmdot8."""
+        self.lcmdot8 = value.lcid
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

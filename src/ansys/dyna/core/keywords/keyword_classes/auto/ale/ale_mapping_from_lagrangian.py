@@ -23,110 +23,53 @@
 """Module providing the AleMappingFromLagrangian class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ALEMAPPINGFROMLAGRANGIAN_CARD0 = (
+    FieldSchema("lagpid", int, 0, 10, None),
+    FieldSchema("lagpty", int, 10, 10, 0),
+)
+
+_ALEMAPPINGFROMLAGRANGIAN_CARD1 = (
+    FieldSchema("nx", int, 0, 10, None),
+    FieldSchema("ny", int, 10, 10, None),
+    FieldSchema("nx", int, 20, 10, None),
+    FieldSchema("npx", int, 30, 10, None),
+    FieldSchema("npy", int, 40, 10, None),
+    FieldSchema("npz", int, 50, 10, None),
+    FieldSchema("aleid", int, 60, 10, None),
+)
+
+_ALEMAPPINGFROMLAGRANGIAN_CARD2 = (
+    FieldSchema("method", int, 0, 10, None),
+    FieldSchema("div", int, 0, 10, None),
+)
 
 class AleMappingFromLagrangian(KeywordBase):
     """DYNA ALE_MAPPING_FROM_LAGRANGIAN keyword"""
 
     keyword = "ALE"
     subkeyword = "MAPPING_FROM_LAGRANGIAN"
+    _link_fields = {
+        "aleid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleMappingFromLagrangian class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lagpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagpty",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aleid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "div",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMAPPINGFROMLAGRANGIAN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPINGFROMLAGRANGIAN_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPINGFROMLAGRANGIAN_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def lagpid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID for Lagrangian parts involved in the mapping
@@ -254,4 +197,9 @@ class AleMappingFromLagrangian(KeywordBase):
     def div(self, value: int) -> None:
         """Set the div property."""
         self._cards[2].set_value("div", value)
+
+    @property
+    def aleid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given aleid."""
+        return self._get_link_by_attr("PART", "pid", self.aleid, "parts")
 

@@ -23,8 +23,30 @@
 """Module providing the SensorDefineNodeSetUpdate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SENSORDEFINENODESETUPDATE_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("node1", int, 10, 10, None),
+    FieldSchema("node2", int, 20, 10, None),
+    FieldSchema("vid", str, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ctype", str, 50, 10, "ACC"),
+    FieldSchema("setopt", str, 60, 10, "AVG"),
+)
+
+_SENSORDEFINENODESETUPDATE_CARD1 = (
+    FieldSchema("birth", float, 0, 10, None),
+    FieldSchema("death", float, 10, 10, None),
+    FieldSchema("dtupd", float, 20, 10, None),
+)
+
+_SENSORDEFINENODESETUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineNodeSetUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_NODE_SET_UPDATE keyword"""
@@ -34,111 +56,33 @@ class SensorDefineNodeSetUpdate(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "node1": LinkType.SET_NODE,
+        "node2": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SensorDefineNodeSetUpdate class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        str,
-                        50,
-                        10,
-                        "ACC",
-                        **kwargs,
-                    ),
-                    Field(
-                        "setopt",
-                        str,
-                        60,
-                        10,
-                        "AVG",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtupd",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINENODESETUPDATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINENODESETUPDATE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineNodeSetUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINENODESETUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.
@@ -267,4 +211,24 @@ class SensorDefineNodeSetUpdate(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node1."""
+        return self._get_set_link("NODE", self.node1)
+
+    @node1_link.setter
+    def node1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node1."""
+        self.node1 = value.sid
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for node2."""
+        return self._get_set_link("NODE", self.node2)
+
+    @node2_link.setter
+    def node2_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for node2."""
+        self.node2 = value.sid
 

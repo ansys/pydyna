@@ -23,7 +23,12 @@
 """Module providing the ParameterDuplication class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARAMETERDUPLICATION_CARD0 = (
+    FieldSchema("dflag", int, 0, 10, 1),
+)
 
 class ParameterDuplication(KeywordBase):
     """DYNA PARAMETER_DUPLICATION keyword"""
@@ -35,20 +40,10 @@ class ParameterDuplication(KeywordBase):
         """Initialize the ParameterDuplication class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dflag",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARAMETERDUPLICATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dflag(self) -> int:
         """Get or set the Flag to control treatment of duplicate parameter definitions:

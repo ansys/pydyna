@@ -23,7 +23,19 @@
 """Module providing the EmControlContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLCONTACT_CARD0 = (
+    FieldSchema("emct", int, 0, 10, 0),
+    FieldSchema("cconly", int, 10, 10, 0),
+    FieldSchema("ctype", int, 20, 10, 0),
+    FieldSchema("cotype", int, 30, 10, 0),
+    FieldSchema("eps1", float, 40, 10, 0.3),
+    FieldSchema("eps2", float, 50, 10, 0.3),
+    FieldSchema("eps3", float, 60, 10, 0.3),
+    FieldSchema("d0", float, 70, 10, None),
+)
 
 class EmControlContact(KeywordBase):
     """DYNA EM_CONTROL_CONTACT keyword"""
@@ -35,75 +47,10 @@ class EmControlContact(KeywordBase):
         """Initialize the EmControlContact class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "emct",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cconly",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cotype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1",
-                        float,
-                        40,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2",
-                        float,
-                        50,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3",
-                        float,
-                        60,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLCONTACT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def emct(self) -> int:
         """Get or set the EM contact activation flag:

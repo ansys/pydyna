@@ -23,54 +23,34 @@
 """Module providing the LoadBeamSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADBEAMSET_CARD0 = (
+    FieldSchema("esid", int, 0, 10, None),
+    FieldSchema("dal", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+)
 
 class LoadBeamSet(KeywordBase):
     """DYNA LOAD_BEAM_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "BEAM_SET"
+    _link_fields = {
+        "esid": LinkType.SET_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBeamSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dal",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBEAMSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID, see *SET_BEAM.
@@ -119,4 +99,14 @@ class LoadBeamSet(KeywordBase):
     def sf(self, value: float) -> None:
         """Set the sf property."""
         self._cards[0].set_value("sf", value)
+
+    @property
+    def esid_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for esid."""
+        return self._get_set_link("BEAM", self.esid)
+
+    @esid_link.setter
+    def esid_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for esid."""
+        self.esid = value.sid
 

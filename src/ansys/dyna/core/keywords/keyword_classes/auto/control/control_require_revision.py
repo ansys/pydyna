@@ -23,7 +23,14 @@
 """Module providing the ControlRequireRevision class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREQUIREREVISION_CARD0 = (
+    FieldSchema("release", str, 0, 10, None),
+    FieldSchema("svnrev", int, 10, 10, None),
+    FieldSchema("gitrev", int, 20, 10, None),
+)
 
 class ControlRequireRevision(KeywordBase):
     """DYNA CONTROL_REQUIRE_REVISION keyword"""
@@ -35,33 +42,10 @@ class ControlRequireRevision(KeywordBase):
         """Initialize the ControlRequireRevision class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "release",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "svnrev",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gitrev",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREQUIREREVISION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def release(self) -> typing.Optional[str]:
         """Get or set the The release of code required. This should be a string such as "R6.1.0" or "R7.0".

@@ -23,99 +23,45 @@
 """Module providing the ControlDamping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLDAMPING_CARD0 = (
+    FieldSchema("nrcyck", int, 0, 10, 250),
+    FieldSchema("drtol", float, 10, 10, 0.001),
+    FieldSchema("drfctr", float, 20, 10, 0.995),
+    FieldSchema("drterm", float, 30, 10, None),
+    FieldSchema("tssfdr", float, 40, 10, 0.0),
+    FieldSchema("irelal", int, 50, 10, 0),
+    FieldSchema("edttl", float, 60, 10, 0.04),
+    FieldSchema("idrflg", int, 70, 10, 0),
+)
+
+_CONTROLDAMPING_CARD1 = (
+    FieldSchema("drpset", int, 0, 10, 0),
+)
 
 class ControlDamping(KeywordBase):
     """DYNA CONTROL_DAMPING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "DAMPING"
+    _link_fields = {
+        "drpset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlDamping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nrcyck",
-                        int,
-                        0,
-                        10,
-                        250,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drtol",
-                        float,
-                        10,
-                        10,
-                        1.0E-03,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drfctr",
-                        float,
-                        20,
-                        10,
-                        9.95E-01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drterm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tssfdr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irelal",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edttl",
-                        float,
-                        60,
-                        10,
-                        4.0E-02,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idrflg",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "drpset",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLDAMPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDAMPING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).
@@ -231,4 +177,14 @@ class ControlDamping(KeywordBase):
     def drpset(self, value: int) -> None:
         """Set the drpset property."""
         self._cards[1].set_value("drpset", value)
+
+    @property
+    def drpset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drpset."""
+        return self._get_set_link("PART", self.drpset)
+
+    @drpset_link.setter
+    def drpset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drpset."""
+        self.drpset = value.sid
 

@@ -23,7 +23,34 @@
 """Module providing the ControlPoreFluid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLPOREFLUID_CARD0 = (
+    FieldSchema("atype", int, 0, 10, 0),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("wtable", float, 20, 10, 0.0),
+    FieldSchema("pf_rho", float, 30, 10, None),
+    FieldSchema("grav", float, 40, 10, None),
+    FieldSchema("pf_bulk", float, 50, 10, None),
+    FieldSchema("output", int, 60, 10, 0),
+    FieldSchema("tmf", float, 70, 10, 1.0),
+)
+
+_CONTROLPOREFLUID_CARD1 = (
+    FieldSchema("targ", float, 0, 10, 0.0),
+    FieldSchema("fmin", float, 10, 10, 0.0),
+    FieldSchema("fmax", float, 20, 10, 0.0),
+    FieldSchema("ftied_", float, 30, 10, 0.0, "ftied "),
+    FieldSchema("conv", float, 40, 10, 0.0001),
+    FieldSchema("conmax", float, 50, 10, 1e+20),
+    FieldSchema("eterm", float, 60, 10, 0.0),
+    FieldSchema("therm", float, 70, 10, 0.0),
+)
+
+_CONTROLPOREFLUID_CARD2 = (
+    FieldSchema("etfag", int, 0, 10, 0),
+)
 
 class ControlPoreFluid(KeywordBase):
     """DYNA CONTROL_PORE_FLUID keyword"""
@@ -35,152 +62,16 @@ class ControlPoreFluid(KeywordBase):
         """Initialize the ControlPoreFluid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "atype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtable",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pf_rho",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pf_bulk",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "output",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmf",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "targ",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmin",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftied ",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conv",
-                        float,
-                        40,
-                        10,
-                        1.0E-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conmax",
-                        float,
-                        50,
-                        10,
-                        1.0E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eterm",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "therm",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "etfag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLPOREFLUID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLPOREFLUID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLPOREFLUID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def atype(self) -> int:
         """Get or set the Analysis type for pore water pressure calculations:
@@ -312,12 +203,12 @@ class ControlPoreFluid(KeywordBase):
         EQ.0.0:	Tied contacts act as impermeable membranes,
         EQ.1.0 : Fluid may flow freely through tied contacts.
         """ # nopep8
-        return self._cards[1].get_value("ftied ")
+        return self._cards[1].get_value("ftied_")
 
     @ftied_.setter
     def ftied_(self, value: float) -> None:
         """Set the ftied_ property."""
-        self._cards[1].set_value("ftied ", value)
+        self._cards[1].set_value("ftied_", value)
 
     @property
     def conv(self) -> float:

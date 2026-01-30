@@ -23,332 +23,91 @@
 """Module providing the LoadHeatExothermicReaction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADHEATEXOTHERMICREACTION_CARD0 = (
+    FieldSchema("hsid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, None),
+    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("bt", float, 30, 10, 0.0),
+    FieldSchema("dt", float, 40, 10, 1e+16),
+    FieldSchema("tmin", float, 50, 10, 0.0),
+    FieldSchema("tmax", float, 60, 10, 1e+16),
+    FieldSchema("toff", float, 70, 10, 0.0),
+)
+
+_LOADHEATEXOTHERMICREACTION_CARD1 = (
+    FieldSchema("csei0", float, 0, 10, 0.0),
+    FieldSchema("asei", float, 10, 10, 0.0),
+    FieldSchema("easei", float, 20, 10, 0.0),
+    FieldSchema("msei", float, 30, 10, 0.0),
+    FieldSchema("hsei", float, 40, 10, 0.0),
+    FieldSchema("wc", float, 50, 10, 0.0),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("ru", float, 70, 10, 8.314),
+)
+
+_LOADHEATEXOTHERMICREACTION_CARD2 = (
+    FieldSchema("cne0", float, 0, 10, 0.0),
+    FieldSchema("ane", float, 10, 10, 0.0),
+    FieldSchema("eane", float, 20, 10, 0.0),
+    FieldSchema("mne", float, 30, 10, 0.0),
+    FieldSchema("hne", float, 40, 10, 0.0),
+    FieldSchema("wcne", float, 50, 10, 0.0),
+    FieldSchema("tsei0", float, 60, 10, 0.0),
+    FieldSchema("tseir", float, 70, 10, 0.0),
+)
+
+_LOADHEATEXOTHERMICREACTION_CARD3 = (
+    FieldSchema("alpha0", float, 0, 10, 0.0),
+    FieldSchema("ape", float, 10, 10, 0.0),
+    FieldSchema("eape", float, 20, 10, 0.0),
+    FieldSchema("mpep1", float, 30, 10, 0.0),
+    FieldSchema("hpe", float, 40, 10, 0.0),
+    FieldSchema("wpe", float, 50, 10, 0.0),
+    FieldSchema("mpep2", float, 60, 10, 0.0),
+)
+
+_LOADHEATEXOTHERMICREACTION_CARD4 = (
+    FieldSchema("ce0", float, 0, 10, 0.0),
+    FieldSchema("ae", float, 10, 10, 0.0),
+    FieldSchema("eae", float, 20, 10, 0.0),
+    FieldSchema("me", float, 30, 10, 0.0),
+    FieldSchema("he", float, 40, 10, 0.0),
+    FieldSchema("we", float, 50, 10, 0.0),
+)
 
 class LoadHeatExothermicReaction(KeywordBase):
     """DYNA LOAD_HEAT_EXOTHERMIC_REACTION keyword"""
 
     keyword = "LOAD"
     subkeyword = "HEAT_EXOTHERMIC_REACTION"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadHeatExothermicReaction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "hsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        40,
-                        10,
-                        1.E16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmin",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmax",
-                        float,
-                        60,
-                        10,
-                        1.E16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toff",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "csei0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asei",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "easei",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msei",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hsei",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ru",
-                        float,
-                        70,
-                        10,
-                        8.314,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cne0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ane",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eane",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mne",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hne",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcne",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsei0",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tseir",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ape",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eape",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpep1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hpe",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wpe",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpep2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ce0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ae",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eae",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "me",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "he",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "we",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADHEATEXOTHERMICREACTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADHEATEXOTHERMICREACTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADHEATEXOTHERMICREACTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADHEATEXOTHERMICREACTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADHEATEXOTHERMICREACTION_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def hsid(self) -> typing.Optional[int]:
         """Get or set the Heat Source ID.
@@ -746,4 +505,14 @@ class LoadHeatExothermicReaction(KeywordBase):
     def we(self, value: float) -> None:
         """Set the we property."""
         self._cards[4].set_value("we", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

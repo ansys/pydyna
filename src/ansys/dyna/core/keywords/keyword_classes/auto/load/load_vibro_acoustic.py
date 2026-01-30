@@ -23,114 +23,53 @@
 """Module providing the LoadVibroAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADVIBROACOUSTIC_CARD0 = (
+    FieldSchema("nmode", float, 0, 10, None),
+    FieldSchema("texpos", float, 10, 10, 1.0),
+    FieldSchema("tscale", float, 20, 10, 0.0),
+    FieldSchema("temper", float, 30, 10, None),
+    FieldSchema("dampro", float, 40, 10, None),
+    FieldSchema("damptype", float, 50, 10, None),
+    FieldSchema("spltype", float, 60, 10, None),
+)
+
+_LOADVIBROACOUSTIC_CARD1 = (
+    FieldSchema("lddamp", int, 0, 10, None),
+    FieldSchema("ldspl", int, 10, 10, None),
+    FieldSchema("ldvel", int, 20, 10, None),
+    FieldSchema("ldflw", int, 30, 10, None),
+    FieldSchema("ldspn", int, 40, 10, None),
+)
 
 class LoadVibroAcoustic(KeywordBase):
     """DYNA LOAD_VIBRO_ACOUSTIC keyword"""
 
     keyword = "LOAD"
     subkeyword = "VIBRO_ACOUSTIC"
+    _link_fields = {
+        "lddamp": LinkType.DEFINE_CURVE,
+        "ldspl": LinkType.DEFINE_CURVE,
+        "ldvel": LinkType.DEFINE_CURVE,
+        "ldflw": LinkType.DEFINE_CURVE,
+        "ldspn": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadVibroAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmode",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscale",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temper",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampro",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damptype",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spltype",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lddamp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldvel",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflw",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspn",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADVIBROACOUSTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADVIBROACOUSTIC_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nmode(self) -> typing.Optional[float]:
         """Get or set the Number of normal vibration modes employed for coupling with excitation pressure field
@@ -262,4 +201,79 @@ class LoadVibroAcoustic(KeywordBase):
     def ldspn(self, value: int) -> None:
         """Set the ldspn property."""
         self._cards[1].set_value("ldspn", value)
+
+    @property
+    def lddamp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lddamp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lddamp:
+                return kwd
+        return None
+
+    @lddamp_link.setter
+    def lddamp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lddamp."""
+        self.lddamp = value.lcid
+
+    @property
+    def ldspl_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldspl."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldspl:
+                return kwd
+        return None
+
+    @ldspl_link.setter
+    def ldspl_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldspl."""
+        self.ldspl = value.lcid
+
+    @property
+    def ldvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldvel:
+                return kwd
+        return None
+
+    @ldvel_link.setter
+    def ldvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldvel."""
+        self.ldvel = value.lcid
+
+    @property
+    def ldflw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldflw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldflw:
+                return kwd
+        return None
+
+    @ldflw_link.setter
+    def ldflw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldflw."""
+        self.ldflw = value.lcid
+
+    @property
+    def ldspn_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldspn."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldspn:
+                return kwd
+        return None
+
+    @ldspn_link.setter
+    def ldspn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldspn."""
+        self.ldspn = value.lcid
 

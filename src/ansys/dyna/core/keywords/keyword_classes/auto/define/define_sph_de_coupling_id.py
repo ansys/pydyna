@@ -23,8 +23,29 @@
 """Module providing the DefineSphDeCouplingId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESPHDECOUPLINGID_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_DEFINESPHDECOUPLINGID_CARD1 = (
+    FieldSchema("sphid", int, 0, 10, None),
+    FieldSchema("desid", int, 10, 10, None),
+    FieldSchema("sphtyp", int, 20, 10, 0),
+    FieldSchema("destyp", int, 30, 10, 0),
+    FieldSchema("pfact", float, 40, 10, 1.0),
+    FieldSchema("dfact", float, 50, 10, 0.0),
+    FieldSchema("sphbox", int, 60, 10, None),
+)
+
+_DEFINESPHDECOUPLINGID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSphDeCouplingId(KeywordBase):
     """DYNA DEFINE_SPH_DE_COUPLING_ID keyword"""
@@ -34,106 +55,32 @@ class DefineSphDeCouplingId(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pfact": LinkType.SECTION,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSphDeCouplingId class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sphid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "desid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "destyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfact",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfact",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphbox",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHDECOUPLINGID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHDECOUPLINGID_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphDeCouplingId.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHDECOUPLINGID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Definition ID. This must be a unique number..
@@ -254,4 +201,19 @@ class DefineSphDeCouplingId(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pfact_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for pfact."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.pfact:
+                return kwd
+        return None
+
+    @pfact_link.setter
+    def pfact_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for pfact."""
+        self.pfact = value.secid
 

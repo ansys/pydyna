@@ -23,31 +23,31 @@
 """Module providing the NodeMergeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_NODEMERGESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+)
 
 class NodeMergeSet(KeywordBase):
     """DYNA NODE_MERGE_SET keyword"""
 
     keyword = "NODE"
     subkeyword = "MERGE_SET"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the NodeMergeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODEMERGESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing list of nodes to be considered for merging.
@@ -58,4 +58,14 @@ class NodeMergeSet(KeywordBase):
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

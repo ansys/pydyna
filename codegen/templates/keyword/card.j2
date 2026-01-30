@@ -1,112 +1,27 @@
+{#
+  Card template dispatcher - routes to the appropriate card type template.
+
+  Card types:
+  - SeriesCard: Variable-length series of values (card.variable)
+  - CardSet reference: Nested CardSet within a CardSet (card.set)
+  - TableCard: DataFrame-backed card (card.table)
+  - TableCardGroup: Group of cards that repeat together (card.table_group)
+  - External: Externally implemented card (card.external)
+  - Card from schema: Optimized Card using FieldSchema (inside CardSet)
+  - Card with fields: Legacy Card with Field objects (top-level)
+#}
 {% if card.variable %}
-            SeriesCard(
-                "{{card.variable.name}}",
-                {{card.variable.size}},
-                {{card.variable.width}},
-                {{card.variable.type}},
-{% if card.variable.length_func %}
-                lambda: {{card.variable.length_func}},
-{% else %}
-                None,
-{% endif %}{# card.variable.length_func #}
-{% if card.variable.active_func %}
-                lambda: {{card.variable.active_func}},
-{% endif %}{# card.variable.active_func #}
-                data = kwargs.get("{{card.variable.name}}")),
+{% include 'keyword/card_types/series_card.j2' %}
 {% elif card.set %}
-            CardSet(
-                {{card.set.name}},
-{% if card.length_func %}
-                length_func = lambda: {{card.length_func}},
-{% endif %}{# card.length_func #}
-{% if card.active_func %}
-                active_func = lambda: {{card.active_func}},
-{% endif %}{# card.active_func #}
-{% if keyword_data.card_sets %}
-{% if keyword_data.card_sets.options %}
-                option_specs = {{card.set.name}}.option_specs,
-{% endif %}{# keyword_data.card_sets.options #}
-{% endif %}{# keyword_data.card_sets #}
-                **kwargs
-            ),
-{% elif card.duplicate %}
-            TableCard(
-                [
-{% for field in card.fields %}
-                    Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {{field.default}}),
-{% endfor %}{# field in card.fields #}
-                ],
-{% if card.duplicate.length_func %}
-                lambda: {{card.duplicate.length_func}},
-{% else %}{# card.duplicate.length_func #}
-                None,
-{% endif %}
-{% if card.duplicate.active_func %}
-                lambda: {{card.duplicate.active_func}},
-{% endif %}
-                name="{{card.duplicate.name}}",
-                **kwargs,
-            ),
-{% elif card.duplicate_group %}
-            TableCardGroup(
-                [
-{% for sub_card in card.sub_cards %}
-                    Card(
-                            [
-{% for field in sub_card.fields %}
-                                Field(
-                                    "{{field.name}}",
-                                    {{field.type}},
-                                    {{field.position}},
-                                    {{field.width}},
-                                ),
-{% endfor %}
-                            ],
-{% if sub_card.func %}
-                            lambda: {{sub_card.func}},
-{% endif %}
-                    ),
-{% endfor %}
-                ],
-{% if card.length_func %}
-                lambda: {{card.length_func}},
-{% else %}
-                None,
-{% endif %}
-{% if card.active_func %}
-                lambda: {{card.active_func}},
-{% else %}
-                None,
-{% endif %}
-                "{{card.overall_name}}",
-                **kwargs,
-            ),
+{% include 'keyword/card_types/card_set_ref.j2' %}
+{% elif card.table %}
+{% include 'keyword/card_types/table_card.j2' %}
+{% elif card.table_group %}
+{% include 'keyword/card_types/table_card_group.j2' %}
 {% elif card.external %}
             {{card.external.name}}(**kwargs)
+{% elif parent_name is defined and card_index is defined %}
+{% include 'keyword/card_types/card_from_schema.j2' %}
 {% else %}
-            Card(
-                [
-{% for field in card.fields %}
-                    Field(
-                        "{{field.name}}",
-                        {{field.type}},
-                        {{field.position}},
-                        {{field.width}},
-{% if field.default is not none %}
-{% if field.readonly %}
-                        Field.ReadOnlyValue({{field.default}}),
-{% else %}
-                        {{field.default}},
+{% include 'keyword/card_types/card_with_fields.j2' %}
 {% endif %}
-                        **kwargs,
-{% else %}
-                        **kwargs,
-{% endif %}
-                    ),
-{% endfor %}
-                ],
-{% if card.func %}
-                lambda: {{card.func}},
-{% endif %}
-            ),
-{% endif %}{# if card.variable #}

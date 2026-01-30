@@ -23,7 +23,56 @@
 """Module providing the Eos014 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOS014_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a1", float, 10, 10, 0.0),
+    FieldSchema("a2", float, 20, 10, 0.0),
+    FieldSchema("a3", float, 30, 10, 0.0),
+    FieldSchema("a4", float, 40, 10, 0.0),
+    FieldSchema("a5", float, 50, 10, 0.0),
+)
+
+_EOS014_CARD1 = (
+    FieldSchema("r1", float, 0, 10, 0.0),
+    FieldSchema("r2", float, 10, 10, 0.0),
+    FieldSchema("r3", float, 20, 10, 0.0),
+    FieldSchema("r4", float, 30, 10, 0.0),
+    FieldSchema("r5", float, 40, 10, 0.0),
+)
+
+_EOS014_CARD2 = (
+    FieldSchema("al1", float, 0, 10, 0.0),
+    FieldSchema("al2", float, 10, 10, 0.0),
+    FieldSchema("al3", float, 20, 10, 0.0),
+    FieldSchema("al4", float, 30, 10, 0.0),
+    FieldSchema("al5", float, 40, 10, 0.0),
+)
+
+_EOS014_CARD3 = (
+    FieldSchema("bl1", float, 0, 10, 0.0),
+    FieldSchema("bl2", float, 10, 10, 0.0),
+    FieldSchema("bl3", float, 20, 10, 0.0),
+    FieldSchema("bl4", float, 30, 10, 0.0),
+    FieldSchema("bl5", float, 40, 10, 0.0),
+)
+
+_EOS014_CARD4 = (
+    FieldSchema("rl1", float, 0, 10, 0.0),
+    FieldSchema("rl2", float, 10, 10, 0.0),
+    FieldSchema("rl3", float, 20, 10, 0.0),
+    FieldSchema("rl4", float, 30, 10, 0.0),
+    FieldSchema("rl5", float, 40, 10, 0.0),
+)
+
+_EOS014_CARD5 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("omega", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("v0", float, 30, 10, None),
+)
 
 class Eos014(KeywordBase):
     """DYNA EOS_014 keyword"""
@@ -35,267 +84,25 @@ class Eos014(KeywordBase):
         """Initialize the Eos014 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a5",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "al1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bl1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bl2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bl3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bl4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bl5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rl1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rl2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rl3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rl4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rl5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS014_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.

@@ -23,7 +23,12 @@
 """Module providing the ModulePath class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MODULEPATH_CARD0 = (
+    FieldSchema("path", str, 0, 80, None),
+)
 
 class ModulePath(KeywordBase):
     """DYNA MODULE_PATH keyword"""
@@ -35,19 +40,10 @@ class ModulePath(KeywordBase):
         """Initialize the ModulePath class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MODULEPATH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the Path of module files.

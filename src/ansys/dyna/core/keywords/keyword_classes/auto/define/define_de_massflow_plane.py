@@ -23,8 +23,20 @@
 """Module providing the DefineDeMassflowPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEMASSFLOWPLANE_CARD0 = (
+    FieldSchema("prtclsid", int, 0, 10, 0),
+    FieldSchema("surfsid", int, 10, 10, 0),
+    FieldSchema("ptype", int, 20, 10, 0),
+    FieldSchema("stype", int, 30, 10, 0),
+)
+
+_DEFINEDEMASSFLOWPLANE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeMassflowPlane(KeywordBase):
     """DYNA DEFINE_DE_MASSFLOW_PLANE keyword"""
@@ -40,61 +52,20 @@ class DefineDeMassflowPlane(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "prtclsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfsid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEMASSFLOWPLANE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeMassflowPlane.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEMASSFLOWPLANE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def prtclsid(self) -> int:
         """Get or set the Node set ID, node ID, part set ID or part ID specifying DES to be measured.  PTYPE below indicates the ID type specified by PRTCLSID

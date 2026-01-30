@@ -23,259 +23,76 @@
 """Module providing the ControlAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLALE_CARD0 = (
+    FieldSchema("dct", int, 0, 10, 1),
+    FieldSchema("nadv", int, 10, 10, 1),
+    FieldSchema("meth", int, 20, 10, 2),
+    FieldSchema("afac", float, 30, 10, 0.0),
+    FieldSchema("bfac", float, 40, 10, 0.0),
+    FieldSchema("cfac", float, 50, 10, 0.0),
+    FieldSchema("dfac", float, 60, 10, 0.0),
+    FieldSchema("efac", float, 70, 10, 0.0),
+)
+
+_CONTROLALE_CARD1 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 1e+20),
+    FieldSchema("aafac", float, 20, 10, 1.0),
+    FieldSchema("vfact", float, 30, 10, 1e-06),
+    FieldSchema("prit", int, 40, 10, 0),
+    FieldSchema("ebc", int, 50, 10, 0),
+    FieldSchema("pref", float, 60, 10, 0.0),
+    FieldSchema("nsidebc", int, 70, 10, None),
+)
+
+_CONTROLALE_CARD2 = (
+    FieldSchema("ncpl", int, 0, 10, 1),
+    FieldSchema("nbkt", int, 10, 10, 50),
+    FieldSchema("imascl", int, 20, 10, 0),
+    FieldSchema("checkr", float, 30, 10, 0.0),
+    FieldSchema("beamin", float, 40, 10, 0.0),
+    FieldSchema("mmgpref", int, 50, 10, 0),
+    FieldSchema("pdifmx", float, 60, 10, 0.0),
+    FieldSchema("dtmufac", float, 70, 10, 0.0),
+)
+
+_CONTROLALE_CARD3 = (
+    FieldSchema("optimpp", int, 0, 10, 0),
+    FieldSchema("ialedr", int, 10, 10, 0),
+    FieldSchema("bndflx", int, 20, 10, 0),
+    FieldSchema("minmas", float, 30, 10, 1e-05),
+)
 
 class ControlAle(KeywordBase):
     """DYNA CONTROL_ALE keyword"""
 
     keyword = "CONTROL"
     subkeyword = "ALE"
+    _link_fields = {
+        "nsidebc": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dct",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nadv",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "meth",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "afac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bfac",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfac",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfac",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efac",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aafac",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfact",
-                        float,
-                        30,
-                        10,
-                        1.0E-06,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prit",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ebc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pref",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidebc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ncpl",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbkt",
-                        int,
-                        10,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imascl",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "checkr",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beamin",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgpref",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pdifmx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmufac",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "optimpp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ialedr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bndflx",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "minmas",
-                        float,
-                        30,
-                        10,
-                        1.0E-5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLALE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLALE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLALE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def dct(self) -> int:
         """Get or set the Flag to invoke alternate advection logic for ALE (see Remark 2):
@@ -631,4 +448,14 @@ class ControlAle(KeywordBase):
     def minmas(self, value: float) -> None:
         """Set the minmas property."""
         self._cards[3].set_value("minmas", value)
+
+    @property
+    def nsidebc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidebc."""
+        return self._get_set_link("NODE", self.nsidebc)
+
+    @nsidebc_link.setter
+    def nsidebc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidebc."""
+        self.nsidebc = value.sid
 

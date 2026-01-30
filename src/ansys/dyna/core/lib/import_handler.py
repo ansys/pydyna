@@ -24,7 +24,6 @@
 
 import dataclasses
 import typing
-import warnings
 
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -57,12 +56,20 @@ class ImportContext:
         ... )
         >>> context = ImportContext(keyword_overrides={"*MAT_295": Mat295Legacy})
         >>> deck.loads(data, context=context)
+    strict : bool, optional
+        If True, raise errors when keyword parsing fails for any reason
+        (undefined parameters, invalid field values, malformed data, etc.).
+        If False (default), keywords that fail to parse are retained as raw
+        strings and a warning is emitted. Default is False for backward
+        compatibility.
+        TODO: Consider making strict=True the default in a future version.
     """
 
     xform: typing.Any = None
     deck: typing.Any = None
     path: str = None
     keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
+    strict: bool = False
 
 
 class ImportHandler:
@@ -90,5 +97,9 @@ class ImportHandler:
         pass
 
     def on_error(self, error):
-        # TODO - use logging
-        warnings.warn(f"error in importhandler {self}: {error}")
+        """Called when an error occurs in this handler's `after_import` method.
+
+        Handlers can override this to handle or log errors as needed.
+        The default implementation does nothing.
+        """
+        pass

@@ -23,7 +23,29 @@
 """Module providing the DualceseInitialHybridSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEINITIALHYBRIDSET_CARD0 = (
+    FieldSchema("esid", int, 0, 10, None),
+    FieldSchema("ifunc", int, 10, 10, None),
+)
+
+_DUALCESEINITIALHYBRIDSET_CARD1 = (
+    FieldSchema("z1", float, 0, 10, None),
+    FieldSchema("ra", float, 10, 10, None),
+    FieldSchema("uic", float, 20, 10, None),
+    FieldSchema("vic", float, 30, 10, None),
+    FieldSchema("wic", float, 40, 10, None),
+    FieldSchema("rho1", float, 50, 10, None),
+    FieldSchema("rho_a", float, 60, 10, None),
+    FieldSchema("rho_b", float, 70, 10, None),
+)
+
+_DUALCESEINITIALHYBRIDSET_CARD2 = (
+    FieldSchema("pic", float, 0, 10, None),
+    FieldSchema("tic", float, 10, 10, None),
+)
 
 class DualceseInitialHybridSet(KeywordBase):
     """DYNA DUALCESE_INITIAL_HYBRID_SET keyword"""
@@ -35,104 +57,16 @@ class DualceseInitialHybridSet(KeywordBase):
         """Initialize the DualceseInitialHybridSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifunc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "z1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ra",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wic",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_b",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pic",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALHYBRIDSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALHYBRIDSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALHYBRIDSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Element set ID (see *DUALCESE_ELEMENTSET)

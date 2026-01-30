@@ -23,71 +23,37 @@
 """Module providing the BoundaryTemperatureNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_BOUNDARYTEMPERATURENODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("cmult", float, 20, 10, 1.0),
+    FieldSchema("loc", int, 30, 10, 0),
+    FieldSchema("tdeath", float, 40, 10, 1e+20),
+    FieldSchema("tbirth", float, 50, 10, 0.0),
+)
 
 class BoundaryTemperatureNode(KeywordBase):
     """DYNA BOUNDARY_TEMPERATURE_NODE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "TEMPERATURE_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryTemperatureNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        50,
-                        10,
-                        0.,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTEMPERATURENODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -158,4 +124,9 @@ class BoundaryTemperatureNode(KeywordBase):
     def tbirth(self, value: float) -> None:
         """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

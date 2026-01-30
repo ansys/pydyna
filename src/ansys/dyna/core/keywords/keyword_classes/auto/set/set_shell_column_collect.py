@@ -23,8 +23,30 @@
 """Module providing the SetShellColumnCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETSHELLCOLUMNCOLLECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+)
+
+_SETSHELLCOLUMNCOLLECT_CARD1 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("a1", float, 10, 10, 0.0),
+    FieldSchema("a2", float, 20, 10, 0.0),
+    FieldSchema("a3", float, 30, 10, 0.0),
+    FieldSchema("a4", float, 40, 10, 0.0),
+)
+
+_SETSHELLCOLUMNCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetShellColumnCollect(KeywordBase):
     """DYNA SET_SHELL_COLUMN_COLLECT keyword"""
@@ -34,117 +56,32 @@ class SetShellColumnCollect(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "eid": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetShellColumnCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETSHELLCOLUMNCOLLECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETSHELLCOLUMNCOLLECT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetShellColumnCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSHELLCOLUMNCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Shell element set ID. All shell sets should have a unique set ID.
@@ -268,4 +205,9 @@ class SetShellColumnCollect(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

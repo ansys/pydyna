@@ -23,111 +23,55 @@
 """Module providing the ConstrainedSpotweldFilteredForce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("sn", float, 20, 10, None),
+    FieldSchema("ss", float, 30, 10, None),
+    FieldSchema("n", float, 40, 10, None),
+    FieldSchema("m", float, 50, 10, None),
+    FieldSchema("tf", float, 60, 10, 1e+20),
+    FieldSchema("ep", float, 70, 10, 1e+20),
+)
+
+_CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD2 = (
+    FieldSchema("nf", int, 0, 10, None),
+    FieldSchema("tw", float, 10, 10, None),
+)
 
 class ConstrainedSpotweldFilteredForce(KeywordBase):
     """DYNA CONSTRAINED_SPOTWELD_FILTERED_FORCE keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "SPOTWELD_FILTERED_FORCE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedSpotweldFilteredForce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tf",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ep",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nf",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tw",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSPOTWELDFILTEREDFORCE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID
@@ -248,4 +192,14 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
     def tw(self, value: float) -> None:
         """Set the tw property."""
         self._cards[2].set_value("tw", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

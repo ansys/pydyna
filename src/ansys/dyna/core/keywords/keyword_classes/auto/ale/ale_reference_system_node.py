@@ -23,123 +23,67 @@
 """Module providing the AleReferenceSystemNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ALEREFERENCESYSTEMNODE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_ALEREFERENCESYSTEMNODE_CARD1 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid3", int, 20, 10, None),
+    FieldSchema("nid4", int, 30, 10, None),
+    FieldSchema("nid5", int, 40, 10, None),
+    FieldSchema("nid6", int, 50, 10, None),
+    FieldSchema("nid7", int, 60, 10, None),
+    FieldSchema("nid8", int, 70, 10, None),
+)
+
+_ALEREFERENCESYSTEMNODE_CARD2 = (
+    FieldSchema("nid9", int, 0, 10, None),
+    FieldSchema("nid10", int, 10, 10, None),
+    FieldSchema("nid11", int, 20, 10, None),
+    FieldSchema("nid12", int, 30, 10, None),
+)
 
 class AleReferenceSystemNode(KeywordBase):
     """DYNA ALE_REFERENCE_SYSTEM_NODE keyword"""
 
     keyword = "ALE"
     subkeyword = "REFERENCE_SYSTEM_NODE"
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+        "nid4": LinkType.NODE,
+        "nid5": LinkType.NODE,
+        "nid6": LinkType.NODE,
+        "nid7": LinkType.NODE,
+        "nid8": LinkType.NODE,
+        "nid9": LinkType.NODE,
+        "nid10": LinkType.NODE,
+        "nid11": LinkType.NODE,
+        "nid12": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleReferenceSystemNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid9",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid10",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid11",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMNODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMNODE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMNODE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node group ID for PRTYPE 3 or 7, see *ALE_REFERENCE_SYSTEM_GROUP.
@@ -282,4 +226,64 @@ class AleReferenceSystemNode(KeywordBase):
     def nid12(self, value: int) -> None:
         """Set the nid12 property."""
         self._cards[2].set_value("nid12", value)
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
+
+    @property
+    def nid4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid4."""
+        return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
+
+    @property
+    def nid5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid5."""
+        return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
+
+    @property
+    def nid6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid6."""
+        return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
+
+    @property
+    def nid7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid7."""
+        return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
+
+    @property
+    def nid8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid8."""
+        return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
+
+    @property
+    def nid9_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid9."""
+        return self._get_link_by_attr("NODE", "nid", self.nid9, "parts")
+
+    @property
+    def nid10_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid10."""
+        return self._get_link_by_attr("NODE", "nid", self.nid10, "parts")
+
+    @property
+    def nid11_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid11."""
+        return self._get_link_by_attr("NODE", "nid", self.nid11, "parts")
+
+    @property
+    def nid12_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid12."""
+        return self._get_link_by_attr("NODE", "nid", self.nid12, "parts")
 

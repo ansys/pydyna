@@ -23,198 +23,68 @@
 """Module providing the AleInjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_ALEINJECTION_CARD0 = (
+    FieldSchema("mmgset", int, 0, 10, None),
+    FieldSchema("segset", int, 10, 10, None),
+    FieldSchema("global_", int, 20, 10, 0, "global"),
+    FieldSchema("lce", int, 30, 10, 0),
+    FieldSchema("lcrvl", int, 40, 10, 0),
+)
+
+_ALEINJECTION_CARD1 = (
+    FieldSchema("lcvt", int, 0, 10, 0),
+    FieldSchema("vect", int, 10, 10, 0),
+    FieldSchema("lcvr", int, 20, 10, 0),
+    FieldSchema("vecr", int, 30, 10, 0),
+    FieldSchema("boxv", int, 40, 10, 0),
+    FieldSchema("xg", float, 50, 10, 0.0),
+    FieldSchema("yg", float, 60, 10, 0.0),
+    FieldSchema("zg", float, 70, 10, 0.0),
+)
+
+_ALEINJECTION_CARD2 = (
+    FieldSchema("surfct", int, 0, 10, 0),
+    FieldSchema("ndiv", int, 10, 10, 3),
+    FieldSchema("xl", float, 20, 10, 0.0),
+    FieldSchema("yl", float, 30, 10, 0.0),
+    FieldSchema("zd", float, 40, 10, 0.0),
+    FieldSchema("zu", float, 50, 10, 0.0),
+    FieldSchema("xc", float, 60, 10, 0.0),
+    FieldSchema("yc", float, 70, 10, 0.0),
+)
 
 class AleInjection(KeywordBase):
     """DYNA ALE_INJECTION keyword"""
 
     keyword = "ALE"
     subkeyword = "INJECTION"
+    _link_fields = {
+        "boxv": LinkType.DEFINE_BOX,
+        "vect": LinkType.DEFINE_VECTOR,
+        "vecr": LinkType.DEFINE_VECTOR,
+        "segset": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleInjection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmgset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "global",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lce",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrvl",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcvt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vect",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvr",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxv",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xg",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yg",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zg",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "surfct",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndiv",
-                        int,
-                        10,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zd",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zu",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEINJECTION_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def mmgset(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_MULTI-MATERIAL_GROUP_LIST).
@@ -257,12 +127,12 @@ class AleInjection(KeywordBase):
         formed by all the segments of SEGSET. Velocities are
         applied in the global coordinate system.
         """ # nopep8
-        return self._cards[0].get_value("global")
+        return self._cards[0].get_value("global_")
 
     @global_.setter
     def global_(self, value: int) -> None:
         """Set the global_ property."""
-        self._cards[0].set_value("global", value)
+        self._cards[0].set_value("global_", value)
 
     @property
     def lce(self) -> int:
@@ -492,4 +362,59 @@ class AleInjection(KeywordBase):
     def yc(self, value: float) -> None:
         """Set the yc property."""
         self._cards[2].set_value("yc", value)
+
+    @property
+    def boxv_link(self) -> DefineBox:
+        """Get the DefineBox object for boxv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxv:
+                return kwd
+        return None
+
+    @boxv_link.setter
+    def boxv_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxv."""
+        self.boxv = value.boxid
+
+    @property
+    def vect_link(self) -> DefineVector:
+        """Get the DefineVector object for vect."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vect:
+                return kwd
+        return None
+
+    @vect_link.setter
+    def vect_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vect."""
+        self.vect = value.vid
+
+    @property
+    def vecr_link(self) -> DefineVector:
+        """Get the DefineVector object for vecr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecr:
+                return kwd
+        return None
+
+    @vecr_link.setter
+    def vecr_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecr."""
+        self.vecr = value.vid
+
+    @property
+    def segset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segset."""
+        return self._get_set_link("SEGMENT", self.segset)
+
+    @segset_link.setter
+    def segset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segset."""
+        self.segset = value.sid
 

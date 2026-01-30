@@ -23,8 +23,24 @@
 """Module providing the DefineCurveCompensationConstraintEnd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0 = (
+    FieldSchema("crvid", int, 0, 10, None),
+    FieldSchema("in_out", int, 10, 10, None, "in/out"),
+)
+
+_DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1 = (
+    FieldSchema("x", float, 0, 16, 0.0),
+    FieldSchema("y", float, 16, 16, 0.0),
+    FieldSchema("z", float, 32, 16, 0.0),
+)
+
+_DEFINECURVECOMPENSATIONCONSTRAINTEND_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCurveCompensationConstraintEnd(KeywordBase):
     """DYNA DEFINE_CURVE_COMPENSATION_CONSTRAINT_END keyword"""
@@ -40,71 +56,23 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "crvid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "in/out",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveCompensationConstraintEnd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVECOMPENSATIONCONSTRAINTEND_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def crvid(self) -> typing.Optional[int]:
         """Get or set the Curve ID; must be unique, with the same begin and end point coordinates.
@@ -121,12 +89,12 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
         """Get or set the Flag to indicate local area to be compensated:
         EQ.1: Compensate area includes enclosed curve under keyword 'BEGIN' and transition area between the two curves; no changes will be made to the area outside the curve under keyword , 'END'
         """ # nopep8
-        return self._cards[0].get_value("in/out")
+        return self._cards[0].get_value("in_out")
 
     @in_out.setter
     def in_out(self, value: int) -> None:
         """Set the in_out property."""
-        self._cards[0].set_value("in/out", value)
+        self._cards[0].set_value("in_out", value)
 
     @property
     def x(self) -> float:

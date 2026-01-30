@@ -23,82 +23,41 @@
 """Module providing the ControlFormingAutopositionParameterPositive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONTROLFORMINGAUTOPOSITIONPARAMETERPOSITIVE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("dir", int, 20, 10, 1),
+    FieldSchema("mpid", int, 30, 10, None),
+    FieldSchema("position", int, 40, 10, 1),
+    FieldSchema("premove", float, 50, 10, None),
+    FieldSchema("thick", float, 60, 10, None),
+    FieldSchema("porder", str, 70, 10, None),
+)
 
 class ControlFormingAutopositionParameterPositive(KeywordBase):
     """DYNA CONTROL_FORMING_AUTOPOSITION_PARAMETER_POSITIVE keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_AUTOPOSITION_PARAMETER_POSITIVE"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
+        "mpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingAutopositionParameterPositive class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "position",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "premove",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "porder",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTOPOSITIONPARAMETERPOSITIVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID. This part will be moved based on the following controlling parameters.
@@ -194,4 +153,29 @@ class ControlFormingAutopositionParameterPositive(KeywordBase):
     def porder(self, value: str) -> None:
         """Set the porder property."""
         self._cards[0].set_value("porder", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def mpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given mpid."""
+        return self._get_link_by_attr("PART", "pid", self.mpid, "parts")
 

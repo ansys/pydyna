@@ -23,290 +23,90 @@
 """Module providing the ControlFormingTemplate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLFORMINGTEMPLATE_CARD0 = (
+    FieldSchema("idtemp", int, 0, 10, 0),
+    FieldSchema("blkid", int, 10, 10, 0),
+    FieldSchema("dieid", int, 20, 10, None),
+    FieldSchema("pnch", int, 30, 10, None),
+    FieldSchema("bndu", int, 40, 10, None),
+    FieldSchema("bndl", int, 50, 10, None),
+    FieldSchema("type", int, 60, 10, 0),
+    FieldSchema("prebd", float, 70, 10, None),
+)
+
+_CONTROLFORMINGTEMPLATE_CARD1 = (
+    FieldSchema("lcss", int, 0, 10, None),
+    FieldSchema("al_fe", str, 10, 10, "F", "al/fe"),
+    FieldSchema("r00", float, 20, 10, 1.0),
+    FieldSchema("r45", float, 30, 10, 1.0),
+    FieldSchema("r90", float, 40, 10, 1.0),
+    FieldSchema("e", float, 50, 10, None),
+    FieldSchema("density", float, 60, 10, None),
+)
+
+_CONTROLFORMINGTEMPLATE_CARD2 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("n", float, 10, 10, None),
+    FieldSchema("mtype", int, 20, 10, 37),
+    FieldSchema("unit", int, 30, 10, 1),
+    FieldSchema("thick", float, 40, 10, None),
+    FieldSchema("gap", float, 50, 10, 1.1),
+    FieldSchema("fs", float, 60, 10, 0.1),
+)
+
+_CONTROLFORMINGTEMPLATE_CARD3 = (
+    FieldSchema("patern", int, 0, 10, 1),
+    FieldSchema("vmax", float, 10, 10, 1000.0),
+    FieldSchema("vx", float, 20, 10, 0.0),
+    FieldSchema("vy", float, 30, 10, 0.0),
+    FieldSchema("vz", float, 40, 10, -1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("amax", float, 60, 10, 1000000.0),
+)
+
+_CONTROLFORMINGTEMPLATE_CARD4 = (
+    FieldSchema("lvlada", int, 0, 10, None),
+    FieldSchema("sizeada", float, 10, 10, None),
+    FieldSchema("timsada", int, 20, 10, 20),
+    FieldSchema("d3plt", int, 30, 10, 10),
+)
 
 class ControlFormingTemplate(KeywordBase):
     """DYNA CONTROL_FORMING_TEMPLATE keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_TEMPLATE"
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingTemplate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idtemp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blkid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dieid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pnch",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bndu",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bndl",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prebd",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcss",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "al/fe",
-                        str,
-                        10,
-                        10,
-                        "F",
-                        **kwargs,
-                    ),
-                    Field(
-                        "r00",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r45",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r90",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        20,
-                        10,
-                        37,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        50,
-                        10,
-                        1.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        60,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "patern",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vmax",
-                        float,
-                        10,
-                        10,
-                        1000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        -1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "amax",
-                        float,
-                        60,
-                        10,
-                        1.0E6,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lvlada",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sizeada",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timsada",
-                        int,
-                        20,
-                        10,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3plt",
-                        int,
-                        30,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTEMPLATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTEMPLATE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTEMPLATE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTEMPLATE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTEMPLATE_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def idtemp(self) -> int:
         """Get or set the Type of forming process (Detailed descriptions can be found in the Remark section)
@@ -422,14 +222,14 @@ class ControlFormingTemplate(KeywordBase):
         EQ. A:  the blank is aluminum
         EQ. F:   the blank is steel (default)
         """ # nopep8
-        return self._cards[1].get_value("al/fe")
+        return self._cards[1].get_value("al_fe")
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
         """Set the al_fe property."""
         if value not in ["F", "A", None]:
             raise Exception("""al_fe must be `None` or one of {"F","A"}.""")
-        self._cards[1].set_value("al/fe", value)
+        self._cards[1].set_value("al_fe", value)
 
     @property
     def r00(self) -> float:
@@ -687,4 +487,34 @@ class ControlFormingTemplate(KeywordBase):
     def d3plt(self, value: int) -> None:
         """Set the d3plt property."""
         self._cards[4].set_value("d3plt", value)
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

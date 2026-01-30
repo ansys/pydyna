@@ -23,7 +23,25 @@
 """Module providing the EfControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EFCONTROL_CARD0 = (
+    FieldSchema("nphton", int, 0, 10, None),
+    FieldSchema("nrefs", int, 10, 10, None),
+    FieldSchema("nwarns", int, 20, 10, None),
+    FieldSchema("nlost", int, 30, 10, None),
+    FieldSchema("nloops", int, 40, 10, None),
+    FieldSchema("errodef", float, 50, 10, None),
+    FieldSchema("inseed", int, 60, 10, None),
+)
+
+_EFCONTROL_CARD1 = (
+    FieldSchema("nphton", int, 0, 10, None),
+    FieldSchema("nrefs", int, 10, 10, None),
+    FieldSchema("nwarns", int, 20, 10, None),
+    FieldSchema("nlost", int, 30, 10, None),
+)
 
 class EfControl(KeywordBase):
     """DYNA EF_CONTROL keyword"""
@@ -35,93 +53,13 @@ class EfControl(KeywordBase):
         """Initialize the EfControl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nphton",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrefs",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nwarns",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlost",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloops",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "errodef",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inseed",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nphton",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrefs",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nwarns",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlost",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EFCONTROL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EFCONTROL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nphton(self) -> typing.Optional[int]:
         """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_‌RADIATION_‌SET_‌EF_‌CALCULATE also effects the number of photons emitted per surface per band per convergence loop

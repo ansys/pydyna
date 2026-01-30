@@ -23,55 +23,34 @@
 """Module providing the BoundaryAcousticImpedanceMechanical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYACOUSTICIMPEDANCEMECHANICAL_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("mparea", float, 10, 10, 0.0),
+    FieldSchema("cparea", float, 20, 10, 0.0),
+    FieldSchema("kparea", int, 30, 10, 0),
+)
 
 class BoundaryAcousticImpedanceMechanical(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_IMPEDANCE_MECHANICAL keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "ACOUSTIC_IMPEDANCE_MECHANICAL"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryAcousticImpedanceMechanical class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mparea",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cparea",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kparea",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICIMPEDANCEMECHANICAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of an acoustic surface.
@@ -115,4 +94,14 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
     def kparea(self, value: int) -> None:
         """Set the kparea property."""
         self._cards[0].set_value("kparea", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

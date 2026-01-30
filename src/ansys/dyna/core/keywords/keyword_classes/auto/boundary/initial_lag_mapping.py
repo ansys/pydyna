@@ -23,80 +23,45 @@
 """Module providing the InitialLagMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_INITIALLAGMAPPING_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+)
+
+_INITIALLAGMAPPING_CARD1 = (
+    FieldSchema("xp", float, 0, 10, 0.0),
+    FieldSchema("yp", float, 10, 10, 0.0),
+    FieldSchema("zp", float, 20, 10, 0.0),
+    FieldSchema("vecid", int, 30, 10, None),
+    FieldSchema("angle", float, 40, 10, None),
+    FieldSchema("nelangl", int, 50, 10, None),
+)
 
 class InitialLagMapping(KeywordBase):
     """DYNA INITIAL_LAG_MAPPING keyword"""
 
     keyword = "INITIAL"
     subkeyword = "LAG_MAPPING"
+    _link_fields = {
+        "vecid": LinkType.DEFINE_VECTOR,
+        "setid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialLagMapping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nelangl",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALLAGMAPPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALLAGMAPPING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the part set ID
@@ -177,4 +142,29 @@ class InitialLagMapping(KeywordBase):
     def nelangl(self, value: int) -> None:
         """Set the nelangl property."""
         self._cards[1].set_value("nelangl", value)
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
+
+    @property
+    def setid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for setid."""
+        return self._get_set_link("PART", self.setid)
+
+    @setid_link.setter
+    def setid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for setid."""
+        self.setid = value.sid
 

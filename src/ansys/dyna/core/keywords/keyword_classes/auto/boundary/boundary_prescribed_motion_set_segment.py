@@ -23,8 +23,27 @@
 """Module providing the BoundaryPrescribedMotionSetSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("vad", int, 20, 10, 0),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, 1e+28),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class BoundaryPrescribedMotionSetSegment(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_SET_SEGMENT keyword"""
@@ -34,103 +53,30 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
     option_specs = [
         OptionSpec("ID", -2, 1),
     ]
+    _link_fields = {
+        "vid": LinkType.DEFINE_VECTOR,
+        "sid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedMotionSetSegment class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionSetSegment.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Segment et ID, see *SET_SEGMENT see DOF = 12), .
@@ -273,4 +219,29 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
         if value:
             self.activate_option("HEADING")
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for sid."""
+        return self._get_set_link("SEGMENT", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sid."""
+        self.sid = value.sid
 

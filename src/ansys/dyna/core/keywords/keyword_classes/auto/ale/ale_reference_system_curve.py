@@ -23,123 +23,67 @@
 """Module providing the AleReferenceSystemCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ALEREFERENCESYSTEMCURVE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_ALEREFERENCESYSTEMCURVE_CARD1 = (
+    FieldSchema("lc1", int, 0, 10, None),
+    FieldSchema("lc2", int, 10, 10, None),
+    FieldSchema("lc3", int, 20, 10, None),
+    FieldSchema("lc4", int, 30, 10, None),
+    FieldSchema("lc5", int, 40, 10, None),
+    FieldSchema("lc6", int, 50, 10, None),
+    FieldSchema("lc7", int, 60, 10, None),
+    FieldSchema("lc8", int, 70, 10, None),
+)
+
+_ALEREFERENCESYSTEMCURVE_CARD2 = (
+    FieldSchema("lc9", int, 0, 10, None),
+    FieldSchema("lc10", int, 10, 10, None),
+    FieldSchema("lc11", int, 20, 10, None),
+    FieldSchema("lc12", int, 30, 10, None),
+)
 
 class AleReferenceSystemCurve(KeywordBase):
     """DYNA ALE_REFERENCE_SYSTEM_CURVE keyword"""
 
     keyword = "ALE"
     subkeyword = "REFERENCE_SYSTEM_CURVE"
+    _link_fields = {
+        "lc1": LinkType.DEFINE_CURVE,
+        "lc2": LinkType.DEFINE_CURVE,
+        "lc3": LinkType.DEFINE_CURVE,
+        "lc4": LinkType.DEFINE_CURVE,
+        "lc5": LinkType.DEFINE_CURVE,
+        "lc6": LinkType.DEFINE_CURVE,
+        "lc7": LinkType.DEFINE_CURVE,
+        "lc8": LinkType.DEFINE_CURVE,
+        "lc9": LinkType.DEFINE_CURVE,
+        "lc10": LinkType.DEFINE_CURVE,
+        "lc11": LinkType.DEFINE_CURVE,
+        "lc12": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleReferenceSystemCurve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc9",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc10",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc11",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEREFERENCESYSTEMCURVE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Curve ID.
@@ -282,4 +226,184 @@ class AleReferenceSystemCurve(KeywordBase):
     def lc12(self, value: int) -> None:
         """Set the lc12 property."""
         self._cards[2].set_value("lc12", value)
+
+    @property
+    def lc1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc1:
+                return kwd
+        return None
+
+    @lc1_link.setter
+    def lc1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc1."""
+        self.lc1 = value.lcid
+
+    @property
+    def lc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc2:
+                return kwd
+        return None
+
+    @lc2_link.setter
+    def lc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc2."""
+        self.lc2 = value.lcid
+
+    @property
+    def lc3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc3:
+                return kwd
+        return None
+
+    @lc3_link.setter
+    def lc3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc3."""
+        self.lc3 = value.lcid
+
+    @property
+    def lc4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc4:
+                return kwd
+        return None
+
+    @lc4_link.setter
+    def lc4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc4."""
+        self.lc4 = value.lcid
+
+    @property
+    def lc5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc5:
+                return kwd
+        return None
+
+    @lc5_link.setter
+    def lc5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc5."""
+        self.lc5 = value.lcid
+
+    @property
+    def lc6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc6:
+                return kwd
+        return None
+
+    @lc6_link.setter
+    def lc6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc6."""
+        self.lc6 = value.lcid
+
+    @property
+    def lc7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc7:
+                return kwd
+        return None
+
+    @lc7_link.setter
+    def lc7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc7."""
+        self.lc7 = value.lcid
+
+    @property
+    def lc8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc8:
+                return kwd
+        return None
+
+    @lc8_link.setter
+    def lc8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc8."""
+        self.lc8 = value.lcid
+
+    @property
+    def lc9_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc9."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc9:
+                return kwd
+        return None
+
+    @lc9_link.setter
+    def lc9_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc9."""
+        self.lc9 = value.lcid
+
+    @property
+    def lc10_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc10."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc10:
+                return kwd
+        return None
+
+    @lc10_link.setter
+    def lc10_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc10."""
+        self.lc10 = value.lcid
+
+    @property
+    def lc11_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc11."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc11:
+                return kwd
+        return None
+
+    @lc11_link.setter
+    def lc11_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc11."""
+        self.lc11 = value.lcid
+
+    @property
+    def lc12_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc12."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc12:
+                return kwd
+        return None
+
+    @lc12_link.setter
+    def lc12_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc12."""
+        self.lc12 = value.lcid
 

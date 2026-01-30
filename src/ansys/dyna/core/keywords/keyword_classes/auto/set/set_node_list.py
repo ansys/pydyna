@@ -23,9 +23,27 @@
 """Module providing the SetNodeList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_SETNODELIST_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+    FieldSchema("its", str, 60, 10, "1"),
+    FieldSchema("unused", str, 70, 10, None),
+)
+
+_SETNODELIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetNodeList(KeywordBase):
     """DYNA SET_NODE_LIST keyword"""
@@ -35,104 +53,42 @@ class SetNodeList(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+        "nid4": LinkType.NODE,
+        "nid5": LinkType.NODE,
+        "nid6": LinkType.NODE,
+        "nid7": LinkType.NODE,
+        "nid8": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetNodeList class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                    Field(
-                        "its",
-                        str,
-                        60,
-                        10,
-                        "1",
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETNODELIST_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "nodes",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("nodes")),
-            OptionCardSet(
+                data = kwargs.get("nodes")),            OptionCardSet(
                 option_spec = SetNodeList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node set ID. All node sets should have a unique set ID.
@@ -240,6 +196,46 @@ class SetNodeList(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
+
+    @property
+    def nid4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid4."""
+        return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
+
+    @property
+    def nid5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid5."""
+        return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
+
+    @property
+    def nid6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid6."""
+        return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
+
+    @property
+    def nid7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid7."""
+        return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
+
+    @property
+    def nid8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid8."""
+        return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
 
 
 class SetNode(SetNodeList):

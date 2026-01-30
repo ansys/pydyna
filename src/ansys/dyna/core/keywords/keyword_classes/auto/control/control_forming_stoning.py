@@ -23,109 +23,49 @@
 """Module providing the ControlFormingStoning class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONTROLFORMINGSTONING_CARD0 = (
+    FieldSchema("istone", int, 0, 10, None),
+    FieldSchema("length", float, 10, 10, None),
+    FieldSchema("width", int, 20, 10, None),
+    FieldSchema("step", float, 30, 10, 0.5),
+    FieldSchema("direction", int, 40, 10, None),
+    FieldSchema("reverse", int, 50, 10, 0),
+    FieldSchema("method", int, 60, 10, 0),
+)
+
+_CONTROLFORMINGSTONING_CARD1 = (
+    FieldSchema("node1", int, 0, 10, None),
+    FieldSchema("node2", int, 10, 10, None),
+    FieldSchema("setid", int, 20, 10, None),
+    FieldSchema("itype", int, 30, 10, 1),
+)
 
 class ControlFormingStoning(KeywordBase):
     """DYNA CONTROL_FORMING_STONING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_STONING"
+    _link_fields = {
+        "node1": LinkType.NODE,
+        "node2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingStoning class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "istone",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "length",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "step",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "direction",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reverse",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "node1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSTONING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSTONING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def istone(self) -> typing.Optional[int]:
         """Get or set the activate this capability.
@@ -253,4 +193,14 @@ class ControlFormingStoning(KeywordBase):
         if value not in [1, 2, None]:
             raise Exception("""itype must be `None` or one of {1,2}.""")
         self._cards[1].set_value("itype", value)
+
+    @property
+    def node1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node1."""
+        return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
+
+    @property
+    def node2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node2."""
+        return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 

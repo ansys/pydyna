@@ -23,8 +23,112 @@
 """Module providing the MatAnisotropicElasticPlastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATANISOTROPICELASTICPLASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("sigy", float, 20, 10, None),
+    FieldSchema("lcss", int, 30, 10, None),
+    FieldSchema("qr1", float, 40, 10, None),
+    FieldSchema("cr1", float, 50, 10, None),
+    FieldSchema("qr2", float, 60, 10, None),
+    FieldSchema("cr2", float, 70, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD1 = (
+    FieldSchema("c11", float, 0, 10, None),
+    FieldSchema("c12", float, 10, 10, None),
+    FieldSchema("c13", float, 20, 10, None),
+    FieldSchema("c14", float, 30, 10, None),
+    FieldSchema("c15", float, 40, 10, None),
+    FieldSchema("c16", float, 50, 10, None),
+    FieldSchema("c22", float, 60, 10, None),
+    FieldSchema("c23", float, 70, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD2 = (
+    FieldSchema("c24", float, 0, 10, None),
+    FieldSchema("c25", float, 10, 10, None),
+    FieldSchema("c26", float, 20, 10, None),
+    FieldSchema("c33", float, 30, 10, None),
+    FieldSchema("c34", float, 40, 10, None),
+    FieldSchema("c35", float, 50, 10, None),
+    FieldSchema("c36", float, 60, 10, None),
+    FieldSchema("c44", float, 70, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD3 = (
+    FieldSchema("c45", float, 0, 10, None),
+    FieldSchema("c46", float, 10, 10, None),
+    FieldSchema("c55", float, 20, 10, None),
+    FieldSchema("c56", float, 30, 10, None),
+    FieldSchema("c66", float, 40, 10, None),
+    FieldSchema("r00_f", float, 50, 10, None, "r00/f"),
+    FieldSchema("r45_g", float, 60, 10, None, "r45/g"),
+    FieldSchema("r90_h", float, 70, 10, None, "r90/h"),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD4 = (
+    FieldSchema("s11_l", float, 0, 10, None, "s11/l"),
+    FieldSchema("s22_m", float, 10, 10, None, "s22/m"),
+    FieldSchema("s33_n", float, 20, 10, None, "s33/n"),
+    FieldSchema("s12", float, 30, 10, None),
+    FieldSchema("aopt", float, 40, 10, None),
+    FieldSchema("vp", float, 50, 10, 0.0),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("macf", int, 70, 10, 1),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD5 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+    FieldSchema("id3upd", float, 60, 10, None),
+    FieldSchema("extra", float, 70, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD6 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("ihis", float, 70, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD7 = (
+    FieldSchema("xt", float, 0, 10, None),
+    FieldSchema("xc", float, 10, 10, None),
+    FieldSchema("yt", float, 20, 10, None),
+    FieldSchema("yc", float, 30, 10, None),
+    FieldSchema("sxy", float, 40, 10, None),
+    FieldSchema("ff12", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("ncfail", float, 70, 10, 10.0),
+)
+
+_MATANISOTROPICELASTICPLASTIC_CARD8 = (
+    FieldSchema("zt", float, 0, 10, None),
+    FieldSchema("zc", float, 10, 10, None),
+    FieldSchema("syz", float, 20, 10, None),
+    FieldSchema("szx", float, 30, 10, None),
+    FieldSchema("ff23", float, 40, 10, None),
+    FieldSchema("ff31", float, 50, 10, None),
+)
+
+_MATANISOTROPICELASTICPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAnisotropicElasticPlastic(KeywordBase):
     """DYNA MAT_ANISOTROPIC_ELASTIC_PLASTIC keyword"""
@@ -34,560 +138,53 @@ class MatAnisotropicElasticPlastic(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAnisotropicElasticPlastic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c12",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c13",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c14",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c15",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c16",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c22",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c24",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c25",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c26",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c33",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c34",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c35",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c36",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c44",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c45",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c46",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c55",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c56",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c66",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r00/f",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r45/g",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r90/h",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "s11/l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s22/m",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s33/n",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3upd",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "extra",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihis",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sxy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff12",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncfail",
-                        float,
-                        70,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "zt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "szx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff23",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff31",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATANISOTROPICELASTICPLASTIC_CARD8,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAnisotropicElasticPlastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATANISOTROPICELASTICPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -911,67 +508,67 @@ class MatAnisotropicElasticPlastic(KeywordBase):
     def r00_f(self) -> typing.Optional[float]:
         """Get or set the The 0,0 term in the 6 x 6 anisotropic constitutive matrix.
         """ # nopep8
-        return self._cards[3].get_value("r00/f")
+        return self._cards[3].get_value("r00_f")
 
     @r00_f.setter
     def r00_f(self, value: float) -> None:
         """Set the r00_f property."""
-        self._cards[3].set_value("r00/f", value)
+        self._cards[3].set_value("r00_f", value)
 
     @property
     def r45_g(self) -> typing.Optional[float]:
         """Get or set the R45, Lankford parmeter determined from experiments
         """ # nopep8
-        return self._cards[3].get_value("r45/g")
+        return self._cards[3].get_value("r45_g")
 
     @r45_g.setter
     def r45_g(self, value: float) -> None:
         """Set the r45_g property."""
-        self._cards[3].set_value("r45/g", value)
+        self._cards[3].set_value("r45_g", value)
 
     @property
     def r90_h(self) -> typing.Optional[float]:
         """Get or set the R90 , Lankford parmeter determined from experiments
         """ # nopep8
-        return self._cards[3].get_value("r90/h")
+        return self._cards[3].get_value("r90_h")
 
     @r90_h.setter
     def r90_h(self, value: float) -> None:
         """Set the r90_h property."""
-        self._cards[3].set_value("r90/h", value)
+        self._cards[3].set_value("r90_h", value)
 
     @property
     def s11_l(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local x-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s11/l")
+        return self._cards[4].get_value("s11_l")
 
     @s11_l.setter
     def s11_l(self, value: float) -> None:
         """Set the s11_l property."""
-        self._cards[4].set_value("s11/l", value)
+        self._cards[4].set_value("s11_l", value)
 
     @property
     def s22_m(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local y-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s22/m")
+        return self._cards[4].get_value("s22_m")
 
     @s22_m.setter
     def s22_m(self, value: float) -> None:
         """Set the s22_m property."""
-        self._cards[4].set_value("s22/m", value)
+        self._cards[4].set_value("s22_m", value)
 
     @property
     def s33_n(self) -> typing.Optional[float]:
         """Get or set the Yield stress in local z-direction. This input is ignored if (R00,R45,R90)>0.
         """ # nopep8
-        return self._cards[4].get_value("s33/n")
+        return self._cards[4].get_value("s33_n")
 
     @s33_n.setter
     def s33_n(self, value: float) -> None:
         """Set the s33_n property."""
-        self._cards[4].set_value("s33/n", value)
+        self._cards[4].set_value("s33_n", value)
 
     @property
     def s12(self) -> typing.Optional[float]:
@@ -1372,4 +969,19 @@ class MatAnisotropicElasticPlastic(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
 

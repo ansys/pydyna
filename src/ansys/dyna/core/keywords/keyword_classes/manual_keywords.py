@@ -19,15 +19,44 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for manual keyword overrides."""
 
-from .manual.define_function import DefineFunction  # noqa: F401
-from .manual.define_table import DefineTable  # noqa: F401
-from .manual.element_solid import ElementSolid  # noqa: F401
-from .manual.element_solid_ortho import ElementSolidOrtho  # noqa: F401
-from .manual.mat_295 import Mat295, MatAnisotropicHyperelastic  # noqa: F401
-from .manual.section_tshell import SectionTShell  # noqa: F401
-from .parameter_expression_custom import (  # noqa: F401
-    ParameterExpression,
-    ParameterExpressionLocal,
-    ParameterExpressionNoecho,
-)
+# Manual keyword overrides - wrapped in try/except to support subset generation
+try:
+    from .manual.define_function import DefineFunction  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.define_table import DefineTable  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.element_solid import ElementSolid  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.element_solid_ortho import ElementSolidOrtho  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.mat_295 import Mat295, MatAnisotropicHyperelastic  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.section_tshell import SectionTShell  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .parameter_expression_custom import (  # noqa: F401
+        ParameterExpression,
+        ParameterExpressionLocal,
+        ParameterExpressionNoecho,
+    )
+except ImportError:
+    pass

@@ -23,7 +23,26 @@
 """Module providing the InitialGasMixture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALGASMIXTURE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("mmgid", int, 20, 10, None),
+    FieldSchema("temp", float, 30, 10, None),
+)
+
+_INITIALGASMIXTURE_CARD1 = (
+    FieldSchema("ro1", float, 0, 10, 0.0),
+    FieldSchema("ro2", float, 10, 10, 0.0),
+    FieldSchema("ro3", float, 20, 10, 0.0),
+    FieldSchema("ro4", float, 30, 10, 0.0),
+    FieldSchema("ro5", float, 40, 10, 0.0),
+    FieldSchema("ro6", float, 50, 10, 0.0),
+    FieldSchema("ro7", float, 60, 10, 0.0),
+    FieldSchema("ro8", float, 70, 10, 0.0),
+)
 
 class InitialGasMixture(KeywordBase):
     """DYNA INITIAL_GAS_MIXTURE keyword"""
@@ -35,109 +54,13 @@ class InitialGasMixture(KeywordBase):
         """Initialize the InitialGasMixture class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ro1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro6",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro7",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro8",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALGASMIXTURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALGASMIXTURE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID for initialization.
