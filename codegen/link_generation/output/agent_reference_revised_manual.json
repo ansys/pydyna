@@ -80184,69 +80184,139 @@
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT_ID",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT_ID",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT_TITLE",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_CONSTRAINT_TITLE",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_DRAG",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80255,15 +80325,19 @@
       "source_keyword": "ALE_COUPLING_NODAL_DRAG",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80272,15 +80346,19 @@
       "source_keyword": "ALE_COUPLING_NODAL_DRAG_ID",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80289,15 +80367,19 @@
       "source_keyword": "ALE_COUPLING_NODAL_DRAG_ID",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80306,15 +80388,19 @@
       "source_keyword": "ALE_COUPLING_NODAL_DRAG_TITLE",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80323,15 +80409,19 @@
       "source_keyword": "ALE_COUPLING_NODAL_DRAG_TITLE",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80340,69 +80430,139 @@
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY_ID",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY_ID",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY_TITLE",
       "source_field": "STRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "strsid",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_COUPLING_NODAL_PENALTY_TITLE",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "ALE_FSI_PROJECTION",
       "source_field": "LAGSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "SIDTYP",
         "value_map": {
-          "0": "PART",
-          "1": "SET_PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.95
       }
@@ -80411,15 +80571,19 @@
       "source_keyword": "ALE_FSI_PROJECTION",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "SIDTYP",
         "value_map": {
-          "0": "PART",
-          "1": "SET_PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.95
       }
@@ -80428,69 +80592,112 @@
       "source_keyword": "ALE_STRUCTURED_FSI",
       "source_field": "LSTRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "ALE_STRUCTURED_FSI",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "alestyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "CONSTRAINED_BEAM_IN_SOLID",
       "source_field": "BSIDE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "bstyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "CONSTRAINED_BEAM_IN_SOLID",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_BEAM_IN_SOLID_PENALTY",
       "source_field": "BSIDE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95,
+      "condition": {
+        "field": "bstyp",
+        "value_map": {
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
+        }
+      }
     },
     {
       "source_keyword": "CONSTRAINED_BEAM_IN_SOLID_PENALTY",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID",
       "source_field": "LSTRSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80499,15 +80706,19 @@
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID",
       "source_field": "ALESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80516,15 +80727,19 @@
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID_EDGE",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80533,15 +80748,19 @@
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID_EDGE",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80550,15 +80769,19 @@
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID_EDGES",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80567,15 +80790,19 @@
       "source_keyword": "CONSTRAINED_LAGRANGE_IN_SOLID_EDGES",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -80584,73 +80811,89 @@
       "source_keyword": "CONSTRAINED_SHELL_IN_SOLID",
       "source_field": "SHSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SHELL_IN_SOLID",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SHELL_IN_SOLID_PENALTY",
       "source_field": "SHSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SHELL_IN_SOLID_PENALTY",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOLID_IN_SOLID",
       "source_field": "SSIDB",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOLID_IN_SOLID",
       "source_field": "SSIDA",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOLID_IN_SOLID_PENALTY",
       "source_field": "SSIDB",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONSTRAINED_SOLID_IN_SOLID_PENALTY",
       "source_field": "SSIDA",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "CONTACT_AIRBAG_SINGLE_SURFACE",
@@ -85648,24 +85891,30 @@
       "source_keyword": "CONTROL_FORMING_TEMPLATE",
       "source_field": "BNDU",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_BEAM_SOLID_COUPLING",
       "source_field": "LSTRID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85674,15 +85923,19 @@
       "source_keyword": "DEFINE_BEAM_SOLID_COUPLING",
       "source_field": "MSOLIDM",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85691,15 +85944,19 @@
       "source_keyword": "DEFINE_BOX_DRAWBEAD",
       "source_field": "SID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "2": "PART",
-          "3": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85708,15 +85965,19 @@
       "source_keyword": "DEFINE_BOX_DRAWBEAD_LOCAL",
       "source_field": "SID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "2": "PART",
-          "3": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85725,15 +85986,19 @@
       "source_keyword": "DEFINE_DE_MASSFLOW_PLANE",
       "source_field": "PRTCLSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85742,15 +86007,19 @@
       "source_keyword": "DEFINE_DE_MASSFLOW_PLANE",
       "source_field": "SURFSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85759,15 +86028,19 @@
       "source_keyword": "DEFINE_DE_TO_BEAM_COUPLING",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85776,15 +86049,19 @@
       "source_keyword": "DEFINE_DE_TO_BEAM_COUPLING",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85793,15 +86070,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_COUPLING",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85810,15 +86091,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_COUPLING",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85827,15 +86112,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_COUPLING_TRANSDUCER",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "STYPE",
         "value_map": {
-          "0": "PART",
-          "1": "SET_PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.95
       }
@@ -85844,15 +86133,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_COUPLING_TRANSDUCER",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "STYPE",
         "value_map": {
-          "0": "PART",
-          "1": "SET_PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.95
       }
@@ -85861,15 +86154,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_TIED",
       "source_field": "SLAVE",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85878,15 +86175,19 @@
       "source_keyword": "DEFINE_DE_TO_SURFACE_TIED",
       "source_field": "MASTER",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "TYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85895,15 +86196,19 @@
       "source_keyword": "DEFINE_FP_TO_SURFACE_COUPLING",
       "source_field": "FP",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85912,15 +86217,19 @@
       "source_keyword": "DEFINE_FP_TO_SURFACE_COUPLING",
       "source_field": "SURF",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85929,15 +86238,19 @@
       "source_keyword": "DEFINE_SPH_DE_COUPLING",
       "source_field": "SPHID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85946,15 +86259,19 @@
       "source_keyword": "DEFINE_SPH_DE_COUPLING",
       "source_field": "DESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85963,15 +86280,19 @@
       "source_keyword": "DEFINE_SPH_DE_COUPLING_ID",
       "source_field": "SPHID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85980,15 +86301,19 @@
       "source_keyword": "DEFINE_SPH_DE_COUPLING_ID",
       "source_field": "DESID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -85997,15 +86322,19 @@
       "source_keyword": "DEFINE_SPH_MASSFLOW_PLANE",
       "source_field": "PRTCLSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -86014,15 +86343,19 @@
       "source_keyword": "DEFINE_SPH_MASSFLOW_PLANE",
       "source_field": "SURFSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -86031,51 +86364,63 @@
       "source_keyword": "DEFINE_SPH_TO_SPH_COUPLING",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_TO_SPH_COUPLING",
       "source_field": "MSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_TO_SPH_COUPLING_ID",
       "source_field": "SSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_TO_SPH_COUPLING_ID",
       "source_field": "MSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFINE_SPH_VICINITY_SENSOR",
       "source_field": "PRTCLSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -86084,15 +86429,19 @@
       "source_keyword": "DEFINE_SPH_VICINITY_SENSOR",
       "source_field": "SURFSID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "PTYPE",
         "value_map": {
-          "0": "SET_NODE",
-          "1": "SET_NODE"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -86101,42 +86450,52 @@
       "source_keyword": "DEFORMABLE_TO_RIGID",
       "source_field": "PID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "DEFORMABLE_TO_RIGID_AUTOMATIC",
       "source_field": "PID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "FREQUENCY_DOMAIN_RANDOM_VIBRATION_FATIGUE",
       "source_field": "PID",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
-      "confidence": 0.85
+      "confidence": 0.95
     },
     {
       "source_keyword": "INTERFACE_DE_HBOND",
       "source_field": "PID1",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -86145,15 +86504,19 @@
       "source_keyword": "INTERFACE_DE_HBOND",
       "source_field": "PID2",
       "referenced_keywords": [
+        "SET_PART",
         "PART",
-        "SET_PART"
+        "SET_SEGMENT",
+        "SET_NODE"
       ],
       "confidence": 0.95,
       "condition": {
         "field": "type",
         "value_map": {
-          "0": "PART",
-          "1": "SET_PART"
+          "0": "SET_PART",
+          "1": "PART",
+          "2": "SET_SEGMENT",
+          "3": "SET_NODE"
         },
         "confidence": 0.85
       }
@@ -96003,7 +96366,7 @@
       "source_keyword": "BOUNDARY_PRESCRIBED_MOTION_SET_FACE_XYZ",
       "source_field": "TYPEID",
       "referenced_keywords": [
-        "SET_FACE_XYZ"
+        "SET_IGA_FACE_XYZ"
       ],
       "confidence": 0.7
     },
@@ -96011,25 +96374,25 @@
       "source_keyword": "IGA_VOLUME_XYZ",
       "source_field": "FSID",
       "referenced_keywords": [
-        "SET_FACE_XYZ"
+        "SET_IGA_FACE_UVW"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_FACE_UVW_SET",
       "source_field": "FID",
       "referenced_keywords": [
-        "SET_FACE_XYZ"
+        "SET_IGA_FACE_UVW"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_FACE_XYZ_SET",
       "source_field": "FXYZSID",
       "referenced_keywords": [
-        "SET_FACE_XYZ"
+        "SET_IGA_FACE_XYZ"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     },
     {
       "source_keyword": "LOAD_POINT_UVW_SET",
@@ -96037,7 +96400,7 @@
       "referenced_keywords": [
         "SET_IGA_POINT_UVW"
       ],
-      "confidence": 0.7
+      "confidence": 0.95
     }
   ],
   "135": [
@@ -98869,7 +99232,7 @@
         "SET_SEGMENT"
       ],
       "condition": {
-        "field": "TYPE",
+        "field": "SETYPE",
         "value_map": {
           "NSET": "SET_NODE",
           "SEGSET": "SET_SEGMENT"
@@ -101958,7 +102321,7 @@
       "source_keyword": "ELEMENT_DISCRETE",
       "source_field": "VID",
       "referenced_keywords": [
-        "NODE"
+        "DEFINE_SD_ORIENTATION"
       ],
       "confidence": 0.9
     },
@@ -101966,7 +102329,7 @@
       "source_keyword": "ELEMENT_DISCRETE_LCO",
       "source_field": "VID",
       "referenced_keywords": [
-        "DEFINE_VECTOR"
+        "DEFINE_SD_ORIENTATION"
       ],
       "confidence": 0.9
     }
@@ -105593,7 +105956,7 @@
       "source_keyword": "IGA_SHELL",
       "source_field": "IDFNE",
       "referenced_keywords": [
-        "IGA_REFINE_SHELL"
+        "ELEMENT_SHELL_NURBS_PATCH"
       ],
       "confidence": 0.9
     },
@@ -105762,7 +106125,7 @@
       "source_keyword": "INTERFACE_SSI",
       "source_field": "GMSET",
       "referenced_keywords": [
-        "UNKNOWN"
+        "INTERFACE_SSI_AUX", "INTERFACE_SSI_AUX_EMBEDDED" 
       ],
       "confidence": 0.0
     },
@@ -105770,7 +106133,7 @@
       "source_keyword": "INTERFACE_SSI_CONSTRAINED_OFFSET",
       "source_field": "GMSET",
       "referenced_keywords": [
-        "UNKNOWN"
+        "INTERFACE_SSI_AUX", "INTERFACE_SSI_AUX_EMBEDDED" 
       ],
       "confidence": 0.0
     },
@@ -105778,7 +106141,7 @@
       "source_keyword": "INTERFACE_SSI_OFFSET",
       "source_field": "GMSET",
       "referenced_keywords": [
-        "UNKNOWN"
+        "INTERFACE_SSI_AUX", "INTERFACE_SSI_AUX_EMBEDDED" 
       ],
       "confidence": 0.0
     }
@@ -105796,9 +106159,7 @@
       "source_keyword": "LOAD_BLAST_SEGMENT_SET",
       "source_field": "BID",
       "referenced_keywords": [
-        "SET_SEGMENT",
-        "LOAD_BLAST_ENHANCED",
-        "LOAD_"
+        "LOAD_BLAST_ENHANCED"
       ],
       "confidence": 0.9
     }
@@ -109044,7 +109405,7 @@
       "source_keyword": "PART_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109052,7 +109413,7 @@
       "source_keyword": "PART_AVERAGED",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109060,95 +109421,95 @@
       "source_keyword": "PART_COMPOSITE",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE",
       "source_field": "TMID2",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_CONTACT",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_CONTACT",
       "source_field": "TMID2",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_IGA_SHELL",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_IGA_SHELL",
       "source_field": "TMID2",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_LONG",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_LONG_CONTACT",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_TSHELL",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_TSHELL",
       "source_field": "TMID2",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_COMPOSITE_TSHELL_LONG",
       "source_field": "TMID1",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     },
     {
       "source_keyword": "PART_CONTACT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109156,7 +109517,7 @@
       "source_keyword": "PART_CONTACT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109164,7 +109525,7 @@
       "source_keyword": "PART_CONTACT_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109172,7 +109533,7 @@
       "source_keyword": "PART_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109180,7 +109541,7 @@
       "source_keyword": "PART_INERTIA",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109188,7 +109549,7 @@
       "source_keyword": "PART_INERTIA_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109196,7 +109557,7 @@
       "source_keyword": "PART_INERTIA_CONTACT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109204,7 +109565,7 @@
       "source_keyword": "PART_INERTIA_CONTACT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109212,7 +109573,7 @@
       "source_keyword": "PART_INERTIA_CONTACT_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109220,7 +109581,7 @@
       "source_keyword": "PART_INERTIA_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109228,7 +109589,7 @@
       "source_keyword": "PART_INERTIA_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109236,7 +109597,7 @@
       "source_keyword": "PART_INERTIA_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109244,7 +109605,7 @@
       "source_keyword": "PART_PART",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109252,7 +109613,7 @@
       "source_keyword": "PART_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109260,7 +109621,7 @@
       "source_keyword": "PART_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109268,7 +109629,7 @@
       "source_keyword": "PART_REPOSITION",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109276,7 +109637,7 @@
       "source_keyword": "PART_REPOSITION_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109284,7 +109645,7 @@
       "source_keyword": "PART_REPOSITION_CONTACT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109292,7 +109653,7 @@
       "source_keyword": "PART_REPOSITION_CONTACT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109300,7 +109661,7 @@
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109308,7 +109669,7 @@
       "source_keyword": "PART_REPOSITION_CONTACT_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109316,7 +109677,7 @@
       "source_keyword": "PART_REPOSITION_PRINT",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109324,7 +109685,7 @@
       "source_keyword": "PART_REPOSITION_PRINT_ATTACHMENT_NODES",
       "source_field": "TMID",
       "referenced_keywords": [
-        "MAT_THERMAL_"
+        "MAT_THERMAL"
       ],
       "confidence": 0.95
     },
@@ -109332,9 +109693,9 @@
       "source_keyword": "PART_STACKED_ELEMENTS",
       "source_field": "TMIDi",
       "referenced_keywords": [
-        "MAT_"
+        "MAT_THERMAL"
       ],
-      "confidence": 0.8
+      "confidence": 0.95
     }
   ],
   "82": [
@@ -109592,7 +109953,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109600,7 +109961,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109608,7 +109969,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109616,7 +109977,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109624,7 +109985,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109632,7 +109993,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109640,7 +110001,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109648,7 +110009,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109656,7 +110017,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109664,7 +110025,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109672,7 +110033,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109680,7 +110041,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC-MATH_UPDATE",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109688,7 +110049,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109696,7 +110057,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109704,7 +110065,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109712,7 +110073,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109720,7 +110081,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109728,7 +110089,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109736,7 +110097,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109744,7 +110105,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109752,7 +110113,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109760,7 +110121,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109768,7 +110129,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109776,7 +110137,7 @@
       "source_keyword": "SENSOR_DEFINE_CALC_MATH_UPDATE",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109784,7 +110145,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109792,7 +110153,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109800,7 +110161,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109808,7 +110169,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109816,7 +110177,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109824,7 +110185,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109832,7 +110193,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109840,7 +110201,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109848,7 +110209,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109856,7 +110217,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109864,7 +110225,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109872,7 +110233,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109880,7 +110241,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109888,7 +110249,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION",
       "source_field": "SENSi+7",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109896,7 +110257,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109904,7 +110265,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109912,7 +110273,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109920,7 +110281,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109928,7 +110289,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109936,7 +110297,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENS6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109944,7 +110305,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109952,7 +110313,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+1",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109960,7 +110321,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+2",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109968,7 +110329,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+3",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109976,7 +110337,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+4",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109984,7 +110345,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+5",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -109992,7 +110353,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+6",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -110000,7 +110361,7 @@
       "source_keyword": "SENSOR_DEFINE_FUNCTION_UPDATE",
       "source_field": "SENSi+7",
       "referenced_keywords": [
-        "SENSOR_DEFINE_"
+        "SENSOR_DEFINE"
       ],
       "confidence": 0.95
     },
@@ -110008,9 +110369,9 @@
       "source_keyword": "SENSOR_SWITCH",
       "source_field": "SENSID",
       "referenced_keywords": [
-        "SET_"
+        "SENSOR_DEFINE"
       ],
-      "confidence": 0.6
+      "confidence": 0.95
     }
   ],
   "111": [
