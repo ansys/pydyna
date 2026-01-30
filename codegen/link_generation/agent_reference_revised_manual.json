@@ -31406,7 +31406,7 @@
     },
     {
       "source_keyword": "MAT_189",
-      "source_field": "TGE",
+      "source_field": "THE",
       "referenced_keywords": [
         "DEFINE_CURVE"
       ],
@@ -33366,7 +33366,7 @@
     },
     {
       "source_keyword": "MAT_ANISOTROPIC_THERMOELASTIC",
-      "source_field": "TGE",
+      "source_field": "THE",
       "referenced_keywords": [
         "DEFINE_CURVE"
       ],
