@@ -1,0 +1,86 @@
+ansys.dyna.core.pre.dynasolution
+================================
+
+.. py:module:: ansys.dyna.core.pre.dynasolution
+
+.. autoapi-nested-parse::
+
+   Module for providing the top object that sets up a DYNA solution.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynasolution.CHUNK_SIZE
+   ansys.dyna.core.pre.dynasolution.MAX_MESSAGE_LENGTH
+   ansys.dyna.core.pre.dynasolution.SERVER_PRE_VERSION
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynasolution/DynaSolution
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynasolution.DynaSolution
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynasolution.init_log
+
+
+Module Contents
+---------------
+
+.. py:data:: CHUNK_SIZE
+   :value: 1048576
+
+
+.. py:data:: MAX_MESSAGE_LENGTH
+   :value: 1073741824
+
+
+.. py:data:: SERVER_PRE_VERSION
+   :value: 'v0.4.6'
+
+
+.. py:function:: init_log(log_file)
+
+   
+   Initialize a log file.
+
+
+   :Parameters:
+
+       **log_file** : :class:`python:str`
+           Name of the log file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

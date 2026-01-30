@@ -1,0 +1,366 @@
+ansys.dyna.core.lib.card.Card
+=============================
+
+.. py:class:: ansys.dyna.core.lib.card.Card(fields: List[ansys.dyna.core.lib.field.Field], active_func: Callable = None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   A Card represents a single line of data in a keyword.
+
+   This implementation separates schema (shared) from values (per-instance)
+   for memory efficiency and faster loading of keywords with many cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: from_field_schemas(field_schemas: Tuple[ansys.dyna.core.lib.field_schema.FieldSchema, Ellipsis], values: Optional[List[Any]] = None, active_func=None, format=format_type.default) -> Card
+      :classmethod:
+
+
+      
+      Create a Card directly from FieldSchema tuples (no Field objects).
+
+      This is the fast path for creating Cards when the schema is already
+      defined at the class level. It avoids creating Field objects entirely.
+
+      :Parameters:
+
+          **field_schemas** : :obj:`Tuple`\[:obj:`FieldSchema`, ...]
+              Tuple of FieldSchema (should be defined at class level for reuse).
+
+          **values** : :obj:`List`\[:obj:`Any`], :obj:`optional`
+              Initial values for each field. If None, uses defaults from schema.
+
+          **active_func** : :func:`python:callable`, :obj:`optional`
+              A function returning bool to determine if card is active.
+
+          **format** : :obj:`format_type`, :obj:`optional`
+              The format type (default, standard, or long).
+
+
+
+      :Returns:
+
+          :obj:`Card`
+              A new Card instance.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: from_field_schemas_with_defaults(field_schemas: Tuple[ansys.dyna.core.lib.field_schema.FieldSchema, Ellipsis], active_func=None, format=format_type.default, **kwargs) -> Card
+      :classmethod:
+
+
+      
+      Create a Card from FieldSchema tuples with kwargs defaults (lspp_defaults).
+
+      This is like from_field_schemas but applies lspp_defaults logic:
+      - If use_lspp_defaults() is True: look up value in kwargs by field name,
+        falling back to the schema default.
+      - If use_lspp_defaults() is False: all fields are None.
+
+      :Parameters:
+
+          **field_schemas** : :obj:`Tuple`\[:obj:`FieldSchema`, ...]
+              Tuple of FieldSchema (should be defined at class level for reuse).
+
+          **active_func** : :func:`python:callable`, :obj:`optional`
+              A function returning bool to determine if card is active.
+
+          **format** : :obj:`format_type`, :obj:`optional`
+              The format type (default, standard, or long).
+
+          **\*\*kwargs**
+              Field values by name (lspp_defaults style).
+
+
+
+      :Returns:
+
+          :obj:`Card`
+              A new Card instance.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+
+      
+      Field width format (default, standard, or long).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> bool
+
+      
+      Reads the card from the given buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, output_format: Optional[str] = None, retain_parameters: bool = False, parameter_set: Optional[ansys.dyna.core.lib.parameters.ParameterSet] = None, uri_prefix: Optional[str] = None) -> Union[str, None]
+
+      
+      Write the card to a buffer or return as string.
+
+
+      :Parameters:
+
+          **format** : :obj:`format_type`, :obj:`optional`
+              Field width format (default, standard, or long).
+
+          **buf** : :obj:`TextIO`, :obj:`optional`
+              Buffer to write to. If None, returns the output as a string.
+
+          **comment** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to include the comment line with field names. Default is True.
+
+          **output_format** : :class:`python:str`, :obj:`optional`
+              Card serialization format: card_format.fixed or card_format.csv.
+              If None (default), uses fixed unless the card was originally read as csv.
+
+          **retain_parameters** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              If True, write original parameter references instead of values.
+
+          **parameter_set** : :obj:`ParameterSet`, :obj:`optional`
+              The parameter set to use for looking up stored refs.
+
+          **uri_prefix** : :class:`python:str`, :obj:`optional`
+              The URI prefix for this card (e.g., "12345/card0") for ref lookup.
+
+
+
+      :Returns:
+
+          :class:`python:str` or :data:`python:None`
+              The card as a string if buf is None, otherwise None.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Get whether the card is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_value(prop: str) -> Any
+
+      
+      Get the value of a field by name.
+
+
+      :Parameters:
+
+          **prop** : :class:`python:str`
+              The field name.
+
+
+
+      :Returns:
+
+          :obj:`Any`
+              The field value.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_value(prop: str, value: Any) -> None
+
+      
+      Set the value of a field by name.
+
+
+      :Parameters:
+
+          **prop** : :class:`python:str`
+              The field name.
+
+          **value** : :obj:`Any`
+              The value to set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: has_nondefault_values() -> bool
+
+      
+      Check if any field in this card has been explicitly set.
+
+      This method returns True if any field has been set via set_value(),
+      which is typically called by property setters on keyword classes.
+      It is used for cascading card activation, where optional cards
+      become active when any of their fields are explicitly set.
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if at least one field has been explicitly set, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
