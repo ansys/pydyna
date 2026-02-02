@@ -231,7 +231,8 @@ class Deck(ValidationMixin):
 
         try:
             with open(path, "rb") as f:
-                return chardet.detect(f.read())["encoding"]
+                sample = f.read(10000)
+                return chardet.detect(sample)["encoding"]
         except Exception as e:
             raise Exception("Failed to detect encoding of deck in `expand`: " + str(e))
 
