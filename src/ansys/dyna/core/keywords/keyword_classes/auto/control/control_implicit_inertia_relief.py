@@ -23,7 +23,25 @@
 """Module providing the ControlImplicitInertiaRelief class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITINERTIARELIEF_CARD0 = (
+    FieldSchema("irflag", int, 0, 10, 0),
+    FieldSchema("thresh", float, 10, 10, 0.001),
+    FieldSchema("ircnt", int, 20, 10, 0),
+)
+
+_CONTROLIMPLICITINERTIARELIEF_CARD1 = (
+    FieldSchema("mode1", int, 0, 10, None),
+    FieldSchema("mode2", int, 10, 10, None),
+    FieldSchema("mode3", int, 20, 10, None),
+    FieldSchema("mode1", int, 30, 10, None),
+    FieldSchema("mode1", int, 40, 10, None),
+    FieldSchema("mode1", int, 50, 10, None),
+    FieldSchema("mode1", int, 60, 10, None),
+    FieldSchema("mode1", int, 70, 10, None),
+)
 
 class ControlImplicitInertiaRelief(KeywordBase):
     """DYNA CONTROL_IMPLICIT_INERTIA_RELIEF keyword"""
@@ -35,96 +53,13 @@ class ControlImplicitInertiaRelief(KeywordBase):
         """Initialize the ControlImplicitInertiaRelief class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "irflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thresh",
-                        float,
-                        10,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ircnt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mode1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode1",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode1",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode1",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITINERTIARELIEF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITINERTIARELIEF_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def irflag(self) -> int:
         """Get or set the Inertia relief flag

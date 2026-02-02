@@ -23,142 +23,53 @@
 """Module providing the ElementSeatbeltSlipring class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTSEATBELTSLIPRING_CARD0 = (
+    FieldSchema("sbsrid", int, 0, 10, 0),
+    FieldSchema("sbid1", int, 10, 10, 0),
+    FieldSchema("sbid2", int, 20, 10, 0),
+    FieldSchema("fc", float, 30, 10, 0.0),
+    FieldSchema("sbrnid", int, 40, 10, 0),
+    FieldSchema("ltime", float, 50, 10, 1e+20),
+    FieldSchema("fcs", float, 60, 10, 0.0),
+    FieldSchema("onid", int, 70, 10, None),
+)
+
+_ELEMENTSEATBELTSLIPRING_CARD1 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("funcid_", int, 10, 10, None, "funcid "),
+    FieldSchema("direct", int, 20, 10, None),
+    FieldSchema("dc", float, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("lcnffd", int, 50, 10, 0),
+    FieldSchema("lcnffs", int, 60, 10, 0),
+)
 
 class ElementSeatbeltSlipring(KeywordBase):
     """DYNA ELEMENT_SEATBELT_SLIPRING keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_SLIPRING"
+    _link_fields = {
+        "sbrnid": LinkType.NODE,
+        "onid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltSlipring class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbsrid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbid2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbrnid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ltime",
-                        float,
-                        50,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcs",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "onid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "funcid ",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "direct",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcnffd",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcnffs",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSLIPRING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTSLIPRING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sbsrid(self) -> int:
         """Get or set the Slipring ID. A unique number has to be used.
@@ -262,12 +173,12 @@ class ElementSeatbeltSlipring(KeywordBase):
     def funcid_(self) -> typing.Optional[int]:
         """Get or set the Function ID to determine friction coefficient
         """ # nopep8
-        return self._cards[1].get_value("funcid ")
+        return self._cards[1].get_value("funcid_")
 
     @funcid_.setter
     def funcid_(self, value: int) -> None:
         """Set the funcid_ property."""
-        self._cards[1].set_value("funcid ", value)
+        self._cards[1].set_value("funcid_", value)
 
     @property
     def direct(self) -> typing.Optional[int]:
@@ -320,4 +231,14 @@ class ElementSeatbeltSlipring(KeywordBase):
     def lcnffs(self, value: int) -> None:
         """Set the lcnffs property."""
         self._cards[1].set_value("lcnffs", value)
+
+    @property
+    def sbrnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given sbrnid."""
+        return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
+
+    @property
+    def onid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given onid."""
+        return self._get_link_by_attr("NODE", "nid", self.onid, "parts")
 

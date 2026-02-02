@@ -23,7 +23,16 @@
 """Module providing the ControlAdaptiveCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLADAPTIVECURVE_CARD0 = (
+    FieldSchema("idset", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 1),
+    FieldSchema("n", int, 20, 10, None),
+    FieldSchema("smin", float, 30, 10, None),
+    FieldSchema("itriop", int, 40, 10, 0),
+)
 
 class ControlAdaptiveCurve(KeywordBase):
     """DYNA CONTROL_ADAPTIVE_CURVE keyword"""
@@ -35,49 +44,10 @@ class ControlAdaptiveCurve(KeywordBase):
         """Initialize the ControlAdaptiveCurve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itriop",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLADAPTIVECURVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idset(self) -> typing.Optional[int]:
         """Get or set the Set id

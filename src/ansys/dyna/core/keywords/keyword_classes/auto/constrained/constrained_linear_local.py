@@ -23,63 +23,44 @@
 """Module providing the ConstrainedLinearLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDLINEARLOCAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_CONSTRAINEDLINEARLOCAL_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, None),
+    FieldSchema("cid", int, 20, 10, None),
+    FieldSchema("coef", float, 30, 10, None),
+)
 
 class ConstrainedLinearLocal(KeywordBase):
     """DYNA CONSTRAINED_LINEAR_LOCAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "LINEAR_LOCAL"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedLinearLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coef",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDLINEARLOCAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for linear constraint definition
@@ -140,4 +121,24 @@ class ConstrainedLinearLocal(KeywordBase):
     def coef(self, value: float) -> None:
         """Set the coef property."""
         self._cards[1].set_value("coef", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

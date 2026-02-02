@@ -23,8 +23,68 @@
 """Module providing the MatHoneycomb class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATHONEYCOMB_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("vf", float, 50, 10, None),
+    FieldSchema("mu", float, 60, 10, 0.05),
+    FieldSchema("bulk", float, 70, 10, 0.0),
+)
+
+_MATHONEYCOMB_CARD1 = (
+    FieldSchema("lca", int, 0, 10, None),
+    FieldSchema("lcb", int, 10, 10, 0),
+    FieldSchema("lcc", int, 20, 10, 0),
+    FieldSchema("lcs", int, 30, 10, 0),
+    FieldSchema("lcab", int, 40, 10, 0),
+    FieldSchema("lcbc", int, 50, 10, 0),
+    FieldSchema("lcca", int, 60, 10, 0),
+    FieldSchema("lcsr", int, 70, 10, 0),
+)
+
+_MATHONEYCOMB_CARD2 = (
+    FieldSchema("eaau", float, 0, 10, None),
+    FieldSchema("ebbu", float, 10, 10, None),
+    FieldSchema("eccu", float, 20, 10, None),
+    FieldSchema("gabu", float, 30, 10, None),
+    FieldSchema("gbcu", float, 40, 10, None),
+    FieldSchema("gcau", float, 50, 10, None),
+    FieldSchema("aopt", float, 60, 10, None),
+    FieldSchema("macf", int, 70, 10, 1),
+)
+
+_MATHONEYCOMB_CARD3 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATHONEYCOMB_CARD4 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+    FieldSchema("tsef", float, 30, 10, None),
+    FieldSchema("ssef", float, 40, 10, None),
+    FieldSchema("v1", float, 50, 10, None),
+    FieldSchema("v2", float, 60, 10, None),
+    FieldSchema("v3", float, 70, 10, None),
+)
+
+_MATHONEYCOMB_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatHoneycomb(KeywordBase):
     """DYNA MAT_HONEYCOMB keyword"""
@@ -34,327 +94,48 @@ class MatHoneycomb(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lca": LinkType.DEFINE_CURVE,
+        "lcb": LinkType.DEFINE_CURVE,
+        "lcc": LinkType.DEFINE_CURVE,
+        "lcs": LinkType.DEFINE_CURVE,
+        "lcab": LinkType.DEFINE_CURVE,
+        "lcbc": LinkType.DEFINE_CURVE,
+        "lcca": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatHoneycomb class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        60,
-                        10,
-                        5.0E-02,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lca",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcb",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcs",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcab",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcca",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eaau",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ebbu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eccu",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gabu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbcu",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcau",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsef",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssef",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATHONEYCOMB_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHONEYCOMB_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHONEYCOMB_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHONEYCOMB_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHONEYCOMB_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatHoneycomb.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHONEYCOMB_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -806,4 +587,124 @@ class MatHoneycomb(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lca_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lca:
+                return kwd
+        return None
+
+    @lca_link.setter
+    def lca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lca."""
+        self.lca = value.lcid
+
+    @property
+    def lcb_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcb:
+                return kwd
+        return None
+
+    @lcb_link.setter
+    def lcb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcb."""
+        self.lcb = value.lcid
+
+    @property
+    def lcc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcc:
+                return kwd
+        return None
+
+    @lcc_link.setter
+    def lcc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcc."""
+        self.lcc = value.lcid
+
+    @property
+    def lcs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcs:
+                return kwd
+        return None
+
+    @lcs_link.setter
+    def lcs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcs."""
+        self.lcs = value.lcid
+
+    @property
+    def lcab_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcab."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcab:
+                return kwd
+        return None
+
+    @lcab_link.setter
+    def lcab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcab."""
+        self.lcab = value.lcid
+
+    @property
+    def lcbc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcbc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcbc:
+                return kwd
+        return None
+
+    @lcbc_link.setter
+    def lcbc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcbc."""
+        self.lcbc = value.lcid
+
+    @property
+    def lcca_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcca:
+                return kwd
+        return None
+
+    @lcca_link.setter
+    def lcca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcca."""
+        self.lcca = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
 

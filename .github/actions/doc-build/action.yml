@@ -47,6 +47,11 @@ runs:
       with:
         persist-credentials: true
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # v7.1.6
+      with:
+        enable-cache: true
+
     - name: Set up Python
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
@@ -54,16 +59,33 @@ runs:
         cache: 'pip'
         cache-dependency-path: 'pyproject.toml'
 
+    - name: set up virtual environment
+      run: |
+        python -m venv .venv
+      shell: bash
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
       shell: bash
 
+    - name: Cache Sphinx build artifacts
+      if: ${{ inputs.build-autokeywords-api != 'True' }}
+      uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb #v5.0.1
+      with:
+        path: |
+          doc/_build
+          doc/source/examples/
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}
+        restore-keys: |
+          sphinx-${{ runner.os }}-${{ inputs.python-version }}-
+
     - name: Install python dependencies
       run: |
-        python -m pip install .[doc]
-        python -m pip install docker
+        source .venv/bin/activate
+        uv pip install .[doc]
+        uv pip install docker
       shell: bash
 
     - name: Login to GitHub container registry
@@ -86,12 +108,14 @@ runs:
 
     - name: LS-DYNA Keyword server activation
       run: |
+        source .venv/bin/activate
         docker pull ghcr.io/ansys/ls-pre:latest
         docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
       shell: bash
 
     - name: Pull PyDyna-run image
       run: |
+        source .venv/bin/activate
         docker pull ghcr.io/ansys/pydyna-run:latest
       shell: bash
 
@@ -100,10 +124,11 @@ runs:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
-        BUILD_AUTOKEYWORS_API: ${{ inputs.build-autokeywords-api }}
+        BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
-        timeout 7200 xvfb-run make -C doc html
+        source .venv/bin/activate
+        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
 
     - name: Upload html documentation
@@ -116,7 +141,8 @@ runs:
     - name: "Build the pdf documentation"
       shell: bash
       run: |
-        xvfb-run make -C doc pdf
+        source .venv/bin/activate
+        xvfb-run uv run --no-sync -- make -C doc pdf
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
@@ -139,6 +165,7 @@ runs:
     - name: Extract the server logs
       if: always()
       run: |
+        source .venv/bin/activate
         docker logs kw_server > server_output.txt
       shell: bash
 

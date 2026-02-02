@@ -23,227 +23,86 @@
 """Module providing the EmBatteryRandles class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_EMBATTERYRANDLES_CARD0 = (
+    FieldSchema("rdlid", int, 0, 10, None),
+    FieldSchema("rdltype", int, 10, 10, None),
+    FieldSchema("rdlarea", int, 20, 10, 0),
+    FieldSchema("ccppart", int, 30, 10, None),
+    FieldSchema("ccnpart", int, 40, 10, None),
+    FieldSchema("seppart", int, 50, 10, None),
+    FieldSchema("poselpart", int, 60, 10, None),
+    FieldSchema("negelpart", int, 70, 10, None),
+)
+
+_EMBATTERYRANDLES_CARD1 = (
+    FieldSchema("q", float, 0, 10, None),
+    FieldSchema("cq", float, 10, 10, None),
+    FieldSchema("socinit", float, 20, 10, None),
+    FieldSchema("soctou", float, 30, 10, None),
+)
+
+_EMBATTERYRANDLES_CARD2 = (
+    FieldSchema("r0cha", float, 0, 10, None),
+    FieldSchema("r0dis", float, 10, 10, None),
+    FieldSchema("r10cha", float, 20, 10, None),
+    FieldSchema("r10dis", float, 30, 10, None),
+    FieldSchema("c10cha", float, 40, 10, None),
+    FieldSchema("c10dis", float, 50, 10, None),
+)
+
+_EMBATTERYRANDLES_CARD3 = (
+    FieldSchema("temp", float, 0, 10, None),
+    FieldSchema("frtherm", int, 10, 10, 0),
+    FieldSchema("r0toth", int, 20, 10, 0),
+    FieldSchema("dudt", float, 30, 10, None),
+    FieldSchema("tempu", int, 40, 10, 0),
+)
+
+_EMBATTERYRANDLES_CARD4 = (
+    FieldSchema("usesocs", int, 0, 10, 0),
+    FieldSchema("tausocs", float, 10, 10, None),
+    FieldSchema("sicslcid", int, 20, 10, None),
+)
 
 class EmBatteryRandles(KeywordBase):
     """DYNA EM_BATTERY_RANDLES keyword"""
 
     keyword = "EM"
     subkeyword = "BATTERY_RANDLES"
+    _link_fields = {
+        "sicslcid": LinkType.DEFINE_CURVE,
+        "ccppart": LinkType.PART,
+        "ccnpart": LinkType.PART,
+        "seppart": LinkType.PART,
+        "poselpart": LinkType.PART,
+        "negelpart": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmBatteryRandles class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rdlid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdltype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdlarea",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ccppart",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ccnpart",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "seppart",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "poselpart",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "negelpart",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "q",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cq",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "socinit",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soctou",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r0cha",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0dis",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r10cha",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r10dis",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10cha",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c10dis",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "temp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frtherm",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0toth",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dudt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempu",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "usesocs",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tausocs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sicslcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMBATTERYRANDLES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMBATTERYRANDLES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMBATTERYRANDLES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMBATTERYRANDLES_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMBATTERYRANDLES_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def rdlid(self) -> typing.Optional[int]:
         """Get or set the Id of the Randle Cell
@@ -562,4 +421,44 @@ class EmBatteryRandles(KeywordBase):
     def sicslcid(self, value: int) -> None:
         """Set the sicslcid property."""
         self._cards[4].set_value("sicslcid", value)
+
+    @property
+    def sicslcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for sicslcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sicslcid:
+                return kwd
+        return None
+
+    @sicslcid_link.setter
+    def sicslcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sicslcid."""
+        self.sicslcid = value.lcid
+
+    @property
+    def ccppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccppart."""
+        return self._get_link_by_attr("PART", "pid", self.ccppart, "parts")
+
+    @property
+    def ccnpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ccnpart."""
+        return self._get_link_by_attr("PART", "pid", self.ccnpart, "parts")
+
+    @property
+    def seppart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given seppart."""
+        return self._get_link_by_attr("PART", "pid", self.seppart, "parts")
+
+    @property
+    def poselpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given poselpart."""
+        return self._get_link_by_attr("PART", "pid", self.poselpart, "parts")
+
+    @property
+    def negelpart_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given negelpart."""
+        return self._get_link_by_attr("PART", "pid", self.negelpart, "parts")
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,6 +22,13 @@
 
 # -*- coding: utf-8 -*-
 import os
+import warnings
+
+warnings.warn(
+    "The 'ansys.dyna.core.pre' module is deprecated and will be removed starting from version v0.11.0. ",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 from ansys.dyna.core.pre.launcher import launch_dynapre
 from ansys.dyna.core.pre.model import Model

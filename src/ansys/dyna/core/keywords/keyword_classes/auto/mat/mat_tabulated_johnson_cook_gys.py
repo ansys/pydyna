@@ -23,8 +23,45 @@
 """Module providing the MatTabulatedJohnsonCookGys class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATTABULATEDJOHNSONCOOKGYS_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("cp", float, 40, 10, None),
+    FieldSchema("tr", float, 50, 10, 0.0),
+    FieldSchema("beta", float, 60, 10, 1.0),
+    FieldSchema("numint", float, 70, 10, 1.0),
+)
+
+_MATTABULATEDJOHNSONCOOKGYS_CARD1 = (
+    FieldSchema("lck1", int, 0, 10, 0),
+    FieldSchema("lckt", int, 10, 10, 0),
+    FieldSchema("lcf", int, 20, 10, 0),
+    FieldSchema("lcg", int, 30, 10, 0),
+    FieldSchema("lch", int, 40, 10, 0),
+    FieldSchema("lci", int, 50, 10, 0),
+)
+
+_MATTABULATEDJOHNSONCOOKGYS_CARD2 = (
+    FieldSchema("lccr", int, 0, 10, None),
+    FieldSchema("lcct", int, 10, 10, None),
+    FieldSchema("lcsr", int, 20, 10, None),
+    FieldSchema("lcst", int, 30, 10, None),
+    FieldSchema("iflag", int, 40, 10, 0),
+    FieldSchema("sfiepm", float, 50, 10, 1.0),
+    FieldSchema("niter", int, 60, 10, 100),
+)
+
+_MATTABULATEDJOHNSONCOOKGYS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatTabulatedJohnsonCookGys(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK_GYS keyword"""
@@ -34,202 +71,40 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcg": LinkType.DEFINE_CURVE,
+        "lch": LinkType.DEFINE_CURVE,
+        "lci": LinkType.DEFINE_CURVE,
+        "lck1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lckt": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcf": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatTabulatedJohnsonCookGys class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lck1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lckt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lci",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lccr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcct",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcst",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfiepm",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niter",
-                        int,
-                        60,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKGYS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKGYS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKGYS_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCookGys.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTABULATEDJOHNSONCOOKGYS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -483,4 +358,121 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcg_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcg."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcg:
+                return kwd
+        return None
+
+    @lcg_link.setter
+    def lcg_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg."""
+        self.lcg = value.lcid
+
+    @property
+    def lch_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lch."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch:
+                return kwd
+        return None
+
+    @lch_link.setter
+    def lch_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch."""
+        self.lch = value.lcid
+
+    @property
+    def lci_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lci."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lci:
+                return kwd
+        return None
+
+    @lci_link.setter
+    def lci_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci."""
+        self.lci = value.lcid
+
+    @property
+    def lck1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lck1."""
+        if self.deck is None:
+            return None
+        field_value = self.lck1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lck1_link.setter
+    def lck1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lck1."""
+        if hasattr(value, "lcid"):
+            self.lck1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lck1 = value.tbid
+
+    @property
+    def lckt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lckt."""
+        if self.deck is None:
+            return None
+        field_value = self.lckt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lckt_link.setter
+    def lckt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lckt."""
+        if hasattr(value, "lcid"):
+            self.lckt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lckt = value.tbid
+
+    @property
+    def lcf_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcf."""
+        if self.deck is None:
+            return None
+        field_value = self.lcf
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcf_link.setter
+    def lcf_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcf."""
+        if hasattr(value, "lcid"):
+            self.lcf = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcf = value.tbid
 

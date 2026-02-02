@@ -23,230 +23,80 @@
 """Module providing the BoundaryThermalWeldTrajectory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYTHERMALWELDTRAJECTORY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ptyp", int, 10, 10, 1),
+    FieldSchema("nsid1", int, 20, 10, 0),
+    FieldSchema("spd1", float, 30, 10, None),
+    FieldSchema("nsid2", int, 40, 10, None),
+    FieldSchema("spd2", float, 50, 10, None),
+    FieldSchema("ncyc", int, 60, 10, 1),
+    FieldSchema("relvel", int, 70, 10, 0),
+)
+
+_BOUNDARYTHERMALWELDTRAJECTORY_CARD1 = (
+    FieldSchema("iform", int, 0, 10, 1),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("q", float, 20, 10, None),
+    FieldSchema("lcrot", int, 30, 10, None),
+    FieldSchema("lcmov", int, 40, 10, None),
+    FieldSchema("lclat", int, 50, 10, None),
+    FieldSchema("disc", float, 60, 10, None),
+    FieldSchema("enfor", int, 70, 10, None),
+)
+
+_BOUNDARYTHERMALWELDTRAJECTORY_CARD2 = (
+    FieldSchema("p1", float, 0, 10, None),
+    FieldSchema("p2", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("p4", float, 30, 10, None),
+    FieldSchema("p5", float, 40, 10, None),
+    FieldSchema("p6", float, 50, 10, None),
+    FieldSchema("p7", float, 60, 10, None),
+    FieldSchema("p8", float, 70, 10, None),
+)
+
+_BOUNDARYTHERMALWELDTRAJECTORY_CARD3 = (
+    FieldSchema("tx", float, 0, 10, None),
+    FieldSchema("ty", float, 10, 10, None),
+    FieldSchema("tz", float, 20, 10, None),
+)
 
 class BoundaryThermalWeldTrajectory(KeywordBase):
     """DYNA BOUNDARY_THERMAL_WELD_TRAJECTORY keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "THERMAL_WELD_TRAJECTORY"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "lcrot": LinkType.DEFINE_CURVE,
+        "lcmov": LinkType.DEFINE_CURVE,
+        "lclat": LinkType.DEFINE_CURVE,
+        "nsid1": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryThermalWeldTrajectory class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid1",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spd1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spd2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyc",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relvel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iform",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrot",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmov",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lclat",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "disc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enfor",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ty",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELDTRAJECTORY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELDTRAJECTORY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELDTRAJECTORY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELDTRAJECTORY_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or Part Set ID of solids or shells to which weld source is applied.
@@ -568,4 +418,74 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     def tz(self, value: float) -> None:
         """Set the tz property."""
         self._cards[3].set_value("tz", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def lcrot_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcrot."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcrot:
+                return kwd
+        return None
+
+    @lcrot_link.setter
+    def lcrot_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcrot."""
+        self.lcrot = value.lcid
+
+    @property
+    def lcmov_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcmov."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcmov:
+                return kwd
+        return None
+
+    @lcmov_link.setter
+    def lcmov_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcmov."""
+        self.lcmov = value.lcid
+
+    @property
+    def lclat_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lclat."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lclat:
+                return kwd
+        return None
+
+    @lclat_link.setter
+    def lclat_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lclat."""
+        self.lclat = value.lcid
+
+    @property
+    def nsid1_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid1."""
+        return self._get_set_link("NODE", self.nsid1)
+
+    @nsid1_link.setter
+    def nsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid1."""
+        self.nsid1 = value.sid
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,27 +20,42 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Manual MAT_295 subclass with before_read support.
+
+This subclass of the auto-generated Mat295 adds a `before_read` method to handle
+the self-referential conditional pattern where card 6 (ANISO) has an active_func
+that depends on `atype`, but `atype` is a field ON that card.
+
+The solution is to peek ahead in the buffer before reading to detect "ANISO" and
+"ACTIVE" title lines and pre-set the corresponding fields so the conditionals
+evaluate correctly during the normal read process.
+
+The auto-generated class handles everything else including:
+- FiberFamily CardSet with discriminator support for ftype-dependent cards
+- All field properties and card definitions
+- Option card handling
+"""
+
 import typing
 
-from ansys.dyna.core.keywords.keyword_classes.auto.mat.mat_295 import Mat295 as Parent
+from ansys.dyna.core.keywords.keyword_classes.auto.mat.mat_295 import Mat295 as Mat295Auto
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
 
-class Mat295(Parent):
-    """DYNA MAT_295 keyword"""
+class Mat295(Mat295Auto):
+    """MAT_295 keyword with before_read support for self-referential conditionals.
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self._ftype = None
+    This subclass adds peek-ahead logic to detect ANISO and ACTIVE title cards
+    before reading, allowing the conditional cards to be properly activated.
+    """
 
     def before_read(self, buf: typing.TextIO) -> None:
-        """Abstract method to peek into the buffer before reading.
+        """Peek into the buffer before reading to activate conditional cards.
 
-        Normally, the number of rows is calculated by the card, and is based on whether
-        the card is active or not. In most cases, a card will know whether it is active
-        or not before it is read, because the `active_func` is based on information loaded
-        into previous cards. In some cases, `active_func` is based on information from the
-        current card, which might default to inactive, and so the card will never be read.
+        The ANISO and ACTIVE cards need to be activated before reading because
+        their conditional functions depend on atype and actype values which
+        are read from those very cards. This method peeks ahead to find these
+        title lines and pre-sets the fields.
         """
         pos = buf.tell()
         while True:
@@ -48,23 +63,13 @@ class Mat295(Parent):
             if end:
                 break
             if line.startswith("ANISO"):
-                # set atype to 1 so that the ANSIO card is active
-                self.atype = 1
-                # set ftype to 1 so that the second row of the anisotropic_settings card is read
-                self.ftype = 1
+                self._cards[6].set_value("atype", 1)
             elif line.startswith("ACTIVE"):
-                # set actype to 1 so that the ACTIVE card is active
-                self.actype = 1
+                self._cards[9].set_value("actype", 1)
         buf.seek(pos)
-
-    @property
-    def ftype(self) -> typing.Optional[int]:
-        return self._ftype
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        self._ftype = value
 
 
 class MatAnisotropicHyperelastic(Mat295):
+    """Alias for MAT_ANISOTROPIC_HYPERELASTIC keyword."""
+
     subkeyword = "ANISOTROPIC_HYPERELASTIC"

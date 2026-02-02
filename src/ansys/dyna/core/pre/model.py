@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -144,7 +144,6 @@ class Model:
 
     def get_rigidwall(self, id):
         """Get rigidwall data."""
-
         data = self._rigidwall(id - 1)
         return data
         data = self.stub.GetRigidWall(GetRigidWallRequest(id=id))

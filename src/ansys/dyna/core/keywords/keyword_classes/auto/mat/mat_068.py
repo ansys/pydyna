@@ -23,8 +23,70 @@
 """Module providing the Mat068 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_MAT068_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("tkr", float, 20, 10, None),
+    FieldSchema("tks", float, 30, 10, None),
+    FieldSchema("tkt", float, 40, 10, None),
+    FieldSchema("rkr", float, 50, 10, None),
+    FieldSchema("rks", float, 60, 10, None),
+    FieldSchema("rkt", float, 70, 10, None),
+)
+
+_MAT068_CARD1 = (
+    FieldSchema("tdr", float, 0, 10, None),
+    FieldSchema("tds", float, 10, 10, None),
+    FieldSchema("tdt", float, 20, 10, None),
+    FieldSchema("rdr", float, 30, 10, None),
+    FieldSchema("rds", float, 40, 10, None),
+    FieldSchema("rdt", float, 50, 10, None),
+)
+
+_MAT068_CARD2 = (
+    FieldSchema("lcpdr", int, 0, 10, 0),
+    FieldSchema("lcpds", int, 10, 10, 0),
+    FieldSchema("lcpdt", int, 20, 10, 0),
+    FieldSchema("lcpmr", int, 30, 10, 0),
+    FieldSchema("lcpms", int, 40, 10, 0),
+    FieldSchema("lcpmt", int, 50, 10, 0),
+)
+
+_MAT068_CARD3 = (
+    FieldSchema("ffailr", float, 0, 10, None),
+    FieldSchema("ffails", float, 10, 10, None),
+    FieldSchema("ffailt", float, 20, 10, None),
+    FieldSchema("mfailr", float, 30, 10, None),
+    FieldSchema("mfails", float, 40, 10, None),
+    FieldSchema("mfailt", float, 50, 10, None),
+)
+
+_MAT068_CARD4 = (
+    FieldSchema("ufailr", float, 0, 10, None),
+    FieldSchema("ufails", float, 10, 10, None),
+    FieldSchema("ufailt", float, 20, 10, None),
+    FieldSchema("tfailr", float, 30, 10, None),
+    FieldSchema("tfails", float, 40, 10, None),
+    FieldSchema("tfailt", float, 50, 10, None),
+)
+
+_MAT068_CARD5 = (
+    FieldSchema("for_", float, 0, 10, None, "for"),
+    FieldSchema("fos", float, 10, 10, None),
+    FieldSchema("fot", float, 20, 10, None),
+    FieldSchema("mor", float, 30, 10, None),
+    FieldSchema("mos", float, 40, 10, None),
+    FieldSchema("mot", float, 50, 10, None),
+)
+
+_MAT068_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat068(KeywordBase):
     """DYNA MAT_068 keyword"""
@@ -34,327 +96,49 @@ class Mat068(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcpdr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpds": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpdt": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpmr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpms": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcpmt": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat068 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tks",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rks",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkt",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tds",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rds",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpdr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpds",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpdt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpms",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ffailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ufailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "for",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fos",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fot",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mor",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mos",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mot",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT068_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat068.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT068_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -726,12 +510,12 @@ class Mat068(KeywordBase):
     def for_(self) -> typing.Optional[float]:
         """Get or set the Preload force in r-direction
         """ # nopep8
-        return self._cards[5].get_value("for")
+        return self._cards[5].get_value("for_")
 
     @for_.setter
     def for_(self, value: float) -> None:
         """Set the for_ property."""
-        self._cards[5].set_value("for", value)
+        self._cards[5].set_value("for_", value)
 
     @property
     def fos(self) -> typing.Optional[float]:
@@ -801,4 +585,148 @@ class Mat068(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcpdr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdr."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpdr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpdr_link.setter
+    def lcpdr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpdr."""
+        if hasattr(value, "lcid"):
+            self.lcpdr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpdr = value.tbid
+
+    @property
+    def lcpds_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpds."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpds
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpds_link.setter
+    def lcpds_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpds."""
+        if hasattr(value, "lcid"):
+            self.lcpds = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpds = value.tbid
+
+    @property
+    def lcpdt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdt."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpdt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpdt_link.setter
+    def lcpdt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpdt."""
+        if hasattr(value, "lcid"):
+            self.lcpdt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpdt = value.tbid
+
+    @property
+    def lcpmr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmr."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpmr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpmr_link.setter
+    def lcpmr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpmr."""
+        if hasattr(value, "lcid"):
+            self.lcpmr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpmr = value.tbid
+
+    @property
+    def lcpms_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpms."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpms
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpms_link.setter
+    def lcpms_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpms."""
+        if hasattr(value, "lcid"):
+            self.lcpms = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpms = value.tbid
+
+    @property
+    def lcpmt_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmt."""
+        if self.deck is None:
+            return None
+        field_value = self.lcpmt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcpmt_link.setter
+    def lcpmt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcpmt."""
+        if hasattr(value, "lcid"):
+            self.lcpmt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcpmt = value.tbid
 

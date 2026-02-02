@@ -23,80 +23,38 @@
 """Module providing the DampingFrequencyRangeDeform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DAMPINGFREQUENCYRANGEDEFORM_CARD0 = (
+    FieldSchema("cdamp", float, 0, 10, 0.0),
+    FieldSchema("flow", float, 10, 10, 0.0),
+    FieldSchema("fhigh", float, 20, 10, 0.0),
+    FieldSchema("psid", int, 30, 10, 0),
+    FieldSchema("blank", int, 40, 10, 0),
+    FieldSchema("pidrel", int, 50, 10, 0),
+    FieldSchema("iflg", int, 60, 10, 0),
+)
 
 class DampingFrequencyRangeDeform(KeywordBase):
     """DYNA DAMPING_FREQUENCY_RANGE_DEFORM keyword"""
 
     keyword = "DAMPING"
     subkeyword = "FREQUENCY_RANGE_DEFORM"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+        "pidrel": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DampingFrequencyRangeDeform class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cdamp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flow",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fhigh",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blank",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidrel",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflg",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGFREQUENCYRANGEDEFORM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cdamp(self) -> float:
         """Get or set the Damping in fraction of critical.  Accurate application of this damping depends on the time step being small compared to the period of interest.
@@ -177,4 +135,19 @@ class DampingFrequencyRangeDeform(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""iflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflg", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def pidrel_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidrel."""
+        return self._get_link_by_attr("PART", "pid", self.pidrel, "parts")
 

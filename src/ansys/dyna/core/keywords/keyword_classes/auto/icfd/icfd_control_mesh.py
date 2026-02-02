@@ -23,7 +23,20 @@
 """Module providing the IcfdControlMesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLMESH_CARD0 = (
+    FieldSchema("mgsf", float, 0, 10, 1.41),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("mstrat", int, 20, 10, 0),
+    FieldSchema("_2dstruc", int, 30, 10, 0, "2dstruc"),
+    FieldSchema("nrmsh", int, 40, 10, 0),
+)
+
+_ICFDCONTROLMESH_CARD1 = (
+    FieldSchema("aver", int, 0, 10, 14),
+)
 
 class IcfdControlMesh(KeywordBase):
     """DYNA ICFD_CONTROL_MESH keyword"""
@@ -35,63 +48,13 @@ class IcfdControlMesh(KeywordBase):
         """Initialize the IcfdControlMesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mgsf",
-                        float,
-                        0,
-                        10,
-                        1.41,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstrat",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "2dstruc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrmsh",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aver",
-                        int,
-                        0,
-                        10,
-                        14,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLMESH_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mgsf(self) -> float:
         """Get or set the Mesh Growth Scale Factor : Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh based on the mesh surface element sizes defined in *MESH_SURFACE_ELEMENT. Values between 1 and 2 are allowed. Values closer to 1 will result in a finer volume mesh (1 means the volume mesh is not allowed to be coarser than the element size from the closest surface meshes) and val# ues closer to 2 will result in a coarser volume mesh (2 means the volume can use elements as much as twice as coarse as those from the closest surface mesh).
@@ -123,14 +86,14 @@ class IcfdControlMesh(KeywordBase):
         """Get or set the Flag to decide between a unstructured mesh generation strategy in 2D or a structured mesh strategy: EQ.0: Structured mesh.
         EQ.1: Unstructured mesh.
         """ # nopep8
-        return self._cards[0].get_value("2dstruc")
+        return self._cards[0].get_value("_2dstruc")
 
     @_2dstruc.setter
     def _2dstruc(self, value: int) -> None:
         """Set the _2dstruc property."""
         if value not in [0, 1, None]:
             raise Exception("""_2dstruc must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("2dstruc", value)
+        self._cards[0].set_value("_2dstruc", value)
 
     @property
     def nrmsh(self) -> int:

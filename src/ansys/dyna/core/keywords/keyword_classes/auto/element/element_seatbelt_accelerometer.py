@@ -23,79 +23,40 @@
 """Module providing the ElementSeatbeltAccelerometer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTSEATBELTACCELEROMETER_CARD0 = (
+    FieldSchema("sbacid", int, 0, 10, 0),
+    FieldSchema("nid1", int, 10, 10, 0),
+    FieldSchema("nid2", int, 20, 10, 0),
+    FieldSchema("nid3", int, 30, 10, 0),
+    FieldSchema("igrav", int, 40, 10, 0),
+    FieldSchema("intopt", int, 50, 10, 0),
+    FieldSchema("mass", float, 60, 10, None),
+)
 
 class ElementSeatbeltAccelerometer(KeywordBase):
     """DYNA ELEMENT_SEATBELT_ACCELEROMETER keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_ACCELEROMETER"
+    _link_fields = {
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltAccelerometer class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbacid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igrav",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intopt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTACCELEROMETER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sbacid(self) -> int:
         """Get or set the Accelerometer ID. A unique number has to be used.
@@ -186,4 +147,19 @@ class ElementSeatbeltAccelerometer(KeywordBase):
     def mass(self, value: float) -> None:
         """Set the mass property."""
         self._cards[0].set_value("mass", value)
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 

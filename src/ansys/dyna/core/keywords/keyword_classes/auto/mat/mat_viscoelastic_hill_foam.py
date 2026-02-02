@@ -23,8 +23,59 @@
 """Module providing the MatViscoelasticHillFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATVISCOELASTICHILLFOAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, 0.0),
+    FieldSchema("nu", float, 40, 10, 0.0),
+    FieldSchema("lcid", int, 50, 10, 0),
+    FieldSchema("fittype", int, 60, 10, 1),
+    FieldSchema("lcsr", int, 70, 10, 0),
+)
+
+_MATVISCOELASTICHILLFOAM_CARD1 = (
+    FieldSchema("lcve", int, 0, 10, 0),
+    FieldSchema("nt", float, 10, 10, 6.0),
+    FieldSchema("gstart", float, 20, 10, 1.0),
+)
+
+_MATVISCOELASTICHILLFOAM_CARD2 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+    FieldSchema("c4", float, 30, 10, None),
+    FieldSchema("c5", float, 40, 10, None),
+    FieldSchema("c6", float, 50, 10, None),
+    FieldSchema("c7", float, 60, 10, None),
+    FieldSchema("c8", float, 70, 10, None),
+)
+
+_MATVISCOELASTICHILLFOAM_CARD3 = (
+    FieldSchema("b1", float, 0, 10, None),
+    FieldSchema("b2", float, 10, 10, None),
+    FieldSchema("b3", float, 20, 10, None),
+    FieldSchema("b4", float, 30, 10, None),
+    FieldSchema("b5", float, 40, 10, None),
+    FieldSchema("b6", float, 50, 10, None),
+    FieldSchema("b7", float, 60, 10, None),
+    FieldSchema("b8", float, 70, 10, None),
+)
+
+_MATVISCOELASTICHILLFOAM_CARD4 = (
+    FieldSchema("gi", float, 0, 10, None),
+    FieldSchema("betai", float, 10, 10, None),
+)
+
+_MATVISCOELASTICHILLFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatViscoelasticHillFoam(KeywordBase):
     """DYNA MAT_VISCOELASTIC_HILL_FOAM keyword"""
@@ -34,262 +85,42 @@ class MatViscoelasticHillFoam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatViscoelasticHillFoam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nu",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fittype",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcve",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt",
-                        float,
-                        10,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gstart",
-                        float,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "b1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATVISCOELASTICHILLFOAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVISCOELASTICHILLFOAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVISCOELASTICHILLFOAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVISCOELASTICHILLFOAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVISCOELASTICHILLFOAM_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatViscoelasticHillFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOELASTICHILLFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.
@@ -628,4 +459,34 @@ class MatViscoelasticHillFoam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
 

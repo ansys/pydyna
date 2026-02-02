@@ -23,74 +23,43 @@
 """Module providing the CeseBoundarySegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CESEBOUNDARYSEGMENT_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2_", int, 10, 10, None, "n2 "),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("dof_", int, 40, 10, None, "dof "),
+    FieldSchema("lcid", int, 50, 10, None),
+    FieldSchema("sf", float, 60, 10, 1.0),
+)
 
 class CeseBoundarySegment(KeywordBase):
     """DYNA CESE_BOUNDARY_SEGMENT keyword"""
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_SEGMENT"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2_": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundarySegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2 ",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof ",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSEGMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
@@ -106,12 +75,12 @@ class CeseBoundarySegment(KeywordBase):
     def n2_(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
         """ # nopep8
-        return self._cards[0].get_value("n2 ")
+        return self._cards[0].get_value("n2_")
 
     @n2_.setter
     def n2_(self, value: int) -> None:
         """Set the n2_ property."""
-        self._cards[0].set_value("n2 ", value)
+        self._cards[0].set_value("n2_", value)
 
     @property
     def n3(self) -> typing.Optional[int]:
@@ -139,12 +108,12 @@ class CeseBoundarySegment(KeywordBase):
     def dof_(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.
         """ # nopep8
-        return self._cards[0].get_value("dof ")
+        return self._cards[0].get_value("dof_")
 
     @dof_.setter
     def dof_(self, value: int) -> None:
         """Set the dof_ property."""
-        self._cards[0].set_value("dof ", value)
+        self._cards[0].set_value("dof_", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
@@ -167,4 +136,39 @@ class CeseBoundarySegment(KeywordBase):
     def sf(self, value: float) -> None:
         """Set the sf property."""
         self._cards[0].set_value("sf", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2__link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2_."""
+        return self._get_link_by_attr("NODE", "nid", self.n2_, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

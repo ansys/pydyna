@@ -23,45 +23,33 @@
 """Module providing the ControlFormingTrimming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLFORMINGTRIMMING_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("ityp", int, 20, 10, None),
+)
 
 class ControlFormingTrimming(KeywordBase):
     """DYNA CONTROL_FORMING_TRIMMING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_TRIMMING"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingTrimming class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ityp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTRIMMING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for trimming, see *SET_PART.
@@ -85,4 +73,14 @@ class ControlFormingTrimming(KeywordBase):
     def ityp(self, value: int) -> None:
         """Set the ityp property."""
         self._cards[0].set_value("ityp", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

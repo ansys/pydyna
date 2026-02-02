@@ -23,8 +23,64 @@
 """Module providing the MatAddInelasticity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_MATADDINELASTICITY_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("nielinks", int, 10, 10, 1),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("g", float, 30, 10, None),
+    FieldSchema("k", float, 40, 10, None),
+    FieldSchema("aopt", float, 50, 10, None),
+    FieldSchema("macf", float, 60, 10, 1.0),
+    FieldSchema("beta", float, 70, 10, None),
+)
+
+_MATADDINELASTICITY_CARD1 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATADDINELASTICITY_CARD2 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+)
+
+_MATADDINELASTICITY_CARD3 = (
+    FieldSchema("nielaws", int, 0, 10, 1),
+    FieldSchema("weight", float, 10, 10, None),
+)
+
+_MATADDINELASTICITY_CARD4 = (
+    FieldSchema("law", int, 0, 10, 3),
+    FieldSchema("model", int, 10, 10, None),
+)
+
+_MATADDINELASTICITY_CARD5 = (
+    FieldSchema("p1", float, 0, 10, None),
+    FieldSchema("p2", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
+)
+
+_MATADDINELASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatAddInelasticity(KeywordBase):
     """DYNA MAT_ADD_INELASTICITY keyword"""
@@ -34,283 +90,44 @@ class MatAddInelasticity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatAddInelasticity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nielinks",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        float,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nielaws",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "weight",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "law",
-                        int,
-                        0,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "model",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDINELASTICITY_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddInelasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDINELASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which this erosion definition applies. A unique number or label must be specified.
@@ -630,4 +447,19 @@ class MatAddInelasticity(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

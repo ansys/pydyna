@@ -23,73 +23,40 @@
 """Module providing the Em2Daxi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EM2DAXI_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("starssid", int, 40, 10, None),
+    FieldSchema("endssid", int, 50, 10, None),
+    FieldSchema("numsec", int, 60, 10, None),
+)
 
 class Em2Daxi(KeywordBase):
     """DYNA EM_2DAXI keyword"""
 
     keyword = "EM"
     subkeyword = "2DAXI"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+        "starssid": LinkType.SET_SEGMENT,
+        "endssid": LinkType.SET_SEGMENT,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Em2Daxi class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "starssid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endssid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numsec",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EM2DAXI_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the part to be solved using 2D axisymmetry.
@@ -144,4 +111,39 @@ class Em2Daxi(KeywordBase):
     def numsec(self, value: int) -> None:
         """Set the numsec property."""
         self._cards[0].set_value("numsec", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
+
+    @property
+    def starssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for starssid."""
+        return self._get_set_link("SEGMENT", self.starssid)
+
+    @starssid_link.setter
+    def starssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for starssid."""
+        self.starssid = value.sid
+
+    @property
+    def endssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for endssid."""
+        return self._get_set_link("SEGMENT", self.endssid)
+
+    @endssid_link.setter
+    def endssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for endssid."""
+        self.endssid = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

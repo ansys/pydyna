@@ -23,74 +23,37 @@
 """Module providing the InitialStressDepth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALSTRESSDEPTH_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ro_g", float, 10, 10, None),
+    FieldSchema("zdatum", float, 20, 10, None),
+    FieldSchema("kfact", float, 30, 10, 0.0),
+    FieldSchema("lc", int, 40, 10, None),
+    FieldSchema("lch", int, 50, 10, None),
+    FieldSchema("lck0", int, 60, 10, None),
+)
 
 class InitialStressDepth(KeywordBase):
     """DYNA INITIAL_STRESS_DEPTH keyword"""
 
     keyword = "INITIAL"
     subkeyword = "STRESS_DEPTH"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressDepth class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro_g",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zdatum",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kfact",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lck0",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSDEPTH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID.
@@ -167,4 +130,9 @@ class InitialStressDepth(KeywordBase):
     def lck0(self, value: int) -> None:
         """Set the lck0 property."""
         self._cards[0].set_value("lck0", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -23,84 +23,39 @@
 """Module providing the EmContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMCONTACT_CARD0 = (
+    FieldSchema("contid", int, 0, 10, None),
+    FieldSchema("conttype", int, 10, 10, 1),
+    FieldSchema("psidm", int, 20, 10, None),
+    FieldSchema("psids", int, 30, 10, None),
+    FieldSchema("eps1", float, 40, 10, 0.3),
+    FieldSchema("eps2", float, 50, 10, 0.3),
+    FieldSchema("eps3", float, 60, 10, 0.3),
+    FieldSchema("d0", float, 70, 10, None),
+)
 
 class EmContact(KeywordBase):
     """DYNA EM_CONTACT keyword"""
 
     keyword = "EM"
     subkeyword = "CONTACT"
+    _link_fields = {
+        "psidm": LinkType.SET_PART,
+        "psids": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmContact class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "contid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conttype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidm",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psids",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1",
-                        float,
-                        40,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2",
-                        float,
-                        50,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3",
-                        float,
-                        60,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTACT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def contid(self) -> typing.Optional[int]:
         """Get or set the Electromagnetic contact ID.
@@ -189,4 +144,24 @@ class EmContact(KeywordBase):
     def d0(self, value: float) -> None:
         """Set the d0 property."""
         self._cards[0].set_value("d0", value)
+
+    @property
+    def psidm_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidm."""
+        return self._get_set_link("PART", self.psidm)
+
+    @psidm_link.setter
+    def psidm_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidm."""
+        self.psidm = value.sid
+
+    @property
+    def psids_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psids."""
+        return self._get_set_link("PART", self.psids)
+
+    @psids_link.setter
+    def psids_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psids."""
+        self.psids = value.sid
 

@@ -23,8 +23,29 @@
 """Module providing the DefineHexSpotweldAssembly class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINEHEXSPOTWELDASSEMBLY_CARD0 = (
+    FieldSchema("id_sw", int, 0, 10, None),
+)
+
+_DEFINEHEXSPOTWELDASSEMBLY_CARD1 = (
+    FieldSchema("eid1", int, 0, 10, None),
+    FieldSchema("eid2", int, 10, 10, None),
+    FieldSchema("eid3", int, 20, 10, None),
+    FieldSchema("eid4", int, 30, 10, None),
+    FieldSchema("eid5", int, 40, 10, None),
+    FieldSchema("eid6", int, 50, 10, None),
+    FieldSchema("eid7", int, 60, 10, None),
+    FieldSchema("eid8", int, 70, 10, None),
+)
+
+_DEFINEHEXSPOTWELDASSEMBLY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineHexSpotweldAssembly(KeywordBase):
     """DYNA DEFINE_HEX_SPOTWELD_ASSEMBLY keyword"""
@@ -34,102 +55,39 @@ class DefineHexSpotweldAssembly(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "eid1": LinkType.ELEMENT_SOLID,
+        "eid2": LinkType.ELEMENT_SOLID,
+        "eid3": LinkType.ELEMENT_SOLID,
+        "eid4": LinkType.ELEMENT_SOLID,
+        "eid5": LinkType.ELEMENT_SOLID,
+        "eid6": LinkType.ELEMENT_SOLID,
+        "eid7": LinkType.ELEMENT_SOLID,
+        "eid8": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineHexSpotweldAssembly class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id_sw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEHEXSPOTWELDASSEMBLY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEHEXSPOTWELDASSEMBLY_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineHexSpotweldAssembly.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEHEXSPOTWELDASSEMBLY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id_sw(self) -> typing.Optional[int]:
         """Get or set the spot weld ID. A uniquie ID number must be used.
@@ -242,4 +200,44 @@ class DefineHexSpotweldAssembly(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def eid1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
+
+    @property
+    def eid2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
+
+    @property
+    def eid3_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid3, "parts")
+
+    @property
+    def eid4_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid4, "parts")
+
+    @property
+    def eid5_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid5, "parts")
+
+    @property
+    def eid6_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid6, "parts")
+
+    @property
+    def eid7_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid7, "parts")
+
+    @property
+    def eid8_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid8."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid8, "parts")
 

@@ -23,88 +23,41 @@
 """Module providing the ElementBeamPulley class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTBEAMPULLEY_CARD0 = (
+    FieldSchema("puid", int, 0, 10, 0),
+    FieldSchema("bid1", int, 10, 10, 0),
+    FieldSchema("bid2", int, 20, 10, 0),
+    FieldSchema("pnid", int, 30, 10, 0),
+    FieldSchema("fd", float, 40, 10, 0.0),
+    FieldSchema("fs", float, 50, 10, 0.0),
+    FieldSchema("lmin", float, 60, 10, 0.0),
+    FieldSchema("dc", float, 70, 10, 0.0),
+)
 
 class ElementBeamPulley(KeywordBase):
     """DYNA ELEMENT_BEAM_PULLEY keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_PULLEY"
+    _link_fields = {
+        "pnid": LinkType.NODE,
+        "bid1": LinkType.ELEMENT_BEAM,
+        "bid2": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamPulley class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "puid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bid2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pnid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMPULLEY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def puid(self) -> int:
         """Get or set the Pulley ID. A unique number has to be used.
@@ -192,4 +145,19 @@ class ElementBeamPulley(KeywordBase):
     def dc(self, value: float) -> None:
         """Set the dc property."""
         self._cards[0].set_value("dc", value)
+
+    @property
+    def pnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given pnid."""
+        return self._get_link_by_attr("NODE", "nid", self.pnid, "parts")
+
+    @property
+    def bid1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bid1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bid1, "parts")
+
+    @property
+    def bid2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bid2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bid2, "parts")
 

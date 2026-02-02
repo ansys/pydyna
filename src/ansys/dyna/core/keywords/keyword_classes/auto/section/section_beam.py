@@ -23,8 +23,78 @@
 """Module providing the SectionBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_SECTIONBEAM_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("qr_irid", int, 30, 10, 2, "qr/irid"),
+    FieldSchema("cst", int, 40, 10, 0),
+    FieldSchema("scoor", float, 50, 10, 0.0),
+    FieldSchema("nsm", float, 60, 10, 0.0),
+    FieldSchema("naupd", int, 70, 10, 0),
+)
+
+_SECTIONBEAM_CARD1 = (
+    FieldSchema("ts1", float, 0, 10, None),
+    FieldSchema("ts2", float, 10, 10, None),
+    FieldSchema("tt1", float, 20, 10, None),
+    FieldSchema("tt2", float, 30, 10, None),
+    FieldSchema("nsloc", float, 40, 10, None),
+    FieldSchema("ntloc", float, 50, 10, None),
+)
+
+_SECTIONBEAM_CARD2 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("iss", float, 10, 10, None),
+    FieldSchema("itt", float, 20, 10, None),
+    FieldSchema("j", float, 30, 10, None),
+    FieldSchema("sa", float, 40, 10, None),
+    FieldSchema("ist", float, 50, 10, None),
+)
+
+_SECTIONBEAM_CARD3 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("rampt", float, 10, 10, None),
+    FieldSchema("stress", float, 20, 10, None),
+)
+
+_SECTIONBEAM_CARD4 = (
+    FieldSchema("ts1", float, 0, 10, None),
+    FieldSchema("ts2", float, 10, 10, None),
+    FieldSchema("tt1", float, 20, 10, None),
+    FieldSchema("tt2", float, 30, 10, None),
+)
+
+_SECTIONBEAM_CARD5 = (
+    FieldSchema("vol", float, 0, 10, None),
+    FieldSchema("iner", float, 10, 10, None),
+    FieldSchema("cid", int, 20, 10, None),
+    FieldSchema("ca", float, 30, 10, None),
+    FieldSchema("offset", float, 40, 10, None),
+    FieldSchema("rrcon", float, 50, 10, 0.0),
+    FieldSchema("srcon", float, 60, 10, 0.0),
+    FieldSchema("trcon", float, 70, 10, 0.0),
+)
+
+_SECTIONBEAM_CARD6 = (
+    FieldSchema("ts1", float, 0, 10, None),
+    FieldSchema("ts2", float, 10, 10, None),
+    FieldSchema("tt1", float, 20, 10, None),
+    FieldSchema("tt2", float, 30, 10, None),
+    FieldSchema("print", float, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("itoff", float, 60, 10, None),
+)
+
+_SECTIONBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionBeam(KeywordBase):
     """DYNA SECTION_BEAM keyword"""
@@ -34,369 +104,53 @@ class SectionBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SectionBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr/irid",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cst",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scoor",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsm",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "naupd",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ts1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsloc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntloc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform in [1,11],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iss",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "j",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sa",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ist",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform in [2,12,13],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rampt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stress",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform == 3,
-            ),
-            Card(
-                [
-                    Field(
-                        "ts1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform in [4,5],
-            ),
-            Card(
-                [
-                    Field(
-                        "vol",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iner",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ca",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rrcon",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srcon",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trcon",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform == 6,
-            ),
-            Card(
-                [
-                    Field(
-                        "ts1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tt2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "print",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itoff",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform == 9,
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD1,
+                active_func=lambda: self.elform in [1,11],
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD2,
+                active_func=lambda: self.elform in [2,12,13],
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD3,
+                active_func=lambda: self.elform == 3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD4,
+                active_func=lambda: self.elform in [4,5],
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD5,
+                active_func=lambda: self.elform == 6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAM_CARD6,
+                active_func=lambda: self.elform == 9,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -456,12 +210,12 @@ class SectionBeam(KeywordBase):
         EQ.5: 4x4 Gauss quadrature,
         EQ.-n: where |n| is the number of the user defined rule. IRID integration rule n is defined using *INTEGRATION_BEAM card.
         """ # nopep8
-        return self._cards[0].get_value("qr/irid")
+        return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
         """Set the qr_irid property."""
-        self._cards[0].set_value("qr/irid", value)
+        self._cards[0].set_value("qr_irid", value)
 
     @property
     def cst(self) -> int:
@@ -919,4 +673,19 @@ class SectionBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

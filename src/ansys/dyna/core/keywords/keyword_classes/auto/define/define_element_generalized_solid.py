@@ -23,8 +23,31 @@
 """Module providing the DefineElementGeneralizedSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEELEMENTGENERALIZEDSOLID_CARD0 = (
+    FieldSchema("elform", int, 0, 10, None),
+    FieldSchema("nip", int, 10, 10, None),
+    FieldSchema("nmnp", int, 20, 10, None),
+    FieldSchema("imass", int, 30, 10, 0),
+)
+
+_DEFINEELEMENTGENERALIZEDSOLID_CARD1 = (
+    FieldSchema("wi", float, 0, 20, None),
+)
+
+_DEFINEELEMENTGENERALIZEDSOLID_CARD2 = (
+    FieldSchema("nki", float, 0, 20, None),
+    FieldSchema("dnkidr", float, 20, 20, None),
+    FieldSchema("dnkids", float, 40, 20, None),
+    FieldSchema("dnkidt", float, 60, 20, None),
+)
+
+_DEFINEELEMENTGENERALIZEDSOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineElementGeneralizedSolid(KeywordBase):
     """DYNA DEFINE_ELEMENT_GENERALIZED_SOLID keyword"""
@@ -40,101 +63,26 @@ class DefineElementGeneralizedSolid(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmnp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imass",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wi",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nki",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnkidr",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnkids",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnkidt",
-                        float,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSOLID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSOLID_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineElementGeneralizedSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTGENERALIZEDSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def elform(self) -> typing.Optional[int]:
         """Get or set the Element Formulation ID referenced via *SECTION_SOLID to connect

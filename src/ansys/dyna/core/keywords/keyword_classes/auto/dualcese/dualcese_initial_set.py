@@ -23,7 +23,22 @@
 """Module providing the DualceseInitialSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEINITIALSET_CARD0 = (
+    FieldSchema("esid", int, 0, 10, None),
+    FieldSchema("ifunc", int, 10, 10, None),
+)
+
+_DUALCESEINITIALSET_CARD1 = (
+    FieldSchema("u", float, 0, 10, 0.0),
+    FieldSchema("v", float, 10, 10, 0.0),
+    FieldSchema("w", float, 20, 10, 0.0),
+    FieldSchema("rho", float, 30, 10, 1.225),
+    FieldSchema("p", float, 40, 10, 0.0),
+    FieldSchema("t", float, 50, 10, 0.0),
+)
 
 class DualceseInitialSet(KeywordBase):
     """DYNA DUALCESE_INITIAL_SET keyword"""
@@ -35,78 +50,13 @@ class DualceseInitialSet(KeywordBase):
         """Initialize the DualceseInitialSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifunc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "u",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho",
-                        float,
-                        30,
-                        10,
-                        1.225,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Element set ID (see *DUALCESE_ELEMENTSET)

@@ -23,555 +23,176 @@
 """Module providing the EmEpCellmodelTentusscher class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMEPCELLMODELTENTUSSCHER_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD1 = (
+    FieldSchema("gas_constant", float, 0, 10, None, "r"),
+    FieldSchema("t", float, 10, 10, None),
+    FieldSchema("faraday_constant", float, 20, 10, None, "f"),
+    FieldSchema("cm", float, 30, 10, None),
+    FieldSchema("vc", float, 40, 10, None),
+    FieldSchema("vsr", float, 50, 10, None),
+    FieldSchema("vss", float, 60, 10, None),
+    FieldSchema("pkna", float, 70, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD2 = (
+    FieldSchema("ko", float, 0, 10, None),
+    FieldSchema("nao", float, 10, 10, None),
+    FieldSchema("cao", float, 20, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD3 = (
+    FieldSchema("gk1", float, 0, 10, None),
+    FieldSchema("gkr", float, 10, 10, None),
+    FieldSchema("gks", float, 20, 10, None),
+    FieldSchema("gna", float, 30, 10, None),
+    FieldSchema("gbna", float, 40, 10, None),
+    FieldSchema("gcal", float, 50, 10, None),
+    FieldSchema("gbca", float, 60, 10, None),
+    FieldSchema("gto", float, 70, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD4 = (
+    FieldSchema("gpca", float, 0, 10, None),
+    FieldSchema("gpk", float, 10, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD5 = (
+    FieldSchema("pnak", float, 0, 10, None),
+    FieldSchema("km", float, 10, 10, None),
+    FieldSchema("kmna", float, 20, 10, None),
+    FieldSchema("knaca", float, 30, 10, None),
+    FieldSchema("ksat", float, 40, 10, None),
+    FieldSchema("alpha", float, 50, 10, None),
+    FieldSchema("gamma", float, 60, 10, None),
+    FieldSchema("kmca", float, 70, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD6 = (
+    FieldSchema("kmnai", float, 0, 10, None),
+    FieldSchema("kpca", float, 10, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD7 = (
+    FieldSchema("k1", float, 0, 10, None),
+    FieldSchema("k2", float, 10, 10, None),
+    FieldSchema("k3", float, 20, 10, None),
+    FieldSchema("k4", float, 30, 10, None),
+    FieldSchema("ec", float, 40, 10, None),
+    FieldSchema("maxsr", float, 50, 10, None),
+    FieldSchema("minsr", float, 60, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD8 = (
+    FieldSchema("vrel", float, 0, 10, None),
+    FieldSchema("vleak", float, 10, 10, None),
+    FieldSchema("vxfer", float, 20, 10, None),
+    FieldSchema("vmaxup", float, 30, 10, None),
+    FieldSchema("kup", float, 40, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD9 = (
+    FieldSchema("bufc", float, 0, 10, None),
+    FieldSchema("kbufc", float, 10, 10, None),
+    FieldSchema("bufsr", float, 20, 10, None),
+    FieldSchema("kbufsf", float, 30, 10, None),
+    FieldSchema("bufss", float, 40, 10, None),
+    FieldSchema("kbufss", float, 50, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD10 = (
+    FieldSchema("v", float, 0, 10, None),
+    FieldSchema("ki", float, 10, 10, None),
+    FieldSchema("nai", float, 20, 10, None),
+    FieldSchema("cai", float, 30, 10, None),
+    FieldSchema("cass", float, 40, 10, None),
+    FieldSchema("casr", float, 50, 10, None),
+    FieldSchema("rpri", float, 60, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD11 = (
+    FieldSchema("xr1", float, 0, 10, None),
+    FieldSchema("xr2", float, 10, 10, None),
+    FieldSchema("xs", float, 20, 10, None),
+    FieldSchema("m", float, 30, 10, None),
+    FieldSchema("h", float, 40, 10, None),
+    FieldSchema("j", float, 50, 10, None),
+    FieldSchema("d", float, 60, 10, None),
+    FieldSchema("f", float, 70, 10, None),
+)
+
+_EMEPCELLMODELTENTUSSCHER_CARD12 = (
+    FieldSchema("f2", float, 0, 10, None),
+    FieldSchema("fcass", float, 10, 10, None),
+    FieldSchema("s", float, 20, 10, None),
+    FieldSchema("r", float, 30, 10, None),
+)
 
 class EmEpCellmodelTentusscher(KeywordBase):
-    """DYNA EM_EP_CELLMODEL_TENTUSSCHER keyword"""
+    """DYNA EM_EP_CELLMODEL_TENTUSSCHER keyword
+
+    Fields with renamed properties:
+        R (Card 2) -> gas_constant
+        F (Card 2) -> faraday_constant
+    """
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_TENTUSSCHER"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelTentusscher class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vss",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pkna",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ko",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nao",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cao",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gk1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gkr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gks",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gna",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbna",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcal",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbca",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gto",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gpca",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gpk",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pnak",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "km",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kmna",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "knaca",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ksat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kmca",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kmnai",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kpca",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxsr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "minsr",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vrel",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vleak",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxfer",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vmaxup",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kup",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bufc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbufc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bufsr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbufsf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bufss",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbufss",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ki",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nai",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cai",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cass",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "casr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpri",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xr1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xr2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "j",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "f2",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcass",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD10,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD11,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELTENTUSSCHER_CARD12,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -587,13 +208,15 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def gas_constant(self) -> typing.Optional[float]:
         """Get or set the Gas constant.
+
+        Note: Location in manual: card:2, field: R
         """ # nopep8
-        return self._cards[1].get_value("r")
+        return self._cards[1].get_value("gas_constant")
 
     @gas_constant.setter
     def gas_constant(self, value: float) -> None:
         """Set the gas_constant property."""
-        self._cards[1].set_value("r", value)
+        self._cards[1].set_value("gas_constant", value)
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -609,13 +232,15 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def faraday_constant(self) -> typing.Optional[float]:
         """Get or set the Faraday constant .
+
+        Note: Location in manual: card:2, field: F
         """ # nopep8
-        return self._cards[1].get_value("f")
+        return self._cards[1].get_value("faraday_constant")
 
     @faraday_constant.setter
     def faraday_constant(self, value: float) -> None:
         """Set the faraday_constant property."""
-        self._cards[1].set_value("f", value)
+        self._cards[1].set_value("faraday_constant", value)
 
     @property
     def cm(self) -> typing.Optional[float]:
@@ -1280,6 +905,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def f(self) -> typing.Optional[float]:
         """Get or set the Initial value of f in component L_type_Ca_current_f_gate.
+
+        Note: For the Faraday constant F (Card 2), use ``faraday_constant``.
         """ # nopep8
         return self._cards[11].get_value("f")
 
@@ -1324,6 +951,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def r(self) -> typing.Optional[float]:
         """Get or set the Initial value of r in component transient_outward_current_r_gate.
+
+        Note: For the gas constant R (Card 2), use ``gas_constant``.
         """ # nopep8
         return self._cards[12].get_value("r")
 
@@ -1331,4 +960,19 @@ class EmEpCellmodelTentusscher(KeywordBase):
     def r(self, value: float) -> None:
         """Set the r property."""
         self._cards[12].set_value("r", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

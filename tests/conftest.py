@@ -162,8 +162,6 @@ def pytest_collection_modifyitems(config, items):
         return  # command line has a -k or -m, let pytest handle it
     skip_run = pytest.mark.skip(reason="run not selected for pytest run (`pytest -m run`).  Skip by default")
     [item.add_marker(skip_run) for item in items if "run" in item.keywords]
-    skip_viz = pytest.mark.skip(reason="viz not selected for pytest run (`pytest -m viz`).  Skip by default")
-    [item.add_marker(skip_viz) for item in items if "viz" in item.keywords]
 
 
 class DynaRunner:

@@ -23,140 +23,51 @@
 """Module providing the InterfaceSpringback class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INTERFACESPRINGBACK_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("nshv", int, 10, 10, None),
+    FieldSchema("ftype", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ftensr", int, 40, 10, 0),
+    FieldSchema("nthhsv", int, 50, 10, None),
+    FieldSchema("rflag", int, 60, 10, None),
+    FieldSchema("intstrn", int, 70, 10, None),
+)
+
+_INTERFACESPRINGBACK_CARD1 = (
+    FieldSchema("optc", str, 0, 10, "OPTCARD"),
+    FieldSchema("sldo", int, 10, 10, 0),
+    FieldSchema("ncyc", int, 20, 10, None),
+    FieldSchema("fsplit", int, 30, 10, 0),
+    FieldSchema("ndflag", int, 40, 10, 0),
+    FieldSchema("cflag", int, 50, 10, 0),
+    FieldSchema("hflag", int, 60, 10, None),
+)
 
 class InterfaceSpringback(KeywordBase):
     """DYNA INTERFACE_SPRINGBACK keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "SPRINGBACK"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceSpringback class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nshv",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftensr",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthhsv",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rflag",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intstrn",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "optc",
-                        str,
-                        0,
-                        10,
-                        "OPTCARD",
-                        **kwargs,
-                    ),
-                    Field(
-                        "sldo",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsplit",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndflag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cflag",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hflag",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACK_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for springback, see * SET_PART.
@@ -345,4 +256,14 @@ class InterfaceSpringback(KeywordBase):
     def hflag(self, value: int) -> None:
         """Set the hflag property."""
         self._cards[1].set_value("hflag", value)
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

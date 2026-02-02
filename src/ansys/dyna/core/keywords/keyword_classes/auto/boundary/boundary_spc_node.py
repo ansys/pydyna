@@ -25,9 +25,18 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_BOUNDARYSPCNODE_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class BoundarySpcNode(KeywordBase):
     """DYNA BOUNDARY_SPC_NODE keyword"""
@@ -37,6 +46,10 @@ class BoundarySpcNode(KeywordBase):
     option_specs = [
         OptionSpec("ID", -2, 1),
     ]
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundarySpcNode class."""
@@ -57,33 +70,17 @@ class BoundarySpcNode(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = BoundarySpcNode.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYSPCNODE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def nodes(self) -> pd.DataFrame:
         """Get the table of nodes."""
@@ -121,4 +118,28 @@ class BoundarySpcNode(KeywordBase):
 
         if value:
             self.activate_option("HEADING")
+
+    @property
+    def nid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nid, keyed by nid value."""
+        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "parts")
+
+    def get_nid_link(self, nid: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", nid, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

@@ -23,127 +23,56 @@
 """Module providing the RveAnalysisFem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_RVEANALYSISFEM_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_RVEANALYSISFEM_CARD1 = (
+    FieldSchema("inpt", int, 0, 10, 0),
+    FieldSchema("oupt", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("idof", int, 30, 10, None),
+    FieldSchema("bc", int, 40, 10, 0),
+    FieldSchema("imatch", int, 50, 10, 1),
+)
+
+_RVEANALYSISFEM_CARD2 = (
+    FieldSchema("h11", float, 0, 10, None),
+    FieldSchema("h22", float, 10, 10, None),
+    FieldSchema("h33", float, 20, 10, None),
+    FieldSchema("h12", float, 30, 10, None),
+    FieldSchema("h23", float, 40, 10, None),
+    FieldSchema("h13", float, 50, 10, None),
+)
 
 class RveAnalysisFem(KeywordBase):
     """DYNA RVE_ANALYSIS_FEM keyword"""
 
     keyword = "RVE"
     subkeyword = "ANALYSIS_FEM"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RveAnalysisFem class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "inpt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oupt",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idof",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imatch",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "h11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h22",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h33",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h23",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h13",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _RVEANALYSISFEM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RVEANALYSISFEM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RVEANALYSISFEM_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of an input file that contains the mesh information (nodal coordinates, element connectivity) of the RVE model.
@@ -315,4 +244,19 @@ class RveAnalysisFem(KeywordBase):
     def h13(self, value: float) -> None:
         """Set the h13 property."""
         self._cards[2].set_value("h13", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

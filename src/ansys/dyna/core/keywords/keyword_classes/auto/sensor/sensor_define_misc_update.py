@@ -23,8 +23,30 @@
 """Module providing the SensorDefineMiscUpdate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORDEFINEMISCUPDATE_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("mtype", str, 10, 10, "ANGLE"),
+    FieldSchema("i0", str, 20, 10, None),
+    FieldSchema("i1", str, 30, 10, None),
+    FieldSchema("i2", str, 40, 10, None),
+    FieldSchema("i3", str, 50, 10, None),
+    FieldSchema("i4", str, 60, 10, None),
+    FieldSchema("i5", str, 70, 10, None),
+)
+
+_SENSORDEFINEMISCUPDATE_CARD1 = (
+    FieldSchema("birth", float, 0, 10, None),
+    FieldSchema("death", float, 10, 10, None),
+    FieldSchema("dtupd", float, 20, 10, None),
+)
+
+_SENSORDEFINEMISCUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineMiscUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_MISC_UPDATE keyword"""
@@ -40,111 +62,23 @@ class SensorDefineMiscUpdate(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        str,
-                        10,
-                        10,
-                        "ANGLE",
-                        **kwargs,
-                    ),
-                    Field(
-                        "i0",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i1",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i2",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i3",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i4",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i5",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtupd",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEMISCUPDATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEMISCUPDATE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineMiscUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEMISCUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.

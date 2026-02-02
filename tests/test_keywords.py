@@ -103,6 +103,39 @@ $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
 
 
 @pytest.mark.keywords
+def test_element_solid_read_legacy_format():
+    """Test reading ElementSolid from legacy format keyword string (all fields on one line)."""
+    legacy_string = """*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8
+       2       1       9      10      11      12      13      14      15      16"""
+
+    elements = kwd.ElementSolid()
+    elements.loads(legacy_string)
+
+    assert len(elements.elements) == 2, f"Expected 2 elements, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [1, 2]
+    assert elements.elements["pid"].tolist() == [1, 1]
+    assert elements.elements["n1"].tolist() == [1, 9]
+    assert elements.elements["n8"].tolist() == [8, 16]
+
+
+@pytest.mark.keywords
+def test_element_solid_read_single_element():
+    """Test reading ElementSolid with a single element."""
+    single_element_string = """*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8"""
+
+    elements = kwd.ElementSolid()
+    elements.loads(single_element_string)
+
+    assert len(elements.elements) == 1, f"Expected 1 element, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [1]
+    assert elements.elements["pid"].tolist() == [1]
+    assert elements.elements["n1"].tolist() == [1]
+    assert elements.elements["n8"].tolist() == [8]
+
+
+@pytest.mark.keywords
 def test_read_node(ref_string):
     n = kwd.Node()
     n.loads(ref_string.test_node_long_id)
@@ -207,6 +240,43 @@ def test_read_keyword_no_defaults():
     with disable_lspp_defaults():
         m = kwd.MatHyperelasticRubber()
         assert m.n == None  # LSPP default for `n` is 0.
+
+
+@pytest.mark.keywords
+def test_disable_lspp_defaults_with_constructor_kwargs():
+    """Test that kwargs passed to constructor work even with disable_lspp_defaults.
+
+    When using disable_lspp_defaults(), schema defaults should be suppressed,
+    but explicitly passed kwargs should still be applied.
+    """
+    # Without disable_lspp_defaults, LSPP defaults are applied
+    kw = kwd.ControlContact()
+    assert kw.slsfac == 0.1  # LSPP default
+    assert kw.shlthk == 0  # LSPP default
+    assert kw.orien == 1  # LSPP default
+
+    # With disable_lspp_defaults but no kwargs, all values should be None
+    with disable_lspp_defaults():
+        kw = kwd.ControlContact()
+        assert kw.slsfac is None
+        assert kw.shlthk is None
+        assert kw.orien is None
+
+    # With disable_lspp_defaults AND kwargs, kwargs should be applied
+    with disable_lspp_defaults():
+        kw = kwd.ControlContact(
+            rwpnal=1.0, shlthk=0, orien=1, ssthk=0, ignore=1, igactc=0
+        )
+        # Explicitly set values should be preserved
+        assert kw.rwpnal == 1.0
+        assert kw.shlthk == 0
+        assert kw.orien == 1
+        assert kw.ssthk == 0
+        assert kw.ignore == 1
+        assert kw.igactc == 0
+        # Values not explicitly set should be None
+        assert kw.slsfac is None
+        assert kw.penopt is None
 
 
 @pytest.mark.keywords
@@ -356,17 +426,68 @@ def test_initial_strain_shell(ref_string):
     i = kwd.InitialStrainShell()
     i.loads(ref)
     assert i.sets[1].eid == 2
-    assert i.sets[2].strains.loc[0, "epszz"] == -9.58e-003
+    assert i.sets[2].strains[0].epszz == -9.58e-003
 
     # test write
     i = kwd.InitialStrainShell()
-    i.add_set(
-        eid=1, nplane=1, nthick=5, strains=pd.DataFrame({"epsxx": [1, 1, 1, 1, 1]})
-    )
+    i.add_set(eid=1, nplane=1, nthick=5, large=0)
+    for idx in range(5):
+        i.sets[0].strains[idx].epsxx = 1.0
     assert 1 == i.sets[0].eid
-    i.add_set(eid=2, nplane=1, nthick=5)
-    i.sets[1].strains = pd.DataFrame({"epsxy": [22, 2, 2, 2, 2]})
+    i.add_set(eid=2, nplane=1, nthick=5, large=0)
+    for idx, val in enumerate([22, 2, 2, 2, 2]):
+        i.sets[1].strains[idx].epsxy = val
     assert i.write() == ref_string.test_initial_strain_shell_string
+
+
+@pytest.mark.keywords
+def test_initial_strain_shell_large_format():
+    """Test INITIAL_STRAIN_SHELL with LARGE format (width=20 fields).
+
+    LARGE=1 format splits strain data across 2 cards:
+    - Card 1: EPSXX, EPSYY, EPSZZ, EPSXY, EPSYZ (5 fields × 20 chars = 100 chars)
+    - Card 2: EPSZX, T (2 fields × 20 chars = 40 chars)
+    """
+    i = kwd.InitialStrainShell()
+    i.add_set(eid=1, nplane=1, nthick=2, large=1)
+
+    # Set strain values for first integration point
+    i.sets[0].large_strains[0].epsxx = 1.23456789012345e-3
+    i.sets[0].large_strains[0].epsyy = 2.34567890123456e-3
+    i.sets[0].large_strains[0].epszz = 3.45678901234567e-3
+    i.sets[0].large_strains[0].epsxy = 4.56789012345678e-3
+    i.sets[0].large_strains[0].epsyz = 5.67890123456789e-3
+    i.sets[0].large_strains[0].epszx = 6.78901234567890e-3
+    i.sets[0].large_strains[0].t = -1.0
+
+    # Write and verify LARGE format
+    output = i.write()
+    lines = [l for l in output.split('\n') if l.strip() and not l.strip().startswith('$')]
+
+    # Check that large=1 is set in header
+    assert 'INITIAL_STRAIN_SHELL' in output
+    eid_line_idx = next(i for i, l in enumerate(lines) if l.strip().startswith('1'))
+
+    # Card 1: EPSXX, EPSYY, EPSZZ, EPSXY, EPSYZ (5 fields, 100 chars)
+    card1_idx = eid_line_idx + 1
+    card1 = lines[card1_idx]
+    assert len(card1) == 100, f"Card 1 should be 100 chars, got {len(card1)}: '{card1}'"
+    assert '0.0012345' in card1 or '1.2345' in card1  # EPSXX
+
+    # Card 2: EPSZX, T (2 fields, 40 chars)
+    card2_idx = eid_line_idx + 2
+    card2 = lines[card2_idx]
+    assert len(card2) <= 40, f"Card 2 should be ≤40 chars, got {len(card2)}: '{card2}'"
+    assert '-1.0' in card2  # T value
+
+    # Test round-trip
+    i2 = kwd.InitialStrainShell()
+    i2.loads(output)
+    assert len(i2.sets) == 1
+    assert i2.sets[0].large == 1
+    assert len(i2.sets[0].large_strains) == 2  # nplane * nthick = 1 * 2
+    # Verify precision is preserved with LARGE format
+    assert abs(i2.sets[0].large_strains[0].epsxx - 1.23456789012345e-3) < 1e-15
 
 
 @pytest.mark.keywords
@@ -416,6 +537,70 @@ def test_initial_stress_shell(ref_string):
     assert stress4.t == 1.0
     assert len(stress4.hisv) == 19
     assert stress4.hisv[5] == 0.163
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_large_format():
+    """Test INITIAL_STRESS_SHELL with LARGE format (width=20 fields).
+
+    LARGE=1 format splits stress data across 2 cards:
+    - Card 1: T, SIGXX, SIGYY, SIGZZ, SIGXY (5 fields × 20 chars = 100 chars)
+    - Card 2: SIGYZ, SIGZX, EPS (3 fields × 20 chars = 60 chars)
+    - History variables: 5 per card × 20 chars = 100 chars per card
+    """
+    i = kwd.InitialStressShell()
+    i.add_set(eid=1, nplane=1, nthick=2, nhisv=6, large=1)
+    # For LARGE format, use large_sets instead of sets
+    i.sets[0].large_sets[0].t = -1.0
+    i.sets[0].large_sets[0].sigxx = 1.23456789012345
+    i.sets[0].large_sets[0].sigyy = 2.34567890123456
+    i.sets[0].large_sets[0].sigzz = 3.45
+    i.sets[0].large_sets[0].sigxy = 4.56
+    i.sets[0].large_sets[0].sigyz = 5.67
+    i.sets[0].large_sets[0].sigzx = 6.78
+    i.sets[0].large_sets[0].eps = 0.5
+    i.sets[0].large_sets[0].hisv.data = [10.1, 20.2, 30.3, 40.4, 50.5, 60.6]
+
+    # Write and verify LARGE format structure
+    output = i.write()
+    lines = [l for l in output.split('\n') if l.strip() and not l.strip().startswith('$')]  # Remove empty/comment lines
+
+    # Check header
+    assert 'INITIAL_STRESS_SHELL' in output
+
+    # Find the main card with EID, NPLANE, NTHICK, NHISV, LARGE
+    eid_line_idx = next(i for i, l in enumerate(lines) if l.strip().startswith('1'))
+
+    # Card 1: T, SIGXX, SIGYY, SIGZZ, SIGXY (5 fields, 100 chars)
+    card1_idx = eid_line_idx + 1
+    card1 = lines[card1_idx]
+    assert len(card1) == 100, f"Card 1 should be 100 chars, got {len(card1)}: '{card1}'"
+    assert '-1.0' in card1  # T value
+    assert '1.23456' in card1  # SIGXX
+    assert '2.34567' in card1  # SIGYY
+
+    # Card 2: SIGYZ, SIGZX, EPS (3 fields, 60 chars)
+    card2_idx = eid_line_idx + 2
+    card2 = lines[card2_idx]
+    assert len(card2) <= 60, f"Card 2 should be ≤60 chars, got {len(card2)}: '{card2}'"
+    assert '5.66' in card2 or '5.67' in card2  # SIGYZ
+    assert '6.78' in card2  # SIGZX
+    assert '0.5' in card2   # EPS
+
+    # History variable cards: 5 values per card (100 chars each)
+    hisv_card1_idx = eid_line_idx + 3
+    hisv_card1 = lines[hisv_card1_idx]
+    assert len(hisv_card1) == 100, f"HISV card 1 should be 100 chars, got {len(hisv_card1)}: '{hisv_card1}'"
+    assert '10.0' in hisv_card1 or '10.1' in hisv_card1  # Check for HISV value (allow fp precision)
+
+    # Test round-trip: read back what we wrote
+    i2 = kwd.InitialStressShell()
+    i2.loads(output)
+    assert len(i2.sets) == 1
+    assert i2.sets[0].large == 1
+    assert i2.sets[0].large_sets[0].sigxx == 1.23456789012345
+    assert i2.sets[0].large_sets[0].sigyy == 2.34567890123456
+    assert len(i2.sets[0].large_sets[0].hisv.data) == 6
 
 
 @pytest.mark.keywords
@@ -809,6 +994,7 @@ def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_
     )
 
 
+@pytest.mark.keywords
 def test_mat_196_read(ref_string):
     m = kwd.Mat196()
     m_alias = kwd.MatGeneralSpringDiscreteBeam()
@@ -820,10 +1006,36 @@ def test_mat_196_read(ref_string):
 
 
 @pytest.mark.keywords
-def test_mat295_read(ref_string):
-    """Round trip test of reading MAT_295."""
+def test_mat_023_temperature_points(ref_string):
+    """Test MAT_023 (MAT_TEMPERATURE_DEPENDENT_ORTHOTROPIC) with multiple temperature points."""
+    m = kwd.Mat023()
+    m.loads(ref_string.test_mat_023_ref_in)
+
+    # Verify basic properties
+    assert m.mid == 1
+    assert m.aopt == 2.0
+    assert m.macf == 1
+
+    # Verify temperature_points table has 3 rows (3 temperature points)
+    assert len(m.temperature_points) == 3
+    assert list(m.temperature_points["ti"]) == [20.0, 100.0, 200.0]
+    assert list(m.temperature_points["eai"]) == [210000.0, 200000.0, 180000.0]
+
+    # Round-trip test
+    assert m.write() == ref_string.test_mat_023_ref_out
+
+
+@pytest.mark.keywords
+def test_mat295_legacy_read(ref_string):
+    """Round trip test of reading MAT_295 using legacy 0.9.1 API (backward compatibility)."""
+    from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
+
+    import warnings
+
     ref_mat295_string = ref_string.test_mat_295_ref
-    m = kwd.Mat295()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        m = Mat295Legacy()
     m.loads(ref_mat295_string)
     assert m.ftype == 1
     assert m.rho == 0.001
@@ -835,10 +1047,41 @@ def test_mat295_read(ref_string):
 
 
 @pytest.mark.keywords
-def test_mat295_iso_read(ref_string):
-    """Round trip test of reading MAT_295."""
-    m = kwd.Mat295(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
+def test_mat295_legacy_iso_read(ref_string):
+    """Round trip test of reading MAT_295 ISO using legacy 0.9.1 API (backward compatibility)."""
+    from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
+
+    import warnings
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        m = Mat295Legacy(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
     assert m.ftype is None
+    assert m.actype is None
+    ref_mat295_string = ref_string.test_mat_295_iso
+    assert m.write() == ref_mat295_string
+
+
+@pytest.mark.keywords
+def test_mat295_read(ref_string):
+    """Round trip test of reading MAT_295 using idiomatic fiber_families API."""
+    ref_mat295_string = ref_string.test_mat_295_ref
+    m = kwd.Mat295()
+    m.loads(ref_mat295_string)
+    assert m.rho == 0.001
+    assert len(m.fiber_families) == 1
+    assert m.fiber_families[0].ftype == 1
+    assert m.actype == 1
+    assert m.l == 1.85
+    assert m.k2 == 1.75  # k2 from itype=3 (Holzapfel-Ogden) card
+    assert m.write() == ref_mat295_string
+
+
+@pytest.mark.keywords
+def test_mat295_iso_read(ref_string):
+    """Round trip test of reading MAT_295 ISO (no fiber families)."""
+    m = kwd.Mat295(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
+    assert len(m.fiber_families) == 0
     assert m.actype is None
     ref_mat295_string = ref_string.test_mat_295_iso
     assert m.write() == ref_mat295_string
@@ -1228,3 +1471,12 @@ def test_em_randles_tshell_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_0_1
     s = kwd.EmRandlesTshell(rdltype=3)
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_2_3
+
+
+@pytest.mark.keywords
+def test_control_shell(ref_string):
+    """Test reading and writing CONTROL_SHELL keyword."""
+    control_shell_string = ref_string.test_control_shell
+    s = kwd.ControlShell()
+    s.loads(control_shell_string)
+    print(s)

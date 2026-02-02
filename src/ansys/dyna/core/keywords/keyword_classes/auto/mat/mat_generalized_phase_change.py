@@ -23,8 +23,99 @@
 """Module providing the MatGeneralizedPhaseChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATGENERALIZEDPHASECHANGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("n", int, 20, 10, None),
+    FieldSchema("e", float, 30, 10, None),
+    FieldSchema("pr", float, 40, 10, None),
+    FieldSchema("mix", int, 50, 10, None),
+    FieldSchema("mixr", int, 60, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD1 = (
+    FieldSchema("tastrt", float, 0, 10, None),
+    FieldSchema("tend", float, 10, 10, None),
+    FieldSchema("cte", float, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("epsini", int, 50, 10, None),
+    FieldSchema("dtemp", float, 60, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD2 = (
+    FieldSchema("xastr", float, 0, 10, None),
+    FieldSchema("xaend", float, 10, 10, None),
+    FieldSchema("xa1pa1", int, 20, 10, None),
+    FieldSchema("xa1pa2", int, 30, 10, None),
+    FieldSchema("xa1pa3", int, 40, 10, None),
+    FieldSchema("xafpa", float, 50, 10, None),
+    FieldSchema("cteann", float, 60, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD3 = (
+    FieldSchema("ptlaw", int, 0, 10, None),
+    FieldSchema("ptstr", int, 10, 10, None),
+    FieldSchema("ptend", int, 20, 10, None),
+    FieldSchema("ptx1", int, 30, 10, None),
+    FieldSchema("ptx2", int, 40, 10, None),
+    FieldSchema("ptx3", int, 50, 10, None),
+    FieldSchema("ptx4", int, 60, 10, None),
+    FieldSchema("ptx5", int, 70, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD4 = (
+    FieldSchema("pttab1", int, 0, 10, None),
+    FieldSchema("pttab2", int, 10, 10, None),
+    FieldSchema("pttab3", int, 20, 10, None),
+    FieldSchema("pttab4", int, 30, 10, None),
+    FieldSchema("pttab5", int, 40, 10, None),
+    FieldSchema("pttab6", int, 50, 10, None),
+    FieldSchema("pttab7", int, 60, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD5 = (
+    FieldSchema("pteps", int, 0, 10, None),
+    FieldSchema("ptrip", int, 10, 10, None),
+    FieldSchema("ptlat", int, 20, 10, None),
+    FieldSchema("postv", int, 30, 10, None),
+    FieldSchema("nushis", int, 40, 10, None),
+    FieldSchema("grai", float, 50, 10, None),
+    FieldSchema("t1phas", int, 60, 10, None),
+    FieldSchema("t2phas", int, 70, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD6 = (
+    FieldSchema("fushi1", int, 0, 10, None),
+    FieldSchema("fushi2", int, 10, 10, None),
+    FieldSchema("fushi3", int, 20, 10, None),
+    FieldSchema("fushi4", int, 30, 10, None),
+    FieldSchema("fushi5", int, 40, 10, None),
+    FieldSchema("fushi6", int, 50, 10, None),
+    FieldSchema("fushi7", int, 60, 10, None),
+    FieldSchema("fushi8", int, 70, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_CARD7 = (
+    FieldSchema("sigy1", int, 0, 10, None),
+    FieldSchema("sigy2", int, 10, 10, None),
+    FieldSchema("sigy3", int, 20, 10, None),
+    FieldSchema("sigy4", int, 30, 10, None),
+    FieldSchema("sigy5", int, 40, 10, None),
+    FieldSchema("sigy6", int, 50, 10, None),
+    FieldSchema("sigy7", int, 60, 10, None),
+    FieldSchema("sigy8", int, 70, 10, None),
+)
+
+_MATGENERALIZEDPHASECHANGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatGeneralizedPhaseChange(KeywordBase):
     """DYNA MAT_GENERALIZED_PHASE_CHANGE keyword"""
@@ -34,483 +125,62 @@ class MatGeneralizedPhaseChange(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mix": LinkType.DEFINE_CURVE,
+        "mixr": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "xa1pa3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy4": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy5": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy6": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy7": LinkType.DEFINE_CURVE_OR_TABLE,
+        "sigy8": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatGeneralizedPhaseChange class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mix",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mixr",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tastrt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cte",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsini",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtemp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xastr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xaend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xa1pa3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xafpa",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cteann",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ptlaw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptstr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptend",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx3",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptx5",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pttab1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pttab7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pteps",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptrip",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptlat",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "postv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nushis",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grai",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1phas",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2phas",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fushi1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fushi8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigy1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALIZEDPHASECHANGE_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatGeneralizedPhaseChange.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGENERALIZEDPHASECHANGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -1287,4 +957,307 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mix_link(self) -> DefineCurve:
+        """Get the DefineCurve object for mix."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.mix:
+                return kwd
+        return None
+
+    @mix_link.setter
+    def mix_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for mix."""
+        self.mix = value.lcid
+
+    @property
+    def mixr_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for mixr."""
+        if self.deck is None:
+            return None
+        field_value = self.mixr
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @mixr_link.setter
+    def mixr_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for mixr."""
+        if hasattr(value, "lcid"):
+            self.mixr = value.lcid
+        elif hasattr(value, "tbid"):
+            self.mixr = value.tbid
+
+    @property
+    def xa1pa1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa1."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa1_link.setter
+    def xa1pa1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa1."""
+        if hasattr(value, "lcid"):
+            self.xa1pa1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa1 = value.tbid
+
+    @property
+    def xa1pa2_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa2."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa2_link.setter
+    def xa1pa2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa2."""
+        if hasattr(value, "lcid"):
+            self.xa1pa2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa2 = value.tbid
+
+    @property
+    def xa1pa3_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa3."""
+        if self.deck is None:
+            return None
+        field_value = self.xa1pa3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @xa1pa3_link.setter
+    def xa1pa3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for xa1pa3."""
+        if hasattr(value, "lcid"):
+            self.xa1pa3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.xa1pa3 = value.tbid
+
+    @property
+    def sigy1_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy1."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy1_link.setter
+    def sigy1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy1."""
+        if hasattr(value, "lcid"):
+            self.sigy1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy1 = value.tbid
+
+    @property
+    def sigy2_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy2."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy2_link.setter
+    def sigy2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy2."""
+        if hasattr(value, "lcid"):
+            self.sigy2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy2 = value.tbid
+
+    @property
+    def sigy3_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy3."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy3_link.setter
+    def sigy3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy3."""
+        if hasattr(value, "lcid"):
+            self.sigy3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy3 = value.tbid
+
+    @property
+    def sigy4_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy4."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy4
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy4_link.setter
+    def sigy4_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy4."""
+        if hasattr(value, "lcid"):
+            self.sigy4 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy4 = value.tbid
+
+    @property
+    def sigy5_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy5."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy5
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy5_link.setter
+    def sigy5_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy5."""
+        if hasattr(value, "lcid"):
+            self.sigy5 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy5 = value.tbid
+
+    @property
+    def sigy6_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy6."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy6
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy6_link.setter
+    def sigy6_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy6."""
+        if hasattr(value, "lcid"):
+            self.sigy6 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy6 = value.tbid
+
+    @property
+    def sigy7_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy7."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy7
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy7_link.setter
+    def sigy7_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy7."""
+        if hasattr(value, "lcid"):
+            self.sigy7 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy7 = value.tbid
+
+    @property
+    def sigy8_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy8."""
+        if self.deck is None:
+            return None
+        field_value = self.sigy8
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @sigy8_link.setter
+    def sigy8_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for sigy8."""
+        if hasattr(value, "lcid"):
+            self.sigy8 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.sigy8 = value.tbid
 

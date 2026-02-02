@@ -23,7 +23,17 @@
 """Module providing the IcfdSolverTolMmov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDSOLVERTOLMMOV_CARD0 = (
+    FieldSchema("atol", float, 0, 10, 1e-08),
+    FieldSchema("rtol", float, 10, 10, 1e-08),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("maxit", int, 30, 10, 1000),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("disptol", float, 50, 10, None),
+)
 
 class IcfdSolverTolMmov(KeywordBase):
     """DYNA ICFD_SOLVER_TOL_MMOV keyword"""
@@ -35,57 +45,10 @@ class IcfdSolverTolMmov(KeywordBase):
         """Initialize the IcfdSolverTolMmov class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "atol",
-                        float,
-                        0,
-                        10,
-                        1.0e-8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rtol",
-                        float,
-                        10,
-                        10,
-                        1.0e-8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxit",
-                        int,
-                        30,
-                        10,
-                        1000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "disptol",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDSOLVERTOLMMOV_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def atol(self) -> float:
         """Get or set the Absolute convergence criteria. Convergence is achieved when Residual𝑖+1 −Residual𝑖 ≤ ATOL. If a negative integer is entered,then that value will be used as a load curve ID for ATOL.

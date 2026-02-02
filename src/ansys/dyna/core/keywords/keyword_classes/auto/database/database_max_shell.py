@@ -23,80 +23,45 @@
 """Module providing the DatabaseMaxShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEMAXSHELL_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+    FieldSchema("id6", int, 50, 10, None),
+    FieldSchema("id7", int, 60, 10, None),
+    FieldSchema("id8", int, 70, 10, None),
+)
 
 class DatabaseMaxShell(KeywordBase):
     """DYNA DATABASE_MAX_SHELL keyword"""
 
     keyword = "DATABASE"
     subkeyword = "MAX_SHELL"
+    _link_fields = {
+        "id1": LinkType.ELEMENT_SHELL,
+        "id2": LinkType.ELEMENT_SHELL,
+        "id3": LinkType.ELEMENT_SHELL,
+        "id4": LinkType.ELEMENT_SHELL,
+        "id5": LinkType.ELEMENT_SHELL,
+        "id6": LinkType.ELEMENT_SHELL,
+        "id7": LinkType.ELEMENT_SHELL,
+        "id8": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseMaxShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEMAXSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Shell element ID.
@@ -184,4 +149,44 @@ class DatabaseMaxShell(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id2, "parts")
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id3, "parts")
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id4, "parts")
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id5, "parts")
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id6, "parts")
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id7, "parts")
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given id8."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.id8, "parts")
 

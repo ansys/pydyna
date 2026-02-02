@@ -23,46 +23,35 @@
 """Module providing the ConstrainedExtraNodesNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDEXTRANODESNODE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("iflag", int, 20, 10, 0),
+)
 
 class ConstrainedExtraNodesNode(KeywordBase):
     """DYNA CONSTRAINED_EXTRA_NODES_NODE keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "EXTRA_NODES_NODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedExtraNodesNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDEXTRANODESNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body to which the nodes will be added, see *PART.
@@ -99,4 +88,14 @@ class ConstrainedExtraNodesNode(KeywordBase):
     def iflag(self, value: int) -> None:
         """Set the iflag property."""
         self._cards[0].set_value("iflag", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

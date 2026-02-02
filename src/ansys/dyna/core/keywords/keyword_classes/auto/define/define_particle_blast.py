@@ -23,8 +23,68 @@
 """Module providing the DefineParticleBlast class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DEFINEPARTICLEBLAST_CARD0 = (
+    FieldSchema("lagsid", int, 0, 10, None),
+    FieldSchema("lagstype", int, 10, 10, 0),
+    FieldSchema("nodid", int, 20, 10, None),
+    FieldSchema("nodtype", int, 30, 10, 0),
+    FieldSchema("hecid", int, 40, 10, None),
+    FieldSchema("hectype", int, 50, 10, 0),
+    FieldSchema("aircid", int, 60, 10, None),
+)
+
+_DEFINEPARTICLEBLAST_CARD1 = (
+    FieldSchema("nphe", int, 0, 10, None),
+    FieldSchema("npair", int, 10, 10, None),
+    FieldSchema("iunit", int, 20, 10, 0),
+)
+
+_DEFINEPARTICLEBLAST_CARD2 = (
+    FieldSchema("ihetype", int, 0, 10, 0),
+    FieldSchema("density", float, 10, 10, None),
+    FieldSchema("energy", float, 20, 10, None),
+    FieldSchema("gamma", float, 30, 10, None),
+    FieldSchema("covol", float, 40, 10, None),
+    FieldSchema("deto_v", float, 50, 10, None),
+)
+
+_DEFINEPARTICLEBLAST_CARD3 = (
+    FieldSchema("detx", float, 0, 10, None),
+    FieldSchema("dety", float, 10, 10, None),
+    FieldSchema("detz", float, 20, 10, None),
+    FieldSchema("tdet", float, 30, 10, None),
+    FieldSchema("btend", float, 40, 10, None),
+    FieldSchema("nid", int, 50, 10, None),
+)
+
+_DEFINEPARTICLEBLAST_CARD4 = (
+    FieldSchema("bcx0", float, 0, 10, None),
+    FieldSchema("bcx1", float, 10, 10, None),
+    FieldSchema("bcy0", float, 20, 10, None),
+    FieldSchema("bcy1", float, 30, 10, None),
+    FieldSchema("bcz0", float, 40, 10, None),
+    FieldSchema("bcz1", float, 50, 10, None),
+)
+
+_DEFINEPARTICLEBLAST_CARD5 = (
+    FieldSchema("ibcx0", int, 0, 10, None),
+    FieldSchema("ibcx1", int, 10, 10, None),
+    FieldSchema("ibcy0", int, 20, 10, None),
+    FieldSchema("ibcy1", int, 30, 10, None),
+    FieldSchema("ibcz0", int, 40, 10, None),
+    FieldSchema("ibcz1", int, 50, 10, None),
+    FieldSchema("bc_p", int, 60, 10, 0),
+)
+
+_DEFINEPARTICLEBLAST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineParticleBlast(KeywordBase):
     """DYNA DEFINE_PARTICLE_BLAST keyword"""
@@ -34,306 +94,44 @@ class DefineParticleBlast(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineParticleBlast class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lagsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lagstype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hecid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hectype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aircid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nphe",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npair",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunit",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ihetype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "energy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "covol",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deto_v",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "detx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dety",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdet",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "btend",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bcx0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcx1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcy0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcy1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcz0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bcz1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ibcx0",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcx1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcy0",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcy1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcz0",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibcz1",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bc_p",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTICLEBLAST_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineParticleBlast.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPARTICLEBLAST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def lagsid(self) -> typing.Optional[int]:
         """Get or set the Structure ID for particle structure interaction
@@ -775,4 +573,9 @@ class DefineParticleBlast(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

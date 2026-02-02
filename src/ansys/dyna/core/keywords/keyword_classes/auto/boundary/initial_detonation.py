@@ -23,127 +23,51 @@
 """Module providing the InitialDetonation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INITIALDETONATION_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("x", float, 10, 10, 0.0),
+    FieldSchema("y", float, 20, 10, 0.0),
+    FieldSchema("z", float, 30, 10, 0.0),
+    FieldSchema("lt", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("mmgset", int, 60, 10, None),
+)
+
+_INITIALDETONATION_CARD1 = (
+    FieldSchema("peak", float, 0, 10, None),
+    FieldSchema("decay", float, 10, 10, None),
+    FieldSchema("xs", float, 20, 10, 0.0),
+    FieldSchema("ys", float, 30, 10, 0.0),
+    FieldSchema("zs", float, 40, 10, 0.0),
+    FieldSchema("nid", int, 50, 10, 0),
+)
 
 class InitialDetonation(KeywordBase):
     """DYNA INITIAL_DETONATION keyword"""
 
     keyword = "INITIAL"
     subkeyword = "DETONATION"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialDetonation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgset",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "peak",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "decay",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xs",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zs",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALDETONATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALDETONATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the high explosive to be lit, except in the case where the high explosive is modeled using an ALE formulation, in which case PID is the part ID of the mesh where the high explosive material to be lit initially resides.  However, two other options are available:
@@ -278,4 +202,14 @@ class InitialDetonation(KeywordBase):
     def nid(self, value: int) -> None:
         """Set the nid property."""
         self._cards[1].set_value("nid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -23,52 +23,36 @@
 """Module providing the NodeThickness class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_NODETHICKNESS_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("thk", float, 10, 10, None),
+    FieldSchema("id2", int, 20, 10, None),
+    FieldSchema("inc", int, 30, 10, None),
+)
 
 class NodeThickness(KeywordBase):
     """DYNA NODE_THICKNESS keyword"""
 
     keyword = "NODE"
     subkeyword = "THICKNESS"
+    _link_fields = {
+        "id1": LinkType.NODE,
+        "id2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the NodeThickness class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thk",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODETHICKNESS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Node ID. If GENERATE option is active, ID1 serves as the starting node.
@@ -112,4 +96,14 @@ class NodeThickness(KeywordBase):
     def inc(self, value: int) -> None:
         """Set the inc property."""
         self._cards[0].set_value("inc", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id1."""
+        return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id2."""
+        return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
 

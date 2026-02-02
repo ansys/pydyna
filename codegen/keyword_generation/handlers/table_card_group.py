@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,72 +21,94 @@
 # SOFTWARE.
 
 """
-Table Card Group Handler: Creates duplicate card groups for table-like data.
+Table Card Group Handler: Creates table card groups for table-like data.
 
 This handler groups multiple cards together to form a repeating structure,
 commonly used for table or matrix data where multiple related cards repeat as a unit.
 """
 
 from dataclasses import dataclass
+import logging
 import typing
 from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import Card, KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class TableCardGroupSettings:
-    """Configuration for grouping multiple cards into a table."""
+    """Configuration for grouping multiple cards into a table.
 
-    indices: List[int]
+    Attributes
+    ----------
+        refs: List of label references for cards to group
+        property_name: Name of the table card group property
+        length_func: Optional function to compute group count
+        active_func: Optional function to determine if group is active
+        key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
+    """
+
+    refs: List[str]
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
+    key_field: Optional[str] = None
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
         return cls(
-            indices=data["indices"],
-            property_name=data["property-name"],
+            refs=data["refs"],
+            property_name=data["overall-name"],
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
+            key_field=data.get("key-field"),
         )
+
+    def resolve_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
+        """Resolve label refs to card indices."""
+        return [registry.resolve_index(ref, cards) for ref in self.refs]
 
 
 @handler(
     name="table-card-group",
-    dependencies=["reorder-card"],
-    description="Creates duplicate card groups for table-like repeating card structures",
+    description="Creates table card groups for table-like repeating card structures",
     input_schema={
         "type": "array",
         "items": {
             "type": "object",
             "properties": {
-                "indices": {
+                "refs": {
                     "type": "array",
-                    "items": {"type": "integer"},
-                    "description": "Card indices to group together",
+                    "items": {"type": "string"},
+                    "description": "Label references for cards to group together",
                 },
-                "overall-name": {"type": "string", "description": "Name of the duplicate group"},
+                "overall-name": {"type": "string", "description": "Name of the table card group"},
                 "length-func": {"type": "string", "description": "Function to compute group count"},
                 "active-func": {"type": "string", "description": "Function to determine if group is active"},
+                "key-field": {
+                    "type": "string",
+                    "description": "Key field name for table-aware link properties (e.g., 'pid' for Part)",
+                },
             },
-            "required": ["indices", "overall-name"],
+            "required": ["refs", "overall-name"],
         },
     },
     output_description=(
-        "Sets kwd_data['duplicate_group']=True, adds card insertion with duplicate group, "
-        "marks source cards for removal"
+        "Sets kwd_data['table_group']=True, adds card insertion with table card group, marks source cards for removal"
     ),
 )
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """
     Groups cards together to form repeating table-like structures.
 
-    This handler creates duplicate card groups where multiple cards are treated
+    This handler creates table card groups where multiple cards are treated
     as a single repeatable unit. Common use cases include table data where each
     row consists of multiple cards that must be repeated together.
 
@@ -97,7 +119,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
     Input Settings Example:
         [
             {
-                "indices": [2, 3, 4],
+                "refs": ["row_card_1", "row_card_2", "row_card_3"],
                 "overall-name": "table_row",
                 "length-func": "self.nrows",
                 "active-func": "self.has_table"
@@ -105,11 +127,11 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         ]
 
     Output Modification:
-        - Sets kwd_data["duplicate_group"] = True
-        - Creates duplicate group structure:
+        - Sets kwd_data["table_group"] = True
+        - Creates table card group structure:
           {
-              "duplicate_group": True,
-              "sub_cards": [...],  # Cards from indices
+              "table_group": True,
+              "sub_cards": [...],  # Cards from refs
               "overall_name": "table_row",
               "length_func": "self.nrows",
               "active_func": "self.has_table"
@@ -118,45 +140,61 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Marks all source cards with "mark_for_removal" = 1
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        """Keep dict settings for table-card-group - uses 'overall-name' not 'property-name'."""
-        return settings
-
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
-        Create duplicate card groups from card indices.
+        Create table card groups from card label refs.
 
         Args:
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
+
+        Raises
+        ------
+            ValueError: If label_registry is not initialized
         """
-        typed_settings = self._parse_settings(settings)
-        kwd_data.duplicate_group = True
+        if kwd_data.label_registry is None:
+            raise ValueError("table-card-group handler requires label_registry to be initialized")
+
+        registry = kwd_data.label_registry
+        typed_settings = parse_settings_list(TableCardGroupSettings, settings)
+        kwd_data.table_group = True
+
         for card_settings in typed_settings:
-            indices_raw = card_settings["indices"]
-            indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
-            # build the card group
-            group = {
-                "duplicate_group": True,
-                "sub_cards": [],
-                "overall_name": card_settings["overall-name"],
-                "length_func": card_settings.get("length-func", ""),
-                "active_func": card_settings.get("active-func", ""),
-            }
+            # Resolve refs to indices
+            indices = card_settings.resolve_indices(registry, kwd_data.cards)
+            logger.debug(
+                f"table-card-group '{card_settings.property_name}': refs {card_settings.refs} -> indices {indices}"
+            )
+
+            # Skip empty refs
+            if not indices:
+                logger.debug(f"table-card-group '{card_settings.property_name}': skipping empty refs")
+                continue
+
+            # Collect sub_cards using reference semantics
+            sub_cards: List[Card] = []
             for index in indices:
                 sub_card = kwd_data.cards[index]
-                sub_card["mark_for_removal"] = 1
-                group["sub_cards"].append(sub_card)
-            # remove all the sub-cards
-            indices.sort(reverse=True)
-            for index in indices:
-                kwd_data.cards[index]["mark_for_removal"] = 1
+                sub_card.mark_for_removal = 1
+                sub_cards.append(sub_card)
+
+            # Build the card group as a Card instance
+            group = Card(
+                index=-1,  # Will be set during insertion
+                fields=[],  # No direct fields, sub_cards hold the fields
+                table_group=True,
+                sub_cards=sub_cards,
+                overall_name=card_settings.property_name,
+                length_func=card_settings.length_func or "",
+                active_func=card_settings.active_func or "",
+                key_field=card_settings.key_field,
+            )
+
+            # Mark all source cards for removal and insert group at minimum position
             insertion = gen.Insertion(min(indices), "", group)
             kwd_data.card_insertions.append(insertion)
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
+            logger.debug(f"Created table card group at position {min(indices)}")

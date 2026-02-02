@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for loading decks."""
 
 import io
 import typing
@@ -46,9 +47,11 @@ class DeckLoaderResult:
         self._unprocessed_keywords = []
 
     def add_unprocessed_keyword(self, name):
+        """Add a keyword that was not processed during the deck load."""
         self._unprocessed_keywords.append(name)
 
     def get_summary(self) -> str:
+        """Get a summary of unprocessed keywords."""
         summary = io.StringIO()
         for unprocessed_keyword in self._unprocessed_keywords:
             summary.write(f"Failed to process: {unprocessed_keyword}\n")
@@ -164,7 +167,90 @@ def _on_error(error, import_handlers: typing.List[ImportHandler]):
 
 def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
     for handler in import_handlers:
-        handler.after_import(context, keyword)
+        try:
+            handler.after_import(context, keyword)
+        except Exception as e:
+            handler.on_error(e)
+
+
+def _get_format_from_keyword_suffix(keyword: str) -> format_type:
+    """Determine format type from keyword suffix (- or +)."""
+    if keyword.endswith("-"):
+        return format_type.standard
+    elif keyword.endswith("+"):
+        return format_type.long
+    return format_type.default
+
+
+def _resolve_keyword_class(
+    keyword: str, context: typing.Optional[ImportContext]
+) -> typing.Tuple[typing.Optional[type], typing.Optional[str], format_type]:
+    """Resolve the keyword class to use, checking overrides first.
+
+    Returns
+    -------
+    tuple
+        (keyword_class, keyword_type_name, format)
+        - keyword_class: Direct class reference if from override, else None
+        - keyword_type_name: Class name string if from TypeMapping, else None
+        - format: The format type to use
+    """
+    keyword_name = keyword.split()[0]
+    keyword_overrides = context.keyword_overrides if context else {}
+
+    # Check for override first
+    override_class = keyword_overrides.get(keyword_name)
+    if override_class is not None:
+        return override_class, None, _get_format_from_keyword_suffix(keyword)
+
+    # Fall back to TypeMapping lookup
+    type_name, format = _get_kwd_class_and_format(keyword)
+    return None, type_name, format
+
+
+def _create_keyword_object(
+    keyword_class: typing.Optional[type], keyword_type_name: typing.Optional[str]
+) -> typing.Optional[KeywordBase]:
+    """Create a keyword object from either a direct class or type name."""
+    if keyword_class is not None:
+        return keyword_class()
+
+    if keyword_type_name is not None:
+        import ansys.dyna.core.keywords
+
+        return getattr(ansys.dyna.core.keywords, keyword_type_name)()
+
+    return None
+
+
+def _load_keyword(
+    keyword_object: KeywordBase,
+    keyword: str,
+    keyword_data: str,
+    deck: "ansys.dyna.core.deck.Deck",
+    import_handlers: typing.List[ImportHandler],
+    result: DeckLoaderResult,
+    context: ImportContext,
+) -> None:
+    """Load keyword data into object and append to deck, handling errors.
+
+    If context.strict is True, exceptions are re-raised. If False, keywords
+    that fail to parse for any reason (undefined parameters, invalid field
+    values, malformed data, etc.) are retained as raw strings and a warning
+    is emitted.
+    """
+    try:
+        keyword_object.loads(keyword_data, deck.parameters)
+    except Exception as e:
+        if context is not None and context.strict:
+            raise
+        _on_error(e, import_handlers)
+        result.add_unprocessed_keyword(keyword)
+        deck.append(keyword_data)
+        _after_import(keyword_data, import_handlers, context)
+        return
+    deck.append(keyword_object)
+    _after_import(keyword_object, import_handlers, context)
 
 
 def _handle_keyword(
@@ -174,32 +260,27 @@ def _handle_keyword(
     result: DeckLoaderResult,
     context: ImportContext,
 ) -> None:
+    """Process a keyword block and add it to the deck."""
     keyword = block[0].strip()
     keyword_data = "\n".join(block)
-    do_import = _before_import(block, keyword, keyword_data, import_handlers, context)
-    if not do_import:
+
+    if not _before_import(block, keyword, keyword_data, import_handlers, context):
         return
-    keyword_object_type, format = _get_kwd_class_and_format(keyword)
-    if keyword_object_type == None:
+
+    keyword_class, keyword_type_name, format = _resolve_keyword_class(keyword, context)
+    keyword_object = _create_keyword_object(keyword_class, keyword_type_name)
+
+    if keyword_object is None:
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
         _after_import(keyword_data, import_handlers, context)
-    else:
-        import ansys.dyna.core.keywords
+        return
 
-        keyword_object: KeywordBase = getattr(ansys.dyna.core.keywords, keyword_object_type)()
-        if format == format_type.default:
-            format = deck.format
-        keyword_object.format = format
-        try:
-            keyword_object.loads(keyword_data, deck.parameters)
-            deck.append(keyword_object)
-            _after_import(keyword_object, import_handlers, context)
-        except Exception as e:
-            _on_error(e, import_handlers)
-            result.add_unprocessed_keyword(keyword)
-            deck.append(keyword_data)
-            _after_import(keyword_data, import_handlers, context)
+    if format == format_type.default:
+        format = deck.format
+    keyword_object.format = format
+
+    _load_keyword(keyword_object, keyword, keyword_data, deck, import_handlers, result, context)
 
 
 def _handle_block(
@@ -230,7 +311,6 @@ def _try_load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> None:
-
     iterstate = IterState.USERCOMMENT
     block = []
     encrypted_section = None
@@ -283,6 +363,7 @@ def load_deck(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text string."""
     result = DeckLoaderResult()
     buffer = io.StringIO()
     buffer.write(text)
@@ -297,6 +378,7 @@ def load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text buffer."""
     result = DeckLoaderResult()
     _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
     return result

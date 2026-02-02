@@ -23,7 +23,23 @@
 """Module providing the DualceseInitialTwophase class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEINITIALTWOPHASE_CARD0 = (
+    FieldSchema("z1", float, 0, 10, None),
+    FieldSchema("uic", float, 10, 10, None),
+    FieldSchema("vic", float, 20, 10, None),
+    FieldSchema("wic", float, 30, 10, None),
+    FieldSchema("rho_1", float, 40, 10, None),
+    FieldSchema("rho_2", float, 50, 10, None),
+    FieldSchema("pic", float, 60, 10, None),
+    FieldSchema("tic", float, 70, 10, None),
+)
+
+_DUALCESEINITIALTWOPHASE_CARD1 = (
+    FieldSchema("ifunc", int, 0, 10, None),
+)
 
 class DualceseInitialTwophase(KeywordBase):
     """DYNA DUALCESE_INITIAL_TWOPHASE keyword"""
@@ -35,79 +51,13 @@ class DualceseInitialTwophase(KeywordBase):
         """Initialize the DualceseInitialTwophase class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "z1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pic",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ifunc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALTWOPHASE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALTWOPHASE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def z1(self) -> typing.Optional[float]:
         """Get or set the Volume fraction of material 1 (or color function).This is usually a value of 0 or 1. For numerical stability, however, use a very small value instead of zero

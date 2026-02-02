@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Dyna solver
-===========
-
-Module for defining the PyDNYA ``solver`` service.
-"""
+"""Module for defining the PyDNYA ``solver`` service."""
 
 import logging
 import os
@@ -172,11 +167,10 @@ class DynaSolver:
         return True
 
     def _argcheck(self, cmd, ngiven, nrequired):
-        """Internally used routine for checking command argument counts
-        when using the generic ``send`` method."""
+        """Internally used routine for checking command argument counts when using the generic ``send`` method."""
         if ngiven < nrequired:
             s = "Bad input for command %s:" % cmd
-            s = s + ("At least %d arguments are required, but only %d " "were given" % (nrequired, ngiven))
+            s = s + ("At least %d arguments are required, but only %d were given" % (nrequired, ngiven))
             self.logger.warning(s)
             return 0
         return 1
@@ -209,14 +203,12 @@ class DynaSolver:
         self.stub.log_level(request)
 
     def _set_log_level(self, levelname):
-        """Internally used routine to set the logging level of both the
-        server and the client."""
+        """Internally used routine to set the logging level of both the server and the client."""
         self._set_client_log_level(levelname)
         self._set_server_log_level(levelname)
 
     def list_files(self, subname=None):
-        """Get size information about one or more files in the LS-DYNA
-        working directory.
+        """Get size information about one or more files in the LS-DYNA working directory.
 
         Parameters
         ----------
@@ -522,7 +514,6 @@ class DynaSolver:
         args : str
             Command line to pass to LS-DYNA.
         """
-
         self.logger.debug("start: %d" % nproc)
         request = dynasolver_pb2.DynaSolverStartLocal()
         request.preset = bytes(preset, "utf-8")

@@ -23,8 +23,23 @@
 """Module providing the DefineFrictionScaling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINEFRICTIONSCALING_CARD0 = (
+    FieldSchema("fsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("psid", int, 20, 10, 0),
+    FieldSchema("scale1", float, 30, 10, 1.0),
+    FieldSchema("scaleo", float, 40, 10, 1.0),
+)
+
+_DEFINEFRICTIONSCALING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFrictionScaling(KeywordBase):
     """DYNA DEFINE_FRICTION_SCALING keyword"""
@@ -34,74 +49,30 @@ class DefineFrictionScaling(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "cid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFrictionScaling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale1",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scaleo",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFRICTIONSCALING_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFrictionScaling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONSCALING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def fsid(self) -> typing.Optional[int]:
         """Get or set the Friction scaling ID number.  Each friction scaling definition should have a unique ID which is used for output messages only.
@@ -170,4 +141,29 @@ class DefineFrictionScaling(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def cid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for cid."""
+        self.cid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

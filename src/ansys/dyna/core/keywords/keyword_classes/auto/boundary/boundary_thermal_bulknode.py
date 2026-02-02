@@ -23,112 +23,56 @@
 """Module providing the BoundaryThermalBulknode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYTHERMALBULKNODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("nbnseg", int, 20, 10, None),
+    FieldSchema("vol", float, 30, 10, None),
+    FieldSchema("lcid", int, 40, 10, None),
+    FieldSchema("h", float, 50, 10, None),
+    FieldSchema("aexp", float, 60, 10, None),
+    FieldSchema("bexp", float, 70, 10, None),
+)
+
+_BOUNDARYTHERMALBULKNODE_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+)
 
 class BoundaryThermalBulknode(KeywordBase):
     """DYNA BOUNDARY_THERMAL_BULKNODE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "THERMAL_BULKNODE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryThermalBulknode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbnseg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aexp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bexp",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALBULKNODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALBULKNODE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Bulk node number.
@@ -260,4 +204,49 @@ class BoundaryThermalBulknode(KeywordBase):
     def n4(self, value: int) -> None:
         """Set the n4 property."""
         self._cards[1].set_value("n4", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

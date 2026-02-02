@@ -23,57 +23,40 @@
 """Module providing the AleFsiToLoadNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ALEFSITOLOADNODE_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+    FieldSchema("iopt", int, 20, 10, 0),
+)
+
+_ALEFSITOLOADNODE_CARD1 = (
+    FieldSchema("path", str, 0, 80, None),
+)
 
 class AleFsiToLoadNode(KeywordBase):
     """DYNA ALE_FSI_TO_LOAD_NODE keyword"""
 
     keyword = "ALE"
     subkeyword = "FSI_TO_LOAD_NODE"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleFsiToLoadNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEFSITOLOADNODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEFSITOLOADNODE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Output intervals.
@@ -125,4 +108,14 @@ class AleFsiToLoadNode(KeywordBase):
     def path(self, value: str) -> None:
         """Set the path property."""
         self._cards[1].set_value("path", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

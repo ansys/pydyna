@@ -23,60 +23,35 @@
 """Module providing the ControlFormingShellToTshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLFORMINGSHELLTOTSHELL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("thick", float, 10, 10, None),
+    FieldSchema("midsf", float, 20, 10, 0.0),
+    FieldSchema("idsegb", float, 30, 10, None),
+    FieldSchema("idsegt", float, 40, 10, None),
+)
 
 class ControlFormingShellToTshell(KeywordBase):
     """DYNA CONTROL_FORMING_SHELL_TO_TSHELL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_SHELL_TO_TSHELL"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingShellToTshell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "midsf",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idsegb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idsegt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSHELLTOTSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the thin shell elements.
@@ -136,4 +111,9 @@ class ControlFormingShellToTshell(KeywordBase):
     def idsegt(self, value: float) -> None:
         """Set the idsegt property."""
         self._cards[0].set_value("idsegt", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

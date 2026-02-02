@@ -23,239 +23,79 @@
 """Module providing the FrequencyDomainFrf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_FREQUENCYDOMAINFRF_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n1typ", int, 10, 10, 0),
+    FieldSchema("dof1", int, 20, 10, 0),
+    FieldSchema("vad1", int, 30, 10, 3),
+    FieldSchema("vid1", int, 40, 10, 0),
+    FieldSchema("fnmax", float, 50, 10, 0.0),
+    FieldSchema("mdmin", int, 60, 10, 0),
+    FieldSchema("mdmax", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINFRF_CARD1 = (
+    FieldSchema("dampf", float, 0, 10, 0.0),
+    FieldSchema("lcdam", int, 10, 10, 0),
+    FieldSchema("lctyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+)
+
+_FREQUENCYDOMAINFRF_CARD2 = (
+    FieldSchema("n2", int, 0, 10, None),
+    FieldSchema("n2typ", int, 10, 10, 0),
+    FieldSchema("dof2", int, 20, 10, 0),
+    FieldSchema("vad2", int, 30, 10, 2),
+    FieldSchema("vid2", int, 40, 10, 0),
+    FieldSchema("relatv", int, 50, 10, 0),
+)
+
+_FREQUENCYDOMAINFRF_CARD3 = (
+    FieldSchema("fmin", float, 0, 10, None),
+    FieldSchema("fmax", float, 10, 10, None),
+    FieldSchema("nfreq", int, 20, 10, 2),
+    FieldSchema("fspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, None),
+    FieldSchema("restrt", int, 50, 10, 0),
+    FieldSchema("output", int, 60, 10, 0),
+)
 
 class FrequencyDomainFrf(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_FRF keyword"""
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_FRF"
+    _link_fields = {
+        "lcdam": LinkType.DEFINE_CURVE,
+        "lcfreq": LinkType.DEFINE_CURVE,
+        "vid1": LinkType.DEFINE_VECTOR,
+        "vid2": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainFrf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof1",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad1",
-                        int,
-                        30,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmin",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n2",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad2",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relatv",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "output",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINFRF_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINFRF_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINFRF_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINFRF_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node / Node set/Segment set ID for excitation input.When VAD1,the excitation type, is set to 1, which is acceleration, this field is ignored.
@@ -612,4 +452,64 @@ class FrequencyDomainFrf(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""output must be `None` or one of {0,1}.""")
         self._cards[3].set_value("output", value)
+
+    @property
+    def lcdam_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdam."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdam:
+                return kwd
+        return None
+
+    @lcdam_link.setter
+    def lcdam_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdam."""
+        self.lcdam = value.lcid
+
+    @property
+    def lcfreq_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfreq."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfreq:
+                return kwd
+        return None
+
+    @lcfreq_link.setter
+    def lcfreq_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfreq."""
+        self.lcfreq = value.lcid
+
+    @property
+    def vid1_link(self) -> DefineVector:
+        """Get the DefineVector object for vid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid1:
+                return kwd
+        return None
+
+    @vid1_link.setter
+    def vid1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid1."""
+        self.vid1 = value.vid
+
+    @property
+    def vid2_link(self) -> DefineVector:
+        """Get the DefineVector object for vid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid2:
+                return kwd
+        return None
+
+    @vid2_link.setter
+    def vid2_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid2."""
+        self.vid2 = value.vid
 

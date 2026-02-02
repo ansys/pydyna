@@ -22,9 +22,44 @@
 
 """Module providing the Mat023 class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT023_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("aopt", float, 20, 10, None),
+    FieldSchema("ref", float, 30, 10, 0.0),
+    FieldSchema("macf", int, 40, 10, 1),
+)
+
+_MAT023_CARD1 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MAT023_CARD2 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MAT023_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat023(KeywordBase):
     """DYNA MAT_023 keyword"""
@@ -40,264 +75,50 @@ class Mat023(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
+            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT023_CARD2,
+                **kwargs,
+            ),            TableCardGroup(
                 [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
+                    (
+                        FieldSchema("eai", float, 0, 10, None),
+                        FieldSchema("ebi", float, 10, 10, None),
+                        FieldSchema("eci", float, 20, 10, None),
+                        FieldSchema("prabi", float, 30, 10, None),
+                        FieldSchema("prcai", float, 40, 10, None),
+                        FieldSchema("prcbi", float, 50, 10, None),
                     ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
+                    (
+                        FieldSchema("aai", float, 0, 10, None),
+                        FieldSchema("abi", float, 10, 10, None),
+                        FieldSchema("aci", float, 20, 10, None),
+                        FieldSchema("gabi", float, 30, 10, None),
+                        FieldSchema("gbci", float, 40, 10, None),
+                        FieldSchema("gcai", float, 50, 10, None),
+                        FieldSchema("ti", float, 60, 10, None),
                     ),
                 ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eai",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ebi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eci",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prabi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcai",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcbi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aai",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aci",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gabi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbci",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcai",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ti",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+                None,
+                None,
+                "temperature_points",
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat023.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT023_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -517,159 +338,30 @@ class Mat023(KeywordBase):
         self._cards[2].set_value("beta", value)
 
     @property
-    def eai(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in a-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("eai")
+    def temperature_points(self) -> pd.DataFrame:
+        """Gets the full table of temperature_points."""
+        return self._cards[3].table
 
-    @eai.setter
-    def eai(self, value: float) -> None:
-        """Set the eai property."""
-        self._cards[3].set_value("eai", value)
-
-    @property
-    def ebi(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in b-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("ebi")
-
-    @ebi.setter
-    def ebi(self, value: float) -> None:
-        """Set the ebi property."""
-        self._cards[3].set_value("ebi", value)
-
-    @property
-    def eci(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in c-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("eci")
-
-    @eci.setter
-    def eci(self, value: float) -> None:
-        """Set the eci property."""
-        self._cards[3].set_value("eci", value)
-
-    @property
-    def prabi(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ba at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prabi")
-
-    @prabi.setter
-    def prabi(self, value: float) -> None:
-        """Set the prabi property."""
-        self._cards[3].set_value("prabi", value)
-
-    @property
-    def prcai(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ca at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prcai")
-
-    @prcai.setter
-    def prcai(self, value: float) -> None:
-        """Set the prcai property."""
-        self._cards[3].set_value("prcai", value)
-
-    @property
-    def prcbi(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio cb at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prcbi")
-
-    @prcbi.setter
-    def prcbi(self, value: float) -> None:
-        """Set the prcbi property."""
-        self._cards[3].set_value("prcbi", value)
-
-    @property
-    def aai(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in a-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("aai")
-
-    @aai.setter
-    def aai(self, value: float) -> None:
-        """Set the aai property."""
-        self._cards[4].set_value("aai", value)
-
-    @property
-    def abi(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in b-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("abi")
-
-    @abi.setter
-    def abi(self, value: float) -> None:
-        """Set the abi property."""
-        self._cards[4].set_value("abi", value)
-
-    @property
-    def aci(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in c-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("aci")
-
-    @aci.setter
-    def aci(self, value: float) -> None:
-        """Set the aci property."""
-        self._cards[4].set_value("aci", value)
-
-    @property
-    def gabi(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus ab at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gabi")
-
-    @gabi.setter
-    def gabi(self, value: float) -> None:
-        """Set the gabi property."""
-        self._cards[4].set_value("gabi", value)
-
-    @property
-    def gbci(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus bc at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gbci")
-
-    @gbci.setter
-    def gbci(self, value: float) -> None:
-        """Set the gbci property."""
-        self._cards[4].set_value("gbci", value)
-
-    @property
-    def gcai(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus ca at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gcai")
-
-    @gcai.setter
-    def gcai(self, value: float) -> None:
-        """Set the gcai property."""
-        self._cards[4].set_value("gcai", value)
-
-    @property
-    def ti(self) -> typing.Optional[float]:
-        """Get or set the i'th temperature.
-        """ # nopep8
-        return self._cards[4].get_value("ti")
-
-    @ti.setter
-    def ti(self, value: float) -> None:
-        """Set the ti property."""
-        self._cards[4].set_value("ti", value)
+    @temperature_points.setter
+    def temperature_points(self, df: pd.DataFrame):
+        """sets temperature_points from the dataframe df."""
+        self._cards[3].table = df
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[5].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[5].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
 
+
+class MatTemperatureDependentOrthotropic(Mat023):
+    """Alias for MAT keyword."""
+    subkeyword = "TEMPERATURE_DEPENDENT_ORTHOTROPIC"

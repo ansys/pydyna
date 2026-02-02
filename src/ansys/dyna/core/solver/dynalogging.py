@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,7 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Logging module supplying a general framework for logging in the PyDYNA
+"""Logging module supplying a general framework for logging in the PyDYNA.
+
+This module provides logging capabilities for the PyDyna
 ``pre`` service.
 
 This module is built upon the `Python logging <https://docs.python.org/3/library/logging.html>`_
@@ -98,7 +100,7 @@ class is created, a logger is created and stored in two places:
 Instance loggers inheritate the ``pydyna_global`` output handlers and
 logging level unless otherwise specified. Instance loggers work in a
 similar way to the global logger. You can use the
-:func:`log_to_file() <PymapdlCustomAdapter.log_to_file>` method to add
+:func:`log_to_file() <PydynaCustomAdapter.log_to_file>` method to add
 a file handler or the :func:`logger.Logging.setLevel` method to change
 the log level.
 
@@ -152,7 +154,7 @@ string_to_loglevel = {
 }
 
 
-class PymapdlCustomAdapter(logging.LoggerAdapter):
+class PydynaCustomAdapter(logging.LoggerAdapter):
     """Adapter for keeping the reference to an MAPDL instance name dynamic.
 
     Using the standard approach, extra parameters must be supplied
@@ -193,7 +195,6 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
             Level of logging. The default is ``LOG_LEVEL``, which causes all messages
             to be recorded. For example, you can set the level of logging to ``DEBUG``.
         """
-
         self.logger = addfile_handler(self.logger, filename=filename, level=level, write_headers=True)
         self.file_handler = self.logger.file_handler
 
@@ -227,7 +228,9 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
         self.level = level
 
 
-class PymapdlPercentStyle(logging.PercentStyle):
+class PydynaPercentStyle(logging.PercentStyle):
+    """Provides a customized ``PercentStyle`` class for overwriting the default format styles."""
+
     def __init__(self, fmt, *, defaults=None):
         self._fmt = fmt or self.default_format
         self._defaults = defaults
@@ -252,7 +255,7 @@ class PymapdlPercentStyle(logging.PercentStyle):
         return STDOUT_MSG_FORMAT % values
 
 
-class PymapdlFormatter(logging.Formatter):
+class PydynaFormatter(logging.Formatter):
     """Provides a customized ``Formatter`` class for overwriting the default format styles."""
 
     def __init__(
@@ -264,7 +267,7 @@ class PymapdlFormatter(logging.Formatter):
         defaults=None,
     ):
         super().__init__(fmt, datefmt, style, validate)
-        self._style = PymapdlPercentStyle(fmt, defaults=defaults)  # overwriting
+        self._style = PydynaPercentStyle(fmt, defaults=defaults)  # overwriting
 
 
 class InstanceFilter(logging.Filter):
@@ -306,11 +309,11 @@ class Logger:
     >>> mapdl._log.info('This is a useful message')
     INFO -  -  <ipython-input-24-80df150fe31f> - <module> - This is LOG debug message.
 
-    Import the global PYMAPDL logger and add a file output handler.
+    Import the global Pydyna logger and add a file output handler.
 
     >>> import os
     >>> from ansys.mapdl.core import LOG
-    >>> file_path = os.path.join(os.getcwd(), 'pymapdl.log')
+    >>> file_path = os.path.join(os.getcwd(), 'Pydyna.log')
     >>> LOG.log_to_file(file_path)
 
     """
@@ -321,7 +324,7 @@ class Logger:
     _instances = {}
 
     def __init__(self, level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME):
-        """Customized the logger for the PyDYNA ``pre`` service.
+        """Customize the logger for the PyDYNA ``pre`` service.
 
         Parameters
         ----------
@@ -335,9 +338,8 @@ class Logger:
         filename : str, optional
             Name of the file where the logs are recorded if ``to_file=True``. The default
             is ``FILE_NAME``, in which case they are recorded in the
-            ``'pymapdl.log'`` file.
+            ``'Pydyna.log'`` file.
         """
-
         # create default main logger
         self.logger = logging.getLogger("pydyna_global")
         self.logger.addFilter(InstanceFilter())
@@ -371,22 +373,21 @@ class Logger:
         filename : str, optional
             Name of the file where the logs are recorded. The default
             is ``FILE_NAME``, in which case they are recorded in the
-            ``'pymapdl.log'`` file.
+            ``'Pydyna.log'`` file.
         level : str, optional
             Level of logging. The default is ``LOG_LEVEL``, in which
             case ``'DEBUG'`` is used.
 
         Examples
         --------
-        Write to the ``pymapdl.log`` file in the current working directory.
+        Write to the ``Pydyna.log`` file in the current working directory.
 
         >>> from ansys.mapdl.core import LOG
         >>> import os
-        >>> file_path = os.path.join(os.getcwd(), 'pymapdl.log')
+        >>> file_path = os.path.join(os.getcwd(), 'Pydyna.log')
         >>> LOG.log_to_file(file_path)
 
         """
-
         self = addfile_handler(self, filename=filename, level=level, write_headers=True)
 
     def log_to_stdout(self, level=LOG_LEVEL):
@@ -397,14 +398,13 @@ class Logger:
         filename : str, optional
             Name of the file where the logs are recorded. The default
             is ``FILE_NAME``, in which case they are recorded in the
-            ``'pymapdl.log'`` file.
+            ``'Pydyna.log'`` file.
         level : str, optional
             Level of logging. The default is ``LOG_LEVEL``, in which
             case ``'DEBUG'`` is used.
         write_headers : bool, optional
             Whether to write the headers to the file. The default is ``True``.
         """
-
         self = add_stdout_handler(self, level=level)
 
     def setLevel(self, level="DEBUG"):
@@ -424,7 +424,7 @@ class Logger:
         """Create a child logger.
 
         This method uses the ``getChild`` method or copies attributes between the
-        ``pymapdl_global`` logger and the new one.
+        ``Pydyna_global`` logger and the new one.
         """
         logger = logging.getLogger(suffix)
         logger.std_out_handler = None
@@ -486,9 +486,9 @@ class Logger:
 
     def _add_mapdl_instance_logger(self, name, mapdl_instance, level):
         if isinstance(name, str):
-            instance_logger = PymapdlCustomAdapter(self._make_child_logger(name, level), mapdl_instance)
+            instance_logger = PydynaCustomAdapter(self._make_child_logger(name, level), mapdl_instance)
         elif not name:  # pragma: no cover
-            instance_logger = PymapdlCustomAdapter(self._make_child_logger("NO_NAMED_YET", level), mapdl_instance)
+            instance_logger = PydynaCustomAdapter(self._make_child_logger("NO_NAMED_YET", level), mapdl_instance)
         else:
             raise ValueError("You can only input 'str' classes to this method.")
 
@@ -511,7 +511,7 @@ class Logger:
 
         Returns
         -------
-        ansys.mapdl.core.logging.PymapdlCustomAdapter
+        ansys.mapdl.core.logging.PydynaCustomAdapter
             Logger adapter customized to add MAPDL information to the
             logs.  You can use this class to log events in the same
             way you use the ``logger`` class.
@@ -531,6 +531,7 @@ class Logger:
         return self._instances[new_name]
 
     def __getitem__(self, key):
+        """Get an instance logger by name."""
         if key in self._instances.keys():
             return self._instances[key]
         else:
@@ -567,7 +568,6 @@ def addfile_handler(logger, filename=FILE_NAME, level=LOG_LEVEL, write_headers=F
     logger
         Logger or Logger object.
     """
-
     file_handler = logging.FileHandler(filename)
     file_handler.setLevel(level)
     file_handler.setFormatter(logging.Formatter(FILE_MSG_FORMAT))
@@ -605,10 +605,9 @@ def add_stdout_handler(logger, level=LOG_LEVEL, write_headers=False):
     logger
         Logger or Logger object.
     """
-
     std_out_handler = logging.StreamHandler()
     std_out_handler.setLevel(level)
-    std_out_handler.setFormatter(PymapdlFormatter(STDOUT_MSG_FORMAT))
+    std_out_handler.setFormatter(PydynaFormatter(STDOUT_MSG_FORMAT))
 
     if isinstance(logger, Logger):
         logger.std_out_handler = std_out_handler

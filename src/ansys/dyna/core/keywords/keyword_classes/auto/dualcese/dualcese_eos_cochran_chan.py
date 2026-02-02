@@ -23,7 +23,23 @@
 """Module providing the DualceseEosCochranChan class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSCOCHRANCHAN_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("eps1", float, 30, 10, None),
+    FieldSchema("eps2", float, 40, 10, None),
+    FieldSchema("gammao", float, 50, 10, None),
+    FieldSchema("rhoo", float, 60, 10, None),
+    FieldSchema("eo", float, 70, 10, None),
+)
+
+_DUALCESEEOSCOCHRANCHAN_CARD1 = (
+    FieldSchema("cv", float, 0, 10, None),
+)
 
 class DualceseEosCochranChan(KeywordBase):
     """DYNA DUALCESE_EOS_COCHRAN_CHAN keyword"""
@@ -35,79 +51,13 @@ class DualceseEosCochranChan(KeywordBase):
         """Initialize the DualceseEosCochranChan class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammao",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoo",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eo",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cv",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSCOCHRANCHAN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSCOCHRANCHAN_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID for the dual CESE solver

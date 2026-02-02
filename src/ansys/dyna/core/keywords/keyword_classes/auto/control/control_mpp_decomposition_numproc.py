@@ -23,7 +23,12 @@
 """Module providing the ControlMppDecompositionNumproc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONNUMPROC_CARD0 = (
+    FieldSchema("i", int, 0, 10, None),
+)
 
 class ControlMppDecompositionNumproc(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_NUMPROC keyword"""
@@ -35,19 +40,10 @@ class ControlMppDecompositionNumproc(KeywordBase):
         """Initialize the ControlMppDecompositionNumproc class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONNUMPROC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def i(self) -> typing.Optional[int]:
         """Get or set the The number of processors for decomposition.

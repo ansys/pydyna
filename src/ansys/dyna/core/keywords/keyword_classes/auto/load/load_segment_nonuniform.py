@@ -23,221 +23,84 @@
 """Module providing the LoadSegmentNonuniform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADSEGMENTNONUNIFORM_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADSEGMENTNONUNIFORM_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sf", float, 10, 10, 1.0),
+    FieldSchema("at", float, 20, 10, 0.0),
+    FieldSchema("dt", float, 30, 10, 1e+16),
+    FieldSchema("cid", int, 40, 10, None),
+    FieldSchema("v1", float, 50, 10, None),
+    FieldSchema("v2", float, 60, 10, None),
+    FieldSchema("v3", float, 70, 10, None),
+)
+
+_LOADSEGMENTNONUNIFORM_CARD2 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("n5", int, 40, 10, None),
+    FieldSchema("n6", int, 50, 10, None),
+    FieldSchema("n7", int, 60, 10, None),
+    FieldSchema("n8", int, 70, 10, None),
+)
+
+_LOADSEGMENTNONUNIFORM_CARD3 = (
+    FieldSchema("p1", float, 0, 10, None),
+    FieldSchema("p2", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("p4", float, 30, 10, None),
+    FieldSchema("p5", float, 40, 10, None),
+    FieldSchema("p6", float, 50, 10, None),
+    FieldSchema("p7", float, 60, 10, None),
+    FieldSchema("p8", float, 70, 10, None),
+)
 
 class LoadSegmentNonuniform(KeywordBase):
     """DYNA LOAD_SEGMENT_NONUNIFORM keyword"""
 
     keyword = "LOAD"
     subkeyword = "SEGMENT_NONUNIFORM"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSegmentNonuniform class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        30,
-                        10,
-                        1E+16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTNONUNIFORM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTNONUNIFORM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTNONUNIFORM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTNONUNIFORM_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -523,4 +386,59 @@ class LoadSegmentNonuniform(KeywordBase):
     def p8(self, value: float) -> None:
         """Set the p8 property."""
         self._cards[3].set_value("p8", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

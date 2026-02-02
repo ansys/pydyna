@@ -23,211 +23,83 @@
 """Module providing the ConstrainedJointStiffnessTranslational class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD0 = (
+    FieldSchema("jsid", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("pidb", int, 20, 10, None),
+    FieldSchema("cida", int, 30, 10, None),
+    FieldSchema("cidb", int, 40, 10, 0),
+    FieldSchema("jid", int, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, None),
+    FieldSchema("lcidy", int, 10, 10, None),
+    FieldSchema("lcidz", int, 20, 10, None),
+    FieldSchema("dlcidx", int, 30, 10, None),
+    FieldSchema("dlcidy", int, 40, 10, None),
+    FieldSchema("dlcidz", int, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD2 = (
+    FieldSchema("esx", float, 0, 10, 0.0),
+    FieldSchema("ffx", float, 10, 10, 0.0),
+    FieldSchema("esy", float, 20, 10, 0.0),
+    FieldSchema("ffy", float, 30, 10, 0.0),
+    FieldSchema("esz", float, 40, 10, 0.0),
+    FieldSchema("ffz", float, 50, 10, 0.0),
+)
+
+_CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD3 = (
+    FieldSchema("nsdx", float, 0, 10, None),
+    FieldSchema("psdx", float, 10, 10, None),
+    FieldSchema("nsdy", float, 20, 10, None),
+    FieldSchema("psdy", float, 30, 10, None),
+    FieldSchema("nsdz", float, 40, 10, None),
+    FieldSchema("psdz", float, 50, 10, None),
+)
 
 class ConstrainedJointStiffnessTranslational(KeywordBase):
     """DYNA CONSTRAINED_JOINT_STIFFNESS_TRANSLATIONAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_STIFFNESS_TRANSLATIONAL"
+    _link_fields = {
+        "lcidx": LinkType.DEFINE_CURVE,
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
+        "dlcidx": LinkType.DEFINE_CURVE,
+        "dlcidy": LinkType.DEFINE_CURVE,
+        "dlcidz": LinkType.DEFINE_CURVE,
+        "cida": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cidb": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pida": LinkType.PART,
+        "pidb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointStiffnessTranslational class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "jsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cida",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cidb",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "esx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsdx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsdy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsdz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psdz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def jsid(self) -> typing.Optional[int]:
         """Get or set the Joint stiffness ID.
@@ -492,4 +364,134 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
     def psdz(self, value: float) -> None:
         """Set the psdz property."""
         self._cards[3].set_value("psdz", value)
+
+    @property
+    def lcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidx:
+                return kwd
+        return None
+
+    @lcidx_link.setter
+    def lcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidx."""
+        self.lcidx = value.lcid
+
+    @property
+    def lcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
+
+    @property
+    def dlcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidx:
+                return kwd
+        return None
+
+    @dlcidx_link.setter
+    def dlcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidx."""
+        self.dlcidx = value.lcid
+
+    @property
+    def dlcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidy:
+                return kwd
+        return None
+
+    @dlcidy_link.setter
+    def dlcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidy."""
+        self.dlcidy = value.lcid
+
+    @property
+    def dlcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidz:
+                return kwd
+        return None
+
+    @dlcidz_link.setter
+    def dlcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidz."""
+        self.dlcidz = value.lcid
+
+    @property
+    def cida_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cida."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cida:
+                return kwd
+        return None
+
+    @cida_link.setter
+    def cida_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cida."""
+        self.cida = value.cid
+
+    @property
+    def cidb_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidb:
+                return kwd
+        return None
+
+    @cidb_link.setter
+    def cidb_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidb."""
+        self.cidb = value.cid
+
+    @property
+    def pida_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pida."""
+        return self._get_link_by_attr("PART", "pid", self.pida, "parts")
+
+    @property
+    def pidb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidb."""
+        return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 

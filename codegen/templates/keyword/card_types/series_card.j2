@@ -1,0 +1,14 @@
+            SeriesCard(
+                "{{card.variable.name}}",
+                {{card.variable.size}},
+                {{card.variable.width}},
+                {{card.variable.type}},
+{% if card.variable.length_func %}
+                lambda: {{card.variable.length_func}},
+{% else %}
+                None,
+{% endif %}
+{% if card.variable.active_func %}
+                lambda: {{card.variable.active_func}},
+{% endif %}
+                data = kwargs.get("{{card.variable.name}}")),

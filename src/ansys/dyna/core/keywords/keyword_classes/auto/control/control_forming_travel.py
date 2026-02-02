@@ -23,73 +23,41 @@
 """Module providing the ControlFormingTravel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLFORMINGTRAVEL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vid", int, 10, 10, None),
+    FieldSchema("travel", float, 20, 10, None),
+    FieldSchema("target", int, 30, 10, None),
+    FieldSchema("gap", float, 40, 10, None),
+    FieldSchema("phase", int, 50, 10, None),
+    FieldSchema("follow", int, 60, 10, None),
+)
 
 class ControlFormingTravel(KeywordBase):
     """DYNA CONTROL_FORMING_TRAVEL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_TRAVEL"
+    _link_fields = {
+        "vid": LinkType.DEFINE_VECTOR,
+        "pid": LinkType.PART,
+        "target": LinkType.PART,
+        "follow": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingTravel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "travel",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "target",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phase",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "follow",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTRAVEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID
@@ -166,4 +134,34 @@ class ControlFormingTravel(KeywordBase):
     def follow(self, value: int) -> None:
         """Set the follow property."""
         self._cards[0].set_value("follow", value)
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def target_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given target."""
+        return self._get_link_by_attr("PART", "pid", self.target, "parts")
+
+    @property
+    def follow_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given follow."""
+        return self._get_link_by_attr("PART", "pid", self.follow, "parts")
 

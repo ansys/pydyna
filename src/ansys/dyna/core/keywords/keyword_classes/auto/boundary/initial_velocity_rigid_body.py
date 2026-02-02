@@ -23,86 +23,40 @@
 """Module providing the InitialVelocityRigidBody class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_INITIALVELOCITYRIGIDBODY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("vy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("vxr", float, 40, 10, 0.0),
+    FieldSchema("vyr", float, 50, 10, 0.0),
+    FieldSchema("vzr", float, 60, 10, 0.0),
+    FieldSchema("icid", int, 70, 10, None),
+)
 
 class InitialVelocityRigidBody(KeywordBase):
     """DYNA INITIAL_VELOCITY_RIGID_BODY keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VELOCITY_RIGID_BODY"
+    _link_fields = {
+        "icid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVelocityRigidBody class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVELOCITYRIGIDBODY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the rigid body.
@@ -190,4 +144,24 @@ class InitialVelocityRigidBody(KeywordBase):
     def icid(self, value: int) -> None:
         """Set the icid property."""
         self._cards[0].set_value("icid", value)
+
+    @property
+    def icid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for icid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.icid:
+                return kwd
+        return None
+
+    @icid_link.setter
+    def icid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for icid."""
+        self.icid = value.cid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

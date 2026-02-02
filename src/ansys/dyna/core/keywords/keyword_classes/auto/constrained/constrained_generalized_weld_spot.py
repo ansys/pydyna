@@ -23,126 +23,57 @@
 """Module providing the ConstrainedGeneralizedWeldSpot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDGENERALIZEDWELDSPOT_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDSPOT_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("filter", int, 20, 10, None),
+    FieldSchema("window", float, 30, 10, 0.0),
+    FieldSchema("npr", int, 40, 10, None),
+    FieldSchema("nprt", int, 50, 10, 0),
+)
+
+_CONSTRAINEDGENERALIZEDWELDSPOT_CARD2 = (
+    FieldSchema("tfail", float, 0, 10, 1e+20),
+    FieldSchema("epsf", float, 10, 10, None),
+    FieldSchema("sn", float, 20, 10, None),
+    FieldSchema("ss", float, 30, 10, None),
+    FieldSchema("n", float, 40, 10, None),
+    FieldSchema("m", float, 50, 10, None),
+)
 
 class ConstrainedGeneralizedWeldSpot(KeywordBase):
     """DYNA CONSTRAINED_GENERALIZED_WELD_SPOT keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "GENERALIZED_WELD_SPOT"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedGeneralizedWeldSpot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filter",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "window",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nprt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tfail",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDSPOT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDSPOT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDSPOT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID
@@ -293,4 +224,29 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
     def m(self, value: float) -> None:
         """Set the m property."""
         self._cards[2].set_value("m", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

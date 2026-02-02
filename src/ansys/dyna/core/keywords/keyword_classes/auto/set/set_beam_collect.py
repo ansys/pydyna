@@ -23,8 +23,29 @@
 """Module providing the SetBeamCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETBEAMCOLLECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETBEAMCOLLECT_CARD1 = (
+    FieldSchema("k1", int, 0, 10, None),
+    FieldSchema("k2", int, 10, 10, None),
+    FieldSchema("k3", int, 20, 10, None),
+    FieldSchema("k4", int, 30, 10, None),
+    FieldSchema("k5", int, 40, 10, None),
+    FieldSchema("k6", int, 50, 10, None),
+    FieldSchema("k7", int, 60, 10, None),
+    FieldSchema("k8", int, 70, 10, None),
+)
+
+_SETBEAMCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetBeamCollect(KeywordBase):
     """DYNA SET_BEAM_COLLECT keyword"""
@@ -34,102 +55,39 @@ class SetBeamCollect(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "k1": LinkType.ELEMENT_BEAM,
+        "k2": LinkType.ELEMENT_BEAM,
+        "k3": LinkType.ELEMENT_BEAM,
+        "k4": LinkType.ELEMENT_BEAM,
+        "k5": LinkType.ELEMENT_BEAM,
+        "k6": LinkType.ELEMENT_BEAM,
+        "k7": LinkType.ELEMENT_BEAM,
+        "k8": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetBeamCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETBEAMCOLLECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETBEAMCOLLECT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetBeamCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAMCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID.
@@ -242,4 +200,44 @@ class SetBeamCollect(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def k1_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k1, "parts")
+
+    @property
+    def k2_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k2, "parts")
+
+    @property
+    def k3_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k3, "parts")
+
+    @property
+    def k4_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k4, "parts")
+
+    @property
+    def k5_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k5, "parts")
+
+    @property
+    def k6_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k6, "parts")
+
+    @property
+    def k7_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k7, "parts")
+
+    @property
+    def k8_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given k8."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.k8, "parts")
 

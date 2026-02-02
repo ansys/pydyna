@@ -23,8 +23,95 @@
 """Module providing the MatT04 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATT04_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
+    FieldSchema("tgmult", float, 30, 10, None),
+    FieldSchema("aopt", float, 40, 10, 0.0),
+    FieldSchema("tlat", float, 50, 10, None),
+    FieldSchema("hlat", float, 60, 10, None),
+)
+
+_MATT04_CARD1 = (
+    FieldSchema("t1", float, 0, 10, None),
+    FieldSchema("t2", float, 10, 10, None),
+    FieldSchema("t3", float, 20, 10, None),
+    FieldSchema("t4", float, 30, 10, None),
+    FieldSchema("t5", float, 40, 10, None),
+    FieldSchema("t6", float, 50, 10, None),
+    FieldSchema("t7", float, 60, 10, None),
+    FieldSchema("t8", float, 70, 10, None),
+)
+
+_MATT04_CARD2 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+    FieldSchema("c4", float, 30, 10, None),
+    FieldSchema("c5", float, 40, 10, None),
+    FieldSchema("c6", float, 50, 10, None),
+    FieldSchema("c7", float, 60, 10, None),
+    FieldSchema("c8", float, 70, 10, None),
+)
+
+_MATT04_CARD3 = (
+    FieldSchema("_k1_1_", float, 0, 10, None, "(k1-1)"),
+    FieldSchema("_k1_2_", float, 10, 10, None, "(k1-2)"),
+    FieldSchema("_k1_3_", float, 20, 10, None, "(k1-3)"),
+    FieldSchema("_k1_4_", float, 30, 10, None, "(k1-4)"),
+    FieldSchema("_k1_5_", float, 40, 10, None, "(k1-5)"),
+    FieldSchema("_k1_6_", float, 50, 10, None, "(k1-6)"),
+    FieldSchema("_k1_7_", float, 60, 10, None, "(k1-7)"),
+    FieldSchema("_k1_8_", float, 70, 10, None, "(k1-8)"),
+)
+
+_MATT04_CARD4 = (
+    FieldSchema("_k2_1_", float, 0, 10, None, "(k2-1)"),
+    FieldSchema("_k2_2_", float, 10, 10, None, "(k2-2)"),
+    FieldSchema("_k2_3_", float, 20, 10, None, "(k2-3)"),
+    FieldSchema("_k2_4_", float, 30, 10, None, "(k2-4)"),
+    FieldSchema("_k2_5_", float, 40, 10, None, "(k2-5)"),
+    FieldSchema("_k2_6_", float, 50, 10, None, "(k2-6)"),
+    FieldSchema("_k2_7_", float, 60, 10, None, "(k2-7)"),
+    FieldSchema("_k2_8_", float, 70, 10, None, "(k2-8)"),
+)
+
+_MATT04_CARD5 = (
+    FieldSchema("_k3_1_", float, 0, 10, None, "(k3-1)"),
+    FieldSchema("_k_2_", float, 10, 10, None, "(k-2)"),
+    FieldSchema("_k3_3_", float, 20, 10, None, "(k3-3)"),
+    FieldSchema("_k3_4_", float, 30, 10, None, "(k3-4)"),
+    FieldSchema("_k3_5_", float, 40, 10, None, "(k3-5)"),
+    FieldSchema("_k3_6_", float, 50, 10, None, "(k3-6)"),
+    FieldSchema("_k3_7_", float, 60, 10, None, "(k3-7)"),
+    FieldSchema("_k3_8_", float, 70, 10, None, "(k3-8)"),
+)
+
+_MATT04_CARD6 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATT04_CARD7 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+)
+
+_MATT04_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatT04(KeywordBase):
     """DYNA MAT_T04 keyword"""
@@ -34,456 +121,50 @@ class MatT04(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tgrlc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatT04 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgrlc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgmult",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlat",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlat",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k1-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k1-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k2-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k2-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "(k3-1)",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k-2)",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-3)",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-4)",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-5)",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-6)",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-7)",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "(k3-8)",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATT04_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatT04.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATT04_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal material identification, a unique number or label muast be specified.
@@ -753,265 +434,265 @@ class MatT04(KeywordBase):
     def _k1_1_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T1.
         """ # nopep8
-        return self._cards[3].get_value("(k1-1)")
+        return self._cards[3].get_value("_k1_1_")
 
     @_k1_1_.setter
     def _k1_1_(self, value: float) -> None:
         """Set the _k1_1_ property."""
-        self._cards[3].set_value("(k1-1)", value)
+        self._cards[3].set_value("_k1_1_", value)
 
     @property
     def _k1_2_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T2.
         """ # nopep8
-        return self._cards[3].get_value("(k1-2)")
+        return self._cards[3].get_value("_k1_2_")
 
     @_k1_2_.setter
     def _k1_2_(self, value: float) -> None:
         """Set the _k1_2_ property."""
-        self._cards[3].set_value("(k1-2)", value)
+        self._cards[3].set_value("_k1_2_", value)
 
     @property
     def _k1_3_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T3.
         """ # nopep8
-        return self._cards[3].get_value("(k1-3)")
+        return self._cards[3].get_value("_k1_3_")
 
     @_k1_3_.setter
     def _k1_3_(self, value: float) -> None:
         """Set the _k1_3_ property."""
-        self._cards[3].set_value("(k1-3)", value)
+        self._cards[3].set_value("_k1_3_", value)
 
     @property
     def _k1_4_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T4.
         """ # nopep8
-        return self._cards[3].get_value("(k1-4)")
+        return self._cards[3].get_value("_k1_4_")
 
     @_k1_4_.setter
     def _k1_4_(self, value: float) -> None:
         """Set the _k1_4_ property."""
-        self._cards[3].set_value("(k1-4)", value)
+        self._cards[3].set_value("_k1_4_", value)
 
     @property
     def _k1_5_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T5.
         """ # nopep8
-        return self._cards[3].get_value("(k1-5)")
+        return self._cards[3].get_value("_k1_5_")
 
     @_k1_5_.setter
     def _k1_5_(self, value: float) -> None:
         """Set the _k1_5_ property."""
-        self._cards[3].set_value("(k1-5)", value)
+        self._cards[3].set_value("_k1_5_", value)
 
     @property
     def _k1_6_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T6.
         """ # nopep8
-        return self._cards[3].get_value("(k1-6)")
+        return self._cards[3].get_value("_k1_6_")
 
     @_k1_6_.setter
     def _k1_6_(self, value: float) -> None:
         """Set the _k1_6_ property."""
-        self._cards[3].set_value("(k1-6)", value)
+        self._cards[3].set_value("_k1_6_", value)
 
     @property
     def _k1_7_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T7.
         """ # nopep8
-        return self._cards[3].get_value("(k1-7)")
+        return self._cards[3].get_value("_k1_7_")
 
     @_k1_7_.setter
     def _k1_7_(self, value: float) -> None:
         """Set the _k1_7_ property."""
-        self._cards[3].set_value("(k1-7)", value)
+        self._cards[3].set_value("_k1_7_", value)
 
     @property
     def _k1_8_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K1 in local x-direction at T8.
         """ # nopep8
-        return self._cards[3].get_value("(k1-8)")
+        return self._cards[3].get_value("_k1_8_")
 
     @_k1_8_.setter
     def _k1_8_(self, value: float) -> None:
         """Set the _k1_8_ property."""
-        self._cards[3].set_value("(k1-8)", value)
+        self._cards[3].set_value("_k1_8_", value)
 
     @property
     def _k2_1_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T1.
         """ # nopep8
-        return self._cards[4].get_value("(k2-1)")
+        return self._cards[4].get_value("_k2_1_")
 
     @_k2_1_.setter
     def _k2_1_(self, value: float) -> None:
         """Set the _k2_1_ property."""
-        self._cards[4].set_value("(k2-1)", value)
+        self._cards[4].set_value("_k2_1_", value)
 
     @property
     def _k2_2_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T2.
         """ # nopep8
-        return self._cards[4].get_value("(k2-2)")
+        return self._cards[4].get_value("_k2_2_")
 
     @_k2_2_.setter
     def _k2_2_(self, value: float) -> None:
         """Set the _k2_2_ property."""
-        self._cards[4].set_value("(k2-2)", value)
+        self._cards[4].set_value("_k2_2_", value)
 
     @property
     def _k2_3_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T3.
         """ # nopep8
-        return self._cards[4].get_value("(k2-3)")
+        return self._cards[4].get_value("_k2_3_")
 
     @_k2_3_.setter
     def _k2_3_(self, value: float) -> None:
         """Set the _k2_3_ property."""
-        self._cards[4].set_value("(k2-3)", value)
+        self._cards[4].set_value("_k2_3_", value)
 
     @property
     def _k2_4_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T4.
         """ # nopep8
-        return self._cards[4].get_value("(k2-4)")
+        return self._cards[4].get_value("_k2_4_")
 
     @_k2_4_.setter
     def _k2_4_(self, value: float) -> None:
         """Set the _k2_4_ property."""
-        self._cards[4].set_value("(k2-4)", value)
+        self._cards[4].set_value("_k2_4_", value)
 
     @property
     def _k2_5_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T5.
         """ # nopep8
-        return self._cards[4].get_value("(k2-5)")
+        return self._cards[4].get_value("_k2_5_")
 
     @_k2_5_.setter
     def _k2_5_(self, value: float) -> None:
         """Set the _k2_5_ property."""
-        self._cards[4].set_value("(k2-5)", value)
+        self._cards[4].set_value("_k2_5_", value)
 
     @property
     def _k2_6_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T6.
         """ # nopep8
-        return self._cards[4].get_value("(k2-6)")
+        return self._cards[4].get_value("_k2_6_")
 
     @_k2_6_.setter
     def _k2_6_(self, value: float) -> None:
         """Set the _k2_6_ property."""
-        self._cards[4].set_value("(k2-6)", value)
+        self._cards[4].set_value("_k2_6_", value)
 
     @property
     def _k2_7_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T7.
         """ # nopep8
-        return self._cards[4].get_value("(k2-7)")
+        return self._cards[4].get_value("_k2_7_")
 
     @_k2_7_.setter
     def _k2_7_(self, value: float) -> None:
         """Set the _k2_7_ property."""
-        self._cards[4].set_value("(k2-7)", value)
+        self._cards[4].set_value("_k2_7_", value)
 
     @property
     def _k2_8_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K2 in local y-direction at T8.
         """ # nopep8
-        return self._cards[4].get_value("(k2-8)")
+        return self._cards[4].get_value("_k2_8_")
 
     @_k2_8_.setter
     def _k2_8_(self, value: float) -> None:
         """Set the _k2_8_ property."""
-        self._cards[4].set_value("(k2-8)", value)
+        self._cards[4].set_value("_k2_8_", value)
 
     @property
     def _k3_1_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T1.
         """ # nopep8
-        return self._cards[5].get_value("(k3-1)")
+        return self._cards[5].get_value("_k3_1_")
 
     @_k3_1_.setter
     def _k3_1_(self, value: float) -> None:
         """Set the _k3_1_ property."""
-        self._cards[5].set_value("(k3-1)", value)
+        self._cards[5].set_value("_k3_1_", value)
 
     @property
     def _k_2_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T2.
         """ # nopep8
-        return self._cards[5].get_value("(k-2)")
+        return self._cards[5].get_value("_k_2_")
 
     @_k_2_.setter
     def _k_2_(self, value: float) -> None:
         """Set the _k_2_ property."""
-        self._cards[5].set_value("(k-2)", value)
+        self._cards[5].set_value("_k_2_", value)
 
     @property
     def _k3_3_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T3.
         """ # nopep8
-        return self._cards[5].get_value("(k3-3)")
+        return self._cards[5].get_value("_k3_3_")
 
     @_k3_3_.setter
     def _k3_3_(self, value: float) -> None:
         """Set the _k3_3_ property."""
-        self._cards[5].set_value("(k3-3)", value)
+        self._cards[5].set_value("_k3_3_", value)
 
     @property
     def _k3_4_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T4.
         """ # nopep8
-        return self._cards[5].get_value("(k3-4)")
+        return self._cards[5].get_value("_k3_4_")
 
     @_k3_4_.setter
     def _k3_4_(self, value: float) -> None:
         """Set the _k3_4_ property."""
-        self._cards[5].set_value("(k3-4)", value)
+        self._cards[5].set_value("_k3_4_", value)
 
     @property
     def _k3_5_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T5.
         """ # nopep8
-        return self._cards[5].get_value("(k3-5)")
+        return self._cards[5].get_value("_k3_5_")
 
     @_k3_5_.setter
     def _k3_5_(self, value: float) -> None:
         """Set the _k3_5_ property."""
-        self._cards[5].set_value("(k3-5)", value)
+        self._cards[5].set_value("_k3_5_", value)
 
     @property
     def _k3_6_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T6.
         """ # nopep8
-        return self._cards[5].get_value("(k3-6)")
+        return self._cards[5].get_value("_k3_6_")
 
     @_k3_6_.setter
     def _k3_6_(self, value: float) -> None:
         """Set the _k3_6_ property."""
-        self._cards[5].set_value("(k3-6)", value)
+        self._cards[5].set_value("_k3_6_", value)
 
     @property
     def _k3_7_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T7.
         """ # nopep8
-        return self._cards[5].get_value("(k3-7)")
+        return self._cards[5].get_value("_k3_7_")
 
     @_k3_7_.setter
     def _k3_7_(self, value: float) -> None:
         """Set the _k3_7_ property."""
-        self._cards[5].set_value("(k3-7)", value)
+        self._cards[5].set_value("_k3_7_", value)
 
     @property
     def _k3_8_(self) -> typing.Optional[float]:
         """Get or set the Thermal conductivity K3 in local z-direction at T8.
         """ # nopep8
-        return self._cards[5].get_value("(k3-8)")
+        return self._cards[5].get_value("_k3_8_")
 
     @_k3_8_.setter
     def _k3_8_(self, value: float) -> None:
         """Set the _k3_8_ property."""
-        self._cards[5].set_value("(k3-8)", value)
+        self._cards[5].set_value("_k3_8_", value)
 
     @property
     def xp(self) -> typing.Optional[float]:
@@ -1125,4 +806,19 @@ class MatT04(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tgrlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tgrlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tgrlc:
+                return kwd
+        return None
+
+    @tgrlc_link.setter
+    def tgrlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tgrlc."""
+        self.tgrlc = value.lcid
 

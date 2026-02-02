@@ -23,106 +23,58 @@
 """Module providing the ConstrainedRigidBodyInsert class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pidl", int, 10, 10, None),
+    FieldSchema("pidc", int, 20, 10, None),
+    FieldSchema("coordid", int, 30, 10, None),
+    FieldSchema("idir", int, 40, 10, 3),
+)
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD1 = (
+    FieldSchema("mflag", int, 0, 10, 0),
+    FieldSchema("mcid", int, 10, 10, None),
+    FieldSchema("deathm", float, 20, 10, 0.0),
+)
+
+_CONSTRAINEDRIGIDBODYINSERT_CARD2 = (
+    FieldSchema("partb", int, 0, 10, None),
+    FieldSchema("deathb", float, 10, 10, 0.0),
+)
 
 class ConstrainedRigidBodyInsert(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODY_INSERT keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODY_INSERT"
+    _link_fields = {
+        "mcid": LinkType.DEFINE_CURVE,
+        "coordid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pidl": LinkType.PART,
+        "pidc": LinkType.PART,
+        "partb": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodyInsert class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coordid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        40,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deathm",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "partb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deathb",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODYINSERT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Insert ID.
@@ -243,4 +195,49 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     def deathb(self, value: float) -> None:
         """Set the deathb property."""
         self._cards[2].set_value("deathb", value)
+
+    @property
+    def mcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for mcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.mcid:
+                return kwd
+        return None
+
+    @mcid_link.setter
+    def mcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for mcid."""
+        self.mcid = value.lcid
+
+    @property
+    def coordid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for coordid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.coordid:
+                return kwd
+        return None
+
+    @coordid_link.setter
+    def coordid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for coordid."""
+        self.coordid = value.cid
+
+    @property
+    def pidl_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidl."""
+        return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
+
+    @property
+    def pidc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidc."""
+        return self._get_link_by_attr("PART", "pid", self.pidc, "parts")
+
+    @property
+    def partb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given partb."""
+        return self._get_link_by_attr("PART", "pid", self.partb, "parts")
 

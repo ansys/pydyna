@@ -23,144 +23,53 @@
 """Module providing the ControlFormingBlankmesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONTROLFORMINGBLANKMESH_CARD0 = (
+    FieldSchema("idmesh", int, 0, 10, None),
+    FieldSchema("eleng", float, 10, 10, 0.0),
+    FieldSchema("xleng", float, 20, 10, 0.0),
+    FieldSchema("yleng", float, 30, 10, 0.0),
+    FieldSchema("angelx", float, 40, 10, 0.0),
+    FieldSchema("nplane", int, 50, 10, 1),
+    FieldSchema("cid", int, 60, 10, 0),
+)
+
+_CONTROLFORMINGBLANKMESH_CARD1 = (
+    FieldSchema("pidbk", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("eid", int, 20, 10, None),
+    FieldSchema("xcent", float, 30, 10, 0.0),
+    FieldSchema("ycent", float, 40, 10, 0.0),
+    FieldSchema("zcent", float, 50, 10, 0.0),
+    FieldSchema("xshift", float, 60, 10, 0.0),
+    FieldSchema("yshift", float, 70, 10, 0.0),
+)
 
 class ControlFormingBlankmesh(KeywordBase):
     """DYNA CONTROL_FORMING_BLANKMESH keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_BLANKMESH"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pidbk": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingBlankmesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idmesh",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eleng",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xleng",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yleng",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angelx",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pidbk",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xcent",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycent",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zcent",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xshift",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yshift",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGBLANKMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGBLANKMESH_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def idmesh(self) -> typing.Optional[int]:
         """Get or set the ID of the blankmesh (not the blank PID); must be unique
@@ -330,4 +239,24 @@ class ControlFormingBlankmesh(KeywordBase):
     def yshift(self, value: float) -> None:
         """Set the yshift property."""
         self._cards[1].set_value("yshift", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pidbk_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidbk."""
+        return self._get_link_by_attr("PART", "pid", self.pidbk, "parts")
 

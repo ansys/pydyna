@@ -23,68 +23,39 @@
 """Module providing the EmExternalField class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_EMEXTERNALFIELD_CARD0 = (
+    FieldSchema("fieldid", int, 0, 10, None),
+    FieldSchema("ftype", int, 10, 10, 1),
+    FieldSchema("fdef", int, 20, 10, 1),
+    FieldSchema("lcidx", int, 30, 10, None),
+    FieldSchema("lcidy", int, 40, 10, None),
+    FieldSchema("lcidz", int, 50, 10, None),
+)
 
 class EmExternalField(KeywordBase):
     """DYNA EM_EXTERNAL_FIELD keyword"""
 
     keyword = "EM"
     subkeyword = "EXTERNAL_FIELD"
+    _link_fields = {
+        "lcidx": LinkType.DEFINE_CURVE,
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmExternalField class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fieldid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fdef",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidx",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEXTERNALFIELD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fieldid(self) -> typing.Optional[int]:
         """Get or set the External Field ID.
@@ -159,4 +130,49 @@ class EmExternalField(KeywordBase):
     def lcidz(self, value: int) -> None:
         """Set the lcidz property."""
         self._cards[0].set_value("lcidz", value)
+
+    @property
+    def lcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidx:
+                return kwd
+        return None
+
+    @lcidx_link.setter
+    def lcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidx."""
+        self.lcidx = value.lcid
+
+    @property
+    def lcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
 

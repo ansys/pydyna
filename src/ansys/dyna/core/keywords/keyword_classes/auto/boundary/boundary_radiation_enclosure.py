@@ -23,211 +23,87 @@
 """Module providing the BoundaryRadiationEnclosure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYRADIATIONENCLOSURE_CARD0 = (
+    FieldSchema("brencid", int, 0, 10, None),
+    FieldSchema("encname", str, 10, 70, None),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD1 = (
+    FieldSchema("calopt", int, 0, 10, 0),
+    FieldSchema("outopt", int, 10, 10, 0),
+    FieldSchema("conopt", int, 20, 10, 0),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD2 = (
+    FieldSchema("encname", str, 0, 80, None),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD3 = (
+    FieldSchema("smflag", int, 0, 10, 0),
+    FieldSchema("smmaxi", int, 10, 10, 500),
+    FieldSchema("smabst", float, 20, 10, 1e-10),
+    FieldSchema("smrelt", float, 30, 10, 1e-06),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD4 = (
+    FieldSchema("stype", int, 0, 10, 0),
+    FieldSchema("slmaxi", int, 10, 10, 500),
+    FieldSchema("slabst", float, 20, 10, 1e-10),
+    FieldSchema("slrelt", float, 30, 10, 1e-06),
+    FieldSchema("slmlev", int, 40, 10, 0),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD5 = (
+    FieldSchema("ssid", int, 0, 10, None),
+)
+
+_BOUNDARYRADIATIONENCLOSURE_CARD6 = (
+    FieldSchema("nint", int, 0, 10, None),
+    FieldSchema("block", int, 10, 10, 0),
+    FieldSchema("selcid", int, 20, 10, 0),
+    FieldSchema("semult", float, 30, 10, 0.0),
+    FieldSchema("loc", int, 40, 10, 0),
+)
 
 class BoundaryRadiationEnclosure(KeywordBase):
     """DYNA BOUNDARY_RADIATION_ENCLOSURE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "RADIATION_ENCLOSURE"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryRadiationEnclosure class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "brencid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "encname",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "calopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outopt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conopt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "encname",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "smflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smmaxi",
-                        int,
-                        10,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smabst",
-                        float,
-                        20,
-                        10,
-                        1.0E-10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smrelt",
-                        float,
-                        30,
-                        10,
-                        1.0E-6,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "stype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slmaxi",
-                        int,
-                        10,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slabst",
-                        float,
-                        20,
-                        10,
-                        1.0E-10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slrelt",
-                        float,
-                        30,
-                        10,
-                        1.0E-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slmlev",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nint",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "block",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "selcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "semult",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONENCLOSURE_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def brencid(self) -> typing.Optional[int]:
         """Get or set the Boundary radiation ID for this enclosure
@@ -484,4 +360,14 @@ class BoundaryRadiationEnclosure(KeywordBase):
     def loc(self, value: int) -> None:
         """Set the loc property."""
         self._cards[6].set_value("loc", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

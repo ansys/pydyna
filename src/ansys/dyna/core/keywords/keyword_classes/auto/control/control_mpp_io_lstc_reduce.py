@@ -23,7 +23,11 @@
 """Module providing the ControlMppIoLstcReduce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPIOLSTCREDUCE_CARD0 = (
+)
 
 class ControlMppIoLstcReduce(KeywordBase):
     """DYNA CONTROL_MPP_IO_LSTC_REDUCE keyword"""
@@ -35,9 +39,7 @@ class ControlMppIoLstcReduce(KeywordBase):
         """Initialize the ControlMppIoLstcReduce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPIOLSTCREDUCE_CARD0,
+                **kwargs,
+            ),        ]

@@ -23,8 +23,49 @@
 """Module providing the ContactForceTransducerConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_CONTACTFORCETRANSDUCERCONSTRAINT_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("surfatyp", int, 20, 10, 0),
+    FieldSchema("surfbtyp", int, 30, 10, 0),
+    FieldSchema("saboxid", int, 40, 10, None),
+    FieldSchema("sbboxid", int, 50, 10, None),
+    FieldSchema("sapr", int, 60, 10, 0),
+    FieldSchema("sbpr", int, 70, 10, 0),
+)
+
+_CONTACTFORCETRANSDUCERCONSTRAINT_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_CONTACTFORCETRANSDUCERCONSTRAINT_CARD2 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_CONTACTFORCETRANSDUCERCONSTRAINT_OPTION0_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class ContactForceTransducerConstraint(KeywordBase):
     """DYNA CONTACT_FORCE_TRANSDUCER_CONSTRAINT keyword"""
@@ -34,222 +75,36 @@ class ContactForceTransducerConstraint(KeywordBase):
     option_specs = [
         OptionSpec("ID", -2, 1),
     ]
+    _link_fields = {
+        "saboxid": LinkType.DEFINE_BOX,
+        "sbboxid": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactForceTransducerConstraint class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfatyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfbtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "saboxid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbboxid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sapr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbpr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTFORCETRANSDUCERCONSTRAINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTFORCETRANSDUCERCONSTRAINT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTFORCETRANSDUCERCONSTRAINT_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactForceTransducerConstraint.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "cid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("cid")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTFORCETRANSDUCERCONSTRAINT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.
@@ -396,4 +251,34 @@ class ContactForceTransducerConstraint(KeywordBase):
 
         if value:
             self.activate_option("HEADING")
+
+    @property
+    def saboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for saboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.saboxid:
+                return kwd
+        return None
+
+    @saboxid_link.setter
+    def saboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for saboxid."""
+        self.saboxid = value.boxid
+
+    @property
+    def sbboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for sbboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.sbboxid:
+                return kwd
+        return None
+
+    @sbboxid_link.setter
+    def sbboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for sbboxid."""
+        self.sbboxid = value.boxid
 

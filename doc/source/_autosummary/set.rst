@@ -461,17 +461,24 @@ SetModeListGenerate
     :members:
 
 
-SetMultiMaterialGroupList
--------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list
-    :members:
-
-
 SetMultiMaterialGroupListGpname
 -------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list_gpname
+    :members:
+
+
+SetMulti_MaterialGroupList
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi__material_group_list
+    :members:
+
+
+SetNode
+-------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_node_list
     :members:
 
 

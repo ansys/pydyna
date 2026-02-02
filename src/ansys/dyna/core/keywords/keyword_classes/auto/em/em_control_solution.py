@@ -23,7 +23,19 @@
 """Module providing the EmControlSolution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLSOLUTION_CARD0 = (
+    FieldSchema("ncylfem", int, 0, 10, 5000),
+    FieldSchema("ncylbem", int, 10, 10, 5000),
+    FieldSchema("autofem", int, 20, 10, 0),
+    FieldSchema("autobem", int, 30, 10, 0),
+    FieldSchema("tol1fem", float, 40, 10, 0.3),
+    FieldSchema("tol2fem", float, 50, 10, 0.1),
+    FieldSchema("tol1bem", float, 60, 10, 0.3),
+    FieldSchema("tol2bem", float, 70, 10, 0.1),
+)
 
 class EmControlSolution(KeywordBase):
     """DYNA EM_CONTROL_SOLUTION keyword"""
@@ -35,76 +47,10 @@ class EmControlSolution(KeywordBase):
         """Initialize the EmControlSolution class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ncylfem",
-                        int,
-                        0,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncylbem",
-                        int,
-                        10,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "autofem",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "autobem",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol1fem",
-                        float,
-                        40,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol2fem",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol1bem",
-                        float,
-                        60,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol2bem",
-                        float,
-                        70,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLSOLUTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ncylfem(self) -> int:
         """Get or set the Number of electromagnetism cycles between the recalculation of FEM matrices.If a negative value is entered, then the absolute value will refer to a load curve giving NCYCLFEM function of time.

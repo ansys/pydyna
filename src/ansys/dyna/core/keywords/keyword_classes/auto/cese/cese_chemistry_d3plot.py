@@ -23,7 +23,16 @@
 """Module providing the CeseChemistryD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESECHEMISTRYD3PLOT_CARD0 = (
+    FieldSchema("modelid", int, 0, 10, None),
+)
+
+_CESECHEMISTRYD3PLOT_CARD1 = (
+    FieldSchema("species", str, 0, 256, None),
+)
 
 class CeseChemistryD3Plot(KeywordBase):
     """DYNA CESE_CHEMISTRY_D3PLOT keyword"""
@@ -35,30 +44,13 @@ class CeseChemistryD3Plot(KeywordBase):
         """Initialize the CeseChemistryD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "modelid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "species",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESECHEMISTRYD3PLOT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESECHEMISTRYD3PLOT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def modelid(self) -> typing.Optional[int]:
         """Get or set the Identifier of a Chemkin-compatible chemistry model.

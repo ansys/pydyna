@@ -23,87 +23,40 @@
 """Module providing the ControlSpotweldBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLSPOTWELDBEAM_CARD0 = (
+    FieldSchema("lct", int, 0, 10, 0),
+    FieldSchema("lcs", int, 10, 10, None),
+    FieldSchema("t_ort", int, 20, 10, 0),
+    FieldSchema("prtflg", int, 30, 10, 0),
+    FieldSchema("t_ors", int, 40, 10, 0),
+    FieldSchema("rpbhx", int, 50, 10, 0),
+    FieldSchema("bmsid", int, 60, 10, 0),
+    FieldSchema("id_off", int, 70, 10, 0),
+)
 
 class ControlSpotweldBeam(KeywordBase):
     """DYNA CONTROL_SPOTWELD_BEAM keyword"""
 
     keyword = "CONTROL"
     subkeyword = "SPOTWELD_BEAM"
+    _link_fields = {
+        "lct": LinkType.DEFINE_CURVE,
+        "lcs": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSpotweldBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lct",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcs",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_ort",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prtflg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_ors",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpbhx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bmsid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id_off",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSPOTWELDBEAM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lct(self) -> int:
         """Get or set the Load curve ID for scaling the response in tension based on the shell element size
@@ -191,4 +144,34 @@ class ControlSpotweldBeam(KeywordBase):
     def id_off(self, value: int) -> None:
         """Set the id_off property."""
         self._cards[0].set_value("id_off", value)
+
+    @property
+    def lct_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lct."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lct:
+                return kwd
+        return None
+
+    @lct_link.setter
+    def lct_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lct."""
+        self.lct = value.lcid
+
+    @property
+    def lcs_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcs."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcs:
+                return kwd
+        return None
+
+    @lcs_link.setter
+    def lcs_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcs."""
+        self.lcs = value.lcid
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -24,7 +24,6 @@
 
 import dataclasses
 import typing
-import warnings
 
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,15 +31,45 @@ if typing.TYPE_CHECKING:
 
 @dataclasses.dataclass
 class ImportContext:
-    """Optional transformation to apply, using type `IncludeTransform`"""
+    """Context for keyword import operations.
+
+    Attributes
+    ----------
+    xform : Any, optional
+        Optional transformation to apply, using type `IncludeTransform`.
+    deck : Any, optional
+        Deck into which the import is occurring.
+    path : str, optional
+        Path of file that is importing.
+    keyword_overrides : Dict[str, type], optional
+        Dictionary mapping keyword names (e.g., "*MAT_295") to keyword classes.
+        When a keyword is imported, if its name matches a key in this dictionary,
+        the corresponding class will be used instead of the default from TypeMapping.
+
+        This allows using alternative or legacy keyword implementations when loading
+        keyword files.
+
+        Example
+        -------
+        >>> from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import (
+        ...     Mat295Legacy,
+        ... )
+        >>> context = ImportContext(keyword_overrides={"*MAT_295": Mat295Legacy})
+        >>> deck.loads(data, context=context)
+    strict : bool, optional
+        If True, raise errors when keyword parsing fails for any reason
+        (undefined parameters, invalid field values, malformed data, etc.).
+        If False (default), keywords that fail to parse are retained as raw
+        strings and a warning is emitted. Default is False for backward
+        compatibility.
+        TODO: Consider making strict=True the default in a future version.
+    """
 
     xform: typing.Any = None
-
-    """Deck into which the import is occurring."""
     deck: typing.Any = None
-
-    """Path of file that is importing."""
     path: str = None
+    keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
+    strict: bool = False
 
 
 class ImportHandler:
@@ -68,5 +97,9 @@ class ImportHandler:
         pass
 
     def on_error(self, error):
-        # TODO - use logging
-        warnings.warn(f"error in importhandler {self}: {error}")
+        """Called when an error occurs in this handler's `after_import` method.
+
+        Handlers can override this to handle or log errors as needed.
+        The default implementation does nothing.
+        """
+        pass

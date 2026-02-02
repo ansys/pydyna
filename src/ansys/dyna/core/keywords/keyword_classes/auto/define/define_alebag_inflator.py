@@ -23,8 +23,45 @@
 """Module providing the DefineAlebagInflator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_DEFINEALEBAGINFLATOR_CARD0 = (
+    FieldSchema("infid", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ngas", int, 40, 10, 0),
+    FieldSchema("norif", int, 50, 10, 0),
+    FieldSchema("lcvel", int, 60, 10, None),
+    FieldSchema("lct", int, 70, 10, None),
+)
+
+_DEFINEALEBAGINFLATOR_CARD1 = (
+    FieldSchema("lcidm", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("mwgas", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("gasa", float, 50, 10, 0.0),
+    FieldSchema("gasb", float, 60, 10, 0.0),
+    FieldSchema("gasc", float, 70, 10, 0.0),
+)
+
+_DEFINEALEBAGINFLATOR_CARD2 = (
+    FieldSchema("nodeid", int, 0, 10, 0),
+    FieldSchema("vecid", int, 10, 10, 0),
+    FieldSchema("orifare", float, 20, 10, 0.0),
+)
+
+_DEFINEALEBAGINFLATOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineAlebagInflator(KeywordBase):
     """DYNA DEFINE_ALEBAG_INFLATOR keyword"""
@@ -34,185 +71,39 @@ class DefineAlebagInflator(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nodeid": LinkType.NODE,
+        "lcvel": LinkType.DEFINE_CURVE,
+        "lct": LinkType.DEFINE_CURVE,
+        "lcidm": LinkType.DEFINE_CURVE,
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineAlebagInflator class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "infid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngas",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norif",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvel",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidm",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mwgas",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasa",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasb",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasc",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodeid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orifare",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAlebagInflator.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEALEBAGINFLATOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def infid(self) -> typing.Optional[int]:
         """Get or set the Inflator ID.
@@ -369,4 +260,69 @@ class DefineAlebagInflator(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
+    def lcvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvel:
+                return kwd
+        return None
+
+    @lcvel_link.setter
+    def lcvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvel."""
+        self.lcvel = value.lcid
+
+    @property
+    def lct_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lct."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lct:
+                return kwd
+        return None
+
+    @lct_link.setter
+    def lct_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lct."""
+        self.lct = value.lcid
+
+    @property
+    def lcidm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidm:
+                return kwd
+        return None
+
+    @lcidm_link.setter
+    def lcidm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidm."""
+        self.lcidm = value.lcid
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

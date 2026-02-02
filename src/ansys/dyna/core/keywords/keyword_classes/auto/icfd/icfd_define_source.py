@@ -23,67 +23,37 @@
 """Module providing the IcfdDefineSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ICFDDEFINESOURCE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("lcidk", int, 10, 10, None),
+    FieldSchema("shape", int, 20, 10, 1),
+    FieldSchema("r", float, 30, 10, None),
+    FieldSchema("pid1", int, 40, 10, None),
+    FieldSchema("pid2", int, 50, 10, None),
+)
 
 class IcfdDefineSource(KeywordBase):
     """DYNA ICFD_DEFINE_SOURCE keyword"""
 
     keyword = "ICFD"
     subkeyword = "DEFINE_SOURCE"
+    _link_fields = {
+        "lcidk": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdDefineSource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidk",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shape",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINESOURCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the source ID
@@ -154,4 +124,19 @@ class IcfdDefineSource(KeywordBase):
     def pid2(self, value: int) -> None:
         """Set the pid2 property."""
         self._cards[0].set_value("pid2", value)
+
+    @property
+    def lcidk_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidk."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidk:
+                return kwd
+        return None
+
+    @lcidk_link.setter
+    def lcidk_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidk."""
+        self.lcidk = value.lcid
 

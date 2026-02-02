@@ -23,119 +23,51 @@
 """Module providing the BoundaryPrescribedOrientationRigidAngles class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("intrp", int, 20, 10, 1),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+    FieldSchema("toffset", int, 50, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD1 = (
+    FieldSchema("lcidq1", int, 0, 10, None),
+    FieldSchema("lcidq2", int, 10, 10, None),
+    FieldSchema("lcidq3", int, 20, 10, None),
+    FieldSchema("iseq", int, 30, 10, 123),
+    FieldSchema("ishft", int, 40, 10, 1),
+    FieldSchema("body", int, 50, 10, 0),
+)
 
 class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_ORIENTATION_RIGID_ANGLES keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_ANGLES"
+    _link_fields = {
+        "lcidq1": LinkType.DEFINE_CURVE,
+        "lcidq2": LinkType.DEFINE_CURVE,
+        "lcidq3": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryPrescribedOrientationRigidAngles class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intrp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toffset",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidq1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidq2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidq3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iseq",
-                        int,
-                        30,
-                        10,
-                        123,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishft",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "body",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed
@@ -297,4 +229,49 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""body must be `None` or one of {0,1}.""")
         self._cards[1].set_value("body", value)
+
+    @property
+    def lcidq1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq1:
+                return kwd
+        return None
+
+    @lcidq1_link.setter
+    def lcidq1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq1."""
+        self.lcidq1 = value.lcid
+
+    @property
+    def lcidq2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq2:
+                return kwd
+        return None
+
+    @lcidq2_link.setter
+    def lcidq2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq2."""
+        self.lcidq2 = value.lcid
+
+    @property
+    def lcidq3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidq3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidq3:
+                return kwd
+        return None
+
+    @lcidq3_link.setter
+    def lcidq3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidq3."""
+        self.lcidq3 = value.lcid
 

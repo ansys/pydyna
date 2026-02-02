@@ -23,8 +23,23 @@
 """Module providing the MatSpringMaxwell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSPRINGMAXWELL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("k0", float, 10, 10, None),
+    FieldSchema("ki", float, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("tc", float, 40, 10, None),
+    FieldSchema("fc", float, 50, 10, None),
+    FieldSchema("copt", float, 60, 10, None),
+)
+
+_MATSPRINGMAXWELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSpringMaxwell(KeywordBase):
     """DYNA MAT_SPRING_MAXWELL keyword"""
@@ -40,79 +55,20 @@ class MatSpringMaxwell(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ki",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        40,
-                        10,
-                        10^20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "copt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSPRINGMAXWELL_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSpringMaxwell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGMAXWELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -158,7 +114,7 @@ class MatSpringMaxwell(KeywordBase):
         self._cards[0].set_value("beta", value)
 
     @property
-    def tc(self) -> float:
+    def tc(self) -> typing.Optional[float]:
         """Get or set the Cut off time. After this time a constant force/moment is transmitted.
         """ # nopep8
         return self._cards[0].get_value("tc")

@@ -23,8 +23,52 @@
 """Module providing the DefineSpotweldRuptureParameter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINESPOTWELDRUPTUREPARAMETER_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
+
+_DEFINESPOTWELDRUPTUREPARAMETER_CARD1 = (
+    FieldSchema("c11", float, 0, 10, None),
+    FieldSchema("c12", float, 10, 10, None),
+    FieldSchema("c13", float, 20, 10, None),
+    FieldSchema("n11", float, 30, 10, None),
+    FieldSchema("n12", float, 40, 10, None),
+    FieldSchema("n13", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("sig_pf", float, 70, 10, None),
+)
+
+_DEFINESPOTWELDRUPTUREPARAMETER_CARD2 = (
+    FieldSchema("c21", float, 0, 10, None),
+    FieldSchema("c22", float, 10, 10, None),
+    FieldSchema("c23", float, 20, 10, None),
+    FieldSchema("n2", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("sig_nf", float, 70, 10, None),
+)
+
+_DEFINESPOTWELDRUPTUREPARAMETER_CARD3 = (
+    FieldSchema("lcdpa", int, 0, 10, 0),
+    FieldSchema("lcdpm", int, 10, 10, 0),
+    FieldSchema("lcdps", int, 20, 10, 0),
+    FieldSchema("lcdna", int, 30, 10, 0),
+    FieldSchema("lcdnm", int, 40, 10, 0),
+    FieldSchema("lcdns", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("nsmt", int, 70, 10, 0),
+)
+
+_DEFINESPOTWELDRUPTUREPARAMETER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSpotweldRuptureParameter(KeywordBase):
     """DYNA DEFINE_SPOTWELD_RUPTURE_PARAMETER keyword"""
@@ -34,229 +78,44 @@ class DefineSpotweldRuptureParameter(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcdpa": LinkType.DEFINE_CURVE,
+        "lcdpm": LinkType.DEFINE_CURVE,
+        "lcdps": LinkType.DEFINE_CURVE,
+        "lcdna": LinkType.DEFINE_CURVE,
+        "lcdnm": LinkType.DEFINE_CURVE,
+        "lcdns": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSpotweldRuptureParameter class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c12",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c13",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n11",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n12",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n13",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig_pf",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c21",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c22",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig_nf",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcdpa",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdpm",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdps",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdna",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdnm",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdns",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsmt",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDRUPTUREPARAMETER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDRUPTUREPARAMETER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDRUPTUREPARAMETER_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDRUPTUREPARAMETER_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldRuptureParameter.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDRUPTUREPARAMETER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for the attached shell..
@@ -496,4 +355,99 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcdpa_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdpa."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdpa:
+                return kwd
+        return None
+
+    @lcdpa_link.setter
+    def lcdpa_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdpa."""
+        self.lcdpa = value.lcid
+
+    @property
+    def lcdpm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdpm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdpm:
+                return kwd
+        return None
+
+    @lcdpm_link.setter
+    def lcdpm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdpm."""
+        self.lcdpm = value.lcid
+
+    @property
+    def lcdps_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdps."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdps:
+                return kwd
+        return None
+
+    @lcdps_link.setter
+    def lcdps_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdps."""
+        self.lcdps = value.lcid
+
+    @property
+    def lcdna_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdna."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdna:
+                return kwd
+        return None
+
+    @lcdna_link.setter
+    def lcdna_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdna."""
+        self.lcdna = value.lcid
+
+    @property
+    def lcdnm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdnm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdnm:
+                return kwd
+        return None
+
+    @lcdnm_link.setter
+    def lcdnm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdnm."""
+        self.lcdnm = value.lcid
+
+    @property
+    def lcdns_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdns."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdns:
+                return kwd
+        return None
+
+    @lcdns_link.setter
+    def lcdns_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdns."""
+        self.lcdns = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

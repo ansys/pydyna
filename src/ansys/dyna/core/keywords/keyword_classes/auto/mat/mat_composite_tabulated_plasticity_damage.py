@@ -23,8 +23,131 @@
 """Module providing the MatCompositeTabulatedPlasticityDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ea", float, 20, 10, None),
+    FieldSchema("eb", float, 30, 10, None),
+    FieldSchema("ec", float, 40, 10, None),
+    FieldSchema("prba", float, 50, 10, None),
+    FieldSchema("prca", float, 60, 10, None),
+    FieldSchema("prcb", float, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD1 = (
+    FieldSchema("gab", float, 0, 10, None),
+    FieldSchema("gbc", float, 10, 10, None),
+    FieldSchema("gca", float, 20, 10, None),
+    FieldSchema("ptol", float, 30, 10, 1e-05),
+    FieldSchema("aopt", float, 40, 10, 0.0),
+    FieldSchema("macf", int, 50, 10, 1),
+    FieldSchema("filt", float, 60, 10, 0.0),
+    FieldSchema("vevp", int, 70, 10, 0),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD2 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD3 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, 0.0),
+    FieldSchema("beta", float, 60, 10, 0.0),
+    FieldSchema("tcsym", int, 70, 10, 0),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD4 = (
+    FieldSchema("h11", float, 0, 10, None),
+    FieldSchema("h22", float, 10, 10, None),
+    FieldSchema("h33", float, 20, 10, None),
+    FieldSchema("h12", float, 30, 10, None),
+    FieldSchema("h23", float, 40, 10, None),
+    FieldSchema("h13", float, 50, 10, None),
+    FieldSchema("h44", float, 60, 10, 3.0),
+    FieldSchema("h55", float, 70, 10, 3.0),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD5 = (
+    FieldSchema("h66", float, 0, 10, 3.0),
+    FieldSchema("lt1", int, 10, 10, None),
+    FieldSchema("lt2", int, 20, 10, None),
+    FieldSchema("lt3", int, 30, 10, None),
+    FieldSchema("lt4", int, 40, 10, None),
+    FieldSchema("lt5", int, 50, 10, None),
+    FieldSchema("lt6", int, 60, 10, None),
+    FieldSchema("lt7", int, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD6 = (
+    FieldSchema("lt8", int, 0, 10, None),
+    FieldSchema("lt9", int, 10, 10, None),
+    FieldSchema("lt10", int, 20, 10, None),
+    FieldSchema("lt11", int, 30, 10, None),
+    FieldSchema("lt12", int, 40, 10, None),
+    FieldSchema("ysc", int, 50, 10, None),
+    FieldSchema("dflag", int, 60, 10, 0),
+    FieldSchema("dc", int, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD7 = (
+    FieldSchema("ftype", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD8 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD9 = (
+    FieldSchema("beta11", float, 0, 10, 0.001),
+    FieldSchema("beta22", float, 10, 10, 0.001),
+    FieldSchema("beta33", float, 20, 10, 0.001),
+    FieldSchema("beta44", float, 30, 10, 0.001),
+    FieldSchema("beta55", float, 40, 10, 0.001),
+    FieldSchema("beta66", float, 50, 10, 0.001),
+    FieldSchema("beta12", float, 60, 10, None),
+    FieldSchema("beta23", float, 70, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD10 = (
+    FieldSchema("beta13", float, 0, 10, None),
+    FieldSchema("cp", float, 10, 10, None),
+    FieldSchema("tqc", float, 20, 10, None),
+    FieldSchema("temp", float, 30, 10, None),
+    FieldSchema("pmacc", float, 40, 10, None),
+)
+
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     """DYNA MAT_COMPOSITE_TABULATED_PLASTICITY_DAMAGE keyword"""
@@ -34,675 +157,60 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "ysc": LinkType.DEFINE_CURVE,
+        "dc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatCompositeTabulatedPlasticityDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prca",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcb",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptol",
-                        float,
-                        30,
-                        10,
-                        10e-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vevp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcsym",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "h11",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h22",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h33",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h23",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h13",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h44",
-                        float,
-                        60,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h55",
-                        float,
-                        70,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "h66",
-                        float,
-                        0,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lt8",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt9",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt10",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt11",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt12",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ysc",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dflag",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ftype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "beta11",
-                        float,
-                        0,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta22",
-                        float,
-                        10,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta33",
-                        float,
-                        20,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta44",
-                        float,
-                        30,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta55",
-                        float,
-                        40,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta66",
-                        float,
-                        50,
-                        10,
-                        0.001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta12",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta23",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "beta13",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tqc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmacc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD10,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCompositeTabulatedPlasticityDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -1532,4 +1040,34 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def ysc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ysc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ysc:
+                return kwd
+        return None
+
+    @ysc_link.setter
+    def ysc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ysc."""
+        self.ysc = value.lcid
+
+    @property
+    def dc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dc:
+                return kwd
+        return None
+
+    @dc_link.setter
+    def dc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dc."""
+        self.dc = value.lcid
 

@@ -23,86 +23,39 @@
 """Module providing the DatabaseTracerDe class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DATABASETRACERDE_CARD0 = (
+    FieldSchema("time", float, 0, 10, 0.0),
+    FieldSchema("track", int, 10, 10, 0),
+    FieldSchema("x", float, 20, 10, 0.0),
+    FieldSchema("y", float, 30, 10, 0.0),
+    FieldSchema("z", float, 40, 10, 0.0),
+    FieldSchema("ammgid", int, 50, 10, None),
+    FieldSchema("nid", int, 60, 10, None),
+    FieldSchema("radius", float, 70, 10, 0.0),
+)
 
 class DatabaseTracerDe(KeywordBase):
     """DYNA DATABASE_TRACER_DE keyword"""
 
     keyword = "DATABASE"
     subkeyword = "TRACER_DE"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseTracerDe class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "time",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "track",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def time(self) -> float:
         """Get or set the Start time for tracer particle
@@ -200,4 +153,9 @@ class DatabaseTracerDe(KeywordBase):
     def radius(self, value: float) -> None:
         """Set the radius property."""
         self._cards[0].set_value("radius", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

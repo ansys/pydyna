@@ -23,8 +23,23 @@
 """Module providing the DefinePartFromLayer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINEPARTFROMLAYER_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("layer", int, 10, 10, None),
+    FieldSchema("pidsrc", int, 20, 10, None),
+    FieldSchema("layold", int, 30, 10, None),
+    FieldSchema("mid", int, 40, 10, None),
+    FieldSchema("thick", float, 50, 10, None),
+)
+
+_DEFINEPARTFROMLAYER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefinePartFromLayer(KeywordBase):
     """DYNA DEFINE_PART_FROM_LAYER keyword"""
@@ -34,77 +49,33 @@ class DefinePartFromLayer(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "pid": LinkType.PART,
+        "layer": LinkType.PART,
+        "pidsrc": LinkType.PART,
+        "layold": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefinePartFromLayer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layer",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidsrc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "layold",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPARTFROMLAYER_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePartFromLayer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPARTFROMLAYER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The part ID to be created
@@ -184,4 +155,39 @@ class DefinePartFromLayer(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def layer_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given layer."""
+        return self._get_link_by_attr("PART", "pid", self.layer, "parts")
+
+    @property
+    def pidsrc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidsrc."""
+        return self._get_link_by_attr("PART", "pid", self.pidsrc, "parts")
+
+    @property
+    def layold_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given layold."""
+        return self._get_link_by_attr("PART", "pid", self.layold, "parts")
 

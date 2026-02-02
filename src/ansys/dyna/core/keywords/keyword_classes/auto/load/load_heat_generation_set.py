@@ -23,67 +23,40 @@
 """Module providing the LoadHeatGenerationSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADHEATGENERATIONSET_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("cmult", float, 20, 10, 1.0),
+    FieldSchema("wblcid", int, 30, 10, None),
+    FieldSchema("cblcid", int, 40, 10, None),
+    FieldSchema("tblcid", int, 50, 10, None),
+)
 
 class LoadHeatGenerationSet(KeywordBase):
     """DYNA LOAD_HEAT_GENERATION_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "HEAT_GENERATION_SET"
+    _link_fields = {
+        "wblcid": LinkType.DEFINE_CURVE,
+        "cblcid": LinkType.DEFINE_CURVE,
+        "tblcid": LinkType.DEFINE_CURVE,
+        "sid": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadHeatGenerationSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmult",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wblcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cblcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tblcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADHEATGENERATIONSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID, *SET_SOLID.
@@ -152,4 +125,59 @@ class LoadHeatGenerationSet(KeywordBase):
     def tblcid(self, value: int) -> None:
         """Set the tblcid property."""
         self._cards[0].set_value("tblcid", value)
+
+    @property
+    def wblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for wblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.wblcid:
+                return kwd
+        return None
+
+    @wblcid_link.setter
+    def wblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for wblcid."""
+        self.wblcid = value.lcid
+
+    @property
+    def cblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for cblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.cblcid:
+                return kwd
+        return None
+
+    @cblcid_link.setter
+    def cblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for cblcid."""
+        self.cblcid = value.lcid
+
+    @property
+    def tblcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tblcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tblcid:
+                return kwd
+        return None
+
+    @tblcid_link.setter
+    def tblcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tblcid."""
+        self.tblcid = value.lcid
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for sid."""
+        return self._get_set_link("SOLID", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for sid."""
+        self.sid = value.sid
 

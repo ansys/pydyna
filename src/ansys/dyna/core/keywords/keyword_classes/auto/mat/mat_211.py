@@ -23,8 +23,60 @@
 """Module providing the Mat211 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT211_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("helas", float, 40, 10, 0.0),
+    FieldSchema("telas", float, 50, 10, 0.0),
+)
+
+_MAT211_CARD1 = (
+    FieldSchema("lcaxh", int, 0, 10, None),
+    FieldSchema("lcshh", int, 10, 10, None),
+    FieldSchema("lcbmh", int, 20, 10, None),
+    FieldSchema("sfaxh", float, 30, 10, 1.0),
+    FieldSchema("sfshh", float, 40, 10, 1.0),
+    FieldSchema("sfbmh", float, 50, 10, 1.0),
+)
+
+_MAT211_CARD2 = (
+    FieldSchema("dfakh", float, 0, 10, None),
+    FieldSchema("dfshh", float, 10, 10, None),
+    FieldSchema("rfbmh", float, 20, 10, None),
+    FieldSchema("dmfaxh", float, 30, 10, 0.1),
+    FieldSchema("dmfshh", float, 40, 10, 0.1),
+    FieldSchema("dmfbmh", float, 50, 10, 0.1),
+)
+
+_MAT211_CARD3 = (
+    FieldSchema("lcaxt", int, 0, 10, None),
+    FieldSchema("lcsht", int, 10, 10, None),
+    FieldSchema("lcbmt", int, 20, 10, None),
+    FieldSchema("sfaxt", float, 30, 10, 1.0),
+    FieldSchema("sfsht", float, 40, 10, 1.0),
+    FieldSchema("sbfmt", float, 50, 10, 1.0),
+)
+
+_MAT211_CARD4 = (
+    FieldSchema("dfaxt", float, 0, 10, None),
+    FieldSchema("dfsht", float, 10, 10, None),
+    FieldSchema("rfbmt", float, 20, 10, None),
+    FieldSchema("dfmaxt", float, 30, 10, 0.1),
+    FieldSchema("dmfsht", float, 40, 10, 0.1),
+    FieldSchema("dmfbmt", float, 50, 10, 0.1),
+)
+
+_MAT211_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat211(KeywordBase):
     """DYNA MAT_211 keyword"""
@@ -34,275 +86,46 @@ class Mat211(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcaxh": LinkType.DEFINE_CURVE,
+        "lcshh": LinkType.DEFINE_CURVE,
+        "lcbmh": LinkType.DEFINE_CURVE,
+        "lcaxt": LinkType.DEFINE_CURVE,
+        "lcsht": LinkType.DEFINE_CURVE,
+        "lcbmt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat211 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "helas",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "telas",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcaxh",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcshh",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbmh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfaxh",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfshh",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfbmh",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dfakh",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfshh",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rfbmh",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmfaxh",
-                        float,
-                        30,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmfshh",
-                        float,
-                        40,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmfbmh",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcaxt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsht",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbmt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfaxt",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsht",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbfmt",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dfaxt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfsht",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rfbmt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfmaxt",
-                        float,
-                        30,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmfsht",
-                        float,
-                        40,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmfbmt",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT211_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT211_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT211_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT211_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT211_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat211.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT211_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -657,4 +480,94 @@ class Mat211(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcaxh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcaxh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcaxh:
+                return kwd
+        return None
+
+    @lcaxh_link.setter
+    def lcaxh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcaxh."""
+        self.lcaxh = value.lcid
+
+    @property
+    def lcshh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcshh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcshh:
+                return kwd
+        return None
+
+    @lcshh_link.setter
+    def lcshh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcshh."""
+        self.lcshh = value.lcid
+
+    @property
+    def lcbmh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcbmh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcbmh:
+                return kwd
+        return None
+
+    @lcbmh_link.setter
+    def lcbmh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcbmh."""
+        self.lcbmh = value.lcid
+
+    @property
+    def lcaxt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcaxt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcaxt:
+                return kwd
+        return None
+
+    @lcaxt_link.setter
+    def lcaxt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcaxt."""
+        self.lcaxt = value.lcid
+
+    @property
+    def lcsht_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsht."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsht:
+                return kwd
+        return None
+
+    @lcsht_link.setter
+    def lcsht_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsht."""
+        self.lcsht = value.lcid
+
+    @property
+    def lcbmt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcbmt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcbmt:
+                return kwd
+        return None
+
+    @lcbmt_link.setter
+    def lcbmt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcbmt."""
+        self.lcbmt = value.lcid
 

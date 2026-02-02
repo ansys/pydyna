@@ -23,161 +23,65 @@
 """Module providing the LoadSeismicSsiDeconvId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADSEISMICSSIDECONVID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADSEISMICSSIDECONVID_CARD1 = (
+    FieldSchema("ssid", int, 0, 8, None),
+    FieldSchema("xp", float, 8, 16, 0.0),
+    FieldSchema("yp", float, 24, 16, 0.0),
+    FieldSchema("zp", float, 40, 16, 0.0),
+    FieldSchema("gmx", int, 56, 8, None),
+    FieldSchema("gmy", int, 64, 8, None),
+    FieldSchema("gmz", int, 72, 8, None),
+)
+
+_LOADSEISMICSSIDECONVID_CARD2 = (
+    FieldSchema("sf", float, 0, 10, 1.0),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("birth", float, 20, 10, 0.0),
+    FieldSchema("death", float, 30, 10, 1e+28),
+    FieldSchema("isg", int, 40, 10, 0),
+    FieldSchema("igm", int, 50, 10, 0),
+    FieldSchema("pset", int, 60, 10, None),
+    FieldSchema("vdir", int, 70, 10, 3),
+)
 
 class LoadSeismicSsiDeconvId(KeywordBase):
     """DYNA LOAD_SEISMIC_SSI_DECONV_ID keyword"""
 
     keyword = "LOAD"
     subkeyword = "SEISMIC_SSI_DECONV_ID"
+    _link_fields = {
+        "gmx": LinkType.DEFINE_CURVE,
+        "gmy": LinkType.DEFINE_CURVE,
+        "gmz": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSeismicSsiDeconvId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmx",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmy",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmz",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        30,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pset",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdir",
-                        int,
-                        70,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIDECONVID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIDECONVID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIDECONVID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -381,4 +285,74 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         if value not in [3, -1, -2, -3, 1, 2, None]:
             raise Exception("""vdir must be `None` or one of {3,-1,-2,-3,1,2}.""")
         self._cards[2].set_value("vdir", value)
+
+    @property
+    def gmx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmx:
+                return kwd
+        return None
+
+    @gmx_link.setter
+    def gmx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmx."""
+        self.gmx = value.lcid
+
+    @property
+    def gmy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmy:
+                return kwd
+        return None
+
+    @gmy_link.setter
+    def gmy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmy."""
+        self.gmy = value.lcid
+
+    @property
+    def gmz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for gmz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.gmz:
+                return kwd
+        return None
+
+    @gmz_link.setter
+    def gmz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for gmz."""
+        self.gmz = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

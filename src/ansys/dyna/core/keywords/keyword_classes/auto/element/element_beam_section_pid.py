@@ -23,171 +23,67 @@
 """Module providing the ElementBeamSectionPid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTBEAMSECTIONPID_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("n1", int, 16, 8, None),
+    FieldSchema("n2", int, 24, 8, None),
+    FieldSchema("n3", int, 32, 8, None),
+    FieldSchema("rt1", int, 40, 8, 0),
+    FieldSchema("rr1", int, 48, 8, 0),
+    FieldSchema("rt2", int, 56, 8, 0),
+    FieldSchema("rr2", int, 64, 8, 0),
+    FieldSchema("local", int, 72, 8, 2),
+)
+
+_ELEMENTBEAMSECTIONPID_CARD1 = (
+    FieldSchema("stype", str, 0, 10, "SECTION_01"),
+    FieldSchema("d1", float, 10, 10, None),
+    FieldSchema("d2", float, 20, 10, None),
+    FieldSchema("d3", float, 30, 10, None),
+    FieldSchema("d4", float, 40, 10, None),
+    FieldSchema("d5", float, 50, 10, None),
+    FieldSchema("d6", float, 60, 10, None),
+)
+
+_ELEMENTBEAMSECTIONPID_CARD2 = (
+    FieldSchema("pid1", int, 0, 8, None),
+    FieldSchema("pid2", int, 8, 8, None),
+)
 
 class ElementBeamSectionPid(KeywordBase):
     """DYNA ELEMENT_BEAM_SECTION_PID keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_SECTION_PID"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "pid": LinkType.PART,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamSectionPid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt1",
-                        int,
-                        40,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr1",
-                        int,
-                        48,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rt2",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rr2",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        72,
-                        8,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "stype",
-                        str,
-                        0,
-                        10,
-                        "SECTION_01",
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d5",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d6",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONPID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONPID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSECTIONPID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -457,4 +353,34 @@ class ElementBeamSectionPid(KeywordBase):
     def pid2(self, value: int) -> None:
         """Set the pid2 property."""
         self._cards[2].set_value("pid2", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

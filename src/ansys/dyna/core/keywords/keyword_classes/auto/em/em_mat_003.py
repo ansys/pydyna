@@ -23,221 +23,74 @@
 """Module providing the EmMat003 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMMAT003_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("mtype", int, 10, 10, 0),
+    FieldSchema("sigma11", float, 20, 10, None),
+    FieldSchema("sigma22", float, 30, 10, None),
+    FieldSchema("sigma33", float, 40, 10, None),
+)
+
+_EMMAT003_CARD1 = (
+    FieldSchema("sigma12", int, 0, 10, None),
+    FieldSchema("sigma13", int, 10, 10, None),
+    FieldSchema("sigma21", float, 20, 10, None),
+    FieldSchema("sigma23", float, 30, 10, None),
+    FieldSchema("sigma31", float, 40, 10, None),
+    FieldSchema("sigma32", float, 50, 10, None),
+    FieldSchema("aopt", int, 60, 10, 0),
+    FieldSchema("lambda_", float, 70, 10, None, "lambda"),
+)
+
+_EMMAT003_CARD2 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+    FieldSchema("macf", int, 60, 10, 1),
+)
+
+_EMMAT003_CARD3 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+)
 
 class EmMat003(KeywordBase):
     """DYNA EM_MAT_003 keyword"""
 
     keyword = "EM"
     subkeyword = "MAT_003"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmMat003 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma22",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma33",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigma12",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma13",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma21",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma23",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma31",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma32",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMMAT003_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMMAT003_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMMAT003_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMMAT003_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card.
@@ -388,12 +241,12 @@ class EmMat003(KeywordBase):
     def lambda_(self) -> typing.Optional[float]:
         """Get or set the Intra- to extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials
         """ # nopep8
-        return self._cards[1].get_value("lambda")
+        return self._cards[1].get_value("lambda_")
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
         """Set the lambda_ property."""
-        self._cards[1].set_value("lambda", value)
+        self._cards[1].set_value("lambda_", value)
 
     @property
     def xp(self) -> typing.Optional[float]:
@@ -538,4 +391,19 @@ class EmMat003(KeywordBase):
     def d3(self, value: float) -> None:
         """Set the d3 property."""
         self._cards[3].set_value("d3", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

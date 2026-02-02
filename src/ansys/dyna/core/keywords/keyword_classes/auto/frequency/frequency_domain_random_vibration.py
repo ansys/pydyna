@@ -23,361 +23,111 @@
 """Module providing the FrequencyDomainRandomVibration class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD0 = (
+    FieldSchema("mdmin", int, 0, 10, 1),
+    FieldSchema("mdmax", int, 10, 10, None),
+    FieldSchema("fnmin", float, 20, 10, 0.0),
+    FieldSchema("fnmax", float, 30, 10, None),
+    FieldSchema("restrt", int, 40, 10, 0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD1 = (
+    FieldSchema("dampf", float, 0, 10, 0.0),
+    FieldSchema("lcdam", int, 10, 10, 0),
+    FieldSchema("lctyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+    FieldSchema("dmptyp", int, 50, 10, 0),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD2 = (
+    FieldSchema("vaflag", int, 0, 10, 0),
+    FieldSchema("method", int, 10, 10, 0),
+    FieldSchema("unit", int, 20, 10, 0),
+    FieldSchema("umlt", float, 30, 10, None),
+    FieldSchema("vapsd", int, 40, 10, 0),
+    FieldSchema("varms", int, 50, 10, 0),
+    FieldSchema("napsd", int, 60, 10, 1),
+    FieldSchema("ncpsd", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD3 = (
+    FieldSchema("ldtyp", int, 0, 10, 0),
+    FieldSchema("ipanelu", int, 10, 10, None),
+    FieldSchema("ipanelv", int, 20, 10, None),
+    FieldSchema("temper", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ldflag", int, 50, 10, 0),
+    FieldSchema("icoarse", int, 60, 10, 0),
+    FieldSchema("tcoarse", float, 70, 10, 0.1),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD4 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, None),
+    FieldSchema("dof", int, 20, 10, 0),
+    FieldSchema("ldpsd", int, 30, 10, None),
+    FieldSchema("ldvel", int, 40, 10, None),
+    FieldSchema("ldflw", int, 50, 10, None),
+    FieldSchema("ldspn", int, 60, 10, None),
+    FieldSchema("cid", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD5 = (
+    FieldSchema("load_i", int, 0, 10, None),
+    FieldSchema("load_j", int, 10, 10, None),
+    FieldSchema("lctyp2", int, 20, 10, 0),
+    FieldSchema("ldpsd1", int, 30, 10, None),
+    FieldSchema("ldpsd2", int, 40, 10, None),
+)
 
 class FrequencyDomainRandomVibration(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_RANDOM_VIBRATION keyword"""
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_RANDOM_VIBRATION"
+    _link_fields = {
+        "lcdam": LinkType.DEFINE_CURVE,
+        "ldpsd": LinkType.DEFINE_CURVE,
+        "ldvel": LinkType.DEFINE_CURVE,
+        "ldflw": LinkType.DEFINE_CURVE,
+        "ldspn": LinkType.DEFINE_CURVE,
+        "ldpsd1": LinkType.DEFINE_CURVE,
+        "ldpsd2": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainRandomVibration class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdmin",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmptyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vaflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "method",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "umlt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vapsd",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varms",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "napsd",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncpsd",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ldtyp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelu",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipanelv",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temper",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflag",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icoarse",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcoarse",
-                        float,
-                        70,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldvel",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldflw",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldspn",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "load_i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "load_j",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldpsd2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).
@@ -889,4 +639,124 @@ class FrequencyDomainRandomVibration(KeywordBase):
     def ldpsd2(self, value: int) -> None:
         """Set the ldpsd2 property."""
         self._cards[5].set_value("ldpsd2", value)
+
+    @property
+    def lcdam_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdam."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdam:
+                return kwd
+        return None
+
+    @lcdam_link.setter
+    def lcdam_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdam."""
+        self.lcdam = value.lcid
+
+    @property
+    def ldpsd_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldpsd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldpsd:
+                return kwd
+        return None
+
+    @ldpsd_link.setter
+    def ldpsd_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldpsd."""
+        self.ldpsd = value.lcid
+
+    @property
+    def ldvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldvel:
+                return kwd
+        return None
+
+    @ldvel_link.setter
+    def ldvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldvel."""
+        self.ldvel = value.lcid
+
+    @property
+    def ldflw_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldflw."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldflw:
+                return kwd
+        return None
+
+    @ldflw_link.setter
+    def ldflw_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldflw."""
+        self.ldflw = value.lcid
+
+    @property
+    def ldspn_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldspn."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldspn:
+                return kwd
+        return None
+
+    @ldspn_link.setter
+    def ldspn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldspn."""
+        self.ldspn = value.lcid
+
+    @property
+    def ldpsd1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldpsd1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldpsd1:
+                return kwd
+        return None
+
+    @ldpsd1_link.setter
+    def ldpsd1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldpsd1."""
+        self.ldpsd1 = value.lcid
+
+    @property
+    def ldpsd2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ldpsd2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ldpsd2:
+                return kwd
+        return None
+
+    @ldpsd2_link.setter
+    def ldpsd2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ldpsd2."""
+        self.ldpsd2 = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

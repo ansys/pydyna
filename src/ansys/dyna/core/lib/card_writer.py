@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -26,6 +26,7 @@ import typing
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 def write_cards(
@@ -33,9 +34,29 @@ def write_cards(
     buf: typing.TextIO,
     write_format: format_type,
     comment: typing.Optional[bool] = True,
+    retain_parameters: bool = False,
+    parameter_set: typing.Optional[ParameterSet] = None,
+    keyword_id: typing.Optional[str] = None,
 ):
-    """Write the cards."""
+    """Write the cards.
 
+    Parameters
+    ----------
+    cards : list of CardInterface
+        The cards to write.
+    buf : TextIO
+        Buffer to write to.
+    write_format : format_type
+        The format to use for writing.
+    comment : bool, optional
+        Whether to write field name comments. Default True.
+    retain_parameters : bool, optional
+        If True, write original parameter references instead of values.
+    parameter_set : ParameterSet, optional
+        The parameter set containing stored refs (when retain_parameters=True).
+    keyword_id : str, optional
+        The keyword's ID for building URI paths (when retain_parameters=True).
+    """
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the
     # keyword, a single newline will be added before them. Streams are typically
@@ -47,13 +68,27 @@ def write_cards(
     # more keywords.
 
     pos = buf.tell()  # record the position of the last newline
-    for card in cards:
-        if buf.tell() != pos:
+    for card_index, card in enumerate(cards):
+        # Only write newline separator if the card is active and will produce output
+        if card.active and buf.tell() != pos:
             # if we have written since the last newline, we need to prepend a new line
-            # (unless this is the last newline to write?)
             buf.write("\n")
             pos = buf.tell()
-        card.write(write_format, buf, comment)
+
+        # Build URI prefix for this card if retaining parameters
+        uri_prefix = None
+        if retain_parameters and keyword_id is not None:
+            uri_prefix = f"{keyword_id}/card{card_index}"
+
+        card.write(
+            write_format,
+            buf,
+            comment,
+            retain_parameters=retain_parameters,
+            parameter_set=parameter_set,
+            uri_prefix=uri_prefix,
+        )
     superfluous_newline = pos == buf.tell()
     if superfluous_newline:
         buf.seek(buf.tell() - 1)
+        buf.truncate()  # Required for StringIO - seek alone doesn't remove content

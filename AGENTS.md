@@ -1,84 +1,50 @@
-See https://deepwiki.com/ansys/pydyna for a description of the codebase
-Assume an appropriate virtual environment is activated. If it isn't, just abort.
+# PyDyna Agent Entry Point
 
-## Agent Hints
+See https://deepwiki.com/ansys/pydyna for codebase overview.
 
-**CRITICAL: Never redirect output to /dev/null on Windows**. This triggers a VS Code security prompt that halts execution. Instead:
-- For commands where you want to suppress output: Use `>$null 2>&1` (PowerShell) or just run the command without redirection
-- For commands where you want to check output: Use `python codegen/generate.py 2>&1 | Out-Null` or capture in a variable
-- For checking if a command succeeded: Just run it normally and check `$?` or `$LASTEXITCODE`
-- Examples:
-  - ❌ BAD: `python codegen/generate.py >/dev/null 2>&1`
-  - ✅ GOOD: `python codegen/generate.py >$null 2>&1`
-  - ✅ GOOD: `python codegen/generate.py` (no redirection)
-  - ✅ GOOD: `$output = python codegen/generate.py 2>&1`
+**Detailed guides**: [agents/README.md](agents/README.md)
 
-**Documentation builds**: To build docs without examples, use:
+## Code Search Policy
+
+**Avoid searching** (context bloat):
+- `src/ansys/dyna/core/keywords/keyword_classes/auto/` — 3000+ generated files
+- `codegen/kwd.json` — 80k+ line schema dump
+
+**When to search `auto/`**: stack traces, verifying codegen output, finding exact generated signatures. Scope to specific subdomain or file.
+
+## Shell Hints (Critical)
+
+- Don't write to `/dev/null` - triggers VS Code security prompt
+- PowerShell: use `>$null 2>&1` not `>/dev/null 2>&1`
+- Or just run commands without redirection
+
+## Quick Commands
+
 ```bash
-# Build docs without examples or autokeywords (fast)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./make.bat html
+# Codegen validation
+bash codegen/validate.sh --quick    # Fast (generate + diff)
+bash codegen/validate.sh            # Full (includes tests)
 
-# Build docs with autokeywords but no examples (slow, ~8+ min for keyword imports alone)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./make.bat html
+# Tests
+uv run --no-project python -m pytest tests/ -v
+
+# Linting
+uv run --no-project pre-commit run --all-files
+
+# Docs (no examples)
+BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./doc/make.bat html
 ```
 
-## Agent Coding Style Preferences
+## Coding Style
 
-- Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
-- There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after making changes.
-- **Handlers use typed dataclasses** (Dec 2025): All handlers now use:
-  - `kwd_data.field` attribute access (dataclass instances, not dicts)
-  - `KeywordData.cards` is `List[Card]` with dict-like backward compatibility (`card["index"]` or `card.index`)
-  - Typed settings dataclasses in each handler file (e.g., `SkipCardSettings`)
-  - Typed metadata instances (e.g., `DuplicateCardMetadata` not `Dict[str, Any]`)
-- **Dict-like access for compatibility**: Card and Field dataclasses implement `__getitem__`, `__setitem__` to support gradual migration
-- **Do not mark items in `codegen/todo.md` as "COMPLETED"**. This is a living document of architectural recommendations, not a task tracker. When implementing recommendations, document the implementation in the appropriate `agents/*.md` guide file instead.
-- **Add comprehensive logging**: Use Python's `logging` module extensively throughout the codebase. Add a logger instance (`logger = logging.getLogger(__name__)`) to each module and use it liberally:
-  - Use `logger.debug()` for detailed traceability of execution flow, variable values, and decisions
-  - Use `logger.info()` for high-level progress updates and successful operations
-  - Use `logger.warning()` for recoverable issues or unexpected conditions
-  - Use `logger.error()` for failures with `exc_info=True` to include stack traces
-  - Replace any `print()` statements with appropriate logging calls
-  - Log function entry/exit for complex operations, parameter values, counts, and decision points
+- **Line limit**: 120 characters
+- **Logging**: Use `logging` module, not `print()`. Add `logger = logging.getLogger(__name__)` to modules.
+- **Imports**: No inline comments explaining imports; use module docstrings instead.
 
-Run `pre-commit run --all-files` after changes
+## Agent Guides Index
 
-## Agent Guides
-
-Detailed documentation for common tasks and patterns:
-
-- **[agents/linked_keywords.md](agents/linked_keywords.md)**: How to expose relationships between keywords (e.g., DefineTable → DefineCurve) using properties and import handlers.
-- **[agents/codegen.md](agents/codegen.md)**: How to work with auto-generated keyword classes and create manual subclasses for customizations.
-
-## Notes on the Keyword Submodule
-
-### Code Generation Handler System
-
-The keyword class generator uses a **handler pipeline** to transform keyword metadata from the JSON schema into Python classes. See `agents/codegen.md` for detailed documentation.
-
-**Key Principles**:
-1. **Execution order matters** - handlers are executed in registration order (see `registry.py`)
-2. **Reference semantics** - handlers like `card-set` and `table-card-group` use references, not deep copies
-3. **In-place mutations** - later handlers modify cards that earlier handlers referenced
-4. **Index vs. position** - after reordering, use list positions not the card's `index` property
-
-**Common Pitfall**: Using `copy.deepcopy()` when grouping cards breaks the generation because later handlers' modifications won't appear in the groups.
-
-### Deck Import Handlers
-
-Deck registers import handlers (e.g., `DefineTableProcessor`) and runs them during `Deck.loads()` and include expansion. Handlers see keywords as they are imported and should only assume immediate neighbor context unless explicitly coded otherwise.
-
-For detailed guidance on linking keywords, see [agents/linked_keywords.md](agents/linked_keywords.md).
-
-### Shared Field Handler - Negative Indices
-
-**Critical**: The `shared_field` handler's `do_negative_shared_fields` function must search option cards FIRST, regardless of index value. Option cards can have indices that overlap with base card ranges (e.g., option card with index=2 when num_cards=3). The logic should:
-1. Always search all option cards for the target index
-2. Only check base cards if not found in options
-3. Never assume `index >= num_cards` means "must be in options" - this assumption is incorrect.
-
-### Auto-Generated Keywords
-
-The files in `src/ansys/dyna/core/keywords/keyword_classes/auto/` are auto-generated by Jinja templates. If they need to be modified, update the codegen system. If modifications are not straightforward to add to codegen, create a manual subclass instead.
-
-For detailed guidance on working with auto-generated files, see [agents/codegen.md](agents/codegen.md).
+| Topic | Guide |
+|-------|-------|
+| **Codegen** | [agents/codegen/](agents/codegen/) |
+| **Keywords** | [agents/keywords/](agents/keywords/) |
+| **Projects** | [agents/projects/](agents/projects/) |

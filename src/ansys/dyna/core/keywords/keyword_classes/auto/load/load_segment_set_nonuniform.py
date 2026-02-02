@@ -23,119 +23,56 @@
 """Module providing the LoadSegmentSetNonuniform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADSEGMENTSETNONUNIFORM_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADSEGMENTSETNONUNIFORM_CARD1 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+    FieldSchema("dt", float, 40, 10, 1e+16),
+    FieldSchema("eltype", str, 50, 10, None),
+)
+
+_LOADSEGMENTSETNONUNIFORM_CARD2 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("v1", float, 10, 10, None),
+    FieldSchema("v2", float, 20, 10, None),
+    FieldSchema("v3", float, 30, 10, None),
+)
 
 class LoadSegmentSetNonuniform(KeywordBase):
     """DYNA LOAD_SEGMENT_SET_NONUNIFORM keyword"""
 
     keyword = "LOAD"
     subkeyword = "SEGMENT_SET_NONUNIFORM"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSegmentSetNonuniform class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        40,
-                        10,
-                        1.0e+16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eltype",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTSETNONUNIFORM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTSETNONUNIFORM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTSETNONUNIFORM_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -271,4 +208,29 @@ class LoadSegmentSetNonuniform(KeywordBase):
     def v3(self, value: float) -> None:
         """Set the v3 property."""
         self._cards[2].set_value("v3", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

@@ -1,0 +1,8 @@
+{# Optimized Card creation using pre-defined FieldSchema tuples #}
+            Card.from_field_schemas_with_defaults(
+                _{{parent_name | upper}}_CARD{{card_index}},
+{% if card.func %}
+                active_func=lambda: {{card.func}},
+{% endif %}
+                **kwargs,
+            ),

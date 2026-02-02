@@ -23,104 +23,47 @@
 """Module providing the InitialAleMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_INITIALALEMAPPING_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("typ", int, 10, 10, 0),
+    FieldSchema("ammsid", int, 20, 10, None),
+)
+
+_INITIALALEMAPPING_CARD1 = (
+    FieldSchema("xo", float, 0, 10, 0.0),
+    FieldSchema("yo", float, 10, 10, 0.0),
+    FieldSchema("zo", float, 20, 10, 0.0),
+    FieldSchema("vecid", int, 30, 10, None),
+    FieldSchema("angle", float, 40, 10, None),
+    FieldSchema("sym", int, 50, 10, 0),
+    FieldSchema("tbeg", float, 60, 10, 0.0),
+)
 
 class InitialAleMapping(KeywordBase):
     """DYNA INITIAL_ALE_MAPPING keyword"""
 
     keyword = "INITIAL"
     subkeyword = "ALE_MAPPING"
+    _link_fields = {
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialAleMapping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xo",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yo",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sym",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALALEMAPPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALALEMAPPING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID
@@ -250,4 +193,19 @@ class InitialAleMapping(KeywordBase):
     def tbeg(self, value: float) -> None:
         """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

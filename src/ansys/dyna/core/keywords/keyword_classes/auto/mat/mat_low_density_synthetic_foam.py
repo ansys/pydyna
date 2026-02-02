@@ -23,8 +23,42 @@
 """Module providing the MatLowDensitySyntheticFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATLOWDENSITYSYNTHETICFOAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("lcid1", int, 30, 10, None),
+    FieldSchema("lcid2", int, 40, 10, None),
+    FieldSchema("hu", float, 50, 10, 1.0),
+    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("damp", float, 70, 10, 0.05),
+)
+
+_MATLOWDENSITYSYNTHETICFOAM_CARD1 = (
+    FieldSchema("shape", float, 0, 10, None),
+    FieldSchema("fail", float, 10, 10, 0.0),
+    FieldSchema("bvflag", float, 20, 10, 0.0),
+    FieldSchema("ed", float, 30, 10, None),
+    FieldSchema("beta1", float, 40, 10, None),
+    FieldSchema("kcon", float, 50, 10, None),
+    FieldSchema("ref", float, 60, 10, 0.0),
+    FieldSchema("tc", float, 70, 10, None),
+)
+
+_MATLOWDENSITYSYNTHETICFOAM_CARD2 = (
+    FieldSchema("rflag", float, 0, 10, 0.0),
+    FieldSchema("dtrt", float, 10, 10, None),
+)
+
+_MATLOWDENSITYSYNTHETICFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatLowDensitySyntheticFoam(KeywordBase):
     """DYNA MAT_LOW_DENSITY_SYNTHETIC_FOAM keyword"""
@@ -34,175 +68,36 @@ class MatLowDensitySyntheticFoam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid1": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatLowDensitySyntheticFoam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hu",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        70,
-                        10,
-                        .05,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shape",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bvflag",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ed",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kcon",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rflag",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtrt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYSYNTHETICFOAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYSYNTHETICFOAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYSYNTHETICFOAM_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatLowDensitySyntheticFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLOWDENSITYSYNTHETICFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.
@@ -434,4 +329,34 @@ class MatLowDensitySyntheticFoam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid1:
+                return kwd
+        return None
+
+    @lcid1_link.setter
+    def lcid1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid1."""
+        self.lcid1 = value.lcid
+
+    @property
+    def lcid2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid2:
+                return kwd
+        return None
+
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 

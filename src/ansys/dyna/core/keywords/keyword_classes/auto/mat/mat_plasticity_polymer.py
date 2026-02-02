@@ -23,8 +23,37 @@
 """Module providing the MatPlasticityPolymer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATPLASTICITYPOLYMER_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+)
+
+_MATPLASTICITYPOLYMER_CARD1 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("lcss", int, 20, 10, 0),
+    FieldSchema("lcsr", int, 30, 10, 0),
+)
+
+_MATPLASTICITYPOLYMER_CARD2 = (
+    FieldSchema("eftx", float, 0, 10, 0.0),
+    FieldSchema("damp", float, 10, 10, None),
+    FieldSchema("ratefac", float, 20, 10, None),
+    FieldSchema("lcfail", int, 30, 10, 0),
+    FieldSchema("numint", float, 40, 10, 0.0),
+)
+
+_MATPLASTICITYPOLYMER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPlasticityPolymer(KeywordBase):
     """DYNA MAT_PLASTICITY_POLYMER keyword"""
@@ -34,139 +63,37 @@ class MatPlasticityPolymer(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+        "lcfail": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPlasticityPolymer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eftx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratefac",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfail",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYPOLYMER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYPOLYMER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYPOLYMER_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPlasticityPolymer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYPOLYMER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -329,4 +256,49 @@ class MatPlasticityPolymer(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
+
+    @property
+    def lcfail_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfail."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfail:
+                return kwd
+        return None
+
+    @lcfail_link.setter
+    def lcfail_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfail."""
+        self.lcfail = value.lcid
 

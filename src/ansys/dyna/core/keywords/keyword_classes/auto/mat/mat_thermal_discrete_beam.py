@@ -23,8 +23,23 @@
 """Module providing the MatThermalDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTHERMALDISCRETEBEAM_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+)
+
+_MATTHERMALDISCRETEBEAM_CARD1 = (
+    FieldSchema("hc", float, 0, 10, None),
+    FieldSchema("tc", float, 10, 10, None),
+)
+
+_MATTHERMALDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatThermalDiscreteBeam(KeywordBase):
     """DYNA MAT_THERMAL_DISCRETE_BEAM keyword"""
@@ -40,61 +55,23 @@ class MatThermalDiscreteBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMALDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermalDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal material identification. A unique number or label must be specified.

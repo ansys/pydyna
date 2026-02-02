@@ -23,72 +23,44 @@
 """Module providing the AleCouplingRigidBody class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ALECOUPLINGRIGIDBODY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("esid", int, 10, 10, None),
+)
+
+_ALECOUPLINGRIGIDBODY_CARD1 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("idtype", int, 10, 10, 0),
+    FieldSchema("ictype", int, 20, 10, 1),
+    FieldSchema("iexcle", int, 30, 10, None),
+)
 
 class AleCouplingRigidBody(KeywordBase):
     """DYNA ALE_COUPLING_RIGID_BODY keyword"""
 
     keyword = "ALE"
     subkeyword = "COUPLING_RIGID_BODY"
+    _link_fields = {
+        "esid": LinkType.SET_NODE,
+        "iexcle": LinkType.SET_SEGMENT,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleCouplingRigidBody class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ictype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iexcle",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALECOUPLINGRIGIDBODY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALECOUPLINGRIGIDBODY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Rigid body part ID.
@@ -162,4 +134,29 @@ class AleCouplingRigidBody(KeywordBase):
     def iexcle(self, value: int) -> None:
         """Set the iexcle property."""
         self._cards[1].set_value("iexcle", value)
+
+    @property
+    def esid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for esid."""
+        return self._get_set_link("NODE", self.esid)
+
+    @esid_link.setter
+    def esid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for esid."""
+        self.esid = value.sid
+
+    @property
+    def iexcle_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for iexcle."""
+        return self._get_set_link("SEGMENT", self.iexcle)
+
+    @iexcle_link.setter
+    def iexcle_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for iexcle."""
+        self.iexcle = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

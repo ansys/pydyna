@@ -23,8 +23,59 @@
 """Module providing the MatPlasticityWithDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATPLASTICITYWITHDAMAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("etan", float, 50, 10, None),
+    FieldSchema("eppf", float, 60, 10, 1000000000000.0),
+    FieldSchema("tdel", float, 70, 10, None),
+)
+
+_MATPLASTICITYWITHDAMAGE_CARD1 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("lcss", int, 20, 10, 0),
+    FieldSchema("lcsr", int, 30, 10, 0),
+    FieldSchema("eppfr", float, 40, 10, 100000000000000.0),
+    FieldSchema("vp", float, 50, 10, None),
+    FieldSchema("lcdm", int, 60, 10, 0),
+    FieldSchema("numint", int, 70, 10, 0),
+)
+
+_MATPLASTICITYWITHDAMAGE_CARD2 = (
+    FieldSchema("eps1", float, 0, 10, None),
+    FieldSchema("eps2", float, 10, 10, None),
+    FieldSchema("eps3", float, 20, 10, None),
+    FieldSchema("eps4", float, 30, 10, None),
+    FieldSchema("eps5", float, 40, 10, None),
+    FieldSchema("eps6", float, 50, 10, None),
+    FieldSchema("eps7", float, 60, 10, None),
+    FieldSchema("eps8", float, 70, 10, None),
+)
+
+_MATPLASTICITYWITHDAMAGE_CARD3 = (
+    FieldSchema("es1", float, 0, 10, None),
+    FieldSchema("es2", float, 10, 10, None),
+    FieldSchema("es3", float, 20, 10, None),
+    FieldSchema("es4", float, 30, 10, None),
+    FieldSchema("es5", float, 40, 10, None),
+    FieldSchema("es6", float, 50, 10, None),
+    FieldSchema("es7", float, 60, 10, None),
+    FieldSchema("es8", float, 70, 10, None),
+)
+
+_MATPLASTICITYWITHDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPlasticityWithDamage(KeywordBase):
     """DYNA MAT_PLASTICITY_WITH_DAMAGE keyword"""
@@ -34,277 +85,40 @@ class MatPlasticityWithDamage(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lcsr": LinkType.DEFINE_CURVE,
+        "lcdm": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPlasticityWithDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eppf",
-                        float,
-                        60,
-                        10,
-                        10.E+11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdel",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eppfr",
-                        float,
-                        40,
-                        10,
-                        10.E+13,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdm",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eps1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "es1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYWITHDAMAGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYWITHDAMAGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYWITHDAMAGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYWITHDAMAGE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPlasticityWithDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYWITHDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -673,4 +487,49 @@ class MatPlasticityWithDamage(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lcsr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsr:
+                return kwd
+        return None
+
+    @lcsr_link.setter
+    def lcsr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsr."""
+        self.lcsr = value.lcid
+
+    @property
+    def lcdm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdm:
+                return kwd
+        return None
+
+    @lcdm_link.setter
+    def lcdm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdm."""
+        self.lcdm = value.lcid
 

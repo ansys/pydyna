@@ -23,122 +23,58 @@
 """Module providing the PartStackedElements class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+
+_PARTSTACKEDELEMENTS_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTSTACKEDELEMENTS_CARD1 = (
+    FieldSchema("pidref", int, 0, 10, 0),
+    FieldSchema("numlay", int, 10, 10, 0),
+    FieldSchema("adpopt", int, 20, 10, 0),
+    FieldSchema("inplcmp", int, 30, 10, 0),
+)
+
+_PARTSTACKEDELEMENTS_CARD2 = (
+    FieldSchema("pidi", int, 0, 10, None),
+    FieldSchema("sidi", int, 10, 10, None),
+    FieldSchema("midi", int, 20, 10, None),
+    FieldSchema("hgidi", int, 30, 10, 0),
+    FieldSchema("tmidi", int, 40, 10, 0),
+    FieldSchema("thki", float, 50, 10, None),
+    FieldSchema("nsldi", int, 60, 10, None),
+)
 
 class PartStackedElements(KeywordBase):
     """DYNA PART_STACKED_ELEMENTS keyword"""
 
     keyword = "PART"
     subkeyword = "STACKED_ELEMENTS"
+    _link_fields = {
+        "midi": LinkType.MAT,
+        "sidi": LinkType.SECTION,
+        "hgidi": LinkType.HOURGLASS,
+        "pidref": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartStackedElements class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pidref",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numlay",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inplcmp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pidi",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidi",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "midi",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgidi",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmidi",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thki",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsldi",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTSTACKEDELEMENTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTSTACKEDELEMENTS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTSTACKEDELEMENTS_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Enter title for the datacard.
@@ -274,4 +210,54 @@ class PartStackedElements(KeywordBase):
     def nsldi(self, value: int) -> None:
         """Set the nsldi property."""
         self._cards[2].set_value("nsldi", value)
+
+    @property
+    def midi_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for midi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.midi:
+                return kwd
+        return None
+
+    @midi_link.setter
+    def midi_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for midi."""
+        self.midi = value.mid
+
+    @property
+    def sidi_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for sidi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.sidi:
+                return kwd
+        return None
+
+    @sidi_link.setter
+    def sidi_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for sidi."""
+        self.sidi = value.secid
+
+    @property
+    def hgidi_link(self) -> Hourglass:
+        """Get the Hourglass object for hgidi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgidi:
+                return kwd
+        return None
+
+    @hgidi_link.setter
+    def hgidi_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgidi."""
+        self.hgidi = value.hgid
+
+    @property
+    def pidref_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidref."""
+        return self._get_link_by_attr("PART", "pid", self.pidref, "parts")
 

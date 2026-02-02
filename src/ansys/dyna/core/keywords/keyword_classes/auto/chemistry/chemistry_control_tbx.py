@@ -23,7 +23,13 @@
 """Module providing the ChemistryControlTbx class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROLTBX_CARD0 = (
+    FieldSchema("idchem", int, 0, 10, None),
+    FieldSchema("usepar", int, 10, 10, 1),
+)
 
 class ChemistryControlTbx(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_TBX keyword"""
@@ -35,27 +41,10 @@ class ChemistryControlTbx(KeywordBase):
         """Initialize the ChemistryControlTbx class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idchem",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "usepar",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLTBX_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idchem(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemistry solver.

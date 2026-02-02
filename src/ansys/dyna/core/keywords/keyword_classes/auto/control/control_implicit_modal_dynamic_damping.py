@@ -23,7 +23,12 @@
 """Module providing the ControlImplicitModalDynamicDamping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITMODALDYNAMICDAMPING_CARD0 = (
+    FieldSchema("zeta1", float, 0, 10, None),
+)
 
 class ControlImplicitModalDynamicDamping(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODAL_DYNAMIC_DAMPING keyword"""
@@ -35,19 +40,10 @@ class ControlImplicitModalDynamicDamping(KeywordBase):
         """Initialize the ControlImplicitModalDynamicDamping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "zeta1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMICDAMPING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def zeta1(self) -> typing.Optional[float]:
         """Get or set the Modal Dynamic damping coefficient.

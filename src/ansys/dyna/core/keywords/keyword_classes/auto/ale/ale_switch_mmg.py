@@ -23,145 +23,52 @@
 """Module providing the AleSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ALESWITCHMMG_CARD0 = (
+    FieldSchema("fr_mmg", int, 0, 10, None),
+    FieldSchema("to_mmg", int, 10, 10, None),
+    FieldSchema("idfunc", int, 20, 10, None),
+    FieldSchema("idsegset", int, 30, 10, 0),
+    FieldSchema("idsldset", int, 40, 10, 0),
+    FieldSchema("ncycseg", int, 50, 10, 50),
+    FieldSchema("ncycsld", int, 60, 10, 50),
+)
+
+_ALESWITCHMMG_CARD1 = (
+    FieldSchema("var1", int, 0, 10, 0),
+    FieldSchema("var2", int, 10, 10, 0),
+    FieldSchema("var3", int, 20, 10, 0),
+    FieldSchema("var4", int, 30, 10, 0),
+    FieldSchema("var5", int, 40, 10, 0),
+    FieldSchema("var6", int, 50, 10, 0),
+    FieldSchema("var7", int, 60, 10, 0),
+    FieldSchema("var8", int, 70, 10, 0),
+)
 
 class AleSwitchMmg(KeywordBase):
     """DYNA ALE_SWITCH_MMG keyword"""
 
     keyword = "ALE"
     subkeyword = "SWITCH_MMG"
+    _link_fields = {
+        "idsegset": LinkType.SET_SEGMENT,
+        "idsldset": LinkType.SET_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fr_mmg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "to_mmg",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idfunc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idsegset",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idsldset",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycseg",
-                        int,
-                        50,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycsld",
-                        int,
-                        60,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESWITCHMMG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESWITCHMMG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMG-SID before the switch. The AMMG-SID
@@ -771,4 +678,24 @@ class AleSwitchMmg(KeywordBase):
     def var8(self, value: int) -> None:
         """Set the var8 property."""
         self._cards[1].set_value("var8", value)
+
+    @property
+    def idsegset_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for idsegset."""
+        return self._get_set_link("SEGMENT", self.idsegset)
+
+    @idsegset_link.setter
+    def idsegset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for idsegset."""
+        self.idsegset = value.sid
+
+    @property
+    def idsldset_link(self) -> KeywordBase:
+        """Get the SET_SOLID_* keyword for idsldset."""
+        return self._get_set_link("SOLID", self.idsldset)
+
+    @idsldset_link.setter
+    def idsldset_link(self, value: KeywordBase) -> None:
+        """Set the SET_SOLID_* keyword for idsldset."""
+        self.idsldset = value.sid
 

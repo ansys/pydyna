@@ -23,220 +23,80 @@
 """Module providing the ConstrainedInterpolationSpotweld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0 = (
+    FieldSchema("pid1", int, 0, 10, None),
+    FieldSchema("pid2", int, 10, 10, None),
+    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("thick", float, 30, 10, None),
+    FieldSchema("r", float, 40, 10, None),
+    FieldSchema("stiff", float, 50, 10, None),
+    FieldSchema("alpha1", float, 60, 10, None),
+    FieldSchema("model", int, 70, 10, 1),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1 = (
+    FieldSchema("rn", float, 0, 10, None),
+    FieldSchema("rs", float, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("lcf", int, 30, 10, None),
+    FieldSchema("lcupf", int, 40, 10, None),
+    FieldSchema("lcupr", int, 50, 10, None),
+    FieldSchema("dens", float, 60, 10, None),
+    FieldSchema("intp", int, 70, 10, 0),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2 = (
+    FieldSchema("upfn", float, 0, 10, None),
+    FieldSchema("upfs", float, 10, 10, None),
+    FieldSchema("alpha2", float, 20, 10, None),
+    FieldSchema("beta2", float, 30, 10, None),
+    FieldSchema("uprn", float, 40, 10, None),
+    FieldSchema("uprs", float, 50, 10, None),
+    FieldSchema("alpha3", float, 60, 10, None),
+    FieldSchema("beta3", float, 70, 10, None),
+)
+
+_CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3 = (
+    FieldSchema("mrn", float, 0, 10, None),
+    FieldSchema("mrs", float, 10, 10, None),
+)
 
 class ConstrainedInterpolationSpotweld(KeywordBase):
     """DYNA CONSTRAINED_INTERPOLATION_SPOTWELD keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "INTERPOLATION_SPOTWELD"
+    _link_fields = {
+        "lcf": LinkType.DEFINE_CURVE,
+        "lcupf": LinkType.DEFINE_CURVE,
+        "lcupr": LinkType.DEFINE_CURVE,
+        "nsid": LinkType.SET_NODE,
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedInterpolationSpotweld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiff",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "model",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcf",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcupf",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcupr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intp",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "upfn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "upfs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uprn",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uprs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mrn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mrs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID of first sheet
@@ -541,4 +401,69 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
     def mrs(self, value: float) -> None:
         """Set the mrs property."""
         self._cards[3].set_value("mrs", value)
+
+    @property
+    def lcf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcf:
+                return kwd
+        return None
+
+    @lcf_link.setter
+    def lcf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf."""
+        self.lcf = value.lcid
+
+    @property
+    def lcupf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcupf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcupf:
+                return kwd
+        return None
+
+    @lcupf_link.setter
+    def lcupf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcupf."""
+        self.lcupf = value.lcid
+
+    @property
+    def lcupr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcupr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcupr:
+                return kwd
+        return None
+
+    @lcupr_link.setter
+    def lcupr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcupr."""
+        self.lcupr = value.lcid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

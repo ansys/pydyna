@@ -23,7 +23,15 @@
 """Module providing the DualceseReactionRatePDepend class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEREACTIONRATEPDEPEND_CARD0 = (
+    FieldSchema("react_id", int, 0, 10, None),
+    FieldSchema("sigma", float, 10, 10, None),
+    FieldSchema("nu", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+)
 
 class DualceseReactionRatePDepend(KeywordBase):
     """DYNA DUALCESE_REACTION_RATE_P_DEPEND keyword"""
@@ -35,40 +43,10 @@ class DualceseReactionRatePDepend(KeywordBase):
         """Initialize the DualceseReactionRatePDepend class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "react_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigma",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nu",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEREACTIONRATEPDEPEND_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def react_id(self) -> typing.Optional[int]:
         """Get or set the ID of reaction rate law

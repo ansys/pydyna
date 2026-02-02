@@ -23,8 +23,25 @@
 """Module providing the SectionAle1D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONALE1D_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("aleform", int, 10, 10, 11),
+    FieldSchema("aet", int, 20, 10, 4),
+    FieldSchema("elform", int, 30, 10, 7),
+)
+
+_SECTIONALE1D_CARD1 = (
+    FieldSchema("thick", float, 0, 10, None),
+    FieldSchema("thick", float, 10, 10, None),
+)
+
+_SECTIONALE1D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionAle1D(KeywordBase):
     """DYNA SECTION_ALE1D keyword"""
@@ -40,78 +57,23 @@ class SectionAle1D(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aleform",
-                        int,
-                        10,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aet",
-                        int,
-                        20,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        30,
-                        10,
-                        7,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "thick",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONALE1D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONALE1D_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionAle1D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONALE1D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

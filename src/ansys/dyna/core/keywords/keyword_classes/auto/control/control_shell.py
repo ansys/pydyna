@@ -23,292 +23,93 @@
 """Module providing the ControlShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLSHELL_CARD0 = (
+    FieldSchema("wrpang", float, 0, 10, 20.0),
+    FieldSchema("esort", int, 10, 10, 0),
+    FieldSchema("irnxx", int, 20, 10, -1),
+    FieldSchema("istupd", int, 30, 10, 0),
+    FieldSchema("theory", int, 40, 10, 2),
+    FieldSchema("bwc", int, 50, 10, 2),
+    FieldSchema("miter", int, 60, 10, 1),
+    FieldSchema("proj", int, 70, 10, 0),
+)
+
+_CONTROLSHELL_CARD1 = (
+    FieldSchema("rotascl", float, 0, 10, 1.0),
+    FieldSchema("intgrd", int, 10, 10, 0),
+    FieldSchema("lamsht", int, 20, 10, 0),
+    FieldSchema("cstyp6", int, 30, 10, 1),
+    FieldSchema("thshel", int, 40, 10, 0),
+)
+
+_CONTROLSHELL_CARD2 = (
+    FieldSchema("psstupd", int, 0, 10, 0),
+    FieldSchema("sidt4tu", int, 10, 10, 0),
+    FieldSchema("cntco", int, 20, 10, 0),
+    FieldSchema("itsflg", int, 30, 10, 0),
+    FieldSchema("irquad", int, 40, 10, 3),
+    FieldSchema("w_mode", float, 50, 10, None, "w-mode"),
+    FieldSchema("stretch", float, 60, 10, None),
+    FieldSchema("icrq", int, 70, 10, 0),
+)
+
+_CONTROLSHELL_CARD3 = (
+    FieldSchema("nfail1", int, 0, 10, None),
+    FieldSchema("nfail4", int, 10, 10, None),
+    FieldSchema("psnfail", int, 20, 10, 0),
+    FieldSchema("keepcs", int, 30, 10, 0),
+    FieldSchema("delfr", int, 40, 10, 0),
+    FieldSchema("drcpsid", int, 50, 10, 0),
+    FieldSchema("drcprm", float, 60, 10, 1.0),
+    FieldSchema("intperr", int, 70, 10, 0),
+)
+
+_CONTROLSHELL_CARD4 = (
+    FieldSchema("drcmth", int, 0, 10, 0),
+    FieldSchema("lispsid", int, 10, 10, 0),
+    FieldSchema("nlocdt", int, 20, 10, 0),
+)
 
 class ControlShell(KeywordBase):
     """DYNA CONTROL_SHELL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "SHELL"
+    _link_fields = {
+        "sidt4tu": LinkType.SET_PART,
+        "psnfail": LinkType.SET_PART,
+        "drcpsid": LinkType.SET_PART,
+        "lispsid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wrpang",
-                        float,
-                        0,
-                        10,
-                        20.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esort",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irnxx",
-                        int,
-                        20,
-                        10,
-                        -1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istupd",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theory",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bwc",
-                        int,
-                        50,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "miter",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "proj",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rotascl",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intgrd",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lamsht",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cstyp6",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thshel",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psstupd",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidt4tu",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cntco",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itsflg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irquad",
-                        int,
-                        40,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w-mode",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stretch",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icrq",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nfail1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfail4",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psnfail",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "keepcs",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delfr",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drcpsid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drcprm",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intperr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "drcmth",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lispsid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlocdt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSHELL_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSHELL_CARD2,
+                active_func=lambda: self._cards[2].has_nondefault_values() or self._cards[3].active,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSHELL_CARD3,
+                active_func=lambda: self._cards[3].has_nondefault_values() or self._cards[4].active,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSHELL_CARD4,
+                active_func=lambda: self._cards[4].has_nondefault_values(),
+                **kwargs,
+            ),        ]
     @property
     def wrpang(self) -> float:
         """Get or set the Shell element warpage angle in degrees. If a warpage greater than this angle is found, a warning message is printed. (Default is 20 degrees).
@@ -588,12 +389,12 @@ class ControlShell(KeywordBase):
     def w_mode(self) -> typing.Optional[float]:
         """Get or set the W-Mode amplitude for element deletion, specified in degrees
         """ # nopep8
-        return self._cards[2].get_value("w-mode")
+        return self._cards[2].get_value("w_mode")
 
     @w_mode.setter
     def w_mode(self, value: float) -> None:
         """Set the w_mode property."""
-        self._cards[2].set_value("w-mode", value)
+        self._cards[2].set_value("w_mode", value)
 
     @property
     def stretch(self) -> typing.Optional[float]:
@@ -795,4 +596,44 @@ class ControlShell(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""nlocdt must be `None` or one of {0,1}.""")
         self._cards[4].set_value("nlocdt", value)
+
+    @property
+    def sidt4tu_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sidt4tu."""
+        return self._get_set_link("PART", self.sidt4tu)
+
+    @sidt4tu_link.setter
+    def sidt4tu_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sidt4tu."""
+        self.sidt4tu = value.sid
+
+    @property
+    def psnfail_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psnfail."""
+        return self._get_set_link("PART", self.psnfail)
+
+    @psnfail_link.setter
+    def psnfail_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psnfail."""
+        self.psnfail = value.sid
+
+    @property
+    def drcpsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drcpsid."""
+        return self._get_set_link("PART", self.drcpsid)
+
+    @drcpsid_link.setter
+    def drcpsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drcpsid."""
+        self.drcpsid = value.sid
+
+    @property
+    def lispsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for lispsid."""
+        return self._get_set_link("PART", self.lispsid)
+
+    @lispsid_link.setter
+    def lispsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for lispsid."""
+        self.lispsid = value.sid
 

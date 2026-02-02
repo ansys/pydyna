@@ -23,433 +23,144 @@
 """Module providing the ElementShellNurbsPatchV3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ELEMENTSHELLNURBSPATCHV3_CARD0 = (
+    FieldSchema("npeid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("npr", int, 20, 10, None),
+    FieldSchema("pr", int, 30, 10, None),
+    FieldSchema("nps", int, 40, 10, None),
+    FieldSchema("ps", int, 50, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD1 = (
+    FieldSchema("wfl", int, 0, 10, None),
+    FieldSchema("form", int, 10, 10, 0),
+    FieldSchema("int_", int, 20, 10, 0, "int"),
+    FieldSchema("nisr", int, 30, 10, None),
+    FieldSchema("niss", int, 40, 10, None),
+    FieldSchema("imass", int, 50, 10, 0),
+    FieldSchema("nl", int, 60, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD2 = (
+    FieldSchema("rk1", float, 0, 10, None),
+    FieldSchema("rk2", float, 10, 10, None),
+    FieldSchema("rk3", float, 20, 10, None),
+    FieldSchema("rk4", float, 30, 10, None),
+    FieldSchema("rk5", float, 40, 10, None),
+    FieldSchema("rk6", float, 50, 10, None),
+    FieldSchema("rk7", float, 60, 10, None),
+    FieldSchema("rk8", float, 70, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD3 = (
+    FieldSchema("sk1", float, 0, 10, None),
+    FieldSchema("sk2", float, 10, 10, None),
+    FieldSchema("sk3", float, 20, 10, None),
+    FieldSchema("sk4", float, 30, 10, None),
+    FieldSchema("sk5", float, 40, 10, None),
+    FieldSchema("sk6", float, 50, 10, None),
+    FieldSchema("sk7", float, 60, 10, None),
+    FieldSchema("sk8", float, 70, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD4 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("n5", int, 40, 10, None),
+    FieldSchema("n6", int, 50, 10, None),
+    FieldSchema("n7", int, 60, 10, None),
+    FieldSchema("n8", int, 70, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD5 = (
+    FieldSchema("w1", float, 0, 10, None),
+    FieldSchema("w2", float, 10, 10, None),
+    FieldSchema("w3", float, 20, 10, None),
+    FieldSchema("w4", float, 30, 10, None),
+    FieldSchema("w5", float, 40, 10, None),
+    FieldSchema("w6", float, 50, 10, None),
+    FieldSchema("w7", float, 60, 10, None),
+    FieldSchema("w8", float, 70, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD6 = (
+    FieldSchema("nel", int, 0, 10, None),
+)
+
+_ELEMENTSHELLNURBSPATCHV3_CARD7 = (
+    FieldSchema("e1", int, 0, 10, None),
+    FieldSchema("e2", int, 10, 10, None),
+    FieldSchema("e3", int, 20, 10, None),
+    FieldSchema("e4", int, 30, 10, None),
+    FieldSchema("e5", int, 40, 10, None),
+    FieldSchema("e6", int, 50, 10, None),
+    FieldSchema("e7", int, 60, 10, None),
+    FieldSchema("e8", int, 70, 10, None),
+)
 
 class ElementShellNurbsPatchV3(KeywordBase):
     """DYNA ELEMENT_SHELL_NURBS_PATCH_V3 keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SHELL_NURBS_PATCH_V3"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+        "e1": LinkType.DEFINE_CURVE,
+        "e2": LinkType.DEFINE_CURVE,
+        "e3": LinkType.DEFINE_CURVE,
+        "e4": LinkType.DEFINE_CURVE,
+        "e5": LinkType.DEFINE_CURVE,
+        "e6": LinkType.DEFINE_CURVE,
+        "e7": LinkType.DEFINE_CURVE,
+        "e8": LinkType.DEFINE_CURVE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementShellNurbsPatchV3 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "npeid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nps",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ps",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wfl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "int",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nisr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niss",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imass",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rk1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sk1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nel",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "e1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLNURBSPATCHV3_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def npeid(self) -> typing.Optional[int]:
         """Get or set the Nurbs-Patch Element ID.  A unique number has to be chosen.
@@ -551,14 +262,14 @@ class ElementShellNurbsPatchV3(KeywordBase):
         EQ.0: reduced Gauss integration (NIP=PR*PS)
         EQ.1: full Gauss integration (NIP=(PR+1)*(PS+1))
         """ # nopep8
-        return self._cards[1].get_value("int")
+        return self._cards[1].get_value("int_")
 
     @int_.setter
     def int_(self, value: int) -> None:
         """Set the int_ property."""
         if value not in [0, 1, None]:
             raise Exception("""int_ must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("int", value)
+        self._cards[1].set_value("int_", value)
 
     @property
     def nisr(self) -> typing.Optional[int]:
@@ -1058,4 +769,169 @@ class ElementShellNurbsPatchV3(KeywordBase):
     def e8(self, value: int) -> None:
         """Set the e8 property."""
         self._cards[7].set_value("e8", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+
+    @property
+    def e1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e1:
+                return kwd
+        return None
+
+    @e1_link.setter
+    def e1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e1."""
+        self.e1 = value.lcid
+
+    @property
+    def e2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e2:
+                return kwd
+        return None
+
+    @e2_link.setter
+    def e2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e2."""
+        self.e2 = value.lcid
+
+    @property
+    def e3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e3:
+                return kwd
+        return None
+
+    @e3_link.setter
+    def e3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e3."""
+        self.e3 = value.lcid
+
+    @property
+    def e4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e4:
+                return kwd
+        return None
+
+    @e4_link.setter
+    def e4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e4."""
+        self.e4 = value.lcid
+
+    @property
+    def e5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e5:
+                return kwd
+        return None
+
+    @e5_link.setter
+    def e5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e5."""
+        self.e5 = value.lcid
+
+    @property
+    def e6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e6:
+                return kwd
+        return None
+
+    @e6_link.setter
+    def e6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e6."""
+        self.e6 = value.lcid
+
+    @property
+    def e7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e7:
+                return kwd
+        return None
+
+    @e7_link.setter
+    def e7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e7."""
+        self.e7 = value.lcid
+
+    @property
+    def e8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for e8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.e8:
+                return kwd
+        return None
+
+    @e8_link.setter
+    def e8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for e8."""
+        self.e8 = value.lcid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

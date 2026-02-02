@@ -23,108 +23,48 @@
 """Module providing the DampingPartMassSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DAMPINGPARTMASSSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, 0),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("flag", int, 30, 10, 0),
+)
+
+_DAMPINGPARTMASSSET_CARD1 = (
+    FieldSchema("stx", float, 0, 10, 0.0),
+    FieldSchema("sty", float, 10, 10, 0.0),
+    FieldSchema("stz", float, 20, 10, 0.0),
+    FieldSchema("srx", float, 30, 10, 0.0),
+    FieldSchema("sry", float, 40, 10, 0.0),
+    FieldSchema("srz", float, 50, 10, 0.0),
+)
 
 class DampingPartMassSet(KeywordBase):
     """DYNA DAMPING_PART_MASS_SET keyword"""
 
     keyword = "DAMPING"
     subkeyword = "PART_MASS_SET"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DampingPartMassSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "stx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sty",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sry",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGPARTMASSSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DAMPINGPARTMASSSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> int:
         """Get or set the Part set ID, see *PART SET.
@@ -236,4 +176,29 @@ class DampingPartMassSet(KeywordBase):
     def srz(self, value: float) -> None:
         """Set the srz property."""
         self._cards[1].set_value("srz", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

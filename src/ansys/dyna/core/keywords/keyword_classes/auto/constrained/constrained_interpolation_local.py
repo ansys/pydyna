@@ -23,158 +23,62 @@
 """Module providing the ConstrainedInterpolationLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDINTERPOLATIONLOCAL_CARD0 = (
+    FieldSchema("icid", int, 0, 10, None),
+    FieldSchema("dnid", int, 10, 10, 0),
+    FieldSchema("ddof", int, 20, 10, 123456),
+    FieldSchema("cidd", int, 30, 10, None),
+    FieldSchema("ityp", int, 40, 10, 0),
+    FieldSchema("idnsw", int, 50, 10, 0),
+    FieldSchema("fgm", int, 60, 10, 0),
+)
+
+_CONSTRAINEDINTERPOLATIONLOCAL_CARD1 = (
+    FieldSchema("inid", int, 0, 10, 0),
+    FieldSchema("idof", int, 10, 10, 123456),
+    FieldSchema("twghtx", float, 20, 10, 1.0),
+    FieldSchema("twghty", float, 30, 10, 1.0),
+    FieldSchema("twghtz", float, 40, 10, 1.0),
+    FieldSchema("rwghtx", float, 50, 10, 1.0),
+    FieldSchema("rwghty", float, 60, 10, 1.0),
+    FieldSchema("rwghtz", float, 70, 10, 1.0),
+)
+
+_CONSTRAINEDINTERPOLATIONLOCAL_CARD2 = (
+    FieldSchema("cidi", int, 0, 10, 0),
+)
 
 class ConstrainedInterpolationLocal(KeywordBase):
     """DYNA CONSTRAINED_INTERPOLATION_LOCAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "INTERPOLATION_LOCAL"
+    _link_fields = {
+        "dnid": LinkType.NODE,
+        "cidd": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cidi": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedInterpolationLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "icid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ddof",
-                        int,
-                        20,
-                        10,
-                        123456,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cidd",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ityp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idnsw",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fgm",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "inid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idof",
-                        int,
-                        10,
-                        10,
-                        123456,
-                        **kwargs,
-                    ),
-                    Field(
-                        "twghtx",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "twghty",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "twghtz",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwghtx",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwghty",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwghtz",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cidi",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONLOCAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDINTERPOLATIONLOCAL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def icid(self) -> typing.Optional[int]:
         """Get or set the Interpolation constraint ID.
@@ -370,4 +274,39 @@ class ConstrainedInterpolationLocal(KeywordBase):
     def cidi(self, value: int) -> None:
         """Set the cidi property."""
         self._cards[2].set_value("cidi", value)
+
+    @property
+    def dnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given dnid."""
+        return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
+
+    @property
+    def cidd_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidd."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidd:
+                return kwd
+        return None
+
+    @cidd_link.setter
+    def cidd_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidd."""
+        self.cidd = value.cid
+
+    @property
+    def cidi_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cidi."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cidi:
+                return kwd
+        return None
+
+    @cidi_link.setter
+    def cidi_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cidi."""
+        self.cidi = value.cid
 

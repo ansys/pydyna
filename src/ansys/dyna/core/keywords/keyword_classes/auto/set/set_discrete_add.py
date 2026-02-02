@@ -23,8 +23,29 @@
 """Module providing the SetDiscreteAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETDISCRETEADD_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETDISCRETEADD_CARD1 = (
+    FieldSchema("dsid1", int, 0, 10, None),
+    FieldSchema("dsid2", int, 10, 10, None),
+    FieldSchema("dsid3", int, 20, 10, None),
+    FieldSchema("dsid4", int, 30, 10, None),
+    FieldSchema("dsid5", int, 40, 10, None),
+    FieldSchema("dsid6", int, 50, 10, None),
+    FieldSchema("dsid7", int, 60, 10, None),
+    FieldSchema("dsid8", int, 70, 10, None),
+)
+
+_SETDISCRETEADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetDiscreteAdd(KeywordBase):
     """DYNA SET_DISCRETE_ADD keyword"""
@@ -34,102 +55,39 @@ class SetDiscreteAdd(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "dsid1": LinkType.SET_DISCRETE,
+        "dsid2": LinkType.SET_DISCRETE,
+        "dsid3": LinkType.SET_DISCRETE,
+        "dsid4": LinkType.SET_DISCRETE,
+        "dsid5": LinkType.SET_DISCRETE,
+        "dsid6": LinkType.SET_DISCRETE,
+        "dsid7": LinkType.SET_DISCRETE,
+        "dsid8": LinkType.SET_DISCRETE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetDiscreteAdd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dsid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETDISCRETEADD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETDISCRETEADD_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetDiscreteAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETDISCRETEADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new discrete set. All discrete sets should have a unique set ID.
@@ -242,4 +200,84 @@ class SetDiscreteAdd(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def dsid1_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid1."""
+        return self._get_set_link("DISCRETE", self.dsid1)
+
+    @dsid1_link.setter
+    def dsid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid1."""
+        self.dsid1 = value.sid
+
+    @property
+    def dsid2_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid2."""
+        return self._get_set_link("DISCRETE", self.dsid2)
+
+    @dsid2_link.setter
+    def dsid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid2."""
+        self.dsid2 = value.sid
+
+    @property
+    def dsid3_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid3."""
+        return self._get_set_link("DISCRETE", self.dsid3)
+
+    @dsid3_link.setter
+    def dsid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid3."""
+        self.dsid3 = value.sid
+
+    @property
+    def dsid4_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid4."""
+        return self._get_set_link("DISCRETE", self.dsid4)
+
+    @dsid4_link.setter
+    def dsid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid4."""
+        self.dsid4 = value.sid
+
+    @property
+    def dsid5_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid5."""
+        return self._get_set_link("DISCRETE", self.dsid5)
+
+    @dsid5_link.setter
+    def dsid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid5."""
+        self.dsid5 = value.sid
+
+    @property
+    def dsid6_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid6."""
+        return self._get_set_link("DISCRETE", self.dsid6)
+
+    @dsid6_link.setter
+    def dsid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid6."""
+        self.dsid6 = value.sid
+
+    @property
+    def dsid7_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid7."""
+        return self._get_set_link("DISCRETE", self.dsid7)
+
+    @dsid7_link.setter
+    def dsid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid7."""
+        self.dsid7 = value.sid
+
+    @property
+    def dsid8_link(self) -> KeywordBase:
+        """Get the SET_DISCRETE_* keyword for dsid8."""
+        return self._get_set_link("DISCRETE", self.dsid8)
+
+    @dsid8_link.setter
+    def dsid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_DISCRETE_* keyword for dsid8."""
+        self.dsid8 = value.sid
 

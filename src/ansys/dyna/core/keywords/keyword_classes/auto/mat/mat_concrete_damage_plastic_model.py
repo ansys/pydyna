@@ -23,8 +23,46 @@
 """Module providing the MatConcreteDamagePlasticModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATCONCRETEDAMAGEPLASTICMODEL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, 0.2),
+    FieldSchema("ecc", float, 40, 10, None),
+    FieldSchema("qh0", float, 50, 10, 0.3),
+    FieldSchema("ft", float, 60, 10, None),
+    FieldSchema("fc", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEPLASTICMODEL_CARD1 = (
+    FieldSchema("hp", float, 0, 10, 0.5),
+    FieldSchema("ah", float, 10, 10, 0.08),
+    FieldSchema("bh", float, 20, 10, 0.003),
+    FieldSchema("ch", float, 30, 10, 2.0),
+    FieldSchema("dh", float, 40, 10, 1e-06),
+    FieldSchema("as_", float, 50, 10, 15.0, "as"),
+    FieldSchema("df", float, 60, 10, 0.85),
+    FieldSchema("fc0", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEPLASTICMODEL_CARD2 = (
+    FieldSchema("type", float, 0, 10, 0.0),
+    FieldSchema("bs", float, 10, 10, 1.0),
+    FieldSchema("wf", float, 20, 10, None),
+    FieldSchema("wf1", float, 30, 10, None),
+    FieldSchema("ft1", float, 40, 10, None),
+    FieldSchema("strflg", float, 50, 10, 0.0),
+    FieldSchema("failflg", float, 60, 10, None),
+    FieldSchema("efc", float, 70, 10, 0.0001),
+)
+
+_MATCONCRETEDAMAGEPLASTICMODEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatConcreteDamagePlasticModel(KeywordBase):
     """DYNA MAT_CONCRETE_DAMAGE_PLASTIC_MODEL keyword"""
@@ -40,218 +78,26 @@ class MatConcreteDamagePlasticModel(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        0.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qh0",
-                        float,
-                        50,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ft",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hp",
-                        float,
-                        0,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ah",
-                        float,
-                        10,
-                        10,
-                        0.08,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bh",
-                        float,
-                        20,
-                        10,
-                        0.003,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ch",
-                        float,
-                        30,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dh",
-                        float,
-                        40,
-                        10,
-                        1.0E-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "as",
-                        float,
-                        50,
-                        10,
-                        15.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "df",
-                        float,
-                        60,
-                        10,
-                        0.85,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fc0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "type",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bs",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wf1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ft1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strflg",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "failflg",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efc",
-                        float,
-                        70,
-                        10,
-                        1.0E-4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEPLASTICMODEL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEPLASTICMODEL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEPLASTICMODEL_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatConcreteDamagePlasticModel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONCRETEDAMAGEPLASTICMODEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -399,12 +245,12 @@ class MatConcreteDamagePlasticModel(KeywordBase):
     def as_(self) -> float:
         """Get or set the Ductility parameter during damage.
         """ # nopep8
-        return self._cards[1].get_value("as")
+        return self._cards[1].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[1].set_value("as", value)
+        self._cards[1].set_value("as_", value)
 
     @property
     def df(self) -> float:

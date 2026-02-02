@@ -23,39 +23,32 @@
 """Module providing the EmBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMBOUNDARY_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("btype", int, 10, 10, 9),
+)
 
 class EmBoundary(KeywordBase):
     """DYNA EM_BOUNDARY keyword"""
 
     keyword = "EM"
     subkeyword = "BOUNDARY"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmBoundary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "btype",
-                        int,
-                        10,
-                        10,
-                        9,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMBOUNDARY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID
@@ -79,4 +72,14 @@ class EmBoundary(KeywordBase):
     def btype(self, value: int) -> None:
         """Set the btype property."""
         self._cards[0].set_value("btype", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

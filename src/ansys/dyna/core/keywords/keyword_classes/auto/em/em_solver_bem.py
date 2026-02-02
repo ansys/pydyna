@@ -23,7 +23,17 @@
 """Module providing the EmSolverBem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMSOLVERBEM_CARD0 = (
+    FieldSchema("reltol", float, 0, 10, 1e-06),
+    FieldSchema("maxite", int, 10, 10, 1000),
+    FieldSchema("stype", int, 20, 10, 2),
+    FieldSchema("precon", int, 30, 10, 2),
+    FieldSchema("uselast", int, 40, 10, 1),
+    FieldSchema("ncyclbem", int, 50, 10, 5000),
+)
 
 class EmSolverBem(KeywordBase):
     """DYNA EM_SOLVER_BEM keyword"""
@@ -35,60 +45,10 @@ class EmSolverBem(KeywordBase):
         """Initialize the EmSolverBem class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "reltol",
-                        float,
-                        0,
-                        10,
-                        1.e-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxite",
-                        int,
-                        10,
-                        10,
-                        1000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "precon",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uselast",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyclbem",
-                        int,
-                        50,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMSOLVERBEM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def reltol(self) -> float:
         """Get or set the Relative tolerance for the iterative solvers (PCG or GMRES). The user should try to decrease this tolerance if the results are not accurate enough. More iterations will then be needed.

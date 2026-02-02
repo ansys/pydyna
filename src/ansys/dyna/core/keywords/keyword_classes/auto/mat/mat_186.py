@@ -23,8 +23,34 @@
 """Module providing the Mat186 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT186_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, 0),
+    FieldSchema("intfail", float, 30, 10, None),
+    FieldSchema("tes", float, 40, 10, None),
+    FieldSchema("tslc", int, 50, 10, None),
+    FieldSchema("gic", float, 60, 10, None),
+    FieldSchema("giic", float, 70, 10, None),
+)
+
+_MAT186_CARD1 = (
+    FieldSchema("xmu", float, 0, 10, None),
+    FieldSchema("t", float, 10, 10, None),
+    FieldSchema("s", float, 20, 10, None),
+    FieldSchema("stfsf", float, 30, 10, None),
+    FieldSchema("tslc2", float, 40, 10, None),
+)
+
+_MAT186_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat186(KeywordBase):
     """DYNA MAT_186 keyword"""
@@ -34,131 +60,33 @@ class Mat186(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tslc": LinkType.DEFINE_CURVE,
+        "tslc2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat186 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tes",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslc",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gic",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "giic",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xmu",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stfsf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslc2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT186_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT186_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat186.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT186_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -322,4 +250,34 @@ class Mat186(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tslc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tslc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tslc:
+                return kwd
+        return None
+
+    @tslc_link.setter
+    def tslc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tslc."""
+        self.tslc = value.lcid
+
+    @property
+    def tslc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tslc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tslc2:
+                return kwd
+        return None
+
+    @tslc2_link.setter
+    def tslc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tslc2."""
+        self.tslc2 = value.lcid
 

@@ -23,64 +23,37 @@
 """Module providing the ControlSteadyStateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLSTEADYSTATEROLLING_CARD0 = (
+    FieldSchema("imass", int, 0, 10, 0),
+    FieldSchema("lcdmu", int, 10, 10, 0),
+    FieldSchema("lcdmur", int, 20, 10, 0),
+    FieldSchema("ivel", int, 30, 10, 0),
+    FieldSchema("scl_k", int, 40, 10, 0),
+)
 
 class ControlSteadyStateRolling(KeywordBase):
     """DYNA CONTROL_STEADY_STATE_ROLLING keyword"""
 
     keyword = "CONTROL"
     subkeyword = "STEADY_STATE_ROLLING"
+    _link_fields = {
+        "lcdmu": LinkType.DEFINE_CURVE,
+        "lcdmur": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlSteadyStateRolling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imass",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdmu",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdmur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivel",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scl_k",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSTEADYSTATEROLLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def imass(self) -> int:
         """Get or set the Inertia switching flag
@@ -141,4 +114,34 @@ class ControlSteadyStateRolling(KeywordBase):
     def scl_k(self, value: int) -> None:
         """Set the scl_k property."""
         self._cards[0].set_value("scl_k", value)
+
+    @property
+    def lcdmu_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdmu."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdmu:
+                return kwd
+        return None
+
+    @lcdmu_link.setter
+    def lcdmu_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdmu."""
+        self.lcdmu = value.lcid
+
+    @property
+    def lcdmur_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdmur."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdmur:
+                return kwd
+        return None
+
+    @lcdmur_link.setter
+    def lcdmur_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdmur."""
+        self.lcdmur = value.lcid
 

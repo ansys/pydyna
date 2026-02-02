@@ -23,45 +23,35 @@
 """Module providing the ElementShellSourceSink class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ELEMENTSHELLSOURCESINK_CARD0 = (
+    FieldSchema("nssr", int, 0, 10, None),
+    FieldSchema("nssk", int, 10, 10, None),
+    FieldSchema("pid", int, 20, 10, None),
+)
 
 class ElementShellSourceSink(KeywordBase):
     """DYNA ELEMENT_SHELL_SOURCE_SINK keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SHELL_SOURCE_SINK"
+    _link_fields = {
+        "nssr": LinkType.SET_NODE,
+        "nssk": LinkType.SET_NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementShellSourceSink class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nssr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nssk",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSHELLSOURCESINK_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nssr(self) -> typing.Optional[int]:
         """Get or set the Node set at source. Provide an ordered set of nodes between corner nodes, which include the corner nodes
@@ -94,4 +84,29 @@ class ElementShellSourceSink(KeywordBase):
     def pid(self, value: int) -> None:
         """Set the pid property."""
         self._cards[0].set_value("pid", value)
+
+    @property
+    def nssr_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nssr."""
+        return self._get_set_link("NODE", self.nssr)
+
+    @nssr_link.setter
+    def nssr_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nssr."""
+        self.nssr = value.sid
+
+    @property
+    def nssk_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nssk."""
+        return self._get_set_link("NODE", self.nssk)
+
+    @nssk_link.setter
+    def nssk_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nssk."""
+        self.nssk = value.sid
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

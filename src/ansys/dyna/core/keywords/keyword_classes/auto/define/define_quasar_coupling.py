@@ -23,8 +23,49 @@
 """Module providing the DefineQuasarCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINEQUASARCOUPLING_CARD0 = (
+    FieldSchema("node", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("romid", int, 20, 10, None),
+    FieldSchema("pid", int, 30, 10, None),
+    FieldSchema("ptype", int, 40, 10, 0),
+    FieldSchema("iopt", int, 50, 10, 0),
+    FieldSchema("cid", int, 60, 10, None),
+    FieldSchema("ex_id", int, 70, 10, None),
+)
+
+_DEFINEQUASARCOUPLING_CARD1 = (
+    FieldSchema("frcfrq", int, 0, 10, None),
+)
+
+_DEFINEQUASARCOUPLING_CARD2 = (
+    FieldSchema("encname1", str, 0, 80, None),
+)
+
+_DEFINEQUASARCOUPLING_CARD3 = (
+    FieldSchema("encname2", str, 0, 80, None),
+)
+
+_DEFINEQUASARCOUPLING_CARD4 = (
+    FieldSchema("var1", float, 0, 10, None),
+    FieldSchema("var2", float, 10, 10, None),
+    FieldSchema("var3", float, 20, 10, None),
+    FieldSchema("var4", float, 30, 10, None),
+    FieldSchema("var5", float, 40, 10, None),
+    FieldSchema("var6", float, 50, 10, None),
+    FieldSchema("var7", float, 60, 10, None),
+    FieldSchema("var8", float, 70, 10, None),
+)
+
+_DEFINEQUASARCOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineQuasarCoupling(KeywordBase):
     """DYNA DEFINE_QUASAR_COUPLING keyword"""
@@ -34,187 +75,42 @@ class DefineQuasarCoupling(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "cid": LinkType.DEFINE_CURVE,
+        "ex_id": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineQuasarCoupling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "node",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "romid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ex_id",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "frcfrq",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "encname1",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "encname2",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEQUASARCOUPLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEQUASARCOUPLING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEQUASARCOUPLING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEQUASARCOUPLING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEQUASARCOUPLING_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineQuasarCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEQUASARCOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def node(self) -> typing.Optional[int]:
         """Get or set the Coupled node/node set
@@ -451,4 +347,29 @@ class DefineQuasarCoupling(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def cid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for cid."""
+        self.cid = value.lcid
+
+    @property
+    def ex_id_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ex_id."""
+        return self._get_set_link("NODE", self.ex_id)
+
+    @ex_id_link.setter
+    def ex_id_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ex_id."""
+        self.ex_id = value.sid
 

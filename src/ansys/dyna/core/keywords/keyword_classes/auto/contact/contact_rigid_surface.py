@@ -23,181 +23,70 @@
 """Module providing the ContactRigidSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_CONTACTRIGIDSURFACE_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("segid", int, 30, 10, None),
+    FieldSchema("fs", float, 40, 10, 0.0),
+    FieldSchema("fd", float, 50, 10, 0.0),
+    FieldSchema("dc", float, 60, 10, 0.0),
+    FieldSchema("vc", float, 70, 10, 0.0),
+)
+
+_CONTACTRIGIDSURFACE_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, 0),
+    FieldSchema("lcidy", int, 10, 10, 0),
+    FieldSchema("lcidz", int, 20, 10, 0),
+    FieldSchema("fslcid", int, 30, 10, 0),
+    FieldSchema("fdlcid", int, 40, 10, 0),
+)
+
+_CONTACTRIGIDSURFACE_CARD2 = (
+    FieldSchema("sfs", float, 0, 10, 1.0),
+    FieldSchema("stthk", float, 10, 10, 0.0),
+    FieldSchema("sfthk", float, 20, 10, 1.0),
+    FieldSchema("xpene", float, 30, 10, 4.0),
+    FieldSchema("bsort", float, 40, 10, 10.0),
+    FieldSchema("ctype", int, 50, 10, 0),
+)
 
 class ContactRigidSurface(KeywordBase):
     """DYNA CONTACT_RIGID_SURFACE keyword"""
 
     keyword = "CONTACT"
     subkeyword = "RIGID_SURFACE"
+    _link_fields = {
+        "lcidx": LinkType.DEFINE_CURVE,
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
+        "fslcid": LinkType.DEFINE_CURVE,
+        "fdlcid": LinkType.DEFINE_CURVE,
+        "boxid": LinkType.DEFINE_BOX,
+        "psid": LinkType.SET_PART,
+        "segid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactRigidSurface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fslcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fdlcid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfs",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stthk",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfthk",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xpene",
-                        float,
-                        30,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsort",
-                        float,
-                        40,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTRIGIDSURFACE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.
@@ -416,4 +305,114 @@ class ContactRigidSurface(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""ctype must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ctype", value)
+
+    @property
+    def lcidx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidx:
+                return kwd
+        return None
+
+    @lcidx_link.setter
+    def lcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidx."""
+        self.lcidx = value.lcid
+
+    @property
+    def lcidy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
+
+    @property
+    def fslcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fslcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fslcid:
+                return kwd
+        return None
+
+    @fslcid_link.setter
+    def fslcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fslcid."""
+        self.fslcid = value.lcid
+
+    @property
+    def fdlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for fdlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.fdlcid:
+                return kwd
+        return None
+
+    @fdlcid_link.setter
+    def fdlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for fdlcid."""
+        self.fdlcid = value.lcid
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def segid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for segid."""
+        return self._get_set_link("SEGMENT", self.segid)
+
+    @segid_link.setter
+    def segid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for segid."""
+        self.segid = value.sid
 

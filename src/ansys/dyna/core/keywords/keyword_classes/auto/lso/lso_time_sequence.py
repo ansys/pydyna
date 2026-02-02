@@ -23,155 +23,65 @@
 """Module providing the LsoTimeSequence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LSOTIMESEQUENCE_CARD0 = (
+    FieldSchema("solver_name", str, 0, 20, "MECH"),
+)
+
+_LSOTIMESEQUENCE_CARD1 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("lcdt", int, 10, 10, 0),
+    FieldSchema("lcopt", int, 20, 10, 1),
+    FieldSchema("npltc", int, 30, 10, 0),
+    FieldSchema("tbeg", float, 40, 10, 0.0),
+    FieldSchema("tend", float, 50, 10, 0.0),
+)
+
+_LSOTIMESEQUENCE_CARD2 = (
+    FieldSchema("domid1", int, 0, 10, None),
+    FieldSchema("domid2", int, 10, 10, None),
+    FieldSchema("domid3", int, 20, 10, None),
+    FieldSchema("domid4", int, 30, 10, None),
+    FieldSchema("domid5", int, 40, 10, None),
+    FieldSchema("domid6", int, 50, 10, None),
+    FieldSchema("domid7", int, 60, 10, None),
+    FieldSchema("domid8", int, 70, 10, None),
+)
+
+_LSOTIMESEQUENCE_CARD3 = (
+    FieldSchema("global_var", str, 0, 80, None),
+)
 
 class LsoTimeSequence(KeywordBase):
     """DYNA LSO_TIME_SEQUENCE keyword"""
 
     keyword = "LSO"
     subkeyword = "TIME_SEQUENCE"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LsoTimeSequence class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "solver_name",
-                        str,
-                        0,
-                        20,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcopt",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "domid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "global_var",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LSOTIMESEQUENCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOTIMESEQUENCE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOTIMESEQUENCE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSOTIMESEQUENCE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def solver_name(self) -> str:
         """Get or set the Selects the solver from which data is output in this time sequence.
@@ -377,4 +287,19 @@ class LsoTimeSequence(KeywordBase):
     def global_var(self, value: str) -> None:
         """Set the global_var property."""
         self._cards[3].set_value("global_var", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
 

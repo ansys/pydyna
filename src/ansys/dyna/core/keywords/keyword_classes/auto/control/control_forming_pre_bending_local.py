@@ -23,91 +23,47 @@
 """Module providing the ControlFormingPreBendingLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONTROLFORMINGPREBENDINGLOCAL_CARD0 = (
+    FieldSchema("pset", int, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("vx", float, 20, 10, None),
+    FieldSchema("vy", float, 30, 10, None),
+    FieldSchema("vz", float, 40, 10, None),
+    FieldSchema("xc", float, 50, 10, None),
+    FieldSchema("yc", float, 60, 10, None),
+    FieldSchema("zc", float, 70, 10, None),
+)
+
+_CONTROLFORMINGPREBENDINGLOCAL_CARD1 = (
+    FieldSchema("cid", int, 0, 10, None),
+)
 
 class ControlFormingPreBendingLocal(KeywordBase):
     """DYNA CONTROL_FORMING_PRE_BENDING_LOCAL keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FORMING_PRE_BENDING_LOCAL"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "pset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingPreBendingLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPREBENDINGLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGPREBENDINGLOCAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pset(self) -> typing.Optional[int]:
         """Get or set the Part set ID to be included in the pre-bending.
@@ -209,4 +165,29 @@ class ControlFormingPreBendingLocal(KeywordBase):
     def cid(self, value: int) -> None:
         """Set the cid property."""
         self._cards[1].set_value("cid", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def pset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pset."""
+        return self._get_set_link("PART", self.pset)
+
+    @pset_link.setter
+    def pset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pset."""
+        self.pset = value.sid
 

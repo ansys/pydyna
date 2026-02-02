@@ -23,87 +23,39 @@
 """Module providing the CeseBoundarySolidWallPartSetRotate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CESEBOUNDARYSOLIDWALLPARTSETROTATE_CARD0 = (
+    FieldSchema("surfsid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("vx", float, 20, 10, 0.0),
+    FieldSchema("vy", float, 30, 10, 0.0),
+    FieldSchema("vz", float, 40, 10, 0.0),
+    FieldSchema("nx", float, 50, 10, 0.0),
+    FieldSchema("ny", float, 60, 10, 0.0),
+    FieldSchema("nz", float, 70, 10, 0.0),
+)
 
 class CeseBoundarySolidWallPartSetRotate(KeywordBase):
     """DYNA CESE_BOUNDARY_SOLID_WALL_PART_SET_ROTATE keyword"""
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_SOLID_WALL_PART_SET_ROTATE"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundarySolidWallPartSetRotate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSOLIDWALLPARTSETROTATE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def surfsid(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
@@ -191,4 +143,19 @@ class CeseBoundarySolidWallPartSetRotate(KeywordBase):
     def nz(self, value: float) -> None:
         """Set the nz property."""
         self._cards[0].set_value("nz", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

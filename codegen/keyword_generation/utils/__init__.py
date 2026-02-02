@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -31,22 +31,50 @@ def handle_single_word_keyword(keyword: str) -> str:
     return keyword
 
 
-def fix_keyword(keyword: str) -> str:
-    """returns a "fixed" keyword in two ways:
-    - a single word keyword will be defined from the kwdm as NAME_NAME,
+def fix_keyword(keyword: str, preserve_hyphen_distinction: bool = True) -> str:
+    """Returns a "fixed" keyword for filenames.
+
+    - A single word keyword will be defined from the kwdm as NAME_NAME,
       and the fixed keyword is just NAME
-    - some keywords are not python and filesystem friendly, for example:
-      MAT_BILKHU/DUBOIS_FOAM becomes MAT_BILKHU_DUBOIS_FOAM"""
+    - Some keywords are not python and filesystem friendly, for example:
+      MAT_BILKHU/DUBOIS_FOAM becomes MAT_BILKHU_DUBOIS_FOAM
+
+    Args:
+        keyword: The keyword to fix
+        preserve_hyphen_distinction: If True, hyphens become double underscores
+            to distinguish from regular underscores (e.g., SPRING-DAMPER becomes
+            SPRING__DAMPER, not SPRING_DAMPER). This prevents filename collisions
+            when both hyphen and underscore variants exist.
+    """
     keyword = handle_single_word_keyword(keyword)
-    for bad_char in ["/", "-", " ", "(", ")"]:
+    for bad_char in ["/", " ", "(", ")"]:
         keyword = keyword.replace(bad_char, "_")
+    # Handle hyphens: use double underscore to preserve distinction
+    if preserve_hyphen_distinction:
+        keyword = keyword.replace("-", "__")
+    else:
+        keyword = keyword.replace("-", "_")
     return keyword
 
 
 def get_classname(keyword: str):
-    """convert CLASS_NAME_FOO to ClassNameFoo"""
-    tokens = keyword.split("_")
-    return "".join([word.title() for word in tokens])
+    """convert CLASS_NAME_FOO to ClassNameFoo.
+    Hyphens are converted to single underscores to preserve distinction.
+    E.g., ALE_MULTI-MATERIAL_GROUP becomes AleMulti_MaterialGroup
+    while ALE_MULTI_MATERIAL_GROUP becomes AleMultiMaterialGroup.
+    Slashes and other special chars are removed."""
+    keyword = handle_single_word_keyword(keyword)
+    # Remove slashes, spaces, parens (these don't need distinction in class names)
+    for bad_char in ["/", " ", "(", ")"]:
+        keyword = keyword.replace(bad_char, "_")
+    # Replace hyphens with a placeholder, then process
+    # We use single underscore in the class name for hyphens
+    parts = []
+    for segment in keyword.split("-"):
+        # Each segment between hyphens becomes TitleCase tokens joined
+        tokens = segment.split("_")
+        parts.append("".join([word.title() for word in tokens]))
+    return "_".join(parts)
 
 
 def get_this_folder():

@@ -23,8 +23,33 @@
 """Module providing the DefineSphMeshBox class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESPHMESHBOX_CARD0 = (
+    FieldSchema("xmin", float, 0, 10, None),
+    FieldSchema("ymin", float, 10, 10, None),
+    FieldSchema("zmin", float, 20, 10, None),
+    FieldSchema("xlen", float, 30, 10, None),
+    FieldSchema("ylen", float, 40, 10, None),
+    FieldSchema("zlen", float, 50, 10, None),
+)
+
+_DEFINESPHMESHBOX_CARD1 = (
+    FieldSchema("ipid", int, 0, 10, None),
+    FieldSchema("nx", int, 10, 10, None),
+    FieldSchema("ny", int, 20, 10, None),
+    FieldSchema("nz", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("idseg", int, 50, 10, 0),
+    FieldSchema("sfsp", float, 60, 10, None),
+)
+
+_DEFINESPHMESHBOX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSphMeshBox(KeywordBase):
     """DYNA DEFINE_SPH_MESH_BOX keyword"""
@@ -34,131 +59,33 @@ class DefineSphMeshBox(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "idseg": LinkType.SET_SEGMENT,
+        "ipid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSphMeshBox class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "xmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xlen",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ylen",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zlen",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idseg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHMESHBOX_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHMESHBOX_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphMeshBox.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHMESHBOX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def xmin(self) -> typing.Optional[float]:
         """Get or set the Minimum x-coordinate
@@ -308,4 +235,19 @@ class DefineSphMeshBox(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def idseg_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for idseg."""
+        return self._get_set_link("SEGMENT", self.idseg)
+
+    @idseg_link.setter
+    def idseg_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for idseg."""
+        self.idseg = value.sid
+
+    @property
+    def ipid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid."""
+        return self._get_link_by_attr("PART", "pid", self.ipid, "parts")
 

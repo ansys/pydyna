@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -43,8 +43,7 @@ import tempfile
 
 import pandas as pd
 
-from ansys.dyna.core import Deck
-from ansys.dyna.core import keywords as kwd
+from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
 

@@ -23,76 +23,43 @@
 """Module providing the DatabaseFrequencyBinaryD3Ssd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DATABASEFREQUENCYBINARYD3SSD_CARD0 = (
+    FieldSchema("binary", int, 0, 10, 0),
+)
+
+_DATABASEFREQUENCYBINARYD3SSD_CARD1 = (
+    FieldSchema("fmin", float, 0, 10, 0.0),
+    FieldSchema("fmax", float, 10, 10, 0.0),
+    FieldSchema("nfreq", int, 20, 10, 0),
+    FieldSchema("fspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, 0),
+)
 
 class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
     """DYNA DATABASE_FREQUENCY_BINARY_D3SSD keyword"""
 
     keyword = "DATABASE"
     subkeyword = "FREQUENCY_BINARY_D3SSD"
+    _link_fields = {
+        "lcfreq": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseFrequencyBinaryD3Ssd class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "binary",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3SSD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3SSD_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def binary(self) -> int:
         """Get or set the Flag for writing the binary plot file.
@@ -171,4 +138,19 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
     def lcfreq(self, value: int) -> None:
         """Set the lcfreq property."""
         self._cards[1].set_value("lcfreq", value)
+
+    @property
+    def lcfreq_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfreq."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfreq:
+                return kwd
+        return None
+
+    @lcfreq_link.setter
+    def lcfreq_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfreq."""
+        self.lcfreq = value.lcid
 

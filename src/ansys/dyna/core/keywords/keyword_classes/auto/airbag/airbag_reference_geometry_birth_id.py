@@ -23,106 +23,54 @@
 """Module providing the AirbagReferenceGeometryBirthId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_AIRBAGREFERENCEGEOMETRYBIRTHID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("sx", float, 10, 10, None),
+    FieldSchema("sy", float, 20, 10, None),
+    FieldSchema("sz", float, 30, 10, None),
+    FieldSchema("nido", int, 40, 10, None),
+)
+
+_AIRBAGREFERENCEGEOMETRYBIRTHID_CARD1 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+)
+
+_AIRBAGREFERENCEGEOMETRYBIRTHID_CARD2 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+)
 
 class AirbagReferenceGeometryBirthId(KeywordBase):
     """DYNA AIRBAG_REFERENCE_GEOMETRY_BIRTH_ID keyword"""
 
     keyword = "AIRBAG"
     subkeyword = "REFERENCE_GEOMETRY_BIRTH_ID"
+    _link_fields = {
+        "nido": LinkType.NODE,
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagReferenceGeometryBirthId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nido",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Card ID.
@@ -232,4 +180,14 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
     def z(self, value: float) -> None:
         """Set the z property."""
         self._cards[2].set_value("z", value)
+
+    @property
+    def nido_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nido."""
+        return self._get_link_by_attr("NODE", "nid", self.nido, "parts")
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

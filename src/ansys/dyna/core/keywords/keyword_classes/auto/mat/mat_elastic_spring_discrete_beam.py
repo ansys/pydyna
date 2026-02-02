@@ -23,8 +23,34 @@
 """Module providing the MatElasticSpringDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATELASTICSPRINGDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("f0", float, 30, 10, None),
+    FieldSchema("d", float, 40, 10, None),
+    FieldSchema("cdf", float, 50, 10, None),
+    FieldSchema("tdf", float, 60, 10, None),
+)
+
+_MATELASTICSPRINGDISCRETEBEAM_CARD1 = (
+    FieldSchema("flcid", int, 0, 10, None),
+    FieldSchema("hlcid", int, 10, 10, None),
+    FieldSchema("c1", float, 20, 10, None),
+    FieldSchema("c2", float, 30, 10, None),
+    FieldSchema("dle", float, 40, 10, 1.0),
+    FieldSchema("glcid", int, 50, 10, None),
+)
+
+_MATELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatElasticSpringDiscreteBeam(KeywordBase):
     """DYNA MAT_ELASTIC_SPRING_DISCRETE_BEAM keyword"""
@@ -34,131 +60,34 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "flcid": LinkType.DEFINE_CURVE,
+        "hlcid": LinkType.DEFINE_CURVE,
+        "glcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatElasticSpringDiscreteBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "flcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dle",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "glcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATELASTICSPRINGDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATELASTICSPRINGDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatElasticSpringDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -318,4 +247,49 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def flcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for flcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.flcid:
+                return kwd
+        return None
+
+    @flcid_link.setter
+    def flcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for flcid."""
+        self.flcid = value.lcid
+
+    @property
+    def hlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlcid:
+                return kwd
+        return None
+
+    @hlcid_link.setter
+    def hlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlcid."""
+        self.hlcid = value.lcid
+
+    @property
+    def glcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for glcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.glcid:
+                return kwd
+        return None
+
+    @glcid_link.setter
+    def glcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for glcid."""
+        self.glcid = value.lcid
 

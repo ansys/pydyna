@@ -23,112 +23,52 @@
 """Module providing the LoadPyroActuator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADPYROACTUATOR_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("id1", int, 10, 10, None),
+    FieldSchema("id2", int, 20, 10, None),
+    FieldSchema("csa", float, 30, 10, None),
+    FieldSchema("vol", float, 40, 10, None),
+    FieldSchema("prs", float, 50, 10, None),
+    FieldSchema("dens", float, 60, 10, None),
+    FieldSchema("atime", float, 70, 10, None),
+)
+
+_LOADPYROACTUATOR_CARD1 = (
+    FieldSchema("mcid", int, 0, 10, None),
+    FieldSchema("cv", float, 10, 10, None),
+    FieldSchema("cp", float, 20, 10, None),
+    FieldSchema("temp", float, 30, 10, None),
+)
 
 class LoadPyroActuator(KeywordBase):
     """DYNA LOAD_PYRO_ACTUATOR keyword"""
 
     keyword = "LOAD"
     subkeyword = "PYRO_ACTUATOR"
+    _link_fields = {
+        "id1": LinkType.NODE,
+        "id2": LinkType.NODE,
+        "mcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadPyroActuator class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atime",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADPYROACTUATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADPYROACTUATOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for actuator.
@@ -263,4 +203,29 @@ class LoadPyroActuator(KeywordBase):
     def temp(self, value: float) -> None:
         """Set the temp property."""
         self._cards[1].set_value("temp", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id1."""
+        return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given id2."""
+        return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
+
+    @property
+    def mcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for mcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.mcid:
+                return kwd
+        return None
+
+    @mcid_link.setter
+    def mcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for mcid."""
+        self.mcid = value.lcid
 

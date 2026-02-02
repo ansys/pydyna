@@ -23,8 +23,44 @@
 """Module providing the DefineDeathTimesNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DEFINEDEATHTIMESNODES_CARD0 = (
+    FieldSchema("geo", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n2", int, 20, 10, None),
+    FieldSchema("n3", int, 30, 10, None),
+)
+
+_DEFINEDEATHTIMESNODES_CARD1 = (
+    FieldSchema("x_t", float, 0, 10, None),
+    FieldSchema("y_t", float, 10, 10, None),
+    FieldSchema("z_t", float, 20, 10, None),
+    FieldSchema("x_h", float, 30, 10, None),
+    FieldSchema("y_h", float, 40, 10, None),
+    FieldSchema("x_h", float, 50, 10, None),
+    FieldSchema("r", float, 60, 10, None),
+    FieldSchema("flag", int, 70, 10, None),
+)
+
+_DEFINEDEATHTIMESNODES_CARD2 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid3", int, 20, 10, None),
+    FieldSchema("nid4", int, 30, 10, None),
+    FieldSchema("nid5", int, 40, 10, None),
+    FieldSchema("nid6", int, 50, 10, None),
+    FieldSchema("nid7", int, 60, 10, None),
+    FieldSchema("nid8", int, 70, 10, None),
+)
+
+_DEFINEDEATHTIMESNODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeathTimesNodes(KeywordBase):
     """DYNA DEFINE_DEATH_TIMES_NODES keyword"""
@@ -34,183 +70,45 @@ class DefineDeathTimesNodes(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "nid1": LinkType.NODE,
+        "nid2": LinkType.NODE,
+        "nid3": LinkType.NODE,
+        "nid4": LinkType.NODE,
+        "nid5": LinkType.NODE,
+        "nid6": LinkType.NODE,
+        "nid7": LinkType.NODE,
+        "nid8": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineDeathTimesNodes class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "geo",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x_t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y_t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z_t",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x_h",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y_h",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x_h",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESNODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESNODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEATHTIMESNODES_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeathTimesNodes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEATHTIMESNODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def geo(self) -> typing.Optional[int]:
         """Get or set the Geometric entity type. =1 plane, =2 infinite cylinder, =3 sphere
@@ -444,4 +342,59 @@ class DefineDeathTimesNodes(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def nid1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid1."""
+        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+
+    @property
+    def nid2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid2."""
+        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
+
+    @property
+    def nid3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid3."""
+        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
+
+    @property
+    def nid4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid4."""
+        return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
+
+    @property
+    def nid5_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid5."""
+        return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
+
+    @property
+    def nid6_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid6."""
+        return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
+
+    @property
+    def nid7_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid7."""
+        return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
+
+    @property
+    def nid8_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid8."""
+        return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
 

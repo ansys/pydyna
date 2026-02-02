@@ -23,51 +23,39 @@
 """Module providing the EmDatabaseNodout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMDATABASENODOUT_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 0),
+    FieldSchema("dtout", float, 10, 10, 0.0),
+)
+
+_EMDATABASENODOUT_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+)
 
 class EmDatabaseNodout(KeywordBase):
     """DYNA EM_DATABASE_NODOUT keyword"""
 
     keyword = "EM"
     subkeyword = "DATABASE_NODOUT"
+    _link_fields = {
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmDatabaseNodout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASENODOUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMDATABASENODOUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.
@@ -104,4 +92,14 @@ class EmDatabaseNodout(KeywordBase):
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

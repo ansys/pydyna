@@ -23,80 +23,46 @@
 """Module providing the CeseBoundaryCyclicSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CESEBOUNDARYCYCLICSEGMENT_CARD0 = (
+    FieldSchema("nd1", int, 0, 10, None),
+    FieldSchema("nd2", int, 10, 10, None),
+    FieldSchema("nd3", int, 20, 10, None),
+    FieldSchema("nd4", int, 30, 10, None),
+    FieldSchema("np1", int, 40, 10, None),
+    FieldSchema("np2", int, 50, 10, None),
+    FieldSchema("np3", int, 60, 10, None),
+    FieldSchema("np4", int, 70, 10, None),
+)
 
 class CeseBoundaryCyclicSegment(KeywordBase):
     """DYNA CESE_BOUNDARY_CYCLIC_SEGMENT keyword"""
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_CYCLIC_SEGMENT"
+    _link_fields = {
+        "nd1": LinkType.NODE,
+        "nd2": LinkType.NODE,
+        "nd3": LinkType.NODE,
+        "nd4": LinkType.NODE,
+        "np1": LinkType.NODE,
+        "np2": LinkType.NODE,
+        "np3": LinkType.NODE,
+        "np4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundaryCyclicSegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nd1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np3",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np4",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICSEGMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nd1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining segment.
@@ -184,4 +150,44 @@ class CeseBoundaryCyclicSegment(KeywordBase):
     def np4(self, value: int) -> None:
         """Set the np4 property."""
         self._cards[0].set_value("np4", value)
+
+    @property
+    def nd1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd1."""
+        return self._get_link_by_attr("NODE", "nid", self.nd1, "parts")
+
+    @property
+    def nd2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd2."""
+        return self._get_link_by_attr("NODE", "nid", self.nd2, "parts")
+
+    @property
+    def nd3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd3."""
+        return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
+
+    @property
+    def nd4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd4."""
+        return self._get_link_by_attr("NODE", "nid", self.nd4, "parts")
+
+    @property
+    def np1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given np1."""
+        return self._get_link_by_attr("NODE", "nid", self.np1, "parts")
+
+    @property
+    def np2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given np2."""
+        return self._get_link_by_attr("NODE", "nid", self.np2, "parts")
+
+    @property
+    def np3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given np3."""
+        return self._get_link_by_attr("NODE", "nid", self.np3, "parts")
+
+    @property
+    def np4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given np4."""
+        return self._get_link_by_attr("NODE", "nid", self.np4, "parts")
 

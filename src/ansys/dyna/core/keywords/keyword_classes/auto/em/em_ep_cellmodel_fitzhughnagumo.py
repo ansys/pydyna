@@ -23,95 +23,51 @@
 """Module providing the EmEpCellmodelFitzhughnagumo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMEPCELLMODELFITZHUGHNAGUMO_CARD0 = (
+    FieldSchema("matid", int, 0, 10, None),
+)
+
+_EMEPCELLMODELFITZHUGHNAGUMO_CARD1 = (
+    FieldSchema("alpha", float, 0, 10, None),
+    FieldSchema("beta", float, 10, 10, None),
+    FieldSchema("gamma", float, 20, 10, None),
+    FieldSchema("c", float, 30, 10, None),
+    FieldSchema("mu1", float, 40, 10, None),
+    FieldSchema("mu2", float, 50, 10, None),
+)
+
+_EMEPCELLMODELFITZHUGHNAGUMO_CARD2 = (
+    FieldSchema("v", float, 0, 10, None),
+    FieldSchema("r", float, 10, 10, None),
+)
 
 class EmEpCellmodelFitzhughnagumo(KeywordBase):
     """DYNA EM_EP_CELLMODEL_FITZHUGHNAGUMO keyword"""
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_FITZHUGHNAGUMO"
+    _link_fields = {
+        "matid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelFitzhughnagumo class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "matid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFITZHUGHNAGUMO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFITZHUGHNAGUMO_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELFITZHUGHNAGUMO_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -211,4 +167,19 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
     def r(self, value: float) -> None:
         """Set the r property."""
         self._cards[2].set_value("r", value)
+
+    @property
+    def matid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for matid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.matid:
+                return kwd
+        return None
+
+    @matid_link.setter
+    def matid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for matid."""
+        self.matid = value.mid
 

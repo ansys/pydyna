@@ -23,112 +23,53 @@
 """Module providing the CeseBoundarySolidWallSegmentRotate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n1", int, 20, 10, None),
+    FieldSchema("n1", int, 30, 10, None),
+    FieldSchema("lcid", int, 40, 10, 0),
+    FieldSchema("vx", float, 50, 10, 0.0),
+    FieldSchema("vy", float, 60, 10, 0.0),
+    FieldSchema("vz", float, 70, 10, 0.0),
+)
+
+_CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD1 = (
+    FieldSchema("nx", float, 0, 10, 0.0),
+    FieldSchema("ny", float, 10, 10, 0.0),
+    FieldSchema("nz", float, 20, 10, 0.0),
+)
 
 class CeseBoundarySolidWallSegmentRotate(KeywordBase):
     """DYNA CESE_BOUNDARY_SOLID_WALL_SEGMENT_ROTATE keyword"""
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_SOLID_WALL_SEGMENT_ROTATE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "n1": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundarySolidWallSegmentRotate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining segment.
@@ -249,4 +190,39 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
     def nz(self, value: float) -> None:
         """Set the nz property."""
         self._cards[1].set_value("nz", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

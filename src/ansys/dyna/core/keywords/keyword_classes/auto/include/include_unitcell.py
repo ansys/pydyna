@@ -23,201 +23,87 @@
 """Module providing the IncludeUnitcell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INCLUDEUNITCELL_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
+
+_INCLUDEUNITCELL_CARD1 = (
+    FieldSchema("inpt", int, 0, 10, 0),
+    FieldSchema("oupt", int, 10, 10, 0),
+    FieldSchema("nedof", int, 20, 10, 0),
+)
+
+_INCLUDEUNITCELL_CARD2 = (
+    FieldSchema("dx", float, 0, 10, 1.0),
+    FieldSchema("dy", float, 10, 10, 1.0),
+    FieldSchema("dz", float, 20, 10, 1.0),
+    FieldSchema("nex", int, 30, 10, 1),
+    FieldSchema("ney", int, 40, 10, 1),
+    FieldSchema("nez", int, 50, 10, 1),
+    FieldSchema("nnpe", int, 60, 10, 8),
+    FieldSchema("tol", float, 70, 10, None),
+)
+
+_INCLUDEUNITCELL_CARD3 = (
+    FieldSchema("noff", int, 0, 10, None),
+    FieldSchema("eoff", int, 10, 10, None),
+    FieldSchema("pnm", int, 20, 10, None),
+)
+
+_INCLUDEUNITCELL_CARD4 = (
+    FieldSchema("cnx", int, 0, 10, None),
+    FieldSchema("cny", int, 10, 10, None),
+    FieldSchema("cnz", int, 20, 10, None),
+)
+
+_INCLUDEUNITCELL_CARD5 = (
+    FieldSchema("ecnx", int, 0, 10, None),
+    FieldSchema("ecny", int, 10, 10, None),
+    FieldSchema("ecnz", int, 20, 10, None),
+)
 
 class IncludeUnitcell(KeywordBase):
     """DYNA INCLUDE_UNITCELL keyword"""
 
     keyword = "INCLUDE"
     subkeyword = "UNITCELL"
+    _link_fields = {
+        "cnx": LinkType.NODE,
+        "cny": LinkType.NODE,
+        "cnz": LinkType.NODE,
+        "ecnx": LinkType.NODE,
+        "ecny": LinkType.NODE,
+        "ecnz": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IncludeUnitcell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "inpt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oupt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nedof",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dx",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dy",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dz",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nex",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ney",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nez",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nnpe",
-                        int,
-                        60,
-                        10,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "noff",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eoff",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pnm",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cnx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cny",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cnz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ecnx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecny",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecnz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEUNITCELL_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the keyword file containing X, Y, Z coordinates as defined using keyword *DEFINE_CURVE_TRIM_3D..
@@ -453,4 +339,34 @@ class IncludeUnitcell(KeywordBase):
     def ecnz(self, value: int) -> None:
         """Set the ecnz property."""
         self._cards[5].set_value("ecnz", value)
+
+    @property
+    def cnx_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cnx."""
+        return self._get_link_by_attr("NODE", "nid", self.cnx, "parts")
+
+    @property
+    def cny_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cny."""
+        return self._get_link_by_attr("NODE", "nid", self.cny, "parts")
+
+    @property
+    def cnz_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given cnz."""
+        return self._get_link_by_attr("NODE", "nid", self.cnz, "parts")
+
+    @property
+    def ecnx_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecnx."""
+        return self._get_link_by_attr("NODE", "nid", self.ecnx, "parts")
+
+    @property
+    def ecny_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecny."""
+        return self._get_link_by_attr("NODE", "nid", self.ecny, "parts")
+
+    @property
+    def ecnz_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ecnz."""
+        return self._get_link_by_attr("NODE", "nid", self.ecnz, "parts")
 

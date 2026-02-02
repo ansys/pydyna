@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,18 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for defining the PyDyna Docker runner."""
+
 import os
 import sys
 
-import docker
-
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
+import docker
 
 
 class DockerRunner(BaseRunner):
-    """Docker implementation to Run LS-DYNA. Tested with a custom exutable
-    and when LS-DYNA is installed as part of the unified Ansys installation
+    """Docker implementation to Run LS-DYNA.
+
+    Tested with a custom executable and when LS-DYNA is
+    installed as part of the unified Ansys installation.
     """
 
     def __init__(self, **kwargs):
@@ -58,6 +61,7 @@ class DockerRunner(BaseRunner):
             raise Exception("Exception in DockerRunner, container image {name} not found!")
 
     def set_input(self, input_file: str, working_directory: str) -> None:
+        """Set the input file and working directory for the run."""
         self._input_file = input_file
         self._working_directory = os.path.abspath(working_directory)
         if not os.path.isdir(self._working_directory):
@@ -73,6 +77,7 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def run(self) -> None:
+        """Run LS-DYNA using the specified configuration."""
         # CASE option logic
         case_option = ""
         if self.activate_case:

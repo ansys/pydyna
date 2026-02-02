@@ -23,8 +23,63 @@
 """Module providing the MatThermoElastoViscoplasticCreep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("alpha", float, 50, 10, None),
+    FieldSchema("lcss", int, 60, 10, None),
+    FieldSchema("reftem", float, 70, 10, None),
+)
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_CARD1 = (
+    FieldSchema("qr1", float, 0, 10, None),
+    FieldSchema("cr1", float, 10, 10, None),
+    FieldSchema("qr2", float, 20, 10, None),
+    FieldSchema("cr2", float, 30, 10, None),
+    FieldSchema("qx1", float, 40, 10, None),
+    FieldSchema("cx1", float, 50, 10, None),
+    FieldSchema("qx2", float, 60, 10, None),
+    FieldSchema("cx2", float, 70, 10, None),
+)
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_CARD2 = (
+    FieldSchema("c", float, 0, 10, None),
+    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("lce", float, 20, 10, None),
+    FieldSchema("lcpr", float, 30, 10, None),
+    FieldSchema("lcsigy", float, 40, 10, None),
+    FieldSchema("lcqr", float, 50, 10, None),
+    FieldSchema("lcqx", float, 60, 10, None),
+    FieldSchema("lcalph", float, 70, 10, None),
+)
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_CARD3 = (
+    FieldSchema("lcc", float, 0, 10, None),
+    FieldSchema("lcp", float, 10, 10, None),
+    FieldSchema("lccr", float, 20, 10, None),
+    FieldSchema("lccx", float, 30, 10, None),
+    FieldSchema("crpa", float, 40, 10, None),
+    FieldSchema("crpb", float, 50, 10, None),
+    FieldSchema("crpq", float, 60, 10, None),
+    FieldSchema("crpm", float, 70, 10, None),
+)
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_CARD4 = (
+    FieldSchema("crplaw", float, 0, 10, 0.0),
+)
+
+_MATTHERMOELASTOVISCOPLASTICCREEP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatThermoElastoViscoplasticCreep(KeywordBase):
     """DYNA MAT_THERMO_ELASTO_VISCOPLASTIC_CREEP keyword"""
@@ -34,283 +89,51 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lce": LinkType.DEFINE_CURVE,
+        "lcpr": LinkType.DEFINE_CURVE,
+        "lcsigy": LinkType.DEFINE_CURVE,
+        "lcqr": LinkType.DEFINE_CURVE,
+        "lcqx": LinkType.DEFINE_CURVE,
+        "lcalph": LinkType.DEFINE_CURVE,
+        "lcc": LinkType.DEFINE_CURVE,
+        "lcp": LinkType.DEFINE_CURVE,
+        "lccr": LinkType.DEFINE_CURVE,
+        "lccx": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatThermoElastoViscoplasticCreep class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reftem",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "qr1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qx1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cx1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qx2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cx2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lce",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcqr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcqx",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcalph",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crpa",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crpb",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crpq",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "crpm",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "crplaw",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMOELASTOVISCOPLASTICCREEP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMOELASTOVISCOPLASTICCREEP_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMOELASTOVISCOPLASTICCREEP_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMOELASTOVISCOPLASTICCREEP_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMOELASTOVISCOPLASTICCREEP_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermoElastoViscoplasticCreep.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMOELASTOVISCOPLASTICCREEP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -691,4 +514,169 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lce_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lce."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lce:
+                return kwd
+        return None
+
+    @lce_link.setter
+    def lce_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lce."""
+        self.lce = value.lcid
+
+    @property
+    def lcpr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcpr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcpr:
+                return kwd
+        return None
+
+    @lcpr_link.setter
+    def lcpr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcpr."""
+        self.lcpr = value.lcid
+
+    @property
+    def lcsigy_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcsigy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsigy:
+                return kwd
+        return None
+
+    @lcsigy_link.setter
+    def lcsigy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsigy."""
+        self.lcsigy = value.lcid
+
+    @property
+    def lcqr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcqr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcqr:
+                return kwd
+        return None
+
+    @lcqr_link.setter
+    def lcqr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcqr."""
+        self.lcqr = value.lcid
+
+    @property
+    def lcqx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcqx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcqx:
+                return kwd
+        return None
+
+    @lcqx_link.setter
+    def lcqx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcqx."""
+        self.lcqx = value.lcid
+
+    @property
+    def lcalph_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcalph."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcalph:
+                return kwd
+        return None
+
+    @lcalph_link.setter
+    def lcalph_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcalph."""
+        self.lcalph = value.lcid
+
+    @property
+    def lcc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcc:
+                return kwd
+        return None
+
+    @lcc_link.setter
+    def lcc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcc."""
+        self.lcc = value.lcid
+
+    @property
+    def lcp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp:
+                return kwd
+        return None
+
+    @lcp_link.setter
+    def lcp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp."""
+        self.lcp = value.lcid
+
+    @property
+    def lccr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lccr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lccr:
+                return kwd
+        return None
+
+    @lccr_link.setter
+    def lccr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lccr."""
+        self.lccr = value.lcid
+
+    @property
+    def lccx_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lccx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lccx:
+                return kwd
+        return None
+
+    @lccx_link.setter
+    def lccx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lccx."""
+        self.lccx = value.lcid
 

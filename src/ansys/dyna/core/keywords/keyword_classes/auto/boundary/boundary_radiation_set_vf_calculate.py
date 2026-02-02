@@ -23,91 +23,46 @@
 """Module providing the BoundaryRadiationSetVfCalculate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYRADIATIONSETVFCALCULATE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 2),
+    FieldSchema("rad_grp", int, 20, 10, 0),
+    FieldSchema("file_no", int, 30, 10, 0),
+    FieldSchema("block", int, 40, 10, 0),
+    FieldSchema("nint", int, 50, 10, 0),
+)
+
+_BOUNDARYRADIATIONSETVFCALCULATE_CARD1 = (
+    FieldSchema("selcid", int, 0, 10, 0),
+    FieldSchema("semult", float, 10, 10, 1.0),
+)
 
 class BoundaryRadiationSetVfCalculate(KeywordBase):
     """DYNA BOUNDARY_RADIATION_SET_VF_CALCULATE keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "RADIATION_SET_VF_CALCULATE"
+    _link_fields = {
+        "selcid": LinkType.DEFINE_CURVE,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryRadiationSetVfCalculate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rad_grp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "file_no",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "block",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nint",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "selcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "semult",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSETVFCALCULATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSETVFCALCULATE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.
@@ -207,4 +162,29 @@ class BoundaryRadiationSetVfCalculate(KeywordBase):
     def semult(self, value: float) -> None:
         """Set the semult property."""
         self._cards[1].set_value("semult", value)
+
+    @property
+    def selcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for selcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.selcid:
+                return kwd
+        return None
+
+    @selcid_link.setter
+    def selcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for selcid."""
+        self.selcid = value.lcid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

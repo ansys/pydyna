@@ -28,9 +28,11 @@ from ansys.dyna.core import Deck
 from ansys.dyna.core.lib.deck_plotter import (
     extract_shell_facets,
     get_polydata,
+    is_jupyter_environment,
     line_array,
     map_facet_nid_to_index,
     np,
+    plot_deck,
     shell_facet_array,
 )
 
@@ -94,10 +96,12 @@ def test_line_array():
 
 @pytest.mark.keywords
 def test_facet_nid_to_index():
+    # Create array-based mapping: mapping[nid] = index
+    mapping = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # indices 0-4, mapping[1]=2, mapping[2]=3, etc.
     numpy.testing.assert_allclose(
         map_facet_nid_to_index(
             np.array([3, 1, 2, 3, 4, 1, 2, 3, 4, 4, 1, 2, 3, 4, 3, 1, 2, 3]),
-            {1: 2, 2: 3, 3: 4, 4: 5},
+            mapping,
         ),
         np.array([3, 2, 3, 4, 4, 2, 3, 4, 5, 4, 2, 3, 4, 5, 3, 2, 3, 4]),
     )
@@ -115,63 +119,345 @@ def test_extract_shell_facets():
             "n4": [0, 1],
         }
     )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 1, 2: 2, 3: 3, 4: 4})[0],
-        [3, 1, 2, 3, 4, 2, 3, 4, 1],
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 1, 2: 2, 3: 3, 4: 4})[1],
-        np.array([1,3]), 
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 1, 2: 2, 3: 3, 4: 4})[2],
-        np.array([1,3]), 
-    )
- 
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 2, 2: 3, 3: 4, 4: 5})[0],
-        [3, 2, 3, 4, 4, 3, 4, 5, 2], 
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 2, 2: 3, 3: 4, 4: 5})[1],
-        np.array([1,3]), 
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, {1: 2, 2: 3, 3: 4, 4: 5})[2],
-        np.array([1,3]), 
-    )
+    # Create array-based mapping: mapping[nid] = index
+    mapping1 = np.array([-1, 1, 2, 3, 4], dtype=np.int32)  # mapping[1]=1, mapping[2]=2, etc.
+    mapping2 = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # mapping[1]=2, mapping[2]=3, etc.
+
+    # extract_shell_facets now returns (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
+    # Test with mapping1: element 1 is triangle [3,1,2,3], element 3 is quad [4,2,3,4,1]
+    tris1, tri_eids1, tri_pids1, quads1, quad_eids1, quad_pids1 = extract_shell_facets(test_1_pddf, mapping1)
+
+    numpy.testing.assert_allclose(tris1, [3, 1, 2, 3])
+    numpy.testing.assert_allclose(tri_eids1, [1])
+    numpy.testing.assert_allclose(tri_pids1, [1])
+    numpy.testing.assert_allclose(quads1, [4, 2, 3, 4, 1])
+    numpy.testing.assert_allclose(quad_eids1, [3])
+    numpy.testing.assert_allclose(quad_pids1, [3])
+
+    # Test with mapping2
+    tris2, tri_eids2, tri_pids2, quads2, quad_eids2, quad_pids2 = extract_shell_facets(test_1_pddf, mapping2)
+
+    numpy.testing.assert_allclose(tris2, [3, 2, 3, 4])
+    numpy.testing.assert_allclose(tri_eids2, [1])
+    numpy.testing.assert_allclose(tri_pids2, [1])
+    numpy.testing.assert_allclose(quads2, [4, 3, 4, 5, 2])
+    numpy.testing.assert_allclose(quad_eids2, [3])
+    numpy.testing.assert_allclose(quad_pids2, [3])
 
 
-@pytest.mark.viz
+def extract_faces_and_lines_from_grid(grid):
+    """Extract faces and lines from UnstructuredGrid for testing."""
+    import vtk
+
+    faces_cells = []
+    lines_cells = []
+
+    cell_idx = 0
+    i = 0
+    while i < len(grid.cells):
+        count = grid.cells[i]
+        cell_type = grid.get_cell(cell_idx).type
+
+        if cell_type in [vtk.VTK_TRIANGLE, vtk.VTK_QUAD]:
+            faces_cells.extend(grid.cells[i:i+count+1])
+        elif cell_type == vtk.VTK_LINE:
+            lines_cells.extend(grid.cells[i:i+count+1])
+
+        i += count + 1
+        cell_idx += 1
+
+    return np.array(faces_cells, dtype=int), np.array(lines_cells, dtype=int)
+
+
+@pytest.mark.keywords
 def test_get_polydata(file_utils):
     deck = Deck()
     keyword_string = file_utils.read_file(file_utils.assets_folder / "plot_test.k")
     deck.loads(keyword_string)
 
     plot_data = get_polydata(deck)
+
+    # Extract faces and lines from UnstructuredGrid
+    faces, lines = extract_faces_and_lines_from_grid(plot_data)
+
+    # UnstructuredGrid groups cells by type, so triangles come first, then quads
+    # From plot_test.k:
+    # Element 3 (triangle): n1=1, n2=2, n3=3, n4=0 -> [3, 0, 1, 2]
+    # Element 2 (quad): n1=1, n2=2, n3=3, n4=4 -> [4, 0, 1, 2, 3]
+    # Element 7 (quad from 7-node shell): n1=1..n4=4 defined -> [4, 0, 1, 2, 3]
+    # Element 8 (quad from 8-node shell): n1=1..n4=4 defined -> [4, 0, 1, 2, 3]
+    # Element 9 (quad): n1=1..n4=4 defined -> [4, 0, 1, 2, 3]
+    # Elements 10, 11 (invalid, < 3 nodes): skipped
     numpy.testing.assert_allclose(
-        plot_data.faces,
+        faces,
         np.array(
             [
-                4,
-                0,
-                1,
-                2,
-                3,
-                3,
-                0,
-                1,
-                2,
-                4,
-                0,
-                1,
-                2,
-                3,
-                3,
-                0,
-                1,
-                2,
+                # 1 triangle
+                3, 0, 1, 2,
+                # 4 quads
+                4, 0, 1, 2, 3,
+                4, 0, 1, 2, 3,
+                4, 0, 1, 2, 3,
+                4, 0, 1, 2, 3,
             ]
         ),
     )
-    numpy.testing.assert_allclose(plot_data.lines, np.array([2, 19, 3, 2, 20, 9]))
+    numpy.testing.assert_allclose(lines, np.array([2, 19, 3, 2, 20, 9]))
+
+
+def create_test_hex_mesh(nx, ny, nz):
+    """Create a simple structured hex mesh for testing."""
+    deck = Deck()
+
+    # Build keyword string
+    kwd_str = "*KEYWORD\n*NODE\n"
+
+    # Create nodes
+    node_id = 1
+    for k in range(nz + 1):
+        for j in range(ny + 1):
+            for i in range(nx + 1):
+                x, y, z = float(i), float(j), float(k)
+                kwd_str += f"{node_id:8d}{x:16.8f}{y:16.8f}{z:16.8f}       0       0\n"
+                node_id += 1
+
+    # Create solid elements
+    kwd_str += "*ELEMENT_SOLID\n"
+    elem_id = 1
+
+    def get_node_id(i, j, k):
+        return 1 + i + j * (nx + 1) + k * (nx + 1) * (ny + 1)
+
+    for k in range(nz):
+        for j in range(ny):
+            for i in range(nx):
+                n1 = get_node_id(i, j, k)
+                n2 = get_node_id(i+1, j, k)
+                n3 = get_node_id(i+1, j+1, k)
+                n4 = get_node_id(i, j+1, k)
+                n5 = get_node_id(i, j, k+1)
+                n6 = get_node_id(i+1, j, k+1)
+                n7 = get_node_id(i+1, j+1, k+1)
+                n8 = get_node_id(i, j+1, k+1)
+
+                kwd_str += f"{elem_id:8d}       1{n1:8d}{n2:8d}{n3:8d}{n4:8d}{n5:8d}{n6:8d}{n7:8d}{n8:8d}\n"
+                elem_id += 1
+
+    kwd_str += "*END\n"
+    deck.loads(kwd_str)
+
+    return deck
+
+
+@pytest.mark.keywords
+def test_solid_mesh_extract_surface():
+    """Test that extract_surface extracts exterior surface for solid meshes."""
+    # Create a small solid mesh (5x5x5 = 125 elements)
+    deck = create_test_hex_mesh(5, 5, 5)
+
+    # Plot WITHOUT extract_surface
+    grid_full = get_polydata(deck, extract_surface=False)
+
+    # Plot WITH extract_surface (default)
+    grid_surf = get_polydata(deck, extract_surface=True)
+
+    # Full mesh has 125 hex elements
+    assert grid_full.n_cells == 125, f"Expected 125 cells, got {grid_full.n_cells}"
+
+    # With extract_surface, we get a PolyData with surface faces
+    # For a 5x5x5 cube, surface has 6 faces * (5x5) = 150 quads
+    assert grid_surf.n_cells == 150, f"Expected 150 surface cells, got {grid_surf.n_cells}"
+
+    # Result types differ: UnstructuredGrid vs PolyData
+    assert type(grid_full).__name__ == 'UnstructuredGrid'
+    assert type(grid_surf).__name__ in ['PolyData', 'UnstructuredGrid']
+
+    # Verify metadata is preserved
+    assert "part_ids" in grid_surf.cell_data
+    assert "element_ids" in grid_surf.cell_data
+
+
+@pytest.mark.keywords
+def test_solid_mesh_medium():
+    """Test with a medium-sized solid mesh."""
+    # Create a 10x10x10 mesh (1000 elements)
+    deck = create_test_hex_mesh(10, 10, 10)
+
+    # Test with extract_surface
+    grid = get_polydata(deck, extract_surface=True)
+
+    # Verify structure
+    assert grid.n_cells > 0
+    assert grid.n_points > 0
+    assert "part_ids" in grid.cell_data
+    assert "element_ids" in grid.cell_data
+
+    # Surface of 10x10x10 cube should have 6*10*10 = 600 quad faces
+    assert grid.n_cells == 600, f"Expected 600 surface cells, got {grid.n_cells}"
+
+    # Surface points should be less than total internal points
+    # Internal: 11^3 = 1331 nodes, Surface should have fewer
+    assert grid.n_points < 1331
+
+
+@pytest.mark.keywords
+def test_mixed_mesh_shells_and_solids():
+    """Test plotting with both shell and solid elements."""
+    deck = Deck()
+
+    # Create a mesh with both shell and solid elements
+    # Note: ElementSolid requires 2+ elements to parse correctly (known limitation)
+    kwd_str = """*KEYWORD
+*NODE
+$#   nid               x               y               z      tc      rc
+       1             0.0             0.0             0.0       0       0
+       2             1.0             0.0             0.0       0       0
+       3             1.0             1.0             0.0       0       0
+       4             0.0             1.0             0.0       0       0
+       5             0.0             0.0             1.0       0       0
+       6             1.0             0.0             1.0       0       0
+       7             1.0             1.0             1.0       0       0
+       8             0.0             1.0             1.0       0       0
+       9             0.0             0.0             2.0       0       0
+      10             1.0             0.0             2.0       0       0
+      11             1.0             1.0             2.0       0       0
+      12             0.0             1.0             2.0       0       0
+      13             2.0             0.0             0.0       0       0
+      14             2.0             1.0             0.0       0       0
+*ELEMENT_SOLID
+       1       1       1       2       3       4       5       6       7       8
+       2       1       5       6       7       8       9      10      11      12
+*ELEMENT_SHELL
+       3       1       2      13      14       3
+*END
+"""
+    deck.loads(kwd_str)
+
+    # Get plot data with extract_surface=False to keep all elements
+    grid = get_polydata(deck, extract_surface=False)
+
+    # Should have 3 cells total (2 hex + 1 quad)
+    assert grid.n_cells == 3, f"Expected 3 cells, got {grid.n_cells}"
+
+    # Should have 14 nodes
+    assert grid.n_points == 14, f"Expected 14 points, got {grid.n_points}"
+
+    # Verify metadata
+    assert "part_ids" in grid.cell_data
+    assert "element_ids" in grid.cell_data
+    assert len(grid.cell_data["part_ids"]) == 3
+    assert len(grid.cell_data["element_ids"]) == 3
+
+@pytest.mark.keywords
+def test_extract_surface():
+    """Test that extract_surface=False keeps all cells."""
+    deck = create_test_hex_mesh(5, 5, 5)
+
+    # With extract_surface=False, should keep all solid cells
+    grid = get_polydata(deck, extract_surface=False)
+
+    # Should have all 125 hex elements
+    assert grid.n_cells == 125
+    assert grid.n_points == 6 * 6 * 6  # 216 nodes
+
+    # Verify metadata
+    assert len(grid.cell_data["part_ids"]) == 125
+    assert len(grid.cell_data["element_ids"]) == 125
+
+
+@pytest.mark.keywords
+def test_shell_only_mesh_not_affected():
+    """Test that shell-only meshes are not affected by extract_surface."""
+    deck = Deck()
+
+    kwd_str = """*KEYWORD
+*NODE
+$#   nid               x               y               z      tc      rc
+       1             0.0             0.0             0.0       0       0
+       2             1.0             0.0             0.0       0       0
+       3             1.0             1.0             0.0       0       0
+       4             0.0             1.0             0.0       0       0
+       5             2.0             0.0             0.0       0       0
+       6             2.0             1.0             0.0       0       0
+*ELEMENT_SHELL
+       1       1       1       2       3       4
+       2       1       2       5       6       3
+*END
+"""
+    deck.loads(kwd_str)
+
+    # Both should produce identical results for shell-only
+    grid_full = get_polydata(deck, extract_surface=False)
+    grid_surf = get_polydata(deck, extract_surface=True)
+
+    # Shell-only mesh should not be affected (no solids to extract)
+    assert grid_full.n_cells == grid_surf.n_cells == 2
+    assert grid_full.n_points == grid_surf.n_points
+
+
+@pytest.mark.keywords
+def test_cell_data_preserved():
+    """Test that part_ids and element_ids are preserved after extract_surface."""
+    # Use a mesh created programmatically to avoid parsing issues
+    deck = create_test_hex_mesh(3, 3, 3)
+
+    grid = get_polydata(deck, extract_surface=True)
+
+    # Verify cell data arrays exist and have correct length
+    assert "part_ids" in grid.cell_data
+    assert "element_ids" in grid.cell_data
+    assert len(grid.cell_data["part_ids"]) == grid.n_cells
+    assert len(grid.cell_data["element_ids"]) == grid.n_cells
+
+    # All elements should have part_id=1 (from our test mesh)
+    assert all(pid == 1 for pid in grid.cell_data["part_ids"])
+
+
+@pytest.mark.keywords
+def test_jupyter_environment_detection():
+    """Test that is_jupyter_environment() returns False in test environment."""
+    # In normal pytest environment, this should return False
+    assert is_jupyter_environment() is False
+
+
+@pytest.mark.keywords
+def test_plot_deck_jupyter_backend_handling():
+    """Test that plot_deck correctly handles jupyter_backend parameter."""
+    from unittest.mock import MagicMock, patch
+
+    # Create a simple test deck
+    deck = create_test_hex_mesh(2, 2, 2)
+
+    # Mock PyVista to avoid actual plotting
+    with patch('ansys.dyna.core.lib.deck_plotter.get_pyvista') as mock_pv:
+        mock_pv_module = MagicMock()
+        mock_pv.return_value = mock_pv_module
+        mock_pv_module.global_theme.color = 'white'
+
+        # Mock the UnstructuredGrid and its plot method
+        with patch('ansys.dyna.core.lib.deck_plotter.get_polydata') as mock_polydata:
+            mock_grid = MagicMock()
+            mock_polydata.return_value = mock_grid
+
+            # Test 1: jupyter_backend='auto' in non-Jupyter environment should not add jupyter_backend
+            plot_deck(deck, jupyter_backend='auto')
+            # Check that plot was called without jupyter_backend (since we're not in Jupyter)
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert 'jupyter_backend' not in call_kwargs or call_kwargs.get('jupyter_backend') is None
+
+            # Reset mock
+            mock_grid.plot.reset_mock()
+
+            # Test 2: explicit jupyter_backend='static' should be passed through
+            plot_deck(deck, jupyter_backend='static')
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert call_kwargs.get('jupyter_backend') == 'static'
+
+            # Reset mock
+            mock_grid.plot.reset_mock()
+
+            # Test 3: jupyter_backend=None should not add the parameter
+            plot_deck(deck, jupyter_backend=None)
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert 'jupyter_backend' not in call_kwargs
+

@@ -23,80 +23,39 @@
 """Module providing the ElementBeamSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_ELEMENTBEAMSOURCE_CARD0 = (
+    FieldSchema("bsid", int, 0, 10, 0),
+    FieldSchema("bsnid", int, 10, 10, 0),
+    FieldSchema("bseid", int, 20, 10, 0),
+    FieldSchema("nele", int, 30, 10, 0),
+    FieldSchema("lfed", float, 40, 10, 0.0),
+    FieldSchema("fpull", float, 50, 10, 0.0),
+    FieldSchema("lmin", float, 60, 10, 0.0),
+)
 
 class ElementBeamSource(KeywordBase):
     """DYNA ELEMENT_BEAM_SOURCE keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "BEAM_SOURCE"
+    _link_fields = {
+        "bsnid": LinkType.NODE,
+        "bseid": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBeamSource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bsid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsnid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bseid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nele",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfed",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fpull",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMSOURCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bsid(self) -> int:
         """Get or set the Beam Source ID.  A unique number has to be used.
@@ -173,4 +132,14 @@ class ElementBeamSource(KeywordBase):
     def lmin(self, value: float) -> None:
         """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
+
+    @property
+    def bsnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given bsnid."""
+        return self._get_link_by_attr("NODE", "nid", self.bsnid, "parts")
+
+    @property
+    def bseid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given bseid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.bseid, "parts")
 

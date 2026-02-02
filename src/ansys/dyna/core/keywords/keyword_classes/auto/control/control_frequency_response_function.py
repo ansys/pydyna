@@ -23,215 +23,74 @@
 """Module providing the ControlFrequencyResponseFunction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLFREQUENCYRESPONSEFUNCTION_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n1typ", int, 10, 10, 0),
+    FieldSchema("dof1", int, 20, 10, -4),
+    FieldSchema("vad1", int, 30, 10, 3),
+    FieldSchema("vid", int, 40, 10, 0),
+    FieldSchema("fnmax", float, 50, 10, 0.0),
+    FieldSchema("mdmin", int, 60, 10, 0),
+    FieldSchema("mdmax", int, 70, 10, 0),
+)
+
+_CONTROLFREQUENCYRESPONSEFUNCTION_CARD1 = (
+    FieldSchema("dampf", float, 0, 10, 0.0),
+    FieldSchema("lcdam", int, 10, 10, 0),
+    FieldSchema("lctyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+)
+
+_CONTROLFREQUENCYRESPONSEFUNCTION_CARD2 = (
+    FieldSchema("n2", int, 0, 10, None),
+    FieldSchema("n2typ", int, 10, 10, 0),
+    FieldSchema("dof2", int, 20, 10, 1),
+    FieldSchema("vad2", int, 30, 10, 2),
+)
+
+_CONTROLFREQUENCYRESPONSEFUNCTION_CARD3 = (
+    FieldSchema("fmin", float, 0, 10, None),
+    FieldSchema("fmax", float, 10, 10, None),
+    FieldSchema("nfreq", int, 20, 10, 2),
+    FieldSchema("fspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, None),
+    FieldSchema("restrt", int, 50, 10, 0),
+)
 
 class ControlFrequencyResponseFunction(KeywordBase):
     """DYNA CONTROL_FREQUENCY_RESPONSE_FUNCTION keyword"""
 
     keyword = "CONTROL"
     subkeyword = "FREQUENCY_RESPONSE_FUNCTION"
+    _link_fields = {
+        "lcfreq": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFrequencyResponseFunction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof1",
-                        int,
-                        20,
-                        10,
-                        -4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad1",
-                        int,
-                        30,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmin",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n2",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2typ",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof2",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad2",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFREQUENCYRESPONSEFUNCTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFREQUENCYRESPONSEFUNCTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFREQUENCYRESPONSEFUNCTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFREQUENCYRESPONSEFUNCTION_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node / Node set/Segment set ID for excitation input
@@ -531,4 +390,34 @@ class ControlFrequencyResponseFunction(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""restrt must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("restrt", value)
+
+    @property
+    def lcfreq_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfreq."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfreq:
+                return kwd
+        return None
+
+    @lcfreq_link.setter
+    def lcfreq_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfreq."""
+        self.lcfreq = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

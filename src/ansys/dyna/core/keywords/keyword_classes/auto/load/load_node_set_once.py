@@ -23,105 +23,54 @@
 """Module providing the LoadNodeSetOnce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADNODESETONCE_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("cid", int, 40, 10, 0),
+    FieldSchema("m1", int, 50, 10, 0),
+    FieldSchema("m2", int, 60, 10, 0),
+    FieldSchema("m3", int, 70, 10, 0),
+)
+
+_LOADNODESETONCE_CARD1 = (
+    FieldSchema("once", int, 0, 10, 0),
+    FieldSchema("lcid1", int, 10, 10, None),
+)
 
 class LoadNodeSetOnce(KeywordBase):
     """DYNA LOAD_NODE_SET_ONCE keyword"""
 
     keyword = "LOAD"
     subkeyword = "NODE_SET_ONCE"
+    _link_fields = {
+        "m1": LinkType.NODE,
+        "m2": LinkType.NODE,
+        "m3": LinkType.NODE,
+        "lcid1": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadNodeSetOnce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m1",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "once",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADNODESETONCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNODESETONCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see also *SET_NODE.
@@ -245,4 +194,59 @@ class LoadNodeSetOnce(KeywordBase):
     def lcid1(self, value: int) -> None:
         """Set the lcid1 property."""
         self._cards[1].set_value("lcid1", value)
+
+    @property
+    def m1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m1."""
+        return self._get_link_by_attr("NODE", "nid", self.m1, "parts")
+
+    @property
+    def m2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m2."""
+        return self._get_link_by_attr("NODE", "nid", self.m2, "parts")
+
+    @property
+    def m3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given m3."""
+        return self._get_link_by_attr("NODE", "nid", self.m3, "parts")
+
+    @property
+    def lcid1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid1:
+                return kwd
+        return None
+
+    @lcid1_link.setter
+    def lcid1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid1."""
+        self.lcid1 = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

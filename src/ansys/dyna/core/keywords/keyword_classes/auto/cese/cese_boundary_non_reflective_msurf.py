@@ -23,7 +23,12 @@
 """Module providing the CeseBoundaryNonReflectiveMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYNONREFLECTIVEMSURF_CARD0 = (
+    FieldSchema("surfprt", int, 0, 10, None),
+)
 
 class CeseBoundaryNonReflectiveMsurf(KeywordBase):
     """DYNA CESE_BOUNDARY_NON_REFLECTIVE_MSURF keyword"""
@@ -35,19 +40,10 @@ class CeseBoundaryNonReflectiveMsurf(KeywordBase):
         """Initialize the CeseBoundaryNonReflectiveMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfprt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYNONREFLECTIVEMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.

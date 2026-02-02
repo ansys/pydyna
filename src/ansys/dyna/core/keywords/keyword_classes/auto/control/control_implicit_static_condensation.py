@@ -23,78 +23,44 @@
 """Module providing the ControlImplicitStaticCondensation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLIMPLICITSTATICCONDENSATION_CARD0 = (
+    FieldSchema("sc_flag", int, 0, 10, 0),
+    FieldSchema("sc_nsid", int, 10, 10, None),
+    FieldSchema("sc_psid", int, 20, 10, None),
+    FieldSchema("se_mass", str, 30, 10, None),
+    FieldSchema("se_stiff", str, 40, 10, None),
+    FieldSchema("se_inert", str, 50, 10, None),
+)
+
+_CONTROLIMPLICITSTATICCONDENSATION_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class ControlImplicitStaticCondensation(KeywordBase):
     """DYNA CONTROL_IMPLICIT_STATIC_CONDENSATION keyword"""
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_STATIC_CONDENSATION"
+    _link_fields = {
+        "sc_nsid": LinkType.SET_NODE,
+        "sc_psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitStaticCondensation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sc_flag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc_nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc_psid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_mass",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_stiff",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_inert",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSTATICCONDENSATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSTATICCONDENSATION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sc_flag(self) -> int:
         """Get or set the Static Condensation Control Flag
@@ -176,4 +142,24 @@ class ControlImplicitStaticCondensation(KeywordBase):
     def filename(self, value: str) -> None:
         """Set the filename property."""
         self._cards[1].set_value("filename", value)
+
+    @property
+    def sc_nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sc_nsid."""
+        return self._get_set_link("NODE", self.sc_nsid)
+
+    @sc_nsid_link.setter
+    def sc_nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sc_nsid."""
+        self.sc_nsid = value.sid
+
+    @property
+    def sc_psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for sc_psid."""
+        return self._get_set_link("PART", self.sc_psid)
+
+    @sc_psid_link.setter
+    def sc_psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for sc_psid."""
+        self.sc_psid = value.sid
 

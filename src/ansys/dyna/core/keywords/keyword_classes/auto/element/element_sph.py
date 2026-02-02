@@ -23,46 +23,33 @@
 """Module providing the ElementSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_ELEMENTSPH_CARD0 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+    FieldSchema("mass", float, 16, 16, 0.0),
+)
 
 class ElementSph(KeywordBase):
     """DYNA ELEMENT_SPH keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SPH"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSph class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSPH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID and Element ID are the same for the SPH option.
@@ -97,4 +84,9 @@ class ElementSph(KeywordBase):
     def mass(self, value: float) -> None:
         """Set the mass property."""
         self._cards[0].set_value("mass", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

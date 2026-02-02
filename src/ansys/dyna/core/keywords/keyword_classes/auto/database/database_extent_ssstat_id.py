@@ -23,38 +23,32 @@
 """Module providing the DatabaseExtentSsstatId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEEXTENTSSSTATID_CARD0 = (
+    FieldSchema("psidn", int, 0, 10, None),
+    FieldSchema("headingn", str, 10, 70, None),
+)
 
 class DatabaseExtentSsstatId(KeywordBase):
     """DYNA DATABASE_EXTENT_SSSTAT_ID keyword"""
 
     keyword = "DATABASE"
     subkeyword = "EXTENT_SSSTAT_ID"
+    _link_fields = {
+        "psidn": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseExtentSsstatId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psidn",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "headingn",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTSSSTATID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psidn(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem n, see *SET_PART.
@@ -76,4 +70,14 @@ class DatabaseExtentSsstatId(KeywordBase):
     def headingn(self, value: str) -> None:
         """Set the headingn property."""
         self._cards[0].set_value("headingn", value)
+
+    @property
+    def psidn_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psidn."""
+        return self._get_set_link("PART", self.psidn)
+
+    @psidn_link.setter
+    def psidn_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidn."""
+        self.psidn = value.sid
 

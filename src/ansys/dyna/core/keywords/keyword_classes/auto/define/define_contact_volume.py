@@ -23,8 +23,46 @@
 """Module providing the DefineContactVolume class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_DEFINECONTACTVOLUME_CARD0 = (
+    FieldSchema("cvid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("type", int, 20, 10, 0),
+    FieldSchema("xc", float, 30, 10, None),
+    FieldSchema("yc", float, 40, 10, None),
+    FieldSchema("zc", float, 50, 10, None),
+)
+
+_DEFINECONTACTVOLUME_CARD1 = (
+    FieldSchema("xmn", float, 0, 10, 0.0),
+    FieldSchema("xmx", float, 10, 10, 0.0),
+    FieldSchema("ymn", float, 20, 10, 0.0),
+    FieldSchema("ymx", float, 30, 10, 0.0),
+    FieldSchema("zmn", float, 40, 10, 0.0),
+    FieldSchema("zmx", float, 50, 10, 0.0),
+)
+
+_DEFINECONTACTVOLUME_CARD2 = (
+    FieldSchema("length", float, 0, 10, 0.0),
+    FieldSchema("rinner", float, 10, 10, 0.0),
+    FieldSchema("router", float, 20, 10, 0.0),
+    FieldSchema("d_angc", float, 30, 10, 0.0),
+)
+
+_DEFINECONTACTVOLUME_CARD3 = (
+    FieldSchema("rinner", float, 0, 10, 0.0),
+    FieldSchema("router", float, 10, 10, 0.0),
+    FieldSchema("d_angs", float, 20, 10, 0.0),
+)
+
+_DEFINECONTACTVOLUME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineContactVolume(KeywordBase):
     """DYNA DEFINE_CONTACT_VOLUME keyword"""
@@ -34,197 +72,41 @@ class DefineContactVolume(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineContactVolume class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cvid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xmn",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymn",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmn",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.type==0,
-            ),
-            Card(
-                [
-                    Field(
-                        "length",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rinner",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "router",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d_angc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.type==1,
-            ),
-            Card(
-                [
-                    Field(
-                        "rinner",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "router",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d_angs",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.type==2,
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTVOLUME_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTVOLUME_CARD1,
+                active_func=lambda: self.type==0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTVOLUME_CARD2,
+                active_func=lambda: self.type==1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONTACTVOLUME_CARD3,
+                active_func=lambda: self.type==2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineContactVolume.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTACTVOLUME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cvid(self) -> typing.Optional[int]:
         """Get or set the Contact volume ID.
@@ -429,4 +311,19 @@ class DefineContactVolume(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

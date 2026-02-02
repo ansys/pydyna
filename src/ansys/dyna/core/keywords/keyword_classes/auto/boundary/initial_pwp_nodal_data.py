@@ -23,86 +23,46 @@
 """Module providing the InitialPwpNodalData class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_INITIALPWPNODALDATA_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nhisv", int, 10, 10, 0),
+    FieldSchema("pid", int, 20, 10, 0),
+)
+
+_INITIALPWPNODALDATA_CARD1 = (
+    FieldSchema("hisv1", float, 0, 16, None),
+    FieldSchema("hisv2", float, 16, 16, None),
+    FieldSchema("hisv3", float, 32, 16, None),
+    FieldSchema("hisv4", float, 48, 16, None),
+    FieldSchema("hisv5", float, 64, 16, None),
+)
 
 class InitialPwpNodalData(KeywordBase):
     """DYNA INITIAL_PWP_NODAL_DATA keyword"""
 
     keyword = "INITIAL"
     subkeyword = "PWP_NODAL_DATA"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialPwpNodalData class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hisv1",
-                        float,
-                        0,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        16,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        32,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv4",
-                        float,
-                        48,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv5",
-                        float,
-                        64,
-                        16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALPWPNODALDATA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALPWPNODALDATA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -190,4 +150,14 @@ class InitialPwpNodalData(KeywordBase):
     def hisv5(self, value: float) -> None:
         """Set the hisv5 property."""
         self._cards[1].set_value("hisv5", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

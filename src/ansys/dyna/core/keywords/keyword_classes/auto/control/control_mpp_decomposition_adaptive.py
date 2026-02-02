@@ -23,7 +23,16 @@
 """Module providing the ControlMppDecompositionAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONADAPTIVE_CARD0 = (
+    FieldSchema("freq", float, 0, 10, None),
+    FieldSchema("defgeo", int, 10, 10, 1),
+    FieldSchema("cweight", float, 20, 10, 1.0),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("stime", float, 40, 10, 0.0),
+)
 
 class ControlMppDecompositionAdaptive(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_ADAPTIVE keyword"""
@@ -35,50 +44,10 @@ class ControlMppDecompositionAdaptive(KeywordBase):
         """Initialize the ControlMppDecompositionAdaptive class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "freq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defgeo",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cweight",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stime",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONADAPTIVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def freq(self) -> typing.Optional[float]:
         """Get or set the Determines the number of redecompositions during the solution.

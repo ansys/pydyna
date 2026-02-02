@@ -23,139 +23,52 @@
 """Module providing the AleStructuredMeshVolumeFilling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_ALESTRUCTUREDMESHVOLUMEFILLING_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("ammgto", str, 20, 10, "0"),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("nsample", int, 40, 10, 3),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused_", int, 60, 10, None, "unused-"),
+    FieldSchema("vid", int, 70, 10, 0),
+)
+
+_ALESTRUCTUREDMESHVOLUMEFILLING_CARD1 = (
+    FieldSchema("geom", str, 0, 10, "ALL"),
+    FieldSchema("in_out", int, 10, 10, 0, "in/out"),
+    FieldSchema("e1", float, 20, 10, None),
+    FieldSchema("e2", float, 30, 10, None),
+    FieldSchema("e3", float, 40, 10, None),
+    FieldSchema("e4", float, 50, 10, None),
+    FieldSchema("e5", float, 60, 10, None),
+)
 
 class AleStructuredMeshVolumeFilling(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_VOLUME_FILLING keyword"""
 
     keyword = "ALE"
     subkeyword = "STRUCTURED_MESH_VOLUME_FILLING"
+    _link_fields = {
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AleStructuredMeshVolumeFilling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgto",
-                        str,
-                        20,
-                        10,
-                        "0",
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsample",
-                        int,
-                        40,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused-",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "geom",
-                        str,
-                        0,
-                        10,
-                        "ALL",
-                        **kwargs,
-                    ),
-                    Field(
-                        "in/out",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e5",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHVOLUMEFILLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHVOLUMEFILLING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. A unique number must be specified.
@@ -194,12 +107,12 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     def unused_(self) -> typing.Optional[int]:
         """Get or set the -.
         """ # nopep8
-        return self._cards[0].get_value("unused-")
+        return self._cards[0].get_value("unused_")
 
     @unused_.setter
     def unused_(self, value: int) -> None:
         """Set the unused_ property."""
-        self._cards[0].set_value("unused-", value)
+        self._cards[0].set_value("unused_", value)
 
     @property
     def vid(self) -> int:
@@ -233,14 +146,14 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
         EQ.0:	Inside(default)
         EQ.1 : Outside
         """ # nopep8
-        return self._cards[1].get_value("in/out")
+        return self._cards[1].get_value("in_out")
 
     @in_out.setter
     def in_out(self, value: int) -> None:
         """Set the in_out property."""
         if value not in [0, 1, None]:
             raise Exception("""in_out must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("in/out", value)
+        self._cards[1].set_value("in_out", value)
 
     @property
     def e1(self) -> typing.Optional[float]:
@@ -296,4 +209,19 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     def e5(self, value: float) -> None:
         """Set the e5 property."""
         self._cards[1].set_value("e5", value)
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

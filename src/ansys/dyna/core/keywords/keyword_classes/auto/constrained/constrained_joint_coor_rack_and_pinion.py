@@ -23,251 +23,101 @@
 """Module providing the ConstrainedJointCoorRackAndPinion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD0 = (
+    FieldSchema("rbid_a", int, 0, 10, None),
+    FieldSchema("rbid_b", int, 10, 10, None),
+    FieldSchema("rps", float, 20, 10, 1.0),
+    FieldSchema("damp", float, 30, 10, None),
+    FieldSchema("tmass", float, 40, 10, None),
+    FieldSchema("rmass", float, 50, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD1 = (
+    FieldSchema("x1", float, 0, 10, None),
+    FieldSchema("y1", float, 10, 10, None),
+    FieldSchema("z1", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD2 = (
+    FieldSchema("x2", float, 0, 10, None),
+    FieldSchema("y2", float, 10, 10, None),
+    FieldSchema("z2", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD3 = (
+    FieldSchema("x3", float, 0, 10, None),
+    FieldSchema("y3", float, 10, 10, None),
+    FieldSchema("z3", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD4 = (
+    FieldSchema("x4", float, 0, 10, None),
+    FieldSchema("y4", float, 10, 10, None),
+    FieldSchema("z4", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD5 = (
+    FieldSchema("x5", float, 0, 10, None),
+    FieldSchema("y5", float, 10, 10, None),
+    FieldSchema("z5", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD6 = (
+    FieldSchema("x6", float, 0, 10, None),
+    FieldSchema("y6", float, 10, 10, None),
+    FieldSchema("z6", float, 20, 10, None),
+)
+
+_CONSTRAINEDJOINTCOORRACKANDPINION_CARD7 = (
+    FieldSchema("parm", float, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("type", int, 20, 10, 0),
+    FieldSchema("r1", float, 30, 10, None),
+)
 
 class ConstrainedJointCoorRackAndPinion(KeywordBase):
     """DYNA CONSTRAINED_JOINT_COOR_RACK_AND_PINION keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_COOR_RACK_AND_PINION"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointCoorRackAndPinion class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rbid_a",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbid_b",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rps",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmass",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmass",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x2",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x3",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y3",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x4",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y4",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z4",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x5",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y5",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z5",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x6",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y6",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z6",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "parm",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTCOORRACKANDPINION_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def rbid_a(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body A
@@ -580,4 +430,19 @@ class ConstrainedJointCoorRackAndPinion(KeywordBase):
     def r1(self, value: float) -> None:
         """Set the r1 property."""
         self._cards[7].set_value("r1", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

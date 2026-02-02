@@ -23,7 +23,13 @@
 """Module providing the DualceseModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEMODEL_CARD0 = (
+    FieldSchema("unitsys", str, 0, 10, None),
+    FieldSchema("filename", str, 10, 70, None),
+)
 
 class DualceseModel(KeywordBase):
     """DYNA DUALCESE_MODEL keyword"""
@@ -35,26 +41,10 @@ class DualceseModel(KeywordBase):
         """Initialize the DualceseModel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "unitsys",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filename",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEMODEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def unitsys(self) -> typing.Optional[str]:
         """Get or set the Name of the unit system of this dual CESE model (defined with *UNIT_SYSTEM).

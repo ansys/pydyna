@@ -23,8 +23,162 @@
 """Module providing the ContactDrawbeadBending class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_CONTACTDRAWBEADBENDING_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("surfatyp", int, 20, 10, 0),
+    FieldSchema("surfbtyp", int, 30, 10, 0),
+    FieldSchema("saboxid", int, 40, 10, None),
+    FieldSchema("sbboxid", int, 50, 10, None),
+    FieldSchema("sapr", int, 60, 10, 0),
+    FieldSchema("sbpr", int, 70, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_CARD1 = (
+    FieldSchema("fs", float, 0, 10, 0.0),
+    FieldSchema("fd", float, 10, 10, 0.0),
+    FieldSchema("dc", float, 20, 10, 0.0),
+    FieldSchema("vc", float, 30, 10, 0.0),
+    FieldSchema("vdc", float, 40, 10, 0.0),
+    FieldSchema("penchk", int, 50, 10, None),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 1e+20),
+)
+
+_CONTACTDRAWBEADBENDING_CARD2 = (
+    FieldSchema("sfsa", float, 0, 10, 1.0),
+    FieldSchema("sfsb", float, 10, 10, 1.0),
+    FieldSchema("sast", float, 20, 10, None),
+    FieldSchema("sbst", float, 30, 10, None),
+    FieldSchema("sfsat", float, 40, 10, 1.0),
+    FieldSchema("sfsbt", float, 50, 10, 1.0),
+    FieldSchema("fsf", float, 60, 10, 1.0),
+    FieldSchema("vsf", float, 70, 10, 1.0),
+)
+
+_CONTACTDRAWBEADBENDING_CARD3 = (
+    FieldSchema("lcidrf", int, 0, 10, None),
+    FieldSchema("lcidnf", int, 10, 10, None),
+    FieldSchema("dbdth", float, 20, 10, 0.0),
+    FieldSchema("dfscl", float, 30, 10, 1.0),
+    FieldSchema("numint", int, 40, 10, 0),
+    FieldSchema("dbpid", int, 50, 10, 0),
+    FieldSchema("eloff", int, 60, 10, None),
+    FieldSchema("nbead", int, 70, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_CARD4 = (
+    FieldSchema("point1", int, 0, 10, None),
+    FieldSchema("point2", int, 10, 10, None),
+    FieldSchema("width", float, 20, 10, None),
+    FieldSchema("effhgt", float, 30, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_CARD5 = (
+    FieldSchema("epm", float, 0, 10, None),
+    FieldSchema("epscal", float, 10, 10, None),
+    FieldSchema("ending", float, 20, 10, 10.0),
+    FieldSchema("unused", int, 30, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION0_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION1_CARD0 = (
+    FieldSchema("ignore", int, 0, 10, 0),
+    FieldSchema("bckt", int, 10, 10, 200),
+    FieldSchema("lcbckt", int, 20, 10, None),
+    FieldSchema("ns2trk", int, 30, 10, 3),
+    FieldSchema("inititr", int, 40, 10, 2),
+    FieldSchema("parmax", float, 50, 10, 1.0005),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("cparm8", int, 70, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION1_CARD1 = (
+    FieldSchema("mpp2", bool, 0, 10, Flag(True, "&", "")),
+    FieldSchema("chksegs", int, 10, 10, 0),
+    FieldSchema("pensf", float, 20, 10, 1.0),
+    FieldSchema("grpable", int, 30, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION2_CARD0 = (
+    FieldSchema("soft", int, 0, 10, None),
+    FieldSchema("sofscl", float, 10, 10, 0.1),
+    FieldSchema("lcidab", int, 20, 10, 0),
+    FieldSchema("maxpar", float, 30, 10, 1.025),
+    FieldSchema("sbopt", int, 40, 10, 2),
+    FieldSchema("depth", int, 50, 10, 2),
+    FieldSchema("bsort", int, 60, 10, None),
+    FieldSchema("frcfrq", int, 70, 10, 1),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION3_CARD0 = (
+    FieldSchema("penmax", float, 0, 10, 0.0),
+    FieldSchema("thkopt", int, 10, 10, 0),
+    FieldSchema("shlthk", int, 20, 10, 0),
+    FieldSchema("snlog", int, 30, 10, 0),
+    FieldSchema("isym", int, 40, 10, 0),
+    FieldSchema("i2d3d", int, 50, 10, 0),
+    FieldSchema("sldthk", float, 60, 10, 0.0),
+    FieldSchema("sldstf", float, 70, 10, 0.0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION4_CARD0 = (
+    FieldSchema("igap", int, 0, 10, 1),
+    FieldSchema("ignore", int, 10, 10, 0),
+    FieldSchema("dprfac", float, 20, 10, 0.0),
+    FieldSchema("dtstif", float, 30, 10, 0.0),
+    FieldSchema("edgek", float, 40, 10, 0.0),
+    FieldSchema("flangl", float, 60, 10, 0.0),
+    FieldSchema("cid_rcf", int, 70, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION5_CARD0 = (
+    FieldSchema("q2tri", int, 0, 10, 0),
+    FieldSchema("dtpchk", float, 10, 10, 0.0),
+    FieldSchema("sfnbr", float, 20, 10, 0.0),
+    FieldSchema("fnlscl", float, 30, 10, 0.0),
+    FieldSchema("dnlscl", float, 40, 10, 0.0),
+    FieldSchema("tcso", int, 50, 10, 0),
+    FieldSchema("tiedid", int, 60, 10, 0),
+    FieldSchema("shledg", int, 70, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION6_CARD0 = (
+    FieldSchema("sharec", int, 0, 10, 0),
+    FieldSchema("cparm8", int, 10, 10, 0),
+    FieldSchema("ipback", int, 20, 10, 0),
+    FieldSchema("srnde", int, 30, 10, 0),
+    FieldSchema("fricsf", float, 40, 10, 1.0),
+    FieldSchema("icor", int, 50, 10, 0),
+    FieldSchema("ftorq", int, 60, 10, 0),
+    FieldSchema("region", int, 70, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION7_CARD0 = (
+    FieldSchema("pstiff", int, 0, 10, 0),
+    FieldSchema("ignroff", int, 10, 10, 0),
+    FieldSchema("fstol", float, 30, 10, 2.0),
+    FieldSchema("_2dbinr", int, 40, 10, 0, "2dbinr"),
+    FieldSchema("ssftyp", int, 50, 10, 0),
+    FieldSchema("swtpr", int, 60, 10, 0),
+    FieldSchema("tetfac", float, 70, 10, 0.0),
+)
+
+_CONTACTDRAWBEADBENDING_OPTION8_CARD0 = (
+    FieldSchema("shloff", float, 10, 10, 0.0),
+)
 
 class ContactDrawbeadBending(KeywordBase):
     """DYNA CONTACT_DRAWBEAD_BENDING keyword"""
@@ -42,358 +196,44 @@ class ContactDrawbeadBending(KeywordBase):
         OptionSpec("F", 6, 0),
         OptionSpec("G", 7, 0),
     ]
+    _link_fields = {
+        "point1": LinkType.NODE,
+        "point2": LinkType.NODE,
+        "lcidrf": LinkType.DEFINE_CURVE,
+        "lcidnf": LinkType.DEFINE_CURVE,
+        "saboxid": LinkType.DEFINE_BOX,
+        "sbboxid": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ContactDrawbeadBending class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfatyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfbtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "saboxid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbboxid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sapr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbpr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penchk",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfsa",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsb",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sast",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbst",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsat",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsbt",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsf",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidrf",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidnf",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbdth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfscl",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbpid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eloff",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbead",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "point1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "point2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "effhgt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epm",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epscal",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ending",
-                        float,
-                        20,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "cid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("cid")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -401,102 +241,14 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[1],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "ignore",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("ignore", 0)
-                            ),
-                            Field(
-                                "bckt",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("bckt", 200)
-                            ),
-                            Field(
-                                "lcbckt",
-                                int,
-                                20,
-                                10,
-                                kwargs.get("lcbckt")
-                            ),
-                            Field(
-                                "ns2trk",
-                                int,
-                                30,
-                                10,
-                                kwargs.get("ns2trk", 3)
-                            ),
-                            Field(
-                                "inititr",
-                                int,
-                                40,
-                                10,
-                                kwargs.get("inititr", 2)
-                            ),
-                            Field(
-                                "parmax",
-                                float,
-                                50,
-                                10,
-                                kwargs.get("parmax", 1.0005)
-                            ),
-                            Field(
-                                "unused",
-                                int,
-                                60,
-                                10,
-                                kwargs.get("unused")
-                            ),
-                            Field(
-                                "cparm8",
-                                int,
-                                70,
-                                10,
-                                kwargs.get("cparm8", 0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION1_CARD0,
+                        **kwargs,
                     ),
-                    Card(
-                        [
-                            Field(
-                                "mpp2",
-                                bool,
-                                0,
-                                10,
-                                Flag(
-                                    kwargs.get("mpp2", True),
-                                    "&",
-                                    ""
-                                )
-                            ),
-                            Field(
-                                "chksegs",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("chksegs", 0)
-                            ),
-                            Field(
-                                "pensf",
-                                float,
-                                20,
-                                10,
-                                kwargs.get("pensf", 1.0)
-                            ),
-                            Field(
-                                "grpable",
-                                int,
-                                30,
-                                10,
-                                kwargs.get("grpable", 0)
-                            ),
-                        ],
-                        lambda: self.mpp2,
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION1_CARD1,
+                        active_func=lambda: self.mpp2,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -504,65 +256,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[2],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "soft",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("soft")
-                            ),
-                            Field(
-                                "sofscl",
-                                float,
-                                10,
-                                10,
-                                kwargs.get("sofscl", 0.1)
-                            ),
-                            Field(
-                                "lcidab",
-                                int,
-                                20,
-                                10,
-                                kwargs.get("lcidab", 0)
-                            ),
-                            Field(
-                                "maxpar",
-                                float,
-                                30,
-                                10,
-                                kwargs.get("maxpar", 1.025)
-                            ),
-                            Field(
-                                "sbopt",
-                                int,
-                                40,
-                                10,
-                                kwargs.get("sbopt", 2)
-                            ),
-                            Field(
-                                "depth",
-                                int,
-                                50,
-                                10,
-                                kwargs.get("depth", 2)
-                            ),
-                            Field(
-                                "bsort",
-                                int,
-                                60,
-                                10,
-                                kwargs.get("bsort")
-                            ),
-                            Field(
-                                "frcfrq",
-                                int,
-                                70,
-                                10,
-                                kwargs.get("frcfrq", 1)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION2_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -570,65 +266,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[3],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "penmax",
-                                float,
-                                0,
-                                10,
-                                kwargs.get("penmax", 0.0)
-                            ),
-                            Field(
-                                "thkopt",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("thkopt", 0)
-                            ),
-                            Field(
-                                "shlthk",
-                                int,
-                                20,
-                                10,
-                                kwargs.get("shlthk", 0)
-                            ),
-                            Field(
-                                "snlog",
-                                int,
-                                30,
-                                10,
-                                kwargs.get("snlog", 0)
-                            ),
-                            Field(
-                                "isym",
-                                int,
-                                40,
-                                10,
-                                kwargs.get("isym", 0)
-                            ),
-                            Field(
-                                "i2d3d",
-                                int,
-                                50,
-                                10,
-                                kwargs.get("i2d3d", 0)
-                            ),
-                            Field(
-                                "sldthk",
-                                float,
-                                60,
-                                10,
-                                kwargs.get("sldthk", 0.0)
-                            ),
-                            Field(
-                                "sldstf",
-                                float,
-                                70,
-                                10,
-                                kwargs.get("sldstf", 0.0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION3_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -636,58 +276,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[4],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "igap",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("igap", 1)
-                            ),
-                            Field(
-                                "ignore",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("ignore", 0)
-                            ),
-                            Field(
-                                "dprfac",
-                                float,
-                                20,
-                                10,
-                                kwargs.get("dprfac", 0)
-                            ),
-                            Field(
-                                "dtstif",
-                                float,
-                                30,
-                                10,
-                                kwargs.get("dtstif", 0)
-                            ),
-                            Field(
-                                "edgek",
-                                float,
-                                40,
-                                10,
-                                kwargs.get("edgek", 0)
-                            ),
-                            Field(
-                                "flangl",
-                                float,
-                                60,
-                                10,
-                                kwargs.get("flangl", 0.0)
-                            ),
-                            Field(
-                                "cid_rcf",
-                                int,
-                                70,
-                                10,
-                                kwargs.get("cid_rcf")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION4_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -695,65 +286,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[5],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "q2tri",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("q2tri", 0)
-                            ),
-                            Field(
-                                "dtpchk",
-                                float,
-                                10,
-                                10,
-                                kwargs.get("dtpchk", 0)
-                            ),
-                            Field(
-                                "sfnbr",
-                                float,
-                                20,
-                                10,
-                                kwargs.get("sfnbr", 0)
-                            ),
-                            Field(
-                                "fnlscl",
-                                float,
-                                30,
-                                10,
-                                kwargs.get("fnlscl", 0)
-                            ),
-                            Field(
-                                "dnlscl",
-                                float,
-                                40,
-                                10,
-                                kwargs.get("dnlscl", 0)
-                            ),
-                            Field(
-                                "tcso",
-                                int,
-                                50,
-                                10,
-                                kwargs.get("tcso", 0)
-                            ),
-                            Field(
-                                "tiedid",
-                                int,
-                                60,
-                                10,
-                                kwargs.get("tiedid", 0)
-                            ),
-                            Field(
-                                "shledg",
-                                int,
-                                70,
-                                10,
-                                kwargs.get("shledg", 0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION5_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -761,65 +296,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[6],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "sharec",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("sharec", 0)
-                            ),
-                            Field(
-                                "cparm8",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("cparm8", 0)
-                            ),
-                            Field(
-                                "ipback",
-                                int,
-                                20,
-                                10,
-                                kwargs.get("ipback", 0)
-                            ),
-                            Field(
-                                "srnde",
-                                int,
-                                30,
-                                10,
-                                kwargs.get("srnde", 0)
-                            ),
-                            Field(
-                                "fricsf",
-                                float,
-                                40,
-                                10,
-                                kwargs.get("fricsf", 1.0)
-                            ),
-                            Field(
-                                "icor",
-                                int,
-                                50,
-                                10,
-                                kwargs.get("icor", 0)
-                            ),
-                            Field(
-                                "ftorq",
-                                int,
-                                60,
-                                10,
-                                kwargs.get("ftorq", 0)
-                            ),
-                            Field(
-                                "region",
-                                int,
-                                70,
-                                10,
-                                kwargs.get("region", 0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION6_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -827,58 +306,9 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[7],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "pstiff",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("pstiff", 0)
-                            ),
-                            Field(
-                                "ignroff",
-                                int,
-                                10,
-                                10,
-                                kwargs.get("ignroff", 0)
-                            ),
-                            Field(
-                                "fstol",
-                                float,
-                                30,
-                                10,
-                                kwargs.get("fstol", 2.0)
-                            ),
-                            Field(
-                                "2dbinr",
-                                int,
-                                40,
-                                10,
-                                kwargs.get("2dbinr", 0)
-                            ),
-                            Field(
-                                "ssftyp",
-                                int,
-                                50,
-                                10,
-                                kwargs.get("ssftyp", 0)
-                            ),
-                            Field(
-                                "swtpr",
-                                int,
-                                60,
-                                10,
-                                kwargs.get("swtpr", 0)
-                            ),
-                            Field(
-                                "tetfac",
-                                float,
-                                70,
-                                10,
-                                kwargs.get("tetfac", 0.0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION7_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -886,22 +316,14 @@ class ContactDrawbeadBending(KeywordBase):
             OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[8],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "shloff",
-                                float,
-                                10,
-                                10,
-                                kwargs.get("shloff", 0.0)
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTDRAWBEADBENDING_OPTION8_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.
@@ -2285,14 +1707,14 @@ class ContactDrawbeadBending(KeywordBase):
         EQ.0:No 2D belt initially inside a retractor is involved.
         EQ.1 : 2D belts initially inside retractors are involved
         """ # nopep8
-        return self._cards[13].cards[0].get_value("2dbinr")
+        return self._cards[13].cards[0].get_value("_2dbinr")
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
         """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
-        self._cards[13].cards[0].set_value("2dbinr", value)
+        self._cards[13].cards[0].set_value("_2dbinr", value)
 
         if value:
             self.activate_option("_2DBINR")
@@ -2362,4 +1784,74 @@ class ContactDrawbeadBending(KeywordBase):
 
         if value:
             self.activate_option("SHLOFF")
+
+    @property
+    def point1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given point1."""
+        return self._get_link_by_attr("NODE", "nid", self.point1, "parts")
+
+    @property
+    def point2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given point2."""
+        return self._get_link_by_attr("NODE", "nid", self.point2, "parts")
+
+    @property
+    def lcidrf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidrf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidrf:
+                return kwd
+        return None
+
+    @lcidrf_link.setter
+    def lcidrf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidrf."""
+        self.lcidrf = value.lcid
+
+    @property
+    def lcidnf_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidnf."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidnf:
+                return kwd
+        return None
+
+    @lcidnf_link.setter
+    def lcidnf_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidnf."""
+        self.lcidnf = value.lcid
+
+    @property
+    def saboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for saboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.saboxid:
+                return kwd
+        return None
+
+    @saboxid_link.setter
+    def saboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for saboxid."""
+        self.saboxid = value.boxid
+
+    @property
+    def sbboxid_link(self) -> DefineBox:
+        """Get the DefineBox object for sbboxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.sbboxid:
+                return kwd
+        return None
+
+    @sbboxid_link.setter
+    def sbboxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for sbboxid."""
+        self.sbboxid = value.boxid
 

@@ -23,7 +23,16 @@
 """Module providing the IncludeMultiscale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEMULTISCALE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_INCLUDEMULTISCALE_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class IncludeMultiscale(KeywordBase):
     """DYNA INCLUDE_MULTISCALE keyword"""
@@ -35,30 +44,13 @@ class IncludeMultiscale(KeywordBase):
         """Initialize the IncludeMultiscale class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEMULTISCALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEMULTISCALE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this multiscale local model.  This ID is used in the keyword *DEFINE_‌MULTISCALE.  Any unique integer will do

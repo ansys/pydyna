@@ -23,8 +23,33 @@
 """Module providing the MatStrainRateDependentPlasticity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATSTRAINRATEDEPENDENTPLASTICITY_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("vp", float, 40, 10, 0.0),
+)
+
+_MATSTRAINRATEDEPENDENTPLASTICITY_CARD1 = (
+    FieldSchema("lc1", int, 0, 10, 0),
+    FieldSchema("etan", float, 10, 10, None),
+    FieldSchema("lc2", int, 20, 10, 0),
+    FieldSchema("lc3", int, 30, 10, 0),
+    FieldSchema("lc4", int, 40, 10, 0),
+    FieldSchema("tdel", float, 50, 10, None),
+    FieldSchema("rdef", float, 60, 10, 1.0),
+)
+
+_MATSTRAINRATEDEPENDENTPLASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatStrainRateDependentPlasticity(KeywordBase):
     """DYNA MAT_STRAIN_RATE_DEPENDENT_PLASTICITY keyword"""
@@ -34,129 +59,35 @@ class MatStrainRateDependentPlasticity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lc1": LinkType.DEFINE_CURVE,
+        "lc2": LinkType.DEFINE_CURVE,
+        "lc3": LinkType.DEFINE_CURVE,
+        "lc4": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatStrainRateDependentPlasticity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdel",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdef",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSTRAINRATEDEPENDENTPLASTICITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSTRAINRATEDEPENDENTPLASTICITY_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatStrainRateDependentPlasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSTRAINRATEDEPENDENTPLASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -311,4 +242,64 @@ class MatStrainRateDependentPlasticity(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc1:
+                return kwd
+        return None
+
+    @lc1_link.setter
+    def lc1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc1."""
+        self.lc1 = value.lcid
+
+    @property
+    def lc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc2:
+                return kwd
+        return None
+
+    @lc2_link.setter
+    def lc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc2."""
+        self.lc2 = value.lcid
+
+    @property
+    def lc3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc3:
+                return kwd
+        return None
+
+    @lc3_link.setter
+    def lc3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc3."""
+        self.lc3 = value.lcid
+
+    @property
+    def lc4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc4:
+                return kwd
+        return None
+
+    @lc4_link.setter
+    def lc4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc4."""
+        self.lc4 = value.lcid
 

@@ -23,62 +23,36 @@
 """Module providing the IgaPointUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_IGAPOINTUVW_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("u", float, 20, 20, 0.0),
+    FieldSchema("v", float, 40, 20, 0.0),
+    FieldSchema("w", float, 60, 20, 0.0),
+)
 
 class IgaPointUvw(KeywordBase):
     """DYNA IGA_POINT_UVW keyword"""
 
     keyword = "IGA"
     subkeyword = "POINT_UVW"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IgaPointUvw class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGAPOINTUVW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Parametric point ID. A unique number must be chosen.
@@ -133,4 +107,9 @@ class IgaPointUvw(KeywordBase):
     def w(self, value: float) -> None:
         """Set the w property."""
         self._cards[0].set_value("w", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

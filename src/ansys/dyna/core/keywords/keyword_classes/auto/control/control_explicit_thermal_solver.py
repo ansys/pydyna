@@ -23,39 +23,32 @@
 """Module providing the ControlExplicitThermalSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLEXPLICITTHERMALSOLVER_CARD0 = (
+    FieldSchema("partset", int, 0, 10, None),
+    FieldSchema("dtfac", float, 10, 10, 0.0),
+)
 
 class ControlExplicitThermalSolver(KeywordBase):
     """DYNA CONTROL_EXPLICIT_THERMAL_SOLVER keyword"""
 
     keyword = "CONTROL"
     subkeyword = "EXPLICIT_THERMAL_SOLVER"
+    _link_fields = {
+        "partset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlExplicitThermalSolver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "partset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtfac",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALSOLVER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).
@@ -79,4 +72,14 @@ class ControlExplicitThermalSolver(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""dtfac must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtfac", value)
+
+    @property
+    def partset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for partset."""
+        return self._get_set_link("PART", self.partset)
+
+    @partset_link.setter
+    def partset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for partset."""
+        self.partset = value.sid
 

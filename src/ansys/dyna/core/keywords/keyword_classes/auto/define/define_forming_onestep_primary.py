@@ -23,8 +23,18 @@
 """Module providing the DefineFormingOnestepPrimary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINEFORMINGONESTEPPRIMARY_CARD0 = (
+    FieldSchema("slpid", int, 0, 10, None),
+)
+
+_DEFINEFORMINGONESTEPPRIMARY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFormingOnestepPrimary(KeywordBase):
     """DYNA DEFINE_FORMING_ONESTEP_PRIMARY keyword"""
@@ -34,42 +44,29 @@ class DefineFormingOnestepPrimary(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "slpid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineFormingOnestepPrimary class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "slpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGONESTEPPRIMARY_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingOnestepPrimary.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGONESTEPPRIMARY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def slpid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the primary blank to which a constrained blank is welded using* CONSTRAINED_SPOTWELD
@@ -94,4 +91,9 @@ class DefineFormingOnestepPrimary(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def slpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given slpid."""
+        return self._get_link_by_attr("PART", "pid", self.slpid, "parts")
 

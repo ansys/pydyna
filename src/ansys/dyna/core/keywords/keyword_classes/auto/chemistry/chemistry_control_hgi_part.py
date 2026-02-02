@@ -23,56 +23,40 @@
 """Module providing the ChemistryControlHgiPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CHEMISTRYCONTROLHGIPART_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("compid", int, 10, 10, None),
+    FieldSchema("exit_bc", int, 20, 10, None),
+)
+
+_CHEMISTRYCONTROLHGIPART_CARD1 = (
+    FieldSchema("file", str, 0, 80, None),
+)
 
 class ChemistryControlHgiPart(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_HGI_PART keyword"""
 
     keyword = "CHEMISTRY"
     subkeyword = "CONTROL_HGI_PART"
+    _link_fields = {
+        "exit_bc": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ChemistryControlHgiPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "compid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exit_bc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLHGIPART_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLHGIPART_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemistry solver.
@@ -116,4 +100,9 @@ class ChemistryControlHgiPart(KeywordBase):
     def file(self, value: str) -> None:
         """Set the file property."""
         self._cards[1].set_value("file", value)
+
+    @property
+    def exit_bc_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given exit_bc."""
+        return self._get_link_by_attr("PART", "pid", self.exit_bc, "parts")
 

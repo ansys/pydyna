@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+"""Module for defining the PyDyna local solver."""
 
 import logging
 import os
@@ -180,7 +182,6 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         If `stream` is `False` and `container` is set, returns the stdout of the run
 
     """
-
     # TODO: jobname => jobid={jobname}
     # TODO: override => clear all generated files before running (like in launch_mapdl)
     # TODO: additional_switches => literal string to add to the command line of the dyna solver

@@ -23,8 +23,32 @@
 """Module providing the DefineSpotweldFailureResultants class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINESPOTWELDFAILURERESULTANTS_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("dsn", float, 10, 10, 0.0),
+    FieldSchema("dss", float, 20, 10, 0.0),
+    FieldSchema("dlcidsn", int, 30, 10, 0),
+    FieldSchema("dlcidss", int, 40, 10, 0),
+)
+
+_DEFINESPOTWELDFAILURERESULTANTS_CARD1 = (
+    FieldSchema("pid_i", int, 0, 10, None),
+    FieldSchema("pid_j", int, 10, 10, None),
+    FieldSchema("snij", float, 20, 10, 0.0),
+    FieldSchema("ssij", float, 30, 10, 0.0),
+    FieldSchema("lcidsnij", int, 40, 10, 0),
+    FieldSchema("lcidssij", int, 50, 10, 0),
+)
+
+_DEFINESPOTWELDFAILURERESULTANTS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSpotweldFailureResultants(KeywordBase):
     """DYNA DEFINE_SPOTWELD_FAILURE_RESULTANTS keyword"""
@@ -34,125 +58,37 @@ class DefineSpotweldFailureResultants(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "dlcidsn": LinkType.DEFINE_CURVE,
+        "dlcidss": LinkType.DEFINE_CURVE,
+        "lcidsnij": LinkType.DEFINE_CURVE,
+        "lcidssij": LinkType.DEFINE_CURVE,
+        "pid_i": LinkType.PART,
+        "pid_j": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSpotweldFailureResultants class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dss",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidsn",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidss",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid_i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid_j",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "snij",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssij",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidsnij",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidssij",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURERESULTANTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURERESULTANTS_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldFailureResultants.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDFAILURERESULTANTS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> int:
         """Get or set the Identification number. Only one table is allowed
@@ -287,4 +223,74 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def dlcidsn_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidsn."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidsn:
+                return kwd
+        return None
+
+    @dlcidsn_link.setter
+    def dlcidsn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidsn."""
+        self.dlcidsn = value.lcid
+
+    @property
+    def dlcidss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dlcidss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dlcidss:
+                return kwd
+        return None
+
+    @dlcidss_link.setter
+    def dlcidss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcidss."""
+        self.dlcidss = value.lcid
+
+    @property
+    def lcidsnij_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidsnij."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidsnij:
+                return kwd
+        return None
+
+    @lcidsnij_link.setter
+    def lcidsnij_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidsnij."""
+        self.lcidsnij = value.lcid
+
+    @property
+    def lcidssij_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidssij."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidssij:
+                return kwd
+        return None
+
+    @lcidssij_link.setter
+    def lcidssij_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidssij."""
+        self.lcidssij = value.lcid
+
+    @property
+    def pid_i_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_i."""
+        return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
+
+    @property
+    def pid_j_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid_j."""
+        return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

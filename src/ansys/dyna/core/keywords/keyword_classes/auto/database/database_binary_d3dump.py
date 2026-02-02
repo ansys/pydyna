@@ -23,72 +23,45 @@
 """Module providing the DatabaseBinaryD3Dump class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DATABASEBINARYD3DUMP_CARD0 = (
+    FieldSchema("cycl", float, 0, 10, None),
+    FieldSchema("lcdt", int, 10, 10, None),
+    FieldSchema("beam", int, 20, 10, 0),
+    FieldSchema("npltc", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
+)
+
+_DATABASEBINARYD3DUMP_CARD1 = (
+    FieldSchema("ioopt", int, 0, 10, 0),
+)
 
 class DatabaseBinaryD3Dump(KeywordBase):
     """DYNA DATABASE_BINARY_D3DUMP keyword"""
 
     keyword = "DATABASE"
     subkeyword = "BINARY_D3DUMP"
+    _link_fields = {
+        "lcdt": LinkType.DEFINE_CURVE,
+        "psetid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseBinaryD3Dump class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cycl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beam",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npltc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ioopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYD3DUMP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYD3DUMP_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values(),
+                **kwargs,
+            ),        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the For D3DUMP and RUNRSF options this field is the number of time steps between output states.  For the D3DLF option, the value, n, inputted in this field causes an output state to be written every nth convergence check during the explicit dynamic relaxation phase
@@ -166,4 +139,29 @@ class DatabaseBinaryD3Dump(KeywordBase):
     def ioopt(self, value: int) -> None:
         """Set the ioopt property."""
         self._cards[1].set_value("ioopt", value)
+
+    @property
+    def lcdt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdt:
+                return kwd
+        return None
+
+    @lcdt_link.setter
+    def lcdt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdt."""
+        self.lcdt = value.lcid
+
+    @property
+    def psetid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

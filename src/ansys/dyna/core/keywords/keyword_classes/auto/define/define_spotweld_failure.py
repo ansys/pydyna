@@ -23,8 +23,39 @@
 """Module providing the DefineSpotweldFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINESPOTWELDFAILURE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("tflag", int, 10, 10, 0),
+    FieldSchema("dc1", float, 20, 10, 1.183),
+    FieldSchema("dc2", float, 30, 10, 0.002963),
+    FieldSchema("dc3", float, 40, 10, 0.0458),
+    FieldSchema("dc4", float, 50, 10, 0.1),
+    FieldSchema("exn", float, 60, 10, 2.0),
+    FieldSchema("exs", float, 70, 10, 2.0),
+)
+
+_DEFINESPOTWELDFAILURE_CARD1 = (
+    FieldSchema("navg", int, 0, 10, 0),
+    FieldSchema("d_sn", float, 10, 10, 0.0),
+    FieldSchema("d_ss", float, 20, 10, 0.0),
+    FieldSchema("r_sult", float, 30, 10, 0.0),
+    FieldSchema("tscale", float, 40, 10, 1.0),
+)
+
+_DEFINESPOTWELDFAILURE_CARD2 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("sn", float, 10, 10, None),
+    FieldSchema("ss", float, 20, 10, None),
+)
+
+_DEFINESPOTWELDFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSpotweldFailure(KeywordBase):
     """DYNA DEFINE_SPOTWELD_FAILURE keyword"""
@@ -34,167 +65,35 @@ class DefineSpotweldFailure(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineSpotweldFailure class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tflag",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc1",
-                        float,
-                        20,
-                        10,
-                        1.183,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc2",
-                        float,
-                        30,
-                        10,
-                        0.002963,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc3",
-                        float,
-                        40,
-                        10,
-                        0.0458,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc4",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exn",
-                        float,
-                        60,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exs",
-                        float,
-                        70,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "navg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d_sn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d_ss",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r_sult",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tscale",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURE_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identification number of data set, input as FVAL on *MAT_SPOTWELD.
@@ -390,4 +289,19 @@ class DefineSpotweldFailure(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

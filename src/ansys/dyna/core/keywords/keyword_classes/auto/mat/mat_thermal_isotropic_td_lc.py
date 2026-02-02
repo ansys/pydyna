@@ -23,8 +23,32 @@
 """Module providing the MatThermalIsotropicTdLc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATTHERMALISOTROPICTDLC_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
+    FieldSchema("tgmult", float, 30, 10, None),
+    FieldSchema("tlat", float, 40, 10, None),
+    FieldSchema("hlat", float, 50, 10, None),
+)
+
+_MATTHERMALISOTROPICTDLC_CARD1 = (
+    FieldSchema("hclc", int, 0, 10, None),
+    FieldSchema("tclc", int, 10, 10, None),
+    FieldSchema("hchsv", float, 20, 10, None),
+    FieldSchema("tchsv", float, 30, 10, None),
+    FieldSchema("tghsv", float, 40, 10, None),
+)
+
+_MATTHERMALISOTROPICTDLC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatThermalIsotropicTdLc(KeywordBase):
     """DYNA MAT_THERMAL_ISOTROPIC_TD_LC keyword"""
@@ -34,116 +58,34 @@ class MatThermalIsotropicTdLc(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "tgrlc": LinkType.DEFINE_CURVE,
+        "hclc": LinkType.DEFINE_CURVE,
+        "tclc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatThermalIsotropicTdLc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgrlc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgmult",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlat",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hclc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tclc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hchsv",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tchsv",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tghsv",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMALISOTROPICTDLC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALISOTROPICTDLC_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermalIsotropicTdLc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALISOTROPICTDLC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal conductivity at T1al material identification, a unique number has to be used.
@@ -293,4 +235,49 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def tgrlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tgrlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tgrlc:
+                return kwd
+        return None
+
+    @tgrlc_link.setter
+    def tgrlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tgrlc."""
+        self.tgrlc = value.lcid
+
+    @property
+    def hclc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hclc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hclc:
+                return kwd
+        return None
+
+    @hclc_link.setter
+    def hclc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hclc."""
+        self.hclc = value.lcid
+
+    @property
+    def tclc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for tclc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.tclc:
+                return kwd
+        return None
+
+    @tclc_link.setter
+    def tclc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for tclc."""
+        self.tclc = value.lcid
 

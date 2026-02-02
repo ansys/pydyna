@@ -23,67 +23,42 @@
 """Module providing the AirbagReferenceGeometryBirth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_AIRBAGREFERENCEGEOMETRYBIRTH_CARD0 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+)
+
+_AIRBAGREFERENCEGEOMETRYBIRTH_CARD1 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+)
 
 class AirbagReferenceGeometryBirth(KeywordBase):
     """DYNA AIRBAG_REFERENCE_GEOMETRY_BIRTH keyword"""
 
     keyword = "AIRBAG"
     subkeyword = "REFERENCE_GEOMETRY_BIRTH"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the AirbagReferenceGeometryBirth class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYBIRTH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYBIRTH_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def birth(self) -> float:
         """Get or set the Time at which the reference geometry activates (default=0.0).
@@ -138,4 +113,9 @@ class AirbagReferenceGeometryBirth(KeywordBase):
     def z(self, value: float) -> None:
         """Set the z property."""
         self._cards[1].set_value("z", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

@@ -23,216 +23,100 @@
 """Module providing the ConstrainedSoilPileCurves class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONSTRAINEDSOILPILECURVES_CARD0 = (
+    FieldSchema("pbsid", int, 0, 10, None),
+    FieldSchema("diam", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("pidns", int, 30, 10, None),
+    FieldSchema("pidnb", int, 40, 10, None),
+    FieldSchema("error", int, 50, 10, 0),
+    FieldSchema("nring", int, 60, 10, 1),
+    FieldSchema("nringb", int, 70, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVES_CARD1 = (
+    FieldSchema("damp", float, 0, 10, 0.0),
+    FieldSchema("local", int, 10, 10, 1),
+)
+
+_CONSTRAINEDSOILPILECURVES_CARD2 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("zref", float, 10, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVES_CARD3 = (
+    FieldSchema("blcz", int, 0, 10, None),
+    FieldSchema("blc", int, 10, 10, None),
+    FieldSchema("blcsh", int, 20, 10, None),
+    FieldSchema("blcsv", int, 30, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVES_CARD4 = (
+    FieldSchema("vlcz", int, 0, 10, None),
+    FieldSchema("vlc", int, 10, 10, None),
+    FieldSchema("vlcsh", int, 20, 10, None),
+    FieldSchema("vlcsv", int, 30, 10, None),
+)
+
+_CONSTRAINEDSOILPILECURVES_CARD5 = (
+    FieldSchema("hlcz", int, 0, 10, None),
+    FieldSchema("hlc", int, 10, 10, None),
+    FieldSchema("hlcsh", int, 20, 10, None),
+    FieldSchema("hlcsv", int, 30, 10, None),
+)
 
 class ConstrainedSoilPileCurves(KeywordBase):
     """DYNA CONSTRAINED_SOIL_PILE_CURVES keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "SOIL_PILE_CURVES"
+    _link_fields = {
+        "blcz": LinkType.DEFINE_CURVE,
+        "blc": LinkType.DEFINE_CURVE,
+        "blcsh": LinkType.DEFINE_CURVE,
+        "blcsv": LinkType.DEFINE_CURVE,
+        "vlcz": LinkType.DEFINE_CURVE,
+        "vlc": LinkType.DEFINE_CURVE,
+        "vlcsh": LinkType.DEFINE_CURVE,
+        "vlcsv": LinkType.DEFINE_CURVE,
+        "hlcz": LinkType.DEFINE_CURVE,
+        "hlc": LinkType.DEFINE_CURVE,
+        "hlcsh": LinkType.DEFINE_CURVE,
+        "hlcsv": LinkType.DEFINE_CURVE,
+        "pbsid": LinkType.SET_PART,
+        "pidns": LinkType.PART,
+        "pidnb": LinkType.PART,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedSoilPileCurves class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pbsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diam",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidns",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidnb",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "error",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nring",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nringb",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "damp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zref",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "blcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vlcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vlcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hlcz",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcsh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcsv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILECURVES_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def pbsid(self) -> typing.Optional[int]:
         """Get or set the Part set ID containing beam elements for coupling (the piles).
@@ -497,4 +381,209 @@ class ConstrainedSoilPileCurves(KeywordBase):
     def hlcsv(self, value: int) -> None:
         """Set the hlcsv property."""
         self._cards[5].set_value("hlcsv", value)
+
+    @property
+    def blcz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for blcz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.blcz:
+                return kwd
+        return None
+
+    @blcz_link.setter
+    def blcz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for blcz."""
+        self.blcz = value.lcid
+
+    @property
+    def blc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for blc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.blc:
+                return kwd
+        return None
+
+    @blc_link.setter
+    def blc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for blc."""
+        self.blc = value.lcid
+
+    @property
+    def blcsh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for blcsh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.blcsh:
+                return kwd
+        return None
+
+    @blcsh_link.setter
+    def blcsh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for blcsh."""
+        self.blcsh = value.lcid
+
+    @property
+    def blcsv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for blcsv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.blcsv:
+                return kwd
+        return None
+
+    @blcsv_link.setter
+    def blcsv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for blcsv."""
+        self.blcsv = value.lcid
+
+    @property
+    def vlcz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlcz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlcz:
+                return kwd
+        return None
+
+    @vlcz_link.setter
+    def vlcz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlcz."""
+        self.vlcz = value.lcid
+
+    @property
+    def vlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlc:
+                return kwd
+        return None
+
+    @vlc_link.setter
+    def vlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlc."""
+        self.vlc = value.lcid
+
+    @property
+    def vlcsh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlcsh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlcsh:
+                return kwd
+        return None
+
+    @vlcsh_link.setter
+    def vlcsh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlcsh."""
+        self.vlcsh = value.lcid
+
+    @property
+    def vlcsv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for vlcsv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.vlcsv:
+                return kwd
+        return None
+
+    @vlcsv_link.setter
+    def vlcsv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for vlcsv."""
+        self.vlcsv = value.lcid
+
+    @property
+    def hlcz_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlcz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlcz:
+                return kwd
+        return None
+
+    @hlcz_link.setter
+    def hlcz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlcz."""
+        self.hlcz = value.lcid
+
+    @property
+    def hlc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlc:
+                return kwd
+        return None
+
+    @hlc_link.setter
+    def hlc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlc."""
+        self.hlc = value.lcid
+
+    @property
+    def hlcsh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlcsh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlcsh:
+                return kwd
+        return None
+
+    @hlcsh_link.setter
+    def hlcsh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlcsh."""
+        self.hlcsh = value.lcid
+
+    @property
+    def hlcsv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for hlcsv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.hlcsv:
+                return kwd
+        return None
+
+    @hlcsv_link.setter
+    def hlcsv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for hlcsv."""
+        self.hlcsv = value.lcid
+
+    @property
+    def pbsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pbsid."""
+        return self._get_set_link("PART", self.pbsid)
+
+    @pbsid_link.setter
+    def pbsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pbsid."""
+        self.pbsid = value.sid
+
+    @property
+    def pidns_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidns."""
+        return self._get_link_by_attr("PART", "pid", self.pidns, "parts")
+
+    @property
+    def pidnb_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidnb."""
+        return self._get_link_by_attr("PART", "pid", self.pidnb, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

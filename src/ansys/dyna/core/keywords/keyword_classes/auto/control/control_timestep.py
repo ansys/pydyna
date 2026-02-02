@@ -23,170 +23,64 @@
 """Module providing the ControlTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_CONTROLTIMESTEP_CARD0 = (
+    FieldSchema("dtinit", float, 0, 10, 0.0),
+    FieldSchema("tssfac", float, 10, 10, 0.0),
+    FieldSchema("isdo", int, 20, 10, 0),
+    FieldSchema("tslimt", float, 30, 10, 0.0),
+    FieldSchema("dt2ms", float, 40, 10, 0.0),
+    FieldSchema("lctm", int, 50, 10, 0),
+    FieldSchema("erode", int, 60, 10, 0),
+    FieldSchema("ms1st", int, 70, 10, 0),
+)
+
+_CONTROLTIMESTEP_CARD1 = (
+    FieldSchema("dt2msf", float, 0, 10, None),
+    FieldSchema("dt2mslc", int, 10, 10, None),
+    FieldSchema("imscl", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("rmscl", float, 50, 10, 0.0),
+    FieldSchema("emscl", float, 60, 10, 0.0),
+    FieldSchema("ihdo", int, 70, 10, 0),
+)
+
+_CONTROLTIMESTEP_CARD2 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("igado", int, 10, 10, 0),
+)
 
 class ControlTimestep(KeywordBase):
     """DYNA CONTROL_TIMESTEP keyword"""
 
     keyword = "CONTROL"
     subkeyword = "TIMESTEP"
+    _link_fields = {
+        "lctm": LinkType.DEFINE_CURVE,
+        "dt2mslc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtinit",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tssfac",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isdo",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslimt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt2ms",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erode",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ms1st",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt2msf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt2mslc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imscl",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmscl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emscl",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihdo",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igado",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTIMESTEP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTIMESTEP_CARD1,
+                active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTIMESTEP_CARD2,
+                active_func=lambda: self._cards[2].has_nondefault_values(),
+                **kwargs,
+            ),        ]
     @property
     def dtinit(self) -> float:
         """Get or set the Initial time step size:
@@ -384,3 +278,37 @@ class ControlTimestep(KeywordBase):
             raise Exception("""igado must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igado", value)
 
+    @property
+    def lctm_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lctm."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lctm:
+                return kwd
+        return None
+
+    @lctm_link.setter
+    def lctm_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lctm."""
+        self.lctm = value.lcid
+
+    @property
+    def dt2mslc_link(self) -> DefineCurve:
+        """Get the DefineCurve object for dt2mslc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.dt2mslc:
+                return kwd
+        return None
+
+    @dt2mslc_link.setter
+    def dt2mslc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dt2mslc."""
+        self.dt2mslc = value.lcid
+
+
+class ControlTimeStep(ControlTimestep):
+    """Alias for CONTROL keyword."""
+    subkeyword = "TIME_STEP"

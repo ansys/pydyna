@@ -23,47 +23,33 @@
 """Module providing the BoundaryNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYNONREFLECTING_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("ad", float, 10, 10, 0.0),
+    FieldSchema("as_", float, 20, 10, 0.0, "as"),
+)
 
 class BoundaryNonReflecting(KeywordBase):
     """DYNA BOUNDARY_NON_REFLECTING keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "NON_REFLECTING"
+    _link_fields = {
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ad",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "as",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYNONREFLECTING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.
@@ -94,10 +80,20 @@ class BoundaryNonReflecting(KeywordBase):
         EQ.0.0: on (default),
         NE.0.0: off.
         """ # nopep8
-        return self._cards[0].get_value("as")
+        return self._cards[0].get_value("as_")
 
     @as_.setter
     def as_(self, value: float) -> None:
         """Set the as_ property."""
-        self._cards[0].set_value("as", value)
+        self._cards[0].set_value("as_", value)
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

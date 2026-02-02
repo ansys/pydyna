@@ -23,8 +23,33 @@
 """Module providing the SectionPointSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_SECTIONPOINTSOURCE_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("lcidt", int, 10, 10, None),
+    FieldSchema("lcidvolr", int, 20, 10, None),
+    FieldSchema("lcidvel", int, 30, 10, None),
+    FieldSchema("nlc001", int, 40, 10, None),
+    FieldSchema("nlc002", int, 50, 10, None),
+    FieldSchema("nlc003", int, 60, 10, None),
+)
+
+_SECTIONPOINTSOURCE_CARD1 = (
+    FieldSchema("nodeid", int, 0, 10, None),
+    FieldSchema("vecid", int, 10, 10, None),
+    FieldSchema("orifarea", float, 20, 10, None),
+)
+
+_SECTIONPOINTSOURCE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionPointSource(KeywordBase):
     """DYNA SECTION_POINT_SOURCE keyword"""
@@ -34,109 +59,39 @@ class SectionPointSource(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nlc001": LinkType.NODE,
+        "nlc002": LinkType.NODE,
+        "nlc003": LinkType.NODE,
+        "nodeid": LinkType.NODE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lcidvolr": LinkType.DEFINE_CURVE,
+        "lcidvel": LinkType.DEFINE_CURVE,
+        "vecid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SectionPointSource class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidvolr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidvel",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlc001",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlc002",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nlc003",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodeid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orifarea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONPOINTSOURCE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionPointSource.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONPOINTSOURCE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -260,4 +215,84 @@ class SectionPointSource(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nlc001_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nlc001."""
+        return self._get_link_by_attr("NODE", "nid", self.nlc001, "parts")
+
+    @property
+    def nlc002_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nlc002."""
+        return self._get_link_by_attr("NODE", "nid", self.nlc002, "parts")
+
+    @property
+    def nlc003_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nlc003."""
+        return self._get_link_by_attr("NODE", "nid", self.nlc003, "parts")
+
+    @property
+    def nodeid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lcidvolr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidvolr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidvolr:
+                return kwd
+        return None
+
+    @lcidvolr_link.setter
+    def lcidvolr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidvolr."""
+        self.lcidvolr = value.lcid
+
+    @property
+    def lcidvel_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidvel."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidvel:
+                return kwd
+        return None
+
+    @lcidvel_link.setter
+    def lcidvel_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidvel."""
+        self.lcidvel = value.lcid
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
 

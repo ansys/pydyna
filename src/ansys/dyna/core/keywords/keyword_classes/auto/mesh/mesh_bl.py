@@ -23,7 +23,16 @@
 """Module providing the MeshBl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MESHBL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nelth", int, 10, 10, None),
+    FieldSchema("blth", float, 20, 10, 0.0),
+    FieldSchema("blfe", float, 30, 10, 0.0),
+    FieldSchema("blst", int, 40, 10, 0),
+)
 
 class MeshBl(KeywordBase):
     """DYNA MESH_BL keyword"""
@@ -35,50 +44,10 @@ class MeshBl(KeywordBase):
         """Initialize the MeshBl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nelth",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blfe",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blst",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MESHBL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part identification.

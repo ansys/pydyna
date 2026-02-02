@@ -23,9 +23,24 @@
 """Module providing the SetPartAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETPARTADD_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+)
+
+_SETPARTADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetPartAdd(KeywordBase):
     """DYNA SET_PART_ADD keyword"""
@@ -35,89 +50,42 @@ class SetPartAdd(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "psid1": LinkType.SET_PART,
+        "psid2": LinkType.SET_PART,
+        "psid3": LinkType.SET_PART,
+        "psid4": LinkType.SET_PART,
+        "psid5": LinkType.SET_PART,
+        "psid6": LinkType.SET_PART,
+        "psid7": LinkType.SET_PART,
+        "psid8": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetPartAdd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETPARTADD_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "parts",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("parts")),
-            OptionCardSet(
+                data = kwargs.get("parts")),            OptionCardSet(
                 option_spec = SetPartAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID,All part sets should have a unique set ID.
@@ -210,4 +178,84 @@ class SetPartAdd(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def psid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid1."""
+        return self._get_set_link("PART", self.psid1)
+
+    @psid1_link.setter
+    def psid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid1."""
+        self.psid1 = value.sid
+
+    @property
+    def psid2_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid2."""
+        return self._get_set_link("PART", self.psid2)
+
+    @psid2_link.setter
+    def psid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid2."""
+        self.psid2 = value.sid
+
+    @property
+    def psid3_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid3."""
+        return self._get_set_link("PART", self.psid3)
+
+    @psid3_link.setter
+    def psid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid3."""
+        self.psid3 = value.sid
+
+    @property
+    def psid4_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid4."""
+        return self._get_set_link("PART", self.psid4)
+
+    @psid4_link.setter
+    def psid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid4."""
+        self.psid4 = value.sid
+
+    @property
+    def psid5_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid5."""
+        return self._get_set_link("PART", self.psid5)
+
+    @psid5_link.setter
+    def psid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid5."""
+        self.psid5 = value.sid
+
+    @property
+    def psid6_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid6."""
+        return self._get_set_link("PART", self.psid6)
+
+    @psid6_link.setter
+    def psid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid6."""
+        self.psid6 = value.sid
+
+    @property
+    def psid7_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid7."""
+        return self._get_set_link("PART", self.psid7)
+
+    @psid7_link.setter
+    def psid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid7."""
+        self.psid7 = value.sid
+
+    @property
+    def psid8_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid8."""
+        return self._get_set_link("PART", self.psid8)
+
+    @psid8_link.setter
+    def psid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid8."""
+        self.psid8 = value.sid
 

@@ -23,245 +23,88 @@
 """Module providing the FrequencyDomainResponseSpectrum class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD0 = (
+    FieldSchema("mdmin", int, 0, 10, 1),
+    FieldSchema("mdmax", int, 10, 10, None),
+    FieldSchema("fnmin", float, 20, 10, 0.0),
+    FieldSchema("fnmax", float, 30, 10, None),
+    FieldSchema("restrt", int, 40, 10, 0),
+    FieldSchema("mcomb", int, 50, 10, 0),
+    FieldSchema("relatv", int, 60, 10, 0),
+    FieldSchema("mprs", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD1 = (
+    FieldSchema("mcomb1", int, 0, 10, 0),
+    FieldSchema("mcomb2", int, 10, 10, 0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD2 = (
+    FieldSchema("w1", float, 0, 10, 0.5),
+    FieldSchema("w1", float, 10, 10, 0.5),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD3 = (
+    FieldSchema("r40", float, 0, 10, 0.4),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD4 = (
+    FieldSchema("dampf", float, 0, 10, None),
+    FieldSchema("lcdamp", int, 10, 10, None),
+    FieldSchema("ldtyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUM_CARD5 = (
+    FieldSchema("lctyp", int, 0, 10, 0),
+    FieldSchema("dof", int, 10, 10, 1),
+    FieldSchema("lc_tbid", int, 20, 10, None, "lc/tbid"),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("vid", int, 40, 10, None),
+    FieldSchema("lnid", int, 50, 10, None),
+    FieldSchema("lntyp", int, 60, 10, 1),
+    FieldSchema("inflag", int, 70, 10, 0),
+)
 
 class FrequencyDomainResponseSpectrum(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_RESPONSE_SPECTRUM keyword"""
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_RESPONSE_SPECTRUM"
+    _link_fields = {
+        "lcdamp": LinkType.DEFINE_CURVE,
+        "lc_tbid": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainResponseSpectrum class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdmin",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcomb",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relatv",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mprs",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mcomb1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcomb2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w1",
-                        float,
-                        10,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r40",
-                        float,
-                        0,
-                        10,
-                        0.4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdamp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lctyp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc/tbid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lnid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lntyp",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inflag",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUM_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).
@@ -534,12 +377,12 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
     def lc_tbid(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the response spectrum for frequencies. If the table definition is used a family of curves are defined for discrete critical damping ratios.
         """ # nopep8
-        return self._cards[5].get_value("lc/tbid")
+        return self._cards[5].get_value("lc_tbid")
 
     @lc_tbid.setter
     def lc_tbid(self, value: int) -> None:
         """Set the lc_tbid property."""
-        self._cards[5].set_value("lc/tbid", value)
+        self._cards[5].set_value("lc_tbid", value)
 
     @property
     def sf(self) -> float:
@@ -607,4 +450,43 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""inflag must be `None` or one of {0,1,2}.""")
         self._cards[5].set_value("inflag", value)
+
+    @property
+    def lcdamp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcdamp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdamp:
+                return kwd
+        return None
+
+    @lcdamp_link.setter
+    def lcdamp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdamp."""
+        self.lcdamp = value.lcid
+
+    @property
+    def lc_tbid_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
+        if self.deck is None:
+            return None
+        field_value = self.lc_tbid
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lc_tbid_link.setter
+    def lc_tbid_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lc_tbid."""
+        if hasattr(value, "lcid"):
+            self.lc_tbid = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lc_tbid = value.tbid
 

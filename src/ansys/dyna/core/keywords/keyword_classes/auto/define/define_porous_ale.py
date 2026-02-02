@@ -23,8 +23,51 @@
 """Module providing the DefinePorousAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_DEFINEPOROUSALE_CARD0 = (
+    FieldSchema("eidbeg", int, 0, 10, None),
+    FieldSchema("eidend", int, 10, 10, 0),
+    FieldSchema("local", int, 20, 10, 0),
+    FieldSchema("vecid1", int, 30, 10, 0),
+    FieldSchema("vecid2", int, 40, 10, 0),
+    FieldSchema("userdef", int, 50, 10, 0),
+)
+
+_DEFINEPOROUSALE_CARD1 = (
+    FieldSchema("axx", float, 0, 10, 0.0),
+    FieldSchema("axy", float, 10, 10, 0.0),
+    FieldSchema("axz", float, 20, 10, 0.0),
+    FieldSchema("bxx", float, 30, 10, 0.0),
+    FieldSchema("bxy", float, 40, 10, 0.0),
+    FieldSchema("bxz", float, 50, 10, 0.0),
+)
+
+_DEFINEPOROUSALE_CARD2 = (
+    FieldSchema("ayx", float, 0, 10, 0.0),
+    FieldSchema("ayy", float, 10, 10, 0.0),
+    FieldSchema("ayz", float, 20, 10, 0.0),
+    FieldSchema("byx", float, 30, 10, 0.0),
+    FieldSchema("byy", float, 40, 10, 0.0),
+    FieldSchema("byz", float, 50, 10, 0.0),
+)
+
+_DEFINEPOROUSALE_CARD3 = (
+    FieldSchema("azx", float, 0, 10, 0.0),
+    FieldSchema("azy", float, 10, 10, 0.0),
+    FieldSchema("azz", float, 20, 10, 0.0),
+    FieldSchema("bzx", float, 30, 10, 0.0),
+    FieldSchema("bzy", float, 40, 10, 0.0),
+    FieldSchema("bzz", float, 50, 10, 0.0),
+)
+
+_DEFINEPOROUSALE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefinePorousAle(KeywordBase):
     """DYNA DEFINE_POROUS_ALE keyword"""
@@ -34,238 +77,39 @@ class DefinePorousAle(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "vecid1": LinkType.DEFINE_VECTOR,
+        "vecid2": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefinePorousAle class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eidbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eidend",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "userdef",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "axx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bxz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ayx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ayy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ayz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "byz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "azx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "azy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "azz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bzz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPOROUSALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPOROUSALE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPOROUSALE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPOROUSALE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePorousAle.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPOROUSALE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def eidbeg(self) -> typing.Optional[int]:
         """Get or set the EIDBEG, EIDEND > 0: Range of thick porous element IDs. These are solids in 3D and shells in 2D.
@@ -574,4 +418,34 @@ class DefinePorousAle(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def vecid1_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid1:
+                return kwd
+        return None
+
+    @vecid1_link.setter
+    def vecid1_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid1."""
+        self.vecid1 = value.vid
+
+    @property
+    def vecid2_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid2:
+                return kwd
+        return None
+
+    @vecid2_link.setter
+    def vecid2_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid2."""
+        self.vecid2 = value.vid
 

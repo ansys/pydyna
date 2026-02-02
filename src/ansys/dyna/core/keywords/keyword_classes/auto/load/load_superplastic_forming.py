@@ -23,99 +23,48 @@
 """Module providing the LoadSuperplasticForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADSUPERPLASTICFORMING_CARD0 = (
+    FieldSchema("lcp1", int, 0, 10, None),
+    FieldSchema("csp1", int, 10, 10, None),
+    FieldSchema("ncp1", float, 20, 10, None),
+    FieldSchema("lcp2", int, 30, 10, None),
+    FieldSchema("csp2", int, 40, 10, None),
+    FieldSchema("ncp2", float, 50, 10, None),
+)
+
+_LOADSUPERPLASTICFORMING_CARD1 = (
+    FieldSchema("erate", float, 0, 10, None),
+    FieldSchema("scmin", float, 10, 10, None),
+    FieldSchema("scmax", float, 20, 10, None),
+    FieldSchema("ncyl", int, 30, 10, 0),
+)
 
 class LoadSuperplasticForming(KeywordBase):
     """DYNA LOAD_SUPERPLASTIC_FORMING keyword"""
 
     keyword = "LOAD"
     subkeyword = "SUPERPLASTIC_FORMING"
+    _link_fields = {
+        "lcp1": LinkType.DEFINE_CURVE,
+        "lcp2": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSuperplasticForming class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcp1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncp1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcp2",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncp2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "erate",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scmin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyl",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSUPERPLASTICFORMING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSUPERPLASTICFORMING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lcp1(self) -> typing.Optional[int]:
         """Get or set the Load curve number for Phase I pressure loading, see *DEFINE_CURVE.
@@ -225,4 +174,34 @@ class LoadSuperplasticForming(KeywordBase):
     def ncyl(self, value: int) -> None:
         """Set the ncyl property."""
         self._cards[1].set_value("ncyl", value)
+
+    @property
+    def lcp1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp1:
+                return kwd
+        return None
+
+    @lcp1_link.setter
+    def lcp1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp1."""
+        self.lcp1 = value.lcid
+
+    @property
+    def lcp2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp2:
+                return kwd
+        return None
+
+    @lcp2_link.setter
+    def lcp2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp2."""
+        self.lcp2 = value.lcid
 

@@ -23,8 +23,77 @@
 """Module providing the MatMohrNonAssociatedFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATMOHRNONASSOCIATEDFLOW_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("p12", float, 40, 10, -0.5),
+    FieldSchema("p22", float, 50, 10, 1.0),
+    FieldSchema("p33", float, 60, 10, 3.0),
+    FieldSchema("g12", float, 70, 10, -0.5),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD1 = (
+    FieldSchema("g22", float, 0, 10, 1.0),
+    FieldSchema("g33", float, 10, 10, 3.0),
+    FieldSchema("lcids", int, 20, 10, None),
+    FieldSchema("lcidv", int, 30, 10, None),
+    FieldSchema("lcidt", int, 40, 10, None),
+    FieldSchema("lfld", int, 50, 10, 0),
+    FieldSchema("lfrac", int, 60, 10, None),
+    FieldSchema("w0", float, 70, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD2 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("b0", float, 10, 10, None),
+    FieldSchema("gamma", float, 20, 10, None),
+    FieldSchema("c", float, 30, 10, None),
+    FieldSchema("n", float, 40, 10, None),
+    FieldSchema("scale", float, 50, 10, 1.0),
+    FieldSchema("size0", float, 60, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD3 = (
+    FieldSchema("tref", float, 0, 10, None),
+    FieldSchema("tmelt", float, 10, 10, None),
+    FieldSchema("m", float, 20, 10, None),
+    FieldSchema("eta", float, 30, 10, None),
+    FieldSchema("cp", float, 40, 10, None),
+    FieldSchema("tini", float, 50, 10, None),
+    FieldSchema("depso", float, 60, 10, None),
+    FieldSchema("depsad", float, 70, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD4 = (
+    FieldSchema("aopt", float, 0, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD5 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_CARD6 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+)
+
+_MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatMohrNonAssociatedFlow(KeywordBase):
     """DYNA MAT_MOHR_NON_ASSOCIATED_FLOW keyword"""
@@ -34,354 +103,51 @@ class MatMohrNonAssociatedFlow(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcids": LinkType.DEFINE_CURVE,
+        "lcidv": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE,
+        "lfld": LinkType.DEFINE_CURVE,
+        "lfrac": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatMohrNonAssociatedFlow class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p12",
-                        float,
-                        40,
-                        10,
-                        -0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p22",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p33",
-                        float,
-                        60,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g12",
-                        float,
-                        70,
-                        10,
-                        -0.5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g22",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g33",
-                        float,
-                        10,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcids",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfld",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfrac",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "size0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tref",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmelt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tini",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "depso",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "depsad",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMOHRNONASSOCIATEDFLOW_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatMohrNonAssociatedFlow.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -891,4 +657,79 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcids_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcids."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcids:
+                return kwd
+        return None
+
+    @lcids_link.setter
+    def lcids_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcids."""
+        self.lcids = value.lcid
+
+    @property
+    def lcidv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidv:
+                return kwd
+        return None
+
+    @lcidv_link.setter
+    def lcidv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidv."""
+        self.lcidv = value.lcid
+
+    @property
+    def lcidt_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcidt."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidt:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidt."""
+        self.lcidt = value.lcid
+
+    @property
+    def lfld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lfld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lfld:
+                return kwd
+        return None
+
+    @lfld_link.setter
+    def lfld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lfld."""
+        self.lfld = value.lcid
+
+    @property
+    def lfrac_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lfrac."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lfrac:
+                return kwd
+        return None
+
+    @lfrac_link.setter
+    def lfrac_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lfrac."""
+        self.lfrac = value.lcid
 

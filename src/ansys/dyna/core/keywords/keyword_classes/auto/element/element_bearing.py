@@ -23,242 +23,85 @@
 """Module providing the ElementBearing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_ELEMENTBEARING_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("itype", int, 10, 10, 0),
+    FieldSchema("n1", int, 20, 10, None),
+    FieldSchema("cid1", int, 30, 10, None),
+    FieldSchema("n2", int, 40, 10, None),
+    FieldSchema("ci2", int, 50, 10, None),
+    FieldSchema("nb", int, 60, 10, None),
+)
+
+_ELEMENTBEARING_CARD1 = (
+    FieldSchema("eball", float, 0, 10, 0.0),
+    FieldSchema("prball", float, 10, 10, 0.0),
+    FieldSchema("erace", float, 20, 10, 0.0),
+    FieldSchema("prrace", float, 30, 10, 0.0),
+    FieldSchema("stresl", float, 40, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD2 = (
+    FieldSchema("d", float, 0, 10, 0.0),
+    FieldSchema("di", float, 10, 10, 0.0),
+    FieldSchema("do", float, 20, 10, 0.0),
+    FieldSchema("dm", float, 30, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD3 = (
+    FieldSchema("ao", float, 0, 10, 0.0),
+    FieldSchema("ai", float, 10, 10, 0.0),
+    FieldSchema("bo", float, 20, 10, 0.0),
+    FieldSchema("pd", float, 30, 10, 0.0),
+)
+
+_ELEMENTBEARING_CARD4 = (
+    FieldSchema("ipflag", int, 0, 10, 0),
+    FieldSchema("xtran", float, 10, 10, 0.0),
+    FieldSchema("ytran", float, 20, 10, 0.0),
+    FieldSchema("ztran", float, 30, 10, 0.0),
+    FieldSchema("xrot", float, 40, 10, 0.0),
+    FieldSchema("yrot", float, 50, 10, 0.0),
+)
 
 class ElementBearing(KeywordBase):
     """DYNA ELEMENT_BEARING keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "BEARING"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "cid1": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ci2": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementBearing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ci2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nb",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eball",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prball",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erace",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prrace",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stresl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "di",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "do",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dm",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ao",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ai",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pd",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xtran",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ytran",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ztran",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xrot",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yrot",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEARING_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the 
@@ -553,4 +396,44 @@ class ElementBearing(KeywordBase):
     def yrot(self, value: float) -> None:
         """Set the yrot property."""
         self._cards[4].set_value("yrot", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def cid1_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid1:
+                return kwd
+        return None
+
+    @cid1_link.setter
+    def cid1_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid1."""
+        self.cid1 = value.cid
+
+    @property
+    def ci2_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for ci2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.ci2:
+                return kwd
+        return None
+
+    @ci2_link.setter
+    def ci2_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for ci2."""
+        self.ci2 = value.cid
 

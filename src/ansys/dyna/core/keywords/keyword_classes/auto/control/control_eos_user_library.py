@@ -23,7 +23,19 @@
 """Module providing the ControlEosUserLibrary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEOSUSERLIBRARY_CARD0 = (
+    FieldSchema("path", str, 0, 80, None),
+)
+
+_CONTROLEOSUSERLIBRARY_CARD1 = (
+    FieldSchema("conm", float, 0, 10, 1.0),
+    FieldSchema("conl", float, 10, 10, 1.0),
+    FieldSchema("cont", float, 20, 10, 1.0),
+    FieldSchema("conp", float, 20, 10, 100.0),
+)
 
 class ControlEosUserLibrary(KeywordBase):
     """DYNA CONTROL_EOS_USER_LIBRARY keyword"""
@@ -35,55 +47,13 @@ class ControlEosUserLibrary(KeywordBase):
         """Initialize the ControlEosUserLibrary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "conm",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conl",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cont",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conp",
-                        float,
-                        20,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEOSUSERLIBRARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLEOSUSERLIBRARY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the Path to the library seslib. The default path is the current working directory

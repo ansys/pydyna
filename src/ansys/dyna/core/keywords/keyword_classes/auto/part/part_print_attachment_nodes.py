@@ -23,119 +23,63 @@
 """Module providing the PartPrintAttachmentNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+
+_PARTPRINTATTACHMENTNODES_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("secid", int, 10, 10, None),
+    FieldSchema("mid", int, 20, 10, None),
+    FieldSchema("eosid", int, 30, 10, 0),
+    FieldSchema("hgid", int, 40, 10, 0),
+    FieldSchema("grav", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, None),
+    FieldSchema("tmid", int, 70, 10, 0),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD2 = (
+    FieldSchema("prbf", int, 0, 10, 0),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD3 = (
+    FieldSchema("ansid", int, 0, 10, 0),
+)
 
 class PartPrintAttachmentNodes(KeywordBase):
     """DYNA PART_PRINT_ATTACHMENT_NODES keyword"""
 
     keyword = "PART"
     subkeyword = "PRINT_ATTACHMENT_NODES"
+    _link_fields = {
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
+        "ansid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartPrintAttachmentNodes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "secid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "prbf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ansid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -275,4 +219,59 @@ class PartPrintAttachmentNodes(KeywordBase):
     def ansid(self, value: int) -> None:
         """Set the ansid property."""
         self._cards[3].set_value("ansid", value)
+
+    @property
+    def mid_link(self) -> KeywordBase:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def secid_link(self) -> KeywordBase:
+        """Get the SECTION_* keyword for secid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.secid:
+                return kwd
+        return None
+
+    @secid_link.setter
+    def secid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for secid."""
+        self.secid = value.secid
+
+    @property
+    def hgid_link(self) -> Hourglass:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
+
+    @property
+    def ansid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for ansid."""
+        return self._get_set_link("NODE", self.ansid)
+
+    @ansid_link.setter
+    def ansid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for ansid."""
+        self.ansid = value.sid
 

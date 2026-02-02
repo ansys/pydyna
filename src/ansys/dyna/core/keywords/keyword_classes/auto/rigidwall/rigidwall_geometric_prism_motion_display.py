@@ -23,375 +23,217 @@
 """Module providing the RigidwallGeometricPrismMotionDisplay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+)
+
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD1 = (
+    FieldSchema("xt", float, 0, 10, 0.0),
+    FieldSchema("yt", float, 10, 10, 0.0),
+    FieldSchema("zt", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+    FieldSchema("fric", float, 60, 10, 0.0),
+)
+
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD2 = (
+    FieldSchema("xhev", float, 0, 10, None),
+    FieldSchema("yhev", float, 10, 10, 0.0),
+    FieldSchema("zhev", float, 20, 10, 0.0),
+    FieldSchema("lenl", float, 30, 10, 0.0),
+    FieldSchema("lenm", float, 40, 10, 0.0),
+    FieldSchema("lenp", float, 50, 10, 0.0),
+)
+
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD3 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("opt", int, 10, 10, 0),
+    FieldSchema("vx", float, 20, 10, None),
+    FieldSchema("vy", float, 30, 10, None),
+    FieldSchema("vz", float, 40, 10, None),
+)
+
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
 
 class RigidwallGeometricPrismMotionDisplay(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_PRISM_MOTION_DISPLAY keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_PRISM_MOTION_DISPLAY"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "boxid": LinkType.DEFINE_BOX,
+        "nsid": LinkType.SET_NODE,
+        "nsidex": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the RigidwallGeometricPrismMotionDisplay class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
+                option_spec = RigidwallGeometricPrismMotionDisplay.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xhev",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yhev",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zhev",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lenl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lenm",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lenp",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "opt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
+                **kwargs
             ),
         ]
-
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the Optional Rigidwall ID.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Ridigwall id descriptor. It is suggested that unique descriptions be used.
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
         EQ.0: all nodes are tracked with respects to the rigid wall.
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def nsidex(self) -> int:
         """Get or set the Node set ID containing nodes that exempted as tracked nodes, see *SET_NODE_OPTION.
         """ # nopep8
-        return self._cards[1].get_value("nsidex")
+        return self._cards[0].get_value("nsidex")
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
         """Set the nsidex property."""
-        self._cards[1].set_value("nsidex", value)
+        self._cards[0].set_value("nsidex", value)
 
     @property
     def boxid(self) -> int:
         """Get or set the If defined, only nodes in box are included as tracked nodes for the rigid wall.
         """ # nopep8
-        return self._cards[1].get_value("boxid")
+        return self._cards[0].get_value("boxid")
 
     @boxid.setter
     def boxid(self, value: int) -> None:
         """Set the boxid property."""
-        self._cards[1].set_value("boxid", value)
+        self._cards[0].set_value("boxid", value)
 
     @property
     def birth(self) -> float:
         """Get or set the Birth time of rigid wall.  The time values of the load curves that control the motion of the wall are offset by the birth time.
         """ # nopep8
-        return self._cards[1].get_value("birth")
+        return self._cards[0].get_value("birth")
 
     @birth.setter
     def birth(self, value: float) -> None:
         """Set the birth property."""
-        self._cards[1].set_value("birth", value)
+        self._cards[0].set_value("birth", value)
 
     @property
     def death(self) -> float:
         """Get or set the Death time of rigid wall.  At this time the wall is deleted from the calculation
         """ # nopep8
-        return self._cards[1].get_value("death")
+        return self._cards[0].get_value("death")
 
     @death.setter
     def death(self, value: float) -> None:
         """Set the death property."""
-        self._cards[1].set_value("death", value)
+        self._cards[0].set_value("death", value)
 
     @property
     def xt(self) -> float:
         """Get or set the x-coordinate of tail of any outward drawn normal vector, n, originating on wall (tail) and terminating in space (head).
         """ # nopep8
-        return self._cards[2].get_value("xt")
+        return self._cards[1].get_value("xt")
 
     @xt.setter
     def xt(self, value: float) -> None:
         """Set the xt property."""
-        self._cards[2].set_value("xt", value)
+        self._cards[1].set_value("xt", value)
 
     @property
     def yt(self) -> float:
         """Get or set the y-coordinate of tail of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("yt")
+        return self._cards[1].get_value("yt")
 
     @yt.setter
     def yt(self, value: float) -> None:
         """Set the yt property."""
-        self._cards[2].set_value("yt", value)
+        self._cards[1].set_value("yt", value)
 
     @property
     def zt(self) -> float:
         """Get or set the z-coordinate of tail of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("zt")
+        return self._cards[1].get_value("zt")
 
     @zt.setter
     def zt(self, value: float) -> None:
         """Set the zt property."""
-        self._cards[2].set_value("zt", value)
+        self._cards[1].set_value("zt", value)
 
     @property
     def xh(self) -> float:
         """Get or set the x-coordinate of head of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("xh")
+        return self._cards[1].get_value("xh")
 
     @xh.setter
     def xh(self, value: float) -> None:
         """Set the xh property."""
-        self._cards[2].set_value("xh", value)
+        self._cards[1].set_value("xh", value)
 
     @property
     def yh(self) -> float:
         """Get or set the y-coordinate of head of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("yh")
+        return self._cards[1].get_value("yh")
 
     @yh.setter
     def yh(self, value: float) -> None:
         """Set the yh property."""
-        self._cards[2].set_value("yh", value)
+        self._cards[1].set_value("yh", value)
 
     @property
     def zh(self) -> float:
         """Get or set the z-coordinate of head of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("zh")
+        return self._cards[1].get_value("zh")
 
     @zh.setter
     def zh(self, value: float) -> None:
         """Set the zh property."""
-        self._cards[2].set_value("zh", value)
+        self._cards[1].set_value("zh", value)
 
     @property
     def fric(self) -> float:
@@ -399,91 +241,91 @@ class RigidwallGeometricPrismMotionDisplay(KeywordBase):
         EQ.0.0: Frictionless sliding when in contact,
         EQ.1.0: No sliding when in contact
         """ # nopep8
-        return self._cards[2].get_value("fric")
+        return self._cards[1].get_value("fric")
 
     @fric.setter
     def fric(self, value: float) -> None:
         """Set the fric property."""
-        self._cards[2].set_value("fric", value)
+        self._cards[1].set_value("fric", value)
 
     @property
     def xhev(self) -> typing.Optional[float]:
         """Get or set the x-coordinate of head of edge vector l.
         """ # nopep8
-        return self._cards[3].get_value("xhev")
+        return self._cards[2].get_value("xhev")
 
     @xhev.setter
     def xhev(self, value: float) -> None:
         """Set the xhev property."""
-        self._cards[3].set_value("xhev", value)
+        self._cards[2].set_value("xhev", value)
 
     @property
     def yhev(self) -> float:
         """Get or set the y-coordinate of head of edge vector l.
         """ # nopep8
-        return self._cards[3].get_value("yhev")
+        return self._cards[2].get_value("yhev")
 
     @yhev.setter
     def yhev(self, value: float) -> None:
         """Set the yhev property."""
-        self._cards[3].set_value("yhev", value)
+        self._cards[2].set_value("yhev", value)
 
     @property
     def zhev(self) -> float:
         """Get or set the z-coordinate of head of edge vector l.
         """ # nopep8
-        return self._cards[3].get_value("zhev")
+        return self._cards[2].get_value("zhev")
 
     @zhev.setter
     def zhev(self, value: float) -> None:
         """Set the zhev property."""
-        self._cards[3].set_value("zhev", value)
+        self._cards[2].set_value("zhev", value)
 
     @property
     def lenl(self) -> float:
         """Get or set the Length of l edge.
         EQ.0.0: defines an infinite size plane.
         """ # nopep8
-        return self._cards[3].get_value("lenl")
+        return self._cards[2].get_value("lenl")
 
     @lenl.setter
     def lenl(self, value: float) -> None:
         """Set the lenl property."""
-        self._cards[3].set_value("lenl", value)
+        self._cards[2].set_value("lenl", value)
 
     @property
     def lenm(self) -> float:
         """Get or set the Length of m edge.
         EQ.0.0: defines an infinite size plane.
         """ # nopep8
-        return self._cards[3].get_value("lenm")
+        return self._cards[2].get_value("lenm")
 
     @lenm.setter
     def lenm(self, value: float) -> None:
         """Set the lenm property."""
-        self._cards[3].set_value("lenm", value)
+        self._cards[2].set_value("lenm", value)
 
     @property
     def lenp(self) -> float:
         """Get or set the Length of prism in the direction negative to n.
         """ # nopep8
-        return self._cards[3].get_value("lenp")
+        return self._cards[2].get_value("lenp")
 
     @lenp.setter
     def lenp(self, value: float) -> None:
         """Set the lenp property."""
-        self._cards[3].set_value("lenp", value)
+        self._cards[2].set_value("lenp", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Stonewall motion curve number, see *DEFINE_CURVE.
         """ # nopep8
-        return self._cards[4].get_value("lcid")
+        return self._cards[3].get_value("lcid")
 
     @lcid.setter
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
-        self._cards[4].set_value("lcid", value)
+        self._cards[3].set_value("lcid", value)
 
     @property
     def opt(self) -> int:
@@ -491,45 +333,123 @@ class RigidwallGeometricPrismMotionDisplay(KeywordBase):
         EQ.0: velocity specified,
         EQ.1: displacement specified.
         """ # nopep8
-        return self._cards[4].get_value("opt")
+        return self._cards[3].get_value("opt")
 
     @opt.setter
     def opt(self, value: int) -> None:
         """Set the opt property."""
         if value not in [0, 1, None]:
             raise Exception("""opt must be `None` or one of {0,1}.""")
-        self._cards[4].set_value("opt", value)
+        self._cards[3].set_value("opt", value)
 
     @property
     def vx(self) -> typing.Optional[float]:
         """Get or set the x-direction cosine of velocity/displacement vector.
         """ # nopep8
-        return self._cards[4].get_value("vx")
+        return self._cards[3].get_value("vx")
 
     @vx.setter
     def vx(self, value: float) -> None:
         """Set the vx property."""
-        self._cards[4].set_value("vx", value)
+        self._cards[3].set_value("vx", value)
 
     @property
     def vy(self) -> typing.Optional[float]:
         """Get or set the y-direction cosine of velocity/displacement vector.
         """ # nopep8
-        return self._cards[4].get_value("vy")
+        return self._cards[3].get_value("vy")
 
     @vy.setter
     def vy(self, value: float) -> None:
         """Set the vy property."""
-        self._cards[4].set_value("vy", value)
+        self._cards[3].set_value("vy", value)
 
     @property
     def vz(self) -> typing.Optional[float]:
         """Get or set the z-direction cosine of velocity/displacement vector.
         """ # nopep8
-        return self._cards[4].get_value("vz")
+        return self._cards[3].get_value("vz")
 
     @vz.setter
     def vz(self, value: float) -> None:
         """Set the vz property."""
-        self._cards[4].set_value("vz", value)
+        self._cards[3].set_value("vz", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Rigidwall ID.
+        """ # nopep8
+        return self._cards[4].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[4].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Rigidwall id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[4].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
+
+    @property
+    def nsidex_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidex."""
+        return self._get_set_link("NODE", self.nsidex)
+
+    @nsidex_link.setter
+    def nsidex_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidex."""
+        self.nsidex = value.sid
 

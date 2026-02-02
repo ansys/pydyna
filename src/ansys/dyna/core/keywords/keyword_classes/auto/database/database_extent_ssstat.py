@@ -23,80 +23,45 @@
 """Module providing the DatabaseExtentSsstat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEEXTENTSSSTAT_CARD0 = (
+    FieldSchema("psid1", int, 0, 10, None),
+    FieldSchema("psid2", int, 10, 10, None),
+    FieldSchema("psid3", int, 20, 10, None),
+    FieldSchema("psid4", int, 30, 10, None),
+    FieldSchema("psid5", int, 40, 10, None),
+    FieldSchema("psid6", int, 50, 10, None),
+    FieldSchema("psid7", int, 60, 10, None),
+    FieldSchema("psid8", int, 70, 10, None),
+)
 
 class DatabaseExtentSsstat(KeywordBase):
     """DYNA DATABASE_EXTENT_SSSTAT keyword"""
 
     keyword = "DATABASE"
     subkeyword = "EXTENT_SSSTAT"
+    _link_fields = {
+        "psid1": LinkType.SET_PART,
+        "psid2": LinkType.SET_PART,
+        "psid3": LinkType.SET_PART,
+        "psid4": LinkType.SET_PART,
+        "psid5": LinkType.SET_PART,
+        "psid6": LinkType.SET_PART,
+        "psid7": LinkType.SET_PART,
+        "psid8": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseExtentSsstat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTSSSTAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid1(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem 1, see *SET_PART.
@@ -184,4 +149,84 @@ class DatabaseExtentSsstat(KeywordBase):
     def psid8(self, value: int) -> None:
         """Set the psid8 property."""
         self._cards[0].set_value("psid8", value)
+
+    @property
+    def psid1_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid1."""
+        return self._get_set_link("PART", self.psid1)
+
+    @psid1_link.setter
+    def psid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid1."""
+        self.psid1 = value.sid
+
+    @property
+    def psid2_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid2."""
+        return self._get_set_link("PART", self.psid2)
+
+    @psid2_link.setter
+    def psid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid2."""
+        self.psid2 = value.sid
+
+    @property
+    def psid3_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid3."""
+        return self._get_set_link("PART", self.psid3)
+
+    @psid3_link.setter
+    def psid3_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid3."""
+        self.psid3 = value.sid
+
+    @property
+    def psid4_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid4."""
+        return self._get_set_link("PART", self.psid4)
+
+    @psid4_link.setter
+    def psid4_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid4."""
+        self.psid4 = value.sid
+
+    @property
+    def psid5_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid5."""
+        return self._get_set_link("PART", self.psid5)
+
+    @psid5_link.setter
+    def psid5_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid5."""
+        self.psid5 = value.sid
+
+    @property
+    def psid6_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid6."""
+        return self._get_set_link("PART", self.psid6)
+
+    @psid6_link.setter
+    def psid6_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid6."""
+        self.psid6 = value.sid
+
+    @property
+    def psid7_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid7."""
+        return self._get_set_link("PART", self.psid7)
+
+    @psid7_link.setter
+    def psid7_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid7."""
+        self.psid7 = value.sid
+
+    @property
+    def psid8_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid8."""
+        return self._get_set_link("PART", self.psid8)
+
+    @psid8_link.setter
+    def psid8_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid8."""
+        self.psid8 = value.sid
 

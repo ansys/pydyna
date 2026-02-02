@@ -23,8 +23,27 @@
 """Module providing the DefineCurveBoxAdaptivity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINECURVEBOXADAPTIVITY_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("level", int, 20, 10, None),
+    FieldSchema("dist1", float, 30, 10, None),
+)
+
+_DEFINECURVEBOXADAPTIVITY_CARD1 = (
+    FieldSchema("x", float, 0, 20, None),
+    FieldSchema("y", float, 20, 20, None),
+    FieldSchema("z", float, 40, 20, None),
+)
+
+_DEFINECURVEBOXADAPTIVITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCurveBoxAdaptivity(KeywordBase):
     """DYNA DEFINE_CURVE_BOX_ADAPTIVITY keyword"""
@@ -34,88 +53,32 @@ class DefineCurveBoxAdaptivity(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineCurveBoxAdaptivity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "level",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEBOXADAPTIVITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEBOXADAPTIVITY_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveBoxAdaptivity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVEBOXADAPTIVITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Curve ID; must be unique. The curve must be closed: its first and
@@ -209,4 +172,9 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

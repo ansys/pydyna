@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,10 +19,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for writing fields to buffers."""
 
 import copy
 import dataclasses
 import io
+import logging
 import typing
 
 import hollerith as holler
@@ -31,6 +33,8 @@ import pandas._libs.missing as libmissing
 
 from ansys.dyna.core.lib.field import Field, to_long
 from ansys.dyna.core.lib.format_type import format_type
+
+logger = logging.getLogger(__name__)
 
 
 def _write_string_right(value, width):
@@ -85,11 +89,13 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
 
 
 def check_field_type(field_type: type):
+    """Check that the field type is valid."""
     if field_type != str and field_type != int and field_type != float:
         raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    """Write a single field to the buffer."""
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:
@@ -101,6 +107,7 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    """Write a single field to the buffer."""
     check_field_type(field_type)
     write_field_c(buf, field_type, value, width)
 
@@ -108,7 +115,10 @@ def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.A
 def write_c_dataframe(
     buf: typing.IO[typing.AnyStr], fields: typing.List[Field], table: pd.DataFrame, format: format_type
 ) -> None:
+    """Method to write a DataFrame to a buffer using hollerith format."""
+
     def convert_field(field: Field) -> holler.Field:
+        """Method to convert a Field to a holler.Field."""
         return holler.Field(type=field.type, width=field.width)
 
     long_format = format == format_type.long
@@ -213,3 +223,108 @@ def write_comment_line(
     buf.seek(pos)
     buf.write("$#")
     buf.seek(endpos)
+
+
+def _format_csv_value(value: typing.Any, field_type: type) -> str:
+    """Format a single value for CSV output.
+
+    Parameters
+    ----------
+    value : Any
+        The value to format.
+    field_type : type
+        The type of the field (int, float, str).
+
+    Returns
+    -------
+    str
+        The formatted string representation.
+    """
+    if libmissing.checknull(value):
+        return ""
+    if field_type == int:
+        return str(int(value))
+    if field_type == float:
+        # Use repr for floats to preserve precision, but strip unnecessary trailing zeros
+        formatted = repr(float(value))
+        return formatted
+    if field_type == str:
+        return str(value)
+    return str(value)
+
+
+def write_fields_csv(
+    buf: typing.IO[typing.AnyStr],
+    fields: typing.List[Field],
+    values: typing.Optional[typing.List[typing.Any]] = None,
+) -> None:
+    """Write `fields` representing a line of a keyword to `buf` in comma-delimited format.
+
+    This produces LS-DYNA compatible comma-delimited (free format) output.
+
+    Parameters
+    ----------
+    buf : IO
+        Buffer to write to.
+    fields : List[Field]
+        Fields to write.
+    values : List[Any], optional
+        List of values for the fields. If not set, use the value property of each field.
+
+    Examples
+    --------
+    >>> s = io.StringIO()
+    >>> fields = [
+    ...     Field("a", int, 0, 10, value=1),
+    ...     Field("b", str, 10, 10, value="hello")
+    ... ]
+    >>> write_fields_csv(s, fields)
+    >>> s.getvalue()
+    '1,hello'
+    """
+    logger.debug("Writing %d fields in CSV format", len(fields))
+
+    if values is not None:
+        fields = copy.deepcopy(fields)
+        for field, value in zip(fields, values):
+            field.value = value
+
+    csv_values = []
+    for field in fields:
+        if field.type is None:
+            csv_values.append("")
+        else:
+            field_value, field_type = field.io_info()
+            csv_values.append(_format_csv_value(field_value, field_type))
+
+    buf.write(",".join(csv_values))
+
+
+def write_c_dataframe_csv(
+    buf: typing.IO[typing.AnyStr],
+    fields: typing.List[Field],
+    table: pd.DataFrame,
+) -> None:
+    """Write a DataFrame to `buf` in comma-delimited format.
+
+    Parameters
+    ----------
+    buf : IO
+        Buffer to write to.
+    fields : List[Field]
+        Field definitions for the columns.
+    table : pd.DataFrame
+        The data to write.
+    """
+    logger.debug("Writing DataFrame with %d rows in CSV format", len(table))
+
+    for row_idx in range(len(table)):
+        csv_values = []
+        for field in fields:
+            if field.name in table.columns:
+                value = table[field.name].iloc[row_idx]
+                csv_values.append(_format_csv_value(value, field.type))
+            else:
+                csv_values.append("")
+        buf.write(",".join(csv_values))
+        buf.write("\n")

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,46 +25,72 @@ Replace Card Handler: Replaces entire cards with alternatives.
 
 Uses cards from additional-cards.json or other sources to completely
 replace existing cards in the keyword structure.
+
+Uses label-based card references:
+    {"ref": "target_card", "card": {"source": "...", "card-name": "..."}}
+
+Labels must be defined in the keyword's labels section or auto-generated.
 """
 
 from dataclasses import dataclass
+import logging
 import typing
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from keyword_generation.data_model import get_card
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
-class ReplaceCardSettings:
-    """Configuration for replacing card fields."""
+class ReplaceCardSettings(LabelRefSettings):
+    """Configuration for replacing card fields.
 
-    index: int
-    fields: List[Dict[str, Any]]
+    Attributes
+    ----------
+        ref: Label-based reference to the card (resolved via LabelRegistry)
+        card: Dict with 'source' and 'card-name' for loading replacement
+    """
+
+    card: Dict[str, Any]
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ReplaceCardSettings":
-        return cls(index=data["index"], fields=data["fields"])
+        """Create settings from dict.
+
+        Args:
+            data: Dict with 'ref' and 'card'
+
+        Returns
+        -------
+            ReplaceCardSettings instance
+
+        Raises
+        ------
+            KeyError: If 'ref' or 'card' is missing
+        """
+        return cls(ref=data["ref"], card=data["card"])
 
 
 @handler(
     name="replace-card",
-    dependencies=["reorder-card"],
     description="Replaces entire cards with alternative definitions from additional-cards.json",
     input_schema={
         "type": "array",
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer"},
+                "ref": {"type": "string", "description": "Card label reference"},
                 "card": {"type": "object"},
             },
-            "required": ["index", "card"],
+            "required": ["ref", "card"],
         },
     },
-    output_description="Replaces cards at specified indices with loaded card definitions",
+    output_description="Replaces cards at specified label references with loaded card definitions",
 )
 class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """
@@ -76,7 +102,7 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
     Input Settings Example:
         [
             {
-                "index": 1,
+                "ref": "target_card",
                 "card": {
                     "source": "additional-cards",
                     "card-name": "BLANK"
@@ -86,30 +112,43 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
 
     Output Modification:
         Replaces kwd_data["cards"][index] with loaded card definition
+
+    Requires:
+        - LabelRegistry must be available on kwd_data.label_registry
+        - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        """Keep dict settings for replace-card - manifest uses 'card' field."""
-        return settings
-
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Replace cards with new card definitions.
 
         Args:
-            kwd_data: Complete keyword data dictionary
-            settings: List of {"index", "card"} dicts
-        """
-        typed_settings = self._parse_settings(settings)
-        for setting in typed_settings:
-            index = setting["index"]
-            replacement = get_card(setting["card"])
-            replacement["index"] = index
-            kwd_data.cards[index] = replacement
+            kwd_data: KeywordData instance containing cards and label_registry
+            settings: List of dicts with 'ref' and 'card'
 
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
+        Raises
+        ------
+            ValueError: If label_registry is not available on kwd_data
+            UndefinedLabelError: If a referenced label is not defined
+        """
+        typed_settings = parse_settings_list(ReplaceCardSettings, settings)
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError(
+                "ReplaceCardHandler requires LabelRegistry on kwd_data.label_registry. "
+                "Ensure labels are defined in the manifest."
+            )
+
+        for card_settings in typed_settings:
+            index = card_settings.resolve_index(registry, kwd_data.cards)
+            replacement = get_card(card_settings.card)
+            replacement["index"] = index
+            logger.debug(f"Replacing card {index} (ref='{card_settings.ref}') with {card_settings.card}")
+            kwd_data.cards[index] = replacement
+            # Update the label registry to point to the new card object
+            # This is necessary because we're replacing the card instance, not mutating it
+            registry.update_reference(card_settings.ref, replacement)

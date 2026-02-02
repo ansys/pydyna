@@ -23,7 +23,19 @@
 """Module providing the EmSolverBemmat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMSOLVERBEMMAT_CARD0 = (
+    FieldSchema("matid", int, 0, 10, 1),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("reltol", float, 70, 10, 1e-06),
+)
 
 class EmSolverBemmat(KeywordBase):
     """DYNA EM_SOLVER_BEMMAT keyword"""
@@ -35,70 +47,10 @@ class EmSolverBemmat(KeywordBase):
         """Initialize the EmSolverBemmat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "matid",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        float,
-                        70,
-                        10,
-                        1.e-6,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMSOLVERBEMMAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def matid(self) -> int:
         """Get or set the Defines which BEM matrix the card refers to:

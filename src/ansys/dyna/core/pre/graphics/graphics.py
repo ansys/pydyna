@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -859,7 +859,6 @@ class _DisplayMesh(object):  # pragma: no cover
         plotter : Plotter
             Elements of another plotter to add.
         """
-
         if self._poly_data == None:
             if self._type is DisplayMeshType.FACE:
                 surf = pv.PolyData(self._vertices, self._facet_list)

@@ -23,127 +23,56 @@
 """Module providing the CeseBoundaryCyclicSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CESEBOUNDARYCYCLICSET_CARD0 = (
+    FieldSchema("ssid1", int, 0, 10, None),
+    FieldSchema("ssid2", int, 10, 10, None),
+    FieldSchema("cyctyp", int, 20, 10, 0),
+)
+
+_CESEBOUNDARYCYCLICSET_CARD1 = (
+    FieldSchema("axisx1", float, 0, 10, 0.0),
+    FieldSchema("axisy1", float, 10, 10, 0.0),
+    FieldSchema("axisz1", float, 20, 10, 0.0),
+    FieldSchema("dirx", float, 30, 10, None),
+    FieldSchema("diry", float, 40, 10, None),
+    FieldSchema("dirz", float, 50, 10, None),
+    FieldSchema("rotang", float, 60, 10, None),
+)
+
+_CESEBOUNDARYCYCLICSET_CARD2 = (
+    FieldSchema("transx", float, 0, 10, None),
+    FieldSchema("transy", float, 10, 10, None),
+    FieldSchema("transz", float, 20, 10, None),
+)
 
 class CeseBoundaryCyclicSet(KeywordBase):
     """DYNA CESE_BOUNDARY_CYCLIC_SET keyword"""
 
     keyword = "CESE"
     subkeyword = "BOUNDARY_CYCLIC_SET"
+    _link_fields = {
+        "ssid1": LinkType.SET_SEGMENT,
+        "ssid2": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the CeseBoundaryCyclicSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cyctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "axisx1",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axisy1",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axisz1",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rotang",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "transx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "transy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "transz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the Segment set  ID.
@@ -290,4 +219,24 @@ class CeseBoundaryCyclicSet(KeywordBase):
     def transz(self, value: float) -> None:
         """Set the transz property."""
         self._cards[2].set_value("transz", value)
+
+    @property
+    def ssid1_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid1."""
+        return self._get_set_link("SEGMENT", self.ssid1)
+
+    @ssid1_link.setter
+    def ssid1_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid1."""
+        self.ssid1 = value.sid
+
+    @property
+    def ssid2_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid2."""
+        return self._get_set_link("SEGMENT", self.ssid2)
+
+    @ssid2_link.setter
+    def ssid2_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid2."""
+        self.ssid2 = value.sid
 

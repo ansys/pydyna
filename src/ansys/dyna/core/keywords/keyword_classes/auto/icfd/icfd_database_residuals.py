@@ -23,7 +23,12 @@
 """Module providing the IcfdDatabaseResiduals class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASERESIDUALS_CARD0 = (
+    FieldSchema("rlvl", int, 0, 10, 0),
+)
 
 class IcfdDatabaseResiduals(KeywordBase):
     """DYNA ICFD_DATABASE_RESIDUALS keyword"""
@@ -35,20 +40,10 @@ class IcfdDatabaseResiduals(KeywordBase):
         """Initialize the IcfdDatabaseResiduals class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rlvl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASERESIDUALS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def rlvl(self) -> int:
         """Get or set the Residual output level :

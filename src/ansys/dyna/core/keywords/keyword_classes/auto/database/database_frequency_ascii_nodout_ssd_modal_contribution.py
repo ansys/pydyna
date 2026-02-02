@@ -23,64 +23,36 @@
 """Module providing the DatabaseFrequencyAsciiNodoutSsdModalContribution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DATABASEFREQUENCYASCIINODOUTSSDMODALCONTRIBUTION_CARD0 = (
+    FieldSchema("fmin", float, 0, 10, 0.0),
+    FieldSchema("fmax", float, 10, 10, 0.0),
+    FieldSchema("nfreq", int, 20, 10, 0),
+    FieldSchema("fspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, 0),
+)
 
 class DatabaseFrequencyAsciiNodoutSsdModalContribution(KeywordBase):
     """DYNA DATABASE_FREQUENCY_ASCII_NODOUT_SSD_MODAL_CONTRIBUTION keyword"""
 
     keyword = "DATABASE"
     subkeyword = "FREQUENCY_ASCII_NODOUT_SSD_MODAL_CONTRIBUTION"
+    _link_fields = {
+        "lcfreq": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseFrequencyAsciiNodoutSsdModalContribution class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYASCIINODOUTSSDMODALCONTRIBUTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fmin(self) -> float:
         """Get or set the Minimum frequency for output (cycles/time).
@@ -141,4 +113,19 @@ class DatabaseFrequencyAsciiNodoutSsdModalContribution(KeywordBase):
     def lcfreq(self, value: int) -> None:
         """Set the lcfreq property."""
         self._cards[0].set_value("lcfreq", value)
+
+    @property
+    def lcfreq_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcfreq."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfreq:
+                return kwd
+        return None
+
+    @lcfreq_link.setter
+    def lcfreq_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfreq."""
+        self.lcfreq = value.lcid
 

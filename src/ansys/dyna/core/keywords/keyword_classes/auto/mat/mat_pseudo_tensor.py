@@ -23,8 +23,86 @@
 """Module providing the MatPseudoTensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATPSEUDOTENSOR_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("g", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+)
+
+_MATPSEUDOTENSOR_CARD1 = (
+    FieldSchema("sigf", float, 0, 10, None),
+    FieldSchema("a0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("a2", float, 30, 10, None),
+    FieldSchema("a0f", float, 40, 10, None),
+    FieldSchema("a1f", float, 50, 10, None),
+    FieldSchema("b1", float, 60, 10, None),
+    FieldSchema("per", float, 70, 10, None),
+)
+
+_MATPSEUDOTENSOR_CARD2 = (
+    FieldSchema("er", float, 0, 10, None),
+    FieldSchema("prr", float, 10, 10, None),
+    FieldSchema("sigy", float, 20, 10, None),
+    FieldSchema("etan", float, 30, 10, None),
+    FieldSchema("lcp", int, 40, 10, 0),
+    FieldSchema("lcr", int, 50, 10, 0),
+)
+
+_MATPSEUDOTENSOR_CARD3 = (
+    FieldSchema("x1", float, 0, 10, None),
+    FieldSchema("x2", float, 10, 10, None),
+    FieldSchema("x3", float, 20, 10, None),
+    FieldSchema("x4", float, 30, 10, None),
+    FieldSchema("x5", float, 40, 10, None),
+    FieldSchema("x6", float, 50, 10, None),
+    FieldSchema("x7", float, 60, 10, None),
+    FieldSchema("x8", float, 70, 10, None),
+)
+
+_MATPSEUDOTENSOR_CARD4 = (
+    FieldSchema("x9", float, 0, 10, None),
+    FieldSchema("x10", float, 10, 10, None),
+    FieldSchema("x11", float, 20, 10, None),
+    FieldSchema("x12", float, 30, 10, None),
+    FieldSchema("x13", float, 40, 10, None),
+    FieldSchema("x14", float, 50, 10, None),
+    FieldSchema("x15", float, 60, 10, None),
+    FieldSchema("x16", float, 70, 10, None),
+)
+
+_MATPSEUDOTENSOR_CARD5 = (
+    FieldSchema("ys1", float, 0, 10, None),
+    FieldSchema("ys2", float, 10, 10, None),
+    FieldSchema("ys3", float, 20, 10, None),
+    FieldSchema("ys4", float, 30, 10, None),
+    FieldSchema("ys5", float, 40, 10, None),
+    FieldSchema("ys6", float, 50, 10, None),
+    FieldSchema("ys7", float, 60, 10, None),
+    FieldSchema("ys8", float, 70, 10, None),
+)
+
+_MATPSEUDOTENSOR_CARD6 = (
+    FieldSchema("ys9", float, 0, 10, None),
+    FieldSchema("ys10", float, 10, 10, None),
+    FieldSchema("ys11", float, 20, 10, None),
+    FieldSchema("ys12", float, 30, 10, None),
+    FieldSchema("ys13", float, 40, 10, None),
+    FieldSchema("ys14", float, 50, 10, None),
+    FieldSchema("ys15", float, 60, 10, None),
+    FieldSchema("ys16", float, 70, 10, None),
+)
+
+_MATPSEUDOTENSOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatPseudoTensor(KeywordBase):
     """DYNA MAT_PSEUDO_TENSOR keyword"""
@@ -34,411 +112,48 @@ class MatPseudoTensor(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcp": LinkType.DEFINE_CURVE,
+        "lcr": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatPseudoTensor class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a0f",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1f",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "per",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "er",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcr",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x9",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x10",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x13",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x14",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x15",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x16",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ys1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ys9",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys10",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys13",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys14",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys15",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys16",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPSEUDOTENSOR_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPseudoTensor.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPSEUDOTENSOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -1002,4 +717,34 @@ class MatPseudoTensor(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcp_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcp:
+                return kwd
+        return None
+
+    @lcp_link.setter
+    def lcp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcp."""
+        self.lcp = value.lcid
+
+    @property
+    def lcr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcr:
+                return kwd
+        return None
+
+    @lcr_link.setter
+    def lcr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcr."""
+        self.lcr = value.lcid
 

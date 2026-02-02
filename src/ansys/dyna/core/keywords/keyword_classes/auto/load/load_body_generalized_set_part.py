@@ -23,144 +23,56 @@
 """Module providing the LoadBodyGeneralizedSetPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_LOADBODYGENERALIZEDSETPART_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("drlcid", int, 30, 10, 0),
+    FieldSchema("xc", float, 40, 10, 0.0),
+    FieldSchema("yc", float, 50, 10, 0.0),
+    FieldSchema("zc", float, 60, 10, 0.0),
+)
+
+_LOADBODYGENERALIZEDSETPART_CARD1 = (
+    FieldSchema("ax", float, 0, 10, 0.0),
+    FieldSchema("ay", float, 10, 10, 0.0),
+    FieldSchema("az", float, 20, 10, 0.0),
+    FieldSchema("omx", float, 30, 10, 0.0),
+    FieldSchema("omy", float, 40, 10, 0.0),
+    FieldSchema("omz", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, None),
+    FieldSchema("angtyp", str, 70, 10, "CENT"),
+)
 
 class LoadBodyGeneralizedSetPart(KeywordBase):
     """DYNA LOAD_BODY_GENERALIZED_SET_PART keyword"""
 
     keyword = "LOAD"
     subkeyword = "BODY_GENERALIZED_SET_PART"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "drlcid": LinkType.DEFINE_CURVE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBodyGeneralizedSetPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drlcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ax",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ay",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "az",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angtyp",
-                        str,
-                        70,
-                        10,
-                        "CENT",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBODYGENERALIZEDSETPART_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBODYGENERALIZEDSETPART_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for body force load.
@@ -330,4 +242,59 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         if value not in ["CENT", "CORI", "ROTA", None]:
             raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}.""")
         self._cards[1].set_value("angtyp", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def drlcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for drlcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.drlcid:
+                return kwd
+        return None
+
+    @drlcid_link.setter
+    def drlcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for drlcid."""
+        self.drlcid = value.lcid
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

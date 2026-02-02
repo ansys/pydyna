@@ -23,8 +23,75 @@
 """Module providing the DefineTableCompact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETABLECOMPACT_CARD0 = (
+    FieldSchema("tbid", int, 0, 10, None),
+    FieldSchema("nvar", int, 10, 10, None),
+    FieldSchema("lcint", int, 20, 10, 0),
+    FieldSchema("mathis", int, 30, 10, 0),
+    FieldSchema("inexect", int, 40, 10, 0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_DEFINETABLECOMPACT_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("his1", int, 10, 10, None),
+    FieldSchema("his2", int, 20, 10, None),
+    FieldSchema("his3", int, 30, 10, None),
+    FieldSchema("his4", int, 40, 10, None),
+    FieldSchema("his5", int, 50, 10, None),
+    FieldSchema("his6", int, 60, 10, None),
+    FieldSchema("his7", int, 70, 10, None),
+)
+
+_DEFINETABLECOMPACT_CARD2 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("his8", int, 10, 10, None),
+    FieldSchema("his9", int, 20, 10, None),
+)
+
+_DEFINETABLECOMPACT_CARD3 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("ixe1", int, 10, 10, None),
+    FieldSchema("ixe2", int, 20, 10, None),
+    FieldSchema("ixe3", int, 30, 10, None),
+    FieldSchema("ixe4", int, 40, 10, None),
+    FieldSchema("ixe5", int, 50, 10, None),
+    FieldSchema("ixe6", int, 60, 10, None),
+    FieldSchema("ixe7", int, 70, 10, None),
+)
+
+_DEFINETABLECOMPACT_CARD4 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("ixe8", int, 10, 10, None),
+    FieldSchema("ixe9", int, 20, 10, None),
+)
+
+_DEFINETABLECOMPACT_CARD5 = (
+    FieldSchema("o1", float, 0, 10, None),
+    FieldSchema("a1_1", float, 10, 10, None, "a1.1"),
+    FieldSchema("a1_2", float, 20, 10, None, "a1.2"),
+    FieldSchema("a1_3", float, 30, 10, None, "a1.3"),
+    FieldSchema("a1_4", float, 40, 10, None, "a1.4"),
+    FieldSchema("a1_5", float, 50, 10, None, "a1.5"),
+    FieldSchema("a1_6", float, 60, 10, None, "a1.6"),
+    FieldSchema("a1_7", float, 70, 10, None, "a1.7"),
+)
+
+_DEFINETABLECOMPACT_CARD6 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("a1_8", float, 10, 10, None, "a1.8"),
+    FieldSchema("a1_9", float, 20, 10, None, "a1.9"),
+)
+
+_DEFINETABLECOMPACT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineTableCompact(KeywordBase):
     """DYNA DEFINE_TABLE_COMPACT keyword"""
@@ -40,343 +107,38 @@ class DefineTableCompact(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tbid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nvar",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcint",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mathis",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inexect",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his8",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "his9",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe8",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixe9",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "o1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.5",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.6",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.7",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.8",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1.9",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLECOMPACT_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTableCompact.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETABLECOMPACT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tbid(self) -> typing.Optional[int]:
         """Get or set the Table ID. Table ID.  Tables and load curves may not share common IDs.  LS DYNA allows load curve IDs and table IDs to be used interchangeably
@@ -654,100 +416,100 @@ class DefineTableCompact(KeywordBase):
     def a1_1(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.1")
+        return self._cards[5].get_value("a1_1")
 
     @a1_1.setter
     def a1_1(self, value: float) -> None:
         """Set the a1_1 property."""
-        self._cards[5].set_value("a1.1", value)
+        self._cards[5].set_value("a1_1", value)
 
     @property
     def a1_2(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.2")
+        return self._cards[5].get_value("a1_2")
 
     @a1_2.setter
     def a1_2(self, value: float) -> None:
         """Set the a1_2 property."""
-        self._cards[5].set_value("a1.2", value)
+        self._cards[5].set_value("a1_2", value)
 
     @property
     def a1_3(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.3")
+        return self._cards[5].get_value("a1_3")
 
     @a1_3.setter
     def a1_3(self, value: float) -> None:
         """Set the a1_3 property."""
-        self._cards[5].set_value("a1.3", value)
+        self._cards[5].set_value("a1_3", value)
 
     @property
     def a1_4(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.4")
+        return self._cards[5].get_value("a1_4")
 
     @a1_4.setter
     def a1_4(self, value: float) -> None:
         """Set the a1_4 property."""
-        self._cards[5].set_value("a1.4", value)
+        self._cards[5].set_value("a1_4", value)
 
     @property
     def a1_5(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.5")
+        return self._cards[5].get_value("a1_5")
 
     @a1_5.setter
     def a1_5(self, value: float) -> None:
         """Set the a1_5 property."""
-        self._cards[5].set_value("a1.5", value)
+        self._cards[5].set_value("a1_5", value)
 
     @property
     def a1_6(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.6")
+        return self._cards[5].get_value("a1_6")
 
     @a1_6.setter
     def a1_6(self, value: float) -> None:
         """Set the a1_6 property."""
-        self._cards[5].set_value("a1.6", value)
+        self._cards[5].set_value("a1_6", value)
 
     @property
     def a1_7(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[5].get_value("a1.7")
+        return self._cards[5].get_value("a1_7")
 
     @a1_7.setter
     def a1_7(self, value: float) -> None:
         """Set the a1_7 property."""
-        self._cards[5].set_value("a1.7", value)
+        self._cards[5].set_value("a1_7", value)
 
     @property
     def a1_8(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[6].get_value("a1.8")
+        return self._cards[6].get_value("a1_8")
 
     @a1_8.setter
     def a1_8(self, value: float) -> None:
         """Set the a1_8 property."""
-        self._cards[6].set_value("a1.8", value)
+        self._cards[6].set_value("a1_8", value)
 
     @property
     def a1_9(self) -> typing.Optional[float]:
         """Get or set the Abscissa values of variable X.
         """ # nopep8
-        return self._cards[6].get_value("a1.9")
+        return self._cards[6].get_value("a1_9")
 
     @a1_9.setter
     def a1_9(self, value: float) -> None:
         """Set the a1_9 property."""
-        self._cards[6].set_value("a1.9", value)
+        self._cards[6].set_value("a1_9", value)
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -23,93 +23,46 @@
 """Module providing the ControlImplicitModesBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONTROLIMPLICITMODESBINARY_CARD0 = (
+    FieldSchema("nsidc", int, 0, 10, 0),
+    FieldSchema("nsida", int, 10, 10, 0),
+    FieldSchema("neig", int, 20, 10, None),
+    FieldSchema("ibase", int, 30, 10, None),
+    FieldSchema("se_mass", str, 40, 10, None),
+    FieldSchema("se_damp", str, 50, 10, None),
+    FieldSchema("se_stiff", str, 60, 10, None),
+    FieldSchema("se_inert", str, 70, 10, None),
+)
+
+_CONTROLIMPLICITMODESBINARY_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class ControlImplicitModesBinary(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODES_BINARY keyword"""
 
     keyword = "CONTROL"
     subkeyword = "IMPLICIT_MODES_BINARY"
+    _link_fields = {
+        "nsidc": LinkType.SET_NODE,
+        "nsida": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlImplicitModesBinary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsidc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsida",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neig",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibase",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_mass",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_damp",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_stiff",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "se_inert",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODESBINARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODESBINARY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsidc(self) -> int:
         """Get or set the Node set ID for constraint modes:
@@ -210,4 +163,24 @@ class ControlImplicitModesBinary(KeywordBase):
     def filename(self, value: str) -> None:
         """Set the filename property."""
         self._cards[1].set_value("filename", value)
+
+    @property
+    def nsidc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidc."""
+        return self._get_set_link("NODE", self.nsidc)
+
+    @nsidc_link.setter
+    def nsidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidc."""
+        self.nsidc = value.sid
+
+    @property
+    def nsida_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsida."""
+        return self._get_set_link("NODE", self.nsida)
+
+    @nsida_link.setter
+    def nsida_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsida."""
+        self.nsida = value.sid
 

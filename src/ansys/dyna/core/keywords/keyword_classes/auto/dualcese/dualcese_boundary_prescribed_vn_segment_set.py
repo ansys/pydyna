@@ -23,155 +23,62 @@
 """Module providing the DualceseBoundaryPrescribedVnSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("idcomp", int, 10, 10, None),
+    FieldSchema("dirx", float, 20, 10, None),
+    FieldSchema("diry", float, 30, 10, None),
+    FieldSchema("dirz", float, 40, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD1 = (
+    FieldSchema("lc_vn", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("lc_rho", int, 30, 10, None),
+    FieldSchema("lc_p", int, 40, 10, None),
+    FieldSchema("lc_t", int, 50, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD2 = (
+    FieldSchema("sf_vn", float, 0, 10, 1.0),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("sf_rho", float, 30, 10, 1.0),
+    FieldSchema("sf_p", float, 40, 10, 1.0),
+    FieldSchema("sf_t", float, 50, 10, 1.0),
+)
 
 class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_PRESCRIBED_VN_SEGMENT_SET keyword"""
 
     keyword = "DUALCESE"
     subkeyword = "BOUNDARY_PRESCRIBED_VN_SEGMENT_SET"
+    _link_fields = {
+        "lc_rho": LinkType.DEFINE_CURVE,
+        "lc_p": LinkType.DEFINE_CURVE,
+        "lc_t": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DualceseBoundaryPrescribedVnSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcomp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_vn",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_rho",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_p",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_t",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf_vn",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_rho",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_p",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_t",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET
@@ -316,4 +223,49 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
     def sf_t(self, value: float) -> None:
         """Set the sf_t property."""
         self._cards[2].set_value("sf_t", value)
+
+    @property
+    def lc_rho_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_rho."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_rho:
+                return kwd
+        return None
+
+    @lc_rho_link.setter
+    def lc_rho_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_rho."""
+        self.lc_rho = value.lcid
+
+    @property
+    def lc_p_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_p."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_p:
+                return kwd
+        return None
+
+    @lc_p_link.setter
+    def lc_p_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_p."""
+        self.lc_p = value.lcid
+
+    @property
+    def lc_t_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_t."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_t:
+                return kwd
+        return None
+
+    @lc_t_link.setter
+    def lc_t_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_t."""
+        self.lc_t = value.lcid
 

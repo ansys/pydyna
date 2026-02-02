@@ -23,7 +23,27 @@
 """Module providing the BatteryBaEchemControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYBAECHEMCONTROLSOLVER_CARD0 = (
+    FieldSchema("imodel", int, 0, 10, None),
+    FieldSchema("igeom", int, 10, 10, None),
+    FieldSchema("ncycle", int, 20, 10, 1),
+    FieldSchema("aging", int, 30, 10, 1),
+    FieldSchema("tra", int, 40, 10, 0),
+    FieldSchema("gas", int, 50, 10, 0),
+    FieldSchema("esolid", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_BATTERYBAECHEMCONTROLSOLVER_CARD1 = (
+    FieldSchema("irun", int, 0, 10, None),
+    FieldSchema("lcur", int, 10, 10, None),
+    FieldSchema("curv", float, 20, 10, None),
+    FieldSchema("ctime", float, 30, 10, 0.0),
+    FieldSchema("vcut", float, 40, 10, 0.0),
+)
 
 class BatteryBaEchemControlSolver(KeywordBase):
     """DYNA BATTERY_BA_ECHEM_CONTROL_SOLVER keyword"""
@@ -35,114 +55,13 @@ class BatteryBaEchemControlSolver(KeywordBase):
         """Initialize the BatteryBaEchemControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imodel",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igeom",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycle",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aging",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tra",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gas",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esolid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "irun",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "curv",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctime",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vcut",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYBAECHEMCONTROLSOLVER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYBAECHEMCONTROLSOLVER_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def imodel(self) -> typing.Optional[int]:
         """Get or set the Sets the battery model.

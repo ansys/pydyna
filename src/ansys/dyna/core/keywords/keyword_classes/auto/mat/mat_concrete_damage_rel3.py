@@ -23,8 +23,86 @@
 """Module providing the MatConcreteDamageRel3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATCONCRETEDAMAGEREL3_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("pr", float, 20, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD1 = (
+    FieldSchema("ft", float, 0, 10, None),
+    FieldSchema("a0", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("a2", float, 30, 10, None),
+    FieldSchema("b1", float, 40, 10, None),
+    FieldSchema("omega", float, 50, 10, None),
+    FieldSchema("a1f", float, 60, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD2 = (
+    FieldSchema("slambda", float, 0, 10, None),
+    FieldSchema("nout", float, 10, 10, None),
+    FieldSchema("edrop", float, 20, 10, None),
+    FieldSchema("rsize", float, 30, 10, None),
+    FieldSchema("ucf", float, 40, 10, None),
+    FieldSchema("lcrate", int, 50, 10, None),
+    FieldSchema("locwidth", float, 60, 10, None),
+    FieldSchema("npts", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD3 = (
+    FieldSchema("lambda1", float, 0, 10, None),
+    FieldSchema("lambda2", float, 10, 10, None),
+    FieldSchema("lambda3", float, 20, 10, None),
+    FieldSchema("lambda4", float, 30, 10, None),
+    FieldSchema("lambda5", float, 40, 10, None),
+    FieldSchema("lambda6", float, 50, 10, None),
+    FieldSchema("lambda7", float, 60, 10, None),
+    FieldSchema("lambda8", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD4 = (
+    FieldSchema("lambda09", float, 0, 10, None),
+    FieldSchema("lambda10", float, 10, 10, None),
+    FieldSchema("lambda11", float, 20, 10, None),
+    FieldSchema("lambda12", float, 30, 10, None),
+    FieldSchema("lambda13", float, 40, 10, None),
+    FieldSchema("b3", float, 50, 10, None),
+    FieldSchema("a0y", float, 60, 10, None),
+    FieldSchema("a1y", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD5 = (
+    FieldSchema("eta1", float, 0, 10, None),
+    FieldSchema("eta2", float, 10, 10, None),
+    FieldSchema("eta3", float, 20, 10, None),
+    FieldSchema("eta4", float, 30, 10, None),
+    FieldSchema("eta5", float, 40, 10, None),
+    FieldSchema("eta6", float, 50, 10, None),
+    FieldSchema("eta7", float, 60, 10, None),
+    FieldSchema("eta8", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_CARD6 = (
+    FieldSchema("eta09", float, 0, 10, None),
+    FieldSchema("eta10", float, 10, 10, None),
+    FieldSchema("eta11", float, 20, 10, None),
+    FieldSchema("eta12", float, 30, 10, None),
+    FieldSchema("eta13", float, 40, 10, None),
+    FieldSchema("b2", float, 50, 10, None),
+    FieldSchema("a2f", float, 60, 10, None),
+    FieldSchema("a2y", float, 70, 10, None),
+)
+
+_MATCONCRETEDAMAGEREL3_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatConcreteDamageRel3(KeywordBase):
     """DYNA MAT_CONCRETE_DAMAGE_REL3 keyword"""
@@ -34,409 +112,47 @@ class MatConcreteDamageRel3(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcrate": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatConcreteDamageRel3 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ft",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1f",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "slambda",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nout",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edrop",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rsize",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ucf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcrate",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "locwidth",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npts",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lambda1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lambda09",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda10",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambda13",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a0y",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1y",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eta1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eta09",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta10",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta12",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta13",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2f",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2y",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEDAMAGEREL3_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatConcreteDamageRel3.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONCRETEDAMAGEREL3_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -1000,4 +716,19 @@ class MatConcreteDamageRel3(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcrate_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcrate."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcrate:
+                return kwd
+        return None
+
+    @lcrate_link.setter
+    def lcrate_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcrate."""
+        self.lcrate = value.lcid
 

@@ -23,8 +23,42 @@
 """Module providing the SectionIgaShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONIGASHELL_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 0),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("nip", int, 30, 10, 2),
+    FieldSchema("irl", int, 40, 10, 0),
+    FieldSchema("qr_irid", float, 50, 10, 0.0, "qr/irid"),
+    FieldSchema("icomp", int, 60, 10, 0),
+)
+
+_SECTIONIGASHELL_CARD1 = (
+    FieldSchema("t", float, 0, 10, 0.0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("nloc", float, 40, 10, 0.0),
+)
+
+_SECTIONIGASHELL_CARD2 = (
+    FieldSchema("b1", float, 0, 10, None),
+    FieldSchema("b2", float, 10, 10, None),
+    FieldSchema("b3", float, 20, 10, None),
+    FieldSchema("b4", float, 30, 10, None),
+    FieldSchema("b5", float, 40, 10, None),
+    FieldSchema("b6", float, 50, 10, None),
+    FieldSchema("b7", float, 60, 10, None),
+    FieldSchema("b8", float, 70, 10, None),
+)
+
+_SECTIONIGASHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionIgaShell(KeywordBase):
     """DYNA SECTION_IGA_SHELL keyword"""
@@ -40,185 +74,26 @@ class SectionIgaShell(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irl",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr/irid",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icomp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "b1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONIGASHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONIGASHELL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONIGASHELL_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionIgaShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONIGASHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -295,12 +170,12 @@ class SectionIgaShell(KeywordBase):
         EQ.0.0 : Gauss - Legendre / Gauss - Lobatto(up to 10 points)
         EQ.1.0 : Trapezoidal, not recommended for accuracy reasons.
         """ # nopep8
-        return self._cards[0].get_value("qr/irid")
+        return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
     def qr_irid(self, value: float) -> None:
         """Set the qr_irid property."""
-        self._cards[0].set_value("qr/irid", value)
+        self._cards[0].set_value("qr_irid", value)
 
     @property
     def icomp(self) -> int:

@@ -23,91 +23,53 @@
 """Module providing the ConstrainedImmersedInSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONSTRAINEDIMMERSEDINSPG_CARD0 = (
+    FieldSchema("spgpid", int, 0, 10, None),
+)
+
+_CONSTRAINEDIMMERSEDINSPG_CARD1 = (
+    FieldSchema("ipid1", int, 0, 10, None),
+    FieldSchema("ipid2", int, 10, 10, None),
+    FieldSchema("ipid3", int, 20, 10, None),
+    FieldSchema("ipid4", int, 30, 10, None),
+    FieldSchema("ipid5", int, 40, 10, None),
+    FieldSchema("ipid6", int, 50, 10, None),
+    FieldSchema("ipid7", int, 60, 10, None),
+    FieldSchema("ipid8", int, 70, 10, None),
+)
 
 class ConstrainedImmersedInSpg(KeywordBase):
     """DYNA CONSTRAINED_IMMERSED_IN_SPG keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "IMMERSED_IN_SPG"
+    _link_fields = {
+        "spgpid": LinkType.PART,
+        "ipid1": LinkType.PART,
+        "ipid2": LinkType.PART,
+        "ipid3": LinkType.PART,
+        "ipid4": LinkType.PART,
+        "ipid5": LinkType.PART,
+        "ipid6": LinkType.PART,
+        "ipid7": LinkType.PART,
+        "ipid8": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedImmersedInSpg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "spgpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ipid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDIMMERSEDINSPG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDIMMERSEDINSPG_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def spgpid(self) -> typing.Optional[int]:
         """Get or set the Part ID of SPG solids where FEM beams are immersed into.
@@ -206,4 +168,49 @@ class ConstrainedImmersedInSpg(KeywordBase):
     def ipid8(self, value: int) -> None:
         """Set the ipid8 property."""
         self._cards[1].set_value("ipid8", value)
+
+    @property
+    def spgpid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given spgpid."""
+        return self._get_link_by_attr("PART", "pid", self.spgpid, "parts")
+
+    @property
+    def ipid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid1."""
+        return self._get_link_by_attr("PART", "pid", self.ipid1, "parts")
+
+    @property
+    def ipid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid2."""
+        return self._get_link_by_attr("PART", "pid", self.ipid2, "parts")
+
+    @property
+    def ipid3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid3."""
+        return self._get_link_by_attr("PART", "pid", self.ipid3, "parts")
+
+    @property
+    def ipid4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid4."""
+        return self._get_link_by_attr("PART", "pid", self.ipid4, "parts")
+
+    @property
+    def ipid5_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid5."""
+        return self._get_link_by_attr("PART", "pid", self.ipid5, "parts")
+
+    @property
+    def ipid6_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid6."""
+        return self._get_link_by_attr("PART", "pid", self.ipid6, "parts")
+
+    @property
+    def ipid7_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid7."""
+        return self._get_link_by_attr("PART", "pid", self.ipid7, "parts")
+
+    @property
+    def ipid8_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given ipid8."""
+        return self._get_link_by_attr("PART", "pid", self.ipid8, "parts")
 

@@ -23,7 +23,21 @@
 """Module providing the LoadThermalBinout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALBINOUT_CARD0 = (
+    FieldSchema("deftemp", float, 0, 10, 0.0),
+)
+
+_LOADTHERMALBINOUT_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_LOADTHERMALBINOUT_CARD2 = (
+    FieldSchema("startt", float, 0, 10, 0.0),
+    FieldSchema("tsf", float, 10, 10, 1.0),
+)
 
 class LoadThermalBinout(KeywordBase):
     """DYNA LOAD_THERMAL_BINOUT keyword"""
@@ -35,51 +49,16 @@ class LoadThermalBinout(KeywordBase):
         """Initialize the LoadThermalBinout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "deftemp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "startt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALBINOUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALBINOUT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALBINOUT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def deftemp(self) -> float:
         """Get or set the Default temperature that is applied to nodes no temperature information is provided in the binout file(s) for.

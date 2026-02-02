@@ -23,118 +23,49 @@
 """Module providing the BoundaryRadiationSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYRADIATIONSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 1),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("pserod", int, 60, 10, None),
+)
+
+_BOUNDARYRADIATIONSET_CARD1 = (
+    FieldSchema("rflcid", int, 0, 10, 0),
+    FieldSchema("rfmult", float, 10, 10, 1.0),
+    FieldSchema("tilcid", int, 20, 10, 0),
+    FieldSchema("timult", float, 30, 10, 1.0),
+    FieldSchema("loc", int, 40, 10, 0),
+)
 
 class BoundaryRadiationSet(KeywordBase):
     """DYNA BOUNDARY_RADIATION_SET keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "RADIATION_SET"
+    _link_fields = {
+        "pserod": LinkType.SET_PART,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryRadiationSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pserod",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rflcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rfmult",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tilcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timult",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYRADIATIONSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.
@@ -231,4 +162,24 @@ class BoundaryRadiationSet(KeywordBase):
         if value not in [0, -1, 1, None]:
             raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
+
+    @property
+    def pserod_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pserod."""
+        return self._get_set_link("PART", self.pserod)
+
+    @pserod_link.setter
+    def pserod_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pserod."""
+        self.pserod = value.sid
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

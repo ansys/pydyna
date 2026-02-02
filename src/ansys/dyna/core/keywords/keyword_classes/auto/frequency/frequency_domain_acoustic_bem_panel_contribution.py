@@ -23,369 +23,110 @@
 """Module providing the FrequencyDomainAcousticBemPanelContribution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD0 = (
+    FieldSchema("ro", float, 0, 10, None),
+    FieldSchema("c", float, 10, 10, None),
+    FieldSchema("fmin", float, 20, 10, None),
+    FieldSchema("fmax", float, 30, 10, None),
+    FieldSchema("nfreq", int, 40, 10, 0),
+    FieldSchema("dtout", float, 50, 10, 0.0),
+    FieldSchema("tstart", float, 60, 10, 0.0),
+    FieldSchema("pref", float, 70, 10, 0.0),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD1 = (
+    FieldSchema("nsidext", int, 0, 10, 0),
+    FieldSchema("typext", int, 10, 10, 0),
+    FieldSchema("nsidint", int, 20, 10, 0),
+    FieldSchema("typint", int, 30, 10, 0),
+    FieldSchema("fftwin", int, 40, 10, 0),
+    FieldSchema("trslt", int, 50, 10, 0),
+    FieldSchema("ipfile", int, 60, 10, 0),
+    FieldSchema("iunits", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD2 = (
+    FieldSchema("method", int, 0, 10, 0),
+    FieldSchema("maxit", int, 10, 10, 100),
+    FieldSchema("tolitr", float, 20, 10, 0.0001),
+    FieldSchema("ndd", int, 30, 10, 1),
+    FieldSchema("tollr", float, 40, 10, 1e-06),
+    FieldSchema("tolfct", float, 50, 10, 1e-06),
+    FieldSchema("ibdim", int, 60, 10, 1000),
+    FieldSchema("npg", int, 70, 10, 2),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD3 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("nbc", int, 10, 10, 1),
+    FieldSchema("restrt", int, 20, 10, 0),
+    FieldSchema("iedge", int, 30, 10, 0),
+    FieldSchema("noel", int, 40, 10, 0),
+    FieldSchema("nfrup", int, 50, 10, 0),
+    FieldSchema("velout", int, 60, 10, 0),
+    FieldSchema("dba", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD4 = (
+    FieldSchema("ssid", int, 0, 10, 0),
+    FieldSchema("sstype", int, 10, 10, 0),
+    FieldSchema("norm", int, 20, 10, 0),
+    FieldSchema("bemtype", int, 30, 10, 0),
+    FieldSchema("lc1", int, 40, 10, None),
+    FieldSchema("lc2", int, 50, 10, None),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD5 = (
+    FieldSchema("nsidpc", int, 0, 10, 0),
+)
+
+_FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD6 = (
+    FieldSchema("t_hold", float, 0, 10, 0.0),
+    FieldSchema("decay", float, 10, 10, 0.02),
+)
 
 class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_BEM_PANEL_CONTRIBUTION keyword"""
 
     keyword = "FREQUENCY"
     subkeyword = "DOMAIN_ACOUSTIC_BEM_PANEL_CONTRIBUTION"
+    _link_fields = {
+        "lc1": LinkType.DEFINE_CURVE,
+        "lc2": LinkType.DEFINE_CURVE,
+        "nsidpc": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the FrequencyDomainAcousticBemPanelContribution class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ro",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstart",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pref",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsidext",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typext",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidint",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typint",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fftwin",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trslt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipfile",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunits",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxit",
-                        int,
-                        10,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolitr",
-                        float,
-                        20,
-                        10,
-                        1E-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndd",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tollr",
-                        float,
-                        40,
-                        10,
-                        1E-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolfct",
-                        float,
-                        50,
-                        10,
-                        1E-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibdim",
-                        int,
-                        60,
-                        10,
-                        1000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npg",
-                        int,
-                        70,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbc",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iedge",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "noel",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfrup",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "velout",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dba",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norm",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bemtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsidpc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t_hold",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "decay",
-                        float,
-                        10,
-                        10,
-                        0.02,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid Density.
@@ -937,4 +678,44 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
     def decay(self, value: float) -> None:
         """Set the decay property."""
         self._cards[6].set_value("decay", value)
+
+    @property
+    def lc1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc1:
+                return kwd
+        return None
+
+    @lc1_link.setter
+    def lc1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc1."""
+        self.lc1 = value.lcid
+
+    @property
+    def lc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc2:
+                return kwd
+        return None
+
+    @lc2_link.setter
+    def lc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc2."""
+        self.lc2 = value.lcid
+
+    @property
+    def nsidpc_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsidpc."""
+        return self._get_set_link("NODE", self.nsidpc)
+
+    @nsidpc_link.setter
+    def nsidpc_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsidpc."""
+        self.nsidpc = value.sid
 

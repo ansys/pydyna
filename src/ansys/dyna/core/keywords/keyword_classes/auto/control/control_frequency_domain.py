@@ -23,7 +23,13 @@
 """Module providing the ControlFrequencyDomain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFREQUENCYDOMAIN_CARD0 = (
+    FieldSchema("refgeo", int, 0, 10, 0),
+    FieldSchema("mpn", float, 10, 10, 0.0),
+)
 
 class ControlFrequencyDomain(KeywordBase):
     """DYNA CONTROL_FREQUENCY_DOMAIN keyword"""
@@ -35,28 +41,10 @@ class ControlFrequencyDomain(KeywordBase):
         """Initialize the ControlFrequencyDomain class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "refgeo",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFREQUENCYDOMAIN_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def refgeo(self) -> int:
         """Get or set the Flag for reference geometry in acoustic eigenvalue analysis:

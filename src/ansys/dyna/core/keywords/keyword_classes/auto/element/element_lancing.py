@@ -23,73 +23,39 @@
 """Module providing the ElementLancing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ELEMENTLANCING_CARD0 = (
+    FieldSchema("idpt", int, 0, 10, None),
+    FieldSchema("idcv", int, 10, 10, None),
+    FieldSchema("irefine", int, 20, 10, None),
+    FieldSchema("smin", float, 30, 10, None),
+    FieldSchema("at", float, 40, 10, None),
+    FieldSchema("endt", float, 50, 10, None),
+    FieldSchema("ntimes", int, 60, 10, None),
+)
 
 class ElementLancing(KeywordBase):
     """DYNA ELEMENT_LANCING keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "LANCING"
+    _link_fields = {
+        "idcv": LinkType.DEFINE_CURVE,
+        "idpt": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementLancing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idpt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcv",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irefine",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntimes",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTLANCING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idpt(self) -> typing.Optional[int]:
         """Get or set the PID of the sheet blank to be lanced, see *PART.
@@ -173,4 +139,24 @@ class ElementLancing(KeywordBase):
     def ntimes(self, value: int) -> None:
         """Set the ntimes property."""
         self._cards[0].set_value("ntimes", value)
+
+    @property
+    def idcv_link(self) -> DefineCurve:
+        """Get the DefineCurve object for idcv."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.idcv:
+                return kwd
+        return None
+
+    @idcv_link.setter
+    def idcv_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for idcv."""
+        self.idcv = value.lcid
+
+    @property
+    def idpt_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given idpt."""
+        return self._get_link_by_attr("PART", "pid", self.idpt, "parts")
 

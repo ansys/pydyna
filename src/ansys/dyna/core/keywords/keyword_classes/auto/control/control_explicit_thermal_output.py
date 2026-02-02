@@ -23,7 +23,15 @@
 """Module providing the ControlExplicitThermalOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEXPLICITTHERMALOUTPUT_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("dtoutyp", int, 10, 10, 0),
+    FieldSchema("setid", int, 20, 10, 0),
+    FieldSchema("setyp", int, 30, 10, 1),
+)
 
 class ControlExplicitThermalOutput(KeywordBase):
     """DYNA CONTROL_EXPLICIT_THERMAL_OUTPUT keyword"""
@@ -35,43 +43,10 @@ class ControlExplicitThermalOutput(KeywordBase):
         """Initialize the ControlExplicitThermalOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtoutyp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setyp",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALOUTPUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between outputs.

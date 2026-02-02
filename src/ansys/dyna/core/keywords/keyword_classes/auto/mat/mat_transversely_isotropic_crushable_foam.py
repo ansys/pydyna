@@ -23,8 +23,62 @@
 """Module providing the MatTransverselyIsotropicCrushableFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e11", float, 20, 10, None),
+    FieldSchema("e22", float, 30, 10, None),
+    FieldSchema("e12", float, 40, 10, None),
+    FieldSchema("e23", float, 50, 10, None),
+    FieldSchema("g", float, 60, 10, None),
+    FieldSchema("k", float, 70, 10, None),
+)
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD1 = (
+    FieldSchema("i11", int, 0, 10, None),
+    FieldSchema("i22", int, 10, 10, None),
+    FieldSchema("i12", int, 20, 10, None),
+    FieldSchema("i23", int, 30, 10, None),
+    FieldSchema("iaa", int, 40, 10, None),
+    FieldSchema("nsym", int, 50, 10, None),
+    FieldSchema("ang", float, 60, 10, None),
+    FieldSchema("mu", float, 70, 10, None),
+)
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD2 = (
+    FieldSchema("aopt", float, 0, 10, None),
+    FieldSchema("iscl", int, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("macf", int, 30, 10, 1),
+)
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD3 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD4 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+    FieldSchema("v1", float, 30, 10, None),
+    FieldSchema("v2", float, 40, 10, None),
+    FieldSchema("v3", float, 50, 10, None),
+)
+
+_MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatTransverselyIsotropicCrushableFoam(KeywordBase):
     """DYNA MAT_TRANSVERSELY_ISOTROPIC_CRUSHABLE_FOAM keyword"""
@@ -34,276 +88,45 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "i11": LinkType.DEFINE_CURVE,
+        "i22": LinkType.DEFINE_CURVE,
+        "i12": LinkType.DEFINE_CURVE,
+        "i23": LinkType.DEFINE_CURVE,
+        "iaa": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatTransverselyIsotropicCrushableFoam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e22",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e12",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e23",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "i11",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i22",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i12",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaa",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsym",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iscl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatTransverselyIsotropicCrushableFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -687,4 +510,79 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def i11_link(self) -> DefineCurve:
+        """Get the DefineCurve object for i11."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.i11:
+                return kwd
+        return None
+
+    @i11_link.setter
+    def i11_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for i11."""
+        self.i11 = value.lcid
+
+    @property
+    def i22_link(self) -> DefineCurve:
+        """Get the DefineCurve object for i22."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.i22:
+                return kwd
+        return None
+
+    @i22_link.setter
+    def i22_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for i22."""
+        self.i22 = value.lcid
+
+    @property
+    def i12_link(self) -> DefineCurve:
+        """Get the DefineCurve object for i12."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.i12:
+                return kwd
+        return None
+
+    @i12_link.setter
+    def i12_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for i12."""
+        self.i12 = value.lcid
+
+    @property
+    def i23_link(self) -> DefineCurve:
+        """Get the DefineCurve object for i23."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.i23:
+                return kwd
+        return None
+
+    @i23_link.setter
+    def i23_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for i23."""
+        self.i23 = value.lcid
+
+    @property
+    def iaa_link(self) -> DefineCurve:
+        """Get the DefineCurve object for iaa."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.iaa:
+                return kwd
+        return None
+
+    @iaa_link.setter
+    def iaa_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for iaa."""
+        self.iaa = value.lcid
 

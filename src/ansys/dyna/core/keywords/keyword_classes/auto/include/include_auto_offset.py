@@ -23,7 +23,12 @@
 """Module providing the IncludeAutoOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEAUTOOFFSET_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class IncludeAutoOffset(KeywordBase):
     """DYNA INCLUDE_AUTO_OFFSET keyword"""
@@ -35,19 +40,10 @@ class IncludeAutoOffset(KeywordBase):
         """Initialize the IncludeAutoOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEAUTOOFFSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name to be included.

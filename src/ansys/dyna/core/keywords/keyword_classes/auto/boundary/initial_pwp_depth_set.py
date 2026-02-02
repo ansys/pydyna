@@ -23,38 +23,32 @@
 """Module providing the InitialPwpDepthSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALPWPDEPTHSET_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lc", int, 10, 10, None),
+)
 
 class InitialPwpDepthSet(KeywordBase):
     """DYNA INITIAL_PWP_DEPTH_SET keyword"""
 
     keyword = "INITIAL"
     subkeyword = "PWP_DEPTH_SET"
+    _link_fields = {
+        "pid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialPwpDepthSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALPWPDEPTHSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part set ID, see also *PART.
@@ -76,4 +70,14 @@ class InitialPwpDepthSet(KeywordBase):
     def lc(self, value: int) -> None:
         """Set the lc property."""
         self._cards[0].set_value("lc", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pid."""
+        return self._get_set_link("PART", self.pid)
+
+    @pid_link.setter
+    def pid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pid."""
+        self.pid = value.sid
 

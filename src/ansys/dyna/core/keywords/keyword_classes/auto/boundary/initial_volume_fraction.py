@@ -23,87 +23,38 @@
 """Module providing the InitialVolumeFraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALVOLUMEFRACTION_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("vf1", float, 10, 10, 0.0),
+    FieldSchema("vf2", float, 20, 10, 0.0),
+    FieldSchema("vf3", float, 30, 10, 0.0),
+    FieldSchema("vf4", float, 40, 10, 0.0),
+    FieldSchema("vf5", float, 50, 10, 0.0),
+    FieldSchema("vf6", float, 60, 10, 0.0),
+    FieldSchema("vf7", float, 70, 10, 0.0),
+)
 
 class InitialVolumeFraction(KeywordBase):
     """DYNA INITIAL_VOLUME_FRACTION keyword"""
 
     keyword = "INITIAL"
     subkeyword = "VOLUME_FRACTION"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_SOLID,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InitialVolumeFraction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf5",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf6",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf7",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALVOLUMEFRACTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID, see also *ELEMENT_OPTION.
@@ -193,4 +144,9 @@ class InitialVolumeFraction(KeywordBase):
     def vf7(self, value: float) -> None:
         """Set the vf7 property."""
         self._cards[0].set_value("vf7", value)
+
+    @property
+    def eid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

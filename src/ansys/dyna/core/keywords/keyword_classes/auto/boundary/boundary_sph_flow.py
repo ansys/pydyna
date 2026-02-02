@@ -23,104 +23,51 @@
 """Module providing the BoundarySphFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_BOUNDARYSPHFLOW_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("styp", int, 10, 10, 1),
+    FieldSchema("dof", int, 20, 10, 0),
+    FieldSchema("vad", int, 30, 10, 0),
+    FieldSchema("lcid", int, 40, 10, None),
+    FieldSchema("sf", float, 50, 10, 1.0),
+    FieldSchema("death", float, 60, 10, 1e+20),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYSPHFLOW_CARD1 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("vid", int, 10, 10, None),
+)
 
 class BoundarySphFlow(KeywordBase):
     """DYNA BOUNDARY_SPH_FLOW keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "SPH_FLOW"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundarySphFlow class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "styp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHFLOW_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHFLOW_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID (NSID), SEE *SET_NODE, or part ID (PID), see *PART.
@@ -248,4 +195,39 @@ class BoundarySphFlow(KeywordBase):
     def vid(self, value: int) -> None:
         """Set the vid property."""
         self._cards[1].set_value("vid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

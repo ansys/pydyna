@@ -23,8 +23,52 @@
 """Module providing the DefineBoxSphLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_DEFINEBOXSPHLOCAL_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, None),
+    FieldSchema("xmn", float, 10, 10, 0.0),
+    FieldSchema("xmx", float, 20, 10, 0.0),
+    FieldSchema("ymn", float, 30, 10, 0.0),
+    FieldSchema("ymx", float, 40, 10, 0.0),
+    FieldSchema("zmn", float, 50, 10, 0.0),
+    FieldSchema("zmx", float, 60, 10, 0.0),
+    FieldSchema("vid", int, 70, 10, 0),
+)
+
+_DEFINEBOXSPHLOCAL_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, 0),
+    FieldSchema("vd", int, 10, 10, 0),
+    FieldSchema("nid", int, 20, 10, 0),
+    FieldSchema("ireact", int, 30, 10, 0),
+    FieldSchema("ibuff", int, 40, 10, 0),
+    FieldSchema("ishow", int, 50, 10, 0),
+    FieldSchema("pid", int, 60, 10, 0),
+)
+
+_DEFINEBOXSPHLOCAL_CARD2 = (
+    FieldSchema("xx", float, 0, 10, 0.0),
+    FieldSchema("yx", float, 10, 10, 0.0),
+    FieldSchema("zx", float, 20, 10, 0.0),
+    FieldSchema("xv", float, 30, 10, 0.0),
+    FieldSchema("yv", float, 40, 10, 0.0),
+    FieldSchema("zv", float, 50, 10, 0.0),
+)
+
+_DEFINEBOXSPHLOCAL_CARD3 = (
+    FieldSchema("cx", float, 0, 10, 0.0),
+    FieldSchema("cy", float, 10, 10, 0.0),
+    FieldSchema("cz", float, 20, 10, 0.0),
+)
+
+_DEFINEBOXSPHLOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineBoxSphLocal(KeywordBase):
     """DYNA DEFINE_BOX_SPH_LOCAL keyword"""
@@ -34,238 +78,39 @@ class DefineBoxSphLocal(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "vid": LinkType.DEFINE_VECTOR,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineBoxSphLocal class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymn",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymx",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmn",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vd",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ireact",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibuff",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishow",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xx",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xv",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yv",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zv",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXSPHLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXSPHLOCAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXSPHLOCAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXSPHLOCAL_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxSphLocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXSPHLOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> typing.Optional[int]:
         """Get or set the Box ID. A unique number must be defined.
@@ -563,4 +408,24 @@ class DefineBoxSphLocal(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def vid_link(self) -> DefineVector:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

@@ -23,166 +23,72 @@
 """Module providing the ConstrainedGeneralizedWeldCrossFillet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("filter", int, 20, 10, None),
+    FieldSchema("window", float, 30, 10, 0.0),
+    FieldSchema("npr", int, 40, 10, None),
+    FieldSchema("nprt", int, 50, 10, 0),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD2 = (
+    FieldSchema("tfail", float, 0, 10, 1e+20),
+    FieldSchema("epsf", float, 10, 10, None),
+    FieldSchema("sigy", float, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("l", float, 40, 10, None),
+    FieldSchema("w", float, 50, 10, None),
+    FieldSchema("a", float, 60, 10, None),
+    FieldSchema("alpha", float, 70, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD3 = (
+    FieldSchema("nodea", int, 0, 10, None),
+    FieldSchema("nodeb", int, 10, 10, None),
+    FieldSchema("ncid", int, 20, 10, 0),
+)
 
 class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
     """DYNA CONSTRAINED_GENERALIZED_WELD_CROSS_FILLET keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "GENERALIZED_WELD_CROSS_FILLET"
+    _link_fields = {
+        "nodea": LinkType.NODE,
+        "nodeb": LinkType.NODE,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "ncid": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedGeneralizedWeldCrossFillet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filter",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "window",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nprt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tfail",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodea",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodeb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID
@@ -388,4 +294,54 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
     def ncid(self, value: int) -> None:
         """Set the ncid property."""
         self._cards[3].set_value("ncid", value)
+
+    @property
+    def nodea_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodea."""
+        return self._get_link_by_attr("NODE", "nid", self.nodea, "parts")
+
+    @property
+    def nodeb_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nodeb."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeb, "parts")
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+
+    @property
+    def ncid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for ncid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.ncid:
+                return kwd
+        return None
+
+    @ncid_link.setter
+    def ncid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for ncid."""
+        self.ncid = value.cid
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

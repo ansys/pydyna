@@ -23,46 +23,33 @@
 """Module providing the EmIsopotentialRogo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_EMISOPOTENTIALROGO_CARD0 = (
+    FieldSchema("isoid", int, 0, 10, None),
+    FieldSchema("settype", int, 10, 10, 1),
+    FieldSchema("setid", int, 20, 10, None),
+)
 
 class EmIsopotentialRogo(KeywordBase):
     """DYNA EM_ISOPOTENTIAL_ROGO keyword"""
 
     keyword = "EM"
     subkeyword = "ISOPOTENTIAL_ROGO"
+    _link_fields = {
+        "setid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmIsopotentialRogo class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "isoid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "settype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMISOPOTENTIALROGO_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def isoid(self) -> typing.Optional[int]:
         """Get or set the ID of the Rogo coil.
@@ -96,4 +83,14 @@ class EmIsopotentialRogo(KeywordBase):
     def setid(self, value: int) -> None:
         """Set the setid property."""
         self._cards[0].set_value("setid", value)
+
+    @property
+    def setid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for setid."""
+        return self._get_set_link("SEGMENT", self.setid)
+
+    @setid_link.setter
+    def setid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for setid."""
+        self.setid = value.sid
 

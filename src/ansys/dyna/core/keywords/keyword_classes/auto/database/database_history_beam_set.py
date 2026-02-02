@@ -23,80 +23,45 @@
 """Module providing the DatabaseHistoryBeamSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DATABASEHISTORYBEAMSET_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+    FieldSchema("id6", int, 50, 10, None),
+    FieldSchema("id7", int, 60, 10, None),
+    FieldSchema("id8", int, 70, 10, None),
+)
 
 class DatabaseHistoryBeamSet(KeywordBase):
     """DYNA DATABASE_HISTORY_BEAM_SET keyword"""
 
     keyword = "DATABASE"
     subkeyword = "HISTORY_BEAM_SET"
+    _link_fields = {
+        "id1": LinkType.SET_BEAM,
+        "id2": LinkType.SET_BEAM,
+        "id3": LinkType.SET_BEAM,
+        "id4": LinkType.SET_BEAM,
+        "id5": LinkType.SET_BEAM,
+        "id6": LinkType.SET_BEAM,
+        "id7": LinkType.SET_BEAM,
+        "id8": LinkType.SET_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseHistoryBeamSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEHISTORYBEAMSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Set ID of the first beam element set.
@@ -184,4 +149,84 @@ class DatabaseHistoryBeamSet(KeywordBase):
     def id8(self, value: int) -> None:
         """Set the id8 property."""
         self._cards[0].set_value("id8", value)
+
+    @property
+    def id1_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id1."""
+        return self._get_set_link("BEAM", self.id1)
+
+    @id1_link.setter
+    def id1_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id1."""
+        self.id1 = value.sid
+
+    @property
+    def id2_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id2."""
+        return self._get_set_link("BEAM", self.id2)
+
+    @id2_link.setter
+    def id2_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id2."""
+        self.id2 = value.sid
+
+    @property
+    def id3_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id3."""
+        return self._get_set_link("BEAM", self.id3)
+
+    @id3_link.setter
+    def id3_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id3."""
+        self.id3 = value.sid
+
+    @property
+    def id4_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id4."""
+        return self._get_set_link("BEAM", self.id4)
+
+    @id4_link.setter
+    def id4_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id4."""
+        self.id4 = value.sid
+
+    @property
+    def id5_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id5."""
+        return self._get_set_link("BEAM", self.id5)
+
+    @id5_link.setter
+    def id5_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id5."""
+        self.id5 = value.sid
+
+    @property
+    def id6_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id6."""
+        return self._get_set_link("BEAM", self.id6)
+
+    @id6_link.setter
+    def id6_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id6."""
+        self.id6 = value.sid
+
+    @property
+    def id7_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id7."""
+        return self._get_set_link("BEAM", self.id7)
+
+    @id7_link.setter
+    def id7_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id7."""
+        self.id7 = value.sid
+
+    @property
+    def id8_link(self) -> KeywordBase:
+        """Get the SET_BEAM_* keyword for id8."""
+        return self._get_set_link("BEAM", self.id8)
+
+    @id8_link.setter
+    def id8_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for id8."""
+        self.id8 = value.sid
 

@@ -25,9 +25,27 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_SETSEGMENT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+    FieldSchema("its", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_SETSEGMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetSegment(KeywordBase):
     """DYNA SET_SEGMENT keyword"""
@@ -37,78 +55,22 @@ class SetSegment(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetSegment class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                    Field(
-                        "its",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _SETSEGMENT_CARD0,
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("n1", int, 0, 10, None),
                     Field("n2", int, 10, 10, None),
@@ -122,26 +84,17 @@ class SetSegment(KeywordBase):
                 None,
                 name="segments",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = SetSegment.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSEGMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID. All segment sets should have a unique set ID.
@@ -248,4 +201,40 @@ class SetSegment(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def n1_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n1, keyed by n1 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n1", "parts")
+
+    def get_n1_link(self, n1: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", n1, "parts")
+
+    @property
+    def n2_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n2, keyed by n2 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n2", "parts")
+
+    def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", n2, "parts")
+
+    @property
+    def n3_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n3, keyed by n3 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n3", "parts")
+
+    def get_n3_link(self, n3: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", n3, "parts")
+
+    @property
+    def n4_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for n4, keyed by n4 value."""
+        return self._get_links_from_table("NODE", "nid", "segments", "n4", "parts")
+
+    def get_n4_link(self, n4: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", n4, "parts")
 

@@ -23,139 +23,63 @@
 """Module providing the ControlDynamicRelaxation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
+
+_CONTROLDYNAMICRELAXATION_CARD0 = (
+    FieldSchema("nrcyck", int, 0, 10, 250),
+    FieldSchema("drtol", float, 10, 10, 0.001),
+    FieldSchema("drfctr", float, 20, 10, 0.995),
+    FieldSchema("drterm", float, 30, 10, None),
+    FieldSchema("tssfdr", float, 40, 10, 0.0),
+    FieldSchema("irelal", int, 50, 10, 0),
+    FieldSchema("edttl", float, 60, 10, 0.04),
+    FieldSchema("idrflg", int, 70, 10, 0),
+)
+
+_CONTROLDYNAMICRELAXATION_CARD1 = (
+    FieldSchema("drpset", int, 0, 10, 0),
+)
+
+_CONTROLDYNAMICRELAXATION_CARD2 = (
+    FieldSchema("nc", int, 0, 10, 100),
+    FieldSchema("np", int, 10, 10, 0),
+)
+
+_CONTROLDYNAMICRELAXATION_CARD3 = (
+    FieldSchema("psid", int, 0, 10, 0),
+    FieldSchema("vecid", int, 10, 10, 0),
+)
 
 class ControlDynamicRelaxation(KeywordBase):
     """DYNA CONTROL_DYNAMIC_RELAXATION keyword"""
 
     keyword = "CONTROL"
     subkeyword = "DYNAMIC_RELAXATION"
+    _link_fields = {
+        "vecid": LinkType.DEFINE_VECTOR,
+        "drpset": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlDynamicRelaxation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nrcyck",
-                        int,
-                        0,
-                        10,
-                        250,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drtol",
-                        float,
-                        10,
-                        10,
-                        1.0E-03,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drfctr",
-                        float,
-                        20,
-                        10,
-                        9.95E-01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drterm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tssfdr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irelal",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edttl",
-                        float,
-                        60,
-                        10,
-                        4.0E-02,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idrflg",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "drpset",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nc",
-                        int,
-                        0,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLDYNAMICRELAXATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDYNAMICRELAXATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDYNAMICRELAXATION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLDYNAMICRELAXATION_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).
@@ -315,4 +239,29 @@ class ControlDynamicRelaxation(KeywordBase):
     def vecid(self, value: int) -> None:
         """Set the vecid property."""
         self._cards[3].set_value("vecid", value)
+
+    @property
+    def vecid_link(self) -> DefineVector:
+        """Get the DefineVector object for vecid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vecid:
+                return kwd
+        return None
+
+    @vecid_link.setter
+    def vecid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vecid."""
+        self.vecid = value.vid
+
+    @property
+    def drpset_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for drpset."""
+        return self._get_set_link("PART", self.drpset)
+
+    @drpset_link.setter
+    def drpset_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for drpset."""
+        self.drpset = value.sid
 

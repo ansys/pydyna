@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling table cards."""
 
 import io
 import typing
@@ -27,8 +28,9 @@ import numpy as np
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_c_dataframe
-from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import is_dataframe, write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -44,7 +46,7 @@ def _check_type(value):
 
 
 def try_initialize_table(card, name: str, **kwargs):
-    """card is a TableCard or a TableCardGroup"""
+    """Card is a TableCard or a TableCardGroup"""
     if name is not None:
         data = kwargs.get(name, None)
         if data is not None:
@@ -64,6 +66,17 @@ def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typi
     return result
 
 
+def _get_first_row_from_schemas(
+    field_schemas: typing.Tuple[FieldSchema, ...], **kwargs
+) -> typing.Optional[typing.Dict[str, typing.Any]]:
+    """Get the first row data from kwargs using field schemas."""
+    result = {}
+    for fs in field_schemas:
+        if fs.name in kwargs:
+            result[fs.name] = kwargs[fs.name]
+    return result if result else None
+
+
 class TableCard(Card):
     def __init__(
         self,
@@ -74,7 +87,17 @@ class TableCard(Card):
         format: format_type = format_type.default,
         **kwargs,
     ):
-        super().__init__(fields, active_func)
+        # Inline Card initialization (avoid deprecated constructor path)
+        field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+        name_to_index = {f.name: i for i, f in enumerate(fields)}
+        self._schema = CardSchema(field_schemas, name_to_index)
+        self._signature = id(self._schema)
+        self._values = [f.value for f in fields]
+        self._active_func = active_func
+        self._format_type = format
+        self._card_format = card_format.fixed
+
+        # TableCard-specific initialization
         self._format = [(field.offset, field.width) for field in self._fields]
         if length_func == None:
             self._bounded = False
@@ -87,6 +110,63 @@ class TableCard(Card):
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
             self._first_row = get_first_row(self._fields, **kwargs)
+
+    @classmethod
+    def from_field_schemas(
+        cls,
+        field_schemas: typing.Tuple[FieldSchema, ...],
+        length_func: typing.Callable,
+        active_func: typing.Callable = None,
+        name: str = None,
+        format: format_type = format_type.default,
+        **kwargs,
+    ) -> "TableCard":
+        """Create a TableCard from FieldSchema tuples.
+
+        This is the preferred way to create TableCard instances as it avoids
+        creating intermediate Field objects.
+
+        Parameters
+        ----------
+        field_schemas : Tuple[FieldSchema, ...]
+            Tuple of FieldSchema objects defining the card structure.
+        length_func : callable
+            Function returning the number of rows, or None for unbounded.
+        active_func : callable, optional
+            Function returning bool to determine if card is active.
+        name : str, optional
+            Name for table initialization from kwargs.
+        format : format_type, optional
+            The format type (default, standard, or long).
+
+        Returns
+        -------
+        TableCard
+            A new TableCard instance.
+        """
+        instance = cls.__new__(cls)
+        name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
+        instance._schema = CardSchema(field_schemas, name_to_index)
+        instance._signature = id(instance._schema)
+        instance._values = [fs.default if not fs.is_flag() else fs.default.value for fs in field_schemas]
+        instance._active_func = active_func
+        instance._format_type = format
+        instance._card_format = card_format.fixed
+
+        # TableCard-specific initialization
+        instance._format = [(fs.offset, fs.width) for fs in field_schemas]
+        if length_func is None:
+            instance._bounded = False
+            instance._length_func = lambda: len(instance.table)
+        else:
+            instance._bounded = True
+            instance._length_func = length_func
+
+        instance._initialized = try_initialize_table(instance, name, **kwargs)
+        if not instance._initialized:
+            instance._first_row = _get_first_row_from_schemas(field_schemas, **kwargs)
+
+        return instance
 
     def _initialize(self, check: bool = False):
         """Lazy initialization routine for the data frame.
@@ -126,14 +206,17 @@ class TableCard(Card):
 
     @property
     def table(self) -> pd.DataFrame:
+        """Get the table as a pandas DataFrame."""
         if not self._initialized:
             self._initialize()
         return self._table
 
     @table.setter
     def table(self, value: pd.DataFrame):
+        """Set the table from a pandas DataFrame."""
         _check_type(value)
-        self._table = pd.DataFrame()
+        # Build columns dict first, then create DataFrame (pandas 2.3+ compatibility)
+        columns = {}
         for field in self._fields:
             if field.name in value:
                 field_type = field.type
@@ -141,17 +224,20 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
-                self._table[field.name] = value[field.name].astype(field_type)
+                columns[field.name] = value[field.name].astype(field_type)
             else:
-                self._table[field.name] = self._make_column(field, len(value))
+                columns[field.name] = self._make_column(field, len(value))
+        self._table = pd.DataFrame(columns)
         self._initialized = True
 
     @property
     def format(self) -> format_type:
+        """Format type of the table card."""
         return self._format_type
 
     @format.setter
     def format(self, value: format_type) -> None:
+        """Set the format type of the table card."""
         self._format_type = value
 
     def _get_default_value(self, field: Field) -> typing.Optional[typing.Any]:
@@ -201,11 +287,17 @@ class TableCard(Card):
         type_mapping = {float: np.float64, int: pd.Int32Dtype(), str: str}
         dtype = {field.name: type_mapping[field.type] for field in fields}
         names = [field.name for field in fields]
-        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
+        # Comment lines are already filtered by buffer_to_lines/read_line before
+        # data reaches this point, so we can skip pandas comment checking entirely.
+        # This provides ~30-40% speedup for large files (see GitHub issue #592)
+        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": None}
         return options
 
     def _read_buffer_as_dataframe(
-        self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet
+        self,
+        buffer: typing.TextIO,
+        fields: typing.Iterable[Field],
+        parameter_set: ParameterSet,
     ) -> pd.DataFrame:
         read_options = self._get_read_options()
         df = pd.read_fwf(buffer, **read_options)
@@ -227,6 +319,7 @@ class TableCard(Card):
         self._load_lines(data_lines, parameter_set)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+        """Read the table card content from a buffer."""
         if self.bounded:
             self._initialized = True
             self._load_bounded_from_buffer(buf, parameter_set)
@@ -238,6 +331,18 @@ class TableCard(Card):
     def _has_parameters(self, data_lines: typing.List[str]) -> bool:
         """Check if any data lines contain parameter references."""
         return any("&" in line for line in data_lines)
+
+    def _has_csv_format(self, data_lines: typing.List[str]) -> bool:
+        """Check if any data lines use comma-delimited format.
+
+        Uses the same detection logic as load_dataline to avoid false positives
+        on lines that contain commas but aren't CSV format (e.g., expressions
+        like min(1,2,3) in PARAMETER_EXPRESSION).
+        """
+        from ansys.dyna.core.lib.kwd_line_formatter import _is_comma_delimited
+
+        num_fields = len(self._fields)
+        return any(_is_comma_delimited(line, num_fields) for line in data_lines)
 
     def _load_lines_with_parameters(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
         """Load lines using load_dataline for parameter support.
@@ -252,8 +357,13 @@ class TableCard(Card):
         format_spec = [(f.offset, f.width, f.type) for f in fields]
 
         rows = []
-        for line in data_lines:
-            values = load_dataline(format_spec, line, parameter_set)
+        for row_index, line in enumerate(data_lines):
+            # Use scope to record parameter refs with row context
+            if parameter_set is not None:
+                with parameter_set.scope(f"row{row_index}"):
+                    values = load_dataline(format_spec, line, parameter_set)
+            else:
+                values = load_dataline(format_spec, line, parameter_set)
             row_dict = {field.name: value for field, value in zip(fields, values)}
             rows.append(row_dict)
 
@@ -261,11 +371,14 @@ class TableCard(Card):
         self._initialized = True
 
     def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
-        # Use parameter-aware loading if parameters are present
-        if parameter_set is not None and self._has_parameters(data_lines):
+        # Use parameter-aware loading if parameters or CSV format is present
+        # CSV format must go through load_dataline since pd.read_fwf doesn't support it
+        has_params = parameter_set is not None and self._has_parameters(data_lines)
+        has_csv = self._has_csv_format(data_lines)
+        if has_params or has_csv:
             self._load_lines_with_parameters(data_lines, parameter_set)
         else:
-            # Use fast pandas path when no parameters present
+            # Use fast pandas path when no parameters present and all lines are fixed-width
             fields = self._get_fields()
             buffer = io.StringIO()
             [(buffer.write(line), buffer.write("\n")) for line in data_lines]
@@ -278,7 +391,12 @@ class TableCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
+        **kwargs,
     ) -> str:
+        """Write the table card to a string or buffer."""
         if format == None:
             format = self._format_type
 
@@ -287,12 +405,84 @@ class TableCard(Card):
                 if comment:
                     buf.write(self._get_comment(format))
                     buf.write("\n")
-                write_c_dataframe(buf, self._fields, self.table, format)
+
+                if retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    # Write row-by-row with parameter ref substitution
+                    self._write_with_parameters(buf, format, parameter_set, uri_prefix)
+                else:
+                    # Fast path: use holler.write_table
+                    write_c_dataframe(buf, self._fields, self.table, format)
 
         return write_or_return(buf, _write)
 
+    def _write_with_parameters(
+        self,
+        buf: typing.TextIO,
+        format: format_type,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> None:
+        """Write table data row-by-row, substituting parameter refs where recorded."""
+        from ansys.dyna.core.lib.field_writer import write_fields
+
+        fields = self._get_fields()
+        if format == format_type.long:
+            fields = self._convert_fields_to_long_format()
+
+        for row_index in range(len(self.table)):
+            # Get row values from DataFrame
+            row_values = [self.table[field.name].iloc[row_index] for field in fields if field.name in self.table]
+
+            # Check for parameter refs and substitute
+            row_fields, row_values = self._substitute_parameter_refs(
+                fields, row_values, parameter_set, uri_prefix, row_index
+            )
+
+            write_fields(buf, row_fields, row_values, format)
+            buf.write("\n")
+
+    def _substitute_parameter_refs(
+        self,
+        fields: typing.List[Field],
+        values: typing.List,
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+        row_index: int,
+    ) -> typing.Tuple[typing.List[Field], typing.List]:
+        """Substitute parameter references for field values where applicable.
+
+        Creates new Field objects with parameter reference strings as values
+        for fields that were originally read from parameters.
+
+        Returns both modified fields and values lists.
+        """
+        result_fields = []
+        result_values = list(values)  # Make a copy
+        for i, field in enumerate(fields):
+            # Skip None-type fields (unused fields)
+            if field.type is None:
+                result_fields.append(field)
+                continue
+
+            # Look up ref using the URI pattern: uri_prefix/row{row_index}/{field_index}
+            # Filter out empty segments to handle empty uri_prefix
+            segments = [s for s in [uri_prefix, f"row{row_index}", str(i)] if s]
+            ref = parameter_set.get_ref(*segments)
+            if ref is not None:
+                # Create a new field with the reference string as the value
+                # The reference will be written as-is (e.g., "&myvar")
+                new_field = Field(field.name, str, field.offset, field.width, ref)
+                result_fields.append(new_field)
+                # Also update the value to be the ref string
+                if i < len(result_values):
+                    result_values[i] = ref
+            else:
+                result_fields.append(field)
+        return result_fields, result_values
+
     @property
     def bounded(self) -> bool:
+        """Indicates whether the card is bounded."""
         return self._bounded
 
     def _num_rows(self) -> int:

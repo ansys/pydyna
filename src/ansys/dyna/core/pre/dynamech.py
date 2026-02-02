@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Mechanical API
-==============
-
-Module for setting up explicit or implicit analysis.
-"""
+"""Module for setting up explicit or implicit analysis."""
 
 from .dynabase import *  # noqa : F403
 
@@ -188,7 +183,7 @@ class DynaMech(DynaBase):
         return ret
 
     def create_section_solid(self, title, secid, elform):
-        """Define section properties for solid continuum and fluid elements.
+        r"""Define section properties for solid continuum and fluid elements.
 
         Parameters
         ----------
@@ -210,7 +205,7 @@ class DynaMech(DynaBase):
         return ret
 
     def create_section_discrete(self, secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0):
-        """Defined spring and damper elements for translation and rotation.
+        r"""Define spring and damper elements for translation and rotation.
 
         Parameters
         ----------

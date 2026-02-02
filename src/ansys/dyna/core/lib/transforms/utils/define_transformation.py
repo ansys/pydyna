@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -63,7 +63,6 @@ def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
 
     whose behavior is according to the rules of *DEFINE_TRANSFORM
     """
-    mtx = tfm.identity_matrix()
     xf = transform.fillna(0.0)
     option, a1, a2, a3, a4, a5, a6, a7 = (
         xf["option"],
@@ -95,6 +94,7 @@ def _get_transform_matrix(transforms: pd.DataFrame) -> np.ndarray:
 
 
 def get_transform_matrix(kwd: typing.Optional[DefineTransformation]) -> typing.Optional[np.ndarray]:
+    r"""Get the 4x4 transformation matrix from a ``*DEFINE_TRANSFORMATION`` keyword."""
     if kwd is None:
         return None
     transforms = kwd.transforms

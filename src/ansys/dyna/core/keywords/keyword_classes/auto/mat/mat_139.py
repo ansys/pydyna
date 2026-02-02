@@ -23,8 +23,198 @@
 """Module providing the Mat139 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MAT139_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("df", float, 40, 10, None),
+    FieldSchema("iaflc", int, 50, 10, 0),
+    FieldSchema("ytflag", float, 60, 10, 0.0),
+    FieldSchema("asoft", float, 70, 10, None),
+)
+
+_MAT139_CARD1 = (
+    FieldSchema("m1", float, 0, 10, None),
+    FieldSchema("m2", float, 10, 10, None),
+    FieldSchema("m3", float, 20, 10, None),
+    FieldSchema("m4", float, 30, 10, None),
+    FieldSchema("m5", float, 40, 10, None),
+    FieldSchema("m6", float, 50, 10, None),
+    FieldSchema("m7", float, 60, 10, None),
+    FieldSchema("m8", float, 70, 10, None),
+)
+
+_MAT139_CARD2 = (
+    FieldSchema("lc1", int, 0, 10, None),
+    FieldSchema("lc2", int, 10, 10, 0),
+    FieldSchema("lc3", int, 20, 10, 0),
+    FieldSchema("lc4", int, 30, 10, 0),
+    FieldSchema("lc5", int, 40, 10, 0),
+    FieldSchema("lc6", int, 50, 10, 0),
+    FieldSchema("lc7", int, 60, 10, 0),
+    FieldSchema("lc8", int, 70, 10, 0),
+)
+
+_MAT139_CARD3 = (
+    FieldSchema("lps1", int, 0, 10, 0),
+    FieldSchema("sfs1", float, 10, 10, 1.0),
+    FieldSchema("lps2", int, 20, 10, 0),
+    FieldSchema("sfs2", float, 30, 10, 1.0),
+    FieldSchema("yms1", float, 40, 10, 1e+20),
+    FieldSchema("yms2", float, 50, 10, 1e+20),
+)
+
+_MAT139_CARD4 = (
+    FieldSchema("lpt1", int, 0, 10, 0),
+    FieldSchema("sft1", float, 10, 10, 1.0),
+    FieldSchema("lpt2", int, 20, 10, 0),
+    FieldSchema("sft2", float, 30, 10, 1.0),
+    FieldSchema("ymt1", float, 40, 10, 1e+20),
+    FieldSchema("ymt2", float, 50, 10, 1e+20),
+)
+
+_MAT139_CARD5 = (
+    FieldSchema("lpr", int, 0, 10, 0),
+    FieldSchema("sfr", float, 10, 10, 1.0),
+    FieldSchema("ymr", float, 20, 10, 1e+20),
+)
+
+_MAT139_CARD6 = (
+    FieldSchema("lys1", int, 0, 10, 0),
+    FieldSchema("sys1", float, 10, 10, 1.0),
+    FieldSchema("lys2", int, 20, 10, 0),
+    FieldSchema("sys2", float, 30, 10, 1.0),
+    FieldSchema("lyt1", int, 40, 10, 0),
+    FieldSchema("syt1", float, 50, 10, 1.0),
+    FieldSchema("lyt2", int, 60, 10, 0),
+    FieldSchema("syt2", float, 70, 10, 1.0),
+)
+
+_MAT139_CARD7 = (
+    FieldSchema("lyr", int, 0, 10, 0),
+    FieldSchema("syr", float, 10, 10, 1.0),
+)
+
+_MAT139_CARD8 = (
+    FieldSchema("hms1_1", float, 0, 10, None),
+    FieldSchema("hms1_2", float, 10, 10, None),
+    FieldSchema("hms1_3", float, 20, 10, None),
+    FieldSchema("hms1_4", float, 30, 10, None),
+    FieldSchema("hms1_5", float, 40, 10, None),
+    FieldSchema("hms1_6", float, 50, 10, None),
+    FieldSchema("hms1_7", float, 60, 10, None),
+    FieldSchema("hms1_8", float, 70, 10, None),
+)
+
+_MAT139_CARD9 = (
+    FieldSchema("lpms1_1", int, 0, 10, None),
+    FieldSchema("lpms1_2", int, 10, 10, None),
+    FieldSchema("lpms1_3", int, 20, 10, None),
+    FieldSchema("lpms1_4", int, 30, 10, None),
+    FieldSchema("lpms1_5", int, 40, 10, None),
+    FieldSchema("lpms1_6", int, 50, 10, None),
+    FieldSchema("lpms1_7", int, 60, 10, None),
+    FieldSchema("lpms1_8", int, 70, 10, None),
+)
+
+_MAT139_CARD10 = (
+    FieldSchema("hms2_1", float, 0, 10, None),
+    FieldSchema("hms2_2", float, 10, 10, None),
+    FieldSchema("hms2_3", float, 20, 10, None),
+    FieldSchema("hms2_4", float, 30, 10, None),
+    FieldSchema("hms2_5", float, 40, 10, None),
+    FieldSchema("hms2_6", float, 50, 10, None),
+    FieldSchema("hms2_7", float, 60, 10, None),
+    FieldSchema("hms2_8", float, 70, 10, None),
+)
+
+_MAT139_CARD11 = (
+    FieldSchema("lpms2_1", int, 0, 10, None),
+    FieldSchema("lpms2_2", int, 10, 10, None),
+    FieldSchema("lpms2_3", int, 20, 10, None),
+    FieldSchema("lpms2_4", int, 30, 10, None),
+    FieldSchema("lpms2_5", int, 40, 10, None),
+    FieldSchema("lpms2_6", int, 50, 10, None),
+    FieldSchema("lpms2_7", int, 60, 10, None),
+    FieldSchema("lpms2_8", int, 70, 10, None),
+)
+
+_MAT139_CARD12 = (
+    FieldSchema("hmt1_1", float, 0, 10, None),
+    FieldSchema("hmt1_2", float, 10, 10, None),
+    FieldSchema("hmt1_3", float, 20, 10, None),
+    FieldSchema("hmt1_4", float, 30, 10, None),
+    FieldSchema("hmt1_5", float, 40, 10, None),
+    FieldSchema("hmt1_6", float, 50, 10, None),
+    FieldSchema("hmt1_7", float, 60, 10, None),
+    FieldSchema("hmt1_8", float, 70, 10, None),
+)
+
+_MAT139_CARD13 = (
+    FieldSchema("lpmt1_1", int, 0, 10, None),
+    FieldSchema("lpmt1_2", int, 10, 10, None),
+    FieldSchema("lpmt1_3", int, 20, 10, None),
+    FieldSchema("lpmt1_4", int, 30, 10, None),
+    FieldSchema("lpmt1_5", int, 40, 10, None),
+    FieldSchema("lpmt1_6", int, 50, 10, None),
+    FieldSchema("lpmt1_7", int, 60, 10, None),
+    FieldSchema("lpmt1_8", int, 70, 10, None),
+)
+
+_MAT139_CARD14 = (
+    FieldSchema("hmt2_1", float, 0, 10, None),
+    FieldSchema("hmt2_2", float, 10, 10, None),
+    FieldSchema("hmt2_3", float, 20, 10, None),
+    FieldSchema("hmt2_4", float, 30, 10, None),
+    FieldSchema("hmt2_5", float, 40, 10, None),
+    FieldSchema("hmt2_6", float, 50, 10, None),
+    FieldSchema("hmt2_7", float, 60, 10, None),
+    FieldSchema("hmt2_8", float, 70, 10, None),
+)
+
+_MAT139_CARD15 = (
+    FieldSchema("lpmt2_1", int, 0, 10, None),
+    FieldSchema("lpmt2_2", int, 10, 10, None),
+    FieldSchema("lpmt2_3", int, 20, 10, None),
+    FieldSchema("lpmt2_4", int, 30, 10, None),
+    FieldSchema("lpmt2_5", int, 40, 10, None),
+    FieldSchema("lpmt2_6", int, 50, 10, None),
+    FieldSchema("lpmt2_7", int, 60, 10, None),
+    FieldSchema("lpmt2_8", int, 70, 10, None),
+)
+
+_MAT139_CARD16 = (
+    FieldSchema("hmr_1", float, 0, 10, None),
+    FieldSchema("hmr_2", float, 10, 10, None),
+    FieldSchema("hmr_3", float, 20, 10, None),
+    FieldSchema("hmr_4", float, 30, 10, None),
+    FieldSchema("hmr_5", float, 40, 10, None),
+    FieldSchema("hmr_6", float, 50, 10, None),
+    FieldSchema("hmr_7", float, 60, 10, None),
+    FieldSchema("hmr_8", float, 70, 10, None),
+)
+
+_MAT139_CARD17 = (
+    FieldSchema("lpmr_1", int, 0, 10, 0),
+    FieldSchema("lpmr_2", int, 10, 10, 0),
+    FieldSchema("lpmr_3", int, 20, 10, 0),
+    FieldSchema("lpmr_4", int, 30, 10, 0),
+    FieldSchema("lpmr_5", int, 40, 10, 0),
+    FieldSchema("lpmr_6", int, 50, 10, 0),
+    FieldSchema("lpmr_7", int, 60, 10, 0),
+    FieldSchema("lpmr_8", int, 70, 10, 0),
+)
+
+_MAT139_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat139(KeywordBase):
     """DYNA MAT_139 keyword"""
@@ -34,1048 +224,137 @@ class Mat139(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lc1": LinkType.DEFINE_CURVE,
+        "lc2": LinkType.DEFINE_CURVE,
+        "lc3": LinkType.DEFINE_CURVE,
+        "lc4": LinkType.DEFINE_CURVE,
+        "lc5": LinkType.DEFINE_CURVE,
+        "lc6": LinkType.DEFINE_CURVE,
+        "lc7": LinkType.DEFINE_CURVE,
+        "lc8": LinkType.DEFINE_CURVE,
+        "lps1": LinkType.DEFINE_CURVE,
+        "lps2": LinkType.DEFINE_CURVE,
+        "lpt1": LinkType.DEFINE_CURVE,
+        "lpt2": LinkType.DEFINE_CURVE,
+        "lpr": LinkType.DEFINE_CURVE,
+        "lys1": LinkType.DEFINE_CURVE,
+        "lys2": LinkType.DEFINE_CURVE,
+        "lyt1": LinkType.DEFINE_CURVE,
+        "lyt2": LinkType.DEFINE_CURVE,
+        "lyr": LinkType.DEFINE_CURVE,
+        "lpms1_1": LinkType.DEFINE_CURVE,
+        "lpms1_2": LinkType.DEFINE_CURVE,
+        "lpms1_3": LinkType.DEFINE_CURVE,
+        "lpms1_4": LinkType.DEFINE_CURVE,
+        "lpms1_5": LinkType.DEFINE_CURVE,
+        "lpms1_6": LinkType.DEFINE_CURVE,
+        "lpms1_7": LinkType.DEFINE_CURVE,
+        "lpms1_8": LinkType.DEFINE_CURVE,
+        "lpms2_1": LinkType.DEFINE_CURVE,
+        "lpms2_2": LinkType.DEFINE_CURVE,
+        "lpms2_3": LinkType.DEFINE_CURVE,
+        "lpms2_4": LinkType.DEFINE_CURVE,
+        "lpms2_5": LinkType.DEFINE_CURVE,
+        "lpms2_6": LinkType.DEFINE_CURVE,
+        "lpms2_7": LinkType.DEFINE_CURVE,
+        "lpms2_8": LinkType.DEFINE_CURVE,
+        "lpmt1_1": LinkType.DEFINE_CURVE,
+        "lpmt1_2": LinkType.DEFINE_CURVE,
+        "lpmt1_3": LinkType.DEFINE_CURVE,
+        "lpmt1_4": LinkType.DEFINE_CURVE,
+        "lpmt1_5": LinkType.DEFINE_CURVE,
+        "lpmt1_6": LinkType.DEFINE_CURVE,
+        "lpmt1_7": LinkType.DEFINE_CURVE,
+        "lpmt1_8": LinkType.DEFINE_CURVE,
+        "lpmt2_1": LinkType.DEFINE_CURVE,
+        "lpmt2_2": LinkType.DEFINE_CURVE,
+        "lpmt2_3": LinkType.DEFINE_CURVE,
+        "lpmt2_4": LinkType.DEFINE_CURVE,
+        "lpmt2_5": LinkType.DEFINE_CURVE,
+        "lpmt2_6": LinkType.DEFINE_CURVE,
+        "lpmt2_7": LinkType.DEFINE_CURVE,
+        "lpmt2_8": LinkType.DEFINE_CURVE,
+        "lpmr_1": LinkType.DEFINE_CURVE,
+        "lpmr_2": LinkType.DEFINE_CURVE,
+        "lpmr_3": LinkType.DEFINE_CURVE,
+        "lpmr_4": LinkType.DEFINE_CURVE,
+        "lpmr_5": LinkType.DEFINE_CURVE,
+        "lpmr_6": LinkType.DEFINE_CURVE,
+        "lpmr_7": LinkType.DEFINE_CURVE,
+        "lpmr_8": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat139 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "df",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaflc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ytflag",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asoft",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lps1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lps2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yms1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yms2",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpt1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpt2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymt1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymt2",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfr",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymr",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lys1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sys1",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lys2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sys2",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lyt1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syt1",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lyt2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syt2",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lyr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "syr",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hms1_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms1_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpms1_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms1_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hms2_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hms2_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpms2_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpms2_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmt1_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt1_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmt1_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt1_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmt2_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmt2_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmt2_1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmt2_8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hmr_1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmr_8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lpmr_1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpmr_8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD10,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD11,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD12,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD13,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD14,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD15,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD16,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT139_CARD17,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat139.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT139_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -2516,4 +1795,874 @@ class Mat139(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc1:
+                return kwd
+        return None
+
+    @lc1_link.setter
+    def lc1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc1."""
+        self.lc1 = value.lcid
+
+    @property
+    def lc2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc2:
+                return kwd
+        return None
+
+    @lc2_link.setter
+    def lc2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc2."""
+        self.lc2 = value.lcid
+
+    @property
+    def lc3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc3:
+                return kwd
+        return None
+
+    @lc3_link.setter
+    def lc3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc3."""
+        self.lc3 = value.lcid
+
+    @property
+    def lc4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc4:
+                return kwd
+        return None
+
+    @lc4_link.setter
+    def lc4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc4."""
+        self.lc4 = value.lcid
+
+    @property
+    def lc5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc5:
+                return kwd
+        return None
+
+    @lc5_link.setter
+    def lc5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc5."""
+        self.lc5 = value.lcid
+
+    @property
+    def lc6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc6:
+                return kwd
+        return None
+
+    @lc6_link.setter
+    def lc6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc6."""
+        self.lc6 = value.lcid
+
+    @property
+    def lc7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc7:
+                return kwd
+        return None
+
+    @lc7_link.setter
+    def lc7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc7."""
+        self.lc7 = value.lcid
+
+    @property
+    def lc8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc8:
+                return kwd
+        return None
+
+    @lc8_link.setter
+    def lc8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc8."""
+        self.lc8 = value.lcid
+
+    @property
+    def lps1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lps1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lps1:
+                return kwd
+        return None
+
+    @lps1_link.setter
+    def lps1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lps1."""
+        self.lps1 = value.lcid
+
+    @property
+    def lps2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lps2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lps2:
+                return kwd
+        return None
+
+    @lps2_link.setter
+    def lps2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lps2."""
+        self.lps2 = value.lcid
+
+    @property
+    def lpt1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpt1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpt1:
+                return kwd
+        return None
+
+    @lpt1_link.setter
+    def lpt1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpt1."""
+        self.lpt1 = value.lcid
+
+    @property
+    def lpt2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpt2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpt2:
+                return kwd
+        return None
+
+    @lpt2_link.setter
+    def lpt2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpt2."""
+        self.lpt2 = value.lcid
+
+    @property
+    def lpr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpr:
+                return kwd
+        return None
+
+    @lpr_link.setter
+    def lpr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpr."""
+        self.lpr = value.lcid
+
+    @property
+    def lys1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lys1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lys1:
+                return kwd
+        return None
+
+    @lys1_link.setter
+    def lys1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lys1."""
+        self.lys1 = value.lcid
+
+    @property
+    def lys2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lys2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lys2:
+                return kwd
+        return None
+
+    @lys2_link.setter
+    def lys2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lys2."""
+        self.lys2 = value.lcid
+
+    @property
+    def lyt1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lyt1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lyt1:
+                return kwd
+        return None
+
+    @lyt1_link.setter
+    def lyt1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lyt1."""
+        self.lyt1 = value.lcid
+
+    @property
+    def lyt2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lyt2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lyt2:
+                return kwd
+        return None
+
+    @lyt2_link.setter
+    def lyt2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lyt2."""
+        self.lyt2 = value.lcid
+
+    @property
+    def lyr_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lyr."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lyr:
+                return kwd
+        return None
+
+    @lyr_link.setter
+    def lyr_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lyr."""
+        self.lyr = value.lcid
+
+    @property
+    def lpms1_1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_1:
+                return kwd
+        return None
+
+    @lpms1_1_link.setter
+    def lpms1_1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_1."""
+        self.lpms1_1 = value.lcid
+
+    @property
+    def lpms1_2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_2:
+                return kwd
+        return None
+
+    @lpms1_2_link.setter
+    def lpms1_2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_2."""
+        self.lpms1_2 = value.lcid
+
+    @property
+    def lpms1_3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_3:
+                return kwd
+        return None
+
+    @lpms1_3_link.setter
+    def lpms1_3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_3."""
+        self.lpms1_3 = value.lcid
+
+    @property
+    def lpms1_4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_4:
+                return kwd
+        return None
+
+    @lpms1_4_link.setter
+    def lpms1_4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_4."""
+        self.lpms1_4 = value.lcid
+
+    @property
+    def lpms1_5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_5:
+                return kwd
+        return None
+
+    @lpms1_5_link.setter
+    def lpms1_5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_5."""
+        self.lpms1_5 = value.lcid
+
+    @property
+    def lpms1_6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_6:
+                return kwd
+        return None
+
+    @lpms1_6_link.setter
+    def lpms1_6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_6."""
+        self.lpms1_6 = value.lcid
+
+    @property
+    def lpms1_7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_7:
+                return kwd
+        return None
+
+    @lpms1_7_link.setter
+    def lpms1_7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_7."""
+        self.lpms1_7 = value.lcid
+
+    @property
+    def lpms1_8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms1_8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms1_8:
+                return kwd
+        return None
+
+    @lpms1_8_link.setter
+    def lpms1_8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms1_8."""
+        self.lpms1_8 = value.lcid
+
+    @property
+    def lpms2_1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_1:
+                return kwd
+        return None
+
+    @lpms2_1_link.setter
+    def lpms2_1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_1."""
+        self.lpms2_1 = value.lcid
+
+    @property
+    def lpms2_2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_2:
+                return kwd
+        return None
+
+    @lpms2_2_link.setter
+    def lpms2_2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_2."""
+        self.lpms2_2 = value.lcid
+
+    @property
+    def lpms2_3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_3:
+                return kwd
+        return None
+
+    @lpms2_3_link.setter
+    def lpms2_3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_3."""
+        self.lpms2_3 = value.lcid
+
+    @property
+    def lpms2_4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_4:
+                return kwd
+        return None
+
+    @lpms2_4_link.setter
+    def lpms2_4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_4."""
+        self.lpms2_4 = value.lcid
+
+    @property
+    def lpms2_5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_5:
+                return kwd
+        return None
+
+    @lpms2_5_link.setter
+    def lpms2_5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_5."""
+        self.lpms2_5 = value.lcid
+
+    @property
+    def lpms2_6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_6:
+                return kwd
+        return None
+
+    @lpms2_6_link.setter
+    def lpms2_6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_6."""
+        self.lpms2_6 = value.lcid
+
+    @property
+    def lpms2_7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_7:
+                return kwd
+        return None
+
+    @lpms2_7_link.setter
+    def lpms2_7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_7."""
+        self.lpms2_7 = value.lcid
+
+    @property
+    def lpms2_8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpms2_8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpms2_8:
+                return kwd
+        return None
+
+    @lpms2_8_link.setter
+    def lpms2_8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpms2_8."""
+        self.lpms2_8 = value.lcid
+
+    @property
+    def lpmt1_1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_1:
+                return kwd
+        return None
+
+    @lpmt1_1_link.setter
+    def lpmt1_1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_1."""
+        self.lpmt1_1 = value.lcid
+
+    @property
+    def lpmt1_2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_2:
+                return kwd
+        return None
+
+    @lpmt1_2_link.setter
+    def lpmt1_2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_2."""
+        self.lpmt1_2 = value.lcid
+
+    @property
+    def lpmt1_3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_3:
+                return kwd
+        return None
+
+    @lpmt1_3_link.setter
+    def lpmt1_3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_3."""
+        self.lpmt1_3 = value.lcid
+
+    @property
+    def lpmt1_4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_4:
+                return kwd
+        return None
+
+    @lpmt1_4_link.setter
+    def lpmt1_4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_4."""
+        self.lpmt1_4 = value.lcid
+
+    @property
+    def lpmt1_5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_5:
+                return kwd
+        return None
+
+    @lpmt1_5_link.setter
+    def lpmt1_5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_5."""
+        self.lpmt1_5 = value.lcid
+
+    @property
+    def lpmt1_6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_6:
+                return kwd
+        return None
+
+    @lpmt1_6_link.setter
+    def lpmt1_6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_6."""
+        self.lpmt1_6 = value.lcid
+
+    @property
+    def lpmt1_7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_7:
+                return kwd
+        return None
+
+    @lpmt1_7_link.setter
+    def lpmt1_7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_7."""
+        self.lpmt1_7 = value.lcid
+
+    @property
+    def lpmt1_8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt1_8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt1_8:
+                return kwd
+        return None
+
+    @lpmt1_8_link.setter
+    def lpmt1_8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt1_8."""
+        self.lpmt1_8 = value.lcid
+
+    @property
+    def lpmt2_1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_1:
+                return kwd
+        return None
+
+    @lpmt2_1_link.setter
+    def lpmt2_1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_1."""
+        self.lpmt2_1 = value.lcid
+
+    @property
+    def lpmt2_2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_2:
+                return kwd
+        return None
+
+    @lpmt2_2_link.setter
+    def lpmt2_2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_2."""
+        self.lpmt2_2 = value.lcid
+
+    @property
+    def lpmt2_3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_3:
+                return kwd
+        return None
+
+    @lpmt2_3_link.setter
+    def lpmt2_3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_3."""
+        self.lpmt2_3 = value.lcid
+
+    @property
+    def lpmt2_4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_4:
+                return kwd
+        return None
+
+    @lpmt2_4_link.setter
+    def lpmt2_4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_4."""
+        self.lpmt2_4 = value.lcid
+
+    @property
+    def lpmt2_5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_5:
+                return kwd
+        return None
+
+    @lpmt2_5_link.setter
+    def lpmt2_5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_5."""
+        self.lpmt2_5 = value.lcid
+
+    @property
+    def lpmt2_6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_6:
+                return kwd
+        return None
+
+    @lpmt2_6_link.setter
+    def lpmt2_6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_6."""
+        self.lpmt2_6 = value.lcid
+
+    @property
+    def lpmt2_7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_7:
+                return kwd
+        return None
+
+    @lpmt2_7_link.setter
+    def lpmt2_7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_7."""
+        self.lpmt2_7 = value.lcid
+
+    @property
+    def lpmt2_8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmt2_8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmt2_8:
+                return kwd
+        return None
+
+    @lpmt2_8_link.setter
+    def lpmt2_8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmt2_8."""
+        self.lpmt2_8 = value.lcid
+
+    @property
+    def lpmr_1_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_1."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_1:
+                return kwd
+        return None
+
+    @lpmr_1_link.setter
+    def lpmr_1_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_1."""
+        self.lpmr_1 = value.lcid
+
+    @property
+    def lpmr_2_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_2:
+                return kwd
+        return None
+
+    @lpmr_2_link.setter
+    def lpmr_2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_2."""
+        self.lpmr_2 = value.lcid
+
+    @property
+    def lpmr_3_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_3:
+                return kwd
+        return None
+
+    @lpmr_3_link.setter
+    def lpmr_3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_3."""
+        self.lpmr_3 = value.lcid
+
+    @property
+    def lpmr_4_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_4:
+                return kwd
+        return None
+
+    @lpmr_4_link.setter
+    def lpmr_4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_4."""
+        self.lpmr_4 = value.lcid
+
+    @property
+    def lpmr_5_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_5."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_5:
+                return kwd
+        return None
+
+    @lpmr_5_link.setter
+    def lpmr_5_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_5."""
+        self.lpmr_5 = value.lcid
+
+    @property
+    def lpmr_6_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_6."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_6:
+                return kwd
+        return None
+
+    @lpmr_6_link.setter
+    def lpmr_6_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_6."""
+        self.lpmr_6 = value.lcid
+
+    @property
+    def lpmr_7_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_7."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_7:
+                return kwd
+        return None
+
+    @lpmr_7_link.setter
+    def lpmr_7_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_7."""
+        self.lpmr_7 = value.lcid
+
+    @property
+    def lpmr_8_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lpmr_8."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lpmr_8:
+                return kwd
+        return None
+
+    @lpmr_8_link.setter
+    def lpmr_8_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lpmr_8."""
+        self.lpmr_8 = value.lcid
 

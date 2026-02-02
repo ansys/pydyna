@@ -23,7 +23,29 @@
 """Module providing the ConstrainedShellInSolidPenalty class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDSHELLINSOLIDPENALTY_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONSTRAINEDSHELLINSOLIDPENALTY_CARD1 = (
+    FieldSchema("shsid", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("shstyp", int, 20, 10, 0),
+    FieldSchema("sstyp", int, 30, 10, 0),
+)
+
+_CONSTRAINEDSHELLINSOLIDPENALTY_CARD2 = (
+    FieldSchema("start", float, 0, 10, 0.0),
+    FieldSchema("end", float, 10, 10, 1e+21),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("pssf", float, 50, 10, 0.1),
+)
 
 class ConstrainedShellInSolidPenalty(KeywordBase):
     """DYNA CONSTRAINED_SHELL_IN_SOLID_PENALTY keyword"""
@@ -35,109 +57,16 @@ class ConstrainedShellInSolidPenalty(KeywordBase):
         """Initialize the ConstrainedShellInSolidPenalty class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "coupid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "start",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        10,
-                        10,
-                        10E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pssf",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSHELLINSOLIDPENALTY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSHELLINSOLIDPENALTY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSHELLINSOLIDPENALTY_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the Coupling card ID number

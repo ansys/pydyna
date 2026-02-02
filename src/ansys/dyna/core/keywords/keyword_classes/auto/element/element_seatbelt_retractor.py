@@ -23,121 +23,52 @@
 """Module providing the ElementSeatbeltRetractor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_ELEMENTSEATBELTRETRACTOR_CARD0 = (
+    FieldSchema("sbrid", int, 0, 10, None),
+    FieldSchema("sbrnid", int, 10, 10, None),
+    FieldSchema("sbid", int, 20, 10, None),
+    FieldSchema("sid1", int, 30, 10, 0),
+    FieldSchema("sid2", int, 40, 10, 0),
+    FieldSchema("sid3", int, 50, 10, 0),
+    FieldSchema("sid4", int, 60, 10, 0),
+)
+
+_ELEMENTSEATBELTRETRACTOR_CARD1 = (
+    FieldSchema("tdel", float, 0, 10, 0.0),
+    FieldSchema("pull", float, 10, 10, 0.0),
+    FieldSchema("llcid", int, 20, 10, 0),
+    FieldSchema("ulcid", int, 30, 10, 0),
+    FieldSchema("lfed", float, 40, 10, 0.0),
+)
 
 class ElementSeatbeltRetractor(KeywordBase):
     """DYNA ELEMENT_SEATBELT_RETRACTOR keyword"""
 
     keyword = "ELEMENT"
     subkeyword = "SEATBELT_RETRACTOR"
+    _link_fields = {
+        "sbrnid": LinkType.NODE,
+        "llcid": LinkType.DEFINE_CURVE,
+        "ulcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ElementSeatbeltRetractor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbrid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbrnid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid3",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid4",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdel",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pull",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "llcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ulcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfed",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTRETRACTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTRETRACTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sbrid(self) -> typing.Optional[int]:
         """Get or set the Retractor ID. A unique number has to be used.
@@ -269,4 +200,39 @@ class ElementSeatbeltRetractor(KeywordBase):
     def lfed(self, value: float) -> None:
         """Set the lfed property."""
         self._cards[1].set_value("lfed", value)
+
+    @property
+    def sbrnid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given sbrnid."""
+        return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
+
+    @property
+    def llcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for llcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.llcid:
+                return kwd
+        return None
+
+    @llcid_link.setter
+    def llcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for llcid."""
+        self.llcid = value.lcid
+
+    @property
+    def ulcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for ulcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.ulcid:
+                return kwd
+        return None
+
+    @ulcid_link.setter
+    def ulcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for ulcid."""
+        self.ulcid = value.lcid
 

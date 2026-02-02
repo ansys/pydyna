@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -26,7 +26,24 @@ from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
 
 
 class BaseRunner:
+    """Base class to Run LS-DYNA."""
+
     def __init__(self, **kwargs):
+        """Initialize BaseRunner.
+
+        Parameters
+        ----------
+        mpi_option : MpiOption
+            MPI option to use for running LS-DYNA.
+        ncpu : int
+            Number of CPUs to use for running LS-DYNA.
+        memory : int
+            Memory amount to allocate for running LS-DYNA.
+        memory_unit : MemoryUnit
+            Memory unit to use for running LS-DYNA.
+        precision : Precision
+            Precision to use for running LS-DYNA.
+        """
         # TODO - split mpi option into precision?
         self.mpi_option = kwargs.get("mpi_option", MpiOption.SMP)
         self.ncpu = kwargs.get("ncpu", 1)
@@ -35,5 +52,6 @@ class BaseRunner:
         self.precision = kwargs.get("precision", Precision.DOUBLE)
 
     def get_memory_string(self) -> str:
+        """Return memory string for the runner."""
         unit = {MemoryUnit.MB: "m", MemoryUnit.GB: "G"}[self.memory_unit]
         return f"{self.memory}{unit}"

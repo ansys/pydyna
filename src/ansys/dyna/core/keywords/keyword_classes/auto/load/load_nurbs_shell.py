@@ -23,317 +23,110 @@
 """Module providing the LoadNurbsShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_LOADNURBSSHELL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADNURBSSHELL_CARD1 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+    FieldSchema("dt", float, 40, 10, 1e+16),
+    FieldSchema("ltype", str, 50, 10, "PRESS"),
+    FieldSchema("regdef", str, 60, 10, "RS"),
+)
+
+_LOADNURBSSHELL_CARD2 = (
+    FieldSchema("cid", int, 0, 10, 0),
+    FieldSchema("v1", float, 10, 10, None),
+    FieldSchema("v2", float, 20, 10, None),
+    FieldSchema("v3", float, 30, 10, None),
+)
+
+_LOADNURBSSHELL_CARD3 = (
+    FieldSchema("rmin", float, 0, 10, None),
+    FieldSchema("smin", float, 10, 10, None),
+    FieldSchema("rmax", float, 20, 10, None),
+    FieldSchema("smax", float, 30, 10, None),
+)
+
+_LOADNURBSSHELL_CARD4 = (
+    FieldSchema("ne1", int, 0, 10, None),
+    FieldSchema("ne2", int, 10, 10, None),
+    FieldSchema("ne3", int, 20, 10, None),
+    FieldSchema("ne4", int, 30, 10, None),
+    FieldSchema("ne5", int, 40, 10, None),
+    FieldSchema("ne6", int, 50, 10, None),
+    FieldSchema("ne7", int, 60, 10, None),
+    FieldSchema("ne8", int, 70, 10, None),
+)
+
+_LOADNURBSSHELL_CARD5 = (
+    FieldSchema("nt1", int, 0, 10, None),
+    FieldSchema("nt2", int, 10, 10, None),
+    FieldSchema("nt3", int, 20, 10, None),
+    FieldSchema("nt4", int, 30, 10, None),
+    FieldSchema("nte", int, 40, 10, None),
+)
+
+_LOADNURBSSHELL_CARD6 = (
+    FieldSchema("r1", float, 0, 10, None),
+    FieldSchema("s1", float, 10, 10, None),
+    FieldSchema("r2", float, 20, 10, None),
+    FieldSchema("s2", float, 30, 10, None),
+)
+
+_LOADNURBSSHELL_CARD7 = (
+    FieldSchema("nc1", int, 0, 10, None),
+    FieldSchema("nc2", int, 10, 10, None),
+    FieldSchema("nce", int, 20, 10, None),
+)
 
 class LoadNurbsShell(KeywordBase):
     """DYNA LOAD_NURBS_SHELL keyword"""
 
     keyword = "LOAD"
     subkeyword = "NURBS_SHELL"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadNurbsShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        40,
-                        10,
-                        1.0e+16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ltype",
-                        str,
-                        50,
-                        10,
-                        "PRESS",
-                        **kwargs,
-                    ),
-                    Field(
-                        "regdef",
-                        str,
-                        60,
-                        10,
-                        "RS",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ne1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ne8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nt1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nte",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nc1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nc2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nce",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNURBSSHELL_CARD7,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -749,4 +542,19 @@ class LoadNurbsShell(KeywordBase):
     def nce(self, value: int) -> None:
         """Set the nce property."""
         self._cards[7].set_value("nce", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

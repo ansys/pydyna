@@ -23,82 +23,43 @@
 """Module providing the LoadBlastSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_LOADBLASTSEGMENT_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n2", int, 20, 10, None),
+    FieldSchema("n3", int, 30, 10, None),
+    FieldSchema("n4", int, 40, 10, None),
+    FieldSchema("alepid", int, 50, 10, None),
+    FieldSchema("sfnrb", float, 60, 10, 0.0),
+    FieldSchema("scalep", float, 70, 10, 1.0),
+)
 
 class LoadBlastSegment(KeywordBase):
     """DYNA LOAD_BLAST_SEGMENT keyword"""
 
     keyword = "LOAD"
     subkeyword = "BLAST_SEGMENT"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "alepid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadBlastSegment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alepid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfnrb",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalep",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBLASTSEGMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED).
@@ -189,4 +150,29 @@ class LoadBlastSegment(KeywordBase):
     def scalep(self, value: float) -> None:
         """Set the scalep property."""
         self._cards[0].set_value("scalep", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def alepid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given alepid."""
+        return self._get_link_by_attr("PART", "pid", self.alepid, "parts")
 

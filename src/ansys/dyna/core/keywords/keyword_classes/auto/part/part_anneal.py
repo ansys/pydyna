@@ -23,38 +23,32 @@
 """Module providing the PartAnneal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_PARTANNEAL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("time", float, 10, 10, None),
+)
 
 class PartAnneal(KeywordBase):
     """DYNA PART_ANNEAL keyword"""
 
     keyword = "PART"
     subkeyword = "ANNEAL"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the PartAnneal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTANNEAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID
@@ -76,4 +70,9 @@ class PartAnneal(KeywordBase):
     def time(self, value: float) -> None:
         """Set the time property."""
         self._cards[0].set_value("time", value)
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -23,7 +23,59 @@
 """Module providing the ControlOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLOUTPUT_CARD0 = (
+    FieldSchema("npopt", int, 0, 10, 0),
+    FieldSchema("neecho", int, 10, 10, 0),
+    FieldSchema("nrefup", int, 20, 10, 0),
+    FieldSchema("iaccop", int, 30, 10, 0),
+    FieldSchema("opifs", float, 40, 10, 0.0),
+    FieldSchema("ipnint", int, 50, 10, 0),
+    FieldSchema("ikedit", int, 60, 10, 100),
+    FieldSchema("iflush", int, 70, 10, 5000),
+)
+
+_CONTROLOUTPUT_CARD1 = (
+    FieldSchema("iprtf", int, 0, 10, 0),
+    FieldSchema("ierode", int, 10, 10, 0),
+    FieldSchema("tet10s8", int, 20, 10, 2),
+    FieldSchema("msgmax", int, 30, 10, 50),
+    FieldSchema("ipcurv", int, 40, 10, 0),
+    FieldSchema("gmdt", float, 50, 10, 0.0),
+    FieldSchema("ip1dblt", int, 60, 10, 0),
+    FieldSchema("eocs", int, 70, 10, 0),
+)
+
+_CONTROLOUTPUT_CARD2 = (
+    FieldSchema("tolev", int, 0, 10, 2),
+    FieldSchema("newleg", int, 10, 10, 0),
+    FieldSchema("frfreq", int, 20, 10, 1),
+    FieldSchema("minfo", int, 30, 10, 0),
+    FieldSchema("solsig", int, 40, 10, 0),
+    FieldSchema("msgflg", int, 50, 10, 0),
+    FieldSchema("cdetol", float, 60, 10, 10.0),
+)
+
+_CONTROLOUTPUT_CARD3 = (
+    FieldSchema("phschng", int, 0, 10, 0),
+    FieldSchema("demden", int, 10, 10, 0),
+    FieldSchema("icrfile", int, 20, 10, 0),
+    FieldSchema("spc2bnd", int, 30, 10, None),
+    FieldSchema("penout", int, 40, 10, 0),
+    FieldSchema("shlsig", int, 50, 10, 0),
+    FieldSchema("hisnout", int, 60, 10, 0),
+    FieldSchema("engout", int, 70, 10, 0),
+)
+
+_CONTROLOUTPUT_CARD4 = (
+    FieldSchema("insf", int, 0, 10, 0),
+    FieldSchema("isolsf", int, 10, 10, 0),
+    FieldSchema("ibsf", int, 20, 10, 0),
+    FieldSchema("issf", int, 30, 10, 0),
+    FieldSchema("mlkbag", int, 40, 10, 0),
+)
 
 class ControlOutput(KeywordBase):
     """DYNA CONTROL_OUTPUT keyword"""
@@ -35,315 +87,22 @@ class ControlOutput(KeywordBase):
         """Initialize the ControlOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "npopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neecho",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrefup",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaccop",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "opifs",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipnint",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ikedit",
-                        int,
-                        60,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflush",
-                        int,
-                        70,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iprtf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ierode",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tet10s8",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msgmax",
-                        int,
-                        30,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipcurv",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmdt",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ip1dblt",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eocs",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tolev",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "newleg",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frfreq",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "minfo",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solsig",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msgflg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdetol",
-                        float,
-                        60,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "phschng",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "demden",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icrfile",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spc2bnd",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penout",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shlsig",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisnout",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "engout",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "insf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isolsf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibsf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "issf",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mlkbag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLOUTPUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLOUTPUT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLOUTPUT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLOUTPUT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLOUTPUT_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def npopt(self) -> int:
         """Get or set the Print suppression during input phase flag for the printed output file:

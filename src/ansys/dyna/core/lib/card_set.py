@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -91,10 +91,12 @@ class CardSet(CardInterface):
 
     @property
     def option_specs(self) -> typing.List[OptionSpec]:
+        """Returns all option specs for this card set."""
         return self._option_specs
 
     @property
     def active(self) -> bool:
+        """Get whether the card set is active."""
         if self._active_func == None:
             return True
         return self._active_func()
@@ -112,12 +114,14 @@ class CardSet(CardInterface):
         return len(self._items) - 1
 
     def items(self) -> typing.List[Cards]:
+        """Gets the list of items in the card set."""
         if not self._initialized:
             self._initialize()
         return self._items
 
     @property
     def bounded(self) -> bool:
+        """Get whether the card set is bounded (fixed length) or unbounded."""
         return self._bounded
 
     @property
@@ -135,6 +139,7 @@ class CardSet(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
         """Renders the card in the dyna keyword format.
         :param buf: Buffer to write to. If None, the output is returned as a string
@@ -145,14 +150,38 @@ class CardSet(CardInterface):
             # write each item in the card set
             for item_index, item in enumerate([item for item in self._items]):
                 write_comment = comment and item_index == 0
+                # Write newline separator before each item (except the first)
                 if item_index != 0:
                     buf.write("\n")
-                item.write(buf, format, write_comment)
+                item.write(buf, format, write_comment, **kwargs)
 
         return write_or_return(buf, _write)
 
     def _read_item_cards(self, buf: typing.TextIO, index: int, parameter_set: ParameterSet) -> bool:
+        """Read cards for a single item in the set.
+
+        If the item has a custom `_read_data` method, use it for reading.
+        This allows CardSet items to implement custom read logic for cases
+        where card activation depends on values within those cards (e.g.,
+        MAT_295 fiber families where ftype determines which card format to use).
+
+        Args:
+            buf: The text buffer to read from.
+            index: The index of the item to read.
+            parameter_set: Optional parameter set for substitution.
+
+        Returns
+        -------
+            True if the reader hit the end of the keyword early, False otherwise.
+            Custom `_read_data` methods should also return a boolean with this meaning.
+        """
         item = self._items[index]
+
+        # Check if item has custom read logic
+        if hasattr(item, "_read_data"):
+            return item._read_data(buf, parameter_set)
+
+        # Default: iterate through all cards
         for card in item._get_all_cards():
             ret = card.read(buf, parameter_set)
             if ret:
@@ -174,10 +203,12 @@ class CardSet(CardInterface):
             index += 1
             self._read_item_cards(buf, index, parameter_set)
             if at_end_of_keyword(buf):
-                # the buffer is at the end of the keyword, exit
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        """Reads the card set from the given buffer."""
+        if not self.active:
+            return False
         self._initialize()
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
@@ -187,12 +218,76 @@ class CardSet(CardInterface):
             return True
 
 
+def read_cards_with_discriminator(
+    cards: typing.List,
+    buf: typing.TextIO,
+    parameters,
+    discriminator: "Field",  # noqa: F821
+    cards_with_field: typing.List[int],
+) -> bool:
+    """Read cards where a discriminator field determines which card variant to use.
+
+    This handles the "chicken-and-egg" problem where card conditionals depend on a
+    field value that is IN those very cards. The solution:
+    1. Read non-discriminator cards first (cards before the first discriminator card)
+    2. Peek at next line to extract the discriminator field value
+    3. Set the field on all cards that have it (so conditionals evaluate correctly)
+    4. Read remaining cards (only active ones will consume data)
+
+    Args:
+        cards: List of Card objects in the CardSet item
+        buf: Text buffer to read from
+        parameters: Parameter set for substitution
+        discriminator: Field instance with name, offset, width, and default value
+        cards_with_field: List of card indices that contain the discriminator field
+
+    Returns
+    -------
+        True if the reader hit end of keyword early, False otherwise.
+    """
+    from ansys.dyna.core.lib.kwd_line_formatter import read_line
+
+    first_discriminator_card = min(cards_with_field)
+
+    # Read non-discriminator cards first
+    for i, card in enumerate(cards):
+        if i >= first_discriminator_card:
+            break
+        card.read(buf, parameters)
+
+    # Peek at next line to determine discriminator value
+    pos = buf.tell()
+    line, _ = read_line(buf)
+    buf.seek(pos)
+
+    # Parse discriminator field value using Field's offset and width
+    default_val = discriminator.value if discriminator.value is not None else 1
+    try:
+        end_pos = discriminator.offset + discriminator.width
+        field_str = line[discriminator.offset : end_pos].strip()
+        field_val = int(field_str) if field_str else default_val
+    except (ValueError, IndexError):
+        field_val = default_val
+
+    # Set field on all cards that have it so conditionals work
+    for card_idx in cards_with_field:
+        cards[card_idx].set_value(discriminator.name, field_val)
+
+    # Read remaining cards (only active ones will consume data)
+    for i, card in enumerate(cards):
+        if i >= first_discriminator_card:
+            card.read(buf, parameters)
+
+    return False
+
+
 def ensure_card_set_properties(kwd, for_setter: bool) -> None:
     """Help with handling card sets.
 
     For convenience the first card set can be manipulated by the keyword
     if it is currently empty. Getters, on the other hand, only work if
-    a card set has been added."""
+    a card set has been added.
+    """
     num_sets = len(kwd.sets)
     if num_sets == 0:
         if for_setter:

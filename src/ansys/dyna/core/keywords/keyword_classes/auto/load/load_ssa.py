@@ -23,170 +23,62 @@
 """Module providing the LoadSsa class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_LOADSSA_CARD0 = (
+    FieldSchema("vs", float, 0, 10, None),
+    FieldSchema("ds", float, 10, 10, None),
+    FieldSchema("refl", float, 20, 10, 0.0),
+    FieldSchema("zb", float, 30, 10, 0.0),
+    FieldSchema("zsurf", float, 40, 10, 0.0),
+    FieldSchema("fpsid", int, 50, 10, 0),
+    FieldSchema("psid", int, 60, 10, 0),
+)
+
+_LOADSSA_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("alpha", float, 10, 10, None),
+    FieldSchema("gamma", float, 20, 10, None),
+    FieldSchema("ktheta", float, 30, 10, None),
+    FieldSchema("kappa", float, 40, 10, None),
+)
+
+_LOADSSA_CARD2 = (
+    FieldSchema("xs", float, 0, 10, None),
+    FieldSchema("ys", float, 10, 10, None),
+    FieldSchema("zs", float, 20, 10, None),
+    FieldSchema("w", float, 30, 10, None),
+    FieldSchema("tdely", float, 40, 10, None),
+    FieldSchema("rad", float, 50, 10, None),
+    FieldSchema("cz", float, 60, 10, None),
+)
 
 class LoadSsa(KeywordBase):
     """DYNA LOAD_SSA keyword"""
 
     keyword = "LOAD"
     subkeyword = "SSA"
+    _link_fields = {
+        "fpsid": LinkType.SET_PART,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSsa class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ds",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refl",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zb",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zsurf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fpsid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ktheta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kappa",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ys",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdely",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rad",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSSA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSSA_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSSA_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def vs(self) -> typing.Optional[float]:
         """Get or set the Sound speed in fluid.
@@ -408,4 +300,24 @@ class LoadSsa(KeywordBase):
     def cz(self, value: float) -> None:
         """Set the cz property."""
         self._cards[2].set_value("cz", value)
+
+    @property
+    def fpsid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for fpsid."""
+        return self._get_set_link("PART", self.fpsid)
+
+    @fpsid_link.setter
+    def fpsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for fpsid."""
+        self.fpsid = value.sid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

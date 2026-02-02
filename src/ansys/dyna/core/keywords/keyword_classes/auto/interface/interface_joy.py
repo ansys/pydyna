@@ -23,31 +23,31 @@
 """Module providing the InterfaceJoy class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INTERFACEJOY_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
 
 class InterfaceJoy(KeywordBase):
     """DYNA INTERFACE_JOY keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "JOY"
+    _link_fields = {
+        "sid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the InterfaceJoy class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEJOY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.
@@ -58,4 +58,14 @@ class InterfaceJoy(KeywordBase):
     def sid(self, value: int) -> None:
         """Set the sid property."""
         self._cards[0].set_value("sid", value)
+
+    @property
+    def sid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for sid."""
+        return self._get_set_link("NODE", self.sid)
+
+    @sid_link.setter
+    def sid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for sid."""
+        self.sid = value.sid
 

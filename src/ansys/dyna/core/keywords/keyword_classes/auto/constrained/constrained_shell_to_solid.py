@@ -23,38 +23,34 @@
 """Module providing the ConstrainedShellToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDSHELLTOSOLID_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+)
 
 class ConstrainedShellToSolid(KeywordBase):
     """DYNA CONSTRAINED_SHELL_TO_SOLID keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "SHELL_TO_SOLID"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "nsid": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedShellToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSHELLTOSOLID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Shell node ID.
@@ -76,4 +72,19 @@ class ConstrainedShellToSolid(KeywordBase):
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def nsid_link(self) -> KeywordBase:
+        """Get the SET_NODE_* keyword for nsid."""
+        return self._get_set_link("NODE", self.nsid)
+
+    @nsid_link.setter
+    def nsid_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nsid."""
+        self.nsid = value.sid
 

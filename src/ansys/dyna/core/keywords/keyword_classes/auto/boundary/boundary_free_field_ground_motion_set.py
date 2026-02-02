@@ -23,111 +23,48 @@
 """Module providing the BoundaryFreeFieldGroundMotionSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_BOUNDARYFREEFIELDGROUNDMOTIONSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("typeid", float, 10, 10, None),
+    FieldSchema("gmx", int, 20, 10, None),
+    FieldSchema("gmy", int, 30, 10, None),
+    FieldSchema("gmz", int, 40, 10, None),
+)
+
+_BOUNDARYFREEFIELDGROUNDMOTIONSET_CARD1 = (
+    FieldSchema("sf", float, 0, 10, 1.0),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("birth", float, 20, 10, 0.0),
+    FieldSchema("death", float, 30, 10, 1e+28),
+    FieldSchema("isg", int, 40, 10, 0),
+    FieldSchema("igm", int, 50, 10, 0),
+)
 
 class BoundaryFreeFieldGroundMotionSet(KeywordBase):
     """DYNA BOUNDARY_FREE_FIELD_GROUND_MOTION_SET keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "FREE_FIELD_GROUND_MOTION_SET"
+    _link_fields = {
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryFreeFieldGroundMotionSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        30,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFREEFIELDGROUNDMOTIONSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYFREEFIELDGROUNDMOTIONSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID.
@@ -258,4 +195,19 @@ class BoundaryFreeFieldGroundMotionSet(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[1].set_value("igm", value)
+
+    @property
+    def cid_link(self) -> DefineCoordinateSystem:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
 

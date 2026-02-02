@@ -23,7 +23,15 @@
 """Module providing the EosMurnaghan class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSMURNAGHAN_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("gamma", float, 10, 10, None),
+    FieldSchema("k0", float, 20, 10, None),
+    FieldSchema("v0", float, 30, 10, None),
+)
 
 class EosMurnaghan(KeywordBase):
     """DYNA EOS_MURNAGHAN keyword"""
@@ -35,40 +43,10 @@ class EosMurnaghan(KeywordBase):
         """Initialize the EosMurnaghan class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSMURNAGHAN_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID, a unique number or label must be specified.

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -32,9 +32,9 @@ from typing import Any, Dict, List, Optional
 
 
 @dataclass
-class DuplicateCardMetadata:
+class TableCardMetadata:
     """
-    Metadata for duplicate/table cards (card['duplicate']).
+    Metadata for table cards (card['table']).
 
     Used by table-card handler to create repeatable card groups.
     """
@@ -44,7 +44,7 @@ class DuplicateCardMetadata:
     active_func: Optional[str] = None
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "DuplicateCardMetadata":
+    def from_dict(cls, data: Dict[str, Any]) -> "TableCardMetadata":
         """Create from dictionary."""
         return cls(
             name=data["name"],
@@ -127,7 +127,8 @@ class OptionGroup:
     def get_all_cards(self) -> List[Dict[str, Any]]:
         """Get all cards in this option group.
 
-        Returns:
+        Returns
+        -------
             List of cards (may be Card instances or dicts during transition)
         """
         return self.cards
@@ -161,7 +162,8 @@ class CardSet:
     def get_all_cards(self) -> List[Dict[str, Any]]:
         """Get all cards in this card set, including nested option cards.
 
-        Returns:
+        Returns
+        -------
             List of cards from source_cards and all option groups
         """
         all_cards = []

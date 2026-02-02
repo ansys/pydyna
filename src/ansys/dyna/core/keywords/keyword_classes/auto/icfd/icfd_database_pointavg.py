@@ -23,7 +23,12 @@
 """Module providing the IcfdDatabasePointavg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASEPOINTAVG_CARD0 = (
+    FieldSchema("on", int, 0, 10, 0),
+)
 
 class IcfdDatabasePointavg(KeywordBase):
     """DYNA ICFD_DATABASE_POINTAVG keyword"""
@@ -35,20 +40,10 @@ class IcfdDatabasePointavg(KeywordBase):
         """Initialize the IcfdDatabasePointavg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "on",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASEPOINTAVG_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def on(self) -> int:
         """Get or set the If equal to 1, the average quantities will be computed.

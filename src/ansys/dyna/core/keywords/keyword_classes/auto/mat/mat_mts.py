@@ -23,8 +23,62 @@
 """Module providing the MatMts class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATMTS_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("siga", float, 20, 10, None),
+    FieldSchema("sigi", float, 30, 10, None),
+    FieldSchema("sigs", float, 40, 10, None),
+    FieldSchema("sig0", float, 50, 10, None),
+    FieldSchema("bulk", float, 60, 10, None),
+)
+
+_MATMTS_CARD1 = (
+    FieldSchema("hf0", float, 0, 10, None),
+    FieldSchema("hf1", float, 10, 10, None),
+    FieldSchema("hf2", float, 20, 10, None),
+    FieldSchema("sigs0", float, 30, 10, None),
+    FieldSchema("edots0", float, 40, 10, None),
+    FieldSchema("burg", float, 50, 10, None),
+    FieldSchema("capa", float, 60, 10, None),
+    FieldSchema("boltz", float, 70, 10, None),
+)
+
+_MATMTS_CARD2 = (
+    FieldSchema("sm0", float, 0, 10, None),
+    FieldSchema("sm1", float, 10, 10, None),
+    FieldSchema("sm2", float, 20, 10, None),
+    FieldSchema("edot0", float, 30, 10, None),
+    FieldSchema("go", float, 40, 10, None),
+    FieldSchema("pinv", float, 50, 10, None),
+    FieldSchema("qinv", float, 60, 10, None),
+    FieldSchema("edoti", float, 70, 10, None),
+)
+
+_MATMTS_CARD3 = (
+    FieldSchema("g0i", float, 0, 10, None),
+    FieldSchema("pinvi", float, 10, 10, None),
+    FieldSchema("qinvi", float, 20, 10, None),
+    FieldSchema("edots", float, 30, 10, None),
+    FieldSchema("g0s", float, 40, 10, None),
+    FieldSchema("pinvs", float, 50, 10, None),
+    FieldSchema("qinvs", float, 60, 10, None),
+)
+
+_MATMTS_CARD4 = (
+    FieldSchema("rhocpr", float, 0, 10, None),
+    FieldSchema("temprf", float, 10, 10, None),
+    FieldSchema("alpha", float, 20, 10, None),
+    FieldSchema("eps0", float, 30, 10, None),
+)
+
+_MATMTS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatMts(KeywordBase):
     """DYNA MAT_MTS keyword"""
@@ -40,283 +94,32 @@ class MatMts(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "siga",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigs",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hf0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hf1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hf2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigs0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edots0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "burg",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "capa",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boltz",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sm0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sm1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sm2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "go",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pinv",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qinv",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edoti",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g0i",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pinvi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qinvi",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edots",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g0s",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pinvs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qinvs",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhocpr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temprf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATMTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMTS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMTS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMTS_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATMTS_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatMts.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMTS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

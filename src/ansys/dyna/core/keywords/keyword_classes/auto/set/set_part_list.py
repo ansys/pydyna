@@ -23,9 +23,24 @@
 """Module providing the SetPartList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETPARTLIST_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+)
+
+_SETPARTLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetPartList(KeywordBase):
     """DYNA SET_PART_LIST keyword"""
@@ -35,89 +50,42 @@ class SetPartList(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "pid1": LinkType.PART,
+        "pid2": LinkType.PART,
+        "pid3": LinkType.PART,
+        "pid4": LinkType.PART,
+        "pid5": LinkType.PART,
+        "pid6": LinkType.PART,
+        "pid7": LinkType.PART,
+        "pid8": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetPartList class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETPARTLIST_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "parts",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("parts")),
-            OptionCardSet(
+                data = kwargs.get("parts")),            OptionCardSet(
                 option_spec = SetPartList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Part set ID. All part sets should have a unique set ID.
@@ -210,4 +178,44 @@ class SetPartList(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def pid1_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid1."""
+        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+
+    @property
+    def pid2_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid2."""
+        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
+
+    @property
+    def pid3_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid3."""
+        return self._get_link_by_attr("PART", "pid", self.pid3, "parts")
+
+    @property
+    def pid4_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid4."""
+        return self._get_link_by_attr("PART", "pid", self.pid4, "parts")
+
+    @property
+    def pid5_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid5."""
+        return self._get_link_by_attr("PART", "pid", self.pid5, "parts")
+
+    @property
+    def pid6_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid6."""
+        return self._get_link_by_attr("PART", "pid", self.pid6, "parts")
+
+    @property
+    def pid7_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid7."""
+        return self._get_link_by_attr("PART", "pid", self.pid7, "parts")
+
+    @property
+    def pid8_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid8."""
+        return self._get_link_by_attr("PART", "pid", self.pid8, "parts")
 

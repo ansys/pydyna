@@ -23,73 +23,39 @@
 """Module providing the LoadHeatController class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_LOADHEATCONTROLLER_CARD0 = (
+    FieldSchema("node", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("load", float, 20, 10, None),
+    FieldSchema("tset", float, 30, 10, None),
+    FieldSchema("type", int, 40, 10, None),
+    FieldSchema("gp", float, 50, 10, None),
+    FieldSchema("gi", float, 60, 10, None),
+)
 
 class LoadHeatController(KeywordBase):
     """DYNA LOAD_HEAT_CONTROLLER keyword"""
 
     keyword = "LOAD"
     subkeyword = "HEAT_CONTROLLER"
+    _link_fields = {
+        "node": LinkType.NODE,
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadHeatController class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "node",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "load",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tset",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gi",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADHEATCONTROLLER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def node(self) -> typing.Optional[int]:
         """Get or set the Sensor is located at this node number.
@@ -168,4 +134,14 @@ class LoadHeatController(KeywordBase):
     def gi(self, value: float) -> None:
         """Set the gi property."""
         self._cards[0].set_value("gi", value)
+
+    @property
+    def node_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given node."""
+        return self._get_link_by_attr("NODE", "nid", self.node, "parts")
+
+    @property
+    def pid_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

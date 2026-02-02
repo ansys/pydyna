@@ -23,7 +23,13 @@
 """Module providing the EmRandlesExothermicReaction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMRANDLESEXOTHERMICREACTION_CARD0 = (
+    FieldSchema("areatype", int, 0, 10, 2),
+    FieldSchema("funcid", int, 10, 10, None),
+)
 
 class EmRandlesExothermicReaction(KeywordBase):
     """DYNA EM_RANDLES_EXOTHERMIC_REACTION keyword"""
@@ -35,27 +41,10 @@ class EmRandlesExothermicReaction(KeywordBase):
         """Initialize the EmRandlesExothermicReaction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "areatype",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "funcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMRANDLESEXOTHERMICREACTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def areatype(self) -> int:
         """Get or set the Works the same way as RDLAREA in *EM_RANDLES_SOLID or in *EM_RANDLES_TSHELL:

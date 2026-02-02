@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,7 +21,6 @@
 # SOFTWARE.
 """Module provides a collection of keywords that can read and write to a keyword file."""
 
-import collections
 import os
 import typing
 from typing import Union
@@ -33,11 +32,13 @@ from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTableProcessor
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_collection import KeywordCollection
 from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
+from ansys.dyna.core.lib.validation_mixin import ValidationMixin
 
 
-class Deck:
+class Deck(ValidationMixin):
     """Provides a collection of keywords that can read and write to a keyword file."""
 
     def __init__(self, title: str = None, **kwargs):
@@ -52,6 +53,7 @@ class Deck:
         # automatically linked during import.
         self._import_handlers.append(DefineTableProcessor())
         self._transform_handler = TransformHandler()
+        self._init_validation()  # Initialize validation mixin
 
     def __add__(self, other):
         """Add two decks together."""
@@ -72,6 +74,7 @@ class Deck:
 
     @property
     def transform_handler(self) -> TransformHandler:
+        """Handles transformations for the deck."""
         return self._transform_handler
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
@@ -85,6 +88,7 @@ class Deck:
 
     @parameters.setter
     def parameters(self, value: ParameterSet) -> None:
+        """Set the parameters for the deck."""
         import copy
 
         self._parameter_set = copy.copy(value)
@@ -185,9 +189,31 @@ class Deck:
         return [kw for kw in self._keywords if isinstance(kw, EncryptedKeyword)]
 
     @property
-    def keywords(self):
-        """List of processed keywords."""
-        return [kw for kw in self._keywords if isinstance(kw, KeywordBase)]
+    def keywords(self) -> KeywordCollection:
+        """Get all processed keywords as a KeywordCollection.
+
+        This provides access to the fluent filtering API for all keywords
+        in the deck. The collection supports indexing, iteration, and
+        comparison with lists for backward compatibility.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all KeywordBase instances in the deck.
+
+        Examples
+        --------
+        >>> # Access by index (backward compatible)
+        >>> first = deck.keywords[0]
+        >>> # Iterate (backward compatible)
+        >>> for kwd in deck.keywords:
+        ...     print(kwd.keyword)
+        >>> # Filter with fluent API
+        >>> high_id_sections = deck.keywords.where(
+        ...     lambda k: k.keyword == "SECTION" and k.secid > 100
+        ... )
+        """
+        return KeywordCollection([kw for kw in self._keywords if isinstance(kw, KeywordBase)])
 
     def extend(self, kwlist: list) -> None:
         """Add a list of keywords to the deck.
@@ -220,8 +246,21 @@ class Deck:
             include_deck.register_import_handler(self.transform_handler)
         return include_deck
 
-    def _expand_helper(self, search_paths: typing.List[str], recurse: bool) -> typing.List[KeywordBase]:
-        """Recursively outputs a list of keywords within Includes."""
+    def _expand_helper(
+        self, search_paths: typing.List[str], recurse: bool, strict: bool = False
+    ) -> typing.List[KeywordBase]:
+        """Recursively outputs a list of keywords within Includes.
+
+        Parameters
+        ----------
+        search_paths : List[str]
+            List of directories to search for include files.
+        recurse : bool
+            If True, recursively expand includes within includes.
+        strict : bool, optional
+            If True, raise errors instead of loading keywords as strings.
+            Default is False.
+        """
         keywords = []
         for keyword in self.all_keywords:
             if not isinstance(keyword, KeywordBase):
@@ -247,16 +286,16 @@ class Deck:
             if keyword.subkeyword == "TRANSFORM":
                 xform = keyword
             include_deck = self._prepare_deck_for_expand(keyword)
-            context = ImportContext(xform, include_deck, expand_include_file)
+            context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
             try:
                 include_deck._import_file(expand_include_file, "utf-8", context)
-            except UnicodeDecodeError as e:
+            except UnicodeDecodeError:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
-                context = ImportContext(xform, include_deck, expand_include_file)
+                context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
-                expanded = include_deck._expand_helper(search_paths, True)
+                expanded = include_deck._expand_helper(search_paths, True, strict)
                 keywords.extend(expanded)
             else:
                 keywords.extend(include_deck.all_keywords)
@@ -265,21 +304,34 @@ class Deck:
                 keyword.deck = None
         return keywords
 
-    def expand(self, cwd=None, recurse=True):
+    def expand(self, cwd=None, recurse=True, strict=False):
         """Get a new deck that is flattened copy of `self`.
 
         A flattened deck is one where the ``*INCLUDE`` keywords are replaced
         by the contents of the file that is included.
-        `cwd` is a working directory used to resolve the filename
-        If `recurse` is true, ``*INCLUDE`` keywords within included decks
-        are expanded, recursively.
+
+        Parameters
+        ----------
+        cwd : str, optional
+            Working directory used to resolve include filenames.
+            Defaults to the current working directory.
+        recurse : bool, optional
+            If True, ``*INCLUDE`` keywords within included decks
+            are expanded recursively. Default is True.
+        strict : bool, optional
+            If True, raise errors when keyword parsing fails for any reason
+            (undefined parameters, invalid field values, malformed data, etc.).
+            If False (default), keywords that fail to parse are retained as raw
+            strings and a warning is emitted. Default is False for backward
+            compatibility.
+            TODO: Consider making strict=True the default in a future version.
         """
         cwd = cwd or os.getcwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
         new_deck.parameters = self.parameters
         search_paths = [cwd]
-        new_deck.extend(self._expand_helper(search_paths, recurse))
+        new_deck.extend(self._expand_helper(search_paths, recurse, strict))
         return new_deck
 
     def _get_title_lines(self) -> typing.List[str]:
@@ -326,11 +378,15 @@ class Deck:
         return self.write()
 
     def _write_keyword(
-        self, buf: typing.TextIO, kwd: typing.Union[str, KeywordBase, EncryptedKeyword], format: format_type
+        self,
+        buf: typing.TextIO,
+        kwd: typing.Union[str, KeywordBase, EncryptedKeyword],
+        format: format_type,
+        retain_parameters: bool = False,
     ) -> None:
         """Write a keyword to the buffer."""
         if isinstance(kwd, KeywordBase):
-            kwd.write(buf, None, format)
+            kwd.write(buf, None, format, retain_parameters=retain_parameters)
         elif isinstance(kwd, str):
             buf.write(kwd)
         elif isinstance(kwd, EncryptedKeyword):
@@ -353,6 +409,8 @@ class Deck:
         self,
         buf: typing.Optional[typing.TextIO] = None,
         format: typing.Optional[format_type] = None,
+        validate: bool = False,
+        retain_parameters: bool = False,
     ):
         """Write the card in the dyna keyword format.
 
@@ -363,7 +421,17 @@ class Deck:
             in which case the output is returned as a string.
         format : optional
             Format to write in. The default is ``None``.
+        validate : bool, optional
+            If True, validate the deck before writing. The default is False.
+            Validation uses registered validators and raises ValidationError if errors are found.
+        retain_parameters : bool, optional
+            If True, write original parameter references (e.g., &myvar) instead of
+            substituted values for fields that were read from parameters. Default is False.
         """
+        if validate:
+            result = self.validate()
+            result.raise_if_errors()
+
         if format is None:
             format = self._format_type
 
@@ -372,7 +440,7 @@ class Deck:
             for kwd in self._keywords:
                 self._remove_trailing_newline(buf)
                 buf.write("\n")
-                self._write_keyword(buf, kwd, format)
+                self._write_keyword(buf, kwd, format, retain_parameters=retain_parameters)
             buf.write("\n*END")
 
         return write_or_return(buf, _write)
@@ -403,29 +471,7 @@ class Deck:
         result = load_deck(self, value, context, self._import_handlers)
         return result
 
-    def _check_unique(self, type: str, field: str) -> None:
-        """Check that all keywords of a given type have a unique field value."""
-        ids = []
-        for kwd in self.get_kwds_by_type(type):
-            if not hasattr(kwd, field):
-                raise Exception(f"kwd of type {type} does not have field {field}.")
-            ids.append(getattr(kwd, field))
-        duplicates = [id for id, count in collections.Counter(ids).items() if count > 1]
-        if len(duplicates) > 0:
-            raise Exception(f"kwds of type {type} have the following duplicate {field} values: {duplicates}")
-
-    def _check_valid(self) -> None:
-        """Check that all keywords are valid."""
-        for kwd in self._keywords:
-            is_valid, msg = kwd._is_valid()
-            if not is_valid:
-                raise Exception(f"{kwd} is not valid due to {msg}")
-
-    def validate(self) -> None:
-        """Validate the collection of keywords."""
-        # TODO - globally unique keywords (like CONTROL_TIME_STEP) are unique
-        self._check_unique("SECTION", "secid")
-        self._check_valid()
+    # Validation methods are provided by ValidationMixin
 
     def get_kwds_by_type(self, str_type: str) -> typing.Iterator[KeywordBase]:
         """Get all keywords for a given type.
@@ -455,7 +501,8 @@ class Deck:
         str_type : str
             Keyword type.
         str_subtype : str
-            Keyword subtype.
+            Keyword subtype or prefix of subtype. Matches keywords where the subkeyword
+            starts with this value.
 
         Returns
         -------
@@ -466,9 +513,16 @@ class Deck:
         Get all ``*SECTION_SHELL`` keyword instances in the deck.
 
         >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+
+        Get all ``*SET_NODE*`` keyword instances (matches NODE, NODE_LIST, NODE_LIST_TITLE, etc).
+
+        >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase) and kwd.keyword == str_type and kwd.subkeyword == str_subtype,
+            lambda kwd: isinstance(kwd, KeywordBase)
+            and kwd.keyword == str_type
+            and kwd.subkeyword is not None
+            and kwd.subkeyword.startswith(str_subtype),
             self._keywords,
         )
 
@@ -498,6 +552,33 @@ class Deck:
                 f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}."  # noqa: E501
             )
         return sections[0]
+
+    def get_set_by_id(self, id: int) -> typing.Optional[KeywordBase]:
+        """Get the SET keyword in the collection for a given set ID.
+
+        Parameters
+        ----------
+        id : int
+            Set ID.
+
+        Returns
+        -------
+        SET keyword or ``None`` if there is no SET keyword that matches the set ID.
+
+        Raises
+        ------
+        Exception
+            If multiple SET keywords use the given set ID.
+        """
+        sets = self.get(type="SET", filter=lambda kwd: kwd.sid == id)
+        if len(sets) == 0:
+            return None
+
+        if len(sets) != 1:
+            raise Exception(
+                f"Failure in `deck.get_set_by_id() method`. Multiple SET keywords use sid {id}."  # noqa: E501
+            )
+        return sets[0]
 
     def get(self, **kwargs) -> typing.List[KeywordBase]:
         """Get a list of keywords.
@@ -529,9 +610,7 @@ class Deck:
             keyword.included_from = path
         return loader_result
 
-    def import_file(
-        self, path: str, encoding: str = "utf-8"
-    ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def import_file(self, path: str, encoding: str = "utf-8") -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821, E501
         """Import a keyword file.
 
         Parameters
@@ -544,21 +623,34 @@ class Deck:
         context = ImportContext(None, self, path)
         self._import_file(path, encoding, context)
 
-    def export_file(self, path: str, encoding="utf-8") -> None:
+    def export_file(self, path: str, encoding="utf-8", validate: bool = False, retain_parameters: bool = False) -> None:
         """Export the keyword file to a new keyword file.
 
         Parameters
         ----------
         path : str
             Full path for the new keyword file.
+        encoding : str, optional
+            String encoding for the file. The default is "utf-8".
+        validate : bool, optional
+            If True, validate the deck before export. The default is False.
+            Validation uses registered validators and raises ValidationError if errors are found.
+        retain_parameters : bool, optional
+            If True, write original parameter references (e.g., &myvar) instead of
+            substituted values for fields that were read from parameters. Default is False.
+
+        Examples
+        --------
+        >>> deck.export_file("output.k", validate=True)  # Validate before export
+        >>> deck.export_file("output.k", retain_parameters=True)  # Keep parameter references
         """
         with open(path, "w+", encoding=encoding) as f:
             if os.name == "nt":
-                self.write(f)
+                self.write(f, validate=validate, retain_parameters=retain_parameters)
             else:
                 # TODO - on linux writing to the buffer can insert a spurious newline
                 #        this is less performant but more correct until that is fixed
-                contents = self.write()
+                contents = self.write(validate=validate, retain_parameters=retain_parameters)
                 f.write(contents)
 
     @property
@@ -577,10 +669,12 @@ class Deck:
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title of the keyword database."""
         self._title = value
 
     @property
     def keyword_names(self) -> typing.List[str]:
+        """Get a list of all keyword names in the deck."""
         names = []
         for kw in self.all_keywords:
             if isinstance(kw, KeywordBase):
@@ -589,7 +683,7 @@ class Deck:
                 try_title = kw.split("\n")[0]
                 names.append(f"str({try_title}...)")
             elif isinstance(kw, EncryptedKeyword):
-                names.append(f"Encrypted")
+                names.append("Encrypted")
         return names
 
     def __repr__(self) -> str:
@@ -610,14 +704,294 @@ class Deck:
         output = "\n".join(content_lines)
         return output
 
-    def plot(self, **args):
-        """Plot the node and element of the mesh using PyVista.
+    def __getitem__(self, key: typing.Union[str, typing.Tuple[str, str]]) -> KeywordCollection:
+        """Get keywords by type using dict-like access.
 
         Parameters
         ----------
-        **args :
-            Keyword arguments. Use * *cwd* (``int``) if the deck and include files are in
+        key : Union[str, Tuple[str, str]]
+            Either a keyword type (e.g., "SECTION") or a tuple of (type, subtype)
+            (e.g., ("SECTION", "SHELL")).
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of matching keywords.
+
+        Examples
+        --------
+        >>> sections = deck["SECTION"]
+        >>> shells = deck["SECTION", "SHELL"]
+        """
+        if isinstance(key, tuple):
+            if len(key) != 2:
+                raise ValueError("Tuple key must have exactly 2 elements (type, subtype)")
+            keyword_type, subkeyword = key
+            return KeywordCollection(self.get_kwds_by_full_type(keyword_type, subkeyword))
+        else:
+            return KeywordCollection(self.get_kwds_by_type(key))
+
+    def __iter__(self) -> typing.Iterator[typing.Union[KeywordBase, str, EncryptedKeyword]]:
+        """Iterate over all keywords in the deck.
+
+        Returns
+        -------
+        Iterator[Union[KeywordBase, str, EncryptedKeyword]]
+            An iterator over all keywords.
+
+        Examples
+        --------
+        >>> for kwd in deck:
+        ...     if isinstance(kwd, KeywordBase):
+        ...         print(kwd.keyword)
+        """
+        return iter(self._keywords)
+
+    def __len__(self) -> int:
+        """Get the number of keywords in the deck.
+
+        Returns
+        -------
+        int
+            The total number of keywords (including strings and encrypted).
+
+        Examples
+        --------
+        >>> num_keywords = len(deck)
+        """
+        return len(self._keywords)
+
+    @property
+    def sections(self) -> KeywordCollection:
+        """Get all SECTION_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all section keywords.
+
+        Examples
+        --------
+        >>> shells = deck.sections.by_subtype("SHELL")
+        """
+        return self["SECTION"]
+
+    @property
+    def materials(self) -> KeywordCollection:
+        """Get all MAT_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all material keywords.
+
+        Examples
+        --------
+        >>> elastic_mats = deck.materials.by_subtype("ELASTIC")
+        """
+        return self["MAT"]
+
+    @property
+    def elements(self) -> KeywordCollection:
+        """Get all ELEMENT_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all element keywords.
+
+        Examples
+        --------
+        >>> solid_elements = deck.elements.by_subtype("SOLID")
+        """
+        return self["ELEMENT"]
+
+    @property
+    def nodes(self) -> KeywordCollection:
+        """Get all NODE keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all node keywords.
+
+        Examples
+        --------
+        >>> all_nodes = deck.nodes.to_list()
+        """
+        return self["NODE"]
+
+    @property
+    def parts(self) -> KeywordCollection:
+        """Get all PART* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all part keywords.
+
+        Examples
+        --------
+        >>> parts = deck.parts.to_list()
+        """
+        return self["PART"]
+
+    @property
+    def sets(self) -> KeywordCollection:
+        """Get all SET_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all set keywords.
+
+        Examples
+        --------
+        >>> node_sets = deck.sets.by_subtype("NODE")
+        """
+        return self["SET"]
+
+    @property
+    def defines(self) -> KeywordCollection:
+        """Get all DEFINE_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all define keywords.
+
+        Examples
+        --------
+        >>> curves = deck.defines.by_subtype("CURVE")
+        """
+        return self["DEFINE"]
+
+    def split(
+        self, key_func: typing.Callable[[typing.Union[KeywordBase, str, EncryptedKeyword]], typing.Any]
+    ) -> typing.Dict[typing.Any, "Deck"]:
+        """Split the deck into multiple decks based on a key function.
+
+        The key function is called on each keyword and should return a value
+        that will be used to group keywords. Keywords with the same return value
+        will be placed in the same deck.
+
+        Parameters
+        ----------
+        key_func : Callable[[Union[KeywordBase, str, EncryptedKeyword]], Any]
+            A function that takes a keyword and returns a grouping key.
+
+        Returns
+        -------
+        Dict[Any, Deck]
+            A dictionary mapping keys to Deck instances.
+
+        Examples
+        --------
+        >>> # Split by keyword type
+        >>> decks_by_type = deck.split(lambda k: k.keyword if isinstance(k, KeywordBase) else "string")
+        >>> section_deck = decks_by_type["SECTION"]
+
+        >>> # Split by domain using the domain mapper
+        >>> from ansys.dyna.core.lib.domain_mapper import by_domain
+        >>> decks_by_domain = deck.split(by_domain)
+        >>> mat_deck = decks_by_domain["mat"]
+
+        >>> # Custom splitting logic
+        >>> def by_id_range(kwd):
+        ...     if isinstance(kwd, KeywordBase) and hasattr(kwd, 'secid'):
+        ...         if kwd.secid < 100:
+        ...             return "low"
+        ...         else:
+        ...             return "high"
+        ...     return "other"
+        >>> decks = deck.split(by_id_range)
+        """
+        result: typing.Dict[typing.Any, Deck] = {}
+        for keyword in self._keywords:
+            key = key_func(keyword)
+            if key not in result:
+                result[key] = Deck(format=self.format)
+                result[key].parameters = self.parameters
+            # Clear deck association if it's a KeywordBase
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
+            result[key].append(keyword)
+        return result
+
+    def split_by_domain(self) -> typing.Dict[str, "Deck"]:
+        """Split the deck by keyword domain (mat, section, control, etc.).
+
+        This is a convenience method that uses the domain mapper to categorize
+        keywords. For custom splitting logic, use the `split()` method directly.
+
+        Returns
+        -------
+        Dict[str, Deck]
+            A dictionary mapping domain names to Deck instances.
+
+        Examples
+        --------
+        >>> decks = deck.split_by_domain()
+        >>> mat_deck = decks["mat"]
+        >>> control_deck = decks["control"]
+        >>> section_deck = decks["section"]
+
+        See Also
+        --------
+        split : Generic splitting method with custom key function.
+        """
+        from ansys.dyna.core.lib.domain_mapper import by_domain
+
+        return self.split(by_domain)
+
+    def plot(self, **args):
+        """Plot the node and element of the mesh using PyVista.
+
+        Automatically detects Jupyter notebook environments and configures
+        appropriate rendering backend for display.
+
+        Parameters
+        ----------
+        cwd : str, optional
+            Current working directory if the deck and include files are in
             a separate directory.
+        jupyter_backend : str, optional
+            Jupyter backend to use. Options are:
+
+            - ``'static'`` - Static image (default for notebooks)
+            - ``'server'`` - Interactive with server backend
+            - ``'trame'`` - Interactive with Trame (requires pyvista[trame])
+            - ``None`` - Disable Jupyter mode, use default windowing
+            - ``'auto'`` - Automatically detect (default)
+        color : str, optional
+            Color of the mesh.
+        scalars : str, optional
+            Name of scalars to color by (e.g., 'part_ids', 'element_ids').
+        **args :
+            Additional keyword arguments passed to PyVista's plot method.
+
+        Returns
+        -------
+        Depends on backend
+            Camera position or plot object depending on the backend used.
+
+        Examples
+        --------
+        Plot a deck in a regular Python script:
+
+        >>> deck.plot()
+
+        Plot with a specific working directory:
+
+        >>> deck.plot(cwd='/path/to/includes')
+
+        Plot in a Jupyter notebook with interactive backend:
+
+        >>> deck.plot(jupyter_backend='server')
+
+        Color by part IDs:
+
+        >>> deck.plot(scalars='part_ids')
         """
         from ansys.dyna.core.lib.deck_plotter import plot_deck
 

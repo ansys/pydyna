@@ -23,38 +23,33 @@
 """Module providing the BoundaryAcousticCouplingSpectral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_BOUNDARYACOUSTICCOUPLINGSPECTRAL_CARD0 = (
+    FieldSchema("ssids", int, 0, 10, None),
+    FieldSchema("ssidf", int, 10, 10, None),
+)
 
 class BoundaryAcousticCouplingSpectral(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_COUPLING_SPECTRAL keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "ACOUSTIC_COUPLING_SPECTRAL"
+    _link_fields = {
+        "ssids": LinkType.SET_SEGMENT,
+        "ssidf": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryAcousticCouplingSpectral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssids",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssidf",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICCOUPLINGSPECTRAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssids(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the structural faces.
@@ -76,4 +71,24 @@ class BoundaryAcousticCouplingSpectral(KeywordBase):
     def ssidf(self, value: int) -> None:
         """Set the ssidf property."""
         self._cards[0].set_value("ssidf", value)
+
+    @property
+    def ssids_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssids."""
+        return self._get_set_link("SEGMENT", self.ssids)
+
+    @ssids_link.setter
+    def ssids_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssids."""
+        self.ssids = value.sid
+
+    @property
+    def ssidf_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssidf."""
+        return self._get_set_link("SEGMENT", self.ssidf)
+
+    @ssidf_link.setter
+    def ssidf_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssidf."""
+        self.ssidf = value.sid
 

@@ -1,0 +1,105 @@
+{# Template for generating CardSet item classes (e.g., FiberFamily, InitialStressShellCardSet) #}
+{# Context: card_set - the card set configuration dict #}
+{# Generate schema definitions for regular Cards (not SeriesCard, CardSet, TableCard, etc.) #}
+{% for card in card_set.source_cards %}
+{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
+_{{card_set.name | upper}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endfor %}
+)
+
+{% endif %}
+{% endfor %}
+{# Generate schema definitions for option Cards #}
+{% if card_set.options %}
+{% for option in card_set.options %}
+{% set option_loop = loop %}
+{% for card in option.cards %}
+_{{card_set.name | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+{% if field.flag %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% else %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
+{% endfor %}
+)
+
+{% endfor %}
+{% endfor %}
+{% endif %}
+class {{card_set.name}}(Cards):
+    """{{card_set.title}} CardSet."""
+{% if card_set.options %}
+
+    option_specs = [
+{% for option in card_set.options %}
+        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
+{% endfor %}
+    ]
+{% endif %}
+
+    def __init__(self, **kwargs):
+        """Initialize the {{card_set.name}} CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
+        self._cards = [
+{% for card in card_set.source_cards %}
+{% with parent_name = card_set.name, card_index = loop.index0 %}
+{% include 'keyword/card.j2' %}
+{% endwith %}
+{% endfor %}
+{% if card_set.options %}
+{% with parent_name = card_set.name %}
+{% with options = card_set.options %}
+{% include 'keyword/options.j2' %}
+{% endwith %}
+{% endwith %}
+{% endif %}{# card_set.options #}
+        ]
+{% if card_set.discriminator %}
+
+    def _read_data(self, buf: typing.TextIO, parameters) -> bool:
+        """Custom read logic to handle {{card_set.discriminator.field}}-dependent cards."""
+        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
+
+        return read_cards_with_discriminator(
+            self._cards,
+            buf,
+            parameters,
+            discriminator=self._cards[{{card_set.discriminator.cards_with_field[0]}}]._fields[0],
+            cards_with_field={{card_set.discriminator.cards_with_field}},
+        )
+{% endif %}{# card_set.discriminator #}
+
+{% for card in card_set.source_cards %}
+{% include 'keyword/card_properties.j2' %}
+{% endfor %}{# card in card_set.source_cards #}
+{% if card_set.shared_fields %}
+{% for shared in card_set.shared_fields %}
+    @property
+    def {{shared.name}}(self) -> typing.Optional[{{shared.type}}]:
+        """Get or set the {{shared.help}}
+        """ # nopep8
+        return self._cards[{{shared.card_indices[0]}}].get_value("{{shared.name}}")
+
+    @{{shared.name}}.setter
+    def {{shared.name}}(self, value: {{shared.type}}) -> None:
+{% for card_idx in shared.card_indices %}
+        self._cards[{{card_idx}}].set_value("{{shared.name}}", value)
+{% endfor %}
+
+{% endfor %}{# shared in card_set.shared_fields #}
+{% endif %}{# card_set.shared_fields #}
+{% if card_set.options %}
+{% for option in card_set.options %}
+{% include 'keyword/option_card_properties.j2' %}
+{% endfor %}{# option in card_set.options #}
+{% endif %}{# card_set.options #}
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,12 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Airbag API
-==========
-
-Module for creating a S-ALE (Structured ALE) DYNA input deck.
-"""
+"""Module for creating a S-ALE (Structured ALE) DYNA input deck."""
 
 from enum import Enum
 import logging
@@ -34,6 +29,8 @@ from .dynabase import *  # noqa : F403
 
 
 class AdvectionMethod(Enum):
+    """Enumeration for advection method in the S-ALE mesh."""
+
     DONOR_CELL_WITH_HALF_INDEX_SHIFT = 1
     VAN_LEER_WITH_HIS = 2
     DONOR_CELL_WITH_HIS = 3
@@ -41,6 +38,8 @@ class AdvectionMethod(Enum):
 
 
 class FillDirection(Enum):
+    """Enumeration for fill direction in the S-ALE mesh."""
+
     INSIDE_THE_GEOMETRY = 0
     OUTSIDE_THE_GEOMETRY = 1
 

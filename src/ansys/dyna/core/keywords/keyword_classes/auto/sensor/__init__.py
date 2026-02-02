@@ -24,10 +24,10 @@
 
 from .sensor_control import SensorControl
 from .sensor_cpm_airbag import SensorCpmAirbag
-from .sensor_define_calc_math import SensorDefineCalcMath
-from .sensor_define_calc_math_update import SensorDefineCalcMathUpdate
-from .sensor_define_calc_math import SensorDefineCalcMath
-from .sensor_define_calc_math_update import SensorDefineCalcMathUpdate
+from .sensor_define_calc__math import SensorDefineCalc_Math
+from .sensor_define_calc__math_update import SensorDefineCalc_MathUpdate
+from .sensor_define_calc__math import SensorDefineCalcMath
+from .sensor_define_calc__math_update import SensorDefineCalcMathUpdate
 from .sensor_define_element import SensorDefineElement
 from .sensor_define_element_set import SensorDefineElementSet
 from .sensor_define_element_set_update import SensorDefineElementSetUpdate
@@ -43,6 +43,6 @@ from .sensor_define_node_set import SensorDefineNodeSet
 from .sensor_define_node_set_update import SensorDefineNodeSetUpdate
 from .sensor_define_node_update import SensorDefineNodeUpdate
 from .sensor_switch import SensorSwitch
-from .sensor_switch_calc_logic import SensorSwitchCalcLogic
-from .sensor_switch_calc_logic import SensorSwitchCalcLogic
+from .sensor_switch_calc__logic import SensorSwitchCalc_Logic
+from .sensor_switch_calc__logic import SensorSwitchCalcLogic
 from .sensor_switch_shell_to_vent import SensorSwitchShellToVent

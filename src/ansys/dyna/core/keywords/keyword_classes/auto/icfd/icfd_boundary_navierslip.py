@@ -23,7 +23,13 @@
 """Module providing the IcfdBoundaryNavierslip class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDBOUNDARYNAVIERSLIP_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("fric", float, 0, 10, None),
+)
 
 class IcfdBoundaryNavierslip(KeywordBase):
     """DYNA ICFD_BOUNDARY_NAVIERSLIP keyword"""
@@ -35,26 +41,10 @@ class IcfdBoundaryNavierslip(KeywordBase):
         """Initialize the IcfdBoundaryNavierslip class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYNAVIERSLIP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface where non-slip boundary condition is applied.

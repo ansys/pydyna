@@ -23,8 +23,21 @@
 """Module providing the ConstrainedRivet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDRIVET_CARD0 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("tf", float, 20, 10, 1e+20),
+)
+
+_CONSTRAINEDRIVET_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
 
 class ConstrainedRivet(KeywordBase):
     """DYNA CONSTRAINED_RIVET keyword"""
@@ -34,57 +47,30 @@ class ConstrainedRivet(KeywordBase):
     option_specs = [
         OptionSpec("ID", -1, 1),
     ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRivet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tf",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIVET_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ConstrainedRivet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDRIVET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node ID for node 1.
@@ -131,4 +117,14 @@ class ConstrainedRivet(KeywordBase):
 
         if value:
             self.activate_option("ID")
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

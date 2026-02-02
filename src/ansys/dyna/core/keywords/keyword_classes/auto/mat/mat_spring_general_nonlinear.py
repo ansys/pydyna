@@ -23,8 +23,23 @@
 """Module providing the MatSpringGeneralNonlinear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_MATSPRINGGENERALNONLINEAR_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("lcdl", int, 10, 10, None),
+    FieldSchema("lcdu", int, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("tyi", float, 40, 10, None),
+    FieldSchema("cyi", float, 50, 10, None),
+)
+
+_MATSPRINGGENERALNONLINEAR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSpringGeneralNonlinear(KeywordBase):
     """DYNA MAT_SPRING_GENERAL_NONLINEAR keyword"""
@@ -34,77 +49,30 @@ class MatSpringGeneralNonlinear(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcdl": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcdu": LinkType.DEFINE_CURVE_OR_TABLE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSpringGeneralNonlinear class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdu",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tyi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cyi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSPRINGGENERALNONLINEAR_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSpringGeneralNonlinear.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGGENERALNONLINEAR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -187,4 +155,52 @@ class MatSpringGeneralNonlinear(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcdl_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdl."""
+        if self.deck is None:
+            return None
+        field_value = self.lcdl
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcdl_link.setter
+    def lcdl_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcdl."""
+        if hasattr(value, "lcid"):
+            self.lcdl = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcdl = value.tbid
+
+    @property
+    def lcdu_link(self) -> KeywordBase:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdu."""
+        if self.deck is None:
+            return None
+        field_value = self.lcdu
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcdu_link.setter
+    def lcdu_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcdu."""
+        if hasattr(value, "lcid"):
+            self.lcdu = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcdu = value.tbid
 

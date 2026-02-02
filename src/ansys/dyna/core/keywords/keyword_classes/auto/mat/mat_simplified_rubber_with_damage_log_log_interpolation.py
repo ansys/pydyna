@@ -23,8 +23,38 @@
 """Module providing the MatSimplifiedRubberWithDamageLogLogInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("mu", float, 30, 10, None),
+    FieldSchema("g", float, 40, 10, None),
+    FieldSchema("sigf", float, 50, 10, None),
+)
+
+_MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD1 = (
+    FieldSchema("sgl", float, 0, 10, None),
+    FieldSchema("sw", float, 10, 10, None),
+    FieldSchema("st", float, 20, 10, None),
+    FieldSchema("lc_tbid", float, 30, 10, None, "lc/tbid"),
+    FieldSchema("tension", float, 40, 10, -1.0),
+    FieldSchema("rtype", float, 50, 10, 0.0),
+    FieldSchema("avgopt", float, 60, 10, 0.0),
+)
+
+_MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD2 = (
+    FieldSchema("lcunld", int, 0, 10, None),
+)
+
+_MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
     """DYNA MAT_SIMPLIFIED_RUBBER_WITH_DAMAGE_LOG_LOG_INTERPOLATION keyword"""
@@ -34,144 +64,36 @@ class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lc_tbid": LinkType.DEFINE_CURVE,
+        "lcunld": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatSimplifiedRubberWithDamageLogLogInterpolation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sgl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sw",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc/tbid",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tension",
-                        float,
-                        40,
-                        10,
-                        -1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rtype",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "avgopt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcunld",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSimplifiedRubberWithDamageLogLogInterpolation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDRUBBERWITHDAMAGELOGLOGINTERPOLATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.
@@ -275,12 +197,12 @@ class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
     def lc_tbid(self) -> typing.Optional[float]:
         """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the force versus actual change in the gauge length. If the table definition is used a family of curves are defined for discrete strain rates. The load curves should cover the complete range of expected loading, i.e., the smallest stretch ratio to the largest.
         """ # nopep8
-        return self._cards[1].get_value("lc/tbid")
+        return self._cards[1].get_value("lc_tbid")
 
     @lc_tbid.setter
     def lc_tbid(self, value: float) -> None:
         """Set the lc_tbid property."""
-        self._cards[1].set_value("lc/tbid", value)
+        self._cards[1].set_value("lc_tbid", value)
 
     @property
     def tension(self) -> float:
@@ -352,4 +274,34 @@ class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc_tbid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lc_tbid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc_tbid:
+                return kwd
+        return None
+
+    @lc_tbid_link.setter
+    def lc_tbid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc_tbid."""
+        self.lc_tbid = value.lcid
+
+    @property
+    def lcunld_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcunld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcunld:
+                return kwd
+        return None
+
+    @lcunld_link.setter
+    def lcunld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcunld."""
+        self.lcunld = value.lcid
 

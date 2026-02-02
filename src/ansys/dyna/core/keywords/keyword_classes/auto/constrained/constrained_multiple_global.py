@@ -23,68 +23,48 @@
 """Module providing the ConstrainedMultipleGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD1 = (
+    FieldSchema("nmp", int, 0, 10, None),
+)
+
+_CONSTRAINEDMULTIPLEGLOBAL_CARD2 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("dir", int, 10, 10, 1),
+    FieldSchema("coef", float, 20, 10, None),
+)
 
 class ConstrainedMultipleGlobal(KeywordBase):
     """DYNA CONSTRAINED_MULTIPLE_GLOBAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "MULTIPLE_GLOBAL"
+    _link_fields = {
+        "nid": LinkType.NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedMultipleGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nmp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coef",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDMULTIPLEGLOBAL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Constraint set identification. All constraint sets should have a unique set ID.
@@ -144,4 +124,9 @@ class ConstrainedMultipleGlobal(KeywordBase):
     def coef(self, value: float) -> None:
         """Set the coef property."""
         self._cards[2].set_value("coef", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

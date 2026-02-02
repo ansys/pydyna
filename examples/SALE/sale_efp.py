@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -31,8 +31,7 @@ The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_
 import os
 import sys
 
-from ansys.dyna.core.pre import dynamaterial as matDB
-from ansys.dyna.core.pre import examples, launch_dynapre
+from ansys.dyna.core.pre import dynamaterial as matDB, examples, launch_dynapre
 from ansys.dyna.core.pre.dynasale import AdvectionMethod, ControlPoint, DynaSALE, FillDirection, Point, StructuredMesh
 from ansys.dyna.core.pre.misc import check_valid_ip
 

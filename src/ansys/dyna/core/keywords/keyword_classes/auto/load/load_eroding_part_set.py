@@ -23,129 +23,53 @@
 """Module providing the LoadErodingPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_LOADERODINGPARTSET_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+    FieldSchema("psid", int, 40, 10, None),
+    FieldSchema("boxid", int, 50, 10, 0),
+    FieldSchema("mem", int, 60, 10, 50),
+    FieldSchema("alpha", float, 70, 10, 80.0),
+)
+
+_LOADERODINGPARTSET_CARD1 = (
+    FieldSchema("iflag", int, 0, 10, 0),
+    FieldSchema("x", float, 10, 10, 0.0),
+    FieldSchema("y", float, 20, 10, 0.0),
+    FieldSchema("z", float, 30, 10, 0.0),
+    FieldSchema("beta", float, 40, 10, 90.0),
+)
 
 class LoadErodingPartSet(KeywordBase):
     """DYNA LOAD_ERODING_PART_SET keyword"""
 
     keyword = "LOAD"
     subkeyword = "ERODING_PART_SET"
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+        "boxid": LinkType.DEFINE_BOX,
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadErodingPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mem",
-                        int,
-                        60,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        80.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        40,
-                        10,
-                        90.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADERODINGPARTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADERODINGPARTSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID number.
@@ -288,4 +212,44 @@ class LoadErodingPartSet(KeywordBase):
     def beta(self, value: float) -> None:
         """Set the beta property."""
         self._cards[1].set_value("beta", value)
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
+
+    @property
+    def boxid_link(self) -> DefineBox:
+        """Get the DefineBox object for boxid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.boxid:
+                return kwd
+        return None
+
+    @boxid_link.setter
+    def boxid_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for boxid."""
+        self.boxid = value.boxid
+
+    @property
+    def psid_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

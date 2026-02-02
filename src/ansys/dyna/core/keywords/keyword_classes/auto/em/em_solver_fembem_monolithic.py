@@ -23,7 +23,16 @@
 """Module providing the EmSolverFembemMonolithic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMSOLVERFEMBEMMONOLITHIC_CARD0 = (
+    FieldSchema("mtype", int, 0, 10, 0),
+    FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("abstol", float, 20, 10, 1e-06),
+    FieldSchema("reltol", float, 30, 10, 0.0001),
+    FieldSchema("maxit", int, 40, 10, 500),
+)
 
 class EmSolverFembemMonolithic(KeywordBase):
     """DYNA EM_SOLVER_FEMBEM_MONOLITHIC keyword"""
@@ -35,52 +44,10 @@ class EmSolverFembemMonolithic(KeywordBase):
         """Initialize the EmSolverFembemMonolithic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mtype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abstol",
-                        float,
-                        20,
-                        10,
-                        1.0E-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        float,
-                        30,
-                        10,
-                        1.0E-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxit",
-                        int,
-                        40,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMSOLVERFEMBEMMONOLITHIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mtype(self) -> int:
         """Get or set the Monolithic solver type (See Remark 1):

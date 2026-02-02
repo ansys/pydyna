@@ -23,92 +23,50 @@
 """Module providing the DatabaseFsiSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_DATABASEFSISENSOR_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("binary", int, 10, 10, 1),
+)
+
+_DATABASEFSISENSOR_CARD1 = (
+    FieldSchema("dbfsi_id", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("segmid", int, 20, 10, None),
+    FieldSchema("offset", float, 30, 10, None),
+    FieldSchema("nd1", int, 40, 10, None),
+    FieldSchema("nd2", int, 50, 10, None),
+    FieldSchema("nd3", int, 60, 10, None),
+)
 
 class DatabaseFsiSensor(KeywordBase):
     """DYNA DATABASE_FSI_SENSOR keyword"""
 
     keyword = "DATABASE"
     subkeyword = "FSI_SENSOR"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "nd1": LinkType.NODE,
+        "nd2": LinkType.NODE,
+        "nd3": LinkType.NODE,
+        "segmid": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DatabaseFsiSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dbfsi_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "segmid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nd3",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFSISENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFSISENSOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output interval
@@ -222,4 +180,29 @@ class DatabaseFsiSensor(KeywordBase):
     def nd3(self, value: int) -> None:
         """Set the nd3 property."""
         self._cards[1].set_value("nd3", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def nd1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd1."""
+        return self._get_link_by_attr("NODE", "nid", self.nd1, "parts")
+
+    @property
+    def nd2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd2."""
+        return self._get_link_by_attr("NODE", "nid", self.nd2, "parts")
+
+    @property
+    def nd3_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nd3."""
+        return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
+
+    @property
+    def segmid_link(self) -> KeywordBase:
+        """Get the ELEMENT keyword containing the given segmid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.segmid, "parts")
 

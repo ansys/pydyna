@@ -23,7 +23,13 @@
 """Module providing the ControlImplicitBuckle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITBUCKLE_CARD0 = (
+    FieldSchema("nmode", int, 0, 10, 0),
+    FieldSchema("bckmth", int, 10, 10, 1),
+)
 
 class ControlImplicitBuckle(KeywordBase):
     """DYNA CONTROL_IMPLICIT_BUCKLE keyword"""
@@ -35,28 +41,10 @@ class ControlImplicitBuckle(KeywordBase):
         """Initialize the ControlImplicitBuckle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmode",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bckmth",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITBUCKLE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nmode(self) -> int:
         """Get or set the Number of buckling modes to compute:

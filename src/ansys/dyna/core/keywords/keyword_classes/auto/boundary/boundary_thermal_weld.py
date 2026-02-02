@@ -23,168 +23,65 @@
 """Module providing the BoundaryThermalWeld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_BOUNDARYTHERMALWELD_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ptyp", int, 10, 10, 1),
+    FieldSchema("nid", int, 20, 10, 0),
+    FieldSchema("nflag", int, 30, 10, 1),
+    FieldSchema("x0", float, 40, 10, None),
+    FieldSchema("y0", float, 50, 10, None),
+    FieldSchema("z0", float, 60, 10, None),
+    FieldSchema("n2id", int, 70, 10, None),
+)
+
+_BOUNDARYTHERMALWELD_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("b", float, 10, 10, None),
+    FieldSchema("cf", float, 20, 10, None),
+    FieldSchema("cr", float, 30, 10, None),
+    FieldSchema("lcid", int, 40, 10, None),
+    FieldSchema("q", float, 50, 10, None),
+    FieldSchema("ff", float, 60, 10, None),
+    FieldSchema("fr", float, 70, 10, None),
+)
+
+_BOUNDARYTHERMALWELD_CARD2 = (
+    FieldSchema("tx", float, 0, 10, None),
+    FieldSchema("ty", float, 10, 10, None),
+    FieldSchema("tz", float, 20, 10, None),
+)
 
 class BoundaryThermalWeld(KeywordBase):
     """DYNA BOUNDARY_THERMAL_WELD keyword"""
 
     keyword = "BOUNDARY"
     subkeyword = "THERMAL_WELD"
+    _link_fields = {
+        "nid": LinkType.NODE,
+        "n2id": LinkType.NODE,
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the BoundaryThermalWeld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nflag",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2id",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fr",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ty",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYTHERMALWELD_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID to which weld source is applied.
@@ -413,4 +310,29 @@ class BoundaryThermalWeld(KeywordBase):
     def tz(self, value: float) -> None:
         """Set the tz property."""
         self._cards[2].set_value("tz", value)
+
+    @property
+    def nid_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def n2id_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2id."""
+        return self._get_link_by_attr("NODE", "nid", self.n2id, "parts")
+
+    @property
+    def lcid_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

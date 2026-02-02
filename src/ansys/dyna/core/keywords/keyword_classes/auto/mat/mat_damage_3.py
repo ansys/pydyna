@@ -23,8 +23,58 @@
 """Module providing the MatDamage3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_MATDAMAGE3_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("hardi", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("lcss", int, 70, 10, None),
+)
+
+_MATDAMAGE3_CARD1 = (
+    FieldSchema("hardk1", float, 0, 10, None),
+    FieldSchema("gamma1", float, 10, 10, None),
+    FieldSchema("hardk2", float, 20, 10, None),
+    FieldSchema("gamma2", float, 30, 10, None),
+    FieldSchema("src", float, 40, 10, None),
+    FieldSchema("srp", float, 50, 10, None),
+    FieldSchema("hardk3", float, 60, 10, None),
+    FieldSchema("gamma3", float, 70, 10, None),
+)
+
+_MATDAMAGE3_CARD2 = (
+    FieldSchema("idamage", int, 0, 10, 0),
+    FieldSchema("ids", int, 10, 10, 0),
+    FieldSchema("idep", int, 20, 10, 0),
+    FieldSchema("epsd", float, 30, 10, None),
+    FieldSchema("s", float, 40, 10, None),
+    FieldSchema("t", float, 50, 10, 1.0),
+    FieldSchema("dc", float, 60, 10, 0.5),
+    FieldSchema("khflg", int, 70, 10, 0),
+)
+
+_MATDAMAGE3_CARD3 = (
+    FieldSchema("hardk4", float, 0, 10, None),
+    FieldSchema("gamma5", float, 10, 10, None),
+)
+
+_MATDAMAGE3_CARD4 = (
+    FieldSchema("lckh", int, 0, 10, None),
+    FieldSchema("nkh", int, 10, 10, None),
+)
+
+_MATDAMAGE3_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatDamage3(KeywordBase):
     """DYNA MAT_DAMAGE_3 keyword"""
@@ -34,253 +84,42 @@ class MatDamage3(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+        "lckh": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatDamage3 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hardk1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardk2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "src",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardk3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idamage",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ids",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idep",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        60,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "khflg",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hardk4",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma5",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lckh",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nkh",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATDAMAGE3_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATDAMAGE3_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATDAMAGE3_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATDAMAGE3_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATDAMAGE3_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatDamage3.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDAMAGE3_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -629,4 +468,34 @@ class MatDamage3(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
+
+    @property
+    def lckh_link(self) -> DefineCurve:
+        """Get the DefineCurve object for lckh."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lckh:
+                return kwd
+        return None
+
+    @lckh_link.setter
+    def lckh_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lckh."""
+        self.lckh = value.lcid
 

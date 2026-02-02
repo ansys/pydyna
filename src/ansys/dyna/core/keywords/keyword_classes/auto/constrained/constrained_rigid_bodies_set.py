@@ -23,45 +23,34 @@
 """Module providing the ConstrainedRigidBodiesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_CONSTRAINEDRIGIDBODIESSET_CARD0 = (
+    FieldSchema("pidl", int, 0, 10, None),
+    FieldSchema("pidc", int, 10, 10, None),
+    FieldSchema("iflag", int, 20, 10, None),
+)
 
 class ConstrainedRigidBodiesSet(KeywordBase):
     """DYNA CONSTRAINED_RIGID_BODIES_SET keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "RIGID_BODIES_SET"
+    _link_fields = {
+        "pidc": LinkType.SET_PART,
+        "pidl": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedRigidBodiesSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDRIGIDBODIESSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pidl(self) -> typing.Optional[int]:
         """Get or set the Lead rigid body part ID, see *PART.
@@ -96,4 +85,19 @@ class ConstrainedRigidBodiesSet(KeywordBase):
     def iflag(self, value: int) -> None:
         """Set the iflag property."""
         self._cards[0].set_value("iflag", value)
+
+    @property
+    def pidc_link(self) -> KeywordBase:
+        """Get the SET_PART_* keyword for pidc."""
+        return self._get_set_link("PART", self.pidc)
+
+    @pidc_link.setter
+    def pidc_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pidc."""
+        self.pidc = value.sid
+
+    @property
+    def pidl_link(self) -> KeywordBase:
+        """Get the PART keyword containing the given pidl."""
+        return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
 

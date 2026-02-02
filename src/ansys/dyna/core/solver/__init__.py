@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for defining the PyDyna ``solver`` service."""
+
+import warnings
+
+warnings.warn(
+    "The 'ansys.dyna.core.solver' module is deprecated and will be removed starting from version v0.11.0. ",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 from ansys.dyna.core.solver.dynasolver import DynaSolver, NotFound, RunningError, UnexpectedResponse
 from ansys.dyna.core.solver.launcher import launch_dyna

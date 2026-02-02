@@ -23,101 +23,51 @@
 """Module providing the LoadSegmentSetAngle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_LOADSEGMENTSETANGLE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("ioptp", int, 40, 10, 0),
+    FieldSchema("ioptd", int, 50, 10, 0),
+)
+
+_LOADSEGMENTSETANGLE_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("na", int, 20, 10, None),
+    FieldSchema("ni", int, 30, 10, None),
+)
 
 class LoadSegmentSetAngle(KeywordBase):
     """DYNA LOAD_SEGMENT_SET_ANGLE keyword"""
 
     keyword = "LOAD"
     subkeyword = "SEGMENT_SET_ANGLE"
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "na": LinkType.NODE,
+        "ni": LinkType.NODE,
+        "ssid": LinkType.SET_SEGMENT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the LoadSegmentSetAngle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioptp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioptd",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "na",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ni",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTSETANGLE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTSETANGLE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Loading ID
@@ -231,4 +181,34 @@ class LoadSegmentSetAngle(KeywordBase):
     def ni(self, value: int) -> None:
         """Set the ni property."""
         self._cards[1].set_value("ni", value)
+
+    @property
+    def n1_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def na_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given na."""
+        return self._get_link_by_attr("NODE", "nid", self.na, "parts")
+
+    @property
+    def ni_link(self) -> KeywordBase:
+        """Get the NODE keyword containing the given ni."""
+        return self._get_link_by_attr("NODE", "nid", self.ni, "parts")
+
+    @property
+    def ssid_link(self) -> KeywordBase:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
+
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 
