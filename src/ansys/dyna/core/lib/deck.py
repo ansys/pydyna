@@ -25,6 +25,8 @@ import os
 import typing
 from typing import Union
 import warnings
+from charset_normalizer import from_path
+import chardet
 
 from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
@@ -227,12 +229,11 @@ class Deck(ValidationMixin):
             self.append(kw)
 
     def _detect_encoding(self, path: str) -> str:
-        import chardet
+        
 
         try:
-            with open(path, "rb") as f:
-                sample = f.read(10000)
-                return chardet.detect(sample)["encoding"]
+            encoding = from_path(path).best().encoding
+            return encoding
         except Exception as e:
             raise Exception("Failed to detect encoding of deck in `expand`: " + str(e))
 
