@@ -56,7 +56,8 @@ class ParameterSet:
         parent : ParameterSet, optional
             Parent scope for parameter lookup. If None, this is a root scope.
         """
-        self._params = dict()  # Local parameters in this scope
+        self._params = dict()  # Global parameters in this scope
+        self._local_params = dict()  # Local-only parameters in this scope
         self._parent = parent  # Parent scope for lookup
         self._uri_stack: typing.List[str] = []  # Stack for building current URI path
         self._refs: typing.Dict[str, str] = {}  # URI -> parameter reference string (e.g., "&myvar")
@@ -80,10 +81,14 @@ class ParameterSet:
         KeyError
             If parameter is not found in this scope or any parent scope.
         """
-        # Check local scope first
+        # Check local scope first (both global and local params)
         if param in self._params:
-            logger.debug(f"Found parameter '{param}' in local scope: {self._params[param]}")
+            logger.debug(f"Found parameter '{param}' in global params: {self._params[param]}")
             return self._params[param]
+        
+        if param in self._local_params:
+            logger.debug(f"Found parameter '{param}' in local params: {self._local_params[param]}")
+            return self._local_params[param]
 
         # Check parent scope
         if self._parent is not None:
@@ -124,7 +129,7 @@ class ParameterSet:
             Parameter value.
         """
         logger.debug(f"Adding local parameter '{param}' = {value} to local scope")
-        self._params[param] = value
+        self._local_params[param] = value
 
     def copy_with_child_scope(self) -> "ParameterSet":
         """Create a new ParameterSet with this as the parent scope.
@@ -222,6 +227,19 @@ class ParameterSet:
             The current URI path joined with '/'.
         """
         return "/".join(self._uri_stack)
+
+    def get_global_params(self) -> typing.Dict[str, typing.Any]:
+        """Get only the global parameters defined in this scope.
+
+        Returns only parameters added via add() (PARAMETER keyword),
+        not parameters added via add_local() (PARAMETER_LOCAL keyword).
+
+        Returns
+        -------
+        dict
+            Dictionary of global parameters defined in this scope only.
+        """
+        return self._params.copy()
 
 
 def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, typing.Any]:  # noqa: F821

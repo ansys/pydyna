@@ -829,6 +829,124 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
 
+
+@pytest.mark.keywords
+def test_deck_expand_sibling_parameters(file_utils):
+    """Test that global parameters from one include are visible in sibling includes.
+    
+    This tests the fix for issue #1081 where parameters defined in one include file
+    (params.k) should be visible in a sibling include file (contact.k).
+    
+    Structure:
+    main.k
+      |--- params.k (defines parameters)
+      |--- contact.k (uses parameters from params.k)
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "sibling"
+    filename = cwd / "main.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # After expansion, parameters from params.k should be accessible
+    # and contact.k should be properly parsed as a keyword
+    assert "ssid" in expanded_deck.parameters._params or (
+        expanded_deck.parameters._parent is not None and 
+        "ssid" in expanded_deck.parameters._parent._params
+    )
+    
+    # Get the section keyword
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 1
+    
+    section = sections[0]
+    # Verify it was parsed as a keyword, not as a string
+    assert section.keyword == "SECTION"
+    assert section.subkeyword == "SOLID"
+    
+    # Verify the parameter values were substituted
+    assert section.secid == 1234.0
+    assert section.elform == 5678.0
+
+
+@pytest.mark.keywords
+def test_deck_expand_global_parameter_collision(file_utils):
+    """Test that global parameters from sibling includes collide (last one wins).
+    
+    This demonstrates the behavior AFTER the fix for issue #1081.
+    
+    KEY INSIGHT: Parameters are substituted DURING import, not after expansion.
+    So module_a gets scale=1.0 and module_b gets scale=2.0 at their import time.
+    
+    The collision is visible when module_c (consumer) tries to use &scale without
+    defining it - it gets the LAST value from the parent deck (2.0 from module_b).
+    
+    BEFORE the fix: module_c would get KeyError (bug - params were isolated).
+    AFTER the fix: module_c gets 2.0 (correct - global params are shared).
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "collision"
+    filename = cwd / "main_with_consumer.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # Get the sections
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 3
+    
+    # Find sections by secid
+    section_100 = next(s for s in sections if s.secid == 100)
+    section_200 = next(s for s in sections if s.secid == 200)
+    section_300 = next(s for s in sections if s.secid == 300)
+    
+    # Each module that DEFINES the parameter uses its own value at import time
+    assert section_100.elform == 1.0, "Module A uses its own value (1.0) at import time"
+    assert section_200.elform == 2.0, "Module B uses its own value (2.0) at import time"
+    
+    # Module C (consumer) gets the LAST value from parent deck (demonstrates collision)
+    assert section_300.elform == 2.0, "Module C gets last value (2.0) from parent - collision!"
+    
+    # The parameter in expanded deck should be the last one
+    assert expanded_deck.parameters.get("scale") == 2.0
+
+
+@pytest.mark.keywords
+def test_deck_expand_local_parameter_no_collision(file_utils):
+    """Test that local parameters from sibling includes do NOT collide.
+    
+    This demonstrates the CORRECT way to avoid collision: use *PARAMETER_LOCAL.
+    When two sibling includes define the same *PARAMETER_LOCAL, each gets its own
+    isolated value.
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "collision_local"
+    filename = cwd / "main.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # Get the sections
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 2
+    
+    # Find sections by secid
+    section_100 = next(s for s in sections if s.secid == 100)
+    section_200 = next(s for s in sections if s.secid == 200)
+    
+    # With PARAMETER_LOCAL: Each module gets its own value (no collision)
+    assert section_100.elform == 1.0, "Module A should use its own local value (1.0)"
+    assert section_200.elform == 2.0, "Module B should use its own local value (2.0)"
+    
+    # Local parameters should NOT be in the parent deck
+    with pytest.raises(KeyError):
+        expanded_deck.parameters.get("scale")
+
+
 @pytest.mark.keywords
 def test_deck_nodeset_extraction(file_utils):
     """Test extracting node set information from a deck.
