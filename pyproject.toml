@@ -97,6 +97,10 @@ doc = [
 [tool.flit.module]
 name = "ansys.dyna.core"
 
+# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging 
+[project.entry-points."agent.instructions"]
+"ansys.dyna.core" = "ansys.dyna.core:AGENT_INSTRUCTIONS"
+
 [project.urls]
 Source = "https://github.com/ansys/pydyna"
 Homepage = "https://dyna.docs.pyansys.com"

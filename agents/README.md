@@ -1,6 +1,8 @@
-# Agent Guides
+# Development Agent Guides
 
-Quick index of detailed documentation for AI agents working with PyDyna.
+Documentation for AI agents **developing and modifying** PyDyna itself.
+
+> **Users of PyDyna?** See the shipped instructions at `src/ansys/dyna/core/AGENT.md`
 
 ## Guide Index
 
