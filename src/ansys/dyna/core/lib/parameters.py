@@ -85,7 +85,7 @@ class ParameterSet:
         if param in self._params:
             logger.debug(f"Found parameter '{param}' in global params: {self._params[param]}")
             return self._params[param]
-        
+
         if param in self._local_params:
             logger.debug(f"Found parameter '{param}' in local params: {self._local_params[param]}")
             return self._local_params[param]

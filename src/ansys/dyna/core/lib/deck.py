@@ -294,12 +294,12 @@ class Deck(ValidationMixin):
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
                 include_deck._import_file(expand_include_file, encoding, context)
-            
+
             # Propagate global parameters from include back to parent (fix for issue #1081)
             # This allows subsequent sibling includes to see parameters defined in earlier includes
             for param_name, param_value in include_deck.parameters.get_global_params().items():
                 self.parameters.add(param_name, param_value)
-            
+
             if recurse:
                 expanded = include_deck._expand_helper(search_paths, True, strict)
                 keywords.extend(expanded)
