@@ -27,8 +27,8 @@ Usage:
 """
 
 import argparse
-import sys
 from pathlib import Path
+import sys
 
 
 def find_workspace_root() -> Path | None:
@@ -179,7 +179,8 @@ def cmd_agent(args: argparse.Namespace) -> int:
         except UnicodeEncodeError:
             # Fall back to UTF-8 if console doesn't support Unicode
             import sys
-            sys.stdout.buffer.write(formatted.encode('utf-8'))
+
+            sys.stdout.buffer.write(formatted.encode("utf-8"))
         return 0
 
     # Find workspace
@@ -209,9 +210,7 @@ def main() -> int:
     int
         Exit code.
     """
-    parser = argparse.ArgumentParser(
-        prog="python -m ansys.dyna.core", description="PyDyna CLI utilities"
-    )
+    parser = argparse.ArgumentParser(prog="python -m ansys.dyna.core", description="PyDyna CLI utilities")
     subparsers = parser.add_subparsers(dest="command")
 
     # agent subcommand
