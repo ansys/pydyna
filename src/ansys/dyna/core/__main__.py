@@ -23,6 +23,7 @@
 
 Usage:
     python -m ansys.dyna.core agent --env cursor
+    python -m ansys.dyna.core agent --env vscode/copilot
     python -m ansys.dyna.core agent --print
 """
 
@@ -97,13 +98,35 @@ alwaysApply: false
 """
 
 
+def format_for_vscode(content: str, source_path: Path) -> str:
+    """Format content for VS Code Copilot.
+
+    Parameters
+    ----------
+    content : str
+        The instructions content.
+    source_path : Path
+        Path to the source file.
+
+    Returns
+    -------
+    str
+        Formatted content for VS Code.
+    """
+    return f"""<!-- Auto-generated from: {source_path} -->
+<!-- To regenerate: python -m ansys.dyna.core agent --env vscode -->
+
+{content}
+"""
+
+
 def get_output_path(env: str, workspace: Path) -> Path:
     """Determine output path based on environment.
 
     Parameters
     ----------
     env : str
-        Target environment (cursor, copilot, or generic).
+        Target environment (cursor, vscode/copilot, or generic).
     workspace : Path
         Workspace root path.
 
@@ -116,7 +139,7 @@ def get_output_path(env: str, workspace: Path) -> Path:
         cursor_dir = workspace / ".cursor" / "rules"
         cursor_dir.mkdir(parents=True, exist_ok=True)
         return cursor_dir / "pydyna.mdc"
-    elif env == "copilot":
+    elif env in ("vscode", "copilot"):  # copilot is alias for vscode
         github_dir = workspace / ".github"
         github_dir.mkdir(parents=True, exist_ok=True)
         return github_dir / "copilot-instructions.md"
@@ -168,6 +191,8 @@ def cmd_agent(args: argparse.Namespace) -> int:
     # Format for environment
     if args.env == "cursor":
         formatted = format_for_cursor(content, source_path)
+    elif args.env in ("vscode", "copilot"):  # copilot is alias for vscode
+        formatted = format_for_vscode(content, source_path)
     else:
         formatted = content
 
@@ -217,9 +242,9 @@ def main() -> int:
     agent_parser = subparsers.add_parser("agent", help="Install agent instructions for AI assistants")
     agent_parser.add_argument(
         "--env",
-        choices=["cursor", "copilot", "generic"],
+        choices=["cursor", "vscode", "copilot", "generic"],
         default="generic",
-        help="Target environment (default: generic)",
+        help="Target environment: cursor, vscode/copilot, or generic (default: generic)",
     )
     agent_parser.add_argument("--print", action="store_true", help="Print to stdout instead of writing file")
     agent_parser.add_argument("--workspace", help="Workspace root (auto-detected if not specified)")
