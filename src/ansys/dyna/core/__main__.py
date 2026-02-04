@@ -168,7 +168,7 @@ def cmd_agent(args: argparse.Namespace) -> int:
 
     # Format for environment
     if args.env == "cursor":
-        formatted = format_for_cursor(content, source_path)    
+        formatted = format_for_cursor(content, source_path)
     else:
         formatted = content
 
