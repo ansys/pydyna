@@ -98,28 +98,6 @@ alwaysApply: false
 """
 
 
-def format_for_vscode(content: str, source_path: Path) -> str:
-    """Format content for VS Code Copilot.
-
-    Parameters
-    ----------
-    content : str
-        The instructions content.
-    source_path : Path
-        Path to the source file.
-
-    Returns
-    -------
-    str
-        Formatted content for VS Code.
-    """
-    return f"""<!-- Auto-generated from: {source_path} -->
-<!-- To regenerate: python -m ansys.dyna.core agent --env vscode -->
-
-{content}
-"""
-
-
 def get_output_path(env: str, workspace: Path) -> Path:
     """Determine output path based on environment.
 
@@ -190,9 +168,7 @@ def cmd_agent(args: argparse.Namespace) -> int:
 
     # Format for environment
     if args.env == "cursor":
-        formatted = format_for_cursor(content, source_path)
-    elif args.env in ("vscode", "copilot"):  # copilot is alias for vscode
-        formatted = format_for_vscode(content, source_path)
+        formatted = format_for_cursor(content, source_path)    
     else:
         formatted = content
 
