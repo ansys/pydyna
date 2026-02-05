@@ -214,3 +214,50 @@ def test_field_write_struct_comment():
     fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
     result = _get_comment_line(fields)
     assert result == "$#     foo       bar       foo       bar"
+
+
+@pytest.mark.keywords
+def test_field_write_large_int():
+    """Test writing integers that are too large for C long (overflow handling)."""
+    # Test with integer larger than 32-bit C long max (2147483647)
+    large_int = 9999999999
+    fields = [Field("large_id", int, 0, 10, large_int)]
+    result = _get_field_value(fields)
+    # Should be written as string when overflow occurs
+    assert result == "9999999999"
+
+
+@pytest.mark.keywords
+def test_field_write_very_large_int():
+    """Test writing very large integers that exceed field width."""
+    # Test with integer that's too large for the field width
+    very_large_int = 12345678901234567890
+    fields = [Field("huge_id", int, 0, 10, very_large_int)]
+    result = _get_field_value(fields)
+    # String representation will be truncated to field width
+    assert len(result) == 10
+
+
+@pytest.mark.keywords
+def test_field_write_negative_large_int():
+    """Test writing negative integers that are too large for C long."""
+    # Test with integer smaller than 32-bit C long min (-2147483648)
+    large_negative_int = -9999999999
+    fields = [Field("large_neg_id", int, 0, 12, large_negative_int)]
+    result = _get_field_value(fields)
+    # Should be written as string when overflow occurs
+    assert result == "-9999999999 "
+
+
+@pytest.mark.keywords
+def test_field_write_large_int_csv():
+    """Test writing large integers in CSV format (should always work)."""
+    import ansys.dyna.core.lib.field_writer as field_writer
+    
+    large_int = 9999999999
+    fields = [Field("large_id", int, 0, 10, large_int)]
+    s = io.StringIO()
+    field_writer.write_fields_csv(s, fields)
+    result = s.getvalue()
+    # CSV format should handle large integers without overflow
+    assert result == "9999999999"

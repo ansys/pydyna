@@ -8,6 +8,7 @@ determines which mutually-exclusive card is active. The manual subclass adds
 before_read support to handle the self-referential conditional pattern.
 """
 
+import io
 import pytest
 
 from ansys.dyna.core.keywords.keyword_classes.manual.mat_295 import (
@@ -211,3 +212,145 @@ class TestMat295FiberFamilies:
         assert ff1.b == pytest.approx(0.4)
         assert ff1.flcid == 200
         assert ff1.e == 1000.0
+
+    def test_no_extra_blank_lines_one_fiber_family(self):
+        """Test that one fiber family writes without extra blank lines."""
+        mat = Mat295()
+        mat.mid = 1
+        mat.nf = 1
+        mat.atype = -1
+
+        families = mat.fiber_families
+        families[0].theta = 30.0
+        families[0].a = 1.0
+        families[0].b = 2.0
+        families[0].ftype = 1
+        families[0].k1 = 0.00049
+        families[0].k2 = 9.01
+
+        output = mat.write()
+        lines = output.split("\n")
+
+        # Find the ANISO section and check for consecutive blank lines
+        aniso_idx = None
+        for i, line in enumerate(lines):
+            if "ANISO" in line:
+                aniso_idx = i
+                break
+
+        assert aniso_idx is not None, "ANISO line not found in output"
+
+        # Check for consecutive blank lines (double blank lines)
+        fiber_section = lines[aniso_idx : aniso_idx + 10]
+        for i in range(len(fiber_section) - 1):
+            if fiber_section[i].strip() == "" and fiber_section[i + 1].strip() == "":
+                pytest.fail(
+                    f"Found consecutive blank lines at index {aniso_idx + i}: "
+                    f"'{fiber_section[i]}' and '{fiber_section[i + 1]}'"
+                )
+
+    def test_no_extra_blank_lines_two_fiber_families(self):
+        """Test that two fiber families write without extra blank lines between them."""
+        mat = Mat295()
+        mat.mid = 2
+        mat.nf = 2
+        mat.atype = -1
+
+        # First fiber family
+        families = mat.fiber_families
+        families[0].theta = 30.0
+        families[0].a = 1.0
+        families[0].b = 2.0
+        families[0].ftype = 1
+        families[0].k1 = 0.00049
+        families[0].k2 = 9.01
+
+        # Second fiber family
+        families[1].theta = 45.0
+        families[1].a = 0.5
+        families[1].b = 1.5
+        families[1].ftype = 1
+        families[1].k1 = 0.0003
+        families[1].k2 = 8.5
+
+        output = mat.write()
+        lines = output.split("\n")
+
+        # Find the ANISO section
+        aniso_idx = None
+        for i, line in enumerate(lines):
+            if "ANISO" in line:
+                aniso_idx = i
+                break
+
+        assert aniso_idx is not None, "ANISO line not found in output"
+
+        # Check for consecutive blank lines in fiber family section
+        # The fiber families should be written back-to-back without extra blank lines
+        fiber_section = lines[aniso_idx : aniso_idx + 12]
+        for i in range(len(fiber_section) - 1):
+            if fiber_section[i].strip() == "" and fiber_section[i + 1].strip() == "":
+                pytest.fail(
+                    f"Found consecutive blank lines at index {aniso_idx + i}: "
+                    f"'{fiber_section[i]}' and '{fiber_section[i + 1]}'"
+                )
+
+        # Additionally verify both fiber families are present in sequence
+        # Family 0 data line (theta=30.0)
+        family0_found = any("30.0" in line for line in fiber_section)
+        # Family 1 data line (theta=45.0)
+        family1_found = any("45.0" in line for line in fiber_section)
+
+        assert family0_found, "Fiber family 0 data not found in output"
+        assert family1_found, "Fiber family 1 data not found in output"
+
+    def test_no_extra_blank_lines_file_write(self, tmp_path):
+        """Test that writing to a file produces no extra blank lines.
+
+        This specifically tests the Windows text mode issue where newline
+        handling could cause double carriage returns (\\r\\r\\n).
+        """
+        mat = Mat295()
+        mat.mid = 3
+        mat.nf = 2
+        mat.atype = -1
+
+        families = mat.fiber_families
+        families[0].theta = 30.0
+        families[0].a = 1.0
+        families[0].b = 2.0
+        families[0].ftype = 1
+        families[0].k1 = 0.00049
+        families[0].k2 = 9.01
+
+        families[1].theta = 45.0
+        families[1].a = 0.5
+        families[1].b = 1.5
+        families[1].ftype = 1
+        families[1].k1 = 0.0003
+        families[1].k2 = 8.5
+
+        # Write to a file
+        filepath = tmp_path / "mat295_test.kwd"
+        with open(filepath, "w") as f:
+            mat.write(buf=f)
+
+        # Read the file in binary mode to check for double carriage returns
+        with open(filepath, "rb") as f:
+            content = f.read()
+
+        # Check for \r\r\n (double carriage return + line feed) which indicates
+        # the bug where inactive cards caused extra blank lines
+        assert b"\r\r\n" not in content, (
+            "Found double carriage return (\\r\\r\\n) in file output. "
+            "This indicates extra blank lines between fiber families."
+        )
+
+        # Also verify the file can be read back correctly
+        deck = Deck()
+        deck.import_file(str(filepath))
+        assert len(deck.keywords) == 1
+
+        mat2 = deck.keywords[0]
+        assert mat2.nf == 2
+        assert len(mat2.fiber_families) == 2

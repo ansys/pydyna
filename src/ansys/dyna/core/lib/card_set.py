@@ -150,6 +150,7 @@ class CardSet(CardInterface):
             # write each item in the card set
             for item_index, item in enumerate([item for item in self._items]):
                 write_comment = comment and item_index == 0
+                # Write newline separator before each item (except the first)
                 if item_index != 0:
                     buf.write("\n")
                 item.write(buf, format, write_comment, **kwargs)

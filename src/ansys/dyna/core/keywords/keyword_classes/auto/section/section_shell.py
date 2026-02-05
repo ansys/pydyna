@@ -39,7 +39,7 @@ _SECTIONSHELLCARDSET_CARD0 = (
     FieldSchema("shrf", float, 20, 10, 1.0),
     FieldSchema("nip", int, 30, 10, 2),
     FieldSchema("propt", float, 40, 10, 1.0),
-    FieldSchema("qr/irid", int, 50, 10, 0),
+    FieldSchema("qr_irid", int, 50, 10, 0, "qr/irid"),
     FieldSchema("icomp", int, 60, 10, 0),
     FieldSchema("setyp", int, 70, 10, 1),
 )

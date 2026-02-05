@@ -3,7 +3,12 @@
 {% for sub_card in card.sub_cards %}
                     (
 {% for field in sub_card.fields %}
-                        FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% set lookup_name = field.property_name if field.property_name else field.name %}
+{% if lookup_name != field.name %}
+                        FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.name}}"),
+{% else %}
+                        FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
 {% endfor %}
                     ),
 {% endfor %}
