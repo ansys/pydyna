@@ -496,10 +496,10 @@ def cmd_agent_pointer(args: argparse.Namespace, workspace: Path) -> int:
         print("     (Your existing instructions were preserved)")
 
     elif env == "generic":
-        print(f"PyDyna agent instructions are installed at:")
+        print("PyDyna agent instructions are installed at:")
         print(f"  {source_path}")
         if extended_docs:
-            print(f"\nExtended documentation:")
+            print("\nExtended documentation:")
             for doc in extended_docs:
                 print(f"  {source_path.parent / doc}")
         print(f"\nManifest updated: {workspace / '.agent' / 'manifest.json'}")
