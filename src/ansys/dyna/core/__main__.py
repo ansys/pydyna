@@ -23,7 +23,8 @@
 
 Usage:
     python -m ansys.dyna.core agent --env cursor
-    python -m ansys.dyna.core agent --env vscode/copilot
+    python -m ansys.dyna.core agent --env vscode
+    python -m ansys.dyna.core agent --env claude
     python -m ansys.dyna.core agent --print
 """
 
@@ -101,34 +102,34 @@ alwaysApply: false
 def get_output_path(env: str, workspace: Path) -> Path:
     """Determine output path based on environment.
 
+    For cursor: writes to .cursor/rules/pydyna.mdc (isolated file, no conflicts)
+    For vscode/copilot/claude/generic: writes to .agent/ansys.dyna.core.md
+
     Parameters
     ----------
     env : str
-        Target environment (cursor, vscode/copilot, or generic).
+        Target environment.
     workspace : Path
         Workspace root path.
 
     Returns
     -------
     Path
-        Output file path.
+        Output file path for PyDyna instructions.
     """
     if env == "cursor":
         cursor_dir = workspace / ".cursor" / "rules"
         cursor_dir.mkdir(parents=True, exist_ok=True)
         return cursor_dir / "pydyna.mdc"
-    elif env in ("vscode", "copilot"):  # copilot is alias for vscode
-        github_dir = workspace / ".github"
-        github_dir.mkdir(parents=True, exist_ok=True)
-        return github_dir / "copilot-instructions.md"
-    else:  # generic
-        agent_dir = workspace / ".agent"
-        agent_dir.mkdir(parents=True, exist_ok=True)
-        return agent_dir / "ansys.dyna.core.md"
+
+    # All other environments: write to .agent/ directory
+    agent_dir = workspace / ".agent"
+    agent_dir.mkdir(parents=True, exist_ok=True)
+    return agent_dir / "ansys.dyna.core.md"
 
 
 def ensure_gitignore(workspace: Path, env: str) -> None:
-    """Add .agent/ to .gitignore if using generic output.
+    """Add .agent/ to .gitignore if we write there.
 
     Parameters
     ----------
@@ -137,8 +138,10 @@ def ensure_gitignore(workspace: Path, env: str) -> None:
     env : str
         Target environment.
     """
-    if env != "generic":
+    # Cursor uses its own directory structure, no need to gitignore
+    if env == "cursor":
         return
+
     gitignore = workspace / ".gitignore"
     marker = ".agent/"
     if gitignore.exists():
@@ -148,6 +151,124 @@ def ensure_gitignore(workspace: Path, env: str) -> None:
                 f.write(f"\n# Agent instructions (auto-generated)\n{marker}\n")
     else:
         gitignore.write_text(f"# Agent instructions (auto-generated)\n{marker}\n")
+
+
+def _make_pointer_block(pydyna_ref: str, tool_name: str, regenerate_cmd: str) -> tuple[str, str, str]:
+    """Create a pointer block for single-file instruction tools.
+
+    Returns start marker, end marker, and block content.
+    """
+    start = "<!-- pydyna-agent-instructions:start -->"
+    end = "<!-- pydyna-agent-instructions:end -->"
+
+    block = f"""{start}
+## PyDyna (ansys-dyna-core)
+
+PyDyna ships agent instructions. To use them, read the file at:
+
+- `{pydyna_ref}`
+
+Regenerate this pointer with: `{regenerate_cmd}`
+{end}"""
+
+    return start, end, block
+
+
+def _update_single_file_instructions(
+    workspace: Path,
+    pydyna_path: Path,
+    target_file: Path,
+    tool_name: str,
+    regenerate_cmd: str,
+    default_header: str,
+) -> Path:
+    """Append/refresh a pointer section in a single-file instructions file.
+
+    This preserves user content and only updates the marked PyDyna section.
+
+    Parameters
+    ----------
+    workspace : Path
+        Workspace root path.
+    pydyna_path : Path
+        Path to the PyDyna instructions file.
+    target_file : Path
+        Path to the tool's instruction file.
+    tool_name : str
+        Name of the tool (for messages).
+    regenerate_cmd : str
+        Command to regenerate this pointer.
+    default_header : str
+        Header to use if creating a new file.
+
+    Returns
+    -------
+    Path
+        Path to the updated file.
+    """
+    try:
+        rel = pydyna_path.relative_to(workspace)
+        pydyna_ref = str(rel).replace("\\", "/")
+    except ValueError:
+        pydyna_ref = str(pydyna_path)
+
+    start, end, block = _make_pointer_block(pydyna_ref, tool_name, regenerate_cmd)
+
+    if target_file.exists():
+        text = target_file.read_text(encoding="utf-8", errors="replace")
+
+        # Check if our markers exist and are in the right order
+        if start in text and end in text and text.index(start) < text.index(end):
+            # Replace existing block
+            pre = text[: text.index(start)].rstrip()
+            post = text[text.index(end) + len(end) :].lstrip()
+            if pre:
+                new_text = f"{pre}\n\n{block}\n"
+            else:
+                new_text = f"{block}\n"
+            if post:
+                new_text += f"\n{post}"
+            new_text = new_text.rstrip() + "\n"
+        else:
+            # Append block to end
+            new_text = text.rstrip() + "\n\n" + block + "\n"
+    else:
+        # Create new file with header and block
+        target_file.parent.mkdir(parents=True, exist_ok=True)
+        new_text = f"{default_header}\n\n{block}\n"
+
+    target_file.write_text(new_text, encoding="utf-8")
+    return target_file
+
+
+def update_copilot_instructions(workspace: Path, pydyna_path: Path) -> Path:
+    """Update .github/copilot-instructions.md with a pointer to PyDyna instructions."""
+    github_dir = workspace / ".github"
+    github_dir.mkdir(parents=True, exist_ok=True)
+    copilot_file = github_dir / "copilot-instructions.md"
+
+    return _update_single_file_instructions(
+        workspace=workspace,
+        pydyna_path=pydyna_path,
+        target_file=copilot_file,
+        tool_name="GitHub Copilot",
+        regenerate_cmd="python -m ansys.dyna.core agent --env vscode",
+        default_header="# Copilot Instructions",
+    )
+
+
+def update_claude_instructions(workspace: Path, pydyna_path: Path) -> Path:
+    """Update CLAUDE.md with a pointer to PyDyna instructions."""
+    claude_file = workspace / "CLAUDE.md"
+
+    return _update_single_file_instructions(
+        workspace=workspace,
+        pydyna_path=pydyna_path,
+        target_file=claude_file,
+        tool_name="Claude Code",
+        regenerate_cmd="python -m ansys.dyna.core agent --env claude",
+        default_header="# Claude Code Instructions",
+    )
 
 
 def cmd_agent(args: argparse.Namespace) -> int:
@@ -178,9 +299,6 @@ def cmd_agent(args: argparse.Namespace) -> int:
         try:
             print(formatted)
         except UnicodeEncodeError:
-            # Fall back to UTF-8 if console doesn't support Unicode
-            import sys
-
             sys.stdout.buffer.write(formatted.encode("utf-8"))
         return 0
 
@@ -194,12 +312,24 @@ def cmd_agent(args: argparse.Namespace) -> int:
             print("Run from a git repo or specify --workspace PATH", file=sys.stderr)
             return 1
 
-    # Write file
+    # Write PyDyna instructions file
     output_path = get_output_path(args.env, workspace)
     output_path.write_text(formatted, encoding="utf-8")
     ensure_gitignore(workspace, args.env)
 
-    print(f"[OK] Agent instructions written to: {output_path}")
+    print(f"[OK] PyDyna instructions written to: {output_path}")
+
+    # For single-file tools, also update their instruction file with a pointer
+    if args.env in ("vscode", "copilot"):
+        pointer_file = update_copilot_instructions(workspace, output_path)
+        print(f"[OK] Added pointer to: {pointer_file}")
+        print("     (Your existing instructions were preserved)")
+
+    elif args.env == "claude":
+        pointer_file = update_claude_instructions(workspace, output_path)
+        print(f"[OK] Added pointer to: {pointer_file}")
+        print("     (Your existing instructions were preserved)")
+
     return 0
 
 
@@ -218,9 +348,9 @@ def main() -> int:
     agent_parser = subparsers.add_parser("agent", help="Install agent instructions for AI assistants")
     agent_parser.add_argument(
         "--env",
-        choices=["cursor", "vscode", "copilot", "generic"],
+        choices=["cursor", "vscode", "copilot", "claude", "generic"],
         default="generic",
-        help="Target environment: cursor, vscode/copilot, or generic (default: generic)",
+        help="Target environment: cursor, vscode/copilot, claude, or generic (default: generic)",
     )
     agent_parser.add_argument("--print", action="store_true", help="Print to stdout instead of writing file")
     agent_parser.add_argument("--workspace", help="Workspace root (auto-detected if not specified)")
