@@ -38,9 +38,7 @@ def _get_matplotlib():
 
         return plt
     except ImportError:
-        raise ImportError(
-            "Matplotlib is required for plotting. Install it with: pip install ansys-dyna-core[graphics]"
-        )
+        raise ImportError("Matplotlib is required for plotting. Install it with: pip install ansys-dyna-core[graphics]")
 
 
 class CurvePlottingMixin:
