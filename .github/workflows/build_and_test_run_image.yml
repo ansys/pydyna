@@ -3,9 +3,7 @@ name: Test Docker Build
 on:
   pull_request:
 
-permissions:
-  contents: read  # Needed to checkout code
-  packages: write # Needed to publish container images to GHCR
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,12 +17,15 @@ env:
   REGISTRY: ghcr.io
   REPO_NAME: ${{ github.repository }}
   IMAGE_TAG: dev-test
-  # PYDYNA_RUN_CONTAINER: ghcr.io/ansys/pydyna-run:dev-test
+  PYDYNA_RUN_CONTAINER: ghcr.io/ansys/pydyna-run:dev-test
 
 jobs:
   test-docker-build:
     name: Test Docker Build (No Push)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: write # Needed for pushing test image to GHCR
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
@@ -41,7 +42,7 @@ jobs:
             --build-arg FTP_LOGIN=${FTP_LOGIN} \
             --load \
             -t ${TEST_DOCKER_IMAGE} \
-            docker/run/MPP/
+            docker/run/SMP
           
           echo "Verifying Docker image was built successfully..."
           docker images ${TEST_DOCKER_IMAGE}
@@ -87,37 +88,62 @@ jobs:
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
           LSTC_LICENSE: ansys
 
-      # - name: Login to ghcr.io
-      #   uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
-      #   with:
-      #     registry: ${{ env.REGISTRY }}
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to ghcr.io
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build and export to Docker
-      #   uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
-      #   with:
-      #     context: docker/run
-      #     file: docker/run/Dockerfile
-      #     push: true
-      #     tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
-      #     build-args: |
-      #       FTP_USER=${{ env.FTP_USER }}
-      #       FTP_LOGIN=${{ env.FTP_LOGIN }}
+      - name: Build and export to Docker
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        with:
+          context: docker/run
+          file: docker/run/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
+          build-args: |
+            FTP_USER=${{ env.FTP_USER }}
+            FTP_LOGIN=${{ env.FTP_LOGIN }}
 
-  # run-testing:
-  #   name: Test the "run" subpackage
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-  #       with:
-  #         persist-credentials: false
+  run-testing:
+    name: Test the "run" subpackage
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: read  # Needed for pulling container images from GHCR
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
-  #     - uses: ./.github/actions/unit-test
-  #       with:
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
-  #         pytest-markers: run
-  #         license-server: ${{ secrets.LICENSE_SERVER }}
-  #         coverage-file: run
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pytest-markers: run
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          coverage-file: run
+
+  doc:
+    name: "Documentation build"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: read  # Needed for pulling container images from GHCR
+    steps:
+      - name: "Checkout project"
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: true
+
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          github-actor: ${{ github.actor }}
