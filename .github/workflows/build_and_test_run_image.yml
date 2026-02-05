@@ -98,8 +98,8 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
         with:
-          context: docker/run
-          file: docker/run/Dockerfile
+          context: docker/run/SMP
+          file: docker/run/SMP/Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
           build-args: |
@@ -121,7 +121,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          docker-image: ${{ env.TEST_DOCKER_IMAGE }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
           coverage-file: run
@@ -141,7 +141,7 @@ jobs:
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
         with:
-          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          PyDynaRunContainer: ${{ env.TEST_DOCKER_IMAGE }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ secrets.LICENSE_SERVER }}
