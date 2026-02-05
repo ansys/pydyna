@@ -44,7 +44,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class AddMixinSettings:
     """Configuration for adding a mixin to a keyword class.
-    
+
     Attributes
     ----------
         source: Full module path to import from (e.g., "ansys.dyna.core.lib.curve_plotting_mixin")
