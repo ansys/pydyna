@@ -106,8 +106,13 @@ class DockerRunner(BaseRunner):
         # From Dockerfile: ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh
         # This extracts to: /opt/Dyna/ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2/
         # Inside, the executable is typically named the same as the directory
-        # main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
-        main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405"
+        # get the executables name based on the solver option
+        # solver_option = self._get_solver_option()
+        # if solver_option == "SP":
+        #     main_executable = "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"
+        # elif solver_option == "DP":
+        #      main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405"
+        main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 
         # The container has this directory in PATH, so we can call the executable directly
         # For now, assume the main executable handles all cases
