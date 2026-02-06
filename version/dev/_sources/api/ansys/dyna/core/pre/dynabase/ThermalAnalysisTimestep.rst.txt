@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep
+====================================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Thermal analysis timestep control (fixed or variable).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: FIXED
+      :value: 0
+
+
+
+   .. py:attribute:: VARIABLE
+      :value: 1
+
+

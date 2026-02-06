@@ -1,0 +1,552 @@
+ansys.dyna.core.pre.dynasolution.DynaSolution
+=============================================
+
+.. py:class:: ansys.dyna.core.pre.dynasolution.DynaSolution(hostname='localhost', port='50051', channel=None, server_path='')
+
+   
+   Contains methods for creating a general LS-DYNA keyword.
+
+
+   :Parameters:
+
+       **hostname** : :class:`python:str`, :obj:`optional`
+           Host name. The default is ``"localhost"``.
+
+       **port** : :class:`python:str`, :obj:`optional`
+           Port. the default is ``"50051"``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: pim_client
+      :value: None
+
+
+
+   .. py:attribute:: remote_instance
+      :value: None
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: object_list
+      :value: []
+
+
+
+   .. py:attribute:: mainname
+      :value: ''
+
+
+
+   .. py:method:: get_download_path()
+
+
+   .. py:method:: get_appdata_path()
+      :staticmethod:
+
+
+
+   .. py:method:: downloadfile(url: str, fname: str, timeout: float = 10.0) -> None
+      :staticmethod:
+
+
+
+   .. py:method:: grpc_local_server_on() -> bool
+      :staticmethod:
+
+
+      
+      Check if the server is launched locally.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: model
+
+      
+      Get model associated with the solution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_stub()
+
+      
+      Get the stub of the solution object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add(obj)
+
+      
+      Add a case in the solution.
+
+
+      :Parameters:
+
+          **obj**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_file_chunks(filename)
+
+      
+      Get file chunks.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`
+              Name of the file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: upload(stub_, filename)
+
+      
+      Upload files to the server.
+
+
+      :Parameters:
+
+          **stub_**
+              ..
+
+          **filename** : :class:`python:str`
+              Name of the file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: download(remote_name, local_name)
+
+      
+      Download files from the server.
+
+
+      :Parameters:
+
+          **stub_**
+              ..
+
+          **remote_name**
+              ..
+
+          **local_name**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: open_files(filenames)
+
+      
+      Open initial model files.
+
+
+      :Parameters:
+
+          **filenames** : :class:`python:list`
+              List of filenames. The main file is ``[0]``. The others are subfiles.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_termination(termination_time)
+
+      
+      Set time for terminating the job.
+
+
+      :Parameters:
+
+          **termination_time** : :class:`python:float`
+              Termination time.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_database_binary(filetype='D3PLOT', dt=0, maxint=3, ieverp=0, dcomp=1, nintsld=1)
+
+      
+      Request binary output.
+
+
+      :Parameters:
+
+          **filetype** : :class:`python:str`, :obj:`optional`
+              Type of file. The default is ``"D3PLOT"``.
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Time interval between output states. The default is ``0``.
+
+          **maxint** : :class:`python:int`, :obj:`optional`
+              Number of shell and thick shell through-thickness integration points
+              to output to the d3plot. The default is ``3``.
+
+          **ieverp** : :class:`python:int`, :obj:`optional`
+              How to plot output states on plot files. The default is ``0``. Every output
+              state for the d3plot database is written to a separate file. Options are:
+              
+              - EQ.0: More than one state can be on each plot file.
+              - EQ.1: Only one state can be on each plot file.
+
+          **dcomp** : :class:`python:int`, :obj:`optional`
+              Data compression to eliminate rigid body data. The default is ``1``.
+
+          **nintsld** : :class:`python:int`, :obj:`optional`
+              Number of solid element integration points written to the LS-DYNA database.
+              The default is ``1``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_database_ascii(type, dt=0.0, binary=1, lcur=0, ioopt=0)
+
+      
+      Obtain output files containing result information.
+
+
+      :Parameters:
+
+          **type** : :class:`python:str`
+              Type of the database. Options are:
+              
+              - BNDOUT
+              - GLSTAT
+              - MATSUM
+              - NODFOR
+              - RCFORC
+              - SLEOUT
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs. The default is ``0.0``.
+
+          **binary** : :class:`python:int`, :obj:`optional`
+              Flag for whether to generate binary output. The default is ``1``.
+
+          **lcur** : :class:`python:int`, :obj:`optional`
+              Curve ID specifying the time interval between outputs. The default
+              is ``0``.
+
+          **ioopt** : :class:`python:int`, :obj:`optional`
+              Flag for governing the behavior of the output frequency load curve
+              defined by the ``lcur`` parameter. The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_output_database(matsum=0, glstat=0, elout=0, nodout=0, nodfor=0, rbdout=0, rcforc=0, secforc=0, rwforc=0, abstat=0, bndout=0, sleout=0, sphmassflow=0)
+
+      
+      Obtain output files containing result information.
+
+
+      :Parameters:
+
+          **matsum** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of part energies. The default is ``0``.
+
+          **glstat** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of global statistics
+              and energies. The default is ``0``.
+
+          **elout**
+              ..
+
+          **nodout**
+              ..
+
+          **modfor**
+              ..
+
+          **rbdout**
+              ..
+
+          **secforc**
+              ..
+
+          **rwforce**
+              ..
+
+          **bndout**
+              ..
+
+          **sleout**
+              ..
+
+          **sphmassflow**
+              ..
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: quit()
+
+      
+      Delete remote instance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

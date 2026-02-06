@@ -1,0 +1,41 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295
+=======================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295
+
+.. autoapi-nested-parse::
+
+   Manual MAT_295 subclass with before_read support.
+
+   This subclass of the auto-generated Mat295 adds a `before_read` method to handle
+   the self-referential conditional pattern where card 6 (ANISO) has an active_func
+   that depends on `atype`, but `atype` is a field ON that card.
+
+   The solution is to peek ahead in the buffer before reading to detect "ANISO" and
+   "ACTIVE" title lines and pre-set the corresponding fields so the conditionals
+   evaluate correctly during the normal read process.
+
+   The auto-generated class handles everything else including:
+   - FiberFamily CardSet with discriminator support for ftype-dependent cards
+   - All field properties and card definitions
+   - Option card handling
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/Mat295
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/MatAnisotropicHyperelastic
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295.MatAnisotropicHyperelastic
+
+

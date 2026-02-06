@@ -1,0 +1,43 @@
+ansys.dyna.core.pre.dynabase.SBOPT
+==================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.SBOPT(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Segment-based contact options.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ASSUME_PLANER_SEGMENTS
+      :value: 2
+
+
+
+   .. py:attribute:: WRAPED_SEGMENT_CHECKING
+      :value: 3
+
+
+
+   .. py:attribute:: SLDING_OPTION
+      :value: 4
+
+

@@ -1,0 +1,28 @@
+ansys.dyna.core.solver.dynalogging.PydynaPercentStyle
+=====================================================
+
+.. py:class:: ansys.dyna.core.solver.dynalogging.PydynaPercentStyle(fmt, *, defaults=None)
+
+   Bases: :py:obj:`logging.PercentStyle`
+
+
+   
+   Provides a customized ``PercentStyle`` class for overwriting the default format styles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

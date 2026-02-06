@@ -1,0 +1,16 @@
+:py:mod:`ansys.dyna.core.pre.examples`
+======================================
+
+.. py:module:: ansys.dyna.core.pre.examples
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   download_utilities/index.rst
+   examples/index.rst
+
+
