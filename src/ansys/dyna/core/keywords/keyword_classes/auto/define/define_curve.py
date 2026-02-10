@@ -24,6 +24,7 @@
 import typing
 import pandas as pd
 
+from ansys.dyna.core.lib.mixins.curve_plotting import CurvePlottingMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
@@ -45,7 +46,10 @@ _DEFINECURVE_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class DefineCurve(KeywordBase):
+class DefineCurve(
+    KeywordBase
+    , CurvePlottingMixin
+    ):
     """DYNA DEFINE_CURVE keyword"""
 
     keyword = "DEFINE"

@@ -42,6 +42,7 @@ dependencies = [
 all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
 
 graphics = [
+    "matplotlib>=3.0",
     "pyvista>=0.43.4",
 ]
 pim = [

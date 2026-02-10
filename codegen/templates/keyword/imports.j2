@@ -11,7 +11,7 @@ import pandas as pd
 {% endif %}
 {% if keyword_data.mixin_imports %}
 {% for mixin_import in keyword_data.mixin_imports %}
-from ansys.dyna.core.lib.cards_.special.{{mixin_import.source}} import{% for name in mixin_import.names %}{{ ", " if not loop.first else " " }}{{name}}{% endfor %}
+from {{mixin_import.source}} import{% for name in mixin_import.names %}{{ ", " if not loop.first else " " }}{{name}}{% endfor %}
 {% endfor %}
 
 {% endif %}
