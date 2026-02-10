@@ -36,6 +36,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation 
 def _get_translation_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
     return tfm.translation_matrix((a1, a2, a3))
 
+
 def _get_scale_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
     """Creates a 4x4 scaling matrix."""
     scale_x = tfm.scale_matrix(factor=a1, direction=[1.0, 0.0, 0.0])
