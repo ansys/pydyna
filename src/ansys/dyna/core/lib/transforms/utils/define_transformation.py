@@ -36,6 +36,13 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation 
 def _get_translation_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
     return tfm.translation_matrix((a1, a2, a3))
 
+def _get_scale_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
+    """Creates a 4x4 scaling matrix."""
+    scale_x = tfm.scale_matrix(factor=a1, direction=[1.0, 0.0, 0.0])
+    scale_y = tfm.scale_matrix(factor=a2, direction=[0.0, 1.0, 0.0])
+    scale_z = tfm.scale_matrix(factor=a3, direction=[0.0, 0.0, 1.0])
+    return tfm.concatenate_matrices(scale_x, scale_y, scale_z)
+
 
 def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, a6: float, a7: float) -> np.ndarray:
     if (a4, a5, a6) == (0.0, 0.0, 0.0):
@@ -78,6 +85,8 @@ def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
         return _get_translation_matrix(a1, a2, a3)
     elif option == "ROTATE":
         return _get_rotation_matrix(a1, a2, a3, a4, a5, a6, a7)
+    elif option == "SCALE":
+        return _get_scale_matrix(a1, a2, a3)
     else:
         warnings.warn(f"DEFINE_TRANFORMATION option {option} not handled yet by pydyna!")
         return None
