@@ -135,7 +135,7 @@ class TestExternalCardHandler:
         assert len(sample_kwd_data.mixin_imports) == 1
         mixin_import = sample_kwd_data.mixin_imports[0]
         assert isinstance(mixin_import, MixinImport)
-        assert mixin_import.source == "common_cards"
+        assert mixin_import.source == "ansys.dyna.core.lib.cards_.special.common_cards"
         assert "TitleCard" in mixin_import.names
         assert "TitleCardMixin" in mixin_import.names
 
@@ -170,8 +170,8 @@ class TestExternalCardHandler:
         # Verify both imports added
         assert len(sample_kwd_data.mixin_imports) == 2
         sources = [mi.source for mi in sample_kwd_data.mixin_imports]
-        assert "common_cards" in sources
-        assert "data_cards" in sources
+        assert "ansys.dyna.core.lib.cards_.special.common_cards" in sources
+        assert "ansys.dyna.core.lib.cards_.special.data_cards" in sources
 
         # Verify both cards marked as external
         assert sample_kwd_data.cards[1]["external"] is not None
