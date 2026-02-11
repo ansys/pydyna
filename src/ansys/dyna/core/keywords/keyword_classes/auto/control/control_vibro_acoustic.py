@@ -214,7 +214,7 @@ class ControlVibroAcoustic(KeywordBase):
         self._cards[1].set_value("nmodstr", value)
 
     @property
-    def nmodstr_link(self) -> DefineCurve:
+    def nmodstr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for nmodstr."""
         if self.deck is None:
             return None

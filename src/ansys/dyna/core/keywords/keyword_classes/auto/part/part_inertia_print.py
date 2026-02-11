@@ -534,12 +534,12 @@ class PartInertiaPrint(KeywordBase):
         self._cards[6].set_value("prbf", value)
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -554,7 +554,7 @@ class PartInertiaPrint(KeywordBase):
         self.mid = value.mid
 
     @property
-    def secid_link(self) -> KeywordBase:
+    def secid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for secid."""
         if self.deck is None:
             return None
@@ -569,7 +569,7 @@ class PartInertiaPrint(KeywordBase):
         self.secid = value.secid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None
@@ -584,7 +584,7 @@ class PartInertiaPrint(KeywordBase):
         self.hgid = value.hgid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

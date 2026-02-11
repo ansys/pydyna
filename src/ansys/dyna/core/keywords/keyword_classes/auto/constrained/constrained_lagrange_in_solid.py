@@ -701,7 +701,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
         self._cards[6].set_value("coeflc", value)
 
     @property
-    def lcidpor_link(self) -> DefineCurve:
+    def lcidpor_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidpor."""
         if self.deck is None:
             return None

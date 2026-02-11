@@ -288,7 +288,7 @@ class Mat099(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdm_link(self) -> DefineCurve:
+    def lcdm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdm."""
         if self.deck is None:
             return None

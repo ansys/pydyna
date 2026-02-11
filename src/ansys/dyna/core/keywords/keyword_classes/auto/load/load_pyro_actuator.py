@@ -205,17 +205,17 @@ class LoadPyroActuator(KeywordBase):
         self._cards[1].set_value("temp", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id1."""
         return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
 
     @property
-    def id2_link(self) -> KeywordBase:
+    def id2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id2."""
         return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
 
     @property
-    def mcid_link(self) -> DefineCurve:
+    def mcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for mcid."""
         if self.deck is None:
             return None

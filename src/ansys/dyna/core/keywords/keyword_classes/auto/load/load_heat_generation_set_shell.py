@@ -126,7 +126,7 @@ class LoadHeatGenerationSetShell(KeywordBase):
         self._cards[0].set_value("tblcid", value)
 
     @property
-    def wblcid_link(self) -> DefineCurve:
+    def wblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for wblcid."""
         if self.deck is None:
             return None
@@ -141,7 +141,7 @@ class LoadHeatGenerationSetShell(KeywordBase):
         self.wblcid = value.lcid
 
     @property
-    def cblcid_link(self) -> DefineCurve:
+    def cblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cblcid."""
         if self.deck is None:
             return None
@@ -156,7 +156,7 @@ class LoadHeatGenerationSetShell(KeywordBase):
         self.cblcid = value.lcid
 
     @property
-    def tblcid_link(self) -> DefineCurve:
+    def tblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tblcid."""
         if self.deck is None:
             return None

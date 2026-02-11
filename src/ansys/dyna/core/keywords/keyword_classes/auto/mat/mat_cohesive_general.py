@@ -252,7 +252,7 @@ class MatCohesiveGeneral(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tslc_link(self) -> DefineCurve:
+    def tslc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tslc."""
         if self.deck is None:
             return None
@@ -267,7 +267,7 @@ class MatCohesiveGeneral(KeywordBase):
         self.tslc = value.lcid
 
     @property
-    def tslc2_link(self) -> DefineCurve:
+    def tslc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tslc2."""
         if self.deck is None:
             return None

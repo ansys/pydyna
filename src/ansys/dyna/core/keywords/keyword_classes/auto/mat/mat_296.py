@@ -280,7 +280,7 @@ class Mat296(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcym_link(self) -> DefineCurve:
+    def lcym_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcym."""
         if self.deck is None:
             return None

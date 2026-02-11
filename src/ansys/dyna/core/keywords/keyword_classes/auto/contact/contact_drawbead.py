@@ -1743,17 +1743,17 @@ class ContactDrawbead(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def point1_link(self) -> KeywordBase:
+    def point1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given point1."""
         return self._get_link_by_attr("NODE", "nid", self.point1, "parts")
 
     @property
-    def point2_link(self) -> KeywordBase:
+    def point2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given point2."""
         return self._get_link_by_attr("NODE", "nid", self.point2, "parts")
 
     @property
-    def lcidrf_link(self) -> DefineCurve:
+    def lcidrf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrf."""
         if self.deck is None:
             return None
@@ -1768,7 +1768,7 @@ class ContactDrawbead(KeywordBase):
         self.lcidrf = value.lcid
 
     @property
-    def lcidnf_link(self) -> DefineCurve:
+    def lcidnf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidnf."""
         if self.deck is None:
             return None
@@ -1783,7 +1783,7 @@ class ContactDrawbead(KeywordBase):
         self.lcidnf = value.lcid
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -1798,7 +1798,7 @@ class ContactDrawbead(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

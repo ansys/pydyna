@@ -156,12 +156,12 @@ class DefineFormingClamp(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def clp1_link(self) -> KeywordBase:
+    def clp1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given clp1."""
         return self._get_link_by_attr("PART", "pid", self.clp1, "parts")
 
     @property
-    def clp2_link(self) -> KeywordBase:
+    def clp2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given clp2."""
         return self._get_link_by_attr("PART", "pid", self.clp2, "parts")
 

@@ -60,7 +60,7 @@ class InterfaceJoy(KeywordBase):
         self._cards[0].set_value("sid", value)
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 

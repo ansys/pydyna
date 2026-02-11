@@ -334,7 +334,7 @@ class Mat265(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcf_link(self) -> DefineCurve:
+    def lcf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf."""
         if self.deck is None:
             return None
@@ -349,7 +349,7 @@ class Mat265(KeywordBase):
         self.lcf = value.lcid
 
     @property
-    def lcupf_link(self) -> DefineCurve:
+    def lcupf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcupf."""
         if self.deck is None:
             return None
@@ -364,7 +364,7 @@ class Mat265(KeywordBase):
         self.lcupf = value.lcid
 
     @property
-    def lcupr_link(self) -> DefineCurve:
+    def lcupr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcupr."""
         if self.deck is None:
             return None

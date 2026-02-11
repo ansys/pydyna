@@ -1965,7 +1965,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def lcfsa_link(self) -> DefineCurve:
+    def lcfsa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfsa."""
         if self.deck is None:
             return None
@@ -1980,7 +1980,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
         self.lcfsa = value.lcid
 
     @property
-    def lcpsa_link(self) -> DefineCurve:
+    def lcpsa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpsa."""
         if self.deck is None:
             return None
@@ -1995,7 +1995,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
         self.lcpsa = value.lcid
 
     @property
-    def lcfsb_link(self) -> DefineCurve:
+    def lcfsb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfsb."""
         if self.deck is None:
             return None
@@ -2010,7 +2010,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
         self.lcfsb = value.lcid
 
     @property
-    def lcpsb_link(self) -> DefineCurve:
+    def lcpsb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpsb."""
         if self.deck is None:
             return None
@@ -2025,7 +2025,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
         self.lcpsb = value.lcid
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -2040,7 +2040,7 @@ class ContactAutomaticOneWaySurfaceToSurfaceOrthoFriction(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

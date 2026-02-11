@@ -740,7 +740,7 @@ class Mat120Rcdc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -755,7 +755,7 @@ class Mat120Rcdc(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lclf_link(self) -> DefineCurve:
+    def lclf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclf."""
         if self.deck is None:
             return None

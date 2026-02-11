@@ -415,7 +415,7 @@ class MatHill3RTabulated(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc00_link(self) -> DefineCurve:
+    def lc00_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc00."""
         if self.deck is None:
             return None
@@ -430,7 +430,7 @@ class MatHill3RTabulated(KeywordBase):
         self.lc00 = value.lcid
 
     @property
-    def lc90_link(self) -> DefineCurve:
+    def lc90_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc90."""
         if self.deck is None:
             return None
@@ -445,7 +445,7 @@ class MatHill3RTabulated(KeywordBase):
         self.lc90 = value.lcid
 
     @property
-    def lc45_link(self) -> DefineCurve:
+    def lc45_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc45."""
         if self.deck is None:
             return None

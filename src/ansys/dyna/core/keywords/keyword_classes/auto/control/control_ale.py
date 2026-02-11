@@ -450,7 +450,7 @@ class ControlAle(KeywordBase):
         self._cards[3].set_value("minmas", value)
 
     @property
-    def nsidebc_link(self) -> KeywordBase:
+    def nsidebc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidebc."""
         return self._get_set_link("NODE", self.nsidebc)
 

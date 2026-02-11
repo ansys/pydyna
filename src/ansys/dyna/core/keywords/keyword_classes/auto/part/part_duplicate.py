@@ -149,7 +149,7 @@ class PartDuplicate(KeywordBase):
         self._cards[0].set_value("zmin", value)
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -164,7 +164,7 @@ class PartDuplicate(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def tranid_link(self) -> DefineTransformation:
+    def tranid_link(self) -> typing.Optional[DefineTransformation]:
         """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None

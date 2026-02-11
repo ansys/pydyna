@@ -157,7 +157,7 @@ class InterfaceCompensation(KeywordBase):
         self._cards[2].set_value("outname", value)
 
     @property
-    def psidt_link(self) -> KeywordBase:
+    def psidt_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidt."""
         return self._get_set_link("PART", self.psidt)
 
@@ -167,7 +167,7 @@ class InterfaceCompensation(KeywordBase):
         self.psidt = value.sid
 
     @property
-    def psidb_link(self) -> KeywordBase:
+    def psidb_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidb."""
         return self._get_set_link("PART", self.psidb)
 

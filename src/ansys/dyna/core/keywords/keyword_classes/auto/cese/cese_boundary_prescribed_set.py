@@ -235,7 +235,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self._cards[2].set_value("sf_t", value)
 
     @property
-    def lc_u_link(self) -> DefineCurve:
+    def lc_u_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_u."""
         if self.deck is None:
             return None
@@ -250,7 +250,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_u = value.lcid
 
     @property
-    def lc_v__link(self) -> DefineCurve:
+    def lc_v__link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_v_."""
         if self.deck is None:
             return None
@@ -265,7 +265,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_v_ = value.lcid
 
     @property
-    def lc_w_link(self) -> DefineCurve:
+    def lc_w_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_w."""
         if self.deck is None:
             return None
@@ -280,7 +280,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_w = value.lcid
 
     @property
-    def lc_rho_link(self) -> DefineCurve:
+    def lc_rho_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_rho."""
         if self.deck is None:
             return None
@@ -295,7 +295,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_rho = value.lcid
 
     @property
-    def lc_p__link(self) -> DefineCurve:
+    def lc_p__link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_p_."""
         if self.deck is None:
             return None
@@ -310,7 +310,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_p_ = value.lcid
 
     @property
-    def lc_t_link(self) -> DefineCurve:
+    def lc_t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_t."""
         if self.deck is None:
             return None
@@ -325,7 +325,7 @@ class CeseBoundaryPrescribedSet(KeywordBase):
         self.lc_t = value.lcid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

@@ -90,7 +90,7 @@ class NodeTransform(KeywordBase):
         self._cards[0].set_value("immed", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -100,7 +100,7 @@ class NodeTransform(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def trsid_link(self) -> DefineTransformation:
+    def trsid_link(self) -> typing.Optional[DefineTransformation]:
         """Get the DefineTransformation object for trsid."""
         if self.deck is None:
             return None

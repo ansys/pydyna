@@ -369,7 +369,7 @@ class MatAddDamageGissmo(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -384,7 +384,7 @@ class MatAddDamageGissmo(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcdlim_link(self) -> DefineCurve:
+    def lcdlim_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdlim."""
         if self.deck is None:
             return None
@@ -399,7 +399,7 @@ class MatAddDamageGissmo(KeywordBase):
         self.lcdlim = value.lcid
 
     @property
-    def lcregd_link(self) -> KeywordBase:
+    def lcregd_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcregd."""
         if self.deck is None:
             return None
@@ -423,7 +423,7 @@ class MatAddDamageGissmo(KeywordBase):
             self.lcregd = value.tbid
 
     @property
-    def lcsrs_link(self) -> KeywordBase:
+    def lcsrs_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsrs."""
         if self.deck is None:
             return None

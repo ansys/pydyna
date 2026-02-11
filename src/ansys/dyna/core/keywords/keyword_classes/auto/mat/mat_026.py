@@ -589,7 +589,7 @@ class Mat026(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lca_link(self) -> DefineCurve:
+    def lca_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca."""
         if self.deck is None:
             return None
@@ -604,7 +604,7 @@ class Mat026(KeywordBase):
         self.lca = value.lcid
 
     @property
-    def lcb_link(self) -> DefineCurve:
+    def lcb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcb."""
         if self.deck is None:
             return None
@@ -619,7 +619,7 @@ class Mat026(KeywordBase):
         self.lcb = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -634,7 +634,7 @@ class Mat026(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lcs_link(self) -> DefineCurve:
+    def lcs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcs."""
         if self.deck is None:
             return None
@@ -649,7 +649,7 @@ class Mat026(KeywordBase):
         self.lcs = value.lcid
 
     @property
-    def lcab_link(self) -> DefineCurve:
+    def lcab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcab."""
         if self.deck is None:
             return None
@@ -664,7 +664,7 @@ class Mat026(KeywordBase):
         self.lcab = value.lcid
 
     @property
-    def lcbc_link(self) -> DefineCurve:
+    def lcbc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbc."""
         if self.deck is None:
             return None
@@ -679,7 +679,7 @@ class Mat026(KeywordBase):
         self.lcbc = value.lcid
 
     @property
-    def lcca_link(self) -> DefineCurve:
+    def lcca_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcca."""
         if self.deck is None:
             return None
@@ -694,7 +694,7 @@ class Mat026(KeywordBase):
         self.lcca = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None

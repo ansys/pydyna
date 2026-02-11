@@ -78,7 +78,7 @@ class InitialCrashfront(KeywordBase):
         self._cards[0].set_value("stype", value)
 
     @property
-    def stype_link(self) -> KeywordBase:
+    def stype_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given stype."""
         return self._get_link_by_attr("NODE", "nid", self.stype, "parts")
 

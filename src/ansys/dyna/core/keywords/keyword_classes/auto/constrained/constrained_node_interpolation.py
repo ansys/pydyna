@@ -179,27 +179,27 @@ class ConstrainedNodeInterpolation(KeywordBase):
         self._cards[1].set_value("w4", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def cn1_link(self) -> KeywordBase:
+    def cn1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cn1."""
         return self._get_link_by_attr("NODE", "nid", self.cn1, "parts")
 
     @property
-    def cn2_link(self) -> KeywordBase:
+    def cn2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cn2."""
         return self._get_link_by_attr("NODE", "nid", self.cn2, "parts")
 
     @property
-    def cn3_link(self) -> KeywordBase:
+    def cn3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cn3."""
         return self._get_link_by_attr("NODE", "nid", self.cn3, "parts")
 
     @property
-    def cn4_link(self) -> KeywordBase:
+    def cn4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cn4."""
         return self._get_link_by_attr("NODE", "nid", self.cn4, "parts")
 

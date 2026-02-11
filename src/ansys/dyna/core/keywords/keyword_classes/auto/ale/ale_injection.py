@@ -364,7 +364,7 @@ class AleInjection(KeywordBase):
         self._cards[2].set_value("yc", value)
 
     @property
-    def boxv_link(self) -> DefineBox:
+    def boxv_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxv."""
         if self.deck is None:
             return None
@@ -379,7 +379,7 @@ class AleInjection(KeywordBase):
         self.boxv = value.boxid
 
     @property
-    def vect_link(self) -> DefineVector:
+    def vect_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vect."""
         if self.deck is None:
             return None
@@ -394,7 +394,7 @@ class AleInjection(KeywordBase):
         self.vect = value.vid
 
     @property
-    def vecr_link(self) -> DefineVector:
+    def vecr_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecr."""
         if self.deck is None:
             return None
@@ -409,7 +409,7 @@ class AleInjection(KeywordBase):
         self.vecr = value.vid
 
     @property
-    def segset_link(self) -> KeywordBase:
+    def segset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segset."""
         return self._get_set_link("SEGMENT", self.segset)
 

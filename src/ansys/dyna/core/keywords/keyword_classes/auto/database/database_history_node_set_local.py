@@ -107,7 +107,7 @@ class DatabaseHistoryNodeSetLocal(KeywordBase):
         self._cards[0].set_value("hfo", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -122,7 +122,7 @@ class DatabaseHistoryNodeSetLocal(KeywordBase):
         self.cid = value.cid
 
     @property
-    def id_link(self) -> KeywordBase:
+    def id_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for id."""
         return self._get_set_link("NODE", self.id)
 

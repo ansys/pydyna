@@ -74,20 +74,20 @@ class ElementDiscrete(KeywordBase):
     @property
     def n1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n1, keyed by n1 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n1", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n1", "")
 
     def get_n1_link(self, n1: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
-        return self._get_link_by_attr("NODE", "nid", n1, "parts")
+        return self._get_link_by_attr("NODE", "nid", n1, "")
 
     @property
     def n2_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n2, keyed by n2 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n2", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n2", "")
 
     def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
-        return self._get_link_by_attr("NODE", "nid", n2, "parts")
+        return self._get_link_by_attr("NODE", "nid", n2, "")
 
     @property
     def pid_links(self) -> typing.Dict[int, KeywordBase]:

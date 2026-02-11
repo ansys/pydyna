@@ -60,7 +60,7 @@ class IcfdDatabaseSsoutExclude(KeywordBase):
         self._cards[0].set_value("ssoutid", value)
 
     @property
-    def ssoutid_link(self) -> KeywordBase:
+    def ssoutid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssoutid."""
         return self._get_set_link("SEGMENT", self.ssoutid)
 

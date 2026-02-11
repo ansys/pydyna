@@ -86,7 +86,7 @@ class ElementShellSourceSink(KeywordBase):
         self._cards[0].set_value("pid", value)
 
     @property
-    def nssr_link(self) -> KeywordBase:
+    def nssr_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nssr."""
         return self._get_set_link("NODE", self.nssr)
 
@@ -96,7 +96,7 @@ class ElementShellSourceSink(KeywordBase):
         self.nssr = value.sid
 
     @property
-    def nssk_link(self) -> KeywordBase:
+    def nssk_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nssk."""
         return self._get_set_link("NODE", self.nssk)
 
@@ -106,7 +106,7 @@ class ElementShellSourceSink(KeywordBase):
         self.nssk = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

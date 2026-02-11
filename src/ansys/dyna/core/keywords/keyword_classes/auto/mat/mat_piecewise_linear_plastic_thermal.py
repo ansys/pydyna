@@ -252,7 +252,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tabidc_link(self) -> DefineCurve:
+    def tabidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tabidc."""
         if self.deck is None:
             return None
@@ -267,7 +267,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
         self.tabidc = value.lcid
 
     @property
-    def tabidt_link(self) -> DefineCurve:
+    def tabidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tabidt."""
         if self.deck is None:
             return None
@@ -282,7 +282,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
         self.tabidt = value.lcid
 
     @property
-    def lalpha_link(self) -> DefineCurve:
+    def lalpha_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lalpha."""
         if self.deck is None:
             return None

@@ -94,7 +94,7 @@ class EmDatabaseElout(KeywordBase):
         self._cards[1].set_value("elsid", value)
 
     @property
-    def elsid_link(self) -> KeywordBase:
+    def elsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for elsid."""
         return self._get_set_link("SOLID", self.elsid)
 

@@ -151,42 +151,42 @@ class FrequencyDomainLocalPart(KeywordBase):
         self._cards[0].set_value("id8", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id1."""
         return self._get_link_by_attr("PART", "pid", self.id1, "parts")
 
     @property
-    def id2_link(self) -> KeywordBase:
+    def id2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id2."""
         return self._get_link_by_attr("PART", "pid", self.id2, "parts")
 
     @property
-    def id3_link(self) -> KeywordBase:
+    def id3_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id3."""
         return self._get_link_by_attr("PART", "pid", self.id3, "parts")
 
     @property
-    def id4_link(self) -> KeywordBase:
+    def id4_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id4."""
         return self._get_link_by_attr("PART", "pid", self.id4, "parts")
 
     @property
-    def id5_link(self) -> KeywordBase:
+    def id5_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id5."""
         return self._get_link_by_attr("PART", "pid", self.id5, "parts")
 
     @property
-    def id6_link(self) -> KeywordBase:
+    def id6_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id6."""
         return self._get_link_by_attr("PART", "pid", self.id6, "parts")
 
     @property
-    def id7_link(self) -> KeywordBase:
+    def id7_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id7."""
         return self._get_link_by_attr("PART", "pid", self.id7, "parts")
 
     @property
-    def id8_link(self) -> KeywordBase:
+    def id8_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given id8."""
         return self._get_link_by_attr("PART", "pid", self.id8, "parts")
 

@@ -408,7 +408,7 @@ class ControlThermalForming(KeywordBase):
         self._cards[2].set_value("lch", value)
 
     @property
-    def lcfst_link(self) -> DefineCurve:
+    def lcfst_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfst."""
         if self.deck is None:
             return None
@@ -423,7 +423,7 @@ class ControlThermalForming(KeywordBase):
         self.lcfst = value.lcid
 
     @property
-    def lcfdt_link(self) -> DefineCurve:
+    def lcfdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfdt."""
         if self.deck is None:
             return None
@@ -438,7 +438,7 @@ class ControlThermalForming(KeywordBase):
         self.lcfdt = value.lcid
 
     @property
-    def a_link(self) -> DefineCurve:
+    def a_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for a."""
         if self.deck is None:
             return None
@@ -453,7 +453,7 @@ class ControlThermalForming(KeywordBase):
         self.a = value.lcid
 
     @property
-    def b_link(self) -> DefineCurve:
+    def b_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for b."""
         if self.deck is None:
             return None
@@ -468,7 +468,7 @@ class ControlThermalForming(KeywordBase):
         self.b = value.lcid
 
     @property
-    def c_link(self) -> DefineCurve:
+    def c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c."""
         if self.deck is None:
             return None
@@ -483,7 +483,7 @@ class ControlThermalForming(KeywordBase):
         self.c = value.lcid
 
     @property
-    def d_link(self) -> DefineCurve:
+    def d_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for d."""
         if self.deck is None:
             return None

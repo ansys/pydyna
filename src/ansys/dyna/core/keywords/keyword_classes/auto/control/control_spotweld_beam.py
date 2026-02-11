@@ -146,7 +146,7 @@ class ControlSpotweldBeam(KeywordBase):
         self._cards[0].set_value("id_off", value)
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -161,7 +161,7 @@ class ControlSpotweldBeam(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lcs_link(self) -> DefineCurve:
+    def lcs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcs."""
         if self.deck is None:
             return None

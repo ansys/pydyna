@@ -237,7 +237,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None
@@ -252,7 +252,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
         self.tgrlc = value.lcid
 
     @property
-    def hclc_link(self) -> DefineCurve:
+    def hclc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hclc."""
         if self.deck is None:
             return None
@@ -267,7 +267,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
         self.hclc = value.lcid
 
     @property
-    def tclc_link(self) -> DefineCurve:
+    def tclc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tclc."""
         if self.deck is None:
             return None

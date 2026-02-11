@@ -764,7 +764,7 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -779,7 +779,7 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vlcid_link(self) -> DefineCurve:
+    def vlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcid."""
         if self.deck is None:
             return None
@@ -794,7 +794,7 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
         self.vlcid = value.lcid
 
     @property
-    def nlp_link(self) -> DefineCurve:
+    def nlp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for nlp."""
         if self.deck is None:
             return None

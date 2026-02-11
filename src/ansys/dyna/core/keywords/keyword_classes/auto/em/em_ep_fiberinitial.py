@@ -112,7 +112,7 @@ class EmEpFiberinitial(KeywordBase):
         self._cards[0].set_value("ssid0", value)
 
     @property
-    def partid_link(self) -> KeywordBase:
+    def partid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given partid."""
         return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

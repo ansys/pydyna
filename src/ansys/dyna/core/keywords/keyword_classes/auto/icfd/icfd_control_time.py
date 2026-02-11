@@ -185,7 +185,7 @@ class IcfdControlTime(KeywordBase):
         self._cards[2].set_value("btbl", value)
 
     @property
-    def lcidsf_link(self) -> DefineCurve:
+    def lcidsf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidsf."""
         if self.deck is None:
             return None

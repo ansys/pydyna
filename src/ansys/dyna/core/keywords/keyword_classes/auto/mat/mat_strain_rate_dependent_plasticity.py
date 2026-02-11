@@ -244,7 +244,7 @@ class MatStrainRateDependentPlasticity(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -259,7 +259,7 @@ class MatStrainRateDependentPlasticity(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -274,7 +274,7 @@ class MatStrainRateDependentPlasticity(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -289,7 +289,7 @@ class MatStrainRateDependentPlasticity(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc4_link(self) -> DefineCurve:
+    def lc4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc4."""
         if self.deck is None:
             return None

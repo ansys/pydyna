@@ -82,74 +82,74 @@ class ElementShell(KeywordBase):
     @property
     def n1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n1, keyed by n1 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n1", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n1", "")
 
     def get_n1_link(self, n1: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
-        return self._get_link_by_attr("NODE", "nid", n1, "parts")
+        return self._get_link_by_attr("NODE", "nid", n1, "")
 
     @property
     def n2_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n2, keyed by n2 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n2", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n2", "")
 
     def get_n2_link(self, n2: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
-        return self._get_link_by_attr("NODE", "nid", n2, "parts")
+        return self._get_link_by_attr("NODE", "nid", n2, "")
 
     @property
     def n3_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n3, keyed by n3 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n3", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n3", "")
 
     def get_n3_link(self, n3: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
-        return self._get_link_by_attr("NODE", "nid", n3, "parts")
+        return self._get_link_by_attr("NODE", "nid", n3, "")
 
     @property
     def n4_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n4, keyed by n4 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n4", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n4", "")
 
     def get_n4_link(self, n4: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
-        return self._get_link_by_attr("NODE", "nid", n4, "parts")
+        return self._get_link_by_attr("NODE", "nid", n4, "")
 
     @property
     def n5_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n5, keyed by n5 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n5", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n5", "")
 
     def get_n5_link(self, n5: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
-        return self._get_link_by_attr("NODE", "nid", n5, "parts")
+        return self._get_link_by_attr("NODE", "nid", n5, "")
 
     @property
     def n6_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n6, keyed by n6 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n6", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n6", "")
 
     def get_n6_link(self, n6: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
-        return self._get_link_by_attr("NODE", "nid", n6, "parts")
+        return self._get_link_by_attr("NODE", "nid", n6, "")
 
     @property
     def n7_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n7, keyed by n7 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n7", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n7", "")
 
     def get_n7_link(self, n7: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n7."""
-        return self._get_link_by_attr("NODE", "nid", n7, "parts")
+        return self._get_link_by_attr("NODE", "nid", n7, "")
 
     @property
     def n8_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n8, keyed by n8 value."""
-        return self._get_links_from_table("NODE", "nid", "elements", "n8", "parts")
+        return self._get_links_from_table("NODE", "nid", "elements", "n8", "")
 
     def get_n8_link(self, n8: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n8."""
-        return self._get_link_by_attr("NODE", "nid", n8, "parts")
+        return self._get_link_by_attr("NODE", "nid", n8, "")
 
     @property
     def pid_links(self) -> typing.Dict[int, KeywordBase]:

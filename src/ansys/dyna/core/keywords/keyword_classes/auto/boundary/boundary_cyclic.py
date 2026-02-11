@@ -143,7 +143,7 @@ class BoundaryCyclic(KeywordBase):
         self._cards[0].set_value("isort", value)
 
     @property
-    def nsid1_link(self) -> KeywordBase:
+    def nsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid1."""
         return self._get_set_link("NODE", self.nsid1)
 
@@ -153,7 +153,7 @@ class BoundaryCyclic(KeywordBase):
         self.nsid1 = value.sid
 
     @property
-    def nsid2_link(self) -> KeywordBase:
+    def nsid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid2."""
         return self._get_set_link("NODE", self.nsid2)
 

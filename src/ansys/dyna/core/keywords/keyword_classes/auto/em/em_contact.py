@@ -146,7 +146,7 @@ class EmContact(KeywordBase):
         self._cards[0].set_value("d0", value)
 
     @property
-    def psidm_link(self) -> KeywordBase:
+    def psidm_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidm."""
         return self._get_set_link("PART", self.psidm)
 
@@ -156,7 +156,7 @@ class EmContact(KeywordBase):
         self.psidm = value.sid
 
     @property
-    def psids_link(self) -> KeywordBase:
+    def psids_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psids."""
         return self._get_set_link("PART", self.psids)
 

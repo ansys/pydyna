@@ -202,42 +202,42 @@ class DefineHexSpotweldAssembly4(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def eid1_link(self) -> KeywordBase:
+    def eid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
 
     @property
-    def eid2_link(self) -> KeywordBase:
+    def eid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid2."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
 
     @property
-    def eid3_link(self) -> KeywordBase:
+    def eid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid3."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid3, "parts")
 
     @property
-    def eid4_link(self) -> KeywordBase:
+    def eid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid4."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid4, "parts")
 
     @property
-    def eid5_link(self) -> KeywordBase:
+    def eid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid5."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid5, "parts")
 
     @property
-    def eid6_link(self) -> KeywordBase:
+    def eid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid6."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid6, "parts")
 
     @property
-    def eid7_link(self) -> KeywordBase:
+    def eid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid7."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid7, "parts")
 
     @property
-    def eid8_link(self) -> KeywordBase:
+    def eid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid8."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid8, "parts")
 

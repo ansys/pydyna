@@ -195,7 +195,7 @@ class InitialAleMapping(KeywordBase):
         self._cards[1].set_value("tbeg", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

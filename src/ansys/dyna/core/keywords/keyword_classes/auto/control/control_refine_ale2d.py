@@ -339,7 +339,7 @@ class ControlRefineAle2D(KeywordBase):
         self._cards[2].set_value("mmsrm", value)
 
     @property
-    def ibox_link(self) -> DefineBox:
+    def ibox_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for ibox."""
         if self.deck is None:
             return None

@@ -387,7 +387,7 @@ class MatTrip(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vm0_link(self) -> DefineCurve:
+    def vm0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vm0."""
         if self.deck is None:
             return None
@@ -402,7 +402,7 @@ class MatTrip(KeywordBase):
         self.vm0 = value.lcid
 
     @property
-    def k2_link(self) -> DefineCurve:
+    def k2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for k2."""
         if self.deck is None:
             return None

@@ -342,7 +342,7 @@ class MatTabulatedJohnsonCook(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg_link(self) -> DefineCurve:
+    def lcg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg."""
         if self.deck is None:
             return None
@@ -357,7 +357,7 @@ class MatTabulatedJohnsonCook(KeywordBase):
         self.lcg = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -372,7 +372,7 @@ class MatTabulatedJohnsonCook(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def tabk1_link(self) -> KeywordBase:
+    def tabk1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for tabk1."""
         if self.deck is None:
             return None
@@ -396,7 +396,7 @@ class MatTabulatedJohnsonCook(KeywordBase):
             self.tabk1 = value.tbid
 
     @property
-    def lcf_link(self) -> KeywordBase:
+    def lcf_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcf."""
         if self.deck is None:
             return None
@@ -420,7 +420,7 @@ class MatTabulatedJohnsonCook(KeywordBase):
             self.lcf = value.tbid
 
     @property
-    def lci_link(self) -> KeywordBase:
+    def lci_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lci."""
         if self.deck is None:
             return None

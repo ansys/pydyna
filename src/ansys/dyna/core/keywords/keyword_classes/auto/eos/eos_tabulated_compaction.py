@@ -679,7 +679,7 @@ class EosTabulatedCompaction(KeywordBase):
         self._cards[8].set_value("k10", value)
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -694,7 +694,7 @@ class EosTabulatedCompaction(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -709,7 +709,7 @@ class EosTabulatedCompaction(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lck_link(self) -> DefineCurve:
+    def lck_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck."""
         if self.deck is None:
             return None

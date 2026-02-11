@@ -156,7 +156,7 @@ class ControlFormingOutputIntfor(KeywordBase):
         self._cards[0].set_value("y4", value)
 
     @property
-    def cid_link(self) -> DefineCurve:
+    def cid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cid."""
         if self.deck is None:
             return None

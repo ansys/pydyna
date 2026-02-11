@@ -169,7 +169,7 @@ class MatAddSocExpansion(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -184,7 +184,7 @@ class MatAddSocExpansion(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -199,7 +199,7 @@ class MatAddSocExpansion(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -214,7 +214,7 @@ class MatAddSocExpansion(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -199,7 +199,7 @@ class MatAcousticComplex(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidrr_link(self) -> DefineCurve:
+    def lcidrr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrr."""
         if self.deck is None:
             return None
@@ -214,7 +214,7 @@ class MatAcousticComplex(KeywordBase):
         self.lcidrr = value.lcid
 
     @property
-    def lcidkr_link(self) -> DefineCurve:
+    def lcidkr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidkr."""
         if self.deck is None:
             return None
@@ -229,7 +229,7 @@ class MatAcousticComplex(KeywordBase):
         self.lcidkr = value.lcid
 
     @property
-    def lcidri_link(self) -> DefineCurve:
+    def lcidri_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidri."""
         if self.deck is None:
             return None
@@ -244,7 +244,7 @@ class MatAcousticComplex(KeywordBase):
         self.lcidri = value.lcid
 
     @property
-    def lcidki_link(self) -> DefineCurve:
+    def lcidki_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidki."""
         if self.deck is None:
             return None

@@ -136,7 +136,7 @@ class LoadBodyX(KeywordBase):
         self._cards[0].set_value("cid", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -151,7 +151,7 @@ class LoadBodyX(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lciddr_link(self) -> DefineCurve:
+    def lciddr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lciddr."""
         if self.deck is None:
             return None
@@ -166,7 +166,7 @@ class LoadBodyX(KeywordBase):
         self.lciddr = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

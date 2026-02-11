@@ -136,7 +136,7 @@ class ControlFormingTravel(KeywordBase):
         self._cards[0].set_value("follow", value)
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -151,17 +151,17 @@ class ControlFormingTravel(KeywordBase):
         self.vid = value.vid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def target_link(self) -> KeywordBase:
+    def target_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given target."""
         return self._get_link_by_attr("PART", "pid", self.target, "parts")
 
     @property
-    def follow_link(self) -> KeywordBase:
+    def follow_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given follow."""
         return self._get_link_by_attr("PART", "pid", self.follow, "parts")
 

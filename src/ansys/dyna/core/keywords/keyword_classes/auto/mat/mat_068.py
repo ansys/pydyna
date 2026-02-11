@@ -587,7 +587,7 @@ class Mat068(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpdr_link(self) -> KeywordBase:
+    def lcpdr_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdr."""
         if self.deck is None:
             return None
@@ -611,7 +611,7 @@ class Mat068(KeywordBase):
             self.lcpdr = value.tbid
 
     @property
-    def lcpds_link(self) -> KeywordBase:
+    def lcpds_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpds."""
         if self.deck is None:
             return None
@@ -635,7 +635,7 @@ class Mat068(KeywordBase):
             self.lcpds = value.tbid
 
     @property
-    def lcpdt_link(self) -> KeywordBase:
+    def lcpdt_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdt."""
         if self.deck is None:
             return None
@@ -659,7 +659,7 @@ class Mat068(KeywordBase):
             self.lcpdt = value.tbid
 
     @property
-    def lcpmr_link(self) -> KeywordBase:
+    def lcpmr_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmr."""
         if self.deck is None:
             return None
@@ -683,7 +683,7 @@ class Mat068(KeywordBase):
             self.lcpmr = value.tbid
 
     @property
-    def lcpms_link(self) -> KeywordBase:
+    def lcpms_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpms."""
         if self.deck is None:
             return None
@@ -707,7 +707,7 @@ class Mat068(KeywordBase):
             self.lcpms = value.tbid
 
     @property
-    def lcpmt_link(self) -> KeywordBase:
+    def lcpmt_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmt."""
         if self.deck is None:
             return None

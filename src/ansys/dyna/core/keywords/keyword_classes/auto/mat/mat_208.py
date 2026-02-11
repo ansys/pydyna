@@ -312,7 +312,7 @@ class Mat208(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcax_link(self) -> DefineCurve:
+    def lcax_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcax."""
         if self.deck is None:
             return None
@@ -327,7 +327,7 @@ class Mat208(KeywordBase):
         self.lcax = value.lcid
 
     @property
-    def lcshr_link(self) -> DefineCurve:
+    def lcshr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcshr."""
         if self.deck is None:
             return None

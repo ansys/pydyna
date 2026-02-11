@@ -617,207 +617,207 @@ class ElementSolidP40(KeywordBase):
         self._cards[4].set_value("n40", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def n5_link(self) -> KeywordBase:
+    def n5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
         return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
 
     @property
-    def n6_link(self) -> KeywordBase:
+    def n6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
         return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
 
     @property
-    def n7_link(self) -> KeywordBase:
+    def n7_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n7."""
         return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
 
     @property
-    def n8_link(self) -> KeywordBase:
+    def n8_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n8."""
         return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
 
     @property
-    def n9_link(self) -> KeywordBase:
+    def n9_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n9."""
         return self._get_link_by_attr("NODE", "nid", self.n9, "parts")
 
     @property
-    def n10_link(self) -> KeywordBase:
+    def n10_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n10."""
         return self._get_link_by_attr("NODE", "nid", self.n10, "parts")
 
     @property
-    def n11_link(self) -> KeywordBase:
+    def n11_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n11."""
         return self._get_link_by_attr("NODE", "nid", self.n11, "parts")
 
     @property
-    def n12_link(self) -> KeywordBase:
+    def n12_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n12."""
         return self._get_link_by_attr("NODE", "nid", self.n12, "parts")
 
     @property
-    def n13_link(self) -> KeywordBase:
+    def n13_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n13."""
         return self._get_link_by_attr("NODE", "nid", self.n13, "parts")
 
     @property
-    def n14_link(self) -> KeywordBase:
+    def n14_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n14."""
         return self._get_link_by_attr("NODE", "nid", self.n14, "parts")
 
     @property
-    def n15_link(self) -> KeywordBase:
+    def n15_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n15."""
         return self._get_link_by_attr("NODE", "nid", self.n15, "parts")
 
     @property
-    def n16_link(self) -> KeywordBase:
+    def n16_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n16."""
         return self._get_link_by_attr("NODE", "nid", self.n16, "parts")
 
     @property
-    def n17_link(self) -> KeywordBase:
+    def n17_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n17."""
         return self._get_link_by_attr("NODE", "nid", self.n17, "parts")
 
     @property
-    def n18_link(self) -> KeywordBase:
+    def n18_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n18."""
         return self._get_link_by_attr("NODE", "nid", self.n18, "parts")
 
     @property
-    def n19_link(self) -> KeywordBase:
+    def n19_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n19."""
         return self._get_link_by_attr("NODE", "nid", self.n19, "parts")
 
     @property
-    def n20_link(self) -> KeywordBase:
+    def n20_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n20."""
         return self._get_link_by_attr("NODE", "nid", self.n20, "parts")
 
     @property
-    def n21_link(self) -> KeywordBase:
+    def n21_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n21."""
         return self._get_link_by_attr("NODE", "nid", self.n21, "parts")
 
     @property
-    def n22_link(self) -> KeywordBase:
+    def n22_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n22."""
         return self._get_link_by_attr("NODE", "nid", self.n22, "parts")
 
     @property
-    def n23_link(self) -> KeywordBase:
+    def n23_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n23."""
         return self._get_link_by_attr("NODE", "nid", self.n23, "parts")
 
     @property
-    def n24_link(self) -> KeywordBase:
+    def n24_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n24."""
         return self._get_link_by_attr("NODE", "nid", self.n24, "parts")
 
     @property
-    def n25_link(self) -> KeywordBase:
+    def n25_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n25."""
         return self._get_link_by_attr("NODE", "nid", self.n25, "parts")
 
     @property
-    def n26_link(self) -> KeywordBase:
+    def n26_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n26."""
         return self._get_link_by_attr("NODE", "nid", self.n26, "parts")
 
     @property
-    def n27_link(self) -> KeywordBase:
+    def n27_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n27."""
         return self._get_link_by_attr("NODE", "nid", self.n27, "parts")
 
     @property
-    def n28_link(self) -> KeywordBase:
+    def n28_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n28."""
         return self._get_link_by_attr("NODE", "nid", self.n28, "parts")
 
     @property
-    def n29_link(self) -> KeywordBase:
+    def n29_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n29."""
         return self._get_link_by_attr("NODE", "nid", self.n29, "parts")
 
     @property
-    def n30_link(self) -> KeywordBase:
+    def n30_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n30."""
         return self._get_link_by_attr("NODE", "nid", self.n30, "parts")
 
     @property
-    def n31_link(self) -> KeywordBase:
+    def n31_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n31."""
         return self._get_link_by_attr("NODE", "nid", self.n31, "parts")
 
     @property
-    def n32_link(self) -> KeywordBase:
+    def n32_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n32."""
         return self._get_link_by_attr("NODE", "nid", self.n32, "parts")
 
     @property
-    def n33_link(self) -> KeywordBase:
+    def n33_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n33."""
         return self._get_link_by_attr("NODE", "nid", self.n33, "parts")
 
     @property
-    def n34_link(self) -> KeywordBase:
+    def n34_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n34."""
         return self._get_link_by_attr("NODE", "nid", self.n34, "parts")
 
     @property
-    def n35_link(self) -> KeywordBase:
+    def n35_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n35."""
         return self._get_link_by_attr("NODE", "nid", self.n35, "parts")
 
     @property
-    def n36_link(self) -> KeywordBase:
+    def n36_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n36."""
         return self._get_link_by_attr("NODE", "nid", self.n36, "parts")
 
     @property
-    def n37_link(self) -> KeywordBase:
+    def n37_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n37."""
         return self._get_link_by_attr("NODE", "nid", self.n37, "parts")
 
     @property
-    def n38_link(self) -> KeywordBase:
+    def n38_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n38."""
         return self._get_link_by_attr("NODE", "nid", self.n38, "parts")
 
     @property
-    def n39_link(self) -> KeywordBase:
+    def n39_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n39."""
         return self._get_link_by_attr("NODE", "nid", self.n39, "parts")
 
     @property
-    def n40_link(self) -> KeywordBase:
+    def n40_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n40."""
         return self._get_link_by_attr("NODE", "nid", self.n40, "parts")
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

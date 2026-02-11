@@ -246,7 +246,7 @@ class Mat078(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpv_link(self) -> DefineCurve:
+    def lcpv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpv."""
         if self.deck is None:
             return None
@@ -261,7 +261,7 @@ class Mat078(KeywordBase):
         self.lcpv = value.lcid
 
     @property
-    def lcyp_link(self) -> DefineCurve:
+    def lcyp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyp."""
         if self.deck is None:
             return None
@@ -276,7 +276,7 @@ class Mat078(KeywordBase):
         self.lcyp = value.lcid
 
     @property
-    def lcfp_link(self) -> DefineCurve:
+    def lcfp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfp."""
         if self.deck is None:
             return None
@@ -291,7 +291,7 @@ class Mat078(KeywordBase):
         self.lcfp = value.lcid
 
     @property
-    def lcrp_link(self) -> DefineCurve:
+    def lcrp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrp."""
         if self.deck is None:
             return None

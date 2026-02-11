@@ -146,7 +146,7 @@ class CeseBoundarySolidWallSetRotate(KeywordBase):
         self._cards[0].set_value("nz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -161,7 +161,7 @@ class CeseBoundarySolidWallSetRotate(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

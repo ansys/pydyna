@@ -736,7 +736,7 @@ class MatGursonJc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -751,7 +751,7 @@ class MatGursonJc(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lcjc_link(self) -> DefineCurve:
+    def lcjc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcjc."""
         if self.deck is None:
             return None
@@ -766,7 +766,7 @@ class MatGursonJc(KeywordBase):
         self.lcjc = value.lcid
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -781,7 +781,7 @@ class MatGursonJc(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lclf_link(self) -> DefineCurve:
+    def lclf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclf."""
         if self.deck is None:
             return None
@@ -796,7 +796,7 @@ class MatGursonJc(KeywordBase):
         self.lclf = value.lcid
 
     @property
-    def lcf0_link(self) -> DefineCurve:
+    def lcf0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf0."""
         if self.deck is None:
             return None
@@ -811,7 +811,7 @@ class MatGursonJc(KeywordBase):
         self.lcf0 = value.lcid
 
     @property
-    def lcfc_link(self) -> DefineCurve:
+    def lcfc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfc."""
         if self.deck is None:
             return None
@@ -826,7 +826,7 @@ class MatGursonJc(KeywordBase):
         self.lcfc = value.lcid
 
     @property
-    def lcfn_link(self) -> DefineCurve:
+    def lcfn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfn."""
         if self.deck is None:
             return None

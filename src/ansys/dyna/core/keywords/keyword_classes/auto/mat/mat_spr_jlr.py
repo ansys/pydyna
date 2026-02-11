@@ -482,7 +482,7 @@ class MatSprJlr(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcaxh_link(self) -> DefineCurve:
+    def lcaxh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcaxh."""
         if self.deck is None:
             return None
@@ -497,7 +497,7 @@ class MatSprJlr(KeywordBase):
         self.lcaxh = value.lcid
 
     @property
-    def lcshh_link(self) -> DefineCurve:
+    def lcshh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcshh."""
         if self.deck is None:
             return None
@@ -512,7 +512,7 @@ class MatSprJlr(KeywordBase):
         self.lcshh = value.lcid
 
     @property
-    def lcbmh_link(self) -> DefineCurve:
+    def lcbmh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbmh."""
         if self.deck is None:
             return None
@@ -527,7 +527,7 @@ class MatSprJlr(KeywordBase):
         self.lcbmh = value.lcid
 
     @property
-    def lcaxt_link(self) -> DefineCurve:
+    def lcaxt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcaxt."""
         if self.deck is None:
             return None
@@ -542,7 +542,7 @@ class MatSprJlr(KeywordBase):
         self.lcaxt = value.lcid
 
     @property
-    def lcsht_link(self) -> DefineCurve:
+    def lcsht_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsht."""
         if self.deck is None:
             return None
@@ -557,7 +557,7 @@ class MatSprJlr(KeywordBase):
         self.lcsht = value.lcid
 
     @property
-    def lcbmt_link(self) -> DefineCurve:
+    def lcbmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbmt."""
         if self.deck is None:
             return None

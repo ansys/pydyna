@@ -911,7 +911,7 @@ class MatConcreteEc2(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcrsu_link(self) -> DefineCurve:
+    def lcrsu_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrsu."""
         if self.deck is None:
             return None
@@ -926,7 +926,7 @@ class MatConcreteEc2(KeywordBase):
         self.lcrsu = value.lcid
 
     @property
-    def lcalps_link(self) -> DefineCurve:
+    def lcalps_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcalps."""
         if self.deck is None:
             return None
@@ -941,7 +941,7 @@ class MatConcreteEc2(KeywordBase):
         self.lcalps = value.lcid
 
     @property
-    def lcalpc_link(self) -> DefineCurve:
+    def lcalpc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcalpc."""
         if self.deck is None:
             return None
@@ -956,7 +956,7 @@ class MatConcreteEc2(KeywordBase):
         self.lcalpc = value.lcid
 
     @property
-    def lcftt_link(self) -> DefineCurve:
+    def lcftt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcftt."""
         if self.deck is None:
             return None

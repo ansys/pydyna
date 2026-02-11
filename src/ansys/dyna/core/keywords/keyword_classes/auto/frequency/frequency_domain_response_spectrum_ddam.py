@@ -506,7 +506,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
         self._cards[6].set_value("mattyp", value)
 
     @property
-    def lcdamp_link(self) -> DefineCurve:
+    def lcdamp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdamp."""
         if self.deck is None:
             return None

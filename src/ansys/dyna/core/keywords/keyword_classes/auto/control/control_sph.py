@@ -380,7 +380,7 @@ class ControlSph(KeywordBase):
         self._cards[2].set_value("ishift", value)
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None

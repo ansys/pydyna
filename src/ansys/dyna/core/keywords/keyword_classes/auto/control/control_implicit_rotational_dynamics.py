@@ -247,7 +247,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
         self._cards[1].set_value("omeg8", value)
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
