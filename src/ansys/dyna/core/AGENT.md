@@ -6,10 +6,10 @@ Instructions for AI assistants helping **users** work with PyDyna (ansys-dyna-co
 
 ## Documentation Structure
 
-- **This file**: Quick reference and common operations
-- **[Deck Operations](ansys.dyna.core/deck.md)**: Detailed guide for Deck class
-- **[Working with Keywords](ansys.dyna.core/keywords.md)**: Keyword system deep dive
-- **[Common Patterns](ansys.dyna.core/patterns.md)**: Complete workflows and examples
+- **This file**: Quick reference
+- **[Keywords Guide](ansys.dyna.core/keywords.md)**: keyword usage patterns
+- **[Deck Operations](ansys.dyna.core/deck.md)**: Loading, filtering, writing
+- **[Common Patterns](ansys.dyna.core/patterns.md)**: Complete workflows
 
 ## Overview
 

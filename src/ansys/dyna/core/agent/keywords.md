@@ -6,6 +6,53 @@ Detailed guide for creating, modifying, and understanding PyDyna keyword classes
 
 Keywords are the building blocks of LS-DYNA input files. PyDyna provides Python classes for each keyword type, with most classes auto-generated from the LS-DYNA schema.
 
+## Data Access Patterns
+
+PyDyna preserves LS-DYNA structure. Most fields use **direct attributes**, but some use special patterns:
+
+### Default: Direct Attributes
+```python
+mat = keywords.Mat001()
+mat.mid = 1
+mat.ro = 7850
+```
+
+### TableCard: Repeating Rows → pandas DataFrame
+When LS-DYNA has repeating rows (nodes, elements, parts):
+```python
+import pandas as pd
+
+node = keywords.Node()
+node.nodes = pd.DataFrame({
+    "nid": [1, 2, 3],
+    "x": [0.0, 1.0, 2.0],
+    "y": [0.0, 0.0, 0.0],
+    "z": [0.0, 0.0, 0.0]
+})
+
+part = keywords.Part()
+part.parts = pd.DataFrame({"pid": [1,2], "secid": [1,2], "mid": [1,2]})
+
+elem = keywords.ElementShell()
+elem.elements = pd.DataFrame({"eid": [1], "pid": [1], "n1": [1], "n2": [2], "n3": [3], "n4": [4]})
+```
+
+### SeriesCard: Repeating Fields
+Some keywords have repeating values in the same logical group (e.g., list of numbers):
+```python
+table = keywords.DefineTable()
+table.tbid = 1
+table.points = [0.0, 1.0, 2.0, 3.0, 4.0]  # List of values
+```
+**Pattern**: Attribute holds a list of values (SeriesCard)
+**When**: DEFINE_TABLE.points, some curve/table definitions
+
+### When Unsure
+```python
+help(keywords.Part)  # Shows structure
+part = keywords.Part()
+```
+
 ## Keyword Class Structure
 
 ### Naming Convention
