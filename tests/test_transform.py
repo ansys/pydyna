@@ -107,6 +107,15 @@ def test_transform_matrix_translation_rotation():
     assert np.allclose(mtx, ref)
 
 @pytest.mark.keywords
+def test_transform_matrix_one_scale():
+    """Verify the transformation matrix for a single SCALE."""
+    define_transform_kwd = kwd.DefineTransformation(option="SCALE", a1=1.0, a2=-1.0, a3=1.0)
+    mtx = get_transform_matrix(define_transform_kwd)
+    ref = tfm.scale_matrix(factor=-1.0, direction=[0,1,0])
+    assert np.allclose(mtx, ref)
+
+
+@pytest.mark.keywords
 def test_transform_unhandled():
     """Verify warning and no transformation when an unhandled DEFINE_TRANSFORMATION option is used."""
     option = "TRANSL2ND"
