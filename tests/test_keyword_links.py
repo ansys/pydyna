@@ -910,6 +910,206 @@ class TestTableCardLinks:
         assert beam.pid_links == {}
 
 
+class TestSeriesCardLinks:
+    """Tests for SeriesCard links (e.g., SET_BEAM -> ELEMENT_BEAM)."""
+
+    def test_set_beam_has_element_link_fields(self):
+        """Test that SetBeam has _link_fields for element."""
+        assert hasattr(kwd.SetBeam, "_link_fields")
+        assert "element" in kwd.SetBeam._link_fields
+        assert kwd.SetBeam._link_fields["element"] == LinkType.ELEMENT_BEAM
+
+    def test_element_links_without_deck_returns_empty(self):
+        """Test that element_links returns empty dict when not in a deck."""
+        set_beam = kwd.SetBeam()
+        set_beam.element.data = [101, 102, 103]
+
+        assert set_beam.element_links == {}
+
+    def test_element_links_returns_correct_mapping(self):
+        """Test that element_links returns correct dict mapping element ID to ELEMENT keyword."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        # Create ELEMENT_BEAM keyword with elements
+        elem_beam = kwd.ElementBeam()
+        elem_beam.elements = pd.DataFrame({
+            "eid": [101, 102, 103],
+            "pid": [1, 1, 1],
+            "n1": [1, 2, 3],
+            "n2": [2, 3, 4],
+            "n3": [3, 4, 5]
+        })
+
+        # Create SET_BEAM that references these elements
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        set_beam.element.data = [101, 102, 103]
+
+        deck.extend([elem_beam, set_beam])
+
+        element_links = set_beam.element_links
+        assert len(element_links) == 3
+        assert element_links[101] is elem_beam
+        assert element_links[102] is elem_beam
+        assert element_links[103] is elem_beam
+
+    def test_element_links_handles_multiple_element_keywords(self):
+        """Test that element_links finds elements in different ELEMENT keywords."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        # Create two ELEMENT_BEAM keywords
+        elem_beam1 = kwd.ElementBeam()
+        elem_beam1.elements = pd.DataFrame({
+            "eid": [101, 102],
+            "pid": [1, 1],
+            "n1": [1, 2],
+            "n2": [2, 3],
+            "n3": [3, 4]
+        })
+        
+        elem_beam2 = kwd.ElementBeam()
+        elem_beam2.elements = pd.DataFrame({
+            "eid": [201, 202],
+            "pid": [2, 2],
+            "n1": [5, 6],
+            "n2": [6, 7],
+            "n3": [7, 8]
+        })
+
+        # Create SET_BEAM that references elements from both keywords
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        set_beam.element.data = [101, 201, 202]
+
+        deck.extend([elem_beam1, elem_beam2, set_beam])
+
+        element_links = set_beam.element_links
+        assert len(element_links) == 3
+        assert element_links[101] is elem_beam1
+        assert element_links[201] is elem_beam2
+        assert element_links[202] is elem_beam2
+
+    def test_element_links_handles_missing_elements(self):
+        """Test that element_links only includes element IDs where ELEMENT exists."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        # Create ELEMENT_BEAM with only some elements
+        elem_beam = kwd.ElementBeam()
+        elem_beam.elements = pd.DataFrame({
+            "eid": [101],
+            "pid": [1],
+            "n1": [1],
+            "n2": [2],
+            "n3": [3]
+        })
+
+        # SET_BEAM references elements that don't all exist
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        set_beam.element.data = [101, 102, 103]  # Only 101 exists
+
+        deck.extend([elem_beam, set_beam])
+
+        element_links = set_beam.element_links
+        assert len(element_links) == 1
+        assert 101 in element_links
+        assert 102 not in element_links
+        assert 103 not in element_links
+
+    def test_get_element_link_returns_correct_element(self):
+        """Test that get_element_link(element_id) returns the correct ELEMENT keyword."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        # Create two ELEMENT_BEAM keywords
+        elem_beam1 = kwd.ElementBeam()
+        elem_beam1.elements = pd.DataFrame({
+            "eid": [101],
+            "pid": [1],
+            "n1": [1],
+            "n2": [2],
+            "n3": [3]
+        })
+        
+        elem_beam2 = kwd.ElementBeam()
+        elem_beam2.elements = pd.DataFrame({
+            "eid": [201],
+            "pid": [2],
+            "n1": [5],
+            "n2": [6],
+            "n3": [7]
+        })
+
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        set_beam.element.data = [101, 201]
+
+        deck.extend([elem_beam1, elem_beam2, set_beam])
+
+        assert set_beam.get_element_link(101) is elem_beam1
+        assert set_beam.get_element_link(201) is elem_beam2
+
+    def test_get_element_link_returns_none_for_missing_element(self):
+        """Test that get_element_link returns None for non-existent element ID."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        elem_beam = kwd.ElementBeam()
+        elem_beam.elements = pd.DataFrame({
+            "eid": [101],
+            "pid": [1],
+            "n1": [1],
+            "n2": [2],
+            "n3": [3]
+        })
+
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        set_beam.element.data = [101]
+
+        deck.extend([elem_beam, set_beam])
+
+        assert set_beam.get_element_link(999) is None
+
+    def test_get_element_link_without_deck_returns_none(self):
+        """Test that get_element_link returns None when not in a deck."""
+        set_beam = kwd.SetBeam()
+        set_beam.element.data = [101, 102]
+
+        assert set_beam.get_element_link(101) is None
+
+    def test_element_links_with_empty_series_card(self):
+        """Test that element_links handles empty SeriesCard."""
+        import pandas as pd
+
+        deck = Deck()
+        
+        elem_beam = kwd.ElementBeam()
+        elem_beam.elements = pd.DataFrame({
+            "eid": [101],
+            "pid": [1],
+            "n1": [1],
+            "n2": [2],
+            "n3": [3]
+        })
+
+        set_beam = kwd.SetBeam()
+        set_beam.sid = 50
+        # element.data is empty by default
+
+        deck.extend([elem_beam, set_beam])
+
+        assert set_beam.element_links == {}
+
+
 @pytest.mark.skip(reason="PART links for scalar fields not yet implemented (kwd.json uses link:69)")
 class TestScalarPartLinks:
     """Tests for scalar PART links (e.g., MESH_BL -> PART)."""
