@@ -596,7 +596,7 @@ class TestRecursiveLinkTraversal:
         # Create a SET_PART that references the part
         set_part = kwd.SetPartList()
         set_part.sid = 50
-        set_part.pid1 = 100  # References the PART
+        set_part.parts.data = [100]  # References the PART
 
         # AirbagParticle references the SET_PART
         airbag = kwd.AirbagParticle()
