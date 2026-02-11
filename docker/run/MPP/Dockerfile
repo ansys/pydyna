@@ -50,22 +50,6 @@ RUN apt-get update && apt-get install -y \
 
 
 # --------------------
-# Intel oneAPI repo
-# --------------------
-RUN wget -qO - https://apt.oneapi.com/GPG-PUB-KEY-INTEL-ONEAPI.PUB \
-    | gpg --dearmor > /usr/share/keyrings/oneapi-archive-keyring.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.oneapi.com all main" \
-    > /etc/apt/sources.list.d/oneapi.list
-
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      intel-oneapi-mpi-runtime \
-      intel-oneapi-compiler-fortran-runtime \
-      libucx-dev ucx-utils && \
-    rm -rf /var/lib/apt/lists/*
-
-
-# --------------------
 # Install dir
 # --------------------
 RUN mkdir -p ${INSTALL_DIR}
