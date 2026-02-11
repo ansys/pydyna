@@ -277,7 +277,7 @@ class MatBilkhuDuboisFoam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpy_link(self) -> DefineCurve:
+    def lcpy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpy."""
         if self.deck is None:
             return None
@@ -292,7 +292,7 @@ class MatBilkhuDuboisFoam(KeywordBase):
         self.lcpy = value.lcid
 
     @property
-    def lcuys_link(self) -> DefineCurve:
+    def lcuys_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcuys."""
         if self.deck is None:
             return None
@@ -307,7 +307,7 @@ class MatBilkhuDuboisFoam(KeywordBase):
         self.lcuys = value.lcid
 
     @property
-    def lcrate_link(self) -> DefineCurve:
+    def lcrate_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrate."""
         if self.deck is None:
             return None

@@ -598,7 +598,7 @@ class ControlShell(KeywordBase):
         self._cards[4].set_value("nlocdt", value)
 
     @property
-    def sidt4tu_link(self) -> KeywordBase:
+    def sidt4tu_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sidt4tu."""
         return self._get_set_link("PART", self.sidt4tu)
 
@@ -608,7 +608,7 @@ class ControlShell(KeywordBase):
         self.sidt4tu = value.sid
 
     @property
-    def psnfail_link(self) -> KeywordBase:
+    def psnfail_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psnfail."""
         return self._get_set_link("PART", self.psnfail)
 
@@ -618,7 +618,7 @@ class ControlShell(KeywordBase):
         self.psnfail = value.sid
 
     @property
-    def drcpsid_link(self) -> KeywordBase:
+    def drcpsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drcpsid."""
         return self._get_set_link("PART", self.drcpsid)
 
@@ -628,7 +628,7 @@ class ControlShell(KeywordBase):
         self.drcpsid = value.sid
 
     @property
-    def lispsid_link(self) -> KeywordBase:
+    def lispsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for lispsid."""
         return self._get_set_link("PART", self.lispsid)
 

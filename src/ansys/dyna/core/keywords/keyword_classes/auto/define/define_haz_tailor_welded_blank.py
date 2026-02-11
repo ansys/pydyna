@@ -149,7 +149,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def idns_link(self) -> KeywordBase:
+    def idns_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for idns."""
         return self._get_set_link("NODE", self.idns)
 

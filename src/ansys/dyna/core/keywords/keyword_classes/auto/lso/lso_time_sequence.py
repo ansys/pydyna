@@ -289,7 +289,7 @@ class LsoTimeSequence(KeywordBase):
         self._cards[3].set_value("global_var", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None

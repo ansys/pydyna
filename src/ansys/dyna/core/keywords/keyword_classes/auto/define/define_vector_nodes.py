@@ -119,12 +119,12 @@ class DefineVectorNodes(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nodet_link(self) -> KeywordBase:
+    def nodet_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodet."""
         return self._get_link_by_attr("NODE", "nid", self.nodet, "parts")
 
     @property
-    def nodeh_link(self) -> KeywordBase:
+    def nodeh_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeh."""
         return self._get_link_by_attr("NODE", "nid", self.nodeh, "parts")
 

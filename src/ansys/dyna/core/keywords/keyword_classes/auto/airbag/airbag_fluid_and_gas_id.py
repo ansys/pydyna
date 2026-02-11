@@ -366,7 +366,7 @@ class AirbagFluidAndGasId(KeywordBase):
         self._cards[3].set_value("kbm", value)
 
     @property
-    def lcxw_link(self) -> DefineCurve:
+    def lcxw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxw."""
         if self.deck is None:
             return None
@@ -381,7 +381,7 @@ class AirbagFluidAndGasId(KeywordBase):
         self.lcxw = value.lcid
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None

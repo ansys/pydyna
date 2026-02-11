@@ -516,7 +516,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -531,7 +531,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None
@@ -546,7 +546,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lce = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -561,7 +561,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsigy_link(self) -> DefineCurve:
+    def lcsigy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsigy."""
         if self.deck is None:
             return None
@@ -576,7 +576,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcsigy = value.lcid
 
     @property
-    def lcqr_link(self) -> DefineCurve:
+    def lcqr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcqr."""
         if self.deck is None:
             return None
@@ -591,7 +591,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcqr = value.lcid
 
     @property
-    def lcqx_link(self) -> DefineCurve:
+    def lcqx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcqx."""
         if self.deck is None:
             return None
@@ -606,7 +606,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcqx = value.lcid
 
     @property
-    def lcalph_link(self) -> DefineCurve:
+    def lcalph_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcalph."""
         if self.deck is None:
             return None
@@ -621,7 +621,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcalph = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -636,7 +636,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None
@@ -651,7 +651,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lcp = value.lcid
 
     @property
-    def lccr_link(self) -> DefineCurve:
+    def lccr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccr."""
         if self.deck is None:
             return None
@@ -666,7 +666,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
         self.lccr = value.lcid
 
     @property
-    def lccx_link(self) -> DefineCurve:
+    def lccx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccx."""
         if self.deck is None:
             return None

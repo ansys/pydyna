@@ -164,12 +164,12 @@ class AirbagReferenceGeometryId(KeywordBase):
         self._cards[1].set_value("z", value)
 
     @property
-    def nido_link(self) -> KeywordBase:
+    def nido_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nido."""
         return self._get_link_by_attr("NODE", "nid", self.nido, "parts")
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

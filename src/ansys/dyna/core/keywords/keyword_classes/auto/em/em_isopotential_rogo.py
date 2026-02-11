@@ -85,7 +85,7 @@ class EmIsopotentialRogo(KeywordBase):
         self._cards[0].set_value("setid", value)
 
     @property
-    def setid_link(self) -> KeywordBase:
+    def setid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for setid."""
         return self._get_set_link("SEGMENT", self.setid)
 

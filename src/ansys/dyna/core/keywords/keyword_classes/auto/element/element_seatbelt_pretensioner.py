@@ -186,7 +186,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
         self._cards[1].set_value("lmtfrc", value)
 
     @property
-    def ptlcid_link(self) -> DefineCurve:
+    def ptlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ptlcid."""
         if self.deck is None:
             return None

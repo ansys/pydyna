@@ -244,7 +244,7 @@ class IcfdMat(KeywordBase):
         self._cards[2].set_value("pmmoid", value)
 
     @property
-    def hcsflcid_link(self) -> DefineCurve:
+    def hcsflcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hcsflcid."""
         if self.deck is None:
             return None
@@ -259,7 +259,7 @@ class IcfdMat(KeywordBase):
         self.hcsflcid = value.lcid
 
     @property
-    def tcsflcid_link(self) -> DefineCurve:
+    def tcsflcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcsflcid."""
         if self.deck is None:
             return None

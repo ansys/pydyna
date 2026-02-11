@@ -294,7 +294,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
         self._cards[2].set_value("u7", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

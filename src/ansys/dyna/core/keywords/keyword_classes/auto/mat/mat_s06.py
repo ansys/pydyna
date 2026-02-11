@@ -157,7 +157,7 @@ class MatS06(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdl_link(self) -> KeywordBase:
+    def lcdl_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdl."""
         if self.deck is None:
             return None
@@ -181,7 +181,7 @@ class MatS06(KeywordBase):
             self.lcdl = value.tbid
 
     @property
-    def lcdu_link(self) -> KeywordBase:
+    def lcdu_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdu."""
         if self.deck is None:
             return None

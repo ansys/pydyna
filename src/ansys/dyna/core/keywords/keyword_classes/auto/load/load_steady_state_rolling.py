@@ -248,37 +248,37 @@ class LoadSteadyStateRolling(KeywordBase):
         self._cards[3].set_value("lcd3r", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def n5_link(self) -> KeywordBase:
+    def n5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
         return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
 
     @property
-    def n6_link(self) -> KeywordBase:
+    def n6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
         return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
 
     @property
-    def lcd1_link(self) -> DefineCurve:
+    def lcd1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd1."""
         if self.deck is None:
             return None
@@ -293,7 +293,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd1 = value.lcid
 
     @property
-    def lcd1r_link(self) -> DefineCurve:
+    def lcd1r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd1r."""
         if self.deck is None:
             return None
@@ -308,7 +308,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd1r = value.lcid
 
     @property
-    def lcd2_link(self) -> DefineCurve:
+    def lcd2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd2."""
         if self.deck is None:
             return None
@@ -323,7 +323,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd2 = value.lcid
 
     @property
-    def lcd2r_link(self) -> DefineCurve:
+    def lcd2r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd2r."""
         if self.deck is None:
             return None
@@ -338,7 +338,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd2r = value.lcid
 
     @property
-    def lcd3_link(self) -> DefineCurve:
+    def lcd3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd3."""
         if self.deck is None:
             return None
@@ -353,7 +353,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd3 = value.lcid
 
     @property
-    def lcd3r_link(self) -> DefineCurve:
+    def lcd3r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd3r."""
         if self.deck is None:
             return None
@@ -368,7 +368,7 @@ class LoadSteadyStateRolling(KeywordBase):
         self.lcd3r = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

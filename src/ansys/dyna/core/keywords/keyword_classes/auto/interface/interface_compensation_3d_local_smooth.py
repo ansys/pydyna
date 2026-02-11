@@ -175,7 +175,7 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
         self._cards[0].set_value("nlinear", value)
 
     @property
-    def psidp_link(self) -> KeywordBase:
+    def psidp_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidp."""
         return self._get_set_link("PART", self.psidp)
 

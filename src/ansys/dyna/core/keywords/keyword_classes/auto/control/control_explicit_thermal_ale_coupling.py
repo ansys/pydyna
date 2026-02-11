@@ -72,7 +72,7 @@ class ControlExplicitThermalAleCoupling(KeywordBase):
         self._cards[0].set_value("mmgset", value)
 
     @property
-    def partset_link(self) -> KeywordBase:
+    def partset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for partset."""
         return self._get_set_link("PART", self.partset)
 

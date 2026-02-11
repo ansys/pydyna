@@ -140,7 +140,7 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
         self._cards[1].set_value("lcfreq", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None

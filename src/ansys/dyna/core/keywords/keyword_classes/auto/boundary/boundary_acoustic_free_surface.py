@@ -73,7 +73,7 @@ class BoundaryAcousticFreeSurface(KeywordBase):
         self._cards[0].set_value("ssidf", value)
 
     @property
-    def ssids_link(self) -> KeywordBase:
+    def ssids_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssids."""
         return self._get_set_link("SEGMENT", self.ssids)
 
@@ -83,7 +83,7 @@ class BoundaryAcousticFreeSurface(KeywordBase):
         self.ssids = value.sid
 
     @property
-    def ssidf_link(self) -> KeywordBase:
+    def ssidf_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssidf."""
         return self._get_set_link("SEGMENT", self.ssidf)
 

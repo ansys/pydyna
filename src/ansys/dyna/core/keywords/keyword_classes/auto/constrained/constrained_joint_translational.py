@@ -150,32 +150,32 @@ class ConstrainedJointTranslational(KeywordBase):
         self._cards[0].set_value("damp", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def n5_link(self) -> KeywordBase:
+    def n5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
         return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
 
     @property
-    def n6_link(self) -> KeywordBase:
+    def n6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
         return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
 

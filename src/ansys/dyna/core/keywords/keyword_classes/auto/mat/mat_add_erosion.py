@@ -501,7 +501,7 @@ class MatAddErosion(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -516,7 +516,7 @@ class MatAddErosion(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcregd_link(self) -> DefineCurve:
+    def lcregd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcregd."""
         if self.deck is None:
             return None
@@ -531,7 +531,7 @@ class MatAddErosion(KeywordBase):
         self.lcregd = value.lcid
 
     @property
-    def lcfld_link(self) -> DefineCurve:
+    def lcfld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfld."""
         if self.deck is None:
             return None
@@ -546,7 +546,7 @@ class MatAddErosion(KeywordBase):
         self.lcfld = value.lcid
 
     @property
-    def lceps12_link(self) -> DefineCurve:
+    def lceps12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps12."""
         if self.deck is None:
             return None
@@ -561,7 +561,7 @@ class MatAddErosion(KeywordBase):
         self.lceps12 = value.lcid
 
     @property
-    def lceps13_link(self) -> DefineCurve:
+    def lceps13_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps13."""
         if self.deck is None:
             return None
@@ -576,7 +576,7 @@ class MatAddErosion(KeywordBase):
         self.lceps13 = value.lcid
 
     @property
-    def lcepsmx_link(self) -> DefineCurve:
+    def lcepsmx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcepsmx."""
         if self.deck is None:
             return None

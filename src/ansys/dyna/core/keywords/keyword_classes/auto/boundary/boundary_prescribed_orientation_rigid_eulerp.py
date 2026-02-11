@@ -184,7 +184,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
         self._cards[1].set_value("lcide4", value)
 
     @property
-    def lcide1_link(self) -> DefineCurve:
+    def lcide1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcide1."""
         if self.deck is None:
             return None
@@ -199,7 +199,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
         self.lcide1 = value.lcid
 
     @property
-    def lcide2_link(self) -> DefineCurve:
+    def lcide2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcide2."""
         if self.deck is None:
             return None
@@ -214,7 +214,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
         self.lcide2 = value.lcid
 
     @property
-    def lcide3_link(self) -> DefineCurve:
+    def lcide3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcide3."""
         if self.deck is None:
             return None
@@ -229,7 +229,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
         self.lcide3 = value.lcid
 
     @property
-    def lcide4_link(self) -> DefineCurve:
+    def lcide4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcide4."""
         if self.deck is None:
             return None

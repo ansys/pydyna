@@ -251,7 +251,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def flcid_link(self) -> DefineCurve:
+    def flcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for flcid."""
         if self.deck is None:
             return None
@@ -266,7 +266,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
         self.flcid = value.lcid
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -281,7 +281,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def glcid_link(self) -> DefineCurve:
+    def glcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for glcid."""
         if self.deck is None:
             return None

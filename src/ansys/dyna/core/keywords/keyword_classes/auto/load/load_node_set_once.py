@@ -196,22 +196,22 @@ class LoadNodeSetOnce(KeywordBase):
         self._cards[1].set_value("lcid1", value)
 
     @property
-    def m1_link(self) -> KeywordBase:
+    def m1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m1."""
         return self._get_link_by_attr("NODE", "nid", self.m1, "parts")
 
     @property
-    def m2_link(self) -> KeywordBase:
+    def m2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m2."""
         return self._get_link_by_attr("NODE", "nid", self.m2, "parts")
 
     @property
-    def m3_link(self) -> KeywordBase:
+    def m3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m3."""
         return self._get_link_by_attr("NODE", "nid", self.m3, "parts")
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -226,7 +226,7 @@ class LoadNodeSetOnce(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -241,7 +241,7 @@ class LoadNodeSetOnce(KeywordBase):
         self.cid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

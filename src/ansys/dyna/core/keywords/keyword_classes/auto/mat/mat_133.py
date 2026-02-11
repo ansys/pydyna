@@ -1179,7 +1179,7 @@ class Mat133(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hta_link(self) -> DefineCurve:
+    def hta_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hta."""
         if self.deck is None:
             return None
@@ -1194,7 +1194,7 @@ class Mat133(KeywordBase):
         self.hta = value.lcid
 
     @property
-    def htb_link(self) -> DefineCurve:
+    def htb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htb."""
         if self.deck is None:
             return None
@@ -1209,7 +1209,7 @@ class Mat133(KeywordBase):
         self.htb = value.lcid
 
     @property
-    def htc_link(self) -> DefineCurve:
+    def htc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htc."""
         if self.deck is None:
             return None
@@ -1224,7 +1224,7 @@ class Mat133(KeywordBase):
         self.htc = value.lcid
 
     @property
-    def htd_link(self) -> DefineCurve:
+    def htd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htd."""
         if self.deck is None:
             return None

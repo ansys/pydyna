@@ -105,7 +105,7 @@ class IcfdDatabaseSsout(KeywordBase):
         self._cards[0].set_value("poff", value)
 
     @property
-    def lcidsf_link(self) -> DefineCurve:
+    def lcidsf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidsf."""
         if self.deck is None:
             return None

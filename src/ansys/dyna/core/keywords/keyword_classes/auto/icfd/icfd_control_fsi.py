@@ -151,7 +151,7 @@ class IcfdControlFsi(KeywordBase):
         self._cards[1].set_value("nsub", value)
 
     @property
-    def lcidsf_link(self) -> DefineCurve:
+    def lcidsf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidsf."""
         if self.deck is None:
             return None

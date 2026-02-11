@@ -471,7 +471,7 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcunld_link(self) -> DefineCurve:
+    def lcunld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcunld."""
         if self.deck is None:
             return None
@@ -486,7 +486,7 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
         self.lcunld = value.lcid
 
     @property
-    def stol_link(self) -> DefineCurve:
+    def stol_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for stol."""
         if self.deck is None:
             return None
@@ -501,7 +501,7 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
         self.stol = value.lcid
 
     @property
-    def lc_tbid_link(self) -> KeywordBase:
+    def lc_tbid_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
         if self.deck is None:
             return None

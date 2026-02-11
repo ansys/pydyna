@@ -280,12 +280,12 @@ class ConstrainedNodalRigidBodySpc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pnode_link(self) -> KeywordBase:
+    def pnode_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given pnode."""
         return self._get_link_by_attr("NODE", "nid", self.pnode, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -300,7 +300,7 @@ class ConstrainedNodalRigidBodySpc(KeywordBase):
         self.cid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

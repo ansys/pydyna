@@ -217,12 +217,12 @@ class DefineBoxNodesAdaptive(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def node_link(self) -> KeywordBase:
+    def node_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -237,7 +237,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcy_link(self) -> DefineCurve:
+    def lcy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy."""
         if self.deck is None:
             return None
@@ -252,7 +252,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcy = value.lcid
 
     @property
-    def lcz_link(self) -> DefineCurve:
+    def lcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcz."""
         if self.deck is None:
             return None
@@ -267,7 +267,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcz = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

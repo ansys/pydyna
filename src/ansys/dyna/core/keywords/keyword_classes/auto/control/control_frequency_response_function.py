@@ -392,7 +392,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
         self._cards[3].set_value("restrt", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None
@@ -407,7 +407,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
         self.lcfreq = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

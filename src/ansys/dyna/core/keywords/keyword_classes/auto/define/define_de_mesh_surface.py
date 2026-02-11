@@ -186,7 +186,7 @@ class DefineDeMeshSurface(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def descid_link(self) -> KeywordBase:
+    def descid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for descid."""
         if self.deck is None:
             return None
@@ -201,7 +201,7 @@ class DefineDeMeshSurface(KeywordBase):
         self.descid = value.secid
 
     @property
-    def despid_link(self) -> KeywordBase:
+    def despid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given despid."""
         return self._get_link_by_attr("PART", "pid", self.despid, "parts")
 

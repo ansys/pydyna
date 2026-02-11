@@ -102,7 +102,7 @@ class EosUserLibrary(KeywordBase):
         self._cards[1].set_value("v0", value)
 
     @property
-    def sesmid_link(self) -> KeywordBase:
+    def sesmid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for sesmid."""
         if self.deck is None:
             return None

@@ -138,7 +138,7 @@ class ChangeVelocity(KeywordBase):
         self._cards[1].set_value("vzr", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

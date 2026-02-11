@@ -143,7 +143,7 @@ class DefineFrictionScaling(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCurve:
+    def cid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cid."""
         if self.deck is None:
             return None
@@ -158,7 +158,7 @@ class DefineFrictionScaling(KeywordBase):
         self.cid = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

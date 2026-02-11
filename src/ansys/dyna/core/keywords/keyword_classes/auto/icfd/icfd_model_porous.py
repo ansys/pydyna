@@ -300,7 +300,7 @@ class IcfdModelPorous(KeywordBase):
         self._cards[3].set_value("projyp_z", value)
 
     @property
-    def pvlcidx_link(self) -> DefineCurve:
+    def pvlcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for pvlcidx."""
         if self.deck is None:
             return None
@@ -315,7 +315,7 @@ class IcfdModelPorous(KeywordBase):
         self.pvlcidx = value.lcid
 
     @property
-    def pvlcidy_link(self) -> DefineCurve:
+    def pvlcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for pvlcidy."""
         if self.deck is None:
             return None
@@ -330,7 +330,7 @@ class IcfdModelPorous(KeywordBase):
         self.pvlcidy = value.lcid
 
     @property
-    def pvlcidz_link(self) -> DefineCurve:
+    def pvlcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for pvlcidz."""
         if self.deck is None:
             return None

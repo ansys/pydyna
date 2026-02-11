@@ -41,10 +41,10 @@ class TableCardGroup(CardInterface):
         self,
         card_schemas: typing.List[typing.Tuple[FieldSchema, ...]],
         length_func: typing.Callable,
-        active_func: typing.Callable = None,
+        active_func: typing.Optional[typing.Callable] = None,
         name: str = None,
         format: format_type = format_type.default,
-        card_active_funcs: typing.List[typing.Callable] = None,
+        card_active_funcs: typing.Optional[typing.List[typing.Callable]] = None,
         **kwargs,
     ):
         """Initialize a TableCardGroup from field schemas.

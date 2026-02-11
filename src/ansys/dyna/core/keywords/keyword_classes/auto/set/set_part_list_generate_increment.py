@@ -200,12 +200,12 @@ class SetPartListGenerateIncrement(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bbeg_link(self) -> KeywordBase:
+    def bbeg_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given bbeg."""
         return self._get_link_by_attr("PART", "pid", self.bbeg, "parts")
 
     @property
-    def bend_link(self) -> KeywordBase:
+    def bend_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given bend."""
         return self._get_link_by_attr("PART", "pid", self.bend, "parts")
 

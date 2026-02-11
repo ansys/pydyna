@@ -115,7 +115,7 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
         self._cards[0].set_value("lcfreq", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None

@@ -301,7 +301,7 @@ class IncludeTransformBinary(KeywordBase):
         self._cards[4].set_value("tranid", value)
 
     @property
-    def tranid_link(self) -> DefineTransformation:
+    def tranid_link(self) -> typing.Optional[DefineTransformation]:
         """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None

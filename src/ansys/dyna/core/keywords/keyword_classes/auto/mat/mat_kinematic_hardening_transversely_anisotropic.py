@@ -342,7 +342,7 @@ class MatKinematicHardeningTransverselyAnisotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hclid_link(self) -> DefineCurve:
+    def hclid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hclid."""
         if self.deck is None:
             return None

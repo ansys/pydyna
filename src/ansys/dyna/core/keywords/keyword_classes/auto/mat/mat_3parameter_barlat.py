@@ -715,7 +715,7 @@ class Mat3ParameterBarlat(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -730,7 +730,7 @@ class Mat3ParameterBarlat(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vlcid_link(self) -> DefineCurve:
+    def vlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcid."""
         if self.deck is None:
             return None
@@ -745,7 +745,7 @@ class Mat3ParameterBarlat(KeywordBase):
         self.vlcid = value.lcid
 
     @property
-    def hta_link(self) -> KeywordBase:
+    def hta_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for hta."""
         if self.deck is None:
             return None
@@ -769,7 +769,7 @@ class Mat3ParameterBarlat(KeywordBase):
             self.hta = value.tbid
 
     @property
-    def htb_link(self) -> KeywordBase:
+    def htb_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for htb."""
         if self.deck is None:
             return None

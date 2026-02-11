@@ -534,7 +534,7 @@ class MatMohrCoulomb(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccpdr_link(self) -> DefineCurve:
+    def lccpdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccpdr."""
         if self.deck is None:
             return None
@@ -549,7 +549,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccpdr = value.lcid
 
     @property
-    def lccpt_link(self) -> DefineCurve:
+    def lccpt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccpt."""
         if self.deck is None:
             return None
@@ -564,7 +564,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccpt = value.lcid
 
     @property
-    def lccjdr_link(self) -> DefineCurve:
+    def lccjdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccjdr."""
         if self.deck is None:
             return None
@@ -579,7 +579,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccjdr = value.lcid
 
     @property
-    def lccjt_link(self) -> DefineCurve:
+    def lccjt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccjt."""
         if self.deck is None:
             return None
@@ -594,7 +594,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccjt = value.lcid
 
     @property
-    def lcsfac_link(self) -> DefineCurve:
+    def lcsfac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsfac."""
         if self.deck is None:
             return None

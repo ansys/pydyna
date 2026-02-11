@@ -203,7 +203,7 @@ class DefineSphDeCoupling(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pfact_link(self) -> KeywordBase:
+    def pfact_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for pfact."""
         if self.deck is None:
             return None

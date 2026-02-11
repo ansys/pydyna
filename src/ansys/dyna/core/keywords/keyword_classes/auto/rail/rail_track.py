@@ -235,17 +235,17 @@ class RailTrack(KeywordBase):
         self._cards[1].set_value("ga2", value)
 
     @property
-    def norgn1_link(self) -> KeywordBase:
+    def norgn1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given norgn1."""
         return self._get_link_by_attr("NODE", "nid", self.norgn1, "parts")
 
     @property
-    def norgn2_link(self) -> KeywordBase:
+    def norgn2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given norgn2."""
         return self._get_link_by_attr("NODE", "nid", self.norgn2, "parts")
 
     @property
-    def lcur1_link(self) -> DefineCurve:
+    def lcur1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur1."""
         if self.deck is None:
             return None
@@ -260,7 +260,7 @@ class RailTrack(KeywordBase):
         self.lcur1 = value.lcid
 
     @property
-    def lcur2_link(self) -> DefineCurve:
+    def lcur2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur2."""
         if self.deck is None:
             return None
@@ -275,7 +275,7 @@ class RailTrack(KeywordBase):
         self.lcur2 = value.lcid
 
     @property
-    def bsetid1_link(self) -> KeywordBase:
+    def bsetid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsetid1."""
         return self._get_set_link("BEAM", self.bsetid1)
 
@@ -285,7 +285,7 @@ class RailTrack(KeywordBase):
         self.bsetid1 = value.sid
 
     @property
-    def bsetid2_link(self) -> KeywordBase:
+    def bsetid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsetid2."""
         return self._get_set_link("BEAM", self.bsetid2)
 

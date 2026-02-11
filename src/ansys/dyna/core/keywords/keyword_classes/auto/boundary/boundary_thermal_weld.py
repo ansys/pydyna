@@ -312,17 +312,17 @@ class BoundaryThermalWeld(KeywordBase):
         self._cards[2].set_value("tz", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def n2id_link(self) -> KeywordBase:
+    def n2id_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2id."""
         return self._get_link_by_attr("NODE", "nid", self.n2id, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

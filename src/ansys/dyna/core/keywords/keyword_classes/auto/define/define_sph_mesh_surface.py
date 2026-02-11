@@ -175,7 +175,7 @@ class DefineSphMeshSurface(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sphxid_link(self) -> KeywordBase:
+    def sphxid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for sphxid."""
         if self.deck is None:
             return None
@@ -190,7 +190,7 @@ class DefineSphMeshSurface(KeywordBase):
         self.sphxid = value.secid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -200,7 +200,7 @@ class DefineSphMeshSurface(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def sphpid_link(self) -> KeywordBase:
+    def sphpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given sphpid."""
         return self._get_link_by_attr("PART", "pid", self.sphpid, "parts")
 

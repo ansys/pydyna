@@ -47,14 +47,7 @@ class SetBox(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
-        "bid1": LinkType.DEFINE_BOX,
-        "bid2": LinkType.DEFINE_BOX,
-        "bid3": LinkType.DEFINE_BOX,
-        "bid4": LinkType.DEFINE_BOX,
-        "bid5": LinkType.DEFINE_BOX,
-        "bid6": LinkType.DEFINE_BOX,
-        "bid7": LinkType.DEFINE_BOX,
-        "bid8": LinkType.DEFINE_BOX,
+        "box": LinkType.DEFINE_BOX,
     }
 
     def __init__(self, **kwargs):
@@ -117,122 +110,17 @@ class SetBox(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bid1_link(self) -> DefineBox:
-        """Get the DefineBox object for bid1."""
+    def box_link(self) -> typing.Optional[DefineBox]:
+        """Get the DefineBox object for box."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid1:
+            if kwd.boxid == self.box:
                 return kwd
         return None
 
-    @bid1_link.setter
-    def bid1_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid1."""
-        self.bid1 = value.boxid
-
-    @property
-    def bid2_link(self) -> DefineBox:
-        """Get the DefineBox object for bid2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid2:
-                return kwd
-        return None
-
-    @bid2_link.setter
-    def bid2_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid2."""
-        self.bid2 = value.boxid
-
-    @property
-    def bid3_link(self) -> DefineBox:
-        """Get the DefineBox object for bid3."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid3:
-                return kwd
-        return None
-
-    @bid3_link.setter
-    def bid3_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid3."""
-        self.bid3 = value.boxid
-
-    @property
-    def bid4_link(self) -> DefineBox:
-        """Get the DefineBox object for bid4."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid4:
-                return kwd
-        return None
-
-    @bid4_link.setter
-    def bid4_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid4."""
-        self.bid4 = value.boxid
-
-    @property
-    def bid5_link(self) -> DefineBox:
-        """Get the DefineBox object for bid5."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid5:
-                return kwd
-        return None
-
-    @bid5_link.setter
-    def bid5_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid5."""
-        self.bid5 = value.boxid
-
-    @property
-    def bid6_link(self) -> DefineBox:
-        """Get the DefineBox object for bid6."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid6:
-                return kwd
-        return None
-
-    @bid6_link.setter
-    def bid6_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid6."""
-        self.bid6 = value.boxid
-
-    @property
-    def bid7_link(self) -> DefineBox:
-        """Get the DefineBox object for bid7."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid7:
-                return kwd
-        return None
-
-    @bid7_link.setter
-    def bid7_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid7."""
-        self.bid7 = value.boxid
-
-    @property
-    def bid8_link(self) -> DefineBox:
-        """Get the DefineBox object for bid8."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
-            if kwd.boxid == self.bid8:
-                return kwd
-        return None
-
-    @bid8_link.setter
-    def bid8_link(self, value: DefineBox) -> None:
-        """Set the DefineBox object for bid8."""
-        self.bid8 = value.boxid
+    @box_link.setter
+    def box_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for box."""
+        self.box = value.boxid
 

@@ -432,7 +432,7 @@ class ConstrainedJointCoorRackAndPinion(KeywordBase):
         self._cards[7].set_value("r1", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

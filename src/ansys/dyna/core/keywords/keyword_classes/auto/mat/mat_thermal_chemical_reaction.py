@@ -815,7 +815,7 @@ class MatThermalChemicalReaction(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccf_link(self) -> DefineCurve:
+    def lccf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccf."""
         if self.deck is None:
             return None
@@ -830,7 +830,7 @@ class MatThermalChemicalReaction(KeywordBase):
         self.lccf = value.lcid
 
     @property
-    def lckf_link(self) -> DefineCurve:
+    def lckf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lckf."""
         if self.deck is None:
             return None
@@ -845,7 +845,7 @@ class MatThermalChemicalReaction(KeywordBase):
         self.lckf = value.lcid
 
     @property
-    def lcci_link(self) -> DefineCurve:
+    def lcci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcci."""
         if self.deck is None:
             return None
@@ -860,7 +860,7 @@ class MatThermalChemicalReaction(KeywordBase):
         self.lcci = value.lcid
 
     @property
-    def lcki_link(self) -> DefineCurve:
+    def lcki_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcki."""
         if self.deck is None:
             return None

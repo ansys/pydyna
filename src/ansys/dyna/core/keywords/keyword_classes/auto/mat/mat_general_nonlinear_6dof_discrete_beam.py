@@ -800,7 +800,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidtr_link(self) -> DefineCurve:
+    def lcidtr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtr."""
         if self.deck is None:
             return None
@@ -815,7 +815,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtr = value.lcid
 
     @property
-    def lcidts_link(self) -> DefineCurve:
+    def lcidts_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidts."""
         if self.deck is None:
             return None
@@ -830,7 +830,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidts = value.lcid
 
     @property
-    def lcidtt_link(self) -> DefineCurve:
+    def lcidtt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtt."""
         if self.deck is None:
             return None
@@ -845,7 +845,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtt = value.lcid
 
     @property
-    def lcidrr_link(self) -> DefineCurve:
+    def lcidrr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrr."""
         if self.deck is None:
             return None
@@ -860,7 +860,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrr = value.lcid
 
     @property
-    def lcidrs_link(self) -> DefineCurve:
+    def lcidrs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrs."""
         if self.deck is None:
             return None
@@ -875,7 +875,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrs = value.lcid
 
     @property
-    def lcidrt_link(self) -> DefineCurve:
+    def lcidrt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrt."""
         if self.deck is None:
             return None
@@ -890,7 +890,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrt = value.lcid
 
     @property
-    def lcidtur_link(self) -> DefineCurve:
+    def lcidtur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtur."""
         if self.deck is None:
             return None
@@ -905,7 +905,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtur = value.lcid
 
     @property
-    def lcidtus_link(self) -> DefineCurve:
+    def lcidtus_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtus."""
         if self.deck is None:
             return None
@@ -920,7 +920,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtus = value.lcid
 
     @property
-    def lcidtut_link(self) -> DefineCurve:
+    def lcidtut_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtut."""
         if self.deck is None:
             return None
@@ -935,7 +935,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtut = value.lcid
 
     @property
-    def lcidrur_link(self) -> DefineCurve:
+    def lcidrur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrur."""
         if self.deck is None:
             return None
@@ -950,7 +950,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrur = value.lcid
 
     @property
-    def lcidrus_link(self) -> DefineCurve:
+    def lcidrus_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrus."""
         if self.deck is None:
             return None
@@ -965,7 +965,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrus = value.lcid
 
     @property
-    def lcidrut_link(self) -> DefineCurve:
+    def lcidrut_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrut."""
         if self.deck is None:
             return None
@@ -980,7 +980,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrut = value.lcid
 
     @property
-    def lcidtdr_link(self) -> DefineCurve:
+    def lcidtdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtdr."""
         if self.deck is None:
             return None
@@ -995,7 +995,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtdr = value.lcid
 
     @property
-    def lcidtds_link(self) -> DefineCurve:
+    def lcidtds_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtds."""
         if self.deck is None:
             return None
@@ -1010,7 +1010,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtds = value.lcid
 
     @property
-    def lcidtdt_link(self) -> DefineCurve:
+    def lcidtdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtdt."""
         if self.deck is None:
             return None
@@ -1025,7 +1025,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtdt = value.lcid
 
     @property
-    def lcidrdr_link(self) -> DefineCurve:
+    def lcidrdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrdr."""
         if self.deck is None:
             return None
@@ -1040,7 +1040,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrdr = value.lcid
 
     @property
-    def lcidrds_link(self) -> DefineCurve:
+    def lcidrds_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrds."""
         if self.deck is None:
             return None
@@ -1055,7 +1055,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrds = value.lcid
 
     @property
-    def lcidrdt_link(self) -> DefineCurve:
+    def lcidrdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrdt."""
         if self.deck is None:
             return None
@@ -1070,7 +1070,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrdt = value.lcid
 
     @property
-    def lcidter_link(self) -> DefineCurve:
+    def lcidter_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidter."""
         if self.deck is None:
             return None
@@ -1085,7 +1085,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidter = value.lcid
 
     @property
-    def lcidtes_link(self) -> DefineCurve:
+    def lcidtes_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtes."""
         if self.deck is None:
             return None
@@ -1100,7 +1100,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtes = value.lcid
 
     @property
-    def lcidtet_link(self) -> DefineCurve:
+    def lcidtet_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtet."""
         if self.deck is None:
             return None
@@ -1115,7 +1115,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidtet = value.lcid
 
     @property
-    def lcidrer_link(self) -> DefineCurve:
+    def lcidrer_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrer."""
         if self.deck is None:
             return None
@@ -1130,7 +1130,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidrer = value.lcid
 
     @property
-    def lcidres_link(self) -> DefineCurve:
+    def lcidres_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidres."""
         if self.deck is None:
             return None
@@ -1145,7 +1145,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
         self.lcidres = value.lcid
 
     @property
-    def lcidret_link(self) -> DefineCurve:
+    def lcidret_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidret."""
         if self.deck is None:
             return None

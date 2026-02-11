@@ -350,7 +350,7 @@ class MatAddDamageDiem(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -365,7 +365,7 @@ class MatAddDamageDiem(KeywordBase):
         self.mid = value.mid
 
     @property
-    def p1_link(self) -> KeywordBase:
+    def p1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for p1."""
         if self.deck is None:
             return None

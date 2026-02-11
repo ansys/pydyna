@@ -964,7 +964,7 @@ class Mat058(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdfail_link(self) -> DefineCurve:
+    def lcdfail_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdfail."""
         if self.deck is None:
             return None
@@ -979,7 +979,7 @@ class Mat058(KeywordBase):
         self.lcdfail = value.lcid
 
     @property
-    def lcxc_link(self) -> DefineCurve:
+    def lcxc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxc."""
         if self.deck is None:
             return None
@@ -994,7 +994,7 @@ class Mat058(KeywordBase):
         self.lcxc = value.lcid
 
     @property
-    def lcxt_link(self) -> DefineCurve:
+    def lcxt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxt."""
         if self.deck is None:
             return None
@@ -1009,7 +1009,7 @@ class Mat058(KeywordBase):
         self.lcxt = value.lcid
 
     @property
-    def lcyc_link(self) -> DefineCurve:
+    def lcyc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyc."""
         if self.deck is None:
             return None
@@ -1024,7 +1024,7 @@ class Mat058(KeywordBase):
         self.lcyc = value.lcid
 
     @property
-    def lcyt_link(self) -> DefineCurve:
+    def lcyt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyt."""
         if self.deck is None:
             return None
@@ -1039,7 +1039,7 @@ class Mat058(KeywordBase):
         self.lcyt = value.lcid
 
     @property
-    def lcsc_link(self) -> DefineCurve:
+    def lcsc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsc."""
         if self.deck is None:
             return None
@@ -1054,7 +1054,7 @@ class Mat058(KeywordBase):
         self.lcsc = value.lcid
 
     @property
-    def lctau_link(self) -> DefineCurve:
+    def lctau_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctau."""
         if self.deck is None:
             return None
@@ -1069,7 +1069,7 @@ class Mat058(KeywordBase):
         self.lctau = value.lcid
 
     @property
-    def lcgam_link(self) -> DefineCurve:
+    def lcgam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcgam."""
         if self.deck is None:
             return None
@@ -1084,7 +1084,7 @@ class Mat058(KeywordBase):
         self.lcgam = value.lcid
 
     @property
-    def lce11c_link(self) -> DefineCurve:
+    def lce11c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce11c."""
         if self.deck is None:
             return None
@@ -1099,7 +1099,7 @@ class Mat058(KeywordBase):
         self.lce11c = value.lcid
 
     @property
-    def lce11t_link(self) -> DefineCurve:
+    def lce11t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce11t."""
         if self.deck is None:
             return None
@@ -1114,7 +1114,7 @@ class Mat058(KeywordBase):
         self.lce11t = value.lcid
 
     @property
-    def lce22c_link(self) -> DefineCurve:
+    def lce22c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce22c."""
         if self.deck is None:
             return None
@@ -1129,7 +1129,7 @@ class Mat058(KeywordBase):
         self.lce22c = value.lcid
 
     @property
-    def lce22t_link(self) -> DefineCurve:
+    def lce22t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce22t."""
         if self.deck is None:
             return None
@@ -1144,7 +1144,7 @@ class Mat058(KeywordBase):
         self.lce22t = value.lcid
 
     @property
-    def lcgms_link(self) -> DefineCurve:
+    def lcgms_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcgms."""
         if self.deck is None:
             return None
@@ -1159,7 +1159,7 @@ class Mat058(KeywordBase):
         self.lcgms = value.lcid
 
     @property
-    def lcefs_link(self) -> DefineCurve:
+    def lcefs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcefs."""
         if self.deck is None:
             return None

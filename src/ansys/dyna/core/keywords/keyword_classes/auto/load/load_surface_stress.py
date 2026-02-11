@@ -264,7 +264,7 @@ class LoadSurfaceStress(KeywordBase):
         self._cards[2].set_value("uscid8", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -338,27 +338,27 @@ class LoadThermalRsw(KeywordBase):
         self._cards[3].set_value("tempzb", value)
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def h2_link(self) -> KeywordBase:
+    def h2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given h2."""
         return self._get_link_by_attr("NODE", "nid", self.h2, "parts")
 
     @property
-    def r_link(self) -> KeywordBase:
+    def r_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given r."""
         return self._get_link_by_attr("NODE", "nid", self.r, "parts")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -373,7 +373,7 @@ class LoadThermalRsw(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 

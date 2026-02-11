@@ -583,7 +583,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
         self._cards[4].set_value("sred", value)
 
     @property
-    def arcctl_link(self) -> KeywordBase:
+    def arcctl_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given arcctl."""
         return self._get_link_by_attr("NODE", "nid", self.arcctl, "parts")
 

@@ -453,7 +453,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self._cards[4].set_value("tz", value)
 
     @property
-    def lcrot_link(self) -> DefineCurve:
+    def lcrot_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrot."""
         if self.deck is None:
             return None
@@ -468,7 +468,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.lcrot = value.lcid
 
     @property
-    def lclat_link(self) -> DefineCurve:
+    def lclat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclat."""
         if self.deck is None:
             return None
@@ -483,7 +483,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.lclat = value.lcid
 
     @property
-    def lctim_link(self) -> DefineCurve:
+    def lctim_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctim."""
         if self.deck is None:
             return None
@@ -498,7 +498,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.lctim = value.lcid
 
     @property
-    def lcinc_link(self) -> DefineCurve:
+    def lcinc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcinc."""
         if self.deck is None:
             return None
@@ -513,7 +513,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.lcinc = value.lcid
 
     @property
-    def nsid1_link(self) -> KeywordBase:
+    def nsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid1."""
         return self._get_set_link("NODE", self.nsid1)
 
@@ -523,7 +523,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.nsid1 = value.sid
 
     @property
-    def pserod_link(self) -> KeywordBase:
+    def pserod_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pserod."""
         return self._get_set_link("PART", self.pserod)
 
@@ -533,7 +533,7 @@ class BoundaryFluxTrajectory(KeywordBase):
         self.pserod = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

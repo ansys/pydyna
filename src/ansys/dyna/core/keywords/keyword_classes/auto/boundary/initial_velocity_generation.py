@@ -262,7 +262,7 @@ class InitialVelocityGeneration(KeywordBase):
         self._cards[1].set_value("irigid", value)
 
     @property
-    def icid_link(self) -> DefineCoordinateSystem:
+    def icid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for icid."""
         if self.deck is None:
             return None

@@ -151,42 +151,42 @@ class DualceseFsiExclude(KeywordBase):
         self._cards[0].set_value("pid8", value)
 
     @property
-    def pid1_link(self) -> KeywordBase:
+    def pid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid1."""
         return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
 
     @property
-    def pid2_link(self) -> KeywordBase:
+    def pid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid2."""
         return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 
     @property
-    def pid3_link(self) -> KeywordBase:
+    def pid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid3."""
         return self._get_link_by_attr("PART", "pid", self.pid3, "parts")
 
     @property
-    def pid4_link(self) -> KeywordBase:
+    def pid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid4."""
         return self._get_link_by_attr("PART", "pid", self.pid4, "parts")
 
     @property
-    def pid5_link(self) -> KeywordBase:
+    def pid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid5."""
         return self._get_link_by_attr("PART", "pid", self.pid5, "parts")
 
     @property
-    def pid6_link(self) -> KeywordBase:
+    def pid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid6."""
         return self._get_link_by_attr("PART", "pid", self.pid6, "parts")
 
     @property
-    def pid7_link(self) -> KeywordBase:
+    def pid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid7."""
         return self._get_link_by_attr("PART", "pid", self.pid7, "parts")
 
     @property
-    def pid8_link(self) -> KeywordBase:
+    def pid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid8."""
         return self._get_link_by_attr("PART", "pid", self.pid8, "parts")
 

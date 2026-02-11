@@ -98,7 +98,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
         self._cards[0].set_value("percnt", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -113,7 +113,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def ndset_link(self) -> KeywordBase:
+    def ndset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ndset."""
         return self._get_set_link("NODE", self.ndset)
 

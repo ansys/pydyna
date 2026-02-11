@@ -570,7 +570,7 @@ class Mat034M(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sxy_link(self) -> DefineCurve:
+    def sxy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for sxy."""
         if self.deck is None:
             return None
@@ -585,7 +585,7 @@ class Mat034M(KeywordBase):
         self.sxy = value.lcid
 
     @property
-    def th_link(self) -> DefineCurve:
+    def th_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for th."""
         if self.deck is None:
             return None
@@ -600,7 +600,7 @@ class Mat034M(KeywordBase):
         self.th = value.lcid
 
     @property
-    def srfac_link(self) -> DefineCurve:
+    def srfac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for srfac."""
         if self.deck is None:
             return None
@@ -615,7 +615,7 @@ class Mat034M(KeywordBase):
         self.srfac = value.lcid
 
     @property
-    def fxx_link(self) -> DefineCurve:
+    def fxx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fxx."""
         if self.deck is None:
             return None
@@ -630,7 +630,7 @@ class Mat034M(KeywordBase):
         self.fxx = value.lcid
 
     @property
-    def fyy_link(self) -> DefineCurve:
+    def fyy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fyy."""
         if self.deck is None:
             return None

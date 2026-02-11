@@ -173,7 +173,7 @@ class LoadMask(KeywordBase):
         self._cards[1].set_value("icycle", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -188,7 +188,7 @@ class LoadMask(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidm_link(self) -> DefineCurve:
+    def lcidm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm."""
         if self.deck is None:
             return None
@@ -203,7 +203,7 @@ class LoadMask(KeywordBase):
         self.lcidm = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -218,7 +218,7 @@ class LoadMask(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def vid1_link(self) -> DefineVector:
+    def vid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid1."""
         if self.deck is None:
             return None
@@ -233,7 +233,7 @@ class LoadMask(KeywordBase):
         self.vid1 = value.vid
 
     @property
-    def vid2_link(self) -> DefineVector:
+    def vid2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid2."""
         if self.deck is None:
             return None
@@ -248,7 +248,7 @@ class LoadMask(KeywordBase):
         self.vid2 = value.vid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

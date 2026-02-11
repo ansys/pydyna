@@ -137,7 +137,7 @@ class DampingFrequencyRange(KeywordBase):
         self._cards[0].set_value("iflg", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 
@@ -147,7 +147,7 @@ class DampingFrequencyRange(KeywordBase):
         self.psid = value.sid
 
     @property
-    def pidrel_link(self) -> KeywordBase:
+    def pidrel_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidrel."""
         return self._get_link_by_attr("PART", "pid", self.pidrel, "parts")
 

@@ -126,7 +126,7 @@ class LoadSegmentSetId(KeywordBase):
         self._cards[1].set_value("at", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

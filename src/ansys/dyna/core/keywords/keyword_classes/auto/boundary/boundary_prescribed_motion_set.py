@@ -291,17 +291,17 @@ class BoundaryPrescribedMotionSet(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -316,7 +316,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
         self.vid = value.vid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

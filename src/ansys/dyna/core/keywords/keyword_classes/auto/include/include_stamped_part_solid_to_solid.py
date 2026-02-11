@@ -220,37 +220,37 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
         self._cards[2].set_value("n3trgt", value)
 
     @property
-    def n1sorc_link(self) -> KeywordBase:
+    def n1sorc_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1sorc."""
         return self._get_link_by_attr("NODE", "nid", self.n1sorc, "parts")
 
     @property
-    def n2sorc_link(self) -> KeywordBase:
+    def n2sorc_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2sorc."""
         return self._get_link_by_attr("NODE", "nid", self.n2sorc, "parts")
 
     @property
-    def n3sorc_link(self) -> KeywordBase:
+    def n3sorc_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3sorc."""
         return self._get_link_by_attr("NODE", "nid", self.n3sorc, "parts")
 
     @property
-    def n1trgt_link(self) -> KeywordBase:
+    def n1trgt_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1trgt."""
         return self._get_link_by_attr("NODE", "nid", self.n1trgt, "parts")
 
     @property
-    def n2trgt_link(self) -> KeywordBase:
+    def n2trgt_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2trgt."""
         return self._get_link_by_attr("NODE", "nid", self.n2trgt, "parts")
 
     @property
-    def n3trgt_link(self) -> KeywordBase:
+    def n3trgt_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3trgt."""
         return self._get_link_by_attr("NODE", "nid", self.n3trgt, "parts")
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

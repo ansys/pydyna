@@ -69,27 +69,27 @@ class ConstrainedAdaptivity(KeywordBase):
     @property
     def dnid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for dnid, keyed by dnid value."""
-        return self._get_links_from_table("NODE", "nid", "constrains", "dnid", "parts")
+        return self._get_links_from_table("NODE", "nid", "constrains", "dnid", "")
 
     def get_dnid_link(self, dnid: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given dnid."""
-        return self._get_link_by_attr("NODE", "nid", dnid, "parts")
+        return self._get_link_by_attr("NODE", "nid", dnid, "")
 
     @property
     def nid1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid1, keyed by nid1 value."""
-        return self._get_links_from_table("NODE", "nid", "constrains", "nid1", "parts")
+        return self._get_links_from_table("NODE", "nid", "constrains", "nid1", "")
 
     def get_nid1_link(self, nid1: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
-        return self._get_link_by_attr("NODE", "nid", nid1, "parts")
+        return self._get_link_by_attr("NODE", "nid", nid1, "")
 
     @property
     def nid2_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid2, keyed by nid2 value."""
-        return self._get_links_from_table("NODE", "nid", "constrains", "nid2", "parts")
+        return self._get_links_from_table("NODE", "nid", "constrains", "nid2", "")
 
     def get_nid2_link(self, nid2: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
-        return self._get_link_by_attr("NODE", "nid", nid2, "parts")
+        return self._get_link_by_attr("NODE", "nid", nid2, "")
 
