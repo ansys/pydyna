@@ -7,20 +7,20 @@ Instructions for AI assistants helping **users** work with PyDyna (ansys-dyna-co
 ## Documentation Structure
 
 - **This file**: Quick reference and common operations
-- **[Deck Operations](agent/deck.md)**: Detailed guide for Deck class
-- **[Working with Keywords](agent/keywords.md)**: Keyword system deep dive  
-- **[Common Patterns](agent/patterns.md)**: Complete workflows and examples
+- **[Deck Operations](ansys.dyna.core/deck.md)**: Detailed guide for Deck class
+- **[Working with Keywords](ansys.dyna.core/keywords.md)**: Keyword system deep dive
+- **[Common Patterns](ansys.dyna.core/patterns.md)**: Complete workflows and examples
 
 ## Overview
 
-PyDyna is a Python interface to LS-DYNA, providing programmatic access to keyword files (`.k`, `.key` files). The primary workflow involves loading keyword files into a `Deck` object, manipulating keywords, and writing the modified deck back to a file.
+PyDyna is a Python interface to LS-DYNA, providing programmatic access to keyword files (`.k`, `.key` files).
 
 ```python
 from ansys.dyna.core import Deck, keywords
 
 # Load an existing model
 deck = Deck()
-deck.load("model.k")
+deck.import_file("model.k")
 
 # Modify a material
 for mat in deck.get_kwds_by_type("MAT"):
@@ -35,26 +35,26 @@ new_mat.e = 7.0e10
 deck.append(new_mat)
 
 # Save
-deck.write("modified_model.k")
+deck.export_file("modified_model.k")
 ```
 
 ## Core Concepts
 
 ### Deck Class
 
-The `Deck` is the main container for keywords. [See detailed guide](agent/deck.md)
+The `Deck` is the main container for keywords. [See detailed guide](ansys.dyna.core/deck.md)
 
 ```python
 deck = Deck()
-deck.load("model.k")        # Load from file
+deck.import_file("model.k")        # Load from file
 deck.append(keyword)        # Add keyword
 deck.remove(index)          # Remove keyword
-deck.write("output.k")      # Save to file
+deck.export_file("output.k")      # Save to file
 ```
 
 ### Keywords Module
 
-Keywords are Python classes representing LS-DYNA cards. [See detailed guide](agent/keywords.md)
+Keywords are Python classes representing LS-DYNA cards. [See detailed guide](ansys.dyna.core/keywords.md)
 
 ```python
 from ansys.dyna.core import keywords
@@ -68,7 +68,7 @@ mat.ro = 7850               # Density
 
 ## Common Operations
 
-**[See Deck Operations guide for details](agent/deck.md)**
+**[See Deck Operations guide for details](ansys.dyna.core/deck.md)**
 
 ### Accessing Keywords
 
@@ -92,10 +92,6 @@ for kw in deck.keywords:
 for mat in deck.get_kwds_by_type("MAT"):
     if mat.mid == 1:
         mat.e = 2.5e11
-
-# Bulk modification
-for node in deck.get_kwds_by_type("NODE"):
-    node.z += 10.0  # Shift all nodes
 ```
 
 ### Adding/Removing
@@ -124,41 +120,36 @@ deck.append(include)
 
 ## Important Notes
 
-**[See full guides for details](agent/)**
+**[See full guides for details](ansys.dyna.core/)**
 
 ### Critical Warnings
 
 1. **Auto-generated files**: Avoid searching `src/ansys/dyna/core/keywords/keyword_classes/auto/` - it contains 3000+ generated files that will bloat your context.
 
-2. **Keyword naming**: Use numeric suffixes: `Mat001` = MAT_ELASTIC, `Section002` = SECTION_SHELL
-
-3. **One deck per keyword**: Keywords can only belong to one deck at a time.
-
-4. **Use filtering**: Call `deck.get_kwds_by_type("MAT")` instead of iterating all keywords.
+2. **Use filtering**: Call `deck.get_kwds_by_type("MAT")` instead of iterating all keywords.
 
 ### Quick Tips
 
 - **Discover keywords**: Use IDE autocomplete on `keywords.`
-- **Field access**: `mat.mid`, `node.x` (use autocomplete)
-- **Validation**: `deck.validate()` or `deck.write("file.k", validate=True)`
+- **Field access**: `mat.mid`, `node.nodes` (use autocomplete)
 - **Format**: Set `deck.format = format_type.long` for wider fields
 - **Parameters**: Automatically loaded from `*PARAMETER` keywords
 
 ## Common Workflows
 
-**[See complete examples in patterns guide](agent/patterns.md)**
+**[See complete examples in patterns guide](ansys.dyna.core/patterns.md)**
 
 ### Load → Modify → Save
 
 ```python
 deck = Deck()
-deck.load("model.k")
+deck.import_file("model.k")
 
 # Modify
 for mat in deck.get_kwds_by_type("MAT"):
     mat.e *= 1.1  # Increase stiffness
 
-deck.write("modified.k")
+deck.export_file("modified.k")
 ```
 
 ### Build from Scratch
@@ -171,23 +162,14 @@ mat.mid = 1
 mat.ro = 7850
 deck.append(mat)
 
-deck.write("new_model.k")
-```
-
-### Transform Geometry
-
-```python
-# Translate all nodes
-for node in deck.get_kwds_by_type("NODE"):
-    node.x += 100
-    node.z += 50
+deck.export_file("new_model.k")
 ```
 
 ## Extended Documentation
 
-- **[Deck Operations](agent/deck.md)** - Loading, filtering, modifying, writing
-- **[Keywords Guide](agent/keywords.md)** - Creating, accessing, understanding keywords  
-- **[Common Patterns](agent/patterns.md)** - Complete workflows, transformations, validation
+- **[Deck Operations](ansys.dyna.core/deck.md)** - Loading, filtering, modifying, writing
+- **[Keywords Guide](ansys.dyna.core/keywords.md)** - Creating, accessing, understanding keywords
+- **[Common Patterns](ansys.dyna.core/patterns.md)** - Complete workflows, transformations, validation
 
 ## Resources
 

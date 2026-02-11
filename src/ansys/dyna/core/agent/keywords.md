@@ -10,16 +10,15 @@ Keywords are the building blocks of LS-DYNA input files. PyDyna provides Python 
 
 ### Naming Convention
 
-Keyword classes use **CamelCase with numeric suffixes**:
+Keyword classes use **CamelCase**:
 
 ```python
 from ansys.dyna.core import keywords
 
-# Format: TypeNNN where NNN is the LS-DYNA type number
-keywords.Mat001()      # *MAT_ELASTIC
-keywords.Mat020()      # *MAT_RIGID
-keywords.Section001()  # *SECTION_BEAM
-keywords.Section002()  # *SECTION_SHELL
+keywords.MatElastic()      # *MAT_ELASTIC
+keywords.MatRigid()      # *MAT_RIGID
+keywords.SectionBeam()  # *SECTION_BEAM
+keywords.SectionShell()  # *SECTION_SHELL
 ```
 
 **Tip**: Use IDE autocomplete to discover available keywords - type `keywords.` and browse.
@@ -39,18 +38,28 @@ keywords.Section002()  # *SECTION_SHELL
 from ansys.dyna.core import keywords
 
 # Create a material
-mat = keywords.Mat001()  # MAT_ELASTIC
+mat = keywords.Mat001()  # MAT_001
 mat.mid = 1              # Material ID
 mat.ro = 7850            # Density
 mat.e = 2.1e11           # Young's modulus
 mat.pr = 0.3             # Poisson's ratio
 
-# Create a node
+# or
+
+mat = keywords.Mat001(mid=1, ro=7850, e=2.1e11, pr=0.3)
+
+# Create nodes
 node = keywords.Node()
-node.nid = 1
-node.x = 0.0
-node.y = 0.0
-node.z = 0.0
+node.nodes = pd.DataFrame({"nid": [1,2,3], "x": [0.0, 0.1, 0.2], "y": [0.0, 0.0, 0.0], "z": [0.0, 0.0, 0.0]})
+```
+
+# Displaying keywords
+```pycon
+>>> mat = keywords.Mat001(mid=1, ro=7850, e=2.1e11, pr=0.3)
+>>> mat
+*MAT_001
+$#     mid        ro         e        pr        da        db    unused
+         1    7850.0   2.1e+11       0.3
 ```
 
 ### With User Comments
@@ -63,7 +72,7 @@ mat.mid = 1
 mat.ro = 7850
 ```
 
-### With Format
+### Using Long Format
 
 ```python
 from ansys.dyna.core.lib.format_type import format_type
@@ -140,17 +149,39 @@ curve = keywords.DefineCurve()
 curve.lcid = 1
 curve.title = "Load curve"
 
-# Add data points (table structure)
-# Specific API depends on keyword structure
+#curve.curves is a pandas dataframe with columns a1 and o1
 ```
 
 ### Option Keywords
 
 Keywords with optional cards:
 
-```python
+```pycon
 # Some keywords have optional additional cards
 # Access via specific attributes defined in the class
+>>> c=kwd.ContactAutomaticSingleSurface()
+>>> c.options
+Options:
+    ID option is not active.
+    MPP option is not active.
+    A option is not active.
+    B option is not active.
+    C option is not active.
+    D option is not active.
+    E option is not active.
+    F option is not active.
+    G option is not active.
+>>> c.options["ID"].active=True
+>>> c
+*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID
+$#     cid                                                               heading
+
+$#    ssid      msid     sstyp     mstyp    sboxid    mboxid       spr       mpr
+
+$#      fs        fd        dc        vc       vdc    penchk        bt        dt
+       0.0       0.0       0.0       0.0       0.0         0       0.0       0.0
+$#     sfs       sfm       sst       mst      sfst      sfmt       fsf       vsf
+       1.0       1.0                           1.0       1.0       1.0       1.0
 ```
 
 ### Complex Keywords
@@ -182,11 +213,6 @@ if mat.ro < 8000:
 # Modify all materials in a deck
 for mat in deck.get_kwds_by_type("MAT"):
     mat.e *= 1.1  # Increase stiffness by 10%
-
-# Conditional bulk modification
-for node in deck.get_kwds_by_type("NODE"):
-    if node.z < 0:
-        node.z = 0.0  # Clamp negative z to zero
 ```
 
 ## Keyword Validation
@@ -240,29 +266,16 @@ section_shell.t1 = 1.0     # Thickness
 
 ```python
 part = keywords.Part()
-part.pid = 1
-part.secid = 1
-part.mid = 1
+part.parts = pd.DataFrame({"pid": [1], "secid": [1], "mid": [1]})
 ```
 
-### Nodes and Elements
+### Elements
 
 ```python
-# Node
-node = keywords.Node()
-node.nid = 100
-node.x = 10.0
-node.y = 20.0
-node.z = 30.0
 
 # Element (varies by type)
 elem = keywords.ElementShell()
-elem.eid = 200
-elem.pid = 1
-elem.n1 = 100
-elem.n2 = 101
-elem.n3 = 102
-elem.n4 = 103
+elem.elements = pd.DataFrame({"eid": [200], "pid": [1], "n1": [100], "n2": [101], "n3": [102], "n4": [103]})
 ```
 
 ### Control Cards
@@ -275,16 +288,6 @@ control_term.endtim = 10.0
 # Output control
 control_out = keywords.DatabaseBinaryD3Plot()
 control_out.dt = 0.01  # Output interval
-```
-
-### Curves and Tables
-
-```python
-# Define a curve
-curve = keywords.DefineCurve()
-curve.lcid = 1
-curve.title = "Time-displacement curve"
-# Add curve data points via specific API
 ```
 
 ## Finding Keywords in Documentation
@@ -318,8 +321,7 @@ Refer to the LS-DYNA Keyword User's Manual for field meanings and valid values.
 Most keyword classes (3000+) are auto-generated from the LS-DYNA schema. This means:
 
 1. **Field names match LS-DYNA**: Use the manual for field documentation
-2. **Type numbers in class names**: `Mat001` = MAT_ELASTIC (type 1)
-3. **Consistent API**: All keywords follow the same patterns
+2. **Consistent API**: All keywords follow the same patterns
 
 ### Searching for Keywords
 
@@ -334,33 +336,6 @@ grep("some_field", path="src/ansys/dyna/core/keywords/keyword_classes/auto/")
 # ✅ Use these approaches
 help(keywords.Mat001)
 deck.get_kwds_by_type("MAT")
-```
-
-### Deck Association Constraint
-
-A keyword can only be in one deck at a time:
-
-```python
-mat = keywords.Mat001()
-deck1.append(mat)  # OK
-deck2.append(mat)  # ERROR: already in deck1
-
-# To add to multiple decks, you need separate instances
-mat2 = keywords.Mat001()
-mat2.mid = mat.mid  # Copy properties
-deck2.append(mat2)  # OK
-```
-
-### Format Consistency
-
-Maintain consistent format within a deck:
-
-```python
-# Set format at deck level
-deck.format = format_type.long
-
-# Or per keyword
-mat.format = format_type.long
 ```
 
 ## Advanced Topics
@@ -381,20 +356,6 @@ if kw.keyword == "MAT":
 # Checking both keyword and subkeyword
 if kw.keyword == "SECTION" and kw.subkeyword == "SHELL":
     print("This is a shell section")
-```
-
-### Copying Keywords
-
-```python
-# Create a new instance and copy properties
-mat1 = keywords.Mat001()
-mat1.mid = 1
-mat1.ro = 7850
-
-mat2 = keywords.Mat001()
-mat2.mid = 2
-mat2.ro = mat1.ro  # Copy density
-mat2.e = mat1.e    # Copy modulus
 ```
 
 ### Keyword Relationships
