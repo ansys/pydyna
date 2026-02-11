@@ -318,20 +318,21 @@ def _make_pointer_block(
     start = "<!-- pydyna-agent-instructions:start -->"
     end = "<!-- pydyna-agent-instructions:end -->"
 
-    extended_section = ""
+    extended_hint = ""
     if extended_docs:
-        extended_section = "\nExtended documentation (relative to above):\n"
-        for doc in extended_docs:
-            extended_section += f"- `{doc}`\n"
+        extended_hint = " (links to extended topics)"
 
     block = f"""{start}
 ## PyDyna (ansys-dyna-core)
 
-PyDyna ships agent instructions. Read the file at:
+**IMPORTANT:** Before writing any code using `ansys.dyna.core`, you MUST:
 
-- `{pydyna_ref}`
-{extended_section}
-Regenerate with: `{regenerate_cmd}`
+1. **Read** the file `{pydyna_ref}` in this workspace
+2. **Read linked files** as needed for your task{extended_hint}
+3. **Search** docs before assuming patterns (NODE/PART use DataFrames, not simple attributes)
+4. **Do not guess** - if uncertain, use `help(keywords.KeywordName)` or ask for clarification
+
+Regenerate: `{regenerate_cmd}`
 {end}"""
 
     return start, end, block
