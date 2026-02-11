@@ -23,6 +23,13 @@ ARG DYNA_FILE="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018.tg
 # ARG DYNA_PATH="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 ARG DYNA_PATH="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
 
+RUN apt-get update && apt-get install -y gpg-agent wget && \
+    wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list && \
+    apt-get update && \
+    apt-get install -y intel-oneapi-mpi-devel
+
+
 # --------------------
 # Environment
 # --------------------
@@ -59,6 +66,7 @@ WORKDIR ${INSTALL_DIR}
 # --------------------
 # Extract LS-DYNA
 # --------------------
+
 RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
       "https://ftp.lstc.com/user/${DYNA_URL}/${DYNA_FILE}" && \
     chmod +x "${DYNA_FILE}" && \
