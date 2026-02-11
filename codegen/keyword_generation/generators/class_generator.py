@@ -650,7 +650,7 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
         # Check if this is a SeriesCard (variable card)
         variable_meta = card.variable if isinstance(card, Card) else card.get("variable")
         is_series = variable_meta is not None
-        
+
         if is_series:
             # For SeriesCard, check if ANY field has a link
             # All fields should have the same link type (e.g., all ELEMENT_BEAM)
@@ -660,7 +660,7 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
                 if "link" in field:
                     link_type = field["link"]
                     break
-            
+
             if link_type and link_type in links.keys():
                 has_link = True
                 series_name = variable_meta.name if hasattr(variable_meta, "name") else variable_meta.get("name")
@@ -675,7 +675,7 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
                 )
                 links[link_type].append(field_info)
             continue  # Skip processing individual fields
-        
+
         # Check if this is a table_group card (TableCardGroup)
         is_table_group = card.table_group if isinstance(card, Card) else card.get("table_group", False)
         table_name = card.overall_name if isinstance(card, Card) else card.get("overall_name")
