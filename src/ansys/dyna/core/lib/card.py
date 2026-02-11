@@ -101,7 +101,7 @@ class Card(CardInterface):
     def __init__(
         self,
         fields: typing.List[Field],
-        active_func: typing.Callable = None,
+        active_func: typing.Optional[typing.Callable] = None,
         format: format_type = format_type.default,
     ):
         """Initialize a Card from Field objects.

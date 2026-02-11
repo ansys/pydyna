@@ -41,8 +41,8 @@ class CardSet(CardInterface):
     def __init__(
         self,
         set_type: type,
-        length_func: typing.Callable = None,
-        active_func: typing.Callable = None,
+        length_func: typing.Optional[typing.Callable] = None,
+        active_func: typing.Optional[typing.Callable] = None,
         option_specs: typing.List[OptionSpec] = None,
         **kwargs,
     ):
