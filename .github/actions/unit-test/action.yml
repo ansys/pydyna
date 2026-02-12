@@ -63,12 +63,13 @@ runs:
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
+        provision-uv: true
 
 
     - name: Create virtual environment
       shell: bash
       run: |
-        python -m venv venv
+        uv venv .venv
 
     - name: Login to GitHub container registry
     # only if there is a docker image to pull
@@ -86,9 +87,9 @@ runs:
         DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source venv/Scripts/activate
+          source .venv/Scripts/activate
         else
-          source venv/bin/activate
+          source .venv/bin/activate
         fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
@@ -98,9 +99,9 @@ runs:
     - name: Install test dependencies
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source venv/Scripts/activate
+          source .venv/Scripts/activate
         else
-          source venv/bin/activate
+          source .venv/bin/activate
         fi
         uv pip install -e .[tests]
       shell: bash
@@ -125,9 +126,9 @@ runs:
         fi
 
         if [ "$PYTEST_MARKERS" = "" ]; then
-          uv run pytest -ra $COVERAGE_ARGS -vv
+          pytest -ra $COVERAGE_ARGS -vv
         else
-          uv run pytest -m "$PYTEST_MARKERS" -ra $COVERAGE_ARGS -vv
+          pytest -m "$PYTEST_MARKERS" -ra $COVERAGE_ARGS -vv
         fi
       shell: bash
 
@@ -135,9 +136,9 @@ runs:
       if: ${{ inputs.server-logs == 'true' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source venv/Scripts/activate
+          source .venv/Scripts/activate
         else
-          source venv/bin/activate
+          source .venv/bin/activate
         fi
         docker logs kw_server > server_output.txt
       shell: bash
