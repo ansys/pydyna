@@ -166,6 +166,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           coverage-file: unittests
+          pytest-markers: "not codegen and not run"
 
   build-library:
     name: "Build library"

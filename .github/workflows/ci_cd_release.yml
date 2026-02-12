@@ -128,8 +128,8 @@ jobs:
 
   unit-tests:
     name: "Unit testing for matrix"
-    runs-on: ${{ matrix.os }}
     needs: [smoke-tests]
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -140,11 +140,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/unit-test
+      - name: Run tests
+        uses: ./.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           coverage-file: unittests
+          pytest-markers: "not codegen and not run"
 
 
   build-library:

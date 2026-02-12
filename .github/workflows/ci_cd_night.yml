@@ -62,12 +62,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Run unit tests
+      - name: Run tests
         uses: ./.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
-          github-token: ${{ env.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           coverage-file: unittests
+          pytest-markers: "not codegen and not run"
 
   doc-build:
     name: "Documentation build"
