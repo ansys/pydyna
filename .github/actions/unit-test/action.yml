@@ -131,39 +131,9 @@ runs:
         fi
       shell: bash
 
-    - name: Extract the server logs
-      if: ${{ inputs.server-logs == 'true' }}
-      run: |
-        if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
-        else
-          source .venv/bin/activate
-        fi
-        docker logs kw_server > server_output.txt
-      shell: bash
-
-    - name: Upload the server logs
-      if: ${{ inputs.server-logs == 'true' }}
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      with:
-        name: server_output_tests.txt
-        path: server_output.txt
-
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
       with:
         flags: ${{ inputs.coverage-file }}
-
-    - name: Stop container
-      if: ${{ inputs.pydyna-run-container != '' }}
-      run: |
-        if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
-        else
-          source .venv/bin/activate
-        fi
-        docker stop kw_server
-        docker rm kw_server
-      shell: bash
