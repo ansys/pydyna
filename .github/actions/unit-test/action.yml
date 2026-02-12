@@ -18,7 +18,7 @@ inputs:
     default: ""
     type: string
 
-  docker-image:
+  pydyna-run-container:
     description: Docker image to use for LS-DYNA keyword server
     required: false
     default: ""
@@ -68,11 +68,11 @@ runs:
     - name: Create virtual environment
       shell: bash
       run: |
-        python -m venv .venv
+        python -m venv venv
 
     - name: Login to GitHub container registry
     # only if there is a docker image to pull
-      if: ${{ inputs.docker-image != '' }}
+      if: ${{ inputs.pydyna-run-container != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
@@ -81,14 +81,14 @@ runs:
 
 
     - name: Pull and start LS-DYNA keyword server
-      if: ${{ inputs.docker-image != ''}}
+      if: ${{ inputs.pydyna-run-container != ''}}
       env:
-        DOCKER_IMAGE: ${{ inputs.docker-image }}
+        DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
+          source venv/Scripts/activate
         else
-          source .venv/bin/activate
+          source venv/bin/activate
         fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
@@ -98,9 +98,9 @@ runs:
     - name: Install test dependencies
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
+          source venv/Scripts/activate
         else
-          source .venv/bin/activate
+          source venv/bin/activate
         fi
         uv pip install -e .[tests]
       shell: bash
@@ -109,15 +109,15 @@ runs:
       env:
         PYTEST_MARKERS: ${{ inputs.pytest-markers }}
         COVERAGE_FILE: ${{ inputs.coverage-file }}
-        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
+          source venv/Scripts/activate
         else
-          source .venv/bin/activate
+          source venv/bin/activate
         fi
         COVERAGE_ARGS=""
         if [ -n "$COVERAGE_FILE" ]; then
@@ -135,9 +135,9 @@ runs:
       if: ${{ inputs.server-logs == 'true' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
+          source venv/Scripts/activate
         else
-          source .venv/bin/activate
+          source venv/bin/activate
         fi
         docker logs kw_server > server_output.txt
       shell: bash
@@ -157,7 +157,7 @@ runs:
         flags: ${{ inputs.coverage-file }}
 
     - name: Stop container
-      if: ${{ inputs.docker-image != '' }}
+      if: ${{ inputs.pydyna-run-container != '' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
           source .venv/Scripts/activate

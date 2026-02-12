@@ -8,7 +8,7 @@ on:
     - cron: '0 22 * * *' # Nightly at 22:00 UTC
   workflow_dispatch:
     inputs:
-      PyDynaRunContainer:
+      pydyna-run-container:
         description: 'Run container name'
         required: false
         default: ghcr.io/ansys/pydyna-run:latest
@@ -23,7 +23,7 @@ env:
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
-  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.pydyna-run-container || 'ghcr.io/ansys/pydyna-run:latest'}}
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
@@ -87,7 +87,7 @@ jobs:
           pdf-pool-size: 15000000
           pdf-string-vacancies: 90000
           pdf-max-strings: 600000
-          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ env.GITHUB_TOKEN }}
           license-server: ${{ env.LICENSE_SERVER }}

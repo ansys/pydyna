@@ -14,7 +14,7 @@ env:
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
-  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.pydyna-run-container || 'ghcr.io/ansys/pydyna-run:latest'}}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -82,7 +82,7 @@ jobs:
           pdf-pool-size: 15000000
           pdf-string-vacancies: 90000
           pdf-max-strings: 600000
-          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ secrets.LICENSE_SERVER }}
@@ -121,7 +121,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
           coverage-file: run

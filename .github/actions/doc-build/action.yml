@@ -13,7 +13,7 @@ inputs:
     required: false
   pdf-max-strings:
     required: false
-  PyDynaRunContainer:
+  pydyna-run-container:
     description: Run container name
     required: true
   python-version:
@@ -106,6 +106,7 @@ runs:
         ANSYS_VERSION: "242"
 
     - name: Login to GitHub container registry
+      if: ${{ inputs.pydyna-run-container != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
@@ -118,16 +119,19 @@ runs:
       shell: bash
 
     - name: Pull PyDyna-run image
+      if: ${{ inputs.pydyna-run-container != '' }}
+      env:
+        DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
         source .venv/bin/activate
-        docker pull ghcr.io/ansys/pydyna-run:latest
+        docker pull $DOCKER_IMAGE
       shell: bash
 
     - name: Build the html documentation
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
@@ -151,7 +155,7 @@ runs:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         PYDYNA_RUN_STREAM: "0"
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
