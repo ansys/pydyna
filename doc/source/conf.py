@@ -1,5 +1,3 @@
-#import ansys.dyna.solver as solver
-
 import datetime
 import os
 
