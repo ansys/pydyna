@@ -48,8 +48,8 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
-  keyword-testing:
-    name: "Keyword testing for matrix"
+  unit-tests:
+    name: "Unit testing for matrix"
     needs: [smoke-tests]
     runs-on: ${{ matrix.os }}
     strategy:
@@ -62,13 +62,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Run test with "keywords" marker
+      - name: Run unit tests
         uses: ./.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ env.GITHUB_TOKEN }}
-          pytest-markers: keywords
-          coverage-file: keywords
+          coverage-file: unittests
 
   doc-build:
     name: "Documentation build"

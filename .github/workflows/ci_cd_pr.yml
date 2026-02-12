@@ -127,10 +127,29 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
+  run-tests:
+    name: Test the "run" subpackage
+    runs-on: ubuntu-latest
+    needs: [smoke-tests]
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
-  keyword-testing:
-    name: "Keyword testing for matrix"
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pytest-markers: run
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          coverage-file: run
+
+
+  unit-tests:
+    name: "Unit testing for matrix"
     runs-on: ${{ matrix.os }}
+    needs: [smoke-tests]
     strategy:
       fail-fast: false
       matrix:
@@ -146,45 +165,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-file: keywords
-
-  run-testing:
-    name: Test the "run" subpackage
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
-
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
-          pytest-markers: run
-          license-server: ${{ secrets.LICENSE_SERVER }}
-          coverage-file: run
-
-  # unit-tests:
-  #   name: "Testing"
-  #   runs-on: ubuntu-latest
-  #   needs: [smoke-tests, codegen-testing]
-  #   steps:
-  #     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-  #       with:
-  #         persist-credentials: false
-  #     - name: Run test without marker
-  #       uses: ./.github/actions/unit-test
-  #       with:
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         server-logs: true
-  #         codecov-token: ${{ env.CODECOV_TOKEN }}
-  #         coverage-file: unittests
+          coverage-file: unittests
 
   build-library:
     name: "Build library"
-    needs: [doc]
+    needs: [doc, run-tests, unit-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/build-library@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
