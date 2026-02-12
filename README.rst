@@ -42,22 +42,11 @@ Overview
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
 build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
 finally postprocess the results.
+ 
+Pydyna contains two modules:
 
-PyDYNA contains three submodules, ``ansys.dyna.core.pre``, and ``ansys.dyna.core.run``.
-
-- ``pre``: This module provides highly abstracted APIs for creating and
-  setting up DYNA input decks. There are many classes supported, namely,
-  DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM,DynaNVH, DynaMaterial,
-  DynaISPH, DynaICFD and DynaAirbag. Each of these classes can be used to generate
-  LS-DYNA keywords. Since these classes have high-level abstraction, each function call
-  generates groups of keywords needed to define an input in LS-DYNA.
-- ``solver``: This API provides features to interact directly with the Ansys LS-DYNA solver.
-  LS-DYNA is primarily a batch solver with very limited interactive capabilities, the
-  ``solver`` service provides a way to push input files to the LS-DYNA solver, monitor the state
-  of the running job, change the value of a load curve and finally retrieve result files back from
-  the server
-- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any
-  client-server library or Docker container.
+- ``keywords``: This module provides the ability to create keyword files for LS-DYNA without using gRPC.
+- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any client-server library or Docker container.
 
 Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers
