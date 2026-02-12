@@ -444,4 +444,3 @@ class TestKeywordHandler:
 
         handler_instance.post_process(kwd_data)
         assert handler_instance.post_process_called
-
