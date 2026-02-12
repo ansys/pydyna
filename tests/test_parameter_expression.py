@@ -33,7 +33,7 @@ from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
-@pytest.mark.keywords
+
 class TestExpressionEvaluator:
     """Test the expression evaluator with various arithmetic operations and functions."""
 
@@ -259,7 +259,7 @@ I result  7.9
         assert isinstance(deck.parameters.get("result"), int)
 
 
-@pytest.mark.keywords
+
 class TestParameterReferences:
     """Test expressions that reference other parameters."""
 
@@ -363,7 +363,7 @@ R result   a*b+c
         assert deck.parameters.get("result") == 10.0
 
 
-@pytest.mark.keywords
+
 class TestDependencyResolution:
     """Test dependency resolution and evaluation ordering."""
 
@@ -463,7 +463,7 @@ R base     5.0
         assert deck.parameters.get("base") == 5.0
 
 
-@pytest.mark.keywords
+
 class TestScoping:
     """Test PARAMETER_EXPRESSION scoping with includes."""
 
@@ -509,7 +509,7 @@ R child    parent*2
         assert deck.parameters.get("child") == 10.0
 
 
-@pytest.mark.keywords
+
 class TestMultipleExpressionKeywords:
     """Test multiple PARAMETER_EXPRESSION keywords in same deck."""
 
@@ -550,7 +550,7 @@ R c        b+a
         assert deck.parameters.get("c") == 15.0
 
 
-@pytest.mark.keywords
+
 class TestEdgeCases:
     """Test edge cases and special scenarios."""
 
@@ -650,7 +650,7 @@ R my_res   my_val*2
         assert deck.parameters.get("my_res") == 20.0
 
 
-@pytest.mark.keywords
+
 class TestNoEchoVariant:
     """Test PARAMETER_EXPRESSION_NOECHO variant."""
 
@@ -667,7 +667,7 @@ R result   5+5
         assert deck.parameters.get("result") == 10.0
 
 
-@pytest.mark.keywords
+
 class TestParameterExpressionLocalScoping:
     """Test PARAMETER_EXPRESSION_LOCAL scoping with includes."""
 
@@ -853,7 +853,7 @@ Rglobalexp,200
         assert set_node.nodes[0] == 200  # &globalexp substituted
 
 
-@pytest.mark.keywords
+
 class TestExpressionReferencingLocalParameter:
     """Test expressions referencing local parameters."""
 

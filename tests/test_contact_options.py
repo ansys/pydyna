@@ -4,7 +4,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_sin
 import pytest
 from ansys.dyna.core.lib.option_card import Options
 
-@pytest.mark.keywords
+
 def test_contact_automatic_single_surface_option_dependencies():
     """Test basic option dependencies for ContactAutomaticSingleSurface"""
     # Create instance of keyword
@@ -34,7 +34,7 @@ def test_contact_automatic_single_surface_option_dependencies():
         assert options[opt].active is True
 
 
-@pytest.mark.keywords
+
 def test_contact_option_cascading_activation():
     """Test cascading activation for all contact option levels."""
     test_cases = [
@@ -60,7 +60,7 @@ def test_contact_option_cascading_activation():
             else:
                 assert options[opt].active is False, f"Option {opt} should not be active when {option_to_activate} is activated"
 
-@pytest.mark.keywords
+
 def test_contact_option_deactivation():
     """Test that options can be deactivated properly"""
     keyword = ContactAutomaticSingleSurface()
@@ -82,7 +82,7 @@ def test_contact_option_deactivation():
         assert options[opt].active is True
 
 
-@pytest.mark.keywords
+
 def test_multiple_contact_card_types():
     """Test that the cascading logic works for different contact card types"""
     contact_classes = [
@@ -106,7 +106,7 @@ def test_multiple_contact_card_types():
             assert options[opt].active is False, f"Option {opt} should not be active for {contact_class.__name__}"
 
 
-@pytest.mark.keywords
+
 def test_contact_card_writing_with_options():
     """Test that contact cards write properly with options activated"""
     keyword = ContactAutomaticSingleSurface()
@@ -127,7 +127,7 @@ def test_contact_card_writing_with_options():
     assert "snlog" in keyword.write()  # SNLOG should be present option B
 
 
-@pytest.mark.keywords
+
 def test_contact_card_option_persistence():
     """Test that option states persist correctly"""
     keyword = ContactAutomaticSingleSurface()
@@ -146,7 +146,7 @@ def test_contact_card_option_persistence():
     assert options2["D"].active is False
 
 
-@pytest.mark.keywords
+
 def test_contact_card_with_parameters_and_options():
     """Test contact card with both parameters and options"""
     keyword = ContactAutomaticSingleSurface()

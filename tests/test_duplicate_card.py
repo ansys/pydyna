@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.format_type import format_type
 
 
-@pytest.mark.keywords
+
 def test_table_card_read_bounded(string_utils):
     """test reading fixed number of lines"""
     d = TableCard(
@@ -59,7 +59,7 @@ def test_table_card_read_bounded(string_utils):
     assert table["rc"][2] == 5
 
 
-@pytest.mark.keywords
+
 def test_table_card_read_unbounded(string_utils):
     """test reading an unknown number of lines into an unbounded card"""
     d = TableCard(
@@ -88,7 +88,7 @@ def test_table_card_read_unbounded(string_utils):
     assert table["rc"][2] == 5
 
 
-@pytest.mark.keywords
+
 def test_table_card_assign():
     """test assigning dataframe to table card"""
     d = TableCard(
@@ -120,7 +120,7 @@ def test_table_card_assign():
     assert table["rc"][4] == 0.0
 
 
-@pytest.mark.keywords
+
 def test_table_card_assign_wrong_types():
     """test assigning wrong type as dataframe to table card"""
 
@@ -142,7 +142,7 @@ def test_table_card_assign_wrong_types():
     pytest.raises(TypeError, assign)
 
 
-@pytest.mark.keywords
+
 def test_table_card_write_long_format(string_utils, ref_string):
     """Test writing a table card with the long format."""
     d = TableCard(
@@ -164,7 +164,7 @@ def test_table_card_write_long_format(string_utils, ref_string):
     assert d_str == ref_string.test_mesh_string_long
 
 
-@pytest.mark.keywords
+
 def test_table_card_read_long(string_utils, ref_string):
     """Test writing a table card with the long format."""
     d = TableCard(
@@ -186,7 +186,7 @@ def test_table_card_read_long(string_utils, ref_string):
     assert pd.isna(table["x"][0])
 
 
-@pytest.mark.keywords
+
 def test_table_card_write_inactive():
     card = TableCard(
         [
@@ -203,7 +203,7 @@ def test_table_card_write_inactive():
     assert card.write() == ""
 
 
-@pytest.mark.keywords
+
 def test_table_card_write_empty():
     card = TableCard(
         [
@@ -219,7 +219,7 @@ def test_table_card_write_empty():
     )
     assert card.write() == ""
 
-@pytest.mark.keywords
+
 def test_table_card_init_data_table():
     node_ids = np.arange(30) + 1
     xs = np.zeros(30) + 0.1
@@ -251,7 +251,7 @@ def test_table_card_init_data_table():
         assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
 
 
-@pytest.mark.keywords
+
 def test_table_card_init_data_scalar():
 
     def _verify_dataframe(df):

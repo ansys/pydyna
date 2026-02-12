@@ -37,7 +37,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.control.control_shell import 
 from ansys.dyna.core.lib.config import disable_lspp_defaults
 
 
-@pytest.mark.keywords
+
 def test_control_shell_default_writes_only_required_card():
     """Test that a default ControlShell writes only the required card 0."""
     kwd = ControlShell()
@@ -53,7 +53,7 @@ def test_control_shell_default_writes_only_required_card():
     assert len(lines) == 1, f"Expected 1 data line, got {len(lines)}: {lines}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_setting_card0_writes_only_card0():
     """Test that setting a field on card 0 still writes only card 0."""
     kwd = ControlShell()
@@ -65,7 +65,7 @@ def test_control_shell_setting_card0_writes_only_card0():
     assert len(lines) == 1, f"Expected 1 data line, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_setting_card1_writes_cards_0_and_1():
     """Test that setting a field on card 1 writes cards 0 and 1."""
     kwd = ControlShell()
@@ -77,7 +77,7 @@ def test_control_shell_setting_card1_writes_cards_0_and_1():
     assert len(lines) == 2, f"Expected 2 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_setting_card2_writes_cards_0_1_2():
     """Test that setting a field on card 2 writes cards 0, 1, and 2."""
     kwd = ControlShell()
@@ -89,7 +89,7 @@ def test_control_shell_setting_card2_writes_cards_0_1_2():
     assert len(lines) == 3, f"Expected 3 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_setting_card3_writes_cards_0_to_3():
     """Test that setting a field on card 3 writes cards 0-3."""
     kwd = ControlShell()
@@ -101,7 +101,7 @@ def test_control_shell_setting_card3_writes_cards_0_to_3():
     assert len(lines) == 4, f"Expected 4 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_setting_card4_writes_all_cards():
     """Test that setting a field on card 4 writes all 5 cards."""
     kwd = ControlShell()
@@ -113,7 +113,7 @@ def test_control_shell_setting_card4_writes_all_cards():
     assert len(lines) == 5, f"Expected 5 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_cascading_from_last_card():
     """Test that setting the last card activates all preceding cards."""
     kwd = ControlShell()
@@ -127,7 +127,7 @@ def test_control_shell_cascading_from_last_card():
     assert kwd._cards[4].active is True
 
 
-@pytest.mark.keywords
+
 def test_control_shell_cascading_from_middle_card():
     """Test that setting a middle card only activates up to that card."""
     kwd = ControlShell()
@@ -143,7 +143,7 @@ def test_control_shell_cascading_from_middle_card():
     assert kwd._cards[4].active is False
 
 
-@pytest.mark.keywords
+
 def test_control_shell_card_active_property():
     """Test that cards report correct active state."""
     kwd = ControlShell()
@@ -156,7 +156,7 @@ def test_control_shell_card_active_property():
     assert kwd._cards[4].active is False
 
 
-@pytest.mark.keywords
+
 def test_control_shell_multiple_fields_same_card():
     """Test setting multiple fields on the same card."""
     kwd = ControlShell()
@@ -169,7 +169,7 @@ def test_control_shell_multiple_fields_same_card():
     assert len(lines) == 2, f"Expected 2 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_fields_on_multiple_cards():
     """Test setting fields on non-consecutive cards."""
     kwd = ControlShell()
@@ -183,7 +183,7 @@ def test_control_shell_fields_on_multiple_cards():
     assert len(lines) == 4, f"Expected 4 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_constructor_kwargs_with_disable_lspp_defaults():
     """Test that constructor kwargs trigger cascading activation with disable_lspp_defaults.
 
@@ -205,7 +205,7 @@ def test_control_shell_constructor_kwargs_with_disable_lspp_defaults():
     assert len(lines) == 3, f"Expected 3 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_constructor_kwargs_card4_activates_all():
     """Test that setting card 4 field via constructor kwargs activates all cards."""
     with disable_lspp_defaults():
@@ -218,7 +218,7 @@ def test_control_shell_constructor_kwargs_card4_activates_all():
     assert len(lines) == 5, f"Expected 5 data lines, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_constructor_kwargs_card0_only():
     """Test that setting only card 0 fields via constructor writes only card 0."""
     with disable_lspp_defaults():
@@ -231,7 +231,7 @@ def test_control_shell_constructor_kwargs_card0_only():
     assert len(lines) == 1, f"Expected 1 data line, got {len(lines)}"
 
 
-@pytest.mark.keywords
+
 def test_control_shell_constructor_kwargs_hyphenated_field():
     """Test that hyphenated field names work with constructor kwargs.
 

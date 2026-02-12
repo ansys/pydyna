@@ -30,7 +30,7 @@ from ansys.dyna.core import keywords as kwd
 
 import pytest
 
-@pytest.mark.keywords
+
 def test_rigidwall_geometric_flat_id():
     """Test RigidwallGeometricFlat with ID option writes correct keyword title."""
     wall = kwd.RigidwallGeometricFlat()

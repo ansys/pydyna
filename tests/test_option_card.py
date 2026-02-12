@@ -76,7 +76,7 @@ class OptionAPIImplementation:
         return [self._option_specs["FOO"], self._option_specs["BAR"]]
 
 
-@pytest.mark.keywords
+
 def test_options_basic():
     impl = OptionAPIImplementation()
     options = Options(impl)
@@ -86,7 +86,7 @@ def test_options_basic():
     assert options["BAR"].active is True
 
 
-@pytest.mark.keywords
+
 def test_options_union():
     impl = OptionAPIImplementation()
     options = Options(impl)

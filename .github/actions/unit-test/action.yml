@@ -82,7 +82,7 @@ runs:
     #   uses: docker/setup-buildx-action@v3
 
     - name: Pull and start LS-DYNA keyword server
-      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != '' }}
       env:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
