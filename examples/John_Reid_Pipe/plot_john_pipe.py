@@ -166,7 +166,6 @@ deck.plot(cwd=rundir.name, show_edges=True)
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
-# Run the Dyna solver.
 
 run_dyna(dynafile, working_directory=rundir.name)
 run_post(rundir.name)
