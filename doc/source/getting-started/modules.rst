@@ -1,8 +1,8 @@
 Modules
 =======
-PyDYNA consists of four modules, ``ansys.dyna.core.pre``, 
-``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
-learn about the different modules in PyDYNA.
+PyDYNA consists of two main modules: ``ansys.dyna.core.run`` and ``ansys.dyna.core.keywords``.
+
+Learn more about these modules in the sections below.
 
 .. grid:: 2 2 3 3
    :gutter: 3 3 4 4
