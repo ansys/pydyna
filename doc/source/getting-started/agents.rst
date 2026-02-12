@@ -87,7 +87,7 @@ To install for a specific tool:
 Installation output
 -------------------
 
-After running the installation command, you will have:
+After running the installation command, local files are created in your workspace:
 
 **Main instruction file**
   Contains quick reference, common operations, and links to detailed guides.
@@ -155,7 +155,7 @@ Created structure:
 
 **Advantages:**
 
-- Works with sandboxed or cloud-based AI tools
+- Works with cloud-based AI tools
 - Instructions remain available even if package is uninstalled
 - No external dependencies for AI tools
 - Suitable for CI/CD environments
@@ -163,7 +163,7 @@ Created structure:
 **Use copy mode when:**
 
 - You're unsure which mode to use (safest choice)
-- Your AI tool runs in a sandbox or restricted environment
+- Your AI tool runs in a restricted environment
 - You want instructions to persist independently of the package
 - Working in containerized or cloud development environments
 
@@ -196,15 +196,10 @@ Instructions are read directly from the PyDyna installation directory.
 - You frequently upgrade PyDyna and want latest instructions
 - Disk space is a concern (though files are small)
 
-.. warning::
-   If you uninstall PyDyna, pointer mode instructions will break. Use copy
-   mode if package availability is uncertain.
-
-
 Tool-specific behavior
 ----------------------
 
-VS code (GitHub Copilot)
+VS code (GitHub copilot)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Updates:
@@ -229,7 +224,7 @@ Creates:
    python -m ansys.dyna.core agent --env cursor --copy
 
 
-Claude Code
+Claude code
 ~~~~~~~~~~~
 
 Updates:
@@ -250,7 +245,7 @@ instructions without conflicts.
 
 The manifest includes:
 
-- Package namespace and ecosystem (e.g., ``ansys.dyna.core``, ``pypi``)
+- Package ``namespace`` and ecosystem (example, ``ansys.dyna.core``, ``pypi``)
 - Installation mode (``copy`` or ``pointer``)
 - Entry file and extended documentation locations
 - Installation timestamp
