@@ -81,7 +81,7 @@ runs:
         password: ${{ inputs.github-token }}
 
 
-    - name: Pull and start LS-DYNA keyword server
+    - name: Pull LS-DYNA run container if specified
       if: ${{ inputs.pydyna-run-container != ''}}
       env:
         DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
@@ -93,7 +93,6 @@ runs:
         fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
-        docker run -d --name kw_server -p 50051:50051 "$DOCKER_IMAGE" && echo "Keyword server active on port 50051."
       shell: bash
 
     - name: Install test dependencies
