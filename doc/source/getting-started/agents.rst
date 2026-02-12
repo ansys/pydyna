@@ -2,23 +2,20 @@ AI assistant integration
 ========================
 
 PyDyna includes built-in usage instructions for AI coding assistants such as
-GitHub Copilot, Cursor, and Claude Code. These instructions are installed with
-the package and match the exact version of PyDyna in your environment.
+GitHub Copilot, Cursor, and Claude Code. These instructions are distributed
+with the package and are version-aligned with the exact PyDyna version
+installed in your environment.
 
-The instructions help AI assistants generate accurate PyDyna code without
+These instructions help AI assistants generate accurate PyDyna code without
 relying on external documentation.
-
-.. contents::
-   :local:
-   :depth: 2
 
 
 Overview
 --------
 
-PyDyna distributes structured AI instructions with the package. These files
-describe how to use core APIs, keyword classes, deck manipulation, and common
-usage patterns.
+PyDyna distributes structured AI instruction files with the package. These
+files describe how to use core APIs, keyword classes, deck manipulation, and
+common usage patterns.
 
 The instructions cover:
 
@@ -39,10 +36,23 @@ Benefits:
 - Compatible with multiple AI tools
 
 
+Prerequisites
+-------------
+
+Before installing agent instructions, ensure:
+
+- PyDyna is installed: ``pip install ansys-dyna-core``
+- You have an active AI coding assistant (GitHub Copilot, Cursor, or Claude Code)
+- You are in your project directory or can specify the path with ``--workspace``
+
+.. note::
+   The agent instructions are version-specific. They match the installed version
+   of PyDyna and should be regenerated after package upgrades.
+
 Quick start
 -----------
 
-Run the following command inside your project:
+Navigate to your project directory and run:
 
 .. code-block:: bash
 
@@ -50,7 +60,7 @@ Run the following command inside your project:
 
 To install for a specific tool:
 
-**VS Code (GitHub Copilot)**
+**VS code (GitHub Copilot)**
 
 .. code-block:: bash
 
@@ -62,15 +72,47 @@ To install for a specific tool:
 
    python -m ansys.dyna.core agent --env cursor --copy
 
-**Claude Code**
+**Claude code**
 
 .. code-block:: bash
 
    python -m ansys.dyna.core agent --env claude --copy
 
+.. tip::
 
-How it works
-------------
+   If you do not specify ``--env``, the command uses generic mode, which
+   creates ``.agent/`` files that work with any AI tool capable of reading
+   local documentation.
+
+Installation output
+-------------------
+
+After running the installation command, you will have:
+
+**Main instruction file**
+  Contains quick reference, common operations, and links to detailed guides.
+  Located at ``.agent/ansys.dyna.core.md`` (or tool-specific location).
+
+**Extended documentation**
+  Three detailed guides in ``.agent/ansys.dyna.core/``:
+
+  - ``deck.md``: Complete Deck class operations
+  - ``keywords.md``: Keyword creation and data access patterns
+  - ``patterns.md``: Full workflow examples
+
+**Manifest file**
+  ``.agent/manifest.json`` tracks all installed agent instruction packages,
+  allowing multiple packages to coexist.
+
+**Tool-specific files**
+  Depending on your ``--env`` choice:
+
+  - **VS Code**: ``.github/copilot-instructions.md`` (pointer to main file)
+  - **Cursor**: ``.cursor/rules/pydyna.mdc`` (single self-contained file)
+  - **Claude**: ``CLAUDE.md`` (appends pointer section)
+
+Operational details
+-------------------
 
 PyDyna exposes the location of its AI instructions through Python:
 
@@ -89,7 +131,8 @@ Installation modes
 Copy mode (default)
 ~~~~~~~~~~~~~~~~~~~
 
-Copy mode copies instruction files into your workspace.
+Copy mode copies instruction files into your workspace. This is the **recommended
+mode** for most users.
 
 .. code-block:: bash
 
@@ -110,32 +153,58 @@ Created structure:
    .github/
    ├── copilot-instructions.md    # Pointer for GitHub Copilot (VS Code)
 
-Use copy mode when:
+**Advantages:**
 
-- Working in CI/CD
-- Using sandboxed AI tools
-- You want project-local documentation
+- Works with sandboxed or cloud-based AI tools
+- Instructions remain available even if package is uninstalled
+- No external dependencies for AI tools
+- Suitable for CI/CD environments
+
+**Use copy mode when:**
+
+- You're unsure which mode to use (safest choice)
+- Your AI tool runs in a sandbox or restricted environment
+- You want instructions to persist independently of the package
+- Working in containerized or cloud development environments
 
 
 Pointer mode
 ~~~~~~~~~~~~
 
-Pointer mode references the installed package without copying files.
+Pointer mode creates references to the installed package without copying files.
+Instructions are read directly from the PyDyna installation directory.
 
 .. code-block:: bash
 
    python -m ansys.dyna.core agent --pointer
 
-Use pointer mode when:
+**Advantages:**
 
-- The AI tool has full filesystem access
-- You want instructions to update automatically after upgrades
+- Automatically reflects package upgrades
+- Minimal disk space usage
+- Single source of truth
+
+**Requirements:**
+
+- AI tool must have filesystem access to Python site-packages
+- PyDyna must remain installed
+
+**Use pointer mode when:**
+
+- Your AI tool has full local filesystem access
+- You want instructions to auto-update after ``pip upgrade``
+- You frequently upgrade PyDyna and want latest instructions
+- Disk space is a concern (though files are small)
+
+.. warning::
+   If you uninstall PyDyna, pointer mode instructions will break. Use copy
+   mode if package availability is uncertain.
 
 
 Tool-specific behavior
 ----------------------
 
-VS Code (GitHub Copilot)
+VS code (GitHub Copilot)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Updates:
@@ -249,6 +318,6 @@ If your AI tool does not detect instructions:
 - Check ``.agent/manifest.json`` to verify the package is registered
 - Restart the editor or AI tool to reload instructions
 - Verify the correct ``--env`` option was used for your tool
-- For VS Code, check that ``.github/copilot-instructions.md`` was created
+- For VS code, check that ``.github/copilot-instructions.md`` was created
 - For Cursor, verify ``.cursor/rules/pydyna.mdc`` exists
 - For Claude, check that ``CLAUDE.md`` contains the PyDyna section
