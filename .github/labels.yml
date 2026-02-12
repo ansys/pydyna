@@ -54,10 +54,6 @@
   description: Anything related to run subpackage
   color: 25c1ea
 
-- name: 'Solver'
-  description: Anything related to solver subpackage
-  color: 7e505b
-
 - name: 'Pre'
   description: Anything related to pre subpackage
   color: 81854c

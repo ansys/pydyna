@@ -1,7 +1,7 @@
 Getting started
 ===============
 
-To use the solver features of PyDYNA, you must have a valid LS-DYNA license.
+To use the run features of PyDYNA, you must have a valid LS-DYNA license.
 
 For information on getting a licensed copy of LS-DYNA, see
 the `Ansys LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_

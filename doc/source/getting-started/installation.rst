@@ -1,11 +1,9 @@
 Installation
 ============
 
-PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
+PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ,
 ``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
 
-``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver`` use gRPC and hence need to be run
-using server-client connection.
 
 Install the client
 ------------------
