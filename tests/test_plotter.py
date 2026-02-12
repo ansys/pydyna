@@ -37,7 +37,6 @@ from ansys.dyna.core.lib.deck_plotter import (
 )
 
 
-
 def test_shell_facet_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -77,7 +76,6 @@ def test_shell_facet_array():
     numpy.testing.assert_allclose(shell_facet_array(test[5]), np.array([]))
 
 
-
 def test_line_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -94,7 +92,6 @@ def test_line_array():
     numpy.testing.assert_allclose(line_array(test[4]), np.array([]))
 
 
-
 def test_facet_nid_to_index():
     # Create array-based mapping: mapping[nid] = index
     mapping = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # indices 0-4, mapping[1]=2, mapping[2]=3, etc.
@@ -105,7 +102,6 @@ def test_facet_nid_to_index():
         ),
         np.array([3, 2, 3, 4, 4, 2, 3, 4, 5, 4, 2, 3, 4, 5, 3, 2, 3, 4]),
     )
-
 
 
 def test_extract_shell_facets():
@@ -167,7 +163,6 @@ def extract_faces_and_lines_from_grid(grid):
         cell_idx += 1
 
     return np.array(faces_cells, dtype=int), np.array(lines_cells, dtype=int)
-
 
 
 def test_get_polydata(file_utils):
@@ -249,7 +244,6 @@ def create_test_hex_mesh(nx, ny, nz):
     return deck
 
 
-
 def test_solid_mesh_extract_surface():
     """Test that extract_surface extracts exterior surface for solid meshes."""
     # Create a small solid mesh (5x5x5 = 125 elements)
@@ -277,7 +271,6 @@ def test_solid_mesh_extract_surface():
     assert "element_ids" in grid_surf.cell_data
 
 
-
 def test_solid_mesh_medium():
     """Test with a medium-sized solid mesh."""
     # Create a 10x10x10 mesh (1000 elements)
@@ -298,7 +291,6 @@ def test_solid_mesh_medium():
     # Surface points should be less than total internal points
     # Internal: 11^3 = 1331 nodes, Surface should have fewer
     assert grid.n_points < 1331
-
 
 
 def test_mixed_mesh_shells_and_solids():
@@ -365,7 +357,6 @@ def test_extract_surface():
     assert len(grid.cell_data["element_ids"]) == 125
 
 
-
 def test_shell_only_mesh_not_affected():
     """Test that shell-only meshes are not affected by extract_surface."""
     deck = Deck()
@@ -395,7 +386,6 @@ $#   nid               x               y               z      tc      rc
     assert grid_full.n_points == grid_surf.n_points
 
 
-
 def test_cell_data_preserved():
     """Test that part_ids and element_ids are preserved after extract_surface."""
     # Use a mesh created programmatically to avoid parsing issues
@@ -413,12 +403,10 @@ def test_cell_data_preserved():
     assert all(pid == 1 for pid in grid.cell_data["part_ids"])
 
 
-
 def test_jupyter_environment_detection():
     """Test that is_jupyter_environment() returns False in test environment."""
     # In normal pytest environment, this should return False
     assert is_jupyter_environment() is False
-
 
 
 def test_plot_deck_jupyter_backend_handling():

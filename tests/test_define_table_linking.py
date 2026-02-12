@@ -2,8 +2,6 @@ import pytest
 
 from ansys.dyna.core import Deck
 
-
-
 def test_define_table_linking_simple(ref_string):
     deck_string = ref_string.test_define_table_simple_ref
     deck = Deck()
@@ -14,8 +12,6 @@ def test_define_table_linking_simple(ref_string):
     table = tables[0]
     assert len(table.linked_curves) >= 1
     assert table.linked_curves[0].lcid == table.tbid
-
-
 
 def test_define_table_linking_interleaved(ref_string):
     deck_string = ref_string.test_define_table_interleaved_ref
@@ -30,8 +26,6 @@ def test_define_table_linking_interleaved(ref_string):
     assert table_a.linked_curves[0].lcid == 10000001
     assert len(table_b.linked_curves) >= 1
     assert table_b.linked_curves[0].lcid == 20000001
-
-
 
 def test_define_table_linking_curve_before_table(ref_string):
     deck_string = ref_string.test_define_table_before_ref

@@ -39,7 +39,6 @@ BLOCK4 = "*END"
 
 HEADER = BLOCK1 + BLOCK2 + BLOCK3
 
-
 def __reference_keyword_file(code):
     return code + "*END"
 

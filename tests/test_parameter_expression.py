@@ -33,7 +33,6 @@ from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
-
 class TestExpressionEvaluator:
     """Test the expression evaluator with various arithmetic operations and functions."""
 

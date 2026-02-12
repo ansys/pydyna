@@ -30,7 +30,6 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.parameters import ParameterSet
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
-
 class TestTableCardGroupParameterRetention:
     """Test parameter retention (write-back) for TableCardGroup."""
 

@@ -39,7 +39,6 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
-
 def test_legacy_card_deprecation_warning():
     """Test that using Card(fields=[...]) emits a deprecation warning."""
     fields = [

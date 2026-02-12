@@ -32,7 +32,6 @@ from ansys.dyna.core.lib.format_type import format_type
 
 import pytest
 
-
 def _get_test_table_card_group(bounded: bool, default_size: int=2, name = None, **kwargs) -> TableCardGroup:
     if bounded:
         lengthfunc = lambda: default_size

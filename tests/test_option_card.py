@@ -76,7 +76,6 @@ class OptionAPIImplementation:
         return [self._option_specs["FOO"], self._option_specs["BAR"]]
 
 
-
 def test_options_basic():
     impl = OptionAPIImplementation()
     options = Options(impl)
@@ -84,7 +83,6 @@ def test_options_basic():
     assert options["BAR"].active is False
     options["BAR"].active = True
     assert options["BAR"].active is True
-
 
 
 def test_options_union():

@@ -10,19 +10,16 @@ import pandas as pd
 import pytest
 import transformations as tfm
 
-
 def test_transform_none():
     """Verify no transformation for no input."""
     mtx = get_transform_matrix(None)
     assert mtx is None
-
 
 def test_transform_empty():
     """Verify no transfomration matrix for an empty DEFINE_TRANFORMATION."""
     define_transform_kwd = kwd.DefineTransformation()
     mtx = get_transform_matrix(None)
     assert mtx is None
-
 
 def test_transform_rotation_1():
     """Verify the transfomration matrix for single ROTATE."""
@@ -60,7 +57,6 @@ def test_transform_rotation_1():
     with pytest.raises(ValueError, match="Direction vector A1, A2, A3 cannot be all zero!"):
         get_transform_matrix(define_transform_kwd)
 
-
 def test_transform_matrix_two_translations():
     """Verify the transformation matrix for multiple TRANSL"""
     define_transform_kwd = kwd.DefineTransformation()
@@ -75,7 +71,6 @@ def test_transform_matrix_two_translations():
     mtx = get_transform_matrix(define_transform_kwd)
     ref = tfm.translation_matrix((-100,0,200))
     assert np.allclose(mtx, ref)
-
 
 def test_transform_matrix_one_translations():
     """Verify the transformation matrix for a single TRANSL."""

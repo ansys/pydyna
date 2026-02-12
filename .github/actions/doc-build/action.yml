@@ -38,7 +38,6 @@ inputs:
     required: true
 
 
-
 runs:
   using: "composite"
   steps:
@@ -149,16 +148,3 @@ runs:
         path: doc/_build/latex/*.pdf
         retention-days: 7
 
-    - name: Extract the server logs
-      if: always()
-      run: |
-        source .venv/bin/activate
-        docker logs kw_server > server_output.txt
-      shell: bash
-
-    - name: Upload the server logs
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      with:
-        name: server_output_docs.txt
-        path: server_output.txt

@@ -29,7 +29,6 @@ from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.format_type import format_type
 
 
-
 def test_table_card_read_bounded(string_utils):
     """test reading fixed number of lines"""
     d = TableCard(
@@ -59,7 +58,6 @@ def test_table_card_read_bounded(string_utils):
     assert table["rc"][2] == 5
 
 
-
 def test_table_card_read_unbounded(string_utils):
     """test reading an unknown number of lines into an unbounded card"""
     d = TableCard(
@@ -86,7 +84,6 @@ def test_table_card_read_unbounded(string_utils):
     assert repr(table) == node_repr
     assert table["x"][1] == -2772.1652832
     assert table["rc"][2] == 5
-
 
 
 def test_table_card_assign():
@@ -120,7 +117,6 @@ def test_table_card_assign():
     assert table["rc"][4] == 0.0
 
 
-
 def test_table_card_assign_wrong_types():
     """test assigning wrong type as dataframe to table card"""
 
@@ -140,7 +136,6 @@ def test_table_card_assign_wrong_types():
         d.table = node_ids
 
     pytest.raises(TypeError, assign)
-
 
 
 def test_table_card_write_long_format(string_utils, ref_string):

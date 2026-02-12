@@ -34,19 +34,15 @@ class bi:
     foo: float = None
     bar: float = None
 
-
 def test_load_dataline_001():
     """test loading a line of right-justified int and string"""
     x = load_dataline([(0, 10, int), (10, 10, str)], "         1     hello")
     assert x == (1, "hello")
 
-
-
 def test_load_dataline_002():
     """test loading a line of right-justified int and left-justified string"""
     x = load_dataline([(0, 10, int), (10, 10, str)], "         1hello     ")
     assert x == (1, "hello")
-
 
 
 def test_load_dataline_003():
@@ -55,12 +51,10 @@ def test_load_dataline_003():
     assert x == (0, 1.0)
 
 
-
 def test_load_dataline_004():
     """test loading a partial line"""
     x = load_dataline([(0, 8, int), (8, 8, float), (16, 8, str)], "     0.0     1.0")
     assert x == (0, 1.0, None)
-
 
 
 def test_load_dataline_005():
@@ -76,7 +70,6 @@ def test_load_dataline_006():
         load_dataline([(0, 8, int), (8, 8, float), (16, 8, float)], "                                          ")
 
 
-
 def test_load_dataline_007():
     """Test loading a data line with a parameter."""
     spec = [(0, 10, float), (10, 10, float), (20, 10, float), (30, 10, float), (40, 10, float), (50, 10, int), (60, 10, float), (70, 10, float)]
@@ -87,7 +80,6 @@ def test_load_dataline_007():
     res = load_dataline(spec, dataline, parameter_set)
     assert res[4] == 1.12
 
-
 def test_load_dataline_008():
     """Test loading a data line with a struct type."""
     spec = [(0, 10, bi)]
@@ -96,7 +88,6 @@ def test_load_dataline_008():
     assert len(res) == 1
     assert res[0].foo == 2
     assert res[0].bar == 50
-
 
 def test_load_dataline_009():
     """Test loading a data line with two struct types."""
@@ -109,7 +100,6 @@ def test_load_dataline_009():
     assert res[1].foo == 1
     assert res[1].bar == 3.1
 
-
 def test_load_dataline_010():
     """Test loading a data line with two struct types and a missing value."""
     dataline = "         2        50         1"
@@ -120,7 +110,6 @@ def test_load_dataline_010():
     assert res[0].bar == 50
     assert res[1].foo == 1
     assert math.isnan(res[1].bar)
-
 
 def test_load_dataline_011():
     """Test reading flags"""
@@ -135,7 +124,6 @@ def test_load_dataline_011():
     assert len(res) == 2
     assert res[0] == 1
     assert res[1] == False
-
 
 def test_load_dataline_012():
     """Test loading a data line with parameter type mismatches."""
@@ -153,7 +141,6 @@ def test_load_dataline_012():
     assert res[4] == 1
 
 
-
 def test_load_dataline_013():
     """Test loading LS-DYNA compact scientific notation (no E)."""
     # Format: "1.00000+4" means 1.00000E+4 = 10000
@@ -167,7 +154,6 @@ def test_load_dataline_013():
     assert res[3] == 0.0
 
 
-
 def test_load_dataline_014():
     """Test loading LS-DYNA compact scientific notation with negative exponent."""
     spec = [(0, 10, float), (10, 10, float)]
@@ -175,7 +161,6 @@ def test_load_dataline_014():
     res = load_dataline(spec, dataline)
     assert res[0] == 3.5e-10
     assert res[1] == 1.0
-
 
 
 def test_load_dataline_015():
@@ -188,7 +173,6 @@ def test_load_dataline_015():
     assert res[1] == 2000
 
 
-
 def test_load_dataline_016():
     """Test Fortran D notation (1.0D+4 -> 1.0E+4)."""
     spec = [(0, 10, float), (10, 10, float)]
@@ -196,7 +180,6 @@ def test_load_dataline_016():
     res = load_dataline(spec, dataline)
     assert res[0] == 10000.0
     assert res[1] == 0.0025
-
 
 
 def test_load_dataline_017():

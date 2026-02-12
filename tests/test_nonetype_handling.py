@@ -32,7 +32,6 @@ from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 
-
 class TestCardActiveWithNone:
     """Tests for Card.active property handling None values in active_func."""
 

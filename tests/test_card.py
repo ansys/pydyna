@@ -33,8 +33,6 @@ from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
-
-
 def test_load_card_errors(string_utils):
     """Error test for loading a card."""
     field_schemas = (
@@ -51,8 +49,6 @@ def test_load_card_errors(string_utils):
         # error if the line that is too long
         buf = "                                           "
         card.read(string_utils.as_buffer(buf))
-
-
 
 def test_load_card_parameters(string_utils):
     """Error test for loading a card."""
@@ -75,7 +71,6 @@ def test_load_card_parameters(string_utils):
     assert card.get_value("e") == 1.12
 
 
-
 def test_load_card_basic(string_utils):
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -90,8 +85,6 @@ def test_load_card_basic(string_utils):
     assert card.get_value("foo") == 8
     assert card.get_value("bar") == 4
 
-
-
 def test_load_card_long(string_utils):
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -103,8 +96,6 @@ def test_load_card_long(string_utils):
     assert card.get_value("foo") == None
     assert card.get_value("bar") == 4
 
-
-
 def test_write_inactive_card():
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -113,16 +104,13 @@ def test_write_inactive_card():
     card = Card.from_field_schemas(field_schemas, active_func=lambda: False, format=format_type.long)
     assert card.write() == ""
 
-
 # =============================================================================
 # Tests for the new Card schema/values architecture
 # =============================================================================
 
-
 class TestFieldSchema:
     """Tests for FieldSchema class."""
 
-    
     def test_field_schema_from_field_basic(self):
         """Test creating FieldSchema from a basic Field."""
         field = Field("test", int, 0, 10, 42)
@@ -135,7 +123,7 @@ class TestFieldSchema:
         assert schema.default == 42
         assert not schema.is_flag()
 
-    
+
     def test_field_schema_from_field_with_flag(self):
         """Test creating FieldSchema from a Flag Field."""
         flag = Flag(value=True, true_value="YES", false_value="NO")
@@ -147,7 +135,6 @@ class TestFieldSchema:
         assert schema.default.true_value == "YES"
         assert schema.default.false_value == "NO"
 
-    
     def test_field_schema_to_field_roundtrip(self):
         """Test that to_field creates a correct Field from schema."""
         original = Field("count", int, 10, 10, 99)
@@ -160,7 +147,6 @@ class TestFieldSchema:
         assert reconstructed.width == 10
         assert reconstructed.value == 123
 
-    
     def test_field_schema_to_field_flag_roundtrip(self):
         """Test flag field roundtrip through schema."""
         flag = Flag(value=False, true_value="ON", false_value="OFF")
@@ -176,7 +162,6 @@ class TestFieldSchema:
 class TestCardSchema:
     """Tests for CardSchema class."""
 
-    
     def test_card_schema_from_fields(self):
         """Test creating CardSchema from a list of Fields."""
         fields = [
@@ -191,7 +176,6 @@ class TestCardSchema:
         assert schema.get_index("b") == 1
         assert schema.get_index("c") == 2
 
-    
     def test_card_schema_to_fields(self):
         """Test reconstructing Fields from CardSchema with values."""
         fields = [
@@ -229,7 +213,6 @@ class TestCardSchemaIntegration:
         # Values should be stored in list
         assert card._values == [1, 2]
 
-    
     def test_multiple_cards_share_schema(self):
         """Test that multiple cards with same structure share schema."""
         field_schemas = (FieldSchema("x", int, 0, 10, None),)
@@ -255,7 +238,6 @@ class TestCardSchemaIntegration:
         assert card.get_value("second") == 2.5
         assert card.get_value("third") == "hello"
 
-    
     def test_card_set_value_updates_values_list(self):
         """Test that set_value updates the internal values list."""
         field_schemas = (FieldSchema("count", int, 0, 10, 0),)
@@ -266,7 +248,6 @@ class TestCardSchemaIntegration:
         assert card._values[0] == 42
         assert card.get_value("count") == 42
 
-    
     def test_card_fields_property_creates_fields_lazily(self):
         """Test that _fields property creates Field objects from schema+values."""
         field_schemas = (
@@ -438,7 +419,6 @@ class TestFromFieldSchemas:
 class TestHasNondefaultValues:
     """Tests for Card.has_nondefault_values() method."""
 
-    
     def test_new_card_has_no_nondefault_values(self):
         """Test that a freshly created card has no nondefault values."""
         field_schemas = (
@@ -448,7 +428,6 @@ class TestHasNondefaultValues:
         card = Card.from_field_schemas(field_schemas)
         assert card.has_nondefault_values() is False
 
-    
     def test_set_value_marks_nondefault(self):
         """Test that set_value marks the card as having nondefault values."""
         field_schemas = (
@@ -461,7 +440,6 @@ class TestHasNondefaultValues:
         card.set_value("foo", 42)
 
         assert card.has_nondefault_values() is True
-
     
     def test_set_value_to_same_as_default_still_marks(self):
         """Test that setting a value to the default still marks it as set.
@@ -481,7 +459,6 @@ class TestHasNondefaultValues:
 
         assert card.has_nondefault_values() is True
 
-    
     def test_multiple_set_values(self):
         """Test that multiple set_value calls are tracked."""
         field_schemas = (

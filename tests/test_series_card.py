@@ -35,7 +35,6 @@ class bi:
     foo: float = None
     bar: float = None
 
-
 def test_series_card_length_function():
     """test series card"""
     v = SeriesCard("bi", 8, 10, float, lambda: 4)

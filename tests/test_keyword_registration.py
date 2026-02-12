@@ -30,7 +30,6 @@ from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.import_handler import ImportContext
 
 
-
 class TestImportContextKeywordOverrides:
     """Tests for ImportContext.keyword_overrides functionality."""
 

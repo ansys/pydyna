@@ -4,7 +4,6 @@ from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_sin
 import pytest
 from ansys.dyna.core.lib.option_card import Options
 
-
 def test_contact_automatic_single_surface_option_dependencies():
     """Test basic option dependencies for ContactAutomaticSingleSurface"""
     # Create instance of keyword
@@ -82,7 +81,6 @@ def test_contact_option_deactivation():
         assert options[opt].active is True
 
 
-
 def test_multiple_contact_card_types():
     """Test that the cascading logic works for different contact card types"""
     contact_classes = [
@@ -104,7 +102,6 @@ def test_multiple_contact_card_types():
 
         for opt in ["D", "E", "F", "G"]:
             assert options[opt].active is False, f"Option {opt} should not be active for {contact_class.__name__}"
-
 
 
 def test_contact_card_writing_with_options():

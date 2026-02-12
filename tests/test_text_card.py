@@ -26,7 +26,6 @@ from ansys.dyna.core.lib.text_card import TextCard
 import pytest
 
 
-
 def test_assign_text_card():
     """test assigning one-line value to text card"""
     t = TextCard("function", "f(a,b,c)=a*2+b*c+sqrt(a*c)")

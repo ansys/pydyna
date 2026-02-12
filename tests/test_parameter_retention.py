@@ -35,7 +35,6 @@ from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 
-
 class TestParameterSetScoping:
     """Test URI scoping functionality in ParameterSet."""
 

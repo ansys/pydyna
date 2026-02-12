@@ -37,7 +37,6 @@ from ansys.dyna.core.keywords.keyword_classes.auto.control.control_shell import 
 from ansys.dyna.core.lib.config import disable_lspp_defaults
 
 
-
 def test_control_shell_default_writes_only_required_card():
     """Test that a default ControlShell writes only the required card 0."""
     kwd = ControlShell()

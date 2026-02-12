@@ -36,7 +36,6 @@ from ansys.dyna.core import keywords as kwd
 import pytest
 
 
-
 def test_mesh(ref_string):
     ref_node = ref_string.test_mesh_string
     nodes = kwd.Node()
@@ -102,7 +101,6 @@ $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
     assert element_string == ref_element, "element solid block does not match"
 
 
-
 def test_element_solid_read_legacy_format():
     """Test reading ElementSolid from legacy format keyword string (all fields on one line)."""
     legacy_string = """*ELEMENT_SOLID
@@ -117,7 +115,6 @@ def test_element_solid_read_legacy_format():
     assert elements.elements["pid"].tolist() == [1, 1]
     assert elements.elements["n1"].tolist() == [1, 9]
     assert elements.elements["n8"].tolist() == [8, 16]
-
 
 
 def test_element_solid_read_single_element():
@@ -135,13 +132,11 @@ def test_element_solid_read_single_element():
     assert elements.elements["n8"].tolist() == [8]
 
 
-
 def test_read_node(ref_string):
     n = kwd.Node()
     n.loads(ref_string.test_node_long_id)
     assert n.nodes["nid"][0] == 69000001
     assert n.write() == ref_string.test_node_long_id
-
 
 
 def test_nodes_from_dataframe():

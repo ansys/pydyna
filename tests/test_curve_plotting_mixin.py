@@ -11,7 +11,6 @@ import pytest
 
 from ansys.dyna.core.lib.mixins.curve_plotting import CurvePlottingMixin
 
-
 class FakeCurveKeyword(CurvePlottingMixin):
     """Fake keyword class for testing the mixin in isolation."""
 
