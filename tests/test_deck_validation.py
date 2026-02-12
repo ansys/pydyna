@@ -39,7 +39,7 @@ from ansys.dyna.core.lib.validators import (
     ValidationSeverity,
     ValidatorRegistry,
 )
-from ansys.dyna.core.pre.errors import (
+from ansys.dyna.core.utils.errors import (
     DuplicateIDError,
     DuplicateKeywordError,
     RequiredFieldError,

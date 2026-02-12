@@ -55,14 +55,14 @@ class PydynaInvalidRoutineError(RuntimeError):
         RuntimeError.__init__(self, msg)
 
 
-class LockFileException(RuntimeError):
+class LockFileExceptionError(RuntimeError):
     """Provides the error raised when the lockfile has not been removed."""
 
     def __init__(self, msg=LOCKFILE_MSG):
         RuntimeError.__init__(self, msg)
 
 
-class KwserverDidNotStart(RuntimeError):
+class KwserverDidNotStartError(RuntimeError):
     """Provides the error raised when the kwserver process does not start."""
 
     def __init__(self, msg=""):
