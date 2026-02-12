@@ -28,7 +28,24 @@ from typing import Optional
 from urllib.parse import urljoin, urlparse
 import urllib.request
 
-from ansys.dyna.core.pre.internals.defaults import EXAMPLES_PATH
+try:
+    import appdirs
+
+    USER_DATA_PATH = os.getenv("PYDYNA_USER_DATA", appdirs.user_data_dir(appname="pydyna", appauthor=False))
+except ModuleNotFoundError:
+    # If appdirs is not installed, then try with tempfile.
+    # NOTE: This only occurs for ADO ARM Test runs
+    import tempfile
+
+    USER_NAME = os.getenv("USERNAME", os.getenv("USER", "pydyna"))
+    USER_DATA_PATH = os.getenv("PYDYNA_USER_DATA", os.path.join(tempfile.gettempdir(), USER_NAME))
+
+if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
+    os.makedirs(USER_DATA_PATH)
+
+EXAMPLES_PATH = os.path.join(USER_DATA_PATH, "examples")
+if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover
+    os.makedirs(EXAMPLES_PATH)
 
 __all__ = ["DownloadManager"]
 

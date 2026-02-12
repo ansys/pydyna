@@ -44,8 +44,8 @@ import tempfile
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 mesh_file_name = "nodes.k"
 mesh_file = DownloadManager().download_file(
