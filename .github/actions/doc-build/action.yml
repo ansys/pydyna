@@ -100,19 +100,6 @@ runs:
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
       shell: bash
 
-    - name: Install DPF
-      uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
-      with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "242"
-
-    - name: LS-DYNA Keyword server activation
-      run: |
-        source .venv/bin/activate
-        docker pull ghcr.io/ansys/ls-pre:latest
-        docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
-      shell: bash
-
     - name: Pull PyDyna-run image
       run: |
         source .venv/bin/activate

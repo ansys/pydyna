@@ -21,7 +21,7 @@ inputs:
   docker-image:
     description: Docker image to use for LS-DYNA keyword server
     required: false
-    default: "ghcr.io/ansys/ls-pre:latest"
+    default: "ghcr.io/ansys/pydyna-run:latest"
     type: string
 
   server-logs:
