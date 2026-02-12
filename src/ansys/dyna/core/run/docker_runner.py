@@ -116,7 +116,7 @@ class DockerRunner(BaseRunner):
         # else:
         #     # Default to SMP double precision if unknown MPI option
         #     main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
-        main_executable = "ls-dyna_mpp_s_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
+        main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
 
         # TODO: In the future, we could check what executables are actually available in the container
         return main_executable
