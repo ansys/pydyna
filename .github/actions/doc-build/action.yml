@@ -7,20 +7,26 @@ inputs:
     description: Enable building the autokeywords API
     required: false
     default: "False"
+
   pdf-pool-size:
     required: false
+
   pdf-string-vacancies:
     required: false
+
   pdf-max-strings:
     required: false
+
   pydyna-run-container:
     description: Run container name
     required: true
+
   python-version:
     description: Python version to use
     required: true
     default: "3.13"
     type: string
+
   github-token:
     description: GitHub token for authentication
     required: true
