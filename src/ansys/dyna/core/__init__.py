@@ -23,11 +23,12 @@
 
 from pathlib import Path
 
+from ansys.dyna.core.solver.dynasolver import *  # noqa: F403
+import ansys.dyna.core.solver.grpc_tags
+
 from ansys.dyna.core.keywords import keywords
 from ansys.dyna.core.lib.config import disable_csv_autodetect
 from ansys.dyna.core.lib.deck import Deck
-from ansys.dyna.core.solver.dynasolver import *  # noqa: F403
-import ansys.dyna.core.solver.grpc_tags
 
 
 def _get_agent_instructions_path() -> str:
