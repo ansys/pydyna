@@ -27,7 +27,7 @@ import pytest
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry, discover_handlers
 
 
-@pytest.mark.codegen
+
 class TestHandlerRegistry:
     """Test HandlerRegistry functionality."""
 

@@ -21,7 +21,7 @@ inputs:
   docker-image:
     description: Docker image to use for LS-DYNA keyword server
     required: false
-    default: "ghcr.io/ansys/pydyna-run:latest"
+    default: ""
     type: string
 
   server-logs:
@@ -71,6 +71,8 @@ runs:
         python -m venv .venv
 
     - name: Login to GitHub container registry
+    # only if there is a docker image to pull
+      if: ${{ inputs.docker-image != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
@@ -79,7 +81,7 @@ runs:
 
 
     - name: Pull and start LS-DYNA keyword server
-      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != '' }}
+      if: ${{ inputs.docker-image != ''}}
       env:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
@@ -155,7 +157,7 @@ runs:
         flags: ${{ inputs.coverage-file }}
 
     - name: Stop container
-      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+      if: ${{ inputs.docker-image != '' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
           source .venv/Scripts/activate
