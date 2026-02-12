@@ -93,6 +93,7 @@ jobs:
           bot-token: ${{ env.BOT_TOKEN }}
           github-actor: ${{ github.actor }}
           persist-credentials: true
+          use_cache_examples: false
 
   doc-deploy-dev:
     name: "Deploy development documentation"

@@ -37,6 +37,13 @@ inputs:
     description: GitHub actor for authentication
     required: true
 
+  use_cache_examples:
+    description: |
+      Whether to use the examples cache. Default is "true".
+    required: false
+    default: true
+    type: boolean
+
 
 runs:
   using: "composite"
@@ -70,13 +77,13 @@ runs:
       shell: bash
 
     - name: Cache Sphinx build artifacts
-      if: ${{ inputs.build-autokeywords-api != 'True' }}
+      if: ${{ inputs.use_cache_examples == 'true' }}
       uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb #v5.0.1
       with:
         path: |
           doc/_build
           doc/source/examples/
-        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}-${{ inputs.reset-cache }}
         restore-keys: |
           sphinx-${{ runner.os }}-${{ inputs.python-version }}-
 
