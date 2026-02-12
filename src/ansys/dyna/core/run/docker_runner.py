@@ -101,20 +101,22 @@ class DockerRunner(BaseRunner):
         """Get the LS-DYNA executable name based on solver configuration."""
         if self.executable_name:
             return self.executable_name
-        # For the container built from the Dockerfile, we have a double precision SMP version
-        # The main executable is usually named after the extraction directory
-        # From Dockerfile: ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh
-        # This extracts to: /opt/Dyna/ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2/
-        # Inside, the executable is typically named the same as the directory
-        # get the executables name based on the solver option
-        # solver_option = self._get_solver_option()
-        # if solver_option == SMP
-        # solver_option = self._get_solver_option()
-        # if solver_option == "SP" or solver_option == "DP":
-        #     main_executable = "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"
-        # elif solver_option == "DP_MPP":
-        #     main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
-        main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
+
+        # Get the executable name based on the MPI option and precision
+        # if self.mpi_option == MpiOption.SMP:
+        #     if self.precision == Precision.SINGLE:
+        #         main_executable = "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"
+        #     else:  # DOUBLE precision (default)
+        #         main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
+        # elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
+        #     if self.precision == Precision.SINGLE:
+        #         main_executable = "ls-dyna_mpp_s_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
+        #     else:  # DOUBLE precision (default)
+        #         main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
+        # else:
+        #     # Default to SMP double precision if unknown MPI option
+        #     main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
+        main_executable = "ls-dyna_mpp_s_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
 
         # TODO: In the future, we could check what executables are actually available in the container
         return main_executable
@@ -134,7 +136,7 @@ class DockerRunner(BaseRunner):
         executable = self._get_executable_name()
 
         # Build command arguments
-        args = [executable, f"i={self._input_file}", f"memory={self.get_memory_string()}"]
+        args = [f"i={self._input_file}", f"memory={self.get_memory_string()}"]
 
         # Add NCPU argument for SMP runs
         if self.mpi_option == MpiOption.SMP and self.ncpu > 1:
@@ -147,7 +149,16 @@ class DockerRunner(BaseRunner):
             else:
                 args.append("CASE")
 
-        command = " ".join(args)
+        # Build the full command with MPI wrapper if needed
+        if self.mpi_option == MpiOption.MPP_INTEL_MPI:
+            # For MPP runs, use mpirun with the specified number of processors
+            # Source Intel MPI environment and then run
+            mpi_setup = "source /opt/intel/oneapi/mpi/latest/env/vars.sh &&"
+            mpi_args = [mpi_setup, "mpirun", "-np", str(self.ncpu), executable] + args
+            command = " ".join(mpi_args)
+        else:
+            # For SMP runs, use direct execution
+            command = " ".join([executable] + args)
         logger.info(f"Running LS-DYNA command: {command}")
 
         # Set up environment variables

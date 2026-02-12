@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -y gpg-agent wget && \
     apt-get update && \
     apt-get install -y intel-oneapi-mpi-devel
 
-
 # --------------------
 # Environment
 # --------------------
@@ -79,6 +78,24 @@ RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
 # --------------------
 RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE && \
     echo "#LICENSE_SERVER: ${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE
+
+# --------------------
+# Intel MPI Environment
+# --------------------
+# Source Intel oneAPI MPI environment
+ENV I_MPI_ROOT=/opt/intel/oneapi/mpi/latest
+ENV MPIROOT=${I_MPI_ROOT}
+ENV PATH="${I_MPI_ROOT}/bin:${PATH}"
+ENV LD_LIBRARY_PATH="${I_MPI_ROOT}/lib:${I_MPI_ROOT}/lib/release:${LD_LIBRARY_PATH}"
+ENV MANPATH="${I_MPI_ROOT}/share/man:${MANPATH}"
+ENV FI_PROVIDER_PATH="${I_MPI_ROOT}/lib/prov:${FI_PROVIDER_PATH}"
+
+# Source Intel oneAPI MPI environment and add to startup
+RUN echo 'source /opt/intel/oneapi/mpi/latest/env/vars.sh' >> /etc/bash.bashrc
+# Additional Intel MPI environment variables for proper initialization
+ENV I_MPI_FABRICS=shm
+ENV I_MPI_DEVICE=rdma:OpenIB-cma
+ENV I_MPI_FALLBACK=1
 
 # --------------------
 # PATH
