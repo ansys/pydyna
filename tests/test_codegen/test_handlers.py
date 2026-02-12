@@ -178,6 +178,7 @@ class TestGetHandlerMetadata:
 
     def test_get_nonexistent_handler(self):
         """Test retrieving metadata for non-existent handler returns None."""
+        pytest.importorskip("jsonschema")  # Skip test if jsonschema not installed
         metadata = get_handler_metadata("nonexistent-handler-xyz")
         assert metadata is None
 
@@ -258,6 +259,7 @@ class TestValidateHandlerSettings:
 
     def test_validate_with_invalid_settings(self):
         """Test validation with invalid settings raises ValueError."""
+        pytest.importorskip("jsonschema")  # Skip test if jsonschema not installed
         _HANDLER_METADATA.pop("test-validate-invalid", None)
 
         schema = {
@@ -292,6 +294,7 @@ class TestValidateHandlerSettings:
 
     def test_validate_handler_without_schema(self, caplog):
         """Test validation skips if no schema defined."""
+        pytest.importorskip("jsonschema")  # Skip test if jsonschema not installed
         _HANDLER_METADATA.pop("test-no-schema", None)
 
         @handler(name="test-no-schema")
@@ -343,6 +346,8 @@ class TestValidateHandlerSettings:
 
     def test_validate_with_schema_error(self):
         """Test validation with invalid schema raises ValueError."""
+        pytest.importorskip("jsonschema")  # Skip test if jsonschema not installed
+        
         _HANDLER_METADATA.pop("test-schema-error", None)
 
         # Invalid schema (missing 'type' in property)
