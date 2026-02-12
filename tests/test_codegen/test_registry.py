@@ -27,7 +27,7 @@ import pytest
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry, discover_handlers
 
 
-
+@pytest.mark.codegen
 class TestHandlerRegistry:
     """Test HandlerRegistry functionality."""
 
@@ -121,4 +121,3 @@ class TestHandlerRegistry:
 
         # Should not raise an error
         registry.post_process_all(sample_keyword_data)
-

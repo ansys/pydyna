@@ -39,7 +39,7 @@ from keyword_generation.handlers.handler_base import (
 )
 
 
-
+@pytest.mark.codegen
 class TestHandlerMetadata:
     """Test HandlerMetadata dataclass."""
 
@@ -90,7 +90,7 @@ class TestHandlerMetadata:
         assert metadata.output_description == "Adds test field"
 
 
-
+@pytest.mark.codegen
 class TestHandlerDecorator:
     """Test handler decorator registration."""
 
@@ -155,7 +155,7 @@ class TestHandlerDecorator:
         assert TestClassMeta._handler_metadata.name == "test-class-meta"
 
 
-
+@pytest.mark.codegen
 class TestGetHandlerMetadata:
     """Test get_handler_metadata function."""
 
@@ -182,7 +182,7 @@ class TestGetHandlerMetadata:
         assert metadata is None
 
 
-
+@pytest.mark.codegen
 class TestGetAllHandlerMetadata:
     """Test get_all_handler_metadata function."""
 
@@ -227,7 +227,7 @@ class TestGetAllHandlerMetadata:
         assert set(all_metadata_again.keys()) == original_keys
 
 
-
+@pytest.mark.codegen
 class TestValidateHandlerSettings:
     """Test validate_handler_settings function."""
 
@@ -343,7 +343,6 @@ class TestValidateHandlerSettings:
 
     def test_validate_with_schema_error(self):
         """Test validation with invalid schema raises ValueError."""
-        
         _HANDLER_METADATA.pop("test-schema-error", None)
 
         # Invalid schema (missing 'type' in property)
@@ -370,7 +369,7 @@ class TestValidateHandlerSettings:
             validate_handler_settings("test-schema-error", [])
 
 
-
+@pytest.mark.codegen
 class TestKeywordHandler:
     """Test KeywordHandler abstract base class."""
 
