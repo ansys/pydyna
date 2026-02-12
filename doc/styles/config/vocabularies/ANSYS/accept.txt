@@ -53,3 +53,4 @@ toctree
 weakref
 ControllerPlant
 ParticleBlast
+[Gg]it[Hh]ub
