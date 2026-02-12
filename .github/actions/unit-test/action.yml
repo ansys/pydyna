@@ -69,7 +69,7 @@ runs:
     - name: Create virtual environment
       shell: bash
       run: |
-        uv venv .venv
+        python -m venv .venv
 
     - name: Login to GitHub container registry
     # only if there is a docker image to pull
@@ -116,9 +116,9 @@ runs:
         LSTC_LICENSE: ansys
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          source venv/Scripts/activate
+          source .venv/Scripts/activate
         else
-          source venv/bin/activate
+          source .venv/bin/activate
         fi
         COVERAGE_ARGS=""
         if [ -n "$COVERAGE_FILE" ]; then
