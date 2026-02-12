@@ -1,6 +1,6 @@
 Modules
 =======
-PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
+PyDYNA consists of four modules, ``ansys.dyna.core.pre``, 
 ``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
 learn about the different modules in PyDYNA.
 
