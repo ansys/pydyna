@@ -20,6 +20,14 @@ PyDyna distributes structured AI instructions with the package. These files
 describe how to use core APIs, keyword classes, deck manipulation, and common
 usage patterns.
 
+The instructions cover:
+
+- **Deck operations**: Loading, filtering, modifying, and writing keyword files
+- **Keyword usage**: Creating and modifying material, section, element, and other keywords
+- **Data access patterns**: Direct attributes, DataFrames for nodes/elements, and special cases
+- **Common workflows**: Load → Modify → Save, building from scratch, geometry transforms
+- **Best practices**: Filtering strategies, validation, format control
+
 You can install these instructions into your workspace so supported AI tools
 can read them.
 
@@ -92,15 +100,15 @@ Created structure:
 .. code-block:: text
 
    .agent/
-   ├── manifest.json
-   ├── README.md
-   ├── ansys.dyna.core.md
+   ├── manifest.json              # Tracks installed instruction packages
+   ├── README.md                  # Auto-generated index
+   ├── ansys.dyna.core.md         # Main PyDyna instructions
    └── ansys.dyna.core/
-       ├── deck.md
-       ├── keywords.md
-       └── patterns.md
+       ├── deck.md                # Detailed Deck class guide
+       ├── keywords.md            # Keyword creation and patterns
+       └── patterns.md            # Complete workflow examples
    .github/
-   ├── copilot-instructions.md
+   ├── copilot-instructions.md    # Pointer for GitHub Copilot (VS Code)
 
 Use copy mode when:
 
@@ -167,7 +175,16 @@ Updates:
 Manifest
 --------
 
-The ``.agent/manifest.json`` file tracks installed instruction sets.
+The ``.agent/manifest.json`` file tracks installed instruction sets from all
+packages in your workspace. This allows multiple packages to install agent
+instructions without conflicts.
+
+The manifest includes:
+
+- Package namespace and ecosystem (e.g., ``ansys.dyna.core``, ``pypi``)
+- Installation mode (``copy`` or ``pointer``)
+- Entry file and extended documentation locations
+- Installation timestamp
 
 Example:
 
@@ -178,8 +195,12 @@ Example:
      "packages": [
        {
          "namespace": "ansys.dyna.core",
+         "ecosystem": "pypi",
+         "package_name": "ansys-dyna-core",
          "mode": "copy",
-         "entry_file": "ansys.dyna.core.md"
+         "entry_file": "ansys.dyna.core.md",
+         "extended_docs": ["ansys.dyna.core/deck.md", "ansys.dyna.core/keywords.md"],
+         "installed_at": "2026-02-12T10:30:00Z"
        }
      ]
    }
@@ -224,6 +245,10 @@ Verify installation:
 
 If your AI tool does not detect instructions:
 
-- Confirm files were created
-- Restart the editor
-- Verify the correct ``--env`` option was used
+- Confirm files were created in the expected location
+- Check ``.agent/manifest.json`` to verify the package is registered
+- Restart the editor or AI tool to reload instructions
+- Verify the correct ``--env`` option was used for your tool
+- For VS Code, check that ``.github/copilot-instructions.md`` was created
+- For Cursor, verify ``.cursor/rules/pydyna.mdc`` exists
+- For Claude, check that ``CLAUDE.md`` contains the PyDyna section
