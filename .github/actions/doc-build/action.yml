@@ -87,6 +87,17 @@ runs:
         uv pip install docker
       shell: bash
 
+    - name: Set Licensing
+      run: |
+        echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Install DPF
+      uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
+      with:
+        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
+        ANSYS_VERSION: "242"
+
     - name: Login to GitHub container registry
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:

@@ -62,13 +62,6 @@ class LockFileExceptionError(RuntimeError):
         RuntimeError.__init__(self, msg)
 
 
-class KwserverDidNotStartError(RuntimeError):
-    """Provides the error raised when the kwserver process does not start."""
-
-    def __init__(self, msg=""):
-        RuntimeError.__init__(self, msg)
-
-
 class ValidationError(Exception):
     """Base class for validation errors in PyDYNA."""
 
