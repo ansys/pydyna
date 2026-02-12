@@ -83,7 +83,7 @@ runs:
         path: |
           doc/_build
           doc/source/examples/
-        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}-${{ inputs.reset-cache }}
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('examples/**/*') }}-${{ inputs.reset-cache }}
         restore-keys: |
           sphinx-${{ runner.os }}-${{ inputs.python-version }}-
 
