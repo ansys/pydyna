@@ -1,6 +1,6 @@
-FROM rockylinux:8
+FROM ubuntu:22.04
 
-LABEL description="LS-DYNA MPP R16.1.1"
+LABEL description="LS-DYNA runtime image"
 LABEL email="pyansys.core@nsys.com"
 
 # --------------------
