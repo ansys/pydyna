@@ -36,6 +36,7 @@ dependencies = [
     "transformations==2025.1.1",
     "chardet==5.2.0",
     "requests==2.32.5",
+    "docker==7.1.0",
 ]
 
 [project.optional-dependencies]
