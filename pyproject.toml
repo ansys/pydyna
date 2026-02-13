@@ -79,7 +79,7 @@ doc = [
     "sphinx-autobuild==2024.10.3",
     "sphinx-design==0.6.1",
     "sphinxcontrib-websupport==2.0.0",
-    "pytest-sphinx==0.6.3",
+    "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.20.0",
