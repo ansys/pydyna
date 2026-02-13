@@ -7,8 +7,8 @@ LABEL email="pyansys.core@nsys.com"
 # Build arguments
 # --------------------
 
-ARG FTP_USER=""
-ARG FTP_LOGIN=""
+ARG FTP_USER
+ARG FTP_LOGIN
 ARG DYNA_URL="mpp-dyna/R16.1.1/linux/x86-64/ifort_190_sse2/MPP/"
 ARG DYNA_FILE="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib.tgz_extractor.sh"
 ARG DYNA_PATH="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib"
@@ -49,29 +49,37 @@ RUN dnf -y update && \
 RUN mkdir -p ${INSTALL_DIR}
 WORKDIR ${INSTALL_DIR}
 
-# --------------------
-# Download & Extract LS-DYNA
-# --------------------
+# Validate required args
+RUN test -n "$FTP_USER" && \
+    test -n "$FTP_LOGIN" && \
+    test -n "$DYNA_URL" && \
+    test -n "$DYNA_FILE" && \
+    test -n "$DYNA_PATH"
+
+# Download, extract, cleanup
 RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
       "https://ftp.lstc.com/user/${DYNA_URL}/${DYNA_FILE}" && \
     chmod +x "${DYNA_FILE}" && \
-    yes | "./${DYNA_FILE}" && \
-    rm -f "${DYNA_FILE}"
+    echo "y" | "./${DYNA_FILE}" && \
+    rm "${DYNA_FILE}"
 
 # --------------------
-# License configuration
+# Verify installation   
+# --------------------
+RUN test -d "${INSTALL_DIR}/${DYNA_PATH}"
+
+# --------------------
+# License config
 # --------------------
 RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE && \
-    echo "#LICENSE_SERVER: ${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE
 
 # --------------------
-# Add LS-DYNA to PATH
+# PATH
 # --------------------
-ENV PATH=${INSTALL_DIR}/${DYNA_PATH}:${PATH}
+ENV PATH="${INSTALL_DIR}/${DYNA_PATH}:${PATH}"
 
 # --------------------
-# Runtime working directory
+# Runtime dir
 # --------------------
 WORKDIR /run
-
-CMD ["/bin/bash"]
