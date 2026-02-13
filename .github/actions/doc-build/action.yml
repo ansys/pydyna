@@ -119,11 +119,6 @@ runs:
         username: ${{ inputs.github-actor }}
         password: ${{ inputs.github-token }}
 
-    - name: Set Licensing
-      run: |
-        echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
-      shell: bash
-
     - name: Pull PyDyna-run image
       if: ${{ inputs.pydyna-run-container != '' }}
       env:
