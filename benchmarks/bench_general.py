@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import DownloadManager
+from ansys.dyna.core.utils.download_utilities import DownloadManager
 
 
 def _gen_nodes(count):

@@ -493,7 +493,7 @@ class ControlAdaptive(KeywordBase):
         self._cards[3].set_value("ifsand", value)
 
     @property
-    def lcadp_link(self) -> DefineCurve:
+    def lcadp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcadp."""
         if self.deck is None:
             return None
@@ -508,7 +508,7 @@ class ControlAdaptive(KeywordBase):
         self.lcadp = value.lcid
 
     @property
-    def lclvl_link(self) -> DefineCurve:
+    def lclvl_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclvl."""
         if self.deck is None:
             return None

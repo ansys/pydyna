@@ -208,7 +208,7 @@ class MatModifiedCrushableFoam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tid_link(self) -> DefineCurve:
+    def tid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tid."""
         if self.deck is None:
             return None

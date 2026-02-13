@@ -680,7 +680,7 @@ class AleSwitchMmg(KeywordBase):
         self._cards[1].set_value("var8", value)
 
     @property
-    def idsegset_link(self) -> KeywordBase:
+    def idsegset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for idsegset."""
         return self._get_set_link("SEGMENT", self.idsegset)
 
@@ -690,7 +690,7 @@ class AleSwitchMmg(KeywordBase):
         self.idsegset = value.sid
 
     @property
-    def idsldset_link(self) -> KeywordBase:
+    def idsldset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for idsldset."""
         return self._get_set_link("SOLID", self.idsldset)
 

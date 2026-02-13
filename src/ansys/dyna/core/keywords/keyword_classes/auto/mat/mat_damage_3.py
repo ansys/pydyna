@@ -470,7 +470,7 @@ class MatDamage3(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -485,7 +485,7 @@ class MatDamage3(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lckh_link(self) -> DefineCurve:
+    def lckh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lckh."""
         if self.deck is None:
             return None

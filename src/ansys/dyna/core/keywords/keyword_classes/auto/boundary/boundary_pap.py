@@ -152,7 +152,7 @@ class BoundaryPap(KeywordBase):
         self._cards[0].set_value("cvrper", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -167,7 +167,7 @@ class BoundaryPap(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def segid_link(self) -> KeywordBase:
+    def segid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segid."""
         return self._get_set_link("SEGMENT", self.segid)
 

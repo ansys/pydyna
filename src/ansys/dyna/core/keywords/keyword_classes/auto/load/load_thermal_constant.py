@@ -118,7 +118,7 @@ class LoadThermalConstant(KeywordBase):
         self._cards[1].set_value("te", value)
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -133,7 +133,7 @@ class LoadThermalConstant(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -143,7 +143,7 @@ class LoadThermalConstant(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 

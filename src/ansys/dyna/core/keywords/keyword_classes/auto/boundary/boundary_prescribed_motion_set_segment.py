@@ -221,7 +221,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -236,7 +236,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
         self.vid = value.vid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sid."""
         return self._get_set_link("SEGMENT", self.sid)
 

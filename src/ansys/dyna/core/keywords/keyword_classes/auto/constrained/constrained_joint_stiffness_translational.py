@@ -366,7 +366,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self._cards[3].set_value("psdz", value)
 
     @property
-    def lcidx_link(self) -> DefineCurve:
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
@@ -381,7 +381,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.lcidx = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -396,7 +396,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -411,7 +411,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def dlcidx_link(self) -> DefineCurve:
+    def dlcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidx."""
         if self.deck is None:
             return None
@@ -426,7 +426,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.dlcidx = value.lcid
 
     @property
-    def dlcidy_link(self) -> DefineCurve:
+    def dlcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidy."""
         if self.deck is None:
             return None
@@ -441,7 +441,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.dlcidy = value.lcid
 
     @property
-    def dlcidz_link(self) -> DefineCurve:
+    def dlcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidz."""
         if self.deck is None:
             return None
@@ -456,7 +456,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.dlcidz = value.lcid
 
     @property
-    def cida_link(self) -> DefineCoordinateSystem:
+    def cida_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cida."""
         if self.deck is None:
             return None
@@ -471,7 +471,7 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.cida = value.cid
 
     @property
-    def cidb_link(self) -> DefineCoordinateSystem:
+    def cidb_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cidb."""
         if self.deck is None:
             return None
@@ -486,12 +486,12 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
         self.cidb = value.cid
 
     @property
-    def pida_link(self) -> KeywordBase:
+    def pida_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pida."""
         return self._get_link_by_attr("PART", "pid", self.pida, "parts")
 
     @property
-    def pidb_link(self) -> KeywordBase:
+    def pidb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidb."""
         return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 

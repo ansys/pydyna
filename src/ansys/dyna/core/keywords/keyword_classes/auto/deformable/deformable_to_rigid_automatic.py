@@ -348,7 +348,7 @@ class DeformableToRigidAutomatic(KeywordBase):
         self._cards[3].set_value("ptype", value)
 
     @property
-    def lrb_link(self) -> KeywordBase:
+    def lrb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lrb."""
         return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

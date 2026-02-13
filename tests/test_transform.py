@@ -10,20 +10,17 @@ import pandas as pd
 import pytest
 import transformations as tfm
 
-@pytest.mark.keywords
 def test_transform_none():
     """Verify no transformation for no input."""
     mtx = get_transform_matrix(None)
     assert mtx is None
 
-@pytest.mark.keywords
 def test_transform_empty():
     """Verify no transfomration matrix for an empty DEFINE_TRANFORMATION."""
     define_transform_kwd = kwd.DefineTransformation()
     mtx = get_transform_matrix(None)
     assert mtx is None
 
-@pytest.mark.keywords
 def test_transform_rotation_1():
     """Verify the transfomration matrix for single ROTATE."""
 
@@ -60,7 +57,6 @@ def test_transform_rotation_1():
     with pytest.raises(ValueError, match="Direction vector A1, A2, A3 cannot be all zero!"):
         get_transform_matrix(define_transform_kwd)
 
-@pytest.mark.keywords
 def test_transform_matrix_two_translations():
     """Verify the transformation matrix for multiple TRANSL"""
     define_transform_kwd = kwd.DefineTransformation()
@@ -76,7 +72,6 @@ def test_transform_matrix_two_translations():
     ref = tfm.translation_matrix((-100,0,200))
     assert np.allclose(mtx, ref)
 
-@pytest.mark.keywords
 def test_transform_matrix_one_translations():
     """Verify the transformation matrix for a single TRANSL."""
     define_transform_kwd = kwd.DefineTransformation(option="TRANSL", a1=-200, a2=0.0, a3=0.0)
@@ -84,7 +79,7 @@ def test_transform_matrix_one_translations():
     ref = tfm.translation_matrix((-200,0,0))
     assert np.allclose(mtx, ref)
 
-@pytest.mark.keywords
+
 def test_transform_matrix_translation_rotation():
     """Verify the transformation matrix for a single TRANSL."""
     define_transform_kwd = kwd.DefineTransformation()
@@ -106,7 +101,16 @@ def test_transform_matrix_translation_rotation():
     mtx = get_transform_matrix(define_transform_kwd)
     assert np.allclose(mtx, ref)
 
-@pytest.mark.keywords
+
+def test_transform_matrix_one_scale():
+    """Verify the transformation matrix for a single SCALE."""
+    define_transform_kwd = kwd.DefineTransformation(option="SCALE", a1=1.0, a2=-1.0, a3=1.0)
+    mtx = get_transform_matrix(define_transform_kwd)
+    ref = tfm.scale_matrix(factor=-1.0, direction=[0,1,0])
+    assert np.allclose(mtx, ref)
+
+
+
 def test_transform_unhandled():
     """Verify warning and no transformation when an unhandled DEFINE_TRANSFORMATION option is used."""
     option = "TRANSL2ND"

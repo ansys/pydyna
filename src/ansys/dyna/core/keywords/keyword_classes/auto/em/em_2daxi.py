@@ -113,7 +113,7 @@ class Em2Daxi(KeywordBase):
         self._cards[0].set_value("numsec", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 
@@ -123,7 +123,7 @@ class Em2Daxi(KeywordBase):
         self.ssid = value.sid
 
     @property
-    def starssid_link(self) -> KeywordBase:
+    def starssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for starssid."""
         return self._get_set_link("SEGMENT", self.starssid)
 
@@ -133,7 +133,7 @@ class Em2Daxi(KeywordBase):
         self.starssid = value.sid
 
     @property
-    def endssid_link(self) -> KeywordBase:
+    def endssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for endssid."""
         return self._get_set_link("SEGMENT", self.endssid)
 
@@ -143,7 +143,7 @@ class Em2Daxi(KeywordBase):
         self.endssid = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

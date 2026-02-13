@@ -184,7 +184,7 @@ class DefineFabricAssemblies(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def spid1_link(self) -> KeywordBase:
+    def spid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid1."""
         return self._get_set_link("PART", self.spid1)
 
@@ -194,7 +194,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid1 = value.sid
 
     @property
-    def spid2_link(self) -> KeywordBase:
+    def spid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid2."""
         return self._get_set_link("PART", self.spid2)
 
@@ -204,7 +204,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid2 = value.sid
 
     @property
-    def spid3_link(self) -> KeywordBase:
+    def spid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid3."""
         return self._get_set_link("PART", self.spid3)
 
@@ -214,7 +214,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid3 = value.sid
 
     @property
-    def spid4_link(self) -> KeywordBase:
+    def spid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid4."""
         return self._get_set_link("PART", self.spid4)
 
@@ -224,7 +224,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid4 = value.sid
 
     @property
-    def spid5_link(self) -> KeywordBase:
+    def spid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid5."""
         return self._get_set_link("PART", self.spid5)
 
@@ -234,7 +234,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid5 = value.sid
 
     @property
-    def spid6_link(self) -> KeywordBase:
+    def spid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid6."""
         return self._get_set_link("PART", self.spid6)
 
@@ -244,7 +244,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid6 = value.sid
 
     @property
-    def spid7_link(self) -> KeywordBase:
+    def spid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid7."""
         return self._get_set_link("PART", self.spid7)
 
@@ -254,7 +254,7 @@ class DefineFabricAssemblies(KeywordBase):
         self.spid7 = value.sid
 
     @property
-    def spid8_link(self) -> KeywordBase:
+    def spid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for spid8."""
         return self._get_set_link("PART", self.spid8)
 

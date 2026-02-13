@@ -117,7 +117,7 @@ class DefineControlVolume(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sid."""
         return self._get_set_link("SEGMENT", self.sid)
 

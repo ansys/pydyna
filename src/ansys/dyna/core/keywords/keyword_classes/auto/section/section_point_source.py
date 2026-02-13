@@ -217,27 +217,27 @@ class SectionPointSource(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nlc001_link(self) -> KeywordBase:
+    def nlc001_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc001."""
         return self._get_link_by_attr("NODE", "nid", self.nlc001, "parts")
 
     @property
-    def nlc002_link(self) -> KeywordBase:
+    def nlc002_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc002."""
         return self._get_link_by_attr("NODE", "nid", self.nlc002, "parts")
 
     @property
-    def nlc003_link(self) -> KeywordBase:
+    def nlc003_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc003."""
         return self._get_link_by_attr("NODE", "nid", self.nlc003, "parts")
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -252,7 +252,7 @@ class SectionPointSource(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidvolr_link(self) -> DefineCurve:
+    def lcidvolr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidvolr."""
         if self.deck is None:
             return None
@@ -267,7 +267,7 @@ class SectionPointSource(KeywordBase):
         self.lcidvolr = value.lcid
 
     @property
-    def lcidvel_link(self) -> DefineCurve:
+    def lcidvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidvel."""
         if self.deck is None:
             return None
@@ -282,7 +282,7 @@ class SectionPointSource(KeywordBase):
         self.lcidvel = value.lcid
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

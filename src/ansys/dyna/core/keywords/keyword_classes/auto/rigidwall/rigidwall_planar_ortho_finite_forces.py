@@ -540,37 +540,37 @@ class RigidwallPlanarOrthoFiniteForces(KeywordBase):
         self._cards[5].set_value("n4", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -585,7 +585,7 @@ class RigidwallPlanarOrthoFiniteForces(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -595,7 +595,7 @@ class RigidwallPlanarOrthoFiniteForces(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 
@@ -605,7 +605,7 @@ class RigidwallPlanarOrthoFiniteForces(KeywordBase):
         self.nsidex = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

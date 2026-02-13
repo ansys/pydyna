@@ -913,7 +913,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcxc_link(self) -> DefineCurve:
+    def lcxc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxc."""
         if self.deck is None:
             return None
@@ -928,7 +928,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
         self.lcxc = value.lcid
 
     @property
-    def lcxt_link(self) -> DefineCurve:
+    def lcxt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxt."""
         if self.deck is None:
             return None
@@ -943,7 +943,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
         self.lcxt = value.lcid
 
     @property
-    def lcyc_link(self) -> DefineCurve:
+    def lcyc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyc."""
         if self.deck is None:
             return None
@@ -958,7 +958,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
         self.lcyc = value.lcid
 
     @property
-    def lcyt_link(self) -> DefineCurve:
+    def lcyt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyt."""
         if self.deck is None:
             return None
@@ -973,7 +973,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
         self.lcyt = value.lcid
 
     @property
-    def lcsc_link(self) -> DefineCurve:
+    def lcsc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsc."""
         if self.deck is None:
             return None

@@ -561,7 +561,7 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
         self._cards[4].set_value("rfiltf", value)
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -576,7 +576,7 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -591,7 +591,7 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lctsrf_link(self) -> DefineCurve:
+    def lctsrf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctsrf."""
         if self.deck is None:
             return None
@@ -606,7 +606,7 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
         self.lctsrf = value.lcid
 
     @property
-    def lcemod_link(self) -> DefineCurve:
+    def lcemod_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcemod."""
         if self.deck is None:
             return None

@@ -170,47 +170,47 @@ class ConstrainedImmersedInSpg(KeywordBase):
         self._cards[1].set_value("ipid8", value)
 
     @property
-    def spgpid_link(self) -> KeywordBase:
+    def spgpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given spgpid."""
         return self._get_link_by_attr("PART", "pid", self.spgpid, "parts")
 
     @property
-    def ipid1_link(self) -> KeywordBase:
+    def ipid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid1."""
         return self._get_link_by_attr("PART", "pid", self.ipid1, "parts")
 
     @property
-    def ipid2_link(self) -> KeywordBase:
+    def ipid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid2."""
         return self._get_link_by_attr("PART", "pid", self.ipid2, "parts")
 
     @property
-    def ipid3_link(self) -> KeywordBase:
+    def ipid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid3."""
         return self._get_link_by_attr("PART", "pid", self.ipid3, "parts")
 
     @property
-    def ipid4_link(self) -> KeywordBase:
+    def ipid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid4."""
         return self._get_link_by_attr("PART", "pid", self.ipid4, "parts")
 
     @property
-    def ipid5_link(self) -> KeywordBase:
+    def ipid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid5."""
         return self._get_link_by_attr("PART", "pid", self.ipid5, "parts")
 
     @property
-    def ipid6_link(self) -> KeywordBase:
+    def ipid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid6."""
         return self._get_link_by_attr("PART", "pid", self.ipid6, "parts")
 
     @property
-    def ipid7_link(self) -> KeywordBase:
+    def ipid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid7."""
         return self._get_link_by_attr("PART", "pid", self.ipid7, "parts")
 
     @property
-    def ipid8_link(self) -> KeywordBase:
+    def ipid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid8."""
         return self._get_link_by_attr("PART", "pid", self.ipid8, "parts")
 

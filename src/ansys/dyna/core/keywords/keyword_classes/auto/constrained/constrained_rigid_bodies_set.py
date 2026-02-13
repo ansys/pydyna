@@ -87,7 +87,7 @@ class ConstrainedRigidBodiesSet(KeywordBase):
         self._cards[0].set_value("iflag", value)
 
     @property
-    def pidc_link(self) -> KeywordBase:
+    def pidc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pidc."""
         return self._get_set_link("PART", self.pidc)
 
@@ -97,7 +97,7 @@ class ConstrainedRigidBodiesSet(KeywordBase):
         self.pidc = value.sid
 
     @property
-    def pidl_link(self) -> KeywordBase:
+    def pidl_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidl."""
         return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
 

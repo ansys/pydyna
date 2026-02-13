@@ -36,7 +36,7 @@ _HOURGLASSCARDSET_CARD0 = (
     FieldSchema("ibq", int, 30, 10, None),
     FieldSchema("q1", float, 40, 10, 1.5),
     FieldSchema("q2", float, 50, 10, 0.06),
-    FieldSchema("qb/vdc", float, 60, 10, 0.1),
+    FieldSchema("qb_vdc", float, 60, 10, 0.1, "qb/vdc"),
     FieldSchema("qw", float, 70, 10, 0.1),
 )
 

@@ -547,7 +547,7 @@ class EmRandlesSolid(KeywordBase):
         self._cards[5].set_value("flcid", value)
 
     @property
-    def flcid_link(self) -> DefineCurve:
+    def flcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for flcid."""
         if self.deck is None:
             return None
@@ -562,27 +562,27 @@ class EmRandlesSolid(KeywordBase):
         self.flcid = value.lcid
 
     @property
-    def ccppart_link(self) -> KeywordBase:
+    def ccppart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ccppart."""
         return self._get_link_by_attr("PART", "pid", self.ccppart, "parts")
 
     @property
-    def ccnpart_link(self) -> KeywordBase:
+    def ccnpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ccnpart."""
         return self._get_link_by_attr("PART", "pid", self.ccnpart, "parts")
 
     @property
-    def seppart_link(self) -> KeywordBase:
+    def seppart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given seppart."""
         return self._get_link_by_attr("PART", "pid", self.seppart, "parts")
 
     @property
-    def pelpart_link(self) -> KeywordBase:
+    def pelpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pelpart."""
         return self._get_link_by_attr("PART", "pid", self.pelpart, "parts")
 
     @property
-    def nelpart_link(self) -> KeywordBase:
+    def nelpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given nelpart."""
         return self._get_link_by_attr("PART", "pid", self.nelpart, "parts")
 

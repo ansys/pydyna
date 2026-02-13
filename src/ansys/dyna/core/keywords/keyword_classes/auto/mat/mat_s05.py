@@ -106,7 +106,7 @@ class MatS05(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdr_link(self) -> DefineCurve:
+    def lcdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdr."""
         if self.deck is None:
             return None

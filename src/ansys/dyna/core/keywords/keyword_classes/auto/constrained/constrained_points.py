@@ -223,12 +223,12 @@ class ConstrainedPoints(KeywordBase):
         self._cards[3].set_value("failm", value)
 
     @property
-    def eid1_link(self) -> KeywordBase:
+    def eid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
 
     @property
-    def eid2_link(self) -> KeywordBase:
+    def eid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid2."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
 

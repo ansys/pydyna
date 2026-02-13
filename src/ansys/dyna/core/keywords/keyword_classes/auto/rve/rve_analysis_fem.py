@@ -246,7 +246,7 @@ class RveAnalysisFem(KeywordBase):
         self._cards[2].set_value("h13", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

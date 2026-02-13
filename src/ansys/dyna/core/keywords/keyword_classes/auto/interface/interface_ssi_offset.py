@@ -197,7 +197,7 @@ class InterfaceSsiOffset(KeywordBase):
         self._cards[2].set_value("memgm", value)
 
     @property
-    def strid_link(self) -> KeywordBase:
+    def strid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for strid."""
         return self._get_set_link("SEGMENT", self.strid)
 
@@ -207,7 +207,7 @@ class InterfaceSsiOffset(KeywordBase):
         self.strid = value.sid
 
     @property
-    def soilid_link(self) -> KeywordBase:
+    def soilid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for soilid."""
         return self._get_set_link("SEGMENT", self.soilid)
 

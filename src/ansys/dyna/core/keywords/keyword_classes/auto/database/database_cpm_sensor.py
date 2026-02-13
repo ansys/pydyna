@@ -143,7 +143,7 @@ class DatabaseCpmSensor(KeywordBase):
         self._cards[1].set_value("lz", value)
 
     @property
-    def segsid_link(self) -> KeywordBase:
+    def segsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segsid."""
         return self._get_set_link("SEGMENT", self.segsid)
 

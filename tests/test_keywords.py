@@ -36,7 +36,6 @@ from ansys.dyna.core import keywords as kwd
 import pytest
 
 
-@pytest.mark.keywords
 def test_mesh(ref_string):
     ref_node = ref_string.test_mesh_string
     nodes = kwd.Node()
@@ -102,7 +101,6 @@ $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
     assert element_string == ref_element, "element solid block does not match"
 
 
-@pytest.mark.keywords
 def test_element_solid_read_legacy_format():
     """Test reading ElementSolid from legacy format keyword string (all fields on one line)."""
     legacy_string = """*ELEMENT_SOLID
@@ -119,7 +117,6 @@ def test_element_solid_read_legacy_format():
     assert elements.elements["n8"].tolist() == [8, 16]
 
 
-@pytest.mark.keywords
 def test_element_solid_read_single_element():
     """Test reading ElementSolid with a single element."""
     single_element_string = """*ELEMENT_SOLID
@@ -135,7 +132,6 @@ def test_element_solid_read_single_element():
     assert elements.elements["n8"].tolist() == [8]
 
 
-@pytest.mark.keywords
 def test_read_node(ref_string):
     n = kwd.Node()
     n.loads(ref_string.test_node_long_id)
@@ -143,7 +139,6 @@ def test_read_node(ref_string):
     assert n.write() == ref_string.test_node_long_id
 
 
-@pytest.mark.keywords
 def test_nodes_from_dataframe():
     node_ids = np.arange(30) + 1
     xs = np.zeros(30) + 0.1
@@ -163,7 +158,7 @@ def test_nodes_from_dataframe():
         )
 
 
-@pytest.mark.keywords
+
 def test_read_segment():
     segment_text = """*SET_SEGMENT
 $#     sid       da1       da2       da3       da4    solver
@@ -192,7 +187,7 @@ $#      n1        n2        n3        n4        a1        a2        a3        a4
     )
 
 
-@pytest.mark.keywords
+
 def test_read_keyword_no_data():
     seatbelt_text = """*SECTION_SEATBELT
 $#   secid      area     thick
@@ -207,7 +202,7 @@ $#   secid      area     thick
         belt.loads(seatbelt_text)
 
 
-@pytest.mark.keywords
+
 def test_read_nodes(ref_string):
     node_text = """*NODE
 $#   nid               x               y               z      tc      rc
@@ -232,7 +227,7 @@ $#   nid               x               y               z      tc      rc
     assert node.write() == node_text
 
 
-@pytest.mark.keywords
+
 def test_read_keyword_no_defaults():
     m = kwd.MatHyperelasticRubber()
     assert m.n == 0  # LSPP default for `n` is 0.
@@ -242,7 +237,7 @@ def test_read_keyword_no_defaults():
         assert m.n == None  # LSPP default for `n` is 0.
 
 
-@pytest.mark.keywords
+
 def test_disable_lspp_defaults_with_constructor_kwargs():
     """Test that kwargs passed to constructor work even with disable_lspp_defaults.
 
@@ -279,7 +274,7 @@ def test_disable_lspp_defaults_with_constructor_kwargs():
         assert kw.penopt is None
 
 
-@pytest.mark.keywords
+
 def test_boundary_prescribed_motion_set(ref_string):
     b = kwd.BoundaryPrescribedMotionSet()
     assert b.write() == ref_string.test_boundary_prescribed_motion_set
@@ -287,7 +282,7 @@ def test_boundary_prescribed_motion_set(ref_string):
     assert b.lcid == 100
 
 
-@pytest.mark.keywords
+
 def test_define_curve_defaults():
     curve = kwd.DefineCurve()
     curve.curves = pd.DataFrame({"o1": [2, 4, 6]})
@@ -303,7 +298,7 @@ def test_define_curve_defaults():
         assert pd.isna(table["a1"][0])
 
 
-@pytest.mark.keywords
+
 def test_constrained_beam_in_solid(ref_string):
     b = kwd.ConstrainedBeamInSolid(ncoup=1)
     b.coupid = 12
@@ -318,7 +313,7 @@ def test_constrained_beam_in_solid(ref_string):
     assert b.write() == ref_string.test_constrained_beam_in_solid_title
 
 
-@pytest.mark.keywords
+
 def test_hourglass(ref_string):
     h = kwd.Hourglass()
     h.options["TITLE"].active = True
@@ -331,7 +326,7 @@ def test_hourglass(ref_string):
     assert len(h.sets) == 1
 
 
-@pytest.mark.keywords
+
 def test_load_segment(ref_string):
     seg = kwd.LoadSegment()
     assert seg.write() == ref_string.test_load_segment_string
@@ -339,7 +334,7 @@ def test_load_segment(ref_string):
     assert seg.write() == ref_string.test_load_segment_id_string
 
 
-@pytest.mark.keywords
+
 def test_section_shell(ref_string):
     shell = kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t4=1.0, nip=5)
     shell.t3 = 1.0
@@ -353,7 +348,7 @@ def test_section_shell(ref_string):
         x = shell.secid
 
 
-@pytest.mark.keywords
+
 def test_section_tshell(ref_string):
     tshell = kwd.SectionTShell(format=format_type.long)
     # check that the keyword wries using the long format
@@ -380,7 +375,7 @@ def test_section_tshell(ref_string):
     assert tshell.bi[8] == 12.0
 
 
-@pytest.mark.keywords
+
 def test_section_solid(ref_string):
     ss = kwd.SectionSolid()
     # check the default output
@@ -401,7 +396,7 @@ def test_section_solid(ref_string):
     assert ss.write() == ref_string.test_ss_elform_101_nip_2_lmc_9_string
 
 
-@pytest.mark.keywords
+
 def test_initial_strain_shell(ref_string):
     # test read
     ref = """*INITIAL_STRAIN_SHELL
@@ -440,7 +435,7 @@ def test_initial_strain_shell(ref_string):
     assert i.write() == ref_string.test_initial_strain_shell_string
 
 
-@pytest.mark.keywords
+
 def test_initial_strain_shell_large_format():
     """Test INITIAL_STRAIN_SHELL with LARGE format (width=20 fields).
 
@@ -490,7 +485,7 @@ def test_initial_strain_shell_large_format():
     assert abs(i2.sets[0].large_strains[0].epsxx - 1.23456789012345e-3) < 1e-15
 
 
-@pytest.mark.keywords
+
 def test_initial_stress_shell_single_element_single_layer(ref_string):
     i = kwd.InitialStressShell()
     i.loads(ref_string.test_initial_stress_shell_string_single_element_single_layer)
@@ -511,7 +506,7 @@ def test_initial_stress_shell_single_element_single_layer(ref_string):
     assert stress0.hisv[18] == 0.311
 
 
-@pytest.mark.keywords
+
 def test_initial_stress_shell_single_element_multiple_layers(ref_string):
     i = kwd.InitialStressShell()
     i.loads(ref_string.test_initial_stress_shell_string_single_element_multiple_layers)
@@ -524,7 +519,7 @@ def test_initial_stress_shell_single_element_multiple_layers(ref_string):
     assert stress1.hisv[18] == 0.32
 
 
-@pytest.mark.keywords
+
 def test_initial_stress_shell(ref_string):
     i = kwd.InitialStressShell()
     i.loads(ref_string.test_initial_stress_shell_string)
@@ -539,7 +534,7 @@ def test_initial_stress_shell(ref_string):
     assert stress4.hisv[5] == 0.163
 
 
-@pytest.mark.keywords
+
 def test_initial_stress_shell_large_format():
     """Test INITIAL_STRESS_SHELL with LARGE format (width=20 fields).
 
@@ -603,7 +598,7 @@ def test_initial_stress_shell_large_format():
     assert len(i2.sets[0].large_sets[0].hisv.data) == 6
 
 
-@pytest.mark.keywords
+
 def test_initial_temperature(ref_string):
     tin = kwd.InitialTemperatureNode()
     tin.loads(ref_string.test_initial_temperature_node_string)
@@ -613,7 +608,7 @@ def test_initial_temperature(ref_string):
     assert tis.write() == ref_string.test_initial_temperature_set_string
 
 
-@pytest.mark.keywords
+
 def test_element_shell_thickness(ref_string):
     ref_element = """*ELEMENT_SHELL_THICKNESS
        1       1       1     105       2       2
@@ -631,7 +626,7 @@ def test_element_shell_thickness(ref_string):
     assert elements.write() == ref_string.element_shell_thickness_string
 
 
-@pytest.mark.keywords
+
 def test_element_solid_ortho(ref_string):
     # assign with one dataframe for all cards
     elements = kwd.ElementSolidOrtho()
@@ -674,7 +669,7 @@ def test_element_solid_ortho(ref_string):
     assert len(elements.cards[0]._cards) == 3
 
 
-@pytest.mark.keywords
+
 def test_control_mpp_decomposition_transformation(ref_string):
     """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
     c = kwd.ControlMppDecompositionTransformation()
@@ -685,7 +680,7 @@ def test_control_mpp_decomposition_transformation(ref_string):
     )
 
 
-@pytest.mark.keywords
+
 def test_control_implicit_eigenvalue(ref_string):
     """Read CONTROL_MPP_DECOMPOSITION_TRANSFORMATION"""
     c = kwd.ControlImplicitEigenvalue(neig=100)
@@ -697,7 +692,7 @@ def test_control_implicit_eigenvalue(ref_string):
     assert (ref_string.test_control_implicit_eigenvalue_3 == c.write())
 
 
-@pytest.mark.keywords
+
 def test_control_time_step_read(ref_string):
     """Read CONTROL_TIME_STEP"""
     c = kwd.ControlTimeStep()
@@ -705,7 +700,7 @@ def test_control_time_step_read(ref_string):
     assert c.tssfac == 1.0
 
 
-@pytest.mark.keywords
+
 def test_control_timestep_read(ref_string):
     """Read CONTROL_TIMESTEP"""
     c = kwd.ControlTimestep()
@@ -713,7 +708,7 @@ def test_control_timestep_read(ref_string):
     assert c.tssfac == 1.0
 
 
-@pytest.mark.keywords
+
 def test_mat_plastic_kinematic_read(ref_string):
     ref_mat_plastic_kinematic_string = ref_string.test_mat_plastic_kinematic_ref
     m = kwd.MatPlasticKinematic()
@@ -721,7 +716,7 @@ def test_mat_plastic_kinematic_read(ref_string):
     assert m.write() == ref_mat_plastic_kinematic_string
 
 
-@pytest.mark.keywords
+
 def test_mat_null_read(ref_string):
     ref_mat_null_string = ref_string.test_mat_null_ref
     m = kwd.MatNull()
@@ -729,7 +724,7 @@ def test_mat_null_read(ref_string):
     assert m.write() == ref_mat_null_string
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_read(ref_string):
     ref_mat_piecewise_linear_plasticity_string = (
         ref_string.test_mat_piecewise_linear_plasticity_ref
@@ -739,7 +734,7 @@ def test_mat_piecewise_linear_plasticity_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_string
 
 
-"""@pytest.mark.keywords
+"""
 def test_mat_piecewise_linear_plasticity_2d_read(ref_string):
     ref_mat_piecewise_linear_plasticity_2d_string = \
         ref_string.test_mat_piecewise_linear_plasticity_2d_ref
@@ -748,7 +743,7 @@ def test_mat_piecewise_linear_plasticity_2d_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_2d_string"""
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_haz_read(ref_string):
     ref_mat_piecewise_linear_plasticity_haz_string = (
         ref_string.test_mat_piecewise_linear_plasticity_haz_ref
@@ -758,7 +753,7 @@ def test_mat_piecewise_linear_plasticity_haz_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_haz_string
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_log_interpolation_read(ref_string):
     ref_mat_piecewise_linear_plasticity_log_interpolation_string = (
         ref_string.test_mat_piecewise_linear_plasticity_log_interpolation_ref
@@ -768,7 +763,7 @@ def test_mat_piecewise_linear_plasticity_log_interpolation_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_log_interpolation_string
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_midfail_read(ref_string):
     ref_mat_piecewise_linear_plasticity_midfail_string = (
         ref_string.test_mat_piecewise_linear_plasticity_midfail_ref
@@ -778,7 +773,7 @@ def test_mat_piecewise_linear_plasticity_midfail_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_midfail_string
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_stochastic_read(ref_string):
     ref_mat_piecewise_linear_plasticity_stochastic_string = (
         ref_string.test_mat_piecewise_linear_plasticity_stochastic_ref
@@ -788,7 +783,7 @@ def test_mat_piecewise_linear_plasticity_stochastic_read(ref_string):
     assert m.write() == ref_mat_piecewise_linear_plasticity_stochastic_string
 
 
-@pytest.mark.keywords
+
 def test_mat_laminated_composite_fabric_read(ref_string):
     ref_mat_laminated_composite_fabric_string = (
         ref_string.test_mat_laminated_composite_fabric_ref
@@ -798,7 +793,7 @@ def test_mat_laminated_composite_fabric_read(ref_string):
     assert m.write() == ref_mat_laminated_composite_fabric_string
 
 
-@pytest.mark.keywords
+
 def test_mat_laminated_composite_fabric_solid_read(ref_string):
     ref_mat_laminated_composite_fabric_solid_string = (
         ref_string.test_mat_laminated_composite_fabric_solid_ref
@@ -808,7 +803,7 @@ def test_mat_laminated_composite_fabric_solid_read(ref_string):
     assert m.write() == ref_mat_laminated_composite_fabric_solid_string
 
 
-@pytest.mark.keywords
+
 def test_mat_hyperelastic_rubber_read(ref_string):
     ref_mat_hyperelastic_rubber_string = ref_string.test_mat_hyperelastic_rubber_ref
     m = kwd.MatHyperelasticRubber()
@@ -822,7 +817,7 @@ def test_mat_hyperelastic_rubber_read(ref_string):
     assert m.cards[3].active
 
 
-@pytest.mark.keywords
+
 def test_mat_ogden_rubber_read(ref_string):
     ref_mat_ogden_rubber_string = ref_string.test_mat_ogden_rubber_ref
     m = kwd.MatOgdenRubber()
@@ -836,7 +831,7 @@ def test_mat_ogden_rubber_read(ref_string):
     assert m.cards[3].active
 
 
-@pytest.mark.keywords
+
 def test_mat_fu_chang_foam_read(ref_string):
     ref_mat_fu_chang_foam_string = ref_string.test_mat_fu_chang_foam_ref
     m = kwd.MatFuChangFoam()
@@ -844,7 +839,7 @@ def test_mat_fu_chang_foam_read(ref_string):
     assert m.write() == ref_mat_fu_chang_foam_string
 
 
-@pytest.mark.keywords
+
 def test_mat_fu_chang_foam_damage_decay_read(ref_string):
     ref_mat_fu_chang_foam_damage_decay_string = (
         ref_string.test_mat_fu_chang_foam_damage_decay_ref
@@ -854,7 +849,7 @@ def test_mat_fu_chang_foam_damage_decay_read(ref_string):
     assert m.write() == ref_mat_fu_chang_foam_damage_decay_string
 
 
-@pytest.mark.keywords
+
 def test_mat_fu_chang_foam_log_log_interpolation_read(ref_string):
     ref_mat_fu_chang_foam_log_log_interpolation_string = (
         ref_string.test_mat_fu_chang_foam_log_log_interpolation_ref
@@ -864,7 +859,7 @@ def test_mat_fu_chang_foam_log_log_interpolation_read(ref_string):
     assert m.write() == ref_mat_fu_chang_foam_log_log_interpolation_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_johnson_cook_read(ref_string):
     ref_mat_modified_johnson_cook_string = ref_string.test_mat_modified_johnson_cook_ref
     m = kwd.MatModifiedJohnsonCook()
@@ -872,7 +867,7 @@ def test_mat_modified_johnson_cook_read(ref_string):
     assert m.write() == ref_mat_modified_johnson_cook_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_ref
@@ -882,7 +877,7 @@ def test_mat_modified_piecewise_linear_plasticity_read(ref_string):
     assert m.write() == ref_mat_modified_piecewise_linear_plasticity_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_log_interpolation_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_log_interpolation_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_log_interpolation_ref
@@ -895,7 +890,7 @@ def test_mat_modified_piecewise_linear_plasticity_log_interpolation_read(ref_str
     )
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_prestrain_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_prestrain_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_prestrain_ref
@@ -905,7 +900,7 @@ def test_mat_modified_piecewise_linear_plasticity_prestrain_read(ref_string):
     assert m.write() == ref_mat_modified_piecewise_linear_plasticity_prestrain_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_rate_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_rate_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_rate_ref
@@ -915,7 +910,7 @@ def test_mat_modified_piecewise_linear_plasticity_rate_read(ref_string):
     assert m.write() == ref_mat_modified_piecewise_linear_plasticity_rate_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_rtcl_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_rtcl_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_rtcl_ref
@@ -925,7 +920,7 @@ def test_mat_modified_piecewise_linear_plasticity_rtcl_read(ref_string):
     assert m.write() == ref_mat_modified_piecewise_linear_plasticity_rtcl_string
 
 
-@pytest.mark.keywords
+
 def test_mat_modified_piecewise_linear_plasticity_stochastic_read(ref_string):
     ref_mat_modified_piecewise_linear_plasticity_stochastic_string = (
         ref_string.test_mat_modified_piecewise_linear_plasticity_stochastic_ref
@@ -935,7 +930,7 @@ def test_mat_modified_piecewise_linear_plasticity_stochastic_read(ref_string):
     assert m.write() == ref_mat_modified_piecewise_linear_plasticity_stochastic_string
 
 
-@pytest.mark.keywords
+
 def test_mat_plasticity_compression_tension_read(ref_string):
     ref_mat_plasticity_compression_tension_string = (
         ref_string.test_mat_plasticity_compression_tension_ref
@@ -945,7 +940,7 @@ def test_mat_plasticity_compression_tension_read(ref_string):
     assert m.write() == ref_mat_plasticity_compression_tension_string
 
 
-@pytest.mark.keywords
+
 def test_mat_cohesive_mixed_mode_read(ref_string):
     ref_mat_cohesive_mixed_mode_string = ref_string.test_mat_cohesive_mixed_mode_ref
     m = kwd.MatCohesiveMixedMode()
@@ -953,7 +948,7 @@ def test_mat_cohesive_mixed_mode_read(ref_string):
     assert m.write() == ref_mat_cohesive_mixed_mode_string
 
 
-@pytest.mark.keywords
+
 def test_mat_simplified_rubber_foam_read(ref_string):
     ref_mat_simplified_rubber_foam_string = (
         ref_string.test_mat_simplified_rubber_foam_ref
@@ -963,7 +958,7 @@ def test_mat_simplified_rubber_foam_read(ref_string):
     assert m.write() == ref_mat_simplified_rubber_foam_string
 
 
-@pytest.mark.keywords
+
 def test_mat_simplified_rubber_foam_log_log_interpolation_read(ref_string):
     ref_mat_simplified_rubber_foam_log_log_interpolation_string = (
         ref_string.test_mat_simplified_rubber_foam_log_log_interpolation_ref
@@ -973,7 +968,7 @@ def test_mat_simplified_rubber_foam_log_log_interpolation_read(ref_string):
     assert m.write() == ref_mat_simplified_rubber_foam_log_log_interpolation_string
 
 
-@pytest.mark.keywords
+
 def test_mat_simplified_rubber_foam_with_failure_read(ref_string):
     ref_mat_simplified_rubber_foam_with_failure_string = (
         ref_string.test_mat_simplified_rubber_foam_with_failure_ref
@@ -983,7 +978,7 @@ def test_mat_simplified_rubber_foam_with_failure_read(ref_string):
     assert m.write() == ref_mat_simplified_rubber_foam_with_failure_string
 
 
-@pytest.mark.keywords
+
 def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_string):
     ref_mat_simplified_rubber_foam_with_failure_log_log_interpolation_string = ref_string.test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_ref
     m = kwd.MatSimplifiedRubberFoamWithFailureLogLogInterpolation()
@@ -994,7 +989,7 @@ def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_
     )
 
 
-@pytest.mark.keywords
+
 def test_mat_196_read(ref_string):
     m = kwd.Mat196()
     m_alias = kwd.MatGeneralSpringDiscreteBeam()
@@ -1005,7 +1000,7 @@ def test_mat_196_read(ref_string):
     assert m_alias.write() == ref_string.test_mat_general_spring_discrete_beam_ref_out
 
 
-@pytest.mark.keywords
+
 def test_mat_023_temperature_points(ref_string):
     """Test MAT_023 (MAT_TEMPERATURE_DEPENDENT_ORTHOTROPIC) with multiple temperature points."""
     m = kwd.Mat023()
@@ -1025,7 +1020,7 @@ def test_mat_023_temperature_points(ref_string):
     assert m.write() == ref_string.test_mat_023_ref_out
 
 
-@pytest.mark.keywords
+
 def test_mat295_legacy_read(ref_string):
     """Round trip test of reading MAT_295 using legacy 0.9.1 API (backward compatibility)."""
     from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
@@ -1046,7 +1041,7 @@ def test_mat295_legacy_read(ref_string):
     assert m.write() == ref_mat295_string
 
 
-@pytest.mark.keywords
+
 def test_mat295_legacy_iso_read(ref_string):
     """Round trip test of reading MAT_295 ISO using legacy 0.9.1 API (backward compatibility)."""
     from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
@@ -1062,7 +1057,7 @@ def test_mat295_legacy_iso_read(ref_string):
     assert m.write() == ref_mat295_string
 
 
-@pytest.mark.keywords
+
 def test_mat295_read(ref_string):
     """Round trip test of reading MAT_295 using idiomatic fiber_families API."""
     ref_mat295_string = ref_string.test_mat_295_ref
@@ -1077,7 +1072,7 @@ def test_mat295_read(ref_string):
     assert m.write() == ref_mat295_string
 
 
-@pytest.mark.keywords
+
 def test_mat295_iso_read(ref_string):
     """Round trip test of reading MAT_295 ISO (no fiber families)."""
     m = kwd.Mat295(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
@@ -1087,39 +1082,39 @@ def test_mat295_iso_read(ref_string):
     assert m.write() == ref_mat295_string
 
 
-@pytest.mark.keywords
+
 def test_constrained_adaptivity(ref_string):
     ca = kwd.ConstrainedAdaptivity()
     ca.loads(ref_string.test_constrained_adaptivity)
     assert ca.constrains.shape == (5, 3)
 
 
-@pytest.mark.keywords
+
 def test_constrained_nodal_rigid_body_inertia_title(ref_string):
     c = kwd.ConstrainedNodalRigidBodyInertia()
     c.loads(ref_string.test_constrained_nodal_rigid_body_inertia_title)
 
 
-@pytest.mark.keywords
+
 def test_constrained_rigid_bodies(ref_string):
     crb = kwd.ConstrainedRigidBodies()
     crb.loads(ref_string.test_constrained_rigid_bodies)
     assert crb.pairs.shape == (2, 3)
 
 
-@pytest.mark.keywords
+
 def test_mat_piecewise_linear_plasticity_title(ref_string):
     m = kwd.MatPiecewiseLinearPlasticity()
     m.loads(ref_string.test_mat_piecewise_linear_plasticity_title)
 
 
-@pytest.mark.keywords
+
 def test_set_node_title(ref_string):
     s = kwd.SetNode()
     s.loads(ref_string.test_set_node_title)
 
 
-@pytest.mark.keywords
+
 def test_set_node_list(ref_string):
     s = kwd.SetNodeList()
     with pytest.warns(UserWarning, match="Detected out of bound card characters"):
@@ -1127,7 +1122,7 @@ def test_set_node_list(ref_string):
     assert len(s.nodes) == 8
 
 
-@pytest.mark.keywords
+
 def test_contact_id_options(ref_string):
     c = kwd.ContactAutomaticSingleSurface()
     c.options["ID"].active = True
@@ -1138,7 +1133,7 @@ def test_contact_id_options(ref_string):
     assert c.write() == ref_string.test_contact_automatic_single_surface_1d_mpp1
 
 
-@pytest.mark.keywords
+
 def test_parameter_expression(ref_string):
     p = kwd.ParameterExpression()
     p.loads(ref_string.test_parameter_expression_ref)
@@ -1147,7 +1142,7 @@ def test_parameter_expression(ref_string):
     assert p.write() == ref_string.test_parameter_expression_ref
 
 
-@pytest.mark.keywords
+
 def test_define_transformation(ref_string):
     d = kwd.DefineTransformation()
     d.loads(ref_string.test_define_transformation_ref)
@@ -1158,13 +1153,13 @@ def test_define_transformation(ref_string):
     assert d.write() == ref_string.test_define_transformation_ref
 
 
-@pytest.mark.keywords
+
 def test_contact_automatic_single_surface(ref_string):
     c = kwd.ContactAutomaticSingleSurface(ssid=1)
     assert c.write() == ref_string.test_contact_automatic_single_surface
 
 
-@pytest.mark.keywords
+
 def test_define_function(ref_string):
     ref_function_string = ref_string.test_define_function_string
     d = kwd.DefineFunction()
@@ -1177,7 +1172,7 @@ a(t)=x(t)+200"""
     assert function_string == ref_function_string
 
 
-@pytest.mark.keywords
+
 def test_set_shell_intersect(ref_string):
     s = kwd.SetShellIntersect()
     assert s.write() == ref_string.test_set_shell_intersect_ref_1
@@ -1187,7 +1182,7 @@ def test_set_shell_intersect(ref_string):
     assert s.write() == ref_string.test_set_shell_intersect_ref_3
 
 
-@pytest.mark.keywords
+
 def test_set_part_list(ref_string):
     """Test formatting of set part list (uses series card with ints)."""
     s = kwd.SetPartList()
@@ -1198,7 +1193,7 @@ def test_set_part_list(ref_string):
 
 
 # uncomment when duplicate card groups can be assigned in this way
-#@pytest.mark.keywords
+#
 #def test_part_assign(ref_string):
 #    """Test formatting of set part list (uses series card with ints)."""
 #    part = kwd.Part(heading="My part", pid=1, secid=1, mid=1, eosid=0)
@@ -1206,7 +1201,7 @@ def test_set_part_list(ref_string):
 #    test = part.write()
 #    assert test == ref
 
-@pytest.mark.keywords
+
 def test_element_beam_assign(ref_string):
     """Test formatting of set part list (uses series card with ints)."""
     beam = kwd.ElementBeam(pid=1, n1=1, n2=0, local=1)
@@ -1214,7 +1209,7 @@ def test_element_beam_assign(ref_string):
     assert beam.write() == ref
 
 
-@pytest.mark.keywords
+
 def test_define_table(ref_string):
     """Test formatting of set part list (uses series card with ints)."""
     table = kwd.DefineTable()
@@ -1224,7 +1219,7 @@ def test_define_table(ref_string):
     assert table.tbid == 10000001
 
 
-@pytest.mark.keywords
+
 def test_icfd_part(ref_string):
     """Test formatting of set part list (uses series card with ints)."""
     part = kwd.IcfdPart(pid=1,secid=2,mid=3)
@@ -1234,7 +1229,7 @@ def test_icfd_part(ref_string):
     assert s == ref_string.test_icfd_part_ref
 
 
-@pytest.mark.keywords
+
 def test_set_part_list_generate(ref_string):
     s = kwd.SetPartListGenerate()
     s.loads(ref_string.test_set_part_list_generate_ref1)
@@ -1271,7 +1266,7 @@ def test_set_part_list_generate(ref_string):
     assert s.block_ranges[2].bbeg == 15010000
 
 
-@pytest.mark.keywords
+
 def test_contact_tied_shell_edge_to_surface_id(ref_string):
     """Test reading CONTACT_TIED_SHELL_EDGE_TO_SURFACE_ID."""
     s = kwd.ContactTiedShellEdgeToSurface()
@@ -1279,7 +1274,7 @@ def test_contact_tied_shell_edge_to_surface_id(ref_string):
     s.loads(ref)
 
 
-@pytest.mark.keywords
+
 def test_control_energy_no_hgen():
     """Test the three ways to remove the hgen field from *CONTROL_ENERGY"""
     with disable_lspp_defaults():
@@ -1292,7 +1287,7 @@ def test_control_energy_no_hgen():
     assert c.hgen is None
 
 
-@pytest.mark.keywords
+
 def test_em_control(ref_string):
     """Test formatting of EM control."""
     s = kwd.EmControl()
@@ -1300,7 +1295,7 @@ def test_em_control(ref_string):
     assert s.write() == ref
 
 
-@pytest.mark.keywords
+
 def test_format_symbol():
     """Test all permutations of the keyword format symbol given the deck format."""
     node = kwd.Node()
@@ -1361,7 +1356,7 @@ def test_format_symbol():
     )
 
 
-@pytest.mark.keywords
+
 def test_em_isopotential_connect(ref_string):
     """Test default card of EM_ISOPOTENTIAL_CONNECT and conditional in case contype=6"""
     s = kwd.EmIsopotentialConnect()
@@ -1370,7 +1365,7 @@ def test_em_isopotential_connect(ref_string):
     assert s.write() == ref_string.test_conditional_card_em_isopotential_connect_string
 
 
-@pytest.mark.keywords
+
 def test_contact_force_transducer_penalty(ref_string):
     c = kwd.ContactForceTransducerPenalty()
     c.loads(ref_string.test_contact_force_transducer_penalty)
@@ -1381,7 +1376,7 @@ def test_contact_force_transducer_penalty(ref_string):
     assert val == ref_string.test_contact_force_transducer_penalty_id
 
 
-@pytest.mark.keywords
+
 def test_contact_automatic_general_id_mpp(ref_string):
     c = kwd.ContactAutomaticGeneral()
     c.options["ID"].active = True
@@ -1399,7 +1394,7 @@ def test_contact_automatic_general_id_mpp(ref_string):
     assert c.surfa == 11
 
 
-@pytest.mark.keywords
+
 def test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards(ref_string):
     """Test to read optional contact cards"""
     # These are for the option A, B, C, D, E, F, G
@@ -1418,7 +1413,7 @@ def test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards(ref_string):
     )
 
 
-@pytest.mark.keywords
+
 def test_em_randles_batmac_rdltype(ref_string):
     s = kwd.EmRandlesBatmac(rdltype=1)
     assert s.write() == ref_string.test_em_randles_batmac_rdltype_0_1
@@ -1426,7 +1421,7 @@ def test_em_randles_batmac_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_batmac_rdltype_2_3
 
 
-@pytest.mark.keywords
+
 def test_multiline_include_keyword(ref_string):
     filename = "a" * 60 + ".k"
     i = kwd.Include(filename=filename)
@@ -1457,7 +1452,7 @@ def test_multiline_include_keyword(ref_string):
         i.write()
 
 
-@pytest.mark.keywords
+
 def test_em_randles_solid_rdltype(ref_string):
     s = kwd.EmRandlesSolid(rdltype=1)
     assert s.write() == ref_string.test_em_randles_solid_rdltype_0_1
@@ -1465,7 +1460,7 @@ def test_em_randles_solid_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_solid_rdltype_2_3
 
 
-@pytest.mark.keywords
+
 def test_em_randles_tshell_rdltype(ref_string):
     s = kwd.EmRandlesTshell(rdltype=1)
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_0_1
@@ -1473,7 +1468,7 @@ def test_em_randles_tshell_rdltype(ref_string):
     assert s.write() == ref_string.test_em_randles_tshell_rdltype_2_3
 
 
-@pytest.mark.keywords
+
 def test_control_shell(ref_string):
     """Test reading and writing CONTROL_SHELL keyword."""
     control_shell_string = ref_string.test_control_shell

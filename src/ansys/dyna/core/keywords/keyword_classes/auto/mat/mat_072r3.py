@@ -718,7 +718,7 @@ class Mat072R3(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcrate_link(self) -> DefineCurve:
+    def lcrate_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrate."""
         if self.deck is None:
             return None

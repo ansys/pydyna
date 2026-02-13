@@ -50,14 +50,7 @@ class SetShellList(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
-        "eid1": LinkType.ELEMENT_SHELL,
-        "eid2": LinkType.ELEMENT_SHELL,
-        "eid3": LinkType.ELEMENT_SHELL,
-        "eid4": LinkType.ELEMENT_SHELL,
-        "eid5": LinkType.ELEMENT_SHELL,
-        "eid6": LinkType.ELEMENT_SHELL,
-        "eid7": LinkType.ELEMENT_SHELL,
-        "eid8": LinkType.ELEMENT_SHELL,
+        "shells": LinkType.ELEMENT_SHELL,
     }
 
     def __init__(self, **kwargs):
@@ -164,42 +157,11 @@ class SetShellList(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def eid1_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid1."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
+    def shells_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all ELEMENT keywords for shells, keyed by element ID."""
+        return self._get_links_from_series("ELEMENT", "eid", "shells", "elements")
 
-    @property
-    def eid2_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid2."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
-
-    @property
-    def eid3_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid3."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid3, "parts")
-
-    @property
-    def eid4_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid4."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid4, "parts")
-
-    @property
-    def eid5_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid5."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid5, "parts")
-
-    @property
-    def eid6_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid6."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid6, "parts")
-
-    @property
-    def eid7_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid7."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid7, "parts")
-
-    @property
-    def eid8_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given eid8."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.eid8, "parts")
+    def get_shells_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given element_id."""
+        return self._get_link_by_attr("ELEMENT", "eid", element_id, "elements")
 

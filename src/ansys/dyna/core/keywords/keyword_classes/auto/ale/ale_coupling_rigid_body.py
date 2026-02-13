@@ -136,7 +136,7 @@ class AleCouplingRigidBody(KeywordBase):
         self._cards[1].set_value("iexcle", value)
 
     @property
-    def esid_link(self) -> KeywordBase:
+    def esid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for esid."""
         return self._get_set_link("NODE", self.esid)
 
@@ -146,7 +146,7 @@ class AleCouplingRigidBody(KeywordBase):
         self.esid = value.sid
 
     @property
-    def iexcle_link(self) -> KeywordBase:
+    def iexcle_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for iexcle."""
         return self._get_set_link("SEGMENT", self.iexcle)
 
@@ -156,7 +156,7 @@ class AleCouplingRigidBody(KeywordBase):
         self.iexcle = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

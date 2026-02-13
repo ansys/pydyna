@@ -257,7 +257,7 @@ class Mat121(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -272,7 +272,7 @@ class Mat121(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidtu_link(self) -> DefineCurve:
+    def lcidtu_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtu."""
         if self.deck is None:
             return None
@@ -287,7 +287,7 @@ class Mat121(KeywordBase):
         self.lcidtu = value.lcid
 
     @property
-    def lcidtd_link(self) -> DefineCurve:
+    def lcidtd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtd."""
         if self.deck is None:
             return None
@@ -302,7 +302,7 @@ class Mat121(KeywordBase):
         self.lcidtd = value.lcid
 
     @property
-    def lcidte_link(self) -> DefineCurve:
+    def lcidte_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidte."""
         if self.deck is None:
             return None

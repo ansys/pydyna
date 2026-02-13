@@ -152,7 +152,7 @@ class BoundaryPoreFluidPart(KeywordBase):
         self._cards[0].set_value("suclim", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

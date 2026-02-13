@@ -603,7 +603,7 @@ class Mat199(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> KeywordBase:
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
         if self.deck is None:
             return None

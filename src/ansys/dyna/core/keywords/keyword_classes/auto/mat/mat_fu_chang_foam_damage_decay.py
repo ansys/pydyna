@@ -406,7 +406,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pvid_link(self) -> DefineCurve:
+    def pvid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for pvid."""
         if self.deck is None:
             return None

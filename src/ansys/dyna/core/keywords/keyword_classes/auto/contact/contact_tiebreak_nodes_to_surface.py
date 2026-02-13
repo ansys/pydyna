@@ -1632,7 +1632,7 @@ class ContactTiebreakNodesToSurface(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -1647,7 +1647,7 @@ class ContactTiebreakNodesToSurface(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

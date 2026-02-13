@@ -131,7 +131,7 @@ class DatabaseNodout(KeywordBase):
         self._cards[0].set_value("option2", value)
 
     @property
-    def lcur_link(self) -> DefineCurve:
+    def lcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur."""
         if self.deck is None:
             return None

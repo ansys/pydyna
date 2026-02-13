@@ -603,7 +603,7 @@ class MatNonlinearOrthotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcida_link(self) -> DefineCurve:
+    def lcida_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcida."""
         if self.deck is None:
             return None
@@ -618,7 +618,7 @@ class MatNonlinearOrthotropic(KeywordBase):
         self.lcida = value.lcid
 
     @property
-    def lcidb_link(self) -> DefineCurve:
+    def lcidb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidb."""
         if self.deck is None:
             return None
@@ -633,7 +633,7 @@ class MatNonlinearOrthotropic(KeywordBase):
         self.lcidb = value.lcid
 
     @property
-    def lcidc_link(self) -> DefineCurve:
+    def lcidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc."""
         if self.deck is None:
             return None
@@ -648,7 +648,7 @@ class MatNonlinearOrthotropic(KeywordBase):
         self.lcidc = value.lcid
 
     @property
-    def lcidab_link(self) -> DefineCurve:
+    def lcidab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidab."""
         if self.deck is None:
             return None
@@ -663,7 +663,7 @@ class MatNonlinearOrthotropic(KeywordBase):
         self.lcidab = value.lcid
 
     @property
-    def lcidbc_link(self) -> DefineCurve:
+    def lcidbc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidbc."""
         if self.deck is None:
             return None
@@ -678,7 +678,7 @@ class MatNonlinearOrthotropic(KeywordBase):
         self.lcidbc = value.lcid
 
     @property
-    def lcidca_link(self) -> DefineCurve:
+    def lcidca_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidca."""
         if self.deck is None:
             return None

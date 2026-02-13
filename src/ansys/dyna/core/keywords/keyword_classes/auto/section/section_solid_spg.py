@@ -669,7 +669,7 @@ class SectionSolidSpg(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None

@@ -93,7 +93,7 @@ class DefineFormingOnestepMaster(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def slpid_link(self) -> KeywordBase:
+    def slpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given slpid."""
         return self._get_link_by_attr("PART", "pid", self.slpid, "parts")
 

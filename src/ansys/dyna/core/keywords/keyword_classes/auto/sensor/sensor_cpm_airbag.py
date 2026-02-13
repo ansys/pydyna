@@ -169,7 +169,7 @@ class SensorCpmAirbag(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def defps_link(self) -> KeywordBase:
+    def defps_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for defps."""
         return self._get_set_link("PART", self.defps)
 
@@ -179,7 +179,7 @@ class SensorCpmAirbag(KeywordBase):
         self.defps = value.sid
 
     @property
-    def rbpid_link(self) -> KeywordBase:
+    def rbpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rbpid."""
         return self._get_link_by_attr("PART", "pid", self.rbpid, "parts")
 

@@ -680,7 +680,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self._cards[6].set_value("decay", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -695,7 +695,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -710,7 +710,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def nsidpc_link(self) -> KeywordBase:
+    def nsidpc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidpc."""
         return self._get_set_link("NODE", self.nsidpc)
 

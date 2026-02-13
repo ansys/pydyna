@@ -167,7 +167,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
         self._cards[1].set_value("cid", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -182,7 +182,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
         self.cid = value.cid
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

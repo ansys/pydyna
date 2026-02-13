@@ -228,7 +228,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def issph_link(self) -> KeywordBase:
+    def issph_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for issph."""
         if self.deck is None:
             return None
@@ -243,7 +243,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
         self.issph = value.secid
 
     @property
-    def ipsph_link(self) -> KeywordBase:
+    def ipsph_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipsph."""
         return self._get_link_by_attr("PART", "pid", self.ipsph, "parts")
 

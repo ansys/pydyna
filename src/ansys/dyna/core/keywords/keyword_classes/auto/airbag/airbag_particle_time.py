@@ -1250,27 +1250,27 @@ class AirbagParticleTime(KeywordBase):
         self._cards[13].set_value("chm_id", value)
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid3_link(self) -> KeywordBase:
+    def nid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid3."""
         return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 
     @property
-    def nidi_link(self) -> KeywordBase:
+    def nidi_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidi."""
         return self._get_link_by_attr("NODE", "nid", self.nidi, "parts")
 
     @property
-    def hconv_link(self) -> DefineCurve:
+    def hconv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hconv."""
         if self.deck is None:
             return None
@@ -1285,7 +1285,7 @@ class AirbagParticleTime(KeywordBase):
         self.hconv = value.lcid
 
     @property
-    def lctc23_link(self) -> DefineCurve:
+    def lctc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc23."""
         if self.deck is None:
             return None
@@ -1300,7 +1300,7 @@ class AirbagParticleTime(KeywordBase):
         self.lctc23 = value.lcid
 
     @property
-    def lcpc23_link(self) -> DefineCurve:
+    def lcpc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpc23."""
         if self.deck is None:
             return None
@@ -1315,7 +1315,7 @@ class AirbagParticleTime(KeywordBase):
         self.lcpc23 = value.lcid
 
     @property
-    def lcmi_link(self) -> DefineCurve:
+    def lcmi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmi."""
         if self.deck is None:
             return None
@@ -1330,7 +1330,7 @@ class AirbagParticleTime(KeywordBase):
         self.lcmi = value.lcid
 
     @property
-    def lcti_link(self) -> DefineCurve:
+    def lcti_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcti."""
         if self.deck is None:
             return None
@@ -1345,7 +1345,7 @@ class AirbagParticleTime(KeywordBase):
         self.lcti = value.lcid
 
     @property
-    def vdi_link(self) -> DefineVector:
+    def vdi_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vdi."""
         if self.deck is None:
             return None
@@ -1360,7 +1360,7 @@ class AirbagParticleTime(KeywordBase):
         self.vdi = value.vid
 
     @property
-    def sidsv_link(self) -> KeywordBase:
+    def sidsv_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sidsv."""
         return self._get_set_link("PART", self.sidsv)
 
@@ -1370,7 +1370,7 @@ class AirbagParticleTime(KeywordBase):
         self.sidsv = value.sid
 
     @property
-    def psid1_link(self) -> KeywordBase:
+    def psid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid1."""
         return self._get_set_link("PART", self.psid1)
 

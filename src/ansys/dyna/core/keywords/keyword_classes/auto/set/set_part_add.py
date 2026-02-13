@@ -51,14 +51,7 @@ class SetPartAdd(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
-        "psid1": LinkType.SET_PART,
-        "psid2": LinkType.SET_PART,
-        "psid3": LinkType.SET_PART,
-        "psid4": LinkType.SET_PART,
-        "psid5": LinkType.SET_PART,
-        "psid6": LinkType.SET_PART,
-        "psid7": LinkType.SET_PART,
-        "psid8": LinkType.SET_PART,
+        "parts": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -180,82 +173,12 @@ class SetPartAdd(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def psid1_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid1."""
-        return self._get_set_link("PART", self.psid1)
+    def parts_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for parts."""
+        return self._get_set_link("PART", self.parts)
 
-    @psid1_link.setter
-    def psid1_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid1."""
-        self.psid1 = value.sid
-
-    @property
-    def psid2_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid2."""
-        return self._get_set_link("PART", self.psid2)
-
-    @psid2_link.setter
-    def psid2_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid2."""
-        self.psid2 = value.sid
-
-    @property
-    def psid3_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid3."""
-        return self._get_set_link("PART", self.psid3)
-
-    @psid3_link.setter
-    def psid3_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid3."""
-        self.psid3 = value.sid
-
-    @property
-    def psid4_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid4."""
-        return self._get_set_link("PART", self.psid4)
-
-    @psid4_link.setter
-    def psid4_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid4."""
-        self.psid4 = value.sid
-
-    @property
-    def psid5_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid5."""
-        return self._get_set_link("PART", self.psid5)
-
-    @psid5_link.setter
-    def psid5_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid5."""
-        self.psid5 = value.sid
-
-    @property
-    def psid6_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid6."""
-        return self._get_set_link("PART", self.psid6)
-
-    @psid6_link.setter
-    def psid6_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid6."""
-        self.psid6 = value.sid
-
-    @property
-    def psid7_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid7."""
-        return self._get_set_link("PART", self.psid7)
-
-    @psid7_link.setter
-    def psid7_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid7."""
-        self.psid7 = value.sid
-
-    @property
-    def psid8_link(self) -> KeywordBase:
-        """Get the SET_PART_* keyword for psid8."""
-        return self._get_set_link("PART", self.psid8)
-
-    @psid8_link.setter
-    def psid8_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid8."""
-        self.psid8 = value.sid
+    @parts_link.setter
+    def parts_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for parts."""
+        self.parts = value.sid
 

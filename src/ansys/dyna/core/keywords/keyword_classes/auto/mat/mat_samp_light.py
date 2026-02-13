@@ -267,7 +267,7 @@ class MatSampLight(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcemod_link(self) -> DefineCurve:
+    def lcemod_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcemod."""
         if self.deck is None:
             return None
@@ -282,7 +282,7 @@ class MatSampLight(KeywordBase):
         self.lcemod = value.lcid
 
     @property
-    def lcid_p_link(self) -> DefineCurve:
+    def lcid_p_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid_p."""
         if self.deck is None:
             return None
@@ -297,7 +297,7 @@ class MatSampLight(KeywordBase):
         self.lcid_p = value.lcid
 
     @property
-    def lcid_t_link(self) -> KeywordBase:
+    def lcid_t_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_t."""
         if self.deck is None:
             return None
@@ -321,7 +321,7 @@ class MatSampLight(KeywordBase):
             self.lcid_t = value.tbid
 
     @property
-    def lcid_c_link(self) -> KeywordBase:
+    def lcid_c_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_c."""
         if self.deck is None:
             return None

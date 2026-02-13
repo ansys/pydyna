@@ -222,7 +222,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None
@@ -237,7 +237,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
         self.lce = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -252,7 +252,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lccte_link(self) -> DefineCurve:
+    def lccte_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccte."""
         if self.deck is None:
             return None

@@ -69,9 +69,9 @@ def write_cards(
 
     pos = buf.tell()  # record the position of the last newline
     for card_index, card in enumerate(cards):
-        if buf.tell() != pos:
+        # Only write newline separator if the card is active and will produce output
+        if card.active and buf.tell() != pos:
             # if we have written since the last newline, we need to prepend a new line
-            # (unless this is the last newline to write?)
             buf.write("\n")
             pos = buf.tell()
 

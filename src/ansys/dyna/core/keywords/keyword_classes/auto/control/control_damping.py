@@ -179,7 +179,7 @@ class ControlDamping(KeywordBase):
         self._cards[1].set_value("drpset", value)
 
     @property
-    def drpset_link(self) -> KeywordBase:
+    def drpset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drpset."""
         return self._get_set_link("PART", self.drpset)
 

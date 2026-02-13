@@ -489,7 +489,7 @@ class Mat081(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -504,7 +504,7 @@ class Mat081(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -519,7 +519,7 @@ class Mat081(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lcdm_link(self) -> DefineCurve:
+    def lcdm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdm."""
         if self.deck is None:
             return None

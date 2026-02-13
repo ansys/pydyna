@@ -751,22 +751,22 @@ class AirbagHybridJetting(KeywordBase):
         self._cards[7].set_value("node3", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def node3_link(self) -> KeywordBase:
+    def node3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node3."""
         return self._get_link_by_attr("NODE", "nid", self.node3, "parts")
 
     @property
-    def lcc23_link(self) -> DefineCurve:
+    def lcc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc23."""
         if self.deck is None:
             return None
@@ -781,7 +781,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lcc23 = value.lcid
 
     @property
-    def lca23_link(self) -> DefineCurve:
+    def lca23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca23."""
         if self.deck is None:
             return None
@@ -796,7 +796,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lca23 = value.lcid
 
     @property
-    def lcp23_link(self) -> DefineCurve:
+    def lcp23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp23."""
         if self.deck is None:
             return None
@@ -811,7 +811,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lcp23 = value.lcid
 
     @property
-    def lcap23_link(self) -> DefineCurve:
+    def lcap23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcap23."""
         if self.deck is None:
             return None
@@ -826,7 +826,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lcap23 = value.lcid
 
     @property
-    def lcidm_link(self) -> DefineCurve:
+    def lcidm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm."""
         if self.deck is None:
             return None
@@ -841,7 +841,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lcidm = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -856,7 +856,7 @@ class AirbagHybridJetting(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

@@ -182,27 +182,27 @@ class DatabaseFsiSensor(KeywordBase):
         self._cards[1].set_value("nd3", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def nd1_link(self) -> KeywordBase:
+    def nd1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd1."""
         return self._get_link_by_attr("NODE", "nid", self.nd1, "parts")
 
     @property
-    def nd2_link(self) -> KeywordBase:
+    def nd2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd2."""
         return self._get_link_by_attr("NODE", "nid", self.nd2, "parts")
 
     @property
-    def nd3_link(self) -> KeywordBase:
+    def nd3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd3."""
         return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
 
     @property
-    def segmid_link(self) -> KeywordBase:
+    def segmid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given segmid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.segmid, "parts")
 

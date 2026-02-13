@@ -138,7 +138,7 @@ class LoadAleConvection(KeywordBase):
         self._cards[1].set_value("lagmas", value)
 
     @property
-    def lagpid_link(self) -> KeywordBase:
+    def lagpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lagpid."""
         return self._get_link_by_attr("PART", "pid", self.lagpid, "parts")
 

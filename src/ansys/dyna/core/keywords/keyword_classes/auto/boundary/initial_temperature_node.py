@@ -67,9 +67,9 @@ class InitialTemperatureNode(KeywordBase):
     @property
     def nid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid, keyed by nid value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "")
 
     def get_nid_link(self, nid: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
-        return self._get_link_by_attr("NODE", "nid", nid, "parts")
+        return self._get_link_by_attr("NODE", "nid", nid, "")
 

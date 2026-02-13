@@ -399,7 +399,7 @@ class PartCompositeContact(KeywordBase):
         self._cards[3].set_value("tmid2", value)
 
     @property
-    def mid1_link(self) -> KeywordBase:
+    def mid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid1."""
         if self.deck is None:
             return None
@@ -414,7 +414,7 @@ class PartCompositeContact(KeywordBase):
         self.mid1 = value.mid
 
     @property
-    def mid2_link(self) -> KeywordBase:
+    def mid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid2."""
         if self.deck is None:
             return None
@@ -429,7 +429,7 @@ class PartCompositeContact(KeywordBase):
         self.mid2 = value.mid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None

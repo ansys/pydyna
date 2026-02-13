@@ -1652,7 +1652,7 @@ class ContactAutomaticSurfaceToSurfaceComposite(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def cidmu_link(self) -> DefineCurve:
+    def cidmu_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cidmu."""
         if self.deck is None:
             return None
@@ -1667,7 +1667,7 @@ class ContactAutomaticSurfaceToSurfaceComposite(KeywordBase):
         self.cidmu = value.lcid
 
     @property
-    def cideta_link(self) -> DefineCurve:
+    def cideta_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cideta."""
         if self.deck is None:
             return None
@@ -1682,7 +1682,7 @@ class ContactAutomaticSurfaceToSurfaceComposite(KeywordBase):
         self.cideta = value.lcid
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -1697,7 +1697,7 @@ class ContactAutomaticSurfaceToSurfaceComposite(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

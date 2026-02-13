@@ -359,7 +359,7 @@ class ConstrainedSpr2(KeywordBase):
         self._cards[3].set_value("xpid4", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -369,32 +369,32 @@ class ConstrainedSpr2(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def upid_link(self) -> KeywordBase:
+    def upid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given upid."""
         return self._get_link_by_attr("PART", "pid", self.upid, "parts")
 
     @property
-    def lpid_link(self) -> KeywordBase:
+    def lpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lpid."""
         return self._get_link_by_attr("PART", "pid", self.lpid, "parts")
 
     @property
-    def xpid1_link(self) -> KeywordBase:
+    def xpid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given xpid1."""
         return self._get_link_by_attr("PART", "pid", self.xpid1, "parts")
 
     @property
-    def xpid2_link(self) -> KeywordBase:
+    def xpid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given xpid2."""
         return self._get_link_by_attr("PART", "pid", self.xpid2, "parts")
 
     @property
-    def xpid3_link(self) -> KeywordBase:
+    def xpid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given xpid3."""
         return self._get_link_by_attr("PART", "pid", self.xpid3, "parts")
 
     @property
-    def xpid4_link(self) -> KeywordBase:
+    def xpid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given xpid4."""
         return self._get_link_by_attr("PART", "pid", self.xpid4, "parts")
 

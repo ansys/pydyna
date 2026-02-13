@@ -470,7 +470,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[4].set_value("rparm6", value)
 
     @property
-    def rparm6_link(self) -> DefineVector:
+    def rparm6_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for rparm6."""
         if self.deck is None:
             return None
@@ -485,7 +485,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.rparm6 = value.vid
 
     @property
-    def iparm3_link(self) -> KeywordBase:
+    def iparm3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm3."""
         return self._get_set_link("NODE", self.iparm3)
 
@@ -495,7 +495,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm3 = value.sid
 
     @property
-    def iparm1_link(self) -> KeywordBase:
+    def iparm1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm1."""
         return self._get_set_link("NODE", self.iparm1)
 
@@ -505,7 +505,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm1 = value.sid
 
     @property
-    def iparm2_link(self) -> KeywordBase:
+    def iparm2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm2."""
         return self._get_set_link("NODE", self.iparm2)
 
@@ -515,7 +515,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm2 = value.sid
 
     @property
-    def iparm3_link(self) -> KeywordBase:
+    def iparm3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm3."""
         return self._get_set_link("NODE", self.iparm3)
 

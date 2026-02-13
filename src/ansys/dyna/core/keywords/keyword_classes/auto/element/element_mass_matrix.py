@@ -357,12 +357,12 @@ class ElementMassMatrix(KeywordBase):
         self._cards[3].set_value("m66", value)
 
     @property
-    def id_link(self) -> KeywordBase:
+    def id_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id."""
         return self._get_link_by_attr("NODE", "nid", self.id, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

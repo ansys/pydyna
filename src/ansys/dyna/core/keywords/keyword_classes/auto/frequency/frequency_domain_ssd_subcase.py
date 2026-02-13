@@ -533,7 +533,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         self._cards[4].set_value("vid", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -548,7 +548,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -563,7 +563,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -578,7 +578,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

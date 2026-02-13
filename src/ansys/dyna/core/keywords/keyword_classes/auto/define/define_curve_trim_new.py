@@ -237,7 +237,7 @@ class DefineCurveTrimNew(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tdir_link(self) -> DefineVector:
+    def tdir_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for tdir."""
         if self.deck is None:
             return None

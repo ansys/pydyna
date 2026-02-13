@@ -333,7 +333,7 @@ class PartModes(KeywordBase):
         self._cards[3].set_value("dampf", value)
 
     @property
-    def ansid_link(self) -> KeywordBase:
+    def ansid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ansid."""
         return self._get_set_link("NODE", self.ansid)
 

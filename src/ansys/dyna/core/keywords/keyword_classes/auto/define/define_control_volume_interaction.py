@@ -144,7 +144,7 @@ class DefineControlVolumeInteraction(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid__link(self) -> DefineCurve:
+    def lcid__link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid_."""
         if self.deck is None:
             return None

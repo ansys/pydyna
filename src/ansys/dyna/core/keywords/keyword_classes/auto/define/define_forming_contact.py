@@ -134,12 +134,12 @@ class DefineFormingContact(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ips_link(self) -> KeywordBase:
+    def ips_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ips."""
         return self._get_link_by_attr("PART", "pid", self.ips, "parts")
 
     @property
-    def ipm_link(self) -> KeywordBase:
+    def ipm_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipm."""
         return self._get_link_by_attr("PART", "pid", self.ipm, "parts")
 

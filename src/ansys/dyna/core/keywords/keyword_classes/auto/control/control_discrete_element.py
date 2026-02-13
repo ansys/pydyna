@@ -444,7 +444,7 @@ class ControlDiscreteElement(KeywordBase):
         self._cards[4].set_value("maxnei", value)
 
     @property
-    def lnorm_link(self) -> DefineCurve:
+    def lnorm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lnorm."""
         if self.deck is None:
             return None

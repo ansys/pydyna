@@ -72,7 +72,7 @@ class LoadThermalConstantElementBeam(KeywordBase):
         self._cards[0].set_value("t", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

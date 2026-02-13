@@ -489,7 +489,7 @@ class IcfdControlTurbulence(KeywordBase):
         self._cards[6].set_value("cw2", value)
 
     @property
-    def lcids1_link(self) -> DefineCurve:
+    def lcids1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcids1."""
         if self.deck is None:
             return None
@@ -504,7 +504,7 @@ class IcfdControlTurbulence(KeywordBase):
         self.lcids1 = value.lcid
 
     @property
-    def lcids2_link(self) -> DefineCurve:
+    def lcids2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcids2."""
         if self.deck is None:
             return None

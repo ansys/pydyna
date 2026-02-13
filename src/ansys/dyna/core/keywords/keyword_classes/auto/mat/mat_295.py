@@ -1550,7 +1550,7 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
             self.activate_option("TITLE")
 
     @property
-    def flid_link(self) -> DefineCurve:
+    def flid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for flid."""
         if self.deck is None:
             return None
@@ -1565,7 +1565,7 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
         self.flid = value.lcid
 
     @property
-    def fvid_link(self) -> DefineCurve:
+    def fvid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fvid."""
         if self.deck is None:
             return None
@@ -1580,7 +1580,7 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
         self.fvid = value.lcid
 
     @property
-    def alphaid_link(self) -> DefineCurve:
+    def alphaid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for alphaid."""
         if self.deck is None:
             return None

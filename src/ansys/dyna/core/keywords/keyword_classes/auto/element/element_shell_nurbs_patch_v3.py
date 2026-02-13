@@ -771,47 +771,47 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self._cards[7].set_value("e8", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def n5_link(self) -> KeywordBase:
+    def n5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
         return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
 
     @property
-    def n6_link(self) -> KeywordBase:
+    def n6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
         return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
 
     @property
-    def n7_link(self) -> KeywordBase:
+    def n7_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n7."""
         return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
 
     @property
-    def n8_link(self) -> KeywordBase:
+    def n8_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n8."""
         return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
 
     @property
-    def e1_link(self) -> DefineCurve:
+    def e1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e1."""
         if self.deck is None:
             return None
@@ -826,7 +826,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e1 = value.lcid
 
     @property
-    def e2_link(self) -> DefineCurve:
+    def e2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e2."""
         if self.deck is None:
             return None
@@ -841,7 +841,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e2 = value.lcid
 
     @property
-    def e3_link(self) -> DefineCurve:
+    def e3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e3."""
         if self.deck is None:
             return None
@@ -856,7 +856,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e3 = value.lcid
 
     @property
-    def e4_link(self) -> DefineCurve:
+    def e4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e4."""
         if self.deck is None:
             return None
@@ -871,7 +871,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e4 = value.lcid
 
     @property
-    def e5_link(self) -> DefineCurve:
+    def e5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e5."""
         if self.deck is None:
             return None
@@ -886,7 +886,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e5 = value.lcid
 
     @property
-    def e6_link(self) -> DefineCurve:
+    def e6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e6."""
         if self.deck is None:
             return None
@@ -901,7 +901,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e6 = value.lcid
 
     @property
-    def e7_link(self) -> DefineCurve:
+    def e7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e7."""
         if self.deck is None:
             return None
@@ -916,7 +916,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e7 = value.lcid
 
     @property
-    def e8_link(self) -> DefineCurve:
+    def e8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for e8."""
         if self.deck is None:
             return None
@@ -931,7 +931,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
         self.e8 = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

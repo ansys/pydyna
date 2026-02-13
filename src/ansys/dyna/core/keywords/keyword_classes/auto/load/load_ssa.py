@@ -302,7 +302,7 @@ class LoadSsa(KeywordBase):
         self._cards[2].set_value("cz", value)
 
     @property
-    def fpsid_link(self) -> KeywordBase:
+    def fpsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for fpsid."""
         return self._get_set_link("PART", self.fpsid)
 
@@ -312,7 +312,7 @@ class LoadSsa(KeywordBase):
         self.fpsid = value.sid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

@@ -42,6 +42,7 @@ dependencies = [
 all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
 
 graphics = [
+    "matplotlib>=3.0",
     "pyvista>=0.43.4",
 ]
 pim = [
@@ -97,6 +98,10 @@ doc = [
 [tool.flit.module]
 name = "ansys.dyna.core"
 
+# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging 
+[project.entry-points."agent.instructions"]
+"ansys.dyna.core" = "ansys.dyna.core:AGENT_INSTRUCTIONS"
+
 [project.urls]
 Source = "https://github.com/ansys/pydyna"
 Homepage = "https://dyna.docs.pyansys.com"
@@ -113,7 +118,6 @@ extend-exclude = [
     "src/ansys/dyna/core/pre/Server/",
     "src/ansys/dyna/core/pre/doc/",
     "src/ansys/dyna/core/pre/",
-    "src/ansys/dyna/core/solver/",
     "src/ansys/dyna/core/pre/kwprocess_pb2.py",
     "src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",

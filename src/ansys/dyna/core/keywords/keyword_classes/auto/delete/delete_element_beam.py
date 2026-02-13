@@ -60,7 +60,7 @@ class DeleteElementBeam(KeywordBase):
         self._cards[0].set_value("esid", value)
 
     @property
-    def esid_link(self) -> KeywordBase:
+    def esid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for esid."""
         return self._get_set_link("BEAM", self.esid)
 

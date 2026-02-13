@@ -277,7 +277,7 @@ class ControlAdapt(KeywordBase):
         self._cards[1].set_value("maxel", value)
 
     @property
-    def lcadp_link(self) -> DefineCurve:
+    def lcadp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcadp."""
         if self.deck is None:
             return None

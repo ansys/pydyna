@@ -229,7 +229,7 @@ class RailTrain(KeywordBase):
         self._cards[1].set_value("fric", value)
 
     @property
-    def lcur_link(self) -> DefineCurve:
+    def lcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur."""
         if self.deck is None:
             return None
@@ -244,7 +244,7 @@ class RailTrain(KeywordBase):
         self.lcur = value.lcid
 
     @property
-    def nsetid_link(self) -> KeywordBase:
+    def nsetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsetid."""
         return self._get_set_link("NODE", self.nsetid)
 

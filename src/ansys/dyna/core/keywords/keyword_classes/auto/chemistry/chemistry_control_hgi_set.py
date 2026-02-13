@@ -102,7 +102,7 @@ class ChemistryControlHgiSet(KeywordBase):
         self._cards[1].set_value("file", value)
 
     @property
-    def exit_bc_link(self) -> KeywordBase:
+    def exit_bc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for exit_bc."""
         return self._get_set_link("SEGMENT", self.exit_bc)
 

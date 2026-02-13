@@ -161,27 +161,27 @@ class LoadNode(KeywordBase):
         self._cards[0].set_value("m3", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def m1_link(self) -> KeywordBase:
+    def m1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m1."""
         return self._get_link_by_attr("NODE", "nid", self.m1, "parts")
 
     @property
-    def m2_link(self) -> KeywordBase:
+    def m2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m2."""
         return self._get_link_by_attr("NODE", "nid", self.m2, "parts")
 
     @property
-    def m3_link(self) -> KeywordBase:
+    def m3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m3."""
         return self._get_link_by_attr("NODE", "nid", self.m3, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

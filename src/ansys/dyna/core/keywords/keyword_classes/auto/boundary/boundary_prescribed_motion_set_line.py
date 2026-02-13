@@ -279,27 +279,27 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
         self._cards[2].set_value("nend", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def nbeg_link(self) -> KeywordBase:
+    def nbeg_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nbeg."""
         return self._get_link_by_attr("NODE", "nid", self.nbeg, "parts")
 
     @property
-    def nend_link(self) -> KeywordBase:
+    def nend_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nend."""
         return self._get_link_by_attr("NODE", "nid", self.nend, "parts")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -314,7 +314,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
         self.vid = value.vid
 
     @property
-    def typeid_link(self) -> KeywordBase:
+    def typeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for typeid."""
         return self._get_set_link("NODE", self.typeid)
 
@@ -324,7 +324,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
         self.typeid = value.sid
 
     @property
-    def lrb_link(self) -> KeywordBase:
+    def lrb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lrb."""
         return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

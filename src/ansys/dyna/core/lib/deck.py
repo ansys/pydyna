@@ -26,6 +26,8 @@ import typing
 from typing import Union
 import warnings
 
+from charset_normalizer import from_path
+
 from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
@@ -227,11 +229,9 @@ class Deck(ValidationMixin):
             self.append(kw)
 
     def _detect_encoding(self, path: str) -> str:
-        import chardet
-
         try:
-            with open(path, "rb") as f:
-                return chardet.detect(f.read())["encoding"]
+            encoding = from_path(path).best().encoding
+            return encoding
         except Exception as e:
             raise Exception("Failed to detect encoding of deck in `expand`: " + str(e))
 
@@ -294,6 +294,12 @@ class Deck(ValidationMixin):
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
                 include_deck._import_file(expand_include_file, encoding, context)
+
+            # Propagate global parameters from include back to parent (fix for issue #1081)
+            # This allows subsequent sibling includes to see parameters defined in earlier includes
+            for param_name, param_value in include_deck.parameters.get_global_params().items():
+                self.parameters.add(param_name, param_value)
+
             if recurse:
                 expanded = include_deck._expand_helper(search_paths, True, strict)
                 keywords.extend(expanded)
@@ -519,10 +525,12 @@ class Deck(ValidationMixin):
         >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase)
-            and kwd.keyword == str_type
-            and kwd.subkeyword is not None
-            and kwd.subkeyword.startswith(str_subtype),
+            lambda kwd: (
+                isinstance(kwd, KeywordBase)
+                and kwd.keyword == str_type
+                and kwd.subkeyword is not None
+                and kwd.subkeyword.startswith(str_subtype)
+            ),
             self._keywords,
         )
 
