@@ -7,20 +7,26 @@ inputs:
     description: Enable building the autokeywords API
     required: false
     default: "False"
+
   pdf-pool-size:
     required: false
+
   pdf-string-vacancies:
     required: false
+
   pdf-max-strings:
     required: false
-  PyDynaRunContainer:
+
+  pydyna-run-container:
     description: Run container name
     required: true
+
   python-version:
     description: Python version to use
     required: true
     default: "3.13"
     type: string
+
   github-token:
     description: GitHub token for authentication
     required: true
@@ -37,6 +43,12 @@ inputs:
     description: GitHub actor for authentication
     required: true
 
+  use_cache_examples:
+    description: |
+      Whether to use the examples cache. Default is "true".
+    required: false
+    default: true
+    type: boolean
 
 
 runs:
@@ -71,13 +83,13 @@ runs:
       shell: bash
 
     - name: Cache Sphinx build artifacts
-      if: ${{ inputs.build-autokeywords-api != 'True' }}
+      if: ${{ inputs.use_cache_examples == 'true' }}
       uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb #v5.0.1
       with:
         path: |
           doc/_build
           doc/source/examples/
-        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}-${{ inputs.reset-cache }}
         restore-keys: |
           sphinx-${{ runner.os }}-${{ inputs.python-version }}-
 
@@ -87,13 +99,6 @@ runs:
         uv pip install .[doc]
         uv pip install docker
       shell: bash
-
-    - name: Login to GitHub container registry
-      uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
-      with:
-        registry: ghcr.io
-        username: ${{ inputs.github-actor }}
-        password: ${{ inputs.github-token }}
 
     - name: Set Licensing
       run: |
@@ -106,24 +111,33 @@ runs:
         dpf-standalone-TOKEN: ${{ inputs.bot-token }}
         ANSYS_VERSION: "242"
 
-    - name: LS-DYNA Keyword server activation
+    - name: Login to GitHub container registry
+      if: ${{ inputs.pydyna-run-container != '' }}
+      uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.github-actor }}
+        password: ${{ inputs.github-token }}
+
+    - name: Set Licensing
       run: |
-        source .venv/bin/activate
-        docker pull ghcr.io/ansys/ls-pre:latest
-        docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+        echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
       shell: bash
 
     - name: Pull PyDyna-run image
+      if: ${{ inputs.pydyna-run-container != '' }}
+      env:
+        DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
         source .venv/bin/activate
-        docker pull ghcr.io/ansys/pydyna-run:latest
+        docker pull $DOCKER_IMAGE
       shell: bash
 
     - name: Build the html documentation
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
@@ -147,7 +161,7 @@ runs:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         PYDYNA_RUN_STREAM: "0"
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
@@ -162,16 +176,3 @@ runs:
         path: doc/_build/latex/*.pdf
         retention-days: 7
 
-    - name: Extract the server logs
-      if: always()
-      run: |
-        source .venv/bin/activate
-        docker logs kw_server > server_output.txt
-      shell: bash
-
-    - name: Upload the server logs
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      with:
-        name: server_output_docs.txt
-        path: server_output.txt

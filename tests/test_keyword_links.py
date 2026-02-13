@@ -28,7 +28,6 @@ from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.keyword_base import KeywordBase, LinkType
 from ansys.dyna.core.keywords import keywords as kwd
 
-
 class TestLinkTypeEnum:
     """Tests for the LinkType enum."""
 
