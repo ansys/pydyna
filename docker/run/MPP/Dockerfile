@@ -25,28 +25,22 @@ ENV DEBIAN_FRONTEND=noninteractive
 # --------------------
 # System dependencies
 # --------------------
-RUN dnf -y update && \
-    dnf -y install \
-        wget \
-        curl \
-        tar \
-        gzip \
-        bash \
-        python3 \
-        python3-pip \
-        git \
-        which \
-        numactl \
-        libfabric \
-        openssh-clients \
-        hostname \
-        procps-ng \
-    && dnf clean all
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    tar \
+    gzip \
+    bash \
+    python3 \
+    python3-pip \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --no-cache-dir uv
 
 # --------------------
-# Install directory
+# Install LS-DYNA
 # --------------------
-RUN mkdir -p ${INSTALL_DIR}
 WORKDIR ${INSTALL_DIR}
 
 # Validate required args
