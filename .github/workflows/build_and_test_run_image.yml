@@ -106,44 +106,44 @@ jobs:
       #       FTP_USER=${{ env.FTP_USER }}
       #       FTP_LOGIN=${{ env.FTP_LOGIN }}
 
-  # run-testing:
-  #   name: Test the "run" subpackage
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read  # Needed to checkout code
-  #     packages: read  # Needed for pulling container images from GHCR
-  #   steps:
-  #     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-  #       with:
-  #         persist-credentials: false
+  run-testing:
+    name: Test the "run" subpackage
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: read  # Needed for pulling container images from GHCR
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
-  #     - uses: ./.github/actions/unit-test
-  #       with:
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
-  #         pytest-markers: run
-  #         license-server: ${{ secrets.LICENSE_SERVER }}
-  #         coverage-file: run
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.TEST_DOCKER_IMAGE }}
+          pytest-markers: run
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          coverage-file: run
 
-  # doc:
-  #   name: "Documentation build"
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read  # Needed to checkout code
-  #     packages: read  # Needed for pulling container images from GHCR
-  #   steps:
-  #     - name: "Checkout project"
-  #       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-  #       with:
-  #         persist-credentials: true
+  doc:
+    name: "Documentation build"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: read  # Needed for pulling container images from GHCR
+    steps:
+      - name: "Checkout project"
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: true
 
-  #     - name: "Build documentation"
-  #       uses: ./.github/actions/doc-build
-  #       with:
-  #         PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         license-server: ${{ secrets.LICENSE_SERVER }}
-  #         bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-  #         github-actor: ${{ github.actor }}
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          pydyna-run-container: ${{ env.TEST_DOCKER_IMAGE }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          github-actor: ${{ github.actor }}

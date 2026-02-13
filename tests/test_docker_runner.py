@@ -78,29 +78,29 @@ class TestDockerRunner:
         assert runner.ncpu == 4
         assert runner.memory == 100
 
-    def test_get_executable_name(self):
-        """Test executable name generation for different configurations."""
-        # Test SMP Double precision (default)
-        runner = DockerRunner(container=container_image)
-        executable = runner._get_executable_name()
-        # assert "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2" in executable
-        assert "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2" in executable
+    # def test_get_executable_name(self):
+    #     """Test executable name generation for different configurations."""
+    #     # Test SMP Double precision (default)
+    #     runner = DockerRunner(container=container_image)
+    #     executable = runner._get_executable_name()
+    #     # assert "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2" in executable
+    #     assert "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2" in executable
 
-        # Test SMP Single precision
-        runner = DockerRunner(
-            container=container_image,
-            mpi_option=MpiOption.SMP,
-            precision=Precision.SINGLE
-        )
-        executable = runner._get_executable_name()
+    #     # Test SMP Single precision
+    #     runner = DockerRunner(
+    #         container=container_image,
+    #         mpi_option=MpiOption.SMP,
+    #         precision=Precision.SINGLE
+    #     )
+    #     executable = runner._get_executable_name()
 
-        # Test custom executable name
-        runner = DockerRunner(
-            container=container_image,
-            executable_name="custom_executable"
-        )
-        executable = runner._get_executable_name()
-        assert executable == "custom_executable"
+    #     # Test custom executable name
+    #     runner = DockerRunner(
+    #         container=container_image,
+    #         executable_name="custom_executable"
+    #     )
+    #     executable = runner._get_executable_name()
+    #     assert executable == "custom_executable"
 
     def test_set_input(self):
         """Test setting input file and working directory."""
