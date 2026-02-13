@@ -130,11 +130,8 @@ lint.select = [
   "PYI", # flake8-pyi, see https://docs.astral.sh/ruff/rules/#flake8-pyi-pyi
 ]
 lint.ignore = [
-  #"D102",  # Missing docstring in public method
-  "D212",  # Multi-line docstring summary should start at the first line
   "D400",  # First line should end with a period
   "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
-  "E743",  # Ambiguous function name. N802 and Python naming restrictions ensure unambiguous names.
   "E722",  # Do not use bare 'except' clauses
   "E402",  # Module level import not at top of file
   "E711",  # Comparison to None should be 'if cond is None:'
