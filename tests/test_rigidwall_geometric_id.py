@@ -30,7 +30,6 @@ from ansys.dyna.core import keywords as kwd
 
 import pytest
 
-@pytest.mark.keywords
 def test_rigidwall_geometric_flat_id():
     """Test RigidwallGeometricFlat with ID option writes correct keyword title."""
     wall = kwd.RigidwallGeometricFlat()
@@ -51,7 +50,6 @@ def test_rigidwall_geometric_flat_id():
     assert "*RIGIDWALL_GEOMETRIC_FLAT_ID" in output
     assert "id" in output.lower()
 
-
 def test_rigidwall_geometric_flat_no_id():
     """Test RigidwallGeometricFlat writes without ID card."""
     wall = kwd.RigidwallGeometricFlat()
@@ -63,7 +61,6 @@ def test_rigidwall_geometric_flat_no_id():
     # The output should not have an ID/TITLE card (first card is NSID)
     lines = output.split("\n")
     assert "nsid" in lines[1].lower()
-
 
 def test_rigidwall_geometric_variants_exist():
     """Test that all main GEOMETRIC variants exist and ID option works."""

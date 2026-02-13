@@ -32,7 +32,6 @@ from ansys.dyna.core.lib.format_type import format_type
 
 import pytest
 
-
 def _get_test_table_card_group(bounded: bool, default_size: int=2, name = None, **kwargs) -> TableCardGroup:
     if bounded:
         lengthfunc = lambda: default_size
@@ -84,7 +83,7 @@ def _get_row_data(dcg: TableCardGroup, index: int) -> str:
     return _get_card_row_data(card, card_index, dcg.format)
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_bounded_empty():
     """test bounded table group"""
     d = _get_test_table_card_group(True)
@@ -100,7 +99,7 @@ def test_table_card_group_bounded_empty():
     assert _get_row_data(d, 5) == "                                                "
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_unbounded_read(string_utils):
     """test reading row data into table group"""
     d = _get_test_table_card_group(False)
@@ -128,7 +127,7 @@ def test_table_card_group_unbounded_read(string_utils):
     assert d._num_rows() == 6
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_unbounded_empty():
     """test unbounded table group"""
     d = _get_test_table_card_group(False)
@@ -157,7 +156,7 @@ def test_table_card_group_unbounded_empty():
     assert d._num_rows() == 6
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_unbounded_read_long(string_utils, ref_string):
     """test reading long row data into table group"""
     d = _get_test_table_card_group(False)
@@ -181,7 +180,7 @@ def test_table_card_group_unbounded_read_long(string_utils, ref_string):
     assert d._num_rows() == 6
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_assign_column():
     d = _get_test_table_card_group(False)
     d.table = pd.DataFrame(
@@ -209,7 +208,7 @@ def test_table_card_group_assign_column():
     assert d.table["a1"][0] == 0.2
 
 
-@pytest.mark.keywords
+
 def test_write_inactive_table_card_group():
     card = _get_test_table_card_group(False)
     card._active_func = lambda: False
@@ -219,13 +218,13 @@ def test_write_inactive_table_card_group():
     assert card.write() == ""
 
 
-@pytest.mark.keywords
+
 def test_write_empty_table_card_group():
     d = _get_test_table_card_group(False)
     assert d.write() == ""
 
 
-@pytest.mark.keywords
+
 def test_table_card_group_init_data_table():
     df = pd.DataFrame(
         {
@@ -258,7 +257,7 @@ def test_table_card_group_init_data_table():
         assert len(df[column]) == len(table[column]), f"Length of {column} column doesn't match"
         assert len(df[column].compare(table[column])) == 0, f"{column} column values don't match"
 
-@pytest.mark.keywords
+
 def test_table_card_group_init_data_scalar():
 
     def _verify_dataframe(df):

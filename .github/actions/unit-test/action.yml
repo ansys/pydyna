@@ -13,15 +13,15 @@ inputs:
     required: true
 
   pytest-markers:
-    description: Pytest markers to use (e.g., 'run', 'keywords')
+    description: Pytest markers to use (e.g., 'run')
     required: false
     default: ""
     type: string
 
-  docker-image:
+  pydyna-run-container:
     description: Docker image to use for LS-DYNA keyword server
     required: false
-    default: "ghcr.io/ansys/ls-pre:latest"
+    default: ""
     type: string
 
   server-logs:
@@ -63,6 +63,7 @@ runs:
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
+        provision-uv: true
 
 
     - name: Create virtual environment
@@ -71,20 +72,19 @@ runs:
         python -m venv .venv
 
     - name: Login to GitHub container registry
+    # only if there is a docker image to pull
+      if: ${{ inputs.pydyna-run-container != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ inputs.github-token }}
 
-    # - name: Set up Docker Buildx for caching
-    #   if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
-    #   uses: docker/setup-buildx-action@v3
 
-    - name: Pull and start LS-DYNA keyword server
-      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+    - name: Pull LS-DYNA run container if specified
+      if: ${{ inputs.pydyna-run-container != ''}}
       env:
-        DOCKER_IMAGE: ${{ inputs.docker-image }}
+        DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
           source .venv/Scripts/activate
@@ -93,7 +93,6 @@ runs:
         fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
-        docker run -d --name kw_server -p 50051:50051 "$DOCKER_IMAGE" && echo "Keyword server active on port 50051."
       shell: bash
 
     - name: Install test dependencies
@@ -110,7 +109,7 @@ runs:
       env:
         PYTEST_MARKERS: ${{ inputs.pytest-markers }}
         COVERAGE_FILE: ${{ inputs.coverage-file }}
-        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
@@ -132,39 +131,9 @@ runs:
         fi
       shell: bash
 
-    - name: Extract the server logs
-      if: ${{ inputs.server-logs == 'true' }}
-      run: |
-        if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
-        else
-          source .venv/bin/activate
-        fi
-        docker logs kw_server > server_output.txt
-      shell: bash
-
-    - name: Upload the server logs
-      if: ${{ inputs.server-logs == 'true' }}
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      with:
-        name: server_output_tests.txt
-        path: server_output.txt
-
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
       with:
         flags: ${{ inputs.coverage-file }}
-
-    - name: Stop container
-      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
-      run: |
-        if [ "$RUNNER_OS" = "Windows" ]; then
-          source .venv/Scripts/activate
-        else
-          source .venv/bin/activate
-        fi
-        docker stop kw_server
-        docker rm kw_server
-      shell: bash

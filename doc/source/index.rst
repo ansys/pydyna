@@ -1,6 +1,8 @@
 PyDYNA documentation  |version|
 ===============================
 
+.. note::
+   The ``ansys.dyna.core.solvers`` module and `ansys.dyna.core.pre` are deprecated and no longer supported.
 
 .. grid:: 1 2 3 3
    :gutter: 1 2 3 3
