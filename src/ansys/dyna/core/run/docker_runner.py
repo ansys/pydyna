@@ -22,7 +22,7 @@
 
 """Module for defining the PyDyna Docker runner."""
 
-import os
+from pathlib import Path
 import sys
 
 from ansys.dyna.core.run.base_runner import BaseRunner
@@ -63,8 +63,8 @@ class DockerRunner(BaseRunner):
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set the input file and working directory for the run."""
         self._input_file = input_file
-        self._working_directory = os.path.abspath(working_directory)
-        if not os.path.isdir(self._working_directory):
+        self._working_directory = str(Path(working_directory).resolve())
+        if not Path(self._working_directory).is_dir():
             raise Exception("`working directory` is not a directory")
 
     def _get_solver_option(self) -> str:

@@ -941,12 +941,12 @@ class Mat295Legacy(KeywordBase):
         self._cards[10].set_value("l0", value)
 
     @property
-    def l(self) -> typing.Optional[float]:
+    def l(self) -> typing.Optional[float]:  # noqa: E743
         """Get or set the Reference (stress-free) sarcomere length."""  # nopep8
         return self._cards[11].get_value("l")
 
-    @l.setter
-    def l(self, value: float) -> None:
+    @l.setter  # noqa: E743
+    def l(self, value: float) -> None:  # noqa: E743
         """Set the l property."""
         self._cards[11].set_value("l", value)
         self._cards[12].set_value("l", value)

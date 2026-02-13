@@ -23,6 +23,7 @@
 """ANSYS Dyna Keywords Module."""
 
 import os
+from pathlib import Path
 
 import appdirs
 
@@ -30,10 +31,10 @@ __all__ = ["keywords", "EXAMPLES_PATH", "USER_DATA_PATH"]
 
 import ansys.dyna.core.keywords.keyword_classes as keywords  # noqa: F401
 
-USER_DATA_PATH = appdirs.user_data_dir(appname="ansys_dyna_keywords", appauthor="Ansys")
-if not os.path.exists(USER_DATA_PATH):
-    os.makedirs(USER_DATA_PATH)
+USER_DATA_PATH = Path(appdirs.user_data_dir(appname="ansys_dyna_keywords", appauthor="Ansys"))
+if not USER_DATA_PATH.exists():
+    USER_DATA_PATH.mkdir(parents=True)
 
-EXAMPLES_PATH = os.path.join(USER_DATA_PATH, "examples")
-if not os.path.exists(EXAMPLES_PATH):
-    os.makedirs(EXAMPLES_PATH)
+EXAMPLES_PATH = USER_DATA_PATH / "examples"
+if not EXAMPLES_PATH.exists():
+    EXAMPLES_PATH.mkdir(parents=True)
