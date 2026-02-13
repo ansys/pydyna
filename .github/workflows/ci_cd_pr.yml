@@ -111,7 +111,7 @@ jobs:
           bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           github-actor: ${{ github.actor }}
           # use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
-          use_cache_examples: true # Temporarily enable cache for all branches due to current cache issues; will revisit later
+          use_cache_examples: false # Temporarily disable cache for examples until cache issues are resolved
 
   smoke-tests:
     name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
