@@ -23,6 +23,7 @@
 """Module for defining the PyDyna Linux runner."""
 
 import os
+from pathlib import Path
 from typing import Optional
 
 from ansys.tools.common.path import get_dyna_path, get_latest_ansys_installation
@@ -63,7 +64,7 @@ class LinuxRunner(BaseRunner):
         """Determine the appropriate LS-DYNA solver executable path."""
         if executable:
             # Use user-provided executable path
-            if not os.path.isfile(executable):
+            if not Path(executable).is_file():
                 raise FileNotFoundError(f"LS-DYNA executable not found at: {executable}")
             self.solver = executable
             return
@@ -80,7 +81,7 @@ class LinuxRunner(BaseRunner):
         else:
             _, install_loc = get_latest_ansys_installation()
 
-        self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
+        self.solver = str(Path(install_loc) / "ansys" / "bin" / "linx64" / self._get_exe_name())
 
     def _get_exe_name(self) -> str:
         exe_name = {
@@ -93,7 +94,7 @@ class LinuxRunner(BaseRunner):
 
     def run(self) -> None:
         """Run LS-DYNA using the specified configuration."""
-        os.chdir(self.working_directory)
+        os.chdir(str(Path(self.working_directory).resolve()))
         # CASE option logic
         case_option = ""
         if self.activate_case:

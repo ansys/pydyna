@@ -42,9 +42,9 @@ except ImportError:
 
 def __make_temp_dir():
     """Create a temporary directory for the job."""
-    job_folder = os.path.join(tempfile.gettempdir(), "ansys", "pydyna", "jobs")
-    pathlib.Path(job_folder).mkdir(parents=True, exist_ok=True)
-    return tempfile.mkdtemp(dir=job_folder)
+    job_folder = pathlib.Path(tempfile.gettempdir()) / "ansys" / "pydyna" / "jobs"
+    job_folder.mkdir(parents=True, exist_ok=True)
+    return tempfile.mkdtemp(dir=str(job_folder))
 
 
 def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
@@ -62,7 +62,7 @@ def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
     """
     if isinstance(input, str):
         try:
-            with open(pathlib.Path(wdir) / input, "r") as f:
+            with (pathlib.Path(wdir) / input).open("r") as f:
                 for line in f:
                     line = line.strip().upper()
                     if line.startswith("*CASE") or line.startswith("*CASE_BEGIN") or line.startswith("*CASE_END"):
@@ -88,7 +88,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
         input_file = input
         if wdir is None:
             wdir = str(pathlib.Path(input_file).parent.resolve())
-        elif not os.path.isdir(wdir):
+        elif not pathlib.Path(wdir).is_dir():
             p = pathlib.Path(wdir)
             p.mkdir(parents=True)
 
@@ -104,7 +104,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
         if wdir is None:
             wdir = __make_temp_dir()
             logging.log(logging.INFO, f"launching the dyna solver in {wdir}")
-        input_file = os.path.join(wdir, "input.k")
+        input_file = str(pathlib.Path(wdir) / "input.k")
         input.export_file(input_file)
 
     return wdir, input_file

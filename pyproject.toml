@@ -115,11 +115,6 @@ extend-exclude = [
     "tests/**/*.py",
     "codegen/kwd.json",
     "codegen/",
-    "src/ansys/dyna/core/pre/Server/",
-    "src/ansys/dyna/core/pre/doc/",
-    "src/ansys/dyna/core/pre/",
-    "src/ansys/dyna/core/pre/kwprocess_pb2.py",
-    "src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
@@ -131,7 +126,7 @@ lint.select = [
   "F",   # pyflakes, see https://beta.ruff.rs/docs/rules/#pyflakes-f
   "I",   # isort, see https://beta.ruff.rs/docs/rules/#isort-i
   "N",   # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
-  #"PTH", # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
+  "PTH", # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
   "PYI", # flake8-pyi, see https://docs.astral.sh/ruff/rules/#flake8-pyi-pyi
 ]
 lint.ignore = [
@@ -152,7 +147,7 @@ lint.ignore = [
 ]
 lint.per-file-ignores."!src/**.py" = [ "D" ]
 lint.per-file-ignores."__init__.py" = [ "F401" ]
-lint.per-file-ignores."examples/**.py" = [ "N" ]
+lint.per-file-ignores."examples/**.py" = [ "N", "PTH" ]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

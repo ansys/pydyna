@@ -22,6 +22,7 @@
 """Module provides a collection of keywords that can read and write to a keyword file."""
 
 import os
+from pathlib import Path
 import typing
 from typing import Union
 import warnings
@@ -275,8 +276,8 @@ class Deck(ValidationMixin):
                 continue
             expand_include_file = None
             for search_path in search_paths:
-                include_file = os.path.join(search_path, keyword.filename)
-                if os.path.isfile(include_file):
+                include_file = Path(search_path) / keyword.filename
+                if include_file.is_file():
                     expand_include_file = include_file
                     break
             if expand_include_file is None:
@@ -332,7 +333,7 @@ class Deck(ValidationMixin):
             compatibility.
             TODO: Consider making strict=True the default in a future version.
         """
-        cwd = cwd or os.getcwd()
+        cwd = cwd or Path.cwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
         new_deck.parameters = self.parameters
@@ -612,7 +613,7 @@ class Deck(ValidationMixin):
     def _import_file(self, path: str, encoding: str, context: ImportContext):
         from ansys.dyna.core.lib.deck_loader import load_deck_from_buffer
 
-        with open(path, encoding=encoding) as f:
+        with open(path, encoding=encoding) as f:  # noqa: PTH123
             loader_result = load_deck_from_buffer(self, f, context, self._import_handlers)
         for keyword in self.keywords:
             keyword.included_from = path
@@ -652,7 +653,7 @@ class Deck(ValidationMixin):
         >>> deck.export_file("output.k", validate=True)  # Validate before export
         >>> deck.export_file("output.k", retain_parameters=True)  # Keep parameter references
         """
-        with open(path, "w+", encoding=encoding) as f:
+        with open(path, "w+", encoding=encoding) as f:  # noqa: PTH123
             if os.name == "nt":
                 self.write(f, validate=validate, retain_parameters=retain_parameters)
             else:

@@ -34,11 +34,6 @@ repos:
       args: [--fix]
     - id: ruff-format
 
-- repo: https://github.com/PyCQA/flake8
-  rev: 7.3.0
-  hooks:
-  - id: flake8
-
 - repo: https://github.com/codespell-project/codespell
   rev: v2.4.1
   hooks:

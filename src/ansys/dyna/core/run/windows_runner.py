@@ -97,10 +97,10 @@ class WindowsRunner(BaseRunner):
             script_name = "lsdynaintelvar.bat"
         else:
             script_name = "lsdynamsvar.bat"
-        lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]
-        env_script_path = os.path.join(self.solver_location, lsprepost, "LS-Run", script_name)
+        lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]  # noqa: PTH208
+        env_script_path = Path(self.solver_location) / lsprepost / "LS-Run" / script_name
 
-        return env_script_path
+        return str(env_script_path)
 
     def _get_exe_name(self) -> str:
         """Get executable name based on MPI option and precision."""
@@ -115,7 +115,7 @@ class WindowsRunner(BaseRunner):
         return exe_name
 
     def _write_runscript(self) -> None:
-        with open(os.path.join(self.working_directory, self._scriptname), "w") as f:
+        with (Path(self.working_directory) / self._scriptname).open("w") as f:
             f.write(self._get_command_line())
 
     @property
@@ -184,8 +184,8 @@ class WindowsRunner(BaseRunner):
         mem = self.get_memory_string()
         input_file = self.input_file
 
-        if not os.path.isabs(self.working_directory):
-            self.working_directory = os.path.abspath(self.working_directory)
+        if not Path(self.working_directory).is_absolute():
+            self.working_directory = str(Path(self.working_directory).resolve())
 
         # CASE option logic
         case_option = ""
