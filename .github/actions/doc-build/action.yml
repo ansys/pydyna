@@ -108,8 +108,8 @@ runs:
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "242"
+        dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        ANSYS_VERSION : ${{ env.ANSYS_VERSION }}
 
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
