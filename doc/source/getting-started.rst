@@ -16,8 +16,11 @@ page on the Ansys website.
       :link: getting-started/installation
       :link-type: doc
       
-
       Install PyDYNA and learn about the different installation modes.
+
+   .. grid-item-card:: Agents
+      :link: getting-started/agents
+      :link-type: doc
 
    .. grid-item-card:: PyDYNA modules
       :link: getting-started/modules
@@ -37,6 +40,7 @@ page on the Ansys website.
    :maxdepth: 2
 
    getting-started/installation
+   getting-started/agents
    getting-started/modules
    getting-started/example
 
