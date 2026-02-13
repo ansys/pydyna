@@ -27,7 +27,6 @@ classifiers = [
 
 dependencies = [
     "ansys-dpf-core>=0.7.2",
-    
     "ansys-api-dyna==0.4.2",
     "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
