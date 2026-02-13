@@ -1,0 +1,156 @@
+ansys.dyna.core.lib.mixins.curve_plotting.CurvePlottingMixin
+============================================================
+
+.. py:class:: ansys.dyna.core.lib.mixins.curve_plotting.CurvePlottingMixin
+
+   
+   Mixin that provides plotting capabilities for DefineCurve classes.
+
+   This mixin adds a `.plot()` method to curve classes, enabling 2D curve
+   visualization using matplotlib. The method automatically applies scale
+   factors and offsets (sfa, sfo, offa, offo) to the curve data.
+
+   Attributes expected from the host class:
+       curves: pd.DataFrame with 'a1' (abscissa) and 'o1' (ordinate) columns
+       sfa: float - scale factor for abscissa
+       sfo: float - scale factor for ordinate
+       offa: float - offset for abscissa
+       offo: float - offset for ordinate
+       lcid: int - load curve ID (for plot title)
+       title: str - optional title text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: plot(apply_transforms: bool = True, title: Optional[str] = None, xlabel: Optional[str] = None, ylabel: Optional[str] = None, show: bool = True, ax: Optional[Any] = None, **kwargs) -> Any
+
+      
+      Plot the curve using matplotlib.
+
+
+      :Parameters:
+
+          **apply_transforms** : :ref:`bool <python:bltin-boolean-values>`, default=True
+              If True, apply scale factors (sfa, sfo) and offsets (offa, offo) to the curve data.
+              If False, plot raw data from the curves table.
+
+          **title** : :class:`python:str`, :obj:`optional`
+              Plot title. If not provided, uses the curve's lcid and title attribute.
+
+          **xlabel** : :class:`python:str`, :obj:`optional`
+              X-axis label. Defaults to "Abscissa" (or "Time" if transforms applied).
+
+          **ylabel** : :class:`python:str`, :obj:`optional`
+              Y-axis label. Defaults to "Ordinate" (or "Value" if transforms applied).
+
+          **show** : :ref:`bool <python:bltin-boolean-values>`, default=True
+              If True, display the plot immediately using plt.show().
+              If False, return the axes object for further customization.
+
+          **ax** : :obj:`matplotlib.axes.Axes`, :obj:`optional`
+              Matplotlib axes to plot on. If None, creates a new figure and axes.
+
+          **\*\*kwargs**
+              Additional keyword arguments passed to matplotlib's plot() function
+              (e.g., color, linewidth, linestyle, marker, etc.)
+
+
+
+      :Returns:
+
+          :obj:`matplotlib.axes.Axes`
+              The axes object containing the plot. Can be used for further customization.
+
+
+
+
+      :Raises:
+
+          :obj:`ImportError`
+              If matplotlib is not installed.
+
+          :obj:`ValueError`
+              If the curve data is empty or invalid.
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> curve = DefineCurve(lcid=1)
+      >>> curve.curves = pd.DataFrame({"a1": [0, 1, 2], "o1": [0, 1, 4]})
+      >>> curve.plot()  # Plot with default settings
+
+      >>> curve.plot(apply_transforms=False, color='red', linewidth=2)  # Customize plot
+
+      >>> fig, ax = plt.subplots()
+      >>> curve.plot(ax=ax, show=False)  # Plot on existing axes
+      >>> ax.grid(True)
+      >>> plt.show()
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_curve_data(apply_transforms: bool = True) -> Tuple[numpy.ndarray, numpy.ndarray]
+
+      
+      Get the curve data as numpy arrays.
+
+
+      :Parameters:
+
+          **apply_transforms** : :ref:`bool <python:bltin-boolean-values>`, default=True
+              If True, apply scale factors (sfa, sfo) and offsets (offa, offo) to the curve data.
+              If False, return raw data from the curves table.
+
+
+
+      :Returns:
+
+          :class:`python:tuple` :obj:`of` (:obj:`x_data`, :obj:`y_data`)
+              Two numpy arrays containing the abscissa and ordinate values.
+
+
+
+
+      :Raises:
+
+          :obj:`AttributeError`
+              If the keyword does not have curve data.
+
+          :obj:`ValueError`
+              If the curve data is empty or invalid.
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> curve = DefineCurve(lcid=1)
+      >>> curve.curves = pd.DataFrame({"a1": [0, 1, 2], "o1": [0, 1, 4]})
+      >>> x, y = curve.get_curve_data()
+      >>> print(x)  # [0. 1. 2.]
+      >>> print(y)  # [0. 1. 4.]
+
+      ..
+          !! processed by numpydoc !!
+

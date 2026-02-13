@@ -1,0 +1,31 @@
+ansys.dyna.core.pre.errors.RequiredFieldError
+=============================================
+
+.. py:exception:: ansys.dyna.core.pre.errors.RequiredFieldError(keyword, field_name)
+
+   Bases: :py:obj:`ValidationError`
+
+
+   
+   Error raised when a required field is missing or None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: field_name
+

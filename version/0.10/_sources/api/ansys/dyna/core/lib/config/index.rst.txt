@@ -1,0 +1,143 @@
+ansys.dyna.core.lib.config
+==========================
+
+.. py:module:: ansys.dyna.core.lib.config
+
+.. autoapi-nested-parse::
+
+   Module for configuration settings.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.config.USE_LSPP_DEFAULTS
+   ansys.dyna.core.lib.config.ENABLE_CSV_AUTODETECT
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.config.use_lspp_defaults
+   ansys.dyna.core.lib.config.csv_autodetect_enabled
+   ansys.dyna.core.lib.config.disable_lspp_defaults
+   ansys.dyna.core.lib.config.disable_csv_autodetect
+
+
+Module Contents
+---------------
+
+.. py:data:: USE_LSPP_DEFAULTS
+   :value: True
+
+
+.. py:data:: ENABLE_CSV_AUTODETECT
+   :value: True
+
+
+.. py:function:: use_lspp_defaults()
+
+   
+   Return whether LSPP default values are currently enabled.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: csv_autodetect_enabled()
+
+   
+   Return whether CSV format auto-detection is enabled.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: disable_lspp_defaults()
+
+   
+   Disable LSPP default values within the context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: disable_csv_autodetect()
+
+   
+   Context manager to temporarily disable CSV format auto-detection.
+
+   By default, pydyna auto-detects comma-delimited (CSV) format in keyword card data.
+   Use this context manager if CSV detection causes issues with specific files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> from ansys.dyna.core.lib.config import disable_csv_autodetect
+   >>> with disable_csv_autodetect():
+   ...     deck.loads(content)  # CSV detection disabled
+
+   ..
+       !! processed by numpydoc !!
+

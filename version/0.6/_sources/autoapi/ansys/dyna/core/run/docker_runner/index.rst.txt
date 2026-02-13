@@ -1,0 +1,50 @@
+ansys.dyna.core.run.docker_runner
+=================================
+
+.. py:module:: ansys.dyna.core.run.docker_runner
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.docker_runner.DockerRunner
+
+
+Module Contents
+---------------
+
+.. py:class:: DockerRunner(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.run.base_runner.BaseRunner`
+
+
+   
+   Docker implementation to Run LS-DYNA. Tested with a custom exutable
+   and when LS-DYNA is installed as part of the unified Ansys installation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: set_input(input_file: str, working_directory: str) -> None
+
+
+   .. py:method:: run() -> None
+
+

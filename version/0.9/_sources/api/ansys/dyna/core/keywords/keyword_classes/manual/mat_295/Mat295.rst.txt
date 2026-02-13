@@ -1,0 +1,62 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295
+==============================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.mat_295.Mat295`
+
+
+   
+   DYNA MAT_295 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Abstract method to peek into the buffer before reading.
+
+      Normally, the number of rows is calculated by the card, and is based on whether
+      the card is active or not. In most cases, a card will know whether it is active
+      or not before it is read, because the `active_func` is based on information loaded
+      into previous cards. In some cases, `active_func` is based on information from the
+      current card, which might default to inactive, and so the card will never be read.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ftype
+      :type: Optional[int]
+
+

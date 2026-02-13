@@ -1,0 +1,68 @@
+ansys.dyna.core.pre.dynabase.ContactType
+========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Contact type for contact interface definitions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: NULL
+      :value: 0
+
+
+
+   .. py:attribute:: AUTOMATIC
+      :value: 1
+
+
+
+   .. py:attribute:: GENERAL
+      :value: 2
+
+
+
+   .. py:attribute:: RIGID
+      :value: 3
+
+
+
+   .. py:attribute:: TIED
+      :value: 4
+
+
+
+   .. py:attribute:: TIED_WITH_FAILURE
+      :value: 5
+
+
+
+   .. py:attribute:: ERODING
+      :value: 6
+
+
+
+   .. py:attribute:: EDGE
+      :value: 7
+
+

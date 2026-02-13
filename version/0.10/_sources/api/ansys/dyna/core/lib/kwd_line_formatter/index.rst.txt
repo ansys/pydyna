@@ -1,0 +1,248 @@
+ansys.dyna.core.lib.kwd_line_formatter
+======================================
+
+.. py:module:: ansys.dyna.core.lib.kwd_line_formatter
+
+.. autoapi-nested-parse::
+
+   Keyword line formatter.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/kwd_line_formatter/FormatSpec
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.FormatSpec
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.read_line
+   ansys.dyna.core.lib.kwd_line_formatter.at_end_of_keyword
+   ansys.dyna.core.lib.kwd_line_formatter.buffer_to_lines
+   ansys.dyna.core.lib.kwd_line_formatter.seek_text_block
+   ansys.dyna.core.lib.kwd_line_formatter.has_value
+   ansys.dyna.core.lib.kwd_line_formatter.load_dataline
+   ansys.dyna.core.lib.kwd_line_formatter.load_dataline_with_format
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: read_line(buf: TextIO, skip_comment=True) -> Tuple[str, bool]
+
+   
+   Read and return the line, and a flag on whether to stop reading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: at_end_of_keyword(buf: TextIO) -> bool
+
+   
+   Return whether the buffer is at the end of the keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: buffer_to_lines(buf: TextIO, max_num_lines: int = -1) -> List[str]
+
+   
+   Read from the buffer into a list of string.
+   buf: buffer to read from
+   max_num_lines: number of lines to read. -1 means no limit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: seek_text_block(line_data: str, position: int, width: int) -> Tuple[int, str]
+
+   
+   Returns the text block from the line at the given position and width.
+
+   If the position is past the end, it will return an empty string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: has_value(text_block: str) -> bool
+
+   
+   Given a text block - determine if a keyword value exists.
+
+   If its an empty string (i.e. the seek_text_block returned an empty
+   string) then there is no value. If its just whitespace, then
+   the keyword file did not include data for that field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_dataline(spec: List[tuple], line_data: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> List
+
+   
+   Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
+
+   LS-DYNA supports both fixed-width format and comma-delimited (free) format. This function
+   automatically detects which format is used based on the presence of commas in the line.
+   Per the LS-DYNA manual, formats can be mixed within a deck but not within a single card.
+
+   :Parameters:
+
+       **spec** : :class:`python:list` :obj:`of` :class:`python:tuple`
+           List of tuples representing the (offset, width, type) of each field.
+           Type can be a Flag which represents the True and False value.
+
+       **line_data** : :class:`python:str`
+           String with keyword data (fixed-width or comma-delimited).
+
+       **parameter_set** : :obj:`ParameterSet`, :obj:`optional`
+           Optional parameter set.
+
+
+
+   :Returns:
+
+       :class:`python:list`
+           Parsed values from the keyword card line.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
+   (1, 'hello')
+   >>> load_dataline([(0,10, int),(10,10, str)], '1,hello')
+   (1, 'hello')
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_dataline_with_format(spec: List[tuple], line_data: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> Tuple[List, str]
+
+   
+   Like load_dataline, but also returns the detected format.
+
+
+
+
+
+   :Returns:
+
+       :class:`python:tuple`
+           A tuple of (values, format) where format is 'csv' or 'fixed'.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

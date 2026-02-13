@@ -1,0 +1,40 @@
+ansys.dyna.core.pre.dynabase.RotVelocity
+========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.RotVelocity(x=0, y=0, z=0)
+
+   
+   Defines a rotational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: x
+      :value: 0
+
+
+
+   .. py:attribute:: y
+      :value: 0
+
+
+
+   .. py:attribute:: z
+      :value: 0
+
+

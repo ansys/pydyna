@@ -1,0 +1,40 @@
+ansys.dyna.core.pre.dynabase.Point
+==================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Point(x=0, y=0, z=0)
+
+   
+   Defines a point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: x
+      :value: 0
+
+
+
+   .. py:attribute:: y
+      :value: 0
+
+
+
+   .. py:attribute:: z
+      :value: 0
+
+

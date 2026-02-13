@@ -1,0 +1,335 @@
+ansys.dyna.core.solver.dynalogging.Logger
+=========================================
+
+.. py:class:: ansys.dyna.core.solver.dynalogging.Logger(level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME)
+
+   
+   Provides the logger used for each PyDyna ``pre`` session.
+
+   This class allows you to add handlers to the logger to output to a file or
+   standard output.
+
+   :Parameters:
+
+       **level** : :class:`python:int`, :obj:`optional`
+           Logging level to filter the message severity allowed in the logger.
+           The default is ``logging.DEBUG``.
+
+       **to_file** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Whether to write log messages to a file. The default is ``False``.
+
+       **to_stdout** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Whether to write log messages to the standard output. The default is
+           ``True``.
+
+       **filename** : :class:`python:str`, :obj:`optional`
+           Name of the file to write log messages to if ``to_file=True``. The default
+           is ``FILE_NAME``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Demonstrate logger usage from an MAPDL instance mapdl. This logger is
+   automatically created when an MAPDL instance is created.
+
+   >>> from ansys.mapdl.core import launch_mapdl
+   >>> mapdl = launch_mapdl(loglevel='DEBUG')
+   >>> mapdl._log.info('This is a useful message')
+   INFO -  -  <ipython-input-24-80df150fe31f> - <module> - This is LOG debug message.
+
+   Import the global Pydyna logger and add a file output handler.
+
+   >>> import os
+   >>> from ansys.mapdl.core import LOG
+   >>> file_path = os.path.join(os.getcwd(), 'Pydyna.log')
+   >>> LOG.log_to_file(file_path)
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: file_handler
+      :value: None
+
+
+
+   .. py:attribute:: std_out_handler
+      :value: None
+
+
+
+   .. py:attribute:: logger
+
+
+   .. py:attribute:: level
+      :value: 0
+
+
+
+   .. py:attribute:: debug
+
+
+   .. py:attribute:: info
+
+
+   .. py:attribute:: warning
+
+
+   .. py:attribute:: error
+
+
+   .. py:attribute:: critical
+
+
+   .. py:attribute:: log
+
+
+   .. py:method:: log_to_file(filename=FILE_NAME, level=LOG_LEVEL)
+
+      
+      Add a file handler to logger.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`, :obj:`optional`
+              Name of the file where the logs are recorded. The default
+              is ``FILE_NAME``, in which case they are recorded in the
+              ``'Pydyna.log'`` file.
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging. The default is ``LOG_LEVEL``, in which
+              case ``'DEBUG'`` is used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      Write to the ``Pydyna.log`` file in the current working directory.
+
+      >>> from ansys.mapdl.core import LOG
+      >>> import os
+      >>> file_path = os.path.join(os.getcwd(), 'Pydyna.log')
+      >>> LOG.log_to_file(file_path)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: log_to_stdout(level=LOG_LEVEL)
+
+      
+      Add a standard output handler to the logger.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`, :obj:`optional`
+              Name of the file where the logs are recorded. The default
+              is ``FILE_NAME``, in which case they are recorded in the
+              ``'Pydyna.log'`` file.
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging. The default is ``LOG_LEVEL``, in which
+              case ``'DEBUG'`` is used.
+
+          **write_headers** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to write the headers to the file. The default is ``True``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setLevel(level='DEBUG')
+
+      
+      Change the log level of the object and the attached handlers.
+
+
+      :Parameters:
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging. The default is ``'DEBUG'``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_child_logger(suffix, level=None)
+
+      
+      Add a child logger to the main logger.
+
+      This child logger is more general than an instance logger, which is designed to
+      track the state of MAPDL instances.
+
+      If the logging level is in the arguments, a new logger with a reference
+      to the ``_global`` logger handlers is created instead of a child logger.
+
+      :Parameters:
+
+          **suffix** : :class:`python:str`
+              Name of the logger.
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging. The default is ``None``.
+
+
+
+      :Returns:
+
+          :obj:`logging.logger`
+              Logger class.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_instance_logger(name, mapdl_instance, level=None)
+
+      
+      Create a logger for an MAPDL instance.
+
+      The MAPDL instance logger is a logger with an adapter that adds
+      contextual information, such as the MAPDL instance name. This logger is
+      returned, and you can use it to log events as a normal logger. It is also
+      stored in the ``_instances`` field.
+
+      :Parameters:
+
+          **name** : :class:`python:str`
+              Name for the new logger.
+
+          **mapdl_instance** : :obj:`ansys.mapdl.core.mapdl._MapdlCore`
+              MAPDL instance object. This should contain the ``name`` attribute.
+
+
+
+      :Returns:
+
+          :obj:`ansys.mapdl.core.logging.PydynaCustomAdapter`
+              Logger adapter customized to add MAPDL information to the
+              logs.  You can use this class to log events in the same
+              way you use the ``logger`` class.
+
+
+
+
+      :Raises:
+
+          :obj:`Exception`
+              You can only input strings as ``name`` to this method.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __getitem__(key)
+
+      
+      Get an instance logger by name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_handling_uncaught_expections(logger)
+
+      
+      Redirect the output of an exception to the logger.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,19 @@
+ansys.dyna.core.keywords.keyword_classes.type_mapping
+=====================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.type_mapping
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.type_mapping.TypeMapping
+
+
+Module Contents
+---------------
+
+.. py:data:: TypeMapping
+

@@ -1,0 +1,1375 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.keywords.keyword_classes.auto.database_extent_binary &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../../_static/documentation_options.js?v=016a97bc"></script>
+    <script src="../../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/keywords/keyword_classes/auto/database_extent_binary';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.9';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../search.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/keywords/keyword_classes/auto/database_extent_binary.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../keywords.html" class="nav-link">ansys.dyna.core.keywords</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.keywords.keyword_classes.auto.database_extent_binary</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.keywords.keyword_classes.auto.database_extent_binary</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="sd">&quot;&quot;&quot;Module providing the DatabaseExtentBinary class.&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.card</span><span class="w"> </span><span class="kn">import</span> <span class="n">Card</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">Flag</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.keyword_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeywordBase</span>
+
+<div class="viewcode-block" id="DatabaseExtentBinary">
+<a class="viewcode-back" href="../../../../../../../_autosummary/index.html#ansys.dyna.core.keywords.keyword_classes.auto.database_extent_binary.DatabaseExtentBinary">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DatabaseExtentBinary</span><span class="p">(</span><span class="n">KeywordBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DYNA DATABASE_EXTENT_BINARY keyword&quot;&quot;&quot;</span>
+
+    <span class="n">keyword</span> <span class="o">=</span> <span class="s2">&quot;DATABASE&quot;</span>
+    <span class="n">subkeyword</span> <span class="o">=</span> <span class="s2">&quot;EXTENT_BINARY&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the DatabaseExtentBinary class.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;neiph&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;neips&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;maxint&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">3</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;strflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;sigflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;epsflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;rltflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">60</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;engflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">70</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;cmpflg&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ieverp&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;beamip&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;dcomp&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;shge&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;stssz&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;n3thdt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">60</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">2</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ialemat&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">70</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;nintsld&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;pkp_sen&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;sclp&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mf">1.0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;hydro&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;msscl&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;therm&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;intout&quot;</span><span class="p">,</span>
+                        <span class="nb">str</span><span class="p">,</span>
+                        <span class="mi">60</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;nodout&quot;</span><span class="p">,</span>
+                        <span class="nb">str</span><span class="p">,</span>
+                        <span class="mi">70</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;dtdt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;resplt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;neipb&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;quadsld&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;cubsld&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;deleres&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neiph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of additional integration point history variables written to the binary database for solid elements. The integration point data is written in the same order that it is stored in memory-each material modal has its own history variables that are stored. For user defined materials it is important to store the history data that is needed for plotting before the data which is not of interest.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;neiph&quot;</span><span class="p">)</span>
+
+    <span class="nd">@neiph</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neiph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the neiph property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;neiph&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neips</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of additional integration point history variables written to the binary database for both shell and thick shell elements for each integration point, see NEIPH above.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;neips&quot;</span><span class="p">)</span>
+
+    <span class="nd">@neips</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neips</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the neips property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;neips&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maxint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of shell integration points written to the LS-DYNA database, see also *INTEGRATION_SHELL. If the default value of 3 is used then results are output for the outermost (top) and innermost (bottom) integration points together with results for the neutral axis. If MAXINT is set to 3 and the element has 1 integration point then all three results will be the same. If a value other than 3 is used then the results for the first MAXINT integration points in the element will be output. NOTE: If the element has an even number of integration points and MAXINT is not set to 3 then you will not get mid-surface results. (See Remarks in user&#39;s manual).If MAXINT is set to a negative</span>
+<span class="sd">        number, MAXINT integration points are output for each in plane</span>
+<span class="sd">        integration point location and no averaging is used. This can greatly</span>
+<span class="sd">        increase the size of the binary databases d3plot, d3thdt, and d3part</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;maxint&quot;</span><span class="p">)</span>
+
+    <span class="nd">@maxint</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maxint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the maxint property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;maxint&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">strflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag for output of strain tensors.  STRFLG is interpreted digit-wise STRFLG = [NML], STRFLG = 100*N + 10*M + L</span>
+<span class="sd">        L.EQ.1: Write strain tensor data to d3plot, elout, and dynain.  For shell and thick shell elements two tensors are written, one at the innermost and one at the outermost integration point.  For solid elements a single strain tensor is written</span>
+<span class="sd">        M.EQ.1:	Write plastic strain data to d3plot.</span>
+<span class="sd">        N.EQ.1:	Write thermal strain data to d3plot.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;strflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@strflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">strflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the strflg property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;strflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag for including stress tensor in the shell LS-DYNA database:</span>
+<span class="sd">        EQ.1: include (default),</span>
+<span class="sd">        EQ.2: exclude.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;sigflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@sigflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the sigflg property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;sigflg must be `None` or one of {1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;sigflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">epsflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag for including the effective plastic strains in the shell LS-DYNA database:</span>
+<span class="sd">        EQ.1: include (default),</span>
+<span class="sd">        EQ.2: exclude.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;epsflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@epsflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">epsflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the epsflg property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;epsflg must be `None` or one of {1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;epsflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rltflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag for including stress resultants in the shell LS-DYNA database:</span>
+<span class="sd">        EQ.1: include (default),</span>
+<span class="sd">        EQ.2: exclude.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;rltflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@rltflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rltflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the rltflg property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;rltflg must be `None` or one of {1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;rltflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">engflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag for including internal energy and thickness in the LS-DYNA database:</span>
+<span class="sd">        EQ.1: include (default),</span>
+<span class="sd">        EQ.2: exclude.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;engflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@engflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">engflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the engflg property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;engflg must be `None` or one of {1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;engflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cmpflg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Orthotropic and anisotropic material stress output in local coordinate system for shells and thick shells.</span>
+<span class="sd">        EQ.0: global,</span>
+<span class="sd">        EQ.1: local.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;cmpflg&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cmpflg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cmpflg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the cmpflg property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;cmpflg must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;cmpflg&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ieverp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Every plot state for D3PLOT database is written to a separate file. This option will limit the database to 100 states:</span>
+<span class="sd">        EQ.0: more than one state can be on each plotfile,</span>
+<span class="sd">        EQ.1: one state only on each plotfile.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ieverp&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ieverp</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ieverp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ieverp property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;ieverp must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ieverp&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">beamip</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of beam integration points for output. This option does not apply to beams that use a resultant formulation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;beamip&quot;</span><span class="p">)</span>
+
+    <span class="nd">@beamip</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">beamip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the beamip property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;beamip&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dcomp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Data compression to eliminate rigid body data:</span>
+<span class="sd">        EQ.1: off (default), no data compression,</span>
+<span class="sd">        EQ.2: on.</span>
+<span class="sd">        EQ.3: off, no rigid body data compression, but nodal velocities and accelerations are eliminated from the database.</span>
+<span class="sd">        EQ.4: on, rigid body data compression active and nodal velocities and accelerations are eliminaated from the database.</span>
+<span class="sd">        EQ.5: on, rigid body data compression active and rigid nodal data are eliminated from the database. Only 6 dof rigid body motion is written.</span>
+<span class="sd">        EQ.6: on, rigid body data compression active, rigid nodal data, and nodal velocities and accelerations are eliminated from the database.  Only 6 dof rigid body motion is written.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;dcomp&quot;</span><span class="p">)</span>
+
+    <span class="nd">@dcomp</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dcomp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the dcomp property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;dcomp must be `None` or one of {1,2,3,4,5,6}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;dcomp&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shge</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output shell hourglass energy:</span>
+<span class="sd">        EQ.1: off (default), no hourglass energy written,</span>
+<span class="sd">        EQ.2: on.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;shge&quot;</span><span class="p">)</span>
+
+    <span class="nd">@shge</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the shge property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;shge must be `None` or one of {1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;shge&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stssz</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output shell element time step, mass or added mass:</span>
+<span class="sd">        EQ.1: off (default),</span>
+<span class="sd">        EQ.2: out time step size,</span>
+<span class="sd">        EQ.3: output mass, added mass, or time step size.</span>
+<span class="sd">        (See Remark 3 in user&#39;s manual).</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;stssz&quot;</span><span class="p">)</span>
+
+    <span class="nd">@stssz</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stssz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the stssz property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;stssz must be `None` or one of {1,2,3}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;stssz&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n3thdt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Material energy write option for D3THDT database</span>
+<span class="sd">        EQ.1: off, energy is NOT written to D3THDT database,</span>
+<span class="sd">        EQ.2: on (default), energy is written to D3THDT database.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;n3thdt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@n3thdt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n3thdt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the n3thdt property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;n3thdt must be `None` or one of {2,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;n3thdt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ialemat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output solid part id list containing ale materials</span>
+<span class="sd">        EQ.1: on (default)</span>
+<span class="sd">        EQ.0: off</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ialemat&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ialemat</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ialemat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ialemat property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;ialemat must be `None` or one of {1,0}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ialemat&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nintsld</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of solid element integration points written to the LS-DYNA database. The default value is 1. For solids with multiple integration points NINTSLD may be set to 8. Currently, no other values for INITSLD are allowed. For solids with multiple integration points, an average value is output if NINTSLD is set to 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;nintsld&quot;</span><span class="p">)</span>
+
+    <span class="nd">@nintsld</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nintsld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the nintsld property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;nintsld must be `None` or one of {0,1,8}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;nintsld&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pkp_sen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Flag to output the peak pressure and surface energy computed by each contact interface into the interface force database.   To obtain the surface energy, FRCENG, must be sent to 1 on the control contact card.  When PKP_SEN=1, it is possible to identify the energies generated on the upper and lower shell surfaces, which is important in metal forming applications.  This data is mapped after each H-adaptive remeshing.</span>
+<span class="sd">        EQ.0: No data is written</span>
+<span class="sd">        EQ.1: Output the peak pressures and surface energy by contact interface.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;pkp_sen&quot;</span><span class="p">)</span>
+
+    <span class="nd">@pkp_sen</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pkp_sen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the pkp_sen property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;pkp_sen must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;pkp_sen&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sclp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the A scaling parameter used in the computation of the peak pressure.  This parameter is generally set to unity (the default), but it must be greater than 0..</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;sclp&quot;</span><span class="p">)</span>
+
+    <span class="nd">@sclp</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sclp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the sclp property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;sclp&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hydro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Either 3 or 5 additional history variables useful to shock physics are</span>
+<span class="sd">        output as the last history variables. For HYDRO = 1, the internal energy</span>
+<span class="sd">        per reference volume, the reference volume, and the value of the bulk</span>
+<span class="sd">        viscosity are added to the database, and for HYDRO = 2, the relative</span>
+<span class="sd">        volume and current density are also added</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;hydro&quot;</span><span class="p">)</span>
+
+    <span class="nd">@hydro</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hydro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the hydro property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;hydro&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">msscl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output nodal information related to mass scaling into the D3PLOT database.  This option can be activated if and only if DT2MS &lt; 0.0, see control card *CONTROL_TIMESTEP.  This option is available starting with the second release of Version 971.</span>
+<span class="sd">        EQ.0: No data is written</span>
+<span class="sd">        EQ.1: Output incremental nodal mass</span>
+<span class="sd">        EQ.2: Output percentage increase in nodal mass.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;msscl&quot;</span><span class="p">)</span>
+
+    <span class="nd">@msscl</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">msscl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the msscl property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;msscl must be `None` or one of {0,1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;msscl&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">therm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output of thermal data to d3plot. The use of this option (THERM&gt;0) may make the database incompatible with other 3rd party software.</span>
+<span class="sd">        EQ.0: (default) output temperature</span>
+<span class="sd">        EQ.1: output temperature</span>
+<span class="sd">        EQ.2: output temperature and flux</span>
+<span class="sd">        EQ.3: output temperature, flux, and shell bottom and top surface temperature</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;therm&quot;</span><span class="p">)</span>
+
+    <span class="nd">@therm</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">therm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the therm property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;therm must be `None` or one of {0,1,2,3}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;therm&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output stress/strain at all integration points for detailed element output in the file ELOUTDET.  DT and BINARY of *DATABASE_ELOUT apply to ELOUTDET.  See remarks 4-10 below.</span>
+<span class="sd">        EQ.STRESS: when stress output is required</span>
+<span class="sd">        EQ.STRAIN when strain output is required</span>
+<span class="sd">        EQ.ALL when both stress and strain output are required</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;intout&quot;</span><span class="p">)</span>
+
+    <span class="nd">@intout</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the intout property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;STRESS&quot;</span><span class="p">,</span> <span class="s2">&quot;STRAIN&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;intout must be `None` or one of {&quot; &quot;,&quot;STRESS&quot;,&quot;STRAIN&quot;,&quot;ALL&quot;}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;intout&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nodout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output extrapolated stress/strain at connectivity nodes points for detailed element output in the file ELOUTDET.  DT and BINARY of *DATABASE_ELOUT apply to ELOUTDET.</span>
+<span class="sd">        EQ.STRESS when stress output is required</span>
+<span class="sd">        EQ.STRAIN when strain output is required</span>
+<span class="sd">        EQ.ALL when both stress and strain output are required</span>
+<span class="sd">        EQ.STRESS_GL when nodal averaged stress output is required</span>
+<span class="sd">        EQ.STRAIN_GL when nodal averaged strain output is required</span>
+<span class="sd">        EQ.ALL_GL for nodal averaged stress and strain output</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;nodout&quot;</span><span class="p">)</span>
+
+    <span class="nd">@nodout</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nodout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the nodout property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;STRESS&quot;</span><span class="p">,</span> <span class="s2">&quot;STRAIN&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;STRESS_GL&quot;</span><span class="p">,</span> <span class="s2">&quot;STRAIN_GL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL_GL&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;nodout must be `None` or one of {&quot; &quot;,&quot;STRESS&quot;,&quot;STRAIN&quot;,&quot;ALL&quot;,&quot;STRESS_GL&quot;,&quot;STRAIN_GL&quot;,&quot;ALL_GL&quot;}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;nodout&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dtdt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output of node point dtemperature/dtime data to d3plot</span>
+<span class="sd">        EQ.0: (default) no output</span>
+<span class="sd">        EQ.1: output dT/dt</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;dtdt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@dtdt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dtdt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the dtdt property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;dtdt must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;dtdt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resplt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output of translational and rotational residual forces to d3plot and d3iter</span>
+<span class="sd">        EQ.0: No output</span>
+<span class="sd">        EQ.1: Output residual</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;resplt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@resplt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resplt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the resplt property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;resplt must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;resplt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neipb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Number of additional integration point history variables written to the binary database for beam elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;neipb&quot;</span><span class="p">)</span>
+
+    <span class="nd">@neipb</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neipb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the neipb property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;neipb&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quadsld</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output option for quadratic higher order solid elements EQ.1: output full connectivity,</span>
+<span class="sd">        EQ.2: full connectivity and data at all integration points.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;quadsld&quot;</span><span class="p">)</span>
+
+    <span class="nd">@quadsld</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quadsld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the quadsld property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;quadsld must be `None` or one of {0,1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;quadsld&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cubsld</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output option for cubic higher order solid elements EQ.1: output full connectivity,</span>
+<span class="sd">        EQ.2: full connectivity and data at all integration points.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;cubsld&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cubsld</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cubsld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the cubsld property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;cubsld must be `None` or one of {0,1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;cubsld&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deleres</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Output flag for results of deleted elements:</span>
+<span class="sd">        EQ.0:	no results output(all zero)</span>
+<span class="sd">        EQ.1 : last available results, e.g., stressesand history variables, are written to d3plotand d3part.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;deleres&quot;</span><span class="p">)</span>
+
+    <span class="nd">@deleres</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deleres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the deleres property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;deleres must be `None` or one of {0,1}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;deleres&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.1. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+ansys.dyna.core.pre.dynabase.ThermalAnalysis
+============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ThermalAnalysis
+
+   Bases: :py:obj:`BaseObj`
+
+
+   
+   Activates thermal analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined_solver
+      :value: False
+
+
+
+   .. py:attribute:: defined_timestep
+      :value: False
+
+
+
+   .. py:attribute:: defined_nonlinear
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'analysis_thermal'
+
+
+
+   .. py:method:: set_timestep(timestep_control=ThermalAnalysisTimestep.FIXED, initial_timestep=0)
+
+      
+      Set time step controls for the thermal solution in a thermal only or coupled structural/thermal analysis.
+
+
+      :Parameters:
+
+          **timestep_control** : :obj:`ThermalAnalysisTimestep`
+              Time step control.
+
+          **initial_timestep** : :class:`python:float`, :obj:`optional`
+              Initial thermal time step. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_solver(analysis_type=ThermalAnalysisType.STEADY_STATE)
+
+      
+      Set options for the thermal solution in a thermal only or coupled structural-thermal analysis.
+
+
+      :Parameters:
+
+          **analysis_type** : :obj:`ImplicitAnalysis`
+              Thermal analysis type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_nonlinear(convergence_tol=0.0001, divergence=0.5)
+
+      
+      Set parameters for a nonlinear thermal or coupled structural/thermal analysis.
+
+
+      :Parameters:
+
+          **convergence_tol** : :class:`python:float`
+              Convergence tolerance for temperature.
+
+          **divergence** : :class:`python:float`
+              Divergence control parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a thermal analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

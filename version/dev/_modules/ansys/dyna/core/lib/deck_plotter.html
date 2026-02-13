@@ -1,0 +1,1310 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.lib.deck_plotter &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/lib/deck_plotter';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/lib/deck_plotter.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.lib.deck_plotter</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.lib.deck_plotter</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="sd">&quot;&quot;&quot;Module for plotting decks.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Deck</span>
+
+
+<div class="viewcode-block" id="get_nid_to_index_mapping">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.get_nid_to_index_mapping">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_nid_to_index_mapping</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create array-based node ID to index mapping.</span>
+
+<span class="sd">    Returns an array where mapping[nid] = index.</span>
+<span class="sd">    This is much faster than dict-based lookup (5000x+ speedup).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nids</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;nid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">max_nid</span> <span class="o">=</span> <span class="n">nids</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+    <span class="c1"># Create lookup array: mapping[nid] = index</span>
+    <span class="c1"># Use -1 for invalid entries</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">max_nid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">mapping</span><span class="p">[</span><span class="n">nids</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nids</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mapping</span></div>
+
+
+
+<div class="viewcode-block" id="merge_keywords">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.merge_keywords">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_keywords</span><span class="p">(</span>
+    <span class="n">deck</span><span class="p">:</span> <span class="n">Deck</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merge mesh keywords.</span>
+
+<span class="sd">    Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)</span>
+<span class="sd">    and returns tham as data frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nodes_temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">kwd</span><span class="o">.</span><span class="n">nodes</span> <span class="k">for</span> <span class="n">kwd</span> <span class="ow">in</span> <span class="n">deck</span><span class="o">.</span><span class="n">get_kwds_by_type</span><span class="p">(</span><span class="s2">&quot;NODE&quot;</span><span class="p">)]</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">nodes_temp</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes_temp</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="n">df_list</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;SHELL&quot;</span><span class="p">,</span> <span class="s2">&quot;BEAM&quot;</span><span class="p">,</span> <span class="s2">&quot;SOLID&quot;</span><span class="p">]:</span>
+        <span class="n">matching_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">kwd</span><span class="o">.</span><span class="n">elements</span> <span class="k">for</span> <span class="n">kwd</span> <span class="ow">in</span> <span class="n">deck</span><span class="o">.</span><span class="n">get_kwds_by_type</span><span class="p">(</span><span class="s2">&quot;ELEMENT&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">kwd</span><span class="o">.</span><span class="n">subkeyword</span> <span class="o">==</span> <span class="n">item</span><span class="p">]</span>
+        <span class="n">df_list</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">matching_elements</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching_elements</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">nodes</span><span class="p">,</span>
+        <span class="n">df_list</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># solids</span></div>
+
+
+
+<div class="viewcode-block" id="process_nodes">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.process_nodes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_nodes</span><span class="p">(</span><span class="n">nodes_df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process nodes DataFrame to extract XYZ coordinates as a numpy array.&quot;&quot;&quot;</span>
+    <span class="n">nodes_xyz</span> <span class="o">=</span> <span class="n">nodes_df</span><span class="p">[[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">nodes_xyz</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="shell_facet_array">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.shell_facet_array">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">shell_facet_array</span><span class="p">(</span><span class="n">facets</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the shell facet array from the DataFrame.</span>
+
+<span class="sd">    Facets are a pandas frame that is a sequence of integers</span>
+<span class="sd">    or NAs with max length of 8.</span>
+<span class="sd">    valid rows contain 3,4,6, or 8 items consecutive from the</span>
+<span class="sd">    left.  we don&#39;t plot quadratic edges so 6/8 collapse to 3/4</span>
+<span class="sd">    invalid rows are ignored, meaning they return an empty array</span>
+<span class="sd">    return an array of length 4 or 5 using the pyvista spec</span>
+<span class="sd">    for facets which includes a length prefix</span>
+<span class="sd">    [1,2,3]=&gt;[3,1,2,3]</span>
+<span class="sd">    [1,2,3,0]=&gt;[3,1,2,3]</span>
+<span class="sd">    [1,2,3,NA]=&gt;[3,1,2,3]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">facet_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">facets</span><span class="p">):</span>
+        <span class="c1"># find the first empty column</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">facet_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">return</span> <span class="n">facet_array</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">facet_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+                <span class="k">return</span> <span class="n">facet_array</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># invalid</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># fill the output to the right of the prefix</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">facet_array</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+    <span class="n">facet_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">return</span> <span class="n">facet_array</span></div>
+
+
+
+<div class="viewcode-block" id="solid_array">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.solid_array">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">solid_array</span><span class="p">(</span><span class="n">solids</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the solid array from the DataFrame.</span>
+
+<span class="sd">    Solids are a pandas frame that is a sequence of integers</span>
+<span class="sd">    or NAs with max length of 28.</span>
+<span class="sd">    valid rows contain 3, 4, 6, or 8 items consecutive from the</span>
+<span class="sd">    left.  We don&#39;t plot quadratic edges so 6/8 collapse to 3/4</span>
+<span class="sd">    invalid rows are ignored, meaning they return an empty array</span>
+<span class="sd">    return an array of length 4 or 5 using the pyvista spec</span>
+<span class="sd">    for facets which includes a length prefix</span>
+<span class="sd">    [1,2,3]=&gt;[3,1,2,3]</span>
+<span class="sd">    [1,2,3,0]=&gt;[3,1,2,3]</span>
+<span class="sd">    [1,2,3,NA]=&gt;[3,1,2,3]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># FACES CREATED BY THE SOLIDS BASED ON MANUAL</span>
+    <span class="c1"># A DUMMY ZERO IS PUT AS A PLACEHOLDER FOR THE LEN PREFIX</span>
+    <span class="n">four_node_faces</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+    <span class="n">six_node_faces</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">]</span>
+    <span class="n">eight_node_faces</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="n">facet_array</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">solids</span><span class="p">):</span>
+        <span class="c1"># find the first empty column</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">facet_array</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">facet</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">solids</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">facet</span> <span class="ow">in</span> <span class="n">four_node_faces</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">facet</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">facet_array</span>
+            <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">facet_array</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">facet</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">solids</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">facet</span> <span class="ow">in</span> <span class="n">six_node_faces</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">facet</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">facet_array</span>
+            <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+                <span class="n">facet_array</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">facet</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">solids</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">facet</span> <span class="ow">in</span> <span class="n">eight_node_faces</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">facet</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">facet_array</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># invalid</span>
+                <span class="k">return</span> <span class="p">[]</span>
+        <span class="c1"># fill the output to the right of the prefix</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">facet_array</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="line_array">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.line_array">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">line_array</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert DataFrame to lines array.</span>
+
+<span class="sd">    `lines` is a pandas frame that is a sequence of integers</span>
+<span class="sd">    or NAs with max length of 2.</span>
+<span class="sd">    valid rows contain 2 items consecutive from the</span>
+<span class="sd">    left.</span>
+<span class="sd">    invalid rows are ignored, meaning they return an empty array</span>
+<span class="sd">    return an array of length 3 using the pyvista spec</span>
+<span class="sd">    for facets which includes a length prefix</span>
+<span class="sd">    [1,2,]=&gt;[2,1,2]</span>
+<span class="sd">    [1,2,3,0]=&gt;[]</span>
+<span class="sd">    [1,2,3,NA]=&gt;[]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">line_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+        <span class="c1"># find the first empty column</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># fill the output to the right of the prefix</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">line_array</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+
+    <span class="n">line_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">line_array</span></div>
+
+
+
+<div class="viewcode-block" id="map_facet_nid_to_index">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.map_facet_nid_to_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_facet_nid_to_index</span><span class="p">(</span><span class="n">flat_facets</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert node IDs to indices using array-based mapping.</span>
+
+<span class="sd">    Given a flat list of facets or lines, use the mapping array to convert</span>
+<span class="sd">    node IDs to Python indices for PyVista visualization.</span>
+
+<span class="sd">    The mapping is a numpy array where mapping[nid] = index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">flat_facets</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Build a mask for positions that are node IDs (not length prefixes)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flat_facets</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_facets</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">flat_facets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Don&#39;t transform the count</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># Apply mapping only to node ID positions (vectorized)</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">flat_facets</span><span class="p">[</span><span class="n">mask</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="extract_shell_facets">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.extract_shell_facets">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_shell_facets</span><span class="p">(</span><span class="n">shells</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract shell faces from DataFrame - returns triangles and quads separately.</span>
+
+<span class="sd">    Shells table comes in with the form</span>
+<span class="sd">    |  eid  | nid1 | nid2 | nid3 | nid4</span>
+<span class="sd">    |  1    | 10   | 11   | 12   |</span>
+<span class="sd">    |  20   | 21   | 22   | 23   | 24</span>
+
+<span class="sd">    Returns triangles and quads in separate arrays (already prefixed with count):</span>
+<span class="sd">    - Triangles: [3, n1, n2, n3, 3, n1, n2, n3, ...]</span>
+<span class="sd">    - Quads: [4, n1, n2, n3, n4, 4, n1, n2, n3, n4, ...]</span>
+
+<span class="sd">    Elements with fewer than 3 valid nodes are skipped.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">empty_return</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">empty_return</span>
+
+    <span class="c1"># Extract columns as numpy arrays (much faster than itertuples)</span>
+    <span class="n">eids</span> <span class="o">=</span> <span class="n">shells</span><span class="p">[</span><span class="s2">&quot;eid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">pids</span> <span class="o">=</span> <span class="n">shells</span><span class="p">[</span><span class="s2">&quot;pid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="c1"># Get node columns as 2D array - fill NA values with 0 before conversion</span>
+    <span class="n">node_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span> <span class="s2">&quot;n2&quot;</span><span class="p">,</span> <span class="s2">&quot;n3&quot;</span><span class="p">,</span> <span class="s2">&quot;n4&quot;</span><span class="p">]</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">shells</span><span class="p">[</span><span class="n">node_cols</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="c1"># Filter out invalid elements (need at least 3 valid nodes: n1, n2, n3 &gt; 0)</span>
+    <span class="n">valid_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span>
+    <span class="n">eids</span> <span class="o">=</span> <span class="n">eids</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span>
+    <span class="n">pids</span> <span class="o">=</span> <span class="n">pids</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">empty_return</span>
+
+    <span class="c1"># Determine element type (3 or 4 nodes)</span>
+    <span class="n">is_quad</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">nodes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">tri_mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">is_quad</span>
+
+    <span class="n">n_tris</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tri_mask</span><span class="p">)</span>
+    <span class="n">n_quads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">is_quad</span><span class="p">)</span>
+
+    <span class="c1"># Process triangles - fully vectorized</span>
+    <span class="k">if</span> <span class="n">n_tris</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tri_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">tri_mask</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">tri_mapped</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">tri_nodes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_tris</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">triangles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_tris</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">triangles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">triangles</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">tri_mapped</span>
+        <span class="n">triangles</span> <span class="o">=</span> <span class="n">triangles</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+        <span class="n">tri_eids</span> <span class="o">=</span> <span class="n">eids</span><span class="p">[</span><span class="n">tri_mask</span><span class="p">]</span>
+        <span class="n">tri_pids</span> <span class="o">=</span> <span class="n">pids</span><span class="p">[</span><span class="n">tri_mask</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">triangles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">tri_eids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">tri_pids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="c1"># Process quads - fully vectorized</span>
+    <span class="k">if</span> <span class="n">n_quads</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">quad_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">is_quad</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">quad_mapped</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">quad_nodes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_quads</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="n">quads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_quads</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">quads</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">quads</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">quad_mapped</span>
+        <span class="n">quads</span> <span class="o">=</span> <span class="n">quads</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+        <span class="n">quad_eids</span> <span class="o">=</span> <span class="n">eids</span><span class="p">[</span><span class="n">is_quad</span><span class="p">]</span>
+        <span class="n">quad_pids</span> <span class="o">=</span> <span class="n">pids</span><span class="p">[</span><span class="n">is_quad</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">quads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">quad_eids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">quad_pids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">triangles</span><span class="p">,</span> <span class="n">tri_eids</span><span class="p">,</span> <span class="n">tri_pids</span><span class="p">,</span> <span class="n">quads</span><span class="p">,</span> <span class="n">quad_eids</span><span class="p">,</span> <span class="n">quad_pids</span></div>
+
+
+
+<div class="viewcode-block" id="extract_lines">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.extract_lines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_lines</span><span class="p">(</span><span class="n">beams</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract lines from DataFrame.</span>
+
+<span class="sd">    Beams table comes in with the form with extra information not supported,</span>
+<span class="sd">    |  eid  | nid1 | nid2</span>
+<span class="sd">    |  1    | 10   | 11</span>
+<span class="sd">    |  20   | 21   | 22</span>
+
+<span class="sd">      we only care about nid 1 and 2</span>
+
+<span class="sd">    but the array needed for pyvista polydata is the same as in extract facets</span>
+<span class="sd">    of the form where each element is prefixed by the length of the element node list</span>
+<span class="sd">    [2,10,11,2,21,22]</span>
+
+<span class="sd">    Take individual rows, extract the appropriate nid&#39;s and output a flat list of</span>
+<span class="sd">    facets for pyvista</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># dont need to do this if there is no beams</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">beams</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="c1"># extract the node information, element_ids and part_ids</span>
+    <span class="n">line_with_prefix</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">eid</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">beams</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">line_array</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Only add if valid line</span>
+            <span class="n">line_with_prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+            <span class="n">eid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">pid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Convert list to np.ndarray</span>
+    <span class="n">flat_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">line_with_prefix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">line_with_prefix</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">flat_lines_indexed</span> <span class="o">=</span> <span class="n">map_facet_nid_to_index</span><span class="p">(</span><span class="n">flat_lines</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">flat_lines_indexed</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">eid</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="extract_solids">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.extract_solids">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_solids</span><span class="p">(</span><span class="n">solids</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract solid elements from DataFrame (optimized vectorized version).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="c1"># Extract data as numpy arrays</span>
+    <span class="n">eids</span> <span class="o">=</span> <span class="n">solids</span><span class="p">[</span><span class="s2">&quot;eid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">pids</span> <span class="o">=</span> <span class="n">solids</span><span class="p">[</span><span class="s2">&quot;pid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="n">node_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span> <span class="s2">&quot;n2&quot;</span><span class="p">,</span> <span class="s2">&quot;n3&quot;</span><span class="p">,</span> <span class="s2">&quot;n4&quot;</span><span class="p">,</span> <span class="s2">&quot;n5&quot;</span><span class="p">,</span> <span class="s2">&quot;n6&quot;</span><span class="p">,</span> <span class="s2">&quot;n7&quot;</span><span class="p">,</span> <span class="s2">&quot;n8&quot;</span><span class="p">]</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">solids</span><span class="p">[</span><span class="n">node_cols</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="c1"># Vectorized unique count: sort each row and count changes</span>
+    <span class="n">sorted_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">unique_counts</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sorted_nodes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">solid_with_prefix</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">8</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)],</span>
+        <span class="mi">6</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)],</span>
+        <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)],</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Process hex elements (8 unique nodes) - most common case, fully vectorized</span>
+    <span class="n">hex_mask</span> <span class="o">=</span> <span class="n">unique_counts</span> <span class="o">==</span> <span class="mi">8</span>
+    <span class="n">n_hex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">hex_mask</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_hex</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">hex_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">hex_mask</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">hex_eids</span> <span class="o">=</span> <span class="n">eids</span><span class="p">[</span><span class="n">hex_mask</span><span class="p">]</span>
+        <span class="n">hex_pids</span> <span class="o">=</span> <span class="n">pids</span><span class="p">[</span><span class="n">hex_mask</span><span class="p">]</span>
+
+        <span class="c1"># Map all node IDs at once</span>
+        <span class="n">mapped_nodes</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">hex_nodes</span><span class="p">]</span>  <span class="c1"># Shape: (n_hex, 8)</span>
+
+        <span class="c1"># Build connectivity: [8, n1, n2, ..., n8] for each element</span>
+        <span class="n">connectivity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_hex</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">connectivity</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">connectivity</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">mapped_nodes</span>
+
+        <span class="n">solid_with_prefix</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">connectivity</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">hex_eids</span><span class="p">,</span> <span class="n">hex_pids</span><span class="p">]</span>
+
+    <span class="c1"># For other element types (less common), fall back to per-element processing</span>
+    <span class="k">for</span> <span class="n">elem_type</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">unique_counts</span> <span class="o">==</span> <span class="n">elem_type</span>
+        <span class="n">n_of_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_of_type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">type_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">type_eids</span> <span class="o">=</span> <span class="n">eids</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">type_pids</span> <span class="o">=</span> <span class="n">pids</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="c1"># Get unique nodes preserving order (first occurrence)</span>
+        <span class="n">connectivity_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_of_type</span><span class="p">):</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">type_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+            <span class="n">unique_nodes</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">elem_type</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># Wedge: reorder for PyVista</span>
+                <span class="n">unique_nodes</span> <span class="o">=</span> <span class="n">unique_nodes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])]</span>
+
+            <span class="n">connectivity_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="n">elem_type</span><span class="p">],</span> <span class="n">mapping</span><span class="p">[</span><span class="n">unique_nodes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)]]))</span>
+
+        <span class="k">if</span> <span class="n">connectivity_list</span><span class="p">:</span>
+            <span class="n">flat_connectivity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">connectivity_list</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+            <span class="n">solid_with_prefix</span><span class="p">[</span><span class="n">elem_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">flat_connectivity</span><span class="p">,</span> <span class="n">type_eids</span><span class="p">,</span> <span class="n">type_pids</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">solid_with_prefix</span></div>
+
+
+
+<div class="viewcode-block" id="get_pyvista">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.get_pyvista">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pyvista</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Method to import pyvista, raising an exception if not installed.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;plot is only supported if pyvista is installed&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pv</span></div>
+
+
+
+<div class="viewcode-block" id="is_jupyter_environment">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.is_jupyter_environment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_jupyter_environment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if code is running in a Jupyter notebook environment.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True if running in Jupyter notebook/lab, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_ipython</span>
+
+        <span class="n">ipython</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ipython</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># Check for notebook or lab kernels</span>
+        <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">in</span> <span class="n">ipython</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="get_polydata">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.get_polydata">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_polydata</span><span class="p">(</span><span class="n">deck</span><span class="p">:</span> <span class="n">Deck</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the PolyData Object for plotting from a given deck with nodes and elements.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    deck : Deck</span>
+<span class="sd">        The deck to plot</span>
+<span class="sd">    cwd : str, optional</span>
+<span class="sd">        Current working directory for expanding includes</span>
+<span class="sd">    extract_surface : bool, default=True</span>
+<span class="sd">        If True, extract only the exterior surface for solid elements.</span>
+<span class="sd">        This dramatically improves performance for large solid meshes with no visual difference,</span>
+<span class="sd">        since only the surface is visible anyway. Set to False to include all cells.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pyvista.UnstructuredGrid</span>
+<span class="sd">        UnstructuredGrid containing the mesh for visualization</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># import this lazily (otherwise this adds over a second to the import time of pyDyna)</span>
+    <span class="n">pv</span> <span class="o">=</span> <span class="n">get_pyvista</span><span class="p">()</span>
+
+    <span class="c1"># check kwargs for cwd. future more arguments to plot</span>
+    <span class="c1"># flatten deck</span>
+    <span class="k">if</span> <span class="n">cwd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flat_deck</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span> <span class="n">recurse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">flat_deck</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">recurse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># get dataframes for each element types</span>
+    <span class="n">nodes_df</span><span class="p">,</span> <span class="n">element_dict</span> <span class="o">=</span> <span class="n">merge_keywords</span><span class="p">(</span><span class="n">flat_deck</span><span class="p">)</span>
+    <span class="n">shells_df</span> <span class="o">=</span> <span class="n">element_dict</span><span class="p">[</span><span class="s2">&quot;SHELL&quot;</span><span class="p">]</span>
+    <span class="n">beams_df</span> <span class="o">=</span> <span class="n">element_dict</span><span class="p">[</span><span class="s2">&quot;BEAM&quot;</span><span class="p">]</span>
+    <span class="n">solids_df</span> <span class="o">=</span> <span class="n">element_dict</span><span class="p">[</span><span class="s2">&quot;SOLID&quot;</span><span class="p">]</span>
+
+    <span class="n">nodes_list</span> <span class="o">=</span> <span class="n">process_nodes</span><span class="p">(</span><span class="n">nodes_df</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">shells_df</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">beams_df</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">solids_df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;missing node or element keyword to plot&quot;</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">get_nid_to_index_mapping</span><span class="p">(</span><span class="n">nodes_df</span><span class="p">)</span>
+
+    <span class="c1"># Extract shell facets - returns triangles and quads separately</span>
+    <span class="n">triangles</span><span class="p">,</span> <span class="n">tri_eids</span><span class="p">,</span> <span class="n">tri_pids</span><span class="p">,</span> <span class="n">quads</span><span class="p">,</span> <span class="n">quad_eids</span><span class="p">,</span> <span class="n">quad_pids</span> <span class="o">=</span> <span class="n">extract_shell_facets</span><span class="p">(</span><span class="n">shells_df</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+
+    <span class="n">lines</span><span class="p">,</span> <span class="n">line_eids</span><span class="p">,</span> <span class="n">line_pids</span> <span class="o">=</span> <span class="n">extract_lines</span><span class="p">(</span><span class="n">beams_df</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+    <span class="n">solids_info</span> <span class="o">=</span> <span class="n">extract_solids</span><span class="p">(</span><span class="n">solids_df</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+
+    <span class="c1"># celltype_dict for beam and shell</span>
+    <span class="n">celltype_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">LINE</span><span class="p">:</span> <span class="n">lines</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Add triangles if present</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">triangles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">celltype_dict</span><span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">TRIANGLE</span><span class="p">]</span> <span class="o">=</span> <span class="n">triangles</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c1"># Add quads if present</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">quads</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">celltype_dict</span><span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">QUAD</span><span class="p">]</span> <span class="o">=</span> <span class="n">quads</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c1"># dict of cell types for node counts</span>
+    <span class="n">solid_celltype</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">TETRA</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">PYRAMID</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">WEDGE</span><span class="p">,</span>
+        <span class="mi">8</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">CellType</span><span class="o">.</span><span class="n">HEXAHEDRON</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Update celltype_dict with solid elements</span>
+    <span class="n">solids_pids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">solids_eids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">n_points</span><span class="p">,</span> <span class="n">elements</span> <span class="ow">in</span> <span class="n">solids_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">temp_solids</span><span class="p">,</span> <span class="n">temp_solids_eids</span><span class="p">,</span> <span class="n">temp_solids_pids</span> <span class="o">=</span> <span class="n">elements</span>
+
+        <span class="n">celltype_dict</span><span class="p">[</span><span class="n">solid_celltype</span><span class="p">[</span><span class="n">n_points</span><span class="p">]]</span> <span class="o">=</span> <span class="n">temp_solids</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># Update part_ids and element_ids info for solid elements</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solids_pids</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">solids_pids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">solids_pids</span><span class="p">,</span> <span class="n">temp_solids_pids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solids_pids</span> <span class="o">=</span> <span class="n">temp_solids_pids</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solids_pids</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">solids_eids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">solids_eids</span><span class="p">,</span> <span class="n">temp_solids_eids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solids_eids</span> <span class="o">=</span> <span class="n">temp_solids_eids</span>
+
+    <span class="c1"># Create UnstructuredGrid</span>
+    <span class="n">plot_data</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">UnstructuredGrid</span><span class="p">(</span><span class="n">celltype_dict</span><span class="p">,</span> <span class="n">nodes_list</span><span class="p">)</span>
+
+    <span class="c1"># Combine shell metadata (triangles and quads)</span>
+    <span class="n">shell_pids_combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">tri_pids</span><span class="p">,</span> <span class="n">quad_pids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">shell_eids_combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">tri_eids</span><span class="p">,</span> <span class="n">quad_eids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Extract only the exterior surface for performance if solids are present</span>
+    <span class="c1"># This dramatically speeds up plotting with no visual difference since only surface is visible</span>
+    <span class="n">has_solids</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solids_info</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">solids_info</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">extract_surface</span> <span class="ow">and</span> <span class="n">has_solids</span><span class="p">:</span>
+        <span class="c1"># Add cell data before extraction (extract_surface preserves cell_data for extracted cells)</span>
+        <span class="n">plot_data</span><span class="o">.</span><span class="n">cell_data</span><span class="p">[</span><span class="s2">&quot;part_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">line_pids</span><span class="p">,</span> <span class="n">shell_pids_combined</span><span class="p">,</span> <span class="n">solids_pids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plot_data</span><span class="o">.</span><span class="n">cell_data</span><span class="p">[</span><span class="s2">&quot;element_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">line_eids</span><span class="p">,</span> <span class="n">shell_eids_combined</span><span class="p">,</span> <span class="n">solids_eids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Extract surface - removes interior solid cells</span>
+        <span class="n">plot_data</span> <span class="o">=</span> <span class="n">plot_data</span><span class="o">.</span><span class="n">extract_surface</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Add cell data without surface extraction</span>
+        <span class="n">plot_data</span><span class="o">.</span><span class="n">cell_data</span><span class="p">[</span><span class="s2">&quot;part_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">line_pids</span><span class="p">,</span> <span class="n">shell_pids_combined</span><span class="p">,</span> <span class="n">solids_pids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plot_data</span><span class="o">.</span><span class="n">cell_data</span><span class="p">[</span><span class="s2">&quot;element_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">line_eids</span><span class="p">,</span> <span class="n">shell_eids_combined</span><span class="p">,</span> <span class="n">solids_eids</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plot_data</span></div>
+
+
+
+<div class="viewcode-block" id="plot_deck">
+<a class="viewcode-back" href="../../../../../api/ansys/dyna/core/lib/deck_plotter/index.html#ansys.dyna.core.lib.deck_plotter.plot_deck">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_deck</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the deck with automatic Jupyter notebook support.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    deck : Deck</span>
+<span class="sd">        The deck to plot</span>
+<span class="sd">    cwd : str, optional</span>
+<span class="sd">        Current working directory for expanding includes</span>
+<span class="sd">    jupyter_backend : str, optional</span>
+<span class="sd">        Jupyter backend to use. Options are &#39;static&#39;, &#39;server&#39;, &#39;trame&#39;, or None.</span>
+<span class="sd">        If not specified, automatically detects Jupyter environment and uses &#39;static&#39;.</span>
+<span class="sd">        Set to None to disable Jupyter mode explicitly.</span>
+<span class="sd">    color : str, optional</span>
+<span class="sd">        Color of the mesh</span>
+<span class="sd">    scalars : str, optional</span>
+<span class="sd">        Scalars to color by (e.g., &#39;part_ids&#39;, &#39;element_ids&#39;)</span>
+<span class="sd">    **args :</span>
+<span class="sd">        Additional keyword arguments passed to pyvista.plot()</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pyvista plot or camera position</span>
+<span class="sd">        Depends on the plotting backend used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># import this lazily (otherwise this adds over a second to the import time of pyDyna)</span>
+    <span class="n">pv</span> <span class="o">=</span> <span class="n">get_pyvista</span><span class="p">()</span>
+
+    <span class="n">plot_data</span> <span class="o">=</span> <span class="n">get_polydata</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;cwd&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+    <span class="c1"># set default color if both color and scalars are not specified</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">scalars</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;scalars&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Handle Jupyter backend - auto-detect if not specified</span>
+    <span class="n">jupyter_backend</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;jupyter_backend&quot;</span><span class="p">,</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">jupyter_backend</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_jupyter_environment</span><span class="p">():</span>
+            <span class="n">jupyter_backend</span> <span class="o">=</span> <span class="s2">&quot;static&quot;</span>  <span class="c1"># Default to static for simplicity</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">jupyter_backend</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Add jupyter_backend to args if specified</span>
+    <span class="k">if</span> <span class="n">jupyter_backend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;jupyter_backend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jupyter_backend</span>
+
+    <span class="k">if</span> <span class="n">scalars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">plot_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="n">scalars</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># User specified scalars</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">plot_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># User specified color</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">plot_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">pv</span><span class="o">.</span><span class="n">global_theme</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># Default color</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

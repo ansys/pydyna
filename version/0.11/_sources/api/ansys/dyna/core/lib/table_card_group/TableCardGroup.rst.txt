@@ -1,0 +1,204 @@
+ansys.dyna.core.lib.table_card_group.TableCardGroup
+===================================================
+
+.. py:class:: ansys.dyna.core.lib.table_card_group.TableCardGroup(card_schemas: List[Tuple[ansys.dyna.core.lib.field_schema.FieldSchema, Ellipsis]], length_func: Callable, active_func: Optional[Callable] = None, name: str = None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default, card_active_funcs: Optional[List[Callable]] = None, **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Format type of the table card group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: table
+      :type: pandas.DataFrame
+
+
+      
+      Get the table as a pandas DataFrame.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> None
+
+      
+      Read the table card group from a buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, retain_parameters: bool = False, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None, uri_prefix: str = None, **kwargs) -> str
+
+      
+      Write the table card group to a string or buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Indicates whether the card group is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+      
+      Indicates whether the card group is bounded.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

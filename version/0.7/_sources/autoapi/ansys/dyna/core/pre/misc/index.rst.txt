@@ -1,0 +1,222 @@
+ansys.dyna.core.pre.misc
+========================
+
+.. py:module:: ansys.dyna.core.pre.misc
+
+.. autoapi-nested-parse::
+
+   Module providing miscellaneous functions and methods.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.misc.MODULE_PATH
+   ansys.dyna.core.pre.misc.base_report_class
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.misc.Plain_Report
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.misc.is_float
+   ansys.dyna.core.pre.misc.random_string
+   ansys.dyna.core.pre.misc.create_temp_dir
+   ansys.dyna.core.pre.misc.check_valid_ip
+   ansys.dyna.core.pre.misc.check_valid_port
+
+
+Module Contents
+---------------
+
+.. py:data:: MODULE_PATH
+
+.. py:class:: Plain_Report(core, optional=None, additional=None, **kwargs)
+
+   .. py:attribute:: additional
+      :value: None
+
+
+
+   .. py:attribute:: core
+
+
+   .. py:attribute:: optional
+      :value: None
+
+
+
+   .. py:attribute:: kwargs
+
+
+   .. py:method:: get_version(package)
+
+
+   .. py:method:: __repr__()
+
+
+.. py:data:: base_report_class
+
+.. py:function:: is_float(input_string)
+
+   
+   Determine if a string can be converted to a float.
+
+
+   :Parameters:
+
+       **input_string** : :class:`python:str`
+           String.
+
+
+
+   :Returns:
+
+       ``True`` :obj:`when` :obj:`the` :class:`python:str` :obj:`can` :obj:`be` :obj:`converted` :obj:`to` :obj:`a` :class:`python:float`, ``False`` otherwise.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: random_string(stringLength=10, letters=string.ascii_lowercase)
+
+   
+   Generate a random string of a fixed length.
+
+
+   :Parameters:
+
+       **stringLength** : :class:`python:int`, :obj:`optional`
+           Length of the string. The default is ``10``.
+
+       **letters**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: create_temp_dir(tmpdir=None)
+
+   
+   Create a unique working directory in a temporary directory.
+
+
+   :Parameters:
+
+       **tempdir** : :class:`python:str`, :obj:`optional`
+           Name of the temporary directory to create the working
+           directory in. The default is ``None``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: check_valid_ip(ip)
+
+   
+   Check if an IP address is valid.
+
+
+   :Parameters:
+
+       **ip**
+           IP address.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: check_valid_port(port, lower_bound=1000, high_bound=60000)
+
+   
+   Check if a port is valid.
+
+
+   :Parameters:
+
+       **port** : :class:`python:int`
+           Port.
+
+       **lower_bound** : :class:`python:int`, :obj:`optional`
+           Lowest value for the port range. The default is ``1000``.
+
+       **high_bound** : :class:`python:int`, :obj:`optional`
+           Highest value for the port range. The default is ``6000``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,289 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyThicknessLargeCardSet
+================================================================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyThicknessLargeCardSet(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.cards.Cards`
+
+
+   
+   CardSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: t
+      :type: Optional[float]
+
+
+      
+      Get or set the Parametric coordinate of through thickness integration point.
+
+      Between -1 and 1 inclusive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigxx
+      :type: float
+
+
+      
+      Get or set the Define the xx stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigyy
+      :type: float
+
+
+      
+      Get or set the Define the yy stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigzz
+      :type: float
+
+
+      
+      Get or set the Define the zz stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigxy
+      :type: float
+
+
+      
+      Get or set the Define the xy stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigyz
+      :type: float
+
+
+      
+      Get or set the Define the yz stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigzx
+      :type: float
+
+
+      
+      Get or set the Define the zx stress component (global cartesian system).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: eps
+      :type: float
+
+
+      
+      Get or set the Effective plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: hisv
+      :type: ansys.dyna.core.lib.series_card.SeriesCard
+
+
+      
+      Dynamic array of history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: parent
+      :type: ansys.dyna.core.lib.keyword_base.KeywordBase
+
+
+      
+      Get the parent keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

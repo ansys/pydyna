@@ -1,0 +1,1500 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.lib.deck.Deck &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/dyna/core/lib/deck/Deck';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.lib.deck_loader" href="../deck_loader/index.html" />
+    <link rel="prev" title="ansys.dyna.core.lib.deck" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/api/ansys/dyna/core/lib/deck/Deck.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html"><span class="nf nf-md-package"></span> ansys.dyna.core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../__main__/index.html">ansys.dyna.core.__main__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../keywords/index.html">ansys.dyna.core.keywords</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">ansys.dyna.core.lib</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../array/index.html">ansys.dyna.core.lib.array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../card/index.html">ansys.dyna.core.lib.card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../card_interface/index.html">ansys.dyna.core.lib.card_interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../card_set/index.html">ansys.dyna.core.lib.card_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../card_writer/index.html">ansys.dyna.core.lib.card_writer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cards/index.html">ansys.dyna.core.lib.cards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cards_/index.html">ansys.dyna.core.lib.cards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/index.html">ansys.dyna.core.lib.config</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">ansys.dyna.core.lib.deck</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">ansys.dyna.core.lib.deck.Deck</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../deck_loader/index.html">ansys.dyna.core.lib.deck_loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deck_plotter/index.html">ansys.dyna.core.lib.deck_plotter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../domain_mapper/index.html">ansys.dyna.core.lib.domain_mapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../encrypted_keyword/index.html">ansys.dyna.core.lib.encrypted_keyword</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../expression_evaluator/index.html">ansys.dyna.core.lib.expression_evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../field/index.html">ansys.dyna.core.lib.field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../field_schema/index.html">ansys.dyna.core.lib.field_schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../field_writer/index.html">ansys.dyna.core.lib.field_writer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../format_type/index.html">ansys.dyna.core.lib.format_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../import_handler/index.html">ansys.dyna.core.lib.import_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../io_utils/index.html">ansys.dyna.core.lib.io_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keyword_base/index.html">ansys.dyna.core.lib.keyword_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keyword_collection/index.html">ansys.dyna.core.lib.keyword_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kwd_line_formatter/index.html">ansys.dyna.core.lib.kwd_line_formatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mixins/index.html">ansys.dyna.core.lib.mixins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../option_card/index.html">ansys.dyna.core.lib.option_card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../parameters/index.html">ansys.dyna.core.lib.parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../series_card/index.html">ansys.dyna.core.lib.series_card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../table_card/index.html">ansys.dyna.core.lib.table_card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../table_card_group/index.html">ansys.dyna.core.lib.table_card_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../text_card/index.html">ansys.dyna.core.lib.text_card</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transform/index.html">ansys.dyna.core.lib.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transforms/index.html">ansys.dyna.core.lib.transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../validation_mixin/index.html">ansys.dyna.core.lib.validation_mixin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../validators/index.html">ansys.dyna.core.lib.validators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../run/index.html">ansys.dyna.core.run</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../_autosummary/index.html"><span class="nf nf-md-package"></span> Auto Keyword classes</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ansys.dyna.core.lib</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">ansys.dyna.core.lib.deck</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.lib.deck.Deck</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ansys-dyna-core-lib-deck-deck">
+<h1>ansys.dyna.core.lib.deck.Deck<a class="headerlink" href="#ansys-dyna-core-lib-deck-deck" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.lib.deck.</span></span><span class="sig-name descname"><span class="pre">Deck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../validation_mixin/ValidationMixin.html#ansys.dyna.core.lib.validation_mixin.ValidationMixin" title="ansys.dyna.core.lib.validation_mixin.ValidationMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.validation_mixin.ValidationMixin</span></code></a></p>
+<p>Provides a collection of keywords that can read and write to a keyword file.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.comment_header">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comment_header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.comment_header" title="Link to this definition">#</a></dt>
+<dd><p>Comment header of the keyword database.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.title" title="Link to this definition">#</a></dt>
+<dd><p>Title of the keyword database.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.format">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../format_type/format_type.html#ansys.dyna.core.lib.format_type.format_type" title="ansys.dyna.core.lib.format_type.format_type"><span class="pre">ansys.dyna.core.lib.format_type.format_type</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.format" title="Link to this definition">#</a></dt>
+<dd><p>Format type of the deck.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.__add__" title="Link to this definition">#</a></dt>
+<dd><p>Add two decks together.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear all keywords from the deck.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.transform_handler">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform_handler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../transform/TransformHandler.html#ansys.dyna.core.lib.transform.TransformHandler" title="ansys.dyna.core.lib.transform.TransformHandler"><span class="pre">ansys.dyna.core.lib.transform.TransformHandler</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.transform_handler" title="Link to this definition">#</a></dt>
+<dd><p>Handles transformations for the deck.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.register_import_handler">
+<span class="sig-name descname"><span class="pre">register_import_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">import_handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../import_handler/ImportHandler.html#ansys.dyna.core.lib.import_handler.ImportHandler" title="ansys.dyna.core.lib.import_handler.ImportHandler"><span class="pre">ansys.dyna.core.lib.import_handler.ImportHandler</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.register_import_handler" title="Link to this definition">#</a></dt>
+<dd><p>Registers an ImportHandler object</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.parameters">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../parameters/ParameterSet.html#ansys.dyna.core.lib.parameters.ParameterSet" title="ansys.dyna.core.lib.parameters.ParameterSet"><span class="pre">ansys.dyna.core.lib.parameters.ParameterSet</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.parameters" title="Link to this definition">#</a></dt>
+<dd><p>Deck parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.append" title="Link to this definition">#</a></dt>
+<dd><p>Add a keyword to the collection.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>keyword</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordBase</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptedKeyword</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>]</span></dt><dd><p>Keyword. The keyword can be <code class="docutils literal notranslate"><span class="pre">KeywordBase</span></code>, <code class="docutils literal notranslate"><span class="pre">EncryptedKeyword</span></code>,
+or a string.</p>
+</dd>
+<dt><strong>check</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>The default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.remove" title="Link to this definition">#</a></dt>
+<dd><p>Remove a keyword from the collection by index.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>index</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">mandatory</span></code></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.all_keywords">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../encrypted_keyword/EncryptedKeyword.html#ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword" title="ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword"><span class="pre">ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.all_keywords" title="Link to this definition">#</a></dt>
+<dd><p>List of all keywords.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.string_keywords">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">string_keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.string_keywords" title="Link to this definition">#</a></dt>
+<dd><p>List of keywords as a raw string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.encrypted_keywords">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encrypted_keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.encrypted_keywords" title="Link to this definition">#</a></dt>
+<dd><p>List of keywords as a raw string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.keywords">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.keywords" title="Link to this definition">#</a></dt>
+<dd><p>Get all processed keywords as a KeywordCollection.</p>
+<p>This provides access to the fluent filtering API for all keywords
+in the deck. The collection supports indexing, iteration, and
+comparison with lists for backward compatibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all KeywordBase instances in the deck.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="c1"># Access by index (backward compatible)</span>
+<span class="gp">>>> </span><span class="n">first</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">keywords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">>>> </span><span class="c1"># Iterate (backward compatible)</span>
+<span class="gp">>>> </span><span class="k">for</span> <span class="n">kwd</span> <span class="ow">in</span> <span class="n">deck</span><span class="o">.</span><span class="n">keywords</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">kwd</span><span class="o">.</span><span class="n">keyword</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="c1"># Filter with fluent API</span>
+<span class="gp">>>> </span><span class="n">high_id_sections</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">keywords</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">keyword</span> <span class="o">==</span> <span class="s2">&quot;SECTION&quot;</span> <span class="ow">and</span> <span class="n">k</span><span class="o">.</span><span class="n">secid</span> <span class="o">></span> <span class="mi">100</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.extend">
+<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwlist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.extend" title="Link to this definition">#</a></dt>
+<dd><p>Add a list of keywords to the deck.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>kwlist</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></span></dt><dd><p>List of keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.expand">
+<span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recurse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.expand" title="Link to this definition">#</a></dt>
+<dd><p>Get a new deck that is flattened copy of <cite>self</cite>.</p>
+<p>A flattened deck is one where the <code class="docutils literal notranslate"><span class="pre">*INCLUDE</span></code> keywords are replaced
+by the contents of the file that is included.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>cwd</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Working directory used to resolve include filenames.
+Defaults to the current working directory.</p>
+</dd>
+<dt><strong>recurse</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, <code class="docutils literal notranslate"><span class="pre">*INCLUDE</span></code> keywords within included decks
+are expanded recursively. Default is True.</p>
+</dd>
+<dt><strong>strict</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, raise errors when keyword parsing fails for any reason
+(undefined parameters, invalid field values, malformed data, etc.).
+If False (default), keywords that fail to parse are retained as raw
+strings and a warning is emitted. Default is False for backward
+compatibility.
+TODO: Consider making strict=True the default in a future version.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.dumps">
+<span class="sig-name descname"><span class="pre">dumps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.dumps" title="Link to this definition">#</a></dt>
+<dd><p>Get the keyword file representation of all keywords as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></dt><dd><p>Keyword file representation of all keywords as a string.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIO</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../format_type/format_type.html#ansys.dyna.core.lib.format_type.format_type" title="ansys.dyna.core.lib.format_type.format_type"><span class="pre">ansys.dyna.core.lib.format_type.format_type</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retain_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.write" title="Link to this definition">#</a></dt>
+<dd><p>Write the card in the dyna keyword format.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>buf</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Buffer to write to. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+in which case the output is returned as a string.</p>
+</dd>
+<dt><strong>format</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Format to write in. The default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><strong>validate</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, validate the deck before writing. The default is False.
+Validation uses registered validators and raises ValidationError if errors are found.</p>
+</dd>
+<dt><strong>retain_parameters</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, write original parameter references (e.g., &amp;myvar) instead of
+substituted values for fields that were read from parameters. Default is False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.loads">
+<span class="sig-name descname"><span class="pre">loads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../import_handler/ImportContext.html#ansys.dyna.core.lib.import_handler.ImportContext" title="ansys.dyna.core.lib.import_handler.ImportContext"><span class="pre">ansys.dyna.core.lib.import_handler.ImportContext</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult</span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.loads" title="Link to this definition">#</a></dt>
+<dd><p>Load all keywords from the keyword file as a string.</p>
+<p>When adding all keywords from the file, this method
+overwrites the title and user comment, if any.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>value</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd></dd>
+<dt><strong>context: ImportContext</strong></dt><dd><p>the context</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.get_kwds_by_type">
+<span class="sig-name descname"><span class="pre">get_kwds_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.get_kwds_by_type" title="Link to this definition">#</a></dt>
+<dd><p>Get all keywords for a given type.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>str_type</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Keyword type.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Iterator</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordBase</span></code>]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Get all <code class="docutils literal notranslate"><span class="pre">*SECTION_*</span></code> keywords in the deck.</p>
+<p>>>>deck.get_kwds_by_type(“SECTION”)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.get_kwds_by_full_type">
+<span class="sig-name descname"><span class="pre">get_kwds_by_full_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_subtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.get_kwds_by_full_type" title="Link to this definition">#</a></dt>
+<dd><p>Get all keywords for a given full type.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>str_type</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Keyword type.</p>
+</dd>
+<dt><strong>str_subtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Keyword subtype or prefix of subtype. Matches keywords where the subkeyword
+starts with this value.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Iterator</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordBase</span></code>]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Get all <code class="docutils literal notranslate"><span class="pre">*SECTION_SHELL</span></code> keyword instances in the deck.</p>
+<p>>>>deck.get_kwds_by_full_type(“SECTION”, “SHELL”)</p>
+<p>Get all <code class="docutils literal notranslate"><span class="pre">*SET_NODE*</span></code> keyword instances (matches NODE, NODE_LIST, NODE_LIST_TITLE, etc).</p>
+<p>>>>deck.get_kwds_by_full_type(“SET”, “NODE”)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.get_section_by_id">
+<span class="sig-name descname"><span class="pre">get_section_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.get_section_by_id" title="Link to this definition">#</a></dt>
+<dd><p>Get the SECTION keyword in the collection for a given section ID.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>id</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Section ID.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION</span></code> <a class="reference external" href="https://docs.python.org/3/library/keyword.html#module-keyword" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyword</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">if</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">there</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">is</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">no</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">SECTION</span></code> <a class="reference external" href="https://docs.python.org/3/library/keyword.html#module-keyword" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyword</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">that</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">matches</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">the</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">section</span></code> ID.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></dt><dd><p>If multiple SECTION keywords use the given section ID.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.get_set_by_id">
+<span class="sig-name descname"><span class="pre">get_set_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.get_set_by_id" title="Link to this definition">#</a></dt>
+<dd><p>Get the SET keyword in the collection for a given set ID.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>id</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Set ID.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">SET</span></code> <a class="reference external" href="https://docs.python.org/3/library/keyword.html#module-keyword" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyword</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">if</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">there</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">is</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">no</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">SET</span></code> <a class="reference external" href="https://docs.python.org/3/library/keyword.html#module-keyword" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyword</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">that</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">matches</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">the</span></code> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set</span></code></a> ID.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></a></dt><dd><p>If multiple SET keywords use the given set ID.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.get" title="Link to this definition">#</a></dt>
+<dd><p>Get a list of keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>- *kwargs* (``dict``) –</strong></dt><dd><p>Keyword arguments.
+* <em>type</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+The type of keyword to get. For example, “SECTION” returns all section keywords.
+* <em>filter</em> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) –
+The filter to apply to the result. Only keywords which pass the filter will be returned.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.import_file">
+<span class="sig-name descname"><span class="pre">import_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult</span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.import_file" title="Link to this definition">#</a></dt>
+<dd><p>Import a keyword file.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>path</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Full path for the keyword file.</p>
+</dd>
+<dt><strong>encoding: str</strong></dt><dd><p>String encoding used to read the keyword file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.export_file">
+<span class="sig-name descname"><span class="pre">export_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retain_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.export_file" title="Link to this definition">#</a></dt>
+<dd><p>Export the keyword file to a new keyword file.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>path</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Full path for the new keyword file.</p>
+</dd>
+<dt><strong>encoding</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>String encoding for the file. The default is “utf-8”.</p>
+</dd>
+<dt><strong>validate</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, validate the deck before export. The default is False.
+Validation uses registered validators and raises ValidationError if errors are found.</p>
+</dd>
+<dt><strong>retain_parameters</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>If True, write original parameter references (e.g., &amp;myvar) instead of
+substituted values for fields that were read from parameters. Default is False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">export_file</span><span class="p">(</span><span class="s2">&quot;output.k&quot;</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Validate before export</span>
+<span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">export_file</span><span class="p">(</span><span class="s2">&quot;output.k&quot;</span><span class="p">,</span> <span class="n">retain_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Keep parameter references</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.keyword_names">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keyword_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.keyword_names" title="Link to this definition">#</a></dt>
+<dd><p>Get a list of all keyword names in the deck.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.__repr__" title="Link to this definition">#</a></dt>
+<dd><p>Get a console-friendly representation of a list of all keywords in the deck.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.__getitem__" title="Link to this definition">#</a></dt>
+<dd><p>Get keywords by type using dict-like access.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>key</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>]]</span></dt><dd><p>Either a keyword type (e.g., “SECTION”) or a tuple of (type, subtype)
+(e.g., (“SECTION”, “SHELL”)).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of matching keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">sections</span> <span class="o">=</span> <span class="n">deck</span><span class="p">[</span><span class="s2">&quot;SECTION&quot;</span><span class="p">]</span>
+<span class="gp">>>> </span><span class="n">shells</span> <span class="o">=</span> <span class="n">deck</span><span class="p">[</span><span class="s2">&quot;SECTION&quot;</span><span class="p">,</span> <span class="s2">&quot;SHELL&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../encrypted_keyword/EncryptedKeyword.html#ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword" title="ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword"><span class="pre">ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.__iter__" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over all keywords in the deck.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterator</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptedKeyword</span></code>]]</dt><dd><p>An iterator over all keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="k">for</span> <span class="n">kwd</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kwd</span><span class="p">,</span> <span class="n">KeywordBase</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">kwd</span><span class="o">.</span><span class="n">keyword</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.__len__" title="Link to this definition">#</a></dt>
+<dd><p>Get the number of keywords in the deck.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>The total number of keywords (including strings and encrypted).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">num_keywords</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.sections">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.sections" title="Link to this definition">#</a></dt>
+<dd><p>Get all SECTION_* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all section keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">shells</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">by_subtype</span><span class="p">(</span><span class="s2">&quot;SHELL&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.materials">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">materials</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.materials" title="Link to this definition">#</a></dt>
+<dd><p>Get all MAT_* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all material keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">elastic_mats</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">by_subtype</span><span class="p">(</span><span class="s2">&quot;ELASTIC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.elements">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.elements" title="Link to this definition">#</a></dt>
+<dd><p>Get all ELEMENT_* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all element keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">solid_elements</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">by_subtype</span><span class="p">(</span><span class="s2">&quot;SOLID&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.nodes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.nodes" title="Link to this definition">#</a></dt>
+<dd><p>Get all NODE keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all node keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">all_nodes</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.parts">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.parts" title="Link to this definition">#</a></dt>
+<dd><p>Get all PART* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all part keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">parts</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.sets">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.sets" title="Link to this definition">#</a></dt>
+<dd><p>Get all SET_* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all set keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">node_sets</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">sets</span><span class="o">.</span><span class="n">by_subtype</span><span class="p">(</span><span class="s2">&quot;NODE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.defines">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">defines</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../keyword_collection/KeywordCollection.html#ansys.dyna.core.lib.keyword_collection.KeywordCollection" title="ansys.dyna.core.lib.keyword_collection.KeywordCollection"><span class="pre">ansys.dyna.core.lib.keyword_collection.KeywordCollection</span></a></em><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.defines" title="Link to this definition">#</a></dt>
+<dd><p>Get all DEFINE_* keywords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordCollection</span></code></dt><dd><p>A collection of all define keywords.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">curves</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">defines</span><span class="o">.</span><span class="n">by_subtype</span><span class="p">(</span><span class="s2">&quot;CURVE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../encrypted_keyword/EncryptedKeyword.html#ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword" title="ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword"><span class="pre">ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ansys.dyna.core.lib.deck.Deck" title="ansys.dyna.core.lib.deck.Deck"><span class="pre">Deck</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.split" title="Link to this definition">#</a></dt>
+<dd><p>Split the deck into multiple decks based on a key function.</p>
+<p>The key function is called on each keyword and should return a value
+that will be used to group keywords. Keywords with the same return value
+will be placed in the same deck.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>key_func</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">KeywordBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">EncryptedKeyword</span></code>]], <code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>]</span></dt><dd><p>A function that takes a keyword and returns a grouping key.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Deck</span></code>]</dt><dd><p>A dictionary mapping keys to Deck instances.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="c1"># Split by keyword type</span>
+<span class="gp">>>> </span><span class="n">decks_by_type</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">keyword</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">KeywordBase</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">section_deck</span> <span class="o">=</span> <span class="n">decks_by_type</span><span class="p">[</span><span class="s2">&quot;SECTION&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="c1"># Split by domain using the domain mapper</span>
+<span class="gp">>>> </span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.domain_mapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">by_domain</span>
+<span class="gp">>>> </span><span class="n">decks_by_domain</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">by_domain</span><span class="p">)</span>
+<span class="gp">>>> </span><span class="n">mat_deck</span> <span class="o">=</span> <span class="n">decks_by_domain</span><span class="p">[</span><span class="s2">&quot;mat&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="c1"># Custom splitting logic</span>
+<span class="gp">>>> </span><span class="k">def</span><span class="w"> </span><span class="nf">by_id_range</span><span class="p">(</span><span class="n">kwd</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kwd</span><span class="p">,</span> <span class="n">KeywordBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">kwd</span><span class="p">,</span> <span class="s1">&#39;secid&#39;</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="n">kwd</span><span class="o">.</span><span class="n">secid</span> <span class="o"><</span> <span class="mi">100</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+<span class="gp">... </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="s2">&quot;high&quot;</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="s2">&quot;other&quot;</span>
+<span class="gp">>>> </span><span class="n">decks</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">by_id_range</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.split_by_domain">
+<span class="sig-name descname"><span class="pre">split_by_domain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ansys.dyna.core.lib.deck.Deck" title="ansys.dyna.core.lib.deck.Deck"><span class="pre">Deck</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.split_by_domain" title="Link to this definition">#</a></dt>
+<dd><p>Split the deck by keyword domain (mat, section, control, etc.).</p>
+<p>This is a convenience method that uses the domain mapper to categorize
+keywords. For custom splitting logic, use the <cite>split()</cite> method directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dict</span></code>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Deck</span></code>]</dt><dd><p>A dictionary mapping domain names to Deck instances.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#ansys.dyna.core.lib.deck.Deck.split" title="ansys.dyna.core.lib.deck.Deck.split"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split</span></code></a></dt><dd><p>Generic splitting method with custom key function.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">decks</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">split_by_domain</span><span class="p">()</span>
+<span class="gp">>>> </span><span class="n">mat_deck</span> <span class="o">=</span> <span class="n">decks</span><span class="p">[</span><span class="s2">&quot;mat&quot;</span><span class="p">]</span>
+<span class="gp">>>> </span><span class="n">control_deck</span> <span class="o">=</span> <span class="n">decks</span><span class="p">[</span><span class="s2">&quot;control&quot;</span><span class="p">]</span>
+<span class="gp">>>> </span><span class="n">section_deck</span> <span class="o">=</span> <span class="n">decks</span><span class="p">[</span><span class="s2">&quot;section&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.lib.deck.Deck.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.lib.deck.Deck.plot" title="Link to this definition">#</a></dt>
+<dd><p>Plot the node and element of the mesh using PyVista.</p>
+<p>Automatically detects Jupyter notebook environments and configures
+appropriate rendering backend for display.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>cwd</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Current working directory if the deck and include files are in
+a separate directory.</p>
+</dd>
+<dt><strong>jupyter_backend</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Jupyter backend to use. Options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'static'</span></code> - Static image (default for notebooks)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'server'</span></code> - Interactive with server backend</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'trame'</span></code> - Interactive with Trame (requires pyvista[trame])</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> - Disable Jupyter mode, use default windowing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'auto'</span></code> - Automatically detect (default)</p></li>
+</ul>
+</dd>
+<dt><strong>color</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Color of the mesh.</p>
+</dd>
+<dt><strong>scalars</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Name of scalars to color by (e.g., ‘part_ids’, ‘element_ids’).</p>
+</dd>
+<dt><strong>**args</strong></dt><dd><p>Additional keyword arguments passed to PyVista’s plot method.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Depends</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">on</span></code> <code class="xref py py-obj docutils literal notranslate"><span class="pre">backend</span></code></dt><dd><p>Camera position or plot object depending on the backend used.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Plot a deck in a regular Python script:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Plot with a specific working directory:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="s1">&#39;/path/to/includes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot in a Jupyter notebook with interactive backend:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">jupyter_backend</span><span class="o">=</span><span class="s1">&#39;server&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Color by part IDs:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">>>> </span><span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;part_ids&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.comment_header"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.comment_header</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.format"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.format</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.__add__"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.__add__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.clear"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.clear()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.transform_handler"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.transform_handler</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.register_import_handler"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.register_import_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.parameters"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.parameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.append"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.append()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.remove"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.remove()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.all_keywords"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.all_keywords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.string_keywords"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.string_keywords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.encrypted_keywords"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.encrypted_keywords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.keywords"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.keywords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.extend"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.extend()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.expand"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.expand()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.dumps"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.dumps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.write"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.write()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.loads"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.loads()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.get_kwds_by_type"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.get_kwds_by_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.get_kwds_by_full_type"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.get_kwds_by_full_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.get_section_by_id"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.get_section_by_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.get_set_by_id"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.get_set_by_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.get"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.get()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.import_file"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.import_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.export_file"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.export_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.keyword_names"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.keyword_names</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.__repr__"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.__repr__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.__getitem__"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.__getitem__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.__iter__"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.__iter__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.__len__"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.__len__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.sections"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.sections</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.materials"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.materials</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.elements"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.elements</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.nodes"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.nodes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.parts"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.parts</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.sets"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.sets</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.defines"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.defines</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.split"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.split()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.split_by_domain"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.split_by_domain()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.lib.deck.Deck.plot"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.deck.Deck.plot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pydyna/edit/main/ansys/dyna/core/lib/deck/Deck.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../_sources/api/ansys/dyna/core/lib/deck/Deck.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+ansys.dyna.core.pre.errors.DuplicateKeywordError
+================================================
+
+.. py:exception:: ansys.dyna.core.pre.errors.DuplicateKeywordError(keyword_type, subkeyword, count)
+
+   Bases: :py:obj:`ValidationError`
+
+
+   
+   Error raised when a globally unique keyword appears more than once.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword_type
+
+
+   .. py:attribute:: subkeyword
+
+
+   .. py:attribute:: count
+

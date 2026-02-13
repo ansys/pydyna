@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.pre.examples.examples &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/ansys_sphinx_theme.css?v=0909a4fa" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=1027fec7"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/pre/examples/examples';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/pre/examples/examples.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.pre.examples.examples</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.pre.examples.examples</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Result Files Examples</span>
+<span class="sd">=====================</span>
+<span class="sd">Examples result files.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">_module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()))</span>
+
+<span class="c1"># this files can be imported with from `ansys.dpf.core import examples`:</span>
+<div class="viewcode-block" id="airbag_deploy">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.airbag_deploy">[docs]</a>
+<span class="n">airbag_deploy</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;airbag&quot;</span><span class="p">,</span> <span class="s2">&quot;airbag_deploy&quot;</span><span class="p">)</span></div>
+
+<span class="c1"># EM</span>
+<div class="viewcode-block" id="em_railgun">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_railgun">[docs]</a>
+<span class="n">em_railgun</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_railgun&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_resistive_heating">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_resistive_heating">[docs]</a>
+<span class="n">em_resistive_heating</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_resistive_heating&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_resistive_heating_2d">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_resistive_heating_2d">[docs]</a>
+<span class="n">em_resistive_heating_2d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_resistive_heating_2d&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_resistive_heating_2d_isopots">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_resistive_heating_2d_isopots">[docs]</a>
+<span class="n">em_resistive_heating_2d_isopots</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_resistive_heating_2d_isopots&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_resistive_heating_2d_multi_isopots">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_resistive_heating_2d_multi_isopots">[docs]</a>
+<span class="n">em_resistive_heating_2d_multi_isopots</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_resistive_heating_2d_multi_isopots&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_rlc_isopotential">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_rlc_isopotential">[docs]</a>
+<span class="n">em_rlc_isopotential</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_rlc_isopotential&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="em_rlc_define_func">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.em_rlc_define_func">[docs]</a>
+<span class="n">em_rlc_define_func</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;em&quot;</span><span class="p">,</span> <span class="s2">&quot;em_rlc_define_func&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="belted_dummy">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.belted_dummy">[docs]</a>
+<span class="n">belted_dummy</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;explicit&quot;</span><span class="p">,</span> <span class="s2">&quot;belted_dummy&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ball_plate">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.ball_plate">[docs]</a>
+<span class="n">ball_plate</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;explicit&quot;</span><span class="p">,</span> <span class="s2">&quot;ball_plate&quot;</span><span class="p">)</span></div>
+
+<span class="c1"># ICFD</span>
+<div class="viewcode-block" id="cylinder_flow">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.cylinder_flow">[docs]</a>
+<span class="n">cylinder_flow</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;cylinder_flow&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="internal_3d_flow">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.internal_3d_flow">[docs]</a>
+<span class="n">internal_3d_flow</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;internal_3d_flow&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="plate_flow">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.plate_flow">[docs]</a>
+<span class="n">plate_flow</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;plate_flow&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mesh_size">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.mesh_size">[docs]</a>
+<span class="n">mesh_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;mesh_size&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="thermal_flow">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.thermal_flow">[docs]</a>
+<span class="n">thermal_flow</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;thermal_flow&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="free_convection_flow">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.free_convection_flow">[docs]</a>
+<span class="n">free_convection_flow</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;free_convection_flow&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="dam_break">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.dam_break">[docs]</a>
+<span class="n">dam_break</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;dam_break&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="driven_cavity">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.driven_cavity">[docs]</a>
+<span class="n">driven_cavity</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;driven_cavity&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="weak_fsi">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.weak_fsi">[docs]</a>
+<span class="n">weak_fsi</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;weak_fsi&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="strong_fsi">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.strong_fsi">[docs]</a>
+<span class="n">strong_fsi</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;strong_fsi&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="imposed_move">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.imposed_move">[docs]</a>
+<span class="n">imposed_move</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;imposed_move&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mesh_adaptivity">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.mesh_adaptivity">[docs]</a>
+<span class="n">mesh_adaptivity</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;mesh_adaptivity&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mesh_morphing">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.mesh_morphing">[docs]</a>
+<span class="n">mesh_morphing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;mesh_morphing&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="dem_coupling">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.dem_coupling">[docs]</a>
+<span class="n">dem_coupling</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;dem_coupling&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sloshing">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.sloshing">[docs]</a>
+<span class="n">sloshing</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;icfd&quot;</span><span class="p">,</span> <span class="s2">&quot;sloshing&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="camry_rc">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.camry_rc">[docs]</a>
+<span class="n">camry_rc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;implicit&quot;</span><span class="p">,</span> <span class="s2">&quot;camry_rc&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sale_efp">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.sale_efp">[docs]</a>
+<span class="n">sale_efp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;sale&quot;</span><span class="p">,</span> <span class="s2">&quot;sale_efp&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="isph_rigidtest">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.isph_rigidtest">[docs]</a>
+<span class="n">isph_rigidtest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;isph&quot;</span><span class="p">,</span> <span class="s2">&quot;rigidtest&quot;</span><span class="p">)</span></div>
+
+<span class="c1"># NVH</span>
+<div class="viewcode-block" id="nvh_frf_plate_damping">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.nvh_frf_plate_damping">[docs]</a>
+<span class="n">nvh_frf_plate_damping</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;nvh&quot;</span><span class="p">,</span> <span class="s2">&quot;frf_plate_damping&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="nvh_frf_solid">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.nvh_frf_solid">[docs]</a>
+<span class="n">nvh_frf_solid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;nvh&quot;</span><span class="p">,</span> <span class="s2">&quot;frf_solid&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="thermal_stress">
+<a class="viewcode-back" href="../../../../../../autoapi/ansys/dyna/core/pre/examples/examples/index.html#ansys.dyna.core.pre.examples.examples.thermal_stress">[docs]</a>
+<span class="n">thermal_stress</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;thermal&quot;</span><span class="p">,</span> <span class="s2">&quot;thermal_stress&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.3.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

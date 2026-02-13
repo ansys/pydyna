@@ -1,0 +1,75 @@
+ansys.dyna.core.pre.dynamaterial.MatShapeMemory
+===============================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatShapeMemory(mass_density=0, young_modulus=0, poisson_ratio=0.3, effective_stress=None, forward_phase_transformation_start=None, forward_phase_transformation_final=None, reverse_phase_transformation_start=None, reverse_phase_transformation_final=None, recoverable_strain=0)
+
+   
+   Describe the superelastic response present in shape-memory alloys.
+
+   Describes the specific behavior associated with
+   the peculiar material ability to undergo large deformations
+   with a full recovery in loading-unloading cycles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: e
+      :value: 0
+
+
+
+   .. py:attribute:: pr
+      :value: 0.3
+
+
+
+   .. py:attribute:: lcss
+      :value: None
+
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: create(stub)
+
+      
+      Create shape memory material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

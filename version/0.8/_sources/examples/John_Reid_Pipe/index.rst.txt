@@ -1,0 +1,46 @@
+
+
+.. _sphx_glr_examples_John_Reid_Pipe:
+
+Pipe
+====
+
+This example is adapted from `https://lsdyna.ansys.com/pipe-d51/` to run from Python.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John Reid pipe example">
+
+.. only:: html
+
+  .. image:: /examples/John_Reid_Pipe/images/thumb/sphx_glr_plot_john_pipe_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_John_Reid_Pipe_plot_john_pipe.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">John Reid pipe example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/John_Reid_Pipe/plot_john_pipe
+

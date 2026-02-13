@@ -1,0 +1,44 @@
+ansys.dyna.core.run.base_runner
+===============================
+
+.. py:module:: ansys.dyna.core.run.base_runner
+
+.. autoapi-nested-parse::
+
+   Base runner class.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.base_runner.BaseRunner
+
+
+Module Contents
+---------------
+
+.. py:class:: BaseRunner(**kwargs)
+
+   .. py:attribute:: mpi_option
+
+
+   .. py:attribute:: ncpu
+
+
+   .. py:attribute:: memory
+
+
+   .. py:attribute:: memory_unit
+
+
+   .. py:attribute:: precision
+
+
+   .. py:method:: get_memory_string() -> str
+
+

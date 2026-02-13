@@ -1,0 +1,94 @@
+ansys.dyna.core.lib.validators.Validator
+========================================
+
+.. py:class:: ansys.dyna.core.lib.validators.Validator(severity: ValidationSeverity = ValidationSeverity.ERROR)
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   
+   Base class for all validators.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: severity
+
+
+   .. py:method:: validate(deck: ansys.dyna.core.lib.deck.Deck, result: ValidationResult) -> None
+      :abstractmethod:
+
+
+      
+      Validate the deck.
+
+
+      :Parameters:
+
+          **deck** : :obj:`Deck`
+              The deck to validate.
+
+          **result** : :obj:`ValidationResult`
+              Result object to accumulate validation errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_name() -> str
+      :abstractmethod:
+
+
+      
+      Get the name of this validator.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:str`
+              Validator name for logging and registration.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

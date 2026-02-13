@@ -1,0 +1,1068 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Interface keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/interface';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Keyword keywords" href="keyword.html" />
+    <link rel="prev" title="Integration keywords" href="integration.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/interface.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Element keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em.html">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigidwall.html">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Interface keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-interface"></span><section id="interface-keywords">
+<h1>Interface keywords<a class="headerlink" href="#interface-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_acoustic">
+<span id="interfaceacoustic"></span><h2>InterfaceAcoustic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_acoustic" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceAcoustic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_development">
+<span id="interfaceblanksizedevelopment"></span><h2>InterfaceBlanksizeDevelopment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_development" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceBlanksizeDevelopment class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_adaptive">
+<span id="interfaceblanksizeinitialadaptive"></span><h2>InterfaceBlanksizeInitialAdaptive<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_adaptive" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceBlanksizeInitialAdaptive class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_trim">
+<span id="interfaceblanksizeinitialtrim"></span><h2>InterfaceBlanksizeInitialTrim<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_trim" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceBlanksizeInitialTrim class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_scale_factor">
+<span id="interfaceblanksizescalefactor"></span><h2>InterfaceBlanksizeScaleFactor<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_scale_factor" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceBlanksizeScaleFactor class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_symmetric_plane">
+<span id="interfaceblanksizesymmetricplane"></span><h2>InterfaceBlanksizeSymmetricPlane<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_symmetric_plane" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceBlanksizeSymmetricPlane class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation">
+<span id="interfacecompensation"></span><h2>InterfaceCompensation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d">
+<span id="interfacecompensation3d"></span><h2>InterfaceCompensation3D<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3D class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_accelerator">
+<span id="interfacecompensation3daccelerator"></span><h2>InterfaceCompensation3DAccelerator<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_accelerator" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DAccelerator class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_flange">
+<span id="interfacecompensation3dflange"></span><h2>InterfaceCompensation3DFlange<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_flange" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DFlange class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_local_smooth">
+<span id="interfacecompensation3dlocalsmooth"></span><h2>InterfaceCompensation3DLocalSmooth<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_local_smooth" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DLocalSmooth class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_multi_steps">
+<span id="interfacecompensation3dmultisteps"></span><h2>InterfaceCompensation3DMultiSteps<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_multi_steps" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DMultiSteps class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_part_change">
+<span id="interfacecompensation3dpartchange"></span><h2>InterfaceCompensation3DPartChange<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_part_change" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DPartChange class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_refine_rigid">
+<span id="interfacecompensation3drefinerigid"></span><h2>InterfaceCompensation3DRefineRigid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_refine_rigid" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensation3DRefineRigid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new">
+<span id="interfacecompensationnew"></span><h2>InterfaceCompensationNew<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensationNew class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_accelerator">
+<span id="interfacecompensationnewaccelerator"></span><h2>InterfaceCompensationNewAccelerator<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_accelerator" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensationNewAccelerator class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_local_smooth">
+<span id="interfacecompensationnewlocalsmooth"></span><h2>InterfaceCompensationNewLocalSmooth<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_local_smooth" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensationNewLocalSmooth class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_multi_steps">
+<span id="interfacecompensationnewmultisteps"></span><h2>InterfaceCompensationNewMultiSteps<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_multi_steps" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensationNewMultiSteps class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_part_change">
+<span id="interfacecompensationnewpartchange"></span><h2>InterfaceCompensationNewPartChange<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_part_change" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceCompensationNewPartChange class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_file">
+<span id="interfacecomponentfile"></span><h2>InterfaceComponentFile<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_file" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceComponentFile class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_node">
+<span id="interfacecomponentnode"></span><h2>InterfaceComponentNode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_node" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceComponentNode class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_segment">
+<span id="interfacecomponentsegment"></span><h2>InterfaceComponentSegment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_segment" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceComponentSegment class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_sph">
+<span id="interfacecomponentsph"></span><h2>InterfaceComponentSph<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_sph" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceComponentSph class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_de_hbond">
+<span id="interfacedehbond"></span><h2>InterfaceDeHbond<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_de_hbond" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceDeHbond class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ensight">
+<span id="interfaceensight"></span><h2>InterfaceEnsight<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ensight" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceEnsight class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_joy">
+<span id="interfacejoy"></span><h2>InterfaceJoy<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_joy" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceJoy class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_node">
+<span id="interfacelinkingdiscretenodenode"></span><h2>InterfaceLinkingDiscreteNodeNode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_node" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingDiscreteNodeNode class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_set">
+<span id="interfacelinkingdiscretenodeset"></span><h2>InterfaceLinkingDiscreteNodeSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_set" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingDiscreteNodeSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_edge">
+<span id="interfacelinkingedge"></span><h2>InterfaceLinkingEdge<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_edge" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingEdge class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_file">
+<span id="interfacelinkingfile"></span><h2>InterfaceLinkingFile<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_file" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingFile class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_forces">
+<span id="interfacelinkingforces"></span><h2>InterfaceLinkingForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_local">
+<span id="interfacelinkingnodelocal"></span><h2>InterfaceLinkingNodeLocal<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_local" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingNodeLocal class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_node">
+<span id="interfacelinkingnodenode"></span><h2>InterfaceLinkingNodeNode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_node" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingNodeNode class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set">
+<span id="interfacelinkingnodeset"></span><h2>InterfaceLinkingNodeSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingNodeSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set_local">
+<span id="interfacelinkingnodesetlocal"></span><h2>InterfaceLinkingNodeSetLocal<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set_local" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingNodeSetLocal class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_segment">
+<span id="interfacelinkingsegment"></span><h2>InterfaceLinkingSegment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_segment" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceLinkingSegment class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_1">
+<span id="interfacespg1"></span><h2>InterfaceSpg1<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_1" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpg1 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_2">
+<span id="interfacespg2"></span><h2>InterfaceSpg2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_2" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpg2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback">
+<span id="interfacespringback"></span><h2>InterfaceSpringback<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringback class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d">
+<span id="interfacespringbackdyna3d"></span><h2>InterfaceSpringbackDyna3D<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackDyna3D class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_nothickness">
+<span id="interfacespringbackdyna3dnothickness"></span><h2>InterfaceSpringbackDyna3DNothickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_nothickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackDyna3DNothickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_thickness">
+<span id="interfacespringbackdyna3dthickness"></span><h2>InterfaceSpringbackDyna3DThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackDyna3DThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude">
+<span id="interfacespringbackexclude"></span><h2>InterfaceSpringbackExclude<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackExclude class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude_thickness">
+<span id="interfacespringbackexcludethickness"></span><h2>InterfaceSpringbackExcludeThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackExcludeThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna">
+<span id="interfacespringbacklsdyna"></span><h2>InterfaceSpringbackLsdyna<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackLsdyna class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_nothickness">
+<span id="interfacespringbacklsdynanothickness"></span><h2>InterfaceSpringbackLsdynaNothickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_nothickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackLsdynaNothickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_thickness">
+<span id="interfacespringbacklsdynathickness"></span><h2>InterfaceSpringbackLsdynaThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackLsdynaThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran">
+<span id="interfacespringbacknastran"></span><h2>InterfaceSpringbackNastran<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackNastran class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_nothickness">
+<span id="interfacespringbacknastrannothickness"></span><h2>InterfaceSpringbackNastranNothickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_nothickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackNastranNothickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_thickness">
+<span id="interfacespringbacknastranthickness"></span><h2>InterfaceSpringbackNastranThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackNastranThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d">
+<span id="interfacespringbacknike3d"></span><h2>InterfaceSpringbackNike3D<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackNike3D class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d_thickness">
+<span id="interfacespringbacknike3dthickness"></span><h2>InterfaceSpringbackNike3DThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackNike3DThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless">
+<span id="interfacespringbackseamless"></span><h2>InterfaceSpringbackSeamless<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackSeamless class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless_thickness">
+<span id="interfacespringbackseamlessthickness"></span><h2>InterfaceSpringbackSeamlessThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSpringbackSeamlessThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi">
+<span id="interfacessi"></span><h2>InterfaceSsi<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsi class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux">
+<span id="interfacessiaux"></span><h2>InterfaceSsiAux<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiAux class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded">
+<span id="interfacessiauxembedded"></span><h2>InterfaceSsiAuxEmbedded<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiAuxEmbedded class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_constrained_offset">
+<span id="interfacessiauxembeddedconstrainedoffset"></span><h2>InterfaceSsiAuxEmbeddedConstrainedOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_constrained_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiAuxEmbeddedConstrainedOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_offset">
+<span id="interfacessiauxembeddedoffset"></span><h2>InterfaceSsiAuxEmbeddedOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiAuxEmbeddedOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_node">
+<span id="interfacessiauxnode"></span><h2>InterfaceSsiAuxNode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_node" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiAuxNode class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_constrained_offset">
+<span id="interfacessiconstrainedoffset"></span><h2>InterfaceSsiConstrainedOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_constrained_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiConstrainedOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_offset">
+<span id="interfacessioffset"></span><h2>InterfaceSsiOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static">
+<span id="interfacessistatic"></span><h2>InterfaceSsiStatic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiStatic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_constrained_offset">
+<span id="interfacessistaticconstrainedoffset"></span><h2>InterfaceSsiStaticConstrainedOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_constrained_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiStaticConstrainedOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_offset">
+<span id="interfacessistaticoffset"></span><h2>InterfaceSsiStaticOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceSsiStaticOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_thickness_change_compensation">
+<span id="interfacethicknesschangecompensation"></span><h2>InterfaceThicknessChangeCompensation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_thickness_change_compensation" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceThicknessChangeCompensation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.interface_weldline_development">
+<span id="interfaceweldlinedevelopment"></span><h2>InterfaceWeldlineDevelopment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_weldline_development" title="Link to this heading">#</a></h2>
+<p>Module providing the InterfaceWeldlineDevelopment class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_acoustic">InterfaceAcoustic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_development">InterfaceBlanksizeDevelopment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_adaptive">InterfaceBlanksizeInitialAdaptive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_initial_trim">InterfaceBlanksizeInitialTrim</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_scale_factor">InterfaceBlanksizeScaleFactor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_blanksize_symmetric_plane">InterfaceBlanksizeSymmetricPlane</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation">InterfaceCompensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d">InterfaceCompensation3D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_accelerator">InterfaceCompensation3DAccelerator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_flange">InterfaceCompensation3DFlange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_local_smooth">InterfaceCompensation3DLocalSmooth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_multi_steps">InterfaceCompensation3DMultiSteps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_part_change">InterfaceCompensation3DPartChange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_3d_refine_rigid">InterfaceCompensation3DRefineRigid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new">InterfaceCompensationNew</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_accelerator">InterfaceCompensationNewAccelerator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_local_smooth">InterfaceCompensationNewLocalSmooth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_multi_steps">InterfaceCompensationNewMultiSteps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_new_part_change">InterfaceCompensationNewPartChange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_file">InterfaceComponentFile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_node">InterfaceComponentNode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_segment">InterfaceComponentSegment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_component_sph">InterfaceComponentSph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_de_hbond">InterfaceDeHbond</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ensight">InterfaceEnsight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_joy">InterfaceJoy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_node">InterfaceLinkingDiscreteNodeNode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_discrete_node_set">InterfaceLinkingDiscreteNodeSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_edge">InterfaceLinkingEdge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_file">InterfaceLinkingFile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_forces">InterfaceLinkingForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_local">InterfaceLinkingNodeLocal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_node">InterfaceLinkingNodeNode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set">InterfaceLinkingNodeSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_node_set_local">InterfaceLinkingNodeSetLocal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_linking_segment">InterfaceLinkingSegment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_1">InterfaceSpg1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_spg_2">InterfaceSpg2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback">InterfaceSpringback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d">InterfaceSpringbackDyna3D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_nothickness">InterfaceSpringbackDyna3DNothickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_dyna3d_thickness">InterfaceSpringbackDyna3DThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude">InterfaceSpringbackExclude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude_thickness">InterfaceSpringbackExcludeThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna">InterfaceSpringbackLsdyna</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_nothickness">InterfaceSpringbackLsdynaNothickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_thickness">InterfaceSpringbackLsdynaThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran">InterfaceSpringbackNastran</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_nothickness">InterfaceSpringbackNastranNothickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_thickness">InterfaceSpringbackNastranThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d">InterfaceSpringbackNike3D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d_thickness">InterfaceSpringbackNike3DThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless">InterfaceSpringbackSeamless</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless_thickness">InterfaceSpringbackSeamlessThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi">InterfaceSsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux">InterfaceSsiAux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded">InterfaceSsiAuxEmbedded</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_constrained_offset">InterfaceSsiAuxEmbeddedConstrainedOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_embedded_offset">InterfaceSsiAuxEmbeddedOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_aux_node">InterfaceSsiAuxNode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_constrained_offset">InterfaceSsiConstrainedOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_offset">InterfaceSsiOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static">InterfaceSsiStatic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_constrained_offset">InterfaceSsiStaticConstrainedOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_ssi_static_offset">InterfaceSsiStaticOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_thickness_change_compensation">InterfaceThicknessChangeCompensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.interface_weldline_development">InterfaceWeldlineDevelopment</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/interface.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

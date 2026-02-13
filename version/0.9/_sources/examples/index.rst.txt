@@ -1,0 +1,902 @@
+:orphan:
+
+Examples
+========
+
+These examples show end-to-end workflows for using PyDyna to create keyword
+files for LS-DYNA and then solve them from Python. Many are adapted from
+the `LS-DYNA Knowledge Base <_ls_dyna_knowledge_base>`_.
+
+.. LINKS AND REFERENCES
+.. _ls_dyna_knowledge_base: https://lsdyna.ansys.com/knowledge-base/
+
+"""
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Airbag examples
+~~~~~~~~~~~~~~~~
+
+These examples show how to create and use airbag models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Airbag deploy">
+
+.. only:: html
+
+  .. image:: /examples/Airbag/images/thumb/sphx_glr_airbag_deploy_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Airbag_airbag_deploy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Airbag deploy</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Airbag deploy postprocessing">
+
+.. only:: html
+
+  .. image:: /examples/Airbag/images/thumb/sphx_glr_airbag_post_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Airbag_airbag_post.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Airbag deploy postprocessing</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Beer can buckling
+=================
+
+This example is adapted from `https://lsdyna.ansys.com/example-nonlinear-2/` to run from
+Python. It is a highly nonlinear problem that whose solution will not fully converge, but
+that is expected.
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Buckling of beer can example">
+
+.. only:: html
+
+  .. image:: /examples/Buckling_Beer_Can/images/thumb/sphx_glr_plot_beercan_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Buckling_Beer_Can_plot_beercan.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Buckling of beer can example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+EM examples
+~~~~~~~~~~~~
+
+These examples show how to create and use electromagnetic models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows the minimum number of keywords required to turn on the EM resistive heating solver. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the connect_isopotential() method to connect two parts. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_isopots_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_isopots.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D connect isopotential</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D multiple-connect isopotential">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_multi_isopots_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_multi_isopots.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D multiple-connect isopotential</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by function">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_rlc_define_func_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_rlc_define_func.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">RLC circuit by function</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by isopotential">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_rlc_isopotential_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_rlc_isopotential.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">RLC circuit by isopotential</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Explicit examples
+~~~~~~~~~~~~~~~~~
+
+These examples show how to create and use explicit models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ball plate">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_ball_plate_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Explicit_ball_plate.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Ball plate</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Belted dummy">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_belted_dummy_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Explicit_belted_dummy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Belted dummy</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+ICFD examples
+~~~~~~~~~~~~~~
+
+These examples show how to create and use ICFD
+incompressible computational fluid dynamics) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a simple ICFD cylinder flow input deck. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_cylinderflow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_cylinderflow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cylinder flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the ICFD solver on a simple free surface. A column of water collapses under the load of gravity. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dam_break_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dam_break.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dam break</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to couple the ICFD fluid solver with DEM particles. The executable file for LS-DYNA is ls-dyna_smp_d_R101_winx64_ifort131.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_dem_coupling_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_dem_coupling.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">DEM coupling</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows the universally famous driven-cavity case tested with the second-order steady solver and for Re=1000. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_driven_cavity_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_driven_cavity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Driven cavity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executable file for LS-DYNA is  ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_free_convection_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_free_convection_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Free convection flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to impose displacements on fluid nodes through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_imposed_move_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_imposed_move.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Imposed move</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple 3D ICFD problem. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_internal_3d_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_internal_3d_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Internal 3D flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with adaptivity. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_adaptivity_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_adaptivity.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh adaptivity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with mesh morphing. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_morphing_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_morphing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh morphing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_mesh_size_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_mesh_size.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mesh size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_plate_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_plate_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plate flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to directly impose a displacement of the entire volume mesh through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword. The executable file for LS-DYNA is ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_sloshing_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_sloshing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sloshing</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using strong FSI. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_strong_fsi_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_strong_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Strong FSI</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_thermal_flow_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_thermal_flow.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using weak/loose/explicit FSI. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ICFD/images/thumb/sphx_glr_icfd_weak_fsi_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ICFD_icfd_weak_fsi.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Weak FSI</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+ISPH examples
+~~~~~~~~~~~~~
+
+These examples show how to create and use ISPH (incompressible
+smooth particle hydrodynamics) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the PyDYNA pre service to create an ISPH model. The executable file for LS-DYNA is ls-dyna_mpp_d_R13.0_365-gf8a97bda2a_winx64_ifort190_msmpi.exe.">
+
+.. only:: html
+
+  .. image:: /examples/ISPH/images/thumb/sphx_glr_rigidtest_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ISPH_rigidtest.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rigid test</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Implicit examples
+~~~~~~~~~~~~~~~~~~
+
+These examples show how to create and use implicit models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Implicit model">
+
+.. only:: html
+
+  .. image:: /examples/Implicit/images/thumb/sphx_glr_camry_rc_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Implicit_camry_rc.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Implicit model</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Pendulum
+========
+
+
+This example is adapted from `https://lsdyna.ansys.com/pendlum/` to run from Python.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John Reid pendulum example">
+
+.. only:: html
+
+  .. image:: /examples/John_Reid_Pendulum/images/thumb/sphx_glr_plot_john_reid_pendulum_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_John_Reid_Pendulum_plot_john_reid_pendulum.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">John Reid pendulum example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Pipe
+====
+
+This example is adapted from `https://lsdyna.ansys.com/pipe-d51/` to run from Python.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="John Reid pipe example">
+
+.. only:: html
+
+  .. image:: /examples/John_Reid_Pipe/images/thumb/sphx_glr_plot_john_pipe_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_John_Reid_Pipe_plot_john_pipe.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">John Reid pipe example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+NVH examples
+~~~~~~~~~~~~~
+
+These examples show how to create and use NVH (noise, vibration, and harshness) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to set up the keywords for computation of a FRF (frequency response function). The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_frf_plate_damping_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_NVH_frf_plate_damping.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a rectangular plate</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a column with a hole using solid elements. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_nvh_frf_solid_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_NVH_nvh_frf_solid.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a colume model with a hole</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+S-ALE examples
+~~~~~~~~~~~~~~
+
+These examples show how to create and use S-ALE (Structured ALE) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a S-ALE input deck. The executable file for LS-DYNA is ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/SALE/images/thumb/sphx_glr_sale_efp_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_SALE_sale_efp.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">EFP concrete target</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Taylor bar impact
+=================
+
+This example, inspired by the `https://lsdyna.ansys.com/bar-a/` example, shows how
+to use PyDyna to parameterize a LS-DYNA problem and compare results.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Taylor bar example">
+
+.. only:: html
+
+  .. image:: /examples/Taylor_Bar/images/thumb/sphx_glr_plot_taylor_bar_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Taylor_Bar_plot_taylor_bar.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Taylor bar example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Thermal examples
+~~~~~~~~~~~~~~~~
+
+These examples show how to create and use thermal models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a thermal stress model with the PyDYNA pre service. The executable file for LS-DYNA is ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe.">
+
+.. only:: html
+
+  .. image:: /examples/Thermal/images/thumb/sphx_glr_thermal_stress_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Thermal_thermal_stress.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal stress example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /examples/Airbag/index.rst
+   /examples/Buckling_Beer_Can/index.rst
+   /examples/EM/index.rst
+   /examples/Explicit/index.rst
+   /examples/ICFD/index.rst
+   /examples/ISPH/index.rst
+   /examples/Implicit/index.rst
+   /examples/John_Reid_Pendulum/index.rst
+   /examples/John_Reid_Pipe/index.rst
+   /examples/NVH/index.rst
+   /examples/SALE/index.rst
+   /examples/Taylor_Bar/index.rst
+   /examples/Thermal/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

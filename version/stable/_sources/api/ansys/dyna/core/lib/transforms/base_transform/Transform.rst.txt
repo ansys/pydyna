@@ -1,0 +1,49 @@
+ansys.dyna.core.lib.transforms.base_transform.Transform
+=======================================================
+
+.. py:class:: ansys.dyna.core.lib.transforms.base_transform.Transform(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+   
+   Transform base class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: transform(keyword) -> None
+
+      
+      Transform the given keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,71 @@
+ansys.dyna.core.lib.import_handler.ImportContext
+================================================
+
+.. py:class:: ansys.dyna.core.lib.import_handler.ImportContext
+
+   
+   Context for keyword import operations.
+
+
+
+   :Attributes:
+
+       **xform** : :obj:`Any`, :obj:`optional`
+           Optional transformation to apply, using type `IncludeTransform`.
+
+       **deck** : :obj:`Any`, :obj:`optional`
+           Deck into which the import is occurring.
+
+       **path** : :class:`python:str`, :obj:`optional`
+           Path of file that is importing.
+
+       **keyword_overrides** : :obj:`Dict`\[:class:`python:str`, :obj:`type`], :obj:`optional`
+           Dictionary mapping keyword names (e.g., "*MAT_295") to keyword classes.
+           When a keyword is imported, if its name matches a key in this dictionary,
+           the corresponding class will be used instead of the default from TypeMapping.
+           
+           This allows using alternative or legacy keyword implementations when loading
+           keyword files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: xform
+      :type:  Any
+      :value: None
+
+
+
+   .. py:attribute:: deck
+      :type:  Any
+      :value: None
+
+
+
+   .. py:attribute:: path
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: keyword_overrides
+      :type:  Dict[str, type]
+
+
+   .. py:attribute:: strict
+      :type:  bool
+      :value: False
+
+

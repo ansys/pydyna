@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>John Reid pipe example &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=016a97bc"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/John_Reid_Pipe/plot_john_pipe';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.9';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NVH examples" href="../NVH/index.html" />
+    <link rel="prev" title="Pipe" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/examples/John_Reid_Pipe/plot_john_pipe.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Airbag/index.html">Airbag examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Buckling_Beer_Can/index.html">Beer can buckling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../EM/index.html">EM examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explicit/index.html">Explicit examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ICFD/index.html">ICFD examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ISPH/index.html">ISPH examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Implicit/index.html">Implicit examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../John_Reid_Pendulum/index.html">Pendulum</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Pipe</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">John Reid pipe example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../NVH/index.html">NVH examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SALE/index.html">S-ALE examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Taylor_Bar/index.html">Taylor bar impact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thermal/index.html">Thermal examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Pipe</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">John Reid pipe example</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-john-reid-pipe-plot-john-pipe-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="john-reid-pipe-example">
+<span id="sphx-glr-examples-john-reid-pipe-plot-john-pipe-py"></span><h1>John Reid pipe example<a class="headerlink" href="#john-reid-pipe-example" title="Link to this heading">#</a></h1>
+<p>This example is inspired by John Reid’s “Pipe” example on the
+<a class="reference external" href="_ls_dyna_knowledge_base">LS-DYNA Knowledge Base</a> site. It shows how
+to use PyDyna to create a keyword file for LS-DYNA and solve it within
+a Pythonic environment.</p>
+<section id="perform-required-imports">
+<h2>Perform required imports<a class="headerlink" href="#perform-required-imports" title="Link to this heading">#</a></h2>
+<p>Import required packages, including those for the keywords, deck, and solver.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Deck</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">keywords</span> <span class="k">as</span> <span class="n">kwd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.pre.examples.download_utilities</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">EXAMPLES_PATH</span></a><span class="p">,</span> <span class="n">DownloadManager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_dyna</span>
+
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a> <span class="o">=</span> <span class="s2">&quot;nodes.k&quot;</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a> <span class="o">=</span> <span class="n">DownloadManager</span><span class="p">()</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">,</span> <span class="s2">&quot;ls-dyna&quot;</span><span class="p">,</span> <span class="s2">&quot;John_Reid_Pipe&quot;</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">EXAMPLES_PATH</span></a><span class="p">,</span> <span class="s2">&quot;John_Reid_Pipe&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<a href="https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dynafile</span></a> <span class="o">=</span> <span class="s2">&quot;pipe.k&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-deck-and-keywords">
+<h2>Create a deck and keywords<a class="headerlink" href="#create-a-deck-and-keywords" title="Link to this heading">#</a></h2>
+<p>Create a deck, which is the container for all the keywords.
+Then, create and append individual keywords to the deck.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">write_deck</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+
+    <span class="c1"># Append control keywords</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ControlTermination</span><span class="p">(</span><span class="n">endtim</span><span class="o">=</span><span class="mf">20.0</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ControlEnergy</span><span class="p">(</span><span class="n">hgen</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rwen</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">slnten</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ControlOutput</span><span class="p">(</span><span class="n">npopt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">neecho</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ControlShell</span><span class="p">(</span><span class="n">istupd</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Append database keywords</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseBinaryD3Plot</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">1.00</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseExtentBinary</span><span class="p">(</span><span class="n">ieverp</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseBinaryD3Thdt</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mi">999999</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseGlstat</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.10</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseMatsum</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.10</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseJntforc</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.10</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseRbdout</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.10</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseRcforc</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.10</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define contacts - sliding interfaces</span>
+
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ContactForceTransducerPenalty</span><span class="p">(</span><span class="n">surfa</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">surfatyp</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">ContactAutomaticSingleSurface</span><span class="p">(</span><span class="n">ssid</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sstyp</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">fd</span><span class="o">=</span><span class="mf">0.30</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">SetPartList</span><span class="p">(</span><span class="n">sid</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define initial conditions</span>
+
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">InitialVelocityGeneration</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">omega</span><span class="o">=-</span><span class="mf">0.082</span><span class="p">,</span> <span class="n">xc</span><span class="o">=-</span><span class="mf">78.50</span><span class="p">,</span> <span class="n">yc</span><span class="o">=-</span><span class="mf">610.13</span><span class="p">,</span> <span class="n">zc</span><span class="o">=</span><span class="mf">5.69</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">SetPartList</span><span class="p">(</span><span class="n">sid</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define pipe parts and materials</span>
+
+    <span class="n">pipe_parts</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+    <span class="n">pipe_parts</span><span class="o">.</span><span class="n">parts</span> <span class="o">=</span> <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class"><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span></a><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;heading&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Deformable-Pipe&quot;</span><span class="p">,</span> <span class="s2">&quot;Pipe-End&quot;</span><span class="p">,</span> <span class="s2">&quot;Rigid-Pipe&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+            <span class="s2">&quot;secid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+            <span class="s2">&quot;mid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">pipe_parts</span><span class="p">,</span>
+            <span class="c1"># Aluminium</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">MatPlasticKinematic</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ro</span><span class="o">=</span><span class="mf">7.86e-6</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">pr</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">sigy</span><span class="o">=</span><span class="mf">0.250</span><span class="p">,</span> <span class="n">etan</span><span class="o">=</span><span class="mf">0.00689</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">MatRigid</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ro</span><span class="o">=</span><span class="mf">7.86e-6</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">pr</span><span class="o">=</span><span class="mf">0.30</span><span class="p">),</span>
+            <span class="c1"># Sections</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">SectionShell</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">elfrom</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nip</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t3</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t4</span><span class="o">=</span><span class="mf">11.0</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">SectionShell</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">elfrom</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nip</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t3</span><span class="o">=</span><span class="mf">11.0</span><span class="p">,</span> <span class="n">t4</span><span class="o">=</span><span class="mf">11.0</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define bracket parts and materials</span>
+    <span class="n">bracket_parts</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Part</span><span class="p">(</span><span class="n">heading</span><span class="o">=</span><span class="s2">&quot;Bracket&quot;</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">secid</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">bracket_parts</span><span class="p">,</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">MatRigid</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ro</span><span class="o">=</span><span class="mf">7.86e-6</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">pr</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">cmo</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">con1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">con2</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
+            <span class="n">kwd</span><span class="o">.</span><span class="n">SectionSolid</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define deformable switching</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">kwd</span><span class="o">.</span><span class="n">DeformableToRigid</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DeformableToRigid</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span>
+
+    <span class="c1"># Define nodes and elements</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">kwd</span><span class="o">.</span><span class="n">Include</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">)])</span>
+
+    <span class="n">deck</span><span class="o">.</span><span class="n">export_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">deck</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_post</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<a href="https://docs.python.org/3/library/shutil.html#shutil.copy" title="shutil.copy" class="sphx-glr-backref-module-shutil sphx-glr-backref-type-py-function"><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">))</span>
+<span class="n">deck</span> <span class="o">=</span> <span class="n">write_deck</span><span class="p">(</span><a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dynafile</span></a><span class="p">))</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_john_pipe_001.png" srcset="../../_images/sphx_glr_plot_john_pipe_001.png" alt="plot john pipe" class = "sphx-glr-single-img"/></section>
+<section id="run-the-dyna-solver">
+<h2>Run the Dyna solver<a class="headerlink" href="#run-the-dyna-solver" title="Link to this heading">#</a></h2>
+<p>Run the Dyna solver.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">run_dyna</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dynafile</span></a><span class="p">,</span> <span class="n">working_directory</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span><span class="o">.</span><span class="n">name</span></a><span class="p">)</span>
+<span class="n">run_post</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rundir</span><span class="o">.</span><span class="n">name</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span> License option : check ansys licenses only
+
+
+ ***************************************************************
+ *            ANSYS LEGAL NOTICES                              *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2023 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+      Date: 12/31/2025      Time: 04:59:51
+      ___________________________________________________
+     |                                                   |
+     |  LS-DYNA, A Program for Nonlinear Dynamic         |
+     |  Analysis of Structures in Three Dimensions       |
+     |  Date    : 10/16/2023    Time: 19:29:09           |
+     |  Version : smp d R14                              |
+     |  Revision: R14.1-205-geb5348f751                  |
+     |  AnLicVer: 2024 R1 (20231025+2752148)             |
+     |                                                   |
+     |  Features enabled in this version:                |
+     |    Shared Memory Parallel                         |
+     |    CESE CHEMISTRY EM ICFD STOCHASTIC_PARTICLES    |
+     |    FFTW (multi-dimensional FFTW Library)          |
+     |    ARPACK (nonsymmetric eigensolver library)      |
+     |    ANSYSLIC enabled                               |
+     |                                                   |
+     |  Platform   : Xeon64 System                       |
+     |  OS Level   : Linux 3.10.0 uum                    |
+     |  Compiler   : Intel Fortran Compiler 19.0 SSE2    |
+     |  Hostname   : 270912858e67                        |
+     |  Precision  : Double precision (I8R8)             |
+     |                                                   |
+     |  Unauthorized use infringes Ansys Inc. copyrights |
+     |___________________________________________________|
+
+ &gt;ncpu=1 i=pipe.k memory=20m
+[license/info] Successfully checked out 1 of &quot;dyna_solver_core&quot;.
+[license/info] --&gt; Checkout ID: 270912858e67-root-8-000004 (days left: 282)
+[license/info] --&gt; Customer ID: 0
+[license/info] Successfully started &quot;LSDYNA (Core-based License)&quot;.
+
+ Executing with ANSYS license
+
+ Command line options: ncpu=1
+                       i=pipe.k
+                       memory=20m
+
+ Input file: pipe.k
+
+ The native file format       : 64-bit small endian
+ Memory size from command line:    20000000
+
+ on UNIX computers note the following change:
+
+ ctrl-c interrupts ls-dyna and prompts for a sense  switch.
+ type the desired sense switch: sw1., sw2., etc. to continue
+ the execution.  ls-dyna will respond as explained in the users manual
+
+    type                      response
+   -----   ------------------------------------------------------------
+   quit    ls-dyna terminates.
+   stop    ls-dyna terminates.
+   sw1.    a restart file is written and ls-dyna terminates.
+   sw2.    ls-dyna responds with time and cycle numbers.
+   sw3.    a restart file is written and ls-dyna continues calculations.
+   sw4.    a plot state is written and ls-dyna continues calculations.
+   sw5.    ls-dyna enters interactive graphics phase.
+   swa.    ls-dyna flushes all output i/o buffers.
+   swb.    a dynain is written and ls-dyna continues calculations.
+   swc.    a restart and dynain are written and ls-dyna continues calculations.
+   swd.    a restart and dynain are written and ls-dyna terminates.
+   swe.    stop dynamic relaxation just as though convergence
+   endtime=time change the termination time
+   lpri    toggle implicit lin. alg. solver output on/off.
+   nlpr    toggle implicit nonlinear solver output on/off.
+   iter    toggle implicit output to d3iter database on/off.
+   prof    output timing data to messag and continue.
+   conv    force implicit nonlinear convergence for current time step.
+   ttrm    terminate implicit time step, reduce time step, retry time step.
+   rtrm    terminate implicit at end of current time step.
+
+
+ ********  notice  ********  notice  ********  notice  ********
+ *                                                            *
+ * This is the LS-DYNA Finite Element code.                   *
+ *                                                            *
+ * Neither LST nor the authors assume any responsibility for  *
+ * the validity, accuracy, or applicability of any results    *
+ * obtained from this system. Users must verify their own     *
+ * results.                                                   *
+ *                                                            *
+ * LST endeavors to make the LS-DYNA code as complete,        *
+ * accurate and easy to use as possible.                      *
+ * Suggestions and comments are welcomed.  Please report any  *
+ * errors encountered in either the documentation or results  *
+ * immediately to LST through your site focus.                *
+ *                                                            *
+ * Copyright (C) 1990-2021                                    *
+ * by Livermore Software Technology, LLC                      *
+ * All rights reserved                                        *
+ *                                                            *
+ ********  notice  ********  notice  ********  notice  ********
+
+ Beginning of keyword reader                                   12/31/25 05:00:00
+
+                                                               12/31/25 05:00:00
+ Open include file: nodes.k
+
+
+ Memory required to process keyword     :     234893
+ Additional dynamic memory required     :    2186821
+
+
+ input of data is completed
+
+ initial kinetic energy = 0.87041732E+05
+
+ The LS-DYNA time step size should not exceed     8.500E-03
+ to avoid contact instabilities.  If the step size is
+ bigger then scale the penalty of the offending surface.
+
+ Memory required to begin solution      :     235K
+ Additional dynamically allocated memory:    2395K
+                                   Total:    2630K
+
+ initialization completed
+
+ *** Warning 30308 (INI+308)
+     Due to common shared node(s) it is necessary to merge
+     rigid part ID: 2 with part ID: 1
+       1 t 0.0000E+00 dt 4.18E-03 flush i/o buffers            12/31/25 05:00:00
+       1 t 0.0000E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:00
+ cpu time per zone cycle............       139 nanoseconds
+ average cpu time per zone cycle....       287 nanoseconds
+ average clock time per zone cycle..       426 nanoseconds
+
+ estimated total cpu time          =         2 sec (       0 hrs  0 mins)
+ estimated cpu time to complete    =         2 sec (       0 hrs  0 mins)
+ estimated total clock time        =        12 sec (       0 hrs  0 mins)
+ estimated clock time to complete  =         3 sec (       0 hrs  0 mins)
+ termination time                  = 2.000E+01
+     240 t 9.9899E-01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+     479 t 1.9980E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+     718 t 2.9970E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+     957 t 3.9960E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    1197 t 4.9991E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    1436 t 5.9981E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    1675 t 6.9971E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    1914 t 7.9961E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    2154 t 8.9993E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    2393 t 9.9983E+00 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    2632 t 1.0997E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    2871 t 1.1996E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    3111 t 1.2999E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    3350 t 1.3998E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    3589 t 1.4997E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    3828 t 1.5996E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:01
+    4068 t 1.7000E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:02
+    4307 t 1.7999E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:02
+    4546 t 1.8998E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:02
+    4785 t 1.9997E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:02
+
+ *** termination time reached ***
+    4785 t 2.0001E+01 dt 4.18E-03 write d3dump01 file          12/31/25 05:00:02
+    4785 t 2.0001E+01 dt 4.18E-03 write d3plot file            12/31/25 05:00:02
+
+ N o r m a l    t e r m i n a t i o n                          12/31/25 05:00:02
+
+ Memory required to complete solution   :     235K
+ Additional dynamically allocated memory:    2395K
+                                   Total:    2630K
+
+ T i m i n g   i n f o r m a t i o n
+                        CPU(seconds)   %CPU  Clock(seconds) %Clock
+  ----------------------------------------------------------------
+  Keyword Processing ... 1.4985E-02    1.15     1.4997E-02    0.14
+    KW Reading ......... 7.1340E-03    0.55     7.1350E-03    0.07
+    KW Writing ......... 1.6866E-03    0.13     1.6970E-03    0.02
+  Initialization ....... 8.0472E-02    6.15     9.6682E+00   88.71
+    Init Proc Phase 1 .. 5.5982E-03    0.43     6.6450E-03    0.06
+    Init Proc Phase 2 .. 1.8522E-03    0.14     2.6770E-03    0.02
+  Init solver .......... 9.9376E-05    0.01     1.0000E-04    0.00
+  Element processing ... 7.2584E-01   55.48     7.2582E-01    6.66
+    Solids ............. 9.8950E-03    0.76     9.7710E-03    0.09
+    Shells ............. 6.7426E-01   51.54     6.7321E-01    6.18
+    ISO Shells ......... 3.2485E-03    0.25     3.2130E-03    0.03
+    E Other ............ 1.2151E-02    0.93     1.2426E-02    0.11
+  Binary databases ..... 2.6527E-02    2.03     2.6569E-02    0.24
+  ASCII database ....... 2.1796E-02    1.67     2.1736E-02    0.20
+  Contact algorithm .... 1.2049E-01    9.21     1.2040E-01    1.10
+    Interf. ID         1 9.3749E-03    0.72     9.5970E-03    0.09
+    Interf. ID         2 6.2302E-02    4.76     6.1822E-02    0.57
+  Rigid Bodies ......... 1.2434E-01    9.50     1.2382E-01    1.14
+  Time step size ....... 4.4260E-03    0.34     4.4510E-03    0.04
+  Group force file ..... 4.3700E-03    0.33     5.1060E-03    0.05
+  Others ............... 1.2906E-02    0.99     1.3001E-02    0.12
+  Misc. 1 .............. 9.1931E-02    7.03     9.5133E-02    0.87
+    Scale Masses ....... 3.6700E-03    0.28     3.6720E-03    0.03
+    Force Constraints .. 3.6197E-03    0.28     3.6430E-03    0.03
+    Force to Accel ..... 1.7553E-02    1.34     1.7440E-02    0.16
+    Update RB nodes .... 3.1014E-02    2.37     3.0598E-02    0.28
+  Misc. 2 .............. 4.0608E-02    3.10     3.9899E-02    0.37
+  Misc. 3 .............. 1.0514E-02    0.80     1.0354E-02    0.10
+  Misc. 4 .............. 2.8994E-02    2.22     2.9132E-02    0.27
+    Timestep Init ...... 1.6021E-02    1.22     1.5777E-02    0.14
+    Apply Loads ........ 5.8652E-03    0.45     5.9790E-03    0.05
+  ----------------------------------------------------------------
+  T o t a l s            1.3083E+00  100.00     1.0899E+01  100.00
+
+ Problem time       =    2.0001E+01
+ Problem cycle      =      4785
+ Total CPU time     =         1 seconds (   0 hours  0 minutes  1 seconds)
+ CPU time per zone cycle  =        148.749 nanoseconds
+ Clock time per zone cycle=        149.077 nanoseconds
+
+ Number of CPU&#39;s    1
+ NLQ used/max     192/  192
+ Start time   12/31/2025 05:00:00
+ End time     12/31/2025 05:00:02
+ Elapsed time       2 seconds for    4785 cycles using  1 SMP thread
+             (      0 hour   0 minute   2 seconds)
+
+ N o r m a l    t e r m i n a t i o n                          12/31/25 05:00:02
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 11.813 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-john-reid-pipe-plot-john-pipe-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/9974bde1bacab47a45bd8583fcef1255/plot_john_pipe.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_john_pipe.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/3f968469164b55705b130a905de3adef/plot_john_pipe.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_john_pipe.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/10fddb0fbff8f5aaecb9f7e49d29e43f/plot_john_pipe.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_john_pipe.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-required-imports">Perform required imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-deck-and-keywords">Create a deck and keywords</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-dyna-solver">Run the Dyna solver</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pydyna/edit/main/doc/source/examples/John_Reid_Pipe/plot_john_pipe.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/John_Reid_Pipe/plot_john_pipe.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.1. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

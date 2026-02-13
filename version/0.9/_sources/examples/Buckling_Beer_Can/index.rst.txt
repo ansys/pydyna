@@ -1,0 +1,47 @@
+
+
+.. _sphx_glr_examples_Buckling_Beer_Can:
+
+Beer can buckling
+=================
+
+This example is adapted from `https://lsdyna.ansys.com/example-nonlinear-2/` to run from
+Python. It is a highly nonlinear problem that whose solution will not fully converge, but
+that is expected.
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Buckling of beer can example">
+
+.. only:: html
+
+  .. image:: /examples/Buckling_Beer_Can/images/thumb/sphx_glr_plot_beercan_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Buckling_Beer_Can_plot_beercan.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Buckling of beer can example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Buckling_Beer_Can/plot_beercan
+

@@ -1,0 +1,62 @@
+ansys.dyna.core.pre.dynabase.Table2D
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Table2D(title='')
+
+   
+   Define a table,a curve ID is specified for each value defined in the table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: title
+      :value: ''
+
+
+
+   .. py:attribute:: valuecurvelist
+      :value: []
+
+
+
+   .. py:method:: append(value=0, curve=None)
+
+
+   .. py:method:: create(stub=None)
+
+      
+      Create Table2D.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,30 @@
+ansys.dyna.core.run.options
+===========================
+
+.. py:module:: ansys.dyna.core.run.options
+
+.. autoapi-nested-parse::
+
+   Options to run LS-DYNA.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/run/options/MpiOption
+   /api/ansys/dyna/core/run/options/Precision
+   /api/ansys/dyna/core/run/options/MemoryUnit
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.options.MpiOption
+   ansys.dyna.core.run.options.Precision
+   ansys.dyna.core.run.options.MemoryUnit
+
+

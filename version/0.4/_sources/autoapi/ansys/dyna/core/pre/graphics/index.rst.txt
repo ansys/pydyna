@@ -1,0 +1,16 @@
+:py:mod:`ansys.dyna.core.pre.graphics`
+======================================
+
+.. py:module:: ansys.dyna.core.pre.graphics
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   graphics/index.rst
+   trame_gui/index.rst
+
+

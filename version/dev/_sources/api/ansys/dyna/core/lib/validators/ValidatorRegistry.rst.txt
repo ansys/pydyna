@@ -1,0 +1,227 @@
+ansys.dyna.core.lib.validators.ValidatorRegistry
+================================================
+
+.. py:class:: ansys.dyna.core.lib.validators.ValidatorRegistry
+
+   
+   Registry for managing validators.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: register(validator: Validator) -> None
+
+      
+      Register a validator.
+
+
+      :Parameters:
+
+          **validator** : :obj:`Validator`
+              The validator to register.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: register_custom(name: str, func: Callable[[ansys.dyna.core.lib.deck.Deck, ValidationResult], None], severity: ValidationSeverity = ValidationSeverity.ERROR) -> None
+
+      
+      Register a custom validation function.
+
+
+      :Parameters:
+
+          **name** : :class:`python:str`
+              Name of the validator.
+
+          **func** : :obj:`Callable`
+              Validation function that takes (deck, result) and adds errors to result.
+
+          **severity** : :obj:`ValidationSeverity`
+              Default severity level for violations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: unregister(validator_name: str) -> bool
+
+      
+      Unregister a validator by name.
+
+
+      :Parameters:
+
+          **validator_name** : :class:`python:str`
+              Name of the validator to remove.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if validator was found and removed, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear() -> None
+
+      
+      Remove all validators from the registry.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_all() -> List[Validator]
+
+      
+      Get all registered validators.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`Validator`]
+              List of all registered validators.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate(deck: ansys.dyna.core.lib.deck.Deck) -> ValidationResult
+
+      
+      Run all registered validators on a deck.
+
+
+      :Parameters:
+
+          **deck** : :obj:`Deck`
+              The deck to validate.
+
+
+
+      :Returns:
+
+          :obj:`ValidationResult`
+              Result containing all errors, warnings, and info messages.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: register_default_validators() -> None
+
+      
+      Register the default set of validators for LS-DYNA decks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

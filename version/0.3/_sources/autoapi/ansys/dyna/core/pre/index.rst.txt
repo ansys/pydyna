@@ -1,0 +1,45 @@
+:py:mod:`ansys.dyna.core.pre`
+=============================
+
+.. py:module:: ansys.dyna.core.pre
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   examples/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   dynabase/index.rst
+   dynadem/index.rst
+   dynaem/index.rst
+   dynaicfd/index.rst
+   dynaiga/index.rst
+   dynaisph/index.rst
+   dynalogging/index.rst
+   dynamaterial/index.rst
+   dynamech/index.rst
+   dynanvh/index.rst
+   dynasale/index.rst
+   dynasolution/index.rst
+   errors/index.rst
+   launcher/index.rst
+   misc/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: LOG
+
+   
+

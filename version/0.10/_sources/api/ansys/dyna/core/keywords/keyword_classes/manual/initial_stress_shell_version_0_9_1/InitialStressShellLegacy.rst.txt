@@ -1,0 +1,317 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacy
+===========================================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacy(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA INITIAL_STRESS_SHELL keyword (legacy version 0.9.1).
+
+   .. deprecated:: 0.10.0
+       Use :class:`~ansys.dyna.core.keywords.InitialStressShell` instead.
+       This legacy version uses TableCard/DataFrame API which does not support LARGE format.
+       The new version uses CardSet API and supports both standard and LARGE formats.
+
+   To use this legacy class when loading decks:
+
+   .. code-block:: python
+
+       from ansys.dyna.core.lib.deck import Deck
+       from ansys.dyna.core.lib.import_handler import ImportContext
+       from ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1 import (
+           InitialStressShellLegacy,
+       )
+
+       deck = Deck()
+       context = ImportContext(
+           deck=deck,
+           keyword_overrides={"*INITIAL_STRESS_SHELL": InitialStressShellLegacy},
+       )
+       deck.loads(data, context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'INITIAL'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'STRESS_SHELL'
+
+
+
+   .. py:property:: eid
+      :type: Optional[int]
+
+
+      
+      Get or set the eid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nplane
+      :type: int
+
+
+      
+      Get or set the nplane
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthick
+      :type: int
+
+
+      
+      Get or set the nthick
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nhisv
+      :type: int
+
+
+      
+      Get or set the nhisv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ntensr
+      :type: int
+
+
+      
+      Get or set the ntensr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: large
+      :type: int
+
+
+      
+      Get or set the large
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthint
+      :type: int
+
+
+      
+      Get or set the nthint
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthhsv
+      :type: int
+
+
+      
+      Get or set the nthhsv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sets
+      :type: List[InitialStressShellLegacyCardSet]
+
+
+      
+      Gets the list of sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_set(**kwargs)
+
+      
+      Adds a set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,994 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Keyword and run example &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=7e54ce6f"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting-started/example';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="User guide" href="../user-guide/index.html" />
+    <link rel="prev" title="Server" href="modules/server.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/getting-started/example.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Keyword and run example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../getting-started.html" class="nav-link">Getting started</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Keyword and run example</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="keyword-and-run-example">
+<h1>Keyword and run example<a class="headerlink" href="#keyword-and-run-example" title="Link to this heading">#</a></h1>
+<p>The next few sections show how to generate, preview, solve, and review a Taylor bar impact problem.
+An example of a sweep over impact velocities for this problem can be found in this repository at
+<code class="docutils literal notranslate"><span class="pre">examples/Taylor_Bar/plot_taylor_bar_example.py</span></code>.</p>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<p>The following code describes an LS-DYNA Model for a Taylor bar impact problem. It assumes that the mesh file
+<cite>taylor_bar_mesh.k</cite> exists in the working directory. This mesh file can be found in this repository at
+<code class="docutils literal notranslate"><span class="pre">examples/Taylor_Bar/taylor_bar_mesh.k</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Deck</span><span class="p">,</span> <span class="n">keywords</span> <span class="k">as</span> <span class="n">kwd</span>
+
+<span class="c1"># construct a new Deck</span>
+<span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+
+<span class="c1"># Define material</span>
+<span class="n">mat_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Mat003</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mat_1</span><span class="o">.</span><span class="n">ro</span> <span class="o">=</span> <span class="mf">7.85000e-9</span>
+<span class="n">mat_1</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="mf">150000.0</span>
+<span class="n">mat_1</span><span class="o">.</span><span class="n">pr</span> <span class="o">=</span> <span class="mf">0.34</span>
+<span class="n">mat_1</span><span class="o">.</span><span class="n">sigy</span> <span class="o">=</span> <span class="mf">390.0</span>
+<span class="n">mat_1</span><span class="o">.</span><span class="n">etan</span> <span class="o">=</span> <span class="mf">90.0</span>
+
+<span class="c1"># Define section</span>
+<span class="n">sec_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">SectionSolid</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sec_1</span><span class="o">.</span><span class="n">elform</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Define part</span>
+<span class="n">part_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="n">part_1</span><span class="o">.</span><span class="n">parts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;mid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">mat_1</span><span class="o">.</span><span class="n">mid</span><span class="p">],</span> <span class="s2">&quot;secid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">sec_1</span><span class="o">.</span><span class="n">secid</span><span class="p">]})</span>
+
+<span class="c1"># Define coordinate system</span>
+<span class="n">cs_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DefineCoordinateSystem</span><span class="p">(</span><span class="n">cid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">cs_1</span><span class="o">.</span><span class="n">xl</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">cs_1</span><span class="o">.</span><span class="n">yp</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+ <span class="c1"># Define initial velocity</span>
+<span class="n">init_vel</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">InitialVelocityGeneration</span><span class="p">()</span>
+<span class="n">init_vel</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">part_1</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="s2">&quot;pid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">init_vel</span><span class="o">.</span><span class="n">styp</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">init_vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <span class="mf">300.0e3</span> <span class="c1"># mm/s</span>
+<span class="n">init_vel</span><span class="o">.</span><span class="n">icid</span> <span class="o">=</span> <span class="n">cs_1</span><span class="o">.</span><span class="n">cid</span>
+
+<span class="c1"># Define box for node set</span>
+<span class="n">box_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DefineBox</span><span class="p">(</span><span class="n">boxid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmn</span><span class="o">=-</span><span class="mi">500</span><span class="p">,</span> <span class="n">xmx</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">ymn</span><span class="o">=</span><span class="mf">39.0</span><span class="p">,</span> <span class="n">ymx</span><span class="o">=</span><span class="mf">40.1</span><span class="p">,</span> <span class="n">zmn</span><span class="o">=-</span><span class="mi">500</span><span class="p">,</span> <span class="n">zmx</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Create node set</span>
+<span class="n">set_node_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">SetNodeGeneral</span><span class="p">()</span>
+<span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">set_node_1</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;BOX&quot;</span>
+<span class="n">set_node_1</span><span class="o">.</span><span class="n">e1</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">boxid</span>
+
+<span class="c1"># Define rigid wall</span>
+<span class="n">rw</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">RigidwallPlanar</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rw</span><span class="o">.</span><span class="n">nsid</span> <span class="o">=</span> <span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span>
+<span class="n">rw</span><span class="o">.</span><span class="n">yt</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">ymx</span>
+<span class="n">rw</span><span class="o">.</span><span class="n">yh</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">ymn</span>
+
+<span class="c1"># Define control termination</span>
+<span class="n">control_term</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">ControlTermination</span><span class="p">(</span><span class="n">endtim</span><span class="o">=</span><span class="mf">8.00000e-5</span><span class="p">,</span> <span class="n">dtmin</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="c1"># Define database cards</span>
+<span class="n">deck_dt_out</span> <span class="o">=</span> <span class="mf">8.00000e-8</span>
+<span class="n">deck_glstat</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseGlstat</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">deck_matsum</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseMatsum</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">deck_nodout</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseNodout</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">deck_elout</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseElout</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">deck_rwforc</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseRwforc</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">deck_d3plot</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseBinaryD3Plot</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">4.00000e-6</span><span class="p">)</span>
+
+<span class="c1"># Define deck history node</span>
+<span class="n">deck_hist_node_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseHistoryNodeSet</span><span class="p">(</span><span class="n">id1</span><span class="o">=</span><span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span><span class="p">)</span>
+
+<span class="c1"># Insert all these cards into the Deck</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">deck_glstat</span><span class="p">,</span>
+        <span class="n">deck_matsum</span><span class="p">,</span>
+        <span class="n">deck_nodout</span><span class="p">,</span>
+        <span class="n">deck_elout</span><span class="p">,</span>
+        <span class="n">deck_rwforc</span><span class="p">,</span>
+        <span class="n">deck_d3plot</span><span class="p">,</span>
+        <span class="n">set_node_1</span><span class="p">,</span>
+        <span class="n">control_term</span><span class="p">,</span>
+        <span class="n">rw</span><span class="p">,</span>
+        <span class="n">box_1</span><span class="p">,</span>
+        <span class="n">init_vel</span><span class="p">,</span>
+        <span class="n">cs_1</span><span class="p">,</span>
+        <span class="n">part_1</span><span class="p">,</span>
+        <span class="n">mat_1</span><span class="p">,</span>
+        <span class="n">sec_1</span><span class="p">,</span>
+        <span class="n">deck_hist_node_1</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Add keyword that imports the mesh</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kwd</span><span class="o">.</span><span class="n">Include</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;taylor_bar_mesh.k&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<section id="preview">
+<h3>Preview<a class="headerlink" href="#preview" title="Link to this heading">#</a></h3>
+<p>The following code opens a 3D graphics window to preview the mesh for the LS-DYNA Model</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preview the model</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="write-to-file">
+<h3>Write to file<a class="headerlink" href="#write-to-file" title="Link to this heading">#</a></h3>
+<p>The following code writes the LS-DYNA model to an <cite>input.k</cite> keyword file in the working directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert deck to string</span>
+<span class="n">deck_string</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+<span class="c1"># Create LS-DYNA input deck</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.k&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+    <span class="n">file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">deck_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="solve">
+<h3>Solve<a class="headerlink" href="#solve" title="Link to this heading">#</a></h3>
+<p>The following code runs LS-DYNA using the <cite>input.k</cite> file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_dyna</span>
+
+<span class="c1"># Run LS-DYNA</span>
+<span class="n">run_dyna</span><span class="p">(</span><span class="s2">&quot;input.k&quot;</span><span class="p">)</span>
+
+<span class="c1"># Confirm that the results exist</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;d3plot&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;lsrun.out.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="post-processing">
+<h3>Post processing<a class="headerlink" href="#post-processing" title="Link to this heading">#</a></h3>
+<p>The following code processes results and generates a line chart of Time vs. Energy from the impact. This requires an installation
+of a <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> backend.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ansys.dpf.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dpf</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">set_result_file_path</span><span class="p">(</span><span class="s2">&quot;d3plot&quot;</span><span class="p">,</span> <span class="s2">&quot;d3plot&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="n">gke_op</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">global_kinetic_energy</span><span class="p">()</span>
+<span class="n">gke_op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_sources</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">gke</span> <span class="o">=</span> <span class="n">gke_op</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">field</span> <span class="o">=</span> <span class="n">gke</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ke_data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">time_data</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">time_freq_support</span><span class="o">.</span><span class="n">time_frequencies</span><span class="o">.</span><span class="n">data_as_list</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_data</span><span class="p">,</span> <span class="n">ke_data</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Kinetic Energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (mJ)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pre-and-solver-example">
+<h2>Pre and solver example<a class="headerlink" href="#pre-and-solver-example" title="Link to this heading">#</a></h2>
+<p>The next few sections show how to preprocessing, solve, and postprocessing a ball plate example.</p>
+<section id="id1">
+<h3>Preprocessing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The following code processes a ball plate example. In the repository, you can get the
+input file from <code class="docutils literal notranslate"><span class="pre">src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k</span></code> and
+the Python file from <code class="docutils literal notranslate"><span class="pre">examples/Explicit/ball_plate.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.pre</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_dynapre</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.pre.dynamech</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DynaMech</span><span class="p">,</span>
+    <span class="n">Velocity</span><span class="p">,</span>
+    <span class="n">PartSet</span><span class="p">,</span>
+    <span class="n">ShellPart</span><span class="p">,</span>
+    <span class="n">SolidPart</span><span class="p">,</span>
+    <span class="n">NodeSet</span><span class="p">,</span>
+    <span class="n">Contact</span><span class="p">,</span>
+    <span class="n">ContactSurface</span><span class="p">,</span>
+    <span class="n">ShellFormulation</span><span class="p">,</span>
+    <span class="n">SolidFormulation</span><span class="p">,</span>
+    <span class="n">ContactType</span><span class="p">,</span>
+    <span class="n">AnalysisType</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.pre.dynamaterial</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MatRigid</span><span class="p">,</span>
+    <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.pre</span><span class="w"> </span><span class="kn">import</span> <span class="n">examples</span>
+
+<span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">launch_dynapre</span><span class="p">(</span><span class="n">ip</span> <span class="o">=</span> <span class="n">hostname</span><span class="p">)</span>
+
+<span class="n">fns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">ball_plate</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">fns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">open_files</span><span class="p">(</span><span class="n">fns</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="o">.</span><span class="n">set_termination</span><span class="p">(</span><span class="n">termination_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ballplate</span> <span class="o">=</span> <span class="n">DynaMech</span><span class="p">(</span><span class="n">AnalysisType</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ballplate</span><span class="p">)</span>
+
+<span class="n">matrigid</span> <span class="o">=</span> <span class="n">MatRigid</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">7.83e-6</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">207</span><span class="p">,</span> <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">matplastic</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">7.83e-6</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">207</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plate</span> <span class="o">=</span> <span class="n">ShellPart</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><span class="n">ShellFormulation</span><span class="o">.</span><span class="n">BELYTSCHKO_TSAY</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matplastic</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_thickness</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_integration_points</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">plate</span><span class="p">)</span>
+
+<span class="n">ball</span> <span class="o">=</span> <span class="n">SolidPart</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ball</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matrigid</span><span class="p">)</span>
+<span class="n">ball</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><span class="n">SolidFormulation</span><span class="o">.</span><span class="n">CONSTANT_STRESS_SOLID_ELEMENT</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ball</span><span class="p">)</span>
+
+<span class="n">selfcontact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+<span class="n">surf1</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">surf1</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selfcontact</span><span class="p">)</span>
+
+<span class="n">spc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">256</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">19</span><span class="p">):</span>
+    <span class="n">spc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">272</span><span class="p">,</span><span class="mi">290</span><span class="p">):</span>
+    <span class="n">spc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_spc</span><span class="p">(</span><span class="n">NodeSet</span><span class="p">(</span><span class="n">spc</span><span class="p">),</span><span class="n">rx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">rz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1652</span><span class="p">):</span>
+    <span class="n">ballplate</span><span class="o">.</span><span class="n">initialconditions</span><span class="o">.</span><span class="n">create_velocity_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">trans</span><span class="o">=</span><span class="n">Velocity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">solution</span><span class="o">.</span><span class="n">set_output_database</span><span class="p">(</span><span class="n">glstat</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">matsum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">sleout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">create_database_binary</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">serverpath</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span>
+
+<span class="n">serveroutfile</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">serverpath</span><span class="p">,</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">))</span>
+<span class="n">downloadpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">)</span>
+<span class="n">downloadfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">,</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">serveroutfile</span><span class="p">,</span><span class="n">downloadfile</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Solve<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>The following code solves this basic ball plate example. In the repository,
+you can get the Python file from <code class="docutils literal notranslate"><span class="pre">examples/solver/ball_plate_solver.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ansys.dyna.core.solver</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">solver</span>
+
+<span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;5000&quot;</span>
+<span class="n">dyna</span><span class="o">=</span><span class="n">launch_dyna</span><span class="p">(</span><span class="n">ip</span> <span class="o">=</span> <span class="n">hostname</span><span class="p">,</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span><span class="p">)</span>            <span class="c1"># connect to the container</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s2">&quot;./output/ball_plate.k&quot;</span><span class="p">)</span>                            <span class="c1"># push an input file</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                                   <span class="c1"># start 4 ranks of mppdyna</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;i=ball_plate.k memory=10m ncycle=20000&quot;</span><span class="p">)</span>   <span class="c1"># begin execution</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Post processing<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>The following code processes results from the solve of this basic ball plate example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dpf</span><span class="w"> </span><span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">dpf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">()</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;d3plot&#39;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">set_result_file_path</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;d3plot&#39;</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="c1"># Extract displacements for all time steps from d3plot</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">displacement</span><span class="o">.</span><span class="n">on_all_time_freqs</span><span class="p">()</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">D</span><span class="o">.</span><span class="n">animate</span><span class="p">()</span>
+
+<span class="n">stress</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">stress</span><span class="p">()</span>
+<span class="n">stress</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_sources</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">stress</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">time_scoping</span><span class="p">([</span><span class="mi">12</span><span class="p">])</span>
+<span class="n">stress</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">stress</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">requested_location</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Nodal&quot;</span><span class="p">)</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">stress</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">fields_container</span><span class="p">()</span>
+
+<span class="n">shell_layer_extract</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">change_shell_layers</span><span class="p">()</span>
+<span class="n">shell_layer_extract</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">fields_container</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">shell_layer_extract</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">e_shell_layer</span><span class="p">)</span>
+<span class="n">shell_layer_extract</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">e_shell_layer</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fields_top</span> <span class="o">=</span> <span class="n">shell_layer_extract</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">fields_container_as_fields_container</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fields_top</span><span class="p">)</span>
+<span class="n">fields_top</span><span class="o">.</span><span class="n">animate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more examples, see <a class="reference external" href="https://dyna.docs.pyansys.com/version/stable/examples/index.html">Examples</a>
+in the PyDYNA documentation.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">Preview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-to-file">Write to file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve">Solve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing">Post processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-and-solver-example">Pre and solver example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Post processing</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pydyna/edit/main/doc/source/getting-started/example.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/getting-started/example.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+ansys.dyna.core.pre.dynabase.Parts
+==================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Parts
+
+   
+   Stores the part list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: beamlist
+      :value: []
+
+
+
+   .. py:attribute:: shelllist
+      :value: []
+
+
+
+   .. py:attribute:: solidlist
+      :value: []
+
+
+
+   .. py:attribute:: igalist
+      :value: []
+
+
+
+   .. py:attribute:: icfdlist
+      :value: []
+
+
+
+   .. py:attribute:: icfdvolumelist
+      :value: []
+
+
+
+   .. py:attribute:: discretelist
+      :value: []
+
+
+
+   .. py:attribute:: isphstructlist
+      :value: []
+
+
+
+   .. py:attribute:: isphfluidlist
+      :value: []
+
+
+
+   .. py:method:: add(part)
+
+      
+      Add a part to the part list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_num_shellpart()
+
+      
+      Get the number of shell parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for added parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,77 @@
+ansys.dyna.core.lib.cards
+=========================
+
+.. py:module:: ansys.dyna.core.lib.cards
+
+.. autoapi-nested-parse::
+
+   Base class for cards and I/O
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards.Cards
+
+
+Module Contents
+---------------
+
+.. py:class:: Cards(keyword)
+
+   .. py:property:: options
+      :type: ansys.dyna.core.lib.option_card.OptionsAPI
+
+
+      
+      Gets the options_api of this keyword, if any
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: TextIO, format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True) -> bool
+
+      
+      Writes the cards to `buf` using `format`.
+      Returns whether a superfluous newline is added
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

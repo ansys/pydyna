@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_ISPH:
+
+ISPH examples
+~~~~~~~~~~~~~
+
+These examples show how to create ISPH model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create an ISPH model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/ISPH/images/thumb/sphx_glr_rigidtest_thumb.png
+    :alt: Rigid test example
+
+  :ref:`sphx_glr_examples_ISPH_rigidtest.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rigid test example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ISPH/rigidtest
+

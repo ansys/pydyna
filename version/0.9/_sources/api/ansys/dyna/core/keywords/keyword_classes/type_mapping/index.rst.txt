@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.type_mapping
+=====================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.type_mapping
+
+.. autoapi-nested-parse::
+
+   Module containing mapping from keywords to classes.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.type_mapping.TypeMapping
+
+
+Module Contents
+---------------
+
+.. py:data:: TypeMapping
+

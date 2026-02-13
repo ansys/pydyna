@@ -1,0 +1,195 @@
+ansys.dyna.core.lib.field.Field
+===============================
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/field/Field.ReadOnlyValue
+
+.. py:class:: ansys.dyna.core.lib.field.Field(name: str, type: Field.__init__.type, offset: int, width: int, /, value: Any = None, **kwargs)
+
+   
+   Class to represent a field in a text card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: __repr__() -> str
+
+
+   .. py:property:: name
+      :type: str
+
+
+      
+      Get or set the name of the field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: type
+      :type: type
+
+
+      
+      Get or set the type of the field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: offset
+      :type: int
+
+
+      
+      Get or set the offset of the field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: width
+      :type: int
+
+
+      
+      Get or set the width of the field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: value
+      :type: Any
+
+
+      
+      Get or set the value of the field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: io_info() -> Tuple[str, Type]
+
+      
+      Return the value and type used for io.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field.Field.ReadOnlyValue
+
+

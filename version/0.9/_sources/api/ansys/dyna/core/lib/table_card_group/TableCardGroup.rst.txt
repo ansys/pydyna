@@ -1,0 +1,162 @@
+ansys.dyna.core.lib.table_card_group.TableCardGroup
+===================================================
+
+.. py:class:: ansys.dyna.core.lib.table_card_group.TableCardGroup(cards: List[ansys.dyna.core.lib.card.Card], length_func: Callable, active_func: Callable = None, name: str = None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default, **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: table
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> None
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> str
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Return whether the card is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

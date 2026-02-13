@@ -1,0 +1,28 @@
+ansys.dyna.core.solver.dynalogging.PymapdlFormatter
+===================================================
+
+.. py:class:: ansys.dyna.core.solver.dynalogging.PymapdlFormatter(fmt=STDOUT_MSG_FORMAT, datefmt=None, style='%', validate=True, defaults=None)
+
+   Bases: :py:obj:`logging.Formatter`
+
+
+   
+   Provides a customized ``Formatter`` class for overwriting the default format styles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

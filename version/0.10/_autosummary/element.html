@@ -1,0 +1,1373 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Element keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=7e54ce6f"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/element';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Em keywords" href="em.html" />
+    <link rel="prev" title="Ef keywords" href="ef.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/element.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Element keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em.html">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigidwall.html">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Element keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-element"></span><section id="element-keywords">
+<h1>Element keywords<a class="headerlink" href="#element-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam">
+<span id="elementbeam"></span><h2>ElementBeam<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeam class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_elbow">
+<span id="elementbeamelbow"></span><h2>ElementBeamElbow<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_elbow" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamElbow class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_offset">
+<span id="elementbeamoffset"></span><h2>ElementBeamOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation">
+<span id="elementbeamorientation"></span><h2>ElementBeamOrientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamOrientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation_offset">
+<span id="elementbeamorientationoffset"></span><h2>ElementBeamOrientationOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamOrientationOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid">
+<span id="elementbeampid"></span><h2>ElementBeamPid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamPid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_offset">
+<span id="elementbeampidoffset"></span><h2>ElementBeamPidOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamPidOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_orientation">
+<span id="elementbeampidorientation"></span><h2>ElementBeamPidOrientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_orientation" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamPidOrientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pulley">
+<span id="elementbeampulley"></span><h2>ElementBeamPulley<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pulley" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamPulley class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar">
+<span id="elementbeamscalar"></span><h2>ElementBeamScalar<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamScalar class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_offset">
+<span id="elementbeamscalaroffset"></span><h2>ElementBeamScalarOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamScalarOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_orientation">
+<span id="elementbeamscalarorientation"></span><h2>ElementBeamScalarOrientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_orientation" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamScalarOrientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_pid">
+<span id="elementbeamscalarpid"></span><h2>ElementBeamScalarPid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_pid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamScalarPid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section">
+<span id="elementbeamsection"></span><h2>ElementBeamSection<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSection class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_offset">
+<span id="elementbeamsectionoffset"></span><h2>ElementBeamSectionOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSectionOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_orientation">
+<span id="elementbeamsectionorientation"></span><h2>ElementBeamSectionOrientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_orientation" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSectionOrientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_pid">
+<span id="elementbeamsectionpid"></span><h2>ElementBeamSectionPid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_pid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSectionPid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_scalar">
+<span id="elementbeamsectionscalar"></span><h2>ElementBeamSectionScalar<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_scalar" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSectionScalar class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_source">
+<span id="elementbeamsource"></span><h2>ElementBeamSource<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_source" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamSource class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness">
+<span id="elementbeamthickness"></span><h2>ElementBeamThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_offset">
+<span id="elementbeamthicknessoffset"></span><h2>ElementBeamThicknessOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamThicknessOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_orientation">
+<span id="elementbeamthicknessorientation"></span><h2>ElementBeamThicknessOrientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_orientation" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamThicknessOrientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_pid">
+<span id="elementbeamthicknesspid"></span><h2>ElementBeamThicknessPid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_pid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamThicknessPid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_scalar">
+<span id="elementbeamthicknessscalar"></span><h2>ElementBeamThicknessScalar<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_scalar" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamThicknessScalar class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_warpage">
+<span id="elementbeamwarpage"></span><h2>ElementBeamWarpage<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_warpage" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBeamWarpage class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_bearing">
+<span id="elementbearing"></span><h2>ElementBearing<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_bearing" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBearing class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_blanking">
+<span id="elementblanking"></span><h2>ElementBlanking<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_blanking" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementBlanking class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input">
+<span id="elementdirectmatrixinput"></span><h2>ElementDirectMatrixInput<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDirectMatrixInput class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input_binary">
+<span id="elementdirectmatrixinputbinary"></span><h2>ElementDirectMatrixInputBinary<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input_binary" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDirectMatrixInputBinary class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete">
+<span id="elementdiscrete"></span><h2>ElementDiscrete<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDiscrete class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_lco">
+<span id="elementdiscretelco"></span><h2>ElementDiscreteLco<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_lco" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDiscreteLco class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere">
+<span id="elementdiscretesphere"></span><h2>ElementDiscreteSphere<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDiscreteSphere class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere_volume">
+<span id="elementdiscretespherevolume"></span><h2>ElementDiscreteSphereVolume<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere_volume" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementDiscreteSphereVolume class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_shell">
+<span id="elementgeneralizedshell"></span><h2>ElementGeneralizedShell<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_shell" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementGeneralizedShell class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_solid">
+<span id="elementgeneralizedsolid"></span><h2>ElementGeneralizedSolid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_solid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementGeneralizedSolid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia">
+<span id="elementinertia"></span><h2>ElementInertia<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementInertia class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia_offset">
+<span id="elementinertiaoffset"></span><h2>ElementInertiaOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementInertiaOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_shell">
+<span id="elementinterpolationshell"></span><h2>ElementInterpolationShell<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_shell" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementInterpolationShell class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_solid">
+<span id="elementinterpolationsolid"></span><h2>ElementInterpolationSolid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_solid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementInterpolationSolid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_lancing">
+<span id="elementlancing"></span><h2>ElementLancing<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_lancing" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementLancing class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass">
+<span id="elementmass"></span><h2>ElementMass<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMass class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix">
+<span id="elementmassmatrix"></span><h2>ElementMassMatrix<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMassMatrix class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix_node_set">
+<span id="elementmassmatrixnodeset"></span><h2>ElementMassMatrixNodeSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix_node_set" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMassMatrixNodeSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_node_set">
+<span id="elementmassnodeset"></span><h2>ElementMassNodeSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_node_set" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMassNodeSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part">
+<span id="elementmasspart"></span><h2>ElementMassPart<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMassPart class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part_set">
+<span id="elementmasspartset"></span><h2>ElementMassPartSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part_set" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementMassPartSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_nurbs_patch_2d_trimmed">
+<span id="elementnurbspatch2dtrimmed"></span><h2>ElementNurbsPatch2DTrimmed<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_nurbs_patch_2d_trimmed" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementNurbsPatch2DTrimmed class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_plotel">
+<span id="elementplotel"></span><h2>ElementPlotel<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_plotel" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementPlotel class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt">
+<span id="elementseatbelt"></span><h2>ElementSeatbelt<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbelt class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_accelerometer">
+<span id="elementseatbeltaccelerometer"></span><h2>ElementSeatbeltAccelerometer<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_accelerometer" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbeltAccelerometer class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_pretensioner">
+<span id="elementseatbeltpretensioner"></span><h2>ElementSeatbeltPretensioner<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_pretensioner" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbeltPretensioner class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_retractor">
+<span id="elementseatbeltretractor"></span><h2>ElementSeatbeltRetractor<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_retractor" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbeltRetractor class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_sensor">
+<span id="elementseatbeltsensor"></span><h2>ElementSeatbeltSensor<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_sensor" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbeltSensor class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_slipring">
+<span id="elementseatbeltslipring"></span><h2>ElementSeatbeltSlipring<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_slipring" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSeatbeltSlipring class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell">
+<span id="elementshell"></span><h2>ElementShell<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShell class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta">
+<span id="elementshellbeta"></span><h2>ElementShellBeta<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBeta class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite">
+<span id="elementshellbetacomposite"></span><h2>ElementShellBetaComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBetaComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite_long">
+<span id="elementshellbetacompositelong"></span><h2>ElementShellBetaCompositeLong<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite_long" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBetaCompositeLong class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset">
+<span id="elementshellbetaoffset"></span><h2>ElementShellBetaOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBetaOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite">
+<span id="elementshellbetaoffsetcomposite"></span><h2>ElementShellBetaOffsetComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBetaOffsetComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite_long">
+<span id="elementshellbetaoffsetcompositelong"></span><h2>ElementShellBetaOffsetCompositeLong<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite_long" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBetaOffsetCompositeLong class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_bext_patch">
+<span id="elementshellbextpatch"></span><h2>ElementShellBextPatch<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_bext_patch" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellBextPatch class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite">
+<span id="elementshellcomposite"></span><h2>ElementShellComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite_long">
+<span id="elementshellcompositelong"></span><h2>ElementShellCompositeLong<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite_long" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellCompositeLong class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_dof">
+<span id="elementshelldof"></span><h2>ElementShellDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid">
+<span id="elementshellmcid"></span><h2>ElementShellMcid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellMcid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid_offset">
+<span id="elementshellmcidoffset"></span><h2>ElementShellMcidOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellMcidOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch">
+<span id="elementshellnurbspatch"></span><h2>ElementShellNurbsPatch<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellNurbsPatch class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_trimmed">
+<span id="elementshellnurbspatchtrimmed"></span><h2>ElementShellNurbsPatchTrimmed<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_trimmed" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellNurbsPatchTrimmed class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_v3">
+<span id="elementshellnurbspatchv3"></span><h2>ElementShellNurbsPatchV3<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_v3" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellNurbsPatchV3 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset">
+<span id="elementshelloffset"></span><h2>ElementShellOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite">
+<span id="elementshelloffsetcomposite"></span><h2>ElementShellOffsetComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellOffsetComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite_long">
+<span id="elementshelloffsetcompositelong"></span><h2>ElementShellOffsetCompositeLong<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite_long" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellOffsetCompositeLong class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_shl4_to_shl8">
+<span id="elementshellshl4toshl8"></span><h2>ElementShellShl4ToShl8<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_shl4_to_shl8" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellShl4ToShl8 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_source_sink">
+<span id="elementshellsourcesink"></span><h2>ElementShellSourceSink<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_source_sink" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellSourceSink class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness">
+<span id="elementshellthickness"></span><h2>ElementShellThickness<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThickness class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta">
+<span id="elementshellthicknessbeta"></span><h2>ElementShellThicknessBeta<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThicknessBeta class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta_offset">
+<span id="elementshellthicknessbetaoffset"></span><h2>ElementShellThicknessBetaOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThicknessBetaOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid">
+<span id="elementshellthicknessmcid"></span><h2>ElementShellThicknessMcid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThicknessMcid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid_offset">
+<span id="elementshellthicknessmcidoffset"></span><h2>ElementShellThicknessMcidOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThicknessMcidOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_offset">
+<span id="elementshellthicknessoffset"></span><h2>ElementShellThicknessOffset<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_offset" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementShellThicknessOffset class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof">
+<span id="elementsoliddof"></span><h2>ElementSolidDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof__ten_nodes_format_">
+<span id="elementsoliddoftennodesformat"></span><h2>ElementSolidDofTenNodesFormat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof__ten_nodes_format_" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidDofTenNodesFormat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20">
+<span id="elementsolidh20"></span><h2>ElementSolidH20<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH20 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20_dof">
+<span id="elementsolidh20dof"></span><h2>ElementSolidH20Dof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH20Dof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27">
+<span id="elementsolidh27"></span><h2>ElementSolidH27<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH27 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27_dof">
+<span id="elementsolidh27dof"></span><h2>ElementSolidH27Dof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH27Dof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h64">
+<span id="elementsolidh64"></span><h2>ElementSolidH64<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h64" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH64 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20">
+<span id="elementsolidh8toh20"></span><h2>ElementSolidH8Toh20<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_dof">
+<span id="elementsolidh8toh20dof"></span><h2>ElementSolidH8Toh20Dof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20Dof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_format2">
+<span id="elementsolidh8toh20format2"></span><h2>ElementSolidH8Toh20Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho">
+<span id="elementsolidh8toh20ortho"></span><h2>ElementSolidH8Toh20Ortho<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20Ortho class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_dof">
+<span id="elementsolidh8toh20orthodof"></span><h2>ElementSolidH8Toh20OrthoDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20OrthoDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_format2">
+<span id="elementsolidh8toh20orthoformat2"></span><h2>ElementSolidH8Toh20OrthoFormat2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh20OrthoFormat2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27">
+<span id="elementsolidh8toh27"></span><h2>ElementSolidH8Toh27<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_dof">
+<span id="elementsolidh8toh27dof"></span><h2>ElementSolidH8Toh27Dof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27Dof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_format2">
+<span id="elementsolidh8toh27format2"></span><h2>ElementSolidH8Toh27Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho">
+<span id="elementsolidh8toh27ortho"></span><h2>ElementSolidH8Toh27Ortho<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27Ortho class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_dof">
+<span id="elementsolidh8toh27orthodof"></span><h2>ElementSolidH8Toh27OrthoDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27OrthoDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_format2">
+<span id="elementsolidh8toh27orthoformat2"></span><h2>ElementSolidH8Toh27OrthoFormat2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh27OrthoFormat2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64">
+<span id="elementsolidh8toh64"></span><h2>ElementSolidH8Toh64<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh64 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64_format2">
+<span id="elementsolidh8toh64format2"></span><h2>ElementSolidH8Toh64Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidH8Toh64Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_nurbs_patch">
+<span id="elementsolidnurbspatch"></span><h2>ElementSolidNurbsPatch<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_nurbs_patch" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidNurbsPatch class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof">
+<span id="elementsolidorthodof"></span><h2>ElementSolidOrthoDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidOrthoDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof__ten_nodes_format_">
+<span id="elementsolidorthodoftennodesformat"></span><h2>ElementSolidOrthoDofTenNodesFormat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof__ten_nodes_format_" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidOrthoDofTenNodesFormat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p21">
+<span id="elementsolidp21"></span><h2>ElementSolidP21<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p21" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidP21 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p40">
+<span id="elementsolidp40"></span><h2>ElementSolidP40<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p40" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidP40 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21">
+<span id="elementsolidp6top21"></span><h2>ElementSolidP6Top21<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidP6Top21 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21_format2">
+<span id="elementsolidp6top21format2"></span><h2>ElementSolidP6Top21Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidP6Top21Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_peri">
+<span id="elementsolidperi"></span><h2>ElementSolidPeri<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_peri" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidPeri class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t15">
+<span id="elementsolidt15"></span><h2>ElementSolidT15<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t15" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT15 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t20">
+<span id="elementsolidt20"></span><h2>ElementSolidT20<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t20" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT20 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10">
+<span id="elementsolidt4tot10"></span><h2>ElementSolidT4Tot10<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT4Tot10 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10_format2">
+<span id="elementsolidt4tot10format2"></span><h2>ElementSolidT4Tot10Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT4Tot10Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15">
+<span id="elementsolidt4tot15"></span><h2>ElementSolidT4Tot15<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT4Tot15 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15_format2">
+<span id="elementsolidt4tot15format2"></span><h2>ElementSolidT4Tot15Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidT4Tot15Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10">
+<span id="elementsolidtet4totet10"></span><h2>ElementSolidTet4Totet10<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidTet4Totet10 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_dof_format2">
+<span id="elementsolidtet4totet10dofformat2"></span><h2>ElementSolidTet4Totet10DofFormat2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_dof_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidTet4Totet10DofFormat2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_format2">
+<span id="elementsolidtet4totet10format2"></span><h2>ElementSolidTet4Totet10Format2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_format2" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidTet4Totet10Format2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho">
+<span id="elementsolidtet4totet10ortho"></span><h2>ElementSolidTet4Totet10Ortho<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidTet4Totet10Ortho class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho_dof">
+<span id="elementsolidtet4totet10orthodof"></span><h2>ElementSolidTet4Totet10OrthoDof<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho_dof" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSolidTet4Totet10OrthoDof class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_sph">
+<span id="elementsph"></span><h2>ElementSph<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_sph" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementSph class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_trim">
+<span id="elementtrim"></span><h2>ElementTrim<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_trim" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTrim class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell">
+<span id="elementtshell"></span><h2>ElementTshell<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTshell class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta">
+<span id="elementtshellbeta"></span><h2>ElementTshellBeta<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTshellBeta class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta_composite">
+<span id="elementtshellbetacomposite"></span><h2>ElementTshellBetaComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTshellBetaComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite">
+<span id="elementtshellcomposite"></span><h2>ElementTshellComposite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTshellComposite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite_beta">
+<span id="elementtshellcompositebeta"></span><h2>ElementTshellCompositeBeta<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite_beta" title="Link to this heading">#</a></h2>
+<p>Module providing the ElementTshellCompositeBeta class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam">ElementBeam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_elbow">ElementBeamElbow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_offset">ElementBeamOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation">ElementBeamOrientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_orientation_offset">ElementBeamOrientationOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid">ElementBeamPid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_offset">ElementBeamPidOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pid_orientation">ElementBeamPidOrientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_pulley">ElementBeamPulley</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar">ElementBeamScalar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_offset">ElementBeamScalarOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_orientation">ElementBeamScalarOrientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_scalar_pid">ElementBeamScalarPid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section">ElementBeamSection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_offset">ElementBeamSectionOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_orientation">ElementBeamSectionOrientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_pid">ElementBeamSectionPid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_section_scalar">ElementBeamSectionScalar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_source">ElementBeamSource</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness">ElementBeamThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_offset">ElementBeamThicknessOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_orientation">ElementBeamThicknessOrientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_pid">ElementBeamThicknessPid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_thickness_scalar">ElementBeamThicknessScalar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_beam_warpage">ElementBeamWarpage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_bearing">ElementBearing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_blanking">ElementBlanking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input">ElementDirectMatrixInput</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_direct_matrix_input_binary">ElementDirectMatrixInputBinary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete">ElementDiscrete</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_lco">ElementDiscreteLco</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere">ElementDiscreteSphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_discrete_sphere_volume">ElementDiscreteSphereVolume</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_shell">ElementGeneralizedShell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_generalized_solid">ElementGeneralizedSolid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia">ElementInertia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_inertia_offset">ElementInertiaOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_shell">ElementInterpolationShell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_interpolation_solid">ElementInterpolationSolid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_lancing">ElementLancing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass">ElementMass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix">ElementMassMatrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_matrix_node_set">ElementMassMatrixNodeSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_node_set">ElementMassNodeSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part">ElementMassPart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_mass_part_set">ElementMassPartSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_nurbs_patch_2d_trimmed">ElementNurbsPatch2DTrimmed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_plotel">ElementPlotel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt">ElementSeatbelt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_accelerometer">ElementSeatbeltAccelerometer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_pretensioner">ElementSeatbeltPretensioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_retractor">ElementSeatbeltRetractor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_sensor">ElementSeatbeltSensor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_seatbelt_slipring">ElementSeatbeltSlipring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell">ElementShell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta">ElementShellBeta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite">ElementShellBetaComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_composite_long">ElementShellBetaCompositeLong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset">ElementShellBetaOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite">ElementShellBetaOffsetComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_beta_offset_composite_long">ElementShellBetaOffsetCompositeLong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_bext_patch">ElementShellBextPatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite">ElementShellComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_composite_long">ElementShellCompositeLong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_dof">ElementShellDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid">ElementShellMcid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_mcid_offset">ElementShellMcidOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch">ElementShellNurbsPatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_trimmed">ElementShellNurbsPatchTrimmed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_v3">ElementShellNurbsPatchV3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset">ElementShellOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite">ElementShellOffsetComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_offset_composite_long">ElementShellOffsetCompositeLong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_shl4_to_shl8">ElementShellShl4ToShl8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_source_sink">ElementShellSourceSink</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness">ElementShellThickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta">ElementShellThicknessBeta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_beta_offset">ElementShellThicknessBetaOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid">ElementShellThicknessMcid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_mcid_offset">ElementShellThicknessMcidOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_shell_thickness_offset">ElementShellThicknessOffset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof">ElementSolidDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_dof__ten_nodes_format_">ElementSolidDofTenNodesFormat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20">ElementSolidH20</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h20_dof">ElementSolidH20Dof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27">ElementSolidH27</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h27_dof">ElementSolidH27Dof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h64">ElementSolidH64</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20">ElementSolidH8Toh20</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_dof">ElementSolidH8Toh20Dof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_format2">ElementSolidH8Toh20Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho">ElementSolidH8Toh20Ortho</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_dof">ElementSolidH8Toh20OrthoDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh20_ortho_format2">ElementSolidH8Toh20OrthoFormat2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27">ElementSolidH8Toh27</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_dof">ElementSolidH8Toh27Dof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_format2">ElementSolidH8Toh27Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho">ElementSolidH8Toh27Ortho</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_dof">ElementSolidH8Toh27OrthoDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh27_ortho_format2">ElementSolidH8Toh27OrthoFormat2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64">ElementSolidH8Toh64</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_h8toh64_format2">ElementSolidH8Toh64Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_nurbs_patch">ElementSolidNurbsPatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof">ElementSolidOrthoDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho_dof__ten_nodes_format_">ElementSolidOrthoDofTenNodesFormat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p21">ElementSolidP21</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p40">ElementSolidP40</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21">ElementSolidP6Top21</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_p6top21_format2">ElementSolidP6Top21Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_peri">ElementSolidPeri</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t15">ElementSolidT15</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t20">ElementSolidT20</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10">ElementSolidT4Tot10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot10_format2">ElementSolidT4Tot10Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15">ElementSolidT4Tot15</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_t4tot15_format2">ElementSolidT4Tot15Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10">ElementSolidTet4Totet10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_dof_format2">ElementSolidTet4Totet10DofFormat2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_format2">ElementSolidTet4Totet10Format2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho">ElementSolidTet4Totet10Ortho</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_solid_tet4totet10_ortho_dof">ElementSolidTet4Totet10OrthoDof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_sph">ElementSph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_trim">ElementTrim</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell">ElementTshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta">ElementTshellBeta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_beta_composite">ElementTshellBetaComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite">ElementTshellComposite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.element_tshell_composite_beta">ElementTshellCompositeBeta</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/element.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

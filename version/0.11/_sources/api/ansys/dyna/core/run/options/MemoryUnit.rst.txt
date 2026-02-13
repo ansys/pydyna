@@ -1,0 +1,50 @@
+ansys.dyna.core.run.options.MemoryUnit
+======================================
+
+.. py:class:: ansys.dyna.core.run.options.MemoryUnit
+
+   
+   Memory unit for LS-DYNA command line.  Only MB and GB are currently supported.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: BYTE
+      :value: 0
+
+
+
+   .. py:attribute:: KB
+      :value: 1
+
+
+
+   .. py:attribute:: MB
+      :value: 2
+
+
+
+   .. py:attribute:: GB
+      :value: 3
+
+
+
+   .. py:attribute:: TB
+      :value: 4
+
+

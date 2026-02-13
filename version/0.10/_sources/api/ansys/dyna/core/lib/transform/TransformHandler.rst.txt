@@ -1,0 +1,100 @@
+ansys.dyna.core.lib.transform.TransformHandler
+==============================================
+
+.. py:class:: ansys.dyna.core.lib.transform.TransformHandler
+
+   Bases: :py:obj:`ansys.dyna.core.lib.import_handler.ImportHandler`
+
+
+   
+   Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: register_transform_handler(identity: Union[str, Tuple[str, str]], handler: ansys.dyna.core.lib.transforms.base_transform.Transform) -> None
+
+      
+      Register a transform handler for a specific keyword or keyword+subkeyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: after_import(context: ansys.dyna.core.lib.import_handler.ImportContext, keyword: Union[ansys.dyna.core.lib.keyword_base.KeywordBase, str]) -> None
+
+      
+      Handle actions after importing a keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: on_error(error)
+
+      
+      Handle errors during import.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

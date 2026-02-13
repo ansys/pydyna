@@ -1,0 +1,51 @@
+ansys.dyna.core.lib.option_card.OptionAPI
+=========================================
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionAPI(options_api: OptionsInterface, name: str)
+
+   
+   API for an individual option associated with a keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Indicates whether the option is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

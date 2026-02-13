@@ -1,0 +1,19 @@
+ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+===================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid_ortho/ElementSolidOrtho
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho
+
+

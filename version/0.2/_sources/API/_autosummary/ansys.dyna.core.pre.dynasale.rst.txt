@@ -1,0 +1,6 @@
+﻿dynasale
+========
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynasale

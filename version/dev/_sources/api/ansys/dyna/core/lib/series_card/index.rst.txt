@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.series_card
+===============================
+
+.. py:module:: ansys.dyna.core.lib.series_card
+
+.. autoapi-nested-parse::
+
+   Module for handling series cards.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/series_card/SeriesCard
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.series_card.SeriesCard
+
+

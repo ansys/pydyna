@@ -1,0 +1,189 @@
+ansys.dyna.core.lib.card
+========================
+
+.. py:module:: ansys.dyna.core.lib.card
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card.Card
+
+
+Module Contents
+---------------
+
+.. py:class:: Card(fields: List[ansys.dyna.core.lib.field.Field], active_func=None, format=format_type.default)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: format
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO) -> bool
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> Union[str, None]
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_value(prop: str) -> Any
+
+      
+      gets the value of the field in the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_value(prop: str, value: Any) -> None
+
+      
+      sets the value of the field in the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

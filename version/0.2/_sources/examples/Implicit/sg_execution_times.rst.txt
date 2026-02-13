@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_examples_Implicit_sg_execution_times:
+
+Computation times
+=================
+**00:17.233** total execution time for **examples_Implicit** files:
+
++-----------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Implicit_camry_rc.py` (``camry_rc.py``) | 00:17.233 | 0.0 MB |
++-----------------------------------------------------------------+-----------+--------+

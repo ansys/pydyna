@@ -1,0 +1,74 @@
+:py:mod:`ansys.dyna.core.solver.grpc_tags`
+==========================================
+
+.. py:module:: ansys.dyna.core.solver.grpc_tags
+
+
+Module Contents
+---------------
+
+.. py:data:: SWITCH
+   :value: 1
+
+   
+
+.. py:data:: RUN
+   :value: 2
+
+   
+
+.. py:data:: CWD
+   :value: 3
+
+   
+
+.. py:data:: PAUSE
+   :value: 4
+
+   
+
+.. py:data:: TIME
+   :value: 5
+
+   
+
+.. py:data:: RESUME
+   :value: 6
+
+   
+
+.. py:data:: REQUIRES_SYNC
+   :value: 1000
+
+   
+
+.. py:data:: NODE
+   :value: 1001
+
+   
+
+.. py:data:: SETLC
+   :value: 1002
+
+   
+
+.. py:data:: ACK
+   :value: 0
+
+   
+
+.. py:data:: NOTRUNNING
+   :value: 1
+
+   
+
+.. py:data:: RUNNING
+   :value: 2
+
+   
+
+.. py:data:: NOTFOUND
+   :value: 3
+
+   
+

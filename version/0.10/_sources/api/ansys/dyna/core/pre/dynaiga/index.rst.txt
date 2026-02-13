@@ -1,0 +1,26 @@
+ansys.dyna.core.pre.dynaiga
+===========================
+
+.. py:module:: ansys.dyna.core.pre.dynaiga
+
+.. autoapi-nested-parse::
+
+   Module for creating an IGA DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynaiga/DynaIGA
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaiga.DynaIGA
+
+

@@ -1,0 +1,1058 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Rigidwall keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/rigidwall';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Rve keywords" href="rve.html" />
+    <link rel="prev" title="Rigid keywords" href="rigid.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/rigidwall.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Element keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em.html">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Rigidwall keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-rigidwall"></span><section id="rigidwall-keywords">
+<h1>Rigidwall keywords<a class="headerlink" href="#rigidwall-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_force_transducer">
+<span id="rigidwallforcetransducer"></span><h2>RigidwallForceTransducer<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_force_transducer" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallForceTransducer class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder">
+<span id="rigidwallgeometriccylinder"></span><h2>RigidwallGeometricCylinder<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinder class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform">
+<span id="rigidwallgeometriccylinderdeform"></span><h2>RigidwallGeometricCylinderDeform<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeform class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display">
+<span id="rigidwallgeometriccylinderdeformdisplay"></span><h2>RigidwallGeometricCylinderDeformDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display_motion">
+<span id="rigidwallgeometriccylinderdeformdisplaymotion"></span><h2>RigidwallGeometricCylinderDeformDisplayMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformDisplayMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior">
+<span id="rigidwallgeometriccylinderdeforminterior"></span><h2>RigidwallGeometricCylinderDeformInterior<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformInterior class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_display">
+<span id="rigidwallgeometriccylinderdeforminteriordisplay"></span><h2>RigidwallGeometricCylinderDeformInteriorDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformInteriorDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion">
+<span id="rigidwallgeometriccylinderdeforminteriormotion"></span><h2>RigidwallGeometricCylinderDeformInteriorMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformInteriorMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion_display">
+<span id="rigidwallgeometriccylinderdeforminteriormotiondisplay"></span><h2>RigidwallGeometricCylinderDeformInteriorMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformInteriorMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion">
+<span id="rigidwallgeometriccylinderdeformmotion"></span><h2>RigidwallGeometricCylinderDeformMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion_display">
+<span id="rigidwallgeometriccylinderdeformmotiondisplay"></span><h2>RigidwallGeometricCylinderDeformMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDeformMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_display">
+<span id="rigidwallgeometriccylinderdisplay"></span><h2>RigidwallGeometricCylinderDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior">
+<span id="rigidwallgeometriccylinderinterior"></span><h2>RigidwallGeometricCylinderInterior<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderInterior class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_deform_display">
+<span id="rigidwallgeometriccylinderinteriordeformdisplay"></span><h2>RigidwallGeometricCylinderInteriorDeformDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_deform_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderInteriorDeformDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_display">
+<span id="rigidwallgeometriccylinderinteriordisplay"></span><h2>RigidwallGeometricCylinderInteriorDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderInteriorDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion">
+<span id="rigidwallgeometriccylinderinteriormotion"></span><h2>RigidwallGeometricCylinderInteriorMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderInteriorMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion_display">
+<span id="rigidwallgeometriccylinderinteriormotiondisplay"></span><h2>RigidwallGeometricCylinderInteriorMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderInteriorMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion">
+<span id="rigidwallgeometriccylindermotion"></span><h2>RigidwallGeometricCylinderMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion_display">
+<span id="rigidwallgeometriccylindermotiondisplay"></span><h2>RigidwallGeometricCylinderMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricCylinderMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat">
+<span id="rigidwallgeometricflat"></span><h2>RigidwallGeometricFlat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricFlat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_display">
+<span id="rigidwallgeometricflatdisplay"></span><h2>RigidwallGeometricFlatDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricFlatDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion">
+<span id="rigidwallgeometricflatmotion"></span><h2>RigidwallGeometricFlatMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricFlatMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion_display">
+<span id="rigidwallgeometricflatmotiondisplay"></span><h2>RigidwallGeometricFlatMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricFlatMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism">
+<span id="rigidwallgeometricprism"></span><h2>RigidwallGeometricPrism<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricPrism class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_display">
+<span id="rigidwallgeometricprismdisplay"></span><h2>RigidwallGeometricPrismDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricPrismDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion">
+<span id="rigidwallgeometricprismmotion"></span><h2>RigidwallGeometricPrismMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricPrismMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion_display">
+<span id="rigidwallgeometricprismmotiondisplay"></span><h2>RigidwallGeometricPrismMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricPrismMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere">
+<span id="rigidwallgeometricsphere"></span><h2>RigidwallGeometricSphere<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricSphere class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_display">
+<span id="rigidwallgeometricspheredisplay"></span><h2>RigidwallGeometricSphereDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricSphereDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion">
+<span id="rigidwallgeometricspheremotion"></span><h2>RigidwallGeometricSphereMotion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricSphereMotion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion_display">
+<span id="rigidwallgeometricspheremotiondisplay"></span><h2>RigidwallGeometricSphereMotionDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallGeometricSphereMotionDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar">
+<span id="rigidwallplanar"></span><h2>RigidwallPlanar<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanar class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite">
+<span id="rigidwallplanarfinite"></span><h2>RigidwallPlanarFinite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFinite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display">
+<span id="rigidwallplanarfinitedisplay"></span><h2>RigidwallPlanarFiniteDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display_id">
+<span id="rigidwallplanarfinitedisplayid"></span><h2>RigidwallPlanarFiniteDisplayId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteDisplayId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces">
+<span id="rigidwallplanarfiniteforces"></span><h2>RigidwallPlanarFiniteForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces_id">
+<span id="rigidwallplanarfiniteforcesid"></span><h2>RigidwallPlanarFiniteForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_id">
+<span id="rigidwallplanarfiniteid"></span><h2>RigidwallPlanarFiniteId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving">
+<span id="rigidwallplanarfinitemoving"></span><h2>RigidwallPlanarFiniteMoving<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMoving class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display">
+<span id="rigidwallplanarfinitemovingdisplay"></span><h2>RigidwallPlanarFiniteMovingDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display_id">
+<span id="rigidwallplanarfinitemovingdisplayid"></span><h2>RigidwallPlanarFiniteMovingDisplayId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingDisplayId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces">
+<span id="rigidwallplanarfinitemovingforces"></span><h2>RigidwallPlanarFiniteMovingForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display">
+<span id="rigidwallplanarfinitemovingforcesdisplay"></span><h2>RigidwallPlanarFiniteMovingForcesDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingForcesDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display_id">
+<span id="rigidwallplanarfinitemovingforcesdisplayid"></span><h2>RigidwallPlanarFiniteMovingForcesDisplayId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingForcesDisplayId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_id">
+<span id="rigidwallplanarfinitemovingforcesid"></span><h2>RigidwallPlanarFiniteMovingForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_id">
+<span id="rigidwallplanarfinitemovingid"></span><h2>RigidwallPlanarFiniteMovingId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarFiniteMovingId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces">
+<span id="rigidwallplanarforces"></span><h2>RigidwallPlanarForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces_id">
+<span id="rigidwallplanarforcesid"></span><h2>RigidwallPlanarForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_id">
+<span id="rigidwallplanarid"></span><h2>RigidwallPlanarId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving">
+<span id="rigidwallplanarmoving"></span><h2>RigidwallPlanarMoving<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMoving class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display">
+<span id="rigidwallplanarmovingdisplay"></span><h2>RigidwallPlanarMovingDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display_id">
+<span id="rigidwallplanarmovingdisplayid"></span><h2>RigidwallPlanarMovingDisplayId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingDisplayId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces">
+<span id="rigidwallplanarmovingforces"></span><h2>RigidwallPlanarMovingForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display">
+<span id="rigidwallplanarmovingforcesdisplay"></span><h2>RigidwallPlanarMovingForcesDisplay<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingForcesDisplay class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display_id">
+<span id="rigidwallplanarmovingforcesdisplayid"></span><h2>RigidwallPlanarMovingForcesDisplayId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingForcesDisplayId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_id">
+<span id="rigidwallplanarmovingforcesid"></span><h2>RigidwallPlanarMovingForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_id">
+<span id="rigidwallplanarmovingid"></span><h2>RigidwallPlanarMovingId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarMovingId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho">
+<span id="rigidwallplanarortho"></span><h2>RigidwallPlanarOrtho<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrtho class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite">
+<span id="rigidwallplanarorthofinite"></span><h2>RigidwallPlanarOrthoFinite<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoFinite class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces">
+<span id="rigidwallplanarorthofiniteforces"></span><h2>RigidwallPlanarOrthoFiniteForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoFiniteForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces_id">
+<span id="rigidwallplanarorthofiniteforcesid"></span><h2>RigidwallPlanarOrthoFiniteForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoFiniteForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_id">
+<span id="rigidwallplanarorthofiniteid"></span><h2>RigidwallPlanarOrthoFiniteId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoFiniteId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces">
+<span id="rigidwallplanarorthoforces"></span><h2>RigidwallPlanarOrthoForces<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoForces class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces_id">
+<span id="rigidwallplanarorthoforcesid"></span><h2>RigidwallPlanarOrthoForcesId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoForcesId class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_id">
+<span id="rigidwallplanarorthoid"></span><h2>RigidwallPlanarOrthoId<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_id" title="Link to this heading">#</a></h2>
+<p>Module providing the RigidwallPlanarOrthoId class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_force_transducer">RigidwallForceTransducer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder">RigidwallGeometricCylinder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform">RigidwallGeometricCylinderDeform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display">RigidwallGeometricCylinderDeformDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_display_motion">RigidwallGeometricCylinderDeformDisplayMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior">RigidwallGeometricCylinderDeformInterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_display">RigidwallGeometricCylinderDeformInteriorDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion">RigidwallGeometricCylinderDeformInteriorMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_interior_motion_display">RigidwallGeometricCylinderDeformInteriorMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion">RigidwallGeometricCylinderDeformMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_deform_motion_display">RigidwallGeometricCylinderDeformMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_display">RigidwallGeometricCylinderDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior">RigidwallGeometricCylinderInterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_deform_display">RigidwallGeometricCylinderInteriorDeformDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_display">RigidwallGeometricCylinderInteriorDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion">RigidwallGeometricCylinderInteriorMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_interior_motion_display">RigidwallGeometricCylinderInteriorMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion">RigidwallGeometricCylinderMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_cylinder_motion_display">RigidwallGeometricCylinderMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat">RigidwallGeometricFlat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_display">RigidwallGeometricFlatDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion">RigidwallGeometricFlatMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_flat_motion_display">RigidwallGeometricFlatMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism">RigidwallGeometricPrism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_display">RigidwallGeometricPrismDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion">RigidwallGeometricPrismMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_prism_motion_display">RigidwallGeometricPrismMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere">RigidwallGeometricSphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_display">RigidwallGeometricSphereDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion">RigidwallGeometricSphereMotion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_geometric_sphere_motion_display">RigidwallGeometricSphereMotionDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar">RigidwallPlanar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite">RigidwallPlanarFinite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display">RigidwallPlanarFiniteDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_display_id">RigidwallPlanarFiniteDisplayId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces">RigidwallPlanarFiniteForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_forces_id">RigidwallPlanarFiniteForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_id">RigidwallPlanarFiniteId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving">RigidwallPlanarFiniteMoving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display">RigidwallPlanarFiniteMovingDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_display_id">RigidwallPlanarFiniteMovingDisplayId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces">RigidwallPlanarFiniteMovingForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display">RigidwallPlanarFiniteMovingForcesDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_display_id">RigidwallPlanarFiniteMovingForcesDisplayId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_forces_id">RigidwallPlanarFiniteMovingForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_finite_moving_id">RigidwallPlanarFiniteMovingId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces">RigidwallPlanarForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_forces_id">RigidwallPlanarForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_id">RigidwallPlanarId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving">RigidwallPlanarMoving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display">RigidwallPlanarMovingDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_display_id">RigidwallPlanarMovingDisplayId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces">RigidwallPlanarMovingForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display">RigidwallPlanarMovingForcesDisplay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_display_id">RigidwallPlanarMovingForcesDisplayId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_forces_id">RigidwallPlanarMovingForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_moving_id">RigidwallPlanarMovingId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho">RigidwallPlanarOrtho</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite">RigidwallPlanarOrthoFinite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces">RigidwallPlanarOrthoFiniteForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_forces_id">RigidwallPlanarOrthoFiniteForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_finite_id">RigidwallPlanarOrthoFiniteId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces">RigidwallPlanarOrthoForces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_forces_id">RigidwallPlanarOrthoForcesId</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.rigidwall_planar_ortho_id">RigidwallPlanarOrthoId</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/rigidwall.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

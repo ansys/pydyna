@@ -1,0 +1,140 @@
+ansys.dyna.core.pre.dynaicfd.ICFDVolumePart
+===========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.ICFDVolumePart(surfaces)
+
+   
+   Assigns material properties to the nodes enclosed by surface ICFD parts.
+
+
+   :Parameters:
+
+       **surfaces** : :class:`python:list`
+           List of part IDs for the surface elements that define the volume mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ICFDVOLUME'
+
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: secid
+      :value: 1
+
+
+
+   .. py:attribute:: mid
+      :value: 0
+
+
+
+   .. py:attribute:: surfaces
+
+
+   .. py:attribute:: defined_imposed_move
+      :value: False
+
+
+
+   .. py:method:: set_material(mat)
+
+      
+      Set a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on a specific ICFD part.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+          **vz**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an ICFD volume part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

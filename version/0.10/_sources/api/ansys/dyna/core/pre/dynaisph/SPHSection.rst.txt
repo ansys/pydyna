@@ -1,0 +1,41 @@
+ansys.dyna.core.pre.dynaisph.SPHSection
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.SPHSection(cslh=1.2, hmin=0.2, hmax=2.0, sphini=0)
+
+   
+   Defines section properties for ISPH particles.
+
+
+   :Parameters:
+
+       **cslh** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **hmin** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **hmax** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **sphini** : :class:`python:int`, :obj:`optional`
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: id
+

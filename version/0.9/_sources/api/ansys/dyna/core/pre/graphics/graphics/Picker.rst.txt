@@ -1,0 +1,135 @@
+ansys.dyna.core.pre.graphics.graphics.Picker
+============================================
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.Picker(plotter: pyvista.Plotter, graphics)
+
+   
+   Contains the items that can be selected from the display with the mouse.
+
+
+   :Parameters:
+
+       **plotter** : :obj:`Plotter`
+           PyVista plotter to manipulate.
+
+       **graphics** : :obj:`Graphics`
+           Class for providing callbacks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: plotter
+
+
+   .. py:property:: selections
+
+      
+      All selected meshes in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear_selection()
+
+      
+      Clear all picked selections in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: ignore(ignore_pick)
+
+      
+      Setter for ignore_pick.
+
+
+      :Parameters:
+
+          **ignore_pick** : :obj:`Any`
+              Picked selection to ignore.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __call__(*args, **kwargs)
+
+      
+      Call the code to run when something is clicked in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

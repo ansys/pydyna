@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Release notes &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/css/ansys_sphinx_theme.css?v=0909a4fa" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="_static/documentation_options.js?v=1027fec7"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Contribute" href="contributing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/changelog.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contribute
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Release notes</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="release-notes">
+<h1>Release notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
+<p>This document contains the release notes for the PyDyna project.</p>
+<section id="id2">
+<h2><a class="reference external" href="https://github.com/ansys/pydyna/releases/tag/v0.7.1">0.7.1</a> - 2025-02-25<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: Add .remove method to deck class (#681) <a class="reference external" href="https://github.com/ansys/pydyna/pull/682">#682</a></p></li>
+<li><p>fix: BOUNDARY_PRESCRIBED_MOTION_*_ID option and CONTROL_MPP_DECOMPOSITION_TRANSFORMATION (Issue #696) <a class="reference external" href="https://github.com/ansys/pydyna/pull/701">#701</a></p></li>
+<li><p>fix: Mat 196 (#707) <a class="reference external" href="https://github.com/ansys/pydyna/pull/708">#708</a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps): bump numpy from 2.1.3 to 2.2.2 <a class="reference external" href="https://github.com/ansys/pydyna/pull/670">#670</a></p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps): bump pyvista from 0.44.1 to 0.44.2 <a class="reference external" href="https://github.com/ansys/pydyna/pull/651">#651</a></p></li>
+<li><p>build(deps): bump jupyterlab from 4.3.1 to 4.3.4 <a class="reference external" href="https://github.com/ansys/pydyna/pull/652">#652</a></p></li>
+<li><p>build(deps): bump nbsphinx from 0.9.5 to 0.9.6 <a class="reference external" href="https://github.com/ansys/pydyna/pull/655">#655</a></p></li>
+<li><p>build(deps): bump ansys-sphinx-theme from 1.2.2 to 1.2.6 <a class="reference external" href="https://github.com/ansys/pydyna/pull/665">#665</a></p></li>
+<li><p>[pre-commit.ci] pre-commit autoupdate <a class="reference external" href="https://github.com/ansys/pydyna/pull/666">#666</a></p></li>
+<li><p>fix: Options api rework <a class="reference external" href="https://github.com/ansys/pydyna/pull/671">#671</a></p></li>
+<li><p>build(deps): bump ipython from 8.29.0 to 8.31.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/673">#673</a></p></li>
+<li><p>build(deps): bump imageio from 2.36.1 to 2.37.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/674">#674</a></p></li>
+<li><p>build(deps): bump scikit-learn from 1.6.0 to 1.6.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/675">#675</a></p></li>
+<li><p>build(deps): bump sphinx-autodoc-typehints from 2.5.0 to 3.0.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/676">#676</a></p></li>
+<li><p>build(deps): bump pypandoc from 1.14 to 1.15 <a class="reference external" href="https://github.com/ansys/pydyna/pull/677">#677</a></p></li>
+<li><p>chore: [pre-commit.ci] pre-commit autoupdate <a class="reference external" href="https://github.com/ansys/pydyna/pull/678">#678</a>, <a class="reference external" href="https://github.com/ansys/pydyna/pull/743">#743</a></p></li>
+<li><p>build(deps): bump imageio-ffmpeg from 0.5.1 to 0.6.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/694">#694</a></p></li>
+<li><p>fix: Support multiline include <a class="reference external" href="https://github.com/ansys/pydyna/pull/699">#699</a></p></li>
+<li><p>fix: SET_PART_LIST_GENERATE <a class="reference external" href="https://github.com/ansys/pydyna/pull/702">#702</a></p></li>
+<li><p>Rename variable card <a class="reference external" href="https://github.com/ansys/pydyna/pull/703">#703</a></p></li>
+<li><p>chore: add dependabot groups <a class="reference external" href="https://github.com/ansys/pydyna/pull/704">#704</a></p></li>
+<li><p>chore: bump the doc group with 5 updates <a class="reference external" href="https://github.com/ansys/pydyna/pull/705">#705</a></p></li>
+<li><p>fix: Assign series card property <a class="reference external" href="https://github.com/ansys/pydyna/pull/706">#706</a></p></li>
+<li><p>feat: Assign fields for duplicate cards in constructor <a class="reference external" href="https://github.com/ansys/pydyna/pull/716">#716</a></p></li>
+<li><p>chore: bump numpy from 2.2.2 to 2.2.3 <a class="reference external" href="https://github.com/ansys/pydyna/pull/722">#722</a></p></li>
+<li><p>chore: pre-commit autoupdate <a class="reference external" href="https://github.com/ansys/pydyna/pull/724">#724</a></p></li>
+<li><p>chore: bump the doc group across 1 directory with 2 updates <a class="reference external" href="https://github.com/ansys/pydyna/pull/727">#727</a></p></li>
+<li><p>fix: Read parameters <a class="reference external" href="https://github.com/ansys/pydyna/pull/728">#728</a></p></li>
+<li><p>fix: add test scenario for bug 584 <a class="reference external" href="https://github.com/ansys/pydyna/pull/729">#729</a></p></li>
+<li><p>fix: Rework defaults <a class="reference external" href="https://github.com/ansys/pydyna/pull/730">#730</a></p></li>
+<li><p>chore: bump the doc group with 3 updates <a class="reference external" href="https://github.com/ansys/pydyna/pull/741">#741</a></p></li>
+<li><p>fix: Contact mpp fix <a class="reference external" href="https://github.com/ansys/pydyna/pull/744">#744</a></p></li>
+<li><p>feat: add api to get keyword names <a class="reference external" href="https://github.com/ansys/pydyna/pull/745">#745</a></p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: Fix BOUNDARY_PRESCRIBED_MOTION and CONSTRAINED_BEAM_IN_SOLID <a class="reference external" href="https://github.com/ansys/pydyna/pull/668">#668</a></p></li>
+<li><p>fix: <a href="#id38"><span class="problematic" id="id39">*</span></a>CONSTRAINED_ADAPTIVITY (#650) <a class="reference external" href="https://github.com/ansys/pydyna/pull/683">#683</a></p></li>
+<li><p>fix: deck.get() in the presence of Encrypted keywords <a class="reference external" href="https://github.com/ansys/pydyna/pull/720">#720</a></p></li>
+<li><p>fix: mat295 iso <a class="reference external" href="https://github.com/ansys/pydyna/pull/725">#725</a></p></li>
+</ul>
+</section>
+<section id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.7.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/661">#661</a></p></li>
+<li><p>Release/0.7 <a class="reference external" href="https://github.com/ansys/pydyna/pull/662">#662</a></p></li>
+<li><p>support single path in <a href="#id45"><span class="problematic" id="id46">*</span></a>INCLUDE_PATH in the <cite>expand</cite> method <a class="reference external" href="https://github.com/ansys/pydyna/pull/697">#697</a></p></li>
+<li><p>feat: Start to handle <a href="#id48"><span class="problematic" id="id49">*</span></a>INCLUDE_TRANSFORM in Deck.expand() <a class="reference external" href="https://github.com/ansys/pydyna/pull/709">#709</a></p></li>
+<li><p>feat: Import encrypted file <a class="reference external" href="https://github.com/ansys/pydyna/pull/712">#712</a></p></li>
+<li><p>fix: Allow setting option fields to None <a class="reference external" href="https://github.com/ansys/pydyna/pull/713">#713</a></p></li>
+<li><p>ci: use main version of the action for doc-style <a class="reference external" href="https://github.com/ansys/pydyna/pull/715">#715</a></p></li>
+<li><p>add active func to codegen for duplicate card group <a class="reference external" href="https://github.com/ansys/pydyna/pull/718">#718</a></p></li>
+<li><p>Default duplicate card <a class="reference external" href="https://github.com/ansys/pydyna/pull/731">#731</a></p></li>
+<li><p>fix: Rename cards <a class="reference external" href="https://github.com/ansys/pydyna/pull/732">#732</a></p></li>
+<li><p>fix: Contact options <a class="reference external" href="https://github.com/ansys/pydyna/pull/733">#733</a></p></li>
+<li><p>Refactor codegen <a class="reference external" href="https://github.com/ansys/pydyna/pull/734">#734</a></p></li>
+<li><p>Fix issues <a class="reference external" href="https://github.com/ansys/pydyna/pull/742">#742</a></p></li>
+</ul>
+</section>
+<section id="test">
+<h3>Test<a class="headerlink" href="#test" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: get by subkeyword and add transform links <a class="reference external" href="https://github.com/ansys/pydyna/pull/735">#735</a></p></li>
+<li><p>feat: begin to handle <a href="#id61"><span class="problematic" id="id62">*</span></a>DEFINE_TRANSFORMATION when expanding include decks <a class="reference external" href="https://github.com/ansys/pydyna/pull/740">#740</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id65">
+<h2><a class="reference external" href="https://github.com/ansys/pydyna/releases/tag/v0.7.0">0.7.0</a> - 2025-01-10<a class="headerlink" href="#id65" title="Link to this heading">#</a></h2>
+<section id="id66">
+<h3>Added<a class="headerlink" href="#id66" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: CONTROL_TIMESTEP and CONTROL_TIME_STEP (#629) <a class="reference external" href="https://github.com/ansys/pydyna/pull/631">#631</a></p></li>
+</ul>
+</section>
+<section id="id68">
+<h3>Dependencies<a class="headerlink" href="#id68" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps): bump ansys-sphinx-theme from 1.2.1 to 1.2.2 <a class="reference external" href="https://github.com/ansys/pydyna/pull/630">#630</a></p></li>
+<li><p>build(deps): bump matplotlib from 3.9.2 to 3.10.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/640">#640</a></p></li>
+<li><p>build(deps): bump scikit-learn from 1.5.2 to 1.6.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/642">#642</a></p></li>
+</ul>
+</section>
+<section id="id72">
+<h3>Documentation<a class="headerlink" href="#id72" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.6.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/627">#627</a></p></li>
+<li><p>fix: update launcher,add argument to define ansys version <a class="reference external" href="https://github.com/ansys/pydyna/pull/632">#632</a></p></li>
+<li><p>build(deps): bump pytest from 8.3.3 to 8.3.4 <a class="reference external" href="https://github.com/ansys/pydyna/pull/633">#633</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.3.3 to 3.4.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/635">#635</a></p></li>
+<li><p>build(deps): bump imageio from 2.36.0 to 2.36.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/636">#636</a></p></li>
+<li><p>build(deps): bump ansys-api-dyna from 0.4.1 to 0.4.2 <a class="reference external" href="https://github.com/ansys/pydyna/pull/637">#637</a></p></li>
+<li><p>[pre-commit.ci] pre-commit autoupdate <a class="reference external" href="https://github.com/ansys/pydyna/pull/638">#638</a></p></li>
+<li><p>add parameter set to lib <a class="reference external" href="https://github.com/ansys/pydyna/pull/644">#644</a></p></li>
+<li><p>feat: support 3.13 <a class="reference external" href="https://github.com/ansys/pydyna/pull/645">#645</a></p></li>
+</ul>
+</section>
+<section id="id82">
+<h3>Fixed<a class="headerlink" href="#id82" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: reading <a href="#id83"><span class="problematic" id="id84">*</span></a>CONTROL_DEBUG <a class="reference external" href="https://github.com/ansys/pydyna/pull/643">#643</a></p></li>
+<li><p>fix run_dyna <a class="reference external" href="https://github.com/ansys/pydyna/pull/658">#658</a></p></li>
+</ul>
+</section>
+<section id="id87">
+<h3>Miscellaneous<a class="headerlink" href="#id87" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: warn out of bounds characters when reading lines <a class="reference external" href="https://github.com/ansys/pydyna/pull/647">#647</a></p></li>
+<li><p>test: add test for deepcopy <a class="reference external" href="https://github.com/ansys/pydyna/pull/648">#648</a></p></li>
+<li><p>feat: Option to disable LSPP defaults <a class="reference external" href="https://github.com/ansys/pydyna/pull/649">#649</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id92">
+<h2><a class="reference external" href="https://github.com/ansys/pydyna/releases/tag/v0.6.1">0.6.1</a> - 2024-11-22<a class="headerlink" href="#id92" title="Link to this heading">#</a></h2>
+<section id="id93">
+<h3>Documentation<a class="headerlink" href="#id93" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps): bump jupyterlab from 4.3.0 to 4.3.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/618">#618</a></p></li>
+<li><p>build(deps): bump ansys-sphinx-theme from 1.2.0 to 1.2.1 <a class="reference external" href="https://github.com/ansys/pydyna/pull/619">#619</a></p></li>
+<li><p>build: allow Numpy 1.X <a class="reference external" href="https://github.com/ansys/pydyna/pull/626">#626</a></p></li>
+</ul>
+</section>
+<section id="id97">
+<h3>Miscellaneous<a class="headerlink" href="#id97" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.6.0 <a class="reference external" href="https://github.com/ansys/pydyna/pull/625">#625</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id100">
+<h2><a class="reference external" href="https://github.com/ansys/pydyna/releases/tag/v0.6.0">0.6.0</a> - 2024-11-20<a class="headerlink" href="#id100" title="Link to this heading">#</a></h2>
+<section id="id101">
+<h3>Added<a class="headerlink" href="#id101" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: changelog actions <a class="reference external" href="https://github.com/ansys/pydyna/pull/613">#613</a></p></li>
+</ul>
+</section>
+<section id="id103">
+<h3>Miscellaneous<a class="headerlink" href="#id103" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: make pr-check-title independent <a class="reference external" href="https://github.com/ansys/pydyna/pull/624">#624</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">0.7.1 - 2025-02-25</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">Test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id65">0.7.0 - 2025-01-10</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id66">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id68">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id72">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id82">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id87">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id92">0.6.1 - 2024-11-22</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id93">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id97">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id100">0.6.0 - 2024-11-20</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id101">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id103">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pydyna/edit/main/doc/source/changelog.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "_static/search.json";
+</script>
+
+
+<script src="_static/js/search.js"></script>
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.3.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

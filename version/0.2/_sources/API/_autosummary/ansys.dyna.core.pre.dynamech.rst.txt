@@ -1,0 +1,6 @@
+﻿dynamech
+========
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynamech

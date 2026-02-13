@@ -1,0 +1,1798 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.pre.dynaem &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/ansys_sphinx_theme.css?v=0909a4fa" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../_static/documentation_options.js?v=1027fec7"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/pre/dynaem';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/pre/dynaem.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.pre.dynaem</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.pre.dynaem</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">EM API</span>
+<span class="sd">======</span>
+
+<span class="sd">Module for creating an electromagnetism (EM) input deck.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dynabase</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa : F403</span>
+
+
+<div class="viewcode-block" id="Isopotential_ConnType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isopotential_ConnType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="Isopotential_ConnType.SHORT_CIRCUIT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType.SHORT_CIRCUIT">[docs]</a>
+    <span class="n">SHORT_CIRCUIT</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Isopotential_ConnType.RESISTANCE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType.RESISTANCE">[docs]</a>
+    <span class="n">RESISTANCE</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="Isopotential_ConnType.VOLTAGE_SOURCE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType.VOLTAGE_SOURCE">[docs]</a>
+    <span class="n">VOLTAGE_SOURCE</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+<div class="viewcode-block" id="Isopotential_ConnType.CURRENT_SOURCE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType.CURRENT_SOURCE">[docs]</a>
+    <span class="n">CURRENT_SOURCE</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="Isopotential_ConnType.RLC_CIRCUIT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential_ConnType.RLC_CIRCUIT">[docs]</a>
+    <span class="n">RLC_CIRCUIT</span> <span class="o">=</span> <span class="mi">6</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DynaEM">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DynaEM</span><span class="p">(</span><span class="n">DynaBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Contains methods for creating keywords related to EM.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<div class="viewcode-block" id="DynaEM.analysis">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.analysis">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">=</span> <span class="n">EMAnalysis</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_control">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_control">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emsol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">numls</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">macrodt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ncylfem</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">ncylbem</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the EM solver and set its options.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        emsol : int, optional</span>
+<span class="sd">           EM solver. The default is ``0``. Options are:</span>
+
+<span class="sd">           - EQ.-1: Turn off the EM solver after reading the EM keywords.</span>
+<span class="sd">           - EQ.1: Eddy current solver.</span>
+<span class="sd">           - EQ.2: Induced heating solver.</span>
+<span class="sd">           - EQ.3: Resistive heating solver.</span>
+<span class="sd">           - EQ.11: Electrophysiology monodomain.</span>
+<span class="sd">           - EQ.12: Electrophysiology bidomain.</span>
+<span class="sd">           - EQ.13: Electrophysiology monodomain coupled with bidomain.</span>
+
+<span class="sd">        numls : int, optional</span>
+<span class="sd">            Number of local EM steps in a whole period for when ``emsol = 2``.</span>
+<span class="sd">            The default is ``100``.</span>
+<span class="sd">        macrodt : int, optional</span>
+<span class="sd">            Macro time step for when ``emsol = 2``. The default is ``0``.</span>
+<span class="sd">        ncylfem : int, optional</span>
+<span class="sd">            Number of electromagnetism cycles between the recalculation of FEM matrices.</span>
+<span class="sd">            The default is ``5000``.</span>
+<span class="sd">        ncylbem : int, optional</span>
+<span class="sd">            Number of electromagnetism cycles between the recalculation of BEM matrices.</span>
+<span class="sd">            The default is ``5000``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMControl</span><span class="p">(</span>
+            <span class="n">EMControlRequest</span><span class="p">(</span>
+                <span class="n">emsol</span><span class="o">=</span><span class="n">emsol</span><span class="p">,</span>
+                <span class="n">numls</span><span class="o">=</span><span class="n">numls</span><span class="p">,</span>
+                <span class="n">macrodt</span><span class="o">=</span><span class="n">macrodt</span><span class="p">,</span>
+                <span class="n">ncylfem</span><span class="o">=</span><span class="n">ncylfem</span><span class="p">,</span>
+                <span class="n">ncylbem</span><span class="o">=</span><span class="n">ncylbem</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Control Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_timestep">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tstype</span><span class="p">,</span> <span class="n">dtconst</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Control the EM time step and its evolution.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tstype : int</span>
+<span class="sd">           Time step type. Options are:</span>
+
+<span class="sd">           - EQ.1: Constant time step given in DTCONST</span>
+<span class="sd">           - EQ.2: Time step as a function of time given by a load curve specified in LCID</span>
+<span class="sd">           - EQ.3: Automatic time step computation, depending on the solver type</span>
+
+<span class="sd">           This time step is then multiplied by FACTOR.</span>
+<span class="sd">        dtconst : float</span>
+<span class="sd">            Constant value for the time step for when ``tstype = 1``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMTimestep</span><span class="p">(</span><span class="n">EMTimestepRequest</span><span class="p">(</span><span class="n">tstype</span><span class="o">=</span><span class="n">tstype</span><span class="p">,</span> <span class="n">dtconst</span><span class="o">=</span><span class="n">dtconst</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Timestep Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_contact">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_contact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">psidm</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">psids</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">eps1</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">eps2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">eps3</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">d0</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an optional card for defining options on electromagnetic contacts between two sets of parts.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contid : int, optional</span>
+<span class="sd">            Electromagnetic contact ID. The default is ``0``.</span>
+<span class="sd">        dtype : int, optional</span>
+<span class="sd">            Detection type.  The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: Contact type 0</span>
+<span class="sd">            - EQ.1: Contact type 1</span>
+
+<span class="sd">        psidm : int, optional</span>
+<span class="sd">            Master part set ID. The default is ``0``.</span>
+<span class="sd">        psids : int</span>
+<span class="sd">            Slave part set ID.  The default is ``0``.</span>
+<span class="sd">        eps1 : float, optional</span>
+<span class="sd">            First contact coefficient for contact detection conditions.</span>
+<span class="sd">            The default is ``0.3``.</span>
+<span class="sd">        eps2 : float, optional</span>
+<span class="sd">            Second contact coefficient for contact detection conditions.</span>
+<span class="sd">            The default is ``0.3``.</span>
+<span class="sd">        eps3 : float, optional</span>
+<span class="sd">            Third contact coefficient for contact detection conditions.</span>
+<span class="sd">            The default is ``0.3``.</span>
+<span class="sd">        d0 : float, optional</span>
+<span class="sd">            Contact condition 3 when ``dtype = 1``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMContact</span><span class="p">(</span>
+            <span class="n">EMContactRequest</span><span class="p">(</span>
+                <span class="n">contid</span><span class="o">=</span><span class="n">contid</span><span class="p">,</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+                <span class="n">psidm</span><span class="o">=</span><span class="n">psidm</span><span class="p">,</span>
+                <span class="n">psids</span><span class="o">=</span><span class="n">psids</span><span class="p">,</span>
+                <span class="n">eps1</span><span class="o">=</span><span class="n">eps1</span><span class="p">,</span>
+                <span class="n">eps2</span><span class="o">=</span><span class="n">eps2</span><span class="p">,</span>
+                <span class="n">eps3</span><span class="o">=</span><span class="n">eps3</span><span class="p">,</span>
+                <span class="n">d0</span><span class="o">=</span><span class="n">d0</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Contact Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.set_rogowsky_coil_to_output_current">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_rogowsky_coil_to_output_current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segmentset</span><span class="o">=</span><span class="n">SegmentSet</span><span class="p">([[]]),</span> <span class="n">settype</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">curtyp</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define Rogowsky coils to measure a global current versus time through a segment set or a node set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rogid : int</span>
+<span class="sd">            Rogowsky coil ID.</span>
+<span class="sd">        setid : int</span>
+<span class="sd">            Segment or node set ID.</span>
+<span class="sd">        settype : int, optional</span>
+<span class="sd">            Type of set. The default is ``1``. Options are:</span>
+
+<span class="sd">            - EQ.1: Segment set</span>
+<span class="sd">            - EQ.2: Node set</span>
+
+<span class="sd">        curtyp : int</span>
+<span class="sd">            Type of current measured. The default is ``1``. Options are:</span>
+
+<span class="sd">            - EQ.1: Volume current</span>
+<span class="sd">            - EQ.2: Surface current (not available yet}</span>
+<span class="sd">            - EQ.3: Magnetic field flow (B field times area)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">segmentset</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="n">setid</span> <span class="o">=</span> <span class="n">segmentset</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMCircuitRogo</span><span class="p">(</span><span class="n">EMCircuitRogoRequest</span><span class="p">(</span><span class="n">setid</span><span class="o">=</span><span class="n">setid</span><span class="p">,</span> <span class="n">settype</span><span class="o">=</span><span class="n">settype</span><span class="p">,</span> <span class="n">curtyp</span><span class="o">=</span><span class="n">curtyp</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Circuit Rogo Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_mat001">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_mat001</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">mtype</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an electromagnetic material type and set properties</span>
+<span class="sd">        for a material whose permeability equals the free space permeability.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mid : int</span>
+<span class="sd">            Material ID.</span>
+<span class="sd">        mtype : int</span>
+<span class="sd">            Electromagnetism type of the material. Options are:</span>
+
+<span class="sd">            - EQ.0: Air or vacuum</span>
+<span class="sd">            - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)</span>
+<span class="sd">            - EQ.2: Conductor carrying a source</span>
+<span class="sd">            - EQ.3: Fluid conductor</span>
+<span class="sd">            - EQ.4: Conductor not connected to any current or voltage source, where the eddy current problem is solved</span>
+
+<span class="sd">        sigma : float</span>
+<span class="sd">            Initial electrical conductivity of the material.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMMat001</span><span class="p">(</span><span class="n">EMMat001Request</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="n">mid</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Material 001 Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_mat002">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_mat002</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">mtype</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">eosid</span><span class="p">,</span> <span class="n">murel</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an electromagnetic material type and set properties</span>
+<span class="sd">        whose permeability is different than the free space permeability.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mid : int</span>
+<span class="sd">            Material ID.</span>
+<span class="sd">        mtype : int</span>
+<span class="sd">            Electromagnetism type of the material. Options are:</span>
+
+<span class="sd">            - EQ.0: Air or vacuum</span>
+<span class="sd">            - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)</span>
+<span class="sd">            - EQ.2: Conductor carrying a source</span>
+<span class="sd">            - EQ.4: Conductor not connected to any current or voltage source, where the wddy current problem is solved</span>
+
+<span class="sd">        sigma : float</span>
+<span class="sd">            Initial electrical conductivity of the material.</span>
+<span class="sd">        eosid : int</span>
+<span class="sd">            ID of the EOS to use for the electrical conductivity.</span>
+<span class="sd">        murel : float</span>
+<span class="sd">            Relative permeability, which is the ratio of the permeability of a specific</span>
+<span class="sd">            medium to the permeability of the free space.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMMat002</span><span class="p">(</span><span class="n">EMMat002Request</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="n">mid</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">eosid</span><span class="o">=</span><span class="n">eosid</span><span class="p">,</span> <span class="n">murel</span><span class="o">=</span><span class="n">murel</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Material 002 Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_solver_fembem_monolithic">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_solver_fembem_monolithic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">abstol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">reltol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn on the monolithic FEM-BEM solver.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mtype : int, optional</span>
+<span class="sd">            Monolithic solver type. The default is ``0``. The only option is EQ.0: Direct symmetric solver.</span>
+<span class="sd">        stype : int</span>
+<span class="sd">            Solver type. The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: MINRES iterative solver</span>
+<span class="sd">            - EQ.1: GMRES iterative solver</span>
+
+<span class="sd">        abstol : float, optional</span>
+<span class="sd">            Absolute tolerance. The default is ``1e-6``.</span>
+<span class="sd">        reltol : float, optional</span>
+<span class="sd">            Relative tolerance. The default is ``1e-4``.</span>
+<span class="sd">        maxit : int, optional.</span>
+<span class="sd">            Maximum number of iterations. The default is 500.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverFemBemMonolithic</span><span class="p">(</span>
+            <span class="n">EMSolverFemBemMonolithicRequest</span><span class="p">(</span><span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="o">=</span><span class="n">stype</span><span class="p">,</span> <span class="n">abstol</span><span class="o">=</span><span class="n">abstol</span><span class="p">,</span> <span class="n">reltol</span><span class="o">=</span><span class="n">reltol</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="n">maxit</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Solver FEMBEM Monolithic Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_output">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_output">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mats</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">matf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sols</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solf</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the level of EM-related output on the screen and in the message file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mats : int, optional</span>
+<span class="sd">            Level of matrix assembly output to show on the screen. The default is ``0``.</span>
+<span class="sd">            Options are:</span>
+
+<span class="sd">            - EQ.0: No output</span>
+<span class="sd">            - EQ.1: Basic assembly steps</span>
+<span class="sd">            - EQ.2: Basic assembly steps + percentage completed + final statistics</span>
+<span class="sd">            - EQ.3: Basic assembly steps + percentage completed + statistics at each percentage of completion</span>
+
+<span class="sd">        matf : int, optional</span>
+<span class="sd">            Level of matrix assembly output to write to the message file. The default</span>
+<span class="sd">            is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: No output</span>
+<span class="sd">            - EQ.1: Basic assembly steps</span>
+<span class="sd">            - EQ.2: Basic assembly steps + percentage completed + final statistics</span>
+<span class="sd">            - EQ.3: Vasic assembly steps + percentage completed + statistics at each percentage of completion</span>
+
+<span class="sd">        sols : int</span>
+<span class="sd">            Level of solver output to show on the screen. The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: No output</span>
+<span class="sd">            - EQ.1: Global information at each FEM iteration</span>
+<span class="sd">            - EQ.2: Detailed information at each FEM iteration</span>
+
+<span class="sd">        solf : int, optional</span>
+<span class="sd">            Level of solver output to write to the message file. The default is ``0``.</span>
+<span class="sd">            Options are:</span>
+
+<span class="sd">            - EQ.0: No output</span>
+<span class="sd">            - EQ.1: Global information at each FEM iteration</span>
+<span class="sd">            0 EQ.2: Detailed information at each FEM iteration</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMOutput</span><span class="p">(</span><span class="n">EMOutputRequest</span><span class="p">(</span><span class="n">mats</span><span class="o">=</span><span class="n">mats</span><span class="p">,</span> <span class="n">matf</span><span class="o">=</span><span class="n">matf</span><span class="p">,</span> <span class="n">sols</span><span class="o">=</span><span class="n">sols</span><span class="p">,</span> <span class="n">solf</span><span class="o">=</span><span class="n">solf</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Output Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.connect_isopotential">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.connect_isopotential">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_isopotential</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">contype</span><span class="o">=</span><span class="n">Isopotential_ConnType</span><span class="o">.</span><span class="n">SHORT_CIRCUIT</span><span class="p">,</span>
+        <span class="n">isopotential1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">isopotential2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">curve</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">inductance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">capacity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">initial_voltage</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a connection between two isopotentials or between an isopotential and the ground.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contype : Isopotential_ConnType</span>
+<span class="sd">            Isopotential connection type. The default is ``SHORT_CIRCUIT``.</span>
+<span class="sd">        isopotential1 : Isopotential</span>
+<span class="sd">            First isopotential to connect.</span>
+<span class="sd">        isopotential2 : Isopotential</span>
+<span class="sd">            Second isopotential to connect.</span>
+<span class="sd">        value : float, optional</span>
+<span class="sd">            Value of the resistance, voltage, or current depending on the isopotential</span>
+<span class="sd">            connection type. The default is ``0``.</span>
+<span class="sd">        func  :</span>
+<span class="sd">        curve :</span>
+<span class="sd">        inductance :</span>
+<span class="sd">        capacity :</span>
+<span class="sd">        initial voltage :</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Connection ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">contype</span> <span class="o">=</span> <span class="n">contype</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">if</span> <span class="n">contype</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="n">inductance</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">initial_voltage</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lcid</span> <span class="o">=</span> <span class="o">-</span><span class="n">func</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">curve</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lcid</span> <span class="o">=</span> <span class="n">curve</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lcid</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">isopotential1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">isoid1</span> <span class="o">=</span> <span class="n">isopotential1</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">isoid1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">isopotential2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">isoid2</span> <span class="o">=</span> <span class="n">isopotential2</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">isoid2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMIsopotentialConnect</span><span class="p">(</span>
+            <span class="n">EMIsopotentialConnectRequest</span><span class="p">(</span>
+                <span class="n">contype</span><span class="o">=</span><span class="n">contype</span><span class="p">,</span> <span class="n">isoid1</span><span class="o">=</span><span class="n">isoid1</span><span class="p">,</span> <span class="n">isoid2</span><span class="o">=</span><span class="n">isoid2</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">lcid</span><span class="o">=</span><span class="n">lcid</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="n">v0</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Isopotential connection Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_database_globalenergy">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_database_globalenergy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outlv</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the output of global EM.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        outlv : int, optional</span>
+<span class="sd">            Flag for whether to generate the output file. The default is ``0``.</span>
+<span class="sd">            Options are:</span>
+
+<span class="sd">            - EQ.0: No output file is generated.</span>
+<span class="sd">            - EQ.1: The output file is generated.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMDatabaseGlobalEnergy</span><span class="p">(</span><span class="n">EMDatabaseGlobalEnergyRequest</span><span class="p">(</span><span class="n">outlv</span><span class="o">=</span><span class="n">outlv</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Database Global Energy Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_Permanent_magnet">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_Permanent_magnet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">partid</span><span class="p">,</span> <span class="n">mtype</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">sourth</span><span class="p">,</span> <span class="n">hc</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a permanent magnet.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id : int</span>
+<span class="sd">            ID of the magnet.</span>
+<span class="sd">        partid : int</span>
+<span class="sd">            Part ID.</span>
+<span class="sd">        mtype : int, optional</span>
+<span class="sd">            Magnet definition type. Options are:</span>
+
+<span class="sd">            - EQ.0: Magnet defined by two node set for the north and south poles</span>
+<span class="sd">            - EQ.1: Magnet defined by two segments set for the north and south poles</span>
+<span class="sd">            - EQ.3: Magnet defined by a global vector orientation</span>
+<span class="sd">            - EQ.4: Magnet defined by a global vector orientation given by two node IDs</span>
+
+<span class="sd">        north : int</span>
+<span class="sd">            ID of the magnet&#39;s north face for ``mtype = 0`` and ``mtype = 1``.</span>
+<span class="sd">        sourth : int</span>
+<span class="sd">            ID of the magnet&#39;s south face for ``mtype = 0`` and ``mtype = 1``.</span>
+<span class="sd">        hc : int</span>
+<span class="sd">            Coercive force.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMPermanentMagnet</span><span class="p">(</span>
+            <span class="n">EMPermanentMagnetRequest</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">partid</span><span class="o">=</span><span class="n">partid</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">north</span><span class="o">=</span><span class="n">north</span><span class="p">,</span> <span class="n">sourth</span><span class="o">=</span><span class="n">sourth</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="n">hc</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Permanent Magnet Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.create_em_eos_permeability">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_em_eos_permeability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eosid</span><span class="p">,</span> <span class="n">eostype</span><span class="p">,</span> <span class="n">lcid</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the parameters for the behavior of a material&#39;s permeability.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        eosid : int</span>
+<span class="sd">            EM EOS ID.</span>
+<span class="sd">        eostype : int</span>
+<span class="sd">            Define the type of EOS. Options are:</span>
+
+<span class="sd">            - EQ.1: Permeability defined by a B function of the H curve</span>
+<span class="sd">            - EQ.2: Permeability defined by an H function of the B curve</span>
+
+<span class="sd">        lcid : int</span>
+<span class="sd">            Load curve ID.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMEOSPermeability</span><span class="p">(</span><span class="n">EMEOSPermeabilityRequest</span><span class="p">(</span><span class="n">eosid</span><span class="o">=</span><span class="n">eosid</span><span class="p">,</span> <span class="n">eostype</span><span class="o">=</span><span class="n">eostype</span><span class="p">,</span> <span class="n">lcid</span><span class="o">=</span><span class="n">lcid</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM EOS Permeability Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaEM.save_file">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.DynaEM.save_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save keyword files.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="EMType.EDDY_CURRENT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMType.EDDY_CURRENT">[docs]</a>
+    <span class="n">EDDY_CURRENT</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="EMType.INDUCTIVE_HEATING">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMType.INDUCTIVE_HEATING">[docs]</a>
+    <span class="n">INDUCTIVE_HEATING</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="EMType.RESISTIVE_HEATING">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMType.RESISTIVE_HEATING">[docs]</a>
+    <span class="n">RESISTIVE_HEATING</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+<div class="viewcode-block" id="EMType.ELECTROPHYSIOLOGY">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMType.ELECTROPHYSIOLOGY">[docs]</a>
+    <span class="n">ELECTROPHYSIOLOGY</span> <span class="o">=</span> <span class="mi">11</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMDimension">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMDimension">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMDimension</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="EMDimension.SOLVER_3D">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMDimension.SOLVER_3D">[docs]</a>
+    <span class="n">SOLVER_3D</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="EMDimension.PLANAR_2D">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMDimension.PLANAR_2D">[docs]</a>
+    <span class="n">PLANAR_2D</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="EMDimension.AXISYMMETRIC_2D">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMDimension.AXISYMMETRIC_2D">[docs]</a>
+    <span class="n">AXISYMMETRIC_2D</span> <span class="o">=</span> <span class="mi">3</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BEMSOLVER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.BEMSOLVER">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BEMSOLVER</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="BEMSOLVER.DIRECT_SOLVER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.BEMSOLVER.DIRECT_SOLVER">[docs]</a>
+    <span class="n">DIRECT_SOLVER</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="BEMSOLVER.PCG">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.BEMSOLVER.PCG">[docs]</a>
+    <span class="n">PCG</span> <span class="o">=</span> <span class="mi">2</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FEMSOLVER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.FEMSOLVER">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FEMSOLVER</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="FEMSOLVER.DIRECT_SOLVER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.FEMSOLVER.DIRECT_SOLVER">[docs]</a>
+    <span class="n">DIRECT_SOLVER</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="FEMSOLVER.PCG">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.FEMSOLVER.PCG">[docs]</a>
+    <span class="n">PCG</span> <span class="o">=</span> <span class="mi">2</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMAnalysis">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enables the EM solver and sets its options.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    type : int</span>
+<span class="sd">       Electromagnetism solver. The default is ``EDDY_CURRENT``. Options are:</span>
+
+<span class="sd">       - EQ.1: Eddy current solver</span>
+<span class="sd">       - EQ.2: Induced heating solver</span>
+<span class="sd">       - EQ.3: Resistive heating solver</span>
+<span class="sd">       - EQ.11: Electrophysiology monodomain</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EMAnalysis.p_matrix_tol">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.p_matrix_tol">[docs]</a>
+    <span class="n">p_matrix_tol</span> <span class="o">=</span> <span class="mf">1e-6</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.q_matrix_tol">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.q_matrix_tol">[docs]</a>
+    <span class="n">q_matrix_tol</span> <span class="o">=</span> <span class="mf">1e-6</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.w_matrix_tol">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.w_matrix_tol">[docs]</a>
+    <span class="n">w_matrix_tol</span> <span class="o">=</span> <span class="mf">1e-6</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">EMType</span><span class="o">.</span><span class="n">EDDY_CURRENT</span><span class="p">):</span>
+<div class="viewcode-block" id="EMAnalysis.defined">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.defined">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.type">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.type">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.dimtype">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.dimtype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimtype</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.defined_bem">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.defined_bem">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_bem</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="EMAnalysis.defined_fem">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.defined_fem">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_fem</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.set_timestep">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.set_timestep">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the EM time step and its evolution.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span> <span class="o">=</span> <span class="n">timestep</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.set_em_solver">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.set_em_solver">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_em_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">EMType</span><span class="o">.</span><span class="n">EDDY_CURRENT</span><span class="p">,</span> <span class="n">dimtype</span><span class="o">=</span><span class="n">EMDimension</span><span class="o">.</span><span class="n">SOLVER_3D</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the EM solver.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimtype</span> <span class="o">=</span> <span class="n">dimtype</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.set_solver_bem">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.set_solver_bem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_solver_bem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">BEMSOLVER</span><span class="o">.</span><span class="n">PCG</span><span class="p">,</span> <span class="n">relative_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_iteration</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the type of linear solver, pre-conditioner, and tolerance for the EM BEM solver.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_bem</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bem_relative_tol</span> <span class="o">=</span> <span class="n">relative_tol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iteration</span> <span class="o">=</span> <span class="n">max_iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bemsolver</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.set_solver_fem">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.set_solver_fem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_solver_fem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">FEMSOLVER</span><span class="o">.</span><span class="n">DIRECT_SOLVER</span><span class="p">,</span> <span class="n">relative_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_iteration</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set some parameters for the EM FEM solver.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defined_fem</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">femsolver</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fem_relative_tol</span> <span class="o">=</span> <span class="n">relative_tol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iteration</span> <span class="o">=</span> <span class="n">max_iteration</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.set_bem_matrix_tol">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.set_bem_matrix_tol">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bem_matrix_tol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_matrix_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">q_matrix_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">w_matrix_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the type of BEM matrices and the way that they are assembled.&quot;&quot;&quot;</span>
+        <span class="n">EMAnalysis</span><span class="o">.</span><span class="n">p_matrix_tol</span> <span class="o">=</span> <span class="n">p_matrix_tol</span>
+        <span class="n">EMAnalysis</span><span class="o">.</span><span class="n">q_matrix_tol</span> <span class="o">=</span> <span class="n">q_matrix_tol</span>
+        <span class="n">EMAnalysis</span><span class="o">.</span><span class="n">w_matrix_tol</span> <span class="o">=</span> <span class="n">w_matrix_tol</span></div>
+
+
+<div class="viewcode-block" id="EMAnalysis.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMAnalysis.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an EM analysis.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMControl</span><span class="p">(</span>
+            <span class="n">EMControlRequest</span><span class="p">(</span><span class="n">emsol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">numls</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">macrodt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dimtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimtype</span><span class="p">,</span> <span class="n">ncylfem</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">ncylbem</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMTimestep</span><span class="p">(</span><span class="n">EMTimestepRequest</span><span class="p">(</span><span class="n">tstype</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtconst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timestep</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Timestep Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_bem</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverBem</span><span class="p">(</span>
+                <span class="n">EMSolverBemRequest</span><span class="p">(</span>
+                    <span class="n">reltol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bem_relative_tol</span><span class="p">,</span>
+                    <span class="n">maxite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iteration</span><span class="p">,</span>
+                    <span class="n">stype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bemsolver</span><span class="p">,</span>
+                    <span class="n">precon</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">uselast</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">ncylbem</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Solver BEM Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_fem</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverFem</span><span class="p">(</span>
+                <span class="n">EMSolverFemRequest</span><span class="p">(</span>
+                    <span class="n">reltol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fem_relative_tol</span><span class="p">,</span>
+                    <span class="n">maxite</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iteration</span><span class="p">,</span>
+                    <span class="n">stype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">femsolver</span><span class="p">,</span>
+                    <span class="n">precon</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">uselast</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">ncylbem</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Solver FEM Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">defined_bem</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverBemMat</span><span class="p">(</span><span class="n">EMSolverBemMatRequest</span><span class="p">(</span><span class="n">matid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reltol</span><span class="o">=</span><span class="n">EMAnalysis</span><span class="o">.</span><span class="n">p_matrix_tol</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverBemMat</span><span class="p">(</span><span class="n">EMSolverBemMatRequest</span><span class="p">(</span><span class="n">matid</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reltol</span><span class="o">=</span><span class="n">EMAnalysis</span><span class="o">.</span><span class="n">q_matrix_tol</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMSolverBemMat</span><span class="p">(</span><span class="n">EMSolverBemMatRequest</span><span class="p">(</span><span class="n">matid</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">reltol</span><span class="o">=</span><span class="n">EMAnalysis</span><span class="o">.</span><span class="n">w_matrix_tol</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Solver BEMMAT Created...&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CircuitType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.CircuitType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CircuitType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="CircuitType.IMPOSED_CURRENT_VS_TIME">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.CircuitType.IMPOSED_CURRENT_VS_TIME">[docs]</a>
+    <span class="n">IMPOSED_CURRENT_VS_TIME</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="CircuitType.IMPOSED_VOLTAGE_VS_TIME">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.CircuitType.IMPOSED_VOLTAGE_VS_TIME">[docs]</a>
+    <span class="n">IMPOSED_VOLTAGE_VS_TIME</span> <span class="o">=</span> <span class="mi">2</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Circuit">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines an electrical circuit.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    circtyp : int</span>
+<span class="sd">        Circuit type. Options are:</span>
+
+<span class="sd">        - EQ.1: Imposed current vs time defined by a load curve</span>
+<span class="sd">        - EQ.2: Imposed voltage vs time defined by a load curve</span>
+
+<span class="sd">    loadcurve : Curve</span>
+<span class="sd">        Load curve for when the ``circtyp`` parameter is set to ``1``,</span>
+<span class="sd">        ``2``, ``21`` or ``22``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loadcurve</span><span class="p">,</span> <span class="n">circuit_type</span><span class="o">=</span><span class="n">CircuitType</span><span class="o">.</span><span class="n">IMPOSED_CURRENT_VS_TIME</span><span class="p">):</span>
+<div class="viewcode-block" id="Circuit.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Circuit.circuit_type">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit.circuit_type">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circuit_type</span> <span class="o">=</span> <span class="n">circuit_type</span><span class="o">.</span><span class="n">value</span></div>
+
+        <span class="n">loadcurve</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+<div class="viewcode-block" id="Circuit.lcid">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit.lcid">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcid</span> <span class="o">=</span> <span class="n">loadcurve</span><span class="o">.</span><span class="n">id</span></div>
+
+
+<div class="viewcode-block" id="Circuit.set_current">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit.set_current">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">current_inlet</span><span class="p">,</span> <span class="n">current_outlet</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the segment set for the current.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        current : SegmentSet</span>
+<span class="sd">            Segment set for the current.</span>
+<span class="sd">        current_inlet : SegmentSet</span>
+<span class="sd">            Segment set for input voltage or input current</span>
+<span class="sd">            for CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.</span>
+<span class="sd">        current_outlet : SegmentSet</span>
+<span class="sd">            Segment set for the output voltage or output current for</span>
+<span class="sd">            CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_id</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inlet_id</span> <span class="o">=</span> <span class="n">current_inlet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlet_id</span> <span class="o">=</span> <span class="n">current_outlet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Circuit.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Circuit.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a circuit.&quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMCircuit</span><span class="p">(</span>
+            <span class="n">EMCircuitRequest</span><span class="p">(</span>
+                <span class="n">circtyp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">circuit_type</span><span class="p">,</span>
+                <span class="n">lcid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcid</span><span class="p">,</span>
+                <span class="n">sidcurr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_id</span><span class="p">,</span>
+                <span class="n">sidvin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inlet_id</span><span class="p">,</span>
+                <span class="n">sidvout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outlet_id</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Circuit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMContactType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContactType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMContactType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="EMContactType.NODE_TO_NODE_BASED_ON_CONSTRAINTS">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContactType.NODE_TO_NODE_BASED_ON_CONSTRAINTS">[docs]</a>
+    <span class="n">NODE_TO_NODE_BASED_ON_CONSTRAINTS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT">[docs]</a>
+    <span class="n">NODE_TO_NODE_PENALTY_BASED_CONTACT</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="EMContactType.DISCRETE_MORTAR_PENALTY_CONTACT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContactType.DISCRETE_MORTAR_PENALTY_CONTACT">[docs]</a>
+    <span class="n">DISCRETE_MORTAR_PENALTY_CONTACT</span> <span class="o">=</span> <span class="mi">1</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMContact">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContact">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMContact</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detects contact between conductors.</span>
+
+<span class="sd">    If no contact parts are defined, this method detects contact between</span>
+<span class="sd">    all active parts associated with a conducting material.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contact_type</span><span class="o">=</span><span class="n">EMContactType</span><span class="o">.</span><span class="n">NODE_TO_NODE_PENALTY_BASED_CONTACT</span><span class="p">):</span>
+<div class="viewcode-block" id="EMContact.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContact.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EMContact.contacttype">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContact.contacttype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contacttype</span> <span class="o">=</span> <span class="n">contact_type</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="EMContact.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMContact.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an EM contact.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMControlContact</span><span class="p">(</span><span class="n">EMControlContactRequest</span><span class="p">(</span><span class="n">emct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cconly</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ctype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">contacttype</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EM Contact Created...&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EMRandlesLayer">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EMRandlesLayer</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="EMRandlesLayer.DEFAULT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.DEFAULT">[docs]</a>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="EMRandlesLayer.CURRENT_COLLECTOR_POSITIVE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.CURRENT_COLLECTOR_POSITIVE">[docs]</a>
+    <span class="n">CURRENT_COLLECTOR_POSITIVE</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="EMRandlesLayer.POSITIVE_ELECTRODE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.POSITIVE_ELECTRODE">[docs]</a>
+    <span class="n">POSITIVE_ELECTRODE</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="EMRandlesLayer.SEPARATOR">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.SEPARATOR">[docs]</a>
+    <span class="n">SEPARATOR</span> <span class="o">=</span> <span class="mi">3</span></div>
+
+<div class="viewcode-block" id="EMRandlesLayer.NEGATIVE_ELECTRODE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.NEGATIVE_ELECTRODE">[docs]</a>
+    <span class="n">NEGATIVE_ELECTRODE</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="EMRandlesLayer.CURRENT_COLLECTOR_NEGATIVE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.EMRandlesLayer.CURRENT_COLLECTOR_NEGATIVE">[docs]</a>
+    <span class="n">CURRENT_COLLECTOR_NEGATIVE</span> <span class="o">=</span> <span class="mi">5</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Isopotential">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isopotential</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines an isopotential.</span>
+
+<span class="sd">    This method constrain nodes so that they have the same scalar potential value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    set : Set</span>
+<span class="sd">        Segment set or node set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Isopotential.isopotlist">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.isopotlist">[docs]</a>
+    <span class="n">isopotlist</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">EMRandlesLayer</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">):</span>
+<div class="viewcode-block" id="Isopotential.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Isopotential.set">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="nb">set</span></div>
+
+<div class="viewcode-block" id="Isopotential.id">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.id">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="Isopotential.rdltype">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.rdltype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdltype</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="Isopotential.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.Isopotential.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an isopotential.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;NODESETBOX&quot;</span><span class="p">:</span>
+            <span class="n">isoinfo</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">boxes</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">isoinfo</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">isoinfo</span> <span class="ow">in</span> <span class="n">Isopotential</span><span class="o">.</span><span class="n">isopotlist</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="nb">id</span><span class="p">,</span> <span class="n">settype</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">type</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;NODESET&quot;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;NODESETBOX&quot;</span><span class="p">:</span>
+                <span class="n">settype</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;SEGMENTSET&quot;</span><span class="p">:</span>
+                <span class="n">settype</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMIsopotential</span><span class="p">(</span><span class="n">EMIsopotentialRequest</span><span class="p">(</span><span class="n">settype</span><span class="o">=</span><span class="n">settype</span><span class="p">,</span> <span class="n">setid</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">rdltype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rdltype</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Isopotential </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RogoCoil">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RogoCoil</span><span class="p">(</span><span class="n">BaseObj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measures the total current flowing through a given section of the conductor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    set : Set</span>
+<span class="sd">        Segment set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RogoCoil.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RogoCoil.set">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil.set">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="nb">set</span></div>
+
+<div class="viewcode-block" id="RogoCoil.id">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil.id">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="RogoCoil.type">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil.type">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;rogocoil&quot;</span></div>
+
+
+<div class="viewcode-block" id="RogoCoil.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RogoCoil.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Rogowsky coil.&quot;&quot;&quot;</span>
+        <span class="nb">id</span><span class="p">,</span> <span class="n">settype</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">type</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">!=</span> <span class="s2">&quot;SEGMENTSET&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMIsopotentialRogo</span><span class="p">(</span><span class="n">EMIsopotentialRogoRequest</span><span class="p">(</span><span class="n">settype</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">setid</span><span class="o">=</span><span class="nb">id</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Isopotential Rogo </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RandlesCellType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandlesCellType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="RandlesCellType.USER_DEFINED_EQUIVALENT_CIRCUIT_MODEL">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType.USER_DEFINED_EQUIVALENT_CIRCUIT_MODEL">[docs]</a>
+    <span class="n">USER_DEFINED_EQUIVALENT_CIRCUIT_MODEL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="RandlesCellType.RANDLES_CELL_0_ORDER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType.RANDLES_CELL_0_ORDER">[docs]</a>
+    <span class="n">RANDLES_CELL_0_ORDER</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="RandlesCellType.RANDLES_CELL_1_ORDER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType.RANDLES_CELL_1_ORDER">[docs]</a>
+    <span class="n">RANDLES_CELL_1_ORDER</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="RandlesCellType.RANDLES_CELL_2_ORDER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType.RANDLES_CELL_2_ORDER">[docs]</a>
+    <span class="n">RANDLES_CELL_2_ORDER</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="RandlesCellType.RANDLES_CELL_3_ORDER">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCellType.RANDLES_CELL_3_ORDER">[docs]</a>
+    <span class="n">RANDLES_CELL_3_ORDER</span> <span class="o">=</span> <span class="mi">3</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RandlesCell">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandlesCell</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define parameters for a Randles Cell.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RandlesCell.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RandlesCell.define_batmac">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.define_batmac">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_batmac</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="RandlesCell.define_randles_short">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.define_randles_short">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_randles_short</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="RandlesCell.define_extra_heat_source">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.define_extra_heat_source">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_extra_heat_source</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="RandlesCell.set_batmac_model">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.set_batmac_model">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_batmac_model</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cell_type</span><span class="o">=</span><span class="n">RandlesCellType</span><span class="o">.</span><span class="n">RANDLES_CELL_1_ORDER</span><span class="p">,</span>
+        <span class="n">cell_parts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">area</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">cell_capacity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">soc_conversion_factor</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">charge_init_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">equilibrium_voltage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">circuit_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">constant_temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">temperature_from_thermal_solver</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">add_heating_to_thermal_solver</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;define the distributed Randles circuit parameters for a Randles cell when using the batmac model.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_batmac</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdltype</span> <span class="o">=</span> <span class="n">cell_type</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdlarea</span> <span class="o">=</span> <span class="n">area</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">psid</span> <span class="o">=</span> <span class="n">cell_parts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">cell_capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cq</span> <span class="o">=</span> <span class="n">soc_conversion_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socinit</span> <span class="o">=</span> <span class="n">charge_init_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soctou</span> <span class="o">=</span> <span class="n">equilibrium_voltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prm</span> <span class="o">=</span> <span class="n">circuit_parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="n">constant_temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frther</span> <span class="o">=</span> <span class="n">temperature_from_thermal_solver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r0toth</span> <span class="o">=</span> <span class="n">add_heating_to_thermal_solver</span></div>
+
+
+<div class="viewcode-block" id="RandlesCell.set_randles_short">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.set_randles_short">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_randles_short</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resistances_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define conditions to turn on a Randles short (replace one or several Randles circuits by resistances),</span>
+<span class="sd">        and to define the value of the short resistance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        resistances_func : Function</span>
+<span class="sd">            Define the local resistance function of local parameters for the local Randles circuit.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_randles_short</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randles_short_function</span> <span class="o">=</span> <span class="n">resistances_func</span></div>
+
+
+<div class="viewcode-block" id="RandlesCell.set_extra_heat_source">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.set_extra_heat_source">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_extra_heat_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heat_source_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an extra heat source term to the Randles circuit nodes in order to account for thermal runaway</span>
+<span class="sd">        situations.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        heat_source_func : Function</span>
+<span class="sd">            Define the local heat source function of local parameters for the local Randles circuit.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">define_extra_heat_source</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_source_func</span> <span class="o">=</span> <span class="n">heat_source_func</span></div>
+
+
+<div class="viewcode-block" id="RandlesCell.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynaem/index.html#ansys.dyna.core.pre.dynaem.RandlesCell.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set parameter for Randles Cell.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">define_batmac</span><span class="p">:</span>
+            <span class="n">sid</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">soutouid</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">psid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">psid</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">soctou</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">soutouid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soctou</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">modified_prm</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prm</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                    <span class="n">modified_prm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="o">==</span> <span class="n">Table2D</span><span class="p">:</span>
+                    <span class="n">tid</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+                    <span class="n">modified_prm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">tid</span><span class="p">)</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">modified_prm</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">modified_prm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMRandlesBatmac</span><span class="p">(</span>
+                <span class="n">EMRandlesBatmacRequest</span><span class="p">(</span>
+                    <span class="n">rdltype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rdltype</span><span class="p">,</span>
+                    <span class="n">rdlarea</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rdlarea</span><span class="p">,</span>
+                    <span class="n">psid</span><span class="o">=</span><span class="n">sid</span><span class="p">,</span>
+                    <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">,</span>
+                    <span class="n">cq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cq</span><span class="p">,</span>
+                    <span class="n">socinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">socinit</span><span class="p">,</span>
+                    <span class="n">soctou</span><span class="o">=</span><span class="n">soutouid</span><span class="p">,</span>
+                    <span class="n">chargedirparam</span><span class="o">=</span><span class="n">modified_prm</span><span class="p">,</span>
+                    <span class="n">temp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">,</span>
+                    <span class="n">frther</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frther</span><span class="p">,</span>
+                    <span class="n">r0toth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">r0toth</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">rdlid</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Randles Batmac </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">define_randles_short</span><span class="p">:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">randles_short_function</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">randles_short_function</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMRandlesShort</span><span class="p">(</span><span class="n">EMRandlesShortRequest</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">fid</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Randles Short Created...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">define_extra_heat_source</span><span class="p">:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_source_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_source_func</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateEMRandlesExothermicReaction</span><span class="p">(</span><span class="n">EMRandlesExothermicReactionRequest</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">fid</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EM Randles Exothermic Reaction Created...&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../_static/search.json";
+</script>
+
+
+<script src="../../../../../_static/js/search.js"></script>
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.3.2. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

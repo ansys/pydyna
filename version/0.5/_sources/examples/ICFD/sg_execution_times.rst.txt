@@ -1,0 +1,79 @@
+
+:orphan:
+
+.. _sphx_glr_examples_ICFD_sg_execution_times:
+
+
+Computation times
+=================
+**00:00.768** total execution time for 15 files **from examples/ICFD**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_ICFD_icfd_sloshing.py` (``icfd_sloshing.py``)
+     - 00:00.227
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_dem_coupling.py` (``icfd_dem_coupling.py``)
+     - 00:00.091
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_strong_fsi.py` (``icfd_strong_fsi.py``)
+     - 00:00.044
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_weak_fsi.py` (``icfd_weak_fsi.py``)
+     - 00:00.043
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_morphing.py` (``icfd_mesh_morphing.py``)
+     - 00:00.039
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_internal_3d_flow.py` (``icfd_internal_3d_flow.py``)
+     - 00:00.037
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_thermal_flow.py` (``icfd_thermal_flow.py``)
+     - 00:00.036
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_size.py` (``icfd_mesh_size.py``)
+     - 00:00.035
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_free_convection_flow.py` (``icfd_free_convection_flow.py``)
+     - 00:00.034
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_adaptivity.py` (``icfd_mesh_adaptivity.py``)
+     - 00:00.033
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_imposed_move.py` (``icfd_imposed_move.py``)
+     - 00:00.033
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_plate_flow.py` (``icfd_plate_flow.py``)
+     - 00:00.032
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_cylinderflow.py` (``icfd_cylinderflow.py``)
+     - 00:00.031
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_dam_break.py` (``icfd_dam_break.py``)
+     - 00:00.028
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_driven_cavity.py` (``icfd_driven_cavity.py``)
+     - 00:00.026
+     - 0.0

@@ -1,0 +1,52 @@
+ansys.dyna.core.lib.transforms.node_transform.TransformNode
+===========================================================
+
+.. py:class:: ansys.dyna.core.lib.transforms.node_transform.TransformNode(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.transforms.base_transform.Transform`
+
+
+   
+   Class to handle transformations for *NODE keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: transform(keyword: ansys.dyna.core.keywords.Node) -> None
+
+      
+      Apply the transformation to the given *NODE keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

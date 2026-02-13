@@ -1,0 +1,53 @@
+ansys.dyna.core.pre.graphics.graphics.DisplayMeshType
+=====================================================
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.DisplayMeshType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   
+   Contains the mesh types to display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: FACE
+      :value: 0
+
+
+
+   .. py:attribute:: BEAM
+      :value: 1
+
+
+
+   .. py:attribute:: CYLINDER
+      :value: 2
+
+
+
+   .. py:attribute:: SPHERE
+      :value: 3
+
+
+
+   .. py:attribute:: PLANAR
+      :value: 4
+
+

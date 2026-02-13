@@ -1,0 +1,43 @@
+ansys.dyna.core.pre.dynabase.Motion
+===================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Motion(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Degree of freedom type for motion (velocity, acceleration, displacement).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: VELOCITY
+      :value: 0
+
+
+
+   .. py:attribute:: ACCELERATION
+      :value: 1
+
+
+
+   .. py:attribute:: DISPLACEMENT
+      :value: 2
+
+

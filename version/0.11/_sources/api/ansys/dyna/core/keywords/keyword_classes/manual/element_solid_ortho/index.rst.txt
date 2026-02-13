@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+===================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+
+.. autoapi-nested-parse::
+
+   Module for ELEMENT_SOLID_ORTHO keyword.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid_ortho/ElementSolidOrtho
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho
+
+

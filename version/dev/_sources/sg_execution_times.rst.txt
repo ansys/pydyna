@@ -1,0 +1,52 @@
+
+:orphan:
+
+.. _sphx_glr_sg_execution_times:
+
+
+Computation times
+=================
+**08:32.044** total execution time for 6 files **from all galleries**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_Optimization_Plate_Thickness_Optimization.py` (``../../examples/Optimization/Plate_Thickness_Optimization.py``)
+     - 04:30.501
+     - 0.0
+   * - :ref:`sphx_glr_examples_Buckling_Beer_Can_plot_beercan.py` (``../../examples/Buckling_Beer_Can/plot_beercan.py``)
+     - 02:46.856
+     - 0.0
+   * - :ref:`sphx_glr_examples_Taylor_Bar_plot_taylor_bar.py` (``../../examples/Taylor_Bar/plot_taylor_bar.py``)
+     - 00:54.707
+     - 0.0
+   * - :ref:`sphx_glr_examples_John_Reid_Pipe_plot_john_pipe.py` (``../../examples/John_Reid_Pipe/plot_john_pipe.py``)
+     - 00:10.631
+     - 0.0
+   * - :ref:`sphx_glr_examples_John_Reid_Pendulum_plot_john_reid_pendulum.py` (``../../examples/John_Reid_Pendulum/plot_john_reid_pendulum.py``)
+     - 00:09.332
+     - 0.0
+   * - :ref:`sphx_glr_examples_jupyter_plotting_demo.py` (``../../examples/jupyter_plotting_demo.py``)
+     - 00:00.017
+     - 0.0

@@ -1,0 +1,107 @@
+ansys.dyna.core.pre.dynaem.Circuit
+==================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.Circuit(loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME)
+
+   
+   Defines an electrical circuit.
+
+
+   :Parameters:
+
+       **circtyp** : :class:`python:int`
+           Circuit type. Options are:
+           
+           - EQ.1: Imposed current vs time defined by a load curve
+           - EQ.2: Imposed voltage vs time defined by a load curve
+
+       **loadcurve** : :obj:`Curve`
+           Load curve for when the ``circtyp`` parameter is set to ``1``,
+           ``2``, ``21`` or ``22``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: circuit_type
+      :value: 1
+
+
+
+   .. py:attribute:: lcid
+
+
+   .. py:method:: set_current(current, current_inlet, current_outlet)
+
+      
+      Define the segment set for the current.
+
+
+      :Parameters:
+
+          **current** : :obj:`SegmentSet`
+              Segment set for the current.
+
+          **current_inlet** : :obj:`SegmentSet`
+              Segment set for input voltage or input current
+              for CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
+
+          **current_outlet** : :obj:`SegmentSet`
+              Segment set for the output voltage or output current for
+              CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a circuit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

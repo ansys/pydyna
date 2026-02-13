@@ -1,0 +1,96 @@
+ansys.dyna.core.lib.table_card
+==============================
+
+.. py:module:: ansys.dyna.core.lib.table_card
+
+.. autoapi-nested-parse::
+
+   Module for handling table cards.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.table_card.CHECK_TYPE
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/table_card/TableCard
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.table_card.TableCard
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.table_card.try_initialize_table
+   ansys.dyna.core.lib.table_card.get_first_row
+
+
+Module Contents
+---------------
+
+.. py:data:: CHECK_TYPE
+   :value: True
+
+
+.. py:function:: try_initialize_table(card, name: str, **kwargs)
+
+   
+   Card is a TableCard or a TableCardGroup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_first_row(fields: List[ansys.dyna.core.lib.card.Field], **kwargs) -> Dict[str, Any]
+
+   
+   Get the first row data from the kwargs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,407 @@
+ansys.dyna.core.pre.dynaicfd.DynaICFD
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.DynaICFD
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for create a keyword related to an ICFD analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: timestep
+      :value: 0
+
+
+
+   .. py:attribute:: termination
+      :value: 1e+28
+
+
+
+   .. py:method:: set_termination(termination_time)
+
+      
+      Set the total time of the simulation for the fluid problem.
+
+
+      :Parameters:
+
+          **termination_time** : :class:`python:float`
+              Total time of the simulation for the fluid problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_general(atype=0, mtype=0, dvcl=0, rdvcl=0)
+
+      
+      Specify the type of CFD analysis.
+
+
+      :Parameters:
+
+          **atype** : :class:`python:int`, :obj:`optional`
+              Analysis type. The default is ``0``.
+
+          **mtype** : :class:`python:int`, :obj:`optional`
+              Solving method type. The default is ``0``.
+
+          **dvcl** : :class:`python:int`, :obj:`optional`
+              Flag for divergence cleaning. The default is ``0``.
+
+          **rdvcl** : :class:`python:int`, :obj:`optional`
+              Flag for remeshing divergence cleaning. The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_output(msgl)
+
+      
+      Modify default values for screen and file outputs related to the fluid solver only.
+
+
+      :Parameters:
+
+          **msgl** : :class:`python:int`
+              Message level.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_turbulence(tmod)
+
+      
+      Modify the default values for the turbulence model.
+
+
+      :Parameters:
+
+          **tmod** : :class:`python:int`
+              Turbulence model to use.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_dem_coupling(ctype=0, bt=0, dt=1e+28, sf=1)
+
+      
+      Activate coupling between the ICFD and DEM solvers.
+
+
+      :Parameters:
+
+          **ctype** : :class:`python:int`, :obj:`optional`
+              Coupling direction to the solver. The default is ``0``.
+
+          **bt** : :class:`python:float`, :obj:`optional`
+              Birth time for the DEM coupling. The default is ``0``.
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Death time for the DEM coupling. The default is ``1e28``.
+
+          **sf** : :class:`python:float`, :obj:`optional`
+              Scale factor to apply to the force transmitted by the fluid to the structure.
+              The default is ``1``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_section_icfd(sid)
+
+      
+      Define a section for the ICFD solver.
+
+
+      :Parameters:
+
+          **sid** : :class:`python:int`
+              Section ID.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_part_icfd(pid, secid, mid)
+
+      
+      Define parts for the ICFD solver.
+
+
+      :Parameters:
+
+          **pid** : :class:`python:int`
+              Part ID for fluid surfaces.
+
+          **secid** : :class:`python:int`
+              Section ID defined with the ``\*ICFD_SECTION`` card.
+
+          **mid** : :class:`python:int`
+              Material ID defined with the ``\*ICFD_MAT`` card.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_solver_tol_mmov(atol=1e-08, rtol=1e-08)
+
+      
+      Change the default tolerance values for the mesh movement algorithm.
+
+
+      :Parameters:
+
+          **atol** : :class:`python:float`, :obj:`optional`
+              Absolute convergence criteria. The default is ``1e-8``.
+
+          **rtol** : :class:`python:float`, :obj:`optional`
+              Relative convergence criteria. The default is ``1e-8``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_initial(velocity=Velocity(0, 0, 0), temperature=0, pressure=0)
+
+      
+      Assign the initial condition to all nodes at once.
+
+
+      :Parameters:
+
+          **velocity** : :obj:`Velocity`, :obj:`optional`
+              Initial velocity. The default is ``(0, 0, 0)``,
+
+          **temperature** : :class:`python:float`, :obj:`optional`
+              Initial temperature. The default is ``0``.
+
+          **pressure** : :class:`python:float`, :obj:`optional`
+              Initial pressure. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on the whole volume mesh.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
