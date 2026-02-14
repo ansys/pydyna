@@ -108,8 +108,8 @@ runs:
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "242"
+        dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        ANSYS_VERSION : "252"
 
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
@@ -118,11 +118,6 @@ runs:
         registry: ghcr.io
         username: ${{ inputs.github-actor }}
         password: ${{ inputs.github-token }}
-
-    - name: Set Licensing
-      run: |
-        echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
-      shell: bash
 
     - name: Pull PyDyna-run image
       if: ${{ inputs.pydyna-run-container != '' }}
