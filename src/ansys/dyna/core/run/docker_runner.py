@@ -151,14 +151,15 @@ class DockerRunner(BaseRunner):
 
         # Build the full command with MPI wrapper if needed
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            # For MPP runs, use mpirun with the specified number of processors
-            # Source Intel MPI environment and then run
-            mpi_setup = "source /opt/intel/oneapi/mpi/latest/env/vars.sh &&"
-            mpi_args = [mpi_setup, "mpirun", "-np", str(self.ncpu), executable] + args
-            command = " ".join(mpi_args)
+            # For Intel MPI, need to source environment
+            inner_command = f"source /opt/intel/oneapi/mpi/latest/env/vars.sh && mpirun -np {self.ncpu} {executable} {' '.join(args)}"  # noqa: E501
+            command = ["sh", "-c", inner_command]
         else:
-            # For SMP runs, use direct execution
-            command = " ".join([executable] + args)
+            # For SMP or OpenMPI (which should be in PATH)
+            if self.mpi_option == MpiOption.SMP:
+                command = [executable] + args
+            else:  # OpenMPI MPP
+                command = ["mpirun", "-np", str(self.ncpu), executable] + args
         logger.info(f"Running LS-DYNA command: {command}")
 
         # Set up environment variables
