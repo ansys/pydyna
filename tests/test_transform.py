@@ -16,7 +16,7 @@ def test_transform_none():
     assert mtx is None
 
 def test_transform_empty():
-    """Verify no transfomration matrix for an empty DEFINE_TRANFORMATION."""
+    """Verify no transfomration matrix for an empty DEFINE_TRANSFORMATION."""
     define_transform_kwd = kwd.DefineTransformation()
     mtx = get_transform_matrix(None)
     assert mtx is None
@@ -32,7 +32,7 @@ def test_transform_rotation_1():
 
     # not yet supported if a4-a7 are zero
     define_transform_kwd = kwd.DefineTransformation(option="ROTATE", a1=1, a2=0, a3=0)
-    expected_warning = "DEFINE_TRANFORMATION ROTATE option with parameters (1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) not handled yet by pydyna!"
+    expected_warning = "DEFINE_TRANSFORMATION ROTATE option with parameters (1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) not handled yet by pydyna!"
     expected_warning_expression = re.escape(expected_warning)
     with pytest.warns(UserWarning, match=expected_warning_expression):
         mtx = get_transform_matrix(define_transform_kwd)
@@ -40,7 +40,7 @@ def test_transform_rotation_1():
 
     # not yet supported if a4-a7 are zero
     define_transform_kwd = kwd.DefineTransformation(option="ROTATE", a1=0, a2=0, a3=0, a7=0)
-    expected_warning = "DEFINE_TRANFORMATION ROTATE option with parameters (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) not handled yet by pydyna!"
+    expected_warning = "DEFINE_TRANSFORMATION ROTATE option with parameters (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) not handled yet by pydyna!"
     expected_warning_expression = re.escape(expected_warning)
     with pytest.warns(UserWarning, match=expected_warning_expression):
         mtx = get_transform_matrix(define_transform_kwd)
@@ -109,12 +109,19 @@ def test_transform_matrix_one_scale():
     ref = tfm.scale_matrix(factor=-1.0, direction=[0,1,0])
     assert np.allclose(mtx, ref)
 
+def test_transform_matrix_one_mirror():
+    """Verify the transformation matrix for a single MIRROR."""
+    define_transform_kwd = kwd.DefineTransformation(option="MIRROR", a1=0.0, a2=0.0, a3=0.0, a4=0.0, a5=1.0, a6=0.0)
+    mtx = get_transform_matrix(define_transform_kwd)
+    ref = tfm.scale_matrix(factor=-1.0, direction=[0,1,0])
+    assert np.allclose(mtx, ref)
+
 
 
 def test_transform_unhandled():
     """Verify warning and no transformation when an unhandled DEFINE_TRANSFORMATION option is used."""
     option = "TRANSL2ND"
     define_transform_kwd = kwd.DefineTransformation(option=option)
-    with pytest.warns(UserWarning, match=f"DEFINE_TRANFORMATION option {option} not handled yet by pydyna!"):
+    with pytest.warns(UserWarning, match=f"DEFINE_TRANSFORMATION option {option} not handled yet by pydyna!"):
         mtx = get_transform_matrix(define_transform_kwd)
     assert mtx is None
