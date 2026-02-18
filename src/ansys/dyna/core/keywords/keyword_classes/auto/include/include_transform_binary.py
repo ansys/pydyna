@@ -291,7 +291,7 @@ class IncludeTransformBinary(KeywordBase):
     @property
     def tranid(self) -> int:
         """Get or set the Transformation ID.
-        EQ.0: no tranformation will be applied.  See the input *DEFINE_TRANSFORM.
+        EQ.0: no transformation will be applied.  See the input *DEFINE_TRANSFORM.
         """ # nopep8
         return self._cards[4].get_value("tranid")
 
