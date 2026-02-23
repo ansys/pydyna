@@ -135,114 +135,65 @@ class DockerRunner(BaseRunner):
         # Build the LS-DYNA command
         executable = self._get_executable_name()
 
-        # Build command arguments
-        args = [f"i={self._input_file}", f"memory={self.get_memory_string()}"]
-
-        # Add NCPU argument for SMP runs
-        if self.mpi_option == MpiOption.SMP and self.ncpu > 1:
-            args.append(f"ncpu={self.ncpu}")
-
-        # Add CASE option if enabled
+        # CASE option logic
+        case_option = ""
         if self.activate_case:
             if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
-                args.append(f"CASE={','.join(str(cid) for cid in self.case_ids)}")
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
             else:
-                args.append("CASE")
+                case_option = "CASE"
+
+        # Build command arguments
+        args = [f"i={self._input_file}", f"memory={self.get_memory_string()}"]
+        if case_option:
+            args.append(case_option)
 
         # Build the full command with MPI wrapper if needed
-        if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            # For Intel MPI, need to source environment
-            inner_command = f"source /opt/intel/oneapi/mpi/latest/env/vars.sh && mpirun -np {self.ncpu} {executable} {' '.join(args)}"  # noqa: E501
-            command = ["sh", "-c", inner_command]
+        if self.mpi_option == MpiOption.SMP:
+            # For SMP, run directly with ncpu argument
+            if self.ncpu > 1:
+                args.append(f"ncpu={self.ncpu}")
+            command = " ".join([executable] + args)
         else:
-            # For SMP or OpenMPI (which should be in PATH)
-            if self.mpi_option == MpiOption.SMP:
-                command = [executable] + args
-            else:  # OpenMPI MPP
-                command = ["mpirun", "-np", str(self.ncpu), executable] + args
-        logger.info(f"Running LS-DYNA command: {command}")
+            # For MPP (OpenMPI or Intel MPI)
+            command = " ".join(["mpirun", "-np", str(self.ncpu), executable] + args)
 
         # Set up environment variables
-        if self._container_env == {}:
-            self._container_env = dict(
-                (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
-            )
-
         env = {}
-        env.update(self._container_env)
+        if self._container_env:
+            env.update(self._container_env)
+        else:
+            # Add license environment variables if they exist
+            for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"):
+                if k in os.environ:
+                    env[k] = os.environ[k]
 
-        # Set up volumes to mount the working directory
+        # Set OpenMPI environment variables to allow running as root
+        env["OMPI_ALLOW_RUN_AS_ROOT"] = "1"
+        env["OMPI_ALLOW_RUN_AS_ROOT_CONFIRM"] = "1"
+
         volumes = [f"{self._working_directory}:/run"]
-
-        # Change working directory inside container to /run
-        working_dir = "/run"
 
         if self._stream:
             cont: docker.models.containers.Container = self._client.containers.run(
-                self._name, command=command, environment=env, volumes=volumes, working_dir=working_dir, detach=True
+                self._name, command=command, environment=env, volumes=volumes, working_dir="/run", detach=True
             )
-
-            logger.info(f"Started container {cont.id[:12]} running LS-DYNA")
-
-            # Stream the logs
             logs: docker.types.daemon.CancellableStream = cont.logs(stream=True, follow=True)
             try:
                 for log in logs:
                     sys.stdout.write(log.decode("utf-8"))
                     sys.stdout.flush()
             except KeyboardInterrupt:
-                logger.info("Stopping container due to keyboard interrupt")
                 cont.stop()
                 raise
 
-            # Wait for container to finish and get exit code
             result = cont.wait()
-            exit_code = result["StatusCode"]
-
-            if exit_code != 0:
-                logger.error(f"LS-DYNA exited with code {exit_code}")
-                # Get any remaining logs
-                final_logs = cont.logs(tail=50)
-                if final_logs:
-                    logger.error("Final container logs:")
-                    logs_str = final_logs.decode("utf-8")
-                    sys.stderr.write(logs_str)
-
-                    # Check for common issues and provide helpful error messages
-                    if "libmpifort" in logs_str or "libmpi" in logs_str:
-                        error_msg = (
-                            f"LS-DYNA execution failed with exit code {exit_code}. "
-                            "This appears to be an Intel MPI library dependency issue. "
-                            "The Docker container may be missing Intel MPI runtime libraries. "
-                            "Ensure the Docker image includes Intel oneAPI MPI runtime."
-                        )
-                    elif "cannot open shared object file" in logs_str:
-                        error_msg = (
-                            f"LS-DYNA execution failed with exit code {exit_code}. "
-                            "Missing shared library dependencies. Check that all required "
-                            "runtime libraries are installed in the Docker container."
-                        )
-                    elif exit_code == 127:
-                        error_msg = (
-                            f"LS-DYNA execution failed with exit code {exit_code}. "
-                            "Command not found or library dependency missing. "
-                            "Verify LS-DYNA executable and its dependencies are properly installed."
-                        )
-                    else:
-                        error_msg = f"LS-DYNA execution failed with exit code {exit_code}"
-                else:
-                    error_msg = f"LS-DYNA execution failed with exit code {exit_code}"
-
-                raise Exception(error_msg)
-
-            # Clean up the container
+            if result["StatusCode"] != 0:
+                raise Exception(f"LS-DYNA execution failed with exit code {result['StatusCode']}")
             cont.remove()
-            logger.info("Container execution completed successfully")
-
         else:
             result = self._client.containers.run(
-                self._name, command=command, environment=env, volumes=volumes, working_dir=working_dir, remove=True
+                self._name, command=command, environment=env, volumes=volumes, working_dir="/run", remove=True
             )
-            logger.info("Container execution completed (non-streaming mode)")
 
         return self._working_directory
