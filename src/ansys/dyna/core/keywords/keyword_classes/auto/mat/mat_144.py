@@ -236,7 +236,7 @@ class Mat144(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpy_link(self) -> DefineCurve:
+    def lcpy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpy."""
         if self.deck is None:
             return None
@@ -251,7 +251,7 @@ class Mat144(KeywordBase):
         self.lcpy = value.lcid
 
     @property
-    def lcuys_link(self) -> DefineCurve:
+    def lcuys_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcuys."""
         if self.deck is None:
             return None
@@ -266,7 +266,7 @@ class Mat144(KeywordBase):
         self.lcuys = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None

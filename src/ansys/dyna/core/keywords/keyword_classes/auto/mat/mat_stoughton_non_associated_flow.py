@@ -437,7 +437,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcids_link(self) -> DefineCurve:
+    def lcids_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcids."""
         if self.deck is None:
             return None
@@ -452,7 +452,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
         self.lcids = value.lcid
 
     @property
-    def lcidv_link(self) -> DefineCurve:
+    def lcidv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidv."""
         if self.deck is None:
             return None

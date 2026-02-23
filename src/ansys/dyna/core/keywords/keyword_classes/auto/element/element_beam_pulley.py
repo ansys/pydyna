@@ -147,17 +147,17 @@ class ElementBeamPulley(KeywordBase):
         self._cards[0].set_value("dc", value)
 
     @property
-    def pnid_link(self) -> KeywordBase:
+    def pnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given pnid."""
         return self._get_link_by_attr("NODE", "nid", self.pnid, "parts")
 
     @property
-    def bid1_link(self) -> KeywordBase:
+    def bid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bid1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bid1, "parts")
 
     @property
-    def bid2_link(self) -> KeywordBase:
+    def bid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bid2."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bid2, "parts")
 

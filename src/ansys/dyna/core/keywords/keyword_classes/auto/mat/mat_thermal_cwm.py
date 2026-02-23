@@ -286,7 +286,7 @@ class MatThermalCwm(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None
@@ -301,7 +301,7 @@ class MatThermalCwm(KeywordBase):
         self.tgrlc = value.lcid
 
     @property
-    def lchc_link(self) -> DefineCurve:
+    def lchc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchc."""
         if self.deck is None:
             return None
@@ -316,7 +316,7 @@ class MatThermalCwm(KeywordBase):
         self.lchc = value.lcid
 
     @property
-    def lctc_link(self) -> DefineCurve:
+    def lctc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc."""
         if self.deck is None:
             return None

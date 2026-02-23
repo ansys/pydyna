@@ -33,8 +33,6 @@ from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
-
-@pytest.mark.keywords
 def test_load_card_errors(string_utils):
     """Error test for loading a card."""
     field_schemas = (
@@ -52,8 +50,6 @@ def test_load_card_errors(string_utils):
         buf = "                                           "
         card.read(string_utils.as_buffer(buf))
 
-
-@pytest.mark.keywords
 def test_load_card_parameters(string_utils):
     """Error test for loading a card."""
     field_schemas = (
@@ -75,7 +71,6 @@ def test_load_card_parameters(string_utils):
     assert card.get_value("e") == 1.12
 
 
-@pytest.mark.keywords
 def test_load_card_basic(string_utils):
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -90,8 +85,6 @@ def test_load_card_basic(string_utils):
     assert card.get_value("foo") == 8
     assert card.get_value("bar") == 4
 
-
-@pytest.mark.keywords
 def test_load_card_long(string_utils):
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -103,8 +96,6 @@ def test_load_card_long(string_utils):
     assert card.get_value("foo") == None
     assert card.get_value("bar") == 4
 
-
-@pytest.mark.keywords
 def test_write_inactive_card():
     field_schemas = (
         FieldSchema("foo", int, 0, 10, None),
@@ -113,16 +104,13 @@ def test_write_inactive_card():
     card = Card.from_field_schemas(field_schemas, active_func=lambda: False, format=format_type.long)
     assert card.write() == ""
 
-
 # =============================================================================
 # Tests for the new Card schema/values architecture
 # =============================================================================
 
-
 class TestFieldSchema:
     """Tests for FieldSchema class."""
 
-    @pytest.mark.keywords
     def test_field_schema_from_field_basic(self):
         """Test creating FieldSchema from a basic Field."""
         field = Field("test", int, 0, 10, 42)
@@ -135,7 +123,7 @@ class TestFieldSchema:
         assert schema.default == 42
         assert not schema.is_flag()
 
-    @pytest.mark.keywords
+
     def test_field_schema_from_field_with_flag(self):
         """Test creating FieldSchema from a Flag Field."""
         flag = Flag(value=True, true_value="YES", false_value="NO")
@@ -147,7 +135,6 @@ class TestFieldSchema:
         assert schema.default.true_value == "YES"
         assert schema.default.false_value == "NO"
 
-    @pytest.mark.keywords
     def test_field_schema_to_field_roundtrip(self):
         """Test that to_field creates a correct Field from schema."""
         original = Field("count", int, 10, 10, 99)
@@ -160,7 +147,6 @@ class TestFieldSchema:
         assert reconstructed.width == 10
         assert reconstructed.value == 123
 
-    @pytest.mark.keywords
     def test_field_schema_to_field_flag_roundtrip(self):
         """Test flag field roundtrip through schema."""
         flag = Flag(value=False, true_value="ON", false_value="OFF")
@@ -176,7 +162,6 @@ class TestFieldSchema:
 class TestCardSchema:
     """Tests for CardSchema class."""
 
-    @pytest.mark.keywords
     def test_card_schema_from_fields(self):
         """Test creating CardSchema from a list of Fields."""
         fields = [
@@ -191,7 +176,6 @@ class TestCardSchema:
         assert schema.get_index("b") == 1
         assert schema.get_index("c") == 2
 
-    @pytest.mark.keywords
     def test_card_schema_to_fields(self):
         """Test reconstructing Fields from CardSchema with values."""
         fields = [
@@ -212,7 +196,7 @@ class TestCardSchema:
 class TestCardSchemaIntegration:
     """Integration tests for Card with schema architecture."""
 
-    @pytest.mark.keywords
+    
     def test_card_stores_schema_and_values_separately(self):
         """Test that Card stores schema reference and values list."""
         field_schemas = (
@@ -229,7 +213,6 @@ class TestCardSchemaIntegration:
         # Values should be stored in list
         assert card._values == [1, 2]
 
-    @pytest.mark.keywords
     def test_multiple_cards_share_schema(self):
         """Test that multiple cards with same structure share schema."""
         field_schemas = (FieldSchema("x", int, 0, 10, None),)
@@ -241,7 +224,7 @@ class TestCardSchemaIntegration:
         assert card1._schema is card2._schema
         assert card1._values != card2._values
 
-    @pytest.mark.keywords
+    
     def test_card_get_value_uses_index_lookup(self):
         """Test that get_value uses efficient index-based lookup."""
         field_schemas = (
@@ -255,7 +238,6 @@ class TestCardSchemaIntegration:
         assert card.get_value("second") == 2.5
         assert card.get_value("third") == "hello"
 
-    @pytest.mark.keywords
     def test_card_set_value_updates_values_list(self):
         """Test that set_value updates the internal values list."""
         field_schemas = (FieldSchema("count", int, 0, 10, 0),)
@@ -266,7 +248,6 @@ class TestCardSchemaIntegration:
         assert card._values[0] == 42
         assert card.get_value("count") == 42
 
-    @pytest.mark.keywords
     def test_card_fields_property_creates_fields_lazily(self):
         """Test that _fields property creates Field objects from schema+values."""
         field_schemas = (
@@ -284,7 +265,7 @@ class TestCardSchemaIntegration:
         assert lazy_fields[0].value == 100
         assert lazy_fields[1].value == 200
 
-    @pytest.mark.keywords
+    
     def test_card_load_updates_values_not_schema(self, string_utils):
         """Test that loading data updates values but reuses schema."""
         field_schemas = (
@@ -301,7 +282,7 @@ class TestCardSchemaIntegration:
         # Values should be updated
         assert card._values == [5, 10]
 
-    @pytest.mark.keywords
+    
     def test_card_write_uses_lazy_fields(self):
         """Test that write creates proper output from schema+values."""
         field_schemas = (
@@ -315,7 +296,7 @@ class TestCardSchemaIntegration:
         assert "42" in output
         assert "99" in output
 
-    @pytest.mark.keywords
+    
     def test_card_with_flag_field(self, string_utils):
         """Test Card handles Flag fields correctly through schema."""
         flag = Flag(value=None, true_value="YES", false_value="NO")
@@ -335,7 +316,7 @@ class TestCardSchemaIntegration:
 class TestFromFieldSchemas:
     """Tests for Card.from_field_schemas() fast path."""
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_basic(self):
         """Test basic Card creation from FieldSchema tuple."""
         field_schemas = (
@@ -347,7 +328,7 @@ class TestFromFieldSchemas:
         assert card.get_value("eid") == 0
         assert card.get_value("pid") == 0
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_with_values(self):
         """Test Card creation with initial values."""
         field_schemas = (
@@ -359,7 +340,7 @@ class TestFromFieldSchemas:
         assert card.get_value("x") == 42
         assert card.get_value("y") == 3.14
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_caches_schema(self):
         """Test that same tuple reuses cached schema."""
         field_schemas = (
@@ -373,7 +354,7 @@ class TestFromFieldSchemas:
         assert card1._schema is card2._schema
         assert card1._signature is card2._signature
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_different_tuples_different_schemas(self):
         """Test that different tuples create different schemas."""
         schemas1 = (FieldSchema("a", int, 0, 10, 0),)
@@ -384,7 +365,7 @@ class TestFromFieldSchemas:
 
         assert card1._schema is not card2._schema
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_set_value(self):
         """Test set_value works on Card from field schemas."""
         field_schemas = (FieldSchema("val", int, 0, 10, 0),)
@@ -393,7 +374,7 @@ class TestFromFieldSchemas:
         card.set_value("val", 999)
         assert card.get_value("val") == 999
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_write(self):
         """Test write works on Card from field schemas."""
         field_schemas = (
@@ -406,7 +387,7 @@ class TestFromFieldSchemas:
         assert "100" in output
         assert "200" in output
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_read(self, string_utils):
         """Test read works on Card from field schemas."""
         field_schemas = (
@@ -420,7 +401,7 @@ class TestFromFieldSchemas:
         assert card.get_value("a") == 42
         assert card.get_value("b") == 3.5
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_with_flag(self, string_utils):
         """Test Card.from_field_schemas with Flag field."""
         flag = Flag(value=None, true_value="Y", false_value="N")
@@ -438,7 +419,6 @@ class TestFromFieldSchemas:
 class TestHasNondefaultValues:
     """Tests for Card.has_nondefault_values() method."""
 
-    @pytest.mark.keywords
     def test_new_card_has_no_nondefault_values(self):
         """Test that a freshly created card has no nondefault values."""
         field_schemas = (
@@ -448,7 +428,6 @@ class TestHasNondefaultValues:
         card = Card.from_field_schemas(field_schemas)
         assert card.has_nondefault_values() is False
 
-    @pytest.mark.keywords
     def test_set_value_marks_nondefault(self):
         """Test that set_value marks the card as having nondefault values."""
         field_schemas = (
@@ -461,8 +440,7 @@ class TestHasNondefaultValues:
         card.set_value("foo", 42)
 
         assert card.has_nondefault_values() is True
-
-    @pytest.mark.keywords
+    
     def test_set_value_to_same_as_default_still_marks(self):
         """Test that setting a value to the default still marks it as set.
 
@@ -481,7 +459,6 @@ class TestHasNondefaultValues:
 
         assert card.has_nondefault_values() is True
 
-    @pytest.mark.keywords
     def test_multiple_set_values(self):
         """Test that multiple set_value calls are tracked."""
         field_schemas = (
@@ -497,7 +474,7 @@ class TestHasNondefaultValues:
         assert card.has_nondefault_values() is True
         assert card._fields_set is True  # Now a simple bool
 
-    @pytest.mark.keywords
+    
     def test_from_field_schemas_with_defaults_no_nondefault(self):
         """Test that from_field_schemas_with_defaults doesn't mark fields as set."""
         field_schemas = (
@@ -511,7 +488,7 @@ class TestHasNondefaultValues:
 class TestFormatSpecCaching:
     """Tests for FormatSpec caching."""
 
-    @pytest.mark.keywords
+    
     def test_format_spec_cached_per_format_type(self):
         """Test that FormatSpec is cached separately for each format type."""
         field_schemas = (FieldSchema("x", int, 0, 10, None),)

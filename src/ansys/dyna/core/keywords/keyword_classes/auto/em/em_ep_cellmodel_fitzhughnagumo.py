@@ -169,7 +169,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
         self._cards[2].set_value("r", value)
 
     @property
-    def matid_link(self) -> KeywordBase:
+    def matid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for matid."""
         if self.deck is None:
             return None

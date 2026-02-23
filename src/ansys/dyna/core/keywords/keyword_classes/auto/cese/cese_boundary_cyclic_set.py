@@ -221,7 +221,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
         self._cards[2].set_value("transz", value)
 
     @property
-    def ssid1_link(self) -> KeywordBase:
+    def ssid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid1."""
         return self._get_set_link("SEGMENT", self.ssid1)
 
@@ -231,7 +231,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
         self.ssid1 = value.sid
 
     @property
-    def ssid2_link(self) -> KeywordBase:
+    def ssid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid2."""
         return self._get_set_link("SEGMENT", self.ssid2)
 

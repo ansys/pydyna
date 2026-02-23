@@ -258,7 +258,7 @@ class MatPlasticityPolymer(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -273,7 +273,7 @@ class MatPlasticityPolymer(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -288,7 +288,7 @@ class MatPlasticityPolymer(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lcfail_link(self) -> DefineCurve:
+    def lcfail_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfail."""
         if self.deck is None:
             return None

@@ -282,7 +282,7 @@ class DefineDeInjection(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -297,7 +297,7 @@ class DefineDeInjection(KeywordBase):
         self.cid = value.cid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 
@@ -307,7 +307,7 @@ class DefineDeInjection(KeywordBase):
         self.sid = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

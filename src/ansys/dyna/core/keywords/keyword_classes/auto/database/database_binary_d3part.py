@@ -173,7 +173,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self._cards[1].set_value("tsetid", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -188,7 +188,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def bsetid_link(self) -> KeywordBase:
+    def bsetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsetid."""
         return self._get_set_link("BEAM", self.bsetid)
 
@@ -198,7 +198,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.bsetid = value.sid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 
@@ -208,7 +208,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.psetid = value.sid
 
     @property
-    def hsetid_link(self) -> KeywordBase:
+    def hsetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for hsetid."""
         return self._get_set_link("SOLID", self.hsetid)
 

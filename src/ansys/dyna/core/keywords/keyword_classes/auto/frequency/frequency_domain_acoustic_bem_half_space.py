@@ -679,7 +679,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
         self._cards[6].set_value("decay", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -694,7 +694,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None

@@ -37,6 +37,42 @@ def _get_translation_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
     return tfm.translation_matrix((a1, a2, a3))
 
 
+def _get_mirror_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, a6: float):
+    p0 = np.array((a1, a2, a3), dtype=float)
+    p1 = np.array((a4, a5, a6), dtype=float)
+
+    n = p1 - p0
+    n = n / np.linalg.norm(n)
+    a, b, c = n
+
+    # Rotation/reflection part
+    r = np.array(
+        [
+            [1 - 2 * a * a, -2 * a * b, -2 * a * c],
+            [-2 * a * b, 1 - 2 * b * b, -2 * b * c],
+            [-2 * a * c, -2 * b * c, 1 - 2 * c * c],
+        ]
+    )
+
+    # Translation
+    d = 2 * np.dot(n, p0)
+    t = d * n
+
+    m = np.eye(4)
+    m[:3, :3] = r
+    m[:3, 3] = t
+
+    return m
+
+
+def _get_scale_matrix(a1: float, a2: float, a3: float) -> np.ndarray:
+    """Creates a 4x4 scaling matrix."""
+    scale_x = tfm.scale_matrix(factor=a1, direction=[1.0, 0.0, 0.0])
+    scale_y = tfm.scale_matrix(factor=a2, direction=[0.0, 1.0, 0.0])
+    scale_z = tfm.scale_matrix(factor=a3, direction=[0.0, 0.0, 1.0])
+    return tfm.concatenate_matrices(scale_x, scale_y, scale_z)
+
+
 def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, a6: float, a7: float) -> np.ndarray:
     if (a4, a5, a6) == (0.0, 0.0, 0.0):
         if a7 != 0.0:
@@ -45,7 +81,7 @@ def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, 
                 raise ValueError("Direction vector A1, A2, A3 cannot be all zero!")
             return tfm.rotation_matrix(math.radians(a7), [a1, a2, a3])
     parameters = (a1, a2, a3, a4, a5, a6, a7)
-    warnings.warn(f"DEFINE_TRANFORMATION ROTATE option with parameters {parameters} not handled yet by pydyna!")
+    warnings.warn(f"DEFINE_TRANSFORMATION ROTATE option with parameters {parameters} not handled yet by pydyna!")
     return None
 
 
@@ -78,8 +114,12 @@ def _get_row_transform_matrix(transform: pd.Series) -> np.ndarray:
         return _get_translation_matrix(a1, a2, a3)
     elif option == "ROTATE":
         return _get_rotation_matrix(a1, a2, a3, a4, a5, a6, a7)
+    elif option == "SCALE":
+        return _get_scale_matrix(a1, a2, a3)
+    elif option == "MIRROR":
+        return _get_mirror_matrix(a1, a2, a3, a4, a5, a6)
     else:
-        warnings.warn(f"DEFINE_TRANFORMATION option {option} not handled yet by pydyna!")
+        warnings.warn(f"DEFINE_TRANSFORMATION option {option} not handled yet by pydyna!")
         return None
 
 

@@ -30,11 +30,10 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.parameters import ParameterSet
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
-
 class TestTableCardGroupParameterRetention:
     """Test parameter retention (write-back) for TableCardGroup."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_write_with_parameter_retention(self):
         """Test that TableCardGroup retains parameter references when writing.
 
@@ -90,7 +89,7 @@ class TestTableCardGroupParameterRetention:
         assert "&myeid" in output, f"Expected '&myeid' in output: {output}"
         assert "&mythic" in output, f"Expected '&mythic' in output: {output}"
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_write_without_parameter_retention(self):
         """Test that TableCardGroup writes resolved values without retain_parameters."""
         parameter_set = ParameterSet()
@@ -120,7 +119,7 @@ class TestTableCardGroupParameterRetention:
         assert "&myeid" not in output
         assert "100" in output
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_parameter_in_second_subcard(self):
         """Test that parameters in the second sub-card are correctly tracked."""
         parameter_set = ParameterSet()
@@ -159,7 +158,7 @@ class TestTableCardGroupParameterRetention:
         )
         assert "&thick" in output, f"Expected '&thick' in output: {output}"
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_multiple_rows_with_parameters(self):
         """Test that parameters in multiple rows are correctly tracked."""
         parameter_set = ParameterSet()

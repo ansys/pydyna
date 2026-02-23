@@ -130,7 +130,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
         self._cards[1].set_value("conthk", value)
 
     @property
-    def segset_link(self) -> KeywordBase:
+    def segset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segset."""
         return self._get_set_link("SEGMENT", self.segset)
 

@@ -1,7 +1,7 @@
 Getting started
 ===============
 
-To use the solver features of PyDYNA, you must have a valid LS-DYNA license.
+To use the run features of PyDYNA, you must have a valid LS-DYNA license.
 
 For information on getting a licensed copy of LS-DYNA, see
 the `Ansys LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_
@@ -16,8 +16,11 @@ page on the Ansys website.
       :link: getting-started/installation
       :link-type: doc
       
-
       Install PyDYNA and learn about the different installation modes.
+
+   .. grid-item-card:: Agents
+      :link: getting-started/agents
+      :link-type: doc
 
    .. grid-item-card:: PyDYNA modules
       :link: getting-started/modules
@@ -37,6 +40,7 @@ page on the Ansys website.
    :maxdepth: 2
 
    getting-started/installation
+   getting-started/agents
    getting-started/modules
    getting-started/example
 

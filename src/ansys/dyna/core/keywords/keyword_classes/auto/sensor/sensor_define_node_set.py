@@ -171,7 +171,7 @@ class SensorDefineNodeSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for node1."""
         return self._get_set_link("NODE", self.node1)
 
@@ -181,7 +181,7 @@ class SensorDefineNodeSet(KeywordBase):
         self.node1 = value.sid
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for node2."""
         return self._get_set_link("NODE", self.node2)
 

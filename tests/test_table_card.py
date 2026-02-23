@@ -44,7 +44,7 @@ from ansys.dyna.core.lib.table_card import TableCard
 class TestTableCardParameterRetention:
     """Test parameter retention (write-back) for TableCard."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_write_with_parameter_retention_single_row(self):
         """Test that a single-row table card retains parameter references when writing."""
         parameter_set = ParameterSet()
@@ -82,7 +82,7 @@ class TestTableCardParameterRetention:
         assert "&x1" in output, f"Expected '&x1' in output: {output}"
         assert "&y1" in output, f"Expected '&y1' in output: {output}"
 
-    @pytest.mark.keywords
+    
     def test_table_card_write_with_parameter_retention_multi_row(self):
         """Test that multi-row table card retains parameter references when writing."""
         parameter_set = ParameterSet()
@@ -124,7 +124,7 @@ class TestTableCardParameterRetention:
         assert "&y1" in output, f"Expected '&y1' in output: {output}"
         assert "&x2" in output, f"Expected '&x2' in output: {output}"
 
-    @pytest.mark.keywords
+    
     def test_table_card_write_without_parameter_retention(self):
         """Test that table card without retain_parameters writes resolved values."""
         parameter_set = ParameterSet()
@@ -149,7 +149,7 @@ class TestTableCardParameterRetention:
         assert "&x1" not in output
         assert "-0.25" in output
 
-    @pytest.mark.keywords
+    
     def test_table_card_write_with_negative_parameter(self):
         """Test that negative parameter references are retained."""
         parameter_set = ParameterSet()
@@ -187,7 +187,7 @@ class TestTableCardParameterRetention:
         )
         assert "-&off" in output, f"Expected '-&off' in output: {output}"
 
-    @pytest.mark.keywords
+    
     def test_table_card_write_mixed_parameters_and_literals(self):
         """Test table card with both parameters and literal values retains only parameters."""
         parameter_set = ParameterSet()

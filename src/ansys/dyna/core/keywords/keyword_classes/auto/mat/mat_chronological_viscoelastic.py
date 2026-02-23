@@ -335,7 +335,7 @@ class MatChronologicalViscoelastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -350,7 +350,7 @@ class MatChronologicalViscoelastic(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidk_link(self) -> DefineCurve:
+    def lcidk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidk."""
         if self.deck is None:
             return None

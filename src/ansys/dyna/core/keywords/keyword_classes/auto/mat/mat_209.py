@@ -1141,7 +1141,7 @@ class Mat209(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpms_link(self) -> DefineCurve:
+    def lcpms_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpms."""
         if self.deck is None:
             return None
@@ -1156,7 +1156,7 @@ class Mat209(KeywordBase):
         self.lcpms = value.lcid
 
     @property
-    def lcpmt_link(self) -> DefineCurve:
+    def lcpmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpmt."""
         if self.deck is None:
             return None
@@ -1171,7 +1171,7 @@ class Mat209(KeywordBase):
         self.lcpmt = value.lcid
 
     @property
-    def lcat_link(self) -> DefineCurve:
+    def lcat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcat."""
         if self.deck is None:
             return None
@@ -1186,7 +1186,7 @@ class Mat209(KeywordBase):
         self.lcat = value.lcid
 
     @property
-    def lcac_link(self) -> DefineCurve:
+    def lcac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcac."""
         if self.deck is None:
             return None
@@ -1201,7 +1201,7 @@ class Mat209(KeywordBase):
         self.lcac = value.lcid
 
     @property
-    def lcshs_link(self) -> DefineCurve:
+    def lcshs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcshs."""
         if self.deck is None:
             return None
@@ -1216,7 +1216,7 @@ class Mat209(KeywordBase):
         self.lcshs = value.lcid
 
     @property
-    def lcsht_link(self) -> DefineCurve:
+    def lcsht_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsht."""
         if self.deck is None:
             return None

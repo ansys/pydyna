@@ -127,7 +127,7 @@ class LoadShellSet(KeywordBase):
         self._cards[1].set_value("at", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

@@ -260,12 +260,12 @@ class DefineFrictionErodingSingleSurface(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pid_i_link(self) -> KeywordBase:
+    def pid_i_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid_i."""
         return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
 
     @property
-    def pid_j_link(self) -> KeywordBase:
+    def pid_j_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid_j."""
         return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

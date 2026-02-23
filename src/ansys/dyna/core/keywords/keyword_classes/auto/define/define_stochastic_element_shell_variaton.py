@@ -141,7 +141,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ide_link(self) -> KeywordBase:
+    def ide_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given ide."""
         return self._get_link_by_attr("ELEMENT", "eid", self.ide, "parts")
 

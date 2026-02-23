@@ -37,7 +37,6 @@ from ansys.dyna.core.lib.deck_plotter import (
 )
 
 
-@pytest.mark.keywords
 def test_shell_facet_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -77,7 +76,6 @@ def test_shell_facet_array():
     numpy.testing.assert_allclose(shell_facet_array(test[5]), np.array([]))
 
 
-@pytest.mark.keywords
 def test_line_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -94,7 +92,6 @@ def test_line_array():
     numpy.testing.assert_allclose(line_array(test[4]), np.array([]))
 
 
-@pytest.mark.keywords
 def test_facet_nid_to_index():
     # Create array-based mapping: mapping[nid] = index
     mapping = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # indices 0-4, mapping[1]=2, mapping[2]=3, etc.
@@ -107,7 +104,6 @@ def test_facet_nid_to_index():
     )
 
 
-@pytest.mark.keywords
 def test_extract_shell_facets():
     test_1_pddf = pd.DataFrame(
         {
@@ -169,7 +165,6 @@ def extract_faces_and_lines_from_grid(grid):
     return np.array(faces_cells, dtype=int), np.array(lines_cells, dtype=int)
 
 
-@pytest.mark.keywords
 def test_get_polydata(file_utils):
     deck = Deck()
     keyword_string = file_utils.read_file(file_utils.assets_folder / "plot_test.k")
@@ -249,7 +244,6 @@ def create_test_hex_mesh(nx, ny, nz):
     return deck
 
 
-@pytest.mark.keywords
 def test_solid_mesh_extract_surface():
     """Test that extract_surface extracts exterior surface for solid meshes."""
     # Create a small solid mesh (5x5x5 = 125 elements)
@@ -277,7 +271,6 @@ def test_solid_mesh_extract_surface():
     assert "element_ids" in grid_surf.cell_data
 
 
-@pytest.mark.keywords
 def test_solid_mesh_medium():
     """Test with a medium-sized solid mesh."""
     # Create a 10x10x10 mesh (1000 elements)
@@ -300,7 +293,6 @@ def test_solid_mesh_medium():
     assert grid.n_points < 1331
 
 
-@pytest.mark.keywords
 def test_mixed_mesh_shells_and_solids():
     """Test plotting with both shell and solid elements."""
     deck = Deck()
@@ -348,7 +340,7 @@ $#   nid               x               y               z      tc      rc
     assert len(grid.cell_data["part_ids"]) == 3
     assert len(grid.cell_data["element_ids"]) == 3
 
-@pytest.mark.keywords
+
 def test_extract_surface():
     """Test that extract_surface=False keeps all cells."""
     deck = create_test_hex_mesh(5, 5, 5)
@@ -365,7 +357,6 @@ def test_extract_surface():
     assert len(grid.cell_data["element_ids"]) == 125
 
 
-@pytest.mark.keywords
 def test_shell_only_mesh_not_affected():
     """Test that shell-only meshes are not affected by extract_surface."""
     deck = Deck()
@@ -395,7 +386,6 @@ $#   nid               x               y               z      tc      rc
     assert grid_full.n_points == grid_surf.n_points
 
 
-@pytest.mark.keywords
 def test_cell_data_preserved():
     """Test that part_ids and element_ids are preserved after extract_surface."""
     # Use a mesh created programmatically to avoid parsing issues
@@ -413,14 +403,12 @@ def test_cell_data_preserved():
     assert all(pid == 1 for pid in grid.cell_data["part_ids"])
 
 
-@pytest.mark.keywords
 def test_jupyter_environment_detection():
     """Test that is_jupyter_environment() returns False in test environment."""
     # In normal pytest environment, this should return False
     assert is_jupyter_environment() is False
 
 
-@pytest.mark.keywords
 def test_plot_deck_jupyter_backend_handling():
     """Test that plot_deck correctly handles jupyter_backend parameter."""
     from unittest.mock import MagicMock, patch

@@ -247,7 +247,7 @@ class Mat037(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -262,7 +262,7 @@ class Mat037(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def idscale_link(self) -> DefineCurve:
+    def idscale_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for idscale."""
         if self.deck is None:
             return None
@@ -277,7 +277,7 @@ class Mat037(KeywordBase):
         self.idscale = value.lcid
 
     @property
-    def icfld_link(self) -> DefineCurve:
+    def icfld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for icfld."""
         if self.deck is None:
             return None

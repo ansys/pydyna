@@ -333,7 +333,7 @@ class ComponentGebodJointWaist(KeywordBase):
         self._cards[3].set_value("unk3", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -348,7 +348,7 @@ class ComponentGebodJointWaist(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -363,7 +363,7 @@ class ComponentGebodJointWaist(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None

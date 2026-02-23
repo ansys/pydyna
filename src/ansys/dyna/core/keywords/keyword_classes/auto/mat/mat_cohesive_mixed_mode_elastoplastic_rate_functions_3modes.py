@@ -542,7 +542,7 @@ class MatCohesiveMixedModeElastoplasticRateFunctions3Modes(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg1c_link(self) -> DefineCurve:
+    def lcg1c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg1c."""
         if self.deck is None:
             return None
@@ -557,7 +557,7 @@ class MatCohesiveMixedModeElastoplasticRateFunctions3Modes(KeywordBase):
         self.lcg1c = value.lcid
 
     @property
-    def lcg2c_link(self) -> DefineCurve:
+    def lcg2c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg2c."""
         if self.deck is None:
             return None

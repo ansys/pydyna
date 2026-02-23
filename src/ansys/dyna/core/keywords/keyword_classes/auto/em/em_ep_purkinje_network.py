@@ -214,12 +214,12 @@ class EmEpPurkinjeNetwork(KeywordBase):
         self._cards[1].set_value("iedgestld", value)
 
     @property
-    def inodestld_link(self) -> KeywordBase:
+    def inodestld_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given inodestld."""
         return self._get_link_by_attr("NODE", "nid", self.inodestld, "parts")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -234,7 +234,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
         self.mid = value.mid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

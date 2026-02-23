@@ -461,7 +461,7 @@ class MatPiecewiseLinearPlasticityMidfail(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -476,7 +476,7 @@ class MatPiecewiseLinearPlasticityMidfail(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lcss_link(self) -> KeywordBase:
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
         if self.deck is None:
             return None

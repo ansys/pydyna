@@ -148,7 +148,7 @@ class LoadVolumeLoss(KeywordBase):
         self._cards[0].set_value("factor", value)
 
     @property
-    def lcur_link(self) -> DefineCurve:
+    def lcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur."""
         if self.deck is None:
             return None
@@ -163,7 +163,7 @@ class LoadVolumeLoss(KeywordBase):
         self.lcur = value.lcid
 
     @property
-    def coord_link(self) -> DefineCoordinateSystem:
+    def coord_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for coord."""
         if self.deck is None:
             return None
@@ -178,7 +178,7 @@ class LoadVolumeLoss(KeywordBase):
         self.coord = value.cid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

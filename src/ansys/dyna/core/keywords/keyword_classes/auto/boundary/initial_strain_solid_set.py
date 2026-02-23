@@ -138,7 +138,7 @@ class InitialStrainSolidSet(KeywordBase):
         self._cards[1].set_value("epszx", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for eid."""
         return self._get_set_link("SOLID", self.eid)
 

@@ -352,7 +352,7 @@ class MatThermalOrthotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None

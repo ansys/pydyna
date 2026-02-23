@@ -200,7 +200,7 @@ class DefineCurveFeedback(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -215,7 +215,7 @@ class DefineCurveFeedback(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def fldid_link(self) -> DefineCurve:
+    def fldid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fldid."""
         if self.deck is None:
             return None
@@ -230,7 +230,7 @@ class DefineCurveFeedback(KeywordBase):
         self.fldid = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -245,7 +245,7 @@ class DefineCurveFeedback(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

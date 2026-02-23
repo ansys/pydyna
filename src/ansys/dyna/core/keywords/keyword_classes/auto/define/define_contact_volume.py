@@ -313,7 +313,7 @@ class DefineContactVolume(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

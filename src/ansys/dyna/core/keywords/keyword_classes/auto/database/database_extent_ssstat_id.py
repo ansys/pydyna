@@ -72,7 +72,7 @@ class DatabaseExtentSsstatId(KeywordBase):
         self._cards[0].set_value("headingn", value)
 
     @property
-    def psidn_link(self) -> KeywordBase:
+    def psidn_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidn."""
         return self._get_set_link("PART", self.psidn)
 

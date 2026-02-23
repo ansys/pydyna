@@ -120,7 +120,7 @@ class MatSpringNonlinearElastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcd_link(self) -> DefineCurve:
+    def lcd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd."""
         if self.deck is None:
             return None
@@ -135,7 +135,7 @@ class MatSpringNonlinearElastic(KeywordBase):
         self.lcd = value.lcid
 
     @property
-    def lcr_link(self) -> DefineCurve:
+    def lcr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcr."""
         if self.deck is None:
             return None

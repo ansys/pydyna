@@ -313,17 +313,17 @@ class ElementSeatbeltSensor(KeywordBase):
         self._cards[5].set_value("pulmn", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 

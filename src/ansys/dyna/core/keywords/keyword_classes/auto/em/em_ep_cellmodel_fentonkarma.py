@@ -247,7 +247,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
         self._cards[3].set_value("w0", value)
 
     @property
-    def matid_link(self) -> KeywordBase:
+    def matid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for matid."""
         if self.deck is None:
             return None

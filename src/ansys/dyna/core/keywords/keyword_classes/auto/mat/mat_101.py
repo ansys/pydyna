@@ -224,7 +224,7 @@ class Mat101(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -239,7 +239,7 @@ class Mat101(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcfeps_link(self) -> DefineCurve:
+    def lcfeps_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfeps."""
         if self.deck is None:
             return None
@@ -254,7 +254,7 @@ class Mat101(KeywordBase):
         self.lcfeps = value.lcid
 
     @property
-    def lcfsig_link(self) -> DefineCurve:
+    def lcfsig_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfsig."""
         if self.deck is None:
             return None
@@ -269,7 +269,7 @@ class Mat101(KeywordBase):
         self.lcfsig = value.lcid
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None

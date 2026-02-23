@@ -279,7 +279,7 @@ class ControlTimestep(KeywordBase):
         self._cards[2].set_value("igado", value)
 
     @property
-    def lctm_link(self) -> DefineCurve:
+    def lctm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctm."""
         if self.deck is None:
             return None
@@ -294,7 +294,7 @@ class ControlTimestep(KeywordBase):
         self.lctm = value.lcid
 
     @property
-    def dt2mslc_link(self) -> DefineCurve:
+    def dt2mslc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dt2mslc."""
         if self.deck is None:
             return None

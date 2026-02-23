@@ -149,17 +149,17 @@ class ElementSeatbeltAccelerometer(KeywordBase):
         self._cards[0].set_value("mass", value)
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid3_link(self) -> KeywordBase:
+    def nid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid3."""
         return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 

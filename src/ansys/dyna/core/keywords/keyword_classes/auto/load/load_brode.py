@@ -188,7 +188,7 @@ class LoadBrode(KeywordBase):
         self._cards[1].set_value("cfp", value)
 
     @property
-    def talc_link(self) -> DefineCurve:
+    def talc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for talc."""
         if self.deck is None:
             return None
@@ -203,7 +203,7 @@ class LoadBrode(KeywordBase):
         self.talc = value.lcid
 
     @property
-    def sflc_link(self) -> DefineCurve:
+    def sflc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for sflc."""
         if self.deck is None:
             return None

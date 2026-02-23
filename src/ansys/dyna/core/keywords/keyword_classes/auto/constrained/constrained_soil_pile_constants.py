@@ -589,7 +589,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
         self._cards[5].set_value("hlc", value)
 
     @property
-    def vlc_link(self) -> DefineCurve:
+    def vlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlc."""
         if self.deck is None:
             return None
@@ -604,7 +604,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
         self.vlc = value.lcid
 
     @property
-    def pbsid_link(self) -> KeywordBase:
+    def pbsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pbsid."""
         return self._get_set_link("PART", self.pbsid)
 
@@ -614,22 +614,22 @@ class ConstrainedSoilPileConstants(KeywordBase):
         self.pbsid = value.sid
 
     @property
-    def pidns_link(self) -> KeywordBase:
+    def pidns_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidns."""
         return self._get_link_by_attr("PART", "pid", self.pidns, "parts")
 
     @property
-    def pidnb_link(self) -> KeywordBase:
+    def pidnb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidnb."""
         return self._get_link_by_attr("PART", "pid", self.pidnb, "parts")
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def blc_link(self) -> KeywordBase:
+    def blc_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given blc."""
         return self._get_link_by_attr("PART", "pid", self.blc, "parts")
 

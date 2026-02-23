@@ -91,7 +91,7 @@ class InterfaceEnsight(KeywordBase):
         self._cards[1].set_value("gfile", value)
 
     @property
-    def nset_link(self) -> KeywordBase:
+    def nset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nset."""
         return self._get_set_link("NODE", self.nset)
 

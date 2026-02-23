@@ -202,12 +202,12 @@ class ElementSeatbeltRetractor(KeywordBase):
         self._cards[1].set_value("lfed", value)
 
     @property
-    def sbrnid_link(self) -> KeywordBase:
+    def sbrnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given sbrnid."""
         return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
 
     @property
-    def llcid_link(self) -> DefineCurve:
+    def llcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for llcid."""
         if self.deck is None:
             return None
@@ -222,7 +222,7 @@ class ElementSeatbeltRetractor(KeywordBase):
         self.llcid = value.lcid
 
     @property
-    def ulcid_link(self) -> DefineCurve:
+    def ulcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ulcid."""
         if self.deck is None:
             return None

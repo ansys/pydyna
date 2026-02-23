@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.11.dev0"
+version = "0.12.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
@@ -42,6 +42,7 @@ dependencies = [
 all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
 
 graphics = [
+    "matplotlib>=3.0",
     "pyvista>=0.43.4",
 ]
 pim = [
@@ -63,7 +64,7 @@ tests = [
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.38.0",
-    "pyvista==0.46.5",
+    "pyvista==0.47.0",
 ]
 dev = [
     "ansys-dyna-core[tests,codegen,graphics]",
@@ -78,7 +79,7 @@ doc = [
     "sphinx-autobuild==2024.10.3",
     "sphinx-design==0.6.1",
     "sphinxcontrib-websupport==2.0.0",
-    "pytest-sphinx==0.6.3",
+    "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.20.0",
@@ -91,7 +92,7 @@ doc = [
     "scikit-learn==1.7.2",
     "ipython==8.38.0",
     "jupyterlab==4.5.2",
-    "pyvista==0.46.5",
+    "pyvista==0.47.0",
 ]
 
 [tool.flit.module]
@@ -117,7 +118,6 @@ extend-exclude = [
     "src/ansys/dyna/core/pre/Server/",
     "src/ansys/dyna/core/pre/doc/",
     "src/ansys/dyna/core/pre/",
-    "src/ansys/dyna/core/solver/",
     "src/ansys/dyna/core/pre/kwprocess_pb2.py",
     "src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",

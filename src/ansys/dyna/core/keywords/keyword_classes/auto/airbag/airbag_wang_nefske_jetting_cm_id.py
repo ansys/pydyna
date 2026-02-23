@@ -895,27 +895,27 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self._cards[9].set_value("nreact", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def node3_link(self) -> KeywordBase:
+    def node3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node3."""
         return self._get_link_by_attr("NODE", "nid", self.node3, "parts")
 
     @property
-    def nreact_link(self) -> KeywordBase:
+    def nreact_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nreact."""
         return self._get_link_by_attr("NODE", "nid", self.nreact, "parts")
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -930,7 +930,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lcmt_link(self) -> DefineCurve:
+    def lcmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmt."""
         if self.deck is None:
             return None
@@ -945,7 +945,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcmt = value.lcid
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -960,7 +960,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def lcc23_link(self) -> DefineCurve:
+    def lcc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc23."""
         if self.deck is None:
             return None
@@ -975,7 +975,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcc23 = value.lcid
 
     @property
-    def lca23_link(self) -> DefineCurve:
+    def lca23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca23."""
         if self.deck is None:
             return None
@@ -990,7 +990,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lca23 = value.lcid
 
     @property
-    def lccp23_link(self) -> DefineCurve:
+    def lccp23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccp23."""
         if self.deck is None:
             return None
@@ -1005,7 +1005,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lccp23 = value.lcid
 
     @property
-    def lcap23_link(self) -> DefineCurve:
+    def lcap23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcap23."""
         if self.deck is None:
             return None
@@ -1020,7 +1020,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcap23 = value.lcid
 
     @property
-    def lcefr_link(self) -> DefineCurve:
+    def lcefr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcefr."""
         if self.deck is None:
             return None
@@ -1035,7 +1035,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcefr = value.lcid
 
     @property
-    def lcbf_link(self) -> DefineCurve:
+    def lcbf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbf."""
         if self.deck is None:
             return None
@@ -1050,7 +1050,7 @@ class AirbagWangNefskeJettingCmId(KeywordBase):
         self.lcbf = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

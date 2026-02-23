@@ -237,7 +237,7 @@ class DefineSphMeshBox(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def idseg_link(self) -> KeywordBase:
+    def idseg_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for idseg."""
         return self._get_set_link("SEGMENT", self.idseg)
 
@@ -247,7 +247,7 @@ class DefineSphMeshBox(KeywordBase):
         self.idseg = value.sid
 
     @property
-    def ipid_link(self) -> KeywordBase:
+    def ipid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid."""
         return self._get_link_by_attr("PART", "pid", self.ipid, "parts")
 

@@ -228,7 +228,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self._cards[2].set_value("lc12", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -243,7 +243,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -258,7 +258,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -273,7 +273,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc4_link(self) -> DefineCurve:
+    def lc4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc4."""
         if self.deck is None:
             return None
@@ -288,7 +288,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc4 = value.lcid
 
     @property
-    def lc5_link(self) -> DefineCurve:
+    def lc5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc5."""
         if self.deck is None:
             return None
@@ -303,7 +303,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc5 = value.lcid
 
     @property
-    def lc6_link(self) -> DefineCurve:
+    def lc6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc6."""
         if self.deck is None:
             return None
@@ -318,7 +318,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc6 = value.lcid
 
     @property
-    def lc7_link(self) -> DefineCurve:
+    def lc7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc7."""
         if self.deck is None:
             return None
@@ -333,7 +333,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc7 = value.lcid
 
     @property
-    def lc8_link(self) -> DefineCurve:
+    def lc8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc8."""
         if self.deck is None:
             return None
@@ -348,7 +348,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc8 = value.lcid
 
     @property
-    def lc9_link(self) -> DefineCurve:
+    def lc9_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc9."""
         if self.deck is None:
             return None
@@ -363,7 +363,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc9 = value.lcid
 
     @property
-    def lc10_link(self) -> DefineCurve:
+    def lc10_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc10."""
         if self.deck is None:
             return None
@@ -378,7 +378,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc10 = value.lcid
 
     @property
-    def lc11_link(self) -> DefineCurve:
+    def lc11_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc11."""
         if self.deck is None:
             return None
@@ -393,7 +393,7 @@ class AleReferenceSystemCurve(KeywordBase):
         self.lc11 = value.lcid
 
     @property
-    def lc12_link(self) -> DefineCurve:
+    def lc12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc12."""
         if self.deck is None:
             return None

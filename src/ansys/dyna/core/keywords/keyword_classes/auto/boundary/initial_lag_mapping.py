@@ -144,7 +144,7 @@ class InitialLagMapping(KeywordBase):
         self._cards[1].set_value("nelangl", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None
@@ -159,7 +159,7 @@ class InitialLagMapping(KeywordBase):
         self.vecid = value.vid
 
     @property
-    def setid_link(self) -> KeywordBase:
+    def setid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for setid."""
         return self._get_set_link("PART", self.setid)
 

@@ -157,7 +157,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pid__link(self) -> KeywordBase:
+    def pid__link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid_."""
         return self._get_link_by_attr("PART", "pid", self.pid_, "parts")
 

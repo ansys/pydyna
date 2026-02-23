@@ -243,7 +243,7 @@ class PartCompositeIgaShell(KeywordBase):
         self._cards[2].set_value("tmid2", value)
 
     @property
-    def mid1_link(self) -> KeywordBase:
+    def mid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid1."""
         if self.deck is None:
             return None
@@ -258,7 +258,7 @@ class PartCompositeIgaShell(KeywordBase):
         self.mid1 = value.mid
 
     @property
-    def mid2_link(self) -> KeywordBase:
+    def mid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid2."""
         if self.deck is None:
             return None
@@ -273,7 +273,7 @@ class PartCompositeIgaShell(KeywordBase):
         self.mid2 = value.mid
 
     @property
-    def irl_link(self) -> Hourglass:
+    def irl_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for irl."""
         if self.deck is None:
             return None

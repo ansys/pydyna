@@ -84,7 +84,7 @@ class ControlFormingOnestepFriction(KeywordBase):
         self._cards[0].set_value("frict", value)
 
     @property
-    def ndset_link(self) -> KeywordBase:
+    def ndset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ndset."""
         return self._get_set_link("NODE", self.ndset)
 

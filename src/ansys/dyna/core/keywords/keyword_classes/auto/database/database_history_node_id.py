@@ -73,7 +73,7 @@ class DatabaseHistoryNodeId(KeywordBase):
         self._cards[0].set_value("heading", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id1."""
         return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
 

@@ -22,10 +22,10 @@ deck = Deck(title="My Analysis")
 ```python
 # Load an existing keyword file
 deck = Deck()
-deck.load("model.k")
+deck.import_file("model.k")
 
 # Load with encoding detection (automatic)
-deck.load("model_utf8.k")
+deck.import_file("model_utf8.k")
 ```
 
 ### From String
@@ -100,14 +100,11 @@ mat.ro = 7850
 deck.append(mat)
 
 # Add multiple keywords
-nodes = []
+contacts = []
 for i in range(10):
-    node = keywords.Node()
-    node.nid = i + 1
-    node.x = i * 10.0
-    nodes.append(node)
-
-deck.extend(nodes)
+    contact = keywords.ContactAutomaticSingleSurface(ssid=i+1)
+    contacts.append(contact)
+deck.extend(contacts)
 ```
 
 ### Removing Keywords
@@ -158,7 +155,7 @@ deck.clear()
 ```python
 # Load main file
 deck = Deck()
-deck.load("main.k")
+deck.import_file("main.k")
 
 # Expand includes (brings included files into main deck)
 deck.expand(
@@ -219,10 +216,9 @@ from ansys.dyna.core.lib.format_type import format_type
 # Set deck format
 deck.format = format_type.default  # Standard format
 deck.format = format_type.long      # Long format (wider fields)
-deck.format = format_type.long_long # Extra long format
 
 # Format affects write output
-deck.write("output_long.k")
+deck.export_file("output_long.k")
 ```
 
 ## Writing Decks
@@ -231,13 +227,13 @@ deck.write("output_long.k")
 
 ```python
 # Write to file
-deck.write("output.k")
+deck.export_file("output.k")
 
 # Write with specific format
-deck.write("output_long.k", format=format_type.long)
+deck.export_file("output_long.k", format=format_type.long)
 
 # Write with validation
-deck.write("output.k", validate=True)
+deck.export_file("output.k", validate=True)
 ```
 
 ### To String
@@ -245,7 +241,6 @@ deck.write("output.k", validate=True)
 ```python
 # Get content as string
 content = deck.write()
-print(content)
 
 # With format option
 content = deck.write(format=format_type.long)
@@ -255,10 +250,10 @@ content = deck.write(format=format_type.long)
 
 ```python
 # Retain parameters in output (default behavior)
-deck.write("output.k", retain_parameters=True)
+deck.export_file("output.k", retain_parameters=True)
 
 # Substitute parameters with their values
-deck.write("output_expanded.k", retain_parameters=False)
+deck.export_file("output_expanded.k", retain_parameters=False)
 ```
 
 ## Parameters
@@ -289,7 +284,7 @@ else:
     print("Deck is valid")
 
 # Validate during write
-deck.write("output.k", validate=True)
+deck.export_file("output.k", validate=True)
 ```
 
 ## Import Handlers
@@ -305,7 +300,7 @@ class MyHandler(ImportHandler):
         pass
 
 deck.register_import_handler(MyHandler())
-deck.load("model.k")  # Handler runs during load
+deck.import_file("model.k")  # Handler runs during load
 ```
 
 ## Properties
@@ -332,14 +327,14 @@ keyword_objects = deck.keywords
 ```python
 # Standard workflow
 deck = Deck()
-deck.load("input.k")
+deck.import_file("input.k")
 
 # Modify
 for mat in deck.get_kwds_by_type("MAT"):
     mat.e *= 1.1  # Increase stiffness by 10%
 
 # Save
-deck.write("output.k")
+deck.export_file("output.k")
 ```
 
 ### Build from Scratch
@@ -367,7 +362,7 @@ section = keywords.Section001()  # SECTION_BEAM
 section.secid = 1
 deck.append(section)
 
-deck.write("beam_model.k")
+deck.export_file("beam_model.k")
 ```
 
 ### Extract Subset
@@ -379,7 +374,7 @@ material_deck = Deck(title="Materials Only")
 for mat in deck.get_kwds_by_type("MAT"):
     material_deck.append(mat)
 
-material_deck.write("materials.k")
+material_deck.export_file("materials.k")
 ```
 
 ## Performance Tips

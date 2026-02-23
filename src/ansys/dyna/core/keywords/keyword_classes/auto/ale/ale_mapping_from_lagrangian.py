@@ -199,7 +199,7 @@ class AleMappingFromLagrangian(KeywordBase):
         self._cards[2].set_value("div", value)
 
     @property
-    def aleid_link(self) -> KeywordBase:
+    def aleid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given aleid."""
         return self._get_link_by_attr("PART", "pid", self.aleid, "parts")
 

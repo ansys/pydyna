@@ -146,7 +146,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
         self._cards[0].set_value("angle", value)
 
     @property
-    def pdlcid_link(self) -> DefineCurve:
+    def pdlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for pdlcid."""
         if self.deck is None:
             return None

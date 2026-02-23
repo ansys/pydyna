@@ -255,7 +255,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("rwghtz", value)
 
     @property
-    def dnid_link(self) -> KeywordBase:
+    def dnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given dnid."""
         return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
 

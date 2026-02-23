@@ -370,7 +370,7 @@ class AleMapping(KeywordBase):
         self._cards[4].set_value("dv2", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None
@@ -385,7 +385,7 @@ class AleMapping(KeywordBase):
         self.vecid = value.vid
 
     @property
-    def vecid1_link(self) -> DefineVector:
+    def vecid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid1."""
         if self.deck is None:
             return None

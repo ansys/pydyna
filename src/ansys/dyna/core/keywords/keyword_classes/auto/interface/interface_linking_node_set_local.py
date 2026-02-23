@@ -176,12 +176,12 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
         self._cards[1].set_value("usen", value)
 
     @property
-    def lnid_link(self) -> KeywordBase:
+    def lnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given lnid."""
         return self._get_link_by_attr("NODE", "nid", self.lnid, "parts")
 
     @property
-    def lcid_link(self) -> DefineCoordinateSystem:
+    def lcid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for lcid."""
         if self.deck is None:
             return None
@@ -196,7 +196,7 @@ class InterfaceLinkingNodeSetLocal(KeywordBase):
         self.lcid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

@@ -454,7 +454,7 @@ class FrequencyDomainFrf(KeywordBase):
         self._cards[3].set_value("output", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -469,7 +469,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None
@@ -484,7 +484,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.lcfreq = value.lcid
 
     @property
-    def vid1_link(self) -> DefineVector:
+    def vid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid1."""
         if self.deck is None:
             return None
@@ -499,7 +499,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.vid1 = value.vid
 
     @property
-    def vid2_link(self) -> DefineVector:
+    def vid2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid2."""
         if self.deck is None:
             return None

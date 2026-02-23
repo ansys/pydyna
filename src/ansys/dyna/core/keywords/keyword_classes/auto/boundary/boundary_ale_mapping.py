@@ -342,7 +342,7 @@ class BoundaryAleMapping(KeywordBase):
         self._cards[2].set_value("vecid", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

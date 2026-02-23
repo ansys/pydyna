@@ -72,7 +72,7 @@ class InterfaceLinkingSegment(KeywordBase):
         self._cards[0].set_value("ifid", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

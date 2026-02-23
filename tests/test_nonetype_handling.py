@@ -32,11 +32,10 @@ from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 
-
 class TestCardActiveWithNone:
     """Tests for Card.active property handling None values in active_func."""
 
-    @pytest.mark.keywords
+    
     def test_active_func_comparison_with_none_returns_false(self):
         """Card.active should return False when active_func compares with None."""
         # Create a simple holder for the value
@@ -62,7 +61,7 @@ class TestCardActiveWithNone:
         holder.value = -1
         assert card.active is False
 
-    @pytest.mark.keywords
+    
     def test_active_func_equality_with_none_returns_false(self):
         """Card.active should return False when active_func does equality check with None."""
 
@@ -80,7 +79,7 @@ class TestCardActiveWithNone:
         holder.value = 1
         assert card.active is True
 
-    @pytest.mark.keywords
+    
     def test_active_func_in_check_with_none_returns_false(self):
         """Card.active should return False when active_func does 'in' check with None."""
 
@@ -98,7 +97,7 @@ class TestCardActiveWithNone:
         holder.value = 2
         assert card.active is True
 
-    @pytest.mark.keywords
+    
     def test_active_func_arithmetic_with_none_returns_false(self):
         """Card.active should return False when active_func does arithmetic with None."""
 
@@ -121,7 +120,7 @@ class TestCardActiveWithNone:
 class TestSeriesCardNumRowsWithNone:
     """Tests for SeriesCard._num_rows handling None from length_func."""
 
-    @pytest.mark.keywords
+    
     def test_num_rows_with_none_length_returns_zero(self):
         """SeriesCard._num_rows should return 0 when length_func returns None."""
 
@@ -148,7 +147,7 @@ class TestSeriesCardNumRowsWithNone:
         holder.value = 10
         assert series._num_rows() == 2  # 10 values, 8 fields per card = 2 rows
 
-    @pytest.mark.keywords
+    
     def test_num_rows_with_zero_length_returns_zero(self):
         """SeriesCard._num_rows should return 0 when length_func returns 0."""
         series = SeriesCard(
@@ -161,7 +160,7 @@ class TestSeriesCardNumRowsWithNone:
 
         assert series._num_rows() == 0
 
-    @pytest.mark.keywords
+    
     def test_series_card_read_with_none_length(self):
         """SeriesCard.read should handle None from length_func gracefully."""
         import io
@@ -191,7 +190,7 @@ class TestSeriesCardNumRowsWithNone:
 class TestKeywordLoadingWithMissingFields:
     """Integration tests for keyword loading with missing fields."""
 
-    @pytest.mark.keywords
+    
     def test_section_shell_with_minimal_data(self):
         """SECTION_SHELL should load without error when only secid is provided."""
         from ansys.dyna.core.keywords.keyword_classes.auto.section.section_shell import SectionShell
@@ -210,7 +209,7 @@ class TestKeywordLoadingWithMissingFields:
         # secid should be loaded
         assert kwd.secid == 1
 
-    @pytest.mark.keywords
+    
     def test_initial_velocity_with_missing_nsidex(self):
         """INITIAL_VELOCITY should load without error when nsidex field is missing."""
         from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_velocity import (
@@ -232,7 +231,7 @@ class TestKeywordLoadingWithMissingFields:
         # nsid should be loaded
         assert kwd.nsid == 95
 
-    @pytest.mark.keywords
+    
     def test_mat_077_h_with_missing_n_field(self):
         """MAT_077_H should load without error when n field is missing."""
         from ansys.dyna.core.keywords.keyword_classes.auto.mat.mat_077_h import Mat077H

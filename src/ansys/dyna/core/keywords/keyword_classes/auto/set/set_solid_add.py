@@ -218,7 +218,7 @@ class SetSolidAdd(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def dsid1_link(self) -> KeywordBase:
+    def dsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid1."""
         return self._get_set_link("SOLID", self.dsid1)
 
@@ -228,7 +228,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid1 = value.sid
 
     @property
-    def dsid2_link(self) -> KeywordBase:
+    def dsid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid2."""
         return self._get_set_link("SOLID", self.dsid2)
 
@@ -238,7 +238,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid2 = value.sid
 
     @property
-    def dsid3_link(self) -> KeywordBase:
+    def dsid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid3."""
         return self._get_set_link("SOLID", self.dsid3)
 
@@ -248,7 +248,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid3 = value.sid
 
     @property
-    def dsid4_link(self) -> KeywordBase:
+    def dsid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid4."""
         return self._get_set_link("SOLID", self.dsid4)
 
@@ -258,7 +258,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid4 = value.sid
 
     @property
-    def dsid5_link(self) -> KeywordBase:
+    def dsid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid5."""
         return self._get_set_link("SOLID", self.dsid5)
 
@@ -268,7 +268,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid5 = value.sid
 
     @property
-    def dsid6_link(self) -> KeywordBase:
+    def dsid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid6."""
         return self._get_set_link("SOLID", self.dsid6)
 
@@ -278,7 +278,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid6 = value.sid
 
     @property
-    def dsid7_link(self) -> KeywordBase:
+    def dsid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid7."""
         return self._get_set_link("SOLID", self.dsid7)
 
@@ -288,7 +288,7 @@ class SetSolidAdd(KeywordBase):
         self.dsid7 = value.sid
 
     @property
-    def dsid8_link(self) -> KeywordBase:
+    def dsid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for dsid8."""
         return self._get_set_link("SOLID", self.dsid8)
 

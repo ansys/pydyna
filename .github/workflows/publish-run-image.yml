@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  docker-images:
+  pydyna-run-containers:
     name: Build the pydyna-run docker image
     runs-on: ubuntu-latest
 

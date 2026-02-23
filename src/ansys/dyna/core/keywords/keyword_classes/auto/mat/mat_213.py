@@ -1042,7 +1042,7 @@ class Mat213(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ysc_link(self) -> DefineCurve:
+    def ysc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ysc."""
         if self.deck is None:
             return None
@@ -1057,7 +1057,7 @@ class Mat213(KeywordBase):
         self.ysc = value.lcid
 
     @property
-    def dc_link(self) -> DefineCurve:
+    def dc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dc."""
         if self.deck is None:
             return None

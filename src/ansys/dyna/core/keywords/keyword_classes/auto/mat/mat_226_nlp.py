@@ -550,7 +550,7 @@ class Mat226Nlp(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -565,7 +565,7 @@ class Mat226Nlp(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def ifld_link(self) -> DefineCurve:
+    def ifld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifld."""
         if self.deck is None:
             return None

@@ -210,7 +210,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
         self._cards[2].set_value("v3", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -225,7 +225,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
         self.cid = value.cid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

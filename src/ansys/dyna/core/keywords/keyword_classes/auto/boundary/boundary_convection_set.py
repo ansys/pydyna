@@ -147,7 +147,7 @@ class BoundaryConvectionSet(KeywordBase):
         self._cards[1].set_value("loc", value)
 
     @property
-    def pserod_link(self) -> KeywordBase:
+    def pserod_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pserod."""
         return self._get_set_link("PART", self.pserod)
 
@@ -157,7 +157,7 @@ class BoundaryConvectionSet(KeywordBase):
         self.pserod = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

@@ -170,7 +170,7 @@ class IcfdBoundaryFswave(KeywordBase):
         self._cards[1].set_value("wpeak", value)
 
     @property
-    def sflcid_link(self) -> DefineCurve:
+    def sflcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for sflcid."""
         if self.deck is None:
             return None

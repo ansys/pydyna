@@ -247,7 +247,7 @@ class DatabaseTracerGeneral(KeywordBase):
         self._cards[2].set_value("varepl", value)
 
     @property
-    def node_link(self) -> KeywordBase:
+    def node_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 

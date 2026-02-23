@@ -744,7 +744,7 @@ class Mat4AMicromec(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -759,7 +759,7 @@ class Mat4AMicromec(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcdi_link(self) -> DefineCurve:
+    def lcdi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdi."""
         if self.deck is None:
             return None

@@ -298,7 +298,7 @@ class ControlRefineShell(KeywordBase):
         self._cards[2].set_value("endrm", value)
 
     @property
-    def ibox_link(self) -> DefineBox:
+    def ibox_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for ibox."""
         if self.deck is None:
             return None

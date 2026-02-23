@@ -48,8 +48,8 @@ import ansys.dpf.core as dpf
 import matplotlib.pyplot as plt
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 workdir = tempfile.TemporaryDirectory()
 

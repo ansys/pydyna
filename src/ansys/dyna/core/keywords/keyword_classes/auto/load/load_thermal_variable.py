@@ -194,7 +194,7 @@ class LoadThermalVariable(KeywordBase):
         self._cards[1].set_value("lcidedr", value)
 
     @property
-    def lcide_link(self) -> DefineCurve:
+    def lcide_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcide."""
         if self.deck is None:
             return None
@@ -209,7 +209,7 @@ class LoadThermalVariable(KeywordBase):
         self.lcide = value.lcid
 
     @property
-    def lcidr_link(self) -> DefineCurve:
+    def lcidr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidr."""
         if self.deck is None:
             return None
@@ -224,7 +224,7 @@ class LoadThermalVariable(KeywordBase):
         self.lcidr = value.lcid
 
     @property
-    def lcidedr_link(self) -> DefineCurve:
+    def lcidedr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidedr."""
         if self.deck is None:
             return None
@@ -239,7 +239,7 @@ class LoadThermalVariable(KeywordBase):
         self.lcidedr = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -254,7 +254,7 @@ class LoadThermalVariable(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -264,7 +264,7 @@ class LoadThermalVariable(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 

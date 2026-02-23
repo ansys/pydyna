@@ -1669,7 +1669,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -1684,7 +1684,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcdc_link(self) -> DefineCurve:
+    def lcdc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdc."""
         if self.deck is None:
             return None
@@ -1699,7 +1699,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         self.lcdc = value.lcid
 
     @property
-    def unlcid_link(self) -> DefineCurve:
+    def unlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for unlcid."""
         if self.deck is None:
             return None
@@ -1714,7 +1714,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         self.unlcid = value.lcid
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -1729,7 +1729,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

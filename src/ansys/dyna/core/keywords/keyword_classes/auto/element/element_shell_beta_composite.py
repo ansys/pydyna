@@ -378,47 +378,47 @@ class ElementShellBetaComposite(KeywordBase):
         self._cards[3].set_value("b2", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def n5_link(self) -> KeywordBase:
+    def n5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n5."""
         return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
 
     @property
-    def n6_link(self) -> KeywordBase:
+    def n6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n6."""
         return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
 
     @property
-    def n7_link(self) -> KeywordBase:
+    def n7_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n7."""
         return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
 
     @property
-    def n8_link(self) -> KeywordBase:
+    def n8_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n8."""
         return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
 
     @property
-    def mid1_link(self) -> KeywordBase:
+    def mid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid1."""
         if self.deck is None:
             return None
@@ -433,7 +433,7 @@ class ElementShellBetaComposite(KeywordBase):
         self.mid1 = value.mid
 
     @property
-    def mid2_link(self) -> KeywordBase:
+    def mid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid2."""
         if self.deck is None:
             return None
@@ -448,7 +448,7 @@ class ElementShellBetaComposite(KeywordBase):
         self.mid2 = value.mid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

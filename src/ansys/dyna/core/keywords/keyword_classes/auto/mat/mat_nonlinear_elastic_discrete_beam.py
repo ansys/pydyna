@@ -501,7 +501,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidtr_link(self) -> DefineCurve:
+    def lcidtr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtr."""
         if self.deck is None:
             return None
@@ -516,7 +516,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidtr = value.lcid
 
     @property
-    def lcidts_link(self) -> DefineCurve:
+    def lcidts_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidts."""
         if self.deck is None:
             return None
@@ -531,7 +531,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidts = value.lcid
 
     @property
-    def lcidtt_link(self) -> DefineCurve:
+    def lcidtt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtt."""
         if self.deck is None:
             return None
@@ -546,7 +546,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidtt = value.lcid
 
     @property
-    def lcidrr_link(self) -> DefineCurve:
+    def lcidrr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrr."""
         if self.deck is None:
             return None
@@ -561,7 +561,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidrr = value.lcid
 
     @property
-    def lcidrs_link(self) -> DefineCurve:
+    def lcidrs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrs."""
         if self.deck is None:
             return None
@@ -576,7 +576,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidrs = value.lcid
 
     @property
-    def lcidrt_link(self) -> DefineCurve:
+    def lcidrt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrt."""
         if self.deck is None:
             return None
@@ -591,7 +591,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidrt = value.lcid
 
     @property
-    def lcidtdr_link(self) -> DefineCurve:
+    def lcidtdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtdr."""
         if self.deck is None:
             return None
@@ -606,7 +606,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidtdr = value.lcid
 
     @property
-    def lcidtds_link(self) -> DefineCurve:
+    def lcidtds_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtds."""
         if self.deck is None:
             return None
@@ -621,7 +621,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidtds = value.lcid
 
     @property
-    def lcidtdt_link(self) -> DefineCurve:
+    def lcidtdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtdt."""
         if self.deck is None:
             return None
@@ -636,7 +636,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidtdt = value.lcid
 
     @property
-    def lcidrdr_link(self) -> DefineCurve:
+    def lcidrdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrdr."""
         if self.deck is None:
             return None
@@ -651,7 +651,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidrdr = value.lcid
 
     @property
-    def lcidrds_link(self) -> DefineCurve:
+    def lcidrds_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrds."""
         if self.deck is None:
             return None
@@ -666,7 +666,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
         self.lcidrds = value.lcid
 
     @property
-    def lcidrdt_link(self) -> DefineCurve:
+    def lcidrdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrdt."""
         if self.deck is None:
             return None

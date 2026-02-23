@@ -203,7 +203,7 @@ class LoadVibroAcoustic(KeywordBase):
         self._cards[1].set_value("ldspn", value)
 
     @property
-    def lddamp_link(self) -> DefineCurve:
+    def lddamp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lddamp."""
         if self.deck is None:
             return None
@@ -218,7 +218,7 @@ class LoadVibroAcoustic(KeywordBase):
         self.lddamp = value.lcid
 
     @property
-    def ldspl_link(self) -> DefineCurve:
+    def ldspl_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldspl."""
         if self.deck is None:
             return None
@@ -233,7 +233,7 @@ class LoadVibroAcoustic(KeywordBase):
         self.ldspl = value.lcid
 
     @property
-    def ldvel_link(self) -> DefineCurve:
+    def ldvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldvel."""
         if self.deck is None:
             return None
@@ -248,7 +248,7 @@ class LoadVibroAcoustic(KeywordBase):
         self.ldvel = value.lcid
 
     @property
-    def ldflw_link(self) -> DefineCurve:
+    def ldflw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldflw."""
         if self.deck is None:
             return None
@@ -263,7 +263,7 @@ class LoadVibroAcoustic(KeywordBase):
         self.ldflw = value.lcid
 
     @property
-    def ldspn_link(self) -> DefineCurve:
+    def ldspn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldspn."""
         if self.deck is None:
             return None

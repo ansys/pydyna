@@ -222,7 +222,7 @@ class PartCompositeTshellLong(KeywordBase):
         self._cards[2].set_value("shrfac", value)
 
     @property
-    def mid1_link(self) -> KeywordBase:
+    def mid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid1."""
         if self.deck is None:
             return None
@@ -237,7 +237,7 @@ class PartCompositeTshellLong(KeywordBase):
         self.mid1 = value.mid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None

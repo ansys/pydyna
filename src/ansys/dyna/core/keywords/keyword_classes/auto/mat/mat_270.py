@@ -274,7 +274,7 @@ class Mat270(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcem_link(self) -> DefineCurve:
+    def lcem_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcem."""
         if self.deck is None:
             return None
@@ -289,7 +289,7 @@ class Mat270(KeywordBase):
         self.lcem = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -304,7 +304,7 @@ class Mat270(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsy_link(self) -> DefineCurve:
+    def lcsy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsy."""
         if self.deck is None:
             return None
@@ -319,7 +319,7 @@ class Mat270(KeywordBase):
         self.lcsy = value.lcid
 
     @property
-    def lchr_link(self) -> DefineCurve:
+    def lchr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchr."""
         if self.deck is None:
             return None
@@ -334,7 +334,7 @@ class Mat270(KeywordBase):
         self.lchr = value.lcid
 
     @property
-    def lcat_link(self) -> DefineCurve:
+    def lcat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcat."""
         if self.deck is None:
             return None

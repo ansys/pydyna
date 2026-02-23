@@ -739,7 +739,7 @@ class MatFabric(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lca_link(self) -> DefineCurve:
+    def lca_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca."""
         if self.deck is None:
             return None
@@ -754,7 +754,7 @@ class MatFabric(KeywordBase):
         self.lca = value.lcid
 
     @property
-    def lcb_link(self) -> DefineCurve:
+    def lcb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcb."""
         if self.deck is None:
             return None
@@ -769,7 +769,7 @@ class MatFabric(KeywordBase):
         self.lcb = value.lcid
 
     @property
-    def lcab_link(self) -> DefineCurve:
+    def lcab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcab."""
         if self.deck is None:
             return None
@@ -784,7 +784,7 @@ class MatFabric(KeywordBase):
         self.lcab = value.lcid
 
     @property
-    def lcua_link(self) -> DefineCurve:
+    def lcua_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcua."""
         if self.deck is None:
             return None
@@ -799,7 +799,7 @@ class MatFabric(KeywordBase):
         self.lcua = value.lcid
 
     @property
-    def lcub_link(self) -> DefineCurve:
+    def lcub_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcub."""
         if self.deck is None:
             return None
@@ -814,7 +814,7 @@ class MatFabric(KeywordBase):
         self.lcub = value.lcid
 
     @property
-    def lcuab_link(self) -> DefineCurve:
+    def lcuab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcuab."""
         if self.deck is None:
             return None
@@ -829,7 +829,7 @@ class MatFabric(KeywordBase):
         self.lcuab = value.lcid
 
     @property
-    def lcaa_link(self) -> DefineCurve:
+    def lcaa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcaa."""
         if self.deck is None:
             return None
@@ -844,7 +844,7 @@ class MatFabric(KeywordBase):
         self.lcaa = value.lcid
 
     @property
-    def lcbb_link(self) -> DefineCurve:
+    def lcbb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbb."""
         if self.deck is None:
             return None

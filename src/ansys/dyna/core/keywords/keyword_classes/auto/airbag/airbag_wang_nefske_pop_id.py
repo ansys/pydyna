@@ -771,7 +771,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self._cards[7].set_value("rbidp", value)
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -786,7 +786,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lcmt_link(self) -> DefineCurve:
+    def lcmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmt."""
         if self.deck is None:
             return None
@@ -801,7 +801,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcmt = value.lcid
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -816,7 +816,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def lcc23_link(self) -> DefineCurve:
+    def lcc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc23."""
         if self.deck is None:
             return None
@@ -831,7 +831,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcc23 = value.lcid
 
     @property
-    def lca23_link(self) -> DefineCurve:
+    def lca23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca23."""
         if self.deck is None:
             return None
@@ -846,7 +846,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lca23 = value.lcid
 
     @property
-    def lccp23_link(self) -> DefineCurve:
+    def lccp23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccp23."""
         if self.deck is None:
             return None
@@ -861,7 +861,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lccp23 = value.lcid
 
     @property
-    def lcap23_link(self) -> DefineCurve:
+    def lcap23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcap23."""
         if self.deck is None:
             return None
@@ -876,7 +876,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcap23 = value.lcid
 
     @property
-    def lcefr_link(self) -> DefineCurve:
+    def lcefr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcefr."""
         if self.deck is None:
             return None
@@ -891,7 +891,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcefr = value.lcid
 
     @property
-    def knkdn_link(self) -> DefineCurve:
+    def knkdn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for knkdn."""
         if self.deck is None:
             return None
@@ -906,7 +906,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.knkdn = value.lcid
 
     @property
-    def lcbf_link(self) -> DefineCurve:
+    def lcbf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbf."""
         if self.deck is None:
             return None
@@ -921,7 +921,7 @@ class AirbagWangNefskePopId(KeywordBase):
         self.lcbf = value.lcid
 
     @property
-    def rbidp_link(self) -> KeywordBase:
+    def rbidp_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rbidp."""
         return self._get_link_by_attr("PART", "pid", self.rbidp, "parts")
 

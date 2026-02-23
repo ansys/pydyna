@@ -107,14 +107,14 @@ class ConstrainedNodalRigidBody(KeywordBase):
     @property
     def pnode_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for pnode, keyed by pnode value."""
-        return self._get_links_from_table("NODE", "nid", "constrained_nodal_rigid_bodies", "pnode", "parts")
+        return self._get_links_from_table("NODE", "nid", "constrained_nodal_rigid_bodies", "pnode", "")
 
     def get_pnode_link(self, pnode: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given pnode."""
-        return self._get_link_by_attr("NODE", "nid", pnode, "parts")
+        return self._get_link_by_attr("NODE", "nid", pnode, "")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -129,7 +129,7 @@ class ConstrainedNodalRigidBody(KeywordBase):
         self.cid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

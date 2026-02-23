@@ -528,6 +528,61 @@ class KeywordBase(Cards):
                 result[id_val] = id_to_kwd[id_val]
         return result
 
+    def _get_links_from_series(
+        self,
+        keyword_type: str,
+        id_attr: str,
+        series_name: str,
+        target_table_attr: typing.Optional[str] = None,
+    ) -> typing.Dict[int, "KeywordBase"]:
+        """Get keywords for IDs in a SeriesCard, keyed by ID value.
+
+        Builds a mapping from each ID value in the specified SeriesCard to the
+        keyword that contains that ID.
+
+        Parameters
+        ----------
+        keyword_type : str
+            The keyword type to search (e.g., "ELEMENT").
+        id_attr : str
+            The attribute/column name on target keywords to match (e.g., "eid").
+        series_name : str
+            Name of the SeriesCard property (e.g., "element").
+        target_table_attr : str, optional
+            If provided, search within this DataFrame attribute on target
+            keywords instead of a scalar attribute.
+
+        Returns
+        -------
+        Dict[int, KeywordBase]
+            Mapping of element IDs to keywords.
+        """
+        if self.deck is None:
+            return {}
+        series_card = getattr(self, series_name, None)
+        if series_card is None:
+            return {}
+
+        # Build id -> keyword map
+        id_to_kwd: typing.Dict[int, "KeywordBase"] = {}
+        for kwd in self.deck.get_kwds_by_type(keyword_type):
+            if target_table_attr is not None:
+                target_table = getattr(kwd, target_table_attr, None)
+                if target_table is not None:
+                    for id_val in target_table[id_attr].values:
+                        id_to_kwd[id_val] = kwd
+            else:
+                id_val = getattr(kwd, id_attr, None)
+                if id_val is not None:
+                    id_to_kwd[id_val] = kwd
+
+        # Map ids from our SeriesCard
+        result: typing.Dict[int, "KeywordBase"] = {}
+        for element_id in series_card.data:
+            if element_id in id_to_kwd:
+                result[element_id] = id_to_kwd[element_id]
+        return result
+
     def _get_table_group_links(
         self,
         keyword_type: str,

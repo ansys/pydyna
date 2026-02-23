@@ -470,7 +470,7 @@ class Mat205(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcz_link(self) -> DefineCurve:
+    def lcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcz."""
         if self.deck is None:
             return None

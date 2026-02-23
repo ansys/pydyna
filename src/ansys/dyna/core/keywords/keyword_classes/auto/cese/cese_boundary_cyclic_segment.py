@@ -152,42 +152,42 @@ class CeseBoundaryCyclicSegment(KeywordBase):
         self._cards[0].set_value("np4", value)
 
     @property
-    def nd1_link(self) -> KeywordBase:
+    def nd1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd1."""
         return self._get_link_by_attr("NODE", "nid", self.nd1, "parts")
 
     @property
-    def nd2_link(self) -> KeywordBase:
+    def nd2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd2."""
         return self._get_link_by_attr("NODE", "nid", self.nd2, "parts")
 
     @property
-    def nd3_link(self) -> KeywordBase:
+    def nd3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd3."""
         return self._get_link_by_attr("NODE", "nid", self.nd3, "parts")
 
     @property
-    def nd4_link(self) -> KeywordBase:
+    def nd4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nd4."""
         return self._get_link_by_attr("NODE", "nid", self.nd4, "parts")
 
     @property
-    def np1_link(self) -> KeywordBase:
+    def np1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given np1."""
         return self._get_link_by_attr("NODE", "nid", self.np1, "parts")
 
     @property
-    def np2_link(self) -> KeywordBase:
+    def np2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given np2."""
         return self._get_link_by_attr("NODE", "nid", self.np2, "parts")
 
     @property
-    def np3_link(self) -> KeywordBase:
+    def np3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given np3."""
         return self._get_link_by_attr("NODE", "nid", self.np3, "parts")
 
     @property
-    def np4_link(self) -> KeywordBase:
+    def np4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given np4."""
         return self._get_link_by_attr("NODE", "nid", self.np4, "parts")
 

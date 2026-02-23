@@ -525,10 +525,12 @@ class Deck(ValidationMixin):
         >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase)
-            and kwd.keyword == str_type
-            and kwd.subkeyword is not None
-            and kwd.subkeyword.startswith(str_subtype),
+            lambda kwd: (
+                isinstance(kwd, KeywordBase)
+                and kwd.keyword == str_type
+                and kwd.subkeyword is not None
+                and kwd.subkeyword.startswith(str_subtype)
+            ),
             self._keywords,
         )
 

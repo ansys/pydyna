@@ -243,7 +243,7 @@ class LoadBlastEnhanced(KeywordBase):
         self._cards[1].set_value("negphs", value)
 
     @property
-    def nidbo_link(self) -> KeywordBase:
+    def nidbo_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidbo."""
         return self._get_link_by_attr("NODE", "nid", self.nidbo, "parts")
 

@@ -134,7 +134,7 @@ class EosTensorPoreCollapse(KeywordBase):
         self._cards[0].set_value("ec0", value)
 
     @property
-    def nld_link(self) -> DefineCurve:
+    def nld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for nld."""
         if self.deck is None:
             return None
@@ -149,7 +149,7 @@ class EosTensorPoreCollapse(KeywordBase):
         self.nld = value.lcid
 
     @property
-    def ncr_link(self) -> DefineCurve:
+    def ncr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ncr."""
         if self.deck is None:
             return None

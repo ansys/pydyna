@@ -402,7 +402,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -417,7 +417,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None

@@ -394,7 +394,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidc_link(self) -> DefineCurve:
+    def lcidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc."""
         if self.deck is None:
             return None
@@ -409,7 +409,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
         self.lcidc = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -424,7 +424,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcsrc_link(self) -> DefineCurve:
+    def lcsrc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrc."""
         if self.deck is None:
             return None
@@ -439,7 +439,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
         self.lcsrc = value.lcid
 
     @property
-    def lcsrt_link(self) -> DefineCurve:
+    def lcsrt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrt."""
         if self.deck is None:
             return None

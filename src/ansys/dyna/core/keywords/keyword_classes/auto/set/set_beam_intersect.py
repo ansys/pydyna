@@ -46,14 +46,7 @@ class SetBeamIntersect(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
-        "bsid1": LinkType.SET_BEAM,
-        "bsid2": LinkType.SET_BEAM,
-        "bsid3": LinkType.SET_BEAM,
-        "bsid4": LinkType.SET_BEAM,
-        "bsid5": LinkType.SET_BEAM,
-        "bsid6": LinkType.SET_BEAM,
-        "bsid7": LinkType.SET_BEAM,
-        "bsid8": LinkType.SET_BEAM,
+        "beams": LinkType.SET_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -116,82 +109,12 @@ class SetBeamIntersect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bsid1_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid1."""
-        return self._get_set_link("BEAM", self.bsid1)
+    def beams_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_BEAM_* keyword for beams."""
+        return self._get_set_link("BEAM", self.beams)
 
-    @bsid1_link.setter
-    def bsid1_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid1."""
-        self.bsid1 = value.sid
-
-    @property
-    def bsid2_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid2."""
-        return self._get_set_link("BEAM", self.bsid2)
-
-    @bsid2_link.setter
-    def bsid2_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid2."""
-        self.bsid2 = value.sid
-
-    @property
-    def bsid3_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid3."""
-        return self._get_set_link("BEAM", self.bsid3)
-
-    @bsid3_link.setter
-    def bsid3_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid3."""
-        self.bsid3 = value.sid
-
-    @property
-    def bsid4_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid4."""
-        return self._get_set_link("BEAM", self.bsid4)
-
-    @bsid4_link.setter
-    def bsid4_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid4."""
-        self.bsid4 = value.sid
-
-    @property
-    def bsid5_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid5."""
-        return self._get_set_link("BEAM", self.bsid5)
-
-    @bsid5_link.setter
-    def bsid5_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid5."""
-        self.bsid5 = value.sid
-
-    @property
-    def bsid6_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid6."""
-        return self._get_set_link("BEAM", self.bsid6)
-
-    @bsid6_link.setter
-    def bsid6_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid6."""
-        self.bsid6 = value.sid
-
-    @property
-    def bsid7_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid7."""
-        return self._get_set_link("BEAM", self.bsid7)
-
-    @bsid7_link.setter
-    def bsid7_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid7."""
-        self.bsid7 = value.sid
-
-    @property
-    def bsid8_link(self) -> KeywordBase:
-        """Get the SET_BEAM_* keyword for bsid8."""
-        return self._get_set_link("BEAM", self.bsid8)
-
-    @bsid8_link.setter
-    def bsid8_link(self, value: KeywordBase) -> None:
-        """Set the SET_BEAM_* keyword for bsid8."""
-        self.bsid8 = value.sid
+    @beams_link.setter
+    def beams_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for beams."""
+        self.beams = value.sid
 

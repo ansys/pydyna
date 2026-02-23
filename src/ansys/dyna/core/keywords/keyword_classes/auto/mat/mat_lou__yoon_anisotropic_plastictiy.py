@@ -681,7 +681,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

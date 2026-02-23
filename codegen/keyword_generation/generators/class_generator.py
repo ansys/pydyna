@@ -288,6 +288,7 @@ class LinkFieldInfo:
     name: str
     is_table_group: bool = False
     is_table: bool = False  # True for TableCard (not TableCardGroup)
+    is_series: bool = False  # True for SeriesCard
     table_name: Optional[str] = None
     key_field: Optional[str] = None
 
@@ -301,6 +302,7 @@ def _convert_link_fields_to_template_format(
             "name": f.name,
             "is_table_group": f.is_table_group,
             "is_table": f.is_table,
+            "is_series": f.is_series,
             "table_name": f.table_name,
             "key_field": f.key_field,
         }
@@ -409,6 +411,7 @@ def _add_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing
         "link_type_name": "PART",
         "is_polymorphic": True,
         "is_table_lookup": True,  # Triggers special lookup in parts DataFrame
+        "target_table_attr": "parts",
     }
     link_data.append(part_link_data)
 
@@ -580,6 +583,7 @@ def _add_element_beam_link_data(link_data: typing.List[typing.Dict], link_fields
         "link_type_name": "ELEMENT_BEAM",
         "is_polymorphic": True,
         "is_table_lookup": True,
+        "target_table_attr": "elements",
     }
     link_data.append(element_beam_link_data)
 
@@ -596,6 +600,7 @@ def _add_element_shell_link_data(link_data: typing.List[typing.Dict], link_field
         "link_type_name": "ELEMENT_SHELL",
         "is_polymorphic": True,
         "is_table_lookup": True,
+        "target_table_attr": "elements",
     }
     link_data.append(element_shell_link_data)
 
@@ -612,6 +617,7 @@ def _add_element_solid_link_data(link_data: typing.List[typing.Dict], link_field
         "link_type_name": "ELEMENT_SOLID",
         "is_polymorphic": True,
         "is_table_lookup": True,
+        "target_table_attr": "elements",
     }
     link_data.append(element_solid_link_data)
 
@@ -641,6 +647,35 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     }
     has_link = False
     for card in kwd_data.cards:
+        # Check if this is a SeriesCard (variable card)
+        variable_meta = card.variable if isinstance(card, Card) else card.get("variable")
+        is_series = variable_meta is not None
+
+        if is_series:
+            # For SeriesCard, check if ANY field has a link
+            # All fields should have the same link type (e.g., all ELEMENT_BEAM)
+            fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
+            link_type = None
+            for field in fields:
+                if "link" in field:
+                    link_type = field["link"]
+                    break
+
+            if link_type and link_type in links.keys():
+                has_link = True
+                series_name = variable_meta.name if hasattr(variable_meta, "name") else variable_meta.get("name")
+                # Create ONE field info for the SeriesCard itself
+                field_info = LinkFieldInfo(
+                    name=series_name,  # e.g., "element"
+                    is_series=True,
+                    is_table=False,
+                    is_table_group=False,
+                    table_name=None,
+                    key_field=None,
+                )
+                links[link_type].append(field_info)
+            continue  # Skip processing individual fields
+
         # Check if this is a table_group card (TableCardGroup)
         is_table_group = card.table_group if isinstance(card, Card) else card.get("table_group", False)
         table_name = card.overall_name if isinstance(card, Card) else card.get("overall_name")
@@ -668,6 +703,7 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
                 name=prop_name,
                 is_table_group=is_table_group,
                 is_table=is_table,
+                is_series=False,
                 table_name=table_name,
                 key_field=key_field,
             )

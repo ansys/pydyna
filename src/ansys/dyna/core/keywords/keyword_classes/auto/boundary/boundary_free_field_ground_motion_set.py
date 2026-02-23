@@ -197,7 +197,7 @@ class BoundaryFreeFieldGroundMotionSet(KeywordBase):
         self._cards[1].set_value("igm", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

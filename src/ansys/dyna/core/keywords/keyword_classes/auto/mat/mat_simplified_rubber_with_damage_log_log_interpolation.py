@@ -276,7 +276,7 @@ class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc_tbid_link(self) -> DefineCurve:
+    def lc_tbid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_tbid."""
         if self.deck is None:
             return None
@@ -291,7 +291,7 @@ class MatSimplifiedRubberWithDamageLogLogInterpolation(KeywordBase):
         self.lc_tbid = value.lcid
 
     @property
-    def lcunld_link(self) -> DefineCurve:
+    def lcunld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcunld."""
         if self.deck is None:
             return None

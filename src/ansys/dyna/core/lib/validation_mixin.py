@@ -94,7 +94,7 @@ class ValidationMixin:
         Examples
         --------
         >>> def check_part_ids(deck, result):
-        ...     from ansys.dyna.core.pre.errors import ValidationError
+        ...     from ansys.dyna.core.utils.errors import ValidationError
         ...     # Custom validation logic
         ...     if some_condition:
         ...         error = ValidationError("Custom error message")

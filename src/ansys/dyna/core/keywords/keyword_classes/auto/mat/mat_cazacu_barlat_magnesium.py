@@ -684,7 +684,7 @@ class MatCazacuBarlatMagnesium(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -699,7 +699,7 @@ class MatCazacuBarlatMagnesium(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lc1id_link(self) -> DefineCurve:
+    def lc1id_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1id."""
         if self.deck is None:
             return None
@@ -714,7 +714,7 @@ class MatCazacuBarlatMagnesium(KeywordBase):
         self.lc1id = value.lcid
 
     @property
-    def lc2id_link(self) -> DefineCurve:
+    def lc2id_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2id."""
         if self.deck is None:
             return None
@@ -729,7 +729,7 @@ class MatCazacuBarlatMagnesium(KeywordBase):
         self.lc2id = value.lcid
 
     @property
-    def lccid_link(self) -> DefineCurve:
+    def lccid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccid."""
         if self.deck is None:
             return None
@@ -744,7 +744,7 @@ class MatCazacuBarlatMagnesium(KeywordBase):
         self.lccid = value.lcid
 
     @property
-    def lc3id_link(self) -> DefineCurve:
+    def lc3id_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3id."""
         if self.deck is None:
             return None

@@ -962,7 +962,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
         self._cards[12].set_value("r", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

@@ -118,7 +118,7 @@ class DefineFormingSolidSurface(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ssetlow_link(self) -> KeywordBase:
+    def ssetlow_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssetlow."""
         return self._get_set_link("SEGMENT", self.ssetlow)
 
@@ -128,7 +128,7 @@ class DefineFormingSolidSurface(KeywordBase):
         self.ssetlow = value.sid
 
     @property
-    def ssetupp_link(self) -> KeywordBase:
+    def ssetupp_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssetupp."""
         return self._get_set_link("SEGMENT", self.ssetupp)
 

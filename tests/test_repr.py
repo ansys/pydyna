@@ -27,7 +27,7 @@ from ansys.dyna.core import keywords as kwd
 
 import pytest
 
-@pytest.mark.keywords
+
 def test_repr(ref_string):
     length = 60
     node_ids = np.arange(length) + 1
@@ -40,7 +40,7 @@ def test_repr(ref_string):
     value = repr(n)
     assert value == ref_string.test_repr_truncate
 
-@pytest.mark.keywords
+
 def test_repr_options(ref_string):
     c = kwd.ContactAutomaticSingleSurface()
     value = repr(c.options)

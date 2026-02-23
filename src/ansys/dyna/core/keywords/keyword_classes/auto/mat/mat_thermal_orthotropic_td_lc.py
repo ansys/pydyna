@@ -406,7 +406,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None
@@ -421,7 +421,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
         self.tgrlc = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -436,7 +436,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lck1_link(self) -> DefineCurve:
+    def lck1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck1."""
         if self.deck is None:
             return None
@@ -451,7 +451,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
         self.lck1 = value.lcid
 
     @property
-    def lck2_link(self) -> DefineCurve:
+    def lck2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck2."""
         if self.deck is None:
             return None
@@ -466,7 +466,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
         self.lck2 = value.lcid
 
     @property
-    def lck3_link(self) -> DefineCurve:
+    def lck3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck3."""
         if self.deck is None:
             return None

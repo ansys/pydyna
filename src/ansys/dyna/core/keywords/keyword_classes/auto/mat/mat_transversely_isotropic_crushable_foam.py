@@ -512,7 +512,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def i11_link(self) -> DefineCurve:
+    def i11_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i11."""
         if self.deck is None:
             return None
@@ -527,7 +527,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
         self.i11 = value.lcid
 
     @property
-    def i22_link(self) -> DefineCurve:
+    def i22_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i22."""
         if self.deck is None:
             return None
@@ -542,7 +542,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
         self.i22 = value.lcid
 
     @property
-    def i12_link(self) -> DefineCurve:
+    def i12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i12."""
         if self.deck is None:
             return None
@@ -557,7 +557,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
         self.i12 = value.lcid
 
     @property
-    def i23_link(self) -> DefineCurve:
+    def i23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i23."""
         if self.deck is None:
             return None
@@ -572,7 +572,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
         self.i23 = value.lcid
 
     @property
-    def iaa_link(self) -> DefineCurve:
+    def iaa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for iaa."""
         if self.deck is None:
             return None

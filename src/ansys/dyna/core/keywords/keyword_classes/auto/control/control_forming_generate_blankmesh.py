@@ -277,7 +277,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
         self._cards[2].set_value("filename", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

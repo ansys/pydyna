@@ -452,7 +452,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         self._cards[5].set_value("inflag", value)
 
     @property
-    def lcdamp_link(self) -> DefineCurve:
+    def lcdamp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdamp."""
         if self.deck is None:
             return None
@@ -467,7 +467,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         self.lcdamp = value.lcid
 
     @property
-    def lc_tbid_link(self) -> KeywordBase:
+    def lc_tbid_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
         if self.deck is None:
             return None

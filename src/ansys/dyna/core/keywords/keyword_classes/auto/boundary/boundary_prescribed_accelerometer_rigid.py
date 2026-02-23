@@ -134,12 +134,12 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self._cards[1].set_value("lcidz", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcidx_link(self) -> DefineCurve:
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
@@ -154,7 +154,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self.lcidx = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -169,7 +169,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -184,7 +184,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -199,7 +199,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
         self.cid = value.cid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

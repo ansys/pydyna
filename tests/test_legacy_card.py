@@ -39,7 +39,6 @@ from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
-@pytest.mark.keywords
 def test_legacy_card_deprecation_warning():
     """Test that using Card(fields=[...]) emits a deprecation warning."""
     fields = [
@@ -50,7 +49,7 @@ def test_legacy_card_deprecation_warning():
         Card(fields)
 
 
-@pytest.mark.keywords
+
 def test_load_card_errors(string_utils):
     """Error test for loading a card using legacy API."""
     fields = [
@@ -71,7 +70,7 @@ def test_load_card_errors(string_utils):
         card.read(string_utils.as_buffer(buf))
 
 
-@pytest.mark.keywords
+
 def test_load_card_parameters(string_utils):
     """Test loading a card with parameters using legacy API."""
     fields = [
@@ -95,7 +94,7 @@ def test_load_card_parameters(string_utils):
     assert card.get_value("e") == 1.12
 
 
-@pytest.mark.keywords
+
 def test_load_card_basic(string_utils):
     """Test basic card loading using legacy API."""
     fields = [
@@ -118,7 +117,7 @@ def test_load_card_basic(string_utils):
     assert card.get_value("bar") == 4
 
 
-@pytest.mark.keywords
+
 def test_load_card_long(string_utils):
     """Test loading card in long format using legacy API."""
     fields = [
@@ -135,7 +134,7 @@ def test_load_card_long(string_utils):
     assert card.get_value("bar") == 4
 
 
-@pytest.mark.keywords
+
 def test_write_inactive_card():
     """Test writing inactive card using legacy API."""
     fields = [
@@ -149,7 +148,7 @@ def test_write_inactive_card():
     assert card.write() == ""
 
 
-@pytest.mark.keywords
+
 def test_legacy_card_with_flag_field(string_utils):
     """Test legacy Card with Flag field."""
     flag = Flag(value=None, true_value="YES", false_value="NO")
@@ -165,7 +164,7 @@ def test_legacy_card_with_flag_field(string_utils):
     assert card.get_value("count") == 5
 
 
-@pytest.mark.keywords
+
 def test_legacy_card_get_set_value():
     """Test get_value and set_value on legacy Card."""
     fields = [
@@ -192,7 +191,7 @@ def test_legacy_card_get_set_value():
     assert card.get_value("z") == "world"
 
 
-@pytest.mark.keywords
+
 def test_legacy_card_write():
     """Test write on legacy Card."""
     fields = [
@@ -208,7 +207,7 @@ def test_legacy_card_write():
     assert "99" in output
 
 
-@pytest.mark.keywords
+
 def test_legacy_card_active_func():
     """Test active_func on legacy Card."""
     fields = [

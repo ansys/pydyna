@@ -50,14 +50,7 @@ class SetNodeIntersect(KeywordBase):
         OptionSpec("TITLE", -1, 1),
     ]
     _link_fields = {
-        "nsid1": LinkType.SET_NODE,
-        "nsid2": LinkType.SET_NODE,
-        "nsid3": LinkType.SET_NODE,
-        "nsid4": LinkType.SET_NODE,
-        "nsid5": LinkType.SET_NODE,
-        "nsid6": LinkType.SET_NODE,
-        "nsid7": LinkType.SET_NODE,
-        "nsid8": LinkType.SET_NODE,
+        "nodes": LinkType.SET_NODE,
     }
 
     def __init__(self, **kwargs):
@@ -164,82 +157,12 @@ class SetNodeIntersect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nsid1_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid1."""
-        return self._get_set_link("NODE", self.nsid1)
+    def nodes_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_NODE_* keyword for nodes."""
+        return self._get_set_link("NODE", self.nodes)
 
-    @nsid1_link.setter
-    def nsid1_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid1."""
-        self.nsid1 = value.sid
-
-    @property
-    def nsid2_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid2."""
-        return self._get_set_link("NODE", self.nsid2)
-
-    @nsid2_link.setter
-    def nsid2_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid2."""
-        self.nsid2 = value.sid
-
-    @property
-    def nsid3_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid3."""
-        return self._get_set_link("NODE", self.nsid3)
-
-    @nsid3_link.setter
-    def nsid3_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid3."""
-        self.nsid3 = value.sid
-
-    @property
-    def nsid4_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid4."""
-        return self._get_set_link("NODE", self.nsid4)
-
-    @nsid4_link.setter
-    def nsid4_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid4."""
-        self.nsid4 = value.sid
-
-    @property
-    def nsid5_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid5."""
-        return self._get_set_link("NODE", self.nsid5)
-
-    @nsid5_link.setter
-    def nsid5_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid5."""
-        self.nsid5 = value.sid
-
-    @property
-    def nsid6_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid6."""
-        return self._get_set_link("NODE", self.nsid6)
-
-    @nsid6_link.setter
-    def nsid6_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid6."""
-        self.nsid6 = value.sid
-
-    @property
-    def nsid7_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid7."""
-        return self._get_set_link("NODE", self.nsid7)
-
-    @nsid7_link.setter
-    def nsid7_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid7."""
-        self.nsid7 = value.sid
-
-    @property
-    def nsid8_link(self) -> KeywordBase:
-        """Get the SET_NODE_* keyword for nsid8."""
-        return self._get_set_link("NODE", self.nsid8)
-
-    @nsid8_link.setter
-    def nsid8_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid8."""
-        self.nsid8 = value.sid
+    @nodes_link.setter
+    def nodes_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nodes."""
+        self.nodes = value.sid
 

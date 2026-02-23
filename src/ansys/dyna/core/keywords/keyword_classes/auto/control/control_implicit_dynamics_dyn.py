@@ -186,7 +186,7 @@ class ControlImplicitDynamicsDyn(KeywordBase):
         self._cards[1].set_value("angle", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

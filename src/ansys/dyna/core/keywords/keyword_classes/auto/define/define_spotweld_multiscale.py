@@ -180,7 +180,7 @@ class DefineSpotweldMultiscale(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bset_link(self) -> KeywordBase:
+    def bset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bset."""
         return self._get_set_link("BEAM", self.bset)
 
@@ -190,7 +190,7 @@ class DefineSpotweldMultiscale(KeywordBase):
         self.bset = value.sid
 
     @property
-    def bset_link(self) -> KeywordBase:
+    def bset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bset."""
         return self._get_set_link("BEAM", self.bset)
 
@@ -200,7 +200,7 @@ class DefineSpotweldMultiscale(KeywordBase):
         self.bset = value.sid
 
     @property
-    def bset_link(self) -> KeywordBase:
+    def bset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bset."""
         return self._get_set_link("BEAM", self.bset)
 
@@ -210,7 +210,7 @@ class DefineSpotweldMultiscale(KeywordBase):
         self.bset = value.sid
 
     @property
-    def bset_link(self) -> KeywordBase:
+    def bset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bset."""
         return self._get_set_link("BEAM", self.bset)
 

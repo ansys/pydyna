@@ -646,7 +646,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
         self._cards[7].set_value("r0", value)
 
     @property
-    def lcsid_link(self) -> DefineCoordinateSystem:
+    def lcsid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for lcsid."""
         if self.deck is None:
             return None
@@ -661,7 +661,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
         self.lcsid = value.cid
 
     @property
-    def sgsid__link(self) -> KeywordBase:
+    def sgsid__link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sgsid_."""
         return self._get_set_link("SEGMENT", self.sgsid_)
 

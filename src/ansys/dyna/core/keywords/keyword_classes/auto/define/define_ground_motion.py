@@ -119,7 +119,7 @@ class DefineGroundMotion(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def alcid_link(self) -> DefineCurve:
+    def alcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for alcid."""
         if self.deck is None:
             return None
@@ -134,7 +134,7 @@ class DefineGroundMotion(KeywordBase):
         self.alcid = value.lcid
 
     @property
-    def vlcid_link(self) -> DefineCurve:
+    def vlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcid."""
         if self.deck is None:
             return None

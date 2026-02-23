@@ -125,7 +125,7 @@ class ControlAccuracy(KeywordBase):
         self._cards[0].set_value("exacc", value)
 
     @property
-    def pidosu_link(self) -> KeywordBase:
+    def pidosu_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pidosu."""
         return self._get_set_link("PART", self.pidosu)
 

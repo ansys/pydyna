@@ -1611,7 +1611,7 @@ class ContactNodesToSurfaceInterference(KeywordBase):
             self.activate_option("SHLOFF")
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -1626,7 +1626,7 @@ class ContactNodesToSurfaceInterference(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid2_link(self) -> DefineCurve:
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None
@@ -1641,7 +1641,7 @@ class ContactNodesToSurfaceInterference(KeywordBase):
         self.lcid2 = value.lcid
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -1656,7 +1656,7 @@ class ContactNodesToSurfaceInterference(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

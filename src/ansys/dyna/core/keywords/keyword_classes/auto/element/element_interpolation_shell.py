@@ -193,27 +193,27 @@ class ElementInterpolationShell(KeywordBase):
         self._cards[1].set_value("w4", value)
 
     @property
-    def ip1_link(self) -> KeywordBase:
+    def ip1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ip1."""
         return self._get_link_by_attr("NODE", "nid", self.ip1, "parts")
 
     @property
-    def ip2_link(self) -> KeywordBase:
+    def ip2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ip2."""
         return self._get_link_by_attr("NODE", "nid", self.ip2, "parts")
 
     @property
-    def ip3_link(self) -> KeywordBase:
+    def ip3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ip3."""
         return self._get_link_by_attr("NODE", "nid", self.ip3, "parts")
 
     @property
-    def ip4_link(self) -> KeywordBase:
+    def ip4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ip4."""
         return self._get_link_by_attr("NODE", "nid", self.ip4, "parts")
 
     @property
-    def eids_link(self) -> KeywordBase:
+    def eids_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eids."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eids, "parts")
 

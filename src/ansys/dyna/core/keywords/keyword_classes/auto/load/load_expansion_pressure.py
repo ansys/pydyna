@@ -153,7 +153,7 @@ class LoadExpansionPressure(KeywordBase):
         self._cards[1].set_value("zn", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -168,7 +168,7 @@ class LoadExpansionPressure(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -178,7 +178,7 @@ class LoadExpansionPressure(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

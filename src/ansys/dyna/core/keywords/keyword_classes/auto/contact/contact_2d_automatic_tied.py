@@ -430,7 +430,7 @@ class Contact2DAutomaticTied(KeywordBase):
         self._cards[3].set_value("tdpen", value)
 
     @property
-    def surfa_link(self) -> KeywordBase:
+    def surfa_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for surfa."""
         return self._get_set_link("PART", self.surfa)
 
@@ -440,7 +440,7 @@ class Contact2DAutomaticTied(KeywordBase):
         self.surfa = value.sid
 
     @property
-    def surfb_link(self) -> KeywordBase:
+    def surfb_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for surfb."""
         return self._get_set_link("PART", self.surfb)
 

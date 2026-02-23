@@ -243,7 +243,7 @@ class DefineHazProperties(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def iss_link(self) -> DefineCurve:
+    def iss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for iss."""
         if self.deck is None:
             return None
@@ -258,7 +258,7 @@ class DefineHazProperties(KeywordBase):
         self.iss = value.lcid
 
     @property
-    def ifs_link(self) -> DefineCurve:
+    def ifs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifs."""
         if self.deck is None:
             return None
@@ -273,7 +273,7 @@ class DefineHazProperties(KeywordBase):
         self.ifs = value.lcid
 
     @property
-    def isb_link(self) -> DefineCurve:
+    def isb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for isb."""
         if self.deck is None:
             return None
@@ -288,7 +288,7 @@ class DefineHazProperties(KeywordBase):
         self.isb = value.lcid
 
     @property
-    def ifb_link(self) -> DefineCurve:
+    def ifb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifb."""
         if self.deck is None:
             return None
@@ -303,7 +303,7 @@ class DefineHazProperties(KeywordBase):
         self.ifb = value.lcid
 
     @property
-    def isc_link(self) -> DefineCurve:
+    def isc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for isc."""
         if self.deck is None:
             return None
@@ -318,7 +318,7 @@ class DefineHazProperties(KeywordBase):
         self.isc = value.lcid
 
     @property
-    def ifc_link(self) -> DefineCurve:
+    def ifc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifc."""
         if self.deck is None:
             return None
@@ -333,7 +333,7 @@ class DefineHazProperties(KeywordBase):
         self.ifc = value.lcid
 
     @property
-    def isw_link(self) -> DefineCurve:
+    def isw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for isw."""
         if self.deck is None:
             return None
@@ -348,7 +348,7 @@ class DefineHazProperties(KeywordBase):
         self.isw = value.lcid
 
     @property
-    def ifw_link(self) -> DefineCurve:
+    def ifw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifw."""
         if self.deck is None:
             return None

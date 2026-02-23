@@ -420,7 +420,7 @@ class DefinePorousAle(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vecid1_link(self) -> DefineVector:
+    def vecid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid1."""
         if self.deck is None:
             return None
@@ -435,7 +435,7 @@ class DefinePorousAle(KeywordBase):
         self.vecid1 = value.vid
 
     @property
-    def vecid2_link(self) -> DefineVector:
+    def vecid2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid2."""
         if self.deck is None:
             return None

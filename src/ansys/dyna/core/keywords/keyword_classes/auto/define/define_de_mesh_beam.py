@@ -229,7 +229,7 @@ class DefineDeMeshBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def desxid_link(self) -> KeywordBase:
+    def desxid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for desxid."""
         if self.deck is None:
             return None
@@ -244,7 +244,7 @@ class DefineDeMeshBeam(KeywordBase):
         self.desxid = value.secid
 
     @property
-    def despid_link(self) -> KeywordBase:
+    def despid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given despid."""
         return self._get_link_by_attr("PART", "pid", self.despid, "parts")
 

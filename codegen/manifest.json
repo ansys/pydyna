@@ -1073,6 +1073,12 @@
                     "property-name": "curves",
                     "ref": "curves_card"
                 }
+            ],
+            "add-mixin": [
+                {
+                    "source": "ansys.dyna.core.lib.mixins.curve_plotting",
+                    "name": "CurvePlottingMixin"
+                }
             ]
         },
         "labels": {

@@ -394,7 +394,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
         self._cards[3].set_value("tz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -409,7 +409,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcrot_link(self) -> DefineCurve:
+    def lcrot_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrot."""
         if self.deck is None:
             return None
@@ -424,7 +424,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
         self.lcrot = value.lcid
 
     @property
-    def lcmov_link(self) -> DefineCurve:
+    def lcmov_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmov."""
         if self.deck is None:
             return None
@@ -439,7 +439,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
         self.lcmov = value.lcid
 
     @property
-    def lclat_link(self) -> DefineCurve:
+    def lclat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclat."""
         if self.deck is None:
             return None
@@ -454,7 +454,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
         self.lclat = value.lcid
 
     @property
-    def nsid1_link(self) -> KeywordBase:
+    def nsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid1."""
         return self._get_set_link("NODE", self.nsid1)
 

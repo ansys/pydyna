@@ -193,7 +193,7 @@ class InterfaceCompensation3D(KeywordBase):
         self._cards[1].set_value("tangent", value)
 
     @property
-    def psidp_link(self) -> KeywordBase:
+    def psidp_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidp."""
         return self._get_set_link("PART", self.psidp)
 

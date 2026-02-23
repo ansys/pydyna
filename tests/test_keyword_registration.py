@@ -30,7 +30,6 @@ from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.import_handler import ImportContext
 
 
-@pytest.mark.keywords
 class TestImportContextKeywordOverrides:
     """Tests for ImportContext.keyword_overrides functionality."""
 
@@ -63,7 +62,7 @@ class TestImportContextKeywordOverrides:
         assert context.keyword_overrides["*MAT_ANISOTROPIC_HYPERELASTIC"] is MatAnisotropicHyperelasticLegacy
 
 
-@pytest.mark.keywords
+
 class TestLegacyMat295:
     """Tests for legacy Mat295 implementation."""
 
@@ -105,7 +104,7 @@ class TestLegacyMat295:
             assert mat.ftype == 1
 
 
-@pytest.mark.keywords
+
 class TestKeywordOverridesLoading:
     """Tests for loading keywords with ImportContext overrides."""
 
@@ -180,7 +179,7 @@ $#  alpha1    alpha2    alpha3    alpha4    alpha5    alpha6    alpha7    alpha8
             assert not isinstance(deck2.keywords[0], Mat295Legacy)
 
 
-@pytest.mark.keywords
+
 class TestLegacyInitialStrainShell:
     """Tests for legacy InitialStrainShell implementation."""
 
@@ -223,7 +222,7 @@ class TestLegacyInitialStrainShell:
             assert isinstance(kwd.sets[0].strains, pd.DataFrame)
 
 
-@pytest.mark.keywords
+
 class TestLegacyInitialStressShell:
     """Tests for legacy InitialStressShell implementation."""
 
@@ -298,7 +297,7 @@ class TestLegacyInitialStressShell:
             assert hasattr(cardset, "hisv")
 
 
-@pytest.mark.keywords
+
 class TestInitialStrainStressLegacyLoading:
     """Tests for loading INITIAL_STRAIN_SHELL and INITIAL_STRESS_SHELL with legacy overrides."""
 

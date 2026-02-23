@@ -429,22 +429,22 @@ class DefineCpmVent(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def lctc23_link(self) -> DefineCurve:
+    def lctc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc23."""
         if self.deck is None:
             return None
@@ -459,7 +459,7 @@ class DefineCpmVent(KeywordBase):
         self.lctc23 = value.lcid
 
     @property
-    def lcpc23_link(self) -> DefineCurve:
+    def lcpc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpc23."""
         if self.deck is None:
             return None
@@ -474,7 +474,7 @@ class DefineCpmVent(KeywordBase):
         self.lcpc23 = value.lcid
 
     @property
-    def lcred_link(self) -> DefineCurve:
+    def lcred_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcred."""
         if self.deck is None:
             return None
@@ -489,7 +489,7 @@ class DefineCpmVent(KeywordBase):
         self.lcred = value.lcid
 
     @property
-    def lcac23_link(self) -> DefineCurve:
+    def lcac23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcac23."""
         if self.deck is None:
             return None
@@ -504,22 +504,22 @@ class DefineCpmVent(KeywordBase):
         self.lcac23 = value.lcid
 
     @property
-    def ids1_link(self) -> KeywordBase:
+    def ids1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ids1."""
         return self._get_link_by_attr("PART", "pid", self.ids1, "parts")
 
     @property
-    def ids2_link(self) -> KeywordBase:
+    def ids2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ids2."""
         return self._get_link_by_attr("PART", "pid", self.ids2, "parts")
 
     @property
-    def pid1_link(self) -> KeywordBase:
+    def pid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid1."""
         return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
 
     @property
-    def pid2_link(self) -> KeywordBase:
+    def pid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid2."""
         return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

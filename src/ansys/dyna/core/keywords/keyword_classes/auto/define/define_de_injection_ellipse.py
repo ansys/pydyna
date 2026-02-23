@@ -474,12 +474,12 @@ class DefineDeInjectionEllipse(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcvx_link(self) -> DefineCurve:
+    def lcvx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvx."""
         if self.deck is None:
             return None
@@ -494,7 +494,7 @@ class DefineDeInjectionEllipse(KeywordBase):
         self.lcvx = value.lcid
 
     @property
-    def lcvy_link(self) -> DefineCurve:
+    def lcvy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvy."""
         if self.deck is None:
             return None
@@ -509,7 +509,7 @@ class DefineDeInjectionEllipse(KeywordBase):
         self.lcvy = value.lcid
 
     @property
-    def lcvz_link(self) -> DefineCurve:
+    def lcvz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvz."""
         if self.deck is None:
             return None
@@ -524,7 +524,7 @@ class DefineDeInjectionEllipse(KeywordBase):
         self.lcvz = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -539,7 +539,7 @@ class DefineDeInjectionEllipse(KeywordBase):
         self.cid = value.cid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 
@@ -549,7 +549,7 @@ class DefineDeInjectionEllipse(KeywordBase):
         self.sid = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

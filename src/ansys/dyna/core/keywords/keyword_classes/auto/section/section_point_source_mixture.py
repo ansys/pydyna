@@ -339,27 +339,27 @@ class SectionPointSourceMixture(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nidlc001_link(self) -> KeywordBase:
+    def nidlc001_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidlc001."""
         return self._get_link_by_attr("NODE", "nid", self.nidlc001, "parts")
 
     @property
-    def nidlc002_link(self) -> KeywordBase:
+    def nidlc002_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidlc002."""
         return self._get_link_by_attr("NODE", "nid", self.nidlc002, "parts")
 
     @property
-    def nidlc003_link(self) -> KeywordBase:
+    def nidlc003_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidlc003."""
         return self._get_link_by_attr("NODE", "nid", self.nidlc003, "parts")
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -374,7 +374,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def notused_link(self) -> DefineCurve:
+    def notused_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for notused."""
         if self.deck is None:
             return None
@@ -389,7 +389,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.notused = value.lcid
 
     @property
-    def lcidvel_link(self) -> DefineCurve:
+    def lcidvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidvel."""
         if self.deck is None:
             return None
@@ -404,7 +404,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcidvel = value.lcid
 
     @property
-    def lcmdot1_link(self) -> DefineCurve:
+    def lcmdot1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot1."""
         if self.deck is None:
             return None
@@ -419,7 +419,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot1 = value.lcid
 
     @property
-    def lcmdot2_link(self) -> DefineCurve:
+    def lcmdot2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot2."""
         if self.deck is None:
             return None
@@ -434,7 +434,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot2 = value.lcid
 
     @property
-    def lcmdot3_link(self) -> DefineCurve:
+    def lcmdot3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot3."""
         if self.deck is None:
             return None
@@ -449,7 +449,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot3 = value.lcid
 
     @property
-    def lcmdot4_link(self) -> DefineCurve:
+    def lcmdot4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot4."""
         if self.deck is None:
             return None
@@ -464,7 +464,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot4 = value.lcid
 
     @property
-    def lcmdot5_link(self) -> DefineCurve:
+    def lcmdot5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot5."""
         if self.deck is None:
             return None
@@ -479,7 +479,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot5 = value.lcid
 
     @property
-    def lcmdot6_link(self) -> DefineCurve:
+    def lcmdot6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot6."""
         if self.deck is None:
             return None
@@ -494,7 +494,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot6 = value.lcid
 
     @property
-    def lcmdot7_link(self) -> DefineCurve:
+    def lcmdot7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot7."""
         if self.deck is None:
             return None
@@ -509,7 +509,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot7 = value.lcid
 
     @property
-    def lcmdot8_link(self) -> DefineCurve:
+    def lcmdot8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmdot8."""
         if self.deck is None:
             return None
@@ -524,7 +524,7 @@ class SectionPointSourceMixture(KeywordBase):
         self.lcmdot8 = value.lcid
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

@@ -276,12 +276,12 @@ class ConstrainedInterpolationLocal(KeywordBase):
         self._cards[2].set_value("cidi", value)
 
     @property
-    def dnid_link(self) -> KeywordBase:
+    def dnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given dnid."""
         return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
 
     @property
-    def cidd_link(self) -> DefineCoordinateSystem:
+    def cidd_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cidd."""
         if self.deck is None:
             return None
@@ -296,7 +296,7 @@ class ConstrainedInterpolationLocal(KeywordBase):
         self.cidd = value.cid
 
     @property
-    def cidi_link(self) -> DefineCoordinateSystem:
+    def cidi_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cidi."""
         if self.deck is None:
             return None

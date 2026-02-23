@@ -518,7 +518,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
         self._cards[4].set_value("thkf", value)
 
     @property
-    def lcidpor_link(self) -> DefineCurve:
+    def lcidpor_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidpor."""
         if self.deck is None:
             return None

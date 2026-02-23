@@ -221,12 +221,12 @@ class ElementInertiaOffset(KeywordBase):
         self._cards[2].set_value("z_off", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def csid_link(self) -> DefineCoordinateSystem:
+    def csid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for csid."""
         if self.deck is None:
             return None

@@ -102,7 +102,7 @@ class InitialInternalDofSolidType3(KeywordBase):
         self._cards[1].set_value("valz", value)
 
     @property
-    def lid_link(self) -> KeywordBase:
+    def lid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given lid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.lid, "parts")
 

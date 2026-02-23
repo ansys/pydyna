@@ -139,7 +139,7 @@ class ContactGuidedCable(KeywordBase):
         self._cards[1].set_value("fric", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -149,7 +149,7 @@ class ContactGuidedCable(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

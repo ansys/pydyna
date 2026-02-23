@@ -267,7 +267,7 @@ class DefineDeByPart(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lnorm_link(self) -> DefineCurve:
+    def lnorm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lnorm."""
         if self.deck is None:
             return None
@@ -282,7 +282,7 @@ class DefineDeByPart(KeywordBase):
         self.lnorm = value.lcid
 
     @property
-    def lshear_link(self) -> DefineCurve:
+    def lshear_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lshear."""
         if self.deck is None:
             return None
@@ -297,7 +297,7 @@ class DefineDeByPart(KeywordBase):
         self.lshear = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

@@ -304,7 +304,7 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def isdes_link(self) -> KeywordBase:
+    def isdes_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for isdes."""
         if self.deck is None:
             return None
@@ -319,7 +319,7 @@ class DefineAdaptiveSolidToDesId(KeywordBase):
         self.isdes = value.secid
 
     @property
-    def ipdes_link(self) -> KeywordBase:
+    def ipdes_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipdes."""
         return self._get_link_by_attr("PART", "pid", self.ipdes, "parts")
 

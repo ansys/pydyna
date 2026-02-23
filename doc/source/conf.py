@@ -1,5 +1,3 @@
-#import ansys.dyna.solver as solver
-
 import datetime
 import os
 
@@ -154,7 +152,7 @@ html_theme_options = {
         ],
         "output": "api",
     },
-    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.",
+    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.",
 }
 
 # static path

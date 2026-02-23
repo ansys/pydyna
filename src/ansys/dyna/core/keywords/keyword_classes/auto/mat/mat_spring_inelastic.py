@@ -135,7 +135,7 @@ class MatSpringInelastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcfd_link(self) -> DefineCurve:
+    def lcfd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfd."""
         if self.deck is None:
             return None

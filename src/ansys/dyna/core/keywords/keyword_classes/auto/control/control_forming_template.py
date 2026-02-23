@@ -489,7 +489,7 @@ class ControlFormingTemplate(KeywordBase):
         self._cards[4].set_value("d3plt", value)
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -504,7 +504,7 @@ class ControlFormingTemplate(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

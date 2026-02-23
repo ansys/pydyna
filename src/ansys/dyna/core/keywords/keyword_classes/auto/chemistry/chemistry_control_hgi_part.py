@@ -102,7 +102,7 @@ class ChemistryControlHgiPart(KeywordBase):
         self._cards[1].set_value("file", value)
 
     @property
-    def exit_bc_link(self) -> KeywordBase:
+    def exit_bc_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given exit_bc."""
         return self._get_link_by_attr("PART", "pid", self.exit_bc, "parts")
 

@@ -77,41 +77,41 @@ class LoadNodePoint(KeywordBase):
     @property
     def nid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid, keyed by nid value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "")
 
     def get_nid_link(self, nid: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
-        return self._get_link_by_attr("NODE", "nid", nid, "parts")
+        return self._get_link_by_attr("NODE", "nid", nid, "")
 
     @property
     def m1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for m1, keyed by m1 value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "m1", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "m1", "")
 
     def get_m1_link(self, m1: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m1."""
-        return self._get_link_by_attr("NODE", "nid", m1, "parts")
+        return self._get_link_by_attr("NODE", "nid", m1, "")
 
     @property
     def m2_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for m2, keyed by m2 value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "m2", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "m2", "")
 
     def get_m2_link(self, m2: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m2."""
-        return self._get_link_by_attr("NODE", "nid", m2, "parts")
+        return self._get_link_by_attr("NODE", "nid", m2, "")
 
     @property
     def m3_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for m3, keyed by m3 value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "m3", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "m3", "")
 
     def get_m3_link(self, m3: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given m3."""
-        return self._get_link_by_attr("NODE", "nid", m3, "parts")
+        return self._get_link_by_attr("NODE", "nid", m3, "")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

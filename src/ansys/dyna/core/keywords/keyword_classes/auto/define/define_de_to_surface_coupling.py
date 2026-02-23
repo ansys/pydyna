@@ -416,7 +416,7 @@ class DefineDeToSurfaceCoupling(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcvx_link(self) -> DefineCurve:
+    def lcvx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvx."""
         if self.deck is None:
             return None
@@ -431,7 +431,7 @@ class DefineDeToSurfaceCoupling(KeywordBase):
         self.lcvx = value.lcid
 
     @property
-    def lcvy_link(self) -> DefineCurve:
+    def lcvy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvy."""
         if self.deck is None:
             return None
@@ -446,7 +446,7 @@ class DefineDeToSurfaceCoupling(KeywordBase):
         self.lcvy = value.lcid
 
     @property
-    def lcvz_link(self) -> DefineCurve:
+    def lcvz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvz."""
         if self.deck is None:
             return None
@@ -461,7 +461,7 @@ class DefineDeToSurfaceCoupling(KeywordBase):
         self.lcvz = value.lcid
 
     @property
-    def cid_rcf_link(self) -> DefineCoordinateSystem:
+    def cid_rcf_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid_rcf."""
         if self.deck is None:
             return None

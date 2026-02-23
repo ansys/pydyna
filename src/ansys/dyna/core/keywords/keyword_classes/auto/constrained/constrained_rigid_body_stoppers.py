@@ -210,7 +210,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
         self._cards[1].set_value("stiff", value)
 
     @property
-    def lcvmnx_link(self) -> DefineCurve:
+    def lcvmnx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvmnx."""
         if self.deck is None:
             return None
@@ -225,7 +225,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
         self.lcvmnx = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -240,7 +240,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
         self.vid = value.vid
 
     @property
-    def psidmx_link(self) -> KeywordBase:
+    def psidmx_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidmx."""
         return self._get_set_link("PART", self.psidmx)
 
@@ -250,7 +250,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
         self.psidmx = value.sid
 
     @property
-    def psidmn_link(self) -> KeywordBase:
+    def psidmn_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidmn."""
         return self._get_set_link("PART", self.psidmn)
 
@@ -260,7 +260,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
         self.psidmn = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

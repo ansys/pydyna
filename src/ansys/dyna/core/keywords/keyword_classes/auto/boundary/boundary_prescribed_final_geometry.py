@@ -166,12 +166,12 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
         self._cards[1].set_value("death", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcidf_link(self) -> DefineCurve:
+    def lcidf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidf."""
         if self.deck is None:
             return None
@@ -186,7 +186,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
         self.lcidf = value.lcid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

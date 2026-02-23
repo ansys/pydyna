@@ -182,7 +182,7 @@ class DatabaseCrossSectionSet(KeywordBase):
         self._cards[1].set_value("itype", value)
 
     @property
-    def bsid_link(self) -> KeywordBase:
+    def bsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsid."""
         return self._get_set_link("BEAM", self.bsid)
 
@@ -192,7 +192,7 @@ class DatabaseCrossSectionSet(KeywordBase):
         self.bsid = value.sid
 
     @property
-    def dsid_link(self) -> KeywordBase:
+    def dsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_DISCRETE_* keyword for dsid."""
         return self._get_set_link("DISCRETE", self.dsid)
 
@@ -202,7 +202,7 @@ class DatabaseCrossSectionSet(KeywordBase):
         self.dsid = value.sid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -212,7 +212,7 @@ class DatabaseCrossSectionSet(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def hsid_link(self) -> KeywordBase:
+    def hsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for hsid."""
         return self._get_set_link("SOLID", self.hsid)
 

@@ -56,7 +56,6 @@ def _to_string(cards):
     cards.write(s, format_type.standard)
     return s.getvalue()
 
-@pytest.mark.keywords
 def test_initial_strain_shell_card_set():
     cs = InitialStrainShellCardSet(eid=1, nplane=1, nthick=5, parent=None, keyword=None)
     assert cs.eid == 1
@@ -66,8 +65,6 @@ def test_initial_strain_shell_card_set():
     assert 5 == cs._cards[1]._length_func()
     assert len(cs.strains) == 5
 
-
-@pytest.mark.keywords
 def test_initial_stress_shell_card_set_bounded():
     parent = Parent()
     kwargs = {"parent": parent, "keyword": parent}
@@ -85,8 +82,6 @@ def test_initial_stress_shell_card_set_bounded():
     assert card_set._length_func() == 1
     assert parent.write() == PARENT_REF_STRING
 
-
-@pytest.mark.keywords
 def test_initial_stress_shell_card_set_unbounded():
     parent = Parent()
     kwargs = {"parent": parent, "keyword": parent}
@@ -99,8 +94,6 @@ def test_initial_stress_shell_card_set_unbounded():
     assert len(card_set) == 1
     assert parent.write() == PARENT_REF_STRING
 
-
-@pytest.mark.keywords
 def test_initial_stress_shell_card_set_unbounded_implicit_initialize():
     parent = Parent()
     kwargs = {"parent": parent, "keyword": parent, "t": 2, "eps": 2.0, "hisv":[1, 2, 3]}
@@ -112,8 +105,6 @@ def test_initial_stress_shell_card_set_unbounded_implicit_initialize():
     assert len(card_set) == 1
     assert parent.write() == PARENT_REF_STRING
 
-
-@pytest.mark.keywords
 def test_initial_stress_shell_card_set_to_string():
     ref_string1 = """$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
        2.0       0.0       0.0       0.0       0.0       0.0       0.0       2.0
@@ -125,8 +116,6 @@ $#    hisv      hisv      hisv      hisv
     cs_str = _to_string(cs)
     assert cs_str == ref_string1
 
-
-@pytest.mark.keywords
 def test_initial_stress_shell_card_set(string_utils):
     parent = Parent()
     cs = InitialStressShellThicknessLargeCardSet(t=2, eps=2.0, hisv=[1, 2, 3], parent=parent, keyword=parent)
@@ -172,8 +161,6 @@ $#    hisv      hisv      hisv      hisv
        1.0       2.0       3.0          """
     assert _to_string(z) == ref_string3
 
-
-@pytest.mark.keywords
 class TestCardSetWithDiscriminator:
     """Tests for CardSet items with discriminator fields.
 
@@ -308,7 +295,6 @@ class TestCardSetWithDiscriminator:
         assert items[0]._cards[2].get_value("val3") == 4.0
 
 
-@pytest.mark.keywords
 class TestInitialStrainShellFix:
     """Tests for INITIAL_STRAIN_SHELL fix for issue #656.
 

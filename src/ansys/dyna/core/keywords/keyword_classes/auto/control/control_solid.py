@@ -312,7 +312,7 @@ class ControlSolid(KeywordBase):
         self._cards[2].set_value("tet13v", value)
 
     @property
-    def psfail_link(self) -> KeywordBase:
+    def psfail_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psfail."""
         return self._get_set_link("PART", self.psfail)
 

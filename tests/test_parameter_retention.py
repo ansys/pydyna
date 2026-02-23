@@ -35,11 +35,10 @@ from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 
-
 class TestParameterSetScoping:
     """Test URI scoping functionality in ParameterSet."""
 
-    @pytest.mark.keywords
+    
     def test_scope_context_manager_pushes_and_pops(self):
         """Test that scope() pushes segment on entry and pops on exit."""
         ps = ParameterSet()
@@ -56,7 +55,7 @@ class TestParameterSetScoping:
 
         assert ps._uri_stack == []
 
-    @pytest.mark.keywords
+    
     def test_scope_pops_on_exception(self):
         """Test that scope() pops even when an exception occurs."""
         ps = ParameterSet()
@@ -70,7 +69,7 @@ class TestParameterSetScoping:
 
         assert ps._uri_stack == []
 
-    @pytest.mark.keywords
+    
     def test_get_current_uri(self):
         """Test get_current_uri returns joined path."""
         ps = ParameterSet()
@@ -87,7 +86,7 @@ class TestParameterSetScoping:
 class TestParameterSetRefRecording:
     """Test parameter reference recording in ParameterSet."""
 
-    @pytest.mark.keywords
+    
     def test_record_ref_stores_at_current_uri(self):
         """Test record_ref stores ref at current URI path."""
         ps = ParameterSet()
@@ -98,7 +97,7 @@ class TestParameterSetRefRecording:
 
         assert ps._refs == {"keyword1/card0/0": "&myvar"}
 
-    @pytest.mark.keywords
+    
     def test_record_ref_multiple_fields(self):
         """Test recording multiple refs in same card."""
         ps = ParameterSet()
@@ -113,7 +112,7 @@ class TestParameterSetRefRecording:
             "kwd/card0/2": "&var2",
         }
 
-    @pytest.mark.keywords
+    
     def test_record_ref_multiple_cards(self):
         """Test recording refs across multiple cards."""
         ps = ParameterSet()
@@ -129,7 +128,7 @@ class TestParameterSetRefRecording:
             "kwd/card1/0": "&b",
         }
 
-    @pytest.mark.keywords
+    
     def test_record_ref_negative_parameter(self):
         """Test recording negative parameter refs."""
         ps = ParameterSet()
@@ -144,7 +143,7 @@ class TestParameterSetRefRecording:
 class TestParameterSetRefRetrieval:
     """Test parameter reference retrieval from ParameterSet."""
 
-    @pytest.mark.keywords
+    
     def test_get_ref_returns_stored_ref(self):
         """Test get_ref returns the stored reference."""
         ps = ParameterSet()
@@ -153,7 +152,7 @@ class TestParameterSetRefRetrieval:
         ref = ps.get_ref("kwd", "card0", "0")
         assert ref == "&myvar"
 
-    @pytest.mark.keywords
+    
     def test_get_ref_returns_none_for_missing(self):
         """Test get_ref returns None for non-existent URI."""
         ps = ParameterSet()
@@ -161,7 +160,7 @@ class TestParameterSetRefRetrieval:
         ref = ps.get_ref("kwd", "card0", "0")
         assert ref is None
 
-    @pytest.mark.keywords
+    
     def test_get_ref_with_different_paths(self):
         """Test get_ref correctly distinguishes different URIs."""
         ps = ParameterSet()
@@ -178,7 +177,7 @@ class TestParameterSetRefRetrieval:
 class TestLoadDatalineRefRecording:
     """Test that load_dataline records parameter refs during parsing."""
 
-    @pytest.mark.keywords
+    
     def test_load_dataline_records_ref(self):
         """Test that loading a line with parameter records the ref."""
         ps = ParameterSet()
@@ -199,7 +198,7 @@ class TestLoadDatalineRefRecording:
         assert ps.get_ref("kwd", "card0", "0") == "&myval"
         assert ps.get_ref("kwd", "card0", "1") is None  # Not a parameter
 
-    @pytest.mark.keywords
+    
     def test_load_dataline_records_negative_ref(self):
         """Test that negative parameter refs are recorded correctly."""
         ps = ParameterSet()
@@ -215,7 +214,7 @@ class TestLoadDatalineRefRecording:
         assert values[0] == -50.0
         assert ps.get_ref("kwd", "card0", "0") == "-&val"
 
-    @pytest.mark.keywords
+    
     def test_load_dataline_multiple_params(self):
         """Test recording multiple parameter refs in one line."""
         ps = ParameterSet()
@@ -240,7 +239,7 @@ class TestLoadDatalineRefRecording:
 class TestCardReadRefRecording:
     """Test that Card.read records parameter refs."""
 
-    @pytest.mark.keywords
+    
     def test_card_read_records_ref(self):
         """Test Card.read with parameter records the ref."""
         ps = ParameterSet()
@@ -272,7 +271,7 @@ class TestCardReadRefRecording:
 class TestCardWriteRetainParameters:
     """Test Card.write with retain_parameters option."""
 
-    @pytest.mark.keywords
+    
     def test_card_write_without_retain_writes_values(self):
         """Test normal card write outputs substituted values."""
         card = Card.from_field_schemas(
@@ -291,7 +290,7 @@ class TestCardWriteRetainParameters:
         assert "2" in output
         assert "&" not in output
 
-    @pytest.mark.keywords
+    
     def test_card_write_with_retain_writes_refs(self):
         """Test card write with retain_parameters outputs refs."""
         ps = ParameterSet()
@@ -319,7 +318,7 @@ class TestCardWriteRetainParameters:
         # elform should still be numeric
         assert "2" in output
 
-    @pytest.mark.keywords
+    
     def test_card_write_retain_without_refs_writes_values(self):
         """Test retain_parameters with no refs still writes values."""
         ps = ParameterSet()
@@ -342,7 +341,7 @@ class TestCardWriteRetainParameters:
         assert "100" in output
         assert "&" not in output
 
-    @pytest.mark.keywords
+    
     def test_card_write_retain_negative_ref(self):
         """Test retain_parameters handles negative refs."""
         ps = ParameterSet()
@@ -369,7 +368,7 @@ class TestCardWriteRetainParameters:
 class TestRoundTrip:
     """Test reading and writing with parameter retention."""
 
-    @pytest.mark.keywords
+    
     def test_card_roundtrip_with_parameter(self):
         """Test read then write preserves parameter reference."""
         ps = ParameterSet()
@@ -410,7 +409,7 @@ class TestRoundTrip:
 class TestDeckWithSeriesAndTableCards:
     """Test parameter retention with decks containing series and table cards."""
 
-    @pytest.mark.keywords
+    
     def test_deck_with_series_card_and_parameters(self):
         """Test that series card parameters are retained when retain_parameters=True.
 
@@ -453,7 +452,7 @@ Rn2,107
         assert "&n1" in output_retain  # parameter ref SHOULD appear
         assert "&n2" in output_retain  # parameter ref SHOULD appear
 
-    @pytest.mark.keywords
+    
     def test_deck_with_table_card_and_parameters(self):
         """Test that table card parameters are retained when retain_parameters=True.
 
@@ -494,7 +493,7 @@ $#   nid               x               y               z      tc      rc
         assert "&x1" in output_retain  # parameter ref SHOULD appear
         assert "&y1" in output_retain  # parameter ref SHOULD appear
 
-    @pytest.mark.keywords
+    
     def test_deck_with_card_and_series_card_parameters(self):
         """Test deck with parameters in both Card fields and SeriesCard data.
 
@@ -540,7 +539,7 @@ Rn2,103
         assert "&n1" in output_retain  # parameter ref SHOULD appear
         assert "&n2" in output_retain  # parameter ref SHOULD appear
 
-    @pytest.mark.keywords
+    
     def test_deck_with_table_card_group_and_parameters(self):
         """Test that a deck with TableCardGroup containing parameters works.
 
@@ -590,7 +589,7 @@ Rn2,103
 class TestCSVFormatRetention:
     """Test parameter retention with CSV (comma-delimited) format."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_roundtrip_with_parameter(self):
         """Test CSV format TableCard read→write preserves parameter refs."""
         from ansys.dyna.core.lib.table_card import TableCard
@@ -630,7 +629,7 @@ class TestCSVFormatRetention:
         # Should contain the parameter reference
         assert "&xval" in output
 
-    @pytest.mark.keywords
+    
     def test_deck_csv_format_table_card_retention(self):
         """Test deck-level CSV format table card parameter retention."""
         from ansys.dyna.core.lib.deck import Deck
@@ -657,7 +656,7 @@ Rx1,100.5
 class TestBoundedCardRetention:
     """Test parameter retention with bounded card variants."""
 
-    @pytest.mark.keywords
+    
     def test_bounded_series_card_retention(self):
         """Test bounded SeriesCard retains parameter refs."""
         from ansys.dyna.core.lib.series_card import SeriesCard
@@ -696,7 +695,7 @@ class TestBoundedCardRetention:
 
         assert "&val" in output
 
-    @pytest.mark.keywords
+    
     def test_bounded_table_card_retention(self):
         """Test bounded TableCard retains parameter refs."""
         from ansys.dyna.core.lib.table_card import TableCard
@@ -731,7 +730,7 @@ class TestBoundedCardRetention:
 
         assert "&x1" in output
 
-    @pytest.mark.keywords
+    
     def test_bounded_table_card_group_retention(self):
         """Test bounded TableCardGroup retains parameter refs."""
         from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -776,7 +775,7 @@ class TestBoundedCardRetention:
 class TestPostExpandRetention:
     """Test parameter retention after deck expansion (includes)."""
 
-    @pytest.mark.keywords
+    
     def test_deck_expand_preserves_parameter_refs(self, tmp_path):
         """Test that deck.expand() preserves parameter refs for retention."""
         from ansys.dyna.core.lib.deck import Deck
@@ -821,7 +820,7 @@ Rn1,101
 class TestOptionCardRetention:
     """Test parameter retention with option cards."""
 
-    @pytest.mark.keywords
+    
     def test_option_card_field_retention(self):
         """Test that parameters in option card fields are retained."""
         from ansys.dyna.core.lib.deck import Deck
@@ -852,7 +851,7 @@ $#     mid        ro         e        pr        da        db  not used
         output_retain = deck.write(retain_parameters=True)
         assert "&mid" in output_retain
 
-    @pytest.mark.keywords
+    
     def test_option_card_with_multiple_parameters(self):
         """Test option card with parameters in base and option cards."""
         from ansys.dyna.core.lib.deck import Deck

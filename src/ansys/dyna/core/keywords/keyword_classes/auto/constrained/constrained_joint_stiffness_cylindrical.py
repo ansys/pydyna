@@ -373,7 +373,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self._cards[3].set_value("psdz", value)
 
     @property
-    def lcidr_link(self) -> DefineCurve:
+    def lcidr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidr."""
         if self.deck is None:
             return None
@@ -388,7 +388,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.lcidr = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -403,7 +403,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def dlcidr_link(self) -> DefineCurve:
+    def dlcidr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidr."""
         if self.deck is None:
             return None
@@ -418,7 +418,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.dlcidr = value.lcid
 
     @property
-    def dlcidp_link(self) -> DefineCurve:
+    def dlcidp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidp."""
         if self.deck is None:
             return None
@@ -433,7 +433,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.dlcidp = value.lcid
 
     @property
-    def dlcidz_link(self) -> DefineCurve:
+    def dlcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidz."""
         if self.deck is None:
             return None
@@ -448,7 +448,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.dlcidz = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -463,7 +463,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def dlcidt_link(self) -> DefineCurve:
+    def dlcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidt."""
         if self.deck is None:
             return None
@@ -478,7 +478,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.dlcidt = value.lcid
 
     @property
-    def cida_link(self) -> DefineCoordinateSystem:
+    def cida_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cida."""
         if self.deck is None:
             return None
@@ -493,7 +493,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.cida = value.cid
 
     @property
-    def cidb_link(self) -> DefineCoordinateSystem:
+    def cidb_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cidb."""
         if self.deck is None:
             return None
@@ -508,12 +508,12 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self.cidb = value.cid
 
     @property
-    def pida_link(self) -> KeywordBase:
+    def pida_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pida."""
         return self._get_link_by_attr("PART", "pid", self.pida, "parts")
 
     @property
-    def pidb_link(self) -> KeywordBase:
+    def pidb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidb."""
         return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 

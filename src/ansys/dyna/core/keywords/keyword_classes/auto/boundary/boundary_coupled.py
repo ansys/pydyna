@@ -118,7 +118,7 @@ class BoundaryCoupled(KeywordBase):
         self._cards[1].set_value("prog", value)
 
     @property
-    def set_link(self) -> KeywordBase:
+    def set_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for set."""
         return self._get_set_link("NODE", self.set)
 

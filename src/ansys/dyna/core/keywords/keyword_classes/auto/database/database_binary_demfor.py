@@ -116,7 +116,7 @@ class DatabaseBinaryDemfor(KeywordBase):
         self._cards[0].set_value("psetid", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -131,7 +131,7 @@ class DatabaseBinaryDemfor(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 

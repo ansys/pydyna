@@ -202,7 +202,7 @@ class SensorDefineForceUpdate(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vid_link(self) -> DefineCoordinateSystem:
+    def vid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for vid."""
         if self.deck is None:
             return None
@@ -217,7 +217,7 @@ class SensorDefineForceUpdate(KeywordBase):
         self.vid = value.cid
 
     @property
-    def crd_link(self) -> DefineCoordinateSystem:
+    def crd_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for crd."""
         if self.deck is None:
             return None

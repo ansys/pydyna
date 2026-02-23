@@ -274,7 +274,7 @@ class MatSeatbelt(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def llcid_link(self) -> DefineCurve:
+    def llcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for llcid."""
         if self.deck is None:
             return None
@@ -289,7 +289,7 @@ class MatSeatbelt(KeywordBase):
         self.llcid = value.lcid
 
     @property
-    def ulcid_link(self) -> DefineCurve:
+    def ulcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ulcid."""
         if self.deck is None:
             return None

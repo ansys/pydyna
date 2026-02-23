@@ -201,7 +201,7 @@ class LoadSeismicSsiSet(KeywordBase):
         self._cards[1].set_value("igm", value)
 
     @property
-    def gmx_link(self) -> DefineCurve:
+    def gmx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmx."""
         if self.deck is None:
             return None
@@ -216,7 +216,7 @@ class LoadSeismicSsiSet(KeywordBase):
         self.gmx = value.lcid
 
     @property
-    def gmy_link(self) -> DefineCurve:
+    def gmy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmy."""
         if self.deck is None:
             return None
@@ -231,7 +231,7 @@ class LoadSeismicSsiSet(KeywordBase):
         self.gmy = value.lcid
 
     @property
-    def gmz_link(self) -> DefineCurve:
+    def gmz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmz."""
         if self.deck is None:
             return None
@@ -246,7 +246,7 @@ class LoadSeismicSsiSet(KeywordBase):
         self.gmz = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -261,7 +261,7 @@ class LoadSeismicSsiSet(KeywordBase):
         self.cid = value.cid
 
     @property
-    def typeid_link(self) -> KeywordBase:
+    def typeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for typeid."""
         return self._get_set_link("NODE", self.typeid)
 

@@ -28,7 +28,7 @@ from enum import Enum
 import logging
 from typing import TYPE_CHECKING, Callable, List
 
-from ansys.dyna.core.pre.errors import (
+from ansys.dyna.core.utils.errors import (
     DuplicateIDError,
     DuplicateKeywordError,
     RequiredFieldError,

@@ -341,32 +341,32 @@ class IncludeUnitcell(KeywordBase):
         self._cards[5].set_value("ecnz", value)
 
     @property
-    def cnx_link(self) -> KeywordBase:
+    def cnx_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cnx."""
         return self._get_link_by_attr("NODE", "nid", self.cnx, "parts")
 
     @property
-    def cny_link(self) -> KeywordBase:
+    def cny_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cny."""
         return self._get_link_by_attr("NODE", "nid", self.cny, "parts")
 
     @property
-    def cnz_link(self) -> KeywordBase:
+    def cnz_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given cnz."""
         return self._get_link_by_attr("NODE", "nid", self.cnz, "parts")
 
     @property
-    def ecnx_link(self) -> KeywordBase:
+    def ecnx_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ecnx."""
         return self._get_link_by_attr("NODE", "nid", self.ecnx, "parts")
 
     @property
-    def ecny_link(self) -> KeywordBase:
+    def ecny_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ecny."""
         return self._get_link_by_attr("NODE", "nid", self.ecny, "parts")
 
     @property
-    def ecnz_link(self) -> KeywordBase:
+    def ecnz_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ecnz."""
         return self._get_link_by_attr("NODE", "nid", self.ecnz, "parts")
 

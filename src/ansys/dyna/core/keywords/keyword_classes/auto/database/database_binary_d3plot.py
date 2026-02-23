@@ -212,7 +212,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
         self._cards[1].set_value("pset", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -227,7 +227,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 
@@ -237,7 +237,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
         self.psetid = value.sid
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

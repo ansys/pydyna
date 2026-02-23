@@ -358,7 +358,7 @@ class ControlFormingUser(KeywordBase):
         self._cards[2].set_value("gap", value)
 
     @property
-    def lcss_link(self) -> DefineVector:
+    def lcss_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for lcss."""
         if self.deck is None:
             return None

@@ -85,12 +85,12 @@ class ControlFormingPosition(KeywordBase):
         self._cards[0].set_value("target", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def target_link(self) -> KeywordBase:
+    def target_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given target."""
         return self._get_link_by_attr("PART", "pid", self.target, "parts")
 

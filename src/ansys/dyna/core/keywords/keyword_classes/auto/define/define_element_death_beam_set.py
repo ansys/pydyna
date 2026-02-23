@@ -185,7 +185,7 @@ class DefineElementDeathBeamSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -200,7 +200,7 @@ class DefineElementDeathBeamSet(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -215,7 +215,7 @@ class DefineElementDeathBeamSet(KeywordBase):
         self.cid = value.cid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for sid."""
         return self._get_set_link("BEAM", self.sid)
 

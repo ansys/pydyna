@@ -45,7 +45,7 @@ from ansys.dyna.core.lib.format_type import format_type
 class TestSeriesCardParameters:
     """Test parameter substitution in SeriesCard."""
 
-    @pytest.mark.keywords
+    
     def test_series_card_unbounded_with_single_parameter(self):
         """Test unbounded SeriesCard with one parameter reference."""
         parameter_set = ParameterSet()
@@ -69,7 +69,7 @@ class TestSeriesCardParameters:
         assert series.data[2] == 7850.0
         assert series.data[3] == 4.0
 
-    @pytest.mark.keywords
+    
     def test_series_card_unbounded_with_negative_parameter(self):
         """Test unbounded SeriesCard with negative parameter (-&param)."""
         parameter_set = ParameterSet()
@@ -92,7 +92,7 @@ class TestSeriesCardParameters:
         assert series.data[1] == -100.0
         assert series.data[2] == 3.0
 
-    @pytest.mark.keywords
+    
     def test_series_card_bounded_with_parameters(self):
         """Test bounded SeriesCard with parameters."""
         parameter_set = ParameterSet()
@@ -120,7 +120,7 @@ class TestSeriesCardParameters:
         assert series.data[4] == 5.0
         assert series.data[5] == 6.0
 
-    @pytest.mark.keywords
+    
     def test_series_card_integer_parameter(self):
         """Test SeriesCard with integer parameter."""
         parameter_set = ParameterSet()
@@ -143,7 +143,7 @@ class TestSeriesCardParameters:
         assert series.data[1] == 42
         assert series.data[2] == 3
 
-    @pytest.mark.keywords
+    
     def test_series_card_multiple_parameters_on_multiple_lines(self):
         """Test SeriesCard with parameters spread across multiple lines."""
         parameter_set = ParameterSet()
@@ -175,7 +175,7 @@ class TestSeriesCardParameters:
 class TestTableCardParameters:
     """Test parameter substitution in TableCard."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_unbounded_with_parameter(self):
         """Test unbounded TableCard with parameter in one field."""
         parameter_set = ParameterSet()
@@ -204,7 +204,7 @@ class TestTableCardParameters:
         assert table.table["nid"][1] == 2
         assert table.table["x"][1] == 200.5
 
-    @pytest.mark.keywords
+    
     def test_table_card_bounded_with_parameters(self):
         """Test bounded TableCard with parameters."""
         parameter_set = ParameterSet()
@@ -233,7 +233,7 @@ class TestTableCardParameters:
         assert table.table["y"][0] == 20.0
         assert table.table["z"][0] == 30.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_with_negative_parameter(self):
         """Test TableCard with negative parameter."""
         parameter_set = ParameterSet()
@@ -256,7 +256,7 @@ class TestTableCardParameters:
         assert table.table["value"][0] == -50.0
         assert table.table["value"][1] == 25.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_mixed_parameters_and_literals(self):
         """Test TableCard with some parameters and some literal values."""
         parameter_set = ParameterSet()
@@ -286,7 +286,7 @@ class TestTableCardParameters:
         assert table.table["y"][1] == 60.0
         assert table.table["z"][1] == 400.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_without_parameters_still_works(self):
         """Ensure TableCard without parameters still works (no regression)."""
         table = TableCard(
@@ -306,7 +306,7 @@ class TestTableCardParameters:
         assert table.table["x"][0] == 100.0
         assert table.table["x"][1] == 200.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_integer_parameter(self):
         """Test TableCard with integer parameter."""
         parameter_set = ParameterSet()
@@ -332,7 +332,7 @@ class TestTableCardParameters:
 class TestTableCardGroupParameters:
     """Test parameter substitution in TableCardGroup."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_with_parameters(self):
         """Test TableCardGroup with parameters across sub-cards."""
         from ansys.dyna.core.lib.field_schema import FieldSchema
@@ -367,7 +367,7 @@ class TestTableCardGroupParameters:
         assert group.table["id"][1] == 200
         assert group.table["value1"][1] == 11.5
 
-    @pytest.mark.keywords
+    
     def test_table_card_group_unbounded_with_parameters(self):
         """Test unbounded TableCardGroup with parameters."""
         from ansys.dyna.core.lib.field_schema import FieldSchema
@@ -402,7 +402,7 @@ class TestTableCardGroupParameters:
 class TestCSVFormatParameterSubstitution:
     """Test parameter substitution in CSV (comma-delimited) format."""
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_format_with_parameter(self):
         """Test TableCard with CSV format and parameter reference."""
         parameter_set = ParameterSet()
@@ -432,7 +432,7 @@ class TestCSVFormatParameterSubstitution:
         assert table.table["nid"][1] == 2
         assert table.table["x"][1] == 200.5
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_format_with_negative_parameter(self):
         """Test TableCard CSV format with negative parameter (-&param)."""
         parameter_set = ParameterSet()
@@ -455,7 +455,7 @@ class TestCSVFormatParameterSubstitution:
         assert table.table["value"][0] == -50.0  # -&offset = -50.0
         assert table.table["value"][1] == 25.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_format_multiple_parameters(self):
         """Test TableCard CSV format with multiple parameters in one row."""
         parameter_set = ParameterSet()
@@ -482,7 +482,7 @@ class TestCSVFormatParameterSubstitution:
         assert table.table["y"][0] == 2.0
         assert table.table["z"][0] == 3.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_format_integer_parameter(self):
         """Test TableCard CSV format with integer parameter."""
         parameter_set = ParameterSet()
@@ -504,7 +504,7 @@ class TestCSVFormatParameterSubstitution:
         assert table.table["nid"][0] == 1000  # &nodeid substituted
         assert table.table["x"][0] == 100.0
 
-    @pytest.mark.keywords
+    
     def test_table_card_csv_format_missing_parameter_raises_error(self):
         """Test TableCard CSV format with missing parameter raises KeyError."""
         parameter_set = ParameterSet()
@@ -528,7 +528,7 @@ class TestCSVFormatParameterSubstitution:
 class TestParameterSubstitutionEdgeCases:
     """Test edge cases and error conditions."""
 
-    @pytest.mark.keywords
+    
     def test_series_card_missing_parameter_raises_error(self):
         """Test that missing parameter raises KeyError."""
         parameter_set = ParameterSet()
@@ -548,7 +548,7 @@ class TestParameterSubstitutionEdgeCases:
         with pytest.raises(KeyError):
             series.read(buf, parameter_set)
 
-    @pytest.mark.keywords
+    
     def test_table_card_missing_parameter_raises_error(self):
         """Test that TableCard with missing parameter raises KeyError."""
         parameter_set = ParameterSet()
@@ -565,7 +565,7 @@ class TestParameterSubstitutionEdgeCases:
         with pytest.raises(KeyError):
             table.read(buf, parameter_set)
 
-    @pytest.mark.keywords
+    
     def test_series_card_type_mismatch_raises_error(self):
         """Test that parameter type mismatch raises TypeError."""
         parameter_set = ParameterSet()
@@ -585,7 +585,7 @@ class TestParameterSubstitutionEdgeCases:
         with pytest.raises(TypeError):
             series.read(buf, parameter_set)
 
-    @pytest.mark.keywords
+    
     def test_table_card_parameter_none_set_raises_error(self):
         """Test that parameter reference without parameter_set raises error."""
         table = TableCard(

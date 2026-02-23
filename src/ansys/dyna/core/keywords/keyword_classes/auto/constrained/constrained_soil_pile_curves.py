@@ -383,7 +383,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self._cards[5].set_value("hlcsv", value)
 
     @property
-    def blcz_link(self) -> DefineCurve:
+    def blcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for blcz."""
         if self.deck is None:
             return None
@@ -398,7 +398,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.blcz = value.lcid
 
     @property
-    def blc_link(self) -> DefineCurve:
+    def blc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for blc."""
         if self.deck is None:
             return None
@@ -413,7 +413,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.blc = value.lcid
 
     @property
-    def blcsh_link(self) -> DefineCurve:
+    def blcsh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for blcsh."""
         if self.deck is None:
             return None
@@ -428,7 +428,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.blcsh = value.lcid
 
     @property
-    def blcsv_link(self) -> DefineCurve:
+    def blcsv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for blcsv."""
         if self.deck is None:
             return None
@@ -443,7 +443,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.blcsv = value.lcid
 
     @property
-    def vlcz_link(self) -> DefineCurve:
+    def vlcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcz."""
         if self.deck is None:
             return None
@@ -458,7 +458,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.vlcz = value.lcid
 
     @property
-    def vlc_link(self) -> DefineCurve:
+    def vlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlc."""
         if self.deck is None:
             return None
@@ -473,7 +473,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.vlc = value.lcid
 
     @property
-    def vlcsh_link(self) -> DefineCurve:
+    def vlcsh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcsh."""
         if self.deck is None:
             return None
@@ -488,7 +488,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.vlcsh = value.lcid
 
     @property
-    def vlcsv_link(self) -> DefineCurve:
+    def vlcsv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcsv."""
         if self.deck is None:
             return None
@@ -503,7 +503,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.vlcsv = value.lcid
 
     @property
-    def hlcz_link(self) -> DefineCurve:
+    def hlcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcz."""
         if self.deck is None:
             return None
@@ -518,7 +518,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.hlcz = value.lcid
 
     @property
-    def hlc_link(self) -> DefineCurve:
+    def hlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlc."""
         if self.deck is None:
             return None
@@ -533,7 +533,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.hlc = value.lcid
 
     @property
-    def hlcsh_link(self) -> DefineCurve:
+    def hlcsh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcsh."""
         if self.deck is None:
             return None
@@ -548,7 +548,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.hlcsh = value.lcid
 
     @property
-    def hlcsv_link(self) -> DefineCurve:
+    def hlcsv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcsv."""
         if self.deck is None:
             return None
@@ -563,7 +563,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.hlcsv = value.lcid
 
     @property
-    def pbsid_link(self) -> KeywordBase:
+    def pbsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pbsid."""
         return self._get_set_link("PART", self.pbsid)
 
@@ -573,17 +573,17 @@ class ConstrainedSoilPileCurves(KeywordBase):
         self.pbsid = value.sid
 
     @property
-    def pidns_link(self) -> KeywordBase:
+    def pidns_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidns."""
         return self._get_link_by_attr("PART", "pid", self.pidns, "parts")
 
     @property
-    def pidnb_link(self) -> KeywordBase:
+    def pidnb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidnb."""
         return self._get_link_by_attr("PART", "pid", self.pidnb, "parts")
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

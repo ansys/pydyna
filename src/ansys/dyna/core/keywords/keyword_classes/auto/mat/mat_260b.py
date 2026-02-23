@@ -740,7 +740,7 @@ class Mat260B(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcids_link(self) -> DefineCurve:
+    def lcids_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcids."""
         if self.deck is None:
             return None
@@ -755,7 +755,7 @@ class Mat260B(KeywordBase):
         self.lcids = value.lcid
 
     @property
-    def lcidv_link(self) -> DefineCurve:
+    def lcidv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidv."""
         if self.deck is None:
             return None
@@ -770,7 +770,7 @@ class Mat260B(KeywordBase):
         self.lcidv = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -785,7 +785,7 @@ class Mat260B(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lfld_link(self) -> DefineCurve:
+    def lfld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lfld."""
         if self.deck is None:
             return None
@@ -800,7 +800,7 @@ class Mat260B(KeywordBase):
         self.lfld = value.lcid
 
     @property
-    def lfrac_link(self) -> DefineCurve:
+    def lfrac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lfrac."""
         if self.deck is None:
             return None

@@ -291,7 +291,7 @@ class IncludeTransform(KeywordBase):
     @property
     def tranid(self) -> int:
         """Get or set the Transformation ID.
-        EQ.0: no tranformation will be applied.  See the input *DEFINE_TRANSFORM.
+        EQ.0: no transformation will be applied.  See the input *DEFINE_TRANSFORM.
         """ # nopep8
         return self._cards[4].get_value("tranid")
 
@@ -301,7 +301,7 @@ class IncludeTransform(KeywordBase):
         self._cards[4].set_value("tranid", value)
 
     @property
-    def tranid_link(self) -> DefineTransformation:
+    def tranid_link(self) -> typing.Optional[DefineTransformation]:
         """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None

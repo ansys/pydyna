@@ -449,7 +449,7 @@ class MatAddInelasticity(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

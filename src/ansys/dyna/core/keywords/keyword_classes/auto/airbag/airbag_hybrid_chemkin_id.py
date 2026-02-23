@@ -691,7 +691,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self._cards[9].set_value("e", value)
 
     @property
-    def lcidm_link(self) -> DefineCurve:
+    def lcidm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm."""
         if self.deck is None:
             return None
@@ -706,7 +706,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self.lcidm = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -721,7 +721,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidn_link(self) -> DefineCurve:
+    def lcidn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidn."""
         if self.deck is None:
             return None

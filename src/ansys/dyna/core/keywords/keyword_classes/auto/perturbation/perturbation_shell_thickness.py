@@ -432,7 +432,7 @@ class PerturbationShellThickness(KeywordBase):
         self._cards[6].set_value("dtype", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

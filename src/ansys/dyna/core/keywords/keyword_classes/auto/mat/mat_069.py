@@ -336,7 +336,7 @@ class Mat069(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidf_link(self) -> DefineCurve:
+    def lcidf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidf."""
         if self.deck is None:
             return None
@@ -351,7 +351,7 @@ class Mat069(KeywordBase):
         self.lcidf = value.lcid
 
     @property
-    def lcidd_link(self) -> DefineCurve:
+    def lcidd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidd."""
         if self.deck is None:
             return None

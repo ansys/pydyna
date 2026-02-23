@@ -177,7 +177,7 @@ class DatabaseNcforcFilter(KeywordBase):
         self._cards[1].set_value("type", value)
 
     @property
-    def lcur_link(self) -> DefineCurve:
+    def lcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur."""
         if self.deck is None:
             return None

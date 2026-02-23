@@ -84,7 +84,7 @@ class ElementMassPartSet(KeywordBase):
         self._cards[0].set_value("finmass", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

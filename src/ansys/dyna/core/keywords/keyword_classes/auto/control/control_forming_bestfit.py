@@ -167,7 +167,7 @@ class ControlFormingBestfit(KeywordBase):
         self._cards[1].set_value("filename", value)
 
     @property
-    def nsets_link(self) -> KeywordBase:
+    def nsets_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsets."""
         return self._get_set_link("NODE", self.nsets)
 
@@ -177,7 +177,7 @@ class ControlFormingBestfit(KeywordBase):
         self.nsets = value.sid
 
     @property
-    def nsett_link(self) -> KeywordBase:
+    def nsett_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsett."""
         return self._get_set_link("NODE", self.nsett)
 

@@ -594,7 +594,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -609,7 +609,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -624,7 +624,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lctsrf_link(self) -> DefineCurve:
+    def lctsrf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctsrf."""
         if self.deck is None:
             return None
@@ -639,7 +639,7 @@ class MatModifiedPiecewiseLinearPlasticityRtcl(KeywordBase):
         self.lctsrf = value.lcid
 
     @property
-    def lcemod_link(self) -> DefineCurve:
+    def lcemod_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcemod."""
         if self.deck is None:
             return None

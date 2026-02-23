@@ -360,7 +360,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg_link(self) -> DefineCurve:
+    def lcg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg."""
         if self.deck is None:
             return None
@@ -375,7 +375,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
         self.lcg = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -390,7 +390,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def lci_link(self) -> DefineCurve:
+    def lci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lci."""
         if self.deck is None:
             return None
@@ -405,7 +405,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
         self.lci = value.lcid
 
     @property
-    def lck1_link(self) -> KeywordBase:
+    def lck1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lck1."""
         if self.deck is None:
             return None
@@ -429,7 +429,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
             self.lck1 = value.tbid
 
     @property
-    def lckt_link(self) -> KeywordBase:
+    def lckt_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lckt."""
         if self.deck is None:
             return None
@@ -453,7 +453,7 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
             self.lckt = value.tbid
 
     @property
-    def lcf_link(self) -> KeywordBase:
+    def lcf_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcf."""
         if self.deck is None:
             return None

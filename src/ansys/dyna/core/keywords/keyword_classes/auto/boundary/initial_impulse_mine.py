@@ -250,12 +250,12 @@ class InitialImpulseMine(KeywordBase):
         self._cards[1].set_value("search", value)
 
     @property
-    def nidmc_link(self) -> KeywordBase:
+    def nidmc_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidmc."""
         return self._get_link_by_attr("NODE", "nid", self.nidmc, "parts")
 
     @property
-    def gvid_link(self) -> DefineVector:
+    def gvid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for gvid."""
         if self.deck is None:
             return None
@@ -270,7 +270,7 @@ class InitialImpulseMine(KeywordBase):
         self.gvid = value.vid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 
@@ -280,7 +280,7 @@ class InitialImpulseMine(KeywordBase):
         self.psid = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

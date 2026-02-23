@@ -197,12 +197,12 @@ class BoundarySphFlow(KeywordBase):
         self._cards[1].set_value("vid", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -217,7 +217,7 @@ class BoundarySphFlow(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

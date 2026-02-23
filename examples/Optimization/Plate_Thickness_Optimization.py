@@ -47,11 +47,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 
 # from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.local_solver import run_dyna
 from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 # from ansys.dyna.core.run.windows_runner import WindowsRunner
 

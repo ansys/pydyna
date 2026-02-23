@@ -354,7 +354,7 @@ class DefineConnectionProperties(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def dcsn_link(self) -> DefineCurve:
+    def dcsn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dcsn."""
         if self.deck is None:
             return None
@@ -369,7 +369,7 @@ class DefineConnectionProperties(KeywordBase):
         self.dcsn = value.lcid
 
     @property
-    def dlcsb_link(self) -> DefineCurve:
+    def dlcsb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcsb."""
         if self.deck is None:
             return None
@@ -384,7 +384,7 @@ class DefineConnectionProperties(KeywordBase):
         self.dlcsb = value.lcid
 
     @property
-    def dlcss_link(self) -> DefineCurve:
+    def dlcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcss."""
         if self.deck is None:
             return None

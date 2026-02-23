@@ -241,7 +241,7 @@ class ControlDynamicRelaxation(KeywordBase):
         self._cards[3].set_value("vecid", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None
@@ -256,7 +256,7 @@ class ControlDynamicRelaxation(KeywordBase):
         self.vecid = value.vid
 
     @property
-    def drpset_link(self) -> KeywordBase:
+    def drpset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drpset."""
         return self._get_set_link("PART", self.drpset)
 

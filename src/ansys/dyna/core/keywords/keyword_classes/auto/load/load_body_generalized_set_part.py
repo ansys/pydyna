@@ -244,7 +244,7 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         self._cards[1].set_value("angtyp", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -259,7 +259,7 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def drlcid_link(self) -> DefineCurve:
+    def drlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for drlcid."""
         if self.deck is None:
             return None
@@ -274,7 +274,7 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         self.drlcid = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -289,7 +289,7 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
         self.cid = value.cid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

@@ -128,12 +128,12 @@ class LoadShellElement(KeywordBase):
         self._cards[1].set_value("at", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

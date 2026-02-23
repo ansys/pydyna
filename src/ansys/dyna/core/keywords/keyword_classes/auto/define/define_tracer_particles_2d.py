@@ -108,7 +108,7 @@ class DefineTracerParticles2D(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nset_link(self) -> KeywordBase:
+    def nset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nset."""
         return self._get_set_link("NODE", self.nset)
 
@@ -118,7 +118,7 @@ class DefineTracerParticles2D(KeywordBase):
         self.nset = value.sid
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

@@ -242,7 +242,7 @@ class MatCohesiveGasket(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc_link(self) -> DefineCurve:
+    def lc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc."""
         if self.deck is None:
             return None

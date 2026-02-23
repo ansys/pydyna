@@ -134,12 +134,12 @@ class ElementBeamSource(KeywordBase):
         self._cards[0].set_value("lmin", value)
 
     @property
-    def bsnid_link(self) -> KeywordBase:
+    def bsnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given bsnid."""
         return self._get_link_by_attr("NODE", "nid", self.bsnid, "parts")
 
     @property
-    def bseid_link(self) -> KeywordBase:
+    def bseid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bseid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bseid, "parts")
 

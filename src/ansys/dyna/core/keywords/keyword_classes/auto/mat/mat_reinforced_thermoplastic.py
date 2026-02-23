@@ -772,7 +772,7 @@ class MatReinforcedThermoplastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcem_link(self) -> DefineCurve:
+    def lcem_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcem."""
         if self.deck is None:
             return None
@@ -787,7 +787,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcem = value.lcid
 
     @property
-    def lcprm_link(self) -> DefineCurve:
+    def lcprm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcprm."""
         if self.deck is None:
             return None
@@ -802,7 +802,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcprm = value.lcid
 
     @property
-    def lcef1_link(self) -> DefineCurve:
+    def lcef1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef1."""
         if self.deck is None:
             return None
@@ -817,7 +817,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcef1 = value.lcid
 
     @property
-    def lcg12_link(self) -> DefineCurve:
+    def lcg12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg12."""
         if self.deck is None:
             return None
@@ -832,7 +832,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcg12 = value.lcid
 
     @property
-    def lcef2_link(self) -> DefineCurve:
+    def lcef2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef2."""
         if self.deck is None:
             return None
@@ -847,7 +847,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcef2 = value.lcid
 
     @property
-    def lcg23_link(self) -> DefineCurve:
+    def lcg23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg23."""
         if self.deck is None:
             return None
@@ -862,7 +862,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcg23 = value.lcid
 
     @property
-    def lcef3_link(self) -> DefineCurve:
+    def lcef3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef3."""
         if self.deck is None:
             return None
@@ -877,7 +877,7 @@ class MatReinforcedThermoplastic(KeywordBase):
         self.lcef3 = value.lcid
 
     @property
-    def lcsigy_link(self) -> KeywordBase:
+    def lcsigy_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsigy."""
         if self.deck is None:
             return None

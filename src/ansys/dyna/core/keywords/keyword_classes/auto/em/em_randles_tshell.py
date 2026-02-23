@@ -497,7 +497,7 @@ class EmRandlesTshell(KeywordBase):
         self._cards[5].set_value("flcid", value)
 
     @property
-    def flcid_link(self) -> DefineCurve:
+    def flcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for flcid."""
         if self.deck is None:
             return None
@@ -512,7 +512,7 @@ class EmRandlesTshell(KeywordBase):
         self.flcid = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

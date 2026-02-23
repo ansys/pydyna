@@ -636,7 +636,7 @@ class MatAddGeneralizedDamage(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -651,7 +651,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcsdg_link(self) -> DefineCurve:
+    def lcsdg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsdg."""
         if self.deck is None:
             return None
@@ -666,7 +666,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcsdg = value.lcid
 
     @property
-    def lcreg_link(self) -> DefineCurve:
+    def lcreg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcreg."""
         if self.deck is None:
             return None
@@ -681,7 +681,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcreg = value.lcid
 
     @property
-    def lcsrs_link(self) -> DefineCurve:
+    def lcsrs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrs."""
         if self.deck is None:
             return None
@@ -696,7 +696,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcsrs = value.lcid
 
     @property
-    def lcdlim_link(self) -> DefineCurve:
+    def lcdlim_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdlim."""
         if self.deck is None:
             return None

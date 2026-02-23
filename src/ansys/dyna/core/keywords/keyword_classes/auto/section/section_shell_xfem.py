@@ -814,7 +814,7 @@ class SectionShellXfem(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cmid_link(self) -> KeywordBase:
+    def cmid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for cmid."""
         if self.deck is None:
             return None

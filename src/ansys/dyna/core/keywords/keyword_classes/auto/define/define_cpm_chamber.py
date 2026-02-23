@@ -205,7 +205,7 @@ class DefineCpmChamber(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sid1_link(self) -> KeywordBase:
+    def sid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sid1."""
         return self._get_set_link("PART", self.sid1)
 
@@ -215,7 +215,7 @@ class DefineCpmChamber(KeywordBase):
         self.sid1 = value.sid
 
     @property
-    def sid2_link(self) -> KeywordBase:
+    def sid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sid2."""
         return self._get_set_link("PART", self.sid2)
 

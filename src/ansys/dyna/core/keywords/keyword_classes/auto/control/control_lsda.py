@@ -169,42 +169,42 @@ class ControlLsda(KeywordBase):
         self._cards[1].set_value("p8", value)
 
     @property
-    def p1_link(self) -> KeywordBase:
+    def p1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p1."""
         return self._get_link_by_attr("PART", "pid", self.p1, "parts")
 
     @property
-    def p2_link(self) -> KeywordBase:
+    def p2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p2."""
         return self._get_link_by_attr("PART", "pid", self.p2, "parts")
 
     @property
-    def p3_link(self) -> KeywordBase:
+    def p3_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p3."""
         return self._get_link_by_attr("PART", "pid", self.p3, "parts")
 
     @property
-    def p4_link(self) -> KeywordBase:
+    def p4_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p4."""
         return self._get_link_by_attr("PART", "pid", self.p4, "parts")
 
     @property
-    def p5_link(self) -> KeywordBase:
+    def p5_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p5."""
         return self._get_link_by_attr("PART", "pid", self.p5, "parts")
 
     @property
-    def p6_link(self) -> KeywordBase:
+    def p6_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p6."""
         return self._get_link_by_attr("PART", "pid", self.p6, "parts")
 
     @property
-    def p7_link(self) -> KeywordBase:
+    def p7_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p7."""
         return self._get_link_by_attr("PART", "pid", self.p7, "parts")
 
     @property
-    def p8_link(self) -> KeywordBase:
+    def p8_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given p8."""
         return self._get_link_by_attr("PART", "pid", self.p8, "parts")
 

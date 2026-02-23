@@ -599,7 +599,7 @@ class Mat106(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -614,7 +614,7 @@ class Mat106(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None
@@ -629,7 +629,7 @@ class Mat106(KeywordBase):
         self.lce = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -644,7 +644,7 @@ class Mat106(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsigy_link(self) -> DefineCurve:
+    def lcsigy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsigy."""
         if self.deck is None:
             return None
@@ -659,7 +659,7 @@ class Mat106(KeywordBase):
         self.lcsigy = value.lcid
 
     @property
-    def lcr_link(self) -> DefineCurve:
+    def lcr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcr."""
         if self.deck is None:
             return None
@@ -674,7 +674,7 @@ class Mat106(KeywordBase):
         self.lcr = value.lcid
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -689,7 +689,7 @@ class Mat106(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcalph_link(self) -> DefineCurve:
+    def lcalph_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcalph."""
         if self.deck is None:
             return None
@@ -704,7 +704,7 @@ class Mat106(KeywordBase):
         self.lcalph = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -719,7 +719,7 @@ class Mat106(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None

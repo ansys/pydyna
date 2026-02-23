@@ -1003,7 +1003,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccf_link(self) -> DefineCurve:
+    def lccf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccf."""
         if self.deck is None:
             return None
@@ -1018,7 +1018,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
         self.lccf = value.lcid
 
     @property
-    def lck1f_link(self) -> DefineCurve:
+    def lck1f_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck1f."""
         if self.deck is None:
             return None
@@ -1033,7 +1033,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
         self.lck1f = value.lcid
 
     @property
-    def lcci_link(self) -> DefineCurve:
+    def lcci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcci."""
         if self.deck is None:
             return None
@@ -1048,7 +1048,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
         self.lcci = value.lcid
 
     @property
-    def lck1i_link(self) -> DefineCurve:
+    def lck1i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck1i."""
         if self.deck is None:
             return None
@@ -1063,7 +1063,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
         self.lck1i = value.lcid
 
     @property
-    def lck2i_link(self) -> DefineCurve:
+    def lck2i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck2i."""
         if self.deck is None:
             return None
@@ -1078,7 +1078,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
         self.lck2i = value.lcid
 
     @property
-    def lck3i_link(self) -> DefineCurve:
+    def lck3i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck3i."""
         if self.deck is None:
             return None

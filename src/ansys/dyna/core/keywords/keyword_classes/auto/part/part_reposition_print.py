@@ -250,7 +250,7 @@ class PartRepositionPrint(KeywordBase):
         self._cards[3].set_value("prbf", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -265,7 +265,7 @@ class PartRepositionPrint(KeywordBase):
         self.mid = value.mid
 
     @property
-    def secid_link(self) -> KeywordBase:
+    def secid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for secid."""
         if self.deck is None:
             return None
@@ -280,7 +280,7 @@ class PartRepositionPrint(KeywordBase):
         self.secid = value.secid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None

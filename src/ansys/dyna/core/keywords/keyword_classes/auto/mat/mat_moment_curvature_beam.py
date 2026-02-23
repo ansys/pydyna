@@ -701,7 +701,7 @@ class MatMomentCurvatureBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def elaf_link(self) -> DefineCurve:
+    def elaf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for elaf."""
         if self.deck is None:
             return None

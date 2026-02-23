@@ -412,7 +412,7 @@ class Mat124(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidc_link(self) -> DefineCurve:
+    def lcidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc."""
         if self.deck is None:
             return None
@@ -427,7 +427,7 @@ class Mat124(KeywordBase):
         self.lcidc = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -442,7 +442,7 @@ class Mat124(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcsrc_link(self) -> DefineCurve:
+    def lcsrc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrc."""
         if self.deck is None:
             return None
@@ -457,7 +457,7 @@ class Mat124(KeywordBase):
         self.lcsrc = value.lcid
 
     @property
-    def lcsrt_link(self) -> DefineCurve:
+    def lcsrt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrt."""
         if self.deck is None:
             return None
@@ -472,7 +472,7 @@ class Mat124(KeywordBase):
         self.lcsrt = value.lcid
 
     @property
-    def lcfail_link(self) -> DefineCurve:
+    def lcfail_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfail."""
         if self.deck is None:
             return None

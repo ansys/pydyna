@@ -310,7 +310,7 @@ class Mat171(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bcur_link(self) -> DefineCurve:
+    def bcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for bcur."""
         if self.deck is None:
             return None

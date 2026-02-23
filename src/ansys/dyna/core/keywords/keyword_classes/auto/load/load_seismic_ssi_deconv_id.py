@@ -287,7 +287,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         self._cards[2].set_value("vdir", value)
 
     @property
-    def gmx_link(self) -> DefineCurve:
+    def gmx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmx."""
         if self.deck is None:
             return None
@@ -302,7 +302,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         self.gmx = value.lcid
 
     @property
-    def gmy_link(self) -> DefineCurve:
+    def gmy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmy."""
         if self.deck is None:
             return None
@@ -317,7 +317,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         self.gmy = value.lcid
 
     @property
-    def gmz_link(self) -> DefineCurve:
+    def gmz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmz."""
         if self.deck is None:
             return None
@@ -332,7 +332,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         self.gmz = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -347,7 +347,7 @@ class LoadSeismicSsiDeconvId(KeywordBase):
         self.cid = value.cid
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

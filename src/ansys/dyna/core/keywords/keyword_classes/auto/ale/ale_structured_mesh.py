@@ -186,12 +186,12 @@ class AleStructuredMesh(KeywordBase):
         self._cards[1].set_value("lcsid", value)
 
     @property
-    def nid0_link(self) -> KeywordBase:
+    def nid0_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid0."""
         return self._get_link_by_attr("NODE", "nid", self.nid0, "parts")
 
     @property
-    def lcsid_link(self) -> DefineCoordinateSystem:
+    def lcsid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for lcsid."""
         if self.deck is None:
             return None

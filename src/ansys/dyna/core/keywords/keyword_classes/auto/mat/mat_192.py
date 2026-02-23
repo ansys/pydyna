@@ -293,7 +293,7 @@ class Mat192(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def rlcid_link(self) -> DefineCurve:
+    def rlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for rlcid."""
         if self.deck is None:
             return None

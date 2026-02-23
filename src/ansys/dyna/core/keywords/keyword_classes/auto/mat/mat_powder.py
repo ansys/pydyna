@@ -602,7 +602,7 @@ class MatPowder(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lck_link(self) -> DefineCurve:
+    def lck_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck."""
         if self.deck is None:
             return None
@@ -617,7 +617,7 @@ class MatPowder(KeywordBase):
         self.lck = value.lcid
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -632,7 +632,7 @@ class MatPowder(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcy_link(self) -> DefineCurve:
+    def lcy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy."""
         if self.deck is None:
             return None
@@ -647,7 +647,7 @@ class MatPowder(KeywordBase):
         self.lcy = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -662,7 +662,7 @@ class MatPowder(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -677,7 +677,7 @@ class MatPowder(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def lcfi_link(self) -> DefineCurve:
+    def lcfi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfi."""
         if self.deck is None:
             return None
@@ -692,7 +692,7 @@ class MatPowder(KeywordBase):
         self.lcfi = value.lcid
 
     @property
-    def lcfk_link(self) -> DefineCurve:
+    def lcfk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfk."""
         if self.deck is None:
             return None
@@ -707,7 +707,7 @@ class MatPowder(KeywordBase):
         self.lcfk = value.lcid
 
     @property
-    def lcfs2_link(self) -> DefineCurve:
+    def lcfs2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs2."""
         if self.deck is None:
             return None
@@ -722,7 +722,7 @@ class MatPowder(KeywordBase):
         self.lcfs2 = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -737,7 +737,7 @@ class MatPowder(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcfs3_link(self) -> DefineCurve:
+    def lcfs3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs3."""
         if self.deck is None:
             return None
@@ -752,7 +752,7 @@ class MatPowder(KeywordBase):
         self.lcfs3 = value.lcid
 
     @property
-    def lctau_link(self) -> DefineCurve:
+    def lctau_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctau."""
         if self.deck is None:
             return None
@@ -767,7 +767,7 @@ class MatPowder(KeywordBase):
         self.lctau = value.lcid
 
     @property
-    def lcfs1_link(self) -> DefineCurve:
+    def lcfs1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs1."""
         if self.deck is None:
             return None
@@ -782,7 +782,7 @@ class MatPowder(KeywordBase):
         self.lcfs1 = value.lcid
 
     @property
-    def lcfks_link(self) -> DefineCurve:
+    def lcfks_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfks."""
         if self.deck is None:
             return None

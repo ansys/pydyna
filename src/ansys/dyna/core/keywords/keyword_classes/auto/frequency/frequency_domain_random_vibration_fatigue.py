@@ -887,7 +887,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self._cards[8].set_value("filename", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -902,7 +902,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def ldpsd_link(self) -> DefineCurve:
+    def ldpsd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd."""
         if self.deck is None:
             return None
@@ -917,7 +917,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldpsd = value.lcid
 
     @property
-    def ldvel_link(self) -> DefineCurve:
+    def ldvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldvel."""
         if self.deck is None:
             return None
@@ -932,7 +932,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldvel = value.lcid
 
     @property
-    def ldflw_link(self) -> DefineCurve:
+    def ldflw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldflw."""
         if self.deck is None:
             return None
@@ -947,7 +947,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldflw = value.lcid
 
     @property
-    def ldspn_link(self) -> DefineCurve:
+    def ldspn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldspn."""
         if self.deck is None:
             return None
@@ -962,7 +962,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldspn = value.lcid
 
     @property
-    def ldpsd1_link(self) -> DefineCurve:
+    def ldpsd1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd1."""
         if self.deck is None:
             return None
@@ -977,7 +977,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldpsd1 = value.lcid
 
     @property
-    def ldpsd2_link(self) -> DefineCurve:
+    def ldpsd2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd2."""
         if self.deck is None:
             return None
@@ -992,7 +992,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.ldpsd2 = value.lcid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -1007,7 +1007,7 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

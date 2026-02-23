@@ -512,7 +512,7 @@ class MatHystereticSoil(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -527,7 +527,7 @@ class MatHystereticSoil(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcd_link(self) -> DefineCurve:
+    def lcd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd."""
         if self.deck is None:
             return None
@@ -542,7 +542,7 @@ class MatHystereticSoil(KeywordBase):
         self.lcd = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
