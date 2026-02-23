@@ -34,6 +34,12 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     git \
+    libgomp1 \
+    libatomic1 \
+    libquadmath0 \
+    libnuma1 \
+    libgfortran5 \
+    libstdc++6 \
     openmpi-bin \
     libopenmpi-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -64,6 +70,9 @@ RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
 # --------------------
 RUN test -d "${INSTALL_DIR}/${DYNA_PATH}"
 
+# Ensure executables are executable
+RUN chmod -R +x "${INSTALL_DIR}/${DYNA_PATH}/"
+
 # --------------------
 # License config
 # --------------------
@@ -74,6 +83,7 @@ RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${DYNA_PATH}/LSTC_FILE && \
 # PATH
 # --------------------
 ENV PATH="${INSTALL_DIR}/${DYNA_PATH}:${PATH}"
+ENV LD_LIBRARY_PATH="${INSTALL_DIR}/${DYNA_PATH}:${LD_LIBRARY_PATH}"
 
 # --------------------
 # Runtime dir
