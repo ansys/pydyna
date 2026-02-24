@@ -555,7 +555,7 @@ def test_deck_expand_with_define_transform(file_utils):
     xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
     xform.tranid_link = define_transform_kwd
     deck.extend([define_transform_kwd, xform])
-    with pytest.warns(UserWarning, match="DEFINE_TRANFORMATION ROTATE option with parameters"):
+    with pytest.warns(UserWarning, match="DEFINE_TRANSFORMATION ROTATE option with parameters"):
         deck.expand()
 
     # multiple transforms
