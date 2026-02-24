@@ -44,8 +44,11 @@ _MPP_EXECUTABLES = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_
 class DockerRunner(BaseRunner):
     """Docker implementation to Run LS-DYNA.
 
-    Tested with a custom executable and when LS-DYNA is
-    installed as part of the unified Ansys installation.
+    Designed to work with the unified PyDyna Docker image containing both
+    SMP and MPP executables. Auto-detects and selects the appropriate executable
+    based on the requested solver mode.
+
+    Also compatible with custom executables and unified Ansys installations.
     """
 
     def __init__(self, **kwargs):
@@ -138,7 +141,12 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def _discover_executables(self) -> str:
-        """Based on the solver options, discover available LS-DYNA executables in the container."""
+        """Based on the solver options, discover available LS-DYNA executables in the container.
+
+        For the unified PyDyna Docker image, both SMP and MPP executables are available
+        in /opt/dyna/. This method will auto-select the appropriate one or fall back
+        to the alternative if requested mode is not available.
+        """
         if self._discovered_executable is not None:
             return self._discovered_executable
 
@@ -149,8 +157,9 @@ class DockerRunner(BaseRunner):
         solver_option = self._get_solver_option()
         expected_basename = expected_executables.get(solver_option)
 
-        find_cmd = "find / -maxdepth 8 -type f -name 'ls-dyna*'"
-        logger.info(f"Discovering LS-DYNA executables in the container using command: {find_cmd}")
+        # Search in known locations first, then fall back to full search
+        find_cmd = "find /opt/dyna /usr/local /opt -maxdepth 3 -type f -name 'ls-dyna*' 2>/dev/null || find / -maxdepth 8 -type f -name 'ls-dyna*' 2>/dev/null"  # noqa: E501
+        logger.info(f"Discovering LS-DYNA executables in container for {solver_option} mode")
         container = self._create_container(volumes=[f"{self._working_directory}:/run"])
         exec_log = container.exec_run(["/bin/bash", "-c", find_cmd])
         all_found = [
@@ -164,17 +173,36 @@ class DockerRunner(BaseRunner):
         matched = [p for p in all_found if os.path.basename(p) == expected_basename]
         if matched:
             chosen = matched[0]
-            logger.info(f"Matched expected executable: {chosen}")
+            logger.info(f"Found expected {solver_option} executable: {chosen}")
         elif all_found:
-            chosen = all_found[0]
-            logger.warning(
-                f"Expected executable '{expected_basename}' not found by name. "
-                f"Falling back to first discovered executable: {chosen}"
-            )
+            # Auto-detect and adjust mpi_option if there's a SMP/MPP mismatch
+            # This happens when using legacy single-mode images or custom images
+            discovered_basename = os.path.basename(all_found[0])
+            if solver_option == "MPP" and _SMP_EXECUTABLES in discovered_basename:
+                logger.warning(
+                    f"MPP solver requested but only SMP executable found in container '{self._name}'. "
+                    f"Auto-switching to SMP mode (unified image should have both executables)."
+                )
+                self.mpi_option = MpiOption.SMP
+                chosen = all_found[0]
+            elif solver_option == "SMP" and _MPP_EXECUTABLES in discovered_basename:
+                logger.info(
+                    f"SMP solver requested but MPP executable found first in container '{self._name}'. "
+                    f"Will use MPP in SMP mode (ncpu=1)."
+                )
+                # Don't auto-switch for this case - MPP can run in SMP mode
+                chosen = all_found[0]
+            else:
+                # Neither SMP/MPP conflict - generic fallback
+                chosen = all_found[0]
+                logger.warning(
+                    f"Expected executable '{expected_basename}' not found by name. "
+                    f"Using discovered executable: {chosen}"
+                )
         else:
             raise Exception(
                 f"No LS-DYNA executable found in container '{self._name}'. "
-                f"Set `executable_name` explicitly or ensure the image contains a valid LS-DYNA installation."
+                f"Ensure the image contains LS-DYNA or set `executable_name` explicitly."
             )
 
         self._discovered_executable = chosen

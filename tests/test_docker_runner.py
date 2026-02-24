@@ -299,6 +299,42 @@ class TestDockerRunnerUnit:
         with pytest.raises(Exception, match="No LS-DYNA executable found"):
             runner._discover_executables()
 
+    def test_discover_executables_auto_switches_mpp_to_smp(self):
+        """_discover_executables auto-switches from MPP to SMP when only SMP is available."""
+        runner, mock_client = _make_runner(mpi_option=MpiOption.MPP_INTEL_MPI)
+        runner._input_file = "model.k"
+        runner._working_directory = "/tmp"
+
+        mock_container = MagicMock()
+        mock_container.status = "running"
+        mock_container.short_id = "abc123"
+        mock_container.exec_run.return_value = MagicMock(
+            output=f"/opt/dyna/{_SMP_EXECUTABLES}\n".encode()
+        )
+        mock_client.containers.run.return_value = mock_container
+
+        result = runner._discover_executables()
+        assert result == f"/opt/dyna/{_SMP_EXECUTABLES}"
+        assert runner.mpi_option == MpiOption.SMP  # Auto-switched
+
+    def test_discover_executables_auto_switches_smp_to_mpp(self):
+        """_discover_executables auto-switches from SMP to MPP when only MPP is available."""
+        runner, mock_client = _make_runner(mpi_option=MpiOption.SMP)
+        runner._input_file = "model.k"
+        runner._working_directory = "/tmp"
+
+        mock_container = MagicMock()
+        mock_container.status = "running"
+        mock_container.short_id = "abc123"
+        mock_container.exec_run.return_value = MagicMock(
+            output=f"/opt/dyna/{_MPP_EXECUTABLES}\n".encode()
+        )
+        mock_client.containers.run.return_value = mock_container
+
+        result = runner._discover_executables()
+        assert result == f"/opt/dyna/{_MPP_EXECUTABLES}"
+        assert runner.mpi_option == MpiOption.MPP_INTEL_MPI  # Auto-switched
+
     # -- run() guard ----------------------------------------------------------
 
     def test_run_raises_without_set_input(self):

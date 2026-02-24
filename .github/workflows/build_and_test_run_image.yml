@@ -1,20 +1,15 @@
-name: Nightly Build and Test PyDyna Run Docker Images
+name: Build and Test PyDyna Run Docker Image (PR/Manual)
 on:
-  # test purpose
   pull_request:
-  schedule:
-    - cron: '0 0 * * *' # Daily at midnight UTC
+    paths:
+      - 'docker/run/**'
+      - '.github/workflows/build_and_test_run_image.yml'
   workflow_dispatch:
     inputs:
-      pydyna-run-mpp-tag:
-        description: 'MPP Container tag for development testing'
+      pydyna-run-tag:
+        description: 'Container tag for development testing (unified image with both SMP and MPP)'
         required: false
-        default: dev-mpp
-
-      pydyna-run-smp-tag:
-        description: 'SMP Container tag for development testing'
-        required: false
-        default: dev-smp
+        default: dev
 
 
 permissions: {}
@@ -33,23 +28,11 @@ env:
 
 jobs:
   test-docker-build:
-    name: Build ${{ matrix.image-type }} Docker image and run tests
+    name: Build unified Docker image (SMP + MPP) and run tests
     runs-on: ubuntu-latest
     permissions:
       contents: read  # Needed to checkout code
       packages: write # Needed for pushing test image to GHCR
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - image-type: smp
-            context: docker/run/SMP
-            dockerfile: docker/run/SMP/Dockerfile
-            docker-image: pydyna-run:dev-smp
-          - image-type: mpp
-            context: docker/run/MPP
-            dockerfile: docker/run/MPP/Dockerfile
-            docker-image: pydyna-run:dev-mpp
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
@@ -71,59 +54,41 @@ jobs:
           source .venv/bin/activate
           uv pip install -e .[tests]
 
-      - name: Build Docker image for testing
-        env:
-          IMAGE_TYPE: ${{ matrix.image-type }}
-          DOCKERFILE: ${{ matrix.dockerfile }}
-          DOCKER_IMAGE: ${{ matrix.docker-image }}
-          BUILD_CONTEXT: ${{ matrix.context }}
+      - name: Build unified Docker image for testing
         run: |
-          echo "Building ${IMAGE_TYPE} Docker image with LS-DYNA..."
+          echo "Building unified Docker image with both SMP and MPP LS-DYNA executables..."
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_LOGIN=${FTP_LOGIN} \
-            --file "${DOCKERFILE}" \
+            --file docker/run/Dockerfile \
             --load \
-            -t "${DOCKER_IMAGE}" \
-            "${BUILD_CONTEXT}"
+            -t pydyna-run:dev \
+            docker/run
 
           echo "Verifying Docker image was built successfully..."
-          docker images "${DOCKER_IMAGE}"
+          docker images pydyna-run:dev
 
           echo "Testing basic Docker image functionality..."
-          docker run --rm -v $(pwd):/run "${DOCKER_IMAGE}" ls /run
+          docker run --rm -v $(pwd):/run pydyna-run:dev ls /run
 
       - name: Run tests with Docker backend
         env:
-          IMAGE_TYPE: ${{ matrix.image-type }}
-          PYDYNA_RUN_CONTAINER: ${{ matrix.docker-image }}
+          PYDYNA_RUN_CONTAINER: pydyna-run:dev
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
           LSTC_LICENSE: ansys
         run: |
-          echo "Running run tests with ${IMAGE_TYPE} Docker backend..."
+          echo "Running run tests with unified Docker backend (auto-selects SMP or MPP)..."
           source .venv/bin/activate
           python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
 
   docker-build-and-push:
     needs: test-docker-build
-    name: Build and push ${{ matrix.image-type }} Docker image
+    name: Build and push unified Docker image (SMP + MPP)
     runs-on: ubuntu-latest
     permissions:
       contents: read  # Needed to checkout code
       packages: write # Needed for pushing image to GHCR
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - image-type: smp
-            context: docker/run/SMP
-            dockerfile: docker/run/SMP/Dockerfile
-            default-tag: dev-smp
-          - image-type: mpp
-            context: docker/run/MPP
-            dockerfile: docker/run/MPP/Dockerfile
-            default-tag: dev-mpp
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
@@ -139,24 +104,17 @@ jobs:
       - name: Resolve Docker image tag
         id: resolve-tag
         env:
-          IMAGE_TYPE: ${{ matrix.image-type }}
-          SMP_TAG: ${{ github.event.inputs.pydyna-run-smp-tag || matrix.default-tag }}
-          MPP_TAG: ${{ github.event.inputs.pydyna-run-mpp-tag || matrix.default-tag }}
+          INPUT_TAG: ${{ github.event.inputs.pydyna-run-tag }}
         run: |
-          if [ "$IMAGE_TYPE" == "smp" ]; then
-            echo "TAG=$SMP_TAG" >> $GITHUB_OUTPUT
-          else
-            echo "TAG=$MPP_TAG" >> $GITHUB_OUTPUT
-          fi
+          TAG="${INPUT_TAG:-dev}"
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+          echo "Using tag: ${TAG}"
 
       - name: Set build context variables
         id: build-vars
-        env:
-          MATRIX_CONTEXT: ${{ matrix.context }}
-          MATRIX_DOCKERFILE: ${{ matrix.dockerfile }}
         run: |
-          echo "context=$MATRIX_CONTEXT" >> $GITHUB_OUTPUT
-          echo "dockerfile=$MATRIX_DOCKERFILE" >> $GITHUB_OUTPUT
+          echo "context=docker/run" >> $GITHUB_OUTPUT
+          echo "dockerfile=docker/run/Dockerfile" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image to GHCR
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
@@ -185,7 +143,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.pydyna-run-smp-tag || 'dev-smp' }} # Use SMP image for testing
+          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.pydyna-run-tag || 'dev' }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
           coverage-file: run
@@ -206,7 +164,7 @@ jobs:
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
         with:
-          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.pydyna-run-smp-tag || 'dev-smp' }} # Use SMP image for documentation build
+          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.pydyna-run-tag || 'dev' }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ secrets.LICENSE_SERVER }}
