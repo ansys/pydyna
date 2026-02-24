@@ -24,6 +24,7 @@
 
 import logging
 import os
+import subprocess
 import sys
 
 from ansys.dyna.core.run.base_runner import BaseRunner
@@ -35,6 +36,9 @@ except ImportError:
     docker = None
 
 logger = logging.getLogger(__name__)
+
+_SMP_EXECUTABLES = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
+_MPP_EXECUTABLES = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib"
 
 
 class DockerRunner(BaseRunner):
@@ -55,7 +59,7 @@ class DockerRunner(BaseRunner):
             Name of the LS-DYNA executable. Default is auto-detected based on solver options.
         """
         if docker is None:
-            raise ImportError("Docker SDK for Python is not installed. Install it with: pip install docker>=6.0.0")
+            raise ImportError("Docker SDK for Python is not installed. Install it with: pip install docker")
 
         super().__init__(**kwargs)
         try:
@@ -70,6 +74,9 @@ class DockerRunner(BaseRunner):
         self.activate_case = kwargs.get("activate_case", False)
         self.case_ids = kwargs.get("case_ids", None)
         self.executable_name = kwargs.get("executable_name", None)
+
+        # discover available executables in the container (for future use)
+        self._discovered_executable: str | None = None
 
     def __ensure_image(self, name):
         self._name = name
@@ -87,39 +94,164 @@ class DockerRunner(BaseRunner):
         if not os.path.isdir(self._working_directory):
             raise Exception("`working directory` is not a directory")
 
+    def _create_container(self, volumes: list[str]) -> "docker.models.containers.Container":
+        """Create a new Docker container for running LS-DYNA."""
+        env = self._build_env()
+        logger.info(f"Creating Docker container from image {self._name}")
+        container = self._client.containers.run(
+            self._name,
+            command="sleep infinity",
+            environment=env,
+            volumes=volumes,
+            working_dir="/run",
+            detach=True,
+            remove=False,
+        )
+        container.reload()
+        if container.status != "running":
+            raise Exception(f"Container {container.short_id} failed to start (status={container.status})")
+        logger.info(f"Container {container.short_id} started")
+        return container
+
+    def _build_env(self) -> dict:
+        """Build environment variables for the container."""
+        env = {
+            "OMPI_ALLOW_RUN_AS_ROOT": "1",
+            "OMPI_ALLOW_RUN_AS_ROOT_CONFIRM": "1",
+        }
+        if self._container_env:
+            env.update(self._container_env)
+        else:
+            for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"):
+                if k in os.environ:
+                    env[k] = os.environ[k]
+        return env
+
     def _get_solver_option(self) -> str:
         """Get the solver option string for the specific LS-DYNA executable."""
         solver_option = {
-            (MpiOption.SMP, Precision.SINGLE): "SP",
-            (MpiOption.SMP, Precision.DOUBLE): "DP",
-            (MpiOption.MPP_INTEL_MPI, Precision.SINGLE): "SP_MPP",
-            (MpiOption.MPP_INTEL_MPI, Precision.DOUBLE): "DP_MPP",
+            (MpiOption.SMP, Precision.SINGLE): "SMP",
+            (MpiOption.SMP, Precision.DOUBLE): "SMP",
+            (MpiOption.MPP_INTEL_MPI, Precision.SINGLE): "MPP",
+            (MpiOption.MPP_INTEL_MPI, Precision.DOUBLE): "MPP",
         }[(self.mpi_option, self.precision)]
         return solver_option
 
-    def _get_executable_name(self) -> str:
-        """Get the LS-DYNA executable name based on solver configuration."""
-        if self.executable_name:
-            return self.executable_name
+    def _discover_executables(self) -> str:
+        """Based on the solver options, discover available LS-DYNA executables in the container."""
+        if self._discovered_executable is not None:
+            return self._discovered_executable
 
-        # Get the executable name based on the MPI option and precision
-        # if self.mpi_option == MpiOption.SMP:
-        #     if self.precision == Precision.SINGLE:
-        #         main_executable = "ls-dyna_smp_s_R16_1_1_x64_centos79_ifort190_sse2"
-        #     else:  # DOUBLE precision (default)
-        #         main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
-        # elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
-        #     if self.precision == Precision.SINGLE:
-        #         main_executable = "ls-dyna_mpp_s_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
-        #     else:  # DOUBLE precision (default)
-        #         main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_intelmpi-2018"
-        # else:
-        #     # Default to SMP double precision if unknown MPI option
-        #     main_executable = "ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
-        main_executable = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib"
+        expected_executables = {
+            "SMP": _SMP_EXECUTABLES,
+            "MPP": _MPP_EXECUTABLES,
+        }
+        solver_option = self._get_solver_option()
+        expected_basename = expected_executables.get(solver_option)
 
-        # TODO: In the future, we could check what executables are actually available in the container
-        return main_executable
+        find_cmd = "find / -maxdepth 8 -type f -name 'ls-dyna*'"
+        logger.info(f"Discovering LS-DYNA executables in the container using command: {find_cmd}")
+        container = self._create_container(volumes=[f"{self._working_directory}:/run"])
+        exec_log = container.exec_run(["/bin/bash", "-c", find_cmd])
+        all_found = [
+            line
+            for line in exec_log.output.decode("utf-8").splitlines()
+            if line.strip() and not line.strip().endswith(".l2a")  # exclude license auth files
+        ]
+        logger.info(f"Found LS-DYNA executables in container: {all_found}")
+
+        # Match by basename against the expected executable name
+        matched = [p for p in all_found if os.path.basename(p) == expected_basename]
+        if matched:
+            chosen = matched[0]
+            logger.info(f"Matched expected executable: {chosen}")
+        elif all_found:
+            chosen = all_found[0]
+            logger.warning(
+                f"Expected executable '{expected_basename}' not found by name. "
+                f"Falling back to first discovered executable: {chosen}"
+            )
+        else:
+            raise Exception(
+                f"No LS-DYNA executable found in container '{self._name}'. "
+                f"Set `executable_name` explicitly or ensure the image contains a valid LS-DYNA installation."
+            )
+
+        self._discovered_executable = chosen
+        # Clean up the discovery container
+        try:
+            container.stop()
+            container.remove()
+        except Exception:
+            pass
+        return self._discovered_executable
+
+    def _build_command(self, executable: str) -> str:
+        """Build the command to run LS-DYNA based on the configuration."""
+        case_option = ""
+        if self.activate_case:
+            if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
+            else:
+                case_option = "CASE"
+
+        args = [f"i={self._input_file}", f"memory={self.get_memory_string()}"]
+        if case_option:
+            args.append(case_option)
+
+        if self.mpi_option == MpiOption.SMP:
+            if self.ncpu > 1:
+                args.append(f"ncpu={self.ncpu}")
+            command = " ".join([executable] + args)
+        else:
+            command = " ".join(["mpirun", "-np", str(self.ncpu), executable] + args)
+
+        logger.info(f"Built command to run in container: {command}")
+        return command
+
+    def _exec_in_container(self, container: "docker.models.containers.Container", command: str) -> int:
+        """Execute a command in the container and stream output.
+
+        Parameters
+        ----------
+        container : docker.models.containers.Container
+            The running container.
+        command : str
+            Shell command to execute.
+
+        Returns
+        -------
+        int
+            Exit code of the command.
+        """
+        env = self._build_env()
+        env_args = " ".join(f"{k}={v}" for k, v in env.items())
+        shell_cmd = f"/bin/bash -c 'export {env_args} && {command}'"
+
+        if self._stream:
+            exec_id = self._client.api.exec_create(
+                container.id,
+                shell_cmd,
+                stdout=True,
+                stderr=True,
+                workdir="/run",
+            )
+            output = self._client.api.exec_start(exec_id, stream=True, demux=False)
+            for chunk in output:
+                sys.stdout.write(chunk.decode("utf-8", errors="replace"))
+                sys.stdout.flush()
+            inspect = self._client.api.exec_inspect(exec_id["Id"])
+            return inspect["ExitCode"]
+        else:
+            exit_code, output = container.exec_run(
+                shell_cmd,
+                stdout=True,
+                stderr=True,
+                workdir="/run",
+            )
+            if output:
+                sys.stdout.write(output.decode("utf-8", errors="replace"))
+            return exit_code
 
     def run(self) -> str:
         """Run LS-DYNA using the specified configuration.
@@ -132,69 +264,29 @@ class DockerRunner(BaseRunner):
         if not hasattr(self, "_working_directory") or not hasattr(self, "_input_file"):
             raise Exception("Input file and working directory must be set before running")
 
-        # Build the LS-DYNA command
-        executable = self._get_executable_name()
-
-        # CASE option logic
-        case_option = ""
-        if self.activate_case:
-            if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
-                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
-            else:
-                case_option = "CASE"
-
-        # Build command arguments
-        args = [f"i={self._input_file}", f"memory={self.get_memory_string()}"]
-        if case_option:
-            args.append(case_option)
-
-        # Build the full command with MPI wrapper if needed
-        if self.mpi_option == MpiOption.SMP:
-            # For SMP, run directly with ncpu argument
-            if self.ncpu > 1:
-                args.append(f"ncpu={self.ncpu}")
-            command = " ".join([executable] + args)
-        else:
-            # For MPP (OpenMPI or Intel MPI)
-            command = " ".join(["mpirun", "-np", str(self.ncpu), executable] + args)
-
-        # Set up environment variables
-        env = {}
-        if self._container_env:
-            env.update(self._container_env)
-        else:
-            # Add license environment variables if they exist
-            for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"):
-                if k in os.environ:
-                    env[k] = os.environ[k]
-
-        # Set OpenMPI environment variables to allow running as root
-        env["OMPI_ALLOW_RUN_AS_ROOT"] = "1"
-        env["OMPI_ALLOW_RUN_AS_ROOT_CONFIRM"] = "1"
-
         volumes = [f"{self._working_directory}:/run"]
+        container = self._create_container(volumes=volumes)
 
-        if self._stream:
-            cont: docker.models.containers.Container = self._client.containers.run(
-                self._name, command=command, environment=env, volumes=volumes, working_dir="/run", detach=True
-            )
-            logs: docker.types.daemon.CancellableStream = cont.logs(stream=True, follow=True)
-            try:
-                for log in logs:
-                    sys.stdout.write(log.decode("utf-8"))
-                    sys.stdout.flush()
-            except KeyboardInterrupt:
-                cont.stop()
-                raise
+        if self.executable_name:
+            executable = self.executable_name
         else:
-            results = self._client.containers.run(
-                self._name,
-                command=command,
-                environment=env,
-                volumes=volumes,
-                working_dir="/run",
-                detach=False,
-                stdout=True,
-                stderr=True,
+            executable = self._discover_executables()
+
+        command = self._build_command(executable=executable)
+        logger.info(f"Running command in container {container.short_id}: {command}")
+
+        try:
+            exit_code = self._exec_in_container(container, command)
+        finally:
+            container.stop()
+            container.remove()
+            logger.info(f"Container {container.short_id} stopped and removed")
+
+        if exit_code != 0:
+            raise subprocess.CalledProcessError(
+                exit_code,
+                command,
+                output=f"LS-DYNA execution failed with exit code {exit_code}",
             )
-            return results
+
+        return self._working_directory
