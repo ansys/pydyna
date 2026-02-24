@@ -6,7 +6,7 @@ This directory contains Docker images for running LS-DYNA through PyDYNA's ``run
 Overview
 --------
 
-The **unified Docker image** (``Dockerfile``) includes both SMP and MPP LS-DYNA executables
+The Docker image (``Dockerfile``) includes both SMP and MPP LS-DYNA executables
 in a single container, providing:
 
 - **SMP executable**: ``ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2``
@@ -14,20 +14,7 @@ in a single container, providing:
 - **OpenMPI** support for MPP runs
 - **Auto-detection**: PyDyna automatically selects the appropriate executable based on your solver options
 
-Directory Structure
--------------------
-
-.. code:: text
-
-    docker/run/
-    ├── Dockerfile              # Unified image (SMP + MPP) - RECOMMENDED
-    ├── SMP/
-    │   └── Dockerfile          # Legacy SMP-only image
-    └── MPP/
-        └── Dockerfile          # Legacy MPP-only image
-
-The ``SMP/`` and ``MPP/`` subdirectories contain legacy single-executable images
-for backward compatibility and are retained for reference purposes.
+This unified approach eliminates mode mismatch issues and simplifies deployment.
 
 Prerequisites
 -------------
@@ -46,10 +33,10 @@ Prerequisites
 
 * You will need FTP credentials to download LS-DYNA executables from LSTC.
 
-Build the Unified Docker Image (Recommended)
----------------------------------------------
+Build the Docker Image
+-----------------------
 
-The unified image contains both SMP and MPP executables, eliminating mode mismatch issues.
+The image contains both SMP and MPP executables, eliminating mode mismatch issues.
 
 To build the unified Docker image:
 
@@ -83,37 +70,10 @@ To build the unified Docker image:
       REPOSITORY     TAG      IMAGE ID       CREATED          SIZE
       pydyna-run     latest   defbadbeee8e   16 minutes ago   12.4GB
 
-Build Legacy Single-Mode Images (Optional)
--------------------------------------------
-
-For specialized use cases, you can build SMP-only or MPP-only images.
-
-**SMP-only image:**
-
-.. code:: bash
-
-   cd docker/run/SMP
-   docker build \
-     --build-arg FTP_USER=your_ftp_username \
-     --build-arg FTP_LOGIN=your_ftp_password \
-     -t pydyna-run-smp:latest \
-     .
-
-**MPP-only image:**
-
-.. code:: bash
-
-   cd docker/run/MPP
-   docker build \
-     --build-arg FTP_USER=your_ftp_username \
-     --build-arg FTP_LOGIN=your_ftp_password \
-     -t pydyna-run-mpp:latest \
-     .
-
 Usage Examples
 --------------
 
-Auto-Detection with Unified Image
+Auto-Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``DockerRunner`` class automatically detects and selects the correct executable:
@@ -208,38 +168,11 @@ Then use without ``container_env``:
         working_directory="run"
     )
 
-Advanced: Using Legacy Single-Mode Images
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you built separate SMP/MPP images:
-
-.. code:: python
-
-    from ansys.dyna.core.run import run_dyna
-    from ansys.dyna.core.run.options import MpiOption
-
-    # Use SMP-only image
-    run_dyna(
-        "input.k",
-        mpi_option=MpiOption.SMP,
-        container="pydyna-run-smp:latest",
-        working_directory="run"
-    )
-
-    # Use MPP-only image
-    run_dyna(
-        "input.k",
-        mpi_option=MpiOption.MPP_INTEL_MPI,
-        ncpu=4,
-        container="pydyna-run-mpp:latest",
-        working_directory="run"
-    )
-
 CI/CD Integration
 -----------------
 
 The nightly workflow ``.github/workflows/ci_cd_night.yml`` automatically builds
-the unified image and pushes it to ``ghcr.io/ansys/pydyna-run:dev``.
+the Docker image and pushes it to ``ghcr.io/ansys/pydyna-run:dev``.
 
 To use the pre-built image from GitHub Container Registry:
 
@@ -268,8 +201,8 @@ Troubleshooting
 
 **Issue: "mpirun: command not found"**
 
-- Use the unified image (``Dockerfile``) which includes OpenMPI
-- Or use the MPP-specific image (``MPP/Dockerfile``)
+- Ensure you're using the Docker image built from this Dockerfile (includes OpenMPI)
+- Verify OpenMPI is installed: ``docker run --rm pydyna-run:latest which mpirun``
 
 **Issue: License errors**
 
