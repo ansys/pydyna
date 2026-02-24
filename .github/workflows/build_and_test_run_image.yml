@@ -1,5 +1,7 @@
 name: Nightly Build and Test PyDyna Run Docker Images
 on:
+  # test purpose
+  pull_request:
   schedule:
     - cron: '0 0 * * *' # Daily at midnight UTC
   workflow_dispatch:
