@@ -72,32 +72,38 @@ jobs:
           uv pip install -e .[tests]
 
       - name: Build Docker image for testing
+        env:
+          IMAGE_TYPE: ${{ matrix.image-type }}
+          DOCKERFILE: ${{ matrix.dockerfile }}
+          DOCKER_IMAGE: ${{ matrix.docker-image }}
+          BUILD_CONTEXT: ${{ matrix.context }}
         run: |
-          echo "Building ${{ matrix.image-type }} Docker image with LS-DYNA..."
+          echo "Building ${IMAGE_TYPE} Docker image with LS-DYNA..."
           docker buildx build \
             --build-arg FTP_USER=${FTP_USER} \
             --build-arg FTP_LOGIN=${FTP_LOGIN} \
-            --file ${{ matrix.dockerfile }} \
+            --file "${DOCKERFILE}" \
             --load \
-            -t ${{ matrix.docker-image }} \
-            ${{ matrix.context }}
+            -t "${DOCKER_IMAGE}" \
+            "${BUILD_CONTEXT}"
 
           echo "Verifying Docker image was built successfully..."
-          docker images ${{ matrix.docker-image }}
+          docker images "${DOCKER_IMAGE}"
 
           echo "Testing basic Docker image functionality..."
-          docker run --rm -v $(pwd):/run ${{ matrix.docker-image }} ls /run
+          docker run --rm -v $(pwd):/run "${DOCKER_IMAGE}" ls /run
 
       - name: Run tests with Docker backend
-        run: |
-          echo "Running run tests with ${{ matrix.image-type }} Docker backend..."
-          source .venv/bin/activate
-          python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
         env:
+          IMAGE_TYPE: ${{ matrix.image-type }}
           PYDYNA_RUN_CONTAINER: ${{ matrix.docker-image }}
           ANSYSLI_SERVERS: 2325@${{ env.license-server }}
           ANSYSLMD_LICENSE_FILE: 1055@${{ env.license-server }}
           LSTC_LICENSE: ansys
+        run: |
+          echo "Running run tests with ${IMAGE_TYPE} Docker backend..."
+          source .venv/bin/activate
+          python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
 
   docker-build-and-push:
     needs: test-docker-build
@@ -133,20 +139,30 @@ jobs:
       - name: Resolve Docker image tag
         id: resolve-tag
         env:
+          IMAGE_TYPE: ${{ matrix.image-type }}
           SMP_TAG: ${{ github.event.inputs.pydyna-run-smp-tag || matrix.default-tag }}
           MPP_TAG: ${{ github.event.inputs.pydyna-run-mpp-tag || matrix.default-tag }}
         run: |
-          if [ "${{ matrix.image-type }}" == "smp" ]; then
+          if [ "$IMAGE_TYPE" == "smp" ]; then
             echo "TAG=$SMP_TAG" >> $GITHUB_OUTPUT
           else
             echo "TAG=$MPP_TAG" >> $GITHUB_OUTPUT
           fi
 
+      - name: Set build context variables
+        id: build-vars
+        env:
+          MATRIX_CONTEXT: ${{ matrix.context }}
+          MATRIX_DOCKERFILE: ${{ matrix.dockerfile }}
+        run: |
+          echo "context=$MATRIX_CONTEXT" >> $GITHUB_OUTPUT
+          echo "dockerfile=$MATRIX_DOCKERFILE" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image to GHCR
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
-          context: ${{ matrix.context }}
-          file: ${{ matrix.dockerfile }}
+          context: ${{ steps.build-vars.outputs.context }} # zizmor: ignore[template-injection]
+          file: ${{ steps.build-vars.outputs.dockerfile }} # zizmor: ignore[template-injection]
           push: true
           tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ steps.resolve-tag.outputs.TAG }}
           build-args: |
