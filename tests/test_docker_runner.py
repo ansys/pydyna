@@ -317,8 +317,8 @@ class TestDockerRunnerUnit:
         assert result == f"/opt/dyna/{_SMP_EXECUTABLES}"
         assert runner.mpi_option == MpiOption.SMP  # Auto-switched
 
-    def test_discover_executables_auto_switches_smp_to_mpp(self):
-        """_discover_executables auto-switches from SMP to MPP when only MPP is available."""
+    def test_discover_executables_uses_mpp_for_smp_mode(self):
+        """_discover_executables uses MPP executable for SMP mode (MPP can run in SMP mode)."""
         runner, mock_client = _make_runner(mpi_option=MpiOption.SMP)
         runner._input_file = "model.k"
         runner._working_directory = "/tmp"
@@ -333,7 +333,7 @@ class TestDockerRunnerUnit:
 
         result = runner._discover_executables()
         assert result == f"/opt/dyna/{_MPP_EXECUTABLES}"
-        assert runner.mpi_option == MpiOption.MPP_INTEL_MPI  # Auto-switched
+        assert runner.mpi_option == MpiOption.SMP  # No auto-switch - MPP can run in SMP mode
 
     # -- run() guard ----------------------------------------------------------
 
