@@ -3,7 +3,6 @@ name: Nightly Build and Test (Docker + Documentation)
 permissions: {}
 
 on:
-  pull_request:
   schedule:
     - cron: '0 0 * * *' # Nightly at midnight UTC
   workflow_dispatch:
@@ -45,8 +44,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.skip-docker-build != 'true'
     permissions:
-      contents: read
-      packages: write
+      contents: read  # Needed to checkout code
+      packages: write # Needed for pushing Docker image to GHCR
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
@@ -115,9 +114,10 @@ jobs:
       - name: Push Docker image to GHCR
         env:
           TAG: ${{ steps.resolve-tag.outputs.TAG }}
+          REGISTRY: ${{ env.REGISTRY }}
         run: |
-          docker tag pydyna-run:dev ${{ env.REGISTRY }}/ansys/pydyna-run:${TAG}
-          docker push ${{ env.REGISTRY }}/ansys/pydyna-run:${TAG}
+          docker tag pydyna-run:dev ${REGISTRY}/ansys/pydyna-run:${TAG}
+          docker push ${REGISTRY}/ansys/pydyna-run:${TAG}
 
   smoke-tests:
     name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
@@ -167,8 +167,8 @@ jobs:
     if: github.event.inputs.skip-docker-build != 'true' || always()
     timeout-minutes: 720
     permissions:
-      contents: read
-      packages: read
+      contents: read  # Needed to checkout code
+      packages: read  # Needed for pulling Docker container images from GHCR
     steps:
       - name: "Checkout project"
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
