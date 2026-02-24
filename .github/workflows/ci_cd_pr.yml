@@ -7,7 +7,7 @@ on:
       pydyna-run-container:
         description: 'Run container name'
         required: false
-        default: ghcr.io/ansys/pydyna-run:latest
+        default: ghcr.io/ansys/pydyna-run:dev
   push:
     tags:
       - "*"
