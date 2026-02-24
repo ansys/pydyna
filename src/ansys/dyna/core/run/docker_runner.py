@@ -186,14 +186,15 @@ class DockerRunner(BaseRunner):
             except KeyboardInterrupt:
                 cont.stop()
                 raise
-
-            result = cont.wait()
-            if result["StatusCode"] != 0:
-                raise Exception(f"LS-DYNA execution failed with exit code {result['StatusCode']}")
-            cont.remove()
         else:
-            result = self._client.containers.run(
-                self._name, command=command, environment=env, volumes=volumes, working_dir="/run", remove=True
+            results = self._client.containers.run(
+                self._name,
+                command=command,
+                environment=env,
+                volumes=volumes,
+                working_dir="/run",
+                detach=False,
+                stdout=True,
+                stderr=True,
             )
-
-        return self._working_directory
+            return results
