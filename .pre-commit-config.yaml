@@ -28,7 +28,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.1 # v0.14.11
+  rev: v0.15.2 # v0.14.11
   hooks:
     - id: ruff-check
       args: [--fix]
