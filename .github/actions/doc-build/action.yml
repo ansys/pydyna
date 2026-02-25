@@ -105,79 +105,13 @@ runs:
 
     - name: Set DPF environment
       run: |
-        echo "=== Finding DPF Server Binaries ==="
-        
-        # Find where the actual server was installed
-        PYTHON_SITE=$(python -c "import site; print(site.getsitepackages()[0])")
-        echo "Python site-packages: ${PYTHON_SITE}"
-        
-        # Check common locations for DPF server binaries
-        DPF_PATH=""
-        
-        # Check 1: Inside package at ansys_dpf_server_2025_2_pre0/ansys/v252
-        if [ -d "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0/ansys/v252" ]; then
-          echo "✓ Found DPF at package/ansys/v252"
-          DPF_PATH="${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0/ansys/v252"
-          ls -la "${DPF_PATH}" || true
-        fi
-        
-        # Check 2: Inside workspace at dpf-standalone/v252/ansys/v252
-        if [ -z "${DPF_PATH}" ] && [ -d "${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/v252" ]; then
-          echo "✓ Found DPF at workspace/dpf-standalone/v252/ansys/v252"
-          DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/v252"
-          ls -la "${DPF_PATH}" || true
-        fi
-        
-        # Check 3: Search for aisol directory anywhere
-        if [ -z "${DPF_PATH}" ]; then
-          echo "Searching for aisol directory..."
-          
-          if [ -d "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" ]; then
-            AISOL_PATH=$(find "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" -name "aisol" -type d 2>/dev/null | head -1 || true)
-            if [ -n "${AISOL_PATH}" ]; then
-              DPF_PATH=$(dirname "${AISOL_PATH}")
-              echo "✓ Found aisol at: ${AISOL_PATH}"
-            fi
-          fi
-          
-          if [ -z "${DPF_PATH}" ] && [ -d "${GITHUB_WORKSPACE}/dpf-standalone/v252" ]; then
-            AISOL_PATH=$(find "${GITHUB_WORKSPACE}/dpf-standalone/v252" -name "aisol" -type d 2>/dev/null | head -1 || true)
-            if [ -n "${AISOL_PATH}" ]; then
-              DPF_PATH=$(dirname "${AISOL_PATH}")
-              echo "✓ Found aisol in workspace at: ${AISOL_PATH}"
-            fi
-          fi
-        fi
-        
-        # Fallback - show structure and use default
-        if [ -z "${DPF_PATH}" ]; then
-          echo "⚠ Could not find DPF binaries, showing structure:"
-          echo "Workspace structure:"
-          if [ -d "${GITHUB_WORKSPACE}/dpf-standalone/v252" ]; then
-            find "${GITHUB_WORKSPACE}/dpf-standalone/v252" -type d -maxdepth 3 || true
-          else
-            echo "Workspace dpf-standalone/v252 does not exist"
-          fi
-          
-          echo ""
-          echo "Site-packages structure:"
-          if [ -d "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" ]; then
-            find "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" -type d -maxdepth 4 || true
-          else
-            echo "Site-packages ansys_dpf_server_2025_2_pre0 does not exist"
-          fi
-          
-          DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252"
-          echo "Using fallback: ${DPF_PATH}"
-        fi
-        
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
+        echo "Setting DPF server path to: ${DPF_PATH}"
         {
           echo "AWP_ROOT252=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
           echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
         } >> "$GITHUB_ENV"
-        
-        echo "=== DPF environment set to: ${DPF_PATH} ==="
       shell: bash
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
@@ -205,8 +139,6 @@ runs:
         LSTC_LICENSE: ansys
         EXAMPLE_PATTERN: "plot_taylor_bar"
       run: |
-        echo "DPF paths: AWP_ROOT252=${AWP_ROOT252}, ANSYS_DPF_PATH=${ANSYS_DPF_PATH}, ANSYS_DPF_SERVER_ROOT=${ANSYS_DPF_SERVER_ROOT}"
-        echo "Running examples matching pattern: ${EXAMPLE_PATTERN}"
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
