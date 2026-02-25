@@ -24,6 +24,7 @@
 
 import logging
 import os
+from pathlib import Path
 import subprocess
 import sys
 
@@ -170,14 +171,14 @@ class DockerRunner(BaseRunner):
         logger.info(f"Found LS-DYNA executables in container: {all_found}")
 
         # Match by basename against the expected executable name
-        matched = [p for p in all_found if os.path.basename(p) == expected_basename]
+        matched = [p for p in all_found if Path(p).name == expected_basename]
         if matched:
             chosen = matched[0]
             logger.info(f"Found expected {solver_option} executable: {chosen}")
         elif all_found:
             # Auto-detect and adjust mpi_option if there's a SMP/MPP mismatch
             # This happens when using legacy single-mode images or custom images
-            discovered_basename = os.path.basename(all_found[0])
+            discovered_basename = Path(all_found[0]).name
             if solver_option == "MPP" and _SMP_EXECUTABLES in discovered_basename:
                 logger.warning(
                     f"MPP solver requested but only SMP executable found in container '{self._name}'. "
