@@ -108,42 +108,68 @@ runs:
 
     - name: Set DPF environment
       run: |
-        echo "=== Inspecting DPF installation ==="
-        echo "Current directory: ${GITHUB_WORKSPACE}"
+        echo "=== Finding DPF Server Binaries ==="
         
-        # Check workspace dpf-standalone
-        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252"
-        echo "Checking workspace path: ${DPF_PATH}"
-        if [ -d "${DPF_PATH}" ]; then
-          echo "Found dpf-standalone/v252 in workspace"
+        # The dpf-standalone/v252 is just the source, not the binaries
+        # After pip install, binaries should be in the package data
+        
+        # Find where the actual server was installed
+        PYTHON_SITE=$(python -c "import site; print(site.getsitepackages()[0])")
+        echo "Python site-packages: ${PYTHON_SITE}"
+        
+        # Check common locations for DPF server binaries
+        DPF_PATH=""
+        
+        # Check 1: Inside package at ansys_dpf_server_2025_2_pre0/ansys/v252
+        if [ -d "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0/ansys/v252" ]; then
+          echo "✓ Found DPF at package/ansys/v252"
+          DPF_PATH="${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0/ansys/v252"
           ls -la "${DPF_PATH}"
-          if [ -d "${DPF_PATH}/aisol" ]; then
-            echo "Found aisol directory:"
-            find "${DPF_PATH}/aisol" -type d | head -20
-          fi
-        else
-          echo "dpf-standalone/v252 NOT found in workspace"
         fi
         
-        # Check if DPF was installed in site-packages
-        echo "Checking Python site-packages for DPF:"
-        python -c "import ansys.dpf.core as dpf; print(f'DPF Core version: {dpf.__version__}'); print(f'DPF Core path: {dpf.__file__}')" || echo "Could not import DPF"
+        # Check 2: Inside workspace at dpf-standalone/v252/ansys/v252
+        if [ -z "${DPF_PATH}" ] && [ -d "${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/v252" ]; then
+          echo "✓ Found DPF at workspace/dpf-standalone/v252/ansys/v252"
+          DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/v252"
+          ls -la "${DPF_PATH}"
+        fi
         
-        # Try to find where ansys-dpf-server was installed
-        echo "Searching for ansys-dpf-server installation:"
-        pip show ansys-dpf-server_2025_2_pre0 || echo "Package not found with pip show"
+        # Check 3: Search for aisol directory anywhere
+        if [ -z "${DPF_PATH}" ]; then
+          echo "Searching for aisol directory..."
+          AISOL_PATH=$(find "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" -name "aisol" -type d 2>/dev/null | head -1)
+          if [ -n "${AISOL_PATH}" ]; then
+            DPF_PATH=$(dirname "${AISOL_PATH}")
+            echo "✓ Found aisol at: ${AISOL_PATH}"
+          else
+            AISOL_PATH=$(find "${GITHUB_WORKSPACE}/dpf-standalone/v252" -name "aisol" -type d 2>/dev/null | head -1)
+            if [ -n "${AISOL_PATH}" ]; then
+              DPF_PATH=$(dirname "${AISOL_PATH}")
+              echo "✓ Found aisol in workspace at: ${AISOL_PATH}"
+            fi
+          fi
+        fi
         
-        # Check common DPF installation locations
-        echo "Checking common DPF locations:"
-        ls -la "$HOME/.local/share/" 2>/dev/null | grep dpf || echo "No dpf in ~/.local/share"
+        # Fallback
+        if [ -z "${DPF_PATH}" ]; then
+          echo "⚠ Could not find DPF binaries, showing structure:"
+          echo "Workspace structure:"
+          find "${GITHUB_WORKSPACE}/dpf-standalone/v252" -type d -maxdepth 3 2>/dev/null || echo "Not found"
+          echo ""
+          echo "Site-packages structure:"
+          find "${PYTHON_SITE}/ansys_dpf_server_2025_2_pre0" -type d -maxdepth 4 2>/dev/null || echo "Not found"
+          
+          DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252"
+          echo "Using fallback: ${DPF_PATH}"
+        fi
         
-        # Set environment variables
         {
           echo "AWP_ROOT252=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
+          echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
         } >> "$GITHUB_ENV"
         
-        echo "=== DPF environment variables set to: ${DPF_PATH} ==="
+        echo "=== DPF environment set to: ${DPF_PATH} ==="
       shell: bash
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
@@ -169,28 +195,11 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
+        EXAMPLE_PATTERN: "plot_taylor_bar"
       run: |
-        echo "=== Environment Variables Check ==="
-        echo "AWP_ROOT252=${AWP_ROOT252}"
-        echo "ANSYS_DPF_PATH=${ANSYS_DPF_PATH}"
-        
+        echo "DPF paths: AWP_ROOT252=${AWP_ROOT252}, ANSYS_DPF_PATH=${ANSYS_DPF_PATH}, ANSYS_DPF_SERVER_ROOT=${ANSYS_DPF_SERVER_ROOT}"
+        echo "Running examples matching pattern: ${EXAMPLE_PATTERN}"
         source .venv/bin/activate
-        
-        echo "=== Python DPF Check ==="
-        python -c "
-        import sys
-        import os
-        print('Python executable:', sys.executable)
-        print('AWP_ROOT252 env:', os.environ.get('AWP_ROOT252', 'NOT SET'))
-        print('ANSYS_DPF_PATH env:', os.environ.get('ANSYS_DPF_PATH', 'NOT SET'))
-        try:
-            import ansys.dpf.core as dpf
-            print('DPF Core imported successfully')
-            print('DPF Core version:', dpf.__version__)
-        except Exception as e:
-            print('DPF import error:', e)
-        "
-        
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
 

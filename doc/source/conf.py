@@ -184,7 +184,7 @@ if BUILD_EXAMPLES:
                 # convert rst to md for ipynb
                 "pypandoc": True,
                 # path to your examples scripts
-                "examples_dirs": ["../../examples/"],
+                "examples_dirs": ["../../examples/Taylor_Bar/"],
                 # path where to save gallery generated examples
                 "gallery_dirs": ["examples"],
                 # Patter to search for examples files
