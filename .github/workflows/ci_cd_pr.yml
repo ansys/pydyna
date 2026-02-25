@@ -7,7 +7,7 @@ on:
       pydyna-run-container:
         description: 'Run container name'
         required: false
-        default: ghcr.io/ansys/pydyna-run:latest
+        default: ghcr.io/ansys/pydyna-run:dev
   push:
     tags:
       - "*"
@@ -23,7 +23,7 @@ env:
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
-  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.pydyna-run-container || 'ghcr.io/ansys/pydyna-run:latest'}}
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.pydyna-run-container || 'ghcr.io/ansys/pydyna-run:dev'}}
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 concurrency:

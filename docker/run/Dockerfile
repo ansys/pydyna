@@ -1,65 +1,102 @@
-FROM ghcr.io/ansys/mechanical:24.1.0 AS pymechanical
+FROM ubuntu:22.04
 
-FROM ubuntu:20.04
+LABEL description="LS-DYNA runtime image with both SMP and MPP executables"
+LABEL email="pyansys.core@nsys.com"
 
-LABEL description="lsdyna solver"
+# --------------------
+# Build arguments
+# --------------------
+ARG FTP_USER
+ARG FTP_LOGIN
 
-# install Intel-MPI
+# SMP executable
+ARG SMP_URL="ls-dyna/R16.1.1/linx.64/lsdyna/SMP/"
+ARG SMP_FILE="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2.tgz_extractor.sh"
+ARG SMP_PATH="ls-dyna_smp_d_R16_1_1_x64_centos79_ifort190_sse2"
 
-ENV TZ=America/New_York
+# MPP executable
+ARG MPP_URL="mpp-dyna/R16.1.1/linux/x86-64/ifort_190_sse2/MPP/"
+ARG MPP_FILE="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib.tgz_extractor.sh"
+ARG MPP_PATH="ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_sharelib"
+
+# --------------------
+# Environment
+# --------------------
+ENV INSTALL_DIR=/opt/dyna
+ENV LSTC_LICENSE=ansys
+ENV LSTC_LICENSE_SERVER=""
+ENV ANSYSLMD_LICENSE_FILE=""
 ENV DEBIAN_FRONTEND=noninteractive
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
-RUN apt update -y
-RUN apt install -y wget
+# --------------------
+# System dependencies (includes OpenMPI for MPP)
+# --------------------
+RUN apt-get update && apt-get install -y \
+    wget \
+    tar \
+    gzip \
+    bash \
+    libgomp1 \
+    libatomic1 \
+    libquadmath0 \
+    libnuma1 \
+    libgfortran5 \
+    libstdc++6 \
+    openmpi-bin \
+    libopenmpi-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# This isn't directly needed, but for some reason if I don't install this package the installation of intel-mpi is broken because of a key issue
-# Maybe this won't be needed in more recent pymechanical images...
-RUN apt install -y libgtk2.0-dev
+# --------------------
+# Install LS-DYNA (SMP)
+# --------------------
+WORKDIR ${INSTALL_DIR}
 
-RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/intel-mpi-archive-keyring.gpg > /dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/intel-mpi-archive-keyring.gpg] https://apt.repos.intel.com/mpi all main" | tee /etc/apt/sources.list.d/intel-mpi.list
-RUN apt update -y
-RUN apt install -y intel-mpi-rt-2019.9-304
+# Validate required args
+RUN test -n "$FTP_USER" && \
+    test -n "$FTP_LOGIN"
 
-ARG MAJORVER=24
-ARG MINORVER=1
-ARG VER=$MAJORVER$MINORVER
+# Download SMP executable
+RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
+      "https://ftp.lstc.com/user/${SMP_URL}/${SMP_FILE}" && \
+    chmod +x "${SMP_FILE}" && \
+    echo "y" | "./${SMP_FILE}" && \
+    rm "${SMP_FILE}"
 
-RUN mkdir -p /install/ansys_inc/shared_files
-RUN mkdir -p /install/ansys_inc/v$VER/ansys/bin/linx64
-RUN mkdir -p /install/ansys_inc/v$VER/mpi
+# Verify SMP installation
+RUN test -d "${INSTALL_DIR}/${SMP_PATH}" && \
+    chmod -R +x "${INSTALL_DIR}/${SMP_PATH}/"
 
-COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e
-COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e
-COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e
-COPY --from=pymechanical /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e /install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e
-COPY --from=pymechanical /install/ansys_inc/v$VER/licensingclient /install/ansys_inc/v$VER/licensingclient
-COPY --from=pymechanical /install/ansys_inc/shared_files /install/ansys_inc/shared_files
-COPY --from=pymechanical /install/ansys_inc/v$VER/builddate.txt /install/ansys_inc/v$VER/builddate.txt
-COPY --from=pymechanical /install/ansys_inc/v$VER/commonfiles/MPI/Intel/2021.10.0/linx64/bin /install/ansys_inc/v$VER/mpi
+# Configure SMP license
+RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${SMP_PATH}/LSTC_FILE && \
+    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${SMP_PATH}/LSTC_FILE
 
-# Set environment variables pointing to Intel-MPI and LS-DYNA
+# --------------------
+# Install LS-DYNA (MPP)  
+# --------------------
 
-ENV MPIVARS=/opt/intel/impi/2019.9.304/intel64/bin/mpivars.sh
-ENV MPIRUN=/install/ansys_inc/v$VER/mpi/mpirun
-ENV LSDYNA_DP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp.e
-ENV LSDYNA_DP_MPP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_dp_mpp.e
-ENV LSDYNA_SP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp.e
-ENV LSDYNA_SP_MPP=/install/ansys_inc/v$VER/ansys/bin/linx64/lsdyna_sp_mpp.e
+# Download MPP executable
+RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
+      "https://ftp.lstc.com/user/${MPP_URL}/${MPP_FILE}" && \
+    chmod +x "${MPP_FILE}" && \
+    echo "y" | "./${MPP_FILE}" && \
+    rm "${MPP_FILE}"
 
-# OPTIONAL
-# pass licensing environment variables into the build
-ARG LSTC_LICENSE
-ENV LSTC_LICENSE=$LSTC_LICENSE
+# Verify MPP installation
+RUN test -d "${INSTALL_DIR}/${MPP_PATH}" && \
+    chmod -R +x "${INSTALL_DIR}/${MPP_PATH}/"
 
-ARG ANSYSLI_SERVERS
-ENV ANSYSLI_SERVERS=$ANSYSLI_SERVERS
+# Create placeholder license file (actual config via runtime env vars)
+RUN touch ${INSTALL_DIR}/${MPP_PATH}/LSTC_FILE
 
-ARG ANSYSLMD_LICENSE_FILE
-ENV ANSYSLMD_LICENSE_FILE=$ANSYSLMD_LICENSE_FILE
+# --------------------
+# PATH (add both executables)
+# --------------------
+ENV PATH="${INSTALL_DIR}/${SMP_PATH}:${INSTALL_DIR}/${MPP_PATH}:${PATH}"
+ENV LD_LIBRARY_PATH="${INSTALL_DIR}/${SMP_PATH}:${INSTALL_DIR}/${MPP_PATH}:${LD_LIBRARY_PATH}"
 
-COPY ./file.sh /
-
-RUN ["chmod", "+x", "/file.sh"]
-
-ENTRYPOINT ["/file.sh"]
+# --------------------
+# Runtime dir
+# --------------------
+WORKDIR /run

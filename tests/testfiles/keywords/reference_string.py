@@ -1690,3 +1690,13 @@ $#     aai       abi       aci      gabi      gbci      gcai        ti
   180000.0  180000.0  180000.0       0.3       0.3       0.3
    1.6e-05   1.6e-05   1.6e-05   69230.8   69230.8   69230.8     200.0"""
 
+# DEFINE_TABLE_2D test strings
+test_define_table_2d_ref = """*DEFINE_TABLE_2D_TITLE
+$# title
+test table
+$#    tbid       sfa      offa
+       101       1.0       1.0
+$#               value                lcid
+                 1.0                 101
+                 2.0                 102
+                 3.0                 103"""

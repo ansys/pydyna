@@ -30,15 +30,12 @@ inputs:
   github-token:
     description: GitHub token for authentication
     required: true
-
   license-server:
     description: License server address
     required: true
-
   bot-token:
     description: Bot token for authentication
     required: true
-  
   github-actor:
     description: GitHub actor for authentication
     required: true
