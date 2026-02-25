@@ -106,6 +106,15 @@ runs:
         dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         ANSYS_VERSION : "252"
 
+    - name: Set DPF environment
+      run: |
+        DPF_PATH="$HOME/.local/share/ansys_dpf_core/v252"
+        {
+          echo "AWP_ROOT252=${DPF_PATH}"
+          echo "ANSYS_DPF_PATH=${DPF_PATH}"
+        } >> "$GITHUB_ENV"
+      shell: bash
+
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
@@ -130,6 +139,8 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
+        AWP_ROOT252: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
+        ANSYS_DPF_PATH: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
@@ -153,6 +164,8 @@ runs:
         LSTC_LICENSE: ansys
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         PYDYNA_RUN_STREAM: "0"
+        AWP_ROOT252: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
+        ANSYS_DPF_PATH: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
         pool_size: ${{ inputs.pdf-pool-size }}
