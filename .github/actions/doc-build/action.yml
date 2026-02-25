@@ -108,13 +108,12 @@ runs:
 
     - name: Set DPF environment
       run: |
-        DPF_PATH="$HOME/.local/share/ansys_dpf_core/v252"
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252"
         {
           echo "AWP_ROOT252=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
         } >> "$GITHUB_ENV"
       shell: bash
-
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
