@@ -2,15 +2,9 @@ name: CI
 
 on:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      pydyna-run-container:
-        description: 'Run container name'
-        required: false
-        default: ghcr.io/ansys/pydyna-run:latest
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
   push:
-    tags:
-      - "*"
     branches:
       - main
 
@@ -23,7 +17,7 @@ env:
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
-  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.pydyna-run-container || 'ghcr.io/ansys/pydyna-run:latest'}}
+  PYDYNA_RUN_CONTAINER: 'ghcr.io/ansys/pydyna-run:latest'
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 concurrency:
@@ -31,15 +25,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  actions-security:
-    name: Actions Security
+
+  labeler:
+    name: "Labels"
+    permissions:
+      contents: read # Read access to modified files in pull-request
+      pull-requests: write # Write access to add or remove new tags
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-actions-security@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v10.2.5
+      - name: "Checkout repository"
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          generate-summary: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          auditing-level: 'high'
+          persist-credentials: false
+
+      - name: "Update labels"
+        uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Label pull-request"
+        uses: actions/labeler@634933edcd8ababfe52f92936142cc22ac488b1b # v6.0.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  changelog-fragment:
+    name: "Create changelog fragment"
+    needs: [labeler]
+    permissions:
+      contents: write  # Required to commit changelog fragment files
+      pull-requests: write  # Required to update pull request with changelog fragment
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ansys/actions/doc-changelog@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v10.2.5
+      with:
+        token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        use-conventional-commits: true
+        bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+        bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+
 
   pr-name:
     if: github.event_name == 'pull_request'
@@ -50,14 +73,6 @@ jobs:
         uses: ansys/actions/check-pr-title@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  code-style:
-    name: "Code style"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ansys/actions/code-style@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
   vulnerabilities:
     name: Vulnerabilities
@@ -70,9 +85,30 @@ jobs:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
+  code-style:
+    name: "Code style"
+    runs-on: ubuntu-latest
+    needs: [vulnerabilities]
+    steps:
+      - uses: ansys/actions/code-style@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  actions-security:
+    name: Actions Security
+    runs-on: ubuntu-latest
+    needs: [vulnerabilities]
+    steps:
+      - uses: ansys/actions/check-actions-security@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v10.2.5
+        with:
+          generate-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auditing-level: 'high'
+
   codegen-testing:
     name: Build and Testing for codegen
     runs-on: ubuntu-latest
+    needs: [vulnerabilities]
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -85,6 +121,7 @@ jobs:
   doc-style:
     name: "Documentation style"
     runs-on: ubuntu-latest
+    needs: [vulnerabilities]
     steps:
       - name: PyAnsys documentation style checks
         uses: ansys/actions/doc-style@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
@@ -115,7 +152,7 @@ jobs:
   smoke-tests:
     name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
     runs-on: ${{ matrix.os }}
-    needs: [code-style]
+    needs: [code-style, codegen-testing]
     strategy:
       fail-fast: false
       matrix:
