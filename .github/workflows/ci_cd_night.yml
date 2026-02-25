@@ -44,7 +44,7 @@ jobs:
       contents: read  # Needed to checkout code
       packages: write # Needed for pushing Docker image to GHCR
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
 
@@ -52,7 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
 
       - name: Set up Python
-        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -130,7 +130,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
-      - uses: ansys/actions/build-wheelhouse@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+      - uses: ansys/actions/build-wheelhouse@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -199,7 +199,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
