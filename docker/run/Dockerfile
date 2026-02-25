@@ -35,13 +35,9 @@ ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 # --------------------
 RUN apt-get update && apt-get install -y \
     wget \
-    curl \
     tar \
     gzip \
     bash \
-    python3 \
-    python3-pip \
-    git \
     libgomp1 \
     libatomic1 \
     libquadmath0 \
@@ -51,8 +47,6 @@ RUN apt-get update && apt-get install -y \
     openmpi-bin \
     libopenmpi-dev \
     && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install --no-cache-dir uv
 
 # --------------------
 # Install LS-DYNA (SMP)
@@ -93,9 +87,8 @@ RUN wget --user "$FTP_USER" --password "$FTP_LOGIN" \
 RUN test -d "${INSTALL_DIR}/${MPP_PATH}" && \
     chmod -R +x "${INSTALL_DIR}/${MPP_PATH}/"
 
-# Configure MPP license
-RUN echo "#LICENSE_TYPE: ansys" > ${INSTALL_DIR}/${MPP_PATH}/LSTC_FILE && \
-    echo "#LICENSE_SERVER: \${LSTC_LICENSE_SERVER:-localhost}" >> ${INSTALL_DIR}/${MPP_PATH}/LSTC_FILE
+# Create placeholder license file (actual config via runtime env vars)
+RUN touch ${INSTALL_DIR}/${MPP_PATH}/LSTC_FILE
 
 # --------------------
 # PATH (add both executables)
