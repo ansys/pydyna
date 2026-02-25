@@ -109,6 +109,13 @@ runs:
     - name: Set DPF environment
       run: |
         DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252"
+        echo "Setting DPF paths to: ${DPF_PATH}"
+        echo "Checking DPF installation structure:"
+        ls -la "${DPF_PATH}" || echo "DPF path does not exist!"
+        if [ -d "${DPF_PATH}/aisol" ]; then
+          echo "Found aisol directory"
+          ls -la "${DPF_PATH}/aisol"
+        fi
         {
           echo "AWP_ROOT252=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
@@ -138,9 +145,9 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
-        AWP_ROOT252: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
-        ANSYS_DPF_PATH: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
       run: |
+        echo "AWP_ROOT252=${AWP_ROOT252}"
+        echo "ANSYS_DPF_PATH=${ANSYS_DPF_PATH}"
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
@@ -163,8 +170,6 @@ runs:
         LSTC_LICENSE: ansys
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         PYDYNA_RUN_STREAM: "0"
-        AWP_ROOT252: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
-        ANSYS_DPF_PATH: ${{ runner.os == 'Linux' && '$HOME/.local/share/ansys_dpf_core/v252' || '' }}
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
         pool_size: ${{ inputs.pdf-pool-size }}
