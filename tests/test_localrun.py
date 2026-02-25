@@ -23,7 +23,7 @@ def patch_ansys_paths(monkeypatch):
 
 @pytest.fixture
 def always_isfile(monkeypatch):
-    monkeypatch.setattr(os.path, "isfile", lambda path: True)
+    monkeypatch.setattr("pathlib.Path.is_file", lambda self: True)
 
 @pytest.fixture
 def instance():
@@ -34,13 +34,13 @@ def instance():
 
 def test_find_solver_with_valid_executable(monkeypatch):
     fake_executable = "/fake/path/lsdyna_sp.e"
-    monkeypatch.setattr(os.path, "isfile", lambda path: path == fake_executable)
+    monkeypatch.setattr("pathlib.Path.is_file", lambda self: str(self) == fake_executable)
     instance = LinuxRunner(executable=fake_executable)
     assert instance.solver == fake_executable
 
 def test_find_solver_with_invalid_executable(monkeypatch):
     fake_executable = "/invalid/path/lsdyna_sp.e"
-    monkeypatch.setattr(os.path, "isfile", lambda path: False)
+    monkeypatch.setattr("pathlib.Path.is_file", lambda self: False)
     with pytest.raises(FileNotFoundError, match="LS-DYNA executable not found"):
         LinuxRunner(executable=fake_executable)
 

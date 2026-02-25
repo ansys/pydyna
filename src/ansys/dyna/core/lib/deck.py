@@ -289,12 +289,12 @@ class Deck(ValidationMixin):
             include_deck = self._prepare_deck_for_expand(keyword)
             context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
             try:
-                include_deck._import_file(expand_include_file, "utf-8", context)
+                include_deck._import_file(str(expand_include_file), "utf-8", context)
             except UnicodeDecodeError:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
-                include_deck._import_file(expand_include_file, encoding, context)
+                include_deck._import_file(str(expand_include_file), encoding, context)
 
             # Propagate global parameters from include back to parent (fix for issue #1081)
             # This allows subsequent sibling includes to see parameters defined in earlier includes
