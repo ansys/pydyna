@@ -3,13 +3,6 @@ ci:
   autoupdate_commit_msg: 'chore: pre-commit automatic update'
   autoupdate_schedule: weekly
 
-files: |
-    (?x)(
-        ^codegen/ |
-        ^src/ansys/ |
-        ^examples |
-        ^.github/
-    )
 exclude: |
     (?x)^(
         codegen/kwd.json|
@@ -52,7 +45,7 @@ repos:
   rev: v0.5.2
   hooks:
     - id: add-license-headers
-      files: './.*\.(py)'
+      files: '(src|tests|doc)/.*\.(py)'
       args:
       - --start_year=2023
 

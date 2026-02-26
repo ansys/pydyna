@@ -116,6 +116,7 @@ extend-exclude = [
     "tests/**/*.py",
     "codegen/kwd.json",
     "codegen/",
+    "benchmarks/",
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
@@ -143,7 +144,7 @@ lint.ignore = [
   "D401",  # First line should be in imperative mood
   "D205",  # 1 blank line required between summary line and description
 ]
-lint.per-file-ignores."!src/**.py" = [ "D" ]
+lint.per-file-ignores."!src/**.py" = [ "D", "PTH" ]
 lint.per-file-ignores."__init__.py" = [ "F401" ]
 lint.per-file-ignores."examples/**.py" = [ "N", "PTH" ]
 
@@ -161,7 +162,7 @@ testpaths = ["tests"]
 pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage
-    keywords: tests that exercies the `keyword` subpackage
+    keywords: tests that exercise the `keyword` subpackage
     codegen: tests that exercise the codegen system
     """
 

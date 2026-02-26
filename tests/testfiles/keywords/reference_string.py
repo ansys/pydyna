@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -1683,7 +1683,7 @@ $#      v1        v2        v3        d1        d2        d3      beta
        0.0       1.0       0.0       0.0       0.0       1.0       0.0
 $#     eai       ebi       eci     prabi     prcai     prcbi
   210000.0  210000.0  210000.0       0.3       0.3       0.3
-$#     aai       abi       aci      gabi      gbci      gcai        ti
+$#     aai       abi       acpi      gabi      gbci      gcai        ti
    1.2e-05   1.2e-05   1.2e-05   80769.2   80769.2   80769.2      20.0
   200000.0  200000.0  200000.0       0.3       0.3       0.3
    1.4e-05   1.4e-05   1.4e-05   76923.1   76923.1   76923.1     100.0

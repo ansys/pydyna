@@ -1,5 +1,6 @@
 # Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
+#
 
 """Tests for MAT_295 fiber families using CardSet with discriminator (issue #995).
 

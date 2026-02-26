@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -199,7 +199,7 @@ def test_field_write_struct_multiple():
 
 
 def test_field_write_struct_overridden_value():
-    # overriden struct values
+    # overridden struct values
     s = io.StringIO()
     values = [bi(1.8, math.nan), bi(0.1, 3.14)]
     fields = [Field("a", bi, 0, 10, None), Field("a", bi, 20, 10, None)]
