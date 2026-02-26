@@ -1219,6 +1219,27 @@ def test_define_table(ref_string):
     assert table.tbid == 10000001
 
 
+def test_define_table_2d(ref_string):
+    """Test DEFINE_TABLE_2D stores multiple value/lcid pairs in a DataFrame."""
+    table = kwd.DefineTable2D()
+    table.loads(ref_string.test_define_table_2d_ref)
+    
+    assert table.tbid == 101
+    assert table.sfa == 1.0
+    assert table.offa == 1.0
+    assert table.title == "test table"
+    
+    assert len(table.table) == 3
+    assert list(table.table["value"]) == [1.0, 2.0, 3.0]
+    assert list(table.table["lcid"]) == [101, 102, 103]
+    
+    output = table.write()
+    table2 = kwd.DefineTable2D()
+    table2.loads(output)
+    assert len(table2.table) == 3
+    assert list(table2.table["value"]) == [1.0, 2.0, 3.0]
+    assert list(table2.table["lcid"]) == [101, 102, 103]
+
 
 def test_icfd_part(ref_string):
     """Test formatting of set part list (uses series card with ints)."""

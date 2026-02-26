@@ -7,6 +7,94 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.11.0 <https://github.com/ansys/pydyna/releases/tag/v0.11.0>`_ - February 13, 2026
+====================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump version 0.11.dev0
+          - `#1073 <https://github.com/ansys/pydyna/pull/1073>`_
+
+        * - Add agent instructions entry point
+          - `#1093 <https://github.com/ansys/pydyna/pull/1093>`_
+
+        * - Plot curve for *DEFINE_CURVE
+          - `#1097 <https://github.com/ansys/pydyna/pull/1097>`_
+
+        * - Remove solver module.
+          - `#1106 <https://github.com/ansys/pydyna/pull/1106>`_
+
+        * - Remove \`\`pre\`\` module
+          - `#1108 <https://github.com/ansys/pydyna/pull/1108>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Blank lines after Mat295 fiber families
+          - `#1087 <https://github.com/ansys/pydyna/pull/1087>`_
+
+        * - Use sample of keyword file for character encoding detection
+          - `#1089 <https://github.com/ansys/pydyna/pull/1089>`_
+
+        * - Writing large int
+          - `#1090 <https://github.com/ansys/pydyna/pull/1090>`_
+
+        * - Parameter expansion bugs
+          - `#1091 <https://github.com/ansys/pydyna/pull/1091>`_
+
+        * - Slash property name handling
+          - `#1092 <https://github.com/ansys/pydyna/pull/1092>`_
+
+        * - Agent instructions
+          - `#1102 <https://github.com/ansys/pydyna/pull/1102>`_
+
+        * - Improve agent instructions
+          - `#1103 <https://github.com/ansys/pydyna/pull/1103>`_, `#1104 <https://github.com/ansys/pydyna/pull/1104>`_
+
+        * - Typing issues and series links
+          - `#1105 <https://github.com/ansys/pydyna/pull/1105>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#1088 <https://github.com/ansys/pydyna/pull/1088>`_
+
+        * - Remove the \`\`pre\`\` examples and docs references
+          - `#1107 <https://github.com/ansys/pydyna/pull/1107>`_
+
+        * - Add agent instructions
+          - `#1109 <https://github.com/ansys/pydyna/pull/1109>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update CHANGELOG for v0.10.0
+          - `#1077 <https://github.com/ansys/pydyna/pull/1077>`_
+
+        * - Pre-commit automatic update
+          - `#1098 <https://github.com/ansys/pydyna/pull/1098>`_
+
+
 `0.10.0 <https://github.com/ansys/pydyna/releases/tag/v0.10.0>`_ - January 27, 2026
 ===================================================================================
 

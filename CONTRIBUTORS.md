@@ -11,6 +11,7 @@
 * [0x4257](https://github.com/0x4257)
 * [Alex Drinkwater](https://github.com/alexDrinkwater)
 * [Alex Kaszynski](https://github.com/akaszynski)
+* [Daniel M.](https://github.com/p300894)
 * [Dominik Gresch](https://github.com/greschd)
 * [Fabian de Leon](https://github.com/fdeleonm)
 * [Jesús Almenara Rescalvo](https://github.com/Jalmenara)

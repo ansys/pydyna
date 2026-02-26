@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.11.dev0"
+version = "0.12.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
@@ -26,7 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "ansys-dpf-core>=0.7.2",
+    "ansys-dpf-core>=0.14.1",
     "ansys-api-dyna==0.4.2",
     "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
@@ -36,6 +36,7 @@ dependencies = [
     "transformations==2025.1.1",
     "chardet==5.2.0",
     "requests==2.32.5",
+    "docker==7.1.0",
 ]
 
 [project.optional-dependencies]
@@ -64,7 +65,7 @@ tests = [
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.38.0",
-    "pyvista==0.46.5",
+    "pyvista==0.47.0",
 ]
 dev = [
     "ansys-dyna-core[tests,codegen,graphics]",
@@ -78,7 +79,7 @@ doc = [
     "Sphinx==8.2.3",
     "sphinx-autobuild==2024.10.3",
     "sphinxcontrib-websupport==2.0.0",
-    "pytest-sphinx==0.6.3",
+    "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.20.0",
@@ -91,7 +92,7 @@ doc = [
     "scikit-learn==1.7.2",
     "ipython==8.38.0",
     "jupyterlab==4.5.3",
-    "pyvista==0.46.5",
+    "pyvista==0.47.0",
 ]
 
 [tool.flit.module]
