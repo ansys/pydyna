@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check commit name
-        uses: ansys/actions/check-pr-title@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+        uses: ansys/actions/check-pr-title@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -78,7 +78,7 @@ jobs:
     name: Vulnerabilities
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-vulnerabilities@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v10.2.5
+      - uses: ansys/actions/check-vulnerabilities@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v10.2.6
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           python-package-name: ${{ env.PACKAGE_NAME }}
@@ -124,7 +124,7 @@ jobs:
     needs: [vulnerabilities]
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+        uses: ansys/actions/doc-style@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -159,7 +159,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.10', '3.13']  # Min and max versions only for PR/push; full matrix runs nightly
     steps:
-      - uses: ansys/actions/build-wheelhouse@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+      - uses: ansys/actions/build-wheelhouse@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -211,7 +211,7 @@ jobs:
     needs: [doc, run-tests, unit-tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v9.0.15
+      - uses: ansys/actions/build-library@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
