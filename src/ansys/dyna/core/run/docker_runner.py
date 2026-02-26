@@ -25,7 +25,9 @@
 import logging
 import os
 from pathlib import Path
-import subprocess
+
+# Subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import sys
 from typing import TYPE_CHECKING
 
@@ -423,10 +425,11 @@ class DockerRunner(BaseRunner):
             logger.info(f"Container {container.short_id} stopped and removed")
 
         if exit_code != 0:
+            # Subprocess is used to run LS-DYNA commands, excluding bandit warning
             raise subprocess.CalledProcessError(
                 exit_code,
                 command,
                 output=f"LS-DYNA execution failed with exit code {exit_code}",
-            )
+            )  # nosec: B603
 
         return self._working_directory
