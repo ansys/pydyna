@@ -54,7 +54,7 @@ Plan: Autodoc for generated keywords
    **Phase A: Measure AutoAPI baseline**
    1. Add detailed timing to AutoAPI phases (Reading files, Mapping Data, Rendering Data)
    2. Measure time per file, identify slowest files to parse
-   3. Profile AST parsing with cProfile targeting AutoAPI/asteroid modules
+   3. Profile AST parsing with cProfile targeting AutoAPI/astroid modules
    4. Baseline: 539 files in ~302s = 0.56s/file average
 
    **Phase B: Quick wins (target: 15-25% improvement)**
@@ -75,7 +75,7 @@ Plan: Autodoc for generated keywords
 
    **Phase D: Deep optimization (target: 20-30% improvement)**
    1. Simplify AutoAPI templates in `doc/source/autoapi/`
-   2. Investigate asteroid caching options
+   2. Investigate astroid caching options
    3. Test if reducing type annotations helps parsing
    4. Consider optimizing keyword class structure (codegen changes)
 
