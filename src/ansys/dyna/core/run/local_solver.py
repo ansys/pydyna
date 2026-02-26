@@ -24,13 +24,16 @@
 
 import logging
 import os
-import pathlib
+from pathlib import Path
 import tempfile
-import typing
+from typing import TYPE_CHECKING
 
 from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.windows_runner import WindowsRunner
+
+if TYPE_CHECKING:
+    from ansys.dyna.core.run.base_runner import BaseRunner
 
 try:
     from ansys.dyna.core.run.docker_runner import DockerRunner
@@ -39,21 +42,36 @@ try:
 except ImportError:
     HAS_DOCKER = False
 
+logger = logging.getLogger(__name__)
 
-def __make_temp_dir():
-    """Create a temporary directory for the job."""
-    job_folder = pathlib.Path(tempfile.gettempdir()) / "ansys" / "pydyna" / "jobs"
+
+def __make_temp_dir() -> str:
+    """Create a temporary directory for the job.
+
+    Returns
+    -------
+    str
+        Path to the created temporary directory.
+    """
+    job_folder = Path(tempfile.gettempdir()) / "ansys" / "pydyna" / "jobs"
     job_folder.mkdir(parents=True, exist_ok=True)
     return tempfile.mkdtemp(dir=str(job_folder))
 
 
-def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
+def _check_case_keywords(input: str | Deck, wdir: str) -> bool:
     """Check if input deck contains *CASE keywords.
 
     This function checks for any of the CASE-related keywords:
     - *CASE
     - *CASE_BEGIN_n
     - *CASE_END_n
+
+    Parameters
+    ----------
+    input : str or Deck
+        Either a filename (str) or a Deck object to check.
+    wdir : str
+        Working directory where the input file is located.
 
     Returns
     -------
@@ -62,60 +80,99 @@ def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
     """
     if isinstance(input, str):
         try:
-            with (pathlib.Path(wdir) / input).open("r") as f:
+            with (Path(wdir) / input).open("r") as f:
                 for line in f:
-                    line = line.strip().upper()
-                    if line.startswith("*CASE") or line.startswith("*CASE_BEGIN") or line.startswith("*CASE_END"):
+                    line_upper = line.strip().upper()
+                    if line_upper.startswith(("*CASE", "*CASE_BEGIN", "*CASE_END")):
                         return True
             return False
         except Exception as e:
-            logging.warning(f"Could not read input file {input} to check for CASE keywords: {e}")
+            logger.warning(f"Could not read input file '{input}' to check for CASE keywords: {e}")
             return False
     elif isinstance(input, Deck):
         try:
-            if len(list(input.get_kwds_by_type("CASE"))) > 0:
-                return True
-            return False
+            return bool(list(input.get_kwds_by_type("CASE")))
         except Exception as e:
-            logging.warning(f"Could not check Deck for CASE keywords: {e}")
+            logger.warning(f"Could not check Deck for CASE keywords: {e}")
             return False
 
+    return False
 
-def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str]:
-    """Return the working directory and input file from a launch_dyna input."""
+
+def __prepare(input: str | Deck, **kwargs) -> tuple[str, str]:
+    """Prepare the working directory and input file for solver execution.
+
+    Parameters
+    ----------
+    input : str or Deck
+        Either a path to a DYNA keyword file or a Deck object.
+    **kwargs : dict
+        Additional keyword arguments, including:
+        - working_directory: Optional working directory path
+        - activate_case: Whether to activate CASE support
+
+    Returns
+    -------
+    tuple[str, str]
+        A tuple of (working_directory, input_file_path).
+
+    Raises
+    ------
+    ValueError
+        If *CASE keywords are detected but activate_case is not True.
+    """
     wdir = kwargs.get("working_directory", None)
     if isinstance(input, str):
         input_file = input
         if wdir is None:
-            wdir = str(pathlib.Path(input_file).parent.resolve())
-        elif not pathlib.Path(wdir).is_dir():
-            p = pathlib.Path(wdir)
-            p.mkdir(parents=True)
+            wdir = str(Path(input_file).parent.resolve())
+        elif not Path(wdir).is_dir():
+            p = Path(wdir)
+            p.mkdir(parents=True, exist_ok=True)
 
     needs_case_keywords = _check_case_keywords(input, wdir=wdir)
-    if needs_case_keywords:
-        if not kwargs.get("activate_case", False):
-            raise UserWarning(
-                "*CASE keyword detected in input file, but `activate_case` is not set to True. "
-                "The solver may fail to run correctly. To enable *CASE support, set `activate_case=True`."
-            )
+    if needs_case_keywords and not kwargs.get("activate_case", False):
+        raise ValueError(
+            "*CASE keyword detected in input file, but `activate_case` is not set to True. "
+            "The solver may fail to run correctly. To enable *CASE support, set `activate_case=True`."
+        )
     if isinstance(input, Deck):
-        # write the deck to a file in the working directory.
+        # Write the deck to a file in the working directory
         if wdir is None:
             wdir = __make_temp_dir()
-            logging.log(logging.INFO, f"launching the dyna solver in {wdir}")
-        input_file = str(pathlib.Path(wdir) / "input.k")
+            logger.info(f"Launching the DYNA solver in '{wdir}'")
+        input_file = str(Path(wdir) / "input.k")
         input.export_file(input_file)
 
     return wdir, input_file
 
 
-def get_runner(**kwargs) -> typing.Any:
-    """Return the runner for the job."""
+def get_runner(**kwargs) -> "BaseRunner":
+    """Return the appropriate runner for the job based on configuration.
+
+    Parameters
+    ----------
+    **kwargs : dict
+        Configuration options including:
+        - container: Docker container name (optional)
+        - Other runner-specific options
+
+    Returns
+    -------
+    BaseRunner
+        An instance of DockerRunner, WindowsRunner, or LinuxRunner.
+
+    Raises
+    ------
+    ImportError
+        If Docker container is requested but Docker SDK is not installed.
+    """
     container = kwargs.get("container", None)
-    if container != None:
+    if container is not None:
         if not HAS_DOCKER:
-            raise Exception("Cannot run in container, `docker` is not installed.")
+            raise ImportError(
+                "Cannot run in container - Docker SDK for Python is not installed. Install it with: pip install docker"
+            )
         return DockerRunner(**kwargs)
     if os.name == "nt":
         return WindowsRunner(**kwargs)
@@ -123,64 +180,68 @@ def get_runner(**kwargs) -> typing.Any:
         return LinuxRunner(**kwargs)
 
 
-def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
-    """Run the Ls-Dyna solver with the given input file.
+def run_dyna(input: str | Deck, **kwargs) -> str:
+    """Run the LS-DYNA solver with the given input file.
 
     Parameters
     ----------
-    input : str or object
-        Either the path to a dyna keyword file or an instance of
+    input : str or Deck
+        Either the path to a DYNA keyword file or an instance of
         ``ansys.dyna.core.lib.deck.Deck``.
     **kwargs : dict
-        mpi_option : int
-            The mpi option to use. Choose from the values defined in ``MpiOption``.
-            Defaults to MpiOption.SMP.
-        precision : int
+        Configuration options:
+
+        mpi_option : int, optional
+            The MPI option to use. Choose from the values defined in ``MpiOption``.
+            Defaults to ``MpiOption.SMP``.
+        precision : int, optional
             Floating point precision. Choose from the values defined in ``Precision``.
-            Defaults to Precision.DOUBLE.
-        version : str
-            Version of Ansys Unified installed to use.
-            Defaults to: TODO (find the latest one?).
-        executable : str
-            Optional and Linux-Only: The name of the DYNA solver executable.
-            Default is s based on the value of the ``mpi_option`` argument.
-            On linux: it can be the full path.
-            Also on linux, ansys-tools-path can be used to save a custom location of
-            a dyna executable so that it doesn't need to be set here each time.
-        ncpu : int
-            Number of cpus.
-            Defaults to 1.
-        memory : int
-            Amount of memory units, as defined by `memory_unit` for DYNA to use.
+            Defaults to ``Precision.DOUBLE``.
+        version : str, optional
+            Version of Ansys Unified installation to use.
+        executable : str, optional
+            Linux-only: The name or full path of the DYNA solver executable.
+            Default is based on the value of the ``mpi_option`` argument.
+            On Linux, ansys-tools-path can be used to save a custom location.
+        ncpu : int, optional
+            Number of CPUs. Defaults to 1.
+        memory : int, optional
+            Amount of memory units (as defined by ``memory_unit``) for DYNA to use.
             Defaults to 20.
-        memory_unit : int
-            Memory unit.  Choose from the values defined in ``MemoryUnit``.
-            Defaults to MemoryUnit.MB.
-        working_directory : str
-            Working directory.
-            If the `input` parameter is a path to the input file,
-            defaults to the same folder as that file.  Otherwise, the job is run
-            in a new folder under $TMP/ansys/pydyna/jobs.
-        container : str
-            DockerContainer to run LS-DYNA in.
-        container_env : dict()
-            Environment variables to pass into the docker container.
-        stream : bool
-            Currently only affects runs using the `container` option.
-            If True, the stdout of solver is streamed to python's stdout during the solve.
-            If False, the solver stdout is printed once after the container exits.
+        memory_unit : int, optional
+            Memory unit. Choose from the values defined in ``MemoryUnit``.
+            Defaults to ``MemoryUnit.MB``.
+        working_directory : str, optional
+            Working directory path.
+            If the ``input`` parameter is a file path, defaults to that file's directory.
+            Otherwise, the job runs in a new folder under ``$TMP/ansys/pydyna/jobs``.
+        container : str, optional
+            Docker container name to run LS-DYNA in.
+        container_env : dict, optional
+            Environment variables to pass into the Docker container.
+        stream : bool, optional
+            Currently only affects runs using the ``container`` option.
+            If True, solver stdout is streamed to Python's stdout during the solve.
+            If False, solver stdout is printed once after the container exits.
             Defaults to True.
-        activate_case : bool
-            If provided, aappends CASE cammad line for *CASE keywords support
-        case_ids : list[int] or None
-            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
+        activate_case : bool, optional
+            If True, appends CASE command line option for *CASE keywords support.
+            Defaults to False.
+        case_ids : list[int], optional
+            If provided, appends CASE=... to the LS-DYNA command line for *CASE support.
 
     Returns
     -------
-    result : str
+    str
         The working directory where the solver is launched.
-        If `stream` is `False` and `container` is set, returns the stdout of the run
+        If ``stream=False`` and ``container`` is set, returns the stdout of the run.
 
+    Raises
+    ------
+    ValueError
+        If *CASE keywords are detected but ``activate_case`` is not True.
+    ImportError
+        If Docker container is requested but Docker SDK is not installed.
     """
     # TODO: jobname => jobid={jobname}
     # TODO: override => clear all generated files before running (like in launch_mapdl)
@@ -189,24 +250,31 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     # TODO: license_server_check, license_type => as in pymapdl
     wdir, input_file = __prepare(input, **kwargs)
 
+    # Check for container configuration in environment variables
     if "container" not in kwargs:
         container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
-        if container != None:
+        if container is not None:
             kwargs["container"] = container
             if "container_env" not in kwargs:
-                kwargs["container_env"] = dict(
-                    (k, os.environ[k]) for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
-                )
+                kwargs["container_env"] = {
+                    k: os.environ[k]
+                    for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE")
+                    if k in os.environ
+                }
 
+    # Check for stream configuration in environment variables
     if "stream" not in kwargs:
         stream = os.environ.get("PYDYNA_RUN_STREAM", None)
-        if stream != None:
+        if stream is not None:
             kwargs["stream"] = bool(int(stream))
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
     result = runner.run()
-    if container != None and kwargs.get("stream", True) is False:
+
+    # Return result for non-streaming container runs, otherwise return working directory
+    container = kwargs.get("container", None)
+    if container is not None and kwargs.get("stream", True) is False:
         return result
     return wdir
