@@ -294,8 +294,8 @@ class DockerRunner(BaseRunner):
         try:
             container.stop()
             container.remove()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Failed to clean up discovery container: {e}")
         return self._discovered_executable
 
     def _build_command(self, executable: str) -> str:
