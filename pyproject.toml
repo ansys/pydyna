@@ -169,7 +169,7 @@ testpaths = ["tests"]
 pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage
-    keywords: tests that exercies the `keyword` subpackage
+    keywords: tests that exercise the `keyword` subpackage
     codegen: tests that exercise the codegen system
     """
 
