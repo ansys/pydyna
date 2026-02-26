@@ -27,9 +27,13 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from typing import TYPE_CHECKING
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
+
+if TYPE_CHECKING:
+    import docker.models.containers
 
 try:
     import docker
@@ -43,65 +47,126 @@ _MPP_EXECUTABLES = "ls-dyna_mpp_d_R16_1_1_x64_centos79_ifort190_sse2_openmpi405_
 
 
 class DockerRunner(BaseRunner):
-    """Docker implementation to Run LS-DYNA.
+    """Docker implementation to run LS-DYNA.
 
     Designed to work with the unified PyDyna Docker image containing both
     SMP and MPP executables. Auto-detects and selects the appropriate executable
     based on the requested solver mode.
 
     Also compatible with custom executables and unified Ansys installations.
+
+    Parameters
+    ----------
+    container : str
+        Name of the Docker container image to use.
+    container_env : dict, optional
+        Environment variables to pass to the container.
+    stream : bool, optional
+        Whether to stream output to stdout. Default is True.
+    activate_case : bool, optional
+        Whether to activate CASE support. Default is False.
+    case_ids : list[int], optional
+        List of case IDs to run. If provided with activate_case=True,
+        appends CASE=... to the solver arguments.
+    executable_name : str, optional
+        Name of the LS-DYNA executable. If not provided, auto-detects
+        based on solver options.
+    **kwargs
+        Additional arguments passed to BaseRunner.
     """
 
     def __init__(self, **kwargs):
         """Initialize DockerRunner.
 
-        Parameters
-        ----------
-        case_ids : list[int] or None
-            If provided, appends CASE or CASE=... to the DYNA_ARGS for *CASE support.
-        executable_name : str, optional
-            Name of the LS-DYNA executable. Default is auto-detected based on solver options.
+        Raises
+        ------
+        ImportError
+            If Docker SDK for Python is not installed.
+        Exception
+            If Docker daemon is not running or image is not found.
         """
         if docker is None:
             raise ImportError("Docker SDK for Python is not installed. Install it with: pip install docker")
 
         super().__init__(**kwargs)
         try:
-            self._client: docker.client.DockerClient = docker.from_env()
+            self._client: "docker.client.DockerClient" = docker.from_env()
         except Exception as e:
             logger.error(f"Failed to connect to Docker: {e}")
-            raise Exception(f"Cannot connect to Docker daemon. Make sure Docker is running. Error: {e}")
+            raise RuntimeError(f"Cannot connect to Docker daemon. Make sure Docker is running. Error: {e}") from e
 
         self.__ensure_image(kwargs["container"])
-        self._container_env = kwargs.get("container_env", dict())
-        self._stream = kwargs.get("stream", True)
-        self.activate_case = kwargs.get("activate_case", False)
-        self.case_ids = kwargs.get("case_ids", None)
-        self.executable_name = kwargs.get("executable_name", None)
+        self._container_env: dict = kwargs.get("container_env", {})
+        self._stream: bool = kwargs.get("stream", True)
+        self.activate_case: bool = kwargs.get("activate_case", False)
+        self.case_ids: list[int] | None = kwargs.get("case_ids", None)
+        self.executable_name: str | None = kwargs.get("executable_name", None)
 
-        # discover available executables in the container (for future use)
+        # Cache for discovered executable path
         self._discovered_executable: str | None = None
 
-    def __ensure_image(self, name):
+    def __ensure_image(self, name: str) -> None:
+        """Verify that the specified Docker image exists.
+
+        Parameters
+        ----------
+        name : str
+            Docker image name to verify.
+
+        Raises
+        ------
+        RuntimeError
+            If the Docker image is not found.
+        """
         self._name = name
         try:
             _ = self._client.images.get(name)
-            logger.info(f"Docker image {name} found")
+            logger.info(f"Docker image '{name}' found")
         except Exception as e:
-            logger.error(f"Docker image {name} not found: {e}")
-            raise Exception(f"Exception in DockerRunner, container image {name} not found!")
+            logger.error(f"Docker image '{name}' not found: {e}")
+            raise RuntimeError(f"Docker image '{name}' not found. Please pull the image first.") from e
 
     def set_input(self, input_file: str, working_directory: str) -> None:
-        """Set the input file and working directory for the run."""
+        """Set the input file and working directory for the run.
+
+        Parameters
+        ----------
+        input_file : str
+            Path to the LS-DYNA input file (relative to working_directory).
+        working_directory : str
+            Absolute or relative path to the working directory.
+
+        Raises
+        ------
+        ValueError
+            If working_directory is not a valid directory.
+        """
         self._input_file = input_file
-        self._working_directory = str(Path(working_directory).resolve())
-        if not Path(self._working_directory).is_dir():
-            raise Exception("`working directory` is not a directory")
+        working_dir_path = Path(working_directory).resolve()
+        if not working_dir_path.is_dir():
+            raise ValueError(f"Working directory '{working_directory}' is not a valid directory")
+        self._working_directory = str(working_dir_path)
 
     def _create_container(self, volumes: list[str]) -> "docker.models.containers.Container":
-        """Create a new Docker container for running LS-DYNA."""
+        """Create a new Docker container for running LS-DYNA.
+
+        Parameters
+        ----------
+        volumes : list[str]
+            List of volume mount specifications (e.g., "host_path:container_path").
+
+        Returns
+        -------
+        docker.models.containers.Container
+            The created and running container.
+
+        Raises
+        ------
+        RuntimeError
+            If the container fails to start.
+        """
         env = self._build_env()
-        logger.info(f"Creating Docker container from image {self._name}")
+        logger.info(f"Creating Docker container from image '{self._name}'")
         container = self._client.containers.run(
             self._name,
             command="sleep infinity",
@@ -113,12 +178,18 @@ class DockerRunner(BaseRunner):
         )
         container.reload()
         if container.status != "running":
-            raise Exception(f"Container {container.short_id} failed to start (status={container.status})")
+            raise RuntimeError(f"Container {container.short_id} failed to start (status={container.status})")
         logger.info(f"Container {container.short_id} started")
         return container
 
     def _build_env(self) -> dict:
-        """Build environment variables for the container."""
+        """Build environment variables for the container.
+
+        Returns
+        -------
+        dict
+            Dictionary of environment variables to pass to the container.
+        """
         env = {
             "OMPI_ALLOW_RUN_AS_ROOT": "1",
             "OMPI_ALLOW_RUN_AS_ROOT_CONFIRM": "1",
@@ -126,13 +197,20 @@ class DockerRunner(BaseRunner):
         if self._container_env:
             env.update(self._container_env)
         else:
+            # Auto-detect common LS-DYNA license environment variables
             for k in ("LSTC_LICENSE", "ANSYSLI_SERVERS", "ANSYSLMD_LICENSE_FILE"):
                 if k in os.environ:
                     env[k] = os.environ[k]
         return env
 
     def _get_solver_option(self) -> str:
-        """Get the solver option string for the specific LS-DYNA executable."""
+        """Get the solver option string for the specific LS-DYNA executable.
+
+        Returns
+        -------
+        str
+            Either 'SMP' or 'MPP' based on the configured MPI option.
+        """
         solver_option = {
             (MpiOption.SMP, Precision.SINGLE): "SMP",
             (MpiOption.SMP, Precision.DOUBLE): "SMP",
@@ -142,11 +220,21 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def _discover_executables(self) -> str:
-        """Based on the solver options, discover available LS-DYNA executables in the container.
+        """Discover available LS-DYNA executables in the container.
 
         For the unified PyDyna Docker image, both SMP and MPP executables are available
         in /opt/dyna/. This method will auto-select the appropriate one or fall back
         to the alternative if requested mode is not available.
+
+        Returns
+        -------
+        str
+            Full path to the discovered LS-DYNA executable.
+
+        Raises
+        ------
+        RuntimeError
+            If no LS-DYNA executable can be found in the container.
         """
         if self._discovered_executable is not None:
             return self._discovered_executable
@@ -159,7 +247,10 @@ class DockerRunner(BaseRunner):
         expected_basename = expected_executables.get(solver_option)
 
         # Search in known locations first, then fall back to full search
-        find_cmd = "find /opt/dyna /usr/local /opt -maxdepth 3 -type f -name 'ls-dyna*' 2>/dev/null || find / -maxdepth 8 -type f -name 'ls-dyna*' 2>/dev/null"  # noqa: E501
+        find_cmd = (
+            "find /opt/dyna /usr/local /opt -maxdepth 3 -type f -name 'ls-dyna*' 2>/dev/null || "
+            "find / -maxdepth 8 -type f -name 'ls-dyna*' 2>/dev/null"
+        )
         logger.info(f"Discovering LS-DYNA executables in container for {solver_option} mode")
         container = self._create_container(volumes=[f"{self._working_directory}:/run"])
         exec_log = container.exec_run(["/bin/bash", "-c", find_cmd])
@@ -201,22 +292,35 @@ class DockerRunner(BaseRunner):
                     f"Using discovered executable: {chosen}"
                 )
         else:
-            raise Exception(
+            raise RuntimeError(
                 f"No LS-DYNA executable found in container '{self._name}'. "
                 f"Ensure the image contains LS-DYNA or set `executable_name` explicitly."
             )
 
         self._discovered_executable = chosen
+
         # Clean up the discovery container
         try:
             container.stop()
             container.remove()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Failed to clean up discovery container: {e}")
+
         return self._discovered_executable
 
     def _build_command(self, executable: str) -> str:
-        """Build the command to run LS-DYNA based on the configuration."""
+        """Build the command to run LS-DYNA based on the configuration.
+
+        Parameters
+        ----------
+        executable : str
+            Full path to the LS-DYNA executable.
+
+        Returns
+        -------
+        str
+            The complete shell command to execute LS-DYNA.
+        """
         case_option = ""
         if self.activate_case:
             if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
@@ -288,10 +392,17 @@ class DockerRunner(BaseRunner):
         Returns
         -------
         str
-            The working directory path
+            The working directory path where results are located.
+
+        Raises
+        ------
+        RuntimeError
+            If input file and working directory are not set.
+        subprocess.CalledProcessError
+            If LS-DYNA execution fails.
         """
         if not hasattr(self, "_working_directory") or not hasattr(self, "_input_file"):
-            raise Exception("Input file and working directory must be set before running")
+            raise RuntimeError("Input file and working directory must be set before running. Call set_input() first.")
 
         volumes = [f"{self._working_directory}:/run"]
         container = self._create_container(volumes=volumes)
