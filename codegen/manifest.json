@@ -440,6 +440,19 @@
             "points_card": 1
         }
     },
+    "DEFINE_TABLE_2D": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "table",
+                    "ref": "table_data_card"
+                }
+            ]
+        },
+        "labels": {
+            "table_data_card": 1
+        }
+    },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "table-card": [
