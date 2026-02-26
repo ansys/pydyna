@@ -400,6 +400,6 @@ class DockerRunner(BaseRunner):
                 exit_code,
                 command,
                 output=f"LS-DYNA execution failed with exit code {exit_code}",
-            )  # nosec: B603
+            )
 
         return self._working_directory
