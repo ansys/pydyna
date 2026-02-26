@@ -24,6 +24,7 @@
 
 import dataclasses
 import logging
+import re
 import typing
 import warnings
 
@@ -255,8 +256,6 @@ def _spec_has_dataclass(spec: typing.List[tuple]) -> bool:
     """
     return FormatSpec.from_list(spec).has_dataclass
 
-
-import re
 
 # Regex pattern to match Fortran/LS-DYNA compact scientific notation
 # Examples: "1.00000+4", "3.5-10", "-2.1+5", "1+4", "-3-2"
@@ -650,7 +649,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
 
         try:
             value = _convert_type(raw_value, item_type)
-        except:
+        except Exception:
             raise TypeError(
                 f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {item_type}."
             )

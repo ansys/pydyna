@@ -27,6 +27,7 @@ from pathlib import Path
 import sys
 
 from pyinstrument import Profiler
+from sphinx.cmd.build import main as sphinx_main
 
 # Set environment variables before importing Sphinx
 os.environ["BUILD_EXAMPLES"] = "false"
@@ -43,7 +44,6 @@ profiler = Profiler()
 profiler.start()
 
 # Import and run Sphinx
-from sphinx.cmd.build import main as sphinx_main
 
 sys.argv = ["sphinx-build", "-M", "html", str(source_dir), str(build_dir), "-j", "1"]
 
